@@ -1147,14 +1147,25 @@ class Review_Card_Carousel extends Module_Base {
             return;
         }
 
-        $thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
-        if (!$thumb_url) {
-            $thumb_url = $item['image']['url'];
-        }
-
 ?>
         <div class="bdt-ep-review-card-carousel-image bdt-image-mask">
-            <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_html($item['reviewer_name']); ?>">
+
+            <?php 
+            $thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
+            if (!$thumb_url) {
+                printf('<img src="%1$s" alt="%2$s">', $item['image']['url'], esc_html($item['reviewer_name']));
+            } else {
+                printf(wp_get_attachment_image(
+                    $item['image']['id'],
+                    $settings['thumbnail_size_size'],
+                    false,
+                    [
+                        'alt' => esc_html($item['reviewer_name'])
+                    ]
+                ));
+            }
+            ?>
+
         </div>
     <?php
     }

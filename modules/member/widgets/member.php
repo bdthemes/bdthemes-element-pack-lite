@@ -1360,13 +1360,45 @@ class Member extends Module_Base {
                          data-bdt-toggle="target: > .bdt-member-photo-flip; mode: hover; animation: bdt-animation-fade; queued: true; duration: 300;">
 
                         <div class="bdt-member-photo-flip bdt-position-absolute bdt-position-z-index">
-                            <?php echo Group_Control_Image_Size::get_attachment_image_html($settings, 'alternative_photo'); ?>
+
+                            <?php 
+                            $thumb_url = Group_Control_Image_Size::get_attachment_image_src($settings['alternative_photo']['id'], 'thumbnail_size', $settings);
+                            if (!$thumb_url) {
+                                printf('<img src="%1$s" alt="%2$s">', $settings['alternative_photo']['url'], esc_html($settings['name']));
+                            } else {
+                                printf(wp_get_attachment_image(
+                                    $settings['alternative_photo']['id'],
+                                    $settings['thumbnail_size_size'],
+                                    false,
+                                    [
+                                        'alt' => esc_html($settings['name'])
+                                    ]
+                                ));
+                            }
+                            ?>
+
                         </div>
                         <?php endif; ?>
 
                         <div class="bdt-member-photo">
                             <div class="<?php echo($photo_hover_animation); ?>">
-                                <?php echo Group_Control_Image_Size::get_attachment_image_html($settings, 'photo'); ?>
+
+                                <?php 
+                                $thumb_url = Group_Control_Image_Size::get_attachment_image_src($settings['photo']['id'], 'thumbnail_size', $settings);
+                                if (!$thumb_url) {
+                                    printf('<img src="%1$s" alt="%2$s">', $settings['photo']['url'], esc_html($settings['name']));
+                                } else {
+                                    printf(wp_get_attachment_image(
+                                        $settings['photo']['id'],
+                                        $settings['thumbnail_size_size'],
+                                        false,
+                                        [
+                                            'alt' => esc_html($settings['name'])
+                                        ]
+                                    ));
+                                }
+                                ?>
+                                
                             </div>
                         </div>
 

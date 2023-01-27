@@ -5,13 +5,13 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.0
-Stable tag: 4.7.0
+Stable tag: 4.8.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.10.0
+Elementor tested up to: 3.10.1
 
-Best Addon for Elementor WordPress Plugin with 55+ Most Popular Elements that need your everyday website page building.
+Best Addon for Elementor WordPress Plugin with 57+ Most Popular Elements that need your everyday website page building.
 
 
 == Description ==
@@ -62,6 +62,7 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 0. **[Progress Pie](https://elementpack.pro/demo/element/progress-pie/)** - Display an interactive pie with percentage numbers, texts, and custom circle width for showing your project progress.
 0. **[Pricing List](https://elementpack.pro/demo/element/pricing-list/)** - Pricing list with some different examples like Item With Image Example, Pricing Background Color Example, Border Radius Example, List Style Different Color
 0. **[Product Grid](https://elementpack.pro/demo/element/product-grid/)** - Display your eCommerce products with insightful details over a very attractive layout to impress your visitors and customers.
+0. **[Product Carousel](https://elementpack.pro/demo/element/product-carousel/)** - Every online store needs a nice-looking product display to showcase all it's products to attract more attention from the viewers and actually sell items. To do that, our Product Carousel is the perfect choice for designers looking for aesthetics and a high-performance interface. 
 0. **[Reading Progress](https://elementpack.pro/demo/element/reading-progress/)** - Attract your visitors to read your content with more consciously, that can help you your bounce rate to decrease. And your readers feel more comfortable.
 0. **[Remote Arrows](https://elementpack.pro/demo/element/remote-arrows/)** - The Remote Arrows is a support feature for carousel or slider type widgets that can be scrolled. Remote arrows provide a remote navigation system that you can link up with the slider and put the remote anywhere on the page while making it move the slider remotely.
 0. **[Remote Fraction](https://elementpack.pro/demo/element/remote-fraction/)** - Remote fraction can be the next suitable attachment for your testimonial section. With this, you can show the number of reviews in a fraction-wise numbering system and make it more understandable for your user.
@@ -391,6 +392,12 @@ https://www.youtube.com/watch?v=9uhFIHz8W7E
 
 == Changelog ==
 
+
+= 4.8.0 [26th January 2023] =
+
+* Added: Product Carousel widget added
+* Fixed: Item box shadow option added in custom gallery widget
+* Fixed: The dropdown style not working issue was fixed in the user register widget
 
 = 4.7.0 [11th January 2023] =
 

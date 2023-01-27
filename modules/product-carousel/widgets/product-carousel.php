@@ -1,6 +1,6 @@
 <?php
 	
-	namespace ElementPack\Modules\ProductGrid\Widgets;
+	namespace ElementPack\Modules\ProductCarousel\Widgets;
 	
 	use ElementPack\Base\Module_Base;
 	use Elementor\Group_Control_Css_Filter;
@@ -16,26 +16,27 @@
 	use ElementPack\Utils;
 
 	use ElementPack\Traits\Global_Mask_Controls;
-	
+	use ElementPack\Traits\Global_Swiper_Controls;
 	
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit;
 	} // Exit if accessed directly
 	
-	class Product_Grid extends Module_Base {
+	class Product_Carousel extends Module_Base {
 
-		use Global_Mask_Controls;
+		use Global_Swiper_Controls;
+    	use Global_Mask_Controls;
 		
 		public function get_name() {
-			return 'bdt-product-grid';
+			return 'bdt-product-carousel';
 		}
 		
 		public function get_title() {
-			return BDTEP . esc_html__( 'Product Grid', 'bdthemes-element-pack' );
+			return BDTEP . esc_html__( 'Product Carousel', 'bdthemes-element-pack' );
 		}
 		
 		public function get_icon() {
-			return 'bdt-wi-product-grid';
+			return 'bdt-wi-product-carousel bdt-new';
 		}
 		
 		public function get_categories() {
@@ -43,14 +44,22 @@
 		}
 		
 		public function get_keywords() {
-			return [ 'product', 'grid', 'client', 'logo', 'showcase' ];
+			return [ 'product', 'carousel', 'client', 'logo', 'showcase' ];
 		}
 		
 		public function get_style_depends() {
 			if ( $this->ep_is_edit_mode() ) {
 				return [ 'ep-styles' ];
 			} else {
-				return [ 'ep-font', 'ep-product-grid' ];
+				return [ 'ep-font', 'ep-product-carousel' ];
+			}
+		}
+
+		public function get_script_depends() {
+			if ($this->ep_is_edit_mode()) {
+				return ['ep-scripts'];
+			} else {
+				return ['ep-product-carousel'];
 			}
 		}
 		
@@ -223,12 +232,12 @@
 			$this->add_responsive_control(
 				'columns',
 				[
-					'label'           => __( 'Columns', 'bdthemes-element-pack' ),
-					'type'            => Controls_Manager::SELECT,
-					'desktop_default' => 3,
-					'tablet_default'  => 2,
-					'mobile_default'  => 1,
-					'options'         => [
+					'label'          => __( 'Columns', 'bdthemes-element-pack' ),
+					'type'           => Controls_Manager::SELECT,
+					'default'        => 3,
+					'tablet_default' => 2,
+					'mobile_default' => 1,
+					'options'        => [
 						1 => '1',
 						2 => '2',
 						3 => '3',
@@ -236,37 +245,34 @@
 						5 => '5',
 						6 => '6',
 					],
-					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid' => 'grid-template-columns: repeat({{SIZE}}, 1fr);',
-					],
 				]
 			);
-
-			$this->add_responsive_control(
-				'column_gap',
+	
+			$this->add_control(
+				'item_gap',
 				[
-					'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
-					'type'      => Controls_Manager::SLIDER,
+					'label'   => __( 'Item Gap', 'bdthemes-element-pack' ),
+					'type'    => Controls_Manager::SLIDER,
 					'default' => [
 						'size' => 20,
 					],
-					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid' => 'grid-column-gap: {{SIZE}}{{UNIT}};',
+					'range'   => [
+						'px' => [
+							'min' => 0,
+							'max' => 100,
+						],
 					],
 				]
 			);
-
-			$this->add_responsive_control(
-				'row_gap',
+	
+			$this->add_control(
+				'item_match_height',
 				[
-					'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack' ),
-					'type'      => Controls_Manager::SLIDER,
-					'default' => [
-						'size' => 20,
-					],
-					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid' => 'grid-row-gap: {{SIZE}}{{UNIT}};',
-					],
+					'label'        => __( 'Item Match Height', 'ultimate-post-kit' ),
+					'type'         => Controls_Manager::SWITCHER,
+					'default'      => 'yes',
+					'prefix_class' => 'bdt-item-match-height--',
+					'render_type' => 'template'
 				]
 			);
 			
@@ -433,7 +439,7 @@
 						],
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-item' => 'text-align: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-item' => 'text-align: {{VALUE}};',
 					],
 					'separator' => 'before'
 				]
@@ -511,8 +517,8 @@
 						'readmore_icon[value]!' => '',
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-right: {{SIZE}}{{UNIT}};' : 'margin-left: {{SIZE}}{{UNIT}};',
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore .bdt-button-icon-align-left'  => is_rtl() ? 'margin-left: {{SIZE}}{{UNIT}};' : 'margin-right: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-right: {{SIZE}}{{UNIT}};' : 'margin-left: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore .bdt-button-icon-align-left'  => is_rtl() ? 'margin-left: {{SIZE}}{{UNIT}};' : 'margin-right: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -648,6 +654,22 @@
 			$this->end_popover();
 	
 			$this->end_controls_section();
+
+			//Navigation Controls
+			$this->start_controls_section(
+				'section_content_navigation',
+				[
+					'label' => __( 'Navigation', 'bdthemes-element-pack' ),
+				]
+			);
+	
+			//Global Navigation Controls
+			$this->register_navigation_controls();
+	
+			$this->end_controls_section();
+	
+			//Global Carousel Settings Controls
+			$this->register_carousel_settings_controls();
 	
 			//Style
 			$this->start_controls_section(
@@ -665,7 +687,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -683,7 +705,7 @@
 				Group_Control_Background::get_type(),
 				[
 					'name'      => 'item_background',
-					'selector'  => '{{WRAPPER}} .bdt-ep-product-grid-item',
+					'selector'  => '{{WRAPPER}} .bdt-ep-product-carousel-item',
 				]
 			);
 	
@@ -691,7 +713,7 @@
 				Group_Control_Border::get_type(),
 				[
 					'name'      => 'item_border',
-					'selector'  => '{{WRAPPER}} .bdt-ep-product-grid-item',
+					'selector'  => '{{WRAPPER}} .bdt-ep-product-carousel-item',
 					'separator' => 'before',
 				]
 			);
@@ -703,7 +725,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -715,7 +737,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -724,7 +746,7 @@
 				Group_Control_Box_Shadow::get_type(),
 				[
 					'name'     => 'item_box_shadow',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-item',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-item',
 				]
 			);
 	
@@ -760,7 +782,7 @@
 				Group_Control_Background::get_type(),
 				[
 					'name'      => 'item_hover_background',
-					'selector'  => '{{WRAPPER}} .bdt-ep-product-grid-item:hover',
+					'selector'  => '{{WRAPPER}} .bdt-ep-product-carousel-item:hover',
 				]
 			);
 	
@@ -773,7 +795,7 @@
 						'item_border_border!' => '',
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-item:hover' => 'border-color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-item:hover' => 'border-color: {{VALUE}};',
 					],
 				]
 			);
@@ -782,7 +804,7 @@
 				Group_Control_Box_Shadow::get_type(),
 				[
 					'name'     => 'item_hover_box_shadow',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-item:hover',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-item:hover',
 				]
 			);
 	
@@ -807,7 +829,7 @@
 				Group_Control_Border::get_type(),
 				[
 					'name'     => 'image_border',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-image img'
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-image img'
 				]
 			);
 	
@@ -818,7 +840,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', 'em', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-image img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-image img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -830,7 +852,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', 'em', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-image img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-image img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -841,7 +863,7 @@
 					'label'     => __('Spacing', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::SLIDER,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-image' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-image' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -850,7 +872,7 @@
 				Group_Control_Css_Filter::get_type(),
 				[
 					'name'     => 'css_filters',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-image img',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-image img',
 				]
 			);
 	
@@ -858,7 +880,7 @@
 				Group_Control_Box_Shadow::get_type(),
 				[
 					'name'     => 'img_shadow',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-image img'
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-image img'
 				]
 			);
 	
@@ -881,7 +903,7 @@
 					'label'     => __('Color', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-title' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-title' => 'color: {{VALUE}};',
 					],
 				]
 			);
@@ -898,7 +920,7 @@
 						],
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-title' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-title' => 'padding-bottom: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -907,7 +929,7 @@
 				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'title_typography',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-title',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-title',
 				]
 			);
 	
@@ -916,7 +938,7 @@
 				[
 					'name' => 'title_shadow',
 					'label' => __( 'Text Shadow', 'bdthemes-element-pack' ),
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-title',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-title',
 				]
 			);
 	
@@ -939,7 +961,7 @@
 					'label'     => __('Color', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-price' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-price' => 'color: {{VALUE}};',
 					],
 				]
 			);
@@ -956,7 +978,7 @@
 						],
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-price' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-price' => 'padding-bottom: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -965,7 +987,7 @@
 				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'price_typography',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-price',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-price',
 				]
 			);
 	
@@ -990,7 +1012,7 @@
 					'label'     => __('Color', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-text' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-text' => 'color: {{VALUE}};',
 					],
 				]
 			);
@@ -999,7 +1021,7 @@
 				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'text_typography',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-text',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-text',
 				]
 			);
 	
@@ -1031,8 +1053,8 @@
 					'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore' => 'color: {{VALUE}};',
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore svg' => 'fill: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore svg' => 'fill: {{VALUE}};',
 					],
 				]
 			);
@@ -1041,7 +1063,7 @@
 				Group_Control_Background::get_type(),
 				[
 					'name'      => 'readmore_background',
-					'selector'  => '{{WRAPPER}} .bdt-ep-product-grid-readmore',
+					'selector'  => '{{WRAPPER}} .bdt-ep-product-carousel-readmore',
 				]
 			);
 	
@@ -1052,7 +1074,7 @@
 					'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
 					'placeholder' => '1px',
 					'default'     => '1px',
-					'selector'    => '{{WRAPPER}} .bdt-ep-product-grid-readmore',
+					'selector'    => '{{WRAPPER}} .bdt-ep-product-carousel-readmore',
 					'separator'   => 'before',
 				]
 			);
@@ -1064,7 +1086,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', '%' ],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1073,7 +1095,7 @@
 				Group_Control_Box_Shadow::get_type(),
 				[
 					'name'     => 'readmore_box_shadow',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-readmore',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-readmore',
 				]
 			);
 	
@@ -1084,7 +1106,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1096,7 +1118,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1105,7 +1127,7 @@
 				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'readmore_typography',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-readmore',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-readmore',
 				]
 			);
 	
@@ -1124,8 +1146,8 @@
 					'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore:hover' => 'color: {{VALUE}};',
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore:hover svg' => 'fill: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore:hover' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore:hover svg' => 'fill: {{VALUE}};',
 					],
 				]
 			);
@@ -1134,7 +1156,7 @@
 				Group_Control_Background::get_type(),
 				[
 					'name'      => 'readmore_hover_background',
-					'selector'  => '{{WRAPPER}} .bdt-ep-product-grid-readmore:hover',
+					'selector'  => '{{WRAPPER}} .bdt-ep-product-carousel-readmore:hover',
 				]
 			);
 	
@@ -1147,7 +1169,7 @@
 						'readmore_border_border!' => '',
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-readmore:hover' => 'border-color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-readmore:hover' => 'border-color: {{VALUE}};',
 					],
 				]
 			);
@@ -1214,7 +1236,7 @@
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#FFCC00',
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating' => 'color: {{VALUE}};',
 					],
 					'condition' => [
 						'rating_type' => 'number',
@@ -1228,7 +1250,7 @@
 					'label' => __( 'Background Color', 'bdthemes-element-pack' ),
 					'type' => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating' => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating' => 'background-color: {{VALUE}};',
 					],
 					'condition' => [
 						'rating_type' => 'number',
@@ -1240,7 +1262,7 @@
 				Group_Control_Border::get_type(),
 				[
 					'name' => 'rating_border',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-rating',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-rating',
 					'condition' => [
 						'rating_type' => 'number',
 					],
@@ -1254,7 +1276,7 @@
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 					'condition' => [
 						'rating_type' => 'number',
@@ -1269,7 +1291,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', 'em', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 					'condition' => [
 						'rating_type' => 'number',
@@ -1284,7 +1306,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1295,7 +1317,7 @@
 					'label' => esc_html__('Size', 'bdthemes-element-pack'),
 					'type'  => Controls_Manager::SLIDER,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating' => 'font-size: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating' => 'font-size: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -1312,8 +1334,8 @@
 						],
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating i + i' => 'margin-left: {{SIZE}}{{UNIT}};',
-						'{{WRAPPER}} .bdt-ep-product-grid-rating span' => 'margin-right: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating i + i' => 'margin-left: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating span' => 'margin-right: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -1324,7 +1346,7 @@
 					'label'     => esc_html__('Count Text Color', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-rating-count' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating-count' => 'color: {{VALUE}};',
 					],
 					'separator' => 'before'
 				]
@@ -1334,7 +1356,7 @@
 				[
 					'name'     => 'rating_count_typography',
 					'label'     => esc_html__('Count Text Typography', 'bdthemes-element-pack'),
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-rating-count',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-rating-count',
 				]
 			);
 	
@@ -1357,7 +1379,7 @@
 					'label'     => __('Color', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-time' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-time' => 'color: {{VALUE}};',
 					],
 				]
 			);
@@ -1374,7 +1396,7 @@
 						],
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-time' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-time' => 'padding-bottom: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -1383,7 +1405,7 @@
 				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'time_typography',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-time',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-time',
 				]
 			);
 	
@@ -1406,7 +1428,7 @@
 					'label'     => __('Text Color', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-grid-badge span' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-badge span' => 'color: {{VALUE}};',
 					],
 				]
 			);
@@ -1415,7 +1437,7 @@
 				Group_Control_Background::get_type(),
 				[
 					'name'     => 'badge_background',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-badge span',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-badge span',
 				]
 			);
 	
@@ -1425,7 +1447,7 @@
 					'name'        => 'badge_border',
 					'placeholder' => '1px',
 					'default'     => '1px',
-					'selector'    => '{{WRAPPER}} .bdt-ep-product-grid-badge span'
+					'selector'    => '{{WRAPPER}} .bdt-ep-product-carousel-badge span'
 				]
 			);
 	
@@ -1436,7 +1458,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-badge span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-badge span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1445,7 +1467,7 @@
 				Group_Control_Box_Shadow::get_type(),
 				[
 					'name'     => 'badge_shadow',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-badge span',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-badge span',
 				]
 			);
 	
@@ -1456,7 +1478,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', 'em', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-grid-badge span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-badge span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1468,7 +1490,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', 'em', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-interactive-card .bdt-ep-product-grid-badge.bdt-position-small' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-interactive-card .bdt-ep-product-carousel-badge.bdt-position-small' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1477,9 +1499,37 @@
 				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'badge_typography',
-					'selector' => '{{WRAPPER}} .bdt-ep-product-grid-badge span',
+					'selector' => '{{WRAPPER}} .bdt-ep-product-carousel-badge span',
 				]
 			);
+	
+			$this->end_controls_section();
+
+			//Navigation Style
+			$this->start_controls_section(
+				'section_style_navigation',
+				[
+					'label'      => __( 'Navigation', 'bdthemes-element-pack' ),
+					'tab'        => Controls_Manager::TAB_STYLE,
+					'conditions' => [
+						'relation' => 'or',
+						'terms'    => [
+							[
+								'name'     => 'navigation',
+								'operator' => '!=',
+								'value'    => 'none',
+							],
+							[
+								'name'  => 'show_scrollbar',
+								'value' => 'yes',
+							],
+						],
+					],
+				]
+			);
+	
+			//Global Navigation Style Controls
+			$this->register_navigation_style_controls('swiper-carousel');
 	
 			$this->end_controls_section();
 			
@@ -1501,7 +1551,7 @@
 				[
 					'readmore-link' => [
 						'class' => [
-							'bdt-ep-product-grid-image-link',
+							'bdt-ep-product-carousel-image-link',
 						],
 						'href'   => isset($item['readmore_link']['url']) ? esc_url($item['readmore_link']['url']) : '#',
 						'target' => $item['readmore_link']['is_external'] ? '_blank' : '_self'
@@ -1510,8 +1560,8 @@
 			);
 	
 			?>
-			<div class="bdt-ep-product-grid-image bdt-image-mask">
-				
+			<div class="bdt-ep-product-carousel-image bdt-image-mask">
+
 				<?php 
 				$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
 				if (!$thumb_url) {
@@ -1546,7 +1596,7 @@
 				[
 					'readmore-link' => [
 						'class' => [
-							'bdt-ep-product-grid-title-link',
+							'bdt-ep-product-carousel-title-link',
 						],
 						'href'   => isset($item['readmore_link']['url']) ? esc_url($item['readmore_link']['url']) : '#',
 						'target' => $item['readmore_link']['is_external'] ? '_blank' : '_self'
@@ -1554,7 +1604,7 @@
 				], '', '', true
 			);
 	
-			$this->add_render_attribute('title-wrap', 'class', 'bdt-ep-product-grid-title', true);
+			$this->add_render_attribute('title-wrap', 'class', 'bdt-ep-product-carousel-title', true);
 	
 			?>
 			<?php if ( $item['title'] ) : ?>
@@ -1575,7 +1625,7 @@
 				return;
 			}
 	
-			$this->add_render_attribute('price-wrap', 'class', 'bdt-ep-product-grid-price', true);
+			$this->add_render_attribute('price-wrap', 'class', 'bdt-ep-product-carousel-price', true);
 	
 			?>
 			<?php if ( $item['price'] ) : ?>
@@ -1593,7 +1643,7 @@
 				return;
 			}
 	
-			$this->add_render_attribute('time-wrap', 'class', 'bdt-ep-product-grid-time', true);
+			$this->add_render_attribute('time-wrap', 'class', 'bdt-ep-product-carousel-time', true);
 	
 			?>
 			<?php if ( $item['time'] ) : ?>
@@ -1614,7 +1664,7 @@
 	
 			?>
 			<?php if ( $item['text'] ) : ?>
-				<div class="bdt-ep-product-grid-text">
+				<div class="bdt-ep-product-carousel-text">
 					<?php echo wp_kses_post( $item['text'] ); ?>
 				</div>
 			<?php endif; ?>
@@ -1632,7 +1682,7 @@
 				[
 					'readmore-link' => [
 						'class' => [
-							'bdt-ep-product-grid-readmore',
+							'bdt-ep-product-carousel-readmore',
 							$settings['readmore_hover_animation'] ? 'elementor-animation-' . $settings['readmore_hover_animation'] : '',
 						],
 						'href'   => isset($item['readmore_link']['url']) ? esc_url($item['readmore_link']['url']) : '#',
@@ -1643,7 +1693,7 @@
 	
 			?>
 			<?php if (( ! empty( $item['readmore_link']['url'] )) && ( $settings['readmore_link_to'] == 'button' )): ?>
-				<div class="bdt-ep-product-grid-readmore-wrap">
+				<div class="bdt-ep-product-carousel-readmore-wrap">
 					<a <?php echo $this->get_render_attribute_string( 'readmore-link' ); ?>>
 						<?php echo esc_html($settings['readmore_text']); ?>
 						<?php if ($settings['readmore_icon']['value']) : ?>
@@ -1680,7 +1730,7 @@
 	
 			?>
 			<div>
-				<div class="bdt-ep-product-grid-rating bdt-flex-inline bdt-flex-middle bdt-<?php echo esc_attr($settings['rating_type']) ?>">
+				<div class="bdt-ep-product-carousel-rating bdt-flex-inline bdt-flex-middle bdt-<?php echo esc_attr($settings['rating_type']) ?>">
 					<?php if ( $settings['rating_type'] === 'number' ) : ?>
 						<span><?php echo esc_html( $item['rating_number']['size'] ); ?></span>
 						<i class="ep-icon-star-full" aria-hidden="true"></i>
@@ -1694,7 +1744,7 @@
 						</span>
 						<?php endif; ?>
 				</div>
-				<span class="bdt-ep-product-grid-rating-count"><?php echo esc_html( $item['rating_count'] ); ?></span>
+				<span class="bdt-ep-product-carousel-rating-count"><?php echo esc_html( $item['rating_count'] ); ?></span>
 			</div>
 			<?php
 		}
@@ -1704,48 +1754,62 @@
 	
 			?>
 			<?php if ( $settings['badge'] and '' != $item['badge_text'] ) : ?>
-				<div class="bdt-ep-product-grid-badge bdt-position-small bdt-position-<?php echo esc_attr($settings['badge_position']); ?>">
+				<div class="bdt-ep-product-carousel-badge bdt-position-small bdt-position-<?php echo esc_attr($settings['badge_position']); ?>">
 					<span class="bdt-badge bdt-padding-small"><?php echo esc_html($item['badge_text']); ?></span>
 				</div>
 			<?php endif; ?>
 			<?php
 		}
-		
-		protected function render() {
+
+		public function render_carosuel_item() {
 			$settings = $this->get_settings_for_display();
-			
-			if ( empty( $settings['product_items'] ) ) {
+	
+			if ( empty($settings['product_items'] ) ) {
 				return;
 			}
-			
-			$this->add_render_attribute( 'product-grid', 'class', 'bdt-ep-product-grid' );
+	
+			$this->add_render_attribute('item-wrap', 'class', 'bdt-ep-product-carousel-item swiper-slide', true);
 
 			?>
-        	<div <?php $this->print_render_attribute_string( 'product-grid' ); ?>>
-			<?php foreach ( $settings['product_items'] as $index => $item ) : 
 
-				$this->add_render_attribute('item-wrap', 'class', 'bdt-ep-product-grid-item', true);
-
-				?>
+			<?php foreach ( $settings['product_items'] as $index => $item ) : ?>
 				<div <?php echo $this->get_render_attribute_string('item-wrap'); ?>>
 					<?php $this->render_image($item); ?>
-					<div class="bdt-ep-product-grid-content">
-						<div class="bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between">
+					<div class="bdt-ep-product-carousel-content">
+						<div class="bdt-ep-product-carousel-title-price bdt-flex bdt-flex-middle bdt-flex-between">
 							<?php $this->render_title($item); ?>
 							<?php $this->render_price($item); ?>
 						</div>
 						<?php $this->render_text($item); ?>
 						<?php $this->render_readmore($item); ?>
-						<div class="bdt-ep-product-grid-rating-time bdt-flex bdt-flex-middle bdt-flex-between">
+						<div class="bdt-ep-product-carousel-rating-time bdt-flex bdt-flex-middle bdt-flex-between">
 							<?php $this->render_review_rating($item); ?>
 							<?php $this->render_time($item); ?>
 						</div>
 					</div>
 					<?php $this->render_badge($item); ?>
 				</div>
-
-			<?php endforeach; ?>
-            </div>
+			<?php endforeach;
+		}
+		
+		public function render_header() {
+			$settings = $this->get_settings_for_display();
+	
+			//Global Function
+			$this->render_swiper_header_attribute( 'product-carousel');
+	
+			$this->add_render_attribute( 'carousel', 'class', 'bdt-ep-product-carousel' );
+	
+			?>
+			<div <?php echo $this->get_render_attribute_string( 'carousel' ); ?>>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
 			<?php
+		}
+	
+		public function render() {
+			$this->render_header();
+			$this->render_carosuel_item();
+			$this->render_footer();
 		}
 	}

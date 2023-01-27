@@ -911,6 +911,16 @@ class ModuleService {
                     'video_url'    => '',
                 ],
                 [
+                    'name'         => 'product-carousel',
+                    'label'        => esc_html__('Product Carousel', 'bdthemes-element-pack'),
+                    'type'         => 'checkbox',
+                    'default'      => 'off',
+                    'widget_type'  => 'free',
+                    'content_type' => 'custom new',
+                    'demo_url'     => 'https://www.elementpack.pro/demo/element/product-carousel',
+                    'video_url'    => '',
+                ],
+                [
                     'name'         => 'panel-slider',
                     'label'        => esc_html__('Panel Slider', 'bdthemes-element-pack'),
                     'type'         => 'checkbox',

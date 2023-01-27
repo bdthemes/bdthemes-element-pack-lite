@@ -145,27 +145,27 @@ class Fancy_List extends Module_Base {
         );
 
         $this->add_responsive_control(
-			'columns',
-			[
-				'label'          => esc_html__( 'Columns', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'           => Controls_Manager::SELECT,
-				'default'        => '1',
-				'tablet_default' => '1',
-				'mobile_default' => '1',
-				'options'        => [
-					'1' => '1',
-					'2' => '2',
-					'3' => '3',
-					'4' => '4',
-					'5' => '5',
-					'6' => '6',
-				],
-				'selectors' => [
+            'columns',
+            [
+                'label'          => esc_html__('Columns', 'bdthemes-element-pack') . BDTEP_NC,
+                'type'           => Controls_Manager::SELECT,
+                'default'        => '1',
+                'tablet_default' => '1',
+                'mobile_default' => '1',
+                'options'        => [
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
+                    '5' => '5',
+                    '6' => '6',
+                ],
+                'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list ul.bdt-fancy-list-group' => 'grid-template-columns: repeat({{SIZE}}, 1fr);',
                 ],
                 'separator' => 'before',
-			]
-		);
+            ]
+        );
 
         $this->add_responsive_control(
             'list_item_space_between',
@@ -878,7 +878,7 @@ class Fancy_List extends Module_Base {
         $settings = $this->get_settings_for_display();
         $this->add_render_attribute('icon_list', 'class', 'bdt-fancy-list-icon');
         $this->add_render_attribute('list_item', 'class', 'elementor-icon-list-item');
-        ?>
+?>
         <div class="bdt-fancy-list">
             <ul class="bdt-list bdt-fancy-list-group" <?php echo $this->get_render_attribute_string('icon_list'); ?>>
                 <?php
@@ -918,11 +918,23 @@ class Fancy_List extends Module_Base {
                             <?php echo '</span></div>';
                             }
                             ?>
-                            <?php
-                            if (!empty($item['img']['url'])) {
-                                echo '<div class=" bdt-fancy-list-img"> <img src=" ' . $item['img']['url'] . '" alt="' . esc_html($item['text']) . '"> </div>';
-                            }
-                            ?>
+                            <?php if (!empty($item['img']['url'])) : ?>
+                                <div class="bdt-fancy-list-img">
+                                    <?php
+                                    $thumb_url = $item['img']['url'];
+                                    if ($thumb_url) {
+                                        printf(wp_get_attachment_image(
+                                            $item['img']['id'],
+                                            'medium',
+                                            false,
+                                            [
+                                                'alt' => esc_html($item['text'])
+                                            ]
+                                        ));
+                                    }
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="bdt-fancy-list-content">
                                 <<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?> <?php echo $this->get_render_attribute_string('list_title_tags'); ?>>
                                     <?php echo wp_kses_post($item['text']); ?>
@@ -940,12 +952,12 @@ class Fancy_List extends Module_Base {
                         ?>
                             </a>
                         <?php else : ?>
-                        </div>
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
         </div>
+    <?php endif; ?>
+    </li>
+<?php endforeach; ?>
+</ul>
+</div>
 <?php
     }
 }

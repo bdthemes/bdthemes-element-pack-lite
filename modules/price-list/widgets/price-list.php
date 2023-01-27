@@ -1413,19 +1413,20 @@ class Price_List extends Module_Base {
 	}
 
 	private function render_image( $item, $settings ) {
-		// $image_id  = $item['image']['id'];
-		// $image_src = wp_get_attachment_image_src( $item['image']['id'], 'thumbnail_size', $settings );
-		$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'thumbnail_size', $settings);
-		if ( ! $thumb_url ) {
-        	$thumb_url = $settings['image']['url'];
+
+		$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
+		if (!$thumb_url) {
+			printf('<img src="%1$s" alt="%2$s">', $settings['image']['url'], esc_html($item['title']));
+		} else {
+			printf(wp_get_attachment_image(
+				$item['image']['id'],
+				$settings['thumbnail_size_size'],
+				false,
+				[
+					'alt' => esc_html($item['title'])
+				]
+			));
 		}
-		?>
-
-		<img src="<?php echo esc_url( $thumb_url); ?>" alt="<?php echo esc_html( $item['title'] ); ?>">
-
-		<?php
-		
-		//return sprintf( '<img src="%s" alt="%s" />', $image_src, $item['title'] );
 	}
 
 	private function render_item_header( $item ) {
@@ -1521,75 +1522,4 @@ class Price_List extends Module_Base {
 		<?php
 	}
 
-	protected function content_template_delete() {
-		?>
-		<ul class="bdt-price-list">
-			<#
-			iconHTML = elementor.helpers.renderIcon( view, settings.cart_icon, { 'aria-hidden': true }, 'i' , 'object' );
-			migrated = elementor.helpers.isIconMigrated( settings, 'cart_icon' );
-
-			var bdt_has_counter = ( 'yes' === settings.item_counter ) ? '<div class="bdt-price-list-counter"></div>' : '';
-
-				for ( var i in settings.price_list ) {
-					var item = settings.price_list[i];
-					var bdt_has_badge   = ( 'yes' == settings.show_badge && ( item.item_badge).length ) ? '<span class="bdt-price-list-badge">' + item.item_badge + '</span>' : '' ;
-
-					item_open_wrap = '<li class="bdt-price-list-item">'+bdt_has_counter+'<div class="bdt-grid bdt-grid-collapse bdt-flex-' + settings.vertical_align + '" bdt-grid>';
-						item_close_wrap = '</div>'+bdt_has_badge+'</li>';
-						
-					if ( item.link.url ) {
-						item_open_wrap = '<li class="bdt-price-list-item">'+bdt_has_counter+'<div class="bdt-grid bdt-grid-collapse bdt-flex-' + settings.vertical_align + '" href="' + item.link.url + '" bdt-grid>';
-						item_close_wrap = '</div>'+bdt_has_badge+'</li>';
-					} #>
-					{{{ item_open_wrap }}}
-					<# if ( item.image && item.image.id ) {
-
-						var image = {
-							id: item.image.id,
-							url: item.image.url,
-							size: settings.image_size,
-							dimension: settings.image_custom_dimension,
-						};
-
-						var image_url = elementor.imagesManager.getImageUrl( image );
-
-						if (  image_url ) { #>
-							<div class="bdt-price-list-image bdt-width-auto"><img src="{{ image_url }}" alt="{{ item.title }}"></div>
-						<# } #>
-
-					<# } #>
-
-					<div class="bdt-price-list-text bdt-width-expand">
-						<div>
-							<div class="bdt-price-list-header bdt-grid bdt-grid-small bdt-flex-middle" bdt-grid>
-								<span class="bdt-price-list-title">{{{ item.title }}}</span>
-								<span class="bdt-price-list-separator bdt-width-expand"></span>
-							</div>
-							<p class="bdt-price-list-description">{{{ item.item_description }}}</p>
-						</div>
-					</div>
-					<div class="bdt-width-auto bdt-flex-inline">
-						<# if ( item.old_price && settings.show_old_price ) { #>
-							<span class="bdt-price-list-old-price"><del>{{{ item.old_price }}}</del></span>
-						<# } #>
-
-						<span class="bdt-price-list-price">{{{ item.price }}}</span>
-					</div>
-
-					<# if ( settings.cart_icon.value && 'yes' == settings.show_cart ) { #>
-						<div class="bdt-width-auto bdt-flex-inline">
-							<span class="bdt-price-list-cart-icon">
-								<# if ( iconHTML && iconHTML.rendered ) { #>
-									{{{ iconHTML.value }}}
-								<# } else { #>
-									<i class="{{ settings.icon }}" aria-hidden="true"></i>
-								<# } #>
-							</span>
-						</div>
-					<# } #>
-
-				{{{ item_close_wrap }}}
-			 <# } #>
-		</ul>
-	<?php }
 }

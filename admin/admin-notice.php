@@ -63,12 +63,14 @@ class Notices {
 			'id'               => '',
 			'type'             => 'info',
 			'show_if'          => true,
+			'title'            => '',
 			'message'          => '',
 			'class'            => 'element-pack-notice',
 			'dismissible'      => false,
 			'dismissible-meta' => 'transient',
 			'dismissible-time' => WEEK_IN_SECONDS,
 			'data'             => '',
+			'action_link'      => '',
 		];
 
 		foreach (self::$notices as $key => $notice) {
@@ -133,13 +135,48 @@ class Notices {
 	 * @param  array $notice Notice notice_layout.
 	 * @return void
 	 */
-	public static function notice_layout($notice = []) {
+	public static function __old__notice_layout($notice = []) {
 
 ?>
 		<div id="<?php echo esc_attr($notice['id']); ?>" class="<?php echo esc_attr($notice['classes']); ?>" <?php echo esc_attr($notice['data']); ?>>
 			<p>
 				<?php echo wp_kses_post($notice['message']); ?>
 			</p>
+		</div>
+	<?php
+	}
+
+	/**
+	 * New Notice Layout
+	 * @param  array $notice Notice notice_layout.
+	 * @return void
+	 * @since 6.11.3
+	 */
+
+	public static function notice_layout($notice = []) {
+
+	?>
+		<div id="<?php echo esc_attr($notice['id']); ?>" class="<?php echo esc_attr($notice['classes']); ?>" <?php echo esc_attr($notice['data']); ?>>
+			<div class="bdt-notice-wrapper">
+				<div class="bdt-notice-icon-wrapper">
+					<!-- <i class="eicon-elementor" aria-hidden="true"></i> -->
+					<img src="<?php echo BDTEP_ASSETS_URL; ?>images/logo.svg">
+				</div>
+
+				<div class="bdt-notice-content">
+					<?php if (isset($notice['title']) && !empty($notice['title'])) : ?>
+						<h2 class="bdt-notice-title"><?php echo wp_kses_post($notice['title']); ?></h2>
+					<?php endif; ?>
+
+					<p class="bdt-notice-text"><?php echo wp_kses_post($notice['message']); ?></p>
+
+					<?php if (isset($notice['action_link']) && !empty($notice['action_link'])) : ?>
+						<div class="bdt-notice-btn">
+							<a href="#">Renew Now</a>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
 <?php
 	}

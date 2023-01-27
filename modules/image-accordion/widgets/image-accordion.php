@@ -257,10 +257,19 @@ class Image_Accordion extends Module_Base {
 			[
 				'label' => esc_html__('Height', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em', 'vh'],
 				'range' => [
 					'px' => [
 						'min' => 100,
 						'max' => 1200,
+					],
+					'em' => [
+						'min' => 10,
+						'max' => 100,
+					],
+					'vh' => [
+						'min' => 10,
+						'max' => 100,
 					],
 				],
 				'selectors' => [

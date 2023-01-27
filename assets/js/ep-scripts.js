@@ -1447,6 +1447,7 @@ $(window).on('elementor/frontend/init', function () {
         var ModuleHandler = elementorModules.frontend.handlers.Base, MegaMenu;
 
 
+        // alert('hhhhö');
         MegaMenu = ModuleHandler.extend({
             bindEvents: function () {
                 this.run();
@@ -1481,7 +1482,10 @@ $(window).on('elementor/frontend/init', function () {
                     return;
                 }
 
-
+                // $($container).removeAttr('style');
+                $($container).find(".ep-megamenu-panel").css({
+                  "opacity": "1",
+                });
                var dropMenu =  $($container).find('.ep-megamenu-vertical-dropdown');
 
 
@@ -1638,7 +1642,6 @@ $(window).on('elementor/frontend/init', function () {
 
                 $(this).find('.details').removeClass("hidden");
                 $($container).find(".sub-menu-toggle").remove();
-                $($container).find(".ep-megamenu-loaded").removeAttr("style");
 
 
                 if ($($elementor_section).find('.bdt-accrodion-title-megamenu').length === 0) {
@@ -1655,8 +1658,8 @@ $(window).on('elementor/frontend/init', function () {
                 var $toggler = $container.find('.bdt-navbar-toggle');
                 var $toggleContent = $elementor_section.find('.ep-virtual-area');
                 bdtUIkit.drop($toggleContent, {
-                    // offset: (this.settings("offset.size") !== '') ? this.settings('offset.size') : '5',
-                    offset:5,
+                    offset: (this.settings("offset_mobile.size") !== '') ? this.settings('offset_mobile.size') : '5',
+                    // offset:5,
                     toggle: $toggler,
                     animation: (this.settings("animation_type") !== undefined) ? this.settings('animation_type') : 'fade',
                     duration: (this.settings("animation_duration") !== undefined) ? this.settings('animation_duration') : '200',
@@ -2305,54 +2308,53 @@ function circleJs(id, circleMoving, movingTime, mouseEvent) {
 
             getDefaultSettings: function () {
                 return {
-                    resize   : true,
+                    resize: true,
                     useWorker: true,
                 };
             },
 
             onElementChange: debounce(function (prop) {
-                if ( prop.indexOf('ep_widget_cf_') !== -1 ) {
+                if (prop.indexOf('ep_widget_cf_') !== -1) {
                     //  this.instance.reset();
                     this.run();
 
                 }
             }, 400),
 
-            settings     : function (key) {
+            settings: function (key) {
                 return this.getElementSettings('ep_widget_cf_' + key);
             },
             randomInRange: function (min, max) {
                 return Math.random() * (max - min) + min;
             },
-            run          : function () {
-                var options  = this.getDefaultSettings(),
+            run: function () {
+                var options = this.getDefaultSettings(),
                     $element = this.$element;
 
                 if (this.settings('z_index')) {
                     options.zIndex = this.settings('z_index');
                 }
-                if ( this.settings('particle_count.size') ) {
+                if (this.settings('particle_count.size')) {
                     options.particleCount = this.settings('particle_count.size') || 100;
                 }
-                if ( this.settings('start_velocity.size') ) {
+                if (this.settings('start_velocity.size')) {
                     options.startVelocity = this.settings('start_velocity.size') || 45;
                 }
 
-                if ( this.settings('spread.size') ) {
+                if (this.settings('spread.size')) {
                     options.spread = this.settings('spread.size') || 70;
                 }
-                if ( this.settings('colors') ) {
-                    var colors     = this.settings('colors');
+                if (this.settings('colors')) {
+                    var colors = this.settings('colors');
                     options.colors = colors.split(',');
                 }
-                if ( this.settings('shapes') ) {
-                    var shapes     = this.settings('shapes');
+                if (this.settings('shapes')) {
+                    var shapes = this.settings('shapes');
                     options.shapes = shapes.split(',');
                 }
 
-
-                if ( this.settings('origin') ) {
-                    if ( this.settings('origin_x.size') || this.settings('origin_y.size') ) {
+                if (this.settings('origin')) {
+                    if (this.settings('origin_x.size') || this.settings('origin_y.size')) {
                         options.origin = {
                             x: this.settings('origin_x.size') || 0.5,
                             y: this.settings('origin_y.size') || 0.6
@@ -2360,33 +2362,33 @@ function circleJs(id, circleMoving, movingTime, mouseEvent) {
                     }
                 }
 
-                if ( this.settings('angle.size') ) {
+                if (this.settings('angle.size')) {
                     options.angle = this.settings('angle.size') || 90;
                 }
 
-                var this_instance    = this;
+                var this_instance = this;
                 var instanceConfetti = {
                     executeConfetti: function () {
-                        if ( this_instance.settings('type') == 'random' ) {
-                            options.angle         = this_instance.randomInRange(55, this_instance.settings('angle.size') || 90);
-                            options.spread        = this_instance.randomInRange(50, this_instance.settings('spread.size') || 70);
+                        if (this_instance.settings('type') == 'random') {
+                            options.angle = this_instance.randomInRange(55, this_instance.settings('angle.size') || 90);
+                            options.spread = this_instance.randomInRange(50, this_instance.settings('spread.size') || 70);
                             options.particleCount = this_instance.randomInRange(55, this_instance.settings('particle_count.size') || 100);
                         }
-                        if ( this_instance.settings('type') == 'fireworks' ) {
-                            var duration     = this_instance.settings('fireworks_duration.size') || 1500;
+                        if (this_instance.settings('type') == 'fireworks') {
+                            var duration = this_instance.settings('fireworks_duration.size') || 1500;
                             var animationEnd = Date.now() + duration;
-                            var defaults     = {
+                            var defaults = {
                                 startVelocity: this_instance.settings('start_velocity.size') || 30,
-                                spread       : this_instance.settings('spread.size') || 360,
-                                shapes       : this_instance.settings('shapes.size') ? shapes.split(',') : ['circle', 'circle', 'square'],
-                                ticks        : 60,
-                                zIndex       : this_instance.settings('z_index') || 0
+                                spread: this_instance.settings('spread.size') || 360,
+                                shapes: this_instance.settings('shapes') ? shapes.split(',') : ['circle', 'circle', 'square'],
+                                ticks: 60,
+                                zIndex: this_instance.settings('z_index') || 0
                             };
 
                             var interval = setInterval(function () {
                                 var timeLeft = animationEnd - Date.now();
 
-                                if ( timeLeft <= 0 ) {
+                                if (timeLeft <= 0) {
                                     return clearInterval(interval);
                                 }
 
@@ -2409,99 +2411,110 @@ function circleJs(id, circleMoving, movingTime, mouseEvent) {
                             }, 250);
                         }
 
-                        if ( this_instance.settings('type') == 'school-pride' ) {
+                        if (this_instance.settings('type') == 'school-pride') {
                             var duration = this_instance.settings('fireworks_duration.size') || 1500;
-                            var end      = Date.now() + (duration);
+                            var end = Date.now() + (duration);
 
                             (function frame() {
                                 confetti({
                                     particleCount: this_instance.settings('particle_count.size') || 2,
-                                    angle        : this_instance.settings('angle.size') || 60,
-                                    spread       : this_instance.settings('spread.size') || 55,
-                                    shapes       : this_instance.settings('shapes.size') ? shapes.split(',') : ['circle', 'circle', 'square'],
-                                    origin       : {
+                                    angle: this_instance.settings('angle.size') || 60,
+                                    spread: this_instance.settings('spread.size') || 55,
+                                    shapes: this_instance.settings('shapes') ? shapes.split(',') : ['circle', 'circle', 'square'],
+                                    origin: {
                                         x: 0
                                     },
-                                    colors       : colors.split(',')
+                                    colors: colors.split(',')
                                 });
                                 confetti({
                                     particleCount: this_instance.settings('particle_count.size') || 2,
-                                    angle        : (this_instance.settings('angle.size') || 60) * 2, //120
-                                    spread       : this_instance.settings('spread.size') || 55,
-                                    shapes       : this_instance.settings('shapes.size') ? shapes.split(',') : ['circle', 'circle', 'square'],
-                                    origin       : {
+                                    angle: (this_instance.settings('angle.size') || 60) * 2, //120
+                                    spread: this_instance.settings('spread.size') || 55,
+                                    shapes: this_instance.settings('shapes') ? shapes.split(',') : ['circle', 'circle', 'square'],
+                                    origin: {
                                         x: 1
                                     },
-                                    colors       : colors.split(',')
+                                    colors: colors.split(',')
                                 });
 
-                                if ( Date.now() < end ) {
+                                if (Date.now() < end) {
                                     requestAnimationFrame(frame);
                                 }
                             }());
                         }
 
-                        if ( this_instance.settings('type') == 'snow' ) {
-                            var duration     = this_instance.settings('fireworks_duration.size') || 1500;
+                        if (this_instance.settings('type') == 'snow') {
+                            var duration = this_instance.settings('fireworks_duration.size') || 1500;
+                            /**
+                             * Infinite Animation Time
+                             * Yes & Not in Editor
+                             */
+                            if ('yes' == this_instance.settings('anim_infinite') && false == Boolean(elementorFrontend.isEditMode())) {
+                                duration = 24 * 60 * 60 * 1000;
+                            }
                             var animationEnd = Date.now() + duration;
-                            var skew         = 1;
+                            var skew = 1;
 
                             (function frame() {
                                 var timeLeft = animationEnd - Date.now();
-                                var ticks    = Math.max(200, 500 * (timeLeft / duration));
-                                skew         = Math.max(0.8, skew - 0.001);
+                                var ticks = Math.max(200, 500 * (timeLeft / duration));
+                                skew = Math.max(0.8, skew - 0.001);
 
                                 confetti({
                                     particleCount: this_instance.settings('particle_count.size') || 1,
                                     startVelocity: this_instance.settings('start_velocity.size') || 0,
-                                    ticks        : ticks,
-                                    origin       : {
+                                    ticks: ticks,
+                                    origin: {
                                         x: Math.random(),
                                         // since particles fall down, skew start toward the top
                                         y: (Math.random() * skew) - 0.2
                                     },
-                                    colors       : colors.split(','),
-                                    shapes       : this_instance.settings('shapes.size') ? shapes.split(',') : ['circle'],
-                                    gravity      : this_instance.randomInRange(0.4, 0.6),
-                                    scalar       : this_instance.randomInRange(0.4, 1),
-                                    drift        : this_instance.randomInRange(-0.4, 0.4)
+                                    colors: colors.split(','),
+                                    shapes: this_instance.settings('shapes') ? shapes.split(',') : ['circle'],
+                                    gravity: this_instance.randomInRange(0.4, 0.6),
+                                    scalar: this_instance.randomInRange(0.4, 1),
+                                    drift: this_instance.randomInRange(-0.4, 0.4)
                                 });
 
-                                if ( timeLeft > 0 ) {
+                                if (timeLeft > 0) {
                                     requestAnimationFrame(frame);
                                 }
                             }());
+
+                            setInterval(function () {
+                                // instanceConfetti.executeConfetti();
+                            }, 5000);
                         }
 
-                        if ( (this_instance.settings('type') == 'basic') ||
-                            (this_instance.settings('type') == 'random') ) {
+                        if ((this_instance.settings('type') == 'basic') ||
+                            (this_instance.settings('type') == 'random')) {
                             this_instance.instance = confetti(options);
 
                         }
                     }
                 };
 
-                if ( this.settings('confetti') == 'yes' ) {
+                if (this.settings('confetti') == 'yes') {
 
-                    if ( (this.settings('trigger_type') == 'click') ) {
+                    if ((this.settings('trigger_type') == 'click')) {
                         jQuery(this.settings('trigger_selector')).on('click', function () {
                             instanceConfetti.executeConfetti();
                             //  $(this).unbind('mouseenter mouseleave');
                         });
-                    } else if ( this.settings('trigger_type') == 'mouseenter' ) {
+                    } else if (this.settings('trigger_type') == 'mouseenter') {
                         jQuery(this.settings('trigger_selector')).on('mouseenter', function () {
                             instanceConfetti.executeConfetti();
                             //  $(this).unbind('mouseenter mouseleave');
                         });
-                    } else if ( this.settings('trigger_type') == 'ajax-success' ) {
+                    } else if (this.settings('trigger_type') == 'ajax-success') {
                         jQuery(document).ajaxComplete(function (event, jqxhr, settings) {
                             instanceConfetti.executeConfetti();
                         });
-                    } else if ( this.settings('trigger_type') == 'delay' ) {
+                    } else if (this.settings('trigger_type') == 'delay') {
                         setTimeout(function () {
                             instanceConfetti.executeConfetti();
                         }, this.settings('trigger_delay.size') ? this.settings('trigger_delay.size') : 1000);
-                    } else if ( this.settings('trigger_type') == 'onview' ) {
+                    } else if (this.settings('trigger_type') == 'onview') {
                         elementorFrontend.waypoint($element, function () {
                             instanceConfetti.executeConfetti();
                         }, {
@@ -2510,7 +2523,6 @@ function circleJs(id, circleMoving, movingTime, mouseEvent) {
                         });
                     } else {
                         instanceConfetti.executeConfetti();
-
                     }
 
                 }
@@ -9418,6 +9430,56 @@ jQuery(window).on('elementor/frontend/init', function() {
 
 	'use strict';
 
+	var widgetProductCarousel = function( $scope, $ ) {
+
+		var $ProductCarousel = $scope.find( '.bdt-ep-product-carousel' );
+				
+        if ( ! $ProductCarousel.length ) {
+            return;
+        }
+
+		var $ProductCarouselContainer = $ProductCarousel.find('.swiper-container'),
+			$settings 		 = $ProductCarousel.data('settings');
+
+		// Access swiper class
+        const Swiper = elementorFrontend.utils.swiper;
+        initSwiper();
+        
+        async function initSwiper() {
+
+			var swiper = await new Swiper($ProductCarouselContainer, $settings);
+
+			if ($settings.pauseOnHover) {
+				 $($ProductCarouselContainer).hover(function() {
+					(this).swiper.autoplay.stop();
+				}, function() {
+					(this).swiper.autoplay.start();
+				});
+			}
+		};
+
+	};
+
+
+	jQuery(window).on('elementor/frontend/init', function() {
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-product-carousel.default', widgetProductCarousel );
+	});
+
+}( jQuery, window.elementorFrontend ) );
+
+/**
+ * End twitter carousel widget script
+ */
+
+
+/**
+ * Start twitter carousel widget script
+ */
+
+( function( $, elementor ) {
+
+	'use strict';
+
 	var widgetStaticCarousel = function( $scope, $ ) {
 
 		var $StaticCarousel = $scope.find( '.bdt-static-carousel' );
@@ -12311,3 +12373,47 @@ jQuery(document).ready(function () {
     }
 
 });
+/**
+ * Start twitter carousel widget script
+ */
+
+(function ($, elementor) {
+
+	'use strict';
+
+	var widgetFbFeedCarousel = function ($scope, $) {
+
+		var $fbCarousel = $scope.find('.bdt-facebook-feed-carousel');
+
+		if (!$fbCarousel.length) {
+			return;
+		}
+
+		var $fbCarouselContainer = $fbCarousel.find('.swiper-container'),
+			$settings = $fbCarousel.data('settings');
+
+		const Swiper = elementorFrontend.utils.swiper;
+		initSwiper();
+		async function initSwiper() {
+			var swiper = await new Swiper($fbCarouselContainer, $settings); // this is an example
+			if ($settings.pauseOnHover) {
+				$($fbCarouselContainer).hover(function () {
+					(this).swiper.autoplay.stop();
+				}, function () {
+					(this).swiper.autoplay.start();
+				});
+			}
+		};
+	};
+
+
+	jQuery(window).on('elementor/frontend/init', function () {
+		elementorFrontend.hooks.addAction('frontend/element_ready/bdt-facebook-feed-carousel.default', widgetFbFeedCarousel);
+	});
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End twitter carousel widget script
+ */
+

@@ -1099,21 +1099,25 @@ class Image_Stack extends Module_Base {
 	protected function render_media($item) {
 		$settings  = $this->get_settings_for_display();
 
-		if('image' == $item['media_type']):
-			$img_url = Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'thumbnail_size', $settings);
-
-			if ( ! $img_url ) {
-				$img_url = $item['image']['url'];
-			}
-		endif;
-
 		?>
 
 		<?php if ( 'icon' == $item['media_type'] ) { ?>
 			<?php Icons_Manager::render_icon( $item['selected_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-		<?php } elseif ( 'image' == $item['media_type'] ) { ?>
-			<img src="<?php echo esc_url( $img_url); ?>" alt="<?php echo esc_html($item['tooltip_text']) ?>">
-		<?php } ?>
+		<?php } elseif ( 'image' == $item['media_type'] ) { 
+			$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
+			if (!$thumb_url) {
+				printf('<img src="%1$s" alt="%2$s">', $item['image']['url'], esc_html($item['tooltip_text']));
+			} else {
+				printf(wp_get_attachment_image(
+					$item['image']['id'],
+					$settings['thumbnail_size_size'],
+					false,
+					[
+						'alt' => esc_html($item['tooltip_text'])
+					]
+				));
+			}
+		} ?>
 
 		<?php
 	}
