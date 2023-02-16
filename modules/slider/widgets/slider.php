@@ -52,11 +52,11 @@ class Slider extends Module_Base {
 	}
 
 	public function get_script_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['imagesloaded', 'ep-scripts'];
-        } else {
+		if ($this->ep_is_edit_mode()) {
+			return ['imagesloaded', 'ep-scripts'];
+		} else {
 			return ['imagesloaded', 'ep-slider'];
-        }
+		}
 	}
 
 	public function on_import($element) {
@@ -610,6 +610,7 @@ class Slider extends Module_Base {
 					'cube'      => esc_html__('Cube', 'bdthemes-element-pack'),
 					'coverflow' => esc_html__('Coverflow', 'bdthemes-element-pack'),
 					'flip'      => esc_html__('Flip', 'bdthemes-element-pack'),
+					// 'creative'      => esc_html__('creative', 'bdthemes-element-pack'),
 				],
 			]
 		);
@@ -909,7 +910,7 @@ class Slider extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name' => 'title_text_stroke',
-                'label' => __('Text_Stroke', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Text_Stroke', 'bdthemes-element-pack') . BDTEP_NC,
 				'selector' => '{{WRAPPER}} .bdt-slider .bdt-slide-item .bdt-slide-title',
 			]
 		);
@@ -2660,6 +2661,18 @@ class Slider extends Module_Base {
 							"observer"       => ($settings["observer"]) ? true : false,
 							"observeParents" => ($settings["observer"]) ? true : false,
 							"effect"         => $settings["transition"],
+							// "creativeEffect" => [
+							// 	'prev' => [
+							// 		'shadow'    => true,
+							// 		'translate' => ["-125%", 0, -800],
+							// 		'rotate'    => [0, 0, -90],
+							// 	],
+							// 	'next' => [
+							// 		'shadow'    => true,
+							// 		'translate' => ["125%", 0, -800],
+							// 		'rotate'    => [0, 0, 90],
+							// 	]
+							// ],
 							"navigation"     => [
 								"nextEl" => "#" . $id . " .bdt-navigation-next",
 								"prevEl" => "#" . $id . " .bdt-navigation-prev",
@@ -2691,7 +2704,7 @@ class Slider extends Module_Base {
 
 ?>
 		<div <?php echo $this->get_render_attribute_string('slider'); ?>>
-			<div class="swiper-container">
+			<div class="swiper swiper-container">
 				<?php if ($settings['scroll_to_section'] && $settings['section_id']) : ?>
 					<div class="bdt-ep-scroll-to-section bdt-position-bottom-center">
 						<a href="<?php echo esc_url($settings['section_id']); ?>" bdt-scroll>
@@ -2901,25 +2914,18 @@ class Slider extends Module_Base {
 
 						<?php if ($image) : ?>
 							<div class="bdt-slider-image-wrapper">
-								<img src="<?php echo esc_url($image); ?>" alt="<?php echo wp_kses_post($item['tab_title']); ?>" class="bdt-cover" data-bdt-cover>
-
-								<?php 
-								// $thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
-								// if (!$thumb_url) {
-								// 	printf('<img src="%1$s" alt="%2$s">', $item['image']['url'], esc_html($item['reviewer_name']));
-								// } else {
-								// 	printf(wp_get_attachment_image(
-								// 		$item['image']['id'],
-								// 		$settings['thumbnail_size_size'],
-								// 		false,
-								// 		[
-								// 			'alt' => esc_html($item['reviewer_name'])
-								// 		]
-								// 	));
-								// }
+								<?php
+								print(wp_get_attachment_image(
+									$item['tab_image']['id'],
+									'full',
+									false,
+									[
+										'class' => 'bdt-cover',
+										'alt' => wp_kses_post($item['tab_title']),
+										'data-bdt-cover' => true
+									]
+								));
 								?>
-
-
 							</div>
 						<?php endif; ?>
 

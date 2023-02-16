@@ -848,17 +848,17 @@ class Svg_Image extends Module_Base {
 		$this->add_render_attribute('svg-image', 'data-bdt-svg', '');
 
 		if ($settings['image']['id']) {
-			$settings['image_size'] = 'full';
-			$image_html        = Group_Control_Image_Size::get_attachment_image_src($settings['image']['id'], 'image', $settings);
+			print(wp_get_attachment_image(
+				$settings['image']['id'],
+				'full',
+				false,
+				[
+					'alt' => esc_html(get_the_title())
+				]
+			));
 		} else {
-			$image_html = BDTEP_ASSETS_URL . 'images/crane.svg';
+			printf('<img src="%1$s" alt="%2$s">', BDTEP_ASSETS_URL . 'images/crane.svg', esc_html(get_the_title()));
 		}
-
-?>
-
-		<img src="<?php echo esc_url($image_html); ?>" alt="<?php echo get_the_title(); ?>" <?php echo $this->get_render_attribute_string('svg-image'); ?>>
-
-	<?php
 	}
 
 	protected function render() {
@@ -903,7 +903,7 @@ class Svg_Image extends Module_Base {
 				$this->add_render_attribute('link', 'rel', 'nofollow');
 			}
 		}
-	?>
+?>
 		<div <?php echo $this->get_render_attribute_string('wrapper'); ?>>
 			<?php if ($has_caption) : ?>
 				<figure class="wp-caption">

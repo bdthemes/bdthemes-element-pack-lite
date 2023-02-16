@@ -1418,7 +1418,7 @@ class Price_List extends Module_Base {
 		if (!$thumb_url) {
 			printf('<img src="%1$s" alt="%2$s">', $settings['image']['url'], esc_html($item['title']));
 		} else {
-			printf(wp_get_attachment_image(
+			print(wp_get_attachment_image(
 				$item['image']['id'],
 				$settings['thumbnail_size_size'],
 				false,

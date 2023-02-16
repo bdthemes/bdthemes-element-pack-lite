@@ -1016,7 +1016,7 @@ class Static_Carousel extends Module_Base {
             if (!$thumb_url) {
                 printf('<img src="%1$s" alt="%2$s">', $item['image']['url'], esc_html($item['title']));
             } else {
-                printf(wp_get_attachment_image(
+                print(wp_get_attachment_image(
                     $item['image']['id'],
                     $settings['thumbnail_size_size'],
                     false,
@@ -1152,7 +1152,7 @@ class Static_Carousel extends Module_Base {
 
         ?>
         <div <?php echo $this->get_render_attribute_string( 'carousel' ); ?>>
-            <div class="swiper-container">
+            <div class="swiper swiper-container">
                 <div class="swiper-wrapper">
         <?php
     }

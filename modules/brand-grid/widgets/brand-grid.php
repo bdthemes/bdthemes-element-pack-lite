@@ -651,7 +651,7 @@ class Brand_Grid extends Module_Base {
 						if (!$thumb_url) {
 							printf('<img src="%1$s" alt="%2$s">', $item['image']['url'], esc_html($item['brand_name']));
 						} else {
-							printf(wp_get_attachment_image(
+							print(wp_get_attachment_image(
 								$item['image']['id'],
 								$settings['thumbnail_size'],
 								false,

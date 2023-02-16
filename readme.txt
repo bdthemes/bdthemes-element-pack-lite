@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.0
-Stable tag: 4.8.0
+Stable tag: 4.8.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.10.1
+Elementor tested up to: 3.11.1
 
 Best Addon for Elementor WordPress Plugin with 57+ Most Popular Elements that need your everyday website page building.
 
@@ -392,6 +392,10 @@ https://www.youtube.com/watch?v=9uhFIHz8W7E
 
 == Changelog ==
 
+= 4.8.1 [16th February 2023] =
+
+* Added: Lazy loading compatibility added
+* Added: Swiper Library v8.4.5 compatibility added
 
 = 4.8.0 [26th January 2023] =
 

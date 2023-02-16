@@ -1155,7 +1155,7 @@ class Review_Card_Carousel extends Module_Base {
             if (!$thumb_url) {
                 printf('<img src="%1$s" alt="%2$s">', $item['image']['url'], esc_html($item['reviewer_name']));
             } else {
-                printf(wp_get_attachment_image(
+                print(wp_get_attachment_image(
                     $item['image']['id'],
                     $settings['thumbnail_size_size'],
                     false,

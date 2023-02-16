@@ -1482,10 +1482,10 @@ $(window).on('elementor/frontend/init', function () {
                     return;
                 }
 
-                // $($container).removeAttr('style');
-                $($container).find(".ep-megamenu-panel").css({
-                  "opacity": "1",
-                });
+                $($container).removeAttr('style');
+                // $($container).find(".ep-megamenu-panel").css({
+                //   "opacity": "1",
+                // });
                var dropMenu =  $($container).find('.ep-megamenu-vertical-dropdown');
 
 

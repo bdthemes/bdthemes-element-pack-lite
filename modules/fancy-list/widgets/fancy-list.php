@@ -794,6 +794,7 @@ class Fancy_List extends Module_Base {
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-icon' => 'color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-icon i' => 'color: {{VALUE}} !important;',
                     '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-icon svg' => 'fill: {{VALUE}} !important;',
                 ],
             ]
@@ -923,7 +924,7 @@ class Fancy_List extends Module_Base {
                                     <?php
                                     $thumb_url = $item['img']['url'];
                                     if ($thumb_url) {
-                                        printf(wp_get_attachment_image(
+                                        print(wp_get_attachment_image(
                                             $item['img']['id'],
                                             'medium',
                                             false,

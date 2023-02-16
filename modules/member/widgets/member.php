@@ -1366,7 +1366,7 @@ class Member extends Module_Base {
                             if (!$thumb_url) {
                                 printf('<img src="%1$s" alt="%2$s">', $settings['alternative_photo']['url'], esc_html($settings['name']));
                             } else {
-                                printf(wp_get_attachment_image(
+                                print(wp_get_attachment_image(
                                     $settings['alternative_photo']['id'],
                                     $settings['thumbnail_size_size'],
                                     false,
@@ -1388,7 +1388,7 @@ class Member extends Module_Base {
                                 if (!$thumb_url) {
                                     printf('<img src="%1$s" alt="%2$s">', $settings['photo']['url'], esc_html($settings['name']));
                                 } else {
-                                    printf(wp_get_attachment_image(
+                                    print(wp_get_attachment_image(
                                         $settings['photo']['id'],
                                         $settings['thumbnail_size_size'],
                                         false,
