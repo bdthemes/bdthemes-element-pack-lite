@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.0
-Stable tag: 4.8.1
+Stable tag: 4.8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.11.1
+Elementor tested up to: 3.11.2
 
 Best Addon for Elementor WordPress Plugin with 57+ Most Popular Elements that need your everyday website page building.
 
@@ -325,6 +325,7 @@ More features & extensions are coming soon...
 0. **[Animated Gradient Background](https://elementpack.pro/demo/element/animated-gradient-background/)** - Wonder if it's possible to make gradient background change color with an animation effect? Yes, it's possible with the animated Gradient background. See the demo
 0. **[Right Click Context Menu](https://elementpack.pro/demo/element/right-click-context-menu/)** - It is possible to add such a dynamic menu to your WordPress website that pops open whenever the user right clicks anywhere on the page. Using the Right Click Context Menu, you can make your main menu integrate with the right click cursor button just like a mobile menu. See the demo
 0. **[Hash Link](https://elementpack.pro/demo/element/hash-link/)** - Convert titles into clickable links and help sharing direct landing link of that part of the content for easier user navigation.
+0. **[Background Expand](https://elementpack.pro/demo/element/background-expand/)** - Is it possible to shrink your page background when your visitors scroll up? Definitely it's possible with the new background expander extension added to our arsenal to provide you a  new amazing experience. Shrink down or reverse into expansion is now possible.
 
 == Pro Version Features 🔥 ==
 
@@ -391,6 +392,11 @@ https://www.youtube.com/watch?v=9uhFIHz8W7E
 
 
 == Changelog ==
+
+= 4.8.2 [4th March 2023] =
+
+* Added: Add support for YouTube Shorts URLs in Lightbox widget
+* Fixed: Elementor Pro slider navigation dots conflict issue fixed (Thanks to Jennifer Burns)
 
 = 4.8.1 [16th February 2023] =
 

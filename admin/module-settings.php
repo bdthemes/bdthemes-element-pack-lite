@@ -1067,7 +1067,7 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'custom new',
+                    'content_type' => 'custom',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/remote-arrows/',
                     'video_url'    => 'https://youtu.be/w0CEROpvjjA',
                 ],
@@ -1077,7 +1077,7 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'custom new',
+                    'content_type' => 'custom',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/remote-fraction/',
                     'video_url'    => 'https://youtu.be/UfmwcTjX7L8',
                 ],
@@ -1087,7 +1087,7 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'custom new',
+                    'content_type' => 'custom',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/remote-pagination/',
                     'video_url'    => 'https://youtu.be/eZWSkb7HeUA',
                 ],
@@ -1097,7 +1097,7 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'custom new',
+                    'content_type' => 'custom',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/remote-thumbs/',
                     'video_url'    => 'https://youtu.be/PKKnqB0vhzE',
                 ],
@@ -1510,9 +1510,18 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/animated-gradient-background/',
                     'video_url'    => 'https://youtu.be/Hdq06W-2KDw',
+                ],
+                [
+                    'name'        => 'background-expand',
+                    'label'       => esc_html__('Background Expand', 'bdthemes-element-pack'),
+                    'type'        => 'checkbox',
+                    'default'     => 'off',
+                    'widget_type' => 'pro',
+                    'content_type' => 'new',
+                    'demo_url'    => 'https://www.elementpack.pro/demo/element/background-expand',
+                    'video_url'   => '',
                 ],
                 [
                     'name'        => 'backdrop-filter',
@@ -1556,7 +1565,6 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/cursor-effects/',
                     'video_url'    => 'https://youtu.be/Pnev5lPByEc',
                 ],
@@ -1621,7 +1629,6 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/notation',
                     'video_url'    => 'https://youtu.be/DTz91mthFGE',
                 ],
@@ -1649,7 +1656,6 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/reveal-effects/',
                     'video_url'    => 'https://youtu.be/mSnoY510IUE',
                 ],
@@ -1677,7 +1683,6 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'pro',
-                    'content_type' => 'new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/sound-effects',
                     'video_url'    => 'https://youtu.be/L1Sy1ZDfp3A',
                 ],
@@ -1687,7 +1692,6 @@ class ModuleService {
                     'type'         => 'checkbox',
                     'default'      => 'off',
                     'widget_type'  => 'free',
-                    'content_type' => 'new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/threed-text',
                     'video_url'    => 'https://youtu.be/lhqgA4EyYKc',
                 ],
@@ -1975,7 +1979,6 @@ class ModuleService {
                     'label'        => esc_html__('Duplicator', 'bdthemes-element-pack'),
                     'desc'         => __('Just hit the button below to enable the duplicator. It can duplicate anything like posts,pages and elementor templates. A masterclass duplication with just one click.', 'bdthemes-element-pack'),
                     'type'         => 'start_group',
-                    'content_type' => 'new',
                 ],
 
                 [
@@ -2038,7 +2041,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-forum-form',
             'video_url'   => '',
         ];
@@ -2051,7 +2053,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-forum-index',
             'video_url'   => '',
         ];
@@ -2064,7 +2065,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-single-forum',
             'video_url'   => '',
         ];
@@ -2076,7 +2076,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-topic-index',
             'video_url'   => '',
         ];
@@ -2088,7 +2087,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-topic-form',
             'video_url'   => '',
         ];
@@ -2100,7 +2098,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-single-topic',
             'video_url'   => '',
         ];
@@ -2112,7 +2109,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-reply-form',
             'video_url'   => '',
         ];
@@ -2124,7 +2120,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-single-reply',
             'video_url'   => '',
         ];
@@ -2136,7 +2131,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-topic-tags',
             'video_url'   => '',
         ];
@@ -2148,7 +2142,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-single-tag',
             'video_url'   => '',
         ];
@@ -2160,7 +2153,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-single-view',
             'video_url'   => '',
         ];
@@ -2172,7 +2164,6 @@ class ModuleService {
             'plugin_name' => 'bbpress',
             'plugin_path' => 'bbpress/bbpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/bbpress-stats',
             'video_url'   => '',
         ];
@@ -2390,7 +2381,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-cart/',
             'video_url'   => '',
         ];
@@ -2403,7 +2393,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-category-grid/',
             'video_url'   => '',
         ];
@@ -2416,7 +2405,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-category-carousel/',
             'video_url'   => '',
         ];
@@ -2429,7 +2417,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-checkout/',
             'video_url'   => '',
         ];
@@ -2441,7 +2428,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-login/',
             'video_url'   => '',
         ];
@@ -2453,7 +2439,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-mini-cart/',
             'video_url'   => '',
         ];
@@ -2465,7 +2450,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-product/',
             'video_url'   => '',
         ];
@@ -2478,7 +2462,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-product-carousel/',
             'video_url'   => '',
         ];
@@ -2491,7 +2474,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-product-reviews/',
             'video_url'   => '',
         ];
@@ -2504,7 +2486,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-product-review-carousel/',
             'video_url'   => '',
         ];
@@ -2541,7 +2522,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-register/',
             'video_url'   => '',
         ];
@@ -2554,7 +2534,6 @@ class ModuleService {
             'plugin_name' => 'easy-digital-downloads',
             'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/edd-tabs/',
             'video_url'   => '',
         ];
@@ -2876,7 +2855,6 @@ class ModuleService {
             'plugin_name' => 'learnpress',
             'plugin_path' => 'learnpress/learnpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'new',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/learnpress-grid/',
             'video_url'   => '',
         ];
@@ -2889,7 +2867,7 @@ class ModuleService {
             'plugin_name' => 'learnpress',
             'plugin_path' => 'learnpress/learnpress.php',
             'widget_type' => 'pro',
-            'content_type' => 'carousel new',
+            'content_type' => 'carousel',
             'demo_url'    => 'https://www.elementpack.pro/demo/element/learnpress-carousel/',
             'video_url'   => '',
         ];

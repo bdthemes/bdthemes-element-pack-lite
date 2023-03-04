@@ -33,7 +33,7 @@ class Toggle extends Module_Base {
     }
 
     public function get_keywords() {
-        return ['toggle', 'accordion', 'tab', 'unfold'];
+        return ['toggle', 'accordion', 'tab', 'unfold', 'expand', 'collapse', 'content', 'show', 'hide', 'element pack'];
     }
 
     public function get_style_depends() {
