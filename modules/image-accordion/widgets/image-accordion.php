@@ -77,14 +77,16 @@ class Image_Accordion extends Module_Base {
 				'options'  => [
 					'default' 	=> __( 'Horizontal', 'bdthemes-element-pack' ),
 					'vertical' 	=> __( 'Vertical', 'bdthemes-element-pack' ),
+					'sliding-box' 	=> __( 'Sliding Box', 'bdthemes-element-pack' ),
 				],
 				'default'  => 'default',
 				'tablet_default'  => 'default',
 				'mobile_default'  => 'default',
-				'prefix_class' => 'bdt-ep-image-accordion--skin-%s-',
+				'prefix_class' => 'skin-%s-',
 				'selectors_dictionary' => [
                     'default' => 'flex-direction: unset;',
                     'vertical' => 'flex-direction: column;',
+                    'sliding-box' => 'flex-direction: unset;',
                 ],
 				'selectors' => [
                     '{{WRAPPER}} .bdt-ep-image-accordion' => '{{VALUE}};',
@@ -320,10 +322,101 @@ class Image_Accordion extends Module_Base {
 		);
 
 		$this->add_control(
+            'divider_hr',
+            [
+                'type'    => Controls_Manager::DIVIDER,
+            ]
+		);
+
+		$this->add_responsive_control(
+			'items_content_position',
+			[
+				'label'   => __( 'Content Position', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'toggle' => false,
+				'default' => 'row',
+				'options' => [
+					'row-reverse' => [
+						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'row' => [
+						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-item' => 'flex-direction: {{VALUE}};',
+				],
+				'prefix_class' => 'ep-img-position--',
+                'render_type'     => 'template',
+                'style_transfer'  => true,
+				'condition' => [
+					'skin_type' => 'sliding-box'
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'items_content_align',
+			[
+				'label'   => __( 'Text Alignment', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-center',
+					],
+					'right' => [
+						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+					'justify' => [
+						'title' => __( 'Justified', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-stretch',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-item' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'items_content_vertical_align',
+			[
+				'label'   => __( 'Vertical Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'flex-start' => [
+						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'center' => [
+						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'flex-end' => [
+						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-content' => 'justify-content: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'active_item',
 			[
 				'label'   => esc_html__( 'Active Item', 'bdthemes-element-pack' ) . BDTEP_NC,
 				'type'    => Controls_Manager::SWITCHER,
+				'separator' => 'before'
 			]
 		);
 
@@ -341,34 +434,30 @@ class Image_Accordion extends Module_Base {
 		);
 
 		$this->add_responsive_control(
-			'items_content_align',
+			'active_item_expand',
 			[
-				'label'   => __( 'Alignment', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-text-align-center',
-					],
-					'right' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-text-align-right',
-					],
-					'justify' => [
-						'title' => __( 'Justified', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-text-align-justify',
+				'label' => esc_html__('Active Item Column Expand', 'bdthemes-element-pack'),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 20,
 					],
 				],
+				'default' => [
+					'size' => 6
+				],
+				'tablet_default' => [
+					'size' => 6,
+				],
+				'mobile_default' => [
+					'size' => 10,
+				],
 				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-image-accordion-item' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion-item.active' => 'flex: {{SIZE}};',
 				],
 			]
 		);
-
 
 		$this->add_control(
 			'show_title',
@@ -376,6 +465,7 @@ class Image_Accordion extends Module_Base {
 				'label'   => esc_html__( 'Show Title', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+				'separator' => 'before'
 			]
 		);
 
@@ -416,6 +506,16 @@ class Image_Accordion extends Module_Base {
 				'label'   => esc_html__( 'Show Button', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+			]
+		);
+
+		//Lightbox
+		$this->add_control(
+			'show_lightbox',
+			[
+				'label'   => esc_html__('Show Lightbox', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+				'separator' => 'before'
 			]
 		);
 
@@ -472,6 +572,133 @@ class Image_Accordion extends Module_Base {
 
 		$this->end_controls_section();
 
+		//Lightbox
+		$this->start_controls_section(
+			'section_accordion_lightbox',
+			[
+				'label' => __( 'Lightbox', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+				'condition' => [
+					'show_lightbox' => 'yes',
+				]
+			]
+		);
+
+		$this->add_control(
+			'link_type',
+			[
+				'label'   => esc_html__('Link Type', 'bdthemes-element-pack'),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'icon',
+				'options' => [
+					'icon' => esc_html__('Icon', 'bdthemes-element-pack'),
+					'text' => esc_html__('Text', 'bdthemes-element-pack'),
+				],
+			]
+		);
+
+		$this->add_control(
+			'icon',
+			[
+				'label'   => esc_html__('Icon', 'bdthemes-element-pack'),
+				'type'    => Controls_Manager::CHOOSE,
+				'default' => 'plus',
+				'options' => [
+					'search' => [
+						'icon' => 'eicon-search',
+					],
+					'plus-circle' => [
+						'icon' => 'eicon-plus-circle-o',
+					],
+					'plus' => [
+						'icon' => 'eicon-plus',
+					],
+					'link' => [
+						'icon' => 'eicon-link',
+					],
+					'play-circle' => [
+						'icon' => 'eicon-play',
+					],
+					'play' => [
+						'icon' => 'eicon-caret-right',
+					],
+				],
+				'conditions' => [
+					'terms'    => [
+						[
+							'name'     => 'link_type',
+							'value'    => 'icon'
+						]
+					]
+				]
+			]
+		);
+		$this->add_control(
+			'lightbox_animation',
+			[
+				'label'   => esc_html__('Lightbox Animation', 'bdthemes-element-pack'),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'slide',
+				'options' => [
+					'slide' => esc_html__('Slide', 'bdthemes-element-pack'),
+					'fade'  => esc_html__('Fade', 'bdthemes-element-pack'),
+					'scale' => esc_html__('Scale', 'bdthemes-element-pack'),
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'lightbox_autoplay',
+			[
+				'label'   => __('Lightbox Autoplay', 'bdthemes-element-pack'),
+				'type'    => Controls_Manager::SWITCHER,
+				
+			]
+		);
+
+		$this->add_control(
+			'lightbox_pause',
+			[
+				'label'   => __('Lightbox Pause on Hover', 'bdthemes-element-pack'),
+				'type'    => Controls_Manager::SWITCHER,
+				'condition' => [
+					'lightbox_autoplay' => 'yes'
+				],
+
+			]
+		);
+
+		$this->add_control(
+			'lightbox_placement',
+			[
+				'label'     => esc_html__( 'Position', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'top-right',
+				'options'   => [
+					'top-left'    => esc_html__( 'Top Left', 'bdthemes-element-pack' ),
+					'top-right'          => esc_html__( 'Top Right', 'bdthemes-element-pack' ),
+					'bottom-left' => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
+					'bottom-right'   => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
+				],
+				'selectors_dictionary' => [
+					'top-left' => 'left: 0;',
+					'top-right' => 'right: 0;',
+					'bottom-left' => 'left: 0; bottom: 0;',
+					'bottom-right' => 'right: 0; bottom: 0;',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox' => '{{VALUE}};',
+				],
+				'condition' => [
+					'skin_type!' => 'sliding-box'
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->end_controls_section();
+
 		//Style
 		$this->start_controls_section(
 			'section_image_accordion_style',
@@ -489,8 +716,41 @@ class Image_Accordion extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-item:before'  => 'background: {{VALUE}};',
 				],
+				'condition' => [
+					'skin_type!' => 'sliding-box'
+				]
 			]
 		);
+		
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'sliding_overlay_background',
+				'label' => esc_html__('Background', 'bdthemes-element-pack'),
+				'types' => ['classic', 'gradient'],
+				'exclude' => ['image'],
+				'selector' => '{{WRAPPER}}.skin--sliding-box .bdt-ep-image-accordion-img:before',
+				'fields_options' => [
+					'background' => [
+						'label' => esc_html__('Overlay Color', 'bdthemes-element-pack'),
+					],
+				],
+				'condition' => [
+					'skin_type' => 'sliding-box'
+				]
+			]
+		);
+
+		$this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'content_background',
+                'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-item',
+				'condition' => [
+					'skin_type' => 'sliding-box'
+				]
+            ]
+        );
 
 		$this->add_responsive_control(
 			'tabs_content_padding',
@@ -510,6 +770,10 @@ class Image_Accordion extends Module_Base {
 				'label'     => __( 'Divider', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
+				'condition' => [
+					'skin_type!' => 'sliding-box',
+					'enable_item_style' => ''
+				]
 			]
 		);
 
@@ -521,6 +785,10 @@ class Image_Accordion extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-item:after'  => 'background: {{VALUE}};',
 				],
+				'condition' => [
+					'skin_type!' => 'sliding-box',
+					'enable_item_style' => ''
+				]
 			]
 		);
 
@@ -539,7 +807,8 @@ class Image_Accordion extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-image-accordion-item:after' => 'width: {{SIZE}}{{UNIT}}; right: calc(-{{SIZE}}{{UNIT}} / 2);',
 				],
 				'condition' => [
-					'skin_type!' => [ 'vertical' ],
+					'skin_type' => [ 'default' ],
+					'enable_item_style' => ''
 				],
 			]
 		);
@@ -557,6 +826,7 @@ class Image_Accordion extends Module_Base {
 				],
 				'condition' => [
 					'skin_type' => [ 'vertical' ],
+					'enable_item_style' => ''
 				],
 				'render_type' => 'ui',
                 'selectors' => [
@@ -564,6 +834,58 @@ class Image_Accordion extends Module_Base {
                 ],
 			]
 		);
+
+		$this->add_responsive_control(
+			'enable_item_style',
+			[
+				'label' => esc_html__('Enable Item Style', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'  => Controls_Manager::SWITCHER,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'item_column_gap',
+			[
+				'label' => esc_html__('Item Gap', 'bdthemes-element-pack'),
+				'type'  => Controls_Manager::SLIDER,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion' => 'grid-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion-item:after' => 'width: 0; right: 0; --ep-divider-width: 0; --ep-divider-bottom: -0;',
+				],
+				'condition' => [
+					'enable_item_style' => 'yes',
+				],
+			]
+		);
+
+		$this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'        => 'item_border',
+                'placeholder' => '1px',
+                'default'     => '1px',
+                'selector'    => '{{WRAPPER}} .bdt-ep-image-accordion-item',
+				'condition' => [
+					'enable_item_style' => 'yes',
+				],
+			]
+        );
+
+        $this->add_responsive_control(
+            'item_radius',
+            [
+                'label'      => __('Border Radius', 'bdthemes-element-pack'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .bdt-ep-image-accordion-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+				'condition' => [
+					'enable_item_style' => 'yes',
+				],
+            ]
+        );
 
 		$this->end_controls_section();
 
@@ -584,7 +906,7 @@ class Image_Accordion extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-image-accordion-title' => 'color: {{VALUE}}; -webkit-text-stroke-color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -637,7 +959,7 @@ class Image_Accordion extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-image-accordion-sub-title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-sub-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -681,7 +1003,7 @@ class Image_Accordion extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-image-accordion-text' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-text, {{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-text *' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -734,7 +1056,7 @@ class Image_Accordion extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-image-accordion-button a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-button a' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -748,14 +1070,6 @@ class Image_Accordion extends Module_Base {
 		);
 
 		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'button_box_shadow',
-				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-button a',
-			]
-		);
-
-		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'button_border',
@@ -765,7 +1079,7 @@ class Image_Accordion extends Module_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'button_border_radius',
 			[
 				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
@@ -788,7 +1102,7 @@ class Image_Accordion extends Module_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'border_radius_advanced',
 			[
 				'label'       => esc_html__('Radius', 'bdthemes-element-pack'),
@@ -806,7 +1120,7 @@ class Image_Accordion extends Module_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'button_padding',
 			[
 				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
@@ -828,6 +1142,14 @@ class Image_Accordion extends Module_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'button_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-button a',
+			]
+		);
+
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
@@ -843,7 +1165,7 @@ class Image_Accordion extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-image-accordion-button a:hover'  => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-button a:hover'  => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -876,7 +1198,283 @@ class Image_Accordion extends Module_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'section_style_lightbox',
+			[
+				'label'     => esc_html__('Lightbox', 'bdthemes-element-pack'),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'show_lightbox' => 'yes',
+				],
+			]
+		);
+
+		$this->start_controls_tabs('tabs_lightbox_style');
+
+		$this->start_controls_tab(
+			'tab_lightbox_normal',
+			[
+				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+			]
+		);
+
+		$this->add_control(
+			'lightbox_text_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox i, {{WRAPPER}} .bdt-ep-image-accordion-lightbox span' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'lightbox_background',
+                'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-lightbox',
+            ]
+        );
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'        => 'lightbox_border',
+				'label'       => esc_html__('Border', 'bdthemes-element-pack'),
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '{{WRAPPER}} .bdt-ep-image-accordion-lightbox',
+				'separator' => 'before'
+			]
+		);
+
+		$this->add_responsive_control(
+			'lightbox_border_radius',
+			[
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lightbox_padding',
+			[
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'lightbox_margin',
+			[
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'lightbox_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-lightbox',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'      => 'lightbox_typography',
+				'selector'  => '{{WRAPPER}} .bdt-ep-image-accordion-lightbox span.bdt-text, {{WRAPPER}} .bdt-ep-image-accordion-lightbox i',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_lightbox_hover',
+			[
+				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+			]
+		);
+
+		$this->add_control(
+			'lightbox_hover_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox:hover span, {{WRAPPER}} .bdt-ep-image-accordion-lightbox:hover i'    => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'lightbox_background_hover_color',
+                'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-lightbox:hover',
+            ]
+        );
+
+		$this->add_control(
+			'lightbox_hover_border_color',
+			[
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => [
+					'lightbox_border_border!' => 'none',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox:hover' => 'border-color: {{VALUE}};',
+				],
+				'separator' => 'before'
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
 	}
+
+	public function render_lightbox($item) {
+		$settings = $this->get_settings_for_display();
+
+		if ( ! $settings['show_lightbox'] ) {
+			return;
+		}
+
+		$image_url = wp_get_attachment_image_src($item['slide_image']['id'], 'full');
+
+		$this->add_render_attribute('lightbox', 'data-elementor-open-lightbox', 'no', true);
+
+		if (!$image_url) {
+			$this->add_render_attribute('lightbox', 'href', $item['slide_image']['url'], true);
+		} else {
+			$this->add_render_attribute('lightbox', 'href', $image_url[0], true);
+		}
+
+
+		$this->add_render_attribute('lightbox', 'class', 'bdt-ep-image-accordion-lightbox', true);
+
+		$this->add_render_attribute('lightbox', 'data-caption', $item['image_accordion_title'], true);
+
+		$icon = $settings['icon'] ?: 'plus';
+
+		?>
+		<a <?php echo $this->get_render_attribute_string('lightbox'); ?>>
+			<?php if ('icon' == $settings['link_type']) : ?>
+				<i class="ep-icon-<?php echo esc_attr($icon); ?>" aria-hidden="true"></i>
+			<?php elseif ('text' == $settings['link_type']) : ?>
+				<span class="bdt-text"><?php esc_html_e('ZOOM', 'bdthemes-element-pack'); ?></span>
+			<?php endif; ?>
+		</a>
+		<?php
+	}
+
+	public function render_accordion_content($item) {
+        $settings = $this->get_settings_for_display();
+
+		$this->add_render_attribute( 'bdt-ep-image-accordion-title', 'class', 'bdt-ep-image-accordion-title', true );
+		$this->add_render_attribute( 'bdt-ep-image-accordion-sub-title', 'class', 'bdt-ep-image-accordion-sub-title', true );
+		$this->add_render_attribute( 'bdt-ep-image-accordion-text', 'class', 'bdt-ep-image-accordion-text', true );
+		$this->add_render_attribute( 'bdt-ep-image-accordion-button', 'class', 'bdt-ep-image-accordion-button', true );
+
+		if ( 'yes' == $settings['hide_on_mobile_title'] ) {
+			$this->add_render_attribute( 'bdt-ep-image-accordion-title', 'class', 'bdt-ep-image-accordion-title bdt-visible@s', true );
+		}
+		if ( 'yes' == $settings['hide_on_mobile_sub_title'] ) {
+			$this->add_render_attribute( 'bdt-ep-image-accordion-sub-title', 'class', 'bdt-ep-image-accordion-sub-title bdt-visible@s', true );
+		}
+		if ( 'yes' == $settings['hide_on_mobile_text'] ) {
+			$this->add_render_attribute( 'bdt-ep-image-accordion-text', 'class', 'bdt-ep-image-accordion-text bdt-visible@s', true );
+		}
+		if ( 'yes' == $settings['hide_on_mobile_button'] ) {
+			$this->add_render_attribute( 'bdt-ep-image-accordion-button', 'class', 'bdt-ep-image-accordion-button bdt-visible@s', true );
+		}
+
+        ?>
+        <div class="bdt-ep-image-accordion-content">
+			<?php if ( $item['image_accordion_sub_title'] && ( 'yes' == $settings['show_sub_title'] ) ) : ?>
+				<div <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-sub-title'); ?>>
+					<?php echo wp_kses( $item['image_accordion_sub_title'], element_pack_allow_tags('title') ); ?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ( $item['image_accordion_title'] && ( 'yes' == $settings['show_title'] ) ) : ?>
+				<?php if ( '' !== $item['title_link']['url'] ) : ?>
+					<a href="<?php echo esc_url( $item['title_link']['url'] ); ?>">
+				<?php endif; ?>
+					<<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?> <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-title'); ?>>
+						<?php echo wp_kses( $item['image_accordion_title'], element_pack_allow_tags('title') ); ?>
+					</<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?>>
+				<?php if ( '' !== $item['title_link']['url'] ) : ?>
+					</a>
+				<?php endif; ?>
+			<?php endif; ?>
+
+			<?php if ( $item['image_accordion_text'] && ( 'yes' == $settings['show_text'] ) ) : ?>
+				<div <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-text'); ?>>
+					<?php echo $this->parse_text_editor( $item['image_accordion_text'] ); ?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ($item['image_accordion_button'] && ( 'yes' == $settings['show_button'] )) : ?>
+				<div <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-button'); ?>>
+					<?php if ( '' !== $item['button_link']['url'] ) : ?>
+						<a href="<?php echo esc_url( $item['button_link']['url'] ); ?>">
+					<?php endif; ?>
+						<?php echo wp_kses_post($item['image_accordion_button']); ?>
+					<?php if ( '' !== $item['button_link']['url'] ) : ?>
+						</a>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+		</div>
+        <?php
+    }
+
+	public function render_image($item) {
+        $settings = $this->get_settings_for_display();
+
+        ?>
+        <div class="bdt-ep-image-accordion-img">
+			<?php 
+			$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['slide_image']['id'], 'thumbnail_size', $settings);
+			if (!$thumb_url) {
+				printf('<img src="%1$s" alt="%2$s">', $item['slide_image']['url'], esc_html($item['image_accordion_title']));
+			} else {
+				print(wp_get_attachment_image(
+					$item['slide_image']['id'],
+					$settings['thumbnail_size_size'],
+					false,
+					[
+						'alt' => esc_html($item['image_accordion_title'])
+					]
+				));
+			}
+			?>
+
+			<?php $this->render_lightbox($item); ?>
+
+		</div>
+        <?php
+    }
 
 	public function render() {
 		$settings = $this->get_settings_for_display();
@@ -905,6 +1503,17 @@ class Image_Accordion extends Module_Base {
 			]
 		);
 
+		if ($settings['show_lightbox']) {
+			$this->add_render_attribute('image-accordion', 'data-bdt-lightbox', 'toggle: .bdt-ep-image-accordion-lightbox; animation:' . $settings['lightbox_animation'] . ';');
+			if ($settings['lightbox_autoplay']) {
+				$this->add_render_attribute('image-accordion', 'data-bdt-lightbox', 'autoplay: 500;');
+
+				if ($settings['lightbox_pause']) {
+					$this->add_render_attribute('image-accordion', 'data-bdt-lightbox', 'pause-on-hover: true;');
+				}
+			}
+		}
+
 		?>
 
 		<div <?php echo ( $this->get_render_attribute_string( 'image-accordion' ) ); ?>>
@@ -914,74 +1523,23 @@ class Image_Accordion extends Module_Base {
                 if ( ! $slide_image ) {
                     $slide_image = $item['slide_image']['url'];
                 }
-
 				$this->add_render_attribute( 'image-accordion-item', 'class', 'bdt-ep-image-accordion-item', true );
-				$this->add_render_attribute( 'bdt-ep-image-accordion-title', 'class', 'bdt-ep-image-accordion-title', true );
-				$this->add_render_attribute( 'bdt-ep-image-accordion-sub-title', 'class', 'bdt-ep-image-accordion-sub-title', true );
-				$this->add_render_attribute( 'bdt-ep-image-accordion-text', 'class', 'bdt-ep-image-accordion-text', true );
-				$this->add_render_attribute( 'bdt-ep-image-accordion-button', 'class', 'bdt-ep-image-accordion-button', true );
-
-				if ( 'yes' == $settings['hide_on_mobile_title'] ) {
-					$this->add_render_attribute( 'bdt-ep-image-accordion-title', 'class', 'bdt-ep-image-accordion-title bdt-visible@s', true );
-				}
-				if ( 'yes' == $settings['hide_on_mobile_sub_title'] ) {
-					$this->add_render_attribute( 'bdt-ep-image-accordion-sub-title', 'class', 'bdt-ep-image-accordion-sub-title bdt-visible@s', true );
-				}
-				if ( 'yes' == $settings['hide_on_mobile_text'] ) {
-					$this->add_render_attribute( 'bdt-ep-image-accordion-text', 'class', 'bdt-ep-image-accordion-text bdt-visible@s', true );
-				}
-				if ( 'yes' == $settings['hide_on_mobile_button'] ) {
-					$this->add_render_attribute( 'bdt-ep-image-accordion-button', 'class', 'bdt-ep-image-accordion-button bdt-visible@s', true );
-				}
-
 				?>
 
-				<div   <?php echo ( $this->get_render_attribute_string( 'image-accordion-item' ) ); ?> style="background-image: url('<?php echo esc_url( $slide_image); ?>');">
-
-					<div class="bdt-ep-image-accordion-content">
-						<?php if ( $item['image_accordion_sub_title'] && ( 'yes' == $settings['show_sub_title'] ) ) : ?>
-							<div <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-sub-title'); ?>>
-								<?php echo wp_kses( $item['image_accordion_sub_title'], element_pack_allow_tags('title') ); ?>
-							</div>
-						<?php endif; ?>
-	
-						<?php if ( $item['image_accordion_title'] && ( 'yes' == $settings['show_title'] ) ) : ?>
-							<?php if ( '' !== $item['title_link']['url'] ) : ?>
-								<a href="<?php echo esc_url( $item['title_link']['url'] ); ?>">
-							<?php endif; ?>
-								<<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?> <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-title'); ?>>
-									<?php echo wp_kses( $item['image_accordion_title'], element_pack_allow_tags('title') ); ?>
-								</<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?>>
-							<?php if ( '' !== $item['title_link']['url'] ) : ?>
-								</a>
-							<?php endif; ?>
-						<?php endif; ?>
-	
-						<?php if ( $item['image_accordion_text'] && ( 'yes' == $settings['show_text'] ) ) : ?>
-							<div <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-text'); ?>>
-								<?php echo $this->parse_text_editor( $item['image_accordion_text'] ); ?>
-							</div>
-						<?php endif; ?>
-	
-						<?php if ($item['image_accordion_button'] && ( 'yes' == $settings['show_button'] )) : ?>
-							<div <?php echo $this->get_render_attribute_string('bdt-ep-image-accordion-button'); ?>>
-								<?php if ( '' !== $item['button_link']['url'] ) : ?>
-									<a href="<?php echo esc_url( $item['button_link']['url'] ); ?>">
-								<?php endif; ?>
-									<?php echo wp_kses_post($item['image_accordion_button']); ?>
-								<?php if ( '' !== $item['button_link']['url'] ) : ?>
-									</a>
-								<?php endif; ?>
-							</div>
-						<?php endif; ?>
+				<?php if( $settings['skin_type'] !== 'sliding-box' ) : ?>
+					<div <?php echo ( $this->get_render_attribute_string( 'image-accordion-item' ) ); ?> style="background-image: url('<?php echo esc_url( $slide_image); ?>');">
+						<?php $this->render_lightbox($item); ?>
+						<?php $this->render_accordion_content($item); ?>
 					</div>
-
-				</div>
+				<?php else: ?>
+					<div <?php echo ( $this->get_render_attribute_string( 'image-accordion-item' ) ); ?>>
+						<?php $this->render_image($item); ?>
+						<?php $this->render_accordion_content($item); ?>
+					</div>
+				<?php endif; ?>
 
 			<?php endforeach; ?>
 		</div>
-
 		<?php 
 	}
- 
 }

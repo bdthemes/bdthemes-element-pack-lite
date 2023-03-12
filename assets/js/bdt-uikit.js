@@ -1,4 +1,4 @@
-/*! bdtUIkit 3.16.1 | https://www.getuikit.com | (c) 2014 - 2023 YOOtheme | MIT License */
+/*! bdtUIkit 3.16.3 | https://www.getuikit.com | (c) 2014 - 2023 YOOtheme | MIT License */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -455,6 +455,7 @@
         if (current) {
           e.current = current;
           listener.call(this, e);
+          delete e.current;
         }
       };
     }
@@ -2056,7 +2057,7 @@
         return toNumber(value);
       } else if (type === "list") {
         return toList(value);
-      } else if (type === Object) {
+      } else if (type === Object && isString(value)) {
         return parseOptions(value);
       }
       return type ? type(value) : value;
@@ -2251,7 +2252,7 @@
     bdtUIkit.data = "__uikit__";
     bdtUIkit.prefix = "bdt-";
     bdtUIkit.options = {};
-    bdtUIkit.version = "3.16.1";
+    bdtUIkit.version = "3.16.3";
     globalAPI(bdtUIkit);
     hooksAPI(bdtUIkit);
     stateAPI(bdtUIkit);
@@ -2992,8 +2993,7 @@
             offset.reverse();
             placement.reverse();
           }
-          const [scrollElement] = scrollParents(element);
-          const { scrollTop, scrollLeft } = scrollElement;
+          const restoreScrollPosition = storeScrollPosition(element);
           const elDim = dimensions$1(element);
           css(element, { top: -elDim.height, left: -elDim.width });
           positionAt(element, target, {
@@ -3003,8 +3003,7 @@
             placement,
             viewportOffset: this.getViewportOffset(element)
           });
-          scrollElement.scrollTop = scrollTop;
-          scrollElement.scrollLeft = scrollLeft;
+          restoreScrollPosition();
         },
         getPositionOffset(element) {
           return toPx(
@@ -3025,6 +3024,15 @@
         }
       }
     };
+    function storeScrollPosition(element) {
+      const [scrollElement] = scrollParents(element);
+      const { scrollTop } = scrollElement;
+      return () => {
+        if (scrollTop !== scrollElement.scrollTop) {
+          scrollElement.scrollTop = scrollTop;
+        }
+      };
+    }
 
     let active$1;
     var drop = {
@@ -8476,15 +8484,6 @@
         },
         itemshown() {
           this.updateActiveClasses();
-        },
-        focusin: {
-          name: "focusin",
-          delegate() {
-            return `${this.selList} > *`;
-          },
-          handler(e) {
-            this.show(e.current);
-          }
         }
       },
       methods: {
@@ -8524,6 +8523,7 @@
             const active = includes(actives, slide);
             toggleClass(slide, activeClasses, active);
             attr(slide, "aria-hidden", !active);
+            attr($$(selFocusable, slide), "tabindex", active ? null : -1);
           }
         },
         getValidIndex(index = this.index, prevIndex = this.prevIndex) {

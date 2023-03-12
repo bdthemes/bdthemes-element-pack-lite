@@ -48,8 +48,6 @@ jQuery(document).ready(function ($) {
 
         // end total active
 
-
-
         // modules
         var moduleUsedWidget = jQuery('#element_pack_active_modules_page').find('.ep-used-widget');
         var moduleUsedWidgetCount = jQuery('#element_pack_active_modules_page').find('.ep-options .ep-used').length;
@@ -84,16 +82,10 @@ jQuery(document).ready(function ($) {
             var $bg = ctx.data('bg');
             $bg = $bg.split(',');
 
-            // var $bgHover = ctx.data('bg-hover');
-            // $bgHover = $bgHover.split(',');
-
-
             const data = {
-                // labels: $labels,
                 datasets: [{
                     data: $value,
                     backgroundColor: $bg,
-                    // hoverBackgroundColor: false, //$bgHover,
                     borderWidth: 0,
                 }],
 
@@ -129,15 +121,7 @@ jQuery(document).ready(function ($) {
             if (window.myChart instanceof Chart) {
                 window.myChart.destroy();
             }
-
             var myChart = new Chart(ctx, config);
-            // if (x != 'init'){
-            //     // myChart.destroy();
-
-            //     // var myChart = new Chart(ctx, config);
-            //      myChart.update();
-            // }
-
 
         });
 
