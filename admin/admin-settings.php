@@ -626,7 +626,7 @@ class ElementPack_Admin_Settings
                         <h1 class="ep-feature-title">Missing Any Feature?</h1>
                         <p style="max-width: 520px;">Are you in need of a feature that’s not available in our plugin?
                             Feel free to do a feature request from here,</p>
-                        <a class="bdt-button bdt-btn-grey bdt-margin-small-top" target="_blank" rel="" href="https://elementpack.pro/make-a-suggestion/">Request Feature</a>
+                        <a class="bdt-button bdt-btn-grey bdt-margin-small-top" target="_blank" rel="" href="https://feedback.bdthemes.com/b/6vr2250l/feature-requests/">Request Feature</a>
                     </div>
                 </div>
 

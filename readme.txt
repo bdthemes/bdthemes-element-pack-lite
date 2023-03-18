@@ -373,7 +373,7 @@ e.g.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Start using it by going to the editor.
 
-https://www.youtube.com/watch?v=9uhFIHz8W7E
+https://youtu.be/u9JRd824Mjc
 
 == Screenshots ==
 
