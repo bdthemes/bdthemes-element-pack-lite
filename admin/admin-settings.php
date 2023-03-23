@@ -11,8 +11,7 @@ use Elementor\Tracker;
  * Element Pack Admin Settings Class
  */
 
-class ElementPack_Admin_Settings
-{
+class ElementPack_Admin_Settings {
 
     public static $modules_list  = null;
     public static $modules_names = null;
@@ -31,8 +30,7 @@ class ElementPack_Admin_Settings
     public  $showMessage  = false;
     private $is_activated = false;
 
-    function __construct()
-    {
+    function __construct() {
         $this->settings_api = new ElementPack_Settings_API;
 
 
@@ -57,8 +55,7 @@ class ElementPack_Admin_Settings
      * @since 6.0.0
      *
      */
-    public static function get_used_widgets()
-    {
+    public static function get_used_widgets() {
 
         $used_widgets = array();
 
@@ -96,8 +93,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_used_only_widgets()
-    {
+    public static function get_used_only_widgets() {
 
         $used_widgets = array();
 
@@ -135,8 +131,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_used_only_3rdparty()
-    {
+    public static function get_used_only_3rdparty() {
 
         $used_widgets = array();
 
@@ -174,8 +169,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_unused_widgets()
-    {
+    public static function get_unused_widgets() {
 
         if (!current_user_can('install_plugins')) {
             die();
@@ -199,8 +193,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_unused_only_widgets()
-    {
+    public static function get_unused_only_widgets() {
 
         if (!current_user_can('install_plugins')) {
             die();
@@ -224,8 +217,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_unused_only_3rdparty()
-    {
+    public static function get_unused_only_3rdparty() {
 
         if (!current_user_can('install_plugins')) {
             die();
@@ -249,8 +241,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_ep_widgets_names()
-    {
+    public static function get_ep_widgets_names() {
         $names = self::$modules_names;
 
         if (null === $names) {
@@ -274,8 +265,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_ep_only_widgets()
-    {
+    public static function get_ep_only_widgets() {
         $names = self::$modules_names_only_widgets;
 
         if (null === $names) {
@@ -299,8 +289,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_ep_only_3rdparty_names()
-    {
+    public static function get_ep_only_3rdparty_names() {
         $names = self::$modules_names_only_3rdparty;
 
         if (null === $names) {
@@ -322,8 +311,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public static function get_url()
-    {
+    public static function get_url() {
         return admin_url('admin.php?page=' . self::PAGE_ID);
     }
 
@@ -334,8 +322,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public function admin_init()
-    {
+    public function admin_init() {
 
         //set the settings
         $this->settings_api->set_sections($this->get_settings_sections());
@@ -352,8 +339,7 @@ class ElementPack_Admin_Settings
      *
      */
 
-    public function admin_menu()
-    {
+    public function admin_menu() {
         add_menu_page(
             BDTEP_TITLE . ' ' . esc_html__('Dashboard', 'bdthemes-element-pack'),
             BDTEP_TITLE,
@@ -420,8 +406,7 @@ class ElementPack_Admin_Settings
      * @return string
      */
 
-    public function element_pack_icon()
-    {
+    public function element_pack_icon() {
         return 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjIsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHdpZHRoPSIyMzAuN3B4IiBoZWlnaHQ9IjI1NC44MXB4IiB2aWV3Qm94PSIwIDAgMjMwLjcgMjU0LjgxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyMzAuNyAyNTQuODE7Ig0KCSB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02MS4wOSwyMjkuMThIMjguOTVjLTMuMTcsMC01Ljc1LTIuNTctNS43NS01Ljc1bDAtMTkyLjA3YzAtMy4xNywyLjU3LTUuNzUsNS43NS01Ljc1aDMyLjE0DQoJYzMuMTcsMCw1Ljc1LDIuNTcsNS43NSw1Ljc1djE5Mi4wN0M2Ni44MywyMjYuNjEsNjQuMjYsMjI5LjE4LDYxLjA5LDIyOS4xOHoiLz4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMDcuNSwzMS4zN3YzMi4xNGMwLDMuMTctMi41Nyw1Ljc1LTUuNzUsNS43NUg5MC4wNGMtMy4xNywwLTUuNzUtMi41Ny01Ljc1LTUuNzVWMzEuMzcNCgljMC0zLjE3LDIuNTctNS43NSw1Ljc1LTUuNzVoMTExLjcyQzIwNC45MywyNS42MiwyMDcuNSwyOC4yLDIwNy41LDMxLjM3eiIvPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTIwNy41LDExMS4zM3YzMi4xNGMwLDMuMTctMi41Nyw1Ljc1LTUuNzUsNS43NUg5MC4wNGMtMy4xNywwLTUuNzUtMi41Ny01Ljc1LTUuNzV2LTMyLjE0DQoJYzAtMy4xNywyLjU3LTUuNzUsNS43NS01Ljc1aDExMS43MkMyMDQuOTMsMTA1LjU5LDIwNy41LDEwOC4xNiwyMDcuNSwxMTEuMzN6Ii8+DQo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjA3LjUsMTkxLjN2MzIuMTRjMCwzLjE3LTIuNTcsNS43NS01Ljc1LDUuNzVIOTAuMDRjLTMuMTcsMC01Ljc1LTIuNTctNS43NS01Ljc1VjE5MS4zDQoJYzAtMy4xNywyLjU3LTUuNzUsNS43NS01Ljc1aDExMS43MkMyMDQuOTMsMTg1LjU1LDIwNy41LDE4OC4xMywyMDcuNSwxOTEuM3oiLz4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNjkuNjIsMjUuNjJoMzIuMTRjMy4xNywwLDUuNzUsMi41Nyw1Ljc1LDUuNzV2MTEyLjFjMCwzLjE3LTIuNTcsNS43NS01Ljc1LDUuNzVoLTMyLjE0DQoJYy0zLjE3LDAtNS43NS0yLjU3LTUuNzUtNS43NVYzMS4zN0MxNjMuODcsMjguMiwxNjYuNDQsMjUuNjIsMTY5LjYyLDI1LjYyeiIvPg0KPC9zdmc+DQo=';
     }
 
@@ -432,8 +417,7 @@ class ElementPack_Admin_Settings
      * @return array
      */
 
-    public function get_settings_sections()
-    {
+    public function get_settings_sections() {
         $sections = [
             [
                 'id'    => 'element_pack_active_modules',
@@ -467,8 +451,7 @@ class ElementPack_Admin_Settings
      * @return array
      */
 
-    protected function element_pack_admin_settings()
-    {
+    protected function element_pack_admin_settings() {
 
         return ModuleService::get_widget_settings(function ($settings) {
             $settings_fields    = $settings['settings_fields'];
@@ -488,8 +471,7 @@ class ElementPack_Admin_Settings
      * @return void
      */
 
-    public function element_pack_welcome()
-    {
+    public function element_pack_welcome() {
 ?>
 
         <div class="ep-dashboard-panel" data-bdt-scrollspy="target: > div > div > .bdt-card; cls: bdt-animation-slide-bottom-small; delay: 300">
@@ -661,7 +643,7 @@ class ElementPack_Admin_Settings
      */
 
     function element_pack_get_pro() {
-        ?>
+    ?>
         <div class="ep-dashboard-panel" bdt-scrollspy="target: > div > div > .bdt-card; cls: bdt-animation-slide-bottom-small; delay: 300">
 
             <div class="bdt-grid" bdt-grid bdt-height-match="target: > div > .bdt-card" style="max-width: 800px; margin-left: auto; margin-right: auto;">
@@ -887,7 +869,7 @@ class ElementPack_Admin_Settings
             </div>
 
         </div>
-        <?php
+    <?php
     }
 
     /**
@@ -897,8 +879,7 @@ class ElementPack_Admin_Settings
      * @return void
      */
 
-    function element_pack_system_requirement()
-    {
+    function element_pack_system_requirement() {
         $php_version        = phpversion();
         $max_execution_time = ini_get('max_execution_time');
         $memory_limit       = ini_get('memory_limit');
@@ -1053,8 +1034,7 @@ class ElementPack_Admin_Settings
      * @return void
      */
 
-    function plugin_page()
-    {
+    function plugin_page() {
 
         echo '<div class="wrap element-pack-dashboard">';
         echo '<h1>' . BDTEP_TITLE . ' Settings</h1>';
@@ -1105,8 +1085,7 @@ class ElementPack_Admin_Settings
      *
      * This code uses localstorage for displaying active tabs
      */
-    function script()
-    {
+    function script() {
     ?>
         <script>
             jQuery(document).ready(function() {
@@ -1115,8 +1094,11 @@ class ElementPack_Admin_Settings
 
             function filterSearch(e) {
                 var parentID = '#' + jQuery(e).data('id');
-
                 var search = jQuery(parentID).find('.bdt-search-input').val().toLowerCase();
+
+                jQuery(".ep-options .ep-option-item").filter(function() {
+                    jQuery(this).toggle(jQuery(this).attr('data-widget-name').toLowerCase().indexOf(search) > -1)
+                });
 
                 if (!search) {
                     jQuery(parentID).find('.bdt-search-input').attr('bdt-filter-control', "");
@@ -1283,8 +1265,7 @@ class ElementPack_Admin_Settings
      * @return void
      */
 
-    function footer_info()
-    {
+    function footer_info() {
     ?>
 
         <div class="element-pack-footer-info bdt-margin-medium-top">
@@ -1319,8 +1300,7 @@ class ElementPack_Admin_Settings
      * @access public
      */
 
-    public function v4_activate_notice()
-    {
+    public function v4_activate_notice() {
 
         Notices::add_notice(
             [
@@ -1340,8 +1320,7 @@ class ElementPack_Admin_Settings
      * @access public
      */
 
-    public function allow_tracker_activate_notice()
-    {
+    public function allow_tracker_activate_notice() {
 
         Notices::add_notice(
             [
@@ -1359,8 +1338,7 @@ class ElementPack_Admin_Settings
      *
      * @return array page names with key value pairs
      */
-    function get_pages()
-    {
+    function get_pages() {
         $pages         = get_pages();
         $pages_options = [];
         if ($pages) {

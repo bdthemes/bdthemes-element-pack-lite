@@ -275,7 +275,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'desktop_filter_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('N O R M A L', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -325,7 +325,7 @@ trait Global_Widget_Controls {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'desktop_filter_radius',
 			[
 				'label'      => __('Radius', 'bdthemes-element-pack'),
@@ -358,10 +358,54 @@ trait Global_Widget_Controls {
 		);
 
 		$this->add_control(
+			'desktop_filter_hover',
+			[
+				'label' => esc_html__('H O V E R', 'bdthemes-element-pack'),
+				'type'  => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'color_filter_hover',
+			[
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'separator' => 'before',
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-grid-filters li:hover a' => 'color: {{VALUE}}; border-bottom-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'desktop_hover_filter_background',
+			[
+				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-grid-filters li:hover' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'desktop_hover_filter_border_color',
+			[
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-grid-filters li:hover' => 'border-color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
 			'desktop_filter_active',
 			[
-				'label' => esc_html__('Active', 'bdthemes-element-pack'),
+				'label' => esc_html__('A C T I V E', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 

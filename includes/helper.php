@@ -826,14 +826,30 @@ function element_pack_title_tags() {
     return $title_tags;
 }
 
+// function element_pack_mask_shapes() {
+//     $path       = BDTEP_ASSETS_URL . 'images/mask/';
+//     $shape_name = 'shape';
+//     $extension  = '.svg';
+//     $list       = [0 => esc_html__('Select Mask', 'bdthemes-element-pack')];
+
+//     for ($i = 1; $i <= 20; $i++) {
+//         $list[$path . $shape_name . '-' . $i . $extension] = ucwords($shape_name . ' ' . $i);
+//     }
+
+//     return $list;
+// }
+
+/**
+ * This is a mask shape list function which return a mask shape list
+ *
+ * @return array list
+ */
 function element_pack_mask_shapes() {
-    $path       = BDTEP_ASSETS_URL . 'images/mask/';
     $shape_name = 'shape';
-    $extension  = '.svg';
-    $list       = [0 => esc_html__('Select Mask', 'bdthemes-element-pack')];
+    $list       = [];
 
     for ($i = 1; $i <= 20; $i++) {
-        $list[$path . $shape_name . '-' . $i . $extension] = ucwords($shape_name . ' ' . $i);
+        $list[$shape_name . '-' . $i] = ucwords($shape_name . ' ' . $i);
     }
 
     return $list;

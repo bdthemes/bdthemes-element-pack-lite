@@ -42,10 +42,10 @@
 		            'label_block'    => true,
 		            'show_label'     => false,
 		            'type'           => Controls_Manager::SELECT,
-		            'default'        => 0,
+		            'default'        => 'shape-1',
 		            'options'        => element_pack_mask_shapes(),
 		            'selectors'      => [
-		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-image: url({{VALUE}}); mask-image: url({{VALUE}});',
+		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg); mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg);',
 		            ],
 		            'condition'      => [
 		                'image_mask_popover' => 'yes',

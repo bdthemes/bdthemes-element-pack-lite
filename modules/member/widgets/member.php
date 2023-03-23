@@ -11,12 +11,16 @@ use Elementor\Repeater;
 use Elementor\Icons_Manager;
 
 use ElementPack\Modules\Member\Skins;
+use ElementPack\Traits\Global_Mask_Controls;
 
 if ( !defined('ABSPATH') ) {
     exit; // Exit if accessed directly.
 }
 
 class Member extends Module_Base {
+
+    use Global_Mask_Controls;
+
     public function get_name() {
         return 'bdt-member';
     }
@@ -113,212 +117,15 @@ class Member extends Module_Base {
         $this->add_control(
             'image_mask_popover',
             [
-                'label'        => __('Image Mask', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Image Mask', 'bdthemes-element-pack'),
                 'type'         => Controls_Manager::POPOVER_TOGGLE,
                 'render_type'  => 'ui',
                 'return_value' => 'yes',
             ]
         );
 
-        $this->start_popover();
-
-        $this->add_control(
-            'image_mask_shape',
-            [
-                'label'     => __('Masking Shape', 'bdthemes-element-pack'),
-                'title'     => __('Masking Shape', 'bdthemes-element-pack'),
-                'type'      => Controls_Manager::CHOOSE,
-                'default'   => 'default',
-                'options'   => [
-                    'default' => [
-                        'title' => __('Default Shapes', 'bdthemes-element-pack'),
-                        'icon'  => 'eicon-star',
-                    ],
-                    'custom'  => [
-                        'title' => __('Custom Shape', 'bdthemes-element-pack'),
-                        'icon'  => 'eicon-image-bold',
-                    ],
-                ],
-                'toggle'    => false,
-                'condition' => [
-                    'image_mask_popover' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_mask_shape_default',
-            [
-                'label'          => _x('Default', 'Mask Image', 'bdthemes-element-pack'),
-                'label_block'    => true,
-                'show_label'     => false,
-                'type'           => Controls_Manager::SELECT,
-                'default'        => '',
-                'options'        => element_pack_mask_shapes(),
-                'selectors'      => [
-                    '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-image: url({{VALUE}}); mask-image: url({{VALUE}});',
-                ],
-                'condition'      => [
-                    'image_mask_popover' => 'yes',
-                    'image_mask_shape'   => 'default',
-                ],
-                'style_transfer' => true,
-            ]
-        );
-
-        $this->add_control(
-            'image_mask_shape_custom',
-            [
-                'label'      => _x('Custom Shape', 'Mask Image', 'bdthemes-element-pack'),
-                'type'       => Controls_Manager::MEDIA,
-                'show_label' => false,
-                'selectors'  => [
-                    '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-image: url({{URL}}); mask-image: url({{URL}});',
-                ],
-                'condition'  => [
-                    'image_mask_popover' => 'yes',
-                    'image_mask_shape'   => 'custom',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_mask_shape_position',
-            [
-                'label'                => __('Position', 'bdthemes-element-pack'),
-                'type'                 => Controls_Manager::SELECT,
-                'default'              => 'center-center',
-                'options'              => [
-                    'center-center' => __('Center Center', 'bdthemes-element-pack'),
-                    'center-left'   => __('Center Left', 'bdthemes-element-pack'),
-                    'center-right'  => __('Center Right', 'bdthemes-element-pack'),
-                    'top-center'    => __('Top Center', 'bdthemes-element-pack'),
-                    'top-left'      => __('Top Left', 'bdthemes-element-pack'),
-                    'top-right'     => __('Top Right', 'bdthemes-element-pack'),
-                    'bottom-center' => __('Bottom Center', 'bdthemes-element-pack'),
-                    'bottom-left'   => __('Bottom Left', 'bdthemes-element-pack'),
-                    'bottom-right'  => __('Bottom Right', 'bdthemes-element-pack'),
-                ],
-                'selectors_dictionary' => [
-                    'center-center' => 'center center',
-                    'center-left'   => 'center left',
-                    'center-right'  => 'center right',
-                    'top-center'    => 'top center',
-                    'top-left'      => 'top left',
-                    'top-right'     => 'top right',
-                    'bottom-center' => 'bottom center',
-                    'bottom-left'   => 'bottom left',
-                    'bottom-right'  => 'bottom right',
-                ],
-                'selectors'            => [
-                    '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-position: {{VALUE}}; mask-position: {{VALUE}};',
-                ],
-                'condition'            => [
-                    'image_mask_popover' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_mask_shape_size',
-            [
-                'label'     => __('Size', 'bdthemes-element-pack'),
-                'type'      => Controls_Manager::SELECT,
-                'default'   => 'contain',
-                'options'   => [
-                    'auto'    => __('Auto', 'bdthemes-element-pack'),
-                    'cover'   => __('Cover', 'bdthemes-element-pack'),
-                    'contain' => __('Contain', 'bdthemes-element-pack'),
-                    'initial' => __('Custom', 'bdthemes-element-pack'),
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-size: {{VALUE}}; mask-size: {{VALUE}};',
-                ],
-                'condition' => [
-                    'image_mask_popover' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_mask_shape_custom_size',
-            [
-                'label'      => _x('Custom Size', 'Mask Image', 'bdthemes-element-pack'),
-                'type'       => Controls_Manager::SLIDER,
-                'responsive' => true,
-                'size_units' => ['px', 'em', '%', 'vw'],
-                'range'      => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 1000,
-                    ],
-                    'em' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                    '%'  => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                    'vw' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
-                'default'    => [
-                    'size' => 100,
-                    'unit' => '%',
-                ],
-                'required'   => true,
-                'selectors'  => [
-                    '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-size: {{SIZE}}{{UNIT}}; mask-size: {{SIZE}}{{UNIT}};',
-                ],
-                'condition'  => [
-                    'image_mask_popover'    => 'yes',
-                    'image_mask_shape_size' => 'initial',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_mask_shape_repeat',
-            [
-                'label'                => __('Repeat', 'bdthemes-element-pack'),
-                'type'                 => Controls_Manager::SELECT,
-                'default'              => 'no-repeat',
-                'options'              => [
-                    'repeat'          => __('Repeat', 'bdthemes-element-pack'),
-                    'repeat-x'        => __('Repeat-x', 'bdthemes-element-pack'),
-                    'repeat-y'        => __('Repeat-y', 'bdthemes-element-pack'),
-                    'space'           => __('Space', 'bdthemes-element-pack'),
-                    'round'           => __('Round', 'bdthemes-element-pack'),
-                    'no-repeat'       => __('No-repeat', 'bdthemes-element-pack'),
-                    'repeat-space'    => __('Repeat Space', 'bdthemes-element-pack'),
-                    'round-space'     => __('Round Space', 'bdthemes-element-pack'),
-                    'no-repeat-round' => __('No-repeat Round', 'bdthemes-element-pack'),
-                ],
-                'selectors_dictionary' => [
-                    'repeat'          => 'repeat',
-                    'repeat-x'        => 'repeat-x',
-                    'repeat-y'        => 'repeat-y',
-                    'space'           => 'space',
-                    'round'           => 'round',
-                    'no-repeat'       => 'no-repeat',
-                    'repeat-space'    => 'repeat space',
-                    'round-space'     => 'round space',
-                    'no-repeat-round' => 'no-repeat round',
-                ],
-                'selectors'            => [
-                    '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-repeat: {{VALUE}}; mask-repeat: {{VALUE}};',
-                ],
-                'condition'            => [
-                    'image_mask_popover' => 'yes',
-                ],
-            ]
-        );
-
-
-        $this->end_popover();
+        //Global Image Mask Controls
+        $this->register_image_mask_controls();
 
         $this->add_control(
             'name',

@@ -5,13 +5,13 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.0
-Stable tag: 4.9.0
+Stable tag: 4.10.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.11.3
+Elementor tested up to: 3.11.5
 
-Best Addon for Elementor WordPress Plugin with 57+ Most Popular Elements that need your everyday website page building.
+Best Addon for Elementor WordPress Plugin with 60+ Most Popular Elements that need your everyday website page building.
 
 
 == Description ==
@@ -40,6 +40,7 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 0. **[Accordion](https://elementpack.pro/demo/element/accordion/)** - Element Pack Lite plugin provides advanced accordion design for the page builder. This page demonstrates the accordion addon.
 0. **[Brand Grid](https://elementpack.pro/demo/element/brand-grid/)** - The brand grid widget is a unique branding tool for WordPress that makes it possible to display brand images with a hover popup on top that contains the identity text. See the demo
 0. **[Business Hours](https://elementpack.pro/demo/element/business-hours/)** - Business hours show your company or business hours as a beautiful list of working hours.
+0. **[Creative Button](https://elementpack.pro/demo/element/creative-button/)** - Killing for some extraordinary button graphics for WordPress? The creative button widget have tons of unique and powerful button layouts to bring more energy to your website. See the demo
 0. **[Call Out](https://elementpack.pro/demo/element/call-out/)** - Call out addon is the ultimate call out design. You can highlight your content using this element. Check the demo now.
 0. **[Countdown](https://elementpack.pro/demo/element/countdown/)** - This feature provides an easy solution to add a countdown timer to your website. Watch the demo to know how to add countdown.
 0. **[Cookie Consent](https://elementpack.pro/demo/element/cookie-consent/)** - If you are looking for the ultimate cookie consent addon, this addon is the solution. It complies site with GDPR
@@ -140,7 +141,6 @@ More features & extensions are coming soon...
 0. **[Circle Info](https://elementpack.pro/demo/element/circle-info/)** - For your users, presentation is everything. And present your content more daynamacally and out of the box, Circle Info can move it to next level.
 0. **[Custom Carousel](https://elementpack.pro/demo/element/custom-carousel/)**  - Get tom Carousel with modern looks and customization options according to your needs. You'll get an awesome experience with it. 
 0. **[Charts](https://elementpack.pro/demo/element/charts)** - Create dynamic charts with an insanely flexible layout and design pie, vertical,& horizontal bar, curve line, radar, doughnut, polar area, and bubble with legends, custom colors, tooltips, and more.
-0. **[Creative Button](https://elementpack.pro/demo/element/creative-button/)** - Killing for some extraordinary button graphics for WordPress? The creative button widget have tons of unique and powerful button layouts to bring more energy to your website. See the demo
 0. **[Crypto Currency Card](https://elementpack.pro/demo/element/crypto-currency-card/)** - Crypto Currency Card displays individual smart profiles for every supported cryptocurrency on your website.
 0. **[Crypto Currency Table](https://elementpack.pro/demo/element/crypto-currency-table/)** - You can easily add the CryptoCurrency Comparison Table to display dynamic currency market values in real time inside your website.
 0. **[Comment](https://elementpack.pro/demo/element/comment/)** - This feature provides you with a commenting system like Disqus and Facebook comments on your website. Watch Demo!
@@ -392,6 +392,10 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 4.10.0 [20th March 2023] =
+
+* Added: Creative button widget unlock from pro
 
 = 4.9.0 [12th March 2023] =
 

@@ -403,7 +403,7 @@ class ModuleService {
                     'label'        => esc_html__('Creative Button', 'bdthemes-element-pack'),
                     'type'         => 'checkbox',
                     'default'      => 'off',
-                    'widget_type'  => 'pro',
+                    'widget_type'  => 'free',
                     'content_type' => 'others',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/creative-button/',
                     'video_url'    => 'https://youtu.be/6f2t-79MfnU',
