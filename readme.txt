@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.0
-Stable tag: 4.10.0
+Stable tag: 4.10.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -156,6 +156,8 @@ More features & extensions are coming soon...
 0. **[Fancy Icons](https://elementpack.pro/demo/element/fancy-icon/)** - Fancy Icon isfor creating beautiful shaded icons for social media promotions. Do a lot more than just an icon.
 0. **[Fancy Slider](https://elementpack.pro/demo/element/fancy-slider/)** - Fancy Slider isfor creating stunning sliders, unique and beautiful, as well as fancy.
 0. **[Fancy Tabs](https://elementpack.pro/demo/element/fancy-tabs/)** - Fancy Tabs is an amazing tab that can display your content more dynamically. You can showcase your content with more modern design styles.
+0. **[Facebook Feed](https://elementpack.pro/demo/element/facebook-feed/)** - Maximize your social media presence by using the Facebook Feed widget inside your WordPress site. With it, you can show your latest and greatest Facebook posts with a customizable masonry layout, a sparkling ID name and banner, like-comment counts, and see more options. 
+0. **[Facebook Feed Carousel](https://elementpack.pro/demo/element/facebook-feed-carousel/)** - Now show your Facebook posts inside your website in reels using the Facebook Feed Carousel widget. The carousel lineup lets to onboard all your latest Facebook posts and display them in slides along with brand ID, post image, description, and a read more button. More options will be available soon.
 0. **[Google Reviews](https://elementpack.pro/demo/element/google-reviews/)** - Now you can show your Google reviews on your site dynamically, TO establish your authority, Google reviews will help you on the way.
 0. **[HoneyCombs](https://elementpack.pro/demo/element/honeycombs/)** - The Honeycombs allows you to create infographic honeycomb-style blocks showing stats, info, icons, and logos on both sides. 
 0. **[Hover Video](https://elementpack.pro/demo/element/hover-video/)** - Hover Video creates slider panels for videos stacked together in an accordion formation. Each one folds into a full section content hiding non-active ones.
@@ -392,6 +394,10 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 4.10.1 [27th March 2023] =
+
+* Added: Trigger Type option added in Flip Box Widget
 
 = 4.10.0 [20th March 2023] =
 

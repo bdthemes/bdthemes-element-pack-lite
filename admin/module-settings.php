@@ -488,6 +488,28 @@ class ModuleService {
 
                 ],
                 [
+                    'name'         => 'facebook-feed',
+                    'label'        => esc_html__('Facebook Feed', 'bdthemes-element-pack'),
+                    'type'         => 'checkbox',
+                    'default'      => 'off',
+                    'widget_type'  => 'pro',
+                    'content_type' => 'custom new',
+                    'demo_url'     => 'https://www.elementpack.pro/demo/element/facebook-feed/',
+                    'video_url'    => 'https://youtu.be/iNUl6q2yRDU',
+
+                ],
+                [
+                    'name'         => 'facebook-feed-carousel',
+                    'label'        => esc_html__('Facebook Feed Carousel', 'bdthemes-element-pack'),
+                    'type'         => 'checkbox',
+                    'default'      => 'off',
+                    'widget_type'  => 'pro',
+                    'content_type' => 'custom new',
+                    'demo_url'     => 'https://www.elementpack.pro/demo/element/facebook-feed-carousel/',
+                    'video_url'    => 'https://youtu.be/wMumsINLfUA',
+
+                ],
+                [
                     'name'         => 'fancy-card',
                     'label'        => esc_html__('Fancy Card', 'bdthemes-element-pack'),
                     'type'         => 'checkbox',
@@ -908,7 +930,7 @@ class ModuleService {
                     'widget_type'  => 'free',
                     'content_type' => 'custom new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/product-grid',
-                    'video_url'    => '',
+                    'video_url'    => 'https://youtu.be/-UJhU-ak5_k',
                 ],
                 [
                     'name'         => 'product-carousel',
@@ -918,7 +940,7 @@ class ModuleService {
                     'widget_type'  => 'free',
                     'content_type' => 'custom new',
                     'demo_url'     => 'https://www.elementpack.pro/demo/element/product-carousel',
-                    'video_url'    => '',
+                    'video_url'    => 'https://youtu.be/ZFpkJIctXic',
                 ],
                 [
                     'name'         => 'panel-slider',
@@ -1521,7 +1543,7 @@ class ModuleService {
                     'widget_type' => 'pro',
                     'content_type' => 'new',
                     'demo_url'    => 'https://www.elementpack.pro/demo/element/background-expand',
-                    'video_url'   => '',
+                    'video_url'   => 'https://youtu.be/VJ5ZnhLgLMs',
                 ],
                 [
                     'name'        => 'backdrop-filter',

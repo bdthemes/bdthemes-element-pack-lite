@@ -45,6 +45,14 @@ class Flip_Box extends Module_Base {
 		}
 	}
 
+	public function get_script_depends() {
+		if ($this->ep_is_edit_mode()) {
+			return ['ep-scripts'];
+		} else {
+			return ['ep-flip-box'];
+		}
+	}
+
 	public function get_custom_help_url() {
 		return 'https://youtu.be/FLmKzk9KbQg';
 	}
@@ -514,6 +522,7 @@ class Flip_Box extends Module_Base {
 				'prefix_class' => 'bdt-flip-box-easing-',
 			]
 		);
+
 		$this->add_control(
 			'flip_transiton_duration',
 			[
@@ -531,6 +540,20 @@ class Flip_Box extends Module_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'flip_trigger',
+			[
+				'label'   => esc_html__('Trigger Type', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'hover',
+				'options' => [
+					'hover' => esc_html__('Hover', 'bdthemes-element-pack'),
+					'click' => esc_html__('Click', 'bdthemes-element-pack'),
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		//Style
@@ -1089,7 +1112,7 @@ class Flip_Box extends Module_Base {
 			]
 		);
 
- 
+
 		$this->start_controls_tabs('back_style_tabs');
 
 		$this->start_controls_tab(
@@ -1423,8 +1446,23 @@ class Flip_Box extends Module_Base {
 		$migrated  = isset($settings['__fa4_migrated']['flip_box_icon']);
 		$is_new    = empty($settings['icon']) && Icons_Manager::is_migration_allowed();
 
+
+		$this->add_render_attribute(
+			[
+				'flip-box' => [
+					'class' => 'bdt-flip-box',
+					'data-settings' => [
+						wp_json_encode([
+							"flipTrigger"     => ("click" == $settings["flip_trigger"]) ? 'click' : 'hover',
+						])
+					]
+				]
+			]
+		);
+
+
 ?>
-		<div class="bdt-flip-box">
+		<div <?php $this->print_render_attribute_string('flip-box'); ?>>
 			<div class="bdt-flip-box-layer bdt-flip-box-front">
 				<div class="bdt-flip-box-layer-overlay">
 					<div class="bdt-flip-box-layer-inner">
@@ -1484,63 +1522,6 @@ class Flip_Box extends Module_Base {
 				</div>
 			</<?php echo esc_attr($wrapper_tag); ?>>
 		</div>
-	<?php
-	}
-
-	protected function content_template() {
-	?>
-		<# var buttonClass='bdt-flip-box-button elementor-button elementor-size-' + settings.button_size + ' elementor-animation-' + settings.button_hover_animation; if ( 'image'===settings.graphic_element && '' !==settings.image.url ) { var image={ id: settings.image.id, url: settings.image.url, size: settings.image_size, dimension: settings.image_custom_dimension, model: view.getEditModel() }; var imageUrl=elementor.imagesManager.getImageUrl( image ); } var wrapperTag='div' , buttonTag='a' ; if ( 'box'===settings.link_click ) { wrapperTag='a' ; buttonTag='button' ; } if ( 'icon'===settings.graphic_element ) { var iconWrapperClasses='elementor-icon-wrapper' ; iconWrapperClasses +=' elementor-view-' + settings.icon_view; if ( 'default' !==settings.icon_view ) { iconWrapperClasses +=' elementor-shape-' + settings.icon_shape; } } view.addRenderAttribute( 'box_front_title_tags' , 'class' , 'bdt-flip-box-layer-title' ); iconHTML=elementor.helpers.renderIcon( view, settings.flip_box_icon, { 'aria-hidden' : true }, 'i' , 'object' ); migrated=elementor.helpers.isIconMigrated( settings, 'flip_box_icon' ); #>
-
-			<div class="bdt-flip-box">
-				<div class="bdt-flip-box-layer bdt-flip-box-front">
-					<div class="bdt-flip-box-layer-overlay">
-						<div class="bdt-flip-box-layer-inner">
-							<# if ( 'image'===settings.graphic_element && '' !==settings.image.url ) { #>
-								<div class="bdt-flip-box-image">
-									<img src="{{ imageUrl }}">
-								</div>
-								<# } else if ( 'icon'===settings.graphic_element && settings.flip_box_icon.value ) { #>
-									<div class="{{ iconWrapperClasses }}">
-										<div class="elementor-icon">
-
-											<# if ( iconHTML && iconHTML.rendered && ( ! settings.icon || migrated ) ) { #>
-												{{{ iconHTML.value }}}
-												<# } else { #>
-													<i class="{{ settings.icon }}" aria-hidden="true"></i>
-													<# } #>
-
-										</div>
-									</div>
-									<# } #>
-
-										<# if ( settings.front_title_text ) { #>
-											<{{{ elementor.helpers.validateHTMLTag(settings.front_title_tags) }}} {{{ view.getRenderAttributeString( 'box_front_title_tags' ) }}}>{{{ settings.front_title_text }}}</{{{ elementor.helpers.validateHTMLTag(settings.front_title_tags) }}}>
-											<# } #>
-
-												<# if ( settings.front_description_text ) { #>
-													<div class="bdt-flip-box-layer-desc">{{{ settings.front_description_text }}}</div>
-													<# } #>
-						</div>
-					</div>
-				</div>
-				<{{ wrapperTag }} class="bdt-flip-box-layer bdt-flip-box-back">
-					<div class="bdt-flip-box-layer-overlay">
-						<div class="bdt-flip-box-layer-inner">
-							<# if ( settings.back_title_text ) { #>
-								<{{{ elementor.helpers.validateHTMLTag(settings.back_title_tags) }}} {{{ view.getRenderAttributeString( 'box_front_title_tags' ) }}}>{{{ settings.back_title_text }}}</{{{ elementor.helpers.validateHTMLTag(settings.back_title_tags) }}}>
-								<# } #>
-
-									<# if ( settings.back_description_text ) { #>
-										<div class="bdt-flip-box-layer-desc">{{{ settings.back_description_text }}}</div>
-										<# } #>
-
-											<# if ( settings.button_text ) { #>
-												<{{ buttonTag }} href="#" class="{{ buttonClass }}">{{{ settings.button_text }}}</{{ buttonTag }}>
-												<# } #>
-						</div>
-					</div>
-				</{{ wrapperTag }}>
-			</div>
 	<?php
 	}
 }
