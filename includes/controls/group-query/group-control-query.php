@@ -254,7 +254,9 @@ trait Group_Control_Query {
                 'label'   => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
                 'type'    => Controls_Manager::NUMBER,
                 'default' => 0,
-
+                'condition' => [
+                    'posts_source!' => 'current_query',
+                ],
             ]
         );
 
@@ -548,12 +550,8 @@ trait Group_Control_Query {
         /**
          * Set Ignore Sticky
          */
-        if (
-            $this->getGroupControlQueryPostType() === 'post'
-            && $this->get_settings_for_display('posts_ignore_sticky_posts') === 'yes'
-        ) {
+        if ($this->getGroupControlQueryPostType() === 'post' && $this->get_settings_for_display('posts_ignore_sticky_posts') === 'yes') {
             $args['ignore_sticky_posts'] = true;
-
             if (in_array('current_post', $exclude_by)) {
                 $args['post__not_in'] = [get_the_ID()];
             }

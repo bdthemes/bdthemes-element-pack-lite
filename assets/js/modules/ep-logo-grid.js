@@ -19,8 +19,6 @@
 
         $tooltip.each(function(index) {
             tippy(this, {
-                //appendTo: $scope[0]
-                //arrow: false,
                 allowHTML: true,
                 theme: 'bdt-tippy-' + widgetID
             });

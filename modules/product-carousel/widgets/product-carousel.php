@@ -63,9 +63,9 @@
 			}
 		}
 		
-		// public function get_custom_help_url() {
-		// 	return 'https://youtu.be/a_wJL950Kz4';
-		// }
+		public function get_custom_help_url() {
+			return 'https://youtu.be/ZFpkJIctXic';
+		}
 		
 		protected function register_controls() {
 			

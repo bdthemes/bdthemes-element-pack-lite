@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.2.0
 Requires PHP: 5.6.0
-Stable tag: 4.10.2
+Stable tag: 4.10.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -16,7 +16,7 @@ Best Addon for Elementor WordPress Plugin with 60+ Most Popular Elements that ne
 
 == Description ==
 
-Element Pack Addon for **[Elementor](https://wordpress.org/plugins/elementor/)** Page Builder is the ultimate web solution and the number #1 addon with essential web development tools for WordPress. Element Pack provides more than 50+ essential elements for everyday applications to simplify the whole web building process.
+Element Pack Addon for **[Elementor](https://wordpress.org/plugins/elementor/)** Page Builder is the ultimate web solution and the number #1 addon with essential web development tools for WordPress. Element Pack provides more than 62+ essential elements for everyday applications to simplify the whole web building process.
 
 **[Element Pack](https://elementpack.pro)** addon for Elementor is developed with the best programming practice of CSS, HTML5, and PHP 8.x. The plugin is compatible with the latest version of WordPress and improved to meet the best standards for web development requirements.
 
@@ -394,6 +394,10 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 4.10.3 [3rd April 2023] =
+
+* Fixed: Global border box css issue fixed
 
 = 4.10.2 [30th March 2023] =
 
