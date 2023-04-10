@@ -1045,14 +1045,20 @@ class Panel_Slider extends Module_Base
 							true
 						);
 
+						$this->add_render_attribute(
+							[
+								'item-wrapper-link' => [
+									'class' => 'bdt-panel-slide-item-wrapper-link',
+									'href'   => $item['tab_link']['url'] ? esc_url($item['tab_link']['url']) : '',
+									'target' => $item['tab_link']['is_external'] ? '_blank' : '_self',
+								]
+							],
+							'',
+							'',
+							true
+						);
+
 						$this->add_render_attribute('panel-slide-item', 'class', ['bdt-panel-slide-item', 'swiper-slide', 'bdt-transition-toggle'], true);
-
-						if ('yes' == $settings['global_link'] and $item['tab_link']['url']) {
-
-							$target = $item['tab_link']['is_external'] ? '_blank' : '_self';
-
-							$this->add_render_attribute('panel-slide-item', 'onclick', "window.open('" . $item['tab_link']['url'] . "', '$target')", true);
-						}
 
 						if (!isset($settings['icon']) && !Icons_Manager::is_migration_allowed()) {
 							// add old default
@@ -1106,6 +1112,9 @@ class Panel_Slider extends Module_Base
 
 							<?php if ('' !== $item['tab_content'] or 'yes' == $settings['show_title']) : ?>
 								<div class="bdt-transition-fade bdt-position-cover bdt-overlay bdt-overlay-gradient"></div>
+							<?php endif; ?>
+							<?php if ('yes' == $settings['global_link'] and $item['tab_link']['url']) : ?>
+								<a <?php echo $this->get_render_attribute_string('item-wrapper-link'); ?>></a>
 							<?php endif; ?>
 						</div>
 					<?php

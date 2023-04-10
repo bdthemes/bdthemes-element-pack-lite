@@ -21,7 +21,7 @@ class Toggle extends Module_Base {
     }
 
     public function get_title() {
-        return BDTEP . esc_html__('Toggle', 'bdthemes-element-pack');
+        return BDTEP . esc_html__('Read More Toggle', 'bdthemes-element-pack');
     }
 
     public function get_icon() {
@@ -33,7 +33,7 @@ class Toggle extends Module_Base {
     }
 
     public function get_keywords() {
-        return ['toggle', 'accordion', 'tab', 'unfold', 'expand', 'collapse', 'content', 'show', 'hide', 'element pack'];
+        return ['toggle', 'accordion', 'tab', 'unfold', 'expand', 'collapse', 'content', 'show', 'hide', 'element pack', 'read more toggle'];
     }
 
     public function get_style_depends() {

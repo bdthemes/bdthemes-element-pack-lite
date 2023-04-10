@@ -4,7 +4,7 @@ namespace ElementPack;
 
 use ElementPack\Admin\ModuleService;
 
-if ( !defined('ABSPATH') ) {
+if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
@@ -21,8 +21,8 @@ final class Manager {
             /**
              * Our Widget
              */
-            foreach ( $core_widgets as $widget ) {
-                if ( element_pack_is_widget_enabled($widget['name']) ) {
+            foreach ($core_widgets as $widget) {
+                if (element_pack_is_widget_enabled($widget['name'])) {
                     $this->load_module_instance($widget);
                 }
             }
@@ -30,8 +30,8 @@ final class Manager {
             /**
              * Extension
              */
-            foreach ( $extensions as $extension ) {
-                if ( element_pack_is_extend_enabled($extension['name']) ) {
+            foreach ($extensions as $extension) {
+                if (element_pack_is_extend_enabled($extension['name'])) {
                     $this->load_module_instance($extension);
                 }
             }
@@ -39,27 +39,26 @@ final class Manager {
             /**
              * Third Party Widget
              */
-            foreach ( $third_party_widgets as $widget ) {
-                if ( element_pack_is_third_party_enabled($widget['name']) ) {
-                    if ( isset($widget['plugin_path']) && ModuleService::is_plugin_active($widget['plugin_path']) ) {
+            foreach ($third_party_widgets as $widget) {
+                if (element_pack_is_third_party_enabled($widget['name'])) {
+                    if (isset($widget['plugin_path']) && ModuleService::is_plugin_active($widget['plugin_path'])) {
                         $this->load_module_instance($widget);
                     }
                 }
             }
             // Static module if need
             $this->load_module_instance(['name' => 'elementor']);
-
         });
     }
 
     public function load_module_instance($module) {
 
-        if(function_exists('element_pack_pro_activated')){
-            if(isset($module['widget_type']) && 'pro' == $module['widget_type'] && true !== element_pack_pro_activated()){
+        if (function_exists('element_pack_pro_activated')) {
+            if (isset($module['widget_type']) && 'pro' == $module['widget_type'] && true !== element_pack_pro_activated()) {
                 return;
             }
         }
-        
+
 
         $direction = is_rtl() ? '.rtl' : '';
         $suffix    = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
@@ -69,20 +68,20 @@ final class Manager {
         $class_name = str_replace(' ', '', ucwords($class_name));
         $class_name = __NAMESPACE__ . '\\Modules\\' . $class_name . '\\Module';
 
-        if ( !element_pack_is_asset_optimization_enabled() ) {
-            if ( !element_pack_is_preview() ) {
+        if (!element_pack_is_asset_optimization_enabled()) {
+            if (!element_pack_is_preview()) {
                 // register widgets css
-                if ( ModuleService::has_module_style($module_id) ) {
+                if (ModuleService::has_module_style($module_id)) {
                     wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . $direction . '.css', [], BDTEP_VER);
                 }
                 // register widget JS
-                if ( ModuleService::has_module_script($module_id) ) {
+                if (ModuleService::has_module_script($module_id)) {
                     wp_register_script('ep-' . $module_id, BDTEP_URL . 'assets/js/modules/ep-' . $module_id . $suffix . '.js', ['jquery', 'bdt-uikit', 'elementor-frontend'], BDTEP_VER, true);
                 }
             }
         }
 
-         if(class_exists($class_name)){
+        if (class_exists($class_name)) {
             $class_name::instance();
         }
     }

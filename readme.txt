@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.2.0
 Requires PHP: 5.6.0
-Stable tag: 4.10.3
+Stable tag: 4.11.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.12.0
+Elementor tested up to: 3.12.1
 
 Best Addon for Elementor WordPress Plugin with 60+ Most Popular Elements that need your everyday website page building.
 
@@ -95,6 +95,7 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 0. **[Ninja Forms](https://elementpack.pro/demo/element/ninja-forms/)** - To collect more subscribers &  to make sure your visitors more return on your site-Ninja Forms is a must-have plugin. Modify its looks and feel.
 0. **[Tutor LMS Course Grid](https://elementpack.pro/demo/element/tutor-lms-course-grid)** - Display purchasable courses integrated through the Tutor LMS platform and help your visitors navigate your custom-made course gallery.
 0. **[Tutor LMS Course Carousel](https://elementpack.pro/demo/element/tutor-lms-course-carousel)** - Display purchasable courses in carousel sliders through the Tutor LMS platform and enjoy lots of design customizations to make your course-selling page more awesome.
+0. **[Testimonial Grid](https://elementpack.pro/demo/element/testimonial-grid/)  - Different style Testimonial Grid, comes with element pack pro WordPress plugin. You can use Top Avatar, Reverse, Image Hide skins to do that.
 0. **[WeForms](https://elementpack.pro/demo/element/weform/)** - WeForm an amazing 3rd party tool that now supports element pack and lets you change the form style and customize its design.
 
 == Free Extensions for Lifetime 🔥 ==
@@ -289,7 +290,6 @@ More features & extensions are coming soon...
 0. **[Portfolio List](https://elementpack.pro/demo/element/portfolio-list)** - The Portfolio List makes amazingly beautiful portfolios for products, services, and persons.
 0. **[QuForm](https://elementpack.pro/demo/element/quform/)** - Quform is an advanced WordPress plugin that allows you to quickly and easily build multiple forms. And it's compatible with WordPress
 0. **[Revolution Slider](https://elementpack.pro/demo/element/revolution-slider/)** - Slider Revolution is an innovative, responsive jQuery Slider Plugin and it works great with the page builder.
-0. **[Testimonial Grid](https://elementpack.pro/demo/element/testimonial-grid/)  - Different style Testimonial Grid, comes with element pack pro WordPress plugin. You can use Top Avatar, Reverse, Image Hide skins to do that.
 0. **[Testimonial Carousel](https://elementpack.pro/demo/element/testimonial-carousel/)** - Skin Twyla Example, Skin Vyxen Example, Skin Vyxen Gradient Example, Shadow Mode Example, Shadow Mode Color Example, and more promising testimonial showcases now possible to create.
 0. **[Testimonial Slider](https://elementpack.pro/demo/element/testimonial-slider/)** - Transform your customer testimonials into customizable sliders and bring more attention to the details for building more trust for the users.
 0. **[TablePress](https://elementpack.pro/demo/element/tablepress/)** - TablePress allows you to easily create and manage beautiful tables. You can embed the tables into posts, pages, or text widgets with a simple Shortcode.
@@ -370,7 +370,7 @@ Visit [BdThemes](https://bdthemes.com/) to learn about our services, page builde
 This section describes how to install the plugin and get it working.
 
 e.g.
- 
+
 1. Upload `bdthemes-element-pack-lite` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Start using it by going to the editor.
@@ -394,6 +394,11 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 4.11.0 [9th April 2023] =
+
+* Added: Testimonial grid widget unlock from pro
+* Upgraded: Wrapper Link upgraded for popup workable in Panel Slider widget (Thanks to Illuspic)
 
 = 4.10.3 [3rd April 2023] =
 

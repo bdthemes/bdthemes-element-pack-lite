@@ -109,7 +109,7 @@
 					'dynamic'     => [
 						'active' => true,
 					],
-					'default' => __('$204', 'bdthemes-element-pack'),
+					'default' => '$204',
 					'label_block' => true,
 				]
 			);
@@ -170,7 +170,7 @@
 					'dynamic'     => [
 						'active' => true,
 					],
-					'default' => __('(10,678)', 'bdthemes-element-pack'),
+					'default' => '(10,678)',
 					'label_block' => true,
 				]
 			);

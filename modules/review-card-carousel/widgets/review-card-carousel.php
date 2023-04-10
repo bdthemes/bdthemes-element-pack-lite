@@ -194,7 +194,7 @@ class Review_Card_Carousel extends Module_Base {
         $this->start_controls_section(
             'section_review_additional_settings',
             [
-                'label' => __('Additional Setttings', 'bdthemes-element-pack'),
+                'label' => __('Additional Settings', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );

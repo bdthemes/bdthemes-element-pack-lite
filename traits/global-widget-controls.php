@@ -275,7 +275,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'desktop_filter_normal',
 			[
-				'label' => esc_html__('N O R M A L', 'bdthemes-element-pack'),
+				'label' => esc_html__('NORMAL', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -360,7 +360,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'desktop_filter_hover',
 			[
-				'label' => esc_html__('H O V E R', 'bdthemes-element-pack'),
+				'label' => esc_html__('HOVER', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -403,7 +403,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'desktop_filter_active',
 			[
-				'label' => esc_html__('A C T I V E', 'bdthemes-element-pack'),
+				'label' => esc_html__('ACTIVE', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]

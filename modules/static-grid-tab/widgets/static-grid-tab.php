@@ -169,7 +169,7 @@ class Static_Grid_Tab extends Module_Base
 		$this->start_controls_section(
 			'section_carousel_additional_settings',
 			[
-				'label' => __('Additional Setttings', 'bdthemes-element-pack'),
+				'label' => __('Additional Settings', 'bdthemes-element-pack'),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);

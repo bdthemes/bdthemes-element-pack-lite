@@ -1110,7 +1110,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'heading_search_ajax_title',
 			[
-				'label'     => esc_html__('H O V E R', 'bdthemes-element-pack'),
+				'label'     => esc_html__('HOVER', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
