@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.2.0
 Requires PHP: 5.6.0
-Stable tag: 4.11.0
+Stable tag: 4.11.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -394,6 +394,13 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 4.11.1 [13th April 2023] =
+
+* Added: Read more text repeater option added in static carousel widget
+* Added: Before after button align, border, box shadow & circle shadow color option added in image compare widget
+* Fixed: Frontend eicon not showing issue fixed
+* Improved: System Improved
 
 = 4.11.0 [9th April 2023] =
 

@@ -4,7 +4,7 @@
  * Plugin Name: Element Pack Lite - Addons for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: The all-new <a href="https://elementpack.pro/">Element Pack</a> brings incredibly advanced, and super-flexible widgets, and A to Z essential addons to the Elementor page builder for WordPress. Explore expertly-coded widgets with first-class support by experts.
- * Version: 4.11.0
+ * Version: 4.11.1
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
  * Text Domain: bdthemes-element-pack-lite
@@ -51,19 +51,10 @@ if (!function_exists('_is_ep_pro_activated_check')) {
 	}
 }
 
-if (!function_exists('element_pack_pro_activated')) {
-	function element_pack_pro_activated() {
-		if (true !== _is_ep_pro_activated_check()) {
-			return false;
-		}
-		return true;
-	}
-}
-
 if (!element_pack_pro_installed()) {
 
 	// Some pre defined value for easy use
-	define('BDTEP_VER', '4.11.0');
+	define('BDTEP_VER', '4.11.1');
 	define('BDTEP_TPL_DB_VER', '1.0.0');
 	define('BDTEP__FILE__', __FILE__);
 	if (!defined('BDTEP_TITLE')) {
@@ -154,13 +145,15 @@ if (!element_pack_pro_installed()) {
 	 * @param string $plugin
 	 * @return void
 	 */
-	function ep_activation_redirect($plugin) {
-		if (!did_action('elementor/loaded')) {
-			return;
-		}
+	if (!function_exists('ep_activation_redirect')) {
+		function ep_activation_redirect($plugin) {
+			if (!did_action('elementor/loaded')) {
+				return;
+			}
 
-		if ($plugin == plugin_basename(BDTEP__FILE__)) {
-			exit(wp_redirect(admin_url('admin.php?page=element_pack_options&notice=v6')));
+			if ($plugin == plugin_basename(BDTEP__FILE__)) {
+				exit(wp_redirect(admin_url('admin.php?page=element_pack_options&notice=v6')));
+			}
 		}
 	}
 

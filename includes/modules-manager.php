@@ -53,13 +53,6 @@ final class Manager {
 
     public function load_module_instance($module) {
 
-        if (function_exists('element_pack_pro_activated')) {
-            if (isset($module['widget_type']) && 'pro' == $module['widget_type'] && true !== element_pack_pro_activated()) {
-                return;
-            }
-        }
-
-
         $direction = is_rtl() ? '.rtl' : '';
         $suffix    = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
