@@ -451,7 +451,7 @@ class Skin_Modal extends Elementor_Skin_Base {
 					<?php endif; ?>
 					<?php if ($this->get_instance_value('modal_header')) : ?>
 					<div class="bdt-modal-header">
-			            <h2 class="bdt-modal-title"><span class="eicon-user-circle-o"></span> <?php esc_html_e('User Registration', 'bdthemes-element-pack'); ?></h2>
+			            <h2 class="bdt-modal-title"><span class="ep-icon-user-circle-o"></span> <?php esc_html_e('User Registration', 'bdthemes-element-pack'); ?></h2>
 			        </div>
 					<?php endif; ?>
 					<div class="elementor-form-fields-wrapper bdt-modal-body">

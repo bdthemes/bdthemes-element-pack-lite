@@ -1598,7 +1598,7 @@
 			?>
 			<?php if ( $item['time'] ) : ?>
 				<div <?php echo $this->get_render_attribute_string('time-wrap'); ?>>
-					<i class="eicon-clock-o" aria-hidden="true"></i>
+					<i class="ep-icon-clock-o" aria-hidden="true"></i>
 					<?php echo wp_kses($item['time'], element_pack_allow_tags('time')); ?>
 				</div>
 			<?php endif; ?>

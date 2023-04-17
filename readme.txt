@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 4.7.0
 Tested up to: 6.2.0
 Requires PHP: 5.6.0
-Stable tag: 4.11.1
+Stable tag: 4.11.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -394,6 +394,25 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 4.11.2 [17th April 2023] =
+
+* Added: Add support for YouTube Shorts URLs in Lightbox component
+* Added: Add Dropnav component
+* Added: Add parent icon to Drop component
+* Added: Add WAI-ARIA roles, states and properties to interactive JavaScript components
+* Added: Add WAI-ARIA keyboard interaction pattern to interactive JavaScript components
+* Added: Add language internationalization (i18n) for interactive JavaScript components
+* Fixed: Fix Scrollspy Nav component updates state once shown
+* Fixed: Fix Slider/Slideshow component autoplay in Firefox
+* Fixed: Fix pause-on-hover option in Slider/Slideshow component
+* Fixed: Fix Slideshow initially shows last slide first
+* Fixed: Fix Slider reactivity when a slide is hidden/shown
+* Fixed: Fix prevent background scrolling in Safari
+* Fixed: Fix opened Drop component prevents smooth scrolling of document on iOS
+* Fixed: Fix focusable elements within none visible slides are no longer focusable in Slider component
+* Fixed: Fix Dropbar partially closing before opening when switching between Navbar items
+* Fixed: Fix Parallax component updating too late during slide animation in Filter component
 
 = 4.11.1 [13th April 2023] =
 
