@@ -59,7 +59,7 @@
             if (response.results.length > 0) {
               if ($search.length >= 3) {
                 var output = `<div class="bdt-search-result-inner">
-                          <h3 class="bdt-search-result-header">SEARCH RESULT<i class="eicon-editor-close bdt-search-result-close-btn"></i></h3>
+                          <h3 class="bdt-search-result-header">SEARCH RESULT<i class="ep-icon-close bdt-search-result-close-btn"></i></h3>
                           <ul class="bdt-list bdt-list-divider">`;
                 for (let i = 0; i < response.results.length; i++) {
                   const element = response.results[i];
@@ -90,7 +90,7 @@
             } else {
               if ($search.length > 3) {
                 var not_found = `<div class="bdt-search-result-inner">
-                                  <h3 class="bdt-search-result-header">${window.ElementPackConfig.search.search_result}<i class="eicon-editor-close bdt-search-result-close-btn"></i></h3>
+                                  <h3 class="bdt-search-result-header">${window.ElementPackConfig.search.search_result}<i class="ep-icon-close bdt-search-result-close-btn"></i></h3>
                                   <div class="bdt-search-text">${$search} ${window.ElementPackConfig.search.not_found}</div>
                                 </div>`;
                 $resultHolder.html(not_found);

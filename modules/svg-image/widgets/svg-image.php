@@ -848,16 +848,10 @@ class Svg_Image extends Module_Base {
 		$this->add_render_attribute('svg-image', 'data-bdt-svg', '');
 
 		if ($settings['image']['id']) {
-			print(wp_get_attachment_image(
-				$settings['image']['id'],
-				'full',
-				false,
-				[
-					'alt' => esc_html(get_the_title())
-				]
-			));
+			$image_url = wp_get_attachment_image_src($settings['image']['id'], 'full');
+			printf('<img src="%1$s" alt="%2$s" '. $this->get_render_attribute_string('svg-image') .'>', $image_url[0], esc_html(get_the_title()));
 		} else {
-			printf('<img src="%1$s" alt="%2$s">', BDTEP_ASSETS_URL . 'images/crane.svg', esc_html(get_the_title()));
+			printf('<img src="%1$s" alt="%2$s" '. $this->get_render_attribute_string('svg-image') .'>', BDTEP_ASSETS_URL . 'images/crane.svg', esc_html(get_the_title()));
 		}
 	}
 

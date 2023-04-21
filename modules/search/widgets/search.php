@@ -39,7 +39,7 @@ class Search extends Module_Base {
 		if ($this->ep_is_edit_mode()) {
 			return ['ep-styles'];
 		} else {
-			return ['ep-search'];
+			return ['ep-font', 'ep-search'];
 		}
 	}
 	public function get_script_depends() {
