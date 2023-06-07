@@ -38,7 +38,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_translate_toggle',
 			[
-				'label'              => __('Translate', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Translate', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [
 					'ep_floating_effects_show' => 'yes',
@@ -171,7 +171,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_toggle',
 			[
-				'label'              => __('Rotate', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Rotate', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [
 					'ep_floating_effects_show' => 'yes',
@@ -360,7 +360,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_scale_toggle',
 			[
-				'label'              => __('Scale', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Scale', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [
 					'ep_floating_effects_show' => 'yes',
@@ -493,7 +493,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_skew_toggle',
 			[
-				'label'              => __('Skew', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Skew', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [
 					'ep_floating_effects_show' => 'yes',
@@ -624,7 +624,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_border_radius_toggle',
 			[
-				'label'              => __('Border Radius', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Border Radius', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [
 					'ep_floating_effects_show' => 'yes',
@@ -734,7 +734,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_opacity_toggle',
 			[
-				'label'              => __('Opacity', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Opacity', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [
 					'ep_floating_effects_show' => 'yes',
@@ -829,7 +829,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_easing',
 			[
-				'label'              => __('Easing', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Easing', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SELECT,
 				'options'            => [
 					'easeInOutQuad'   => esc_html__('Ease In Out Quad', 'bdtheme-element-pack'),
@@ -873,7 +873,7 @@ class Module extends Element_Pack_Module_Base {
 		 * BDTU-011
 		 */
 		wp_enqueue_script('anime', BDTEP_ASSETS_URL . 'vendor/js/anime.min.js', [], '3.2.1', true);
-        wp_enqueue_script('ep-floating-effects');
+		wp_enqueue_script('ep-floating-effects');
 	}
 	public function should_script_enqueue($widget) {
 		if ('yes' === $widget->get_settings_for_display('ep_floating_effects_show')) {

@@ -42,9 +42,17 @@ class Svg_Image extends Module_Base {
 
 	public function get_script_depends() {
 		if ($this->ep_is_edit_mode()) {
-			return ['draw-svg-plugin-js', 'scroll-trigger-js', 'magic-scroll-js', 'magic-scroll-animation-js', 'ep-scripts'];
+			if (true == is_ep_pro()) {
+				return ['draw-svg-plugin-js', 'scroll-trigger-js', 'magic-scroll-js', 'magic-scroll-animation-js', 'ep-scripts'];
+			} else {
+				return ['ep-scripts'];
+			}
 		} else {
-			return ['gsap', 'draw-svg-plugin-js', 'magic-scroll-js', 'magic-scroll-animation-js', 'scroll-trigger-js', 'ep-svg-image'];
+			if (true == is_ep_pro()) {
+				return ['gsap', 'draw-svg-plugin-js', 'magic-scroll-js', 'magic-scroll-animation-js', 'scroll-trigger-js', 'ep-svg-image'];
+			} else {
+				return ['ep-svg-image'];
+			}
 		}
 	}
 
@@ -53,17 +61,18 @@ class Svg_Image extends Module_Base {
 	}
 
 	protected function register_controls() {
+
 		$this->start_controls_section(
 			'section_image',
 			[
-				'label' => __('SVG', 'bdthemes-element-pack'),
+				'label' => esc_html__('SVG', 'bdthemes-element-pack'),
 			]
 		);
 
 		$this->add_control(
 			'image',
 			[
-				'label'   => __('Choose SVG', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Choose SVG', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [
 					'active' => true,
@@ -77,19 +86,19 @@ class Svg_Image extends Module_Base {
 		$this->add_responsive_control(
 			'align',
 			[
-				'label'     => __('Alignment', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Alignment', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack'),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -102,12 +111,12 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'caption_source',
 			[
-				'label'   => __('Caption', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Caption', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'none'       => __('None', 'bdthemes-element-pack'),
-					'attachment' => __('Attachment Caption', 'bdthemes-element-pack'),
-					'custom'     => __('Custom Caption', 'bdthemes-element-pack'),
+					'none'       => esc_html__('None', 'bdthemes-element-pack'),
+					'attachment' => esc_html__('Attachment Caption', 'bdthemes-element-pack'),
+					'custom'     => esc_html__('Custom Caption', 'bdthemes-element-pack'),
 				],
 				'default' => 'none',
 			]
@@ -116,10 +125,10 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'caption',
 			[
-				'label'       => __('Custom Caption', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Custom Caption', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
-				'placeholder' => __('Enter your image caption', 'bdthemes-element-pack'),
+				'placeholder' => esc_html__('Enter your image caption', 'bdthemes-element-pack'),
 				'condition'   => [
 					'caption_source' => 'custom',
 				],
@@ -132,13 +141,13 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'link_to',
 			[
-				'label'   => __('Link', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Link', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => [
-					'none'   => __('None', 'bdthemes-element-pack'),
-					'file'   => __('Media File', 'bdthemes-element-pack'),
-					'custom' => __('Custom URL', 'bdthemes-element-pack'),
+					'none'   => esc_html__('None', 'bdthemes-element-pack'),
+					'file'   => esc_html__('Media File', 'bdthemes-element-pack'),
+					'custom' => esc_html__('Custom URL', 'bdthemes-element-pack'),
 				],
 			]
 		);
@@ -146,12 +155,12 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'link',
 			[
-				'label'       => __('Link', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Link', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [
 					'active' => true,
 				],
-				'placeholder' => __('https://your-link.com', 'bdthemes-element-pack'),
+				'placeholder' => esc_html__('https://your-link.com', 'bdthemes-element-pack'),
 				'condition'   => [
 					'link_to' => 'custom',
 				],
@@ -162,12 +171,12 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'open_lightbox',
 			[
-				'label'     => __('Lightbox', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Lightbox', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'yes',
 				'options'   => [
-					'yes' => __('Yes', 'bdthemes-element-pack'),
-					'no'  => __('No', 'bdthemes-element-pack'),
+					'yes' => esc_html__('Yes', 'bdthemes-element-pack'),
+					'no'  => esc_html__('No', 'bdthemes-element-pack'),
 				],
 				'condition' => [
 					'link_to' => 'file',
@@ -178,42 +187,47 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'view',
 			[
-				'label'   => __('View', 'bdthemes-element-pack'),
+				'label'   => esc_html__('View', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'traditional',
 			]
 		);
-		$this->add_control(
-			'svg_image_draw',
-			[
-				'label'         => __('Draw SVG', 'bdthemes-element-pack') . BDTEP_NC,
-				'type'          => Controls_Manager::SWITCHER,
-				'label_on'      => __('Yes', 'bdthemes-element-pack'),
-				'label_off'     => __('No', 'bdthemes-element-pack'),
-				'return_value'  => 'yes',
-				'frontend_available' => true,
-				'render_type'        => 'template',
-				'separator' => 'before'
-			]
-		);
+
 		$this->end_controls_section();
 
+		
 		$this->start_controls_section(
 			'section_svg_additionl',
 			[
-				'label' => __('Additional', 'bdthemes-element-pack'),
+				'label' => esc_html__('SVG Animation', 'bdthemes-element-pack'),
+			]
+		);
+
+		if(true === is_ep_pro()) {
+
+		$this->add_control(
+			'svg_image_draw',
+			[
+				'label'              => esc_html__('Draw SVG', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'               => Controls_Manager::SWITCHER,
+				'label_on'           => esc_html__('Yes', 'bdthemes-element-pack'),
+				'label_off'          => esc_html__('No', 'bdthemes-element-pack'),
+				'return_value'       => 'yes',
+				'frontend_available' => true,
+				'render_type'        => 'template',
+				'separator'          => 'before'
 			]
 		);
 
 		$this->add_control(
 			'svg_image_drawer_type',
 			[
-				'label'              => __('Drawer Type', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Drawer Type', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SELECT,
 				'options'            => [
-					'hover'     => __(' On Hover', 'bdthemes-element-pack'),
-					'viewport'  => __('On Scroll', 'bdthemes-element-pack'),
-					'automatic' => __('Automatic', 'bdthemes-element-pack'),
+					'hover'     => esc_html__(' On Hover', 'bdthemes-element-pack'),
+					'viewport'  => esc_html__('On Scroll', 'bdthemes-element-pack'),
+					'automatic' => esc_html__('Automatic', 'bdthemes-element-pack'),
 				],
 				'default'            => 'hover',
 				'frontend_available' => true,
@@ -227,12 +241,12 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_animate_trigger',
 			[
-				'label'              => __('When the draw should start?', 'bdthemes-element-pack'),
+				'label'              => esc_html__('When the draw should start?', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SELECT,
 				'options'            => [
-					'top'    => __('Top of Viewport Hits The Widget', 'bdthemes-element-pack'),
-					'center' => __('Center of Viewport Hits The Widget', 'bdthemes-element-pack'),
-					'custom' => __('Custom Offset', 'bdthemes-element-pack'),
+					'top'    => esc_html__('Top of Viewport Hits The Widget', 'bdthemes-element-pack'),
+					'center' => esc_html__('Center of Viewport Hits The Widget', 'bdthemes-element-pack'),
+					'custom' => esc_html__('Custom Offset', 'bdthemes-element-pack'),
 				],
 				'separator' 		 => 'before',
 				'default'            => 'center',
@@ -247,7 +261,7 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_anim_rev',
 			[
-				'label'              => __('Reset Animation on Scroll Up', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Reset Animation on Scroll Up', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SWITCHER,
 				'render_type'        => 'template',
 				'default'            => 'yes',
@@ -261,7 +275,7 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_animate_offset',
 			[
-				'label'              => __('Offset (%)', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Offset (%)', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [
 					'size' => 50,
@@ -278,10 +292,10 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_repeat',
 			[
-				'label'         => __('Repeat', 'bdthemes-element-pack'),
+				'label'         => esc_html__('Repeat', 'bdthemes-element-pack'),
 				'type'          => Controls_Manager::SWITCHER,
-				'label_on'      => __('Yes', 'bdthemes-element-pack'),
-				'label_off'     => __('No', 'bdthemes-element-pack'),
+				'label_on'      => esc_html__('Yes', 'bdthemes-element-pack'),
+				'label_off'     => esc_html__('No', 'bdthemes-element-pack'),
 				'separator'     => 'before',
 				'default'       => 'yes',
 				'frontend_available' => true,
@@ -294,7 +308,7 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_yoyo',
 			[
-				'label'              => __('Yoyo Effect', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Yoyo Effect', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SWITCHER,
 				'condition'          => [
 					'svg_image_drawer_type!' => 'viewport',
@@ -309,9 +323,9 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_animation_duration',
 			[
-				'label'              => __('Duration', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Duration', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SLIDER,
-				'description'        => __('Larger value means longer drawing duration.', 'bdthemes-element-pack'),
+				'description'        => esc_html__('Larger value means longer drawing duration.', 'bdthemes-element-pack'),
 				'range'         => [
 					'px'        => [
 						'min'   => 0,
@@ -333,9 +347,9 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_animation_start_point',
 			[
-				'label'              => __('Start Point (%)', 'bdthemes-element-pack'),
+				'label'              => esc_html__('Start Point (%)', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SLIDER,
-				'description'        => __('Set the point that the SVG should start from.', 'bdthemes-element-pack'),
+				'description'        => esc_html__('Set the point that the SVG should start from.', 'bdthemes-element-pack'),
 				'default'            => [
 					'unit' => '%',
 					'size' => 0,
@@ -350,9 +364,9 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_image_animation_end_point',
 			[
-				'label'              => __('End Point (%)', 'bdthemes-element-pack'),
+				'label'              => esc_html__('End Point (%)', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SLIDER,
-				'description'        => __('Set the point that the SVG should end at.', 'bdthemes-element-pack'),
+				'description'        => esc_html__('Set the point that the SVG should end at.', 'bdthemes-element-pack'),
 				'default'            => [
 					'unit' => '%',
 					'size' => 100,
@@ -364,23 +378,26 @@ class Svg_Image extends Module_Base {
 				'separator' 		 => 'after'
 			]
 		);
+		}
+
+		if(true !== is_ep_pro()) {
 		$this->add_control(
 			'on_hover_animation',
 			[
-				'label' => __('On Hover Animation', 'bdthemes-element-pack'),
-				'description' => __('Make sure you select a stroke based svg image, otherwise hover animation will not work.', 'bdthemes-element-pack'),
+				'label' => esc_html__('On Hover Animation', 'bdthemes-element-pack'),
+				'description' => esc_html__('Make sure you select a stroke based svg image, otherwise hover animation will not work.', 'bdthemes-element-pack'),
 				'type' => Controls_Manager::SWITCHER,
 				'separator'     => 'before',
-				'condition' => [
-					'svg_image_draw!' => 'yes'
-				]
+				// 'condition' => [
+				// 	'svg_image_draw!' => 'yes'
+				// ]
 			]
 		);
 
 		$this->add_control(
 			'on_hover_reverse_animation',
 			[
-				'label' => __('Reverse Animation', 'bdthemes-element-pack'),
+				'label' => esc_html__('Reverse Animation', 'bdthemes-element-pack'),
 				'type' => Controls_Manager::SWITCHER,
 				'condition' => [
 					'on_hover_animation' => 'yes',
@@ -391,13 +408,13 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_parallax_effects_show',
 			[
-				'label'       => __('Stroke Parallax Animation', 'bdthemes-element-pack'),
-				'description' => __('Make sure you select a stroke based svg image, otherwise parallax stroke animation will not work.', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Stroke Parallax Animation', 'bdthemes-element-pack'),
+				'description' => esc_html__('Make sure you select a stroke based svg image, otherwise parallax stroke animation will not work.', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::SWITCHER,
 				'separator' => 'before',
-				'condition' => [
-					'svg_image_draw!' => 'yes'
-				]
+				// 'condition' => [
+				// 	'svg_image_draw!' => 'yes'
+				// ]
 			]
 		);
 
@@ -445,14 +462,16 @@ class Svg_Image extends Module_Base {
 				],
 			]
 		);
+		}
 
 		$this->end_controls_section();
+	
 
 		//Style
 		$this->start_controls_section(
 			'section_style_image',
 			[
-				'label' => __('SVG', 'bdthemes-element-pack'),
+				'label' => esc_html__('SVG', 'bdthemes-element-pack'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -460,7 +479,7 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'svg_color_preserved',
 			[
-				'label' => __('Preserved Original Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Preserved Original Color', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -490,7 +509,7 @@ class Svg_Image extends Module_Base {
 		$this->add_responsive_control(
 			'width',
 			[
-				'label'          => __('Width', 'bdthemes-element-pack'),
+				'label'          => esc_html__('Width', 'bdthemes-element-pack'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'unit' => '%',
@@ -525,7 +544,7 @@ class Svg_Image extends Module_Base {
 		$this->add_responsive_control(
 			'space',
 			[
-				'label'          => __('Max Width', 'bdthemes-element-pack') . ' (%)',
+				'label'          => esc_html__('Max Width', 'bdthemes-element-pack') . ' (%)',
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'unit' => '%',
@@ -562,14 +581,14 @@ class Svg_Image extends Module_Base {
 		$this->start_controls_tab(
 			'normal',
 			[
-				'label' => __('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
 			]
 		);
 
 		$this->add_control(
 			'opacity',
 			[
-				'label'     => __('Opacity', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Opacity', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -597,14 +616,14 @@ class Svg_Image extends Module_Base {
 		$this->start_controls_tab(
 			'hover',
 			[
-				'label' => __('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
 			]
 		);
 
 		$this->add_control(
 			'opacity_hover',
 			[
-				'label'     => __('Opacity', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Opacity', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -630,7 +649,7 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'background_hover_transition',
 			[
-				'label'     => __('Transition Duration', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Transition Duration', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -660,7 +679,7 @@ class Svg_Image extends Module_Base {
 		$this->add_responsive_control(
 			'image_border_radius',
 			[
-				'label'      => __('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -685,7 +704,7 @@ class Svg_Image extends Module_Base {
 		$this->start_controls_section(
 			'section_style_caption',
 			[
-				'label'     => __('Caption', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Caption', 'bdthemes-element-pack'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'caption_source!' => 'none',
@@ -696,23 +715,23 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'caption_align',
 			[
-				'label'     => __('Alignment', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Alignment', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'    => [
-						'title' => __('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [
-						'title' => __('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [
-						'title' => __('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack'),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => __('Justified', 'bdthemes-element-pack'),
+						'title' => esc_html__('Justified', 'bdthemes-element-pack'),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -726,7 +745,7 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -745,7 +764,7 @@ class Svg_Image extends Module_Base {
 		$this->add_control(
 			'caption_background_color',
 			[
-				'label'     => __('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .widget-image-caption' => 'background-color: {{VALUE}};',
@@ -785,7 +804,7 @@ class Svg_Image extends Module_Base {
 		$this->add_responsive_control(
 			'caption_space',
 			[
-				'label'     => __('Spacing', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Spacing', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -832,13 +851,15 @@ class Svg_Image extends Module_Base {
 	public function render_image() {
 		$settings = $this->get_settings_for_display();
 
-		if ($settings['on_hover_animation']) {
-			$this->add_render_attribute('svg-image', 'class', 'bdt-animation-stroke');
-			$this->add_render_attribute('svg-image', 'data-bdt-svg', 'stroke-animation: true');
-		}
+		if (true !== is_ep_pro()) {
+			if ($settings['on_hover_animation']) {
+				$this->add_render_attribute('svg-image', 'class', 'bdt-animation-stroke');
+				$this->add_render_attribute('svg-image', 'data-bdt-svg', 'stroke-animation: true');
+			}
 
-		if ($settings['on_hover_reverse_animation']) {
-			$this->add_render_attribute('svg-image', 'class', 'bdt-animation-reverse');
+			if ($settings['on_hover_reverse_animation']) {
+				$this->add_render_attribute('svg-image', 'class', 'bdt-animation-reverse');
+			}
 		}
 
 		if ($settings['svg_color_preserved']) {
@@ -848,10 +869,16 @@ class Svg_Image extends Module_Base {
 		$this->add_render_attribute('svg-image', 'data-bdt-svg', '');
 
 		if ($settings['image']['id']) {
-			$image_url = wp_get_attachment_image_src($settings['image']['id'], 'full');
-			printf('<img src="%1$s" alt="%2$s" '. $this->get_render_attribute_string('svg-image') .'>', $image_url[0], esc_html(get_the_title()));
+			print(wp_get_attachment_image(
+				$settings['image']['id'],
+				'full',
+				false,
+				[
+					'alt' => esc_html(get_the_title())
+				]
+			));
 		} else {
-			printf('<img src="%1$s" alt="%2$s" '. $this->get_render_attribute_string('svg-image') .'>', BDTEP_ASSETS_URL . 'images/crane.svg', esc_html(get_the_title()));
+			printf('<img %3$s src="%1$s" alt="%2$s">', BDTEP_ASSETS_URL . 'images/crane.svg', esc_html(get_the_title()), $this->get_render_attribute_string('svg-image'));
 		}
 	}
 
@@ -863,11 +890,14 @@ class Svg_Image extends Module_Base {
 		}
 		$has_caption = $this->has_caption($settings);
 		$this->add_render_attribute('wrapper', 'class', 'elementor-image bdt-svg-image bdt-animation-toggle');
-		$parallax_stroke   = 100 - (isset($settings['parallax_effects_stroke_value']['size']) ? $settings['parallax_effects_stroke_value']['size'] : 0);
-		$parallax_viewport = (isset($settings['parallax_effects_viewport_value']['size']) ? $settings['parallax_effects_viewport_value']['size'] : 0.7);
-		if ($settings['svg_parallax_effects_show']) {
-			$this->add_render_attribute('wrapper', 'bdt-parallax', 'stroke: ' . $parallax_stroke . '%;');
-			$this->add_render_attribute('wrapper', 'bdt-parallax', 'viewport: ' . $parallax_viewport . ';');
+
+		if (true !== is_ep_pro()) {
+			$parallax_stroke   = 100 - (isset($settings['parallax_effects_stroke_value']['size']) ? $settings['parallax_effects_stroke_value']['size'] : 0);
+			$parallax_viewport = (isset($settings['parallax_effects_viewport_value']['size']) ? $settings['parallax_effects_viewport_value']['size'] : 0.7);
+			if ($settings['svg_parallax_effects_show']) {
+				$this->add_render_attribute('wrapper', 'bdt-parallax', 'stroke: ' . $parallax_stroke . '%;');
+				$this->add_render_attribute('wrapper', 'bdt-parallax', 'viewport: ' . $parallax_viewport . ';');
+			}
 		}
 
 		if (!empty($settings['shape'])) {
@@ -905,7 +935,7 @@ class Svg_Image extends Module_Base {
 				<?php if ($link) : ?>
 					<a <?php echo $this->get_render_attribute_string('link'); ?>>
 					<?php endif; ?>
-					<?php if ('yes' === $settings['svg_image_draw']) {
+					<?php if (isset($settings['svg_image_draw']) && 'yes' === $settings['svg_image_draw']) {
 						$this->render_svg();
 					} else {
 						$this->render_image();

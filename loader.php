@@ -258,6 +258,9 @@ class Element_Pack_Loader {
         if (element_pack_is_widget_enabled('calendly')) {
             wp_register_script('calendly', BDTEP_ASSETS_URL . 'vendor/js/calendly.min.js', ['jquery'], '0.0.1', true);
         }
+        if (element_pack_is_widget_enabled('dark-mode')) {
+            wp_register_script('darkmode', BDTEP_ASSETS_URL . 'vendor/js/darkmode.min.js', ['jquery'], '1.1.1', true);
+        }
     }
 
     public function register_site_styles() {

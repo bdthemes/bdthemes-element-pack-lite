@@ -72,6 +72,39 @@ jQuery('.bdt-ss-link').on('click', function () {
  */
 
 /**
+ * Start Crypto Currency
+ */
+
+function returnCurrencySymbol(currency = null) {
+    if (currency === null) return "";
+    let currency_symbols = {
+        USD: "$", // US Dollar
+        EUR: "€", // Euro
+        CRC: "₡", // Costa Rican Colón
+        GBP: "£", // British Pound Sterling
+        ILS: "₪", // Israeli New Sheqel
+        INR: "₹", // Indian Rupee
+        JPY: "¥", // Japanese Yen
+        KRW: "₩", // South Korean Won
+        NGN: "₦", // Nigerian Naira
+        PHP: "₱", // Philippine Peso
+        PLN: "zł", // Polish Zloty
+        PYG: "₲", // Paraguayan Guarani
+        THB: "฿", // Thai Baht
+        UAH: "₴", // Ukrainian Hryvnia
+        VND: "₫", // Vietnamese Dong
+    };
+    if (currency_symbols[currency] !== undefined) {
+        return currency_symbols[currency];
+    } else {
+        return ""; // this is means there is not any
+    }
+}
+
+/**
+ * End Crypto Currency
+ */
+/**
  * Start accordion widget script
  */
 
@@ -1438,6 +1471,309 @@ $(window).on('elementor/frontend/init', function () {
     });
 
 })(jQuery, window.elementorFrontend);
+(function ($, elementor) {
+  "use strict";
+
+  $(window).on("elementor/frontend/init", function () {
+    var ModuleHandler = elementorModules.frontend.handlers.Base,
+      SvgBlob;
+
+    SvgBlob = ModuleHandler.extend({
+      bindEvents: function () {
+        this.run();
+      },
+
+      getDefaultSettings: function () {
+        return {};
+      },
+
+      settings: function (key) {
+        return this.getElementSettings("svg_blob_" + key);
+      },
+
+      run: function () {
+        var options = this.getDefaultSettings();
+        var element = this.findElement(".elementor-widget-container").get(0);
+        if (jQuery(this.$element).hasClass("elementor-section")) {
+          element = this.$element.get(0);
+        }
+        var $container = this.$element.find(".bdt-svg-blob");
+        if (!$container.length) {
+          return;
+        }
+        const path = $container.data("settings");
+        const firstSVG = $container.find("path")[0];
+        options = {
+          targets: firstSVG,
+          d: [{ value: path || [] }],
+          easing: 'easeOutQuad',
+          direction: 'alternate',
+          loop: this.settings('loop') === 'yes',
+          duration:
+            this.settings('duration.size') !== ''
+              ? this.settings('duration.size')
+              : 2000,
+          delay:
+            this.settings('delay.size') !== ''
+              ? this.settings('delay.size')
+              : 10,
+          endDelay:
+            this.settings('end_delay.size') !== ''
+              ? this.settings('end_delay.size')
+              : 10,
+        };
+        anime(options);
+      },
+    });
+
+    elementorFrontend.hooks.addAction(
+      "frontend/element_ready/bdt-svg-blob.default",
+      function ($scope) {
+        elementorFrontend.elementsHandler.addHandler(SvgBlob, {
+          $element: $scope,
+        });
+      }
+    );
+  });
+})(jQuery, window.elementorFrontend);
+
+(function ($, elementor) {
+  $(window).on("elementor/frontend/init", function () {
+    let ModuleHandler = elementorModules.frontend.handlers.Base,
+      ListMarquee;
+
+    ListMarquee = ModuleHandler.extend({
+      bindEvents: function () {
+        this.run();
+      },
+      getDefaultSettings: function () {
+        return {
+          allowHTML: true,
+        };
+      },
+
+      onElementChange: debounce(function (prop) {
+        if (prop.indexOf("marquee_") !== -1) {
+          this.run();
+        }
+      }, 400),
+
+      settings: function (key) {
+        return this.getElementSettings("marquee_" + key);
+      },
+
+      pauseOnHover: function (rollingTween) {
+        $(".marquee-rolling").on("mouseenter", () => {
+          rollingTween.pause();
+        });
+        $(".marquee-rolling").on("mouseleave", () => {
+          rollingTween.play();
+        });
+      },
+      run: function () {
+        const widgetID = this.$element.data("id");
+        var self = this;
+        var options = this.getDefaultSettings();
+        var element = this.findElement(".elementor-widget-container").get(0);
+        if (jQuery(this.$element).hasClass("elementor-section")) {
+          element = this.$element.get(0);
+        }
+        var $container = this.$element.find(".bdt-marquee");
+        if (!$container.length) {
+          return;
+        }
+
+        var widgetContainer = ".elementor-element-" + widgetID;
+        var rollingTween = new TimelineMax({ paused: false });
+        var time = this.settings("speed");
+        var marqueeRolling = $container.find(".marquee-rolling");
+
+        function startRolling() {
+          marqueeRolling.css({ width: "auto" });
+          var width = marqueeRolling.width();
+          marqueeRolling.width(width);
+          if (self.settings("direction") === "right") {
+            TweenLite.set(widgetContainer + " .marquee-rolling-wrapper", {
+              x: -width - 0,
+            });
+            var directionWidth = width;
+          } else {
+            var directionWidth = -width;
+          }
+
+          rollingTween.to(
+            widgetContainer + " .marquee-rolling",
+            time,
+            {
+              x: directionWidth,
+              ease: Linear.easeIn,
+              repeat: -1,
+            },
+            0
+          );
+          console.log(self.settings("pause_on_hover"));
+          if (self.settings("pause_on_hover") === "yes") {
+            self.pauseOnHover(rollingTween);
+          }
+          return rollingTween;
+        }
+
+        function rollingText() {
+          var holder, clone, counter;
+          holder = widgetContainer + " .marquee-rolling-wrapper";
+          counter = $(widgetContainer + " .marquee-rolling").children().length;
+          var marqueeType = self.settings("type");
+          var cloneLimit = marqueeType === "text" ? 6 : 6;
+          for (counter = Number(counter); counter <= cloneLimit; counter++) {
+            clone = $(widgetContainer + " .marquee-rolling").clone();
+            clone.prependTo(holder);
+          }
+          $(widgetContainer + " .marquee-rolling")
+            .clone()
+            .appendTo(widgetContainer + " .marquee-rolling-wrapper");
+          startRolling();
+        }
+        rollingText();
+      },
+    });
+
+    elementorFrontend.hooks.addAction(
+      "frontend/element_ready/bdt-marquee.default",
+      function ($scope) {
+        elementorFrontend.elementsHandler.addHandler(ListMarquee, {
+          $element: $scope,
+        });
+      }
+    );
+  });
+})(jQuery, window.elementorFrontend);
+
+(function ($, elementor) {
+  "use strict";
+  $(window).on("elementor/frontend/init", function () {
+    var ModuleHandler = elementorModules.frontend.handlers.Base,
+      PostGrid;
+
+    PostGrid = ModuleHandler.extend({
+      bindEvents: function () {
+        this.run();
+      },
+
+      getDefaultSettings: function () {
+        return {};
+      },
+
+      onElementChange: debounce(function (prop) {
+        if (prop.indexOf("post_grid") !== -1) {
+          this.run();
+        }
+      }, 400),
+
+      settings: function (key) {
+        return this.getElementSettings("post_grid_" + key);
+      },
+
+      run: function () {
+        var options = this.getDefaultSettings();
+        var content = this.settings("ajax_loadmore");
+
+        // console.log(content);
+        var element = this.findElement(".elementor-widget-container").get(0);
+        if (jQuery(this.$element).hasClass("elementor-section")) {
+          element = this.$element.get(0);
+        }
+        var $container = this.$element.find(".bdt-post-grid");
+        if (!$container.length) {
+          return;
+        }
+        if (content === undefined) {
+          return;
+        }
+        var settingsLoadmore = this.settings("show_loadmore");
+        var settingsInfiniteScroll = this.settings("show_infinite_scroll");
+
+        var loadButtonContainer = this.$element.find(".bdt-loadmore-container");
+        var grid = $container.find(".bdt-grid");
+        var loadButton = loadButtonContainer.find(".bdt-loadmore");
+        var loading = false;
+        var settings = $container.data("settings");
+        var readMore = $container.data("settings-button");
+        // var page = 1;
+        var currentItemCount = settings.posts_per_page;
+
+        var loadMorePosts = function () {
+          var dataSettings = {
+            action: "ep_loadmore_posts",
+            settings: settings,
+            readMore: readMore,
+            per_page: settings.ajax_item_load,
+            offset: currentItemCount,
+          };
+          jQuery.ajax({
+            url: window.ElementPackConfig.ajaxurl,
+            type: "post",
+            data: dataSettings,
+            // beforeSend: function () {
+            // 	$('.bdt-loader').remove();
+            //   $($container).append('<div class="bdt-loader" bdt-spinner></div>');
+            // },
+            success: function (response) {
+              $(grid).append(response.markup);
+              currentItemCount += settings.ajax_item_load;
+              loading = false;
+              if (settingsLoadmore === "yes") {
+                loadButton.html("Load More");
+              }
+
+              if ($(response.markup).length < settings.ajax_item_load) {
+                loadButton.hide();
+                loadButtonContainer.hide();
+              }
+            },
+            // complete: function () {
+            //   $('.bdt-loader').remove();
+            //   console.log("complete");
+            // },
+          });
+        };
+
+        if (settingsLoadmore === "yes") {
+          $(loadButton).on("click", function () {
+            if (!loading) {
+              loading = true;
+              loadButton.html("loading...");
+              loadMorePosts();
+            }
+          });
+        }
+
+        if (settingsInfiniteScroll === "yes") {
+          $(window).scroll(function () {
+            if (
+              $(window).scrollTop() ==
+              $(document).height() - $(window).height()
+            ) {
+              $(".bdt-loadmore").css("display", "block");
+              loadMorePosts();
+            } else {
+              return;
+            }
+          });
+        }
+      },
+    });
+
+    elementorFrontend.hooks.addAction(
+      "frontend/element_ready/bdt-post-grid.default",
+      function ($scope) {
+        elementorFrontend.elementsHandler.addHandler(PostGrid, {
+          $element: $scope,
+        });
+      }
+    );
+  });
+})(jQuery, window.elementorFrontend);
+
 ; (function ($, elementor) {
     'use strict';
 
@@ -5464,6 +5800,266 @@ var widgetVideoAccordion = function ($scope, $) {
  */
 
 
+(function ($, elementor) {
+  "use strict";
+
+  $(window).on("elementor/frontend/init", function () {
+    var ModuleHandler = elementorModules.frontend.handlers.Base,
+      SvgMaps;
+    SvgMaps = ModuleHandler.extend({
+      bindEvents: function () {
+        this.run();
+      },
+
+      getDefaultSettings: function () {
+        return {};
+      },
+
+      onElementChange: debounce(function (prop) {
+        if (prop.indexOf("svg_maps") !== -1) {
+          this.run();
+        }
+      }, 400),
+
+      settings: function (key) {
+        return this.getElementSettings("svg_maps_" + key);
+      },
+      createColorAxisArray: function () {
+        const axisColorList = this.settings("region_axis_color");
+
+        const colors = [];
+        // set default color
+        // if (this.settings("default_color") != "") {
+        //   colors.push(this.settings("default_color"));
+        // }
+
+        // set color axis
+        axisColorList.forEach((color) => {
+          if (color.axis_color !== "") {
+            colors.push(color.axis_color);
+          }
+        });
+
+        return colors;
+      },
+
+      createCustomRegion: function (data, options, isLinkable) {
+        const regionList = this.settings("array_regions");
+        const currentRegionColors = [];
+        data.addColumn("string", "Country");
+        data.addColumn("number", "Population");
+        data.addColumn({ type: "string", role: "tooltip", p: { html: true } });
+        regionList.forEach((region, index) => {
+          currentRegionColors.push(
+            region.active_region_color ? region.active_region_color : "#146C94"
+          );
+          options.colors = currentRegionColors;
+          data.addRows([
+            [
+              {
+                v: region.active_region_code,
+                f:
+                  region.active_region_name !== ""
+                    ? region.active_region_name
+                    : region.active_region_code,
+              },
+              index,
+              region.active_tooltip_content,
+            ],
+          ]);
+
+          isLinkable[region.active_region_code] = {
+            url: region.region_link ? region.region_link.url : "",
+            target:
+              region.region_link && !region.region_link.is_external
+                ? "_self"
+                : "",
+          };
+        });
+      },
+      createDataVisRegions: function (isLinkable) {
+        const dataVisualArray = [];
+        const dataVisualTitle = this.settings("region_value_title");
+        const dataRegionList = this.settings("data_visual_array_regions");
+        dataVisualArray[0] = ["Country", dataVisualTitle];
+
+        dataRegionList.forEach((region) => {
+          dataVisualArray.push([
+            region.visual_data_region_name,
+            region.visual_data_value,
+          ]);
+
+          isLinkable[region.visual_data_region_name] = {
+            url: region.visual_data_region_link
+              ? region.visual_data_region_link.url
+              : "",
+            target:
+              region.visual_data_region_link &&
+              !region.visual_data_region_link.is_external
+                ? "_self"
+                : "",
+          };
+        });
+
+        var data = google.visualization.arrayToDataTable(dataVisualArray);
+        return {
+          data,
+        };
+      },
+      run: function () {
+        const self = this;
+        var options = this.getDefaultSettings();
+        var element = this.findElement(".elementor-widget-container").get(0),
+          widgetID = this.$element.data("id");
+        if (jQuery(this.$element).hasClass("elementor-section")) {
+          element = this.$element.get(0);
+        }
+        var $container = this.$element.find(".bdt-svg-maps");
+        if (!$container.length) {
+          return;
+        }
+        const $mapWrapper = document.getElementById(`bdt-svg-maps-${widgetID}`);
+
+        google.charts.load("current", {
+          packages: ["geochart"],
+        });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+          var data = new google.visualization.DataTable();
+          let isLinkable = [];
+          let markerIsLinkable = [];
+
+          // set region
+          switch (self.settings("region_type")) {
+            case "continent":
+              options.region = self.settings("display_region_continent")
+                ? self.settings("display_region_continent")
+                : "002";
+              break;
+
+            case "subcontinent":
+              options.region = self.settings("display_region_sub_continent")
+                ? self.settings("display_region_sub_continent")
+                : "015";
+              break;
+
+            case "countries":
+              options.region = self.settings("display_region_countries")
+                ? self.settings("display_region_countries")
+                : "AU";
+              break;
+
+            default:
+              options.region = "world";
+              break;
+          }
+          // options.region = self.settings("display_region") ? self.settings("display_region") : "world";
+
+
+          options.width = self.settings("width")
+            ? self.settings("width").size
+            : 600;
+          options.height = self.settings("height")
+            ? self.settings("height").size
+            : 400;
+          options.backgroundColor = self.settings("background_color")
+            ? self.settings("background_color")
+            : "#81d4fa";
+          options.datalessRegionColor = self.settings("dataless_region_color")
+            ? self.settings("dataless_region_color")
+            : "#f8bbd0";
+
+          options.tooltip = {
+            isHtml: true,
+            trigger: self.settings("tooltip_trigger")
+              ? self.settings("tooltip_trigger")
+              : "focus",
+            textStyle: {
+              // fontSize: self.settings("tooltip_font_size")   ? self.settings("tooltip_font_size") : 14,
+              bold:
+                self.settings("tooltip_font_weight") === "yes" ? true : false,
+              italic:
+                self.settings("tooltip_font_style") === "yes" ? true : false,
+            },
+          };
+          // show legend
+          if (self.settings("show_legend") !== "yes") {
+            options.legend = "none";
+          } else {
+            options.legend = {
+              textStyle: {
+                color: self.settings("legend_font_color")
+                  ? self.settings("legend_font_color")
+                  : "#000000",
+                fontSize: self.settings("legend_font_size")
+                  ? self.settings("legend_font_size")
+                  : 16,
+                bold:
+                  self.settings("legend_font_weight") === "yes" ? true : false,
+                italic:
+                  self.settings("legend_font_style") === "yes" ? true : false,
+              },
+            };
+          }
+
+          // run initilize code here to get data
+          if (self.settings("display_mode") === "regions") {
+            if (self.settings("display_type") === "custom") {
+              self.createCustomRegion(data, options, isLinkable);
+            } else {
+              const dataVisRegions = self.createDataVisRegions(isLinkable);
+              data = dataVisRegions.data;
+              // set color axis
+              options.colorAxis = {
+                colors: self.createColorAxisArray(),
+              };
+            }
+          }
+
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.GeoChart($mapWrapper);
+          google.visualization.events.addListener(chart, "select", () => {
+            const selection = chart.getSelection();
+            if (selection.length === 1) {
+              const selectedRow = selection[0].row;
+              const selectedRegion = data.getValue(selectedRow, 0);
+              switch (self.settings("display_mode")) {
+                case "regions":
+                  isLinkable[selectedRegion].url !== ""
+                    ? window.open(
+                        isLinkable[selectedRegion].url,
+                        isLinkable[selectedRegion].target
+                      )
+                    : "";
+                  break;
+                case "markers":
+                  markerIsLinkable[selectedRegion].url !== ""
+                    ? window.open(
+                        markerIsLinkable[selectedRegion].url,
+                        markerIsLinkable[selectedRegion].target
+                      )
+                    : "";
+                  break;
+              }
+            }
+          });
+          chart.draw(data, options);
+        }
+      },
+    });
+
+    elementorFrontend.hooks.addAction(
+      "frontend/element_ready/bdt-svg-maps.default",
+      function ($scope) {
+        elementorFrontend.elementsHandler.addHandler(SvgMaps, {
+          $element: $scope,
+        });
+      }
+    );
+  });
+})(jQuery, window.elementorFrontend);
+
 /**
  * Start interactive tabs widget script
  */
@@ -6217,358 +6813,369 @@ jQuery(window).on('elementor/frontend/init', function() {
  * Start news ticker widget script
  */
 
-(function($) {
+(function ($) {
     "use strict";
-    $.epNewsTicker = function(element, options) {
+    $.epNewsTickerOld = function (element, options) {
 
         var defaults = {
-            effect         : 'fade',
-            direction      : 'ltr',
-            autoPlay       : false,
-            interval       : 4000,
-            scrollSpeed    : 2,
-            pauseOnHover   : false,
-            position       : 'auto',
-            zIndex         : 99999
+            effect: 'fade',
+            direction: 'ltr',
+            autoPlay: false,
+            interval: 4000,
+            scrollSpeed: 2,
+            pauseOnHover: false,
+            position: 'auto',
+            zIndex: 99999
         }
 
         var ticker = this;
         ticker.settings = {};
         ticker._element = $(element);
-        
-        ticker._label            = ticker._element.children(".bdt-news-ticker-label"),
-        ticker._news             = ticker._element.children(".bdt-news-ticker-content"),
-        ticker._ul               = ticker._news.children("ul"),
-        ticker._li               = ticker._ul.children("li"),
-        ticker._controls         = ticker._element.children(".bdt-news-ticker-controls"),
-        ticker._prev             = ticker._controls.find(".bdt-news-ticker-prev").parent(),
-        ticker._action           = ticker._controls.find(".bdt-news-ticker-action").parent(),
-        ticker._next             = ticker._controls.find(".bdt-news-ticker-next").parent();
 
-        ticker._pause            = false;
+        ticker._label = ticker._element.children(".bdt-news-ticker-label"),
+            ticker._news = ticker._element.children(".bdt-news-ticker-content"),
+            ticker._ul = ticker._news.children("ul"),
+            ticker._li = ticker._ul.children("li"),
+            ticker._controls = ticker._element.children(".bdt-news-ticker-controls"),
+            ticker._prev = ticker._controls.find(".bdt-news-ticker-prev").parent(),
+            ticker._action = ticker._controls.find(".bdt-news-ticker-action").parent(),
+            ticker._next = ticker._controls.find(".bdt-news-ticker-next").parent();
+
+        ticker._pause = false;
         ticker._controlsIsActive = true;
-        ticker._totalNews        = ticker._ul.children("li").length;
-        ticker._activeNews       = 0;
-        ticker._interval         = false;
-        ticker._frameId          = null;
+        ticker._totalNews = ticker._ul.children("li").length;
+        ticker._activeNews = 0;
+        ticker._interval = false;
+        ticker._frameId = null;
 
         /****************************************************/
         /**PRIVATE METHODS***********************************/
         /****************************************************/
 
-        var setContainerWidth = function(){
-            if (ticker._label.length > 0){
+        var setContainerWidth = function () {
+            if (ticker._label.length > 0) {
                 if (ticker.settings.direction == 'rtl')
-                    ticker._news.css({"right":ticker._label.outerWidth()});
+                    ticker._news.css({
+                        "right": ticker._label.outerWidth()
+                    });
                 else
-                    ticker._news.css({"left":ticker._label.outerWidth()});
+                    ticker._news.css({
+                        "left": ticker._label.outerWidth()
+                    });
             }
 
-            if (ticker._controls.length > 0){
+            if (ticker._controls.length > 0) {
                 var controlsWidth = ticker._controls.outerWidth();
                 if (ticker.settings.direction == 'rtl')
-                    ticker._news.css({"left":controlsWidth});
+                    ticker._news.css({
+                        "left": controlsWidth
+                    });
                 else
-                    ticker._news.css({"right":controlsWidth});
-            }    
+                    ticker._news.css({
+                        "right": controlsWidth
+                    });
+            }
 
-            if (ticker.settings.effect === 'scroll')
-            {
+            if (ticker.settings.effect === 'scroll') {
                 var totalW = 0;
-                ticker._li.each(function(){
+                ticker._li.each(function () {
                     totalW += $(this).outerWidth();
                 });
                 totalW += 50;
-                ticker._ul.css({'width':totalW});
+                ticker._ul.css({
+                    'width': totalW
+                });
             }
         }
 
-        
-        var startScrollAnimationLTR = function(){
-            var _ulPosition = parseFloat(ticker._ul.css('marginLeft'));
-            _ulPosition -= ticker.settings.scrollSpeed/2;
-            ticker._ul.css({'marginLeft': _ulPosition });
 
-            if (_ulPosition <= -ticker._ul.find('li:first-child').outerWidth())
-            {
+        var startScrollAnimationLTR = function () {
+            var _ulPosition = parseFloat(ticker._ul.css('marginLeft'));
+            _ulPosition -= ticker.settings.scrollSpeed / 2;
+            ticker._ul.css({
+                'marginLeft': _ulPosition
+            });
+
+            if (_ulPosition <= -ticker._ul.find('li:first-child').outerWidth()) {
                 ticker._ul.find('li:first-child').insertAfter(ticker._ul.find('li:last-child'));
-                ticker._ul.css({'marginLeft': 0 });
+                ticker._ul.css({
+                    'marginLeft': 0
+                });
             }
-            if (ticker._pause === false){
+            if (ticker._pause === false) {
                 ticker._frameId = requestAnimationFrame(startScrollAnimationLTR);
                 (window.requestAnimationFrame && ticker._frameId) || setTimeout(startScrollAnimationLTR, 16);
             }
         }
 
-        var startScrollAnimationRTL = function(){
+        var startScrollAnimationRTL = function () {
             var _ulPosition = parseFloat(ticker._ul.css('marginRight'));
-            _ulPosition -= ticker.settings.scrollSpeed/2;
-            ticker._ul.css({'marginRight': _ulPosition });
+            _ulPosition -= ticker.settings.scrollSpeed / 2;
+            ticker._ul.css({
+                'marginRight': _ulPosition
+            });
 
-            if (_ulPosition <= -ticker._ul.find('li:first-child').outerWidth())
-            {
+            if (_ulPosition <= -ticker._ul.find('li:first-child').outerWidth()) {
                 ticker._ul.find('li:first-child').insertAfter(ticker._ul.find('li:last-child'));
-                ticker._ul.css({'marginRight': 0 });
+                ticker._ul.css({
+                    'marginRight': 0
+                });
             }
             if (ticker._pause === false)
                 ticker._frameId = requestAnimationFrame(startScrollAnimationRTL);
-                (window.requestAnimationFrame && ticker._frameId) || setTimeout(startScrollAnimationRTL, 16);
+            (window.requestAnimationFrame && ticker._frameId) || setTimeout(startScrollAnimationRTL, 16);
         }
 
-        var scrollPlaying = function(){
-            if (ticker.settings.direction === 'rtl')
-            {
+        var scrollPlaying = function () {
+            if (ticker.settings.direction === 'rtl') {
                 if (ticker._ul.width() > ticker._news.width())
                     startScrollAnimationRTL();
                 else
-                	ticker._ul.css({'marginRight': 0 });
-            }
+                    ticker._ul.css({
+                        'marginRight': 0
+                    });
+            } else
+            if (ticker._ul.width() > ticker._news.width())
+                startScrollAnimationLTR();
             else
-                if (ticker._ul.width() > ticker._news.width())
-                    startScrollAnimationLTR();
-                else
-                	ticker._ul.css({'marginLeft': 0 });
+                ticker._ul.css({
+                    'marginLeft': 0
+                });
         }
-        
-        var scrollGoNextLTR = function(){            
+
+        var scrollGoNextLTR = function () {
             ticker._ul.stop().animate({
-                marginLeft : - ticker._ul.find('li:first-child').outerWidth()
-            },300, function(){
+                marginLeft: -ticker._ul.find('li:first-child').outerWidth()
+            }, 300, function () {
                 ticker._ul.find('li:first-child').insertAfter(ticker._ul.find('li:last-child'));
-                ticker._ul.css({'marginLeft': 0 });
+                ticker._ul.css({
+                    'marginLeft': 0
+                });
                 ticker._controlsIsActive = true;
             });
         }
 
-        var scrollGoNextRTL = function(){
+        var scrollGoNextRTL = function () {
             ticker._ul.stop().animate({
-                marginRight : - ticker._ul.find('li:first-child').outerWidth()
-            },300, function(){
+                marginRight: -ticker._ul.find('li:first-child').outerWidth()
+            }, 300, function () {
                 ticker._ul.find('li:first-child').insertAfter(ticker._ul.find('li:last-child'));
-                ticker._ul.css({'marginRight': 0 });
+                ticker._ul.css({
+                    'marginRight': 0
+                });
                 ticker._controlsIsActive = true;
             });
         }
 
-        var scrollGoPrevLTR = function(){
-            var _ulPosition = parseInt(ticker._ul.css('marginLeft'),10);
-            if (_ulPosition >= 0)
-            {
-                ticker._ul.css({'margin-left' : -ticker._ul.find('li:last-child').outerWidth()});
-                ticker._ul.find('li:last-child').insertBefore(ticker._ul.find('li:first-child'));                
-            }
-
-            ticker._ul.stop().animate({
-                marginLeft : 0
-            },300, function(){
-                ticker._controlsIsActive = true;
-            });
-        }
-
-        var scrollGoPrevRTL = function(){
-            var _ulPosition = parseInt(ticker._ul.css('marginRight'),10);
-            if (_ulPosition >= 0)
-            {
-                ticker._ul.css({'margin-right' : -ticker._ul.find('li:last-child').outerWidth()});
+        var scrollGoPrevLTR = function () {
+            var _ulPosition = parseInt(ticker._ul.css('marginLeft'), 10);
+            if (_ulPosition >= 0) {
+                ticker._ul.css({
+                    'margin-left': -ticker._ul.find('li:last-child').outerWidth()
+                });
                 ticker._ul.find('li:last-child').insertBefore(ticker._ul.find('li:first-child'));
             }
 
             ticker._ul.stop().animate({
-                marginRight : 0
-            },300, function(){
+                marginLeft: 0
+            }, 300, function () {
                 ticker._controlsIsActive = true;
             });
         }
 
-        var scrollNext = function(){
+        var scrollGoPrevRTL = function () {
+            var _ulPosition = parseInt(ticker._ul.css('marginRight'), 10);
+            if (_ulPosition >= 0) {
+                ticker._ul.css({
+                    'margin-right': -ticker._ul.find('li:last-child').outerWidth()
+                });
+                ticker._ul.find('li:last-child').insertBefore(ticker._ul.find('li:first-child'));
+            }
+
+            ticker._ul.stop().animate({
+                marginRight: 0
+            }, 300, function () {
+                ticker._controlsIsActive = true;
+            });
+        }
+
+        var scrollNext = function () {
             if (ticker.settings.direction === 'rtl')
                 scrollGoNextRTL();
             else
                 scrollGoNextLTR();
         }
 
-        var scrollPrev = function(){
+        var scrollPrev = function () {
             if (ticker.settings.direction === 'rtl')
                 scrollGoPrevRTL();
             else
                 scrollGoPrevLTR();
         }
 
-        var effectTypography = function(){
+        var effectTypography = function () {
             ticker._ul.find('li').hide();
             ticker._ul.find('li').eq(ticker._activeNews).width(30).show();
             ticker._ul.find('li').eq(ticker._activeNews).animate({
                 width: '100%',
-                opacity : 1
-            },1500);
+                opacity: 1
+            }, 1500);
         }
 
-        var effectFade = function(){
+        var effectFade = function () {
             ticker._ul.find('li').hide();
             ticker._ul.find('li').eq(ticker._activeNews).fadeIn();
         }
 
-        var effectSlideDown = function(){
-            if (ticker._totalNews <= 1)
-            {
-                 ticker._ul.find('li').animate({
-                    'top':30,
-                    'opacity':0
-                },300, function(){
+        var effectSlideDown = function () {
+            if (ticker._totalNews <= 1) {
+                ticker._ul.find('li').animate({
+                    'top': 30,
+                    'opacity': 0
+                }, 300, function () {
                     $(this).css({
                         'top': -30,
-                        'opacity' : 0,
+                        'opacity': 0,
                         'display': 'block'
                     })
                     $(this).animate({
                         'top': 0,
-                        'opacity' : 1
-                    },300);
+                        'opacity': 1
+                    }, 300);
                 });
-            }   
-            else
-            {   
+            } else {
                 ticker._ul.find('li:visible').animate({
-                    'top':30,
-                    'opacity':0
-                },300, function(){
+                    'top': 30,
+                    'opacity': 0
+                }, 300, function () {
                     $(this).hide();
                 });
 
                 ticker._ul.find('li').eq(ticker._activeNews).css({
                     'top': -30,
-                    'opacity' : 0
+                    'opacity': 0
                 }).show();
 
                 ticker._ul.find('li').eq(ticker._activeNews).animate({
                     'top': 0,
-                    'opacity' : 1
-                },300);
+                    'opacity': 1
+                }, 300);
             }
         }
 
-        var effectSlideUp = function(){
-            if (ticker._totalNews <= 1)
-            {
-                 ticker._ul.find('li').animate({
-                    'top':-30,
-                    'opacity':0
-                },300, function(){
+        var effectSlideUp = function () {
+            if (ticker._totalNews <= 1) {
+                ticker._ul.find('li').animate({
+                    'top': -30,
+                    'opacity': 0
+                }, 300, function () {
                     $(this).css({
                         'top': 30,
-                        'opacity' : 0,
+                        'opacity': 0,
                         'display': 'block'
                     })
                     $(this).animate({
                         'top': 0,
-                        'opacity' : 1
-                    },300);
+                        'opacity': 1
+                    }, 300);
                 });
-            }   
-            else
-            {   
+            } else {
                 ticker._ul.find('li:visible').animate({
-                    'top':-30,
-                    'opacity':0
-                },300, function(){
+                    'top': -30,
+                    'opacity': 0
+                }, 300, function () {
                     $(this).hide();
                 });
 
                 ticker._ul.find('li').eq(ticker._activeNews).css({
                     'top': 30,
-                    'opacity' : 0
+                    'opacity': 0
                 }).show();
 
                 ticker._ul.find('li').eq(ticker._activeNews).animate({
                     'top': 0,
-                    'opacity' : 1
-                },300);
+                    'opacity': 1
+                }, 300);
             }
         }
 
-        var effectSlideRight = function(){  
-            if (ticker._totalNews <= 1)
-            {
-                 ticker._ul.find('li').animate({
-                    'left':'50%',
-                    'opacity':0
-                },300, function(){
+        var effectSlideRight = function () {
+            if (ticker._totalNews <= 1) {
+                ticker._ul.find('li').animate({
+                    'left': '50%',
+                    'opacity': 0
+                }, 300, function () {
                     $(this).css({
                         'left': -50,
-                        'opacity' : 0,
+                        'opacity': 0,
                         'display': 'block'
                     })
                     $(this).animate({
                         'left': 0,
-                        'opacity' : 1
-                    },300);
+                        'opacity': 1
+                    }, 300);
                 });
-            }   
-            else
-            {       
+            } else {
                 ticker._ul.find('li:visible').animate({
-                    'left':'50%',
-                    'opacity':0
-                },300, function(){
+                    'left': '50%',
+                    'opacity': 0
+                }, 300, function () {
                     $(this).hide();
                 });
 
                 ticker._ul.find('li').eq(ticker._activeNews).css({
                     'left': -50,
-                    'opacity' : 0
+                    'opacity': 0
                 }).show();
 
                 ticker._ul.find('li').eq(ticker._activeNews).animate({
                     'left': 0,
-                    'opacity' : 1
-                },300);
+                    'opacity': 1
+                }, 300);
             }
         }
 
-        var effectSlideLeft = function(){
-            if (ticker._totalNews <= 1)
-            {
-                 ticker._ul.find('li').animate({
-                    'left':'-50%',
-                    'opacity':0
-                },300, function(){
+        var effectSlideLeft = function () {
+            if (ticker._totalNews <= 1) {
+                ticker._ul.find('li').animate({
+                    'left': '-50%',
+                    'opacity': 0
+                }, 300, function () {
                     $(this).css({
                         'left': '50%',
-                        'opacity' : 0,
+                        'opacity': 0,
                         'display': 'block'
                     })
                     $(this).animate({
                         'left': 0,
-                        'opacity' : 1
-                    },300);
+                        'opacity': 1
+                    }, 300);
                 });
-            }   
-            else
-            {   
+            } else {
                 ticker._ul.find('li:visible').animate({
-                    'left':'-50%',
-                    'opacity':0
-                },300, function(){
+                    'left': '-50%',
+                    'opacity': 0
+                }, 300, function () {
                     $(this).hide();
                 });
 
                 ticker._ul.find('li').eq(ticker._activeNews).css({
                     'left': '50%',
-                    'opacity' : 0
+                    'opacity': 0
                 }).show();
 
                 ticker._ul.find('li').eq(ticker._activeNews).animate({
                     'left': 0,
-                    'opacity' : 1
-                },300);
+                    'opacity': 1
+                }, 300);
             }
         }
 
 
-        var showThis = function(){            
+        var showThis = function () {
             ticker._controlsIsActive = true;
 
-            switch (ticker.settings.effect){
+            switch (ticker.settings.effect) {
                 case 'typography':
                     effectTypography();
                     break;
@@ -6591,11 +7198,11 @@ jQuery(window).on('elementor/frontend/init', function() {
                     ticker._ul.find('li').hide();
                     ticker._ul.find('li').eq(ticker._activeNews).show();
             }
-            
+
         }
 
-        var nextHandler = function(){
-            switch (ticker.settings.effect){
+        var nextHandler = function () {
+            switch (ticker.settings.effect) {
                 case 'scroll':
                     scrollNext();
                     break;
@@ -6605,147 +7212,147 @@ jQuery(window).on('elementor/frontend/init', function() {
                         ticker._activeNews = 0;
 
                     showThis();
-                    
+
             }
         }
 
-        var prevHandler = function(){
-            switch (ticker.settings.effect){
+        var prevHandler = function () {
+            switch (ticker.settings.effect) {
                 case 'scroll':
                     scrollPrev();
                     break;
                 default:
                     ticker._activeNews--;
                     if (ticker._activeNews < 0)
-                        ticker._activeNews = ticker._totalNews-1;
-                    
+                        ticker._activeNews = ticker._totalNews - 1;
+
                     showThis();
             }
         }
 
-        var playHandler = function(){
+        var playHandler = function () {
             ticker._pause = false;
-            if (ticker.settings.autoPlay)
-            {
-                switch (ticker.settings.effect){
+            if (ticker.settings.autoPlay) {
+                switch (ticker.settings.effect) {
                     case 'scroll':
                         scrollPlaying();
                         break;
                     default:
                         ticker.pause();
-                        ticker._interval = setInterval(function(){
+                        ticker._interval = setInterval(function () {
                             ticker.next();
-                        },ticker.settings.interval);
+                        }, ticker.settings.interval);
                 }
             }
         }
 
-        var resizeEvent = function(){
-            if (ticker._element.width() < 480){
+        var resizeEvent = function () {
+            if (ticker._element.width() < 480) {
                 ticker._label.hide();
                 if (ticker.settings.direction == 'rtl')
-                    ticker._news.css({"right":0});
+                    ticker._news.css({
+                        "right": 0
+                    });
                 else
-                    ticker._news.css({"left":0});
-            }
-            else{
+                    ticker._news.css({
+                        "left": 0
+                    });
+            } else {
                 ticker._label.show();
                 if (ticker.settings.direction == 'rtl')
-                    ticker._news.css({"right":ticker._label.outerWidth()});
+                    ticker._news.css({
+                        "right": ticker._label.outerWidth()
+                    });
                 else
-                    ticker._news.css({"left":ticker._label.outerWidth()});
+                    ticker._news.css({
+                        "left": ticker._label.outerWidth()
+                    });
             }
         }
 
         /****************************************************/
         /**PUBLIC METHODS************************************/
         /****************************************************/
-        ticker.init = function() {
+        ticker.init = function () {
             ticker.settings = $.extend({}, defaults, options);
 
             //ticker._element.append('<div class="bdt-breaking-loading"></div>');
             //window.onload = function(){
 
-            	//ticker._element.find('.bdt-breaking-loading').hide();
+            //ticker._element.find('.bdt-breaking-loading').hide();
 
-	            //adding effect type class
-	            ticker._element.addClass('bdt-effect-'+ticker.settings.effect+' bdt-direction-'+ticker.settings.direction);
-	            
-	            setContainerWidth();
+            //adding effect type class
+            ticker._element.addClass('bdt-effect-' + ticker.settings.effect + ' bdt-direction-' + ticker.settings.direction);
 
-                if (ticker.settings.effect != 'scroll')
-                    showThis();
+            setContainerWidth();
 
-                playHandler();
+            if (ticker.settings.effect != 'scroll')
+                showThis();
 
-	            //set playing status class
-	            if (!ticker.settings.autoPlay)
-	                ticker._action.find('span').removeClass('bdt-news-ticker-pause').addClass('bdt-news-ticker-play');
-	            else
-	                ticker._action.find('span').removeClass('bdt-news-ticker-play').addClass('bdt-news-ticker-pause');
+            playHandler();
+
+            //set playing status class
+            if (!ticker.settings.autoPlay)
+                ticker._action.find('span').removeClass('bdt-news-ticker-pause').addClass('bdt-news-ticker-play');
+            else
+                ticker._action.find('span').removeClass('bdt-news-ticker-play').addClass('bdt-news-ticker-pause');
 
 
-	            ticker._element.on('mouseleave', function(e){                
-	                var activePosition = $(document.elementFromPoint(e.clientX, e.clientY)).parents('.bdt-breaking-news')[0];
-	                if ($(this)[0] === activePosition) {
-	                    return;
-	                }
-	                
+            ticker._element.on('mouseleave', function (e) {
+                var activePosition = $(document.elementFromPoint(e.clientX, e.clientY)).parents('.bdt-breaking-news')[0];
+                if ($(this)[0] === activePosition) {
+                    return;
+                }
 
-	                if (ticker.settings.pauseOnHover === true)
-	                {
-	                    if (ticker.settings.autoPlay === true)
-	                        ticker.play();
-	                }
-	                else
-	                {
-	                    if (ticker.settings.autoPlay === true && ticker._pause === true)
-	                        ticker.play();
-	                }                
 
-	            });
+                if (ticker.settings.pauseOnHover === true) {
+                    if (ticker.settings.autoPlay === true)
+                        ticker.play();
+                } else {
+                    if (ticker.settings.autoPlay === true && ticker._pause === true)
+                        ticker.play();
+                }
 
-	            ticker._element.on('mouseenter', function(){
-	                if (ticker.settings.pauseOnHover === true)
-	                    ticker.pause();
-	            });
+            });
 
-	            ticker._next.on('click', function(){
-	                if (ticker._controlsIsActive){
-	                    ticker._controlsIsActive = false;
-	                    ticker.pause();
-	                    ticker.next();
-	                }                
-	            });
+            ticker._element.on('mouseenter', function () {
+                if (ticker.settings.pauseOnHover === true)
+                    ticker.pause();
+            });
 
-	            ticker._prev.on('click', function(){
-	                if (ticker._controlsIsActive){
-	                    ticker._controlsIsActive = false;
-	                    ticker.pause();
-	                    ticker.prev();
-	                } 
-	            });
+            ticker._next.on('click', function () {
+                if (ticker._controlsIsActive) {
+                    ticker._controlsIsActive = false;
+                    ticker.pause();
+                    ticker.next();
+                }
+            });
 
-	            ticker._action.on('click', function(){
-	                if (ticker._controlsIsActive){
-	                    if (ticker._action.find('span').hasClass('bdt-news-ticker-pause'))
-	                    {
-	                        ticker._action.find('span').removeClass('bdt-news-ticker-pause').addClass('bdt-news-ticker-play');
-	                        ticker.stop();
-	                    }
-	                    else
-	                    {
-	                        ticker.settings.autoPlay = true;
-	                        ticker._action.find('span').removeClass('bdt-news-ticker-play').addClass('bdt-news-ticker-pause');
-	                        //ticker._pause = false;
-	                    }
-	                } 
-	            });
+            ticker._prev.on('click', function () {
+                if (ticker._controlsIsActive) {
+                    ticker._controlsIsActive = false;
+                    ticker.pause();
+                    ticker.prev();
+                }
+            });
 
-	            resizeEvent();
-	        //}
+            ticker._action.on('click', function () {
+                if (ticker._controlsIsActive) {
+                    if (ticker._action.find('span').hasClass('bdt-news-ticker-pause')) {
+                        ticker._action.find('span').removeClass('bdt-news-ticker-pause').addClass('bdt-news-ticker-play');
+                        ticker.stop();
+                    } else {
+                        ticker.settings.autoPlay = true;
+                        ticker._action.find('span').removeClass('bdt-news-ticker-play').addClass('bdt-news-ticker-pause');
+                        //ticker._pause = false;
+                    }
+                }
+            });
 
-            $(window).on('resize', function(){
+            resizeEvent();
+            //}
+
+            $(window).on('resize', function () {
                 resizeEvent();
                 ticker.pause();
                 ticker.play();
@@ -6753,26 +7360,26 @@ jQuery(window).on('elementor/frontend/init', function() {
 
         }
 
-        ticker.pause = function() {
+        ticker.pause = function () {
             ticker._pause = true;
             clearInterval(ticker._interval);
             cancelAnimationFrame(ticker._frameId);
         }
 
-        ticker.stop = function() {
+        ticker.stop = function () {
             ticker._pause = true;
             ticker.settings.autoPlay = false;
         }
 
-        ticker.play = function() {
+        ticker.play = function () {
             playHandler();
         }
 
-        ticker.next = function() {
+        ticker.next = function () {
             nextHandler();
         }
 
-        ticker.prev = function() {
+        ticker.prev = function () {
             prevHandler();
         }
         /****************************************************/
@@ -6782,12 +7389,12 @@ jQuery(window).on('elementor/frontend/init', function() {
 
     }
 
-    $.fn.epNewsTicker = function(options) {
+    $.fn.epNewsTickerOld = function (options) {
 
-        return this.each(function() {
-            if (undefined == $(this).data('epNewsTicker')) {
-                var ticker = new $.epNewsTicker(this, options);
-                $(this).data('epNewsTicker', ticker);
+        return this.each(function () {
+            if (undefined == $(this).data('epNewsTickerOld')) {
+                var ticker = new $.epNewsTickerOld(this, options);
+                $(this).data('epNewsTickerOld', ticker);
             }
         });
 
@@ -6797,34 +7404,33 @@ jQuery(window).on('elementor/frontend/init', function() {
 
 
 
-( function( $, elementor ) {
+(function ($, elementor) {
 
-	'use strict';
+    'use strict';
 
-	var widgetNewsTicker = function( $scope, $ ) {
+    var widgetNewsTicker = function ($scope, $) {
 
-		var $newsTicker = $scope.find('.bdt-news-ticker'),
+        var $newsTicker = $scope.find('.bdt-news-ticker'),
             $settings = $newsTicker.data('settings');
 
-        if ( ! $newsTicker.length ) {
+        if (!$newsTicker.length) {
             return;
         }
 
-        $($newsTicker).epNewsTicker($settings);
+        $($newsTicker).epNewsTickerOld($settings);
 
-	};
+    };
 
 
-	jQuery(window).on('elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-news-ticker.default', widgetNewsTicker );
-	});
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-news-ticker.default', widgetNewsTicker);
+    });
 
-}( jQuery, window.elementorFrontend ) );
+}(jQuery, window.elementorFrontend));
 
 /**
  * End news ticker widget script
  */
-
 
 ;
 (function ($, elementor) {
@@ -9849,6 +10455,93 @@ jQuery(window).on('elementor/frontend/init', function() {
 /**
  * End switcher widget script
  */
+/**
+ * Start Content Switcher widget script
+ */
+
+(function ($, elementor) {
+
+    'use strict';
+
+    var widgetContentSwitcher = function ($scope, $) {
+
+        var $contentSwitcher = $scope.find('.bdt-content-switcher'),
+            $settings = $contentSwitcher.data('settings');
+
+        if (!$contentSwitcher.length) {
+            return;
+        }
+
+        if ('button' !== $settings.switcherStyle) {
+
+            // Conten Switcher Checkbox
+            var $checkbox = $contentSwitcher.find('input[type="checkbox"]');
+            var primarySwitcher = $contentSwitcher.find('.bdt-primary-switcher');
+            var secondarySwitcher = $contentSwitcher.find('.bdt-secondary-switcher');
+            var primaryIcon = $contentSwitcher.find('.bdt-primary-icon');
+            var secondaryIcon = $contentSwitcher.find('.bdt-secondary-icon');
+            var primaryText = $contentSwitcher.find('.bdt-primary-text');
+            var secondaryText = $contentSwitcher.find('.bdt-secondary-text');
+            var primaryContent = $contentSwitcher.find('.bdt-switcher-content.bdt-primary');
+            var secondaryContent = $contentSwitcher.find('.bdt-switcher-content.bdt-secondary');
+
+            $checkbox.on('change', function () {
+                if (this.checked) {
+                    primarySwitcher.removeClass('bdt-active');
+                    secondarySwitcher.addClass('bdt-active');
+                    primaryIcon.removeClass('bdt-active');
+                    secondaryIcon.addClass('bdt-active');
+                    primaryText.removeClass('bdt-active');
+                    secondaryText.addClass('bdt-active');
+                    primaryContent.removeClass('bdt-active');
+                    secondaryContent.addClass('bdt-active');
+                } else {
+                    primarySwitcher.addClass('bdt-active');
+                    secondarySwitcher.removeClass('bdt-active');
+                    primaryIcon.addClass('bdt-active');
+                    secondaryIcon.removeClass('bdt-active');
+                    primaryText.addClass('bdt-active');
+                    secondaryText.removeClass('bdt-active');
+                    primaryContent.addClass('bdt-active');
+                    secondaryContent.removeClass('bdt-active');
+                }
+            });
+
+        }
+
+        
+
+        if ('button' == $settings.switcherStyle) {
+
+            var $tabs = $contentSwitcher.find('.bdt-switcher-content-wrapper');
+            var $tab = $contentSwitcher.find('.bdt-content-switcher-tab');
+
+            $tab.on('click', function () {
+                var $this = $(this);
+                var id = $this.attr('id');
+                var $content = $contentSwitcher.find('.bdt-switcher-content[data-content-id="' + id + '"]');
+
+                $tab.removeClass('bdt-active');
+                $this.addClass('bdt-active');
+
+                $tabs.find('.bdt-switcher-content').removeClass('bdt-active');
+                $content.addClass('bdt-active');
+            });
+            
+        }
+    }
+
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-content-switcher.default', widgetContentSwitcher);
+    });
+
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End Content Switcher widget script
+ */
 ; (function ($, elementor) {
     'use strict';
     $(window).on('elementor/frontend/init', function () {
@@ -12535,3 +13228,2744 @@ jQuery(document).ready(function () {
  * End twitter carousel widget script
  */
 
+
+/**
+ * Start accordion widget script
+ */
+
+;
+(function ($, elementor) {
+    'use strict';
+    var widgetCrypto = function ($scope, $) {
+        var $cryptoWidget = $scope.find('.bdt-ep-crypto-currency-card'),
+            $settings = $cryptoWidget.data('settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$cryptoWidget.length) {
+            return;
+        }
+
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        // $options.limit = $settings.limit
+        // if ($settings.limit) {
+        // }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: 1, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                let itemData = $($cryptoWidget).find('.bdt-crypto-currency-card-item');
+                /**
+                 * @idPriceColumnArray is holding data from current items
+                 */
+
+                let idPriceColumnArray = [];
+                for (let i = 0; i < itemData.length; i++) {
+                    idPriceColumnArray.push({
+                        // id: itemData[i]["id"],
+                        id: $(itemData[i]).data('id'),
+                        current_price: parseFloat($(itemData[i]).find('.bdt-price-text').text()),
+                    });
+                }
+
+                // console.log(idPriceColumnArray);
+
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            // console.log(elem.current_price);
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // console.log(changesIdArray);
+
+                if (changesIdArray.length !== 0) {
+                    changesIdArray.forEach(element => {
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').addClass('data-changed');
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').find('.bdt-price-text').text(element.current_price);
+
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+                        $($cryptoWidget).find('[data-id="' + element.id + '"] .price-int').text(amount);
+
+                    });
+                }
+                
+
+                setTimeout(function () {
+                    $($cryptoWidget).find('.bdt-crypto-currency-card-item').removeClass('data-changed');
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+            data: {
+                currency: currency_selected,
+                per_page: cryptoDataSettingsValue.limit, //limit
+                order: cryptoDataSettingsValue.order,
+                ids: $settings.ids
+            },
+            success: function (result) {
+                $($cryptoWidget).empty();
+
+                if (typeof result.data !== "undefined" && result.data.length > 0 && true === result.apiErrors) {
+                    let output = `<div class="bdt-alert-danger" bdt-alert>
+                                    <a class="bdt-alert-close" bdt-close></a>
+                                    <p>${result.data}</p>
+                                </div>`;
+                    $($cryptoWidget).append(output);
+                    return;
+                }
+
+
+                var count = 0;
+                result.data.forEach(element => {
+                    count++;
+                    if (count > 1) {
+                        return;
+                    }
+                    // console.log(element.id);
+                    let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                    // let formatAmount = numFormatter(element.current_price);
+                    let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+
+                    let data = element.price_change_percentage_1h;
+                    let OneHourData = (Number(data) === data && data % 1 !== 0) ? data.toFixed(2) + "%" : data + "%";
+
+                    var img_html = '';
+                    var name_html = '';
+                    var symble_html = '';
+                    var price_html = '';
+                    var hourly_price_html = '';
+                    var market_cap_rank_html = '';
+                    var market_cap_html = '';
+                    var total_volume_html = '';
+                    var price_change_html = '';
+                    if (true == $settings.showCurrencyImage) {
+                        img_html = `<div class="bdt-ep-currency-image">
+                        <img src="${element.image}" alt="${element.id}">
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyShortName) {
+                        symble_html = `<div class="bdt-ep-currency-short-name">
+                        <span>${element.symbol}</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyName) {
+                        name_html = `<div class="bdt-crypto-name-wrap"><div class="bdt-ep-currency-name">
+                        <span>${element.id}</span>
+                    </div> ${symble_html}</div>`;
+                    }
+                    if (true == $settings.showCurrencyChangePrice) {
+                        hourly_price_html = `<div class="bdt-percentage" title="1 Hour Data Change">${OneHourData}</div>`;
+                    }
+                    if (true == $settings.showCurrencyCurrentPrice) {
+                        price_html = `<div class="bdt-width-1-1 bdt-width-1-2@s"><div class="bdt-ep-current-price">
+                        <div class="bdt-price">${amount}</div>
+                        ${hourly_price_html}
+                    </div></div>`;
+                    }
+                    if (true == $settings.showMarketCapRank) {
+                        market_cap_rank_html = `<div class="bdt-ep-ccc-atribute">
+                        <span class="bdt-ep-item-text">Market Cap Rank: </span>
+                        <span>#${element.market_cap_rank}</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showMarketCap) {
+                        market_cap_html = `<div class="bdt-ep-ccc-atribute">
+                        <span class="bdt-ep-item-text">Market Cap: </span>
+                        <span>${element.market_cap}</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showTotalVolume) {
+                        total_volume_html = `<div class="bdt-ep-ccc-atribute">
+                        <span class="bdt-ep-item-text">Total Volume: </span>
+                        <span>${element.total_volume}</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showPriceChange) {
+                        price_change_html = `<div class="bdt-ep-ccc-atribute">
+                        <span class="bdt-ep-item-text">24H Change(%): </span>
+                        <span>${element.price_change_percentage_24h}</span>
+                    </div>`;
+                    }
+
+                    var output = `<div class="bdt-grid" bdt-grid data-id="${element.id}">
+
+                                    <div class="bdt-width-1-1 bdt-width-1-2@s">
+                                        <div class="bdt-ep-currency">
+                                            ${img_html}
+                                            ${name_html}
+                                        </div>
+                                    </div>
+                                    
+                                    ${price_html}
+                                    
+                                    <div class="bdt-width-1-1 bdt-margin-small-top bdt-ep-ccc-atributes bdt-grid-margin bdt-first-column">
+
+                                        ${market_cap_rank_html}
+
+                                        ${market_cap_html}
+
+                                        ${total_volume_html}
+
+                                        ${price_change_html}
+
+                                    </div>
+                                
+                                <span class="bdt-price-text bdt-hidden">${element.current_price}</span>
+                            </div>`;
+
+                    $($cryptoWidget).append(output);
+
+                });
+            }
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 5000);
+        }
+
+    };
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-card.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End accordion widget script
+ */
+/**
+ * Start accordion widget script
+ */
+
+;
+(function ($, elementor) {
+    'use strict';
+    var widgetCrypto = function ($scope, $) {
+        var $cryptoWidget = $scope.find('.bdt-crypto-currency-table'),
+            $settings = $cryptoWidget.data('settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$cryptoWidget.length) {
+            return;
+        }
+
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        if ($settings.limit) {
+            $options.limit = $settings.limit
+        }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let table, currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                var tableData = table.rows().data();
+                /**
+                 * @idPriceColumnArray is holding data from current datatable
+                 */
+                let idPriceColumnArray = [];
+                for (let i = 0; i < tableData.length; i++) {
+                    idPriceColumnArray.push({
+                        id: tableData[i]["id"],
+                        current_price: tableData[i]["current_price"],
+                    });
+                }
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                changesIdArray.filter(function (valueChangesArray, index) {
+                    let foundindex = 0;
+                    var filteredData = table.column(1)
+                        .data()
+                        .filter(function (value, index) {
+                            if (value === valueChangesArray.id) {
+                                foundindex = index;
+                                table.column(2)
+                                    .nodes()
+                                    .each(function (node, colIndex, dt) {
+                                        if (colIndex === index) {
+                                            table.cell(node)
+                                                .data(valueChangesArray.current_price);
+                                            let nodes = table.column(2).nodes();
+                                            $(nodes[index]).addClass("focus-item");
+                                        }
+                                    });
+                            }
+                            return value === valueChangesArray.id ? true : false;
+                        });
+                });
+                setTimeout(function () {
+                    table.column(2)
+                        .nodes()
+                        .each(function () {
+                            $(this).removeClass("focus-item");
+                        });
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+        table = $($settings.tableId).DataTable({
+            processing: true,
+            serverSide: false,
+            searching: $settings.searching,
+            ordering: $settings.ordering,
+            paging: $settings.paging,
+            info: $settings.info,
+            pageLength: $settings.pageLength,
+            ajax: {
+                type: "GET",
+                dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+            },
+            columns: [{
+                    data: "market_cap_rank"
+                },
+                {
+                    data: "id",
+                    render: function (data, type, row, meta) {
+                        return (
+                            '<div class="bdt-coin"><div class="bdt-coin-image"><img src="' +
+                            row["image"] +
+                            '" alt="' +
+                            row["id"] +
+                            '"></div><div class="bdt-coin-title"><div class="bdt-coin-name">' +
+                            row["id"] +
+                            '</div><div class="bdt-coin-symbol">' +
+                            row["symbol"] +
+                            "</div></div></div>"
+                        );
+                    },
+                },
+                {
+                    data: "current_price",
+                    render: function (data, type, row, meta) {
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let val = Number(data) === data && data % 1 !== 0 ? data.toFixed(2) : data; // this is just we are checking if this value is float. then we are just adjusting the two decimal point. otherwise returing the original value
+                        //return returnCurrencySymbol(upperCaseCurrncyCode) + data;
+                        return returnCurrencySymbol(upperCaseCurrncyCode) + val;
+                    },
+                },
+                {
+                    data: "price_change_percentage_24h",
+                    render: function (data, type, row, meta) {
+                        return Number(data) === data && data % 1 !== 0 ? data.toFixed(2) + "%" : data + "%";
+                    },
+                },
+                {
+                    data: "market_cap",
+                    render: function (data, type, row, meta) {
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let formatAmout = numFormatter(data);
+                        //return returnCurrencySymbol(upperCaseCurrncyCode) + data;
+                        return returnCurrencySymbol(upperCaseCurrncyCode) + formatAmout;
+                    },
+                },
+                {
+                    data: "total_volume",
+                    render: function (data, type, row, meta) {
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let formatAmout = numFormatter(data);
+                        //return returnCurrencySymbol(upperCaseCurrncyCode) + data;
+                        return returnCurrencySymbol(upperCaseCurrncyCode) + formatAmout;
+                    },
+                },
+                {
+                    data: "circulating_supply",
+                    render: function (data, type, row, mata) {
+                        let formatAmout = numFormatter(data);
+                        //return data.toFixed(2);
+                        return formatAmout;
+                    }
+                },
+                {
+                    data: "last_seven_days_changes",
+                    render: function (data, type, row, meta) {
+                        return (
+                            '<input type="hidden" class="hdnInputCanvas-' + row["id"] + '"  value="' + data + '"/>' + '<div class="chart-container" style="position: relative; height:150px; width:50px"><canvas id="canvas-' + row["id"] + '"></canvas></div>'
+                        );
+                    },
+                },
+            ],
+            columnDefs: [{
+                searchable: false,
+                orderable: false,
+                //targets: [0, 8],
+                targets: [7],
+            }, ],
+            //order: [[1, "asc"]],
+            order: [
+                [0, "asc"]
+            ],
+            createdRow: function (row, data, index) {
+                let getCanvasElement = $("td", row).eq(7);
+                //let canvas_id = $(getCanvasElement).find("canvas").attr("id");
+                let getHiddenData = $(getCanvasElement).find("input").val();
+                let splitData = getHiddenData.split(",");
+                /***
+                 * here we are just getting last 20 values value
+                 */
+                if (splitData && splitData.length > 15) {
+                    splitData = splitData.slice(0, 14);
+                }
+                /**
+                 * end of splice code. this we can remove if any further code found
+                 */
+                const dom_canvas_element = $(getCanvasElement).find("canvas");
+                const labels = [],
+                    dataPointvalue = [];
+                splitData.forEach((element, index) => {
+                    labels.push(index);
+                    dataPointvalue.push(Number(element));
+                });
+       
+
+                const dataCharts = {
+                    labels: labels,
+                    datasets: [{
+                        label: "",
+                        backgroundColor: "rgba(30,135,240,0.2)",
+                        borderColor: "#1e87f0",
+                        fill: true,
+                        lineTension: 0.4,
+                        pointStyle: 'circle',
+                        pointBackgroundColor: "#1e87f0",
+                        pointBorderWidth: 1,
+                        borderWidth: 2,
+                        data: dataPointvalue,
+                    }, ],
+                };
+                const config = {
+                    type: "line",
+                    data: dataCharts,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    display: false,
+                                },
+                                grid: {
+                                    display: false,
+                                    drawBorder: false,
+                                    drawOnChartArea: false,
+                                    drawTicks: false,
+                                },
+                            },
+                            y: {
+                                ticks: {
+                                    display: false,
+                                },
+                                grid: {
+                                    display: false,
+                                    drawBorder: false,
+                                    drawOnChartArea: false,
+                                    drawTicks: false,
+                                },
+                            },
+                        },
+                    },
+                };
+                const chart = new Chart(dom_canvas_element, config);
+                chart.canvas.parentNode.style.width = "100%";
+                chart.canvas.style.width = "100%";
+                chart.canvas.parentNode.style.height = "50px";
+            },
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 5000);
+        }
+
+    };
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-table.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End accordion widget script
+ */
+/**
+ * Start accordion widget script
+ */
+
+;
+(function ($, elementor) {
+    'use strict';
+    var widgetCrypto = function ($scope, $) {
+        var $cryptoWidget = $scope.find('.bdt-crypto-currency-grid'),
+            $settings = $cryptoWidget.data('settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$cryptoWidget.length) {
+            return;
+        }
+
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        if ($settings.limit) {
+            $options.limit = $settings.limit
+        }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                let itemData = $($cryptoWidget).find('.bdt-crypto-currency-grid-item');
+                /**
+                 * @idPriceColumnArray is holding data from current items
+                 */
+
+                let idPriceColumnArray = [];
+                for (let i = 0; i < itemData.length; i++) {
+                    idPriceColumnArray.push({
+                        // id: itemData[i]["id"],
+                        id: $(itemData[i]).data('id'),
+                        current_price: parseFloat($(itemData[i]).find('.bdt-price-text').text()),
+                    });
+                }
+
+                // console.log(idPriceColumnArray);
+
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            // console.log(elem.current_price);
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // console.log(changesIdArray);
+
+                if (changesIdArray.length !== 0) {
+                    changesIdArray.forEach(element => {
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').addClass('data-changed');
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').find('.bdt-price-text').text(element.current_price);
+
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+                        $($cryptoWidget).find('[data-id="' + element.id + '"] .price-int').text(amount);
+
+                    });
+                }
+
+
+                setTimeout(function () {
+                    $($cryptoWidget).find('.bdt-crypto-currency-grid-item').removeClass('data-changed');
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+            data: {
+                currency: currency_selected,
+                per_page: cryptoDataSettingsValue.limit, //limit
+                order: cryptoDataSettingsValue.order,
+                ids: $settings.ids
+            },
+            success: function (result) {
+                $($cryptoWidget).empty();
+
+                
+                if (typeof result.data !== "undefined" && result.data.length > 0 && true === result.apiErrors) {
+                    let output = `<div class="bdt-alert-danger" bdt-alert>
+                                    <a class="bdt-alert-close" bdt-close></a>
+                                    <p>${result.data}</p>
+                                </div>`;
+                    $($cryptoWidget).append(output);
+                    return;
+                }
+
+                var count = 0;
+                result.data.forEach(element => {
+                    count++;
+                    if (count > cryptoDataSettingsValue.limit) {
+                        return;
+                    }
+                    // console.log(element.id);
+                    let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                    // let formatAmount = numFormatter(element.current_price);
+                    let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+
+                    var img_html = '';
+                    var name_html = '';
+                    var symble_html = '';
+                    var price_html = '';
+                    var price_label_html = '';
+                    if (true == $settings.showCurrencyImage) {
+                        img_html = `<div class="bdt-crypto-currency-grid-img">
+                                        <img src="${element.image}" alt="${element.id}">
+                                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyShortName) {
+                        symble_html = `<span>(${element.symbol})</span>`;
+                    }
+                    if (true == $settings.showCurrencyName) {
+                        name_html = `<div class="bdt-crypto-currency-grid-title">
+                        <h4>${element.id} ${symble_html}</h4>
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyPriceLabel) {
+                        price_label_html = `<div class="bdt-crypto-currency-grid-price-text">
+                        <span>price</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyCurrentPrice) {
+                        price_html = `${price_label_html}
+                    <div class="bdt-crypto-currency-grid-price-nu">
+                        <span class="price-int">${amount}</span>
+                    </div>`;
+                    }
+
+                    var output = `<div class="bdt-crypto-currency-grid-item" data-id="${element.id}">
+                                <div class="bdt-crypto-currency-grid-content">
+                                    <div class="bdt-crypto-currency-grid-bg">
+                                        <img src="${element.image}" alt="${element.id}">
+                                    </div>
+
+                                    <div class="bdt-crypto-currency-grid-head-content">
+                                        ${img_html}
+                                        ${name_html}
+                                    </div>
+                                    <div class="bdt-crypto-currency-grid-bottom-content">
+                                        ${price_html}
+                                    </div>
+                                </div>
+                                <span class="bdt-price-text bdt-hidden">${element.current_price}</span>
+                            </div>`;
+
+                    $($cryptoWidget).append(output);
+
+                });
+            }
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 5000);
+        }
+
+    };
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-grid.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End accordion widget script
+ */
+/**
+ * Start accordion widget script
+ */
+
+;
+(function ($, elementor) {
+    'use strict';
+    var widgetCrypto = function ($scope, $) {
+        var $cryptoWidget = $scope.find('.bdt-crypto-currency-list'),
+            $settings = $cryptoWidget.data('settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$cryptoWidget.length) {
+            return;
+        }
+
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        if ($settings.limit) {
+            $options.limit = $settings.limit
+        }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                let itemData = $($cryptoWidget).find('.bdt-crypto-currency-list-item');
+                /**
+                 * @idPriceColumnArray is holding data from current items
+                 */
+
+                let idPriceColumnArray = [];
+                for (let i = 0; i < itemData.length; i++) {
+                    idPriceColumnArray.push({
+                        // id: itemData[i]["id"],
+                        id: $(itemData[i]).data('id'),
+                        current_price: parseFloat($(itemData[i]).find('.bdt-price-text').text()),
+                    });
+                }
+
+                // console.log(idPriceColumnArray);
+
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            // console.log(elem.current_price);
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // console.log(changesIdArray);
+
+                if (changesIdArray.length !== 0) {
+                    changesIdArray.forEach(element => {
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').addClass('data-changed');
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').find('.bdt-price-text').text(element.current_price);
+
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+                        $($cryptoWidget).find('[data-id="' + element.id + '"] .price-int').text(amount);
+
+                    });
+                }
+
+
+                setTimeout(function () {
+                    $($cryptoWidget).find('.bdt-crypto-currency-list-item').removeClass('data-changed');
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+            data: {
+                currency: currency_selected,
+                per_page: cryptoDataSettingsValue.limit, //limit
+                order: cryptoDataSettingsValue.order,
+                ids: $settings.ids
+            },
+            success: function (result) {
+                $($cryptoWidget).empty();
+                var count = 0;
+                result.data.forEach(element => {
+                    count++;
+                    if (count > cryptoDataSettingsValue.limit) {
+                        return;
+                    }
+                    // console.log(element.id);
+                    let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                    // let formatAmount = numFormatter(element.current_price);
+                    let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+
+                    var img_html = '';
+                    var name_html = '';
+                    var symble_html = '';
+                    var price_html = '';
+                    if (true == $settings.showCurrencyImage) {
+                        img_html = `<div class="bdt-crypto-currency-list-img">
+                        <img src="${element.image}" alt="${element.id}">
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyShortName) {
+                        symble_html = `<span>(${element.symbol})</span>`;
+                    }
+                    if (true == $settings.showCurrencyName) {
+                        name_html = `<div class="bdt-crypto-currency-list-title">
+                        ${element.id} ${symble_html}
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyCurrentPrice) {
+                        price_html = `<div class="bdt-crypto-currency-list-price">
+                        <span>${amount}</span>
+                    </div>`;
+                    }
+
+                    var output = `<div class="bdt-crypto-currency-list-item" data-id="${element.id}">
+
+                                <div class="bdt-crypto-currency-list-content">
+                                    <div class="bdt-crypto-currency-list-inner">
+                                        ${img_html}
+                                        ${name_html}
+                                    </div>
+                                    ${price_html}
+                                </div>
+
+                                <span class="bdt-price-text bdt-hidden">${element.current_price}</span>
+                             </div>`;
+
+                    $($cryptoWidget).append(output);
+
+                });
+            }
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 5000);
+        }
+
+    };
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-list.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End accordion widget script
+ */
+(function ($, elementor) {
+
+    'use strict';
+
+    var widgetCrypto = function ($scope, $) {
+
+        var $carousel = $scope.find('.bdt-crypto-currency-carousel'),
+            $cryptoWidget = $scope.find('.bdt-crypto-currency-carousel'),
+            $settings = $cryptoWidget.data('crypto-settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$carousel.length) {
+            return;
+        }
+
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        if ($settings.limit) {
+            $options.limit = $settings.limit
+        }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                let itemData = $($cryptoWidget).find('.bdt-crypto-currency-carousel-item');
+                /**
+                 * @idPriceColumnArray is holding data from current items
+                 */
+
+                let idPriceColumnArray = [];
+                for (let i = 0; i < itemData.length; i++) {
+                    idPriceColumnArray.push({
+                        // id: itemData[i]["id"],
+                        id: $(itemData[i]).data('id'),
+                        current_price: parseFloat($(itemData[i]).find('.bdt-price-text').text()),
+                    });
+                }
+
+                // console.log(idPriceColumnArray);
+
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            // console.log(elem.current_price);
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // console.log(changesIdArray);
+
+                if (changesIdArray.length !== 0) {
+                    changesIdArray.forEach(element => {
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').addClass('data-changed');
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').find('.bdt-price-text').text(element.current_price);
+
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+                        $($cryptoWidget).find('[data-id="' + element.id + '"] .price-int').text(amount);
+
+                    });
+                }
+
+
+                setTimeout(function () {
+                    $($cryptoWidget).find('.bdt-crypto-currency-carousel-item').removeClass('data-changed');
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+            data: {
+                currency: currency_selected,
+                per_page: cryptoDataSettingsValue.limit, //limit
+                order: cryptoDataSettingsValue.order,
+                ids: $settings.ids
+            },
+            success: function (result) {
+                $($cryptoWidget).find('.swiper-wrapper').empty();
+                var count = 0;
+                result.data.forEach(element => {
+                    count++;
+                    if (count > cryptoDataSettingsValue.limit) {
+                        return;
+                    }
+                    // console.log(element.id);
+                    let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                    // let formatAmount = numFormatter(element.current_price);
+                    let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+
+                    var img_html = '';
+                    var name_html = '';
+                    var symble_html = '';
+                    var price_html = '';
+                    var price_label_html = '';
+                    if (true == $settings.showCurrencyImage) {
+                        img_html = `<div class="bdt-crypto-currency-carousel-img">
+                                        <img src="${element.image}" alt="${element.id}">
+                                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyShortName) {
+                        symble_html = `<span>(${element.symbol})</span>`;
+                    }
+                    if (true == $settings.showCurrencyName) {
+                        name_html = `<div class="bdt-crypto-currency-carousel-title">
+                        <h4>${element.id} ${symble_html}</h4>
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyPriceLabel) {
+                        price_label_html = `<div class="bdt-crypto-currency-carousel-price-text">
+                        <span>price</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyCurrentPrice) {
+                        price_html = `${price_label_html}
+                    <div class="bdt-crypto-currency-carousel-price-nu">
+                        <span class="price-int">${amount}</span>
+                    </div>`;
+                    }
+
+                    var output = `<div class="swiper-slide"><div class="bdt-crypto-currency-carousel-item" data-id="${element.id}">
+                                <div class="bdt-crypto-currency-carousel-content">
+                                    <div class="bdt-crypto-currency-carousel-bg">
+                                        <img src="${element.image}" alt="${element.id}">
+                                    </div>
+
+                                    <div class="bdt-crypto-currency-carousel-head-content">
+                                        ${img_html}
+                                        ${name_html}
+                                    </div>
+                                    <div class="bdt-crypto-currency-carousel-bottom-content">
+                                        ${price_html}
+                                    </div>
+                                </div>
+                                <span class="bdt-price-text bdt-hidden">${element.current_price}</span>
+                            </div></div>`;
+
+                    $($cryptoWidget).find('.swiper-wrapper').append(output);
+
+                    var $carouselContainer = $carousel.find('.swiper-container'),
+                        $carouselSettings = $carousel.data('settings');
+
+                    const Swiper = elementorFrontend.utils.swiper;
+                    initSwiper();
+                    async function initSwiper() {
+                        var swiper = await new Swiper($carouselContainer, $carouselSettings);
+
+                        if ($carouselSettings.pauseOnHover) {
+                            $($carouselContainer).hover(function () {
+                                (this).swiper.autoplay.stop();
+                            }, function () {
+                                (this).swiper.autoplay.start();
+                            });
+                        }
+
+                    };
+
+                });
+            }
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 5000);
+        }
+
+
+
+    };
+
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-carousel.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+/**
+ * Start accordion widget script
+ */
+
+;
+(function ($, elementor) {
+    'use strict';
+    var widgetCrypto = function ($scope, $) {
+        var $cryptoWidget = $scope.find('.bdt-crypto-currency-chart'),
+            $settings = $cryptoWidget.data('settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$cryptoWidget.length) {
+            return;
+        }
+
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        if ($settings.limit) {
+            $options.limit = $settings.limit
+        }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                let itemData = $($cryptoWidget).find('.bdt-crypto-currency-chart-item');
+                /**
+                 * @idPriceColumnArray is holding data from current items
+                 */
+
+                let idPriceColumnArray = [];
+                for (let i = 0; i < itemData.length; i++) {
+                    idPriceColumnArray.push({
+                        // id: itemData[i]["id"],
+                        id: $(itemData[i]).data('id'),
+                        current_price: parseFloat($(itemData[i]).find('.bdt-price-text').text()),
+                    });
+                }
+
+                // console.log(idPriceColumnArray);
+
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            // console.log(elem.current_price);
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // console.log(changesIdArray);
+
+                if (changesIdArray.length !== 0) {
+                    changesIdArray.forEach(element => {
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').addClass('data-changed');
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').find('.bdt-price-text').text(element.current_price);
+
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+                        $($cryptoWidget).find('[data-id="' + element.id + '"] .price-int').text(amount);
+
+                    });
+                }
+
+
+                setTimeout(function () {
+                    $($cryptoWidget).find('.bdt-crypto-currency-chart-item').removeClass('data-changed');
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+            data: {
+                currency: currency_selected,
+                per_page: cryptoDataSettingsValue.limit, //limit
+                order: cryptoDataSettingsValue.order,
+                ids: $settings.ids
+            },
+            success: function (result) {
+                $($cryptoWidget).empty();
+                var count = 0;
+                result.data.forEach(element => {
+                    count++;
+                    if (count > cryptoDataSettingsValue.limit) {
+                        return;
+                    }
+                    // console.log(element.id);
+                    let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                    // let formatAmount = numFormatter(element.current_price);
+                    let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+
+                    let data = element.price_change_percentage_1h;
+                    let OneHourData = (Number(data) === data && data % 1 !== 0) ? data.toFixed(2) + "%" : data + "%";
+
+                    var name_html = '';
+                    var symble_html = '';
+                    var price_html = '';
+                    var price_change_percentage_1h_html = '';
+                    if (true == $settings.showCurrencyShortName) {
+                        symble_html = `<span>(${element.symbol})</span>`;
+                    }
+                    if (true == $settings.showCurrencyName) {
+                        name_html = `<div class="bdt-crypto-currency-chart-title"><h4>${element.id} ${symble_html}</h4></div>`;
+                    }
+                    if (true == $settings.showCurrencyCurrentPrice) {
+                        price_html = `<div class="bdt-crypto-currency-chart-price-l">
+                        <span class="price-int">${amount}</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showPriceChangePercentage) {
+                        price_change_percentage_1h_html = `<div class="bdt-crypto-currency-chart-change">
+                        <span class="bdt-crypto-currency-chart-list-change up" title="1 Hour Data Change">${OneHourData}</span>
+                    </div>`;
+                    }
+
+                    var output = `<div class="bdt-crypto-currency-chart-item" data-id="${element.id}">
+                                    <div class="bdt-crypto-currency-chart-head-content">
+                                        <div class="bdt-crypto-currency-chart-head-inner-content">
+                                            ${name_html}
+                                            ${price_change_percentage_1h_html}
+                                            
+                                        </div>
+                                        <div class="bdt-crypto-currency-chart-bottom-inner-content">
+                                            ${price_html}
+                                        </div>
+                                    </div>
+                                    <div class="bdt-crypto-currency-chart-chart">
+                                        <input type="hidden" class="hdnInputCanvas-${element.id}"  value="${element.last_seven_days_changes}"/><div class="chart-container" style="position: relative;"><canvas id="canvas-${element.id}"></canvas></div>
+                                    </div>
+                                    <span class="bdt-price-text bdt-hidden">${element.current_price}</span>
+                                </div>`;
+
+                    $($cryptoWidget).append(output);
+
+                    let getCanvasElement = $($cryptoWidget).find('[data-id="' + element.id + '"]');
+                    //let canvas_id = $(getCanvasElement).find("canvas").attr("id");
+                    let getHiddenData = $(getCanvasElement).find("input").val();
+                    let splitData = getHiddenData.split(",");
+                    /***
+                     * here we are just getting last 20 values value
+                     */
+                    if (splitData && splitData.length > 15) {
+                        splitData = splitData.slice(0, 14);
+                    }
+                    /**
+                     * end of splice code. this we can remove if any further code found
+                     */
+                    const dom_canvas_element = $(getCanvasElement).find("canvas");
+                    const labels = [],
+                        dataPointvalue = [];
+                    splitData.forEach((element, index) => {
+                        labels.push(index);
+                        dataPointvalue.push(Number(element));
+                    });
+                    const dataCharts = {
+                        labels: labels,
+                        datasets: [{
+                            label: "",
+                            // backgroundColor: $settings.backgroundColor || "#777",
+                            // borderColor: $settings.borderColor || "#777",
+                            backgroundColor: "rgba(30,135,240,0.2)",
+                            borderColor: "#1e87f0",
+                            fill: true,
+                            lineTension: 0.4,
+                            pointStyle: 'circle',
+                            pointBackgroundColor: "#1e87f0",
+                            pointBorderWidth: 1,
+                            borderWidth: 2,
+                            data: dataPointvalue,
+                        }, ],
+                    };
+                    const config = {
+                        type: "line",
+                        data: dataCharts,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                                tooltip: {
+                                    enabled: true
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    ticks: {
+                                        display: false,
+                                    },
+                                    grid: {
+                                        display: false,
+                                        drawBorder: false,
+                                        drawOnChartArea: false,
+                                        drawTicks: false,
+                                    },
+                                },
+                                y: {
+                                    ticks: {
+                                        display: false,
+                                    },
+                                    grid: {
+                                        display: false,
+                                        drawBorder: false,
+                                        drawOnChartArea: false,
+                                        drawTicks: false,
+                                    },
+                                },
+                            },
+                        },
+                    };
+                    const chart = new Chart(dom_canvas_element, config);
+                    // chart.canvas.parentNode.style.width = "100%";
+                    // chart.canvas.parentNode.style.height = "80px";
+
+                });
+            }
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 5000);
+        }
+    };
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-chart.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End accordion widget script
+ */
+(function ($, elementor) {
+
+    'use strict';
+
+    var widgetCrypto = function ($scope, $) {
+
+        var $carousel = $scope.find('.bdt-crypto-currency-chart-carousel'),
+            $cryptoWidget = $scope.find('.bdt-crypto-currency-chart-carousel'),
+            $settings = $cryptoWidget.data('crypto-settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$carousel.length) {
+            return;
+        }
+
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        if ($settings.limit) {
+            $options.limit = $settings.limit
+        }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                let itemData = $($cryptoWidget).find('.bdt-crypto-currency-chart-carousel-item');
+                /**
+                 * @idPriceColumnArray is holding data from current items
+                 */
+
+                let idPriceColumnArray = [];
+                for (let i = 0; i < itemData.length; i++) {
+                    idPriceColumnArray.push({
+                        // id: itemData[i]["id"],
+                        id: $(itemData[i]).data('id'),
+                        current_price: parseFloat($(itemData[i]).find('.bdt-price-text').text()),
+                    });
+                }
+
+                // console.log(idPriceColumnArray);
+
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            // console.log(elem.current_price);
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // console.log(changesIdArray);
+
+                if (changesIdArray.length !== 0) {
+                    changesIdArray.forEach(element => {
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').addClass('data-changed');
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').find('.bdt-price-text').text(element.current_price);
+
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+                        $($cryptoWidget).find('[data-id="' + element.id + '"] .price-int').text(amount);
+
+                    });
+                }
+
+
+                setTimeout(function () {
+                    $($cryptoWidget).find('.bdt-crypto-currency-chart-carousel-item').removeClass('data-changed');
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+            data: {
+                currency: currency_selected,
+                per_page: cryptoDataSettingsValue.limit, //limit
+                order: cryptoDataSettingsValue.order,
+                ids: $settings.ids
+            },
+            success: function (result) {
+                $($cryptoWidget).find('.swiper-wrapper').empty();
+                var count = 0;
+                result.data.forEach(element => {
+                    count++;
+                    if (count > cryptoDataSettingsValue.limit) {
+                        return;
+                    }
+                    // console.log(element.id);
+                    let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                    // let formatAmount = numFormatter(element.current_price);
+                    let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+
+                    let data = element.price_change_percentage_1h;
+                    let OneHourData = (Number(data) === data && data % 1 !== 0) ? data.toFixed(2) + "%" : data + "%";
+
+                    var name_html = '';
+                    var symble_html = '';
+                    var price_html = '';
+                    var price_change_percentage_1h_html = '';
+                    if (true == $settings.showCurrencyShortName) {
+                        symble_html = `<span>(${element.symbol})</span>`;
+                    }
+                    if (true == $settings.showCurrencyName) {
+                        name_html = `<div class="bdt-crypto-currency-chart-carousel-title"><h4>${element.id} ${symble_html}</h4></div>`;
+                    }
+                    if (true == $settings.showCurrencyCurrentPrice) {
+                        price_html = `<div class="bdt-crypto-currency-chart-carousel-price-l">
+                        <span>${amount}</span>
+                    </div>`;
+                    }
+                    if (true == $settings.showPriceChangePercentage) {
+                        price_change_percentage_1h_html = `<div class="bdt-crypto-currency-chart-carousel-change">
+                        <span class="bdt-crypto-currency-chart-carousel-list-change up" title="1 Hour Data Change">${OneHourData}</span>
+                    </div>`;
+                    }
+
+                    var output = `<div class="swiper-slide"><div class="bdt-crypto-currency-chart-carousel-item" data-id="${element.id}">
+                                    <div class="bdt-crypto-currency-chart-carousel-head-content">
+                                        <div class="bdt-crypto-currency-chart-carousel-head-inner-content">
+                                            ${name_html}
+                                            ${price_change_percentage_1h_html}
+                                            
+                                        </div>
+                                        <div class="bdt-crypto-currency-chart-carousel-bottom-inner-content">
+                                            ${price_html}
+                                        </div>
+                                    </div>
+                                    <div class="bdt-crypto-currency-chart-carousel-chart">
+                                        <input type="hidden" class="hdnInputCanvas-${element.id}"  value="${element.last_seven_days_changes}"/><div class="chart-container" style="position: relative;"><canvas id="canvas-${element.id}"></canvas></div>
+                                    </div>
+                                    <span class="bdt-price-text bdt-hidden">${element.current_price}</span>
+                                </div></div>`;
+
+                    $($cryptoWidget).find('.swiper-wrapper').append(output);
+
+                    var $carouselContainer = $carousel.find('.swiper-container'),
+                        $carouselSettings = $carousel.data('settings');
+
+                    const Swiper = elementorFrontend.utils.swiper;
+                    initSwiper();
+                    async function initSwiper() {
+                        var swiper = await new Swiper($carouselContainer, $carouselSettings);
+
+                        if ($carouselSettings.pauseOnHover) {
+                            $($carouselContainer).hover(function () {
+                                (this).swiper.autoplay.stop();
+                            }, function () {
+                                (this).swiper.autoplay.start();
+                            });
+                        }
+
+                    };
+
+
+
+                    let getCanvasElement = $($cryptoWidget).find('[data-id="' + element.id + '"]');
+                    //let canvas_id = $(getCanvasElement).find("canvas").attr("id");
+                    let getHiddenData = $(getCanvasElement).find("input").val();
+                    let splitData = getHiddenData.split(",");
+                    /***
+                     * here we are just getting last 20 values value
+                     */
+                    if (splitData && splitData.length > 15) {
+                        splitData = splitData.slice(0, 14);
+                    }
+                    /**
+                     * end of splice code. this we can remove if any further code found
+                     */
+                    const dom_canvas_element = $(getCanvasElement).find("canvas");
+                    const labels = [],
+                        dataPointvalue = [];
+                    splitData.forEach((element, index) => {
+                        labels.push(index);
+                        dataPointvalue.push(Number(element));
+                    });
+                    const dataCharts = {
+                        labels: labels,
+                        datasets: [{
+                            label: "",
+                            // backgroundColor: $settings.backgroundColor || "#777",
+                            // borderColor: $settings.borderColor || "#777",
+                            backgroundColor: "rgba(30,135,240,0.2)",
+                            borderColor: "#1e87f0",
+                            fill: true,
+                            lineTension: 0.4,
+                            pointStyle: 'circle',
+                            pointBackgroundColor: "#1e87f0",
+                            pointBorderWidth: 1,
+                            borderWidth: 2,
+                            data: dataPointvalue,
+                        }, ],
+                    };
+                    const config = {
+                        type: "line",
+                        data: dataCharts,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                                tooltip: {
+                                    enabled: true
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    ticks: {
+                                        display: false,
+                                    },
+                                    grid: {
+                                        display: false,
+                                        drawBorder: false,
+                                        drawOnChartArea: false,
+                                        drawTicks: false,
+                                    },
+                                },
+                                y: {
+                                    ticks: {
+                                        display: false,
+                                    },
+                                    grid: {
+                                        display: false,
+                                        drawBorder: false,
+                                        drawOnChartArea: false,
+                                        drawTicks: false,
+                                    },
+                                },
+                            },
+                        },
+                    };
+                    const chart = new Chart(dom_canvas_element, config);
+                    // chart.canvas.parentNode.style.width = "100%";
+                    // chart.canvas.parentNode.style.height = "80px";
+
+
+
+                });
+            }
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 5000);
+        }
+
+
+    };
+
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-chart-carousel.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+/**
+ * Start accordion widget script
+ */
+
+;
+(function ($, elementor) {
+    'use strict';
+    var widgetCrypto = function ($scope, $) {
+        var $cryptoWidget = $scope.find('.bdt-crypto-currency-ticker'),
+            $settings = $cryptoWidget.data('settings'),
+            $tickerSettings = $cryptoWidget.data('ticker-settings'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$cryptoWidget.length) {
+            return;
+        }
+
+        // Crypto Data
+        var $options = {
+            'currency': $settings.currency,
+            'limit': 100,
+            'order': 'market_cap_desc',
+        };
+
+        if ($settings.currency) {
+            $options.currency = $settings.currency
+        }
+        if ($settings.limit) {
+            $options.limit = $settings.limit
+        }
+        if ($settings.order) {
+            $options.order = $settings.order
+        }
+
+        let currency_selected, cryptoDataSettingsValue = $options;
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: ElementPackConfig.ajaxurl + '?action=ep_crypto_data',
+                data: {
+                    currency: currency_selected,
+                    per_page: cryptoDataSettingsValue.limit, //limit
+                    order: cryptoDataSettingsValue.order,
+                    ids: $settings.ids
+                },
+
+            }).done(function (data) {
+                let itemData = $($cryptoWidget).find('.bdt-crypto-currency-ticker-item');
+                /**
+                 * @idPriceColumnArray is holding data from current items
+                 */
+
+                let idPriceColumnArray = [];
+                for (let i = 0; i < itemData.length; i++) {
+                    idPriceColumnArray.push({
+                        // id: itemData[i]["id"],
+                        id: $(itemData[i]).data('id'),
+                        current_price: parseFloat($(itemData[i]).find('.bdt-price-text').text()),
+                    });
+                }
+
+                // console.log(idPriceColumnArray);
+
+                /**
+                 * @crypDataParse holding data from crypto live data server
+                 */
+                let cryptDataParse = JSON.parse(data);
+                /**
+                 * changes array
+                 */
+                let changesIdArray = [];
+                /**
+                 * now have to compare this two array of object
+                 */
+                for (let i = 0; i < idPriceColumnArray.length; i++) {
+                    $.map(cryptDataParse, function (elem, index) {
+                        if (elem.id === idPriceColumnArray[i].id) {
+                            // console.log(elem.current_price);
+                            if (elem.current_price !== idPriceColumnArray[i].current_price) {
+                                changesIdArray.push({
+                                    id: idPriceColumnArray[i].id,
+                                    current_price: elem.current_price,
+                                    old_price: idPriceColumnArray[i].current_price,
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // console.log(changesIdArray);
+
+                if (changesIdArray.length !== 0) {
+                    changesIdArray.forEach(element => {
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').addClass('data-changed');
+                        $($cryptoWidget).find('[data-id="' + element.id + '"]').find('.bdt-price-text').text(element.current_price);
+
+                        let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                        let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+                        $($cryptoWidget).find('[data-id="' + element.id + '"] .price-int').text(amount);
+
+                    });
+                }
+
+
+                setTimeout(function () {
+                    $($cryptoWidget).find('.bdt-crypto-currency-ticker-item').removeClass('data-changed');
+                    return getData();
+                }, 10000);
+            });
+        }
+
+        /**
+         * number format
+         */
+        function numFormatter(num) {
+            if (num > 999 && num < 1000000) {
+                return (num / 1000).toFixed(2) + 'K'; // convert to K for number from > 1000 < 1 million 
+            } else if (num > 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B'; // convert to M for number from > 1 million 
+            } else if (num > 1000000) {
+                return (num / 1000000).toFixed(2) + 'M'; // convert to M for number from > 1 million 
+            } else if (num < 900) {
+                return num; // if value < 1000, nothing to do
+            }
+        }
+        /**
+         * defalt onload call will be here
+         */
+        if (cryptoDataSettingsValue !== undefined && cryptoDataSettingsValue.currency !== undefined) {
+            currency_selected = cryptoDataSettingsValue.currency;
+        } else {
+            currency_selected = "usd"; // default currency settings here
+        }
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: ElementPackConfig.ajaxurl + '?action=ep_crypto',
+            data: {
+                currency: currency_selected,
+                per_page: cryptoDataSettingsValue.limit, //limit
+                order: cryptoDataSettingsValue.order,
+                ids: $settings.ids
+            },
+            success: function (result) {
+                $($cryptoWidget).find('ul').empty();
+                var count = 0;
+                result.data.forEach(element => {
+                    count++;
+                    if (count > cryptoDataSettingsValue.limit) {
+                        return;
+                    }
+                    // console.log(element.id);
+                    let upperCaseCurrncyCode = currency_selected.toString().toUpperCase();
+                    // let formatAmount = numFormatter(element.current_price);
+                    let amount = returnCurrencySymbol(upperCaseCurrncyCode) + element.current_price;
+
+                    let data = element.price_change_percentage_1h;
+                    let OneHourData = (Number(data) === data && data % 1 !== 0) ? data.toFixed(2) + "%" : data + "%";
+
+                    var img_html = '';
+                    var name_html = '';
+                    var symble_html = '';
+                    var price_html = '';
+                    var price_change_percentage_1h_html = '';
+                    if (true == $settings.showCurrencyImage) {
+                        img_html = `<div class="bdt-crypto-currency-ticker-img">
+                        <img src="${element.image}" alt="${element.id}">
+                    </div>`;
+                    }
+                    if (true == $settings.showCurrencyShortName) {
+                        symble_html = `<span>(${element.symbol})</span>`;
+                    }
+                    if (true == $settings.showCurrencyName) {
+                        name_html = `<h3 class="bdt-crypto-currency-ticker-title">
+                        ${element.id} ${symble_html}
+                    </h3>`;
+                    }
+                    if (true == $settings.showCurrencyCurrentPrice) {
+                        price_html = `<span class="bdt-crypto-currency-ticker-price">${amount}</span>`;
+                    }
+                    if (true == $settings.showPriceChangePercentage) {
+                        price_change_percentage_1h_html = `<div class="bdt-crypto-currency-ticker-percentage">
+                        <svg width="25" height="22" viewBox="0 0 20 20" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                                clip-rule="evenodd" />
+                            <path fill-rule="evenodd"
+                                d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span>${OneHourData}</span>
+                    </div>`;
+                    }
+
+                    var output = `<li class="bdt-crypto-currency-ticker-item" data-id="${element.id}">
+
+                                <div class="bdt-crypto-currency-ticker-inner-item">
+                                    ${img_html}
+                                    <div class="bdt-crypto-currency-ticker-content">
+                                        ${name_html}
+                                        ${price_html}
+                                        ${price_change_percentage_1h_html}
+                                    </div>
+                                </div>
+
+                                <span class="bdt-price-text bdt-hidden">${element.current_price}</span>
+                             </li>`;
+
+                    $($cryptoWidget).find('ul').append(output);
+
+                });
+            }
+        });
+
+        if (true !== editMode) {
+            setTimeout(function () {
+                getData();
+            }, 7000);
+        }
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $($cryptoWidget).epNewsTicker($tickerSettings);
+            }, 7000);
+        });
+
+    };
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-crypto-currency-ticker.default', widgetCrypto);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End accordion widget script
+ */
+;
+(function ($, elementor) {
+    $(window).on('elementor/frontend/init', function () {
+        var ModuleHandler = elementorModules.frontend.handlers.Base,
+            RealisticShadow;
+
+        RealisticShadow = ModuleHandler.extend({
+
+            bindEvents: function () {
+                this.run();
+            },
+
+            getDefaultSettings: function () {
+                return {
+                    allowHTML: true,
+                };
+            },
+
+            onElementChange: debounce(function (prop) {
+                if (prop.indexOf('element_pack_ris_') !== -1) {
+                    this.run();
+                }
+            }, 400),
+
+            settings: function (key) {
+                return this.getElementSettings('element_pack_ris_' + key);
+            },
+
+            run: function () {
+                var options = this.getDefaultSettings();
+                var widgetID = this.$element.data('id');
+                var widgetContainer = $('.elementor-element-' + widgetID + ' .elementor-widget-container');
+                var obj = this;
+
+                if ('yes' !== this.settings('enable')) {
+                    return;
+                }
+
+                if (this.settings('selector')) {
+                    widgetContainer = $('.elementor-element-' + widgetID).find(this.settings('selector'));
+                }
+
+                var $image = widgetContainer.find('img');
+
+                $image.each(function () {
+                    var $this = $(this);
+                    if (!$this.hasClass('element-pack-ris-image')) {
+                        var $duplicateImage = $this.clone();
+                        $duplicateImage.addClass('element-pack-ris-image');
+                        
+
+                        // Remove any existing 'element-pack-ris-image' elements except the first one
+                        var $existingImages = $($this).parent().find('.element-pack-ris-image');
+                        if ($existingImages.length > 1) {
+                            $existingImages.not(':first').remove();
+                        }
+
+                        if ($existingImages.length < 1) {
+                            $($this).parent().append($duplicateImage);
+                        }
+
+                        // Add class to parent
+                        widgetContainer.addClass('bdt-realistic-image-shadow');
+
+                        if (obj.settings('on_hover') === 'yes') {
+                            widgetContainer.addClass('bdt-hover');
+                        }
+                    }
+                });
+
+            }
+        });
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+            elementorFrontend.elementsHandler.addHandler(RealisticShadow, {
+                $element: $scope
+            });
+        });
+    });
+})(jQuery, window.elementorFrontend);
+/**
+ * Start Content Switcher widget script
+ */
+
+(function ($, elementor) {
+
+    'use strict';
+
+    var widgetFloatingKnowledgebase = function ($scope, $) {
+
+        var $floatingKnowledgebase = $scope.find('.bdt-floating-knowledgebase'),
+            $settings = $floatingKnowledgebase.data('settings');
+
+        if (!$floatingKnowledgebase.length) {
+            return;
+        }
+
+        ;
+        (function ($) {
+            "use strict";
+            /*
+             *--------------------------------------------------------------------------
+             * CONFIG OR SETTINGS - Customize the help center
+             *--------------------------------------------------------------------------
+             */
+            var helpCenterConfig = {
+                // primaryColor: "#007bff", // Floating button color
+                linkColor: "#007bff", // Color of anchor tags or links
+                showHelperText: true, // Helper text beside floating button(true|false)
+                helperTextLabel: $settings.helperTextLabel || "Have any queries?<br /><strong>Check Help Center</strong>", // Helper text label
+                showContactUsLink: true, // Hide or show contact us link(true|false)
+                contactUsLabel: $settings.supportLinkText || "Still no luck? We can help!", // Text of contact us link
+                contactUsLink: $settings.supportLink || "/contact-us", // Contact us link
+                noResultsLabel: $settings.noSearchResultText || "Sorry, we don’t have any results. Updates are being added all the time.", // No results found text
+                resetOnPopupClose: false, // Reset popup back to original state on close(true|false)
+                btnZindex: 999, // Z-index property of floating button
+                popupZindex: 998, // Z-index property of popup
+                onPopupOpen: function () {}, // Callback function which runs on popup open
+                onPopupClose: function () {} // Callback function which runs on popup close
+            }
+
+            var nodesStack = []; // Array to hande "nodes/html-content" back-forth pagination
+            var titleStack = []; // Array to hande "title" back-forth pagination
+            var jsonData; // JSON data
+
+            /**
+             * Get the JSON Data and Initialize plugin
+             */
+
+
+            // console.log($settings.data_source);
+
+            $.fn.floatingHelpCenter = function () {
+                // $.getJSON("http://192.168.1.111/FloatingHelpCenter/FloatingHelpCenter/data.json", function (jsonObj) { // get the JSON data
+                //     jsonData = $settings.data_source;
+                //     renderHelpCenterBtn(helpCenterConfig); // render popup button
+                //     renderPopup(jsonData); // render popup with JSON data
+
+                // }).fail(function () {
+                //     alert("JSON error");
+                // });
+                 jsonData = $settings.data_source;
+                 renderHelpCenterBtn(helpCenterConfig); // render popup button
+                 renderPopup(jsonData); // render popup with JSON data
+            }
+            /**
+             * Renders the help center button using config
+             * @param {Object} config - Contains config/preferences
+             */
+            function renderHelpCenterBtn(config) {
+                var $btnWrap = $("<div>", {
+                    class: "floating-help-center__btn"
+                }).css('zIndex', helpCenterConfig.btnZindex);
+                $btnWrap.click(togglePopup);
+                var $helperText = $("<p>", {
+                    class: "helper-txt"
+                }).html(helpCenterConfig.helperTextLabel);
+                var $btn = $("<button>", {
+                    class: "btn"
+                });
+                $("#bdt-floating-help-center").append($btnWrap.append(function () {
+                    if (helpCenterConfig.showHelperText) {
+                        return $helperText;
+                    }
+                }, $btn));
+            }
+
+            /**
+             * Shows or hide the popup on button click
+             */
+            function togglePopup() {
+                var $popup = $("#bdt-floating-help-center .floating-help-center__popup");
+                var $popBtn = $("#bdt-floating-help-center .floating-help-center__btn");
+                var popupActiveClass = "floating-help-center__popup--active";
+                if ($popup.hasClass(popupActiveClass)) {
+                    $popup.removeClass(popupActiveClass);
+                    $popBtn.removeClass(popupActiveClass);
+                    helpCenterConfig.onPopupClose.call(this);
+                } else {
+                    if (helpCenterConfig.resetOnPopupClose) {
+                        resetPopupContent();
+                    }
+                    $popup.addClass(popupActiveClass);
+                    $popBtn.addClass(popupActiveClass);
+                    helpCenterConfig.onPopupOpen.call(this);
+                }
+            }
+
+            /**
+             * Renders the popup with populated data
+             * @param {Object} data - contains json data
+             */
+            function renderPopup(data) {
+                var $outerWrap = $("<div>", {
+                    id: "floatingHelpCenterPopup",
+                    class: "floating-help-center__popup"
+                }).css('zIndex', helpCenterConfig.popupZindex);;
+                var $searchOuter = $("<div>", {
+                    class: "searchbox"
+                });
+                var $searchIcon = $("<div>", {
+                    class: "searchbox__search-icon"
+                }).html(searchSVG);
+                var $input = $("<input>", {
+                    class: "searchbox__input",
+                    type: "text",
+                    placeholder: "Search..."
+                });
+                var $crossIcon = $("<div>", {
+                    class: "searchbox__cross-icon"
+                }).html(crossSVG).css({
+                    display: "none"
+                });
+                $crossIcon.click(resetPopupContent);
+                $input.on("input", searchInputHandler);
+                $searchOuter.append($searchIcon, $input, $crossIcon);
+                var $helpList = $("<ul>", {
+                    id: "listItemsContainer",
+                    class: "help-list"
+                });
+                var $externalLinkWrap = $("<div>", {
+                    id: "externalLinkWrap",
+                    class: "external"
+                });
+                var $externalLink = $("<a>", {
+                    id: "externalLinkWrap",
+                    class: "external__link",
+                    target: "_blank",
+                    href: helpCenterConfig.contactUsLink
+                }).text(helpCenterConfig.contactUsLabel);
+                var $externalArrow = $("<span>", {
+                    class: "external__arrow"
+                }).html(externalArrowSVG);
+                $externalLinkWrap.append($externalLink.append($externalArrow));
+                $("#bdt-floating-help-center").append($outerWrap.append(function () {
+                    if (helpCenterConfig.showContactUsLink) {
+                        return [$searchOuter, $helpList, $externalLinkWrap];
+                    }
+                    return [$searchOuter, $helpList];
+                }));
+                setPopupContent(data);
+            }
+
+            /**
+             * Search input listener and sends input query to
+             * findObject() function
+             */
+            function searchInputHandler() {
+                var $crossIcon = $("#bdt-floating-help-center .searchbox__cross-icon");
+                var query = $(this).val();
+                if (query && query !== "") {
+                    $crossIcon.css({
+                        display: "block"
+                    });
+                    var resultsArr = findObject(jsonData, "title", query, true);
+                    setPopupContent(resultsArr, "search");
+                } else {
+                    $crossIcon.css({
+                        display: "none"
+                    });
+                    resetPopupContent();
+                }
+            }
+
+            /**
+             * Enables or Disables Search Input
+             */
+            function searchInputReadonlyToggle() {
+                var $searchInput = $("#bdt-floating-help-center .searchbox__input");
+                $searchInput.attr('readonly', nodesStack.length > 1);
+            }
+
+            /**
+             * Displays the list of questions/title
+             * @param {Array} data - Data array
+             */
+            function renderPopupContentList(data) {
+                $.each(data, function (index, listObj) {
+                    var $listWrap = $("<li>", {
+                        class: "help-list__item"
+                    });
+                    $listWrap.click(function () {
+                        listItemClickHandler(this);
+                    });
+                    var $listArrow = $("<span>", {
+                        class: "help-list__item-arrow"
+                    }).html(listArrowSVG);
+                    var $listText = $("<span>", {
+                        class: "help-list__item-txt"
+                    }).html(listObj["title"]);
+                    $("#bdt-floating-help-center #listItemsContainer").append($listWrap.append($listText, $listArrow));
+                });
+            }
+
+            /**
+             * Hides or shows the back button on search input
+             */
+            function toggleBackButton() {
+                $("#bdt-floating-help-center .searchbox__search-icon").unbind();
+                nodesStack.length > 1 ?
+                    $(".searchbox__search-icon").html(backSVG).click(backBtnHandler) :
+                    $("#bdt-floating-help-center .searchbox__search-icon").html(searchSVG);
+            }
+
+            /**
+             * Resets the previous html content before 
+             * populating with new content
+             */
+            function resetPreviousState() {
+                $("#bdt-floating-help-center #htmlContent, #bdt-floating-help-center #noResultTxt").remove();
+                $("#bdt-floating-help-center #listItemsContainer").html("");
+            }
+
+            /**
+             * Performs set of operations on back button click
+             */
+            function backBtnHandler() {
+                nodesStack.pop();
+                titleStack.pop();
+                var lastNode = nodesStack.pop();
+                var lastTitle = titleStack.pop();
+                setInputTitle(lastTitle);
+                setPopupContent(lastNode);
+                searchInputReadonlyToggle();
+            }
+
+            /**
+             * Checks the data type and calls the rendering functions accordingly
+             * @param {Object|Array|String} data - Data to be rendered
+             * @param {string} event - Event type(search)  
+             */
+            function setPopupContent(data, event) {
+                if (data.length === 0) {
+                    renderNoResults();
+                    return;
+                }
+                if (data.length > 1) {
+                    beforeSetPopupContent(data, event);
+                    renderPopupContentList(data);
+                    return;
+                }
+                if (event === "search") {
+                    beforeSetPopupContent(data, event);
+                    renderPopupContentList(data);
+                    return;
+                }
+                var destructuredObj = data.pop();
+                if (typeof destructuredObj === "string") {
+                    beforeSetPopupContent([destructuredObj], event);
+                    renderHTML("", destructuredObj);
+                    return;
+                }
+                if (destructuredObj.hasOwnProperty("nodes")) {
+                    beforeSetPopupContent(destructuredObj["nodes"], event);
+                    renderPopupContentList(destructuredObj["nodes"]);
+                    return;
+                }
+                beforeSetPopupContent([destructuredObj["html"]], event);
+                renderHTML(destructuredObj["title"], destructuredObj["html"]);
+            }
+
+            /**
+             * Performs set of operation before popup content is set
+             * @param {Object|Array|string} data - Data to be rendered 
+             * @param {string} event - Type of event
+             */
+            function beforeSetPopupContent(data, event) {
+                if (event === undefined || event !== "search") {
+                    nodesStack.push(data);
+                }
+                toggleBackButton();
+                resetPreviousState();
+            }
+
+            /**
+             * Links other objects title in anchor tags
+             * in attribute "data-title"
+             */
+            function anchorDataTitleHandler() {
+                $("#bdt-floating-help-center #htmlContent a").click(function () {
+                    var dataTitle = $(this).attr("data-title");
+                    if (dataTitle && dataTitle !== "") {
+                        var resultsArr = findObject(jsonData, "title", dataTitle);
+                        setInputTitle(dataTitle);
+                        setPopupContent(resultsArr);
+                        return false;
+                    }
+                });
+            }
+
+            /**
+             * Resets the popup content to initial state
+             */
+            function resetPopupContent() {
+                nodesStack = [];
+                titleStack = [];
+                setInputTitle("");
+                $("#bdt-floating-help-center .searchbox__cross-icon").css({
+                    display: "none"
+                });
+                setPopupContent(jsonData);
+                $("#bdt-floating-help-center #htmlContent, #bdt-floating-help-center #noResultTxt").remove();
+            }
+
+            /**
+             * Set's title in searchbar
+             * @param {string} title - Title
+             */
+            function setInputTitle(title) {
+                if (title && title !== "") {
+                    $("#bdt-floating-help-center .searchbox__input").val(title);
+                    titleStack.push(title);
+                } else {
+                    $("#bdt-floating-help-center .searchbox__input").val("");
+                }
+            }
+
+            /**
+             * Click handler for lists
+             * @param {HTMLElement} listElement - list element
+             */
+            function listItemClickHandler(listElement) {
+                var listTitle = $(listElement).find(".help-list__item-txt").text();
+                var matchedObj = findObject(jsonData, "title", listTitle);
+                setInputTitle(listTitle);
+                setPopupContent(matchedObj);
+                searchInputReadonlyToggle();
+            }
+
+            /**
+             * Displays HTML help article
+             * @param {string} title - Title of article
+             * @param {string} htmlContent - Content of article
+             */
+            function renderHTML(title, htmlContent) {
+                $(".searchbox__cross-icon").css({
+                    display: "none"
+                });
+                var $htmlContentElement = $("<div>", {
+                    id: "htmlContent",
+                    class: "html-content"
+                }).html(htmlContent);
+                var articleTitle = title || $("#bdt-floating-help-center .searchbox__input").val();
+                $htmlContentElement.prepend($("<h5>", {
+                    id: "contentTitle",
+                    class: "html-content__title"
+                }).html(articleTitle));
+                $htmlContentElement.find("a").not('.callout-block a').css({
+                    "color": helpCenterConfig.linkColor
+                });
+                $htmlContentElement.insertBefore("#bdt-floating-help-center #listItemsContainer");
+                anchorDataTitleHandler();
+            }
+
+            /**
+             * Shows no results message
+             */
+            function renderNoResults() {
+                resetPreviousState();
+                var $noResultsLabel = $("<p>", {
+                    id: "noResultTxt",
+                    class: "no-result"
+                }).html(helpCenterConfig.noResultsLabel);
+                if ($("#noResultTxt").length === 0) {
+                    $noResultsLabel.insertAfter("#bdt-floating-help-center .searchbox");
+                }
+            }
+
+            /**
+             * @param {Object} obj - Object where search has to be performed 
+             * @param {string} key - Attribute Key
+             * @param {string} value - Value 
+             * @param {boolean} performSearch - Search perform or finding value by key
+             * @returns {Object} obj - Result filtered object
+             */
+            function findObject(obj, key, value, performSearch) {
+                value = performSearch === true ? value.toUpperCase() : value;
+                var results = [];
+
+                function recursiveSearch(obj) {
+                    if (!obj || _typeof(obj) !== "object") {
+                        return;
+                    }
+                    if (performSearch) {
+                        if (obj[key] && obj[key].toUpperCase().indexOf(value) > -1) {
+                            results.push(obj);
+                        }
+                    } else {
+                        if (obj[key] === value) {
+                            results.push(obj);
+                        }
+                    }
+                    Object.keys(obj).forEach(function (k) {
+                        recursiveSearch(obj[k]);
+                    });
+                }
+                recursiveSearch(obj);
+                return results;
+            }
+
+
+            /**
+             * Helper function for old browsers
+             */
+            function _typeof(obj) {
+                "@babel/helpers - typeof";
+                if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+                    _typeof = function _typeof(obj) {
+                        return typeof obj;
+                    };
+                } else {
+                    _typeof = function _typeof(obj) {
+                        return obj &&
+                            typeof Symbol === "function" &&
+                            obj.constructor === Symbol &&
+                            obj !== Symbol.prototype ? "symbol" : typeof obj;
+                    };
+                }
+                return _typeof(obj);
+            }
+
+            /**
+             * floating help center window object
+             * and public functions
+             */
+            return window.floatingHelpCenter = {
+                init: function () {
+                    $.fn.floatingHelpCenter();
+                },
+                toggle: function () {
+                    togglePopup();
+                },
+                isOpen: function () {
+                    return $("#bdt-floating-help-centerPopup").hasClass("floating-help-center__popup--active");
+                }
+            };
+
+        })(jQuery);
+        // Search icon svg
+        var searchSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.2 16.34a7.5 7.5 0 1 1 1.38-1.45l4.2 4.2a1 1 0 1 1-1.42 1.41l-4.16-4.16zm-4.7.16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>';
+
+        // Cross icon svg
+        var crossSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M13.06 12.15l5.02-5.03a.75.75 0 1 0-1.06-1.06L12 11.1 6.62 5.7a.75.75 0 1 0-1.06 1.06l5.38 5.38-5.23 5.23a.75.75 0 1 0 1.06 1.06L12 13.2l4.88 4.87a.75.75 0 1 0 1.06-1.06l-4.88-4.87z"></path></svg>';
+
+        // back icon svg
+        var backSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.45 17.97L9.5 12.01a.25.25 0 0 1 0-.36l5.87-5.87a.75.75 0 0 0-1.06-1.06l-5.87 5.87c-.69.68-.69 1.8 0 2.48l5.96 5.96a.75.75 0 0 0 1.06-1.06z"></path></svg>';
+
+        // list arrow svg
+        var listArrowSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" d="M6.47 4.29l3.54 3.53c.1.1.1.26 0 .36L6.47 11.7a.75.75 0 1 0 1.06 1.06l3.54-3.53c.68-.69.68-1.8 0-2.48L7.53 3.23a.75.75 0 0 0-1.06 1.06z"></path></svg>';
+
+        var externalArrowSVG = '<svg fill="#3a3f3f" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M11.268 5.824L5.232 11.86a.75.75 0 1 1-1.06-1.06L10.22 4.75H5.75a.75.75 0 0 1 0-1.5h6.268a.75.75 0 0 1 .75.75v6.243a.75.75 0 0 1-1.5 0v-4.42z" fill="currentColor"></path></svg>';
+
+        floatingHelpCenter.init();
+
+    }
+
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-floating-knowledgebase.default', widgetFloatingKnowledgebase);
+    });
+
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End Content Switcher widget script
+ */

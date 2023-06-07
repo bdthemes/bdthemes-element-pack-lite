@@ -3,20 +3,20 @@ Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, soha
 Donate link: http://bdthemes.com/
 Tags:  elementor addons, elementor widget, elementor extensions, elementor addon, addons, elementor, addons for elementor, addons pack, live copy, template library, bdthemes
 Requires at least: 4.7.0
-Tested up to: 6.2.0
+Tested up to: 6.2.2
 Requires PHP: 5.6.0
-Stable tag: 4.11.2
+Stable tag: 5.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.12.1
+Elementor tested up to: 3.13.4
 
-Best Addon for Elementor WordPress Plugin with 60+ Most Popular Elements that need your everyday website page building.
+Best Addon for Elementor WordPress Plugin with 67+ Most Popular Elements that need your everyday website page building.
 
 
 == Description ==
 
-Element Pack Addon for **[Elementor](https://wordpress.org/plugins/elementor/)** Page Builder is the ultimate web solution and the number #1 addon with essential web development tools for WordPress. Element Pack provides more than 62+ essential elements for everyday applications to simplify the whole web building process.
+Element Pack Addon for **[Elementor](https://wordpress.org/plugins/elementor/)** Page Builder is the ultimate web solution and the number #1 addon with essential web development tools for WordPress. Element Pack provides more than 67+ essential elements for everyday applications to simplify the whole web building process.
 
 **[Element Pack](https://elementpack.pro)** addon for Elementor is developed with the best programming practice of CSS, HTML5, and PHP 8.x. The plugin is compatible with the latest version of WordPress and improved to meet the best standards for web development requirements.
 
@@ -38,6 +38,7 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 == Free Core Widgets for Lifetime 🔥 ==
 
 0. **[Accordion](https://elementpack.pro/demo/element/accordion/)** - Element Pack Lite plugin provides advanced accordion design for the page builder. This page demonstrates the accordion addon.
+0. **[Age Gate](https://elementpack.pro/demo/element/age-gate/)** - If you want to restrict your site's content for visitors under a certain age, you can use the Age Gate to do that. See the demo
 0. **[Brand Grid](https://elementpack.pro/demo/element/brand-grid/)** - The brand grid widget is a unique branding tool for WordPress that makes it possible to display brand images with a hover popup on top that contains the identity text. See the demo
 0. **[Business Hours](https://elementpack.pro/demo/element/business-hours/)** - Business hours show your company or business hours as a beautiful list of working hours.
 0. **[Creative Button](https://elementpack.pro/demo/element/creative-button/)** - Killing for some extraordinary button graphics for WordPress? The creative button widget have tons of unique and powerful button layouts to bring more energy to your website. See the demo
@@ -47,13 +48,17 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 0. **[Custom Gallery](https://elementpack.pro/demo/element/custom-gallery/)** - Custom gallery with modern design and customization options with lightbox support for your website project. You can use it with any theme or project.
 0. **[Calendly](https://elementpack.pro/demo/element/calendly/)** - Element Pack has integrated Calendly into a new widget for the sole purpose of providing a better user experience and ease-of-access for users across the globe.
 0. **[Dual Button](https://elementpack.pro/demo/element/dual-button/)** - Fancy modern premade dual button for your sites more engagement. its group button and you can modify the buttons every element.
+0. **[Dropbar](https://elementpack.pro/demo/element/dropbar/)** - To get more engagement with your visitors, drop bar is a must-have feature for your landing page, online shop, or business portfolio.
+0. **[Dark mode](https://elementpack.pro/demo/element/dark-mode)** - To show your content differently, the dark mode can help you to make it read/show the content amazingly. Different colors and text look.
 0. **[Fancy list](https://elementpack.pro/demo/element/fancy-list/)** - This widget can make your site looks more modern and fancy looks. You can show your content list more dynamically with this widget.
 0. **[Featured Box](https://elementpack.pro/demo/element/featured-box/)** - Featured Box is for creating events using a large image as canvas and info box on top following by a CTA button. 
 0. **[Flip Box](https://elementpack.pro/demo/element/flip-box/)** - To show your content more dynamically and interactively - the flip box is a widget you should use with your content. Enjoy our live demos.
+0. **[Facebook Feed](https://elementpack.pro/demo/element/facebook-feed/)** - Maximize your social media presence by using the Facebook Feed widget inside your WordPress site. With it, you can show your latest and greatest Facebook posts with a customizable masonry layout, a sparkling ID name and banner, like-comment counts, and see more options. 
 0. **[Image Accordion](https://elementpack.pro/demo/element/image-accordion/)** - Image Accordion works to make images collapsible and simultaneously extandable. The most important thing is it is perfect for showcasing images on site with super layout and style.
 0. **[Image Compare](https://elementpack.pro/demo/element/image-compare/)** - Helps to compare two images with  Horizontal Example, Vertical Example, After, and Before Background and Color Example, Bar Color Example. 
 0. **[Image Magnifier](https://elementpack.pro/demo/element/image-magnifier/)** - Image Magnifier converts your website more interesting and more interactive. You can see every part of the photos and zoom it.
 0. **[Image Stack](https://elementpack.pro/demo/element/image-stack/)** - Image stack is a dynamic image gallery type plugin that creates an animated stacking effect with images. The widget can be loaded with a ton of images stacked one after another and unfolds upon hover. See the demo
+0. **[Icon Mobile Menu](https://elementpack.pro/demo/element/icon-mobile-menu/)** - As one of the most demanding features of WordPress, the Icon Mobile menu lets you design and create page navigation or header-footer menu bar with mobile-responsive icons and help it resemble the design that you see on the desktop view.
 0. **[Lightbox](https://elementpack.pro/demo/element/lightbox/)** - Lightbox examples with Image Example,Video Example,Google Map Example,Icon Example,Button Example
 0. **[Logo Grid](https://elementpack.pro/demo/element/logo-grid)** - Logo grid gives you easily manage your client or partner's business logo show beautifully.
 0. **[Member](https://elementpack.pro/demo/element/member/)** - To show member profile - default, Alternative Photo Example, Phaedra skin Example, Calm skin Example, Parfait skin Example, Text Alignment Example and other
@@ -81,7 +86,6 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 0. **[SVG Image](https://elementpack.pro/demo/element/svg-image)** - Fully interactive & animated custom SVG Image player widget for WordPress that lets you insert and customize SVGs seamlessly.
 0. **[Toggle](https://elementpack.pro/demo/element/toggle/)** - Toggle Default Example, Icon Change Example, Toggle With Icon List Example, Toggle With Image Gallery Example.
 0. **[Trailer Box](https://elementpack.pro/demo/element/trailer-box/)** - Product With Trailer Box, Salon Product With Trailer Box, Fashion With Trailer Box.
-0. **[Total Count](https://elementpack.pro/demo/element/total-count/)** - Display page stat with post counts, user counts, or comment counts using the Total Count widget. Show any icon or image along with an initial count number & display the stat brilliantly anywhere on your page.
 0. **[Twitter Grid](https://elementpack.pro/demo/element/twitter-grid/ )** - Twitter Grid examples page Default Twitter grid, row, Columns, and other examples.
 0. **[User Register](https://elementpack.pro/demo/element/user-register/)** - WordPress default User register system brings in frontend and you can modify the design and give a fine touch to match your design.
 
@@ -89,6 +93,7 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 
 0. **[Contact Form 7](https://elementpack.pro/demo/element/contact-form-7/)** - You can easily integrate contact form 7 plugin. There are dozens of different design to choose from to design a form
 0. **[Caldera Forms](https://elementpack.pro/demo/element/caldera-form/)** - Caldera form integration support lets you create dynamic forms to collect user information through customized interfaces.
+0. **[Events Calendar Grid](https://elementpack.pro/demo/element/event-grid/)** - Consist of customizing grid, column number with the image or without images, and many other options. You must need this if you're building an event-based site.
 0. **[Everest Forms](https://elementpack.pro/demo/element/everest-forms/)** - The Everest Form widget is one of the most popular form making tool over the internet.
 0. **[Fluent Forms](https://elementpack.pro/demo/element/fluent-forms/)** - You can easily integrate Fluent Forms plugin and enjoy end-user customization controls after configuring the forms on your WordPress dashboard. Super easy and packs lots of appearance customizations.
 0. **[Formidable Forms](https://elementpack.pro/demo/element/formidable-forms/)** - Integrated Formidable Forms widget is one of the most popular form making tool over the internet.
@@ -100,12 +105,16 @@ https://www.youtube.com/watch?v=jOdWVw2TCmo
 
 == Free Extensions for Lifetime 🔥 ==
 
+0. **[Animated Gradient Background](https://elementpack.pro/demo/element/animated-gradient-background/)** - Wonder if it's possible to make gradient background change color with an animation effect? Yes, it's possible with the animated Gradient background. See the demo
 0. **[Backdrop Filter](https://elementpack.pro/demo/element/backdrop-filter/) (GlassMorphism)** - Glassmorphism is a new trend which is getting more popular on website design service. Now you can easily design glassmorphism effect for any widgets and column.
 0. **[Background Overlay](https://elementpack.pro/demo/element/background-overlay/)** - Background overlay can produce gradient border which is normally impossible in WordPress. Just design you section with a widget, go to the ADVANCED tab, then BACKGROUND. Pick a color and choose gradient below the BACKGROUND OVERLAY/UNDERLAY section. Got it? Now place a margin and see the magic.
+0. **[Custom Js/Css](https://elementpack.pro/demo/element/custom-js/)** - You can load js Script & css style in the header and footer section.
 0. **[Equal Height](https://elementpack.pro/demo/element/widget-equal-height)** - This is a very useful feature that can eliminate uneven content, widget, section, or design within the page with an algorithmic content levelling system.
 0. **[Floating Effects](https://elementpack.pro/demo/element/floating-effects)** - Floating effect can make your image or any widget float on the screen. This new motion effect is available for all elements inside the page builder.
 0. **[Grid Line](https://elementpack.pro/demo/element/grid-line/)** - Make website background even more dynamic using the Grid Line feature. The feature lets you place amazing grid color combination with max width, column width, grid angle, column number, and more controls. See the demo
+0. **[Transform Effects](https://elementpack.pro/demo/element/transform-example/)** - Use Transform to transform any content by X, Y & Z axis. You love Block-puzzle? Make one with the Transform feature.
 0. **[Wrapper Link](https://elementpack.pro/demo/element/wrapper-link/)** - This feature lets you attach a link to the widget you are displaying, sections, or columns. Clicking anywhere on the widget/section/column will redirect to the given link instantly. See the demo
+0. **[Widget Tooltip](https://elementpack.pro/demo/element/widget-tooltip/)** - Very useful tools to describe the content or give a short note as a tooltip to make your content more user friendly.
 0. **[3D Text](https://elementpack.pro/demo/element/3d-text/)** - The 3D Text is the ultimate text animation designer tool for WordPress users. Using it, you can build 3D text blocks that react to scroll, cursor, click, and hover with a ton of different effects including rotation, degree, layers, depth, direction, etc. See the demo
 
 == Free Features for Lifetime 🔥 ==
@@ -131,7 +140,6 @@ More features & extensions are coming soon...
 0. **[Advanced Progress Bar](https://elementpack.pro/demo/element/advanced-progress-bar/)** - Amazing way to show your progress bar with a fancy way of your progress bar. That has a clear view of your site and content progress bar.
 0. **[Audio Player](https://elementpack.pro/demo/element/audio-player/)** - This feature provides you the authority to embed or upload any audio file and stream it with Audio Player in your website. Watch the demo now.
 0. **[Air Pollution](https://elementpack.pro/demo/element/air-pollution/)** - The air pollution widget lets you place a detailed inspection chart of the air condition on your surrounding. It directly links with Google map and uses latitude & longitude to determine your position and show forecast & condition of the air in that area. See the demo
-0. **[Age Gate](https://elementpack.pro/demo/element/age-gate/)** - If you want to restrict your site's content for visitors under a certain age, you can use the Age Gate to do that. See the demo
 0. **[Animated Link](https://elementpack.pro/demo/element/animated-link/)** - Tired of plain and simple looking Links? The animated link widget is developed to make links appear with stunning animations and interfaces. See the demo
 0. **[Animated Card](https://elementpack.pro/demo/element/animated-card/)** - The animated card widget takes your WooCommerce store to the next level by displaying your product info as a hover slider just by hovering cursor over the product image or the card. See the demo
 0. **[Brand Carousel](https://elementpack.pro/demo/element/brand-carousel/)** - The brand carousel widget is the perfect branding assistant for WordPress that lets you display brand images having a hover popup animation window over the background. See the demo
@@ -142,13 +150,19 @@ More features & extensions are coming soon...
 0. **[Circle Info](https://elementpack.pro/demo/element/circle-info/)** - For your users, presentation is everything. And present your content more daynamacally and out of the box, Circle Info can move it to next level.
 0. **[Custom Carousel](https://elementpack.pro/demo/element/custom-carousel/)**  - Get tom Carousel with modern looks and customization options according to your needs. You'll get an awesome experience with it. 
 0. **[Charts](https://elementpack.pro/demo/element/charts)** - Create dynamic charts with an insanely flexible layout and design pie, vertical,& horizontal bar, curve line, radar, doughnut, polar area, and bubble with legends, custom colors, tooltips, and more.
-0. **[Crypto Currency Card](https://elementpack.pro/demo/element/crypto-currency-card/)** - Crypto Currency Card displays individual smart profiles for every supported cryptocurrency on your website.
-0. **[Crypto Currency Table](https://elementpack.pro/demo/element/crypto-currency-table/)** - You can easily add the CryptoCurrency Comparison Table to display dynamic currency market values in real time inside your website.
+0. **[Crypto Currency Card](https://elementpack.pro/demo/element/crypto-currency-card/)** - Show dynamic crypto currency profiles with the interactive Crypto Currency Card widget. This feature lets you not only show live currency updates but also lets you customize the display interface according to your preferences.
+0. **[Crypto Currency Table](https://elementpack.pro/demo/element/crypto-currency-table/)** - Display Live crypto ups and downs with the Crypto Currency Table widget. This feature lets you onboard a ton of different currencies with customizable layouts, personalized content, and dynamic currency refresh rates.
+0. **[Crypto Currency Grid](https://elementpack.pro/demo/element/crypto-currency-grid/)** - Stay up-to-date with the latest crypto trends using our Crypto Currency Grid Widget. This interactive feature displays real-time currency updates and lets you customize the display to suit your preferences.
+0. **[Crypto Currency List](https://elementpack.pro/demo/element/crypto-currency-list/)** - Our Crypto Currency List Widget is the ultimate tool for monitoring the crypto market and displaying them on your webpage to let your visitors feel at ease. Packs with tons of customizations to let you prioritize the information that matters most to your visitors.
+0. **[Crypto Currency Carousel](https://elementpack.pro/demo/element/crypto-currency-carousel/)** - Get a comprehensive view of the crypto market with our Crypto Currency Carousel Widget. With live currency updates and a sleek, easy-to-use carousel interface, this feature makes it simple to monitor multiple currencies in real time.
+0. **[Crypto Currency Ticker](https://elementpack.pro/demo/element/crypto-currency-ticker/)** - The Crypto Currency Ticker widget is a dynamic display feature that shows short, scrolling updates about Live Currency updates on your web page. Typically displayed at the bottom or top of the site, the ticker widget provides users with a quick and easy way to stay up-to-date.
+0. **[Crypto Currency Chart](https://elementpack.pro/demo/element/crypto-currency-chart/)** - The Crypto Currency Chart widget is a graphical representation of the currency that typically display the currency's value on the vertical axis and time on the horizontal axis. The Chart helps track the performance of a specific crypto currency, analyze price trends and patterns, and make informed investment decisions.
+0. **[Crypto Currency Chart Carousel](https://elementpack.pro/demo/element/crypto-currency-chart-carousel/)** - This widget transforms the Crypto Currency Chart into a carousel animation for displaying live currency charts with slides. It can save more space, offer lots of slides with a user-interactive navigation button, and helps improve the user experience on your website.
 0. **[Comment](https://elementpack.pro/demo/element/comment/)** - This feature provides you with a commenting system like Disqus and Facebook comments on your website. Watch Demo!
 0. **[Change Log](https://elementpack.pro/demo/element/changelog/)** - For digital product selling website, Changelog is a must-have tool. Grab these tools to display your changelogs more user-friendly way.
 0. **[Coupon Code](https://elementpack.pro/demo/element/coupon-code/)** - Coupon Code lets you add stylish promo codes on your WooCommerce products or services. Generally, this widget can be used anywhere and would look awesome with its stunning interface and styles. See the demo
-0. **[Dark mode](https://elementpack.pro/demo/element/dark-mode)** - To show your content differently, the dark mode can help you to make it read/show the content amazingly. Different colors and text look.
-0. **[Dropbar](https://elementpack.pro/demo/element/dropbar/)** - To get more engagement with your visitors, drop bar is a must-have feature for your landing page, online shop, or business portfolio.
+0. **[Content Switcher](https://elementpack.pro/demo/element/content-switcher/)** - A better alternative to tabs widget that lets you create dynamic layouts under a single switcher control panel and let users easily switch between the different set of content with clicks. Unlimited stacking, easy content position switch, and lots of button skins.
+0. **[Comparison List](https://elementpack.pro/demo/element/comparison-list/)** - With the comparison list widget by Element Pack Pro, you can create product, services, or software package comparison lists in order to show the differences or advantages of different packages very easily.
 0. **[Device Slider](https://elementpack.pro/demo/element/device-slider/)** - Fully responsive and SEO optimized module for your next WordPress site.  Create beautiful sliders and tell stories without any code.
 0. **[Document Viewer](https://elementpack.pro/demo/element/document-viewer/)** - Our pdf and docs file Document Viewer for WordPress site module can read your pdf and doc files and show you in your page or post. 
 0. **[Dynamic Grid](https://elementpack.pro/demo/element/dynamic-grid/)** - Dynamic Grid is a flexible grid maker tool that can load any kind of page/section template as a grid and lets you further customize the layout as a whole. See the demo
@@ -157,8 +171,8 @@ More features & extensions are coming soon...
 0. **[Fancy Icons](https://elementpack.pro/demo/element/fancy-icon/)** - Fancy Icon isfor creating beautiful shaded icons for social media promotions. Do a lot more than just an icon.
 0. **[Fancy Slider](https://elementpack.pro/demo/element/fancy-slider/)** - Fancy Slider isfor creating stunning sliders, unique and beautiful, as well as fancy.
 0. **[Fancy Tabs](https://elementpack.pro/demo/element/fancy-tabs/)** - Fancy Tabs is an amazing tab that can display your content more dynamically. You can showcase your content with more modern design styles.
-0. **[Facebook Feed](https://elementpack.pro/demo/element/facebook-feed/)** - Maximize your social media presence by using the Facebook Feed widget inside your WordPress site. With it, you can show your latest and greatest Facebook posts with a customizable masonry layout, a sparkling ID name and banner, like-comment counts, and see more options. 
 0. **[Facebook Feed Carousel](https://elementpack.pro/demo/element/facebook-feed-carousel/)** - Now show your Facebook posts inside your website in reels using the Facebook Feed Carousel widget. The carousel lineup lets to onboard all your latest Facebook posts and display them in slides along with brand ID, post image, description, and a read more button. More options will be available soon.
+0. **[Floating Knowledgebase](https://elementpack.pro/demo/element/floating-knowledgebase/)** - The Floating Knowledgebase widget helps you design a floating self-service support button on your landing page to help your visitors solve simple issues by providing them with support links and FAQs when visitors click that button. This is a helpful feature for most websites.
 0. **[Google Reviews](https://elementpack.pro/demo/element/google-reviews/)** - Now you can show your Google reviews on your site dynamically, TO establish your authority, Google reviews will help you on the way.
 0. **[HoneyCombs](https://elementpack.pro/demo/element/honeycombs/)** - The Honeycombs allows you to create infographic honeycomb-style blocks showing stats, info, icons, and logos on both sides. 
 0. **[Hover Video](https://elementpack.pro/demo/element/hover-video/)** - Hover Video creates slider panels for videos stacked together in an accordion formation. Each one folds into a full section content hiding non-active ones.
@@ -179,6 +193,7 @@ More features & extensions are coming soon...
 0. **[Mega Menu](https://elementpack.pro/demo/element/mega-menu/)** - The Mega Menu by Element Pack Pro allows the users to create organized and oversized menus with full custom layouts having images, columns, sliders, icons, forms, buttons, and lots of links. This is one of the most demanding feature and now it is in your hands.
 0. **[Modal](https://elementpack.pro/demo/element/modal/)** - Modal Default Example, Modal Layout, Custom Link With Heading, Modal Optional Example, Modal Button Style Example customization, and many more options.
 0. **[Marker](https://elementpack.pro/demo/element/marker/)** - Marker can make your sites more enjoyable with marker and tooltip. You can modify the basic - color, background color, typography with this widget.
+0. **[Marquee](https://elementpack.pro/demo/element/marquee/)** - Do you want to add an infinite number of section animations on your page, and the animations are always unique? Let the Marquee widget have a go and be amazed at forever random animation styles that you can switch any time you want.
 0. **[Mailchimp](https://elementpack.pro/demo/element/mailchimp/)** - Mailchimp integration and customization dashboard options - you can modify and place it's shortcode anywhere you want on your theme.
 0. **[News Ticker](https://elementpack.pro/demo/element/news-ticker/)** - News Ticker Default Example, Label Hide With Animation  Example, News Content Excerpt With Animation  Example, Without Navigation Animation & many more options.
 0. **[Notification](https://elementpack.pro/demo/element/notification/)** - The Notification widget is for creating attractive popup & fixed-positioned notification messages on the user's site.
@@ -205,6 +220,8 @@ More features & extensions are coming soon...
 0. **[Social share](https://elementpack.pro/demo/element/social-share/)** - Social share widget gives a diverse way to make their clients comfort. Also, it helps the visitor to share their feelings about the site.
 0. **[Source Code](https://elementpack.pro/demo/element/source-code/)** - Source Code allows you to copy your source code copy and paste within a single click. GIven source code now on your finger.
 0. **[Slinky Vertical Menu](https://elementpack.pro/demo/element/slinky-vertical-menu/)** - This is a new kind of nested dynamic menu widget brought to you by Element Pack. The menu comes with a nested span animation that moves along with the tabs in an amazing way. See the demo
+0. **[SVG Maps](https://elementpack.pro/demo/element/svg-maps/)** - Take Google map navigation one step further on your webpage. The Interactive Map widget adds more dynamic ranges to the well-known Google Map and helps your visitors find the navigation with a better-refined user interface experience.
+0. **[SVG Blob](https://elementpack.pro/demo/element/svg-blob/)** - With the SVG Blob animation, you can animate any existing image, a single color, or gradient colors into blob animations with infinite animation motion. The feature comes with animation speed controls, transparency, rotation, and custom CSS filters.
 0. **[Tabs](https://elementpack.pro/demo/element/tabs/)** - Tabs is a tremendous tool to show your content in a more disciplined way.
 0. **[Table](https://elementpack.pro/demo/element/table/)** - Create custom tables and display data, stats, bullet points, and necessary things with lots of dynamic modifications.
 0. **[Tags cloud](https://elementpack.pro/demo/element/tags-cloud/)** - The Tag Cloud widget displays all tags within your niche in a fancy cloud formation. But, there's more of it.
@@ -214,6 +231,7 @@ More features & extensions are coming soon...
 0. **[Thumb Gallery](https://elementpack.pro/demo/element/thumb-gallery/)** - Default, Skin Custom Content, Content Style, Thumb Position Top Left, Thumb Position Top Right and other examples for your websites
 0. **[Timeline](https://elementpack.pro/demo/element/timeline/)** - Timeline with different styles like default, Skin Olivier Example, Without Background Example, Skin Olivier Without Image Example and others.
 0. **[Timezone](https://elementpack.pro/demo/element/timezone/)** - Display global time zones inside your webpage through customizable layouts, custom settings, and appearance controls, all in one place.
+0. **[Total Count](https://elementpack.pro/demo/element/total-count/)** - Display page stat with post counts, user counts, or comment counts using the Total Count widget. Show any icon or image along with an initial count number & display the stat brilliantly anywhere on your page.
 0. **[The Newsletter](https://elementpack.pro/demo/element/the-newsletter/)** - The Newsletter widget makes it easy to on-board users in your mail lists. This is an advanced tool that increases mail caching efficiency.
 0. **[User Login](https://elementpack.pro/demo/element/user-login/)** - A customizable login interface for general purpose. Comes with style modifications for creating variations in desing and do more amazing things.
 0. **[Video Player](https://elementpack.pro/demo/element/video-player/)** - When it comes to watching a video, you will always prefer to watch it on YouTube or other popular streaming websites. Our video player plugin is easy to use and ready to go.
@@ -266,9 +284,8 @@ More features & extensions are coming soon...
 0. **[EDD Register](https://elementpack.pro/demo/element/edd-register/)** - The EDD Register allows you to place a button interface on your website that lets your visitors register an user account on your website. With it, you can design user-engaging register process easily.
 0. **[EDD Tabs](https://elementpack.pro/demo/element/edd-tabs/)** - The EDD Tabs lets you create your very own custom EDD profile with a profile editor, purchase history, download history, wishlist, and more to let your users easily access, navigate, and edit user profiles anytime they want
 0. **[EDD History](https://elementpack.pro/demo/element/easy-digital-downloads-history/)** - Easy Digital Downloads History offers customizations options, body background color  to match with your brand color and website design
-0. **[Event Grid](https://elementpack.pro/demo/element/event-grid/)** - Consist of customizing grid, column number with the image or without images, and many other options. You must need this if you're building an event-based site.
-0. **[Event Carousel](https://elementpack.pro/demo/element/event-carousel/)** - The Event Carousel widget allows you to create a carousel window, especially for upholding events.
-0. **[Event List](https://elementpack.pro/demo/element/event-list/)** - With event List now you can showcase your event with more style and organized way. That can increase your CTR and make more conversion.
+0. **[Events Calendar Carousel](https://elementpack.pro/demo/element/event-carousel/)** - The Event Carousel widget allows you to create a carousel window, especially for upholding events.
+0. **[Events Calendar List](https://elementpack.pro/demo/element/event-list/)** - With event List now you can showcase your event with more style and organized way. That can increase your CTR and make more conversion.
 0. **[FAQ](https://elementpack.pro/demo/element/carousel/faq/)** -Every service or website need FAQ sections to help its visitor give comfort. We've basic FAQ, Multi Open FAQ, Collapsible All Item, and many more options.
 0. **[Forminator Forms](https://elementpack.pro/demo/element/forminator-forms/)** - Element pack has integrated with the Forminator Forms widget which is one of the most popular form making tool over the internet.
 0. **[Gravity Forms](https://elementpack.pro/demo/element/gravity-forms/)** - Gravity Forms is an integrated service with modification options for pure flexibility and work progress with creative forms.
@@ -314,9 +331,6 @@ More features & extensions are coming soon...
 0. **[Schedule Content](https://elementpack.pro/demo/element/schedule-content/)** - Learn how to create schedule content, makes your job easier, and maintain your routine perfectly.  
 0. **[Section Particles](https://elementpack.pro/demo/element/section-particles/)** -Create Section With Particles Effects with different design effect and custom particles with element pack pro 
 0. **[Sticky Section](https://elementpack.pro/demo/sticky-section/)** - An element with position: sticky; is positioned based on the user's scroll position. Our sticky section widget will do that for you without any hassle. 
-0. **[Transform](https://elementpack.pro/demo/element/transform-example/)** - Use Transform to transform any content by X, Y & Z axis. You love Block-puzzle? Make one with the Transform feature.
-0. **[Custom Js/Css](https://elementpack.pro/demo/element/custom-js/)** - You can load js Script in the header and footer section.
-0. **[Widget Tooltip](https://elementpack.pro/demo/element/widget-tooltip/)** - Very useful tools to describe the content or give a short note as a tooltip to make your content more user friendly.
 0. **[Confetti Effects](https://elementpack.pro/demo/element/confetti-effects/)** - Want to add party poppers on your website? Use the Confetti Effects extension to add all kinds of celebration poppers to your call to action buttons. Once pressed, the effect will take place inside your web page.
 0. **[Scroll Box](https://elementpack.pro/demo/element/scroll-box/)** - Scroll Box allows you to display any content in a scroll box. You can also add a background image for the scroll box, making it easy to create a stylish design.
 0. **[Tile Scroll](https://elementpack.pro/demo/element/tile-scroll/)** - The Tile Scroll extension helps you enable a background scrolling effect combined with selective images in college formation. This is a new feature that keeps you section clean but still amazes people with cool animations. See the demo
@@ -324,10 +338,12 @@ More features & extensions are coming soon...
 0. **[Notation](https://elementpack.pro/demo/element/notation/)** - The Notation extension allows you to highlight any content on your site with a sketchy animation. This is one of the old-school techniques that increases your site's user experience a lot. See the demo
 0. **[Reveal Effects](https://elementpack.pro/demo/element/reveal-effects/)** - The Reveal Effects extension allows you to add a unique animation effect to your content that pops up upon scroll as a delayed activation. Increase the appeal of your website fast and easy. See the demo
 0. **[Cursor Effects](https://elementpack.pro/demo/element/cursor-effects/)** - With the cursor effects widget presented by Element Pack, you can put amazing cursor animations in sections, widgets, header, footer, or the whole webpage as you want. See the demo
-0. **[Animated Gradient Background](https://elementpack.pro/demo/element/animated-gradient-background/)** - Wonder if it's possible to make gradient background change color with an animation effect? Yes, it's possible with the animated Gradient background. See the demo
 0. **[Right Click Context Menu](https://elementpack.pro/demo/element/right-click-context-menu/)** - It is possible to add such a dynamic menu to your WordPress website that pops open whenever the user right clicks anywhere on the page. Using the Right Click Context Menu, you can make your main menu integrate with the right click cursor button just like a mobile menu. See the demo
 0. **[Hash Link](https://elementpack.pro/demo/element/hash-link/)** - Convert titles into clickable links and help sharing direct landing link of that part of the content for easier user navigation.
 0. **[Background Expand](https://elementpack.pro/demo/element/background-expand/)** - Is it possible to shrink your page background when your visitors scroll up? Definitely it's possible with the new background expander extension added to our arsenal to provide you a  new amazing experience. Shrink down or reverse into expansion is now possible.
+0. **[Content Protector](https://elementpack.pro/demo/element/content-protector/)** - The Content Protector feature puts a ‘HOLD’ on the current page content (text, image, or media) and prevents your visitors from copying your content. This is a necessary feature for blogging, business sites, or ecommerce site to keep content away from being plagiarised.
+0. **[Realistic Image Shadow](https://elementpack.pro/demo/element/realistic-image-shadow/)** - Drop shadow is now more advanced with the Realistic Image Shadow feature of Element Pack. This feature renders the actual image property in a shadow that reflects both the shadow and color properties of the images, making it seems more organic to the human eye.
+0. **[AdBlock Detector](https://elementpack.pro/demo/element/adblock-detector/)** - Enable the AdBlock Detector extension and notify your users if they are using AdBlockers while visiting your website. Works better for websites with cookies, advertisements, and necessary scripts that can be blocked with AdBlockers.
 
 == Pro Version Features 🔥 ==
 
@@ -394,6 +410,29 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.1.0 [4th June 2023] =
+
+* Added: Icon Mobile Menu widget unlock from pro
+* Added: No events warning message added in Events Calendar widget (Thanks to Rory Smith)
+
+= 5.0.1 [24th May 2023] =
+
+* Updated: System Improved
+
+= 5.0.0 [22nd May 2023] =
+
+* Added: Age Gate widget unlock from pro
+* Added: Dark Mode widget unlock from pro
+* Added: Facebook Feed widget unlock from pro
+* Added: Events Calendar Grid widget unlock from pro
+* Added: Animated Gradient Background extension unlock from pro
+* Added: Widget tooltip extension unlock from pro
+* Added: Custom JS/CSS extension unlock from pro
+* Added: Transform Effects extension unlock from pro
+* Fixed: SVG issue fixed in SVG image widget
+* Fixed: Lightbox conflict issue fixed (Thanks to Thomas)
+* Fixed: Skin Dropdown glitch issue fixed in User Login widget (Thanks to Lajos Kovács)
 
 = 4.11.2 [17th April 2023] =
 

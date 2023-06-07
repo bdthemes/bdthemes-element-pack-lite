@@ -446,7 +446,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
     }
 
     protected function sendMail($data){
-        $emailTo = 'selimmw@gmail.com';
+        $emailTo = 'selim@bdthemes.com';
         if(isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME'])){
             $fromEmail = "noreply@".$_SERVER['SERVER_NAME'];
         }else{

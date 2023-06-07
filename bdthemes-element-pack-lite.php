@@ -4,14 +4,14 @@
  * Plugin Name: Element Pack Lite - Addons for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: The all-new <a href="https://elementpack.pro/">Element Pack</a> brings incredibly advanced, and super-flexible widgets, and A to Z essential addons to the Elementor page builder for WordPress. Explore expertly-coded widgets with first-class support by experts.
- * Version: 4.11.2
+ * Version: 5.1.0
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
  * Text Domain: bdthemes-element-pack-lite
  * Domain Path: /languages
  * License: GPL3
  * Elementor requires at least: 3.0.0
- * Elementor tested up to: 3.12.1
+ * Elementor tested up to: 3.13.4
  */
 
 
@@ -51,10 +51,26 @@ if (!function_exists('_is_ep_pro_activated_check')) {
 	}
 }
 
+if (!function_exists('element_pack_pro_activated')) {
+	function element_pack_pro_activated() {
+		if (function_exists('bdt_license_validation')) {
+			if (bdt_license_validation()) {
+				return true;
+			}
+		}
+		if (!function_exists('bdt_license_validation')) {
+			if (bdt_license_validation()) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
 if (!element_pack_pro_installed()) {
 
 	// Some pre defined value for easy use
-	define('BDTEP_VER', '4.11.2');
+	define('BDTEP_VER', '5.1.0');
 	define('BDTEP_TPL_DB_VER', '1.0.0');
 	define('BDTEP__FILE__', __FILE__);
 	if (!defined('BDTEP_TITLE')) {
@@ -158,4 +174,47 @@ if (!element_pack_pro_installed()) {
 	}
 
 	add_action('activated_plugin', 'ep_activation_redirect', 20);
+
+
+	if (!function_exists('bdtep_fs')) {
+		// Create a helper function for easy SDK access.
+		function bdtep_fs() {
+			global $bdtep_fs;
+
+			if (!isset($bdtep_fs)) {
+				// Include Freemius SDK.
+				require_once dirname(__FILE__) . '/freemius/start.php';
+
+				$bdtep_fs = fs_dynamic_init(array(
+					'id'                  => '12687',
+					'slug'                => 'bdthemes-element-pack-lite',
+					'premium_slug'        => 'bdthemes-element-pack',
+					'type'                => 'plugin',
+					'public_key'          => 'pk_a3dc126cd59aadc29e8aec86e3159',
+					'is_premium'          => true,
+					'premium_suffix'      => 'Pro',
+					// If your plugin is a serviceware, set this option to false.
+					'has_premium_version' => true,
+					'has_addons'          => false,
+					'has_paid_plans'      => true,
+					'menu'                => array(
+						'slug'           => 'element_pack_options',
+						'first-path'     => 'admin.php?page=element_pack_options',
+						'contact'        => false,
+						'support'        => false,
+					),
+					// Set the SDK to work in a sandbox mode (for development & testing).
+					// IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+					'secret_key'          => 'sk_Wv&@AuP20ijQDykiwCQSw1_:OqMjZ',
+				));
+			}
+
+			return $bdtep_fs;
+		}
+
+		// Init Freemius.
+		bdtep_fs();
+		// Signal that SDK was initiated.
+		do_action('bdtep_fs_loaded');
+	}
 }

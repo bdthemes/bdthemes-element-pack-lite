@@ -57,16 +57,29 @@ class Fancy_List extends Module_Base {
             ]
         );
 
+        $this->add_control(
+            'layout_style',
+            [
+                'label'   => esc_html__('Layout Style', 'bdthemes-element-pack') . BDTEP_NC,
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'style-1',
+                'options' => [
+                    'style-1'  => '01',
+                    'style-2'  => '02',
+                ],
+            ]
+        );
+
         $repeater = new Repeater();
 
         $repeater->add_control(
             'text',
             [
-                'label' => __('Title', 'bdthemes-element-pack'),
+                'label' => esc_html__('Title', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'placeholder' => __('List Item', 'bdthemes-element-pack'),
-                'default' => __('List Item', 'bdthemes-element-pack'),
+                'placeholder' => esc_html__('List Item', 'bdthemes-element-pack'),
+                'default' => esc_html__('List Item', 'bdthemes-element-pack'),
                 'dynamic' => [
                     'active' => true,
                 ],
@@ -76,10 +89,10 @@ class Fancy_List extends Module_Base {
         $repeater->add_control(
             'text_details',
             [
-                'label' => __('Sub Title', 'bdthemes-element-pack'),
+                'label' => esc_html__('Sub Title', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'placeholder' => __('Sub Title', 'bdthemes-element-pack'),
+                'placeholder' => esc_html__('Sub Title', 'bdthemes-element-pack'),
                 'dynamic' => [
                     'active' => true,
                 ],
@@ -89,7 +102,7 @@ class Fancy_List extends Module_Base {
         $repeater->add_control(
             'list_icon',
             [
-                'label' => __('Icon', 'bdthemes-element-pack'),
+                'label' => esc_html__('Icon', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::ICONS,
                 'label_block' => false,
                 'skin' => 'inline',
@@ -100,7 +113,7 @@ class Fancy_List extends Module_Base {
         $repeater->add_control(
             'img',
             [
-                'label' => __('Image', 'bdthemes-element-pack'),
+                'label' => esc_html__('Image', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => [
                     'active' => true,
@@ -113,13 +126,13 @@ class Fancy_List extends Module_Base {
         $repeater->add_control(
             'link',
             [
-                'label' => __('Link', 'bdthemes-element-pack'),
+                'label' => esc_html__('Link', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::URL,
                 'dynamic' => [
                     'active' => true,
                 ],
                 'label_block' => true,
-                'placeholder' => __('https://your-link.com', 'bdthemes-element-pack'),
+                'placeholder' => esc_html__('https://your-link.com', 'bdthemes-element-pack'),
             ]
         );
 
@@ -131,13 +144,13 @@ class Fancy_List extends Module_Base {
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        'text' => __('List Item #1', 'bdthemes-element-pack'),
+                        'text' => esc_html__('List Item #1', 'bdthemes-element-pack'),
                     ],
                     [
-                        'text' => __('List Item #2', 'bdthemes-element-pack'),
+                        'text' => esc_html__('List Item #2', 'bdthemes-element-pack'),
                     ],
                     [
-                        'text' => __('List Item #3', 'bdthemes-element-pack'),
+                        'text' => esc_html__('List Item #3', 'bdthemes-element-pack'),
                     ],
                 ],
                 'title_field' => '{{{ elementor.helpers.renderIcon( this, list_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ text }}}',
@@ -164,13 +177,17 @@ class Fancy_List extends Module_Base {
                     '{{WRAPPER}} .bdt-fancy-list ul.bdt-fancy-list-group' => 'grid-template-columns: repeat({{SIZE}}, 1fr);',
                 ],
                 'separator' => 'before',
+                'condition' => [
+                    'layout_style' => 'style-1',
+                ],
+
             ]
         );
 
         $this->add_responsive_control(
             'list_item_space_between',
             [
-                'label' => __('Grid Gap', 'bdthemes-element-pack'),
+                'label' => esc_html__('Grid Gap', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -187,7 +204,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'show_number_icon',
             [
-                'label' => __('Show Number Count', 'bdthemes-element-pack'),
+                'label' => esc_html__('Show Number Count', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::SWITCHER,
             ]
         );
@@ -195,7 +212,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'title_tags',
             [
-                'label'   => __('Title HTML Tag', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Title HTML Tag', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'h4',
                 'options' => element_pack_title_tags(),
@@ -205,24 +222,24 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'icon_position',
             [
-                'label' => __('Icon Position', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => esc_html__('Icon Position', 'bdthemes-element-pack') . BDTEP_NC,
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => true,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
                         'icon' => 'eicon-h-align-right',
                     ],
                     'top' => [
-                        'title' => __('Top', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Top', 'bdthemes-element-pack'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'bottom' => [
-                        'title' => __('Bottom', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Bottom', 'bdthemes-element-pack'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -241,17 +258,17 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'content_position',
             [
-                'label' => __('Content Position', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => esc_html__('Content Position', 'bdthemes-element-pack') . BDTEP_NC,
                 'type' => Controls_Manager::CHOOSE,
                 'default' => 'left',
                 'toggle' => false,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -263,19 +280,19 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'list_item_align',
             [
-                'label' => __('Alignment', 'bdthemes-element-pack'),
+                'label' => esc_html__('Alignment', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Center', 'bdthemes-element-pack'),
                         'icon' => 'eicon-h-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -288,7 +305,7 @@ class Fancy_List extends Module_Base {
         $this->start_controls_section(
             'section_list_items',
             [
-                'label' => __('List Item', 'bdthemes-element-pack'),
+                'label' => esc_html__('List Item', 'bdthemes-element-pack'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -324,7 +341,7 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'list_item_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -336,7 +353,7 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'list_item_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => esc_html__('Padding', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -349,7 +366,7 @@ class Fancy_List extends Module_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'list_item_box_shadow',
-                'label' => __('Box Shadow', 'bdthemes-element-pack'),
+                'label' => esc_html__('Box Shadow', 'bdthemes-element-pack'),
                 'selector' => '{{WRAPPER}} .bdt-fancy-list .flex-wrap',
             ]
         );
@@ -357,7 +374,7 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'list_item_border',
             [
-                'label' => __('Height', 'bdthemes-element-pack'),
+                'label' => esc_html__('Height', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -406,7 +423,7 @@ class Fancy_List extends Module_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'list_item_box_shadow_hover',
-                'label' => __('Box Shadow', 'bdthemes-element-pack'),
+                'label' => esc_html__('Box Shadow', 'bdthemes-element-pack'),
                 'selector' => '{{WRAPPER}} .bdt-fancy-list .flex-wrap:hover',
             ]
         );
@@ -420,7 +437,7 @@ class Fancy_List extends Module_Base {
         $this->start_controls_section(
             'section_icon',
             [
-                'label' => __('Number Count', 'bdthemes-element-pack'),
+                'label' => esc_html__('Number Count', 'bdthemes-element-pack'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_number_icon' => 'yes',
@@ -433,14 +450,14 @@ class Fancy_List extends Module_Base {
         $this->start_controls_tab(
             'tab_number_icon_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => esc_html__('Normal', 'bdthemes-element-pack'),
             ]
         );
 
         $this->add_control(
             'number_icon_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-number-icon span' => 'color: {{VALUE}} ',
@@ -451,7 +468,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'icon_bg_color',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-number-icon' => 'background-color: {{VALUE}}',
@@ -471,7 +488,7 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'icon_number_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -517,17 +534,17 @@ class Fancy_List extends Module_Base {
         $this->start_controls_tab(
             'tab_number_icon_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => esc_html__('Hover', 'bdthemes-element-pack') . BDTEP_NC,
             ]
         );
 
         $this->add_control(
             'number_icon_color_hover',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-fancy-list-group a:hover .bdt-fancy-list-number-icon span' => 'color: {{VALUE}} ',
+                    '{{WRAPPER}} .bdt-fancy-list-group .bdt-fancy-list-wrap:hover .bdt-fancy-list-number-icon span' => 'color: {{VALUE}} ',
                 ],
             ]
         );
@@ -535,10 +552,10 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'number_icon_bg_color_hover',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-fancy-list-group a:hover .bdt-fancy-list-number-icon' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .bdt-fancy-list-group .bdt-fancy-list-wrap:hover .bdt-fancy-list-number-icon' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -546,10 +563,10 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'number_icon_border_color_hover',
             [
-                'label' => __('Border Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Border Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-fancy-list-group a:hover .bdt-fancy-list-number-icon' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .bdt-fancy-list-group .bdt-fancy-list-wrap:hover .bdt-fancy-list-number-icon' => 'border-color: {{VALUE}}',
                 ],
                 'condition' => [
                     'icon_number_border_border!' => ''
@@ -566,7 +583,7 @@ class Fancy_List extends Module_Base {
         $this->start_controls_section(
             'section_text_style',
             [
-                'label' => __('Title / Subtitle', 'bdthemes-element-pack'),
+                'label' => esc_html__('Title / Subtitle', 'bdthemes-element-pack'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -575,14 +592,14 @@ class Fancy_List extends Module_Base {
         $this->start_controls_tab(
             'tab_normal_mode_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => esc_html__('Normal', 'bdthemes-element-pack'),
             ]
         );
 
         $this->add_control(
             'title_heading',
             [
-                'label' => __('Title', 'bdthemes-element-pack'),
+                'label' => esc_html__('Title', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -590,7 +607,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'title_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-title ' => 'color: {{VALUE}} ',
@@ -609,7 +626,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'sub_title_heading',
             [
-                'label' => __('Sub Title', 'bdthemes-element-pack'),
+                'label' => esc_html__('Sub Title', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -618,7 +635,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'des_text_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-text' => 'color: {{VALUE}} ',
@@ -651,14 +668,14 @@ class Fancy_List extends Module_Base {
         $this->start_controls_tab(
             'tab_hover_mode_normal',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => esc_html__('Hover', 'bdthemes-element-pack'),
             ]
         );
 
         $this->add_control(
             'title_color_hover',
             [
-                'label' => __('Title Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Title Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-title' => 'color: {{VALUE}}',
@@ -669,7 +686,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'text_color_hover',
             [
-                'label' => __('Sub Title Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Sub Title Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-text' => 'color: {{VALUE}}',
@@ -687,7 +704,7 @@ class Fancy_List extends Module_Base {
         $this->start_controls_section(
             'section_icon_style',
             [
-                'label' => __('Icon', 'bdthemes-element-pack'),
+                'label' => esc_html__('Icon', 'bdthemes-element-pack'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -696,14 +713,14 @@ class Fancy_List extends Module_Base {
         $this->start_controls_tab(
             'tab_normal_mode_normal1',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => esc_html__('Normal', 'bdthemes-element-pack'),
             ]
         );
 
         $this->add_control(
             'icon_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#242424',
                 'selectors' => [
@@ -716,7 +733,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'right_icon_bg_color',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -737,7 +754,7 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'icon_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -783,14 +800,14 @@ class Fancy_List extends Module_Base {
         $this->start_controls_tab(
             'tab_hover_mode_normal1',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => esc_html__('Hover', 'bdthemes-element-pack'),
             ]
         );
 
         $this->add_control(
             'icon_color_hover',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-icon' => 'color: {{VALUE}} !important;',
@@ -803,7 +820,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'icon_bg_color_hover',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-icon' => 'background-color: {{VALUE}} ;',
@@ -814,7 +831,7 @@ class Fancy_List extends Module_Base {
         $this->add_control(
             'icon_border_color_hover',
             [
-                'label' => __('Border Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Border Color', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::COLOR,
                 'condition' => [
                     'icon_border_border!' => '',
@@ -834,7 +851,7 @@ class Fancy_List extends Module_Base {
         $this->start_controls_section(
             'section_image_style',
             [
-                'label' => __('Image', 'bdthemes-element-pack'),
+                'label' => esc_html__('Image', 'bdthemes-element-pack'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -851,7 +868,7 @@ class Fancy_List extends Module_Base {
         $this->add_responsive_control(
             'border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -872,6 +889,24 @@ class Fancy_List extends Module_Base {
             ]
         );
 
+        //size
+        $this->add_responsive_control(
+            'image_size',
+            [
+                'label' => esc_html__('Size', 'bdthemes-element-pack') . BDTEP_NC,
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-fancy-list-img img' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -880,7 +915,7 @@ class Fancy_List extends Module_Base {
         $this->add_render_attribute('icon_list', 'class', 'bdt-fancy-list-icon');
         $this->add_render_attribute('list_item', 'class', 'elementor-icon-list-item');
 ?>
-        <div class="bdt-fancy-list">
+        <div class="bdt-fancy-list bdt-fancy-list-<?php echo esc_attr($settings['layout_style']); ?>">
             <ul class="bdt-list bdt-fancy-list-group" <?php echo $this->get_render_attribute_string('icon_list'); ?>>
                 <?php
                 $i = 1;
@@ -940,7 +975,7 @@ class Fancy_List extends Module_Base {
                                 <<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?> <?php echo $this->get_render_attribute_string('list_title_tags'); ?>>
                                     <?php echo wp_kses_post($item['text']); ?>
                                 </<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?>>
-                                <p class="bdt-fancy-list-text"> <?php echo $item['text_details']; ?></p>
+                                <p class="bdt-fancy-list-text"> <?php echo wp_kses_post($item['text_details']); ?></p>
                             </div>
                             <?php if (!empty($item['list_icon']['value'])) : ?>
                                 <div class="bdt-fancy-list-icon">

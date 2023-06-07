@@ -131,16 +131,6 @@ class Static_Carousel extends Module_Base {
         );
 
         $repeater->add_control(
-			'readmore_text',
-			[
-				'label'       => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack' ),
-			]
-		);
-
-        $repeater->add_control(
 			'readmore_link',
 			[
 				'label'       => esc_html__( 'Link', 'bdthemes-element-pack' ),
@@ -382,15 +372,15 @@ class Static_Carousel extends Module_Base {
 			]
 		);
 
-		// $this->add_control(
-		// 	'readmore_text',
-		// 	[
-		// 		'label'       => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
-		// 		'type'        => Controls_Manager::TEXT,
-		// 		'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
-		// 		'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack' ),
-		// 	]
-		// );
+		$this->add_control(
+			'readmore_text',
+			[
+				'label'       => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack' ),
+			]
+		);
 
 		$this->add_control(
 			'readmore_icon',
@@ -1116,7 +1106,7 @@ class Static_Carousel extends Module_Base {
         <?php if (( ! empty( $item['readmore_link']['url'] )) && ( $settings['show_readmore'] )): ?>
             <div class="bdt-ep-static-carousel-readmore-wrap">
                 <a <?php echo $this->get_render_attribute_string( 'readmore-link' ); ?>>
-                    <?php echo esc_html($item['readmore_text']); ?>
+                    <?php echo esc_html($settings['readmore_text']); ?>
                     <?php if ($settings['readmore_icon']['value']) : ?>
                         <span class="bdt-button-icon-align-<?php echo esc_attr($settings['icon_align']); ?>">
                             <?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>

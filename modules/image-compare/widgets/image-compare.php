@@ -5,8 +5,6 @@ use ElementPack\Base\Module_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Border;
-use Elementor\Group_Control_Box_Shadow;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -186,78 +184,6 @@ class Image_Compare extends Module_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'before_after_vertical_align',
-			[
-				'label'   => __( 'Vertical Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'    => Controls_Manager::CHOOSE,
-				'toggle'  => false,
-				'options' => [
-					'top' => [
-						'title' => __( 'Top', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-v-align-top',
-					],
-					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-v-align-middle',
-					],
-					'bottom' => [
-						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-v-align-bottom',
-					],
-				],
-				'default' => 'center',
-				'selectors_dictionary' => [
-					'top' => 'top: 0;',
-					'center' => 'top: 50%; transform: translateY(-50%);',
-					'bottom' => 'bottom: 0;',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-image-compare .icv__icv--horizontal .icv__label' => '{{VALUE}};',
-				],
-				'condition'   => [
-					'no_overlay' => 'yes',
-					'orientation' => 'horizontal'
-				]
-			]
-		);
-
-		$this->add_responsive_control(
-			'before_after_horizontal_align',
-			[
-				'label'   => __( 'Horizontal Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'    => Controls_Manager::CHOOSE,
-				'toggle'  => false,
-				'options' => [
-					'left' => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-h-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-h-align-center',
-					],
-					'right' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-h-align-right',
-					],
-				],
-				'default' => 'center',
-				'selectors_dictionary' => [
-					'left' => 'left: 0; right: auto;',
-					'center' => '    left: 50%; transform: translateX(-50%);',
-					'right' => 'right: 0; left: auto;',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-image-compare .icv__label.vertical' => '{{VALUE}};',
-				],
-				'condition'   => [
-					'no_overlay' => 'yes',
-					'orientation' => 'vertical'
-				]
-			]
-		);
-
 		$this->add_control(
 			'move_slider_on_hover',
 			[
@@ -354,7 +280,7 @@ class Image_Compare extends Module_Base {
 		$this->start_controls_section(
 			'section_style_style',
 			[
-				'label' => esc_html__( 'Before & After', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Style', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -381,17 +307,6 @@ class Image_Compare extends Module_Base {
 				'label' => esc_html__( 'Before', 'bdthemes-element-pack' ),
 			]
 		);
-
-		$this->add_control(
-			'before_color',
-			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-before' => 'color: {{VALUE}};',
-				],
-			]
-		);
 		
 		$this->add_control(
 			'before_background',
@@ -404,23 +319,26 @@ class Image_Compare extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'before_color',
+			[
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-before' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+
 		$this->end_controls_tab();
+
+
 
 		$this->start_controls_tab(
 			'tab_image_compare_after_style',
 			[
 				'label' => esc_html__( 'After', 'bdthemes-element-pack' ),
-			]
-		);
-
-		$this->add_control(
-			'after_color',
-			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-after' => 'color: {{VALUE}};',
-				],
 			]
 		);
 
@@ -435,82 +353,23 @@ class Image_Compare extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'after_color',
+			[
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-after' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->end_controls_tab();
 
-		$this->end_controls_tabs();
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'        => 'before_after_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
-				'placeholder' => '1px',
-				'default'     => '1px',
-				'selector'    => '{{WRAPPER}} .bdt-image-compare .icv__label',
-				'separator'   => 'before',
-			]
-		);
-
-		$this->add_responsive_control(
-			'after_before_radius',
-			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-image-compare .icv__label' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'after_before_padding',
-			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-image-compare .icv__label' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'after_before_margin',
-			[
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-image-compare .icv__label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'      => 'after_before_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
-				'selector'  => '{{WRAPPER}} .bdt-image-compare .icv__label',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'after_before_box_shadow',
-				'selector' => '{{WRAPPER}} .bdt-image-compare .icv__label',
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_image_compare_bar_style',
+		$this->start_controls_tab(
+			'tab_image_compare_bar_style',
 			[
 				'label' => esc_html__( 'Bar', 'bdthemes-element-pack' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -523,20 +382,42 @@ class Image_Compare extends Module_Base {
 			]
 		);
 
-		$this->add_control(
-			'after_before_shadow_color',
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+
+		$this->add_responsive_control(
+			'after_before_padding',
 			[
-				'label'     => esc_html__( 'Shadow Color', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-image-compare .icv__circle' => 'box-shadow: {{VALUE}} 0px 0px 15px !important;',
-					'{{WRAPPER}} .bdt-image-compare .icv__arrow-wrapper svg' => '-webkit-filter: drop-shadow( 0px 3px 5px {{VALUE}}) !important;
-						filter: drop-shadow( 0px -3px 5px {{VALUE}}) !important;',
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-image-compare .icv__label' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition'   => [
-					'add_circle' => 'yes',
-					'add_circle_shadow' => 'yes'
-				]
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'after_before_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-image-compare .icv__label' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'      => 'after_before_typography',
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'selector'  => '{{WRAPPER}} .bdt-image-compare .icv__label',
 			]
 		);
 

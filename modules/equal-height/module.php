@@ -11,27 +11,23 @@ use ElementPack\Base\Element_Pack_Module_Base;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class Module extends Element_Pack_Module_Base
-{
+class Module extends Element_Pack_Module_Base {
 
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
 		$this->add_actions();
 	}
 
-	public function get_name()
-	{
+	public function get_name() {
 		return 'bdt-equal-height';
 	}
 
-	public function register_section($element)
-	{
+	public function register_section($element) {
 
 		$element->start_controls_section(
 			'section_equal_height_controls',
 			[
-				'label' => BDTEP_CP . __('Equal Height', 'bdthemes-element-pack'),
+				'label' => BDTEP_CP . esc_html__('Equal Height', 'bdthemes-element-pack'),
 				'tab' => Controls_Manager::TAB_ADVANCED,
 			]
 		);
@@ -39,8 +35,7 @@ class Module extends Element_Pack_Module_Base
 		$element->end_controls_section();
 	}
 
-	public function register_controls($section, $args)
-	{
+	public function register_controls($section, $args) {
 
 		$section->add_control(
 			'section_equal_height_on',
@@ -87,8 +82,7 @@ class Module extends Element_Pack_Module_Base
 	}
 
 
-	public function equal_height_before_render($section)
-	{
+	public function equal_height_before_render($section) {
 
 		$settings = $section->get_settings_for_display();
 
@@ -129,8 +123,7 @@ class Module extends Element_Pack_Module_Base
 		}
 	}
 
-	protected function add_actions()
-	{
+	protected function add_actions() {
 
 		add_action('elementor/element/section/section_advanced/after_section_end', [$this, 'register_section']);
 		add_action('elementor/element/section/section_equal_height_controls/before_section_end', [$this, 'register_controls'], 10, 2);

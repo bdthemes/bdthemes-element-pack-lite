@@ -70,3 +70,37 @@ jQuery('.bdt-ss-link').on('click', function () {
 /** 
  * end Social Share
  */
+
+/**
+ * Start Crypto Currency
+ */
+
+function returnCurrencySymbol(currency = null) {
+    if (currency === null) return "";
+    let currency_symbols = {
+        USD: "$", // US Dollar
+        EUR: "€", // Euro
+        CRC: "₡", // Costa Rican Colón
+        GBP: "£", // British Pound Sterling
+        ILS: "₪", // Israeli New Sheqel
+        INR: "₹", // Indian Rupee
+        JPY: "¥", // Japanese Yen
+        KRW: "₩", // South Korean Won
+        NGN: "₦", // Nigerian Naira
+        PHP: "₱", // Philippine Peso
+        PLN: "zł", // Polish Zloty
+        PYG: "₲", // Paraguayan Guarani
+        THB: "฿", // Thai Baht
+        UAH: "₴", // Ukrainian Hryvnia
+        VND: "₫", // Vietnamese Dong
+    };
+    if (currency_symbols[currency] !== undefined) {
+        return currency_symbols[currency];
+    } else {
+        return ""; // this is means there is not any
+    }
+}
+
+/**
+ * End Crypto Currency
+ */
