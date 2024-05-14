@@ -23,7 +23,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_backdrop_filter',
             [
-                'label'         => BDTEP_CP . esc_html__('Backdrop Filter', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'         => BDTEP_CP . esc_html__('Backdrop Filter', 'bdthemes-element-pack'),
                 'type'          => Controls_Manager::POPOVER_TOGGLE,
                 'return_value'  => 'yes',
                 'separator'    => 'before',
@@ -246,5 +246,8 @@ class Module extends Element_Pack_Module_Base {
     protected function add_actions() {
         add_action('elementor/element/column/section_style/before_section_end', [$this, 'register_controls'], 10, 2);
         add_action('elementor/element/common/_section_background/before_section_end', [$this, 'register_controls'], 10, 2);
+
+		add_action('elementor/element/container/section_background/before_section_end', [$this, 'register_controls'], 10, 2);
+
     }
 }

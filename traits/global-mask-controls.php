@@ -45,7 +45,8 @@
 		            'default'        => 'shape-1',
 		            'options'        => element_pack_mask_shapes(),
 		            'selectors'      => [
-		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg); mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg);',
+		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg); mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg);',
+		                '{{WRAPPER}} .bdt-image-mask:before' => 'background-image: url('.BDTEP_ASSETS_URL . 'images/mask/color-'.'{{VALUE}}.svg);',
 		            ],
 		            'condition'      => [
 		                'image_mask_popover' => 'yes',
@@ -62,7 +63,7 @@
 		            'type'       => Controls_Manager::MEDIA,
 		            'show_label' => false,
 		            'selectors'  => [
-		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-image: url({{URL}}); mask-image: url({{URL}});',
+		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-image: url({{URL}}); mask-image: url({{URL}});',
 		            ],
 		            'condition'  => [
 		                'image_mask_popover' => 'yes',
@@ -100,7 +101,7 @@
 		                'bottom-right'  => 'bottom right',
 		            ],
 		            'selectors'            => [
-		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-position: {{VALUE}}; mask-position: {{VALUE}};',
+		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-position: {{VALUE}}; mask-position: {{VALUE}};',
 		            ],
 		            'condition'            => [
 		                'image_mask_popover' => 'yes',
@@ -121,7 +122,7 @@
 		                'initial' => esc_html__('Custom', 'bdthemes-element-pack'),
 		            ],
 		            'selectors' => [
-		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-size: {{VALUE}}; mask-size: {{VALUE}};',
+		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-size: {{VALUE}}; mask-size: {{VALUE}};',
 		            ],
 		            'condition' => [
 		                'image_mask_popover' => 'yes',
@@ -160,7 +161,7 @@
 		            ],
 		            'required'   => true,
 		            'selectors'  => [
-		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-size: {{SIZE}}{{UNIT}}; mask-size: {{SIZE}}{{UNIT}};',
+		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-size: {{SIZE}}{{UNIT}}; mask-size: {{SIZE}}{{UNIT}};',
 		            ],
 		            'condition'  => [
 		                'image_mask_popover'    => 'yes',
@@ -198,7 +199,7 @@
 		                'no-repeat-round' => 'no-repeat round',
 		            ],
 		            'selectors'            => [
-		                '{{WRAPPER}} .bdt-image-mask' => '-webkit-mask-repeat: {{VALUE}}; mask-repeat: {{VALUE}};',
+		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-repeat: {{VALUE}}; mask-repeat: {{VALUE}};',
 		            ],
 		            'condition'            => [
 		                'image_mask_popover' => 'yes',

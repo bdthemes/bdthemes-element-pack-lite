@@ -11,7 +11,8 @@ jQuery(document).ready(function ($) {
                 action: 'element-pack-notices',
                 id: $id,
                 meta: $meta,
-                time: $time
+                time: $time,
+                _wpnonce: ElementPackNoticeConfig.nonce
             }
         });
     });

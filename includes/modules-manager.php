@@ -53,6 +53,10 @@ final class Manager {
 
     public function load_module_instance($module) {
 
+        if(isset($_GET['page']) && 'element_pack_options' ==  $_GET['page']){
+            return;
+        }
+
         $direction = is_rtl() ? '.rtl' : '';
         $suffix    = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 

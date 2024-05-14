@@ -27,7 +27,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_show',
 			[
-				'label'              => BDTEP_CP . esc_html__('Floating Effects', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'              => BDTEP_CP . esc_html__('Floating Effects', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SWITCHER,
 				'default'            => '',
 				'return_value'       => 'yes',
@@ -832,15 +832,15 @@ class Module extends Element_Pack_Module_Base {
 				'label'              => esc_html__('Easing', 'bdthemes-element-pack'),
 				'type'               => Controls_Manager::SELECT,
 				'options'            => [
-					'easeInOutQuad'   => esc_html__('Ease In Out Quad', 'bdtheme-element-pack'),
-					'easeInOutCubic'  => esc_html__('Ease In Out Cubic', 'bdtheme-element-pack'),
-					'easeInOutQuart'  => esc_html__('Ease In Out Quart', 'bdtheme-element-pack'),
-					'easeInOutQuint'  => esc_html__('Ease In Out Quint', 'bdtheme-element-pack'),
-					'easeInOutSine'   => esc_html__('Ease In Out Sine', 'bdtheme-element-pack'),
-					'easeInOutExpo'   => esc_html__('Ease In Out Expo', 'bdtheme-element-pack'),
-					'easeInOutCirc'   => esc_html__('Ease In Out Circ', 'bdtheme-element-pack'),
-					'easeInOutBack'   => esc_html__('Ease In Out Back', 'bdtheme-element-pack'),
-					'easeInOutBounce' => esc_html__('Ease In Out Bounce', 'bdtheme-element-pack'),
+					'easeInOutQuad'   => esc_html__('Ease In Out Quad', 'bdthemes-element-pack'),
+					'easeInOutCubic'  => esc_html__('Ease In Out Cubic', 'bdthemes-element-pack'),
+					'easeInOutQuart'  => esc_html__('Ease In Out Quart', 'bdthemes-element-pack'),
+					'easeInOutQuint'  => esc_html__('Ease In Out Quint', 'bdthemes-element-pack'),
+					'easeInOutSine'   => esc_html__('Ease In Out Sine', 'bdthemes-element-pack'),
+					'easeInOutExpo'   => esc_html__('Ease In Out Expo', 'bdthemes-element-pack'),
+					'easeInOutCirc'   => esc_html__('Ease In Out Circ', 'bdthemes-element-pack'),
+					'easeInOutBack'   => esc_html__('Ease In Out Back', 'bdthemes-element-pack'),
+					'easeInOutBounce' => esc_html__('Ease In Out Bounce', 'bdthemes-element-pack'),
 				],
 				'default'            => 'easeInOutQuad',
 				'condition'          => [

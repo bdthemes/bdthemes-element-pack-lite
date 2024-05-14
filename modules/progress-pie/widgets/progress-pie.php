@@ -436,7 +436,7 @@ class Progress_Pie extends Module_Base {
 
 		?>
 		<div id="<?php echo esc_attr($id); ?>_container" class="bdt-progress-pie-wrapper">
-			<div <?php echo ( $this->get_render_attribute_string( 'pp-settings' ) ); ?>>
+			<div <?php $this->print_render_attribute_string( 'pp-settings' ); ?>>
 		    	<div class="bdt-progress-pie-label">
 			       <?php if ($settings['before'] !== '') : ?>
 					    <div class="bdt-progress-pie-before"><?php echo esc_html($settings['before']); ?></div>
@@ -452,10 +452,9 @@ class Progress_Pie extends Module_Base {
 	        		<?php endif; ?>
 			    </div>
 			</div>
-				<?php if ($settings['title'] !== '') : ?>
-				    <h4 class="bdt-progress-pie-title<?php echo esc_attr($settings['hide_title_divider']); ?>"><?php echo esc_html($settings['title']); ?></h4>
-				<?php endif; ?>
-					
+			<?php if ($settings['title'] !== '') : ?>
+				<h4 class="bdt-progress-pie-title<?php echo esc_attr($settings['hide_title_divider']); ?>"><?php echo esc_html($settings['title']); ?></h4>
+			<?php endif; ?>
 		</div>
 
 		<?php

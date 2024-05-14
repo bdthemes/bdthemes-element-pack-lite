@@ -23,6 +23,7 @@ class Element_Pack_Loader {
      * @var Element_Pack_Loader
      */
     private static $_instance;
+    public $_modules_manager;
 
     public $elements_data = [
         'sections' => [],
@@ -287,7 +288,7 @@ class Element_Pack_Loader {
 
         $direction_suffix = is_rtl() ? '.rtl' : '';
 
-        wp_enqueue_style('bdt-uikit', BDTEP_ASSETS_URL . 'css/bdt-uikit' . $direction_suffix . '.css', [], '3.13.1');
+        wp_enqueue_style('bdt-uikit', BDTEP_ASSETS_URL . 'css/bdt-uikit' . $direction_suffix . '.css', [], '3.17.0');
         wp_enqueue_style('ep-helper', BDTEP_ASSETS_URL . 'css/ep-helper' . $direction_suffix . '.css', [], BDTEP_VER);
     }
 
@@ -300,7 +301,7 @@ class Element_Pack_Loader {
 
         $suffix           = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-        wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit' . $suffix . '.js', ['jquery'], '3.13.1', true);
+        wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit' . $suffix . '.js', ['jquery'], '3.17.0', true);
 
         if (!element_pack_is_asset_optimization_enabled()) {
             wp_enqueue_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper' . $suffix . '.js', ['jquery', 'elementor-frontend'], BDTEP_VER, true);
@@ -329,6 +330,11 @@ class Element_Pack_Loader {
             ],
             'mailchimp'     => [
                 'subscribing' => esc_html_x('Subscribing you please wait...', 'Mailchimp String', 'bdthemes-element-pack'),
+            ],
+            'search'        => [ 
+                'more_result'   => esc_html_x( 'More Results', 'Search Widget String', 'bdthemes-element-pack' ),
+                'search_result' => esc_html_x( 'SEARCH RESULT', 'Search Widget String', 'bdthemes-element-pack' ),
+                'not_found'     => esc_html_x( 'not found', 'Search Widget String', 'bdthemes-element-pack' ),
             ],
             'elements_data' => $this->elements_data,
         ];

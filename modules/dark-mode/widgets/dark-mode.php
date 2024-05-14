@@ -177,7 +177,7 @@ class Dark_Mode extends Module_Base {
             'ignore_element_notes',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__('Note: Image can invert some cases so you need use the class for that image element. If you will add classes they will be ignore. Some cases Background image not support in dark mode effect. So don\'t blame us for it. But it\'s possible to solve by Ignore Elements.', 'bdthemes-element-pack'),
+                'raw'             => esc_html__('Note: add Class ID of elements to exempt them from dark mode effect, i.e. images, special background, etc.', 'bdthemes-element-pack'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 
             ]
@@ -197,7 +197,7 @@ class Dark_Mode extends Module_Base {
             'save_cookies_notes',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__('Note: If you will activate this option, this will save user action on the browser. Example:- If the user pressed Dark/Light Mode, this mode will always activate on the user browsers. Cookie will not work on Elementor Editor.', 'bdthemes-element-pack'),
+                'raw'             => esc_html__('Note: saves the last user action on the browser, i.e. loads the last browser condition whether dark mode was on/off. Cookie is exempted on Elementor Editor.', 'bdthemes-element-pack'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 
             ]
@@ -218,7 +218,7 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_section(
             'section_style',
             [
-                'label' => esc_html__('Dark Mode', 'bdthemes-color-mode'),
+                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -296,7 +296,7 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_section(
             'toggle_button_style',
             [
-                'label' => esc_html__('Toggle Button', 'bdthemes-color-mode'),
+                'label' => esc_html__('Toggle Button', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );

@@ -100,9 +100,11 @@
                     });
 
                     bdtUIkit.util.on($this, 'hidden', function () {
-                        // debug last time - BDTU-011
-                        // console.log('ssss');
-                        // console.log(firedNotify);
+
+                        if(editMode){
+                            return;
+                        }
+
                         if (redirect_link == false && firedNotify <= 0) {
 
                             setTimeout( function(){

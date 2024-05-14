@@ -436,7 +436,10 @@ $keywordSearch $sortingQuery LIMIT $offset, $per_page", ARRAY_A);
         return $allPagesData;
     }
 
-    public function findDemo($id){
-        return $this->wpdb->get_row("SELECT * FROM {$this->table_post} WHERE id=$id", ARRAY_A);
+    public function findDemo($id) {
+        return $this->wpdb->get_row(
+            $this->wpdb->prepare("SELECT * FROM {$this->table_post} WHERE id=%d", $id),
+            ARRAY_A
+        );
     }
 }

@@ -14,7 +14,7 @@
             return;
         }
 
-        var $sliderContainer = $slider.find('.swiper-container'),
+        var $sliderContainer = $slider.find('.swiper-carousel'),
 			$settings 		 = $slider.data('settings');
 
 		// Access swiper class
@@ -39,6 +39,7 @@
 
 	jQuery(window).on('elementor/frontend/init', function() {
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-slider.default', widgetSlider );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-acf-slider.default', widgetSlider );
 	});
 
 }( jQuery, window.elementorFrontend ) );

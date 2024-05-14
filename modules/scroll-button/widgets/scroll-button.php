@@ -471,7 +471,7 @@ class Scroll_Button extends Module_Base {
 		$is_new    = empty( $settings['scroll_button_icon'] ) && Icons_Manager::is_migration_allowed();
 
 		?>
-		<span <?php echo $this->get_render_attribute_string( 'content-wrapper' ); ?>>
+		<span <?php $this->print_render_attribute_string( 'content-wrapper' ); ?>>
 			<?php if ( ! empty( $settings['button_icon']['value'] ) ) : ?>
 			<span class="bdt-scroll-button-align-icon-<?php echo esc_attr($settings['icon_align']); ?>">
 
@@ -483,7 +483,7 @@ class Scroll_Button extends Module_Base {
 
 			</span>
 			<?php endif; ?>
-			<span <?php echo $this->get_render_attribute_string( 'text' ); ?>><?php echo esc_html($settings['scroll_button_text']); ?></span>
+			<span <?php $this->print_render_attribute_string( 'text' ); ?>><?php echo esc_html($settings['scroll_button_text']); ?></span>
 		</span>
 		<?php
 	}
@@ -532,8 +532,8 @@ class Scroll_Button extends Module_Base {
 		}
 
 		?>
-		<div <?php echo $this->get_render_attribute_string( 'bdt-scroll-wrapper' ); ?>>
-			<button <?php echo $this->get_render_attribute_string( 'bdt-scroll-button' ); ?>>
+		<div <?php $this->print_render_attribute_string( 'bdt-scroll-wrapper' ); ?>>
+			<button <?php $this->print_render_attribute_string( 'bdt-scroll-button' ); ?>>
 				<?php $this->render_text($settings); ?>
 			</button>
 		</div>

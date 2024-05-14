@@ -34,14 +34,23 @@ class Notices {
 	 * Dismiss Notice.
 	 */
 	public function dismiss() {
-
+		$nonce = (isset($_POST['_wpnonce'])) ? sanitize_text_field($_POST['_wpnonce']) : '';
 		$id   = (isset($_POST['id'])) ? esc_attr($_POST['id']) : '';
 		$time = (isset($_POST['time'])) ? esc_attr($_POST['time']) : '';
 		$meta = (isset($_POST['meta'])) ? esc_attr($_POST['meta']) : '';
 
-		// Valid inputs?
-		if (!empty($id)) {
+		if ( ! wp_verify_nonce($nonce, 'element-pack') ) {
+			wp_send_json_error();
+		}
 
+		if ( ! current_user_can('manage_options') ) {
+			wp_send_json_error();
+		}
+
+		/**
+		 * Valid inputs?
+		 */
+		if (!empty($id)) {
 			if ('user' === $meta) {
 				update_user_meta(get_current_user_id(), $id, true);
 			} else {
@@ -155,12 +164,16 @@ class Notices {
 
 	public static function notice_layout($notice = []) {
 
+		if( isset($notice['html_message']) && ! empty($notice['html_message']) ) {
+			self::new_notice_layout($notice);
+			return;
+		}
+
 	?>
 		<div id="<?php echo esc_attr($notice['id']); ?>" class="<?php echo esc_attr($notice['classes']); ?>" <?php echo esc_attr($notice['data']); ?>>
 			<div class="bdt-notice-wrapper">
 				<div class="bdt-notice-icon-wrapper">
-					<!-- <i class="eicon-elementor" aria-hidden="true"></i> -->
-					<img height="25" width="25" src="<?php echo BDTEP_ASSETS_URL; ?>images/logo.svg">
+					<img height="25" width="25" src="<?php echo esc_url (BDTEP_ASSETS_URL ); ?>images/logo.svg">
 				</div>
 
 				<div class="bdt-notice-content">
@@ -179,6 +192,22 @@ class Notices {
 			</div>
 		</div>
 <?php
+	}
+
+	public static function new_notice_layout( $notice = [] ) {
+
+		?>
+		<div id="<?php echo esc_attr( $notice['id'] ); ?>" class="<?php echo esc_attr( $notice['classes'] ); ?>" <?php echo esc_attr( $notice['data'] ); ?>>
+
+				
+			<?php 
+				echo wp_kses_post( $notice['html_message'] );
+			?>
+			
+
+
+		</div>
+		<?php
 	}
 }
 

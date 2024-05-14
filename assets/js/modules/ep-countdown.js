@@ -111,7 +111,11 @@
                     success: function (data) {
                          if (data == 'ended') {
                              setTimeout(function () {
-                                 document.getElementById($settings.triggerId).click();
+                                if ($settings.triggerId){
+                                    document.getElementById($settings.triggerId).click();
+                                    
+                                }
+                                // document.getElementById($settings.triggerId).click();
                                 //  jQuery('#' + $settings.triggerId).trigger('click');
                              }, 1500);
                          }

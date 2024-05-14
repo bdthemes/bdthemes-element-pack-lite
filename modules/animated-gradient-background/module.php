@@ -179,7 +179,7 @@ class Module extends Element_Pack_Module_Base {
 
 
     public function enqueue_scripts() {
-        wp_enqueue_script('granim', BDTEP_ASSETS_URL . 'vendor/js/granim.min.js', 'v2.0.0', true);
+        wp_enqueue_script('granim', BDTEP_ASSETS_URL . 'vendor/js/granim.min.js', [], 'v2.0.0', true);
     }
     public function should_script_enqueue($section) {
         if ('yes' === $section->get_settings_for_display('element_pack_agbg_show')) {

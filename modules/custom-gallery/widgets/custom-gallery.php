@@ -50,9 +50,9 @@ class Custom_Gallery extends Module_Base {
 
 	public function get_script_depends() {
 		if ($this->ep_is_edit_mode()) {
-			return ['imagesloaded', 'tilt', 'ep-scripts'];
+			return ['tilt', 'ep-scripts'];
 		} else {
-			return ['imagesloaded', 'tilt', 'ep-custom-gallery'];
+			return ['tilt', 'ep-custom-gallery'];
 		}
 	}
 
@@ -298,9 +298,9 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'image_mask_popover',
 			[
-				'label'        => esc_html__('Image Mask', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'        => esc_html__('Image Mask', 'bdthemes-element-pack'),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
-				'render_type'  => 'ui',
+				'render_type'  => 'template',
 				'return_value' => 'yes',
 			]
 		);
@@ -660,7 +660,7 @@ class Custom_Gallery extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'item_box_shadow',
-				'label' => esc_html__('Box Shadow', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__('Box Shadow', 'bdthemes-element-pack'),
 				'selector' => '{{WRAPPER}} .bdt-custom-gallery .bdt-custom-gallery-inner',
 			]
 		);
@@ -683,7 +683,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_blur_effect',
 			[
-				'label' => esc_html__('Glassmorphism', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__('Glassmorphism', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 				'description' => sprintf(__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
 				'separator' => 'before',
@@ -770,6 +770,21 @@ class Custom_Gallery extends Module_Base {
 				],
 				'condition' => [
 					'_skin!' => '',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'content_padding',
+			[
+				'label'      => esc_html__('Content Padding', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-custom-gallery .bdt-overlay' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'_skin' => '',
 				],
 			]
 		);
@@ -1008,7 +1023,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'button_margin',
 			[
-				'label'      => esc_html__('Margin', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1098,7 +1113,7 @@ class Custom_Gallery extends Module_Base {
 			<?php
 			$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['gallery_image']['id'], 'thumbnail_size', $settings);
 			if (!$thumb_url) {
-				printf('<img src="%1$s" alt="%2$s">', $item['gallery_image']['url'], esc_html($item['image_title']));
+				printf('<img src="%1$s" alt="%2$s">', esc_url($item['gallery_image']['url']), esc_html($item['image_title']));
 			} else {
 				print(wp_get_attachment_image(
 					$item['gallery_image']['id'],
@@ -1122,9 +1137,9 @@ class Custom_Gallery extends Module_Base {
 
 		$tag = $this->get_settings_for_display('title_tag');
 	?>
-		<<?php echo Utils::get_valid_html_tag($tag); ?> class="bdt-gallery-item-title bdt-transition-slide-top-small">
+		<<?php echo esc_attr(Utils::get_valid_html_tag($tag)); ?> class="bdt-gallery-item-title bdt-transition-slide-top-small">
 			<?php echo wp_kses($title['image_title'], element_pack_allow_tags('text')); ?>
-		</<?php echo Utils::get_valid_html_tag($tag); ?>>
+		</<?php echo esc_attr(Utils::get_valid_html_tag($tag)); ?>>
 	<?php
 	}
 
@@ -1146,24 +1161,24 @@ class Custom_Gallery extends Module_Base {
 
 		if ($content['image_link_type']) {
 			if ('google-map' == $content['image_link_type'] and '' != $content['image_link_google_map']) {
-				$this->add_render_attribute($element_key, 'href', $content['image_link_google_map']['url']);
+				$this->add_link_attributes($element_key, $content['image_link_google_map']);
 				$this->add_render_attribute($element_key, 'data-type', 'iframe');
 			} elseif ('video' == $content['image_link_type'] and '' != $content['image_link_video']) {
-				$this->add_render_attribute($element_key, 'href', $content['image_link_video']['url']);
+				$this->add_link_attributes($element_key, $content['image_link_video']);
 				$this->add_render_attribute($element_key, 'data-type', 'video');
 			} elseif ('youtube' == $content['image_link_type'] and '' != $content['image_link_youtube']) {
-				$this->add_render_attribute($element_key, 'href', $content['image_link_youtube']['url']);
+				$this->add_link_attributes($element_key, $content['image_link_youtube']);
 				$this->add_render_attribute($element_key, 'data-type', false);
 			} elseif ('vimeo' == $content['image_link_type'] and '' != $content['image_link_vimeo']) {
-				$this->add_render_attribute($element_key, 'href', $content['image_link_vimeo']['url']);
+				$this->add_link_attributes($element_key, $content['image_link_vimeo']);
 				$this->add_render_attribute($element_key, 'data-type', false);
 			} else {
-				$this->add_render_attribute($element_key, 'href', $content['image_link_website']['url']);
+				$this->add_link_attributes($element_key, $content['image_link_website']);
 				$this->add_render_attribute($element_key, 'data-type', 'iframe');
 			}
 		} else {
 			if (!$image_url) {
-				$this->add_render_attribute($element_key, 'href', $content['gallery_image']['url']);
+				$this->add_link_attributes($element_key, $content['gallery_image']);
 			} else {
 				$this->add_render_attribute($element_key, 'href', $image_url[0]);
 			}
@@ -1184,7 +1199,7 @@ class Custom_Gallery extends Module_Base {
 		}
 
 	?>
-		<div <?php echo $this->get_render_attribute_string('overlay-settings'); ?>>
+		<div <?php $this->print_render_attribute_string('overlay-settings'); ?>>
 			<div class="bdt-custom-gallery-content">
 				<div class="bdt-custom-gallery-content-inner">
 
@@ -1203,7 +1218,7 @@ class Custom_Gallery extends Module_Base {
 
 					?>
 						<div class="bdt-flex-inline bdt-gallery-item-link-wrapper">
-							<a <?php echo $this->get_render_attribute_string($element_key); ?>>
+							<a <?php $this->print_render_attribute_string($element_key); ?>>
 								<?php if ('icon' == $settings['link_type']) : ?>
 									<i class="ep-icon-<?php echo esc_attr($icon); ?>" aria-hidden="true"></i>
 								<?php elseif ('text' == $settings['link_type']) : ?>
@@ -1268,7 +1283,7 @@ class Custom_Gallery extends Module_Base {
 		);
 
 	?>
-		<div <?php echo $this->get_render_attribute_string('custom-gallery'); ?>>
+		<div <?php $this->print_render_attribute_string('custom-gallery'); ?>>
 		<?php
 	}
 
@@ -1282,6 +1297,8 @@ class Custom_Gallery extends Module_Base {
 	public function render() {
 		$settings = $this->get_settings_for_display();
 
+		$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
+
 		$columns_mobile = isset($settings['columns_mobile']) ? $settings['columns_mobile'] : 1;
 		$columns_tablet = isset($settings['columns_tablet']) ? $settings['columns_tablet'] : 2;
 		$columns 		= isset($settings['columns']) ? $settings['columns'] : 3;
@@ -1292,7 +1309,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_render_attribute('custom-gallery-item', 'class', 'bdt-width-1-' . $columns_tablet . '@s');
 		$this->add_render_attribute('custom-gallery-item', 'class', 'bdt-width-1-' . $columns . '@m');
 
-		$this->add_render_attribute('custom-gallery-inner', 'class', 'bdt-custom-gallery-inner bdt-image-mask');
+		$this->add_render_attribute('custom-gallery-inner', 'class', 'bdt-custom-gallery-inner' . $image_mask);
 
 		if ('yes' === $settings['tilt_show']) {
 			$this->add_render_attribute('custom-gallery-inner', 'data-tilt', '');
@@ -1302,8 +1319,8 @@ class Custom_Gallery extends Module_Base {
 		foreach ($settings['gallery'] as $index => $item) :
 
 		?>
-			<div <?php echo $this->get_render_attribute_string('custom-gallery-item'); ?>>
-				<div <?php echo $this->get_render_attribute_string('custom-gallery-inner'); ?>>
+			<div <?php $this->print_render_attribute_string('custom-gallery-item'); ?>>
+				<div <?php $this->print_render_attribute_string('custom-gallery-inner'); ?>>
 
 					<?php $this->rendar_link($item, 'gallery-item-' . $index); ?>
 
@@ -1315,7 +1332,7 @@ class Custom_Gallery extends Module_Base {
 						}
 						?>
 
-						<a <?php echo $this->get_render_attribute_string('gallery-item-' . $index); ?>>
+						<a <?php $this->print_render_attribute_string('gallery-item-' . $index); ?>>
 						<?php endif; ?>
 
 						<?php

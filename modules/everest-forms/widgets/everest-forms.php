@@ -2055,7 +2055,7 @@ class Everest_Forms extends Module_Base {
 		
 		?>
 
-		<div <?php echo $this->get_render_attribute_string('everest_wrapper'); ?>>
+		<div <?php $this->print_render_attribute_string('everest_wrapper'); ?>>
 
 			<?php echo do_shortcode( $this->get_shortcode() ); ?>
 
@@ -2065,6 +2065,6 @@ class Everest_Forms extends Module_Base {
 	}
 
 	public function render_plain_content() {
-		echo $this->get_shortcode();
+		echo wp_kses_post($this->get_shortcode());
 	}
 }

@@ -14,7 +14,7 @@
             return;
         }
 
-		var $ProductCarouselContainer = $ProductCarousel.find('.swiper-container'),
+		var $ProductCarouselContainer = $ProductCarousel.find('.swiper-carousel'),
 			$settings 		 = $ProductCarousel.data('settings');
 
 		// Access swiper class

@@ -363,7 +363,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'menu_spacing',
 			[
-				'label' => esc_html__( 'Gap', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -375,6 +375,25 @@ class Navbar extends Module_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-navbar-nav' => 'margin-left: -{{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .bdt-navbar-nav > li' => 'margin-left: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'menu_bottom_spacing',
+			[
+				'label' => esc_html__( 'Row Gap', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 25,
+					],
+				],
+				'size_units' => [ 'px'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-navbar-nav' => 'margin-bottom: -{{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-navbar-nav > li' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -422,6 +441,20 @@ class Navbar extends Module_Base {
 				'condition' => ['menu_parent_arrow' => 'yes'],
 			]
 		);
+		//auto hiding menu shadow
+		$this->add_control(
+			'auto_hiding_menu_both_side_color',
+			[
+				'label'     => esc_html__( 'Auto Hiding Menu Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-auto-hide-menu .bdt-cd-secondary-nav::before' => 'background: linear-gradient(to right, {{VALUE}}, rgba(37,40,61,0));',
+					'{{WRAPPER}} .bdt-auto-hide-menu .bdt-cd-secondary-nav::after' => 'background: linear-gradient(to left, {{VALUE}}, rgba(37,40,61,0));',
+				],
+				'condition' => ['auto_hiding_menu' => 'yes'],
+			]
+		);
+
 
 		$this->end_controls_tab();
 
@@ -924,8 +957,8 @@ class Navbar extends Module_Base {
 		$this->add_render_attribute('navbar-wrap', 'class', 'bdt-navbar-wrapper');
 
 		?>
-		<div <?php echo $this->get_render_attribute_string( 'navbar-wrap' ); ?>>
-			<nav <?php echo $this->get_render_attribute_string( 'navbar-attr' ); ?>>
+		<div <?php $this->print_render_attribute_string( 'navbar-wrap' ); ?>>
+			<nav <?php $this->print_render_attribute_string( 'navbar-attr' ); ?>>
 				<?php wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $settings ) ); ?>
 			</nav>
 		</div>

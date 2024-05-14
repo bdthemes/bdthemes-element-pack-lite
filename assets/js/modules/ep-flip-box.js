@@ -18,7 +18,6 @@
         }
         if ('hover' === $settings.flipTrigger) {
             $($flipBox).on('mouseenter', function () {
-                console.log('hover');
                 $(this).addClass('bdt-active');
             });
             $($flipBox).on('mouseleave', function () {

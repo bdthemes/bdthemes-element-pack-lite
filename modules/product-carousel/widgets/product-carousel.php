@@ -339,6 +339,7 @@
 						'button' => __( 'Button', 'bdthemes-element-pack' ),
 						'title' => __( 'Title', 'bdthemes-element-pack' ),
 						'image' => __( 'Image', 'bdthemes-element-pack' ),
+						'item' => __( 'Item Wrapper', 'bdthemes-element-pack' ),
 					],
 				]
 			);
@@ -404,7 +405,7 @@
 				[
 					'label'        => esc_html__('Image Mask', 'bdthemes-element-pack'),
 					'type'         => Controls_Manager::POPOVER_TOGGLE,
-					'render_type'  => 'ui',
+					'render_type'  => 'template',
 					'return_value' => 'yes',
 					'condition' => [
 						'show_image' => 'yes'
@@ -764,7 +765,7 @@
 						]
 					],
 					'selectors'   => [
-						'{{WRAPPER}} .swiper-container' => 'padding: {{SIZE}}{{UNIT}}; margin: 0 -{{SIZE}}{{UNIT}};'
+						'{{WRAPPER}} .swiper-carousel' => 'padding: {{SIZE}}{{UNIT}}; margin: 0 -{{SIZE}}{{UNIT}};'
 					],
 				]
 			);
@@ -1535,7 +1536,7 @@
 			
 		}
 
-		public function render_image($item) {
+		public function render_image($item, $image_key) {
 			$settings = $this->get_settings_for_display();
 	
 			if ( ! $settings['show_image'] ) {
@@ -1547,25 +1548,21 @@
 				$thumb_url = $item['image']['url'];
 			}
 
-			$this->add_render_attribute(
-				[
-					'readmore-link' => [
-						'class' => [
-							'bdt-ep-product-carousel-image-link',
-						],
-						'href'   => isset($item['readmore_link']['url']) ? esc_url($item['readmore_link']['url']) : '#',
-						'target' => $item['readmore_link']['is_external'] ? '_blank' : '_self'
-					]
-				], '', '', true
-			);
+			$this->add_render_attribute( $image_key, 'class', 'bdt-ep-product-carousel-image-link bdt-position-z-index', true );
+			if (!empty($item['readmore_link'])) {
+				$this->add_link_attributes($image_key, $item['readmore_link']);
+			}
+
+			$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
+			$this->add_render_attribute('image-wrap', 'class', 'bdt-ep-product-carousel-image' . $image_mask);
 	
 			?>
-			<div class="bdt-ep-product-carousel-image bdt-image-mask">
+			<div <?php $this->print_render_attribute_string('image-wrap'); ?>>
 
 				<?php 
 				$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
 				if (!$thumb_url) {
-					printf('<img src="%1$s" alt="%2$s">', $item['image']['url'], esc_html($item['title']));
+					printf('<img src="%1$s" alt="%2$s">', esc_url($item['image']['url']), esc_html($item['title']));
 				} else {
 					print(wp_get_attachment_image(
 						$item['image']['id'],
@@ -1579,41 +1576,34 @@
 				?>
 
 				<?php if($settings['readmore_link_to'] == 'image') : ?>
-				<a <?php echo $this->get_render_attribute_string( 'readmore-link' ); ?>></a>
+				<a <?php $this->print_render_attribute_string( $image_key ); ?>></a>
 				<?php endif; ?>
 			</div>
 			<?php
 		}
 	
-		public function render_title($item) {
+		public function render_title($item, $title_key) {
 			$settings = $this->get_settings_for_display();
 	
 			if ( ! $settings['show_title'] ) {
 				return;
 			}
 
-			$this->add_render_attribute(
-				[
-					'readmore-link' => [
-						'class' => [
-							'bdt-ep-product-carousel-title-link',
-						],
-						'href'   => isset($item['readmore_link']['url']) ? esc_url($item['readmore_link']['url']) : '#',
-						'target' => $item['readmore_link']['is_external'] ? '_blank' : '_self'
-					]
-				], '', '', true
-			);
+			$this->add_render_attribute( $title_key, 'class', 'bdt-ep-product-carousel-title-link', true );
+			if (!empty($item['readmore_link'])) {
+				$this->add_link_attributes($title_key, $item['readmore_link']);
+			}
 	
 			$this->add_render_attribute('title-wrap', 'class', 'bdt-ep-product-carousel-title', true);
 	
 			?>
 			<?php if ( $item['title'] ) : ?>
-				<<?php echo Utils::get_valid_html_tag($settings['title_tag']); ?> <?php echo $this->get_render_attribute_string('title-wrap'); ?>>
+				<<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tag'])); ?> <?php $this->print_render_attribute_string('title-wrap'); ?>>
 					<?php echo wp_kses($item['title'], element_pack_allow_tags('title')); ?>
 					<?php if($settings['readmore_link_to'] == 'title') : ?>
-					<a <?php echo $this->get_render_attribute_string( 'readmore-link' ); ?>></a>
+					<a <?php $this->print_render_attribute_string( $title_key ); ?>></a>
 					<?php endif; ?>
-				</<?php echo Utils::get_valid_html_tag($settings['title_tag']); ?>>
+				</<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tag'])); ?>>
 			<?php endif; ?>
 			<?php
 		}
@@ -1629,7 +1619,7 @@
 	
 			?>
 			<?php if ( $item['price'] ) : ?>
-				<div <?php echo $this->get_render_attribute_string('price-wrap'); ?>>
+				<div <?php $this->print_render_attribute_string('price-wrap'); ?>>
 					<?php echo wp_kses($item['price'], element_pack_allow_tags('price')); ?>
 				</div>
 			<?php endif; ?>
@@ -1647,7 +1637,7 @@
 	
 			?>
 			<?php if ( $item['time'] ) : ?>
-				<div <?php echo $this->get_render_attribute_string('time-wrap'); ?>>
+				<div <?php $this->print_render_attribute_string('time-wrap'); ?>>
 					<i class="ep-icon-clock-o" aria-hidden="true"></i>
 					<?php echo wp_kses($item['time'], element_pack_allow_tags('time')); ?>
 				</div>
@@ -1671,30 +1661,27 @@
 			<?php
 		}
 	
-		public function render_readmore($item) {
+		public function render_readmore($item, $readmore_key) {
 			$settings = $this->get_settings_for_display();
-	
-			// if ( ! $settings['show_readmore'] ) {
-			// 	return;
-			// }
-	
+
 			$this->add_render_attribute(
 				[
-					'readmore-link' => [
+					$readmore_key => [
 						'class' => [
 							'bdt-ep-product-carousel-readmore',
 							$settings['readmore_hover_animation'] ? 'elementor-animation-' . $settings['readmore_hover_animation'] : '',
 						],
-						'href'   => isset($item['readmore_link']['url']) ? esc_url($item['readmore_link']['url']) : '#',
-						'target' => $item['readmore_link']['is_external'] ? '_blank' : '_self'
 					]
 				], '', '', true
 			);
+			if (!empty($item['readmore_link'])) {
+				$this->add_link_attributes($readmore_key, $item['readmore_link']);
+			}
 	
 			?>
 			<?php if (( ! empty( $item['readmore_link']['url'] )) && ( $settings['readmore_link_to'] == 'button' )): ?>
 				<div class="bdt-ep-product-carousel-readmore-wrap">
-					<a <?php echo $this->get_render_attribute_string( 'readmore-link' ); ?>>
+					<a <?php $this->print_render_attribute_string( $readmore_key ); ?>>
 						<?php echo esc_html($settings['readmore_text']); ?>
 						<?php if ($settings['readmore_icon']['value']) : ?>
 							<span class="bdt-button-icon-align-<?php echo esc_attr($settings['icon_align']); ?>">
@@ -1735,7 +1722,7 @@
 						<span><?php echo esc_html( $item['rating_number']['size'] ); ?></span>
 						<i class="ep-icon-star-full" aria-hidden="true"></i>
 					<?php else : ?>
-						<span class="epsc-rating epsc-rating-<?php echo $score; ?>">
+						<span class="epsc-rating epsc-rating-<?php echo esc_attr($score); ?>">
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
@@ -1772,22 +1759,36 @@
 
 			?>
 
-			<?php foreach ( $settings['product_items'] as $index => $item ) : ?>
-				<div <?php echo $this->get_render_attribute_string('item-wrap'); ?>>
-					<?php $this->render_image($item); ?>
+			<?php foreach ( $settings['product_items'] as $index => $item ) : 
+				
+				$item_key = 'item_' . $index;
+				$this->add_render_attribute( $item_key, 'class', 'bdt-ep-product-carousel-item-link bdt-position-z-index', true );
+
+				if (!empty($item['readmore_link'])) {
+					$this->add_link_attributes($item_key, $item['readmore_link']);
+				}
+				
+				?>
+				<div <?php $this->print_render_attribute_string('item-wrap'); ?>>
+					<?php $this->render_image($item, 'image_'.$index); ?>
 					<div class="bdt-ep-product-carousel-content">
 						<div class="bdt-ep-product-carousel-title-price bdt-flex bdt-flex-middle bdt-flex-between">
-							<?php $this->render_title($item); ?>
+							<?php $this->render_title($item, 'title_'.$index); ?>
 							<?php $this->render_price($item); ?>
 						</div>
 						<?php $this->render_text($item); ?>
-						<?php $this->render_readmore($item); ?>
+						<?php $this->render_readmore($item, 'link_'.$index); ?>
 						<div class="bdt-ep-product-carousel-rating-time bdt-flex bdt-flex-middle bdt-flex-between">
 							<?php $this->render_review_rating($item); ?>
 							<?php $this->render_time($item); ?>
 						</div>
 					</div>
 					<?php $this->render_badge($item); ?>
+
+					<?php if($settings['readmore_link_to'] == 'item') : ?>
+					<a <?php $this->print_render_attribute_string( $item_key ); ?>></a>
+					<?php endif; ?>
+
 				</div>
 			<?php endforeach;
 		}
@@ -1801,8 +1802,8 @@
 			$this->add_render_attribute( 'carousel', 'class', 'bdt-ep-product-carousel' );
 	
 			?>
-			<div <?php echo $this->get_render_attribute_string( 'carousel' ); ?>>
-				<div class="swiper-container">
+			<div <?php $this->print_render_attribute_string( 'carousel' ); ?>>
+				<div <?php $this->print_render_attribute_string('swiper'); ?>>
 					<div class="swiper-wrapper">
 			<?php
 		}

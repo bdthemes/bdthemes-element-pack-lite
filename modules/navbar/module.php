@@ -26,7 +26,7 @@ class Module extends Element_Pack_Module_Base {
 class ep_menu_walker extends Walker_Nav_Menu {
     var $has_child = false;
     public function start_lvl(&$output, $depth = 0, $args = array()) {      
-        $output .= '<div class="bdt-navbar-dropdown"><ul class="bdt-nav bdt-navbar-dropdown-nav">';
+        $output .= '<div class="bdt-navbar-dropdown bdt-drop"><ul class="bdt-nav bdt-navbar-dropdown-nav">';
     }
 
     public function end_lvl(&$output, $depth = 0, $args = array()) {

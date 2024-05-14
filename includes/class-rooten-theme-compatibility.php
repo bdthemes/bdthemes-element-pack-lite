@@ -139,7 +139,7 @@ class Element_Pack_Rooten_Theme_Compatibility {
 			<label for="rooten_template_type">{$_page}</label><br>
 BDT;
         }
-        echo $content;
+        echo wp_kses_post($content);
     }
 
     public function rooten_custom_template_save_metabox($post_id) {

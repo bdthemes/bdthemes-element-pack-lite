@@ -29,7 +29,7 @@ class Horizontal_Progress extends Elementor_Skin_Base
         $position = $settings['horizontal_reading_progress_position'];
  
         ?>
-        <div class="bdt-horizontal-progress <?php echo $position; ?>" id="bdt-progress">
+        <div class="bdt-horizontal-progress <?php echo esc_attr($position); ?>" id="bdt-progress">
         </div>
 
         <?php
