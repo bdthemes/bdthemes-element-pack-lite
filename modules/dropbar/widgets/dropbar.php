@@ -168,6 +168,8 @@ class Dropbar extends Module_Base {
 				'label'       => esc_html__('Icon', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
+				'skin'        => 'inline',
+				'label_block' => false
 			]
 		);
 
@@ -827,12 +829,12 @@ class Dropbar extends Module_Base {
 		}
 
 		?>
-		<div <?php echo $this->get_render_attribute_string('dropbar-wrapper'); ?>>
-			<a <?php echo $this->get_render_attribute_string('button'); ?>>
+		<div <?php $this->print_render_attribute_string('dropbar-wrapper'); ?>>
+			<a <?php $this->print_render_attribute_string('button'); ?>>
 				<?php $this->render_text($settings); ?>
 			</a>
 			<!-- <div> -->
-				<div <?php echo $this->get_render_attribute_string('drop-settings'); ?>>
+				<div <?php $this->print_render_attribute_string('drop-settings'); ?>>
 					<?php
 					if ('custom' == $settings['source'] and !empty($settings['content'])) {
 						echo wp_kses_post($settings['content']);
@@ -875,13 +877,13 @@ class Dropbar extends Module_Base {
 		$is_new    = empty($settings['icon']) && Icons_Manager::is_migration_allowed();
 
 	?>
-		<span <?php echo $this->get_render_attribute_string('content-wrapper'); ?>>
-			<span <?php echo $this->get_render_attribute_string('dropbar-button'); ?>>
+		<span <?php $this->print_render_attribute_string('content-wrapper'); ?>>
+			<span <?php $this->print_render_attribute_string('dropbar-button'); ?>>
 
-				<span <?php echo $this->get_render_attribute_string('text'); ?>><?php echo wp_kses($settings['button_text'], element_pack_allow_tags('title')); ?></span>
+				<span <?php $this->print_render_attribute_string('text'); ?>><?php echo wp_kses($settings['button_text'], element_pack_allow_tags('title')); ?></span>
 
 				<?php if (!empty($settings['button_icon']['value'])) : ?>
-					<span <?php echo $this->get_render_attribute_string('icon-align'); ?>>
+					<span <?php $this->print_render_attribute_string('icon-align'); ?>>
 
 						<?php if ($is_new || $migrated) :
 							Icons_Manager::render_icon($settings['button_icon'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);

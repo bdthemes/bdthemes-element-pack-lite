@@ -334,7 +334,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 				}
 ?>
 				<div id="<?php echo esc_attr($id); ?>" <?php $this->parent->print_render_attribute_string('user_register'); ?>>
-					<a <?php echo $this->parent->get_render_attribute_string('dropdown-button'); ?>>
+					<a <?php $this->parent->print_render_attribute_string('dropdown-button'); ?>>
 						<?php $this->render_text(); ?>
 					</a>
 				</div>
@@ -388,11 +388,11 @@ class Skin_Dropdown extends Elementor_Skin_Base
 
 		?>
 		<div <?php $this->parent->print_render_attribute_string('user_register'); ?>>
-			<a <?php echo $this->parent->get_render_attribute_string('dropdown-button-settings'); ?>>
+			<a <?php $this->parent->print_render_attribute_string('dropdown-button-settings'); ?>>
 				<?php $this->render_text(); ?>
 			</a>
 
-			<div <?php echo $this->parent->get_render_attribute_string('dropdown-settings'); ?>>
+			<div <?php $this->parent->print_render_attribute_string('dropdown-settings'); ?>>
 				<div class="elementor-form-fields-wrapper bdt-text-left">
 					<?php $this->parent->user_register_form(); ?>
 				</div>
@@ -439,7 +439,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 
 		<span class="elementor-button-content-wrapper">
 			<?php if (!empty($dropdown_icon['value'])) : ?>
-				<span <?php echo $this->parent->get_render_attribute_string('button-icon'); ?>>
+				<span <?php $this->parent->print_render_attribute_string('button-icon'); ?>>
 
 					<?php if ($is_new || $migrated) :
 						Icons_Manager::render_icon((array) $dropdown_icon, ['aria-hidden' => 'true', 'class' => 'fa-fw']);
@@ -450,7 +450,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 				</span>
 			<?php else : ?>
 				<?php $this->parent->add_render_attribute('button-icon', 'class', ['bdt-hidden@l']); ?>
-				<span <?php echo $this->parent->get_render_attribute_string('button-icon'); ?>>
+				<span <?php $this->parent->print_render_attribute_string('button-icon'); ?>>
 					<i class="ep-icon-lock" aria-hidden="true"></i>
 				</span>
 

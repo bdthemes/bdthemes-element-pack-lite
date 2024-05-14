@@ -25,7 +25,7 @@ class Events_Calendar_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Events Calendar Grid', 'bdthemes-element-pack');
+		return BDTEP . esc_html__('Events Calendar Grid', 'bdthemes-element-pack');
 	}
 
 	public function get_icon() {
@@ -1283,7 +1283,7 @@ class Events_Calendar_Grid extends Module_Base {
 				$this->render_loop_item($post);
 			}
 		} else {
-			echo '<div class="bdt-alert bdt-alert-warning">'.__('No events!', 'bdthemes-element-pack').'</div>';
+			echo '<div class="bdt-alert bdt-alert-warning">'.esc_html__('No events!', 'bdthemes-element-pack').'</div>';
 		}
 
 		$this->render_footer();
@@ -1312,8 +1312,10 @@ class Events_Calendar_Grid extends Module_Base {
 ?>
 
 		<div class="bdt-event-image bdt-background-cover">
-			<a href="<?php echo ($settings['anchor_link'] == 'yes') ? the_permalink() : 'javascript:void(0);'; ?>" title="<?php echo get_the_title(); ?>">
-				<img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size']); ?>" alt="<?php echo get_the_title(); ?>">
+			<a href="<?php echo ($settings['anchor_link'] == 'yes') ? esc_url(the_permalink()) : 'javascript:void(0);'; ?>" 
+			title="<?php echo esc_html(get_the_title()); ?>">
+				<img src="<?php echo esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])); ?>" 
+				alt="<?php echo esc_html(get_the_title()); ?>">
 			</a>
 		</div>
 	<?php
@@ -1328,7 +1330,7 @@ class Events_Calendar_Grid extends Module_Base {
 	?>
 
 		<h3 class="bdt-event-title-wrap">
-			<a href="<?php echo ($settings['anchor_link'] == 'yes') ? get_permalink() : 'javascript:void(0);'; ?>" class="bdt-event-title">
+			<a href="<?php echo ($settings['anchor_link'] == 'yes') ? esc_url( get_permalink()) : 'javascript:void(0);'; ?>" class="bdt-event-title">
 				<?php the_title() ?>
 			</a>
 		</h3>
@@ -1372,9 +1374,9 @@ class Events_Calendar_Grid extends Module_Base {
 			<?php
 
 			if (!$post->post_excerpt) {
-				echo strip_shortcodes(wp_trim_words($post->post_content, $this->get_settings('excerpt_length')));
+				echo wp_kses_post(strip_shortcodes(wp_trim_words($post->post_content, $this->get_settings('excerpt_length'))));
 			} else {
-				echo strip_shortcodes(wp_trim_words($post->post_excerpt, $this->get_settings('excerpt_length')));
+				echo wp_kses_post(strip_shortcodes(wp_trim_words($post->post_excerpt, $this->get_settings('excerpt_length'))));
 			}
 
 			?>
@@ -1451,7 +1453,7 @@ class Events_Calendar_Grid extends Module_Base {
 		}
 
 	?>
-		<div <?php echo $this->get_render_attribute_string('event-grid'); ?>>
+		<div <?php $this->print_render_attribute_string('event-grid'); ?>>
 			<div class="bdt-grid bdt-grid-<?php echo esc_attr($settings['column_gap']); ?> bdt-child-width-1-<?php echo esc_attr($mobile_cols); ?> bdt-child-width-1-<?php echo esc_attr($tablet_cols); ?>@s bdt-child-width-1-<?php echo esc_attr($desktop_cols); ?>@l" bdt-grid>
 
 			<?php

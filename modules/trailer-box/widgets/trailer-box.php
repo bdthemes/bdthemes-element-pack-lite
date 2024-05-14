@@ -1981,7 +1981,6 @@ class Trailer_Box extends Module_Base {
 
 	public function render_button() {
 		$settings = $this->get_settings_for_display();
-		$target   = (isset($settings['button']['is_external']) && $settings['button']['is_external'] == 'on' ) ? '_blank' : '_self';
 
 		if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
 			// add old default
@@ -1996,11 +1995,10 @@ class Trailer_Box extends Module_Base {
 		<?php if ('button' === $settings['link_type']) : ?>
 			<?php if (( '' !== $settings['button']['url'] ) and ('' !== $settings['button_text'] )) :
 
+				$this->add_link_attributes( 'trailer-box-button', $settings['button'] );
 				$this->add_render_attribute(
 					[
 						'trailer-box-button' => [
-							'href'   => esc_url($settings['button']['url']),
-							'target' => esc_attr($target),
 							'class'  => [
 								'bdt-trailer-box-button',
 								$settings['button_hover_animation'] ? 'elementor-animation-'.$settings['button_hover_animation'] : ''
@@ -2024,8 +2022,8 @@ class Trailer_Box extends Module_Base {
 				}
 
 				?>
-				<div <?php echo $this->get_render_attribute_string( 'trailer-box-button-position' ); ?>>
-					<a <?php echo $this->get_render_attribute_string( 'trailer-box-button' ); ?>>
+				<div <?php $this->print_render_attribute_string( 'trailer-box-button-position' ); ?>>
+					<a <?php $this->print_render_attribute_string( 'trailer-box-button' ); ?>>
 						<?php echo esc_html($settings['button_text']); ?>
 	
 						<?php if ($settings['button_icon']['value']) : ?>
@@ -2087,16 +2085,16 @@ class Trailer_Box extends Module_Base {
 				<div class="bdt-trailer-box-desc <?php echo esc_attr($origin); ?>">
 					<div class="bdt-trailer-box-desc-inner">
 						<?php if ( '' !== $settings['pre_title'] ) : ?>
-							<div <?php echo $this->get_render_attribute_string( 'avd-hclass' );?>>
+							<div <?php $this->print_render_attribute_string( 'avd-hclass' );?>>
 								<?php echo wp_kses( $settings['pre_title'], element_pack_allow_tags('title') ); ?>
 							</div>
 						<?php endif; ?>
 
 						<?php if ( '' !== $settings['title'] ) : ?>
 							<div class="bdt-trailer-box-title-wrap">
-								<<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?> <?php echo $this->get_render_attribute_string('bdt-trailer-box-title'); ?>>
+								<<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tags'])); ?> <?php $this->print_render_attribute_string('bdt-trailer-box-title'); ?>>
 									<?php echo wp_kses( $settings['title'], element_pack_allow_tags('title') ); ?>
-								</<?php echo Utils::get_valid_html_tag($settings['title_tags']); ?>>
+								</<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tags'])); ?>>
 							</div>
 						<?php endif; ?>
 

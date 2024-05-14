@@ -44,27 +44,23 @@ var debounce = function (func, wait, immediate) {
 /** 
  * Start used on Social Share
  */
-function copyToClipboard(selector) {
-    var $temp = jQuery("<div>");
-    jQuery("body").append($temp);
-    $temp.attr("contenteditable", true)
-        .html(jQuery(selector).data('url')).select()
-        .on("focus", function () {
-            document.execCommand('selectAll', false, null);
-        })
-        .focus();
-    document.execCommand("copy");
-    $temp.remove();
 
-    jQuery(selector).find('.bdt-social-share-title').html(jQuery(selector).data('copied'));
-    setTimeout(() => {
-        jQuery(selector).find('.bdt-social-share-title').html(jQuery(selector).data('orginal'));
-    }, 5000);
+jQuery(document).ready(function() {
+    jQuery(".bdt-ss-link").on("click", function() {
+        var $temp = jQuery("<input>");
+        jQuery("body").append($temp);
+        $temp.val(jQuery(this).data("url")).select();
+        document.execCommand("copy");
+        $temp.remove();
 
-}
+        // Update the text to indicate that it has been copied
+        jQuery(this).find('.bdt-social-share-title').html(jQuery(this).data('copied'));
 
-jQuery('.bdt-ss-link').on('click', function () {
-    copyToClipboard(this);
+        // Reset the text after a delay (e.g., 5 seconds)
+        setTimeout(() => {
+            jQuery(this).find('.bdt-social-share-title').html(jQuery(this).data('orginal'));
+        }, 5000);
+    });
 });
 
 /** 
@@ -103,4 +99,23 @@ function returnCurrencySymbol(currency = null) {
 
 /**
  * End Crypto Currency
+ */
+
+/**
+ * Open Offcanvas on Mini Cart Update
+ */
+
+jQuery(document).ajaxComplete(function (event, request, settings) {
+    if (request.responseJSON && typeof request.responseJSON.cart_hash !== 'undefined' && request.responseJSON.cart_hash) {
+        if (jQuery('.bdt-offcanvas').hasClass('__update_cart')) {
+            let id = jQuery('.bdt-offcanvas.__update_cart').attr('id');
+            bdtUIkit.util.ready(function () {
+                bdtUIkit.offcanvas('#' + id).show();
+            });
+        }
+    }
+});
+
+/**
+ * /Open Offcanvas on Mini Cart Update
  */

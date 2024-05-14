@@ -43,11 +43,11 @@ class Search extends Module_Base {
 		}
 	}
 	public function get_script_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-scripts'];
-        } else {
+		if ($this->ep_is_edit_mode()) {
+			return ['ep-scripts'];
+		} else {
 			return ['ep-search'];
-        }
+		}
 	}
 
 	public function get_custom_help_url() {
@@ -85,9 +85,10 @@ class Search extends Module_Base {
 			[
 				'label'       => esc_html__('Specific Post Type', 'bdthemes-element-pack'),
 				'description' => esc_html__('Select post type if you need to search only this post type content.', 'bdthemes-element-pack'),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 0,
-				'options'     => element_pack_get_post_types(),
+				'type'    => Controls_Manager::SELECT,
+				'options' => $this->getGroupControlQueryPostTypes(),
+				'default' => 'post',
+
 			]
 		);
 
@@ -239,6 +240,7 @@ class Search extends Module_Base {
 				'condition' => [
 					'skin' => ['default']
 				],
+				'return_value' => 'yes',
 				'separator' => 'before'
 			]
 		);
@@ -313,7 +315,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'button_icon',
 			[
-				'label'            => __('Icon', 'bdthemes-element-pack'),
+				'label'            => esc_html__('Icon', 'bdthemes-element-pack'),
 				'type'             => Controls_Manager::ICONS,
 				'render_type'      => 'template',
 				'condition'        => [
@@ -404,7 +406,7 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_posts_include',
 			[
-				'label'     => __('Include', 'ultimate-post-kit-pro'),
+				'label'     => esc_html__('Include', 'bdthemes-element-pack'),
 				'condition' => [
 					'show_ajax_search' => 'yes'
 				]
@@ -414,13 +416,13 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_include_by',
 			[
-				'label'       => __('Include By', 'ultimate-post-kit-pro'),
+				'label'       => esc_html__('Include By', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::SELECT2,
 				'multiple'    => true,
 				'label_block' => true,
 				'options'     => [
-					'authors' => __('Authors', 'ultimate-post-kit-pro'),
-					'terms'   => __('Terms', 'ultimate-post-kit-pro'),
+					'authors' => esc_html__('Authors', 'bdthemes-element-pack'),
+					'terms'   => esc_html__('Terms', 'bdthemes-element-pack'),
 				],
 				'condition' => [
 					'show_ajax_search' => 'yes'
@@ -431,7 +433,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_include_author_ids',
 			[
-				'label'       => __('Authors', 'ultimate-post-kit-pro'),
+				'label'       => esc_html__('Authors', 'bdthemes-element-pack'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
@@ -448,31 +450,30 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_include_term_ids',
 			[
-				'label'       => __('Terms', 'ultimate-post-kit-pro'),
-				'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'ultimate-post-kit-pro'),
+				'label'       => __('Terms', 'bdthemes-element-pack'),
+				'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
-				'placeholder' => __('Type and select terms', 'ultimate-post-kit-pro'),
+				'placeholder' => __('Type and select terms', 'bdthemes-element-pack'),
 				'query_args'  => [
 					'query'        => 'terms',
 					'widget_props' => [
-						'post_type' => 'search_query'
-					]
+						'post_type' => 'search_query',
+					],
 				],
 				'condition'   => [
 					'posts_include_by' => 'terms',
 					'show_ajax_search' => 'yes',
-				]
+				],
 			]
 		);
-
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
 			'tab_posts_exclude',
 			[
-				'label'     => __('Exclude', 'ultimate-post-kit-pro'),
+				'label'     => esc_html__('Exclude', 'bdthemes-element-pack'),
 				'condition' => [
 					'show_ajax_search' => 'yes'
 				]
@@ -482,15 +483,15 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_by',
 			[
-				'label'       => __('Exclude By', 'ultimate-post-kit-pro'),
+				'label'       => esc_html__('Exclude By', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::SELECT2,
 				'multiple'    => true,
 				'label_block' => true,
 				'options'     => [
-					'authors'          => __('Authors', 'ultimate-post-kit-pro'),
-					'current_post'     => __('Current Post', 'ultimate-post-kit-pro'),
-					'manual_selection' => __('Manual Selection', 'ultimate-post-kit-pro'),
-					'terms'            => __('Terms', 'ultimate-post-kit-pro'),
+					'authors'          => esc_html__('Authors', 'bdthemes-element-pack'),
+					'current_post'     => esc_html__('Current Post', 'bdthemes-element-pack'),
+					'manual_selection' => esc_html__('Manual Selection', 'bdthemes-element-pack'),
+					'terms'            => esc_html__('Terms', 'bdthemes-element-pack'),
 				],
 				'condition' => [
 					'show_ajax_search' => 'yes'
@@ -501,7 +502,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_ids',
 			[
-				'label'       => __('Search & Select', 'ultimate-post-kit-pro'),
+				'label'       => esc_html__('Search & Select', 'bdthemes-element-pack'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
@@ -521,7 +522,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_author_ids',
 			[
-				'label'       => __('Authors', 'ultimate-post-kit-pro'),
+				'label'       => esc_html__('Authors', 'bdthemes-element-pack'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
@@ -538,12 +539,12 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_term_ids',
 			[
-				'label'       => __('Terms', 'ultimate-post-kit-pro'),
-				'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'ultimate-post-kit-pro'),
+				'label'       => esc_html__('Terms', 'bdthemes-element-pack'),
+				'description' => esc_html__('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
-				'placeholder' => __('Type and select terms', 'ultimate-post-kit-pro'),
+				'placeholder' => esc_html__('Type and select terms', 'bdthemes-element-pack'),
 				'query_args'  => [
 					'query'        => 'terms',
 					'widget_props' => [
@@ -552,7 +553,7 @@ class Search extends Module_Base {
 				],
 				'condition'   => [
 					'posts_exclude_by' => 'terms',
-					'show_ajax_search!' => 'yes',
+					'show_ajax_search' => 'yes',
 				]
 			]
 		);
@@ -998,7 +999,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_search_ajax_style',
 			[
-				'label' => esc_html__('Ajax Search Dropdown', 'bdthemes-element-pack'),
+				'label' => esc_html__('Ajax Dropdown', 'bdthemes-element-pack'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'conditions' => [
 					'relation' => 'and',
@@ -1023,27 +1024,59 @@ class Search extends Module_Base {
 				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-search-results-wrap, {{WRAPPER}} .bdt-search-results-wrap:before' => 'background: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result' => 'background: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'ajax_search_dropdown_padding',
+			[
+				'label'                 => esc_html__('Padding', 'bdthemes-element-pack'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%', 'em'],
+				'selectors'             => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result '    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'separator'             => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'ajax_search_dropdown_margin',
+			[
+				'label'                 => esc_html__('Margin', 'bdthemes-element-pack'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%', 'em'],
+				'selectors'             => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result '    => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
 		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'      => 'ajax_search_border',
+				'label'     => esc_html__('Border', 'bdthemes-element-pack'),
+				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result',
+			]
+		);
+		$this->add_responsive_control(
+			'ajax_search_dropdown_radius',
+			[
+				'label'                 => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%', 'em'],
+				'selectors'             => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result '    => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'           => 'search_ajax_shadow',
-				'selector'       => '{{WRAPPER}} .bdt-search-result',
-			]
-		);
-		$this->add_control(
-			'search_ajax_loader_background_color',
-			[
-				'label'     => esc_html__('Search Loader Color', 'bdthemes-element-pack'),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-search.bdt-search-loading:after' => 'background-color: {{VALUE}};',
-				],
-				// 'separator' => 'before',
+				'selector'       => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result',
 			]
 		);
 
@@ -1053,7 +1086,7 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_ajax_heading',
 			[
-				'label' => esc_html__('Heading', 'bdtheme-element-pack'),
+				'label' => esc_html__('Heading', 'bdthemes-element-pack'),
 			]
 		);
 		$this->add_control(
@@ -1062,7 +1095,7 @@ class Search extends Module_Base {
 				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-search-results-head-title a' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result-header' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1071,14 +1104,14 @@ class Search extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'ajax_heading_typography',
-				'selector' => '{{WRAPPER}} .bdt-search-results-head-title a',
+				'selector' => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result-header',
 			]
 		);
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'tab_ajax_title',
 			[
-				'label' => esc_html__('Title', 'bdtheme-element-pack'),
+				'label' => esc_html__('Title', 'bdthemes-element-pack'),
 			]
 		);
 		$this->add_control(
@@ -1087,7 +1120,7 @@ class Search extends Module_Base {
 				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-search-result .bdt-doc-article a' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1097,14 +1130,14 @@ class Search extends Module_Base {
 				'name'      => 'search_ajax_title_background',
 				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
 				'types'     => ['classic', 'gradient'],
-				'selector'  => '{{WRAPPER}} .bdt-search-result .bdt-doc-article a',
+				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title',
 			]
 		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'ajax_title_typography',
-				'selector' => '{{WRAPPER}} .bdt-search-result .bdt-doc-article a',
+				'selector' => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title',
 			]
 		);
 		$this->add_control(
@@ -1121,7 +1154,7 @@ class Search extends Module_Base {
 				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-search-result .bdt-doc-article a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1131,34 +1164,34 @@ class Search extends Module_Base {
 				'name'      => 'search_ajax_title_h_background',
 				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
 				'types'     => ['classic', 'gradient'],
-				'selector'  => '{{WRAPPER}} .bdt-search-result .bdt-doc-article a:hover',
+				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title:hover',
 			]
 		);
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
-			'tab_ajax_category',
+			'tab_ajax_desc',
 			[
-				'label' => esc_html__('Category', 'bdtheme-element-pack'),
+				'label' => esc_html__('Description', 'bdthemes-element-pack'),
 			]
 		);
 		$this->add_control(
-			'search_ajax_category_color',
+			'search_ajax_desc_color',
 			[
 				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-search-result .bdt-doc-section a' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-text' => 'color: {{VALUE}};',
 				],
 			]
 		);
 		$this->add_control(
-			'search_ajax_category_h_color',
+			'search_ajax_desc_h_color',
 			[
 				'label'     => esc_html__('Hover Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-search-result .bdt-doc-section a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-text:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1166,15 +1199,94 @@ class Search extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'ajax_category_typography',
-				'selector' => '{{WRAPPER}} .bdt-search-result .bdt-doc-section a',
+				'name'     => 'ajax_desc_typography',
+				'selector' => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-text',
 			]
 		);
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'tab_ajax_no_posts',
 			[
-				'label' => esc_html__('No Posts', 'bdtheme-element-pack'),
+				'label' => esc_html__('Others', 'bdthemes-element-pack'),
+			]
+		);
+
+		$this->add_control(
+			'ajax_search_close_button_heading',
+			[
+				'label'     => __('C L O S E    B U T T O N', 'plugin-domain'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'close_btn_color',
+			[
+				'label'     => __('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'close_btn_bg_color',
+			[
+				'label'     => __('Background Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'close_btn_hover_color',
+			[
+				'label'     => __('Hover Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn:hover' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'close_btn_hover_bg_color',
+			[
+				'label'     => __('Hover Background Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn:hover' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'ajx_search_dropdown_divider_heading',
+			[
+				'label'     => __('D I V I D E R', 'plugin-domain'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+		$this->add_control(
+			'ajax_search_dropdown_divider_color',
+			[
+				'label'     => __('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header' => 'border-bottom-color: {{VALUE}}',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-more' => 'border-top-color: {{VALUE}}',
+					'{{WRAPPER}} .bdt-list-divider>:nth-child(n+2)' => 'border-top-color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'ajax_search_empty_heading',
+			[
+				'label'     => __('N O   P O S T ', 'plugin-domain'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 		$this->add_control(
@@ -1183,7 +1295,7 @@ class Search extends Module_Base {
 				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-search .bdt-empty' => 'color: {{VALUE}}',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-text' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -1192,7 +1304,7 @@ class Search extends Module_Base {
 			[
 				'name'      => 'ajax_no_posts_typography',
 				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
-				'selector'  => '{{WRAPPER}} .bdt-search .bdt-empty',
+				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-text',
 			]
 		);
 		$this->end_controls_tab();
@@ -1202,7 +1314,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_style_search_button',
 			[
-				'label'     => __('Search Button', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Search Button', 'bdthemes-element-pack'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'search_button'       => 'yes',
@@ -1216,14 +1328,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_search_button_normal',
 			[
-				'label' => __('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
 			]
 		);
 
 		$this->add_control(
 			'search_button_text_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-button' => 'color: {{VALUE}};',
@@ -1251,7 +1363,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_button_radius',
 			[
-				'label'      => __('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1271,7 +1383,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_button_padding',
 			[
-				'label'      => __('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1293,14 +1405,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_search_button_hover',
 			[
-				'label' => __('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
 			]
 		);
 
 		$this->add_control(
 			'search_button_hover_text_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-button:hover' => 'color: {{VALUE}};',
@@ -1320,7 +1432,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_button_hover_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-button:hover' => 'border-color: {{VALUE}};',
@@ -1345,7 +1457,29 @@ class Search extends Module_Base {
 
 		$this->end_controls_section();
 	}
+	private function getGroupControlQueryPostTypes() {
+		$post_types = get_post_types(['public' => true], 'objects');
+		$post_types = array_column($post_types, 'label', 'name');
 
+		$ignorePostTypes = [
+			'elementor_library'    => '',
+			'attachment'           => '',
+			'bdt_template_manager' => '',
+			'bdt-custom-template'  => '',
+		];
+
+		$post_types = array_diff_key($post_types, $ignorePostTypes);
+
+		$extra_types = [
+			'manual_selection'   => __('Manual Selection', 'bdthemes-element-pack'),
+			'current_query'      => __('Current Query', 'bdthemes-element-pack'),
+			'_related_post_type' => __('Related', 'bdthemes-element-pack'),
+		];
+
+		$post_types = array_merge($post_types, $extra_types);
+
+		return $post_types;
+	}
 	public function render() {
 		$settings    = $this->get_settings_for_display();
 		$current_url = remove_query_arg('fake_arg');
@@ -1408,15 +1542,15 @@ class Search extends Module_Base {
 				],
 				'data-settings' => [
 					wp_json_encode(array_filter([
-						'post_type'          => $settings['search_query'],
-						'per_page'           => $settings['ajax_item_limit'],
-						'include_by'         => $settings['posts_include_by'],
-						'exclude_by'         => $settings['posts_exclude_by'],
-						'include_author_ids' => $settings['posts_include_author_ids'],
-						'exclude_author_ids' => $settings['posts_exclude_author_ids'],
-						'include_term_ids'   => $settings['posts_include_term_ids'],
-						'exclude_term_ids'   => $settings['posts_exclude_term_ids'],
-						'exclude_ids'        => $settings['posts_exclude_ids'],
+						'post_type'          => isset($settings['search_query']) ? $settings['search_query'] : 'any',
+						'per_page'           => isset($settings['posts_per_page']) ? $settings['posts_per_page'] : 5,
+						'include_by'         => isset($settings['posts_include_by']) ? $settings['posts_include_by'] : '',
+						'exclude_by'         => isset($settings['posts_exclude_by']) ? $settings['posts_exclude_by'] : '',
+						'include_author_ids' => isset($settings['posts_include_author_ids']) ? $settings['posts_include_author_ids'] : '',
+						'exclude_author_ids' => isset($settings['posts_exclude_author_ids']) ? $settings['posts_exclude_author_ids'] : '',
+						'include_term_ids'   => isset($settings['posts_include_term_ids']) ? $settings['posts_include_term_ids'] : '',
+						'exclude_term_ids'   => isset($settings['posts_exclude_term_ids']) ? $settings['posts_exclude_term_ids'] : '',
+						'exclude_ids'        => isset($settings['posts_exclude_ids']) ? $settings['posts_exclude_ids'] : '',
 					])),
 				],
 			]);
@@ -1426,19 +1560,19 @@ class Search extends Module_Base {
 
 			<?php $this->add_render_attribute('search', 'class', 'bdt-search-default'); ?>
 
-			<form <?php echo $this->get_render_attribute_string('search'); ?>>
+			<form <?php $this->print_render_attribute_string('search'); ?>>
 				<div class="bdt-position-relative">
 					<?php $this->search_icon($settings); ?>
 					<?php if ($settings['search_query']) : ?>
-						<input name="post_type" id="post_type" type="hidden" value="<?php echo $settings['search_query']; ?>">
+						<input name="post_type" id="post_type" type="hidden" value="<?php echo esc_attr($settings['search_query']); ?>">
 					<?php endif; ?>
-					<input <?php echo $this->get_render_attribute_string('input'); ?>>
+					<input <?php $this->print_render_attribute_string('input'); ?>>
 					<?php $this->search_button(); ?>
 				</div>
 
 
 				<?php if ($settings['show_ajax_search']) : ?>
-					<div class="bdt-search-result"></div>
+					<div class="bdt-search-result" style="display:none"></div>
 				<?php endif; ?>
 			</form>
 
@@ -1466,14 +1600,14 @@ class Search extends Module_Base {
 		?>
 
 			<?php $this->render_toggle_icon($settings); ?>
-			<div <?php echo $this->get_render_attribute_string('dropbar'); ?>>
-				<form <?php echo $this->get_render_attribute_string('search'); ?>>
+			<div <?php $this->print_render_attribute_string('dropbar'); ?>>
+				<form <?php $this->print_render_attribute_string('search'); ?>>
 					<div class="bdt-position-relative">
 						<?php $this->add_render_attribute('input', 'class', 'bdt-padding-small'); ?>
 						<?php if ($settings['search_query']) : ?>
-							<input name="post_type" id="post_type" type="hidden" value="<?php echo $settings['search_query']; ?>">
+							<input name="post_type" id="post_type" type="hidden" value="<?php echo esc_attr($settings['search_query']); ?>">
 						<?php endif; ?>
-						<input <?php echo $this->get_render_attribute_string('input'); ?> autofocus>
+						<input <?php $this->print_render_attribute_string('input'); ?> autofocus>
 					</div>
 
 				</form>
@@ -1501,17 +1635,17 @@ class Search extends Module_Base {
 		?>
 			<?php $this->render_toggle_icon($settings); ?>
 
-			<div <?php echo $this->get_render_attribute_string('dropdown'); ?>>
+			<div <?php $this->print_render_attribute_string('dropdown'); ?>>
 
-				<div class="bdt-grid-small bdt-flex-middle" bdt-grid>
+				<div class="bdt-grid-small bdt-flex-middle" data-bdt-grid>
 					<div class="bdt-width-expand">
-						<form <?php echo $this->get_render_attribute_string('search'); ?>>
+						<form <?php $this->print_render_attribute_string('search'); ?>>
 							<div class="bdt-position-relative">
 								<?php $this->add_render_attribute('input', 'class', 'bdt-padding-small'); ?>
 								<?php if ($settings['search_query']) : ?>
-									<input name="post_type" id="post_type" type="hidden" value="<?php echo $settings['search_query']; ?>">
+									<input name="post_type" id="post_type" type="hidden" value="<?php echo esc_attr($settings['search_query']); ?>">
 								<?php endif; ?>
-								<input <?php echo $this->get_render_attribute_string('input'); ?> autofocus>
+								<input <?php $this->print_render_attribute_string('input'); ?> autofocus>
 							</div>
 						</form>
 					</div>
@@ -1533,14 +1667,14 @@ class Search extends Module_Base {
 			<div id="modal-search-<?php echo esc_attr($id); ?>" class="bdt-modal-full bdt-modal" bdt-modal>
 				<div class="bdt-modal-dialog bdt-flex bdt-flex-center bdt-flex-middle" bdt-height-viewport>
 					<button class="bdt-modal-close-full" type="button" bdt-close></button>
-					<form <?php echo $this->get_render_attribute_string('search'); ?>>
+					<form <?php $this->print_render_attribute_string('search'); ?>>
 						<div class="bdt-position-relative">
 							<?php $this->add_render_attribute('input', ['class' => 'bdt-text-center']); ?>
 							<?php $this->search_icon($settings); ?>
 							<?php if ($settings['search_query']) : ?>
-								<input name="post_type" id="post_type" type="hidden" value="<?php echo $settings['search_query']; ?>">
+								<input name="post_type" id="post_type" type="hidden" value="<?php echo esc_attr($settings['search_query']); ?>">
 							<?php endif; ?>
-							<input <?php echo $this->get_render_attribute_string('input'); ?> autofocus>
+							<input <?php $this->print_render_attribute_string('input'); ?> autofocus>
 						</div>
 
 					</form>
@@ -1579,7 +1713,15 @@ class Search extends Module_Base {
 	private function render_toggle_icon($settings) {
 		$id                = $this->get_id();
 
-		$this->add_render_attribute('toggle-icon', 'class', 'bdt-search-toggle');
+		$this->add_render_attribute(
+			[
+				'toggle-icon' => [
+					'class' => 'bdt-search-toggle',
+					'aria-label' => 'search-button',
+					'title' => 'search-button',
+				],
+			]
+		);
 
 		if ('modal' === $settings['skin']) {
 			$this->add_render_attribute('toggle-icon', 'bdt-toggle');
@@ -1598,7 +1740,7 @@ class Search extends Module_Base {
 
 	?>
 
-		<a <?php echo $this->get_render_attribute_string('toggle-icon'); ?>>
+		<a <?php $this->print_render_attribute_string('toggle-icon'); ?>>
 
 			<?php if ($is_new || $migrated) :
 				Icons_Manager::render_icon($settings['search_toggle_icon'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);

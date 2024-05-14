@@ -14,7 +14,7 @@
 			return;
 		}
 
-		var $sliderContainer = $slider.find('.swiper-container'),
+		var $sliderContainer = $slider.find('.swiper-carousel'),
 			$settings = $slider.data('settings'),
 			$widgetSettings = $slider.data('widget-settings');
 

@@ -477,7 +477,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 			<?php 
 			$event_button_icon = $this->get_instance_value('event_button_icon');
 			if ( ! empty( $event_button_icon ) ) : ?>
-				<span <?php echo $this->parent->get_render_attribute_string( 'event-button-icon' ); ?>>
+				<span <?php $this->parent->print_render_attribute_string( 'event-button-icon' ); ?>>
 				
 					<?php if ( $is_new || $migrated ) :
 						Icons_Manager::render_icon( $event_button_icon , [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
@@ -552,13 +552,13 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 					</div>
 				<?php endif; ?>
 
-				<div <?php echo $this->parent->get_render_attribute_string( 'countdown' ); ?>>
+				<div <?php $this->parent->print_render_attribute_string( 'countdown' ); ?>>
 
 					<?php echo wp_kses_post($string); ?>
 
 					<?php if( '' != $event_id  and 'yes' == $this->get_instance_value('show_event_button') ) : ?>
 						<div class="bdt-countdown bdt-countdown-event-button">
-							<a <?php echo $this->parent->get_render_attribute_string( 'event-button' ); ?>>
+							<a <?php $this->parent->print_render_attribute_string( 'event-button' ); ?>>
 								<?php $this->render_text(); ?>
 							</a>
 						</div>
@@ -566,7 +566,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 				</div>
 			</div>
 			<?php 
-		} else echo '<div class="bdt-alert-warning" data-bdt-alert><p>You couldn\'t select any event, please select a event from event list.</p></div>';
+		} else echo '<div class="bdt-alert-warning" data-bdt-alert><p>'. esc_html__('You couldn\'t select any event, please select a event from event list.', 'bdthemes-element-pack') .'</p></div>';
 	}
 }
 

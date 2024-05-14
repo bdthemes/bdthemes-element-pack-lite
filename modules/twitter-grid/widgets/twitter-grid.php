@@ -822,7 +822,7 @@ class Twitter_Grid extends Module_Base {
                 );
             endfor;
 
-            set_transient($transName, $tweets, 60 * $settings['cache_time']);
+            set_transient($transName, $tweets, 60 * (int) $settings['cache_time']);
             update_option($backupName, $tweets);
         endif;
         ?>
@@ -872,7 +872,7 @@ class Twitter_Grid extends Module_Base {
                                             }
                                             $displayAgo = _x('ago', 'leading space is required', 'bdthemes-element-pack');
                                             // Use to make il8n compliant
-                                            printf(__('%1$s %2$s', 'bdthemes-element-pack'), $timeDisplay, $displayAgo);
+                                            printf(esc_html__('%1$s %2$s', 'bdthemes-element-pack'), wp_kses_post($timeDisplay), wp_kses_post($displayAgo));
                                             ?>
                                         </a>
                                     <?php endif; ?>
@@ -882,17 +882,17 @@ class Twitter_Grid extends Module_Base {
                                         <div class="bdt-twitter-meta-button">
                                             <a href="https://twitter.com/intent/tweet?in_reply_to=<?php echo esc_url($t['tweet_id']); ?>"
                                                data-lang="en" class="bdt-tmb-reply"
-                                               title="<?php _e('Reply', 'bdthemes-element-pack'); ?>" target="_blank">
+                                               title="<?php esc_html_e('Reply', 'bdthemes-element-pack'); ?>" target="_blank">
                                                 <i class="ep-icon-reply" aria-hidden="true"></i>
                                             </a>
                                             <a href="https://twitter.com/intent/retweet?tweet_id=<?php echo esc_url($t['tweet_id']); ?>"
                                                data-lang="en" class="bdt-tmb-retweet"
-                                               title="<?php _e('Retweet', 'bdthemes-element-pack'); ?>" target="_blank">
+                                               title="<?php esc_html_e('Retweet', 'bdthemes-element-pack'); ?>" target="_blank">
                                                 <i class="ep-icon-refresh" aria-hidden="true"></i>
                                             </a>
                                             <a href="https://twitter.com/intent/favorite?tweet_id=<?php echo esc_url($t['tweet_id']); ?>"
                                                data-lang="en" class="bdt-tmb-favorite"
-                                               title="<?php _e('Favourite', 'bdthemes-element-pack'); ?>"
+                                               title="<?php esc_html_e('Favourite', 'bdthemes-element-pack'); ?>"
                                                target="_blank">
                                                 <i class="ep-icon-star" aria-hidden="true"></i>
                                             </a>
@@ -931,7 +931,7 @@ class Twitter_Grid extends Module_Base {
             <div class="bdt-alert-warning" bdt-alert>
                 <a class="bdt-alert-close" bdt-close></a>
                 <?php $ep_setting_url = esc_url(admin_url('admin.php?page=element_pack_options#element_pack_api_settings')); ?>
-                <p><?php printf(__('Please set your twitter API settings from here <a href="%s">element pack settings</a> to show your map correctly.', 'bdthemes-element-pack'), $ep_setting_url); ?></p>
+                <p><?php printf(esc_html__('Please set your twitter API settings from here <a href="%s">element pack settings</a> to show your map correctly.', 'bdthemes-element-pack'), esc_url($ep_setting_url)); ?></p>
             </div>
             <?php
         }
@@ -1001,7 +1001,7 @@ class Twitter_Grid extends Module_Base {
         $this->add_render_attribute('twitter_grid', 'class', 'bdt-twitter-grid');
 
         ?>
-        <div id="bdt-twitter-grid-<?php echo esc_attr($id); ?>" <?php echo $this->get_render_attribute_string('twitter_grid'); ?>>
+        <div id="bdt-twitter-grid-<?php echo esc_attr($id); ?>" <?php $this->print_render_attribute_string('twitter_grid'); ?>>
         <div class="bdt-grid bdt-grid-<?php echo esc_attr($settings['column_gap']); ?> bdt-child-width-1-<?php echo esc_attr($mobile_cols); ?> bdt-child-width-1-<?php echo esc_attr($tablet_cols); ?>@s bdt-child-width-1-<?php echo esc_attr($desktop_cols); ?>@l" data-bdt-grid>
 
         <?php

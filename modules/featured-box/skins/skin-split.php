@@ -30,9 +30,9 @@ class Skin_Split extends Elementor_Skin_Base {
 		}
 
 		?>
-		<div <?php echo $this->parent->get_render_attribute_string( 'featured-box' ); ?>>
+		<div <?php $this->parent->print_render_attribute_string( 'featured-box' ); ?>>
 
-			<div <?php echo $this->parent->get_render_attribute_string( 'featured-box-content' ); ?>>
+			<div <?php $this->parent->print_render_attribute_string( 'featured-box-content' ); ?>>
 				<div class="bdt-width-1-1 bdt-width-2-5@s">
 					<div class="bdt-ep-featured-box-content bdt-position-z-index bdt-position-center-<?php echo esc_attr($settings['skin_content_position']); ?> bdt-text-<?php echo esc_attr($settings['skin_content_position']); ?>">
 						<?php $this->parent->render_featured_content(); ?>

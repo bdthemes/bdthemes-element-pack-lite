@@ -23,7 +23,8 @@ class Skin_Flip extends Elementor_Skin_Base {
         $settings = $this->parent->get_settings_for_display();
         $alternative_image = '';
 
-		$this->parent->add_render_attribute( 'skin-flip', 'class', ['bdt-member', 'skin-flip', 'bdt-transition-toggle', 'bdt-inline', 'bdt-image-mask'] );
+        $image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
+		$this->parent->add_render_attribute( 'skin-flip', 'class', 'bdt-member skin-flip bdt-transition-toggle bdt-inline' . $image_mask );
 
 		if ( ! isset( $settings['social_icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
 			// add old default
@@ -44,7 +45,7 @@ class Skin_Flip extends Elementor_Skin_Base {
         
 
 		?>
-		<div <?php echo $this->parent->get_render_attribute_string( 'skin-flip' ); ?>>
+		<div <?php $this->parent->print_render_attribute_string( 'skin-flip' ); ?>>
 
             <div class="bdt-skin-flip-layer bdt-skin-flip-front" style="background-image: url('<?php echo esc_url($member_image); ?>');">
 				<div class="bdt-skin-flip-layer-overlay">

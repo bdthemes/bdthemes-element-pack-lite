@@ -338,8 +338,8 @@ class Image_Magnifier extends Module_Base {
 
         if (isset($image_url[0])) {
         	?>
-            <div <?php echo $this->get_render_attribute_string( 'image-magnifier-settings' ); ?>>
-                <img <?php echo $this->get_render_attribute_string( 'image-magnifier' ); ?>>
+            <div <?php $this->print_render_attribute_string( 'image-magnifier-settings' ); ?>>
+                <img <?php $this->print_render_attribute_string( 'image-magnifier' ); ?>>
             </div>
             <?php
         } else {

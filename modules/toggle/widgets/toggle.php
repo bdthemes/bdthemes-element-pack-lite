@@ -192,6 +192,7 @@ class Toggle extends Module_Base {
                     'unit' => 'px',
                     'size' => 30,
                 ],
+                'condition'  => ['source' => 'widget'],
             ]
         );
 
@@ -721,12 +722,12 @@ class Toggle extends Module_Base {
 ?>
 
         <div class="bdt-show-hide-container">
-            <div <?php echo $this->get_render_attribute_string('toggle_data'); ?>>
+            <div <?php $this->print_render_attribute_string('toggle_data'); ?>>
                 <div class="bdt-show-hide-item<?php echo ('yes' == $settings['toggle_initially_open']) ? ' bdt-open ' : ''; ?> ">
-                    <div <?php echo $this->get_render_attribute_string('toggle_content'); ?>>
+                    <div <?php $this->print_render_attribute_string('toggle_content'); ?>>
                         <?php
                         if ('custom' == $settings['source'] and !empty($settings['toggle_content'])) {
-                            echo $this->parse_text_editor($settings['toggle_content']);
+                            $this->print_text_editor($settings['toggle_content']);
                         } elseif ("elementor" == $settings['source'] and !empty($settings['template_id'])) {
                             echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($settings['template_id']);
                             echo element_pack_template_edit_link($settings['template_id']);
@@ -739,7 +740,7 @@ class Toggle extends Module_Base {
                         ?>
                     </div>
 
-                    <a <?php echo $this->get_render_attribute_string('tab_title'); ?> href='javascript:void(0)'>
+                    <a <?php $this->print_render_attribute_string('tab_title'); ?> href='javascript:void(0)'>
                         <!--  -->
                         <?php if ('yes' === $settings['toggle_icon_show']) : ?>
                             <?php if ($settings['toggle_icon_position'] == 'left') : ?>

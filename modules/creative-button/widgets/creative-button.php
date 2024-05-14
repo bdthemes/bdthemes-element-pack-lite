@@ -38,7 +38,7 @@ class Creative_Button extends Module_Base {
 		if ($this->ep_is_edit_mode()) {
 			return ['ep-styles'];
 		} else {
-			return [ 'ep-creative-button' ];
+			return [ 'ep-font', 'ep-creative-button' ];
 		}
 	}
 
@@ -82,6 +82,7 @@ class Creative_Button extends Module_Base {
 					'skoll'    => esc_html__( 'Skoll', 'bdthemes-element-pack' ),
 					'surtur'   => esc_html__( 'Surtur', 'bdthemes-element-pack' ),
 					'telesto'  => esc_html__( 'Telesto', 'bdthemes-element-pack' ),
+					'reklo'    => esc_html__( 'Reklo', 'bdthemes-element-pack' ),
 				],
 			]
 		);
@@ -272,7 +273,7 @@ class Creative_Button extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-creative-button--dione::after' => 'border-color: {{VALUE}};',
 				],
 				'condition' => [
-					'button_style!' => ['fenrir', 'hati', 'surtur']
+					'button_style!' => ['fenrir', 'hati', 'surtur', 'reklo']
 				]
 			]
 		);
@@ -311,7 +312,7 @@ class Creative_Button extends Module_Base {
 				'name'     => 'creative_button_border',
 				'selector' => '{{WRAPPER}} .bdt-ep-creative-button, {{WRAPPER}} .bdt-ep-creative-button--bestia .bdt-ep-creative-button__bg',
 				'condition' => [
-					'button_style!' => ['fenrir', 'janus', 'surtur', 'pandora', 'narvi']
+					'button_style!' => ['fenrir', 'janus', 'surtur', 'pandora', 'narvi', 'reklo']
 				]
 			]
 		);
@@ -326,7 +327,7 @@ class Creative_Button extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-creative-button, {{WRAPPER}} .bdt-ep-creative-button--bestia .bdt-ep-creative-button__bg, {{WRAPPER}} .bdt-ep-creative-button--pandora span, {{WRAPPER}} .bdt-ep-creative-button--dione::before, {{WRAPPER}} .bdt-ep-creative-button--dione::after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
-					'button_style!' => ['fenrir', 'janus', 'surtur', 'narvi']
+					'button_style!' => ['fenrir', 'janus', 'surtur', 'narvi', 'reklo']
 				]
 			]
 		);
@@ -341,7 +342,7 @@ class Creative_Button extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-creative-button, {{WRAPPER}} .bdt-ep-creative-button--bestia .bdt-ep-creative-button__bg span, {{WRAPPER}} .bdt-ep-creative-button-marquee span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
-					'button_style!' => ['fenrir', 'janus', 'surtur', 'pandora', 'rhea']
+					'button_style!' => ['fenrir', 'janus', 'surtur', 'pandora', 'rhea', 'reklo']
 				]
 			]
 		);
@@ -367,7 +368,7 @@ class Creative_Button extends Module_Base {
 				'name'     => 'creative_button_shadow',
 				'selector' => '{{WRAPPER}} .bdt-ep-creative-button, {{WRAPPER}} .bdt-ep-creative-button--bestia .bdt-ep-creative-button__bg',
 				'condition' => [
-					'button_style!' => ['fenrir', 'janus', 'surtur']
+					'button_style!' => ['fenrir', 'janus', 'surtur', 'reklo']
 				]
 			]
 		);
@@ -465,7 +466,7 @@ class Creative_Button extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-creative-button--dione:hover::after' => 'border-color: {{VALUE}};',
 				],
 				'condition' => [
-					'button_style!' => ['fenrir', 'hati', 'surtur']
+					'button_style!' => ['fenrir', 'hati', 'surtur', 'reklo']
 				]
 			]
 		);
@@ -494,7 +495,7 @@ class Creative_Button extends Module_Base {
 				],
 				'condition' => [
 					'creative_button_border_border!' => '',
-					'button_style!' => ['fenrir', 'janus', 'surtur', 'narvi']
+					'button_style!' => ['fenrir', 'janus', 'surtur', 'narvi', 'reklo']
 				]
 			]
 		);
@@ -505,7 +506,7 @@ class Creative_Button extends Module_Base {
 				'name'     => 'creative_button_hover_shadow',
 				'selector' => '{{WRAPPER}} .bdt-ep-creative-button:hover, {{WRAPPER}} .bdt-ep-creative-button--bestia:hover .bdt-ep-creative-button__bg',
 				'condition' => [
-					'button_style!' => ['fenrir', 'janus', 'surtur']
+					'button_style!' => ['fenrir', 'janus', 'surtur', 'reklo']
 				]
 			]
 		);
@@ -515,6 +516,109 @@ class Creative_Button extends Module_Base {
 			[
 				'label' => esc_html__( 'Hover Animation', 'bdthemes-element-pack' ),
 				'type' => Controls_Manager::HOVER_ANIMATION,
+			]
+		);
+
+		//icon color
+		$this->add_control(
+			'creative_button_hover_icon_heading',
+			[
+				'label'     => esc_html__( 'Icon Style', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::HEADING,
+				'condition' => [
+					'button_style' => ['reklo']
+				],
+				'separator' => 'before'
+			]
+		);
+		$this->add_control(
+			'creative_button_hover_icon_color',
+			[
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--reklo:hover i' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'button_style' => ['reklo']
+				]
+			]
+		);
+		$this->add_control(
+			'creative_button_hover_icon_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--reklo i' => 'background-color: {{VALUE}};',
+				],
+				'condition' => [
+					'button_style' => ['reklo']
+				]
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'      => 'icon_border',
+				'selector'  => '{{WRAPPER}} .bdt-ep-creative-button--reklo i',
+				'condition' => [
+					'button_style' => ['reklo']
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'icon_border_radius',
+			[
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-creative-button--reklo i' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'button_style' => ['reklo']
+				]
+			]
+		);
+		$this->add_responsive_control(
+			'icon_size',
+			[
+				'label' => esc_html__('Size', 'bdthemes-element-pack'),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--reklo i' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'button_style' => ['reklo']
+				]
+			]
+		);
+		$this->add_responsive_control(
+			'icon_gap',
+			[
+				'label' => esc_html__('Space Between', 'bdthemes-element-pack'),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--reklo' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'button_style' => ['reklo']
+				]
 			]
 		);
 
@@ -530,15 +634,7 @@ class Creative_Button extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if ( ! empty( $settings['link']['url'] ) ) {
-			$this->add_render_attribute( 'creative_button', 'href', $settings['link']['url'] );
-
-			if ( $settings['link']['is_external'] ) {
-				$this->add_render_attribute( 'creative_button', 'target', '_blank' );
-			}
-
-			if ( $settings['link']['nofollow'] ) {
-				$this->add_render_attribute( 'creative_button', 'rel', 'nofollow' );
-			}
+			$this->add_link_attributes( 'creative_button', $settings['link'] );
 		}
 
 		if ( $settings['link']['nofollow'] ) {
@@ -581,9 +677,9 @@ class Creative_Button extends Module_Base {
 
 		?>
 		<?php if ( $settings['button_style'] == 'hyperion' or $settings['button_style'] == 'telesto' or $settings['button_style'] == 'narvi' or $settings['button_style'] == 'helene' or $settings['button_style'] == 'greip' or $settings['button_style'] == 'skoll' ) : ?>
-			<a <?php echo $this->get_render_attribute_string( 'creative_button' ); ?>><span><span><?php echo esc_html($settings['text']); ?></span></span></a>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>><span><span><?php echo esc_html($settings['text']); ?></span></span></a>
 		<?php elseif ( $settings['button_style'] == 'atlas' or $settings['button_style'] == 'kari' ) : ?>
-			<a <?php echo $this->get_render_attribute_string( 'creative_button' ); ?>>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>>
 				<span><?php echo esc_html($settings['text']); ?></span>
 				<div class="bdt-ep-creative-button-marquee" aria-hidden="true">
 					<div class="bdt-ep-creative-button-marquee__inner">
@@ -595,13 +691,13 @@ class Creative_Button extends Module_Base {
 				</div>
 			</a>
 		<?php elseif ( $settings['button_style'] == 'pallene' ) : ?>
-			<a <?php echo $this->get_render_attribute_string( 'creative_button' ); ?>><?php echo esc_html($settings['text']); ?></a>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>><?php echo esc_html($settings['text']); ?></a>
 		<?php elseif ( $settings['button_style'] == 'bestia' ) : ?>
-			<a <?php echo $this->get_render_attribute_string( 'creative_button' ); ?>>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>>
 				<div class="bdt-ep-creative-button__bg"></div><span><?php echo esc_html($settings['text']); ?></span>
 			</a>
 		<?php elseif ( $settings['button_style'] == 'surtur' ) : ?>
-			<a <?php echo $this->get_render_attribute_string( 'creative_button' ); ?>>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>>
 				<svg class="textcircle" viewBox="0 0 500 500">
 					<title><?php echo esc_html($settings['text']); ?></title>
 					<defs><path id="textcircle" d="M250,400 a150,150 0 0,1 0,-300a150,150 0 0,1 0,300Z"
@@ -617,15 +713,20 @@ class Creative_Button extends Module_Base {
 				</svg>
 			</a>
 		<?php elseif ( $settings['button_style'] == 'fenrir' ) : ?>
-			<a <?php echo $this->get_render_attribute_string( 'creative_button' ); ?>>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>>
 				<svg aria-hidden="true" class="progress" width="70" height="70" viewbox="0 0 70 70">
 					<path class="progress__circle" d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" />
 					<path class="progress__path" d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" pathLength="1" />
 				</svg>
 				<span><?php echo esc_html($settings['text']); ?></span>
 			</a>
+		<?php elseif ( $settings['button_style'] == 'reklo' ) : ?>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>>
+				<span><?php echo esc_html($settings['text']); ?></span>
+				<i class="ep-icon-arrow-right-0 bdt-flex bdt-flex-middle bdt-flex-center"></i>
+			</a>
 		<?php else: ?>
-			<a <?php echo $this->get_render_attribute_string( 'creative_button' ); ?>><span><?php echo esc_html($settings['text']); ?></span></a>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>><span><?php echo esc_html($settings['text']); ?></span></a>
 		<?php endif; ?>
 
 		<?php

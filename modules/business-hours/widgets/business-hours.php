@@ -1199,7 +1199,7 @@ class Business_Hours extends Module_Base {
 
     ?>
 
-    <div class="bdt-ep-business-hours" <?php echo $this->get_render_attribute_string('bdt-ep-business-hours-data'); ?>>
+    <div class="bdt-ep-business-hours" <?php $this->print_render_attribute_string('bdt-ep-business-hours-data'); ?>>
 
         <?php if ('yes' == $settings['show_header']) : ?>
             <div class="bdt-ep-business-hours-header">
@@ -1208,10 +1208,10 @@ class Business_Hours extends Module_Base {
                     <div class="bdt-ep-business-hours-current-time">
                         <?php
                         if($settings['business_hour_style'] == 'default'){
-	                        echo date_i18n( get_option('time_format'), current_time( 'timestamp' ) );
+	                        echo wp_kses_post(date_i18n( get_option('time_format'), current_time( 'timestamp' ) ));
                         }else{
                             $cur_time   =   strtotime($this->set_time_zone());
-	                        echo date_i18n( 'h:i a', $cur_time );
+	                        echo wp_kses_post(date_i18n( 'h:i a', $cur_time ));
                         }
                         ?>
 
@@ -1222,10 +1222,10 @@ class Business_Hours extends Module_Base {
                     <div class="bdt-ep-business-hours-current-date">
                         <?php
                         if($settings['business_hour_style'] == 'default'){
-	                        echo date_i18n( get_option( 'date_format' ), current_time( 'timestamp' ) );
+	                        echo wp_kses_post(date_i18n( get_option( 'date_format' ), current_time( 'timestamp' ) ));
                         } else {
                             $cur_time   =   strtotime(  $this->set_time_zone()  );
-	                        echo date_i18n( get_option( 'date_format' ), $cur_time );
+	                        echo wp_kses_post(date_i18n( get_option( 'date_format' ), $cur_time ));
                         }
                         ?>
 
@@ -1272,16 +1272,16 @@ class Business_Hours extends Module_Base {
                             $this->add_render_attribute( 'bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time' );
                         }
                         ?>
-                        <div <?php echo $this->get_render_attribute_string( 'bdt-bs-background' . $item['_id'] ); ?>>
-                            <div <?php echo $this->get_render_attribute_string( 'bdt-inner-element' ); ?>>
-                                <span <?php echo $this->get_render_attribute_string( 'bdt-highlight-day' . $item['_id'] ); ?>>
-                                 <span <?php echo $this->get_render_attribute_string( $day_settings ); ?>><?php echo esc_html($item['enter_day']); ?></span>
+                        <div <?php $this->print_render_attribute_string( 'bdt-bs-background' . $item['_id'] ); ?>>
+                            <div <?php $this->print_render_attribute_string( 'bdt-inner-element' ); ?>>
+                                <span <?php $this->print_render_attribute_string( 'bdt-highlight-day' . $item['_id'] ); ?>>
+                                 <span <?php $this->print_render_attribute_string( $day_settings ); ?>><?php echo esc_html($item['enter_day']); ?></span>
                              </span>
 
                              <?php if ( ! empty($item['enter_time']) ) : ?>
-                                <span <?php echo $this->get_render_attribute_string( 'bdt-highlight-time' . $item['_id'] ); ?>>
-                                  <span <?php echo $this->get_render_attribute_string( 'bdt-inner-heading-time' ); ?>>
-                                   <span <?php echo $this->get_render_attribute_string( $time_settings ); ?>><?php echo esc_html($item['enter_time']); ?></span>
+                                <span <?php $this->print_render_attribute_string( 'bdt-highlight-time' . $item['_id'] ); ?>>
+                                  <span <?php $this->print_render_attribute_string( 'bdt-inner-heading-time' ); ?>>
+                                   <span <?php $this->print_render_attribute_string( $time_settings ); ?>><?php echo esc_html($item['enter_time']); ?></span>
                                </span>
                            </span>
                        <?php endif; ?>
@@ -1339,10 +1339,10 @@ public function dynamicRender(){
                 }
                 
                 ?>
-                <div <?php echo $this->get_render_attribute_string( 'bdt-bs-background' . $item['_id'] ); ?>>
-                    <div <?php echo $this->get_render_attribute_string( 'bdt-inner-element' ); ?>>
-                     <span <?php echo $this->get_render_attribute_string( 'bdt-highlight-day' . $item['_id'] ); ?>>
-                        <span <?php echo $this->get_render_attribute_string( $day_settings ); ?>>
+                <div <?php $this->print_render_attribute_string( 'bdt-bs-background' . $item['_id'] ); ?>>
+                    <div <?php $this->print_render_attribute_string( 'bdt-inner-element' ); ?>>
+                     <span <?php $this->print_render_attribute_string( 'bdt-highlight-day' . $item['_id'] ); ?>>
+                        <span <?php $this->print_render_attribute_string( $day_settings ); ?>>
                            <?php
                            if($item['dynamic_enter_day_level'] == '')
                             echo esc_html( ucwords($item['dynamic_enter_day']) );
@@ -1354,9 +1354,9 @@ public function dynamicRender(){
                 </span>
                 
                 <?php //if ( ! empty($item['dynamic_start_time']) ) : ?>
-                <span <?php echo $this->get_render_attribute_string( 'bdt-highlight-time' . $item['_id'] ); ?>>
-                   <span <?php echo $this->get_render_attribute_string( 'bdt-inner-heading-time' ); ?>>
-                      <span <?php echo $this->get_render_attribute_string( $time_settings ); ?>>
+                <span <?php $this->print_render_attribute_string( 'bdt-highlight-time' . $item['_id'] ); ?>>
+                   <span <?php $this->print_render_attribute_string( 'bdt-inner-heading-time' ); ?>>
+                      <span <?php $this->print_render_attribute_string( $time_settings ); ?>>
 
                          <?php
                          if ($item['dynamic_close_this'] !='yes'){
@@ -1460,14 +1460,14 @@ if(isset($exStats['2']) && isset($exStats['3'])){
         <div class="bdt-alert-success" data-bdt-alert >
             <a class="bdt-alert-close" data-bdt-close></a>
 
-            <?php echo $officeStatus; ?>
+            <?php echo esc_html($officeStatus); ?>
 
         </div>
         <?php else: ?>
             <div class="bdt-alert-danger" data-bdt-alert >
                 <a class="bdt-alert-close" data-bdt-close></a>
 
-                <?php echo $officeStatus; ?>
+                <?php echo esc_html($officeStatus); ?>
 
             </div>
             <?php

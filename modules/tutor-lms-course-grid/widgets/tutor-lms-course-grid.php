@@ -1846,7 +1846,7 @@ class TutorLms_Course_Grid extends Module_Base {
 		?>
 
 		<div class="bdt-tutor-course-header">
-			<a href="<?php the_permalink(); ?>"> <?php echo $thumbnail_html ?> </a>
+			<a href="<?php the_permalink(); ?>"> <?php echo wp_kses_post($thumbnail_html); ?> </a>
 			<div class="bdt-tutor-course-loop-header-meta">
 				<?php
 				$is_wishlisted = tutor_utils()->is_wishlisted($course_id);
@@ -1856,11 +1856,11 @@ class TutorLms_Course_Grid extends Module_Base {
 				}
 
 				if ('yes' == $settings['show_meta_label']) {
-					echo '<span class="bdt-tutor-course-loop-level">' . get_tutor_course_level() . '</span>';
+					echo '<span class="bdt-tutor-course-loop-level">' . esc_html(get_tutor_course_level()) . '</span>';
 				}
 
 				if ('yes' == $settings['show_meta_wishlist']) {
-					echo '<span class="bdt-tutor-course-wishlist"><a href="javascript:void(0);" class="tutor-icon-fav-line tutor-course-wishlist-btn ' . $has_wish_list . ' " data-course-id="' . $course_id . '"></a> </span>';
+					echo '<span class="bdt-tutor-course-wishlist"><a href="javascript:void(0);" class="tutor-icon-fav-line tutor-course-wishlist-btn ' . esc_attr($has_wish_list) . ' " data-course-id="' . esc_attr($course_id) . '"></a> </span>';
 				}
 
 				?>
@@ -1881,7 +1881,7 @@ class TutorLms_Course_Grid extends Module_Base {
 	?>
 		<div class="bdt-tutor-course-loop-title">
 			<h2>
-				<a href="<?php echo get_the_permalink(); ?>">
+				<a href="<?php the_permalink(); ?>">
 					<?php the_title() ?>
 				</a>
 			</h2>
@@ -1924,7 +1924,7 @@ class TutorLms_Course_Grid extends Module_Base {
 
 	?>
 
-		<div <?php echo $this->get_render_attribute_string('courses'); ?>>
+		<div <?php $this->print_render_attribute_string('courses'); ?>>
 
 		<?php
 	}
@@ -1950,12 +1950,12 @@ class TutorLms_Course_Grid extends Module_Base {
 				$course_students = tutor_utils()->count_enrolled_users_by_course();
 				?>
 				<div class="bdt-tutor-single-loop-meta">
-					<i class='tutor-icon-user'></i><span><?php echo $course_students; ?></span>
+					<i class='tutor-icon-user'></i><span><?php echo esc_html($course_students); ?></span>
 				</div>
 				<?php
 				if (!empty($course_duration)) { ?>
 					<div class="bdt-tutor-single-loop-meta">
-						<i class='tutor-icon-clock'></i> <span><?php echo $course_duration; ?></span>
+						<i class='tutor-icon-clock'></i> <span><?php echo esc_html($course_duration); ?></span>
 					</div>
 				<?php } ?>
 			</div>
@@ -1965,14 +1965,14 @@ class TutorLms_Course_Grid extends Module_Base {
 
 			<?php if ('yes' == $settings['show_author_avatar']) : ?>
 				<div class="bdt-tutor-single-course-avatar">
-					<a href="<?php echo $profile_url; ?>"> <?php echo tutor_utils()->get_tutor_avatar($post->post_author); ?></a>
+					<a href="<?php echo esc_url($profile_url); ?>"> <?php echo wp_kses(tutor_utils()->get_tutor_avatar($post->post_author)); ?></a>
 				</div>
 			<?php endif; ?>
 
 			<?php if ('yes' == $settings['show_author_name']) : ?>
 				<div class="bdt-tutor-single-course-author-name">
-					<span><?php _e('by', 'tutor'); ?></span>
-					<a href="<?php echo $profile_url; ?>"><?php echo get_the_author(); ?></a>
+					<span><?php esc_html_e('by', 'tutor'); ?></span>
+					<a href="<?php echo esc_url($profile_url); ?>"><?php echo get_the_author(); ?></a>
 				</div>
 			<?php endif; ?>
 
@@ -1987,7 +1987,7 @@ class TutorLms_Course_Grid extends Module_Base {
 						foreach ($course_categories as $course_category) {
 							$category_name = $course_category->name;
 							$category_link = get_term_link($course_category->term_id);
-							echo "<a href='$category_link'>$category_name </a>";
+							echo "<a href='" . esc_url($category_link) . "'>" . esc_html($category_name) . "</a>";
 						}
 					}
 					?>
@@ -2051,7 +2051,7 @@ class TutorLms_Course_Grid extends Module_Base {
 					}
 				}
 
-				echo $price_html;
+				echo wp_kses_post($price_html);
 				?>
 			</div>
 		</div>
@@ -2089,8 +2089,8 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_render_attribute('tutor-course-item', 'class', 'bdt-tutor-course bdt-tutor-course-item', true);
 
 	?>
-		<div <?php echo $this->get_render_attribute_string($element_key); ?>>
-			<div <?php echo $this->get_render_attribute_string('tutor-course-item'); ?>>
+		<div <?php $this->print_render_attribute_string($element_key); ?>>
+			<div <?php $this->print_render_attribute_string('tutor-course-item'); ?>>
 				<?php $this->render_thumbnail(); ?>
 				<?php $this->render_desc(); ?>
 			</div>

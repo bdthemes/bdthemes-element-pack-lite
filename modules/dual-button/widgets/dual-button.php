@@ -90,7 +90,9 @@ class DualButton extends Module_Base {
 						'icon' => 'eicon-text-align-right',
 					],
 				],
-				'prefix_class' => 'bdt-element-align%s-',
+				'selectors' => [
+					'{{WRAPPER}} .bdt-element-align-wrapper' => 'justify-content: {{VALUE}};',
+				],
 			]
 		);
 
@@ -1399,7 +1401,7 @@ class DualButton extends Module_Base {
 		$is_new    = empty( $settings['button_a_icon'] ) && Icons_Manager::is_migration_allowed();
 
 		?>
-		<div <?php echo $this->get_render_attribute_string( 'content-wrapper-a' ); ?>>
+		<div <?php $this->print_render_attribute_string( 'content-wrapper-a' ); ?>>
 			<?php if ( ! empty( $settings['button_a_select_icon']['value'] ) ) : ?>
 				<div class="bdt-btn-icon bdt-a-icon bdt-flex-align-<?php echo esc_attr($settings['button_a_icon_align']); ?>">
 					<div class="bdt-ep-button-a-icon-inner">
@@ -1413,7 +1415,7 @@ class DualButton extends Module_Base {
 					</div>
 				</div>
 			<?php endif; ?>
-			<div <?php echo $this->get_render_attribute_string( 'button-a-text' ); ?>><?php echo wp_kses( $settings['button_a_text'], element_pack_allow_tags('title') ); ?></div>
+			<div <?php $this->print_render_attribute_string( 'button-a-text' ); ?>><?php echo wp_kses( $settings['button_a_text'], element_pack_allow_tags('title') ); ?></div>
 		</div>
 		<?php
 	}
@@ -1442,7 +1444,7 @@ class DualButton extends Module_Base {
 		$is_new    = empty( $settings['button_b_icon'] ) && Icons_Manager::is_migration_allowed();
 
 		?>
-		<div <?php echo $this->get_render_attribute_string( 'content-wrapper-b' ); ?>>
+		<div <?php $this->print_render_attribute_string( 'content-wrapper-b' ); ?>>
 			<?php if ( ! empty( $settings['button_b_select_icon']['value'] ) ) : ?>
 				<div class="bdt-btn-icon bdt-btn-b-icon bdt-flex-align-<?php echo esc_attr($settings['button_b_icon_align']); ?>">
 					<div class="bdt-b-icon-inner">
@@ -1456,7 +1458,7 @@ class DualButton extends Module_Base {
 					</div>
 				</div>
 			<?php endif; ?>
-			<div <?php echo $this->get_render_attribute_string( 'button-b-text' ); ?>><?php echo wp_kses( $settings['button_b_text'], element_pack_allow_tags('title') ); ?></div>
+			<div <?php $this->print_render_attribute_string( 'button-b-text' ); ?>><?php echo wp_kses( $settings['button_b_text'], element_pack_allow_tags('title') ); ?></div>
 		</div>
 		<?php
 	}
@@ -1467,35 +1469,11 @@ class DualButton extends Module_Base {
 		$this->add_render_attribute( 'wrapper', 'class', 'bdt-dual-button bdt-ep-button-wrapper bdt-element' );
 
 		if ( ! empty( $settings['button_a_link']['url'] ) ) {
-			$this->add_render_attribute( 'button_a', 'href', $settings['button_a_link']['url'] );
-
-			if ( $settings['button_a_link']['is_external'] ) {
-				$this->add_render_attribute( 'button_a', 'target', '_blank' );
-			}
-
-			if ( $settings['button_a_link']['nofollow'] ) {
-				$this->add_render_attribute( 'button_a', 'rel', 'nofollow' );
-			}
+			$this->add_link_attributes( 'button_a', $settings['button_a_link'] );
 		}
 
 		if ( ! empty( $settings['button_b_link']['url'] ) ) {
-			$this->add_render_attribute( 'button_b', 'href', $settings['button_b_link']['url'] );
-
-			if ( $settings['button_b_link']['is_external'] ) {
-				$this->add_render_attribute( 'button_b', 'target', '_blank' );
-			}
-
-			if ( $settings['button_b_link']['nofollow'] ) {
-				$this->add_render_attribute( 'button_b', 'rel', 'nofollow' );
-			}
-		}
-
-		if ( $settings['button_a_link']['nofollow'] ) {
-			$this->add_render_attribute( 'button_a', 'rel', 'nofollow' );
-		}
-
-		if ( $settings['button_b_link']['nofollow'] ) {
-			$this->add_render_attribute( 'button_b', 'rel', 'nofollow' );
+			$this->add_link_attributes( 'button_b', $settings['button_b_link'] );
 		}
 
 		if ( 'yes' === $settings['button_a_onclick'] ) {
@@ -1506,7 +1484,7 @@ class DualButton extends Module_Base {
 			$this->add_render_attribute( 'button_b', 'onclick', $settings['button_b_onclick_event'] );
 		}
 
-		$this->add_render_attribute( 'button_a', 'class', 'bdt-btn-a bdt-ep-button' );		
+		$this->add_render_attribute( 'button_a', 'class', 'bdt-btn-a bdt-ep-button' );
 		$this->add_render_attribute( 'button_a', 'class', 'bdt-effect-' . esc_attr($settings['button_a_effect']) );
 		$this->add_render_attribute( 'button_a', 'class', 'bdt-ep-button-size-' . esc_attr($settings['dual_button_size']) );
 
@@ -1561,9 +1539,9 @@ class DualButton extends Module_Base {
 		}
 
 		?>
-		<div class="bdt-element-align-wrapper">
-			<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
-				<a <?php echo $this->get_render_attribute_string( 'button_a' ); ?>>
+		<div class="bdt-element-align-wrapper bdt-flex">
+			<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
+				<a <?php $this->print_render_attribute_string( 'button_a' ); ?>>
 					<?php $this->render_text_a($settings); ?>
 				</a>
 
@@ -1571,7 +1549,7 @@ class DualButton extends Module_Base {
 					<span><?php echo esc_attr($settings['middle_text']); ?></span>
 				<?php endif; ?>
 
-				<a <?php echo $this->get_render_attribute_string( 'button_b' ); ?>>
+				<a <?php $this->print_render_attribute_string( 'button_b' ); ?>>
 					<?php $this->render_text_b($settings); ?>
 				</a>
 			</div>

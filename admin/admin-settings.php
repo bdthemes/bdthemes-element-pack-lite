@@ -1225,6 +1225,11 @@ class ElementPack_Admin_Settings {
                     jQuery('a.ep-active-all-widget').removeClass('bdt-active');
                 });
 
+                jQuery('#element_pack_active_modules_page, #element_pack_third_party_widget_page, #element_pack_elementor_extend_page, #element_pack_other_settings_page').find('.ep-pro-inactive .checkbox').each(function() {
+					jQuery(this).removeAttr('checked');
+					jQuery(this).attr("disabled", true);
+				});
+
                 jQuery('form.settings-save').submit(function(event) {
                     event.preventDefault();
 

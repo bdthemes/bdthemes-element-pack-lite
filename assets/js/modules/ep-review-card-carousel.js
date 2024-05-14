@@ -14,7 +14,7 @@
 			return;
 		}
 
-		var $reviewCardCarouselContainer = $reviewCardCarousel.find('.swiper-container'),
+		var $reviewCardCarouselContainer = $reviewCardCarousel.find('.swiper-carousel'),
 			$settings = $reviewCardCarousel.data('settings');
 
 		const Swiper = elementorFrontend.utils.swiper;

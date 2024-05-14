@@ -32,7 +32,6 @@
       $($connectSettings.element_selector).hide();
     }
 
-
     $($searchWidget).on('keyup keypress', function (e) {
       var keyCode = e.keyCode || e.which;
       if (keyCode === 13) {
@@ -59,7 +58,7 @@
             if (response.results.length > 0) {
               if ($search.length >= 3) {
                 var output = `<div class="bdt-search-result-inner">
-                          <h3 class="bdt-search-result-header">SEARCH RESULT<i class="ep-icon-close bdt-search-result-close-btn"></i></h3>
+                          <h3 class="bdt-search-result-header">${window.ElementPackConfig.search.search_result}<i class="ep-icon-close bdt-search-result-close-btn"></i></h3>
                           <ul class="bdt-list bdt-list-divider">`;
                 for (let i = 0; i < response.results.length; i++) {
                   const element = response.results[i];
@@ -120,6 +119,7 @@
     });
 
   };
+
 
   jQuery(window).on('elementor/frontend/init', function () {
     elementorFrontend.hooks.addAction('frontend/element_ready/bdt-search.default', widgetAjaxSearch);

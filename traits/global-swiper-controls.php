@@ -6,6 +6,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Plugin;
 
 
 defined('ABSPATH') || die();
@@ -466,7 +467,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_heading',
 			[
-				'label'     => __('A R R O W S', 'bdthemes-element-pack'),
+				'label'     => __('ARROWS', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation!' => ['dots', 'progressbar', 'none'],
@@ -691,7 +692,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'dots_heading',
 			[
-				'label'     => __('D O T S', 'bdthemes-element-pack'),
+				'label'     => __('DOTS', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -1004,7 +1005,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'fraction_heading',
 			[
-				'label'     => __('F R A C T I O N', 'bdthemes-element-pack'),
+				'label'     => __('FRACTION', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation' => 'arrows-fraction',
@@ -1075,7 +1076,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'progresbar_heading',
 			[
-				'label'     => __('P R O G R E S B A R', 'bdthemes-element-pack'),
+				'label'     => __('PROGRESBAR', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation' => 'progressbar',
@@ -1135,7 +1136,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'scrollbar_heading',
 			[
-				'label'     => __('S C R O L L B A R', 'bdthemes-element-pack'),
+				'label'     => __('SCROLLBAR', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'show_scrollbar' => 'yes'
@@ -1193,7 +1194,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-container-horizontal > .swiper-scrollbar' => 'height: {{SIZE}}px;',
+					'{{WRAPPER}} .swiper-container-horizontal > .swiper-scrollbar, {{WRAPPER}} .swiper-horizontal > .swiper-scrollbar' => 'height: {{SIZE}}px;',
 				],
 				'condition' => [
 					'show_scrollbar' => 'yes'
@@ -1211,7 +1212,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'navi_offset_heading',
 			[
-				'label' => __('O F F S E T', 'bdthemes-element-pack'),
+				'label' => __('OFFSET', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -1727,7 +1728,7 @@ trait Global_Swiper_Controls {
 				'label'     => __('Scrollbar Offset', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
-					'{{WRAPPER}} .swiper-container-horizontal > .swiper-scrollbar' => 'bottom: {{SIZE}}px;',
+					'{{WRAPPER}} .swiper-container-horizontal > .swiper-scrollbar, {{WRAPPER}} .swiper-horizontal > .swiper-scrollbar' => 'bottom: {{SIZE}}px;',
 				],
 				'condition' => [
 					'show_scrollbar' => 'yes'
@@ -1821,25 +1822,15 @@ trait Global_Swiper_Controls {
 								'modifier'     => ("yes" == $settings["coverflow_toggle"]) ? $settings["coverflow_modifier"]["size"] : 1,
 								'slideShadows' => true,
 							],
-
-
-							// "effect" => 'creative',
-							// "creativeEffect" => [
-							// 	"prev" => [
-							// 	  // will set `translateZ(-400px)` on previous slides
-							// 	  "translate" => [0, 0, -400],
-							// 	],
-							// 	"next" => [
-							// 	  // will set `"translate"X(100%)` on next slides
-							// 	  "translate" => ['100%', 0, 0],
-							// 	],
-							// ],
-
+							"watchSlidesProgress" => true,
 						]))
 					]
 				]
 			]
 		);
+
+		$swiper_class = Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+		$this->add_render_attribute('swiper', 'class', 'swiper-carousel ' . $swiper_class);
 	}
 
 	function render_navigation() {
@@ -1850,12 +1841,12 @@ trait Global_Swiper_Controls {
 			<div class="bdt-position-z-index bdt-position-<?php
 															echo esc_attr($settings['arrows_position'] . $hide_arrow_on_mobile); ?>">
 				<div class="bdt-arrows-container bdt-slidenav-container">
-					<a href="" class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
+					<div class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
 						<i class="ep-icon-arrow-left-<?php echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
-					</a>
-					<a href="" class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
+					</div>
+					<div class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
 						<i class="ep-icon-arrow-right-<?php echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
-					</a>
+					</div>
 				</div>
 			</div>
 		<?php
@@ -1875,8 +1866,7 @@ trait Global_Swiper_Controls {
 
 		<?php
 		elseif ('progressbar' == $settings['navigation']) : ?>
-			<div class="swiper-pagination bdt-position-z-index bdt-position-<?php
-																			echo esc_attr($settings['progress_position']); ?>"></div>
+			<div class="swiper-pagination bdt-position-z-index bdt-position-<?php echo esc_attr($settings['progress_position']); ?>"></div>
 		<?php
 		endif;
 	}
@@ -1886,17 +1876,15 @@ trait Global_Swiper_Controls {
 		$hide_arrow_on_mobile = $settings['hide_arrow_on_mobile'] ? 'bdt-visible@m' : '';
 
 		?>
-		<div class="bdt-position-z-index bdt-position-<?php
-														echo esc_attr($settings['both_position']); ?>">
+		<div class="bdt-position-z-index bdt-position-<?php echo esc_attr($settings['both_position']); ?>">
 			<div class="bdt-arrows-dots-container bdt-slidenav-container ">
 
 				<div class="bdt-flex bdt-flex-middle">
 					<div class="<?php
 								echo esc_attr($hide_arrow_on_mobile); ?>">
-						<a href="" class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
-							<i class="ep-icon-arrow-left-<?php
-															echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
-						</a>
+						<div class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
+							<i class="ep-icon-arrow-left-<?php echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
+						</div>
 					</div>
 
 					<?php
@@ -1907,10 +1895,9 @@ trait Global_Swiper_Controls {
 
 					<div class="<?php
 								echo esc_attr($hide_arrow_on_mobile); ?>">
-						<a href="" class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
-							<i class="ep-icon-arrow-right-<?php
-															echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
-						</a>
+						<div class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
+							<i class="ep-icon-arrow-right-<?php echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
+						</div>
 					</div>
 
 				</div>
@@ -1924,17 +1911,14 @@ trait Global_Swiper_Controls {
 		$hide_arrow_on_mobile = $settings['hide_arrow_on_mobile'] ? 'bdt-visible@m' : '';
 
 	?>
-		<div class="bdt-position-z-index bdt-position-<?php
-														echo esc_attr($settings['arrows_fraction_position']); ?>">
+		<div class="bdt-position-z-index bdt-position-<?php echo esc_attr($settings['arrows_fraction_position']); ?>">
 			<div class="bdt-arrows-fraction-container bdt-slidenav-container ">
 
 				<div class="bdt-flex bdt-flex-middle">
-					<div class="<?php
-								echo esc_attr($hide_arrow_on_mobile); ?>">
-						<a href="" class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
-							<i class="ep-icon-arrow-left-<?php
-															echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
-						</a>
+					<div class="<?php echo esc_attr($hide_arrow_on_mobile); ?>">
+						<div class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
+							<i class="ep-icon-arrow-left-<?php echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
+						</div>
 					</div>
 
 					<?php
@@ -1943,12 +1927,10 @@ trait Global_Swiper_Controls {
 					<?php
 					endif; ?>
 
-					<div class="<?php
-								echo esc_attr($hide_arrow_on_mobile); ?>">
-						<a href="" class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
-							<i class="ep-icon-arrow-right-<?php
-															echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
-						</a>
+					<div class="<?php echo esc_attr($hide_arrow_on_mobile); ?>">
+						<div class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
+							<i class="ep-icon-arrow-right-<?php echo esc_attr($settings['nav_arrows_icon']); ?>" aria-hidden="true"></i>
+						</div>
 					</div>
 
 				</div>

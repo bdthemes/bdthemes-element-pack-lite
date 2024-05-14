@@ -4,7 +4,8 @@ namespace ElementPack\Modules\ImageMagnifier\Skins;
 use Elementor\Skin_Base as Elementor_Skin_Base;
 
 use Elementor\Group_Control_Image_Size;     
-use Elementor\Control_Media;;
+use Elementor\Control_Media;
+use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -78,15 +79,18 @@ class Skin_Thumbnail extends Elementor_Skin_Base {
 
 		 ?>
 	      <div class="swiper-slide">
-	      	<img src="<?php echo esc_url($image_url[0]); ?>" alt="<?php echo get_the_title(); ?>">
+	      	<img src="<?php echo esc_url($image_url[0]); ?>" alt="<?php echo esc_html(get_the_title()); ?>">
 	      </div>
 		  <?php
 	}
 
-	public function render_slider_thumbnail($settings) {		
+	public function render_slider_thumbnail($settings) { 
+
+		$swiper_class = Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+		$this->add_render_attribute('swiper', 'class', 'swiper-carousel gallery-top ' . $swiper_class);
 
 		?>
-		<div class="swiper-container gallery-top">
+		<div <?php $this->print_render_attribute_string('swiper'); ?>>
 			<div class="swiper-wrapper">
 				<?php foreach ( $settings['image_magnifier_gallery'] as $index => $item ) : ?>
 					<?php $this->render_image($settings, $item); ?>
@@ -97,8 +101,12 @@ class Skin_Thumbnail extends Elementor_Skin_Base {
 	}
 
 	public function render_slidenav_thumbnail($settings) {
+		
+		$swiper_class = Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+		$this->add_render_attribute('swiper', 'class', 'swiper-carousel gallery-thumbs ' . $swiper_class);
+
 		?>
-		<div class="swiper-container gallery-thumbs">
+		<div <?php $this->print_render_attribute_string('swiper'); ?>>
 		    <div class="swiper-wrapper">
 				<?php foreach ( $settings['image_magnifier_gallery'] as $index => $item ) : ?>
 				      <?php $this->render_image($settings, $item); ?>

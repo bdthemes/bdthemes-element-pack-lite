@@ -487,7 +487,7 @@ class Contact_Form_7 extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['contact_form']) {
-			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Contact Form From Setting!', 'bdthemes-element-pack').'</div>';
+			return '<div class="bdt-alert bdt-alert-warning">'.esc_html__('Please select a Contact Form From Setting!', 'bdthemes-element-pack').'</div>';
 		}
 
 		$attributes = [

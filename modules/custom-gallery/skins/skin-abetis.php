@@ -132,7 +132,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 		);
 
 		?>
-		<div <?php echo $this->parent->get_render_attribute_string( 'overlay-settings' ); ?>>
+		<div <?php $this->parent->print_render_attribute_string( 'overlay-settings' ); ?>>
 			<div class="bdt-custom-gallery-content">
 				<div class="bdt-custom-gallery-content-inner">
 				
@@ -146,7 +146,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 
 						?>
 						<div class="bdt-flex-inline bdt-gallery-item-link-wrapper">
-							<a <?php echo $this->parent->get_render_attribute_string( $element_key ); ?>>
+							<a <?php $this->parent->print_render_attribute_string( $element_key ); ?>>
 								<?php if ( 'icon' == $settings['link_type'] ) : ?>
 									<i class="ep-icon-<?php echo esc_attr( $icon); ?>" aria-hidden="true"></i>
 								<?php elseif ( 'text' == $settings['link_type'] ) : ?>
@@ -219,11 +219,16 @@ class Skin_Abetis extends Elementor_Skin_Base {
 			$this->parent->add_render_attribute('custom-gallery-item-inner', 'data-tilt', '');
 		}
 
+		$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
+
+		$this->parent->add_render_attribute('item-inner', 'class', 'bdt-custom-gallery-inner bdt-transition-toggle bdt-position-relative' . $image_mask);
+
 		foreach ( $settings['gallery'] as $index => $item ) :
 
+
 			?>
-			<div <?php echo $this->parent->get_render_attribute_string( 'custom-gallery-item' ); ?>>
-				<div <?php echo $this->parent->get_render_attribute_string( 'custom-gallery-item-inner' ); ?>>
+			<div <?php $this->parent->print_render_attribute_string( 'custom-gallery-item' ); ?>>
+				<div <?php $this->parent->print_render_attribute_string( 'custom-gallery-item-inner' ); ?>>
 
 					<?php $this->parent->rendar_link($item, 'gallery-item-' . $index); ?>
 					
@@ -233,11 +238,11 @@ class Skin_Abetis extends Elementor_Skin_Base {
 								$this->parent->add_render_attribute( 'gallery-item-' . $index, 'target', '_blank' );
 							} 
 						?>
-						<a <?php echo $this->parent->get_render_attribute_string( 'gallery-item-' . $index ); ?>>
+						<a <?php $this->parent->print_render_attribute_string( 'gallery-item-' . $index ); ?>>
 					<?php endif; ?>
 
 
-					<div class="bdt-custom-gallery-inner bdt-image-mask bdt-transition-toggle bdt-position-relative">
+					<div <?php $this->parent->print_render_attribute_string( 'item-inner' ); ?>>
 						<?php 
 						$this->parent->render_thumbnail($item, 'gallery-item-' . $index);
 						$this->render_overlay($item, 'gallery-item-' . $index );

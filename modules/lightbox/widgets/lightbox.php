@@ -792,9 +792,9 @@ class Lightbox extends Module_Base {
 		$is_new    = empty( $settings['icon'] ) && Icons_Manager::is_migration_allowed();
 		
 		?>
-		<span <?php echo $this->get_render_attribute_string( 'content-wrapper' ); ?>>
+		<span <?php $this->print_render_attribute_string( 'content-wrapper' ); ?>>
 			<?php if ( ! empty( $settings['button_icon']['value'] ) ) : ?>
-			<span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
+			<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
 
 				<?php if ( $is_new || $migrated ) :
 					Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
@@ -804,7 +804,7 @@ class Lightbox extends Module_Base {
 
 			</span>
 			<?php endif; ?>
-			<span <?php echo $this->get_render_attribute_string( 'text' ); ?>><?php echo wp_kses( $settings['button_text'], element_pack_allow_tags('title') ); ?></span>
+			<span <?php $this->print_render_attribute_string( 'text' ); ?>><?php echo wp_kses( $settings['button_text'], element_pack_allow_tags('title') ); ?></span>
 		</span>
 		<?php
 	}
@@ -899,17 +899,17 @@ class Lightbox extends Module_Base {
 		}
 
         ?>
-        <div id="bdt-lightbox-<?php echo esc_attr($id); ?>" <?php echo $this->get_render_attribute_string( 'lightbox-wrapper' ); ?>>              
-			<div <?php echo $this->get_render_attribute_string( 'lightbox' ); ?>>			
+        <div id="bdt-lightbox-<?php echo esc_attr($id); ?>" <?php $this->print_render_attribute_string( 'lightbox-wrapper' ); ?>>              
+			<div <?php $this->print_render_attribute_string( 'lightbox' ); ?>>			
 
-			    <a <?php echo $this->get_render_attribute_string( 'lightbox-content' ); ?>>
+			    <a <?php $this->print_render_attribute_string( 'lightbox-content' ); ?>>
 
 			    	<?php if ( 'poster' == $settings['lightbox_toggler'] ) : ?>
 						<div class="bdt-toggler-poster bdt-background-cover" style="background-image: url('<?php echo esc_url($poster_url); ?>');"></div>
 					<?php endif; ?>
 
 					<?php if ( 'icon' == $settings['lightbox_toggler'] ) : ?>
-				    	<span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
+				    	<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
 							<?php if ( $is_new || $migrated ) :
 								Icons_Manager::render_icon( $settings['lightbox_toggler_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
 							else : ?>
@@ -924,7 +924,7 @@ class Lightbox extends Module_Base {
 		    	</a>
 
 				<?php if ( ! empty($settings['icon_text']) ) : ?>
-				<a <?php echo $this->get_render_attribute_string( 'lightbox-icon-content' ); ?>><?php echo wp_kses( $settings['icon_text'], element_pack_allow_tags('title') ); ?></a>
+				<a <?php $this->print_render_attribute_string( 'lightbox-icon-content' ); ?>><?php echo wp_kses( $settings['icon_text'], element_pack_allow_tags('title') ); ?></a>
 				<?php endif; ?>
 
 			</div>     

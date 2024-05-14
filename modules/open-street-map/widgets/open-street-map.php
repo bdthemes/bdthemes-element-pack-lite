@@ -488,7 +488,7 @@ class Open_Street_Map extends Module_Base {
 				$marker_settings['lat']        = ( $marker_item['marker_lat'] ) ? $marker_item['marker_lat'] : '';
 				$marker_settings['lng']        = ( $marker_item['marker_lng'] ) ? $marker_item['marker_lng'] : '';
 				$marker_settings['title']      = ( $marker_item['marker_title'] ) ? $marker_item['marker_title'] : '';
-				$marker_settings['iconUrl']    = ( $marker_item['custom_marker']['url'] ) ? $marker_item['custom_marker']['url'] : '';
+				$marker_settings['iconUrl']    = ( $marker_item['custom_marker']['url'] ) ? $marker_item['custom_marker']['url'] : BDTEP_ASSETS_URL . 'images/marker-icon.png';
 				$marker_settings['infoWindow'] = ( $marker_item['marker_content'] ) ? $marker_item['marker_content'] : '';
 
 				$all_markers[] = $marker_settings;
@@ -510,7 +510,7 @@ class Open_Street_Map extends Module_Base {
 			
 
 			?>
-			<div class="bdt-open-street-map" style="width: auto; min-height: 400px;" <?php echo $this->get_render_attribute_string( 'open-street-map' ); ?>></div>
+			<div class="bdt-open-street-map" style="width: auto; min-height: 400px;" <?php $this->print_render_attribute_string( 'open-street-map' ); ?>></div>
 		    <?php
 	}
 } 

@@ -63,6 +63,7 @@
 
     jQuery(window).on('elementor/frontend/init', function() {
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-accordion.default', widgetAccordion);
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-acf-accordion.default', widgetAccordion);
     });
 
 }(jQuery, window.elementorFrontend));
