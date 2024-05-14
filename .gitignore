@@ -1,0 +1,8 @@
+.DS_Store
+bdthemes-element-pack-lite.zip
+.sync.ffs_db
+*.DS_Store
+*.po
+*.mo
+*.zip
+*sync.ffs_db
