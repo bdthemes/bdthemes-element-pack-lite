@@ -10,11 +10,8 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
 {
     protected $source = null;
 
-
     public function __construct()
     {
-//        error_reporting(E_ALL);
-//        ini_set('display_errors', 1);
         parent::__construct();
         add_action('wp_ajax_bdt_element_pack_template_library_get_layouts', [$this, 'get_layouts']);
         add_action('wp_ajax_bdt_element_pack_template_library_making_syncing', [$this, 'sync_now']);
@@ -32,14 +29,14 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
                 $editor_post_id = absint( $data['editor_post_id'] );
 
                 if ( ! get_post( $editor_post_id ) ) {
-                    throw new \Exception( __( 'Post not found', 'bdthemes-element-pack' ) );
+                    throw new \Exception( esc_html__( 'Post not found', 'bdthemes-element-pack' ) );
                 }
 
                 \Elementor\Plugin::instance()->db->switch_to_post( $editor_post_id );
             }
 
             if ( empty( $data['template_id'] ) ) {
-                throw new \Exception( __( 'Template id missing', 'bdthemes-element-pack' ) );
+                throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack' ) );
             }
 
             return $this->get_template_data( $data );
@@ -51,11 +48,11 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         $result = $this->findDemo($args['template_id']);
 
         if(!is_array($result) || !isset($result['json_url'])){
-            throw new \Exception( __( 'Template id missing', 'bdthemes-element-pack' ) );
+            throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack' ) );
         }
 
         if($result['is_pro'] == 1 && !$this->packLicenseActivated){
-            throw new \Exception( __( 'required_activated_license', 'bdthemes-element-pack' ) );
+            throw new \Exception( esc_html__( 'required_activated_license', 'bdthemes-element-pack' ) );
         }
 
         $args['demo_json'] = $result['json_url'];
@@ -76,13 +73,15 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         $this->checkDemoData();
         $demoDataType = $this->demoType;
         // Table Info
+        global $wpdb;
+        $table_prefix = $wpdb->prefix;
         $postTable      = $this->table_post;
         $postCatTable   = $this->table_cat_post;
         $catTable       = $this->table_cat;
 
         $demoData = $this->wpdb->get_results("SELECT COUNT(*) as ttotal, {$catTable}.* FROM {$postTable}
  LEFT JOIN {$postCatTable}  ON {$postTable}.demo_id = {$postCatTable} .demo_id
-LEFT JOIN {$catTable} ON {$catTable}.term_id = wp_ep_template_library_cat_post.term_id
+LEFT JOIN {$catTable} ON {$catTable}.term_id = {$table_prefix}ep_template_library_cat_post.term_id
  WHERE type={$demoDataType} GROUP BY term_id", ARRAY_A);
 
         $navItems = array();

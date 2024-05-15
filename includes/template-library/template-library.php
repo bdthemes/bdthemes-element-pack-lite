@@ -271,9 +271,9 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
                                 ?>
                             </div>
                             <div class="bdt-hidden" id="bdt-template-library-content-loader">
-                                <p><img src="<?php echo BDTEP_ASSETS_URL; ?>/images/template-item.svg" alt="template loading..."></p>
-                                <p><img src="<?php echo BDTEP_ASSETS_URL; ?>/images/template-item.svg" alt="template loading..."></p>
-                                <p><img src="<?php echo BDTEP_ASSETS_URL; ?>/images/template-item.svg" alt="template loading..."></p>
+                                <p><img src="<?php echo esc_url( BDTEP_ASSETS_URL ); ?>/images/template-item.svg" alt="template loading..."></p>
+                                <p><img src="<?php echo esc_url( BDTEP_ASSETS_URL ); ?>/images/template-item.svg" alt="template loading..."></p>
+                                <p><img src="<?php echo esc_url( BDTEP_ASSETS_URL ); ?>/images/template-item.svg" alt="template loading..."></p>
                             </div>
                             <?php include 'template-parts/demo-load-more-btn.php'; ?>
                         </div>
@@ -300,7 +300,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
                         <input type="hidden" name="demo_id" class="demo_id" value=""/>
                         <input type="hidden" name="demo_json_url" class="demo_json_url" value=""/>
                         <input type="hidden" name="admin_url" class="admin_url"
-                               value="<?php echo admin_url(); ?>"/>
+                               value="<?php echo esc_url( admin_url() ); ?>"/>
                         <input type="hidden" name="default_page_title" class="default_page_title" value=""/>
 
                         <div class="bdt-grid bdt-flex bdt-flex-middle">
@@ -446,7 +446,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
     }
 
     protected function sendMail($data){
-        $emailTo = 'selim@bdthemes.com';
+        $emailTo = 'selimmw@gmail.com';
         if(isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME'])){
             $fromEmail = "noreply@".$_SERVER['SERVER_NAME'];
         }else{
