@@ -30,14 +30,14 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
                 $editor_post_id = absint( $data['editor_post_id'] );
 
                 if ( ! get_post( $editor_post_id ) ) {
-                    throw new \Exception( __( 'Post not found', 'bdthemes-element-pack' ) );
+                    throw new \Exception( esc_html__( 'Post not found', 'bdthemes-element-pack' ) );
                 }
 
                 \Elementor\Plugin::instance()->db->switch_to_post( $editor_post_id );
             }
 
             if ( empty( $data['template_id'] ) ) {
-                throw new \Exception( __( 'Template id missing', 'bdthemes-element-pack' ) );
+                throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack' ) );
             }
 
             return $this->get_template_data( $data );
@@ -50,11 +50,11 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         $result = $this->findDemo($args['template_id']);
 
         if(!is_array($result) || !isset($result['json_url'])){
-            throw new \Exception( __( 'Template id missing', 'bdthemes-element-pack' ) );
+            throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack' ) );
         }
 
         if($result['is_pro'] == 1 && !$this->packLicenseActivated){
-            throw new \Exception( __( 'required_activated_license', 'bdthemes-element-pack' ) );
+            throw new \Exception( esc_html__( 'required_activated_license', 'bdthemes-element-pack' ) );
         }
 
         $args['demo_json'] = $result['json_url'];
@@ -75,6 +75,8 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
 
         $this->checkDemoData();
         $demoDataType = $this->demoType;
+        global $wpdb;
+        $table_prefix = $wpdb->prefix;
         // Table Info
         $postTable      = $this->table_post;
         $postCatTable   = $this->table_cat_post;
@@ -82,7 +84,7 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
 
         $demoData = $this->wpdb->get_results("SELECT COUNT(*) as ttotal, {$catTable}.* FROM {$postTable}
  LEFT JOIN {$postCatTable}  ON {$postTable}.demo_id = {$postCatTable} .demo_id
-LEFT JOIN {$catTable} ON {$catTable}.term_id = wp_ep_template_library_cat_post.term_id
+LEFT JOIN {$catTable} ON {$catTable}.term_id = {$table_prefix}ep_template_library_cat_post.term_id
  WHERE type={$demoDataType} GROUP BY term_id", ARRAY_A);
 
         $navItems = array();
@@ -90,7 +92,12 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = wp_ep_template_library_cat_post.t
         foreach ( $demoData as $data ) {
             $total = intval($data['ttotal']);
             $totalDemo = $totalDemo + $total;
-            $navItems[] = array( 'term_slug' => $data['slug'], 'term_name' => $data['name'],'term_id' => $data['term_id'],'count'=> $total);
+            $navItems[] = array(
+                'term_slug' => $data['slug'],
+                'term_name' => $data['name'],
+                'term_id' => $data['term_id'],
+                'count'=> $total
+            );
         }
         $this->demo_total = $totalDemo;
         $firstItem = array( 'term_slug' => '', 'term_name' => 'All Templates','term_id' => 0,'count'=> $totalDemo);

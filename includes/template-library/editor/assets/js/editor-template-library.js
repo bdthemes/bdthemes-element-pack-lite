@@ -354,6 +354,14 @@
                         templates : templates,
                         categories: categories
                     }, _this.layout.showTemplatesView(templates, categories)
+
+                    if (e.data.templates.length <= 0){
+                        let url = document.location.origin;
+                        let msg = `System issues, please try again later. Don't forget to click over Sync Library. Or contact our support team (support@bdthemes.com). Don't forget to send your domain ${url}`;
+
+                        alert(msg);
+                    }
+                    
                 }
             })
         },
@@ -370,6 +378,14 @@
                     tabData.data.templates = '';
                     tabData.data.categories = '';
                     _this.getTemplatedata(currentTab);
+
+                    if ( e.data.length <= 0 ){
+                        let url = document.location.origin;
+                        let msg = `System issues, please try again later. Don't forget to click over Sync Library. Or contact our support team (support@bdthemes.com). Don't forget to send your domain ${url}`;
+
+                        // alert(msg);
+                    }
+                    
                 }
             })
         },

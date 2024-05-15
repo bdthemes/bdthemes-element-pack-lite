@@ -24,8 +24,8 @@ if (!$demo_thumb) {
 }
 ?>
 <div class="demo-importer-template-item demo-importer-template-item-index"
-     data-demo="<?php echo esc_attr($template_date) ?>"
-     data-title="<?php echo strtolower($demo_title) ?> <?php echo strtolower($tagsString); ?>"
+     data-demo="<?php echo esc_attr($template_date); ?>"
+     data-title="<?php echo esc_attr( strtolower($demo_title)); ?> <?php echo esc_attr( strtolower($tagsString) ); ?>"
      data-category="<?php echo esc_attr($termslug); ?>"
      data-pro="<?php echo esc_attr($is_pro); ?>">
     <div class="bdt-hidden plugin-content-item">
@@ -40,7 +40,7 @@ if (!$demo_thumb) {
 
     <div class="bdt-template-library-item bdt-pro bdt-card bdt-card-default <?php echo esc_attr(($is_new_demo) ? 'new-template' : '') ?>">
         <div class="thumbnail bdt-position-relative">
-            <img src="<?php echo $demo_thumb ?>" alt="<?php echo esc_attr($demo_title) ?>">
+            <img src="<?php echo esc_url( $demo_thumb ); ?>" alt="<?php echo esc_attr($demo_title) ?>">
 
             <div class="bdt-position-top-right bdt-position-small">
                 <span class="bdt-badge bdt-background-<?php echo esc_html(($is_pro == 1) ? 'pro' : 'free') ?>">

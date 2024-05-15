@@ -125,27 +125,6 @@ trait Group_Control_Query {
             ]
         );
 
-        /**
-         * ! TODO FOR NEXT DAY ADDED BY TALIB
-         */
-
-        // $this->update_control(
-        // 	'posts_include_term_ids',
-        // 	[
-        // 		'label'     => __('Terms', 'bdthemes-element-pack'),
-        // 		'type'      => Controls_Manager::SELECT2,
-        // 		'multiple'  => true,
-        // 		'label_block' => true,
-        // 		'options'   => $this->ep_get_supported_taxonomies(),
-        // 		'condition' => [
-        // 			'posts_include_by'   => 'terms',
-        // 			'posts_source' => [
-        // 				'_related_post_type',
-        // 			],
-        // 		],
-        // 	]
-        // );
-
         $this->end_controls_tab();
 
         $this->start_controls_tab(

@@ -16,7 +16,7 @@ class Library_Source extends Source_Base {
 	}
 
 	public function get_title() {
-		return __( 'ElementPack Library', 'bdthemes-element-pack' );
+		return esc_html__( 'ElementPack Library', 'bdthemes-element-pack' );
 	}
 
 	public function register_data() {}
@@ -80,7 +80,6 @@ class Library_Source extends Source_Base {
 	 * Get library data from remote source and cache
 	 *
 	 * @param boolean $force_update
-	 * @return array
 	 */
 	private static function request_library_data( $force_update = false ) {
 		$data = get_option( self::LIBRARY_CACHE_KEY );
@@ -163,7 +162,7 @@ class Library_Source extends Source_Base {
 		$data = json_decode( $data, true );
 
 		if ( empty( $data ) || empty( $data['content'] ) ) {
-			throw new \Exception( __( 'Template does not have any content', 'bdthemes-element-pack' ) );
+			throw new \Exception( esc_html__( 'Template does not have any content', 'bdthemes-element-pack' ) );
 		}
 
 		$data['content'] = $this->replace_elements_ids( $data['content'] );
