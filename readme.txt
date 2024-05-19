@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, soha
 Donate link: http://bdthemes.com/
 Tags:  elementor addons, elementor widget, elementor extensions, elementor addon, addons
 Requires at least: 5.0.0
-Tested up to: 6.5.2
+Tested up to: 6.5.3
 Requires PHP: 7.4.0
-Stable tag: 5.6.3
+Stable tag: 5.6.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.21.4
+Elementor tested up to: 3.21.5
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -256,6 +256,14 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.6.4 [19th May 2024] =
+
+* Fixed: HTML tag issue fixed in Business Hours widget (Thanks to Charles)
+* Fixed: Accessibility issue fixed in Search widget (Thanks to Steffen Heinz)
+* Fixed: Column Selector issue fixed in Equal Height extension (Thanks to Joy)
+* Updated: Security improved in Creative Button widget
+* Updated: Email Spamming improved in Simple Contact Form widget
 
 = 5.6.3 [2nd May 2024] =
 
