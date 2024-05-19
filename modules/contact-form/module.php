@@ -41,6 +41,29 @@ class Module extends Element_Pack_Module_Base {
         return false;
     }
 
+
+	public function normalize_email( $email ) {
+		/**
+         * Split the email into local part and domain
+         */
+		list( $local, $domain ) = explode( '@', $email );
+
+		/**
+         * Remove any text after the plus sign in the local part
+         */
+		if ( ( $plusPos = strpos( $local, '+' ) ) !== false ) {
+			$local = substr( $local, 0, $plusPos );
+		}
+
+		/**
+         * Return the normalized email
+         */
+		return $local . '@' . $domain;
+	}
+
+	public function are_emails_same( $email1, $email2 ) {
+		return $this->normalize_email( $email1 ) === $this->normalize_email( $email2 );
+	}
     public function contact_form() {
 
         $email               = get_bloginfo('admin_email');
@@ -98,10 +121,12 @@ class Module extends Element_Pack_Module_Base {
                 $result = $error_noemail;
             }
 
-            // Stop spamming
+            /**
+             * Stop spamming
+             */
             if (!$error) {
                 $admin_email = get_option('admin_email');
-                if ($admin_email == trim($form_data['email']) || $email == trim($form_data['email'])) {
+                if ( $this->are_emails_same( wp_kses_post( trim( $form_data['email'] ) ), $admin_email ) || $admin_email == wp_kses_post(trim($form_data['email'])) || $email == wp_kses_post(trim($form_data['email']))) {
                     $error  = true;
                     $result = $error_same_as_admin;
                 } else {
@@ -118,6 +143,7 @@ class Module extends Element_Pack_Module_Base {
                     }
                 }
             }
+
             /** Recaptcha*/
 
 

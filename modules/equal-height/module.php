@@ -92,7 +92,7 @@ class Module extends Element_Pack_Module_Base {
 			$height_option = '';
 
 			if ('column' == $settings['section_equal_height_selector']) {
-				$height_option = 'target: .ep-section-eql-height .elementor-element';
+				$height_option = 'target: .ep-section-eql-height > .elementor-element';
 			}
 
 			if ('widgets' == $settings['section_equal_height_selector']) {

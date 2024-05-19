@@ -1460,14 +1460,14 @@ if(isset($exStats['2']) && isset($exStats['3'])){
         <div class="bdt-alert-success" data-bdt-alert >
             <a class="bdt-alert-close" data-bdt-close></a>
 
-            <?php echo esc_html($officeStatus); ?>
+            <?php echo wp_kses_post($officeStatus); ?>
 
         </div>
         <?php else: ?>
             <div class="bdt-alert-danger" data-bdt-alert >
                 <a class="bdt-alert-close" data-bdt-close></a>
 
-                <?php echo esc_html($officeStatus); ?>
+                <?php echo wp_kses_post($officeStatus); ?>
 
             </div>
             <?php

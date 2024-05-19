@@ -148,7 +148,7 @@ class Creative_Button extends Module_Base {
 				'label'       => esc_html__( 'OnClick Event', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'myFunction()',
-				'description' => sprintf( esc_html__('For details please look <a href="%s" target="_blank">here</a>'), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
+				'description' => sprintf( wp_kses_post('For details please look <a href="%s" target="_blank">here</a>'), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
 				'condition' => [
 					'onclick' => 'yes'
 				]
@@ -634,7 +634,7 @@ class Creative_Button extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if ( ! empty( $settings['link']['url'] ) ) {
-			$this->add_link_attributes( 'creative_button', $settings['link'] );
+			$this->add_link_attributes( 'creative_button', $settings['link']);
 		}
 
 		if ( $settings['link']['nofollow'] ) {
@@ -642,11 +642,11 @@ class Creative_Button extends Module_Base {
 		}
 
 		if ($settings['onclick']) {
-			$this->add_render_attribute( 'creative_button', 'onclick', $settings['onclick_event'] );
+			$this->add_render_attribute( 'creative_button', 'onclick', esc_attr($settings['onclick_event']) );
 		}
 
-		if ( $settings['add_custom_attributes'] and ! empty( $settings['custom_attributes'] ) ) {
-			$attributes = explode( "\n", $settings['custom_attributes'] );
+		if ( $settings['add_custom_attributes'] && isset( $settings['custom_attributes'] ) && ! empty( $settings['custom_attributes'] ) ) {
+			$attributes = explode( "\n", wp_kses_post( $settings['custom_attributes'] ) );
 
 			$reserved_attr = [ 'href', 'target' ];
 
@@ -658,7 +658,7 @@ class Creative_Button extends Module_Base {
 					}
 
 					if ( ! in_array( strtolower( $attr[0] ), $reserved_attr ) ) {
-						$this->add_render_attribute( 'creative_button', trim( $attr[0] ), trim( $attr[1] ) );
+						$this->add_render_attribute( 'creative_button', trim( $attr[0] ), wp_kses_post( trim( $attr[1] ) ) );
 					}
 				}
 			}
@@ -668,11 +668,11 @@ class Creative_Button extends Module_Base {
 		$this->add_render_attribute( 'creative_button', 'class', 'bdt-ep-creative-button--' . esc_attr($settings['button_style']) );
 
 		if ( $settings['hover_animation'] ) {
-			$this->add_render_attribute( 'creative_button', 'class', 'elementor-animation-' . $settings['hover_animation'] );
+			$this->add_render_attribute( 'creative_button', 'class', 'elementor-animation-' . esc_attr($settings['hover_animation']) );
 		}
 
 		if ( ! empty( $settings['button_css_id'] ) ) {
-			$this->add_render_attribute( 'creative_button', 'id', $settings['button_css_id'] );
+			$this->add_render_attribute( 'creative_button', 'id', esc_attr($settings['button_css_id']) );
 		}
 
 		?>
