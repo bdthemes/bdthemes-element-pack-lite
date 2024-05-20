@@ -257,7 +257,7 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
-= 5.6.4 [19th May 2024] =
+= 5.6.4 [20th May 2024] =
 
 * Fixed: HTML tag issue fixed in Business Hours widget (Thanks to Charles)
 * Fixed: Accessibility issue fixed in Search widget (Thanks to Steffen Heinz)
