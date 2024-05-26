@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.5.3
 Requires PHP: 7.4.0
-Stable tag: 5.6.4
+Stable tag: 5.6.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.21.5
+Elementor tested up to: 3.21.7
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -213,6 +213,8 @@ Feel free to [Contact us](https://bdthemes.com/support/) 💌 or check our widge
 
 == Check out our other Addons 👑 ==
 
+* **[ZoloBlocks](https://wordpress.org/plugins/zoloblocks/)** 🆕☀️ - Mind-blowing dynamic block plugin for Gutenberg with powerful and advanced features offering greater web design experience.
+
 * **[Prime Slider](https://wordpress.org/plugins/bdthemes-prime-slider-lite/)** - The revolutionary slider builder addon with next-gen superb interface.
 
 * **[Ultimate Post Kit](https://wordpress.org/plugins/ultimate-post-kit/)** - Best blogging addon for building quality blogging website with fine-tuned features and widgets.
@@ -256,6 +258,11 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.6.5 [27th May 2024] =
+
+* Fixed: Close Button issue fixed in Search widget (Thanks to Andre Head)
+* Fixed: Swiper carousel autoplay interaction issue fixed
 
 = 5.6.4 [20th May 2024] =
 

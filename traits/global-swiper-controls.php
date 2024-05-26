@@ -1775,7 +1775,7 @@ trait Global_Swiper_Controls {
 				'carousel' => [
 					'data-settings' => [
 						wp_json_encode(array_filter([
-							"autoplay"              => ("yes" == $settings["autoplay"]) ? ["delay"                                                => $settings["autoplay_speed"]] : false,
+							"autoplay"              => ("yes" == $settings["autoplay"]) ? ["delay" => $settings["autoplay_speed"], "disableOnInteraction" => false] : false,
 							"loop"                  => ($settings["loop"] == "yes") ? true : false,
 							"speed"                 => $settings["speed"]["size"],
 							"pauseOnHover"          => ("yes" == $settings["pauseonhover"]) ? true : false,
