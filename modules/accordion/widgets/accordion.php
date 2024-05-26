@@ -13,7 +13,7 @@ use ElementPack\Traits\Global_Widget_Controls;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-} // Exit if accessed directly so no one can access our file.
+} // Exit if accessed directly
 
 class Accordion extends Module_Base {
 	use Global_Widget_Controls;

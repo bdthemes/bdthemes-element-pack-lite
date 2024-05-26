@@ -1768,6 +1768,10 @@ $(window).on('elementor/frontend/init', function () {
     var $searchContainer = $scope.find('.bdt-search-container'),
       $searchWidget = $scope.find('.bdt-ajax-search');
 
+    $($scope).find('.bdt-navbar-dropdown-close').on('click', function () {
+      bdtUIkit.drop($scope.find('.bdt-navbar-dropdown')).hide();
+    });
+
     let $search;
 
     if (!$searchWidget.length) {
