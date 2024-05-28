@@ -9,7 +9,7 @@ Stable tag: 5.6.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.21.7
+Elementor tested up to: 3.21.8
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -259,8 +259,9 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
-= 5.6.5 [27th May 2024] =
+= 5.6.5 [28th May 2024] =
 
+* Added: Modal Close Button controls added in search widget
 * Fixed: Close Button issue fixed in Search widget (Thanks to Andre Head)
 * Fixed: Swiper carousel autoplay interaction issue fixed
 

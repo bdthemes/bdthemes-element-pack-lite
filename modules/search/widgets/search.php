@@ -169,6 +169,7 @@ class Search extends Module_Base {
 			[
 				'label'   => esc_html__('Dropbar Position', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SELECT,
+				'default' => 'bottom-left',
 				'options' => [
 					'bottom-left'    => esc_html__('Bottom Left', 'bdthemes-element-pack'),
 					'bottom-center'  => esc_html__('Bottom Center', 'bdthemes-element-pack'),
@@ -655,6 +656,9 @@ class Search extends Module_Base {
 			[
 				'label' => esc_html__('Search Container', 'bdthemes-element-pack'),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'skin!' => 'modal'
+				]
 			]
 		);
 
@@ -668,7 +672,7 @@ class Search extends Module_Base {
 					'{{WRAPPER}} .bdt-navbar-dropdown-close.bdt-icon.bdt-close svg *' => 'fill: {{VALUE}};',
 				],
 				'condition' => [
-					'skin!' => 'default',
+					'skin' => 'dropdown',
 				],
 			]
 		);
@@ -995,6 +999,161 @@ class Search extends Module_Base {
 
 		$this->end_controls_section();
 
+		/**
+		 * Modal Close Button Style
+		 */
+		$this->start_controls_section(
+			'section_modal_close_button_style',
+			[
+				'label'     => esc_html__('Modal Close Button', 'bdthemes-element-pack') . BDTEP_NC,
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'skin' => 'modal'
+				]
+			]
+		);
+
+		$this->start_controls_tabs('tabs_modal_close_button_style');
+		
+		$this->start_controls_tab(
+			'tab_modal_close_button_normal',
+			[
+				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+			]
+		);
+		
+		$this->add_control(
+			'modal_close_button_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal-search-{{ID}} .bdt-modal-close-full' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'modal_close_button_background',
+				'types'    => ['classic', 'gradient'],
+				'exclude'  => ['image'],
+				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full',
+			]
+		);
+		
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'modal_close_button_border',
+				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full',
+				'separator' => 'before',
+			]
+		);
+		
+		$this->add_responsive_control(
+			'modal_close_button_radius',
+			[
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'selectors'  => [
+					'#modal-search-{{ID}} .bdt-modal-close-full' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'modal_close_button_padding',
+			[
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'#modal-search-{{ID}} .bdt-modal-close-full' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'modal_close_button_margin',
+			[
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'#modal-search-{{ID}} .bdt-modal-close-full' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'modal_close_button_shadow',
+				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full',
+			]
+		);
+		
+		$this->end_controls_tab();
+		
+		$this->start_controls_tab(
+			'tab_modal_close_button_hover',
+			[
+				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+			]
+		);
+		
+		$this->add_control(
+			'modal_close_button_color_hover',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal-search-{{ID}} .bdt-modal-close-full:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'modal_close_button_background_hover',
+				'types'    => ['classic', 'gradient'],
+				'exclude'  => ['image'],
+				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full:hover',
+			]
+		);
+		
+		$this->add_control(
+			'modal_close_button_border_color_hover',
+			[
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal-search-{{ID}} .bdt-modal-close-full:hover' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'modal_close_button_border_border!' => '',
+				],
+			]
+		);
+		
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'modal_close_button_shadow_hover',
+				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full:hover',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
 
 		$this->start_controls_section(
 			'section_search_ajax_style',
@@ -1035,7 +1194,7 @@ class Search extends Module_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => ['px', '%', 'em'],
 				'selectors'             => [
-					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result '    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-inner'    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator'             => 'before',
 			]
@@ -1214,7 +1373,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'ajax_search_close_button_heading',
 			[
-				'label'     => __('C L O S E    B U T T O N', 'plugin-domain'),
+				'label'     => __('CLOSE BUTTON', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1231,22 +1390,22 @@ class Search extends Module_Base {
 			]
 		);
 		$this->add_control(
-			'close_btn_bg_color',
-			[
-				'label'     => __('Background Color', 'bdthemes-element-pack'),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn' => 'background-color: {{VALUE}}',
-				],
-			]
-		);
-		$this->add_control(
 			'close_btn_hover_color',
 			[
 				'label'     => __('Hover Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn:hover' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'close_btn_bg_color',
+			[
+				'label'     => __('Background Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn' => 'background-color: {{VALUE}}',
 				],
 			]
 		);
@@ -1260,10 +1419,22 @@ class Search extends Module_Base {
 				],
 			]
 		);
+		$this->add_responsive_control(
+			'close_btn_border_radius',
+			[
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'selectors'  => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				],
+			]
+		);
+
 		$this->add_control(
 			'ajx_search_dropdown_divider_heading',
 			[
-				'label'     => __('D I V I D E R', 'plugin-domain'),
+				'label'     => __('DIVIDER', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1284,7 +1455,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'ajax_search_empty_heading',
 			[
-				'label'     => __('N O   P O S T ', 'plugin-domain'),
+				'label'     => __('NO POST', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1650,7 +1821,7 @@ class Search extends Module_Base {
 						</form>
 					</div>
 					<div class="bdt-width-auto">
-						<a class="bdt-navbar-dropdown-close" href="#" bdt-close></a>
+						<a class="bdt-navbar-dropdown-close" href="javascript:void(0)" bdt-close></a>
 					</div>
 				</div>
 
