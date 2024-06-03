@@ -1270,7 +1270,7 @@ class Member extends Module_Base {
 				<div class="bdt-member-icons">
 					<?php
 					foreach ( $settings['social_link_list'] as $link ) :
-						$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' data-bdt-tooltip="' . $link['social_link_title'] . '"' : ''; ?>
+						$tooltip = 'yes' == $settings['social_icon_tooltip'] ? ' data-bdt-tooltip="' . wp_kses_post( $link['social_link_title'] ) . '"' : ''; ?>
 
 						<?php
 						$migrated = isset( $link['__fa4_migrated']['social_share_icon'] );

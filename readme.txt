@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.5.3
 Requires PHP: 7.4.0
-Stable tag: 5.6.5
+Stable tag: 5.6.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -258,6 +258,11 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.6.6 [3rd June 2024] =
+
+* Added: Content align option added in panel slider widget
+* Added: Modal close icon size option added in search widget
 
 = 5.6.5 [28th May 2024] =
 

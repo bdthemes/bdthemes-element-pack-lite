@@ -9,6 +9,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Text_Stroke;
+use Elementor\Group_Control_Text_Shadow;
 use Elementor\Icons_Manager;
 use Elementor\Repeater;
 use Elementor\Plugin;
@@ -67,10 +68,95 @@ class Panel_Slider extends Module_Base {
 	}
 
 	protected function register_controls() {
+
+		$this->start_controls_section(
+			'section_content_sliders',
+			[ 
+				'label' => esc_html__( 'Slider Item', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'tab_title',
+			[ 
+				'label'       => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
+				'default'     => esc_html__( 'Slide Title', 'bdthemes-element-pack' ),
+				'label_block' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'tab_image',
+			[ 
+				'label'       => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::MEDIA,
+				'dynamic'     => [ 'active' => true ],
+				'description' => __( 'Use same size ratio image', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$repeater->add_control(
+			'tab_content',
+			[ 
+				'label'      => esc_html__( 'Content', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::WYSIWYG,
+				'dynamic'    => [ 'active' => true ],
+				'default'    => esc_html__( 'Slide Content', 'bdthemes-element-pack' ),
+				'show_label' => false,
+			]
+		);
+
+		$repeater->add_control(
+			'tab_link',
+			[ 
+				'label'       => esc_html__( 'Link', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::URL,
+				'dynamic'     => [ 'active' => true ],
+				'placeholder' => 'http://your-link.com',
+				'default'     => [ 
+					'url' => '#',
+				],
+			]
+		);
+
+		$this->add_control(
+			'tabs',
+			[ 
+				'label'       => esc_html__( 'Items', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::REPEATER,
+				'fields'      => $repeater->get_controls(),
+				'default'     => [ 
+					[ 
+						'tab_title'   => esc_html__( 'Slide #1', 'bdthemes-element-pack' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+					],
+					[ 
+						'tab_title'   => esc_html__( 'Slide #2', 'bdthemes-element-pack' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+					],
+					[ 
+						'tab_title'   => esc_html__( 'Slide #3', 'bdthemes-element-pack' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+					],
+					[ 
+						'tab_title'   => esc_html__( 'Slide #4', 'bdthemes-element-pack' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+					],
+				],
+				'title_field' => '{{{ tab_title }}}',
+			]
+		);
+
+		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -140,7 +226,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'column_space',
 			[ 
-				'label' => esc_html__( 'Column Space', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SLIDER,
 			]
 		);
@@ -169,6 +255,17 @@ class Panel_Slider extends Module_Base {
 				'selectors'  => [ 
 					'{{WRAPPER}} .swiper-wrapper' => 'height: {{SIZE}}{{UNIT}};'
 				]
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			[ 
+				'name'      => 'thumbnail_size',
+				'label'     => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
+				'exclude'   => [ 'custom' ],
+				'default'   => 'full',
+				'separator' => 'before'
 			]
 		);
 
@@ -201,9 +298,9 @@ class Panel_Slider extends Module_Base {
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
 				'description' => 'It will work when link field no null.',
-				'condition'   => [ 
-					'_skin!' => 'bdt-middle',
-				],
+				// 'condition'   => [ 
+				// 	'_skin!' => 'bdt-middle',
+				// ],
 			]
 		);
 
@@ -230,9 +327,33 @@ class Panel_Slider extends Module_Base {
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
-				// 'prefix_class' => 'elementor%s-align-',
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slider' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'vertical_align_content',
+			[ 
+				'label'     => esc_html__( 'Align Content', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [ 
+					'flex-start'    => [ 
+						'title' => esc_html__( 'Top', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'center' => [ 
+						'title' => esc_html__( 'Middle', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'flex-end' => [ 
+						'title' => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-panel-slide-desc' => 'align-content: {{VALUE}};',
 				],
 			]
 		);
@@ -256,7 +377,19 @@ class Panel_Slider extends Module_Base {
 				],
 				'condition' => [ 
 					'_skin!' => 'bdt-middle',
-				]
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'mouse_interactivity',
+			[ 
+				'label'        => __( 'Item Mouse Interaction', 'bdthemes-element-pack' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'separator'    => 'before',
+				'prefix_class' => 'ep-mouse-interaction-',
+				'render_type'  => 'template'
 			]
 		);
 
@@ -271,112 +404,6 @@ class Panel_Slider extends Module_Base {
 			]
 		);
 
-		$this->add_control(
-			'mouse_interactivity',
-			[ 
-				'label'        => __( 'Item Mouse Interaction', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'         => Controls_Manager::SWITCHER,
-				'separator'    => 'before',
-				'prefix_class' => 'ep-mouse-interaction-',
-				'render_type'  => 'template'
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_content_sliders',
-			[ 
-				'label' => esc_html__( 'Sliders', 'bdthemes-element-pack' ),
-			]
-		);
-
-		$repeater = new Repeater();
-
-		$repeater->add_control(
-			'tab_title',
-			[ 
-				'label'       => esc_html__( 'Title', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'Slide Title', 'bdthemes-element-pack' ),
-				'label_block' => true,
-			]
-		);
-
-		$repeater->add_control(
-			'tab_image',
-			[ 
-				'label'       => esc_html__( 'Image', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::MEDIA,
-				'dynamic'     => [ 'active' => true ],
-				'description' => __( 'Use same size ratio image', 'bdthemes-element-pack' ),
-			]
-		);
-
-		$repeater->add_control(
-			'tab_content',
-			[ 
-				'label'      => esc_html__( 'Content', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::WYSIWYG,
-				'dynamic'    => [ 'active' => true ],
-				'default'    => esc_html__( 'Slide Content', 'bdthemes-element-pack' ),
-				'show_label' => false,
-			]
-		);
-
-		$repeater->add_control(
-			'tab_link',
-			[ 
-				'label'       => esc_html__( 'Link', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::URL,
-				'dynamic'     => [ 'active' => true ],
-				'placeholder' => 'http://your-link.com',
-				'default'     => [ 
-					'url' => '#',
-				],
-			]
-		);
-
-		$this->add_control(
-			'tabs',
-			[ 
-				'label'       => esc_html__( 'Slider Items', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'default'     => [ 
-					[ 
-						'tab_title'   => esc_html__( 'Slide #1', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
-					],
-					[ 
-						'tab_title'   => esc_html__( 'Slide #2', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
-					],
-					[ 
-						'tab_title'   => esc_html__( 'Slide #3', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
-					],
-					[ 
-						'tab_title'   => esc_html__( 'Slide #4', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
-					],
-				],
-				'title_field' => '{{{ tab_title }}}',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Image_Size::get_type(),
-			[ 
-				'name'      => 'thumbnail_size',
-				'label'     => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
-				'exclude'   => [ 'custom' ],
-				'default'   => 'full',
-				'separator' => 'before'
-			]
-		);
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -385,7 +412,7 @@ class Panel_Slider extends Module_Base {
 				'label'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'button' => 'yes',
-					'_skin!' => 'bdt-middle',
+					// '_skin!' => 'bdt-middle',
 				],
 			]
 		);
@@ -515,9 +542,9 @@ class Panel_Slider extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
-				'default'   => [ 
-					'size' => 0.4,
-				],
+				// 'default'   => [ 
+				// 	'size' => 0.4,
+				// ],
 				'range'     => [ 
 					'px' => [ 
 						'min'  => 0,
@@ -526,9 +553,8 @@ class Panel_Slider extends Module_Base {
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-panel-slide-thumb img'                                                                => 'opacity: {{SIZE}};',
-					'{{WRAPPER}} .bdt-skin-middle .swiper-slide:not(.swiper-slide-active):hover .bdt-panel-slide-thumb img' => 'opacity: {{SIZE}} !important;',
-
+					'{{WRAPPER}} .bdt-panel-slide-thumb' => 'opacity: {{SIZE}};',
+					'{{WRAPPER}} .bdt-skin-middle .swiper-slide:not(.swiper-slide-active):hover .bdt-panel-slide-thumb' => 'opacity: {{SIZE}} !important;',
 				],
 			]
 		);
@@ -536,7 +562,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'desc_padding',
 			[ 
-				'label'     => esc_html__( 'Description Padding', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::DIMENSIONS,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-desc' => 'padding: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
@@ -606,7 +632,16 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[ 
 				'name'     => 'title_text_stroke',
-				'label'    => __( 'Text_Stroke', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Text Stroke', 'bdthemes-element-pack' ),
+				'selector' => '{{WRAPPER}} .bdt-panel-slide-title',
+			]
+		);
+		
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[ 
+				'name'     => 'title_shadow',
+				'label'    => esc_html__( 'Text Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
 				'selector' => '{{WRAPPER}} .bdt-panel-slide-title',
 			]
 		);
@@ -644,7 +679,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'text_top_spacing',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-text' => 'margin-top: {{SIZE}}{{UNIT}};',
@@ -659,19 +694,9 @@ class Panel_Slider extends Module_Base {
 			[ 
 				'label'      => esc_html__( 'Read More', 'bdthemes-element-pack' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => [ 
-					'terms' => [ 
-						[ 
-							'name'  => 'button',
-							'value' => 'yes'
-						],
-						[ 
-							'name'     => '_skin',
-							'operator' => '!=',
-							'value'    => 'bdt-middle'
-						],
-					]
-				]
+				'condition'  => [ 
+					'button' => 'yes',
+				],
 			]
 		);
 
@@ -715,7 +740,6 @@ class Panel_Slider extends Module_Base {
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-panel-slide-link',
-				'separator'   => 'before',
 			]
 		);
 
@@ -740,14 +764,13 @@ class Panel_Slider extends Module_Base {
 				'selectors'  => [ 
 					'{{WRAPPER}} .bdt-panel-slide-link' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'separator'  => 'before',
 			]
 		);
 
 		$this->add_responsive_control(
 			'btn_spacing',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-link' => 'margin-top: {{SIZE}}{{UNIT}};',
@@ -1082,7 +1105,7 @@ class Panel_Slider extends Module_Base {
 								<?php endif; ?>
 
 								<?php if ( ! empty( $item['tab_link']['url'] ) ) : ?>
-									<?php if ( $settings['button'] == 'yes' and 'bdt-middle' != $settings['_skin'] ) : ?>
+									<?php if ( $settings['button'] == 'yes' ) : ?>
 										<a <?php $this->print_render_attribute_string( $element_key ); ?>>
 											<span>
 												<?php echo esc_html( $settings['button_text'] ); ?>
