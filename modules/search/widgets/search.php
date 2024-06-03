@@ -1095,6 +1095,23 @@ class Search extends Module_Base {
 				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full',
 			]
 		);
+
+		$this->add_responsive_control(
+			'modal_close_button_size',
+			[
+				'label' => esc_html__('Size', 'bdthemes-element-pack'),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'#modal-search-{{ID}} .bdt-modal-close-full svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 		
 		$this->end_controls_tab();
 		

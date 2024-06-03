@@ -2284,7 +2284,7 @@ class Step_Flow extends Module_Base {
         }
 
         if ($settings['onclick']) {
-            $this->add_render_attribute('readmore', 'onclick', $settings['onclick_event']);
+            $this->add_render_attribute('readmore', 'onclick', wp_kses_post( $settings['onclick_event'] ));
         }
 
         if (!empty($settings['button_css_id'])) {
