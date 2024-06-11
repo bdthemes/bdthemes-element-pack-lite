@@ -259,7 +259,7 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
-= 5.6.7 [3rd June 2024] =
+= 5.6.7 [11th June 2024] =
 
 * Added: Keyboard option added in slider widget
 * Added: Pre title & text controls added in trailer box widget
