@@ -4384,6 +4384,14 @@ trait Global_Widget_Controls {
 			]
 		);
 		$this->add_control(
+			'keyboard',
+			[
+				'label'   => __('Keyboard', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+
+			]
+		);
+		$this->add_control(
 			'speed',
 			[
 				'label'   => __('Animation Speed (ms)', 'bdthemes-element-pack'),
@@ -4557,7 +4565,7 @@ trait Global_Widget_Controls {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name' => 'title_text_stroke',
-				'label' => __('Text_Stroke', 'bdthemes-element-pack'),
+				'label' => __('Text Stroke', 'bdthemes-element-pack'),
 				'selector' => '{{WRAPPER}} .bdt-slider .bdt-slide-item .bdt-slide-title',
 			]
 		);
@@ -7606,6 +7614,7 @@ trait Global_Widget_Controls {
 								"el"            => "#" . $id . " .swiper-scrollbar",
 								"hide"          => "true",
 							],
+							"keyboard" => ("yes" == $settings["keyboard"]) ? ["enabled" => true, "onlyInViewport" => true,] : false,
 						]))
 					]
 				]
