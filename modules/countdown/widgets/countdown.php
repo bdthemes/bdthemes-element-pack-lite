@@ -2488,6 +2488,8 @@ class Countdown extends Module_Base {
 
 		// $coupon_tricky_id  = !empty($settings['_element_id']) ? 'bdt-sf-' . $settings['_element_id'] :  'bdt-sf-' . $id;
 
+		$end_redirect_url = esc_html($settings['end_redirect_link']);
+
 		$this->add_render_attribute(
 			[
 				'countdown_wrapper' => [
@@ -2498,7 +2500,7 @@ class Countdown extends Module_Base {
 							'msgId'			 => '#' . $msg_id,
 							'adminAjaxUrl'   => admin_url("admin-ajax.php"),
 							'endActionType'	 => $settings['end_action_type'],
-							'redirectUrl'	 => $settings['end_redirect_link'],
+							'redirectUrl'	 => $end_redirect_url,
 							'redirectDelay'	 => (empty($settings['link_redirect_delay']['size'])) ? 1000 : ($settings['link_redirect_delay']['size']) * 1000,
 							'finalTime'		 => isset($settings['loop_time']) && ($settings['loop_time'] == 'yes') ?  '' :  $final_time,
 							'wpCurrentTime'  => $this->wp_current_time(),
