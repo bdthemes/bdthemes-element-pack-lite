@@ -151,7 +151,7 @@ class Facebook_Feed extends Module_Base {
 		$this->add_control(
 			'masonry',
 			[ 
-				'label'        => __( 'Masonry', 'pixel-gallery' ),
+				'label'        => __( 'Masonry', 'bdthemes-element-pack' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'prefix_class' => 'bdt-ep-masonry--',
@@ -162,7 +162,7 @@ class Facebook_Feed extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[ 
-				'label'          => __( 'Columns', 'ultimate-post-kit' ),
+				'label'          => __( 'Columns', 'bdthemes-element-pack' ),
 				'type'           => Controls_Manager::SELECT,
 				'default'        => '3',
 				'tablet_default' => '2',
@@ -187,7 +187,7 @@ class Facebook_Feed extends Module_Base {
 		$this->add_responsive_control(
 			'grid_columns',
 			[ 
-				'label'          => __( 'Columns', 'ultimate-post-kit' ),
+				'label'          => __( 'Columns', 'bdthemes-element-pack' ),
 				'type'           => Controls_Manager::SELECT,
 				'default'        => '3',
 				'tablet_default' => '2',

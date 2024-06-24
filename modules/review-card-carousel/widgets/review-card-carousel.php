@@ -238,7 +238,7 @@ class Review_Card_Carousel extends Module_Base {
         $this->add_control(
             'item_match_height',
             [
-                'label'        => __('Item Match Height', 'ultimate-post-kit'),
+                'label'        => __('Item Match Height', 'bdthemes-element-pack'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'yes',
                 'prefix_class' => 'bdt-item-match-height--',
