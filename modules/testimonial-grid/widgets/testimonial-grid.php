@@ -1541,7 +1541,7 @@ class Testimonial_Grid extends Module_Base {
 
 			wp_reset_postdata();
 		} else {
-			echo '<div class="bdt-alert-warning" bdt-alert>Oppps!! There is no post, please select actual post or categories.<div>';
+			echo '<div class="bdt-alert-warning" bdt-alert> '. esc_html_x('Oppps!! There is no post, please select actual post or categories.', 'Frontend', 'bdthemes-element-pack') .' <div>';
 		}
 	}
 

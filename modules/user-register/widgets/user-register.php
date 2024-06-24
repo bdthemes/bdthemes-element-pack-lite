@@ -1524,7 +1524,7 @@ class User_Register extends Module_Base {
 				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 					<?php
 					if ( $settings['show_labels'] ) {
-						// echo '<label ' . $this->get_render_attribute_string( 'first_name_label' ) . '>' . $settings['first_name_label'] . '</label>';
+
 						?>
 						<label <?php $this->print_render_attribute_string( 'first_name_label' ); ?>>
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
@@ -1547,7 +1547,7 @@ class User_Register extends Module_Base {
 				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 					<?php
 					if ( $settings['show_labels'] ) {
-						// echo '<label ' . $this->get_render_attribute_string( 'last_name_label' ) . '>' . $settings['last_name_label'] . '</label>';
+						
 						?>
 						<label <?php $this->print_render_attribute_string( 'last_name_label' ); ?>>
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
@@ -1569,7 +1569,7 @@ class User_Register extends Module_Base {
 			<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 				<?php
 				if ( $settings['show_labels'] ) :
-					// echo '<label ' . $this->get_render_attribute_string( 'email_label' ) . '>' . $settings['email_label'] . '</label>';
+					
 					?>
 					<label <?php $this->print_render_attribute_string( 'email_label' ); ?>>
 						<?php if ( 'yes' == $settings['custom_labels'] ) {
@@ -1591,7 +1591,7 @@ class User_Register extends Module_Base {
 				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 					<?php
 					if ( $settings['show_labels'] ) :
-						// echo '<label ' . $this->get_render_attribute_string( 'password_label' ) . '>' . $settings['password_label'] . '</label>';
+						
 						?>
 						<label <?php $this->print_render_attribute_string( 'password_label' ); ?>>
 							<?php if ( 'yes' == $settings['custom_labels'] ) {

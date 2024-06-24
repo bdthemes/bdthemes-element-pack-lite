@@ -26,7 +26,7 @@ class Skin_Tiny_Countdown extends Elementor_Skin_Base {
     
     public function render() {
 		$settings      = $this->parent->get_settings_for_display();
-		$due_date      = $settings['due_date'];
+		$due_date      = ! empty( $settings['due_date'] ) ? $settings['due_date'] : date( 'Y-m-d H:i:s', strtotime( '+1 week' ) );
 		$string        = $this->parent->get_strftime( $settings );
 		
 		$with_gmt_time = date( 'Y-m-d H:i', strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );		
@@ -57,7 +57,7 @@ class Skin_Tiny_Countdown extends Elementor_Skin_Base {
 		$id       = $this->parent->get_id();
 		$coupon_tricky_id  = !empty($settings['id_for_coupon_code']) ? 'bdt-sf-' . $settings['id_for_coupon_code'] :  'bdt-sf-' . $id;
 
-		$end_redirect_url = esc_html($settings['end_redirect_link']);
+		$end_redirect_url = !empty(esc_html($settings['end_redirect_link'])) ? esc_html($settings['end_redirect_link']) : '';
 
 		$this->parent->add_render_attribute(
 			[

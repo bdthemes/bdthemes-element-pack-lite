@@ -2488,7 +2488,7 @@ class Countdown extends Module_Base {
 
 		// $coupon_tricky_id  = !empty($settings['_element_id']) ? 'bdt-sf-' . $settings['_element_id'] :  'bdt-sf-' . $id;
 
-		$end_redirect_url = esc_html($settings['end_redirect_link']);
+		$end_redirect_url = !empty(esc_html($settings['end_redirect_link'])) ? esc_html($settings['end_redirect_link']) : '';
 
 		$this->add_render_attribute(
 			[
