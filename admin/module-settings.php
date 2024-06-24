@@ -1938,7 +1938,7 @@ class ModuleService {
                     'type'        => 'checkbox',
                     'default'     => 'off',
                     'widget_type' => 'pro',
-                    'demo_url'    => 'https://demo.elementpack.pro/element/widget-tooltip/',
+                    'demo_url'    => 'https://demo.elementpack.pro/element/realistic-image-shadow/',
                     'video_url'   => 'https://youtu.be/oVXwG-38g2Y',
                 ],
                 [
