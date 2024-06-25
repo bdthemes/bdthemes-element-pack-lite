@@ -1037,7 +1037,7 @@ class ElementPack_Admin_Settings {
     function plugin_page() {
 
         echo '<div class="wrap element-pack-dashboard">';
-        echo '<h1>' . BDTEP_TITLE . ' Settings</h1>';
+        echo '<h1>' . BDTEP_TITLE . ' ' . esc_html__('Settings', 'bdthemes-element-pack') . '</h1>';
 
         $this->settings_api->show_navigation();
 
@@ -1165,7 +1165,8 @@ class ElementPack_Admin_Settings {
                     jQuery(this).parent().addClass('current');
                 });
 
-                jQuery('#element_pack_active_modules_page a.ep-active-all-widget').click(function() {
+                jQuery('#element_pack_active_modules_page a.ep-active-all-widget').click(function(e) {
+                    e.preventDefault();
 
                     jQuery('#element_pack_active_modules_page .ep-widget-free .checkbox:visible').each(function() {
                         jQuery(this).attr('checked', 'checked').prop("checked", true);
@@ -1175,7 +1176,8 @@ class ElementPack_Admin_Settings {
                     jQuery('a.ep-deactive-all-widget').removeClass('bdt-active');
                 });
 
-                jQuery('#element_pack_active_modules_page a.ep-deactive-all-widget').click(function() {
+                jQuery('#element_pack_active_modules_page a.ep-deactive-all-widget').click(function(e) {
+                    e.preventDefault();
 
                     jQuery('#element_pack_active_modules_page .ep-widget-free .checkbox:visible').each(function() {
                         jQuery(this).removeAttr('checked');
@@ -1185,7 +1187,8 @@ class ElementPack_Admin_Settings {
                     jQuery('a.ep-active-all-widget').removeClass('bdt-active');
                 });
 
-                jQuery('#element_pack_third_party_widget_page a.ep-active-all-widget').click(function() {
+                jQuery('#element_pack_third_party_widget_page a.ep-active-all-widget').click(function(e) {
+                    e.preventDefault();
 
                     jQuery('#element_pack_third_party_widget_page .ep-widget-free .checkbox:visible').each(function() {
                         jQuery(this).attr('checked', 'checked').prop("checked", true);
@@ -1195,7 +1198,8 @@ class ElementPack_Admin_Settings {
                     jQuery('a.ep-deactive-all-widget').removeClass('bdt-active');
                 });
 
-                jQuery('#element_pack_third_party_widget_page a.ep-deactive-all-widget').click(function() {
+                jQuery('#element_pack_third_party_widget_page a.ep-deactive-all-widget').click(function(e) {
+                    e.preventDefault();
 
                     jQuery('#element_pack_third_party_widget_page .ep-widget-free .checkbox:visible').each(function() {
                         jQuery(this).removeAttr('checked');
@@ -1205,7 +1209,8 @@ class ElementPack_Admin_Settings {
                     jQuery('a.ep-active-all-widget').removeClass('bdt-active');
                 });
 
-                jQuery('#element_pack_elementor_extend_page a.ep-active-all-widget').click(function() {
+                jQuery('#element_pack_elementor_extend_page a.ep-active-all-widget').click(function(e) {
+                    e.preventDefault();
 
                     jQuery('#element_pack_elementor_extend_page .ep-widget-free .checkbox:visible').each(function() {
                         jQuery(this).attr('checked', 'checked').prop("checked", true);
@@ -1215,7 +1220,8 @@ class ElementPack_Admin_Settings {
                     jQuery('a.ep-deactive-all-widget').removeClass('bdt-active');
                 });
 
-                jQuery('#element_pack_elementor_extend_page a.ep-deactive-all-widget').click(function() {
+                jQuery('#element_pack_elementor_extend_page a.ep-deactive-all-widget').click(function(e) {
+                    e.preventDefault();
 
                     jQuery('#element_pack_elementor_extend_page .ep-widget-free .checkbox:visible').each(function() {
                         jQuery(this).removeAttr('checked');

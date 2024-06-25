@@ -259,6 +259,10 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.X.X [XXth June 2024] =
+
+* Fixed: Text Domain and Translation issue fixed (Thanks to itapress)
+
 = 5.6.9 [24th June 2024] =
 
 * Fixed: Text Domain and Translation issue fixed (Thanks to itapress)

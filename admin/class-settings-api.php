@@ -112,7 +112,7 @@ if (!class_exists('ElementPack_Settings_API')) :
                 }
                 echo '<div class="ep-options bdt-grid bdt-child-width-1-1 bdt-child-width-1-2@m bdt-child-width-1-3@l' . esc_attr($section_class) . '" role="presentation" bdt-grid="masonry: true" ' . esc_attr($data_settings) . '>';
 
-                echo '<p class="ep-no-result bdt-text-center bdt-width-1-1 bdt-margin-small-top bdt-h4">Ops! Your Searched widget not found! Do you have any idea? If yes, <a href="https://feedback.elementpack.pro/b/3v2gg80n/feature-requests/idea/new" target="_blank">Submit here</a></p>';
+                echo '<p class="ep-no-result bdt-text-center bdt-width-1-1 bdt-margin-small-top bdt-h4">'.esc_html__('Ops! Your Searched widget not found! Do you have any idea? If yes, ', 'bdthemes-element-pack').'<a href="https://feedback.elementpack.pro/b/3v2gg80n/feature-requests/idea/new" target="_blank">'.esc_html__('Submit here', 'bdthemes-element-pack').'</a></p>';
 
                 $this->do_settings_fields($page, $section['id']);
 
@@ -380,7 +380,7 @@ if (!class_exists('ElementPack_Settings_API')) :
                 }
             }
 
-            $widget_using_status = '</span> <br><span class="ep-widget-count-text">Total Used  - ' . esc_html($used_widgets_count) . ' </span>';
+            $widget_using_status = '</span> <br><span class="ep-widget-count-text">'.esc_html__('Total Used', 'bdthemes-element-pack').'  - ' . esc_html($used_widgets_count) . ' </span>';
 
             // remove counts
             if (isset($args['id']) && $args['id'] == 'not') {
@@ -396,7 +396,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 
             $html .= '<i class="bdt-wi-' . esc_attr($args['id']) . '" aria-hidden="true"></i>';
 
-            $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]" %3$s>', $args['section'], $args['id'], ('pro' == $pro) ? 'bdt-tooltip="Pro widget only works with pro version of Element Pack"' : '');
+            $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]" %3$s>', $args['section'], $args['id'], ('pro' == $pro) ? 'bdt-tooltip="'.esc_html__('Pro widget only works with Pro version.', 'bdthemes-element-pack').'"' : '');
             $html .= '<span scope="row" class="ep-option-label">' . $args['name'] . $widget_using_status;
             $html  .= '</label>';
 
@@ -421,14 +421,14 @@ if (!class_exists('ElementPack_Settings_API')) :
                     }
                     if (!is_plugin_active($plugin_path)) {
                         $active_link = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $plugin_path . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $plugin_path);
-                        $html .= '<a href="' . $active_link . '" class="element-pack-3pp-active" bdt-tooltip="Activate the plugin first then you can activate this widget."><span class="dashicons dashicons-admin-plugins"></span></a>';
+                        $html .= '<a href="' . $active_link . '" class="element-pack-3pp-active" bdt-tooltip="'.esc_html__('Activate the plugin first then you can activate this widget.', 'bdthemes-element-pack').'"><span class="dashicons dashicons-admin-plugins"></span></a>';
                     }
                 } else {
                     if ($paid) {
-                        $html .= '<a href="' . $paid . '" class="element-pack-3pp-download" bdt-tooltip="Download and install plugin first then you can activate this widget."><span class="dashicons dashicons-download"></span></a>';
+                        $html .= '<a href="' . $paid . '" class="element-pack-3pp-download" bdt-tooltip="'.esc_html__('Download and install plugin first then you can activate this widget.', 'bdthemes-element-pack').'"><span class="dashicons dashicons-download"></span></a>';
                     } else {
                         $install_link = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $plugin_name), 'install-plugin_' . $plugin_name);
-                        $html .= '<a href="' . $install_link . '" class="element-pack-3pp-install" bdt-tooltip="Install the plugin first then you can activate this widget."><span class="dashicons dashicons-download"></span></a>';
+                        $html .= '<a href="' . $install_link . '" class="element-pack-3pp-install" bdt-tooltip="'.esc_html__('Install the plugin first then you can activate this widget.', 'bdthemes-element-pack').'"><span class="dashicons dashicons-download"></span></a>';
                     }
                 }
 
@@ -445,7 +445,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             } else { // core widgets
 
                 $html  .= '<fieldset>';
-                $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]" %2$s>', $args['section'], $args['id'], ('pro' == $pro) ? 'bdt-tooltip="Pro widget only works with pro version of Element Pack"' : '');
+                $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]" %2$s>', $args['section'], $args['id'], ('pro' == $pro) ? 'bdt-tooltip="'.esc_html__('Pro widget only works with Pro version.', 'bdthemes-element-pack').'"' : '');
                 $html  .= sprintf('<input type="hidden" name="%1$s[%2$s]" value="off" />', $args['section'], $args['id']);
                 $html  .= sprintf('<input type="checkbox" class="checkbox" id="bdt_ep_%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s %4$s />', $args['section'], $args['id'], checked($value, 'on', false), ('pro' == $pro) ? 'disabled="disabled"' : '');
                 $html    .= '<span class="switch"></span>';
@@ -575,7 +575,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             $value = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
             $size  = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
             $id    = $args['section']  . '[' . $args['id'] . ']';
-            $label = isset($args['options']['button_label']) ? $args['options']['button_label'] : __('Choose File');
+            $label = isset($args['options']['button_label']) ? $args['options']['button_label'] : __('Choose File', 'bdthemes-element-pack');
 
             $html  = sprintf('<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value);
             $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
@@ -769,14 +769,14 @@ if (!class_exists('ElementPack_Settings_API')) :
             $html = '<div class="bdt-dashboard-navigation">';
             $html .= '<ul class="bdt-tab" bdt-tab="animation: bdt-animation-slide-bottom-small;connect: .bdt-tab-container;">';
 
-            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="0">%2$s</a></li>', 'element_pack_welcome', 'Dashboard');
+            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="0">%2$s</a></li>', 'element_pack_welcome', esc_html__('Dashboard', 'bdthemes-element-pack'));
 
             $count = 1;
 
             foreach ($this->settings_sections as $tab) {
                 $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="%2$s">%3$s</a></li>', $tab['id'], $count++, $tab['title']);
             }
-            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="5">%2$s</a></li>', 'element_pack_get_pro', 'Get Pro');
+            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="5">%2$s</a></li>', 'element_pack_get_pro', esc_html__('Get Pro', 'bdthemes-element-pack'));
 
             $html .= '</ul>';
             $html .= '</div>';
@@ -839,9 +839,9 @@ if (!class_exists('ElementPack_Settings_API')) :
 
                                         <div>
                                             <ul class="bdt-subnav bdt-subnav-pill ep-widget-filter bdt-widget-type-content bdt-flex-inline">
-                                                <li class="ep-widget-all bdt-active" bdt-filter-control="*"><a href="#">All</a></li>
-                                                <li class="ep-widget-free" bdt-filter-control="filter: [data-widget-type='free']; group: data-content-type"><a href="#">Free</a></li>
-                                                <li class="ep-widget-pro" bdt-filter-control="filter: [data-widget-type='pro']; group: data-content-type"><a href="#">Pro</a></li>
+                                                <li class="ep-widget-all bdt-active" bdt-filter-control="*"><a href="#"><?php esc_html_e('All', 'bdthemes-element-pack') ?></a></li>
+                                                <li class="ep-widget-free" bdt-filter-control="filter: [data-widget-type='free']; group: data-content-type"><a href="#"><?php esc_html_e('Free', 'bdthemes-element-pack') ?></a></li>
+                                                <li class="ep-widget-pro" bdt-filter-control="filter: [data-widget-type='pro']; group: data-content-type"><a href="#"><?php esc_html_e('Pro', 'bdthemes-element-pack') ?></a></li>
 
                                             </ul>
                                         </div>
@@ -849,22 +849,22 @@ if (!class_exists('ElementPack_Settings_API')) :
                                         <?php if ($form['id'] == 'element_pack_active_modules' or $form['id'] == 'element_pack_third_party_widget') : ?>
 
                                             <div>
-                                                <button class="bdt-button bdt-button-default" type="button">Filter By</button>
+                                                <button class="bdt-button bdt-button-default" type="button"><?php esc_html_e('Filter By', 'bdthemes-element-pack') ?></button>
                                                 <div bdt-dropdown="animation: bdt-animation-slide-top-small; duration: 300">
                                                     <ul class="bdt-nav bdt-subnav-pill bdt-dropdown-nav ep-widget-filter ep-widget-content-type">
-                                                        <li class="ep-widget-new" bdt-filter-control="filter: [data-content-type*='new']; group: data-widget-type"><a href="#">New</a></li>
-                                                        <li class="ep-widget-post" bdt-filter-control="filter: [data-content-type*='post']; group: data-widget-type"><a href="#">Post</a></li>
+                                                        <li class="ep-widget-new" bdt-filter-control="filter: [data-content-type*='new']; group: data-widget-type"><a href="#"><?php esc_html_e('New', 'bdthemes-element-pack') ?></a></li>
+                                                        <li class="ep-widget-post" bdt-filter-control="filter: [data-content-type*='post']; group: data-widget-type"><a href="#"><?php esc_html_e('Post', 'bdthemes-element-pack') ?></a></li>
                                                         <?php if ($form['id'] == 'element_pack_active_modules') : ?>
-                                                            <li class="ep-widget-custom" bdt-filter-control="filter: [data-content-type*='custom']; group: data-widget-type"><a href="#">Custom</a></li>
+                                                            <li class="ep-widget-custom" bdt-filter-control="filter: [data-content-type*='custom']; group: data-widget-type"><a href="#"><?php esc_html_e('Custom', 'bdthemes-element-pack') ?></a></li>
                                                         <?php endif; ?>
-                                                        <li class="ep-widget-others" bdt-filter-control="filter: [data-content-type*='others']; group: data-widget-type"><a href="#">Others</a></li>
-                                                        <li class="ep-widget-gallery" bdt-filter-control="filter: [data-content-type*='gallery']; group: data-widget-type"><a href="#">Gallery</a></li>
-                                                        <li class="ep-widget-slider" bdt-filter-control="filter: [data-content-type*='slider']; group: data-widget-type"><a href="#">Slider</a></li>
-                                                        <li class="ep-widget-carousel" bdt-filter-control="filter: [data-content-type*='carousel']; group: data-widget-type"><a href="#">Carousel</a></li>
+                                                        <li class="ep-widget-others" bdt-filter-control="filter: [data-content-type*='others']; group: data-widget-type"><a href="#"><?php esc_html_e('Others', 'bdthemes-element-pack') ?></a></li>
+                                                        <li class="ep-widget-gallery" bdt-filter-control="filter: [data-content-type*='gallery']; group: data-widget-type"><a href="#"><?php esc_html_e('Gallery', 'bdthemes-element-pack') ?></a></li>
+                                                        <li class="ep-widget-slider" bdt-filter-control="filter: [data-content-type*='slider']; group: data-widget-type"><a href="#"><?php esc_html_e('Slider', 'bdthemes-element-pack') ?></a></li>
+                                                        <li class="ep-widget-carousel" bdt-filter-control="filter: [data-content-type*='carousel']; group: data-widget-type"><a href="#"><?php esc_html_e('Carousel', 'bdthemes-element-pack') ?></a></li>
                                                         <?php if ($form['id'] == 'element_pack_third_party_widget') : ?>
-                                                            <li class="ep-widget-acf" bdt-filter-control="filter: [data-content-type*='acf']; group: data-widget-type"><a href="#">ACF</a></li>
-                                                            <li class="ep-widget-forms" bdt-filter-control="filter: [data-content-type*='forms']; group: data-widget-type"><a href="#">Forms</a></li>
-                                                            <li class="ep-widget-ecommerce" bdt-filter-control="filter: [data-content-type*='ecommerce']; group: data-widget-type"><a href="#">eCommerce</a></li>
+                                                            <li class="ep-widget-acf" bdt-filter-control="filter: [data-content-type*='acf']; group: data-widget-type"><a href="#"><?php esc_html_e('ACF', 'bdthemes-element-pack') ?></a></li>
+                                                            <li class="ep-widget-forms" bdt-filter-control="filter: [data-content-type*='forms']; group: data-widget-type"><a href="#"><?php esc_html_e('Forms', 'bdthemes-element-pack') ?></a></li>
+                                                            <li class="ep-widget-ecommerce" bdt-filter-control="filter: [data-content-type*='ecommerce']; group: data-widget-type"><a href="#"><?php esc_html_e('eCommerce', 'bdthemes-element-pack') ?></a></li>
                                                         <?php endif; ?>
 
 
@@ -878,11 +878,11 @@ if (!class_exists('ElementPack_Settings_API')) :
                                                 <div>
                                                     <ul class="bdt-subnav bdt-subnav-pill ep-widget-filter ep-used-unused-widgets bdt-flex-inline">
                                                         <li class="ep-widget--" bdt-filter-control="filter: [data-content-type*='ep-used']; group: data-content-type">
-                                                            <a href="#">Used
+                                                            <a href="#"><?php esc_html_e('Used', 'bdthemes-element-pack') ?>
                                                                 <span class="bdt-badge ep-used-widget"></span>
                                                             </a>
                                                         </li>
-                                                        <li class="ep-widget--" bdt-filter-control="filter: [data-content-type*='ep-unused']; group: data-content-type"><a href="#" bdt-tooltip="Don't need unused widget? Click on the Deactivate All button.">Unused
+                                                        <li class="ep-widget--" bdt-filter-control="filter: [data-content-type*='ep-unused']; group: data-content-type"><a href="#" bdt-tooltip="<?php esc_html_e('Don\'t need unused widget? Click on the Deactivate All button.', 'bdthemes-element-pack'); ?>"><?php esc_html_e('Unused', 'bdthemes-element-pack') ?>
                                                                 <span class="bdt-badge ep-unused-widget bdt-danger"></span>
                                                             </a>
                                                         </li>
@@ -955,7 +955,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 
                                         <?php if (isset($this->settings_fields[$form['id']])) : ?>
 
-                                            <button class="bdt-button bdt-button-primary element-pack-settings-save-btn" type="submit">Save Settings</button>
+                                            <button class="bdt-button bdt-button-primary element-pack-settings-save-btn" type="submit"><?php esc_html_e('Save Settings', 'bdthemes-element-pack') ?></button>
 
                                         <?php endif; ?>
 
