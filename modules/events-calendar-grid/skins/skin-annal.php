@@ -68,7 +68,7 @@ class Skin_Annal extends Elementor_Skin_Base {
 				<?php if (!empty($more_icon)) : ?>
 					<div class="bdt-width-expand bdt-text-right">
 						<div class="bdt-more-icon">
-							<a href="javascript:void(0);" bdt-tooltip="<?php echo esc_html('Find out more', 'bdthemes-element-pack'); ?>" class="ep-icon-arrow-right-4" aria-hidden="true"></a>
+							<a href="javascript:void(0);" bdt-tooltip="<?php echo esc_html__('Find out more', 'bdthemes-element-pack'); ?>" class="ep-icon-arrow-right-4" aria-hidden="true"></a>
 						</div>
 					</div>
 				<?php endif; ?>

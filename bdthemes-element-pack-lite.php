@@ -4,14 +4,14 @@
  * Plugin Name: Element Pack Lite - Addons for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: The all-new <a href="https://elementpack.pro/">Element Pack</a> brings incredibly advanced, and super-flexible widgets, and A to Z essential addons to the Elementor page builder for WordPress. Explore expertly-coded widgets with first-class support by experts.
- * Version: 5.6.9
+ * Version: 5.6.10
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
- * Text Domain: bdthemes-element-pack-lite
+ * Text Domain: bdthemes-element-pack
  * Domain Path: /languages
  * License: GPL3
  * Elementor requires at least: 3.0.0
- * Elementor tested up to: 3.22.1
+ * Elementor tested up to: 3.22.2
  */
 
 
@@ -68,7 +68,7 @@ if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 if ( ! element_pack_pro_installed() ) {
 
 	// Some pre defined value for easy use
-	define( 'BDTEP_VER', '5.6.9' );
+	define( 'BDTEP_VER', '5.6.10' );
 	define( 'BDTEP_TPL_DB_VER', '1.0.0' );
 	define( 'BDTEP__FILE__', __FILE__ );
 	if ( ! defined( 'BDTEP_TITLE' ) ) {
