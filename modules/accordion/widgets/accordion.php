@@ -378,7 +378,7 @@ class Accordion extends Module_Base {
 								</span>
 							<?php endif; ?>
 
-							<span role="heading" class="bdt-ep-title-text bdt-display-inline-block" <?php echo ( 'yes' == $settings['schema_activity']) ? 'itemprop="name"' : ''; ?>>
+							<span role="heading" class="bdt-ep-title-text bdt-flex-inline bdt-flex-middle" <?php echo ( 'yes' == $settings['schema_activity']) ? 'itemprop="name"' : ''; ?>>
 
 								<?php if ( ! empty( $item['repeater_icon']['value'] ) and $settings['show_custom_icon'] == 'yes' ) : ?>
 									<span class="bdt-ep-accordion-custom-icon">
