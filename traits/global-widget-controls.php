@@ -714,7 +714,7 @@ trait Global_Widget_Controls {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'item_spacing',
 			[ 
 				'label'     => __( 'Item Gap', 'bdthemes-element-pack' ),
@@ -760,14 +760,14 @@ trait Global_Widget_Controls {
 				'default'     => 'flex-start',
 				'toggle'      => false,
 				'label_block' => false,
-				'selectors_dictionary' => [
-					'flex-start' => 'text-align: left;',
-					'center' => 'text-align: center;',
-					'flex-end' => 'text-align: right;',
-					'justify' => 'text-align: justify;',
-				],
+				// 'selectors_dictionary' => [
+				// 	'flex-start' => 'text-align: left;',
+				// 	'center' => 'text-align: center;',
+				// 	'flex-end' => 'text-align: right;',
+				// 	'justify' => 'text-align: justify;',
+				// ],
 				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-title-text' => '{{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-title-text' => 'justify-content: {{VALUE}};',
 				],
 			]
 		);
