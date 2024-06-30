@@ -321,33 +321,6 @@ class Step_Flow extends Module_Base {
         );
 
         $this->add_control(
-            'onclick',
-            [
-                'label' => esc_html__('OnClick', 'bdthemes-element-pack'),
-                'type' => Controls_Manager::SWITCHER,
-                'condition' => [
-                    'readmore' => 'yes',
-                    //'readmore_text!' => '',
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'onclick_event',
-            [
-                'label' => esc_html__('OnClick Event', 'bdthemes-element-pack'),
-                'type' => Controls_Manager::TEXT,
-                'placeholder' => 'myFunction()',
-                'description' => sprintf(esc_html__('For details please look <a href="%s" target="_blank">here</a>'), 'https://www.w3schools.com/jsref/event_onclick.asp'),
-                'condition' => [
-                    'readmore' => 'yes',
-                    //'readmore_text!' => '',
-                    'onclick' => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_control(
             'advanced_readmore_icon',
             [
                 'label' => __('Icon', 'bdthemes-element-pack'),
@@ -2281,10 +2254,6 @@ class Step_Flow extends Module_Base {
 
         if ($settings['readmore_hover_animation']) {
             $this->add_render_attribute('readmore', 'class', 'elementor-animation-' . $settings['readmore_hover_animation']);
-        }
-
-        if ($settings['onclick']) {
-            $this->add_render_attribute('readmore', 'onclick', wp_kses_post( $settings['onclick_event'] ));
         }
 
         if (!empty($settings['button_css_id'])) {

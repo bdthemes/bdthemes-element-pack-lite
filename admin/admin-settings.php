@@ -488,16 +488,16 @@ class ElementPack_Admin_Settings {
 
                         <div class="ep-count-canvas-wrap bdt-flex bdt-flex-between">
                             <div class="ep-count-wrap">
-                                <h1 class="ep-feature-title">All Widgets</h1>
-                                <div class="ep-widget-count">Used: <b><?php echo $used_widgets; ?></b></div>
-                                <div class="ep-widget-count">Unused: <b><?php echo $un_used_widgets; ?></b></div>
-                                <div class="ep-widget-count">Total:
+                                <h1 class="ep-feature-title"><?php echo esc_html__('All Widgets', 'bdthemes-element-pack'); ?></h1>
+                                <div class="ep-widget-count"><?php echo esc_html__('Used: ', 'bdthemes-element-pack'); ?><b><?php echo $used_widgets; ?></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Unused: ', 'bdthemes-element-pack'); ?><b><?php echo $un_used_widgets; ?></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Total: ', 'bdthemes-element-pack'); ?>
                                     <b><?php echo $used_widgets + $un_used_widgets; ?></b>
                                 </div>
                             </div>
 
                             <div class="ep-canvas-wrap">
-                                <canvas id="bdt-db-total-status" style="height: 120px; width: 120px;" data-label="Total Widgets Status - (<?php echo $used_widgets + $un_used_widgets; ?>)" data-labels="<?php echo esc_attr('Used, Unused'); ?>" data-value="<?php echo esc_attr($used_widgets) . ',' . esc_attr($un_used_widgets); ?>" data-bg="#FFD166, #fff4d9" data-bg-hover="#0673e1, #e71522"></canvas>
+                                <canvas id="bdt-db-total-status" style="height: 120px; width: 120px;" data-label="<?php echo esc_html__('Total Widgets Status', 'bdthemes-element-pack'); ?> - (<?php echo $used_widgets + $un_used_widgets; ?>)" data-labels="<?php echo esc_attr('Used, Unused'); ?>" data-value="<?php echo esc_attr($used_widgets) . ',' . esc_attr($un_used_widgets); ?>" data-bg="#FFD166, #fff4d9" data-bg-hover="#0673e1, #e71522"></canvas>
                             </div>
                         </div>
 
@@ -514,16 +514,16 @@ class ElementPack_Admin_Settings {
 
                         <div class="ep-count-canvas-wrap bdt-flex bdt-flex-between">
                             <div class="ep-count-wrap">
-                                <h1 class="ep-feature-title">Core</h1>
-                                <div class="ep-widget-count">Used: <b><?php echo $used_only_widgets; ?></b></div>
-                                <div class="ep-widget-count">Unused: <b><?php echo $unused_only_widgets; ?></b></div>
-                                <div class="ep-widget-count">Total:
+                                <h1 class="ep-feature-title"><?php echo esc_html__('Core', 'bdthemes-element-pack'); ?></h1>
+                                <div class="ep-widget-count"><?php echo esc_html__('Used: ', 'bdthemes-element-pack'); ?><b><?php echo $used_only_widgets; ?></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Unused: ', 'bdthemes-element-pack'); ?><b><?php echo $unused_only_widgets; ?></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Total: ', 'bdthemes-element-pack'); ?>
                                     <b><?php echo $used_only_widgets + $unused_only_widgets; ?></b>
                                 </div>
                             </div>
 
                             <div class="ep-canvas-wrap">
-                                <canvas id="bdt-db-only-widget-status" style="height: 120px; width: 120px;" data-label="Core Widgets Status - (<?php echo $used_only_widgets + $unused_only_widgets; ?>)" data-labels="<?php echo esc_attr('Used, Unused'); ?>" data-value="<?php echo esc_attr($used_only_widgets) . ',' . esc_attr($unused_only_widgets); ?>" data-bg="#EF476F, #ffcdd9" data-bg-hover="#0673e1, #e71522"></canvas>
+                                <canvas id="bdt-db-only-widget-status" style="height: 120px; width: 120px;" data-label="<?php echo esc_html__('Core Widgets Status', 'bdthemes-element-pack'); ?> - (<?php echo $used_only_widgets + $unused_only_widgets; ?>)" data-labels="<?php echo esc_attr('Used, Unused'); ?>" data-value="<?php echo esc_attr($used_only_widgets) . ',' . esc_attr($unused_only_widgets); ?>" data-bg="#EF476F, #ffcdd9" data-bg-hover="#0673e1, #e71522"></canvas>
                             </div>
                         </div>
 
@@ -540,16 +540,16 @@ class ElementPack_Admin_Settings {
 
                         <div class="ep-count-canvas-wrap bdt-flex bdt-flex-between">
                             <div class="ep-count-wrap">
-                                <h1 class="ep-feature-title">3rd Party</h1>
-                                <div class="ep-widget-count">Used: <b><?php echo $used_only_3rdparty; ?></b></div>
-                                <div class="ep-widget-count">Unused: <b><?php echo $unused_only_3rdparty; ?></b></div>
-                                <div class="ep-widget-count">Total:
+                                <h1 class="ep-feature-title"><?php echo esc_html__('3rd Party', 'bdthemes-element-pack'); ?></h1>
+                                <div class="ep-widget-count"><?php echo esc_html__('Used: ', 'bdthemes-element-pack'); ?><b><?php echo $used_only_3rdparty; ?></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Unused: ', 'bdthemes-element-pack'); ?><b><?php echo $unused_only_3rdparty; ?></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Total:', 'bdthemes-element-pack'); ?>
                                     <b><?php echo $used_only_3rdparty + $unused_only_3rdparty; ?></b>
                                 </div>
                             </div>
 
                             <div class="ep-canvas-wrap">
-                                <canvas id="bdt-db-only-3rdparty-status" style="height: 120px; width: 120px;" data-label="3rd Party Widgets Status - (<?php echo $used_only_3rdparty + $unused_only_3rdparty; ?>)" data-labels="<?php echo esc_attr('Used, Unused'); ?>" data-value="<?php echo esc_attr($used_only_3rdparty) . ',' . esc_attr($unused_only_3rdparty); ?>" data-bg="#06D6A0, #B6FFEC" data-bg-hover="#0673e1, #e71522"></canvas>
+                                <canvas id="bdt-db-only-3rdparty-status" style="height: 120px; width: 120px;" data-label="<?php echo esc_html__('3rd Party Widgets Status', 'bdthemes-element-pack'); ?> - (<?php echo $used_only_3rdparty + $unused_only_3rdparty; ?>)" data-labels="<?php echo esc_attr('Used, Unused'); ?>" data-value="<?php echo esc_attr($used_only_3rdparty) . ',' . esc_attr($unused_only_3rdparty); ?>" data-bg="#06D6A0, #B6FFEC" data-bg-hover="#0673e1, #e71522"></canvas>
                             </div>
                         </div>
 
@@ -561,15 +561,15 @@ class ElementPack_Admin_Settings {
 
                         <div class="ep-count-canvas-wrap bdt-flex bdt-flex-between">
                             <div class="ep-count-wrap">
-                                <h1 class="ep-feature-title">Active</h1>
-                                <div class="ep-widget-count">Core: <b id="bdt-total-widgets-status-core"></b></div>
-                                <div class="ep-widget-count">3rd Party: <b id="bdt-total-widgets-status-3rd"></b></div>
-                                <div class="ep-widget-count">Extensions: <b id="bdt-total-widgets-status-extensions"></b></div>
-                                <div class="ep-widget-count">Total: <b id="bdt-total-widgets-status-heading"></b></div>
+                                <h1 class="ep-feature-title"><?php echo esc_html__('Active', 'bdthemes-element-pack'); ?></h1>
+                                <div class="ep-widget-count"><?php echo esc_html__('Core: ', 'bdthemes-element-pack'); ?><b id="bdt-total-widgets-status-core"></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('3rd Party: ', 'bdthemes-element-pack'); ?><b id="bdt-total-widgets-status-3rd"></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Extensions: ', 'bdthemes-element-pack'); ?><b id="bdt-total-widgets-status-extensions"></b></div>
+                                <div class="ep-widget-count"><?php echo esc_html__('Total: ', 'bdthemes-element-pack'); ?><b id="bdt-total-widgets-status-heading"></b></div>
                             </div>
 
                             <div class="ep-canvas-wrap">
-                                <canvas id="bdt-total-widgets-status" style="height: 120px; width: 120px;" data-label="Total Active Widgets Status" data-labels="<?php echo esc_attr('Core, 3rd Party, Extensions'); ?>" data-bg="#0680d6, #B0EBFF, #E6F9FF" data-bg-hover="#0673e1, #B0EBFF, #b6f9e8">
+                                <canvas id="bdt-total-widgets-status" style="height: 120px; width: 120px;" data-label="<?php echo esc_html__('Total Active Widgets Status', 'bdthemes-element-pack'); ?>" data-labels="<?php echo esc_attr('Core, 3rd Party, Extensions'); ?>" data-bg="#0680d6, #B0EBFF, #E6F9FF" data-bg-hover="#0673e1, #B0EBFF, #b6f9e8">
                                 </canvas>
                             </div>
                         </div>
@@ -582,21 +582,19 @@ class ElementPack_Admin_Settings {
             <div class="bdt-grid" bdt-grid bdt-height-match="target: > div > .bdt-card">
                 <div class="bdt-width-1-3@m ep-support-section">
                     <div class="ep-support-content bdt-card bdt-card-body">
-                        <h1 class="ep-feature-title">Support And Feedback</h1>
-                        <p>Feeling like to consult with an expert? Take live Chat support immediately from <a href="https://elementpack.pro" target="_blank" rel="">ElementPack</a>. We are always
-                            ready to help
-                            you 24/7.</p>
-                        <p><strong>Or if you’re facing technical issues with our plugin, then please create a support
-                                ticket</strong></p>
-                        <a class="bdt-button bdt-btn-blue bdt-margin-small-top bdt-margin-small-right" target="_blank" rel="" href="https://bdthemes.com/all-knowledge-base-of-element-pack/">Knowledge
-                            Base</a>
-                        <a class="bdt-button bdt-btn-grey bdt-margin-small-top" target="_blank" href="https://bdthemes.com/support/">Get Support</a>
+                        <?php 
+                        echo '<h1 class="ep-feature-title">' . esc_html__('Support And Feedback', 'bdthemes-element-pack') . '</h1>';
+                        echo '<p>' . esc_html__('Feeling like to consult with an expert? Take live Chat support immediately from', 'bdthemes-element-pack') . ' <a href="https://elementpack.pro" target="_blank" rel="">ElementPack</a>.' . esc_html__(' We are always ready to help you 24/7.', 'bdthemes-element-pack') . '</p>';
+                        echo '<p><strong>' . esc_html__('Or if you\'re facing technical issues with our plugin, then please create a support ticket', 'bdthemes-element-pack') . '</strong></p>';
+                        echo '<a class="bdt-button bdt-btn-blue bdt-margin-small-top bdt-margin-small-right" target="_blank" rel="" href="https://bdthemes.com/all-knowledge-base-of-element-pack/">' . esc_html__('Knowledge Base', 'bdthemes-element-pack') . '</a>';
+                        echo '<a class="bdt-button bdt-btn-grey bdt-margin-small-top" target="_blank" href="https://bdthemes.com/support/">' . esc_html__('Get Support', 'bdthemes-element-pack') . '</a>';
+                        ?>
                     </div>
                 </div>
 
                 <div class="bdt-width-2-3@m">
                     <div class="bdt-card bdt-card-body ep-system-requirement">
-                        <h1 class="ep-feature-title bdt-margin-small-bottom">System Requirement</h1>
+                        <h1 class="ep-feature-title bdt-margin-small-bottom"><?php echo esc_html__('System Requirement', 'bdthemes-element-pack'); ?></h1>
                         <?php $this->element_pack_system_requirement(); ?>
                     </div>
                 </div>
@@ -605,26 +603,31 @@ class ElementPack_Admin_Settings {
             <div class="bdt-grid" bdt-grid bdt-height-match="target: > div > .bdt-card">
                 <div class="bdt-width-1-2@m ep-support-section">
                     <div class="bdt-card bdt-card-body ep-feedback-bg">
-                        <h1 class="ep-feature-title">Missing Any Feature?</h1>
-                        <p style="max-width: 520px;">Are you in need of a feature that’s not available in our plugin?
-                            Feel free to do a feature request from here,</p>
-                        <a class="bdt-button bdt-btn-grey bdt-margin-small-top" target="_blank" rel="" href="https://feedback.bdthemes.com/b/6vr2250l/feature-requests/">Request Feature</a>
+                        <?php 
+                        echo '<h1 class="ep-feature-title">' . esc_html__('Missing Any Feature?', 'bdthemes-element-pack') . '</h1>';
+                        echo '<p>' . esc_html__('Are you in need of a feature that\'s not available in our plugin? Feel free to do a feature request from here.', 'bdthemes-element-pack') . '</p>';
+                        echo '<a class="bdt-button bdt-btn-grey bdt-margin-small-top" target="_blank" rel="" href="https://feedback.bdthemes.com/b/6vr2250l/feature-requests/">' . esc_html__('Request Feature', 'bdthemes-element-pack') . '</a>';
+                        ?>
                     </div>
                 </div>
 
                 <div class="bdt-width-1-2@m">
                     <div class="bdt-card bdt-card-body ep-tryaddon-bg">
-                        <h1 class="ep-feature-title">Try Our Others Addons</h1>
-                        <p style="max-width: 520px;">
-                            <b>Prime Slider, Ultimate Store Kit, Ultimate Store Kit & Live Copy Paste </b> addons for <b>Elementor</b> is the best slider, blogs and eCommerce plugin for WordPress.
-                        </p>
-                        <div class="bdt-others-plugins-link">
-                            <a class="bdt-button bdt-btn-ps bdt-margin-small-right" target="_blank" href="https://wordpress.org/plugins/bdthemes-prime-slider-lite/" bdt-tooltip="The revolutionary slider builder addon for Elementor with next-gen superb interface. It's Free! Download it.">Prime Slider</a>
-                            <a class="bdt-button bdt-btn-upk bdt-margin-small-right" target="_blank" rel="" href="https://wordpress.org/plugins/ultimate-post-kit/" bdt-tooltip="Best blogging addon for building quality blogging website with fine-tuned features and widgets. It's Free! Download it.">Ultimate Post Kit</a>
-                            <a class="bdt-button bdt-btn-usk bdt-margin-small-right" target="_blank" rel="" href="https://wordpress.org/plugins/ultimate-store-kit/" bdt-tooltip="The only eCommmerce addon for answering all your online store design problems in one package. It's Free! Download it.">Ultimate Store Kit</a>
-                            <a class="bdt-button bdt-btn-live-copy bdt-margin-small-right" target="_blank" rel="" href="https://wordpress.org/plugins/live-copy-paste/" bdt-tooltip="Superfast cross-domain copy-paste mechanism for WordPress websites with true UI copy experience. It's Free! Download it.">Live Copy Paste</a>
-                            <a class="bdt-button bdt-btn-pg bdt-margin-small-right" target="_blank" href="https://wordpress.org/plugins/pixel-gallery/" bdt-tooltip="Pixel Gallery provides more than 30+ essential elements for everyday applications to simplify the whole web building process. It's Free! Download it.">Pixel Gallery</a>
-                        </div>
+                        <?php
+                        echo '<h1 class="ep-feature-title">' . esc_html__('Try Our Others Addons', 'bdthemes-element-pack') . '</h1>';
+                        echo '<p style="max-width: 520px;">';
+                        echo '<b>' . esc_html__('Prime Slider, Ultimate Store Kit, Ultimate Store Kit & Live Copy Paste', 'bdthemes-element-pack') . '</b> ' . esc_html__('addons for', 'bdthemes-element-pack') . ' <b>' . esc_html__('Elementor', 'bdthemes-element-pack') . '</b> ' . esc_html__('is the best slider, blogs and eCommerce plugin for WordPress.', 'bdthemes-element-pack');
+                        echo esc_html__(' Also, try our new plugin ZoloBlocks for Gutenberg.', 'bdthemes-prime-slider');
+                        echo '</p>';
+                        echo '<div class="bdt-others-plugins-link">';
+                        echo '<a class="bdt-button bdt-btn-ps bdt-margin-small-right" target="_blank" href="https://wordpress.org/plugins/bdthemes-prime-slider-lite/" bdt-tooltip="' . esc_html__('The revolutionary slider builder addon for Elementor with next-gen superb interface. It\'s Free! Download it.', 'bdthemes-element-pack') . '">Prime Slider</a>';
+                        echo '<a class="bdt-button bdt-btn-zb bdt-margin-small-right" target="_blank" href="https://wordpress.org/plugins/zoloblocks/" bdt-tooltip="' . esc_html__('ZoloBlocks is a powerful and lightweight page builder for WordPress. It\'s Free! Download it.', 'bdthemes-element-pack') . '">ZoloBlocks</a>';
+                        echo '<a class="bdt-button bdt-btn-upk bdt-margin-small-right" target="_blank" rel="" href="https://wordpress.org/plugins/ultimate-post-kit/" bdt-tooltip="' . esc_html__('Best blogging addon for building quality blogging website with fine-tuned features and widgets. It\'s Free! Download it.', 'bdthemes-element-pack') . '">Ultimate Post Kit</a>';
+                        echo '<a class="bdt-button bdt-btn-usk bdt-margin-small-right" target="_blank" rel="" href="https://wordpress.org/plugins/ultimate-store-kit/" bdt-tooltip="' . esc_html__('The only eCommmerce addon for answering all your online store design problems in one package. It\'s Free! Download it.', 'bdthemes-element-pack') . '">Ultimate Store Kit</a>';
+                        echo '<a class="bdt-button bdt-btn-live-copy bdt-margin-small-right" target="_blank" rel="" href="https://wordpress.org/plugins/live-copy-paste/" bdt-tooltip="' . esc_html__('Superfast cross-domain copy-paste mechanism for WordPress websites with true UI copy experience. It\'s Free! Download it.', 'bdthemes-element-pack') . '">Live Copy Paste</a>';
+                        echo '<a class="bdt-button bdt-btn-pg bdt-margin-small-right" target="_blank" href="https://wordpress.org/plugins/pixel-gallery/" bdt-tooltip="' . esc_html__('Pixel Gallery provides more than 30+ essential elements for everyday applications to simplify the whole web building process. It\'s Free! Download it.', 'bdthemes-element-pack') . '">Pixel Gallery</a>';
+                        echo '</div>';
+                        ?>
                     </div>
                 </div>
             </div>
@@ -648,10 +651,10 @@ class ElementPack_Admin_Settings {
 
             <div class="bdt-grid" bdt-grid bdt-height-match="target: > div > .bdt-card" style="max-width: 800px; margin-left: auto; margin-right: auto;">
                 <div class="bdt-width-1-1@m ep-comparision bdt-text-center">
-                    <h1 class="bdt-text-bold">WHY GO WITH PRO?</h1>
-                    <h2>Just Compare With Element Pack Lite Vs Pro</h2>
-
-
+                    <?php 
+                    echo '<h1 class="bdt-text-bold">' . esc_html__('WHY GO WITH PRO?', 'bdthemes-element-pack') . '</h1>';
+                    echo '<h2>' . esc_html__('Just Compare With Element Pack Lite Vs Pro', 'bdthemes-element-pack') . '</h2>';
+                    ?>
                     <div>
 
                         <ul class="bdt-list bdt-list-divider bdt-text-left bdt-text-normal" style="font-size: 16px;">
@@ -659,133 +662,135 @@ class ElementPack_Admin_Settings {
 
                             <li class="bdt-text-bold">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Features</div>
-                                    <div class="bdt-width-auto@m">Free</div>
-                                    <div class="bdt-width-auto@m">Pro</div>
+                                    <?php 
+                                    echo '<div class="bdt-width-expand@m">' . esc_html__('Features', 'bdthemes-element-pack') . '</div>';
+                                    echo '<div class="bdt-width-auto@m">' . esc_html__('Free', 'bdthemes-element-pack') . '</div>';
+                                    echo '<div class="bdt-width-auto@m">' . esc_html__('Pro', 'bdthemes-element-pack') . '</div>';
+                                    ?>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m"><span bdt-tooltip="pos: top-left; title: Lite have 35+ Widgets but Pro have 100+ core widgets">Core Widgets</span></div>
-                                    <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-                                    <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-                                </div>
-                            </li>
-                            <li class="">
-                                <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Theme Compatibility</div>
+                                    <div class="bdt-width-expand@m"><span bdt-tooltip="pos: top-left; title: <?php echo esc_html__('Lite have 35+ Widgets but Pro have 100+ core widgets', 'bdthemes-element-pack'); ?>"><?php echo esc_html__('Core Widgets', 'bdthemes-element-pack'); ?></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Dynamic Content & Custom Fields Capabilities</div>
+                                    <?php echo '<div class="bdt-width-expand@m">' . esc_html__('Theme Compatibility', 'bdthemes-element-pack') . '</div>'; ?>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Proper Documentation</div>
+                                    <?php echo '<div class="bdt-width-expand@m">' . esc_html__('Dynamic Content & Custom Fields Capabilities', 'bdthemes-element-pack') . '</div>'; ?>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Updates & Support</div>
+                                    <?php echo '<div class="bdt-width-expand@m">' . esc_html__('Proper Documentation', 'bdthemes-element-pack') . '</div>'; ?>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Header & Footer Builder</div>
+                                    <?php echo '<div class="bdt-width-expand@m">' . esc_html__('Updates & Support', 'bdthemes-element-pack') . '</div>'; ?>
+                                    <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+                                    <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="bdt-grid">
+                                    <?php echo '<div class="bdt-width-expand@m">' . esc_html__('Header & Footer Builder', 'bdthemes-element-pack') . '</div>'; ?>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Rooten Theme Pro Features</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Rooten Theme Pro Features', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Priority Support</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Priority Support', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">WooCommerce Widgets</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('WooCommerce Widgets', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Ready Made Pages</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Ready Made Pages', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Ready Made Blocks</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Ready Made Blocks', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Ready Made Header & Footer</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Ready Made Header & Footer', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Elementor Extended Widgets</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Elementor Extended Widgets', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Asset Manager</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Asset Manager', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Live Copy or Paste</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Live Copy or Paste', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Essential Shortcodes</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Essential Shortcodes', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Template Library (in Editor)</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Template Library (in Editor)', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
                             </li>
                             <li class="">
                                 <div class="bdt-grid">
-                                    <div class="bdt-width-expand@m">Context Menu</div>
+                                    <div class="bdt-width-expand@m"><?php echo esc_html__('Context Menu', 'bdthemes-element-pack'); ?></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
                                     <div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
                                 </div>
@@ -801,14 +806,24 @@ class ElementPack_Admin_Settings {
                             <ul class="bdt-list bdt-list-divider bdt-text-left" style="font-size: 16px;">
                                 <li>
                                     <div class="bdt-grid">
+                                        <?php 
+                                        echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__(' Incredibly Advanced', 'bdthemes-element-pack') . '</div>';
+                                        echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__(' Refund or Cancel Anytime', 'bdthemes-element-pack') . '</div>';
+                                        echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__(' Dynamic Content', 'bdthemes-element-pack') . '</div>';
+                                        ?>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="bdt-grid">
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Incredibly Advanced
+                                            <span class="dashicons dashicons-heart"></span> <?php echo esc_html__('Super-Flexible Widgets', 'bdthemes-element-pack'); ?>
                                         </div>
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Refund or Cancel Anytime
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' 24/7 Premium Support', 'bdthemes-element-pack'); ?>
                                         </div>
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Dynamic Content
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' Third Party Plugins', 'bdthemes-element-pack'); ?>
                                         </div>
                                     </div>
                                 </li>
@@ -816,27 +831,13 @@ class ElementPack_Admin_Settings {
                                 <li>
                                     <div class="bdt-grid">
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Super-Flexible Widgets
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' Special Discount!', 'bdthemes-element-pack'); ?>
                                         </div>
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> 24/7 Premium Support
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' Custom Field Integration', 'bdthemes-element-pack'); ?>
                                         </div>
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Third Party Plugins
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="bdt-grid">
-                                        <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Special Discount!
-                                        </div>
-                                        <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Custom Field Integration
-                                        </div>
-                                        <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> With Live Chat Support
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' With Live Chat Support', 'bdthemes-element-pack'); ?>
                                         </div>
                                     </div>
                                 </li>
@@ -844,13 +845,13 @@ class ElementPack_Admin_Settings {
                                 <li>
                                     <div class="bdt-grid">
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Trusted Payment Methods
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' Trusted Payment Methods', 'bdthemes-element-pack'); ?>
                                         </div>
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Interactive Effects
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' Interactive Effects', 'bdthemes-element-pack'); ?>
                                         </div>
                                         <div class="bdt-width-1-3@m">
-                                            <span class="dashicons dashicons-heart"></span> Video Tutorial
+                                            <span class="dashicons dashicons-heart"></span><?php echo esc_html__(' Video Tutorial', 'bdthemes-element-pack'); ?>
                                         </div>
                                     </div>
                                 </li>
@@ -859,7 +860,7 @@ class ElementPack_Admin_Settings {
                             <!-- <div class="ep-dashboard-divider"></div> -->
 
                             <div class="ep-purchase-button">
-                                <a href="https://elementpack.pro/pricing/" target="_blank">Purchase Now</a>
+                                <a href="https://elementpack.pro/pricing/" target="_blank"><?php echo esc_html__('Purchase Now', 'bdthemes-element-pack'); ?></a>
                             </div>
 
                         </div>
@@ -897,15 +898,15 @@ class ElementPack_Admin_Settings {
             <li>
                 <div>
 
-                    <span class="label1">PHP Version: </span>
+                    <span class="label1"><?php echo esc_html__('PHP Version: ', 'bdthemes-element-pack'); ?></span>
 
                     <?php
                     if (version_compare($php_version, '7.0.0', '<')) {
                         echo $no_icon;
-                        echo '<span class="label2" title="Min: 7.0 Recommended" bdt-tooltip>Currently: ' . $php_version . '</span>';
+                        echo '<span class="label2" title="' . esc_html__('Min: 7.0 Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently: ', 'bdthemes-element-pack') . $php_version . '</span>';
                     } else {
                         echo $yes_icon;
-                        echo '<span class="label2">Currently: ' . $php_version . '</span>';
+                        echo '<span class="label2">' . esc_html__('Currently: ', 'bdthemes-element-pack') . $php_version . '</span>';
                     }
                     ?>
                 </div>
@@ -913,30 +914,30 @@ class ElementPack_Admin_Settings {
 
             <li>
                 <div>
-                    <span class="label1">Max execution time: </span>
+                    <span class="label1"><?php echo esc_html__('Max execution time: ', 'bdthemes-element-pack'); ?></span>
 
                     <?php
                     if ($max_execution_time < '90') {
                         echo $no_icon;
-                        echo '<span class="label2" title="Min: 90 Recommended" bdt-tooltip>Currently: ' . $max_execution_time . '</span>';
+                        echo '<span class="label2" title="' . esc_html__('Min: 90 Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently: ', 'bdthemes-element-pack') . $max_execution_time . '</span>';
                     } else {
                         echo $yes_icon;
-                        echo '<span class="label2">Currently: ' . $max_execution_time . '</span>';
+                        echo '<span class="label2">' . esc_html__('Currently: ', 'bdthemes-element-pack') . $max_execution_time . '</span>';
                     }
                     ?>
                 </div>
             </li>
             <li>
                 <div>
-                    <span class="label1">Memory Limit: </span>
+                    <span class="label1"><?php echo esc_html__('Memory Limit: ', 'bdthemes-element-pack'); ?></span>
 
                     <?php
                     if (intval($memory_limit) < '812') {
                         echo $no_icon;
-                        echo '<span class="label2" title="Min: 812M Recommended" bdt-tooltip>Currently: ' . $memory_limit . '</span>';
+                        echo '<span class="label2" title="' . esc_html__('Min: 812M Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently: ', 'bdthemes-element-pack') . $memory_limit . '</span>';
                     } else {
                         echo $yes_icon;
-                        echo '<span class="label2">Currently: ' . $memory_limit . '</span>';
+                        echo '<span class="label2">' . esc_html__('Currently: ', 'bdthemes-element-pack') . $memory_limit . '</span>';
                     }
                     ?>
                 </div>
@@ -944,15 +945,15 @@ class ElementPack_Admin_Settings {
 
             <li>
                 <div>
-                    <span class="label1">Max Post Limit: </span>
+                    <span class="label1"><?php echo esc_html__('Max Post Limit: ', 'bdthemes-element-pack'); ?></span>
 
                     <?php
                     if (intval($post_limit) < '32') {
                         echo $no_icon;
-                        echo '<span class="label2" title="Min: 32M Recommended" bdt-tooltip>Currently: ' . $post_limit . '</span>';
+                        echo '<span class="label2" title="' . esc_html__('Min: 32M Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently: ', 'bdthemes-element-pack') . $post_limit . '</span>';
                     } else {
                         echo $yes_icon;
-                        echo '<span class="label2">Currently: ' . $post_limit . '</span>';
+                        echo '<span class="label2">' . esc_html__('Currently: ', 'bdthemes-element-pack') . $post_limit . '</span>';
                     }
                     ?>
                 </div>
@@ -960,7 +961,7 @@ class ElementPack_Admin_Settings {
 
             <li>
                 <div>
-                    <span class="label1">Uploads folder writable: </span>
+                    <span class="label1"><?php echo esc_html__('Uploads folder writable: ', 'bdthemes-element-pack'); ?></span>
 
                     <?php
                     if (!is_writable($upload_path)) {
@@ -974,15 +975,15 @@ class ElementPack_Admin_Settings {
 
             <li>
                 <div>
-                    <span class="label1">MultiSite: </span>
+                    <span class="label1"><?php echo esc_html__('MultiSite: ', 'bdthemes-element-pack'); ?></span>
 
                     <?php
                     if ($environment['wp_multisite']) {
                         echo $yes_icon;
-                        echo '<span class="label2">MultiSite</span>';
+                        echo '<span class="label2">' . esc_html__('MultiSite', 'bdthemes-element-pack') . '</span>';
                     } else {
                         echo $yes_icon;
-                        echo '<span class="label2">No MultiSite </span>';
+                        echo '<span class="label2">' . esc_html__('No MultiSite', 'bdthemes-element-pack') . '</span>';
                     }
                     ?>
                 </div>
@@ -990,7 +991,7 @@ class ElementPack_Admin_Settings {
 
             <li>
                 <div>
-                    <span class="label1">GZip Enabled: </span>
+                    <span class="label1"><?php echo esc_html__('GZip Enabled: ', 'bdthemes-element-pack'); ?></span>
 
                     <?php
                     if ($environment['gzip_enabled']) {
@@ -1004,7 +1005,7 @@ class ElementPack_Admin_Settings {
 
             <li>
                 <div>
-                    <span class="label1">Debug Mode: </span>
+                    <span class="label1"><?php echo esc_html__('Debug Mode: ', 'bdthemes-element-pack'); ?></span>
                     <?php
                     if ($environment['wp_debug_mode']) {
                         echo $no_icon;
@@ -1020,9 +1021,9 @@ class ElementPack_Admin_Settings {
         </ul>
 
         <div class="bdt-admin-alert">
-            <strong>Note:</strong> If you have multiple addons like <b>Element Pack</b> so you need some more
-            requirement some
-            cases so make sure you added more memory for others addon too.
+            <?php
+            echo '<strong>' . esc_html__('Note:', 'bdthemes-element-pack') . '</strong> ' . esc_html__('If you have multiple addons like', 'bdthemes-element-pack') . ' <b>Element Pack</b> ' . esc_html__('so you need some more requirement some cases so make sure you added more memory for others addon too.', 'bdthemes-element-pack');
+            ?>
         </div>
     <?php
     }

@@ -134,27 +134,6 @@ class Creative_Button extends Module_Base {
 			]
 		);
 
-		$this->add_control(
-			'onclick',
-			[
-				'label'   => esc_html__( 'OnClick', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::SWITCHER,
-			]
-		);
-
-		$this->add_control(
-			'onclick_event',
-			[
-				'label'       => esc_html__( 'OnClick Event', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::TEXT,
-				'placeholder' => 'myFunction()',
-				'description' => sprintf( wp_kses_post('For details please look <a href="%s" target="_blank">here</a>'), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
-				'condition' => [
-					'onclick' => 'yes'
-				]
-			]
-		);
-
 		$this->add_responsive_control(
 			'alignment',
 			[
@@ -639,10 +618,6 @@ class Creative_Button extends Module_Base {
 
 		if ( $settings['link']['nofollow'] ) {
 			$this->add_render_attribute( 'creative_button', 'rel', 'nofollow' );
-		}
-
-		if ($settings['onclick']) {
-			$this->add_render_attribute( 'creative_button', 'onclick', esc_attr($settings['onclick_event']) );
 		}
 
 		if ( $settings['add_custom_attributes'] && isset( $settings['custom_attributes'] ) && ! empty( $settings['custom_attributes'] ) ) {
