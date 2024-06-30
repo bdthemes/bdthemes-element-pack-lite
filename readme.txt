@@ -259,6 +259,11 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.6.X [XX June 2024] =
+
+* Updated: OnClick Event depricated from widgets
+* Fixed: Translation issue fixed (Thanks to itapress)
+
 = 5.6.11 [29th June 2024] =
 
 * Fixed: Icon align issue fixed in accordion widget
