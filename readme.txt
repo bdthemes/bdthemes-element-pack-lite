@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.5.5
 Requires PHP: 7.4.0
-Stable tag: 5.6.11
+Stable tag: 5.6.12
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -259,7 +259,7 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
-= 5.6.X [XX June 2024] =
+= 5.6.12 [1st July 2024] =
 
 * Updated: OnClick Event depricated from widgets
 * Fixed: Translation issue fixed (Thanks to itapress)
