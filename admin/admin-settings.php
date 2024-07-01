@@ -614,7 +614,7 @@ class ElementPack_Admin_Settings {
                 <div class="bdt-width-1-2@m">
                     <div class="bdt-card bdt-card-body ep-tryaddon-bg">
                         <?php
-                        echo '<h1 class="ep-feature-title">' . esc_html__('Try Our Others Addons', 'bdthemes-element-pack') . '</h1>';
+                        echo '<h1 class="ep-feature-title">' . esc_html__('Try Our Others Plugins', 'bdthemes-element-pack') . '</h1>';
                         echo '<p style="max-width: 520px;">';
                         echo '<b>' . esc_html__('Prime Slider, Ultimate Store Kit, Ultimate Store Kit & Live Copy Paste', 'bdthemes-element-pack') . '</b> ' . esc_html__('addons for', 'bdthemes-element-pack') . ' <b>' . esc_html__('Elementor', 'bdthemes-element-pack') . '</b> ' . esc_html__('is the best slider, blogs and eCommerce plugin for WordPress.', 'bdthemes-element-pack');
                         echo esc_html__(' Also, try our new plugin ZoloBlocks for Gutenberg.', 'bdthemes-prime-slider');
