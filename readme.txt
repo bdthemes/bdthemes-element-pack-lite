@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.5.5
 Requires PHP: 7.4.0
-Stable tag: 5.6.12
+Stable tag: 5.6.13
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -259,9 +259,16 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.6.13 [14 July 2024] =
+
+* Fixed: Background overlay undefined issue fixed in trailer box widget (Thanks to Lihong)
+* Fixed: W3C Markup Validation issue fixed in Accordion widget (Thanks to Andreas)
+* Fixed: Translation issue fixed
+* Updated: UIKit framework updated
+
 = 5.6.12 [1st July 2024] =
 
-* Updated: OnClick Event depricated from widgets
+* Deprecated: OnClick Event depricated in all widgets
 * Fixed: Translation issue fixed (Thanks to itapress)
 
 = 5.6.11 [29th June 2024] =
@@ -296,91 +303,6 @@ https://youtu.be/u9JRd824Mjc
 * Added: Modal Close Button controls added in search widget
 * Fixed: Close Button issue fixed in Search widget (Thanks to Andre Head)
 * Fixed: Swiper carousel autoplay interaction issue fixed
-
-= 5.6.4 [20th May 2024] =
-
-* Fixed: HTML tag issue fixed in Business Hours widget (Thanks to Charles)
-* Fixed: Accessibility issue fixed in Search widget (Thanks to Steffen Heinz)
-* Fixed: Column Selector issue fixed in Equal Height extension (Thanks to Joy)
-* Updated: Security improved in Creative Button widget
-* Updated: Email Spamming improved in Simple Contact Form widget
-
-= 5.6.3 [2nd May 2024] =
-
-* Fixed: Equal Height extension issue fixed
-
-= 5.6.2 [24th April 2024] =
-
-* Added: Alignment justify option added in accordion widget
-* Fixed: FAQ Schema issue fixed in Accordion widget
-
-= 5.6.1 [15th April 2024] =
-
-* Fixed: API Settings problem fixed (Thanks to Stan Robin)
-* Fixed: Marker icon issue fixed in Open Street Map widget
-* Fixed: Link issue fixed in price list widget
-* Fixed: PHP Fatal error fixed (Thanks to Alex Lim)
-
-= 5.6.0 [7th April 2024] =
-
-* Fixed: Templates Library issue fixed
-* Fixed: Marker icon issue fixed in Open Street Map widget
-* Fixed: Blinking issue fixed in Navbar widget (Thanks to Rosanna Fazio)
-* Fixed: Widget Visibility issue fixed in Toggle widget (Thanks to Tri)
-* Updated: Plugin Security improved
-
-= 5.5.6 [4th April 2024] =
-
-* Updated: System improved
-
-= 5.5.5 [17th March 2024] =
-
-* Fixed: SVG image widget issue fixed (Thanks to Maximilien LELEU)
-* Updated: Admin dashboard design improved
-
-= 5.5.4 [7th March 2024] =
-
-* Fixed: Wrapper link security issue fixed
-* Fixed: Template library security issue fixed
-
-= 5.5.3 [5th March 2024] =
-
-* Fixed: Ajax query terms issue fixed in Search Widget
-* Fixed: Security issue fixed
-* Fixed: Translate issue fixed
-
-= 5.5.2 [15th February 2024] =
-
-* Fixed: Ajax issue fixed in search widget (Thanks to Skyler Nelson)
-
-= 5.5.1 [15th February 2024] =
-
-* Fixed: Simple Contact form issue fixed
-* Fixed: Lightbox autoplay issue fixed
-
-= 5.5.0 [29th January 2024] =
-
-* Updated: System improved
-
-= 5.4.14 [16th January 2024] =
-
-* Added: Image position responsive option added in review card widget
-* Added: Content Padding option added in custom gallery widget
-* Fixed: Uikit print css issue fixed
-
-= 5.4.13 [5th January 2024] =
-
-* Fixed: Critical issue fixed
-
-= 5.4.12 [4th January 2024] =
-
-* Fixed: Duplicator issue fixed
-* Fixed: Image height issue fixed in Slider widget (Thanks to Ray Clark)
-
-= 5.4.11 [18th December 2023] =
-
-* Fixed: Swiper carousel hidden item opacity issue fixed
-* Fixed: Image size & RTL issue fixed in Slider widget (Thanks to Reza)
 
 Details [changelog here](https://feedback.bdthemes.com/announcements?category=category_6l495r8q)
 

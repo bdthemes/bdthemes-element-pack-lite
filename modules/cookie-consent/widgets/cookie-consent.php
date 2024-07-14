@@ -304,7 +304,7 @@ class Cookie_Consent extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#ffffff',
+				// 'default'   => '#ffffff',
 				'selectors' => [ 
 					'body .cc-window .cc-btn.cc-dismiss' => 'color: {{VALUE}} !important;',
 				],
@@ -316,7 +316,7 @@ class Cookie_Consent extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#41aab9',
+				// 'default'   => '#41aab9',
 				'selectors' => [ 
 					'body .cc-window .cc-btn.cc-dismiss' => 'background-color: {{VALUE}} !important;',
 				],
@@ -467,6 +467,204 @@ class Cookie_Consent extends Module_Base {
 		$this->end_controls_tabs();
 
 		$this->end_controls_section();
+
+
+		$this->start_controls_section(
+			'section_style_dismiss_close_button',
+			[ 
+				'label' => esc_html__( 'Close Button', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_dismiss_close_button_style' );
+
+		$this->start_controls_tab(
+			'tab_dismiss_close_button_normal',
+			[ 
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_color',
+			[ 
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				// 'default'   => '#ffffff',
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'dismiss_close_button_size',
+			[
+				'label' => esc_html__( 'Icon Size', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 24,
+				],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.cc-compliance .bdt-cc-close-btn svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_background',
+			[ 
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				// 'default'   => '#41aab9',
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_border_style',
+			[ 
+				'label'     => esc_html__( 'Border Style', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'none',
+				'options'   => [ 
+					'none'   => esc_html__( 'None', 'bdthemes-element-pack' ),
+					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
+					'double' => esc_html__( 'Double', 'bdthemes-element-pack' ),
+					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
+					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
+					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack' ),
+				],
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'border-style: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_border_width',
+			[ 
+				'label'     => esc_html__( 'Border Width', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [ 
+					'min'  => 0,
+					'max'  => 20,
+					'size' => 1,
+				],
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'border-width: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_border_color',
+			[ 
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ccc',
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'border-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'dismiss_close_button_padding',
+			[ 
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'dismiss_close_button_margin',
+			[ 
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'.cc-compliance .bdt-cc-close-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_dismiss_close_button_hover',
+			[ 
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_hover_color',
+			[ 
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn:hover' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_hover_background',
+			[ 
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn:hover' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dismiss_close_button_hover_border_color',
+			[ 
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => [ 
+					'dismiss_close_button_border_style!' => 'none',
+				],
+				'selectors' => [ 
+					'.cc-compliance .bdt-cc-close-btn:hover' => 'border-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
 	}
 
 	protected function render() {
@@ -566,6 +764,12 @@ class Cookie_Consent extends Module_Base {
 					<a aria-label="dismiss cookie message" role="button" tabindex="0" class="cc-btn cc-dismiss">
 						<?php echo esc_html( $settings['button_text'] ); ?>
 					</a>
+
+					<button class="bdt-cc-close-btn">
+						<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+						</svg>
+					</button>
 				</div>
 				<!--googleon: all-->
 

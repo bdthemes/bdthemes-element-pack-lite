@@ -45,8 +45,8 @@ var debounce = function (func, wait, immediate) {
  * Start used on Social Share
  */
 
-jQuery(document).ready(function() {
-    jQuery(".bdt-ss-link").on("click", function() {
+jQuery(document).ready(function () {
+    jQuery(".bdt-ss-link").on("click", function () {
         var $temp = jQuery("<input>");
         jQuery("body").append($temp);
         $temp.val(jQuery(this).data("url")).select();
@@ -118,6 +118,42 @@ jQuery(document).ajaxComplete(function (event, request, settings) {
 
 /**
  * /Open Offcanvas on Mini Cart Update
+ */
+
+/**
+ * Open In a New Tab Feature
+ */
+
+jQuery(document).ready(function () {
+
+    const element = {
+        'elementor-widget-bdt-post-grid-tab': {
+            'selectors': [
+                '.bdt-post-grid-desc-inner a',
+                '.bdt-post-grid-tab-readmore',
+            ]
+        },
+        'elementor-widget-bdt-post-grid': {
+            'selectors': [
+                '.bdt-post-grid-title a',
+            ]
+        },
+    };
+
+    Object.keys(element).forEach(function (key) {
+        if (jQuery('.' + key).length > 0) {
+            if (jQuery('.' + key).data('settings') !== undefined && jQuery('.' + key).data('settings').bdt_link_new_tab === 'yes') {
+                element[key].selectors.forEach(function (selector) {
+                    jQuery(selector).attr('target', '_blank');
+                });
+            }
+        }
+    });
+
+});
+
+/**
+ * /Open In a New Tab Feature
  */
 /**
  * Start accordion widget script
@@ -415,6 +451,14 @@ $(window).on('elementor/frontend/init', function () {
         }
 
         window.cookieconsent.initialise($settings);
+
+		$('.cc-compliance').append(
+			`<button class="bdt-cc-close-btn cc-btn cc-dismiss">
+				<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+				</svg>
+		   </button>`
+		);
 
 		/**
 		 * gtag consent update
