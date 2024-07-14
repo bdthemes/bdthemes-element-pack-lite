@@ -45,8 +45,8 @@ var debounce = function (func, wait, immediate) {
  * Start used on Social Share
  */
 
-jQuery(document).ready(function() {
-    jQuery(".bdt-ss-link").on("click", function() {
+jQuery(document).ready(function () {
+    jQuery(".bdt-ss-link").on("click", function () {
         var $temp = jQuery("<input>");
         jQuery("body").append($temp);
         $temp.val(jQuery(this).data("url")).select();
@@ -118,4 +118,40 @@ jQuery(document).ajaxComplete(function (event, request, settings) {
 
 /**
  * /Open Offcanvas on Mini Cart Update
+ */
+
+/**
+ * Open In a New Tab Feature
+ */
+
+jQuery(document).ready(function () {
+
+    const element = {
+        'elementor-widget-bdt-post-grid-tab': {
+            'selectors': [
+                '.bdt-post-grid-desc-inner a',
+                '.bdt-post-grid-tab-readmore',
+            ]
+        },
+        'elementor-widget-bdt-post-grid': {
+            'selectors': [
+                '.bdt-post-grid-title a',
+            ]
+        },
+    };
+
+    Object.keys(element).forEach(function (key) {
+        if (jQuery('.' + key).length > 0) {
+            if (jQuery('.' + key).data('settings') !== undefined && jQuery('.' + key).data('settings').bdt_link_new_tab === 'yes') {
+                element[key].selectors.forEach(function (selector) {
+                    jQuery(selector).attr('target', '_blank');
+                });
+            }
+        }
+    });
+
+});
+
+/**
+ * /Open In a New Tab Feature
  */

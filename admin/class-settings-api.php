@@ -898,7 +898,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 
                                 <div class="bdt-width-auto@l bdt-search-active-wrap bdt-flex bdt-flex-middle bdt-flex-between">
                                     <div class="bdt-widget-search">
-                                        <input data-id="ep-options-parent-<?php echo esc_attr($i); ?>" onkeyup="filterSearch(this);" bdt-filter-control="" class="bdt-search-input bdt-flex-middle" type="search" placeholder="Search widget..." autofocus>
+                                        <input data-id="ep-options-parent-<?php echo esc_attr($i); ?>" onkeyup="filterSearch(this);" bdt-filter-control="" class="bdt-search-input bdt-flex-middle" type="search" placeholder="<?php esc_html_e('Search widget...', 'bdthemes-element-pack'); ?>" autofocus>
                                     </div>
 
                                     <?php //if ($form['id'] == 'element_pack_active_modules' or $form['id'] == 'element_pack_third_party_widget' ) : 
@@ -962,10 +962,13 @@ if (!class_exists('ElementPack_Settings_API')) :
                                     </div>
 
                                     <div class="bdt-width-expand@s bdt-text-right">
-                                        <p class="">
-                                            Element Pack plugin made with love by <a target="_blank" href="https://bdthemes.com">BdThemes</a> Team.
-                                            <br>All rights reserved by <a target="_blank" href="https://bdthemes.com">BdThemes.com</a>.
-                                        </p>
+                                        <?php 
+                                        echo '<p>';
+                                        echo esc_html__('Element Pack plugin made with love by', 'bdthemes-element-pack') . ' <a target="_blank" href="https://bdthemes.com">BdThemes</a> ' . esc_html__('Team.', 'bdthemes-element-pack');
+                                        echo '<br>';
+                                        echo esc_html__('All rights reserved by', 'bdthemes-element-pack') . ' <a target="_blank" href="https://bdthemes.com">BdThemes.com</a>.';
+                                        echo '</p>';
+                                        ?>
                                     </div>
                                 </div>
 

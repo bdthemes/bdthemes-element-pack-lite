@@ -2087,9 +2087,16 @@ class Trailer_Box extends Module_Base {
 		$target   = (isset($settings['button']['is_external'])  && $settings['button']['is_external'] == 'on' ) ? '_blank' : '_self';
 		
 		$origin                 = ' bdt-position-' . $settings['origin'];
-		$has_background_overlay = in_array( $settings['background_overlay_background'], [ 'classic', 'gradient' ] ) ||
-		in_array( $settings['background_overlay_hover_background'], [ 'classic', 'gradient' ] );
-		
+
+		$has_background_overlay = false;
+
+		if ( isset( $settings['background_overlay_background'] ) && in_array( $settings['background_overlay_background'], [ 'classic', 'gradient' ] ) ) {
+			$has_background_overlay = true;
+		}
+
+		if ( isset( $settings['background_overlay_hover_background'] ) && in_array( $settings['background_overlay_hover_background'], [ 'classic', 'gradient' ] ) ) {
+			$has_background_overlay = true;
+		}
 
 		if ( $has_background_overlay ) : ?>
 			<div class="elementor-background-overlay"></div>
