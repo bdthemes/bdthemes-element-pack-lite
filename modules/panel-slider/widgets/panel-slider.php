@@ -67,6 +67,10 @@ class Panel_Slider extends Module_Base {
 		return 'https://youtu.be/_piVTeJd0g4';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	protected function register_controls() {
 
 		$this->start_controls_section(

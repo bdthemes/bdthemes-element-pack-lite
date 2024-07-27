@@ -46,6 +46,10 @@ class Creative_Button extends Module_Base {
 		return 'https://youtu.be/6f2t-79MfnU';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_creative_button',

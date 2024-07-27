@@ -51,6 +51,10 @@ class Image_Magnifier extends Module_Base {
 		return 'https://youtu.be/GSy3pLihNPY';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_layout',

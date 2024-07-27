@@ -74,6 +74,10 @@ class Events_Calendar_Grid extends Module_Base {
 		return $this->_query;
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	public function register_controls() {
 
 		// Layout Section

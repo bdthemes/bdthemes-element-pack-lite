@@ -69,6 +69,10 @@ class Reading_Progress extends Module_Base {
 		return 'https://youtu.be/cODL1E2f9FI';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 
 		$this->start_controls_section(

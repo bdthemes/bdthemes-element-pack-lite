@@ -60,6 +60,10 @@ class Twitter_Grid extends Module_Base {
         return 'https://youtu.be/cYqDPiDpsEY';
     }
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+    
     protected function register_controls() {
         $this->register_query_section_controls();
     }
@@ -930,8 +934,12 @@ class Twitter_Grid extends Module_Base {
             ?>
             <div class="bdt-alert-warning" bdt-alert>
                 <a class="bdt-alert-close" bdt-close></a>
-                <?php $ep_setting_url = esc_url(admin_url('admin.php?page=element_pack_options#element_pack_api_settings')); ?>
-                <p><?php printf(esc_html__('Please set your twitter API settings from here <a href="%s">element pack settings</a> to show your map correctly.', 'bdthemes-element-pack'), esc_url($ep_setting_url)); ?></p>
+                <?php 
+				$ep_setting_url = esc_url( admin_url( 'admin.php?page=element_pack_options#element_pack_api_settings' ) );
+                echo '<p>';
+                echo sprintf(esc_html__('Please add your twitter API key in Element Pack settings. %1$sClick here%2$s to add your twitter API key.', 'bdthemes-element-pack'), '<a href="' . $ep_setting_url . '">', '</a>');
+                echo '</p>';
+                ?>
             </div>
             <?php
         }

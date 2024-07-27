@@ -63,6 +63,10 @@ class Review_Card_Carousel extends Module_Base {
         return 'https://youtu.be/7kMyajVai6E';
     }
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+    
     protected function register_controls() {
 
         $this->start_controls_section(

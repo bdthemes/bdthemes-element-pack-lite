@@ -55,6 +55,10 @@ class Open_Street_Map extends Module_Base {
 		return 'https://youtu.be/DCQ5g7yleyk';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_osmap',

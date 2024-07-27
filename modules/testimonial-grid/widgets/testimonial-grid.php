@@ -63,6 +63,10 @@ class Testimonial_Grid extends Module_Base {
 		return $this->_query;
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	public function register_controls() {
 
 		$this->start_controls_section(
@@ -1209,10 +1213,16 @@ class Testimonial_Grid extends Module_Base {
 
 		$testimonial_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $image_id ), 'medium' );
 
+		if ( ! $testimonial_thumb ) {
+			$testimonial_thumb = BDTEP_ASSETS_URL . 'images/member.svg';
+		} else {
+			$testimonial_thumb = $testimonial_thumb[0];
+		}
+
 		?>
 		<div class="bdt-flex bdt-position-relative">
 			<div class="bdt-testimonial-grid-img-wrapper bdt-overflow-hidden bdt-border-circle bdt-background-cover">
-				<img src="<?php echo esc_url( $testimonial_thumb[0] ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" />
+				<img src="<?php echo esc_url( $testimonial_thumb ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" />
 			</div>
 			<?php $this->render_review_platform( get_the_ID() ); ?>
 		</div>
@@ -1225,11 +1235,12 @@ class Testimonial_Grid extends Module_Base {
 			return;
 		}
 
+		$company_name = get_post_meta( $post_id, 'bdthemes_tm_company_name', true );
+
 		?>
 		<h4 class="bdt-testimonial-grid-title bdt-margin-remove-bottom bdt-margin-remove-top">
-			<?php echo esc_attr( get_the_title( $post_id ) ); ?>
-			<?php if ( $settings['show_comma'] ) {
-				echo ( ( $settings['show_title'] ) and ( $settings['show_address'] ) ) ? ', ' : '';
+			<?php echo esc_attr( get_the_title( $post_id ) ); ?><?php if ( $settings['show_comma'] ) {
+				echo ( ( $settings['show_title'] ) and ( $settings['show_address'] ) and $company_name ) ? ', ' : '';
 			} ?>
 		</h4>
 		<?php

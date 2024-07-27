@@ -54,6 +54,10 @@ class Search extends Module_Base {
 		return 'https://youtu.be/H3F1LHc97Gk';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return true;
+	}
+
 	protected function register_controls() {
 
 		$this->start_controls_section(

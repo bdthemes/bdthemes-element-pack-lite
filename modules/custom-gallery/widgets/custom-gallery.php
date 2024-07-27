@@ -65,6 +65,10 @@ class Custom_Gallery extends Module_Base {
 		$this->add_skin(new Skins\Skin_Fedara($this));
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	public function register_controls() {
 		$this->start_controls_section(
 			'section_custom_gallery_content',

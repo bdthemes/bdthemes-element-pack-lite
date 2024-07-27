@@ -74,6 +74,10 @@ class Static_Carousel extends Module_Base
         return 'https://youtu.be/8A2a8ws6364';
     }
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
     protected function register_controls()
     {
 

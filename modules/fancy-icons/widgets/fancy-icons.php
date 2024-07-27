@@ -50,6 +50,10 @@ class Fancy_Icons extends Module_Base {
         return 'https://youtu.be/Y4NoiuW2yBM';
     }
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+    
     protected function register_controls() {
 
         $this->start_controls_section(
