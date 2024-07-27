@@ -58,6 +58,10 @@ class Image_Stack extends Module_Base {
 		return 'https://youtu.be/maLIlug2RwM';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_image_stack',

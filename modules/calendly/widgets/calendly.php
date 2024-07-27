@@ -43,6 +43,10 @@ class Calendly extends Module_Base {
 		return 'https://youtu.be/nl4zC46SrhY';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_calendly',

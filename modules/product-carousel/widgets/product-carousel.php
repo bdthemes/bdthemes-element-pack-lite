@@ -66,7 +66,11 @@
 		public function get_custom_help_url() {
 			return 'https://youtu.be/ZFpkJIctXic';
 		}
-		
+
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 		protected function register_controls() {
 			
 			$this->start_controls_section(

@@ -70,6 +70,9 @@ class Member extends Module_Base {
 		$this->add_skin( new Skins\Skin_Flip( $this ) );
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
 
 	protected function register_controls() {
 		$this->start_controls_section(

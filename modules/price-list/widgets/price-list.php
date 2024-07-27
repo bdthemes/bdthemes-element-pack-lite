@@ -50,6 +50,10 @@ class Price_List extends Module_Base {
 		return 'https://youtu.be/QsXkIYwfXt4';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_list',
@@ -1782,9 +1786,7 @@ class Price_List extends Module_Base {
 										<?php echo esc_html( $item['title'] ); ?>
 									</span>
 
-									<?php if ( 'none' != $settings['separator_style'] ) : ?>
-										<span class="bdt-price-list-separator bdt-width-expand"></span>
-									<?php endif; ?>
+									<span class="bdt-price-list-separator bdt-width-expand"></span>
 
 								</div>
 

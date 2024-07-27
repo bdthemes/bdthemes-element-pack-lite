@@ -57,6 +57,10 @@ class Scroll_Button extends Module_Base {
 		return 'https://youtu.be/y8LJCO3tQqk';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_scroll_button',

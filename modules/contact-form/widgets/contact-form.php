@@ -61,6 +61,10 @@ class Contact_Form extends Module_Base {
 		return 'https://youtu.be/faIeyW7LOJ8';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return true;
+	}
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_forms_layout',

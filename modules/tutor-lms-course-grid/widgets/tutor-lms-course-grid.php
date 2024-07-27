@@ -74,6 +74,10 @@ class TutorLms_Course_Grid extends Module_Base {
 		return 'https://youtu.be/WWCE-_Po1uo';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	public function register_controls() {
 		$this->register_section_controls();
 	}

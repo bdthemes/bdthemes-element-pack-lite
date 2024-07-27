@@ -45,6 +45,10 @@ class Navbar extends Module_Base {
 		return 'https://youtu.be/ZXdDAi9tCxE';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 		
 		$this->start_controls_section(

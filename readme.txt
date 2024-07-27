@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, soha
 Donate link: http://bdthemes.com/
 Tags:  elementor addons, elementor widget, elementor extensions, elementor addon, addons
 Requires at least: 5.0.0
-Tested up to: 6.5.5
+Tested up to: 6.6.1
 Requires PHP: 7.4.0
-Stable tag: 5.6.13
+Stable tag: 5.7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.22.3
+Elementor tested up to: 3.23.3
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -258,6 +258,15 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.7.0 [27th July 2024] =
+
+* Added: Widget Caching feature added
+* Fixed: Separator issue fixed in price list widget
+
+= 5.6.14 [18th July 2024] =
+
+* Updated: Version compatibility added
 
 = 5.6.13 [14 July 2024] =
 

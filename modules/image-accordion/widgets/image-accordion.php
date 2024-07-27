@@ -60,6 +60,10 @@ class Image_Accordion extends Module_Base {
 		return 'https://youtu.be/jQWU4kxXJpM';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 
 		$this->start_controls_section(

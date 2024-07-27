@@ -50,9 +50,9 @@ class Facebook_Feed extends Module_Base {
 		}
 	}
 
-	// public function get_custom_help_url() {
-	//     return 'https://youtu.be/m38ddVi52-Q';
-	// }
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
 
 	protected function register_controls() {
 		$this->start_controls_section(

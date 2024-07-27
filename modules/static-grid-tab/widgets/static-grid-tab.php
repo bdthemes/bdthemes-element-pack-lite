@@ -75,6 +75,10 @@ class Static_Grid_Tab extends Module_Base
 		return 'https://www.youtube.com/watch?v=HIvQX9eLWU8';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+	
 	protected function register_controls()
 	{
 

@@ -63,6 +63,10 @@ class User_Register extends Module_Base {
 		$this->add_skin( new Skins\Skin_Modal( $this ) );
 	}
 
+	protected function is_dynamic_content(): bool {
+		return true;
+	}
+
 	protected function register_controls() {
 		$this->register_layout_section_controls();
 	}

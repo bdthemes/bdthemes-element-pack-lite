@@ -43,6 +43,10 @@ class Formidable_Forms extends Module_Base {
 		return 'https://youtu.be/ZQzcED7S-XI';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return true;
+	}
+	
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_layout',

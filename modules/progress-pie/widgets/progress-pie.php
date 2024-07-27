@@ -52,6 +52,10 @@ class Progress_Pie extends Module_Base {
 		return 'https://youtu.be/c5ap86jbCeg';
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_layout',

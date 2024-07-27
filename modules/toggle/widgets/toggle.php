@@ -56,6 +56,10 @@ class Toggle extends Module_Base {
         return 'https://youtu.be/7_jk_NvbKls';
     }
 
+    protected function is_dynamic_content(): bool {
+		return false;
+	}
+    
     protected function register_controls() {
         $this->start_controls_section(
             'section_title',
