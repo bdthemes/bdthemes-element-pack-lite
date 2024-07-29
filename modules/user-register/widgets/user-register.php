@@ -256,6 +256,17 @@ class User_Register extends Module_Base {
 		);
 
 		$this->add_control(
+			'is_confirm_password_input',
+			[ 
+				'label'     => esc_html__( 'Confirm password field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'is_needed_password_input' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
 			'password_strength',
 			[ 
 				'label'   => esc_html__( 'Show Password Strength', 'bdthemes-element-pack' ) . BDTEP_NC,
@@ -439,6 +450,80 @@ class User_Register extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'confirm_password_label',
+			[ 
+				'label'      => esc_html__( 'Confirm Password Label', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::TEXT,
+				'default'    => esc_html__( 'Confirm Password', 'bdthemes-element-pack' ),
+				'conditions' => [ 
+					'terms' => [ 
+						[ 
+							'name'  => 'show_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'custom_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'is_confirm_password_input',
+							'value' => 'yes',
+						],
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'confirm_password_msg',
+			[ 
+				'label'      => esc_html__( 'Confirm Password Message', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::TEXT,
+				'default'    => esc_html__( 'Passwords must be same', 'bdthemes-element-pack' ),
+				'conditions' => [ 
+					'terms' => [ 
+						[ 
+							'name'  => 'show_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'custom_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'is_confirm_password_input',
+							'value' => 'yes',
+						],
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'confirm_password_placeholder',
+			[ 
+				'label'      => esc_html__( 'Confirm Password Placeholder', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::TEXT,
+				'default'    => esc_html__( 'Confirm your password', 'bdthemes-element-pack' ),
+				'conditions' => [ 
+					'terms' => [ 
+						[ 
+							'name'  => 'show_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'custom_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'is_confirm_password_input',
+							'value' => 'yes',
+						],
+					],
+				],
+			]
+		);
 
 		$this->add_control(
 			'show_additional_message',
@@ -467,6 +552,16 @@ class User_Register extends Module_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-show-recaptcha-badge-',
 				'separator'    => 'before',
+			]
+		);
+
+		$this->add_control(
+			'toggle_password',
+			[ 
+				'label'     => esc_html__( 'Toggle Password', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+				'separator' => 'before',
 			]
 		);
 
@@ -1303,6 +1398,51 @@ class User_Register extends Module_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_toggle_pass',
+			[ 
+				'label'     => esc_html__( 'Toggle Password', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'toggle_password' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'toggle_pass_color',
+			[ 
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-toggle-pass-wrapper'                    => 'color: {{VALUE}};',
+					'#modal{{ID}} .bdt-modal-dialog .bdt-toggle-pass-wrapper' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'toggle_pass_size',
+			[ 
+				'label'      => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem' ],
+				'range'      => [ 
+					'px' => [ 
+						'min' => 1,
+						'max' => 50,
+					],
+				],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-toggle-pass-wrapper i, #modal{{ID}} .bdt-toggle-pass-wrapper i'     => 'font-size:{{SIZE}}{{UNIT}}; width:{{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-toggle-pass-wrapper svg, #modal{{ID}} .bdt-toggle-pass-wrapper svg' => 'font-size:{{SIZE}}{{UNIT}}; width:{{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 	}
 
 
@@ -1310,7 +1450,7 @@ class User_Register extends Module_Base {
 		$settings = $this->get_settings_for_display();
 		$id       = $this->get_id();
 
-		if ( ! empty ( $settings['button_size'] ) ) {
+		if ( ! empty( $settings['button_size'] ) ) {
 			$this->add_render_attribute( 'button', 'class', 'bdt-button-' . $settings['button_size'] );
 		}
 
@@ -1407,7 +1547,7 @@ class User_Register extends Module_Base {
 			]
 		);
 
-		if ( isset ( $settings['is_needed_password_input'] ) ) {
+		if ( isset( $settings['is_needed_password_input'] ) ) {
 			$this->add_render_attribute(
 				[ 
 					'password_input' => [ 
@@ -1417,6 +1557,24 @@ class User_Register extends Module_Base {
 						'placeholder' => ( $settings['password_placeholder'] ) ? $settings['password_placeholder'] : esc_html__( 'Enter password', 'bdthemes-element-pack' ),
 						'class'       => [ 
 							'user_password',
+							'bdt-input',
+							'bdt-form-' . $settings['input_size'],
+						],
+					]
+				]
+			);
+		}
+
+		if ( isset( $settings['is_confirm_password_input'] ) ) {
+			$this->add_render_attribute(
+				[ 
+					'confirm_password_input' => [ 
+						'type'        => 'password',
+						'name'        => 'confirm_password',
+						'id'          => 'confirm_password' . esc_attr( $id ),
+						'placeholder' => ( $settings['confirm_password_placeholder'] ) ? $settings['confirm_password_placeholder'] : esc_html__( 'Enter password', 'bdthemes-element-pack' ),
+						'class'       => [ 
+							'confirm_password',
 							'bdt-input',
 							'bdt-form-' . $settings['input_size'],
 						],
@@ -1473,7 +1631,7 @@ class User_Register extends Module_Base {
 			]
 		);
 
-		if ( isset ( $settings['password_strength'] ) && 'yes' == $settings['password_strength'] ) {
+		if ( isset( $settings['password_strength'] ) && 'yes' == $settings['password_strength'] ) {
 			$this->add_render_attribute(
 				[ 
 					'user_register' => [ 
@@ -1507,7 +1665,7 @@ class User_Register extends Module_Base {
 		$id          = $this->get_id();
 		$current_url = remove_query_arg( 'fake_arg' );
 
-		if ( $settings['redirect_after_register'] && ! empty ( $settings['redirect_url']['url'] ) ) {
+		if ( $settings['redirect_after_register'] && ! empty( $settings['redirect_url']['url'] ) ) {
 			$redirect_url = $settings['redirect_url']['url'];
 		} else {
 			$redirect_url = $current_url;
@@ -1515,8 +1673,8 @@ class User_Register extends Module_Base {
 
 		$is_needed_password_input = '';
 		?>
-		<form id="bdt-user-register<?php echo esc_attr( $id ); ?>" class="bdt-form-stacked bdt-width-1-1 bdt-user-register-widget"
-			method="post">
+		<form id="bdt-user-register<?php echo esc_attr( $id ); ?>"
+			class="bdt-form-stacked bdt-width-1-1 bdt-user-register-widget" method="post">
 			<?php
 			if ( $settings['show_recaptcha_checker'] ) {
 				do_action( 'element_pack_google_rechatcha_render', $this, 'onLoadElementPackRegisterCaptcha', 'button' );
@@ -1551,7 +1709,7 @@ class User_Register extends Module_Base {
 				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 					<?php
 					if ( $settings['show_labels'] ) {
-						
+
 						?>
 						<label <?php $this->print_render_attribute_string( 'last_name_label' ); ?>>
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
@@ -1573,7 +1731,7 @@ class User_Register extends Module_Base {
 			<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 				<?php
 				if ( $settings['show_labels'] ) :
-					
+
 					?>
 					<label <?php $this->print_render_attribute_string( 'email_label' ); ?>>
 						<?php if ( 'yes' == $settings['custom_labels'] ) {
@@ -1590,12 +1748,12 @@ class User_Register extends Module_Base {
 				?>
 			</div>
 
-			<?php if ( isset ( $settings['is_needed_password_input'] ) ) : ?>
+			<?php if ( isset( $settings['is_needed_password_input'] ) && 'yes' == $settings['is_needed_password_input'] ) : ?>
 				<?php $is_needed_password_input = 'yes'; ?>
 				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 					<?php
 					if ( $settings['show_labels'] ) :
-						
+
 						?>
 						<label <?php $this->print_render_attribute_string( 'password_label' ); ?>>
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
@@ -1606,12 +1764,42 @@ class User_Register extends Module_Base {
 						</label>
 						<?php
 					endif;
-					echo '<div class="bdt-form-controls">';
+					echo '<div class="bdt-form-controls bdt-pass-input-wrapper">';
 					echo '<input ' . wp_kses_post( $this->get_render_attribute_string( 'password_input' ) ) . ' required>';
+					echo ( 'yes' == $settings['toggle_password'] ) ? '<div class="bdt-toggle-pass-wrapper"><i class="fa fa-fw fa-eye"></i></div>' : '';
 					echo '</div>';
 
-					if ( isset ( $settings['password_strength'] ) && 'yes' == $settings['password_strength'] ) {
+					if ( isset( $settings['password_strength'] ) && 'yes' == $settings['password_strength'] ) {
 						echo '<div class="bdt-progress bdt-width-1-1"> <div class="bdt-progress-bar" value="0" max="100" style="width:0;"></div> </div>';
+					}
+
+					?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ( isset( $settings['is_confirm_password_input'] ) && 'yes' == $settings['is_confirm_password_input'] ) : ?>
+				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
+					<?php
+					if ( $settings['show_labels'] ) :
+
+						?>
+						<label <?php $this->print_render_attribute_string( 'confirm_password_label' ); ?>>
+							<?php if ( 'yes' == $settings['custom_labels'] ) {
+								echo wp_kses_post( $settings['confirm_password_label'] );
+							} else {
+								echo esc_html__( 'Confirm Password', 'bdthemes-element-pack' );
+							} ?>
+						</label>
+						<?php
+					endif;
+					echo '<div class="bdt-form-controls bdt-pass-input-wrapper">';
+					echo '<input ' . wp_kses_post( $this->get_render_attribute_string( 'confirm_password_input' ) ) . ' required>';
+					echo ( 'yes' == $settings['toggle_password'] ) ? '<div class="bdt-toggle-pass-wrapper"><i class="fa fa-fw fa-eye"></i></div>' : '';
+					echo '</div>';
+
+					if ( isset( $settings['is_confirm_password_input'] ) && 'yes' == $settings['is_confirm_password_input'] ) {
+						if ( isset( $settings['confirm_password_msg'] ) )
+							echo '<div class="bdt-user-register-pass-res bdt-width-1-1 bdt-hidden"> ' . esc_html( $settings['confirm_password_msg'] ) . ' </div>';
 					}
 
 					?>
@@ -1625,7 +1813,7 @@ class User_Register extends Module_Base {
 					</span>
 				</div>
 			<?php endif; ?>
-			<?php $redirect_after_register = ( $settings['redirect_after_register'] && ! empty ( $settings['redirect_url']['url'] ) ) ? $settings['redirect_url']['url'] : ''; ?>
+			<?php $redirect_after_register = ( $settings['redirect_after_register'] && ! empty( $settings['redirect_url']['url'] ) ) ? $settings['redirect_url']['url'] : ''; ?>
 			<input type="hidden" name="is_password_required" class="is_password_required"
 				value="<?php echo esc_attr( $is_needed_password_input ) ?>" />
 			<input type="hidden" name="redirect_after_register" class="redirect_after_register"
@@ -1634,7 +1822,7 @@ class User_Register extends Module_Base {
 				value="<?php esc_html_e( "We are registering you, please wait...", "bdthemes-element-pack" ); ?>" />
 			<div <?php $this->print_render_attribute_string( 'submit-group' ); ?>>
 				<button type="submit" <?php $this->print_render_attribute_string( 'button' ); ?>>
-					<?php if ( ! empty ( $settings['button_text'] ) ) : ?>
+					<?php if ( ! empty( $settings['button_text'] ) ) : ?>
 						<span>
 							<?php echo wp_kses( $settings['button_text'], element_pack_allow_tags( 'title' ) ); ?>
 						</span>

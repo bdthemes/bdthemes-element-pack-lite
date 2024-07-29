@@ -935,9 +935,9 @@ class Twitter_Grid extends Module_Base {
             <div class="bdt-alert-warning" bdt-alert>
                 <a class="bdt-alert-close" bdt-close></a>
                 <?php 
-				$ep_setting_url = esc_url( admin_url( 'admin.php?page=element_pack_options#element_pack_api_settings' ) );
+				$ep_setting_url = admin_url( 'admin.php?page=element_pack_options#element_pack_api_settings' );
                 echo '<p>';
-                echo sprintf(esc_html__('Please add your twitter API key in Element Pack settings. %1$sClick here%2$s to add your twitter API key.', 'bdthemes-element-pack'), '<a href="' . $ep_setting_url . '">', '</a>');
+                echo sprintf(esc_html__('Please add your twitter API key in Element Pack settings. %1$sClick here%2$s to add your twitter API key.', 'bdthemes-element-pack'), '<a href="' . esc_url($ep_setting_url) . '">', '</a>');
                 echo '</p>';
                 ?>
             </div>
