@@ -127,8 +127,6 @@
             return;
         }
 
-        console.log($settings);
-
         var percentage = 0,
             $selector = $('#' + $settings.id),
             $progressBar = $('#' + $settings.id).find('.bdt-progress-bar');
@@ -196,7 +194,6 @@
                     var input = $(this).val(),
                         length = input.length;
                     let result = passStrength.formula(input, length);
-                    console.log(result);
                     passStrength.progress(result);
 
                     if (typeof $settings.forceStrongPass !== 'undefined') {
@@ -206,6 +203,26 @@
                 if (typeof $settings.forceStrongPass !== 'undefined') {
                     $($selector).find('.elementor-field-type-submit .bdt-button').prop('disabled', true);
                 }
+
+                $scope.find('.confirm_password').keyup(function () {
+                    let input = $(this).val(),
+                        length = input.length;
+                    let result = passStrength.formula(input, length);
+                    passStrength.progress(result);
+
+                    let pass = $scope.find('.user_password').val();
+                    
+                    if(input !== pass){
+                        $scope.find('.bdt-user-register-pass-res').removeClass('bdt-hidden');
+                        $($selector).find('.elementor-field-type-submit .bdt-button').prop('disabled', true);
+                    }else{
+                        $scope.find('.bdt-user-register-pass-res').addClass('bdt-hidden');
+                        if (typeof $settings.forceStrongPass !== 'undefined') {
+                            passStrength.forceStrongPass(result);
+                        }
+                    }
+
+                });
             }
         }
 

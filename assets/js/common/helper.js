@@ -120,12 +120,12 @@ jQuery(document).ajaxComplete(function (event, request, settings) {
  * /Open Offcanvas on Mini Cart Update
  */
 
-/**
- * Open In a New Tab Feature
- */
 
 jQuery(document).ready(function () {
-
+    
+    /**
+     * Open In a New Tab Feature
+     */
     const element = {
         'elementor-widget-bdt-post-grid-tab': {
             'selectors': [
@@ -149,9 +149,24 @@ jQuery(document).ready(function () {
             }
         }
     });
+    /**
+     * /Open In a New Tab Feature
+     */
+
+    /** Toggle Pass */
+
+    jQuery('.bdt-pass-input-wrapper').find('i').on('click', function(){
+        if (jQuery(this).hasClass('fa-eye')){
+            jQuery(this).toggleClass("fa-eye-slash");
+        }
+        let input = jQuery(this).closest('.bdt-pass-input-wrapper').find('input');
+        if (input.attr("type") == "password") {
+            jQuery(input).attr("type", "text");
+        } else {
+            jQuery(input).attr("type", "password");
+        }
+    });
+
+    /** /Toggle Pass */
 
 });
-
-/**
- * /Open In a New Tab Feature
- */

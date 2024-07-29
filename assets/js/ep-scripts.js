@@ -120,12 +120,12 @@ jQuery(document).ajaxComplete(function (event, request, settings) {
  * /Open Offcanvas on Mini Cart Update
  */
 
-/**
- * Open In a New Tab Feature
- */
 
 jQuery(document).ready(function () {
-
+    
+    /**
+     * Open In a New Tab Feature
+     */
     const element = {
         'elementor-widget-bdt-post-grid-tab': {
             'selectors': [
@@ -149,12 +149,28 @@ jQuery(document).ready(function () {
             }
         }
     });
+    /**
+     * /Open In a New Tab Feature
+     */
+
+    /** Toggle Pass */
+
+    jQuery('.bdt-pass-input-wrapper').find('i').on('click', function(){
+        if (jQuery(this).hasClass('fa-eye')){
+            jQuery(this).toggleClass("fa-eye-slash");
+        }
+        let input = jQuery(this).closest('.bdt-pass-input-wrapper').find('input');
+        if (input.attr("type") == "password") {
+            jQuery(input).attr("type", "text");
+        } else {
+            jQuery(input).attr("type", "password");
+        }
+    });
+
+    /** /Toggle Pass */
 
 });
 
-/**
- * /Open In a New Tab Feature
- */
 /**
  * Start accordion widget script
  */
@@ -2531,8 +2547,6 @@ $(window).on('elementor/frontend/init', function () {
             return;
         }
 
-        console.log($settings);
-
         var percentage = 0,
             $selector = $('#' + $settings.id),
             $progressBar = $('#' + $settings.id).find('.bdt-progress-bar');
@@ -2600,7 +2614,6 @@ $(window).on('elementor/frontend/init', function () {
                     var input = $(this).val(),
                         length = input.length;
                     let result = passStrength.formula(input, length);
-                    console.log(result);
                     passStrength.progress(result);
 
                     if (typeof $settings.forceStrongPass !== 'undefined') {
@@ -2610,6 +2623,26 @@ $(window).on('elementor/frontend/init', function () {
                 if (typeof $settings.forceStrongPass !== 'undefined') {
                     $($selector).find('.elementor-field-type-submit .bdt-button').prop('disabled', true);
                 }
+
+                $scope.find('.confirm_password').keyup(function () {
+                    let input = $(this).val(),
+                        length = input.length;
+                    let result = passStrength.formula(input, length);
+                    passStrength.progress(result);
+
+                    let pass = $scope.find('.user_password').val();
+                    
+                    if(input !== pass){
+                        $scope.find('.bdt-user-register-pass-res').removeClass('bdt-hidden');
+                        $($selector).find('.elementor-field-type-submit .bdt-button').prop('disabled', true);
+                    }else{
+                        $scope.find('.bdt-user-register-pass-res').addClass('bdt-hidden');
+                        if (typeof $settings.forceStrongPass !== 'undefined') {
+                            passStrength.forceStrongPass(result);
+                        }
+                    }
+
+                });
             }
         }
 

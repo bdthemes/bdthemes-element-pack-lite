@@ -4,7 +4,7 @@
  * Plugin Name: Element Pack Lite - Addons for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: The all-new <a href="https://elementpack.pro/">Element Pack</a> brings incredibly advanced, and super-flexible widgets, and A to Z essential addons to the Elementor page builder for WordPress. Explore expertly-coded widgets with first-class support by experts.
- * Version: 5.7.0
+ * Version: 5.7.1
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
  * Text Domain: bdthemes-element-pack
@@ -68,7 +68,7 @@ if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 if ( ! element_pack_pro_installed() ) {
 
 	// Some pre defined value for easy use
-	define( 'BDTEP_VER', '5.7.0' );
+	define( 'BDTEP_VER', '5.7.1' );
 	define( 'BDTEP_TPL_DB_VER', '1.0.0' );
 	define( 'BDTEP__FILE__', __FILE__ );
 	if ( ! defined( 'BDTEP_TITLE' ) ) {
@@ -214,17 +214,21 @@ if ( ! element_pack_pro_installed() ) {
 				require_once dirname(__FILE__) . '/dci/start.php';
 
 				dci_dynamic_init(array(
-					'sdk_version'  => '1.1.0',
+					'sdk_version'  => '1.2.0',
 					'product_id'   => 4,
 					'plugin_name'  => 'Element Pack Lite', // make simple, must not empty
 					'plugin_title' => 'Love using Element Pack Lite? Congrats 🎉  ( Never miss an Important Update )', // You can describe your plugin title here
 					'plugin_icon'  => BDTEP_ASSETS_URL . 'images/logo.svg',
 					'api_endpoint' => 'https://analytics.bdthemes.com/wp-json/dci/v1/data-insights',
+					'slug'                => 'bdthemes-element-pack-lite',
+					'plugin_deactivate_id'=> 'bdthemes-element-pack-lite',
 					'menu'         => array(
 						'slug' => 'element_pack_options',
 					),
 					'public_key'   => 'pk_ilWmdZmKDWVCdkkKvf5SnD5ib3nZmLJr',
 					'is_premium'   => false,
+					'popup_notice'        => true,
+					'deactivate_feedback' => true,
 					'plugin_msg'   => '<p>Be Top-contributor by sharing non-sensitive plugin data and create an impact to the global WordPress community today! You can receive valuable emails periodically.</p>',
 				));
 			}
