@@ -69,7 +69,7 @@
                                     'display': 'none'
                                 });
                             }
-                            if ($settings.endActionType == 'url') {
+                            if ($settings.endActionType == 'url' && $settings.redirectUrl) {
                                 setInterval(function () {
                                     jQuery(location).attr('href', $settings.redirectUrl);
                                 }, $settings.redirectDelay);
@@ -77,7 +77,6 @@
                         } 
                     },
                     error: function () {
-                        //error handling
                         console.log("Error");
                     }
                 });
@@ -94,8 +93,6 @@
                     success: function (data) {
                     },
                     error: function () {
-                        //error handling
-                        //console.log("Error");
                     }
                 });
             },

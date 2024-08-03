@@ -2498,11 +2498,11 @@ class Countdown extends Module_Base {
 					'class'         => 'bdt-countdown-wrapper bdt-countdown-skin-default',
 					'data-settings' => [ 
 						wp_json_encode( [ 
-							'id'             => '#bdt-countdown-' . $this->get_id(),
+							'id'             => '#bdt-countdown-' . esc_attr($id),
 							'msgId'          => '#' . esc_attr( $msg_id ),
 							'adminAjaxUrl'   => esc_url( admin_url( "admin-ajax.php" ) ),
 							'endActionType'  => $settings['end_action_type'],
-							'redirectUrl'    => ! empty( $settings['end_redirect_link'] ) ? esc_url( $settings['end_redirect_link'] ) : '',
+							'redirectUrl'    => ! empty( $settings['end_redirect_link'] ) ? esc_url( $settings['end_redirect_link'] ) : 'javascript:void(0);',
 							'redirectDelay'  => ( empty( $settings['link_redirect_delay']['size'] ) ) ? 1000 : ( $settings['link_redirect_delay']['size'] ) * 1000,
 							'finalTime'      => isset( $settings['loop_time'] ) && ( $settings['loop_time'] == 'yes' ) ? '' : $final_time,
 							'wpCurrentTime'  => $this->wp_current_time(),
