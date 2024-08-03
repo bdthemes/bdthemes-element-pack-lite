@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4.0
-Stable tag: 5.7.1
+Stable tag: 5.7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -259,7 +259,13 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
-= 5.7.1 [28th July 2024] =
+= 5.7.2 [3rd August 2024] =
+
+* Fixed: Security improved in Lightbox feature
+* Fixed: Security issue fixed in Countdown widget (Thanks to Jennifer Vasko and Craig Smith)
+* Updated: Countdown widget improved
+
+= 5.7.1 [29th July 2024] =
 
 * Added: Toggle Password feature added in User Register widget (Thanks to Lasr)
 * Added: Confirm Password feature added in User Register widget (Thanks to Lasr)

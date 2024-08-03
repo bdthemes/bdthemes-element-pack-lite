@@ -587,7 +587,7 @@ $(window).on('elementor/frontend/init', function () {
                                     'display': 'none'
                                 });
                             }
-                            if ($settings.endActionType == 'url') {
+                            if ($settings.endActionType == 'url' && $settings.redirectUrl) {
                                 setInterval(function () {
                                     jQuery(location).attr('href', $settings.redirectUrl);
                                 }, $settings.redirectDelay);
@@ -595,7 +595,6 @@ $(window).on('elementor/frontend/init', function () {
                         } 
                     },
                     error: function () {
-                        //error handling
                         console.log("Error");
                     }
                 });
@@ -612,8 +611,6 @@ $(window).on('elementor/frontend/init', function () {
                     success: function (data) {
                     },
                     error: function () {
-                        //error handling
-                        //console.log("Error");
                     }
                 });
             },
