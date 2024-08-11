@@ -57,8 +57,6 @@ class Skin_Tiny_Countdown extends Elementor_Skin_Base {
 		$id       = $this->parent->get_id();
 		$coupon_tricky_id  = !empty($settings['id_for_coupon_code']) ? 'bdt-sf-' . $settings['id_for_coupon_code'] :  'bdt-sf-' . $id;
 
-		$end_redirect_url = !empty(esc_html($settings['end_redirect_link'])) ? esc_html($settings['end_redirect_link']) : 'javascript:void(0)';
-
 		$this->parent->add_render_attribute(
 			[
 				'countdown_wrapper' => [
@@ -67,9 +65,9 @@ class Skin_Tiny_Countdown extends Elementor_Skin_Base {
 						wp_json_encode([
 							"id"             => '#bdt-countdown-' . $this->get_id(), 
 							'msgId'			 => '#' . $msg_id,
-							'adminAjaxUrl'   => admin_url("admin-ajax.php"),
+							'adminAjaxUrl'   => esc_url(admin_url("admin-ajax.php")),
 							'endActionType'	 => $settings['end_action_type'],
-							'redirectUrl'	 => $end_redirect_url,
+							'redirectUrl'	 => !empty($settings['end_redirect_link']) ? esc_url($settings['end_redirect_link']) : 'javascript:void(0);',
 							'redirectDelay'	 => (empty($settings['link_redirect_delay']['size'])) ? 1000 : ($settings['link_redirect_delay']['size']) * 1000,
 							'finalTime'		 => isset($settings['loop_time']) && ($settings['loop_time'] == 'yes') ?  '' :  $final_time,
 							'wpCurrentTime'		 => $this->parent->wp_current_time(),

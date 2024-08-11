@@ -41,31 +41,22 @@ var debounce = function (func, wait, immediate) {
     };
 };
 
-/** 
- * Start used on Social Share
- */
+function epObserveTarget(target, callback) {
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    // Set the rootMargin to trigger when the target is 10% past the viewport
+    options.rootMargin = options.rootMargin || '10% 0px 0px 0px';
+    var observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                callback(entry);
 
-jQuery(document).ready(function () {
-    jQuery(".bdt-ss-link").on("click", function () {
-        var $temp = jQuery("<input>");
-        jQuery("body").append($temp);
-        $temp.val(jQuery(this).data("url")).select();
-        document.execCommand("copy");
-        $temp.remove();
-
-        // Update the text to indicate that it has been copied
-        jQuery(this).find('.bdt-social-share-title').html(jQuery(this).data('copied'));
-
-        // Reset the text after a delay (e.g., 5 seconds)
-        setTimeout(() => {
-            jQuery(this).find('.bdt-social-share-title').html(jQuery(this).data('orginal'));
-        }, 5000);
-    });
-});
-
-/** 
- * end Social Share
- */
+                if (!options.loop)
+                    observer.unobserve(entry.target); // Unobserve after the first intersection
+            }
+        });
+    }, options);
+    observer.observe(target);
+}
 
 /**
  * Start Crypto Currency
@@ -101,72 +92,141 @@ function returnCurrencySymbol(currency = null) {
  * End Crypto Currency
  */
 
-/**
- * Open Offcanvas on Mini Cart Update
- */
+(function ($) {
 
-jQuery(document).ajaxComplete(function (event, request, settings) {
-    if (request.responseJSON && typeof request.responseJSON.cart_hash !== 'undefined' && request.responseJSON.cart_hash) {
-        if (jQuery('.bdt-offcanvas').hasClass('__update_cart')) {
-            let id = jQuery('.bdt-offcanvas.__update_cart').attr('id');
-            bdtUIkit.util.ready(function () {
-                bdtUIkit.offcanvas('#' + id).show();
-            });
-        }
-    }
-});
-
-/**
- * /Open Offcanvas on Mini Cart Update
- */
-
-
-jQuery(document).ready(function () {
-    
     /**
-     * Open In a New Tab Feature
+     * Open Offcanvas on Mini Cart Update
      */
-    const element = {
-        'elementor-widget-bdt-post-grid-tab': {
-            'selectors': [
-                '.bdt-post-grid-desc-inner a',
-                '.bdt-post-grid-tab-readmore',
-            ]
-        },
-        'elementor-widget-bdt-post-grid': {
-            'selectors': [
-                '.bdt-post-grid-title a',
-            ]
-        },
-    };
 
-    Object.keys(element).forEach(function (key) {
-        if (jQuery('.' + key).length > 0) {
-            if (jQuery('.' + key).data('settings') !== undefined && jQuery('.' + key).data('settings').bdt_link_new_tab === 'yes') {
-                element[key].selectors.forEach(function (selector) {
-                    jQuery(selector).attr('target', '_blank');
+    jQuery(document).ajaxComplete(function (event, request, settings) {
+        if (request.responseJSON && typeof request.responseJSON.cart_hash !== 'undefined' && request.responseJSON.cart_hash) {
+            if (jQuery('.bdt-offcanvas').hasClass('__update_cart')) {
+                let id = jQuery('.bdt-offcanvas.__update_cart').attr('id');
+                bdtUIkit.util.ready(function () {
+                    bdtUIkit.offcanvas('#' + id).show();
                 });
             }
         }
     });
+
     /**
-     * /Open In a New Tab Feature
+     * /Open Offcanvas on Mini Cart Update
      */
 
-    /** Toggle Pass */
+    jQuery(document).ready(function () {
 
-    jQuery('.bdt-pass-input-wrapper').find('i').on('click', function(){
-        if (jQuery(this).hasClass('fa-eye')){
-            jQuery(this).toggleClass("fa-eye-slash");
-        }
-        let input = jQuery(this).closest('.bdt-pass-input-wrapper').find('input');
-        if (input.attr("type") == "password") {
-            jQuery(input).attr("type", "text");
-        } else {
-            jQuery(input).attr("type", "password");
-        }
+        /** 
+        * Start used on Social Share
+        */
+
+        jQuery(".bdt-ss-link").on("click", function () {
+            var $temp = jQuery("<input>");
+            jQuery("body").append($temp);
+            $temp.val(jQuery(this).data("url")).select();
+            document.execCommand("copy");
+            $temp.remove();
+
+            // Update the text to indicate that it has been copied
+            jQuery(this).find('.bdt-social-share-title').html(jQuery(this).data('copied'));
+
+            // Reset the text after a delay (e.g., 5 seconds)
+            setTimeout(() => {
+                jQuery(this).find('.bdt-social-share-title').html(jQuery(this).data('orginal'));
+            }, 5000);
+        });
+
+        /**
+         * end Social Share
+         */
+
+        /**
+         * Open In a New Tab Feature
+         */
+        const element = {
+            'elementor-widget-bdt-post-grid-tab': {
+                'selectors': [
+                    '.bdt-post-grid-desc-inner a',
+                    '.bdt-post-grid-tab-readmore',
+                ]
+            },
+            'elementor-widget-bdt-post-grid': {
+                'selectors': [
+                    '.bdt-post-grid-title a',
+                ]
+            },
+        };
+
+        Object.keys(element).forEach(function (key) {
+            if (jQuery('.' + key).length > 0) {
+                if (jQuery('.' + key).data('settings') !== undefined && jQuery('.' + key).data('settings').bdt_link_new_tab === 'yes') {
+                    element[key].selectors.forEach(function (selector) {
+                        jQuery(selector).attr('target', '_blank');
+                    });
+                }
+            }
+        });
+        /**
+         * /Open In a New Tab Feature
+         */
+
+        /** Toggle Pass */
+
+        jQuery('.bdt-pass-input-wrapper').find('i').on('click', function () {
+            if (jQuery(this).hasClass('fa-eye')) {
+                jQuery(this).toggleClass("fa-eye-slash");
+            }
+            let input = jQuery(this).closest('.bdt-pass-input-wrapper').find('input');
+            if (input.attr("type") == "password") {
+                jQuery(input).attr("type", "text");
+            } else {
+                jQuery(input).attr("type", "password");
+            }
+        });
+
+        /** /Toggle Pass */
+
+        /** Read more */
+        elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+            if (jQuery($scope).find('.bdt-ep-read-more-text').length) {
+                jQuery($scope).find('.bdt-ep-read-more-text').each(function () {
+                    console.log('ElementPackConfig:');
+                    var words_limit_settings = $(this).data('read-more');
+
+                    var max_words = words_limit_settings.words_length || 20; // Set the maximum number of words
+
+                    var content = $(this).html(); // Get the full content
+                    var words = content.split(/\s+/); // Split content into words
+
+                    if (words.length > max_words) {
+                        var short_content = words.slice(0, max_words).join(' '); // Get the first part of the content
+                        var long_content = words.slice(max_words).join(' '); // Get the remaining part of the content
+
+                        $(this).html(`
+                        ${short_content}
+                        <a href="#" class="bdt_read_more">...<br>${ElementPackConfig.words_limit.read_more}</a>
+                        <span class="bdt_more_text" style="display:none;">${long_content}</span>
+                        <a href="#" class="bdt_read_less" style="display:none;">${ElementPackConfig.words_limit.read_less}</a>
+                    `);
+
+                        $(this).find('a.bdt_read_more').click(function (event) {
+                            event.preventDefault();
+                            $(this).hide(); // Hide the read more link
+                            $(this).siblings('.bdt_more_text').show(); // Show the more text
+                            $(this).siblings('a.bdt_read_less').show(); // Show the read less link
+                        });
+
+                        $(this).find('a.bdt_read_less').click(function (event) {
+                            event.preventDefault();
+                            $(this).hide(); // Hide the read less link
+                            $(this).siblings('.bdt_more_text').hide(); // Hide the more text
+                            $(this).siblings('a.bdt_read_more').show(); // Show the read more link
+                        });
+                    }
+                });
+            }
+        });
+        /** /Read more */
+
     });
 
-    /** /Toggle Pass */
-
-});
+})(jQuery);

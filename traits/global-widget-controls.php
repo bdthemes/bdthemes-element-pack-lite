@@ -7742,4 +7742,64 @@ trait Global_Widget_Controls {
 
         $this->render_loop_item($settings, $id);
     }
+
+	protected function gloabl_read_more_link_style_controls() {
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'gb_read_more_typography',
+				'selector' => '{{WRAPPER}} .bdt_read_more, {{WRAPPER}} .bdt_read_less',
+			]
+		);
+		
+		$this->start_controls_tabs(
+			'gb_words_limit_style_tabs'
+		);
+
+		$this->start_controls_tab(
+			'gb_words_limit_style_normal_tab',
+			[ 
+				'label' => esc_html__( 'Normal', 'textdomain' ),
+			]
+		);
+
+		$this->add_control(
+			'gb_words_limit_color',
+			[ 
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt_read_more' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt_read_less' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'gb_words_limit_style_hover_tab',
+			[ 
+				'label' => esc_html__( 'Hover', 'textdomain' ),
+			]
+		);
+
+		$this->add_control(
+			'gb_words_limit_color_color_hover',
+			[
+				'label'     => esc_html__('Hover Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt_read_less:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt_read_more:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+	}
 }

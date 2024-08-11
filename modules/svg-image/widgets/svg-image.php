@@ -848,8 +848,10 @@ class Svg_Image extends Module_Base {
 
 	public function render_svg() {
 		$settings = $this->get_settings_for_display();
-		$svg_file = file_get_contents( $settings['image']['url'], true );
-		echo $svg_file;
+		$svg_file = $settings['image']['url'];
+		?>
+		<img src="<?php echo esc_url( $svg_file ); ?>" alt="<?php echo esc_html( get_the_title() ); ?>" class="bdt-svg-image" data-bdt-svg="stroke-animation: true" data-bdt-svg />
+		<?
 	}
 
 	public function render_image() {

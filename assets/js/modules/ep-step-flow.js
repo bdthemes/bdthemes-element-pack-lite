@@ -2,12 +2,11 @@
  * Start step flow widget script
  */
 
-(function($, elementor) {
+(function ($, elementor) {
 
     'use strict';
 
-    // Accordion
-    var widgetStepFlow = function($scope, $) {
+    var widgetStepFlow = function ($scope, $) {
 
         var $avdDivider = $scope.find('.bdt-step-flow'),
             divider = $($avdDivider).find('.bdt-title-separator-wrapper > img');
@@ -16,18 +15,20 @@
             return;
         }
 
-        elementorFrontend.waypoint(divider, function() {
-            bdtUIkit.svg(this, {
+        epObserveTarget($scope[0], function () {
+            bdtUIkit.svg(divider, {
                 strokeAnimation: true
             });
         }, {
-            offset: 'bottom-in-view'
+            root: null, // Use the viewport as the root
+            rootMargin: '0px', // No margin around the root
+            threshold: 0.8 // 80% visibility (1 - 0.8)
         });
 
     };
 
 
-    jQuery(window).on('elementor/frontend/init', function() {
+    jQuery(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-step-flow.default', widgetStepFlow);
     });
 
