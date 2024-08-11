@@ -214,7 +214,7 @@ if ( ! element_pack_pro_installed() ) {
 				require_once dirname(__FILE__) . '/dci/start.php';
 
 				dci_dynamic_init(array(
-					'sdk_version'  => '1.2.0',
+					'sdk_version'  => '1.2.1',
 					'product_id'   => 4,
 					'plugin_name'  => 'Element Pack Lite', // make simple, must not empty
 					'plugin_title' => 'Love using Element Pack Lite? Congrats 🎉  ( Never miss an Important Update )', // You can describe your plugin title here
@@ -226,8 +226,8 @@ if ( ! element_pack_pro_installed() ) {
 						'slug' => 'element_pack_options',
 					),
 					'public_key'   => 'pk_ilWmdZmKDWVCdkkKvf5SnD5ib3nZmLJr',
-					'is_premium'   => false,
-					'popup_notice'        => true,
+					'is_premium'   => true,
+					'popup_notice'        => false,
 					'deactivate_feedback' => true,
 					'plugin_msg'   => '<p>Be Top-contributor by sharing non-sensitive plugin data and create an impact to the global WordPress community today! You can receive valuable emails periodically.</p>',
 				));

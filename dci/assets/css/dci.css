@@ -450,6 +450,32 @@ button.notice-dismiss {
  * End Deactivate CSS
  */
 
+
+.dci-global-notice.dci-notice-data .dci-button-allow {
+	--primaryColor: #08AEEC;
+	--secondaryColor: #20E2AD;
+	background: linear-gradient(313deg, var(--primaryColor), var(--secondaryColor) 100%);
+}
+
+.dci-global-notice.dci-notice-data .dci-button-allow:hover {
+	--primaryColor: #20E2AD;
+	;
+	--secondaryColor: #08AEEC;
+}
+
+.dci-global-notice.dci-notice-data {
+	border-left-color: #46d8bb;
+}
+
+
+.dci-global-notice.dci-notice-data .dci-button-skip {
+	background-color: #e0f5ff;
+}
+
+.dci-global-notice.dci-notice-data .dci-button-skip:hover {
+	background-color: #d9f1fd;
+}
+
 /**
  * Start Element Pack Pro
  */
