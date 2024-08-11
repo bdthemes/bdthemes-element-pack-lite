@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4.0
-Stable tag: 5.7.2
+Stable tag: 5.7.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.23.3
+Elementor tested up to: 3.23.4
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -258,6 +258,14 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.7.3 [11th August 2024] =
+
+* Added: Read more (word limit) feature added in review card grid & carousel widget
+* Fixed: Swiping issue fixed in Switcher widget (Thanks to Amanda Knapper)
+* Fixed: Security issue fixed in Custom Gallery widget
+* Updated: Svg Image widget improved
+* Updated: waypoint.js replaced with Intersection Observer
 
 = 5.7.2 [3rd August 2024] =
 
