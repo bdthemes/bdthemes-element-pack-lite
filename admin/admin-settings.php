@@ -33,13 +33,9 @@ class ElementPack_Admin_Settings {
 	function __construct() {
 		$this->settings_api = new ElementPack_Settings_API;
 
-
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 201 );
 
-		if ( ! Tracker::is_allow_track() ) {
-			add_action( 'admin_notices', [ $this, 'allow_tracker_activate_notice' ], 10, 3 );
-		}
 	}
 
 	/**
@@ -1386,27 +1382,6 @@ class ElementPack_Admin_Settings {
 		</div>
 
 		<?php
-	}
-
-	/**
-	 * 
-	 * Allow Tracker deactivated warning
-	 * If Allow Tracker disable in elementor then this notice will be show
-	 *
-	 * @access public
-	 */
-
-	public function allow_tracker_activate_notice() {
-
-		Notices::add_notice(
-			[ 
-				'id'               => 'ep-allow-tracker',
-				'type'             => 'warning',
-				'dismissible'      => true,
-				'dismissible-time' => MONTH_IN_SECONDS * 2,
-				'message'          => __( 'Please activate <strong>Usage Data Sharing</strong> features from Elementor, otherwise Widgets Analytics will not work. Please activate the settings from <strong>Elementor > Settings > General Tab >  Usage Data Sharing.</strong> Thank you.', 'bdthemes-element-pack' ),
-			]
-		);
 	}
 
 	/**
