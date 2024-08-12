@@ -233,8 +233,7 @@ if ( ! element_pack_pro_installed() ) {
 					'popup_notice'        => false,
 					'deactivate_feedback' => true,
 					'delay_time'   => [
-						// 'time' => 3 * DAY_IN_SECONDS,
-						'time' => 133 * MINUTE_IN_SECONDS,
+						'time' => 3 * DAY_IN_SECONDS,
 					],
 					'plugin_msg'   => '<p>Be Top-contributor by sharing non-sensitive plugin data and create an impact to the global WordPress community today! You can receive valuable emails periodically.</p>',
 				));
