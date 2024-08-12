@@ -59,6 +59,10 @@ class ElementPack_Admin_Settings {
 
         $used_widgets = array();
 
+		if ( ! Tracker::is_allow_track() ) {
+			return $used_widgets;
+		}
+
         if (class_exists('Elementor\Modules\Usage\Module')) {
 
             $module     = Module::instance();
@@ -97,6 +101,10 @@ class ElementPack_Admin_Settings {
 
         $used_widgets = array();
 
+		if ( ! Tracker::is_allow_track() ) {
+			return $used_widgets;
+		}
+
         if (class_exists('Elementor\Modules\Usage\Module')) {
 
             $module     = Module::instance();
@@ -134,6 +142,10 @@ class ElementPack_Admin_Settings {
     public static function get_used_only_3rdparty() {
 
         $used_widgets = array();
+
+		if ( ! Tracker::is_allow_track() ) {
+			return $used_widgets;
+		}
 
         if (class_exists('Elementor\Modules\Usage\Module')) {
 
@@ -472,13 +484,18 @@ class ElementPack_Admin_Settings {
      */
 
     public function element_pack_welcome() {
+		$track_nw_msg = '';
+		if ( ! Tracker::is_allow_track() ) {
+			$track_nw     = esc_html__( 'This feature is not working because the Elementor Usage Data Sharing feature is Not Enabled.', 'bdthemes-element-pack' );
+			$track_nw_msg = 'bdt-tooltip="' . $track_nw . '"';
+		}
 ?>
 
         <div class="ep-dashboard-panel" data-bdt-scrollspy="target: > div > div > .bdt-card; cls: bdt-animation-slide-bottom-small; delay: 300">
 
             <div class="bdt-grid" data-bdt-grid data-bdt-height-match="target: > div > .bdt-card">
                 <div class="bdt-width-1-2@m bdt-width-1-4@l">
-                    <div class="ep-widget-status bdt-card bdt-card-body">
+                    <div class="ep-widget-status bdt-card bdt-card-body" <?php echo wp_kses_post( $track_nw_msg ); ?>>
 
                         <?php
                         $used_widgets    = count(self::get_used_widgets());
@@ -504,7 +521,7 @@ class ElementPack_Admin_Settings {
                     </div>
                 </div>
                 <div class="bdt-width-1-2@m bdt-width-1-4@l">
-                    <div class="ep-widget-status bdt-card bdt-card-body">
+                    <div class="ep-widget-status bdt-card bdt-card-body" <?php echo wp_kses_post( $track_nw_msg ); ?>>
 
                         <?php
                         $used_only_widgets   = count(self::get_used_only_widgets());
@@ -530,7 +547,7 @@ class ElementPack_Admin_Settings {
                     </div>
                 </div>
                 <div class="bdt-width-1-2@m bdt-width-1-4@l">
-                    <div class="ep-widget-status bdt-card bdt-card-body">
+                    <div class="ep-widget-status bdt-card bdt-card-body" <?php echo wp_kses_post( $track_nw_msg ); ?>>
 
                         <?php
                         $used_only_3rdparty   = count(self::get_used_only_3rdparty());
@@ -557,7 +574,7 @@ class ElementPack_Admin_Settings {
                 </div>
 
                 <div class="bdt-width-1-2@m bdt-width-1-4@l">
-                    <div class="ep-widget-status bdt-card bdt-card-body">
+                    <div class="ep-widget-status bdt-card bdt-card-body" <?php echo wp_kses_post( $track_nw_msg ); ?>>
 
                         <div class="ep-count-canvas-wrap bdt-flex bdt-flex-between">
                             <div class="ep-count-wrap">
@@ -578,6 +595,17 @@ class ElementPack_Admin_Settings {
                 </div>
             </div>
 
+            <?php if ( ! Tracker::is_allow_track() ) : ?>
+				<div class="bdt-border-rounded bdt-box-shadow-small bdt-alert-warning" bdt-alert>
+					<a href class="bdt-alert-close" bdt-close></a>
+					<div class="bdt-text-default">
+						<?php
+						esc_html_e( 'To view widgets analytics, Elementor Usage Data Sharing feature by Elementor needs to be activated. Please activate the feature to get widget analytics instantly ', 'bdthemes-element-pack' );
+						echo '<a href="' . esc_url( admin_url( 'admin.php?page=elementor' ) ) . '">from here.</a>';
+						?>
+					</div>
+				</div>
+			<?php endif; ?>
 
             <div class="bdt-grid" bdt-grid bdt-height-match="target: > div > .bdt-card">
                 <div class="bdt-width-1-3@m ep-support-section">

@@ -213,6 +213,9 @@ if ( ! element_pack_pro_installed() ) {
 				// Include DCI SDK.
 				require_once dirname(__FILE__) . '/dci/start.php';
 
+				wp_register_style( 'dci-sdk-ep-lite', plugins_url( 'dci/assets/css/dci.css', __FILE__ ), array(), '1.2.1', 'all' );
+				wp_enqueue_style( 'dci-sdk-ep-lite' );
+
 				dci_dynamic_init(array(
 					'sdk_version'  => '1.2.1',
 					'product_id'   => 4,
