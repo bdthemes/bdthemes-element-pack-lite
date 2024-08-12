@@ -166,7 +166,7 @@ if ( ! element_pack_pro_installed() ) {
 			}
 
 			if ( $plugin == plugin_basename( BDTEP__FILE__ ) ) {
-				exit( wp_redirect( admin_url( 'admin.php?page=element_pack_options&notice=v6' ) ) );
+				exit( wp_redirect( admin_url( 'admin.php?page=element_pack_options' ) ) );
 			}
 		}
 	}

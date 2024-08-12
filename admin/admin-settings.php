@@ -37,11 +37,6 @@ class ElementPack_Admin_Settings {
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 201 );
 
-
-		if ( isset( $_GET['notice'] ) && $_GET['notice'] == 'v4' ) {
-			add_action( 'admin_notices', [ $this, 'v4_activate_notice' ], 10, 3 );
-		}
-
 		if ( ! Tracker::is_allow_track() ) {
 			add_action( 'admin_notices', [ $this, 'allow_tracker_activate_notice' ], 10, 3 );
 		}
@@ -1393,27 +1388,6 @@ class ElementPack_Admin_Settings {
 		<?php
 	}
 
-
-
-	/**
-	 * v4 Notice
-	 * This notice is very important to show minimum 3 to 5 next update released version.
-	 *
-	 * @access public
-	 */
-
-	public function v4_activate_notice() {
-
-		Notices::add_notice(
-			[ 
-				'id'               => 'version-4',
-				'type'             => 'warning',
-				'dismissible'      => true,
-				'dismissible-time' => 43200,
-				'message'          => __( 'There are very important changes in our major version <strong>v4.0.0</strong>. If you are continuing with the Element Pack plugin from an earlier version of v4.0.0 then you must read this article carefully <a href="https://bdthemes.com/knowledge-base/read-before-upgrading-to-element-pack-pro-version-4-0" target="_blank">from here</a>. <br> And if you are using this plugin from v4.0.0 there is nothing to worry about you. Thank you.', 'bdthemes-element-pack' ),
-			]
-		);
-	}
 	/**
 	 * 
 	 * Allow Tracker deactivated warning
