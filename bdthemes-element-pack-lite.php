@@ -166,7 +166,7 @@ if ( ! element_pack_pro_installed() ) {
 			}
 
 			if ( $plugin == plugin_basename( BDTEP__FILE__ ) ) {
-				exit( wp_redirect( admin_url( 'admin.php?page=element_pack_options&notice=v6' ) ) );
+				exit( wp_redirect( admin_url( 'admin.php?page=element_pack_options' ) ) );
 			}
 		}
 	}
@@ -213,6 +213,9 @@ if ( ! element_pack_pro_installed() ) {
 				// Include DCI SDK.
 				require_once dirname(__FILE__) . '/dci/start.php';
 
+				wp_register_style( 'dci-sdk-ep-lite', plugins_url( 'dci/assets/css/dci.css', __FILE__ ), array(), '1.2.1', 'all' );
+				wp_enqueue_style( 'dci-sdk-ep-lite' );
+
 				dci_dynamic_init(array(
 					'sdk_version'  => '1.2.1',
 					'product_id'   => 4,
@@ -229,6 +232,9 @@ if ( ! element_pack_pro_installed() ) {
 					'is_premium'   => true,
 					'popup_notice'        => false,
 					'deactivate_feedback' => true,
+					'delay_time'   => [
+						'time' => 3 * DAY_IN_SECONDS,
+					],
 					'plugin_msg'   => '<p>Be Top-contributor by sharing non-sensitive plugin data and create an impact to the global WordPress community today! You can receive valuable emails periodically.</p>',
 				));
 			}
