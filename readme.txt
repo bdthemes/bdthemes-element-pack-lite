@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4.0
-Stable tag: 5.7.3
+Stable tag: 5.7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -259,6 +259,10 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.7.4 [14th August 2024] =
+
+* Updated: Dashboard system improved
+
 = 5.7.3 [11th August 2024] =
 
 * Added: Read more (word limit) feature added in review card grid & carousel widget
@@ -283,55 +287,6 @@ https://youtu.be/u9JRd824Mjc
 
 * Added: Widget Caching feature added
 * Fixed: Separator issue fixed in price list widget
-
-= 5.6.14 [18th July 2024] =
-
-* Updated: Version compatibility added
-
-= 5.6.13 [14 July 2024] =
-
-* Fixed: Background overlay undefined issue fixed in trailer box widget (Thanks to Lihong)
-* Fixed: W3C Markup Validation issue fixed in Accordion widget (Thanks to Andreas)
-* Fixed: Translation issue fixed
-* Updated: UIKit framework updated
-
-= 5.6.12 [1st July 2024] =
-
-* Deprecated: OnClick Event depricated in all widgets
-* Fixed: Translation issue fixed (Thanks to itapress)
-
-= 5.6.11 [29th June 2024] =
-
-* Fixed: Icon align issue fixed in accordion widget
-* Updated: Item Gap improved in Accordion widget
-
-= 5.6.10 [25th June 2024] =
-
-* Fixed: Text domain & translation issue fixed (Thanks to itapress)
-
-= 5.6.9 [24th June 2024] =
-
-* Fixed: Text Domain and Translation issue fixed (Thanks to itapress)
-
-= 5.6.8 [19th June 2024] =
-
-* Fixed: Security improved in countdown widget
-
-= 5.6.7 [11th June 2024] =
-
-* Added: Keyboard option added in slider widget
-* Added: Pre title & text controls added in trailer box widget
-
-= 5.6.6 [3rd June 2024] =
-
-* Added: Content align option added in panel slider widget
-* Added: Modal close icon size option added in search widget
-
-= 5.6.5 [28th May 2024] =
-
-* Added: Modal Close Button controls added in search widget
-* Fixed: Close Button issue fixed in Search widget (Thanks to Andre Head)
-* Fixed: Swiper carousel autoplay interaction issue fixed
 
 Details [changelog here](https://feedback.bdthemes.com/announcements?category=category_6l495r8q)
 
