@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4.0
-Stable tag: 5.7.4
+Stable tag: 5.7.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -258,6 +258,13 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.7.5 [14th August 2024] =
+
+* Added: Touch Screen Swiping feature added in Image Accordion widget ( Thnaks to Thorben )
+* Added: Ajax loading spacing, icon width option added in search widget
+* Fixed: Search icon input radius issue fixed in search widget
+* Fixed: Escaping fixed in Tutor LMS widget ( Thanks to Mirko )
 
 = 5.7.4 [14th August 2024] =
 

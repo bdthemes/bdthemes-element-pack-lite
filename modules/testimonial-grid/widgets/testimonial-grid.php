@@ -1410,14 +1410,7 @@ class Testimonial_Grid extends Module_Base {
 		$settings = $this->get_settings_for_display();
 		$id	   = $this->get_id();
 
-		// TODO need to delete after v6.5
-		if ( isset( $settings['posts'] ) and $settings['posts_per_page'] == 4 ) {
-			$limit = $settings['posts'];
-		} else {
-			$limit = $settings['posts_per_page'];
-		}
-
-		$wp_query = $this->render_query( $limit );
+		$wp_query = $this->render_query( $settings['posts_per_page'] );
 
 		$this->add_render_attribute( 'testimonial-grid', 'data-bdt-grid', '' );
 		$this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-grid' );

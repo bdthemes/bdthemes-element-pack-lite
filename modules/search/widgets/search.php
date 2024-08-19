@@ -733,33 +733,13 @@ class Search extends Module_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_search_style',
+			'section_search_icon_style',
 			[
-				'label' => esc_html__('Input', 'bdthemes-element-pack'),
+				'label' => esc_html__('Search Icon', 'bdthemes-element-pack'),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'input_typography',
-				'selector' => '{{WRAPPER}} .bdt-search-input, #modal-search-{{ID}} .bdt-search-input',
-				//'scheme'   => Schemes\Typography::TYPOGRAPHY_3,
-			]
-		);
-
-		$this->add_responsive_control(
-			'search_icon_size',
-			[
-				'label'     => esc_html__('Icon Size', 'bdthemes-element-pack'),
-				'type'      => Controls_Manager::SLIDER,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-search .bdt-search-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: auto;',
-				],
 				'condition' => [
-					'skin' => 'default'
-				]
+					'search_icon' => 'yes',
+				],
 			]
 		);
 
@@ -810,6 +790,54 @@ class Search extends Module_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'search_icon_size',
+			[
+				'label'     => esc_html__('Icon Size', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SLIDER,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-search .bdt-search-icon svg' => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'skin' => 'default'
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'search_icon_width',
+			[
+				'label'     => esc_html__('Icon Width', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SLIDER,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-search .bdt-search-icon' => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'skin' => 'default'
+				]
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_search_style',
+			[
+				'label' => esc_html__('Input', 'bdthemes-element-pack'),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'input_typography',
+				'selector' => '{{WRAPPER}} .bdt-search-input, #modal-search-{{ID}} .bdt-search-input',
+			]
+		);
+
+		
+
 		$this->start_controls_tabs('tabs_input_colors');
 
 		$this->start_controls_tab(
@@ -830,7 +858,6 @@ class Search extends Module_Base {
 				],
 			]
 		);
-
 
 		$this->add_control(
 			'input_background_color',
@@ -901,6 +928,7 @@ class Search extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-input' => 'border-radius: {{SIZE}}{{UNIT}}',
 					'#modal-search-{{ID}} .bdt-search-input' => 'border-radius: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .bdt-search .bdt-position-relative' => 'border-radius: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -1197,42 +1225,6 @@ class Search extends Module_Base {
 			]
 		);
 
-
-		$this->add_control(
-			'search_ajax_background_color',
-			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result' => 'background: {{VALUE}};',
-				],
-			]
-		);
-		$this->add_responsive_control(
-			'ajax_search_dropdown_padding',
-			[
-				'label'                 => esc_html__('Padding', 'bdthemes-element-pack'),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => ['px', '%', 'em'],
-				'selectors'             => [
-					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-inner'    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'separator'             => 'before',
-			]
-		);
-
-		$this->add_responsive_control(
-			'ajax_search_dropdown_margin',
-			[
-				'label'                 => esc_html__('Margin', 'bdthemes-element-pack'),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => ['px', '%', 'em'],
-				'selectors'             => [
-					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result '    => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -1252,11 +1244,58 @@ class Search extends Module_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'search_ajax_background_color',
+			[
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result' => 'background: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'ajax_search_dropdown_padding',
+			[
+				'label'                 => esc_html__('Padding', 'bdthemes-element-pack'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%', 'em'],
+				'selectors'             => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-inner'    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'ajax_search_dropdown_margin',
+			[
+				'label'                 => esc_html__('Margin', 'bdthemes-element-pack'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%', 'em'],
+				'selectors'             => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result '    => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'           => 'search_ajax_shadow',
 				'selector'       => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result',
+			]
+		);
+
+		$this->add_responsive_control(
+			'ajax_loading_spacing',
+			[
+				'label'      => esc_html__('Loading Spacing', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em'],
+				'selectors'  => [
+					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search.bdt-search-loading:after' => 'right: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 
