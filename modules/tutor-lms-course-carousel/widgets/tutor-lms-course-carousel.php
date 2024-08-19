@@ -258,6 +258,13 @@ class TutorLms_Course_Carousel extends Module_Base {
 			]
 		);
 
+		$this->update_control(
+			'posts_source',
+			[
+				'default' => 'courses',
+			]
+		);
+
 		$this->end_controls_section();
 
 		//Navigation Controls
@@ -1520,13 +1527,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 	public function render() {
 		$settings = $this->get_settings_for_display();
 
-		// TODO need to delete after v6.5
-		if (isset($settings['limit']) and $settings['posts_per_page'] == 9) {
-			$limit = $settings['limit'];
-		} else {
-			$limit = $settings['posts_per_page'];
-		}
-		$this->query_posts($limit);
+		$this->query_posts($settings['posts_per_page']);
 		$wp_query = $this->get_query();
 
 		if (!$wp_query->found_posts) {
@@ -1641,12 +1642,12 @@ class TutorLms_Course_Carousel extends Module_Base {
 							$course_students = tutor_utils()->count_enrolled_users_by_course();
 							?>
 							<div class="bdt-tutor-single-loop-meta">
-								<i class='tutor-icon-user'></i><span><?php echo esc_html($course_students); ?></span>
+								<i class='tutor-icon-user'></i><span><?php echo wp_kses_post($course_students); ?></span>
 							</div>
 							<?php
 							if (!empty($course_duration)) { ?>
 								<div class="bdt-tutor-single-loop-meta">
-									<i class='tutor-icon-clock'></i> <span><?php echo esc_html($course_duration); ?></span>
+									<i class='tutor-icon-clock'></i> <span><?php echo wp_kses_post($course_duration); ?></span>
 								</div>
 							<?php } ?>
 						</div>
@@ -1656,7 +1657,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 
 						<?php if ('yes' == $settings['show_author_avatar']) : ?>
 							<div class="bdt-tutor-single-course-avatar">
-								<a href="<?php echo esc_url($profile_url); ?>"> <?php echo wp_kses(tutor_utils()->get_tutor_avatar($post->post_author)); ?></a>
+								<a href="<?php echo esc_url($profile_url); ?>"> <?php echo wp_kses_post(tutor_utils()->get_tutor_avatar($post->post_author)); ?></a>
 							</div>
 						<?php endif; ?>
 

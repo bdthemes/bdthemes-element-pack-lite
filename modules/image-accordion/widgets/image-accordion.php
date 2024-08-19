@@ -326,6 +326,15 @@ class Image_Accordion extends Module_Base {
 		);
 
 		$this->add_control(
+			'swiping',
+			[
+				'label'   => esc_html__('Touch Screen Swiping', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+				//'separator' => 'before'
+			]
+		);
+
+		$this->add_control(
             'divider_hr',
             [
                 'type'    => Controls_Manager::DIVIDER,
@@ -1508,7 +1517,8 @@ class Image_Accordion extends Module_Base {
 					        'tabs_id' => 'bdt-ep-image-accordion-' . $this->get_id(),
 							'mouse_event' => $imageAccordionEvent,
 							'activeItem' => $settings['active_item'] == 'yes' ? true : false,
-							'activeItemNumber' => $settings['active_item_number']
+							'activeItemNumber' => $settings['active_item_number'],
+							'swiping' => $settings['swiping']
 						]))
 					]
 				]
