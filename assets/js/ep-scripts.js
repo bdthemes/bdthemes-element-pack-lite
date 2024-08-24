@@ -1735,7 +1735,6 @@ $(window).on('elementor/frontend/init', function () {
             return false;
         });
 
-
     };
 
     // end progress back to top

@@ -207,7 +207,6 @@
             return false;
         });
 
-
     };
 
     // end progress back to top

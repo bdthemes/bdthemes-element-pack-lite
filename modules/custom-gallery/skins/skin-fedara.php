@@ -170,9 +170,9 @@ class Skin_Fedara extends Elementor_Skin_Base {
 
 		$tag = $this->parent->get_settings( 'title_tag' );
 		?>
-		<<?php echo esc_html($tag) ?> class="bdt-gallery-item-title">
-			<?php echo esc_html($title['image_title']); ?>
-		</<?php echo esc_html($tag) ?>>
+		<<?php echo esc_attr($tag) ?> class="bdt-gallery-item-title">
+			<?php echo wp_kses( $title['image_title'], element_pack_allow_tags( 'text' ) ); ?>
+		</<?php echo esc_attr($tag) ?>>
 		<?php
 	}
 
