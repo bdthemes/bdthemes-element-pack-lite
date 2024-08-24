@@ -1111,14 +1111,14 @@ class Image_Stack extends Module_Base {
 		<?php } elseif ( 'image' == $item['media_type'] ) {
 			$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'thumbnail_size', $settings );
 			if ( ! $thumb_url ) {
-				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), esc_html( $item['tooltip_text'] ) );
+				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), esc_attr( $item['tooltip_text'] ) );
 			} else {
 				print( wp_get_attachment_image(
 					$item['image']['id'],
 					$settings['thumbnail_size_size'],
 					false,
 					[ 
-						'alt' => esc_html( $item['tooltip_text'] )
+						'alt' => esc_attr( $item['tooltip_text'] )
 					]
 				) );
 			}
@@ -1149,7 +1149,7 @@ class Image_Stack extends Module_Base {
 					$this->add_render_attribute( 'stack-item', 'data-tippy', '', true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy-arrow', 'true', true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', $item['tooltip_placement'], true );
-					$this->add_render_attribute( 'stack-item', 'data-tippy-content', $item['tooltip_text'], true );
+					$this->add_render_attribute( 'stack-item', 'data-tippy-content', esc_attr($item['tooltip_text']), true );
 				}
 
 				if ( ! empty( $item['link_url']['url'] ) ) {

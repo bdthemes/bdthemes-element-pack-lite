@@ -58,7 +58,6 @@ class Reading_Progress extends Module_Base {
 		}
 	}
 
-
 	public function register_skins() {
 		$this->add_skin( new Skins\Back_To_Top_With_Progress( $this ) );
 		$this->add_skin( new Skins\Horizontal_Progress( $this ) );
@@ -186,7 +185,6 @@ class Reading_Progress extends Module_Base {
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-reading-progress'                     => 'margin: {{SIZE}}{{UNIT}} 0px;',
 					'{{WRAPPER}} .bdt-progress-with-top .bdt-progress-wrap' => 'margin: {{SIZE}}{{UNIT}} 0px;',
-
 				],
 				'condition' => [ 
 					'_skin' => [ '', 'bdt-back-to-top-with-progress' ],

@@ -831,7 +831,7 @@ class Lightbox extends Module_Base {
 		}
 
 		if ( $settings['content_caption'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'data-caption', wp_kses_post( $settings['content_caption'] ) );
+			$this->add_render_attribute( 'lightbox-content', 'data-caption', esc_attr( $settings['content_caption'] ) );
 		}
 
 		if ( ! empty( $settings['icon_text'] ) ) {
