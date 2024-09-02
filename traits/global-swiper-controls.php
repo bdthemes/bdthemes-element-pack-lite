@@ -1194,7 +1194,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-container-horizontal > .swiper-scrollbar, {{WRAPPER}} .swiper-horizontal > .swiper-scrollbar' => 'height: {{SIZE}}px;',
+					'{{WRAPPER}} .swiper-horizontal > .swiper-scrollbar' => 'height: {{SIZE}}px;',
 				],
 				'condition' => [
 					'show_scrollbar' => 'yes'
@@ -1728,7 +1728,7 @@ trait Global_Swiper_Controls {
 				'label'     => __('Scrollbar Offset', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
-					'{{WRAPPER}} .swiper-container-horizontal > .swiper-scrollbar, {{WRAPPER}} .swiper-horizontal > .swiper-scrollbar' => 'bottom: {{SIZE}}px;',
+					'{{WRAPPER}} .swiper-horizontal > .swiper-scrollbar' => 'bottom: {{SIZE}}px;',
 				],
 				'condition' => [
 					'show_scrollbar' => 'yes'
@@ -1829,8 +1829,7 @@ trait Global_Swiper_Controls {
 			]
 		);
 
-		$swiper_class = Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
-		$this->add_render_attribute('swiper', 'class', 'swiper-carousel ' . $swiper_class);
+		$this->add_render_attribute('swiper', 'class', 'swiper-carousel swiper');
 	}
 
 	function render_navigation() {

@@ -86,8 +86,7 @@ class Skin_Thumbnail extends Elementor_Skin_Base {
 
 	public function render_slider_thumbnail($settings) { 
 
-		$swiper_class = Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
-		$this->add_render_attribute('swiper', 'class', 'swiper-carousel gallery-top ' . $swiper_class);
+		$this->add_render_attribute('swiper', 'class', 'swiper-carousel gallery-top swiper');
 
 		?>
 		<div <?php $this->print_render_attribute_string('swiper'); ?>>
@@ -102,8 +101,7 @@ class Skin_Thumbnail extends Elementor_Skin_Base {
 
 	public function render_slidenav_thumbnail($settings) {
 		
-		$swiper_class = Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
-		$this->add_render_attribute('swiper', 'class', 'swiper-carousel gallery-thumbs ' . $swiper_class);
+		$this->add_render_attribute('swiper', 'class', 'swiper-carousel gallery-thumbs swiper');
 
 		?>
 		<div <?php $this->print_render_attribute_string('swiper'); ?>>

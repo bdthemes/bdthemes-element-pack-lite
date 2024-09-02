@@ -7629,8 +7629,7 @@ trait Global_Widget_Controls {
 		$migrated  = isset($settings['__fa4_migrated']['slider_scroll_to_section_icon']);
 		$is_new    = empty($settings['scroll_to_section_icon']) && Icons_Manager::is_migration_allowed();
 
-		$swiper_class = Plugin::$instance->experiments->is_feature_active('e_swiper_latest') ? 'swiper' : 'swiper-container';
-		$this->add_render_attribute('swiper', 'class', 'swiper-carousel ' . $swiper_class);
+		$this->add_render_attribute('swiper', 'class', 'swiper-carousel swiper');
 
 		?>
 		<div <?php $this->print_render_attribute_string('slider'); ?>>

@@ -19,7 +19,7 @@ class Caldera_Forms extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Caldera Forms', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Caldera Forms (Deprecated)', 'bdthemes-element-pack' );
 	}
 
 	public function get_icon() {
