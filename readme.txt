@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4.0
-Stable tag: 5.7.6
+Stable tag: 5.7.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -258,6 +258,13 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.7.7 [2nd September 2024] =
+
+* Fixed: Swiper carousel & slider CLS issue fixed
+* Fixed: Security issue fixed ( Thanks to Ngô Thiên An )
+* Updated: Swiper library old support completely removed
+* Updated: Caldera Forms widget deprecated
 
 = 5.7.6 [24th August 2024] =
 

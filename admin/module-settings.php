@@ -2566,7 +2566,7 @@ class ModuleService {
 
         $settings_fields['element_pack_third_party_widget'][] = [
             'name'         => 'caldera-forms',
-            'label'        => esc_html__('Caldera Forms', 'bdthemes-element-pack'),
+            'label'        => esc_html__('Caldera Forms (Deprecated)', 'bdthemes-element-pack'),
             'type'         => 'checkbox',
             'default'      => 'on',
             'plugin_name'  => 'caldera-forms',
