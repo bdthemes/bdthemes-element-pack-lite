@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4.0
-Stable tag: 5.7.7
+Stable tag: 5.7.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
@@ -258,6 +258,18 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.7.8 [7th September 2024] =
+
+### Added
+
+* Added: Title style added in advanced icon box & static carousel widget
+
+### Fixed
+
+* Fixed: Depriecation warning fixed in optimizer
+* Fixed: Critical error fixed in Custom Gallery widget ( Thanks to Andrew )
+* Fixed: Individual icon(SVG) color issue fixed in Fancy Icon widget ( Thanks to Linda McColley )
 
 = 5.7.7 [2nd September 2024] =
 

@@ -138,6 +138,7 @@ class Fancy_Icons extends Module_Base {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} {{CURRENT_ITEM}}.bdt-fancy-icons-item a'          => 'color: {{VALUE}};',
+                    '{{WRAPPER}} {{CURRENT_ITEM}}.bdt-fancy-icons-item a.icon svg'          => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -149,6 +150,7 @@ class Fancy_Icons extends Module_Base {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} {{CURRENT_ITEM}}.bdt-fancy-icons-item:hover a'          => 'color: {{VALUE}};',
+                    '{{WRAPPER}} {{CURRENT_ITEM}}.bdt-fancy-icons-item:hover a.icon svg'          => 'fill: {{VALUE}};',
                 ],
             ]
         );

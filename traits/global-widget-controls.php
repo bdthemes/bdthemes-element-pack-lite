@@ -18,6 +18,25 @@ defined( 'ABSPATH' ) || die();
 
 trait Global_Widget_Controls {
 
+	protected function register_title_animation_controls() {
+		$this->add_control(
+			'title_style',
+			[
+				'label'   => esc_html__('Style', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'    => Controls_Manager::SELECT,
+				'default' => '',
+				'options' => [
+					''               => esc_html__('Default', 'bdthemes-element-pack'),
+					'style-1'        => esc_html__('Style 1', 'bdthemes-element-pack'),
+					'style-2'        => esc_html__('Style 2', 'bdthemes-element-pack'),
+					'style-3'        => esc_html__('Style 3', 'bdthemes-element-pack'),
+					'style-4'        => esc_html__('Style 4', 'bdthemes-element-pack'),
+					'style-5'        => esc_html__('Style 5', 'bdthemes-element-pack'),
+				],
+			]
+		);
+	}
+
 	protected function register_pagination_controls() {
 
 		$this->start_controls_tabs( 'tabs_pagination_style' );

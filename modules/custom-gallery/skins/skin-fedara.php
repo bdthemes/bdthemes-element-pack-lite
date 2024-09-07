@@ -2,7 +2,7 @@
 namespace ElementPack\Modules\CustomGallery\Skins;
 use ElementPack\Base\Module_Base;
 use Elementor\Controls_Manager;
-use Elementor\Utils;
+use ElementPack\Utils;
 
 use Elementor\Skin_Base as Elementor_Skin_Base;
 
