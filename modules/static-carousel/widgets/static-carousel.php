@@ -17,6 +17,7 @@ use ElementPack\Utils;
 
 use ElementPack\Traits\Global_Swiper_Controls;
 use ElementPack\Traits\Global_Mask_Controls;
+use ElementPack\Traits\Global_Widget_Controls;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -26,6 +27,7 @@ class Static_Carousel extends Module_Base
 
     use Global_Swiper_Controls;
     use Global_Mask_Controls;
+    use Global_Widget_Controls;
 
     public function get_name()
     {
@@ -704,6 +706,11 @@ class Static_Carousel extends Module_Base
             ]
         );
 
+        /**
+		 * Title Animation Style
+		 */
+		$this->register_title_animation_controls();
+
         $this->add_control(
             'title_color',
             [
@@ -727,7 +734,7 @@ class Static_Carousel extends Module_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-ep-static-carousel-title' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bdt-ep-static-carousel-title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1080,7 +1087,7 @@ class Static_Carousel extends Module_Base
             $this->add_link_attributes($title_key, $item['readmore_link']);
         }
 
-        $this->add_render_attribute('title-wrap', 'class', 'bdt-ep-static-carousel-title', true);
+        $this->add_render_attribute('title-wrap', 'class', 'bdt-ep-static-carousel-title ep-title-' . esc_attr($settings['title_style']), true);
 
         ?>
         <?php if ($item['title']): ?>
