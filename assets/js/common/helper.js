@@ -152,6 +152,43 @@ function returnCurrencySymbol(currency = null) {
             'elementor-widget-bdt-post-grid': {
                 'selectors': [
                     '.bdt-post-grid-title a',
+                    '.bdt-post-grid-readmore',
+                ]
+            },
+            'elementor-widget-bdt-post-card': {
+                'selectors': [
+                    '.bdt-post-card-title a',
+                    '.bdt-post-card-button',
+                ]
+            },
+            'elementor-widget-bdt-post-block': {
+                'selectors': [
+                    '.bdt-post-block-title a',
+                    '.bdt-post-block-read-more',
+                ]
+            },
+            'elementor-widget-bdt-post-block-modern': {
+                'selectors': [
+                    '.bdt-post-block-modern-title a',
+                    '.bdt-post-block-modern-read-more',
+                ]
+            },
+            'elementor-widget-bdt-post-gallery': {
+                'selectors': [
+                    '.bdt-post-gallery-title-link',
+                    '.bdt-gallery-item-link',
+                ]
+            },
+            'elementor-widget-bdt-post-list': {
+                'selectors': [
+                    '.bdt-title a',
+                    '.bdt-image a',
+                ]
+            },
+            'elementor-widget-bdt-post-slider': {
+                'selectors': [
+                    '.bdt-post-slider-title-wrap a',
+                    '.bdt-post-slider-button',
                 ]
             },
         };

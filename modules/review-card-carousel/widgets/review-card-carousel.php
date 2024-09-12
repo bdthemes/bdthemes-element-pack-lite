@@ -367,14 +367,14 @@ class Review_Card_Carousel extends Module_Base {
 				]
 			]
 		);
-		$this->add_control(
-			'image_position',
+		$this->add_responsive_control(
+			'iamge_position',
 			[ 
-				'label'        => __( 'Image Position', 'bdthemes-element-pack' ),
-				'type'         => Controls_Manager::CHOOSE,
-				'default'      => 'top',
-				'toggle'       => false,
-				'options'      => [ 
+				'label'                => __( 'Image Position', 'bdthemes-element-pack' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'default'              => 'top',
+				'toggle'               => false,
+				'options'              => [ 
 					'left'  => [ 
 						'title' => __( 'Left', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-left',
@@ -388,21 +388,29 @@ class Review_Card_Carousel extends Module_Base {
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
-				'prefix_class' => 'bdt-review-img--',
-				'render_type'  => 'template',
-				'condition'    => [ 
+				'condition'            => [ 
 					'show_reviewer_image' => 'yes'
-				]
+				],
+				'selectors_dictionary' => [ 
+					'left'  => 'display: flex; align-items: center; flex-direction: row;',
+					'right' => 'display: flex; align-items: center; flex-direction: row-reverse; text-align: right;',
+					'top'   => 'display: flex; flex-direction: column; text-align: left;',
+				],
+				'selectors'            => [ 
+					'{{WRAPPER}} .bdt-ep-review-card-carousel-item' => '{{VALUE}};',
+				],
+				'render_type'          => 'template'
 			]
 		);
 
 		$this->add_control(
 			'image_inline',
 			[ 
-				'label'        => esc_html__( 'Image Inline', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'        => esc_html__( 'Image Inline', 'bdthemes-element-pack' ),
+				'description'  => esc_html__( 'This option only works for left and right image position and it\'s not working on responsive mode.', 'bdthemes-element-pack' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'condition'    => [ 
-					'image_position'      => [ 'left', 'right' ],
+					'iamge_position!'     => 'top',
 					'show_reviewer_image' => 'yes'
 				],
 				'prefix_class' => 'bdt-review-img-inline--',
@@ -411,15 +419,14 @@ class Review_Card_Carousel extends Module_Base {
 		);
 
 		$this->add_responsive_control(
-			'image_alignment',
+			'iamge_alignment',
 			[ 
 				'label'     => __( 'Image Alignment', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::CHOOSE,
-				'default'   => 'center',
-				'toggle'    => false,
+				'default'   => 'flex-start',
 				'options'   => [ 
 					'flex-start' => [ 
-						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'title' => __( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'center'     => [ 
@@ -427,7 +434,7 @@ class Review_Card_Carousel extends Module_Base {
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'flex-end'   => [ 
-						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -435,7 +442,7 @@ class Review_Card_Carousel extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-review-card-carousel-image' => 'align-self: {{VALUE}};',
 				],
 				'condition' => [ 
-					'image_position'      => [ 'left', 'right' ],
+					// 'iamge_position!' => 'top',
 					'image_inline!'       => 'yes',
 					'show_reviewer_image' => 'yes'
 				]
@@ -779,10 +786,7 @@ class Review_Card_Carousel extends Module_Base {
 					'size' => 15,
 				],
 				'selectors' => [ 
-					'{{WRAPPER}}.bdt-review-img--top .bdt-ep-review-card-carousel-image'                                                                      => 'margin-bottom: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.bdt-review-img--left .bdt-ep-review-card-carousel-item, {{WRAPPER}}.bdt-review-img--right .bdt-ep-review-card-carousel-item' => 'grid-gap: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.bdt-review-img-inline--yes.bdt-review-img--left .bdt-ep-review-card-carousel-image'                                          => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.bdt-review-img-inline--yes.bdt-review-img--right .bdt-ep-review-card-carousel-image'                                         => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-review-card-carousel-item, {{WRAPPER}}.bdt-review-img-inline--yes .bdt-ep-img-inline' => 'grid-gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1339,15 +1343,15 @@ class Review_Card_Carousel extends Module_Base {
 			return;
 		}
 
-		$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-review-card-carousel-text' );
-
 		if ( isset( $settings['review_words_length'] ) && ! empty( $settings['review_words_length'] ) ) {
-			$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-read-more-text' );
+			$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-review-card-carousel-text bdt-ep-read-more-text', true );
 			$this->add_render_attribute( 'review-text', 'data-read-more', wp_json_encode(
 				[ 
 					'words_length' => $settings['review_words_length'],
 				]
-			) );
+            ), true );
+		} else {
+			$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-review-card-carousel-text', true );
 		}
 
 		?>
@@ -1407,10 +1411,10 @@ class Review_Card_Carousel extends Module_Base {
 
 		$this->add_render_attribute( 'review-item', 'class', 'bdt-ep-review-card-carousel-item swiper-slide', true );
 
-		if ( 'right' == $settings['image_position'] ) {
-			$this->add_render_attribute( 'image-inline', 'class', 'bdt-flex bdt-flex-row-reverse', true );
+		if ( 'right' == $settings['iamge_position'] ) {
+			$this->add_render_attribute( 'image-inline', 'class', 'bdt-ep-img-inline bdt-flex bdt-flex-row-reverse' );
 		} else {
-			$this->add_render_attribute( 'image-inline', 'class', 'bdt-flex', true );
+			$this->add_render_attribute( 'image-inline', 'class', 'bdt-ep-img-inline bdt-flex' );
 		}
 
 		?>

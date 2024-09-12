@@ -1280,8 +1280,7 @@ class Member extends Module_Base {
 						$is_new   = empty( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
 						?>
 
-						<a href="<?php echo esc_url( $link['social_link'] ); ?>"
-							class="bdt-member-icon elementor-repeater-item-<?php echo esc_attr( $link['_id'] ); ?>" target="_blank" <?php echo wp_kses_post( $tooltip ); ?>>
+						<a href="<?php echo esc_url( $link['social_link'] ); ?>" class="bdt-member-icon elementor-repeater-item-<?php echo esc_attr( $link['_id'] ); ?>" target="_blank" <?php echo wp_kses_post( $tooltip ); ?>>
 
 							<?php if ( $is_new || $migrated ) :
 								Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );

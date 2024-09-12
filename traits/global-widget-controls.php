@@ -18,6 +18,18 @@ defined( 'ABSPATH' ) || die();
 
 trait Global_Widget_Controls {
 
+	protected function register_bdt_link_new_tab_controls() {
+		$this->add_control(
+			'bdt_link_new_tab',
+			[ 
+				'label'              => esc_html__( 'Link Open in a New Tab', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'               => Controls_Manager::SWITCHER,
+				'separator'          => 'before',
+				'frontend_available' => true,
+			]
+		);
+	}
+
 	protected function register_title_animation_controls() {
 		$this->add_control(
 			'title_style',

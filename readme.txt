@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, soha
 Donate link: http://bdthemes.com/
 Tags:  elementor addons, elementor widget, elementor extensions, elementor addon, addons
 Requires at least: 5.0.0
-Tested up to: 6.6.1
+Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.7.8
+Stable tag: 5.8.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Elementor requires at least: 3.0.0
-Elementor tested up to: 3.23.4
+Elementor requires at least: 3.22
+Elementor tested up to: 3.24.0
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -259,14 +259,15 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.8.0 [12th September 2024] =
+
+* Added: Image position responsive option added in review card carousel widget widget
+* Fixed: Words limit issue fixed in review card carousel widget
+* Fixed: CSS on all iframes fixed in Iframe widget (Thanks to Gabriel Sirbu)
+
 = 5.7.8 [7th September 2024] =
 
-### Added
-
-* Added: Title style added in advanced icon box & static carousel widget
-
-### Fixed
-
+* Added: Title style added in static carousel widget
 * Fixed: Depriecation warning fixed in optimizer
 * Fixed: Critical error fixed in Custom Gallery widget ( Thanks to Andrew )
 * Fixed: Individual icon(SVG) color issue fixed in Fancy Icon widget ( Thanks to Linda McColley )
