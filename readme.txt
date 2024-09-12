@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.8.0
+Stable tag: 5.8.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.24.0
+Elementor tested up to: 3.24.1
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -258,6 +258,11 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.8.1 [13th September 2024] =
+
+* Added: Toggle button controls added in Read more toggle widget
+* Fixed: JS Error fixed in all extension (Thanks to Ricardo De Lucia Leite)
 
 = 5.8.0 [12th September 2024] =
 

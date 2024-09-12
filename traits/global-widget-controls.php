@@ -7832,4 +7832,23 @@ trait Global_Widget_Controls {
 		$this->end_controls_tabs();
 
 	}
+
+	// Function to recursively search for the particles value
+	public function ep_find_recursive_item( $sections, $key ) {
+		foreach ($sections as $section) {
+			if (is_array($section)) {
+				if (isset($section['settings'][$key]) && $section['settings'][$key] === 'yes') {
+					return true;
+					break;					
+				} else {
+
+					$result = $this->ep_find_recursive_item($section, $key);
+					if ($result !== false) {
+						return $result;
+					}
+				}				
+			}
+		}
+		return false;
+	}
 }

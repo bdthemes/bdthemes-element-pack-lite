@@ -5,9 +5,10 @@ namespace ElementPack\Modules\Toggle\Widgets;
 use ElementPack\Base\Module_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Icons_Manager;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
 
 use ElementPack\Element_Pack_Loader;
 use ElementPack\Includes\Controls\SelectInput\Dynamic_Select;
@@ -105,29 +106,6 @@ class Toggle extends Module_Base {
             ]
         );
 
-        // $this->add_control(
-        //     'template_id',
-        //     [
-        //         'label'       => __('Select Template', 'bdthemes-element-pack'),
-        //         'type'        => Controls_Manager::SELECT,
-        //         'default'     => '0',
-        //         'options'     => element_pack_et_options(),
-        //         'label_block' => 'true',
-        //         'condition'   => ['source' => "elementor"],
-        //     ]
-        // );
-
-        // $this->add_control(
-        //     'anywhere_id',
-        //     [
-        //         'label'       => esc_html__('Select Template', 'bdthemes-element-pack'),
-        //         'type'        => Controls_Manager::SELECT,
-        //         'default'     => '0',
-        //         'options'     => element_pack_ae_options(),
-        //         'label_block' => 'true',
-        //         'condition'   => ['source' => 'anywhere'],
-        //     ]
-        // );
         $this->add_control(
             'template_id',
             [
@@ -200,12 +178,57 @@ class Toggle extends Module_Base {
             ]
         );
 
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'section_content_additional',
+            [
+                'label' => esc_html__('Additional Options', 'bdthemes-element-pack'),
+            ]
+        );
+
         $this->add_control(
             'toggle_icon_show',
             [
                 'label'   => esc_html__('Toggle Icon', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'toggle_icon_normal',
+            [
+                'label'            => esc_html__('Normal Icon', 'bdthemes-element-pack'),
+                'type'             => Controls_Manager::ICONS,
+                'fa4compatibility' => 'icon_normal',
+                'default'          => [
+                    'value'   => 'fas fa-plus',
+                    'library' => 'fa-solid',
+                ],
+                'condition'        => [
+                    'toggle_icon_show!' => '',
+                ],
+                'skin'             => 'inline',
+                'label_block'      => false,
+            ]
+        );
+
+        $this->add_control(
+            'toggle_icon_active',
+            [
+                'label'            => esc_html__('Active Icon', 'bdthemes-element-pack'),
+                'type'             => Controls_Manager::ICONS,
+                'fa4compatibility' => 'icon_active',
+                'default'          => [
+                    'value'   => 'fas fa-minus',
+                    'library' => 'fa-solid',
+                ],
+                'condition'        => [
+                    'toggle_icon_show!' => '',
+                ],
+                'skin'             => 'inline',
+                'label_block'      => false,
             ]
         );
 
@@ -222,15 +245,6 @@ class Toggle extends Module_Base {
                 'condition' => [
                     'toggle_icon_show' => 'yes',
                 ],
-            ]
-        );
-
-        $this->end_controls_section();
-
-        $this->start_controls_section(
-            'section_content_additional',
-            [
-                'label' => esc_html__('Additional', 'bdthemes-element-pack'),
             ]
         );
 
@@ -254,39 +268,7 @@ class Toggle extends Module_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-title' => 'text-align: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'toggle_icon_normal',
-            [
-                'label'            => esc_html__('Normal Icon', 'bdthemes-element-pack'),
-                'type'             => Controls_Manager::ICONS,
-                'fa4compatibility' => 'icon_normal',
-                'default'          => [
-                    'value'   => 'fas fa-plus',
-                    'library' => 'fa-solid',
-                ],
-                'condition'        => [
-                    'toggle_icon_show!' => '',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'toggle_icon_active',
-            [
-                'label'            => esc_html__('Active Icon', 'bdthemes-element-pack'),
-                'type'             => Controls_Manager::ICONS,
-                'fa4compatibility' => 'icon_active',
-                'default'          => [
-                    'value'   => 'fas fa-minus',
-                    'library' => 'fa-solid',
-                ],
-                'condition'        => [
-                    'toggle_icon_show!' => '',
+                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-title' => 'justify-content: {{VALUE}};',
                 ],
             ]
         );
@@ -400,7 +382,7 @@ class Toggle extends Module_Base {
         $this->start_controls_section(
             'section_toggle_style_title',
             [
-                'label' => esc_html__('Title', 'bdthemes-element-pack'),
+                'label' => esc_html__('Toggle', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -420,7 +402,46 @@ class Toggle extends Module_Base {
                 'label'     => esc_html__('Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-title'     => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn'     => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'title_background',
+				'types'    => [ 'classic', 'gradient' ],
+                'exclude'  => [ 'image' ],
+                'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn',
+			]
+		);
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'title_border',
+                'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn',
+                'separator' => 'before',
+            ]
+        );
+        $this->add_responsive_control(
+            'title_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'title_padding',
+            [
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -429,19 +450,7 @@ class Toggle extends Module_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'title_shadow',
-                'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item .bdt-show-hide-title',
-            ]
-        );
-
-        $this->add_responsive_control(
-            'title_padding',
-            [
-                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
-                'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors'  => [
-                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
+                'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn',
             ]
         );
 
@@ -450,7 +459,6 @@ class Toggle extends Module_Base {
             [
                 'name'     => 'title_typography',
                 'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-title',
-                //'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
             ]
         );
 
@@ -485,7 +493,6 @@ class Toggle extends Module_Base {
         );
 
         $this->end_controls_tab();
-
         $this->start_controls_tab(
             'tab_title_active',
             [
@@ -499,16 +506,35 @@ class Toggle extends Module_Base {
                 'label'     => esc_html__('Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-title'     => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-btn'     => 'color: {{VALUE}};',
                 ],
-                'separator' => 'before',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [ 
+                'name'     => 'active_title_background',
+                'types'    => [ 'classic', 'gradient' ],
+                'exclude'  => [ 'image' ],
+                'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-btn',
+            ]
+        );
+        $this->add_control(
+            'active_title_border_color',
+            [
+                'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-btn'     => 'border-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'title_border_border!' => '',
+                ],
             ]
         );
 
         $this->end_controls_tab();
-
         $this->end_controls_tabs();
-
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -745,60 +771,61 @@ class Toggle extends Module_Base {
                     </div>
 
                     <a <?php $this->print_render_attribute_string('tab_title'); ?> href='javascript:void(0)'>
-                        <!--  -->
-                        <?php if ('yes' === $settings['toggle_icon_show']) : ?>
-                            <?php if ($settings['toggle_icon_position'] == 'left') : ?>
-                                <span class="bdt-show-hide-icon left-position" aria-hidden="true">
-                                    <span class="bdt-show-hide-icon-closed">
-                                        <?php if ($is_new || $migrated) :
-                                            Icons_Manager::render_icon($settings['toggle_icon_normal'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
-                                        else : ?>
-                                            <i class="<?php echo esc_attr($settings['icon_normal']); ?>" aria-hidden="true"></i>
-                                        <?php endif; ?>
-                                    </span>
+                        <span class="bdt-show-hide-btn bdt-display-inline">
 
-                                    <span class="bdt-show-hide-icon-opened">
-                                        <?php if ($active_is_new || $active_migrated) :
-                                            Icons_Manager::render_icon($settings['toggle_icon_active'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
-                                        else : ?>
-                                            <i class="<?php echo esc_attr($settings['icon_active']); ?>" aria-hidden="true"></i>
-                                        <?php endif; ?>
+                            <?php if ('yes' === $settings['toggle_icon_show']) : ?>
+                                <?php if ($settings['toggle_icon_position'] == 'left') : ?>
+                                    <span class="bdt-show-hide-icon left-position" aria-hidden="true">
+                                        <span class="bdt-show-hide-icon-closed">
+                                            <?php if ($is_new || $migrated) :
+                                                Icons_Manager::render_icon($settings['toggle_icon_normal'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
+                                            else : ?>
+                                                <i class="<?php echo esc_attr($settings['icon_normal']); ?>" aria-hidden="true"></i>
+                                            <?php endif; ?>
+                                        </span>
+    
+                                        <span class="bdt-show-hide-icon-opened">
+                                            <?php if ($active_is_new || $active_migrated) :
+                                                Icons_Manager::render_icon($settings['toggle_icon_active'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
+                                            else : ?>
+                                                <i class="<?php echo esc_attr($settings['icon_active']); ?>" aria-hidden="true"></i>
+                                            <?php endif; ?>
+                                        </span>
+    
                                     </span>
-
-                                </span>
+                                <?php endif; ?>
                             <?php endif; ?>
-                        <?php endif; ?>
-                        <!--  -->
-                        <span class="bdt-toggle-open">
-                            <?php echo wp_kses($settings['toggle_title'], element_pack_allow_tags('title')); ?>
-                        </span>
-                        <span class="bdt-toggle-close">
-                            <?php echo wp_kses($settings['toggle_open_title'], element_pack_allow_tags('title'));
-                            ?>
-                        </span>
-                        <?php if ('yes' === $settings['toggle_icon_show']) : ?>
-                            <?php if ($settings['toggle_icon_position'] == 'right') : ?>
-                                <span class="bdt-show-hide-icon" aria-hidden="true">
-
-                                    <span class="bdt-show-hide-icon-closed">
-                                        <?php if ($is_new || $migrated) :
-                                            Icons_Manager::render_icon($settings['toggle_icon_normal'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
-                                        else : ?>
-                                            <i class="<?php echo esc_attr($settings['icon_normal']); ?>" aria-hidden="true"></i>
-                                        <?php endif; ?>
+                            <span class="bdt-toggle-open">
+                                <?php echo wp_kses($settings['toggle_title'], element_pack_allow_tags('title')); ?>
+                            </span>
+                            <span class="bdt-toggle-close">
+                                <?php echo wp_kses($settings['toggle_open_title'], element_pack_allow_tags('title'));
+                                ?>
+                            </span>
+                            <?php if ('yes' === $settings['toggle_icon_show']) : ?>
+                                <?php if ($settings['toggle_icon_position'] == 'right') : ?>
+                                    <span class="bdt-show-hide-icon" aria-hidden="true">
+    
+                                        <span class="bdt-show-hide-icon-closed">
+                                            <?php if ($is_new || $migrated) :
+                                                Icons_Manager::render_icon($settings['toggle_icon_normal'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
+                                            else : ?>
+                                                <i class="<?php echo esc_attr($settings['icon_normal']); ?>" aria-hidden="true"></i>
+                                            <?php endif; ?>
+                                        </span>
+    
+                                        <span class="bdt-show-hide-icon-opened">
+                                            <?php if ($active_is_new || $active_migrated) :
+                                                Icons_Manager::render_icon($settings['toggle_icon_active'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
+                                            else : ?>
+                                                <i class="<?php echo esc_attr($settings['icon_active']); ?>" aria-hidden="true"></i>
+                                            <?php endif; ?>
+                                        </span>
+    
                                     </span>
-
-                                    <span class="bdt-show-hide-icon-opened">
-                                        <?php if ($active_is_new || $active_migrated) :
-                                            Icons_Manager::render_icon($settings['toggle_icon_active'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
-                                        else : ?>
-                                            <i class="<?php echo esc_attr($settings['icon_active']); ?>" aria-hidden="true"></i>
-                                        <?php endif; ?>
-                                    </span>
-
-                                </span>
+                                <?php endif; ?>
                             <?php endif; ?>
-                        <?php endif; ?>
+                        </span>
 
                     </a>
                 </div>
