@@ -6,11 +6,15 @@ use Elementor\Controls_Manager;
 use ElementPack;
 use ElementPack\Base\Element_Pack_Module_Base;
 
+use ElementPack\Traits\Global_Widget_Controls;
+
 if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
 
 class Module extends Element_Pack_Module_Base {
+
+	use Global_Widget_Controls;
 
 	public function __construct() {
 		parent::__construct();
@@ -875,8 +879,17 @@ class Module extends Element_Pack_Module_Base {
 		wp_enqueue_script('anime', BDTEP_ASSETS_URL . 'vendor/js/anime.min.js', [], '3.2.1', true);
 		wp_enqueue_script('ep-floating-effects');
 	}
-	public function should_script_enqueue($widget) {
-		if ('yes' === $widget->get_settings_for_display('ep_floating_effects_show')) {
+
+	public function should_script_enqueue() {
+		$sections = get_post_meta(get_the_ID(), '_elementor_data', true);
+
+		if (is_string($sections)) {
+            $sections = json_decode($sections, true); // Decode JSON into an associative array
+        }
+		
+		$is_active = $this->ep_find_recursive_item($sections, 'ep_floating_effects_show');
+	
+		if ($is_active) {
 			$this->enqueue_scripts();
 		}
 	}
@@ -887,7 +900,8 @@ class Module extends Element_Pack_Module_Base {
 		add_action('elementor/element/column/section_effects/after_section_start', [$this, 'register_widget_control'], 10, 11);
 		add_action('elementor/element/common/section_effects/after_section_start', [$this, 'register_widget_control'], 10, 11);
 		//render scripts
-		add_action('elementor/frontend/widget/before_render', [$this, 'should_script_enqueue'], 10, 1);
+		// add_action('elementor/frontend/widget/before_render', [$this, 'should_script_enqueue'], 10, 1);
 		add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue_scripts']);
+		add_action('elementor/frontend/before_enqueue_scripts', [$this, 'should_script_enqueue']);
 	}
 }

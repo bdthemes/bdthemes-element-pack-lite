@@ -9,12 +9,14 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use ElementPack;
 use ElementPack\Base\Element_Pack_Module_Base;
+use ElementPack\Traits\Global_Widget_Controls;
 
 if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
 
 class Module extends Element_Pack_Module_Base {
+	use Global_Widget_Controls;
 
 	public function __construct() {
 		parent::__construct();
@@ -463,8 +465,17 @@ class Module extends Element_Pack_Module_Base {
 		wp_enqueue_script('popper-js', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', ['jquery'], null, true);
 		wp_enqueue_script('tippy-js', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', ['jquery'], null, true);
 	}
-	public function should_script_enqueue($widget) {
-		if ('yes' === $widget->get_settings_for_display('element_pack_widget_tooltip')) {
+	public function should_script_enqueue() {
+		$sections = get_post_meta(get_the_ID(), '_elementor_data', true);
+
+		if (is_string($sections)) {
+            $sections = json_decode($sections, true); // Decode JSON into an associative array
+        }
+		
+		$is_active = $this->ep_find_recursive_item($sections, 'element_pack_widget_tooltip');
+	
+		if ($is_active) {
+		//if ('yes' === $widget->get_settings_for_display('element_pack_widget_tooltip')) {
 			$this->enqueue_scripts();
 			wp_enqueue_script('ep-tooltip');
 		}
@@ -477,7 +488,9 @@ class Module extends Element_Pack_Module_Base {
 		add_action('elementor/element/common/section_element_pack_tooltip_controls/before_section_end', [$this, 'register_controls'], 10, 2);
 
 		//render scripts
-		add_action('elementor/frontend/widget/before_render', [$this, 'should_script_enqueue']);
+		//add_action('elementor/frontend/widget/before_render', [$this, 'should_script_enqueue']);
 		add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue_scripts']);
+
+		add_action('elementor/frontend/before_enqueue_scripts', [$this, 'should_script_enqueue']);
 	}
 }
