@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.8.1
+Stable tag: 5.8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.24.1
+Elementor tested up to: 3.24.2
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -259,6 +259,11 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.8.2 [15th September 2024] =
+
+* Fixed: Security improved in social title feature in Member & Profile Card widgets
+* Fixed: JS Loading issue fixed in extensions (Tooltip, Particles, Animated Gradient, Background Expand, Floating Effects, Ripple Effects, Scroll Fill Effects, 3d Text, Cursor Effects, Reveal Effects, Confetti Effects)
+
 = 5.8.1 [13th September 2024] =
 
 * Added: Toggle button controls added in Read more toggle widget
@@ -276,53 +281,6 @@ https://youtu.be/u9JRd824Mjc
 * Fixed: Depriecation warning fixed in optimizer
 * Fixed: Critical error fixed in Custom Gallery widget ( Thanks to Andrew )
 * Fixed: Individual icon(SVG) color issue fixed in Fancy Icon widget ( Thanks to Linda McColley )
-
-= 5.7.7 [2nd September 2024] =
-
-* Fixed: Swiper carousel & slider CLS issue fixed
-* Fixed: Security issue fixed ( Thanks to Ngô Thiên An )
-* Updated: Swiper library old support completely removed
-* Updated: Caldera Forms widget deprecated
-
-= 5.7.6 [24th August 2024] =
-
-* Updated: Security improved
-
-= 5.7.5 [14th August 2024] =
-
-* Added: Touch Screen Swiping feature added in Image Accordion widget ( Thnaks to Thorben )
-* Added: Ajax loading spacing, icon width option added in search widget
-* Fixed: Search icon input radius issue fixed in search widget
-* Fixed: Escaping fixed in Tutor LMS widget ( Thanks to Mirko )
-
-= 5.7.4 [14th August 2024] =
-
-* Updated: Dashboard system improved
-
-= 5.7.3 [11th August 2024] =
-
-* Added: Read more (word limit) feature added in review card grid & carousel widget
-* Fixed: Swiping issue fixed in Switcher widget (Thanks to Amanda Knapper)
-* Fixed: Security issue fixed in Custom Gallery widget
-* Updated: Svg Image widget improved
-* Updated: waypoint.js replaced with Intersection Observer
-
-= 5.7.2 [3rd August 2024] =
-
-* Fixed: Security improved in Lightbox feature
-* Fixed: Security issue fixed in Countdown widget (Thanks to Jennifer Vasko and Craig Smith)
-* Updated: Countdown widget improved
-
-= 5.7.1 [29th July 2024] =
-
-* Added: Toggle Password feature added in User Register widget (Thanks to Lasr)
-* Added: Confirm Password feature added in User Register widget (Thanks to Lasr)
-* Updated: System improved
-
-= 5.7.0 [27th July 2024] =
-
-* Added: Widget Caching feature added
-* Fixed: Separator issue fixed in price list widget
 
 Details [changelog here](https://feedback.bdthemes.com/announcements?category=category_6l495r8q)
 

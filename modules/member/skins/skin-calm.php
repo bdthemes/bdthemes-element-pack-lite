@@ -115,7 +115,7 @@ class Skin_Calm extends Elementor_Skin_Base {
 						<div class="bdt-member-icons bdt-transition-slide-bottom">
 							<?php
 							foreach ( $settings['social_link_list'] as $link ) :
-								$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' title="' . esc_attr( $link['social_link_title'] ) . '"  
+								$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' title="' . wp_kses_post( $link['social_link_title'] ) . '"  
 							data-bdt-tooltip' : ''; ?>
 
 								<?php
