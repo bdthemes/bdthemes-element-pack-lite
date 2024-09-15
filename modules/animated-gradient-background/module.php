@@ -178,22 +178,11 @@ class Module extends Element_Pack_Module_Base {
         );
     }
 
-
-
-    public function enqueue_scripts() {
+ public function enqueue_scripts() {
         wp_enqueue_script('granim', BDTEP_ASSETS_URL . 'vendor/js/granim.min.js', [], 'v2.0.0', true);
     }
-    public function should_script_enqueue() {
-        $sections = get_post_meta(get_the_ID(), '_elementor_data', true);
-
-		if (is_string($sections)) {
-            $sections = json_decode($sections, true); // Decode JSON into an associative array
-        }
-		
-		$is_active = $this->ep_find_recursive_item($sections, 'element_pack_agbg_show');
-	
-		if ($is_active) {
-        // if ('yes' === $section->get_settings_for_display('element_pack_agbg_show')) {
+    public function should_script_enqueue($section) {
+        if ('yes' === $section->get_settings_for_display('element_pack_agbg_show')) {
             $this->enqueue_scripts();
             wp_enqueue_style('ep-animated-gradient-background');
             wp_enqueue_script('ep-animated-gradient-background');
@@ -203,14 +192,12 @@ class Module extends Element_Pack_Module_Base {
     protected function add_actions() {
         add_action('elementor/element/section/section_background/after_section_end', [$this, 'register_section']);
         add_action('elementor/element/section/element_pack_agbg_section/before_section_end', [$this, 'register_controls'], 10, 2);
-        //add_action('elementor/frontend/section/before_render', [$this, 'should_script_enqueue']);
+        add_action('elementor/frontend/section/before_render', [$this, 'should_script_enqueue']);
 
         add_action('elementor/element/container/section_background/after_section_end', [$this, 'register_section']);
         add_action('elementor/element/container/element_pack_agbg_section/before_section_end', [$this, 'register_controls'], 10, 2);
-        //add_action('elementor/frontend/container/before_render', [$this, 'should_script_enqueue']);
+        add_action('elementor/frontend/container/before_render', [$this, 'should_script_enqueue']);
 
         add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue_scripts']);
-
-        add_action('elementor/frontend/before_enqueue_scripts', [$this, 'should_script_enqueue']);
     }
 }

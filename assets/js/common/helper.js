@@ -223,10 +223,9 @@ function returnCurrencySymbol(currency = null) {
         /** /Toggle Pass */
 
         /** Read more */
-        elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+        const readMoreWidgetHandler = function readMoreWidgetHandler($scope) {
             if (jQuery($scope).find('.bdt-ep-read-more-text').length) {
                 jQuery($scope).find('.bdt-ep-read-more-text').each(function () {
-                    console.log('ElementPackConfig:');
                     var words_limit_settings = $(this).data('read-more');
 
                     var max_words = words_limit_settings.words_length || 20; // Set the maximum number of words
@@ -261,6 +260,16 @@ function returnCurrencySymbol(currency = null) {
                     }
                 });
             }
+        }
+        
+        const readMoreWidgetsHanlders = {
+            'bdt-review-card.default': readMoreWidgetHandler,
+            'bdt-review-card-carousel.default': readMoreWidgetHandler,
+            'bdt-review-card-grid.default': readMoreWidgetHandler
+        };
+
+        $.each(readMoreWidgetsHanlders, function (widgetName, handlerFn) {
+            elementorFrontend.hooks.addAction('frontend/element_ready/' + widgetName, handlerFn);
         });
         /** /Read more */
 

@@ -113,7 +113,7 @@ class Skin_Phaedra extends Elementor_Skin_Base {
 						<div class="bdt-member-icons bdt-transition-slide-bottom-small">
 							<?php
 							foreach ( $settings['social_link_list'] as $link ) :
-								$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' data-bdt-tooltip="' . esc_attr( $link['social_link_title'] ) . '"' : ''; ?>
+								$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' data-bdt-tooltip="' . wp_kses_post( $link['social_link_title'] ) . '"' : ''; ?>
 
 								<?php
 								$migrated = isset ( $link['__fa4_migrated']['social_share_icon'] );

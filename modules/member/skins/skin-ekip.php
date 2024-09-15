@@ -124,7 +124,7 @@ class Skin_Ekip extends Elementor_Skin_Base {
 						<div class="bdt-member-icons">
 							<?php
 							foreach ( $settings['social_link_list'] as $link ) :
-								$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' title="' . $link['social_link_title'] . '" data-bdt-tooltip' : ''; ?>
+								$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' title="' . wp_kses_post($link['social_link_title']) . '" data-bdt-tooltip' : ''; ?>
 
 								<?php
 								$migrated = isset ( $link['__fa4_migrated']['social_share_icon'] );
