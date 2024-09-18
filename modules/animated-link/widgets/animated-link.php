@@ -201,7 +201,7 @@ class AnimatedLink extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if ($settings['link_style'] == 'leda') {
-			$this->add_render_attribute('link-wrap', 'data-text',  esc_attr($settings['link_text']));
+			$this->add_render_attribute('link-wrap', 'data-text',  esc_html($settings['link_text']));
 		}
 
 		$this->add_render_attribute('link-wrap', 'class', 'bdt-ep-animated-link bdt-ep-animated-link--' . esc_attr($settings['link_style']));
