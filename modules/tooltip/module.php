@@ -188,40 +188,6 @@ class Module extends Element_Pack_Module_Base {
 			]
 		);
 
-		//			$widget->add_control(
-		//				'element_pack_widget_tooltip_animation_duration',
-		//				[
-		//					'label'   => esc_html__('Animation Duration', 'bdthemes-element-pack'),
-		//					'type'               => Controls_Manager::SLIDER,
-		//					'default'            => [
-		//						'sizes' => [
-		//							'from' => 0,
-		//							'to'   => 0,
-		//						],
-		//						'unit'  => 'ms',
-		//					],
-		//					'range'              => [
-		//						'ms' => [
-		//							'min'  => 0,
-		//							'max'  => 5000,
-		//							'step' => 100
-		//						]
-		//					],
-		//					'labels'             => [
-		//						esc_html__( 'From', 'bdthemes-element-pack' ),
-		//						esc_html__( 'To', 'bdthemes-element-pack' ),
-		//					],
-		//					'scales'             => 1,
-		//					'handles'            => 'range',
-		//					'condition'          => [
-		//						'element_pack_widget_tooltip'         => 'yes',
-		//					],
-		//					'render_type'        => 'none',
-		//					'frontend_available' => true,
-		//				]
-		//			);
-
-
 		$widget->add_control(
 			'element_pack_widget_tooltip_x_offset',
 			[ 
@@ -461,19 +427,31 @@ class Module extends Element_Pack_Module_Base {
 	public function enqueue_scripts() {
 		$suffix           = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$direction_suffix = is_rtl() ? '.rtl' : '';
-		wp_enqueue_style( 'tippy-css', BDTEP_ASSETS_URL . 'css/tippy' . $direction_suffix . '.css', [], BDTEP_VER );
-		wp_enqueue_script( 'popper-js', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', [ 'jquery' ], null, true );
-		wp_enqueue_script( 'tippy-js', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', [ 'jquery' ], null, true );
+		wp_register_style( 'tippy', BDTEP_ASSETS_URL . 'css/tippy' . $direction_suffix . '.css', [], BDTEP_VER );
+		wp_register_script( 'popper', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', [ 'jquery' ], null );
+		wp_register_script( 'tippyjs', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', [ 'jquery' ], null );
+
+		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
+			wp_enqueue_script( 'popper' );
+			wp_enqueue_script( 'tippyjs' );
+			wp_enqueue_style( 'tippy' );
+		}
 	}
 
 	public function should_script_enqueue( $widget ) {
 		if ( 'yes' === $widget->get_settings_for_display( 'element_pack_widget_tooltip' ) ) {
 			$this->enqueue_scripts();
+			wp_enqueue_style( 'tippy' );
+			wp_enqueue_script( 'popper' );
+			wp_enqueue_script( 'tippyjs' );
 			wp_enqueue_script( 'ep-tooltip' );
 		}
 	}
 
 	protected function add_actions() {
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_section' ] );
 
 		add_action( 'elementor/element/common/section_element_pack_tooltip_controls/before_section_end', [ $this, 'register_controls' ], 10, 2 );

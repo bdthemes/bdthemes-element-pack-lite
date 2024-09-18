@@ -1392,7 +1392,7 @@ class DualButton extends Module_Base {
 
 		$this->add_render_attribute( 'content-wrapper-a', 'class', ( 'top' == $settings['button_a_icon_align'] ) ? 'bdt-flex bdt-flex-column' : '' );
 		$this->add_render_attribute( 'content-wrapper-a', 'class', ( 'bottom' == $settings['button_a_icon_align'] ) ? 'bdt-flex bdt-flex-column-reverse' : '' );
-		$this->add_render_attribute( 'content-wrapper-a', 'data-text', esc_attr($settings['button_a_text']));
+		$this->add_render_attribute( 'content-wrapper-a', 'data-text', esc_html($settings['button_a_text']));
 
 		$this->add_render_attribute( 'button-a-text', 'class', 'bdt-btn-text' );
 
@@ -1435,7 +1435,7 @@ class DualButton extends Module_Base {
 
 		$this->add_render_attribute( 'content-wrapper-b', 'class', ( 'top' == $settings['button_b_icon_align'] ) ? 'bdt-flex bdt-flex-column' : '' );
 		$this->add_render_attribute( 'content-wrapper-b', 'class', ( 'bottom' == $settings['button_b_icon_align'] ) ? 'bdt-flex bdt-flex-column-reverse' : '' );
-		$this->add_render_attribute( 'content-wrapper-b', 'data-text', esc_attr($settings['button_b_text']));
+		$this->add_render_attribute( 'content-wrapper-b', 'data-text', esc_html($settings['button_b_text']));
 
 		$this->add_render_attribute( 'button-b-text', 'class', 'bdt-btn-text' );
 

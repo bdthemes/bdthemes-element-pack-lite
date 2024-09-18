@@ -237,22 +237,29 @@ class Module extends Element_Pack_Module_Base {
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_script('ztext-js', BDTEP_ASSETS_URL . 'vendor/js/ztext.min.js', ['jquery'], '0.0.2', true);
+		wp_register_script('ztext-js', BDTEP_ASSETS_URL . 'vendor/js/ztext.min.js', ['jquery'], '0.0.2');
+
+		if (\ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode()) {
+			wp_enqueue_script('ztext-js');
+		}
 	}
+	
 	public function should_script_enqueue($widget) {
 		if ('yes' === $widget->get_settings_for_display('ep_threed_text_active')) {
 			$this->enqueue_scripts();
+			wp_enqueue_script( 'ztext-js' );
 			wp_enqueue_script('ep-threed-text');
 		}
 	}
 	protected function add_actions() {
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 
 		add_action('elementor/element/heading/section_title_style/before_section_start', [$this, 'register_section']);
 		add_action('elementor/element/bdt-advanced-heading/section_style_sub_heading/before_section_start', [$this, 'register_section']);
 		add_action('elementor/element/heading/section_element_pack_threed_text_controls/before_section_end', [$this, 'register_controls'], 10, 2);
 		add_action('elementor/element/bdt-advanced-heading/section_element_pack_threed_text_controls/before_section_end', [$this, 'register_controls'], 10, 2);
 
-		// render scripts
 		add_action('elementor/frontend/widget/before_render', [$this, 'should_script_enqueue']);
 		add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue_scripts']);
 	}
