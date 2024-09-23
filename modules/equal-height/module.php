@@ -112,7 +112,7 @@ class Module extends Element_Pack_Module_Base {
 			}
 
 			if ('custom' == $settings['section_equal_height_selector'] and $settings['section_equal_height_custom_selector']) {
-				$height_option = 'target: .ep-section-eql-height ' . esc_attr($settings['section_equal_height_custom_selector']);
+				$height_option = 'target: .ep-section-eql-height ' . esc_html($settings['section_equal_height_custom_selector']);
 			}
 
 			$section->add_render_attribute('_wrapper', 'class', 'ep-section-eql-height');

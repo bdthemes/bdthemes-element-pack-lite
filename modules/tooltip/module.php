@@ -450,7 +450,7 @@ class Module extends Element_Pack_Module_Base {
 
 	protected function add_actions() {
 
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ], 9999 );
 
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_section' ] );
 

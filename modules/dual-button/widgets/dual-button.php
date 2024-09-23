@@ -1550,7 +1550,7 @@ class DualButton extends Module_Base {
 				</a>
 
 				<?php if ( 'yes' === $settings['show_middle_text'] ) : ?>
-					<span><?php echo esc_attr($settings['middle_text']); ?></span>
+					<span><?php echo esc_html($settings['middle_text']); ?></span>
 				<?php endif; ?>
 
 				<a <?php $this->print_render_attribute_string( 'button_b' ); ?>>

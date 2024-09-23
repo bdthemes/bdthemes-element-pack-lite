@@ -1722,7 +1722,7 @@ class Price_List extends Module_Base {
 		$settings       = $this->get_settings_for_display();
 		$bdt_has_image  = $item['image']['url'] ? ' bdt-has-image' : '';
 		$unique_link_id = 'item-link-' . $item['_id'];
-		$bdt_has_badge  = ( 'yes' == $settings['show_badge'] and $item['item_badge'] ) ? '<span class="bdt-price-list-badge">' . esc_attr( $item['item_badge'] ) . '</span>' : '';
+		$bdt_has_badge  = ( 'yes' == $settings['show_badge'] and $item['item_badge'] ) ? '<span class="bdt-price-list-badge">' . esc_html( $item['item_badge'] ) . '</span>' : '';
 
 		$bdt_has_counter = ( 'yes' === $settings['item_counter'] ) ? '<div class="bdt-price-list-counter"></div>' : '';
 

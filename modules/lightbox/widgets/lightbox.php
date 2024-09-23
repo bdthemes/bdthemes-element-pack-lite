@@ -831,7 +831,7 @@ class Lightbox extends Module_Base {
 		}
 
 		if ( $settings['content_caption'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'data-caption', esc_attr( $settings['content_caption'] ) );
+			$this->add_render_attribute( 'lightbox-content', 'data-caption', esc_html( $settings['content_caption'] ) );
 		}
 
 		if ( ! empty( $settings['icon_text'] ) ) {

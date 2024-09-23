@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.8.3
+Stable tag: 5.8.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -258,6 +258,11 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.8.4 [23th September 2024] =
+
+* Fixed: JS scripts error fixed
+* Fixed: Security improved in advanced icon box, animated heading, calendly, countdown, creative button, custom gallery, dual button, fancy card, iconnav, image accordion, image compare, image stack, lightbox, mailchimp, price list, price table, scroll button, scroll image, slideshow, social proof, switcher, thumb gallery, timeline, video player widgets
 
 = 5.8.3 [18th September 2024] =
 

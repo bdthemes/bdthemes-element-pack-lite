@@ -651,7 +651,7 @@ class Creative_Button extends Module_Base {
 		}
 
 		if ( ! empty( $settings['button_css_id'] ) ) {
-			$this->add_render_attribute( 'creative_button', 'id', esc_attr($settings['button_css_id']) );
+			$this->add_render_attribute( 'creative_button', 'id', esc_html($settings['button_css_id']) );
 		}
 
 		?>

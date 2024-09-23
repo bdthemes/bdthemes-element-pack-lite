@@ -221,7 +221,14 @@ function returnCurrencySymbol(currency = null) {
         });
 
         /** /Toggle Pass */
+    });
 
+})(jQuery);
+
+
+(function ($, elementor) {
+    'use strict';
+    $(window).on('elementor/frontend/init', function () {
         /** Read more */
         const readMoreWidgetHandler = function readMoreWidgetHandler($scope) {
             if (jQuery($scope).find('.bdt-ep-read-more-text').length) {
@@ -261,7 +268,7 @@ function returnCurrencySymbol(currency = null) {
                 });
             }
         }
-        
+
         const readMoreWidgetsHanlders = {
             'bdt-review-card.default': readMoreWidgetHandler,
             'bdt-review-card-carousel.default': readMoreWidgetHandler,
@@ -272,10 +279,8 @@ function returnCurrencySymbol(currency = null) {
             elementorFrontend.hooks.addAction('frontend/element_ready/' + widgetName, handlerFn);
         });
         /** /Read more */
-
     });
-
-})(jQuery);
+}(jQuery, window.elementorFrontend));
 /**
  * Start accordion widget script
  */

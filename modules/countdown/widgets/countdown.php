@@ -2399,7 +2399,7 @@ class Countdown extends Module_Base {
 		}
 
 		if ( 'yes' == $settings['show_separator'] ) {
-			$string .= '<span class="bdt-countdown-divider">' . esc_attr( $settings['separator'] ) . '</span>';
+			$string .= '<span class="bdt-countdown-divider">' . esc_html( $settings['separator'] ) . '</span>';
 		}
 
 		$string .= '</div>';
