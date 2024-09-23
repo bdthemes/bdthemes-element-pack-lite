@@ -1118,14 +1118,14 @@ class Custom_Gallery extends Module_Base {
 			<?php
 			$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $item['gallery_image']['id'], 'thumbnail_size', $settings );
 			if ( ! $thumb_url ) {
-				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['gallery_image']['url'] ), esc_attr( $item['image_title'] ) );
+				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['gallery_image']['url'] ), esc_html( $item['image_title'] ) );
 			} else {
 				print ( wp_get_attachment_image(
 					$item['gallery_image']['id'],
 					$settings['thumbnail_size_size'],
 					false,
 					[ 
-						'alt' => esc_attr( $item['image_title'] )
+						'alt' => esc_html( $item['image_title'] )
 					]
 				) );
 			}

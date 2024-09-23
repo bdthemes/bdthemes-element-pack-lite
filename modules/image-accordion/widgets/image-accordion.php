@@ -1385,7 +1385,7 @@ class Image_Accordion extends Module_Base {
 
 		$this->add_render_attribute('lightbox', 'class', 'bdt-ep-image-accordion-lightbox', true);
 
-		$this->add_render_attribute('lightbox', 'data-caption', esc_attr($item['image_accordion_title']), true);
+		$this->add_render_attribute('lightbox', 'data-caption', esc_html($item['image_accordion_title']), true);
 
 		$icon = $settings['icon'] ?: 'plus';
 
@@ -1478,14 +1478,14 @@ class Image_Accordion extends Module_Base {
 			<?php 
 			$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['slide_image']['id'], 'thumbnail_size', $settings);
 			if (!$thumb_url) {
-				printf('<img src="%1$s" alt="%2$s">', esc_url($item['slide_image']['url']), esc_attr($item['image_accordion_title']));
+				printf('<img src="%1$s" alt="%2$s">', esc_url($item['slide_image']['url']), esc_html($item['image_accordion_title']));
 			} else {
 				print(wp_get_attachment_image(
 					$item['slide_image']['id'],
 					$settings['thumbnail_size_size'],
 					false,
 					[
-						'alt' => esc_attr($item['image_accordion_title'])
+						'alt' => esc_html($item['image_accordion_title'])
 					]
 				));
 			}

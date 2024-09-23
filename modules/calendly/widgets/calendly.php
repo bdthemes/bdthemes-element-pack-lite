@@ -189,7 +189,7 @@ class Calendly extends Module_Base {
 		];
 
 		$requestUrl = 'https://calendly.com/';
-		$requestUrl .= esc_attr( $settings['calendly_username'] );
+		$requestUrl .= esc_html( $settings['calendly_username'] );
 		$requestUrl .= esc_attr( $calendly_time );
 		$requestUrl .= '/?';
 		$requestUrl .= esc_attr( $calendly_event );
@@ -197,7 +197,7 @@ class Calendly extends Module_Base {
 		$final_url = $requestUrl . http_build_query( $parameters );
 
 		?>
-		<?php if ( $settings['calendly_username'] ) : ?>
+		<?php if ( ! empty( $settings['calendly_username'] ) ) : ?>
 
 			<div class="calendly-inline-widget" data-url="<?php echo esc_url( $final_url ); ?>" style="min-width:320px;"></div>
 

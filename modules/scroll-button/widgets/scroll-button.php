@@ -519,7 +519,7 @@ class Scroll_Button extends Module_Base {
 			$this->add_render_attribute( 'bdt-scroll-button', 'style', 'opacity: 0;' );
 		}
 
-		$this->add_render_attribute( 'bdt-scroll-button', 'data-selector', '#' . esc_attr($settings['section_id']) );
+		$this->add_render_attribute( 'bdt-scroll-button', 'data-selector', '#' . esc_html($settings['section_id']) );
 
 		if ( '' !== $settings['scroll_button_position'] ) {
 			$this->add_render_attribute( 'bdt-scroll-wrapper', 'class', ['bdt-position-fixed', 'bdt-position-' . $settings['scroll_button_position']] );
