@@ -288,8 +288,11 @@ class Element_Pack_Loader {
 
         $direction_suffix = is_rtl() ? '.rtl' : '';
 
-        wp_enqueue_style('bdt-uikit', BDTEP_ASSETS_URL . 'css/bdt-uikit' . $direction_suffix . '.css', [], '3.17.0');
-        wp_enqueue_style('ep-helper', BDTEP_ASSETS_URL . 'css/ep-helper' . $direction_suffix . '.css', [], BDTEP_VER);
+        wp_register_style('bdt-uikit', BDTEP_ASSETS_URL . 'css/bdt-uikit' . $direction_suffix . '.css', [], '3.21.7');
+        wp_register_style('ep-helper', BDTEP_ASSETS_URL . 'css/ep-helper' . $direction_suffix . '.css', [], BDTEP_VER);
+
+		wp_enqueue_style( 'bdt-uikit' );
+		wp_enqueue_style( 'ep-helper' );
     }
 
 
@@ -301,10 +304,13 @@ class Element_Pack_Loader {
 
         $suffix           = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-        wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit' . $suffix . '.js', ['jquery'], '3.17.0', true);
+		wp_register_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit' . $suffix . '.js', ['jquery'], '3.21.7', true);
+
+		wp_enqueue_script( 'bdt-uikit' );
 
         if (!element_pack_is_asset_optimization_enabled()) {
-            wp_enqueue_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper' . $suffix . '.js', ['jquery', 'elementor-frontend'], BDTEP_VER, true);
+			wp_register_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper' . $suffix . '.js', ['jquery', 'elementor-frontend'], BDTEP_VER, true);
+            wp_enqueue_script('element-pack-helper');
         }
 
 
@@ -369,7 +375,7 @@ class Element_Pack_Loader {
 
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-        wp_enqueue_script(
+		wp_register_script(
             'element-pack',
             BDTEP_ASSETS_URL . 'js/ep-editor' . $suffix . '.js',
             [
@@ -380,6 +386,8 @@ class Element_Pack_Loader {
             BDTEP_VER,
             true
         );
+
+		wp_enqueue_script( 'element-pack' );
 
         $localize_data = [
             'pro_installed'  => element_pack_pro_installed(),
@@ -449,6 +457,15 @@ class Element_Pack_Loader {
         if (element_pack_is_asset_optimization_enabled()) {
             wp_enqueue_style('ep-styles');
         }
+
+		/**
+		 * Must load into Editor for Extension Support
+		 * 
+		 * by U-011
+		 */
+		if ( Element_Pack_Loader::elementor()->preview->is_preview_mode() || Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
+			wp_enqueue_style( 'ep-styles' );
+		}
     }
 
     public function enqueue_minified_js() {
@@ -468,6 +485,14 @@ class Element_Pack_Loader {
         if (element_pack_is_asset_optimization_enabled()) {
             wp_enqueue_script('ep-scripts');
         }
+		/**
+		 * Must load into Editor for Extension Support
+		 * 
+		 * by U-011
+		 */
+		if ( Element_Pack_Loader::elementor()->preview->is_preview_mode() || Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
+			wp_enqueue_script( 'ep-scripts' );
+		}
     }
 
     /**
@@ -475,7 +500,14 @@ class Element_Pack_Loader {
      */
 
     public function enqueue_admin_scripts() {
-        wp_enqueue_script('ep-notice-js', BDTEP_ADMIN_URL . 'assets/js/ep-notice.js', ['jquery'], BDTEP_VER, true);
+		wp_enqueue_style( 'ep-notice-css', BDTEP_ADMIN_URL . 'assets/css/ep-notice.css', [], BDTEP_VER, 'all' );
+		wp_enqueue_script( 'ep-notice-js', BDTEP_ADMIN_URL . 'assets/js/ep-notice.js', [ 'jquery' ], BDTEP_VER, true );
+
+		$script_config = [ 
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'element-pack' ),
+		];
+		wp_localize_script( 'ep-notice-js', 'ElementPackNoticeConfig', $script_config );
     }
 
     /**
@@ -597,24 +629,21 @@ class Element_Pack_Loader {
     private function setup_hooks() {
 
         add_action('elementor/controls/register', [$this, 'ElementPack_Json_File_Import_register_controls']);
-
         add_action('elementor/controls/register', [$this, 'ElementPack_FB_Token_Register_Controls']);
-
         add_action('elementor/elements/categories_registered', [$this, 'element_pack_category_register']);
         add_action('elementor/init', [$this, 'element_pack_init']);
 
-
         add_action('elementor/editor/after_enqueue_styles', [$this, 'enqueue_editor_styles']);
 
-        add_action('elementor/frontend/before_register_styles', [$this, 'register_site_styles']);
-        add_action('elementor/frontend/before_register_scripts', [$this, 'register_site_scripts']);
+        add_action('wp_enqueue_scripts', [$this, 'register_site_styles'], 99999);
+        add_action('wp_enqueue_scripts', [$this, 'register_site_scripts'], 99999);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_site_styles'], 99999);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_site_scripts'], 99999);
 
         add_action('elementor/preview/enqueue_styles', [$this, 'enqueue_preview_styles']);
         add_action('elementor/editor/after_enqueue_scripts', [$this, 'enqueue_editor_scripts']);
 
-        add_action('elementor/frontend/after_register_styles', [$this, 'enqueue_site_styles']);
-        add_action('elementor/frontend/before_enqueue_scripts', [$this, 'enqueue_site_scripts']);
-
+        
         // For frontend css load
         add_action('elementor/frontend/after_enqueue_styles', [$this, 'enqueue_minified_css']);
         add_action('elementor/frontend/after_enqueue_scripts', [$this, 'enqueue_minified_js']);
