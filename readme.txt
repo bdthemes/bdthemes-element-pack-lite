@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.8.4
+Stable tag: 5.8.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.24.3
+Elementor tested up to: 3.24.4
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -259,37 +259,17 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.8.5 [24th September 2024] =
+
+* Fixed: JS scripts error fixed
+* Fixed: Reklo button icon issue fixed in creative button widget
+* Fixed: Time spacing issue fixed in product grid & product carousel widget
+* Fixed: Item match height issue fixed in product carousel widget
+
 = 5.8.4 [23th September 2024] =
 
 * Fixed: JS scripts error fixed
-* Fixed: Security improved in advanced icon box, animated heading, calendly, countdown, creative button, custom gallery, dual button, fancy card, iconnav, image accordion, image compare, image stack, lightbox, mailchimp, price list, price table, scroll button, scroll image, slideshow, social proof, switcher, thumb gallery, timeline, video player widgets
-
-= 5.8.3 [18th September 2024] =
-
-* Fixed: JS Loading issue fixed in extensions (Tooltip, Particles, Animated Gradient, Background Expand, Floating Effects, Ripple Effects, Scroll Fill Effects, 3d Text, Cursor Effects, Reveal Effects, Confetti Effects)
-
-= 5.8.2 [15th September 2024] =
-
-* Fixed: Security improved in social title feature in Member & Profile Card widgets
-* Fixed: JS Loading issue fixed in extensions (Tooltip, Particles, Animated Gradient, Background Expand, Floating Effects, Ripple Effects, Scroll Fill Effects, 3d Text, Cursor Effects, Reveal Effects, Confetti Effects)
-
-= 5.8.1 [13th September 2024] =
-
-* Added: Toggle button controls added in Read more toggle widget
-* Fixed: JS Error fixed in all extension (Thanks to Ricardo De Lucia Leite)
-
-= 5.8.0 [12th September 2024] =
-
-* Added: Image position responsive option added in review card carousel widget widget
-* Fixed: Words limit issue fixed in review card carousel widget
-* Fixed: CSS on all iframes fixed in Iframe widget (Thanks to Gabriel Sirbu)
-
-= 5.7.8 [7th September 2024] =
-
-* Added: Title style added in static carousel widget
-* Fixed: Depriecation warning fixed in optimizer
-* Fixed: Critical error fixed in Custom Gallery widget ( Thanks to Andrew )
-* Fixed: Individual icon(SVG) color issue fixed in Fancy Icon widget ( Thanks to Linda McColley )
+* Fixed: Security improved
 
 Details [changelog here](https://feedback.bdthemes.com/announcements?category=category_6l495r8q)
 
