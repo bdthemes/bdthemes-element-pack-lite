@@ -1311,7 +1311,7 @@
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => ['px', '%'],
 					'selectors'  => [
-						'{{WRAPPER}} .bdt-ep-product-carousel-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-rating-time' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -1392,16 +1392,16 @@
 			$this->add_responsive_control(
 				'time_bottom_space',
 				[
-					'label'     => __('Spacing', 'bdthemes-element-pack'),
+					'label'     => __('Space Between', 'bdthemes-element-pack'),
 					'type'      => Controls_Manager::SLIDER,
 					'range'     => [
 						'px' => [
 							'min' => 0,
-							'max' => 100,
+							'max' => 10,
 						],
 					],
 					'selectors' => [
-						'{{WRAPPER}} .bdt-ep-product-carousel-time' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .bdt-ep-product-carousel-time i' => 'margin-right: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -1558,7 +1558,7 @@
 			}
 
 			$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
-			$this->add_render_attribute('image-wrap', 'class', 'bdt-ep-product-carousel-image' . $image_mask);
+			$this->add_render_attribute('image-wrap', 'class', 'bdt-ep-product-carousel-image bdt-flex-inline' . $image_mask, true);
 	
 			?>
 			<div <?php $this->print_render_attribute_string('image-wrap'); ?>>
@@ -1759,7 +1759,7 @@
 				return;
 			}
 	
-			$this->add_render_attribute('item-wrap', 'class', 'bdt-ep-product-carousel-item swiper-slide', true);
+			$this->add_render_attribute('item-wrap', 'class', 'bdt-ep-product-carousel-item swiper-slide bdt-flex bdt-flex-column', true);
 
 			?>
 
@@ -1775,14 +1775,16 @@
 				?>
 				<div <?php $this->print_render_attribute_string('item-wrap'); ?>>
 					<?php $this->render_image($item, 'image_'.$index); ?>
-					<div class="bdt-ep-product-carousel-content">
-						<div class="bdt-ep-product-carousel-title-price bdt-flex bdt-flex-middle bdt-flex-between">
-							<?php $this->render_title($item, 'title_'.$index); ?>
-							<?php $this->render_price($item); ?>
+					<div class="bdt-ep-product-carousel-content bdt-flex bdt-flex-column bdt-flex-between">
+						<div>
+							<div class="bdt-ep-product-carousel-title-price bdt-flex bdt-flex-middle bdt-flex-between">
+								<?php $this->render_title($item, 'title_'.$index); ?>
+								<?php $this->render_price($item); ?>
+							</div>
+							<?php $this->render_text($item); ?>
+							<?php $this->render_readmore($item, 'link_'.$index); ?>
 						</div>
-						<?php $this->render_text($item); ?>
-						<?php $this->render_readmore($item, 'link_'.$index); ?>
-						<div class="bdt-ep-product-carousel-rating-time bdt-flex bdt-flex-middle bdt-flex-between">
+						<div class="bdt-ep-product-carousel-rating-time bdt-flex bdt-flex-middle bdt-flex-between bdt-flex-wrap">
 							<?php $this->render_review_rating($item); ?>
 							<?php $this->render_time($item); ?>
 						</div>

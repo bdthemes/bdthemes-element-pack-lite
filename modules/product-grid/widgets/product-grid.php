@@ -1288,7 +1288,7 @@ class Product_Grid extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
-					'{{WRAPPER}} .bdt-ep-product-grid-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-product-grid-rating-time' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1369,16 +1369,16 @@ class Product_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'time_bottom_space',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Space Between', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
 						'min' => 0,
-						'max' => 100,
+						'max' => 10,
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-ep-product-grid-time' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-product-grid-time i' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1507,7 +1507,7 @@ class Product_Grid extends Module_Base {
 		}
 
 		$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
-		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-ep-product-grid-image' . $image_mask );
+		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-ep-product-grid-image bdt-flex-inline' . $image_mask );
 
 		?>
 		<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
@@ -1723,19 +1723,21 @@ class Product_Grid extends Module_Base {
 		<div <?php $this->print_render_attribute_string( 'product-grid' ); ?>>
 			<?php foreach ( $settings['product_items'] as $index => $item ) :
 
-				$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-grid-item', true );
+				$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-grid-item bdt-flex bdt-flex-column', true );
 
 				?>
 				<div <?php $this->print_render_attribute_string( 'item-wrap' ); ?>>
 					<?php $this->render_image( $item, 'image_' . $index ); ?>
-					<div class="bdt-ep-product-grid-content">
-						<div class="bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between">
-							<?php $this->render_title( $item, 'title_' . $index ); ?>
-							<?php $this->render_price( $item ); ?>
+					<div class="bdt-ep-product-grid-content bdt-flex bdt-flex-column bdt-flex-between">
+						<div>
+							<div class="bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between">
+								<?php $this->render_title( $item, 'title_' . $index ); ?>
+								<?php $this->render_price( $item ); ?>
+							</div>
+							<?php $this->render_text( $item ); ?>
+							<?php $this->render_readmore( $item, 'link_' . $index ); ?>
 						</div>
-						<?php $this->render_text( $item ); ?>
-						<?php $this->render_readmore( $item, 'link_' . $index ); ?>
-						<div class="bdt-ep-product-grid-rating-time bdt-flex bdt-flex-middle bdt-flex-between">
+						<div class="bdt-ep-product-grid-rating-time bdt-flex bdt-flex-middle bdt-flex-between bdt-flex-wrap">
 							<?php $this->render_review_rating( $item ); ?>
 							<?php $this->render_time( $item ); ?>
 						</div>

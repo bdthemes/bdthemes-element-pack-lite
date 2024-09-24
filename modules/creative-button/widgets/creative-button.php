@@ -702,7 +702,7 @@ class Creative_Button extends Module_Base {
 		<?php elseif ( $settings['button_style'] == 'reklo' ) : ?>
 			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>>
 				<span><?php echo esc_html($settings['text']); ?></span>
-				<i class="ep-icon-arrow-right-0 bdt-flex bdt-flex-middle bdt-flex-center"></i>
+				<i class="ep-icon-arrow-right-0"></i>
 			</a>
 		<?php else: ?>
 			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>><span><?php echo esc_html($settings['text']); ?></span></a>
