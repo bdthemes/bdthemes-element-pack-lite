@@ -398,7 +398,7 @@ class Accordion extends Module_Base {
 								if ( 'yes' == $settings['schema_activity'] ) {
 									echo '<div itemprop="text">';
 								}
-								echo wp_kses_post( $this->parse_text_editor( $item['tab_content'] ) );
+								echo $this->parse_text_editor( $item['tab_content'] );
 								if ( 'yes' == $settings['schema_activity'] ) {
 									echo '</div>';
 								}

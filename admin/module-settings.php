@@ -2552,7 +2552,7 @@ class ModuleService {
 
         $settings_fields['element_pack_third_party_widget'][] = [
             'name'        => 'booked-calendar',
-            'label'       => esc_html__('Booked Calendar', 'bdthemes-element-pack'),
+            'label'       => esc_html__('Booked Calendar (Deprecated)', 'bdthemes-element-pack'),
             'type'        => 'checkbox',
             'default'     => 'off',
             'plugin_name' => 'booked',
@@ -2561,21 +2561,6 @@ class ModuleService {
             'widget_type' => 'pro',
             'demo_url'    => 'https://demo.elementpack.pro/element/booked-calendar/',
             'video_url'   => 'https://youtu.be/bodvi_5NkDU',
-
-        ];
-
-        $settings_fields['element_pack_third_party_widget'][] = [
-            'name'         => 'caldera-forms',
-            'label'        => esc_html__('Caldera Forms (Deprecated)', 'bdthemes-element-pack'),
-            'type'         => 'checkbox',
-            'default'      => 'on',
-            'plugin_name'  => 'caldera-forms',
-            'plugin_path'  => 'caldera-forms/caldera-core.php',
-            'paid'         => 'https://calderaforms.com/updates/caldera-forms-1-9-7/',
-            'widget_type'  => 'free',
-            'content_type' => 'forms',
-            'demo_url'     => 'https://demo.elementpack.pro/element/caldera-form/',
-            'video_url'    => 'https://youtu.be/2EiVSLows20',
 
         ];
 

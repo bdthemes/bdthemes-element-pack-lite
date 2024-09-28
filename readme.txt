@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.8.5
+Stable tag: 5.9.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -258,6 +258,12 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.9.0 [28th September 2024] =
+
+* Fixed: Security improved
+* Fixed: Escaping on content issue fixed in Accordion widget (Thanks to Trevor Leach)
+* Removed: Caldera forms widget removed
 
 = 5.8.5 [24th September 2024] =
 

@@ -1219,7 +1219,7 @@ class Custom_Gallery extends Module_Base {
 
 						$this->add_render_attribute( $element_key, 'class', [ 'bdt-gallery-item-link', 'bdt-gallery-lightbox-item' ] );
 
-						$this->add_render_attribute( $element_key, 'data-caption', wp_kses_post( $content['image_title'] ) );
+						$this->add_render_attribute( $element_key, 'data-caption', esc_html( $content['image_title'] ) );
 						$icon = $settings['icon'] ?: 'plus';
 
 						?>
