@@ -580,6 +580,7 @@ class Panel_Slider extends Module_Base {
 				'label'        => esc_html__( 'Shadow Mode', 'bdthemes-element-pack' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-ep-shadow-mode-',
+				'render_type'  => 'template',
 			]
 		);
 
@@ -592,12 +593,33 @@ class Panel_Slider extends Module_Base {
 					'shadow_mode' => 'yes',
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .elementor-widget-container:before' => 'background: linear-gradient(to right,
-					{{VALUE}} 5%,rgba(255,255,255,0) 100%);',
+					'{{WRAPPER}} .elementor-widget-container:before' => 'background: linear-gradient(to right, {{VALUE}} 5%,rgba(255,255,255,0) 100%);',
 					'{{WRAPPER}} .elementor-widget-container:after'  => 'background: linear-gradient(to right, rgba(255,255,255,0) 0%, {{VALUE}} 95%);',
 				],
 			]
 		);
+
+		$this->add_responsive_control(
+            'item_shadow_padding',
+            [
+                'label'       => esc_html__('Match Padding', 'bdthemes-element-pack'),
+                'description' => esc_html__('You have to add padding for matching overlaping normal/hover box shadow when you used Box Shadow option.', 'bdthemes-element-pack'),
+                'type'        => Controls_Manager::SLIDER,
+                'range'       => [
+                    'px' => [
+                        'min'  => 0,
+                        'step' => 1,
+                        'max'  => 50,
+                    ]
+                ],
+                'default'     => [
+                    'size' => 10
+                ],
+                'selectors'   => [
+                    '{{WRAPPER}} .swiper-carousel' => 'padding: {{SIZE}}{{UNIT}}; margin: 0 -{{SIZE}}{{UNIT}};'
+                ],
+            ]
+        );
 
 		$this->end_controls_section();
 

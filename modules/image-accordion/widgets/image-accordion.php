@@ -473,6 +473,19 @@ class Image_Accordion extends Module_Base {
 		);
 
 		$this->add_control(
+			'inactive_item_overlay',
+			[
+				'label'   => esc_html__( 'In-active Item Overlay', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+				'prefix_class' => 'bdt-ep-inactive-item-overlay-',
+				'render_type'  => 'template',
+				// 'condition' => [
+				// 	'skin_type!' => 'sliding-box'
+				// ]
+			]
+		);
+
+		$this->add_control(
 			'show_title',
 			[
 				'label'   => esc_html__( 'Show Title', 'bdthemes-element-pack' ),
@@ -724,7 +737,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'image_accordion_overlay_color',
 			[
-				'label'     => __( 'Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Active Item Overlay Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-item:before'  => 'background: {{VALUE}};',
@@ -745,11 +758,26 @@ class Image_Accordion extends Module_Base {
 				'selector' => '{{WRAPPER}}.skin--sliding-box .bdt-ep-image-accordion-img:before',
 				'fields_options' => [
 					'background' => [
-						'label' => esc_html__('Overlay Color', 'bdthemes-element-pack'),
+						'label' => esc_html__('Active Item Overlay Color', 'bdthemes-element-pack'),
 					],
 				],
 				'condition' => [
 					'skin_type' => 'sliding-box'
+				]
+			]
+		);
+
+		$this->add_control(
+			'image_accordion_inactive_item_overlay_color',
+			[
+				'label'     => __( 'In-active Item Overlay Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-image-accordion-item.bdt-inactive:before'  => 'background: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-image-accordion-item.bdt-inactive .bdt-ep-image-accordion-img:before'  => 'background: {{VALUE}};',
+				],
+				'condition' => [
+					'inactive_item_overlay' => 'yes',
 				]
 			]
 		);
@@ -1518,7 +1546,8 @@ class Image_Accordion extends Module_Base {
 							'mouse_event' => $imageAccordionEvent,
 							'activeItem' => $settings['active_item'] == 'yes' ? true : false,
 							'activeItemNumber' => $settings['active_item_number'],
-							'swiping' => $settings['swiping']
+							'swiping' => $settings['swiping'],
+							'inactiveItemOverlay' => $settings['inactive_item_overlay'],
 						]))
 					]
 				]
