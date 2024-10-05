@@ -69,7 +69,7 @@ final class Manager {
             if (!element_pack_is_preview()) {
                 // register widgets css
                 if (ModuleService::has_module_style($module_id)) {
-                    wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . $direction . '.css', [], BDTEP_VER);
+                    wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . $direction . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
                 }
                 // register widget JS
                 if (ModuleService::has_module_script($module_id)) {

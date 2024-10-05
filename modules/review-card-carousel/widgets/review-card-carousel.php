@@ -1277,7 +1277,7 @@ class Review_Card_Carousel extends Module_Base {
 		}
 
 		$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
-		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-ep-review-card-carousel-image' . $image_mask );
+		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-ep-review-card-carousel-image' . $image_mask, true );
 		?>
 		<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
 

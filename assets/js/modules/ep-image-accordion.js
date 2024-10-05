@@ -81,6 +81,25 @@
         handleSwipe(event);
       });
     }
+
+    // Inactive Item
+    if ($settings.inactiveItemOverlay) {
+      console.log("inactiveItemOverlay");
+      $(accordionItem).on($settings.mouse_event, function (event) {
+        event.stopPropagation();
+        if ($(this).hasClass("active")) {
+          $(this)
+            .removeClass("bdt-inactive")
+            .siblings()
+            .addClass("bdt-inactive");
+        } else {
+          $(this).siblings().removeClass("bdt-inactive");
+        }
+      });
+      $(document).on($settings.mouse_event, function () {
+        $(accordionItem).removeClass("bdt-inactive");
+      });
+    }
   };
 
   jQuery(window).on("elementor/frontend/init", function () {

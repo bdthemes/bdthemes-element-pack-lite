@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.9.0
+Stable tag: 5.9.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.24.4
+Elementor tested up to: 3.24.5
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -258,6 +258,13 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.9.1 [6th October 2024] =
+
+* Added: Match padding option added in panel slider widget
+* Added: In-active item overlay color added for Image Accordion widget (Thanks to Steffen)
+* Fixed: Shadow Mode issue fixed in panel slider widget
+* Fixed: Editor mode image size issue fixed in review grid & review carousel widget
 
 = 5.9.0 [28th September 2024] =
 
