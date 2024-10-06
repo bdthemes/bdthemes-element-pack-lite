@@ -263,6 +263,7 @@ https://youtu.be/u9JRd824Mjc
 
 * Added: Match padding option added in panel slider widget
 * Added: In-active item overlay color added for Image Accordion widget (Thanks to Steffen)
+* Added: Cookie consent widget style controls added
 * Fixed: Shadow Mode issue fixed in panel slider widget
 * Fixed: Editor mode image size issue fixed in review grid & review carousel widget
 
