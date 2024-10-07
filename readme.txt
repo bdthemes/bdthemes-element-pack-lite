@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.9.1
+Stable tag: 5.10.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -259,13 +259,13 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
-= 5.9.1 [6th October 2024] =
+= 5.10.0 [7th October 2024] =
 
 * Added: Match padding option added in panel slider widget
 * Added: In-active item overlay color added for Image Accordion widget (Thanks to Steffen)
 * Added: Cookie consent widget style controls added
 * Fixed: Shadow Mode issue fixed in panel slider widget
-* Fixed: Editor mode image size issue fixed in review grid & review carousel widget
+* Fixed: Editor mode image size issue fixed in review card carousel widget
 
 = 5.9.0 [28th September 2024] =
 
