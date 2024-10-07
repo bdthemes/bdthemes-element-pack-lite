@@ -235,6 +235,9 @@ class Cookie_Consent extends Module_Base {
 
 		$this->end_controls_section();
 
+		/**
+		 * Style Tab
+		 */
 		$this->start_controls_section(
 			'section_style',
 			[ 
@@ -385,6 +388,35 @@ class Cookie_Consent extends Module_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'content_alignment',
+			[
+				'label' => esc_html__( 'Text Align', 'bdthemes-element-pack' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-text-align-right',
+					],
+					'justify' => [
+						'title' => esc_html__( 'Justify', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-text-align-justify',
+					],
+				],
+				'selectors' => [
+					'body .cc-window' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -394,7 +426,34 @@ class Cookie_Consent extends Module_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
-
+		$this->add_responsive_control(
+			'button_align',
+			[
+				'label' => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'flex-start' => [
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-align-start-h',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-align-center-h',
+					],
+					'flex-end' => [
+						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-align-end-h',
+					],
+					'stretch' => [
+						'title' => esc_html__( 'Stretch', 'bdthemes-element-pack' ),
+						'icon' => 'eicon-align-stretch-h',
+					],
+				],
+				'selectors' => [
+					'body .cc-window' => 'align-items: {{VALUE}};',
+				],
+			]
+		);
 		$this->start_controls_tabs( 'tabs_dismiss_button_style' );
 		$this->start_controls_tab(
 			'tab_dismiss_button_normal',
@@ -410,7 +469,7 @@ class Cookie_Consent extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				// 'default'   => '#ffffff',
 				'selectors' => [ 
-					'body .cc-window .cc-btn.cc-dismiss' => 'color: {{VALUE}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -422,7 +481,7 @@ class Cookie_Consent extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				// 'default'   => '#41aab9',
 				'selectors' => [ 
-					'body .cc-window .cc-btn.cc-dismiss' => 'background-color: {{VALUE}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss' => 'background-color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -431,7 +490,7 @@ class Cookie_Consent extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'dismiss_button_border',
-				'selector' => 'body .cc-window .cc-compliance .cc-btn.cc-dismiss',
+				'selector' => 'body .cc-window .cc-compliance a.cc-btn.cc-dismiss',
 				'separator' => 'before',
 			]
 		);
@@ -442,7 +501,7 @@ class Cookie_Consent extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
-					'body .cc-window .cc-btn.cc-dismiss' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -454,7 +513,7 @@ class Cookie_Consent extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
-					'body .cc-window .cc-btn.cc-dismiss' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -466,7 +525,7 @@ class Cookie_Consent extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
-					'body .cc-window .cc-btn.cc-dismiss' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -481,14 +540,14 @@ class Cookie_Consent extends Module_Base {
 				],
 			]
 		);
-
+		
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'dismiss_button_typography',
 				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
-				'selector' => 'body .cc-window .cc-btn.cc-dismiss',
+				'selector' => 'body .cc-window a.cc-btn.cc-dismiss',
 			]
 		);
 
@@ -506,7 +565,7 @@ class Cookie_Consent extends Module_Base {
 				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'body .cc-window .cc-btn.cc-dismiss:hover' => 'color: {{VALUE}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss:hover' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -517,7 +576,7 @@ class Cookie_Consent extends Module_Base {
 				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'body .cc-window .cc-btn.cc-dismiss:hover' => 'background-color: {{VALUE}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss:hover' => 'background-color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -531,7 +590,7 @@ class Cookie_Consent extends Module_Base {
 					'dismiss_button_border_border!' => '',
 				],
 				'selectors' => [ 
-					'body .cc-window .cc-btn.cc-dismiss:hover' => 'border-color: {{VALUE}} !important;',
+					'body .cc-window a.cc-btn.cc-dismiss:hover' => 'border-color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -564,8 +623,12 @@ class Cookie_Consent extends Module_Base {
 						'icon' => 'eicon-h-align-right',
 					],
 				],
+				'selectors_dictionary' => [
+					'row-reverse' => 'flex-direction: row-reverse; justify-content: flex-end;',
+					'row' => 'flex-direction: row; justify-content: flex-start;',
+				],
 				'selectors' => [
-					'body .cc-window .cc-compliance' => 'flex-direction: {{VALUE}};',
+					'body .cc-window .cc-compliance' => '{{VALUE}}',
 				],
 			]
 		);
@@ -584,7 +647,7 @@ class Cookie_Consent extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'.cc-compliance .bdt-cc-close-btn' => 'color: {{VALUE}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -595,7 +658,7 @@ class Cookie_Consent extends Module_Base {
 				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'.cc-compliance .bdt-cc-close-btn' => 'background-color: {{VALUE}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'background-color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -604,7 +667,7 @@ class Cookie_Consent extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'dismiss_close_button_border',
-				'selector' => '.cc-compliance .bdt-cc-close-btn',
+				'selector' => 'body .cc-window .cc-compliance .bdt-cc-close-btn',
 				'separator' => 'before',
 			]
 		);
@@ -615,7 +678,7 @@ class Cookie_Consent extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
-					'.cc-compliance .bdt-cc-close-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -627,7 +690,7 @@ class Cookie_Consent extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
-					'.cc-compliance .bdt-cc-close-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -639,7 +702,7 @@ class Cookie_Consent extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
-					'.cc-compliance .bdt-cc-close-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -656,7 +719,7 @@ class Cookie_Consent extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'.cc-compliance .bdt-cc-close-btn' => 'font-size: {{SIZE}}{{UNIT}};',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -675,7 +738,7 @@ class Cookie_Consent extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'.cc-compliance .bdt-cc-close-btn:hover' => 'color: {{VALUE}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn:hover' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -686,7 +749,7 @@ class Cookie_Consent extends Module_Base {
 				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'.cc-compliance .bdt-cc-close-btn:hover' => 'background-color: {{VALUE}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn:hover' => 'background-color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -700,7 +763,7 @@ class Cookie_Consent extends Module_Base {
 					'dismiss_close_button_border_border!' => '',
 				],
 				'selectors' => [ 
-					'.cc-compliance .bdt-cc-close-btn:hover' => 'border-color: {{VALUE}} !important;',
+					'body .cc-window .cc-compliance .bdt-cc-close-btn:hover' => 'border-color: {{VALUE}} !important;',
 				],
 			]
 		);
