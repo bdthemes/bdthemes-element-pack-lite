@@ -489,18 +489,6 @@ class Static_Carousel extends Module_Base
             ]
         );
 
-        $this->add_control(
-            'content_padding',
-            [
-                'label' => esc_html__('Content Padding', 'bdthemes-element-pack'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .bdt-ep-static-carousel-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
         $this->start_controls_tabs('tabs_item_style');
 
         $this->start_controls_tab(
@@ -618,9 +606,71 @@ class Static_Carousel extends Module_Base
         );
 
         $this->end_controls_tab();
-
         $this->end_controls_tabs();
+        $this->end_controls_section();
 
+        $this->start_controls_section(
+            'section_style_content',
+            [
+                'label' => __('Content', 'bdthemes-element-pack'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'content_background',
+                'selector' => '{{WRAPPER}} .bdt-ep-static-carousel-content',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'content_border',
+                'selector' => '{{WRAPPER}} .bdt-ep-static-carousel-content',
+                'separator' => 'before',
+            ]
+        );
+        $this->add_responsive_control(
+            'content_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-ep-static-carousel-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'content_padding',
+            [
+                'label' => esc_html__('Padding', 'bdthemes-element-pack'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-ep-static-carousel-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'content_margin',
+            [
+                'label' => esc_html__('Margin', 'bdthemes-element-pack'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-ep-static-carousel-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'content_box_shadow',
+                'selector' => '{{WRAPPER}} .bdt-ep-static-carousel-content',
+            ]
+        );
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1044,7 +1094,7 @@ class Static_Carousel extends Module_Base
         }
 
         $image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
-        $this->add_render_attribute('image-wrap', 'class', 'bdt-ep-static-carousel-image' . $image_mask);
+        $this->add_render_attribute('image-wrap', 'class', 'bdt-flex bdt-ep-static-carousel-image' . $image_mask);
         ?>
         <div <?php $this->print_render_attribute_string('image-wrap'); ?>>
 

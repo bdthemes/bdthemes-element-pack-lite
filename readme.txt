@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.10.0
+Stable tag: 5.10.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.24.5
+Elementor tested up to: 3.24.6
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -258,6 +258,13 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.1 [14th October 2024] =
+
+* Added: Close button hide & position options added in cookie consent widget
+* Added: Close all items on mobile feature added in Accordion widget (Thanks to Rys)
+* Added: Content style controls added in static carousel widget
+* Fixed: JS dependency issue fixed (Thanks to Devon Jordaan)
 
 = 5.10.0 [7th October 2024] =
 

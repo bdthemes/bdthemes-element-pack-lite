@@ -644,6 +644,15 @@ trait Global_Widget_Controls {
 		);
 
 		$this->add_control(
+			'close_all_items_on_mobile',
+			[ 
+				'label' => __( 'Close All Items on Mobile', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'description' => __( 'All items will be closed on mobile devices when the page is loaded.', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SWITCHER,
+			]
+		);
+
+		$this->add_control(
 			'active_item',
 			[ 
 				'label' => __( 'Active Item No', 'bdthemes-element-pack' ),
