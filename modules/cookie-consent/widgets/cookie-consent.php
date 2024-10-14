@@ -236,6 +236,44 @@ class Cookie_Consent extends Module_Base {
 		$this->end_controls_section();
 
 		/**
+		 * Additional Options
+		 */
+		$this->start_controls_section(
+			'section_additional_options',
+			[ 
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+			]
+		);
+		$this->add_control(
+			'close_button',
+			[ 
+				'label'   => esc_html__( 'Close Button', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'default',
+				'options' => [ 
+					'default'    => esc_html__( 'Default', 'bdthemes-element-pack' ),
+					'none'    => esc_html__( 'None', 'bdthemes-element-pack' ),
+					'top-left'     => esc_html__( 'Top Left', 'bdthemes-element-pack' ),
+					'top-right'    => esc_html__( 'Top Right', 'bdthemes-element-pack' ),
+					'bottom-left'  => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
+					'bottom-right' => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
+				],
+				'selectors_dictionary' => [
+					'default'    => '',
+					'none'    => 'display: none;',
+					'top-left'   => 'position: absolute; top: 0; left: 0;',
+					'top-right'  => 'position: absolute; top: 0; right: 0;',
+					'bottom-left'  => 'position: absolute; bottom: 0; left: 0;',
+					'bottom-right' => 'position: absolute; bottom: 0; right: 0;',
+				],
+				'selectors' => [
+					'body .cc-window .cc-compliance .bdt-cc-close-btn' => '{{VALUE}}',
+				],
+			]
+		);
+		$this->end_controls_section();
+
+		/**
 		 * Style Tab
 		 */
 		$this->start_controls_section(
@@ -605,6 +643,9 @@ class Cookie_Consent extends Module_Base {
 			[ 
 				'label' => esc_html__( 'Close Button', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'close_button!' => 'none',
+				],
 			]
 		);
 
@@ -629,6 +670,9 @@ class Cookie_Consent extends Module_Base {
 				],
 				'selectors' => [
 					'body .cc-window .cc-compliance' => '{{VALUE}}',
+				],
+				'condition' => [ 
+					'close_button' => 'default',
 				],
 			]
 		);
