@@ -830,8 +830,8 @@ class Lightbox extends Module_Base {
 			}
 		}
 
-		if ( $settings['content_caption'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'data-caption', esc_html( $settings['content_caption'] ) );
+		if ( $settings['content_caption'] ) {			
+			$this->add_render_attribute( 'lightbox-content', 'data-caption', wp_kses( $settings['content_caption'], element_pack_allow_tags( 'title' ) ) );
 		}
 
 		if ( ! empty( $settings['icon_text'] ) ) {

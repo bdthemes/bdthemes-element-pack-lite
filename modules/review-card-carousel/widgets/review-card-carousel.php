@@ -58,7 +58,7 @@ class Review_Card_Carousel extends Module_Base {
 		if ( $this->ep_is_edit_mode() ) {
 			return [ 'ep-scripts' ];
 		} else {
-			return [ 'ep-review-card-carousel' ];
+			return [ 'ep-review-card-carousel', 'ep-review-card' ];
 		}
 	}
 

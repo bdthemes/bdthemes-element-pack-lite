@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.10.1
+Stable tag: 5.10.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.24.6
+Elementor tested up to: 3.24.7
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -23,7 +23,7 @@ Element Pack Addon for **[Elementor](https://wordpress.org/plugins/elementor/)**
 Element Pack is very user-friendly and lets you build & manage your website with a simple drag-n-drop feature like the page builder. Element Pack combines the most commonly used elements with essential unique web kits to empower you to build the next generation of websites. You absolutely need no coding skills to use Element Pack.
 
 ###USEFUL LINKS 👇###
-**[Live Demo](https://www.elementpack.pro/elements-demo/)** | **[Documentation](https://bdthemes.com/all-knowledge-base-of-element-pack/)** | **[Video Tutorial](https://www.youtube.com/watch?v=1tNppRHvSvQ&list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA)** | **[Upgrade Pro](https://www.elementpack.pro/pricing/)** | **[Need Support?](https://bdthemes.com/support/)**
+**[Live Demo](https://www.elementpack.pro/elements-demo/)** | **[Documentation](https://bdthemes.com/all-knowledge-base-of-element-pack/)** | **[Video Tutorial](https://youtube.com/playlist?list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA&si=bR91QQYCjeAtG9vC)** | **[Upgrade Pro](https://www.elementpack.pro/pricing/)** | **[Need Support?](https://bdthemes.com/support/)**
 
 
 https://www.youtube.com/watch?v=Z6XNSPSxtJw
@@ -194,7 +194,7 @@ More features & extensions are coming soon...
 
 == Pro Version Features 🔥 ==
 
-* [Essential Shortcodes](https://bdthemes.com/knowledge-base/element-pack-essential-shortcodes/) | [Context Menu](https://bdthemes.com/knowledge-base/context-menu/) | [Smooth Scroller](https://bdthemes.com/all-knowledge-base-of-element-pack/) | [SEO Performance](https://bdthemes.com/all-knowledge-base-of-element-pack/) 
+* [Essential Shortcodes](https://bdthemes.com/knowledge-base/element-pack-essential-shortcodes/) | [Context Menu](https://bdthemes.com/knowledge-base/context-menu/) | [Smooth Scroller](https://bdthemes.com/all-knowledge-base-of-element-pack/)
 
 **[PURCHASE ELEMENT PACK PRO FROM OUR WEBSITE]( https://www.elementpack.pro/pricing/ )**
 
@@ -258,6 +258,12 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.2 [28th October 2024] =
+
+* Fixed: Svg image widget issue fixed
+* Fixed: Navigation progress position issue fixed
+* Fixed: Security improved
 
 = 5.10.1 [14th October 2024] =
 

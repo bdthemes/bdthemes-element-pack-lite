@@ -1413,7 +1413,7 @@ class Image_Accordion extends Module_Base {
 
 		$this->add_render_attribute('lightbox', 'class', 'bdt-ep-image-accordion-lightbox', true);
 
-		$this->add_render_attribute('lightbox', 'data-caption', esc_html($item['image_accordion_title']), true);
+		$this->add_render_attribute('lightbox', 'data-caption', wp_kses( $item['image_accordion_title'], element_pack_allow_tags( 'title' ) ), true);
 
 		$icon = $settings['icon'] ?: 'plus';
 
