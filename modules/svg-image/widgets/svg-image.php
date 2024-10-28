@@ -43,13 +43,13 @@ class Svg_Image extends Module_Base {
 	public function get_script_depends() {
 		if ( $this->ep_is_edit_mode() ) {
 			if ( true == is_ep_pro() ) {
-				return [ 'draw-svg-plugin-js', 'scroll-trigger-js', 'magic-scroll-js', 'magic-scroll-animation-js', 'ep-scripts' ];
+				return [ 'draw-svg-plugin-js', 'scroll-trigger', 'magic-scroll', 'magic-scroll-animation', 'ep-scripts' ];
 			} else {
 				return [ 'ep-scripts' ];
 			}
 		} else {
 			if ( true == is_ep_pro() ) {
-				return [ 'gsap', 'draw-svg-plugin-js', 'magic-scroll-js', 'magic-scroll-animation-js', 'scroll-trigger-js', 'ep-svg-image' ];
+				return [ 'gsap', 'draw-svg-plugin-js', 'magic-scroll', 'magic-scroll-animation', 'scroll-trigger',  'ep-svg-image' ];
 			} else {
 				return [ 'ep-svg-image' ];
 			}
@@ -63,7 +63,7 @@ class Svg_Image extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 
 		$this->start_controls_section(
@@ -826,13 +826,13 @@ class Svg_Image extends Module_Base {
 	}
 
 	private function has_caption( $settings ) {
-		return ( ! empty ( $settings['caption_source'] ) && 'none' !== $settings['caption_source'] );
+		return ( ! empty( $settings['caption_source'] ) && 'none' !== $settings['caption_source'] );
 	}
 
 	private function get_caption( $settings ) {
 		$caption = '';
 
-		if ( ! empty ( $settings['caption_source'] ) ) {
+		if ( ! empty( $settings['caption_source'] ) ) {
 
 			switch ( $settings['caption_source'] ) {
 				case 'attachment':
@@ -850,7 +850,8 @@ class Svg_Image extends Module_Base {
 		$settings = $this->get_settings_for_display();
 		$svg_file = $settings['image']['url'];
 		?>
-		<img src="<?php echo esc_url( $svg_file ); ?>" alt="<?php echo esc_html( get_the_title() ); ?>" class="bdt-svg-image" data-bdt-svg="stroke-animation: true" data-bdt-svg />
+		<img src="<?php echo esc_url( $svg_file ); ?>" alt="<?php echo esc_html( get_the_title() ); ?>" class="bdt-svg-image"
+			data-bdt-svg="stroke-animation: true" data-bdt-svg />
 		<?
 	}
 
@@ -885,22 +886,22 @@ class Svg_Image extends Module_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		if ( empty ( $settings['image']['url'] ) ) {
+		if ( empty( $settings['image']['url'] ) ) {
 			return;
 		}
 		$has_caption = $this->has_caption( $settings );
 		$this->add_render_attribute( 'wrapper', 'class', 'elementor-image bdt-svg-image bdt-animation-toggle' );
 
 		if ( true !== is_ep_pro() ) {
-			$parallax_stroke   = 100 - ( isset ( $settings['parallax_effects_stroke_value']['size'] ) ? $settings['parallax_effects_stroke_value']['size'] : 0 );
-			$parallax_viewport = ( isset ( $settings['parallax_effects_viewport_value']['size'] ) ? $settings['parallax_effects_viewport_value']['size'] : 0.7 );
+			$parallax_stroke   = 100 - ( isset( $settings['parallax_effects_stroke_value']['size'] ) ? $settings['parallax_effects_stroke_value']['size'] : 0 );
+			$parallax_viewport = ( isset( $settings['parallax_effects_viewport_value']['size'] ) ? $settings['parallax_effects_viewport_value']['size'] : 0.7 );
 			if ( $settings['svg_parallax_effects_show'] ) {
 				$this->add_render_attribute( 'wrapper', 'bdt-parallax', 'stroke: ' . $parallax_stroke . '%;' );
 				$this->add_render_attribute( 'wrapper', 'bdt-parallax', 'viewport: ' . $parallax_viewport . ';' );
 			}
 		}
 
-		if ( ! empty ( $settings['shape'] ) ) {
+		if ( ! empty( $settings['shape'] ) ) {
 			$this->add_render_attribute( 'wrapper', 'class', 'elementor-image-shape-' . $settings['shape'] );
 		}
 		$link = $this->get_link_url( $settings );
@@ -928,7 +929,7 @@ class Svg_Image extends Module_Base {
 				<?php if ( $link ) : ?>
 					<a <?php $this->print_render_attribute_string( 'link' ); ?>>
 					<?php endif; ?>
-					<?php if ( isset ( $settings['svg_image_draw'] ) && 'yes' === $settings['svg_image_draw'] ) {
+					<?php if ( isset( $settings['svg_image_draw'] ) && 'yes' === $settings['svg_image_draw'] ) {
 						$this->render_svg();
 					} else {
 						$this->render_image();
@@ -958,7 +959,7 @@ class Svg_Image extends Module_Base {
 
 		if ( 'custom' === $settings['link_to'] ) {
 
-			if ( empty ( $settings['link']['url'] ) ) {
+			if ( empty( $settings['link']['url'] ) ) {
 				return false;
 			}
 

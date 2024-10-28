@@ -52,6 +52,14 @@ class Review_Card extends Module_Base {
 		}
 	}
 
+	public function get_script_depends() {
+        if ($this->ep_is_edit_mode()) {
+            return ['ep-scripts'];
+        } else {
+            return ['ep-review-card'];
+        }
+    }
+
 	public function get_custom_help_url() {
 		return 'https://youtu.be/xFtjeR1qgSE';
 	}

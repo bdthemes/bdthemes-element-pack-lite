@@ -50,7 +50,7 @@ class Age_Gate extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 
 		$this->start_controls_section(
@@ -1251,8 +1251,8 @@ class Age_Gate extends Module_Base {
 							"closeBtnDelayShow"  => ( "yes" == $settings["close_btn_delay_show"] ) ? true : false,
 							"delayTime"          => isset( $settings["close_btn_delay_time"]['size'] ) ? $settings["close_btn_delay_time"]['size'] * 1000 : false,
 							"displayTimesExpire" => isset( $settings['display_times_expire'] ) && ! empty( $settings['display_times_expire'] ) ? (int) $settings['display_times_expire'] : 24,
-							'requiredAge'        => $settings['required_age'],
-							'redirect_link'      => ! empty( $settings['redirect_link']['url'] ) ? $settings['redirect_link']['url'] : false,
+							'requiredAge'        => (int) $settings['required_age'],
+							'redirect_link'      => ! empty( $settings['redirect_link']['url'] ) ? esc_url( $settings['redirect_link']['url'] ) : false,
 						] )
 					]
 				]

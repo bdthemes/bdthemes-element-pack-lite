@@ -3199,6 +3199,16 @@ trait Global_Widget_Controls {
 
 	// Global controls for Fancy List and ACF List
 	protected function register_fancy_list_controls() {
+		
+		$this->end_controls_section();
+		
+		$this->start_controls_section(
+			'section_additional_options',
+			[ 
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+			]
+		);
+
 		$this->add_responsive_control(
 			'columns',
 			[ 
@@ -3316,6 +3326,31 @@ trait Global_Widget_Controls {
 				],
 				'prefix_class' => 'bdt-content-position--',
 				// 'separator' => 'before'
+			]
+		);
+
+		$this->add_responsive_control(
+			'content_y_align',
+			[ 
+				'label'     => esc_html__( 'Content Vertical Align', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [ 
+					'flex-start' => [ 
+						'title' => esc_html__( 'Top', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'center' => [ 
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'flex-end' => [ 
+						'title' => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-fancy-list .flex-wrap' => 'align-items: {{VALUE}};',
+				],
 			]
 		);
 
