@@ -261,6 +261,7 @@ https://youtu.be/u9JRd824Mjc
 
 = 5.10.2 [28th October 2024] =
 
+* Added: Content vertical align added in fancy list widget
 * Fixed: Svg image widget issue fixed
 * Fixed: Navigation progress position issue fixed
 * Fixed: Security improved
