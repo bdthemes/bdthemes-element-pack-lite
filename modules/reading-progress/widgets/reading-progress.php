@@ -352,8 +352,10 @@ class Reading_Progress extends Module_Base {
 				'reading-progress' => [ 
 					'data-settings' => [ 
 						wp_json_encode( array_filter( [ 
-							"progress_bg" => $settings['reading_progress_bg'],
-							"scroll_bg"   => $settings['reading_progress_bg_scroll'],
+							// "progress_bg" => $settings['reading_progress_bg'],
+							// "scroll_bg"   => $settings['reading_progress_bg_scroll'],
+							"progress_bg" => isset( $settings['reading_progress_bg'] ) ? $settings['reading_progress_bg'] : '#08AEEC',
+							"scroll_bg"   => isset( $settings['reading_progress_bg_scroll'] ) ? $settings['reading_progress_bg_scroll'] : '#FF0000',
 						] ) ),
 					],
 				],

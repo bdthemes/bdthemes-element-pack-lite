@@ -58,6 +58,87 @@ function epObserveTarget(target, callback) {
 }
 
 /**
+ * Safe HTML
+ */
+function EP_SAFE_HTML(input) {
+  /**
+   * Expanded list of allowed tags and attributes for a more flexible sanitization
+   */
+  const allowedTags = {
+    'img': ['src', 'alt', 'title', 'width', 'height', 'style'],
+    'a': ['href', 'title', 'target', 'rel'],
+    'p': ['class', 'style', 'id'],
+    'b': ['class', 'style'],
+    'i': ['class', 'style'],
+    'u': ['class', 'style'],
+    'strong': ['class', 'style'],
+    'em': ['class', 'style'],
+    'br': [],
+    'hr': ['class', 'style'],
+    'ul': ['class', 'style'],
+    'ol': ['class', 'style'],
+    'li': ['class', 'style'],
+    'div': ['class', 'style', 'id'],
+    'span': ['class', 'style', 'id'],
+    'blockquote': ['cite', 'class', 'style'],
+    'code': ['class', 'style'],
+    'pre': ['class', 'style'],
+    'h1': ['class', 'style', 'id'],
+    'h2': ['class', 'style', 'id'],
+    'h3': ['class', 'style', 'id'],
+    'h4': ['class', 'style', 'id'],
+    'h5': ['class', 'style', 'id'],
+    'h6': ['class', 'style', 'id'],
+    'table': ['class', 'style', 'id'],
+    'thead': ['class', 'style'],
+    'tbody': ['class', 'style'],
+    'tfoot': ['class', 'style'],
+    'tr': ['class', 'style'],
+    'th': ['class', 'style', 'scope'],
+    'td': ['class', 'style', 'colspan', 'rowspan'],
+  };
+
+  /**
+   * Main sanitization process
+   */
+  const tagPattern = /<\/?([a-zA-Z0-9]+)([^>]*)>/g;
+  input = input.replace(tagPattern, (match, tagName, attributes) => {
+    tagName = tagName.toLowerCase();
+
+    /**
+     * Remove the tag if it's not allowed
+     */
+    if (!allowedTags.hasOwnProperty(tagName)) {
+      return '';
+    }
+
+    /**
+     * Filter attributes for allowed tags only
+     */
+    const allowedAttributes = allowedTags[tagName];
+    const filteredAttributes = attributes.replace(/([a-zA-Z0-9-]+)\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/g, (match, attrName, attrValue) => {
+      attrName = attrName.toLowerCase();
+
+      /**
+       * Only keep attributes in the allowed list and ignore any "on" events or disallowed protocols
+       */
+      if (!allowedAttributes.includes(attrName) || attrName.startsWith("on") || /^javascript:/i.test(attrValue)) {
+        return '';
+      }
+
+      return `${attrName}=${attrValue}`;
+    });
+
+    return `<${tagName}${filteredAttributes}>`;
+  });
+
+  return input;
+}
+/**
+ * /Safe HTML
+ */
+
+/**
  * Start Crypto Currency
  */
 
@@ -217,6 +298,7 @@ function returnCurrencySymbol(currency = null) {
     /** /Toggle Pass */
   });
 })(jQuery);
+
 /**
  * Start accordion widget script
  */
@@ -550,25 +632,25 @@ $(window).on('elementor/frontend/init', function () {
  * Start cookie consent widget script
  */
 
-( function( $, elementor ) {
+(function ($, elementor) {
 
 	'use strict';
 
-	var widgetCookieConsent = function( $scope, $ ) {
+	var widgetCookieConsent = function ($scope, $) {
 
 		var $cookieConsent = $scope.find('.bdt-cookie-consent'),
-            $settings      = $cookieConsent.data('settings'),
-            editMode       = Boolean( elementorFrontend.isEditMode() ),
-			gtagSettings   = $cookieConsent.data('gtag');
-        
-        if ( ! $cookieConsent.length || editMode ) {
-            return;
-        }
+			$settings = $cookieConsent.data('settings'),
+			editMode = Boolean(elementorFrontend.isEditMode()),
+			gtagSettings = $cookieConsent.data('gtag');
 
-        window.cookieconsent.initialise($settings);
+		if (!$cookieConsent.length || editMode) {
+			return;
+		}
+
+		window.cookieconsent.initialise($settings);
 
 		$('.cc-compliance').append(
-			`<button class="bdt-cc-close-btn cc-btn cc-dismiss">
+			`<button class="btn-denyCookie bdt-cc-close-btn cc-btn cc-dismiss">
 				<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
 				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
 				</svg>
@@ -576,9 +658,24 @@ $(window).on('elementor/frontend/init', function () {
 		);
 
 		/**
+		 * Dismiss if user click close button
+		 */
+		$('.bdt-cc-close-btn').on('click', function () {
+			$('.bdt-cookie-consent').hide();
+			document.cookie = 'element_pack_cookie_widget=denied; max-age=' + 60 * 60 * 24 * 7;
+			return;
+		});
+
+		if (document.cookie.indexOf('element_pack_cookie_widget=denied') !== -1) {
+			$('.bdt-cookie-consent').hide();
+			return;
+		}
+
+
+		/**
 		 * gtag consent update
 		 */
-		if( gtagSettings === undefined ) {
+		if (gtagSettings === undefined) {
 			return;
 		}
 
@@ -589,7 +686,7 @@ $(window).on('elementor/frontend/init', function () {
 		function consentGrantedAdStorage($args) {
 			gtag('consent', 'update', $args);
 		}
-		
+
 		let gtag_attr_obj = {
 			'ad_user_data': gtagSettings.ad_user_data,
 			'ad_personalization': gtagSettings.ad_personalization,
@@ -597,18 +694,18 @@ $(window).on('elementor/frontend/init', function () {
 			'analytics_storage': gtagSettings.analytics_storage,
 		};
 
-		$('.cc-btn.cc-dismiss').on('click', function() {
+		$('.cc-btn.cc-dismiss').on('click', function () {
 			consentGrantedAdStorage(gtag_attr_obj);
 		});
 
 	};
 
 
-	jQuery(window).on('elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-cookie-consent.default', widgetCookieConsent );
+	jQuery(window).on('elementor/frontend/init', function () {
+		elementorFrontend.hooks.addAction('frontend/element_ready/bdt-cookie-consent.default', widgetCookieConsent);
 	});
 
-}( jQuery, window.elementorFrontend ) );
+}(jQuery, window.elementorFrontend));
 
 /**
  * End cookie consent widget script
@@ -3464,80 +3561,80 @@ $(window).on('elementor/frontend/init', function () {
   });
 })(jQuery, window.elementorFrontend);
 ; (function ($, elementor) {
-$(window).on('elementor/frontend/init', function () {
-    var ModuleHandler = elementorModules.frontend.handlers.Base,
-        Tooltip;
+    $(window).on('elementor/frontend/init', function () {
+        var ModuleHandler = elementorModules.frontend.handlers.Base,
+            Tooltip;
 
-    Tooltip = ModuleHandler.extend({
+        Tooltip = ModuleHandler.extend({
 
-        bindEvents: function () {
-            this.run();
-        },
-
-        getDefaultSettings: function () {
-            return {
-                allowHTML: true,
-            };
-        },
-
-        onElementChange: debounce(function (prop) {
-            if (prop.indexOf('element_pack_widget_') !== -1) {
-                this.instance.destroy();
+            bindEvents: function () {
                 this.run();
-            }
-        }, 400),
+            },
 
-        settings: function (key) {
-            return this.getElementSettings('element_pack_widget_' + key);
-        },
+            getDefaultSettings: function () {
+                return {
+                    allowHTML: true,
+                };
+            },
 
-        run: function () {
-            var options = this.getDefaultSettings();
-            var widgetID = this.$element.data('id');
-            var widgetContainer = document.querySelector('.elementor-element-' + widgetID + ' .elementor-widget-container');
+            onElementChange: debounce(function (prop) {
+                if (prop.indexOf('element_pack_widget_') !== -1) {
+                    this.instance.destroy();
+                    this.run();
+                }
+            }, 400),
 
-            if (this.settings('tooltip_text')) {
-                options.content = this.settings('tooltip_text');
-            }
+            settings: function (key) {
+                return this.getElementSettings('element_pack_widget_' + key);
+            },
 
-            options.arrow = !!this.settings('tooltip_arrow');
-            options.followCursor = !!this.settings('tooltip_follow_cursor');
+            run: function () {
+                var options = this.getDefaultSettings();
+                var widgetID = this.$element.data('id');
+                var widgetContainer = document.querySelector('.elementor-element-' + widgetID + ' .elementor-widget-container');
 
-            if (this.settings('tooltip_placement')) {
-                options.placement = this.settings('tooltip_placement');
-            }
+                if (this.settings('tooltip_text')) {
+                    options.content = EP_SAFE_HTML(this.settings('tooltip_text'));
+                }
 
-            if (this.settings('tooltip_trigger')) {
-                if (this.settings('tooltip_custom_trigger')) {
-                    options.triggerTarget = document.querySelector(this.settings('tooltip_custom_trigger'));
-                } else {
-                    options.trigger = this.settings('tooltip_trigger');
+                options.arrow = !!this.settings('tooltip_arrow');
+                options.followCursor = !!this.settings('tooltip_follow_cursor');
+
+                if (this.settings('tooltip_placement')) {
+                    options.placement = this.settings('tooltip_placement');
+                }
+
+                if (this.settings('tooltip_trigger')) {
+                    if (this.settings('tooltip_custom_trigger')) {
+                        options.triggerTarget = document.querySelector(this.settings('tooltip_custom_trigger'));
+                    } else {
+                        options.trigger = this.settings('tooltip_trigger');
+                    }
+                }
+                // if (this.settings('tooltip_animation_duration')) {
+                //     options.duration = this.settings('tooltip_animation_duration.sizes.from');
+                // }
+                if (this.settings('tooltip_animation')) {
+                    if (this.settings('tooltip_animation') === 'fill') {
+                        options.animateFill = true;
+                    } else {
+                        options.animation = this.settings('tooltip_animation');
+                    }
+                }
+                if (this.settings('tooltip_x_offset.size') || this.settings('tooltip_y_offset.size')) {
+                    options.offset = [this.settings('tooltip_x_offset.size') || 0, this.settings('tooltip_y_offset.size') || 0];
+                }
+                if (this.settings('tooltip')) {
+                    options.theme = 'bdt-tippy-' + widgetID;
+                    this.instance = tippy(widgetContainer, options);
                 }
             }
-            // if (this.settings('tooltip_animation_duration')) {
-            //     options.duration = this.settings('tooltip_animation_duration.sizes.from');
-            // }
-            if (this.settings('tooltip_animation')) {
-                if (this.settings('tooltip_animation') === 'fill') {
-                    options.animateFill = true;
-                } else {
-                    options.animation = this.settings('tooltip_animation');
-                }
-            }
-            if (this.settings('tooltip_x_offset.size') || this.settings('tooltip_y_offset.size')) {
-                options.offset = [this.settings('tooltip_x_offset.size') || 0, this.settings('tooltip_y_offset.size') || 0];
-            }
-            if (this.settings('tooltip')) {
-                options.theme = 'bdt-tippy-' + widgetID;
-                this.instance = tippy(widgetContainer, options);
-            }
-        }
-    });
+        });
 
-    elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
-        elementorFrontend.elementsHandler.addHandler(Tooltip, {
-            $element: $scope
+        elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+            elementorFrontend.elementsHandler.addHandler(Tooltip, {
+                $element: $scope
+            });
         });
     });
-});
 })(jQuery, window.elementorFrontend);

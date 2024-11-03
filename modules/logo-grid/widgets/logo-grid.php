@@ -66,7 +66,7 @@ class Logo_Grid extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 
 		$this->start_controls_section(
@@ -950,7 +950,7 @@ class Logo_Grid extends Module_Base {
 				$tooltip_content = '<span class="bdt-title">' . $item['name'] . '</span>' . $item['description'];
 				$image_alt       = $item['name'] . ' : ' . $item['description'];
 				$this->add_render_attribute( $repeater_key, 'class', 'bdt-item' );
-				$this->add_render_attribute( $repeater_key, 'data-tippy-content', esc_attr($tooltip_content), true );
+				$this->add_render_attribute( $repeater_key, 'data-tippy-content', htmlspecialchars( $tooltip_content, ENT_QUOTES, 'UTF-8' ), true );
 
 				if ( $item['link']['url'] ) {
 					$tag = 'a ';

@@ -58,6 +58,87 @@ function epObserveTarget(target, callback) {
 }
 
 /**
+ * Safe HTML
+ */
+function EP_SAFE_HTML(input) {
+  /**
+   * Expanded list of allowed tags and attributes for a more flexible sanitization
+   */
+  const allowedTags = {
+    'img': ['src', 'alt', 'title', 'width', 'height', 'style'],
+    'a': ['href', 'title', 'target', 'rel'],
+    'p': ['class', 'style', 'id'],
+    'b': ['class', 'style'],
+    'i': ['class', 'style'],
+    'u': ['class', 'style'],
+    'strong': ['class', 'style'],
+    'em': ['class', 'style'],
+    'br': [],
+    'hr': ['class', 'style'],
+    'ul': ['class', 'style'],
+    'ol': ['class', 'style'],
+    'li': ['class', 'style'],
+    'div': ['class', 'style', 'id'],
+    'span': ['class', 'style', 'id'],
+    'blockquote': ['cite', 'class', 'style'],
+    'code': ['class', 'style'],
+    'pre': ['class', 'style'],
+    'h1': ['class', 'style', 'id'],
+    'h2': ['class', 'style', 'id'],
+    'h3': ['class', 'style', 'id'],
+    'h4': ['class', 'style', 'id'],
+    'h5': ['class', 'style', 'id'],
+    'h6': ['class', 'style', 'id'],
+    'table': ['class', 'style', 'id'],
+    'thead': ['class', 'style'],
+    'tbody': ['class', 'style'],
+    'tfoot': ['class', 'style'],
+    'tr': ['class', 'style'],
+    'th': ['class', 'style', 'scope'],
+    'td': ['class', 'style', 'colspan', 'rowspan'],
+  };
+
+  /**
+   * Main sanitization process
+   */
+  const tagPattern = /<\/?([a-zA-Z0-9]+)([^>]*)>/g;
+  input = input.replace(tagPattern, (match, tagName, attributes) => {
+    tagName = tagName.toLowerCase();
+
+    /**
+     * Remove the tag if it's not allowed
+     */
+    if (!allowedTags.hasOwnProperty(tagName)) {
+      return '';
+    }
+
+    /**
+     * Filter attributes for allowed tags only
+     */
+    const allowedAttributes = allowedTags[tagName];
+    const filteredAttributes = attributes.replace(/([a-zA-Z0-9-]+)\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/g, (match, attrName, attrValue) => {
+      attrName = attrName.toLowerCase();
+
+      /**
+       * Only keep attributes in the allowed list and ignore any "on" events or disallowed protocols
+       */
+      if (!allowedAttributes.includes(attrName) || attrName.startsWith("on") || /^javascript:/i.test(attrValue)) {
+        return '';
+      }
+
+      return `${attrName}=${attrValue}`;
+    });
+
+    return `<${tagName}${filteredAttributes}>`;
+  });
+
+  return input;
+}
+/**
+ * /Safe HTML
+ */
+
+/**
  * Start Crypto Currency
  */
 
