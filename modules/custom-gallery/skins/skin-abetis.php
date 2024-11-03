@@ -150,8 +150,8 @@ class Skin_Abetis extends Elementor_Skin_Base {
 							<a <?php $this->parent->print_render_attribute_string( $element_key ); ?>>
 								<?php if ( 'icon' == $settings['link_type'] ) : ?>
 									<i class="ep-icon-<?php echo esc_attr( $icon); ?>" aria-hidden="true"></i>
-								<?php elseif ( 'text' == $settings['link_type'] ) : ?>
-									<span class="bdt-text"><?php esc_html_e( 'ZOOM', 'bdthemes-element-pack' ); ?></span>
+								<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
+									<span class="bdt-text"><?php esc_html_e( $settings['link_text'] ); ?></span>
 								<?php endif;?>
 							</a>
 						</div>

@@ -100,6 +100,15 @@ class DualButton extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'button_width_auto',
+			[
+				'label' => __( 'Button Width Auto', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SWITCHER,
+				'prefix_class' => 'bdt-dual-button-width-',
+			]
+		);
+
 		$this->add_responsive_control(
 			'button_width',
 			[
@@ -130,6 +139,9 @@ class DualButton extends Module_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dual-button'  => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'button_width_auto' => '',
 				],
 			]
 		);

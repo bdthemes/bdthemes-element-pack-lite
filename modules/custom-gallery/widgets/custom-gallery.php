@@ -503,6 +503,20 @@ class Custom_Gallery extends Module_Base {
 		);
 
 		$this->add_control(
+			'link_text',
+			[
+				'label'       => esc_html__('Link Text', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack'),
+				'condition' => [
+					'show_lightbox' => 'yes',
+					'link_type'		=> 'text',
+				],
+				'label_block' => false
+			]
+		);
+
+		$this->add_control(
 			'tilt_show',
 			[ 
 				'label' => esc_html__( 'Tilt Effect', 'bdthemes-element-pack' ),
@@ -1227,8 +1241,8 @@ class Custom_Gallery extends Module_Base {
 							<a <?php $this->print_render_attribute_string( $element_key ); ?>>
 								<?php if ( 'icon' == $settings['link_type'] ) : ?>
 									<i class="ep-icon-<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
-								<?php elseif ( 'text' == $settings['link_type'] ) : ?>
-									<span class="bdt-text"><?php esc_html_e( 'ZOOM', 'bdthemes-element-pack' ); ?></span>
+								<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
+									<span class="bdt-text"><?php esc_html_e( $settings['link_text'] ); ?></span>
 								<?php endif; ?>
 							</a>
 						</div>

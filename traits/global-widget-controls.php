@@ -1722,6 +1722,21 @@ trait Global_Widget_Controls {
 		);
 
 		$this->add_control(
+			'ep_gallery_link_text',
+			[
+				'label'       => esc_html__('Link Text', 'bdthemes-element-pack'),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack'),
+				'condition' => [
+					'show_lightbox' => 'yes',
+					'link_type'		=> 'text',
+					'_skin!'		=> 'bdt-hidden',
+				],
+				'label_block' => false
+			]
+		);
+
+		$this->add_control(
 			'show_caption',
 			[
 				'label'       => esc_html__('Show Caption', 'bdthemes-element-pack'),

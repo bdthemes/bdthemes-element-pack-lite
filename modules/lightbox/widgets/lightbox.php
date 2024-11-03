@@ -829,9 +829,9 @@ class Lightbox extends Module_Base {
 				$this->add_render_attribute( 'lightbox-content', 'class', 'elementor-animation-' . esc_attr( $settings['hover_animation'] ) );
 			}
 		}
-
+		
 		if ( $settings['content_caption'] ) {			
-			$this->add_render_attribute( 'lightbox-content', 'data-caption', wp_kses( $settings['content_caption'], element_pack_allow_tags( 'title' ) ) );
+			$this->add_render_attribute( 'lightbox-content', 'data-caption', esc_attr( htmlspecialchars($settings['content_caption']) ) );
 		}
 
 		if ( ! empty( $settings['icon_text'] ) ) {

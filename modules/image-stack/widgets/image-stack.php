@@ -61,7 +61,7 @@ class Image_Stack extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_image_stack',
@@ -1113,7 +1113,7 @@ class Image_Stack extends Module_Base {
 			if ( ! $thumb_url ) {
 				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), esc_html( $item['tooltip_text'] ) );
 			} else {
-				print( wp_get_attachment_image(
+				print ( wp_get_attachment_image(
 					$item['image']['id'],
 					$settings['thumbnail_size_size'],
 					false,
@@ -1148,8 +1148,8 @@ class Image_Stack extends Module_Base {
 					], true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy', '', true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy-arrow', 'true', true );
-					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', $item['tooltip_placement'], true );
-					$this->add_render_attribute( 'stack-item', 'data-tippy-content', esc_html($item['tooltip_text']), true );
+					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', htmlspecialchars( $item['tooltip_placement'], ENT_QUOTES, 'UTF-8' ), true );
+					$this->add_render_attribute( 'stack-item', 'data-tippy-content', htmlspecialchars( $item['tooltip_text'], ENT_QUOTES, 'UTF-8' ), true );
 				}
 
 				if ( ! empty( $item['link_url']['url'] ) ) {

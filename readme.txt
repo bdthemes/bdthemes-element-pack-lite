@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 5.10.2
+Stable tag: 5.10.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.24.7
+Elementor tested up to: 3.25.3
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -258,6 +258,16 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.3 [3rd November 2024] =
+
+* Added: Button width auto option added in dual button widget
+* Added: Lightbox and Post details link text dynamic added in Custom Gallery, Image Accordion widget
+* Fixed: Progress undefined issue fixed in reading progress widget
+* Updated: Assets manager improved
+* Updated: Security improved within Cookie consent widget
+* Updated: Cookie improved for users Data in cookie consent widget
+* Updated: Security issue improved in Lightbox widget
 
 = 5.10.2 [28th October 2024] =
 
