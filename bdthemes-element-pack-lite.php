@@ -30,23 +30,40 @@ if ( ! function_exists( 'element_pack_pro_installed' ) ) {
 	}
 }
 
-if ( ! function_exists( '_is_ep_pro_activated_check' ) ) {
 
+
+if ( ! function_exists( '_is_ep_pro_activated_check' ) ) {
 	function _is_ep_pro_activated_check() {
 
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		$file_path         = 'bdthemes-element-pack/bdthemes-element-pack.php';
-		$installed_plugins = get_plugins();
+		$file_path = 'bdthemes-element-pack/bdthemes-element-pack.php';
 
 		if ( is_plugin_active( $file_path ) ) {
+
+			print_r( 'Element Pack Pro is activated' );
+
 			return true;
 		}
 
 		return false;
 	}
+}
+
+// Check if the Pro version is activated
+if ( ! function_exists( 'is_element_pack_pro_activated' ) ) {
+	function is_element_pack_pro_activated() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		return is_plugin_active( 'bdthemes-element-pack/bdthemes-element-pack.php' );
+	}
+}
+
+if ( is_element_pack_pro_activated() ) {
+	return;
 }
 
 if ( ! function_exists( 'element_pack_pro_activated' ) ) {
@@ -203,41 +220,41 @@ if ( ! element_pack_pro_installed() ) {
 	}
 
 
-/**
- * SDK Integration
- */
+	/**
+	 * SDK Integration
+	 */
 
-	if (!function_exists('dci_plugin_element_pack_lite')) {
-			function dci_plugin_element_pack_lite() {
+	if ( ! function_exists( 'dci_plugin_element_pack_lite' ) ) {
+		function dci_plugin_element_pack_lite() {
 
-				// Include DCI SDK.
-				require_once dirname(__FILE__) . '/dci/start.php';
+			// Include DCI SDK.
+			require_once dirname( __FILE__ ) . '/dci/start.php';
 
-				wp_register_style( 'dci-sdk-ep-lite', plugins_url( 'dci/assets/css/dci.css', __FILE__ ), array(), '1.2.1', 'all' );
-				wp_enqueue_style( 'dci-sdk-ep-lite' );
+			wp_register_style( 'dci-sdk-ep-lite', plugins_url( 'dci/assets/css/dci.css', __FILE__ ), array(), '1.2.1', 'all' );
+			wp_enqueue_style( 'dci-sdk-ep-lite' );
 
-				dci_dynamic_init(array(
-					'sdk_version'  => '1.2.1',
-					'product_id'   => 4,
-					'plugin_name'  => 'Element Pack Lite', // make simple, must not empty
-					'plugin_title' => 'Love using Element Pack Lite? Congrats 🎉  ( Never miss an Important Update )', // You can describe your plugin title here
-					'plugin_icon'  => BDTEP_ASSETS_URL . 'images/logo.svg',
-					'api_endpoint' => 'https://analytics.bdthemes.com/wp-json/dci/v1/data-insights',
-					'slug'                => 'bdthemes-element-pack-lite',
-					'plugin_deactivate_id'=> 'bdthemes-element-pack-lite',
-					'menu'         => array(
-						'slug' => 'element_pack_options',
-					),
-					'public_key'   => 'pk_ilWmdZmKDWVCdkkKvf5SnD5ib3nZmLJr',
-					'is_premium'   => true,
-					'popup_notice'        => false,
-					'deactivate_feedback' => true,
-					'delay_time'   => [
-						'time' => 3 * DAY_IN_SECONDS,
-					],
-					'plugin_msg'   => '<p>Be Top-contributor by sharing non-sensitive plugin data and create an impact to the global WordPress community today! You can receive valuable emails periodically.</p>',
-				));
-			}
-			add_action('admin_init', 'dci_plugin_element_pack_lite');
+			dci_dynamic_init( array(
+				'sdk_version'          => '1.2.1',
+				'product_id'           => 4,
+				'plugin_name'          => 'Element Pack Lite', // make simple, must not empty
+				'plugin_title'         => 'Love using Element Pack Lite? Congrats 🎉  ( Never miss an Important Update )', // You can describe your plugin title here
+				'plugin_icon'          => BDTEP_ASSETS_URL . 'images/logo.svg',
+				'api_endpoint'         => 'https://analytics.bdthemes.com/wp-json/dci/v1/data-insights',
+				'slug'                 => 'bdthemes-element-pack-lite',
+				'plugin_deactivate_id' => 'bdthemes-element-pack-lite',
+				'menu'                 => array(
+					'slug' => 'element_pack_options',
+				),
+				'public_key'           => 'pk_ilWmdZmKDWVCdkkKvf5SnD5ib3nZmLJr',
+				'is_premium'           => true,
+				'popup_notice'         => false,
+				'deactivate_feedback'  => true,
+				'delay_time'           => [ 
+					'time' => 3 * DAY_IN_SECONDS,
+				],
+				'plugin_msg'           => '<p>Be Top-contributor by sharing non-sensitive plugin data and create an impact to the global WordPress community today! You can receive valuable emails periodically.</p>',
+			) );
+		}
+		add_action( 'admin_init', 'dci_plugin_element_pack_lite' );
 	}
 }
