@@ -42,9 +42,6 @@ if ( ! function_exists( '_is_ep_pro_activated_check' ) ) {
 		$file_path = 'bdthemes-element-pack/bdthemes-element-pack.php';
 
 		if ( is_plugin_active( $file_path ) ) {
-
-			print_r( 'Element Pack Pro is activated' );
-
 			return true;
 		}
 
