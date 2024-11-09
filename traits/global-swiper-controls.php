@@ -1789,6 +1789,7 @@ trait Global_Swiper_Controls {
 							"observer"              => ($settings["observer"]) ? true : false,
 							"observeParents"        => ($settings["observer"]) ? true : false,
 							"watchSlidesVisibility" => ($settings["show_hidden_item"]) ? true : false,
+							"watchSlidesProgress" 	=> ($settings["show_hidden_item"]) ? true : false,
 							"breakpoints"     => [
 								(int)$viewport_md => [
 									"slidesPerView"  => isset($settings["columns_tablet"]) ? (int)$settings["columns_tablet"] : 2,
@@ -1822,7 +1823,6 @@ trait Global_Swiper_Controls {
 								'modifier'     => ("yes" == $settings["coverflow_toggle"]) ? $settings["coverflow_modifier"]["size"] : 1,
 								'slideShadows' => true,
 							],
-							"watchSlidesProgress" => true,
 						]))
 					]
 				]
