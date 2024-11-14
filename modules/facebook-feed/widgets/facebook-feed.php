@@ -20,7 +20,10 @@ class Facebook_Feed extends Module_Base {
 
 	public $feed_data = [];
 	public $api_url = 'https://graph.facebook.com/v4.0/%1$s/posts?%2$s&access_token=%3$s';
-	public $api_queries = 'fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)';
+
+	public $api_queries = 'fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments{type,media_type,title,description,unshimmed_url,subattachments},comments.summary(total_count),reactions.summary(total_count)';
+
+	
 
 	public function get_name() {
 		return 'bdt-facebook-feed';
@@ -279,11 +282,22 @@ class Facebook_Feed extends Module_Base {
 		);
 
 		$this->add_control(
+			'show_image_album',
+			[ 
+				'label'   => esc_html__( 'Show Image Album', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+			]
+		);
+
+		$this->add_control(
 			'show_feature_image',
 			[ 
 				'label'   => esc_html__( 'Show Feature Image', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+				'condition' => [ 
+					'show_image_album!' => 'yes'
+				]	
 			]
 		);
 
@@ -787,7 +801,7 @@ class Facebook_Feed extends Module_Base {
 			Group_Control_Background::get_type(),
 			[ 
 				'name'     => 'feature_img_background',
-				'selector' => '{{WRAPPER}} .bdt-img-wrap img',
+				'selector' => '{{WRAPPER}} .bdt-img-wrap .bdt-img-item',
 			]
 		);
 
@@ -798,7 +812,7 @@ class Facebook_Feed extends Module_Base {
 				'name'        => 'feature_img_border',
 				'placeholder' => '1px',
 				'default'     => '1px',
-				'selector'    => '{{WRAPPER}} .bdt-img-wrap img',
+				'selector'    => '{{WRAPPER}} .bdt-img-wrap .bdt-img-item',
 			]
 		);
 
@@ -809,7 +823,7 @@ class Facebook_Feed extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
-					'{{WRAPPER}} .bdt-img-wrap img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+					'{{WRAPPER}} .bdt-img-wrap .bdt-img-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
 				],
 			]
 		);
@@ -821,7 +835,7 @@ class Facebook_Feed extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
-					'{{WRAPPER}} .bdt-img-wrap img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-img-wrap .bdt-img-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -842,7 +856,58 @@ class Facebook_Feed extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'feature_img_shadow',
-				'selector' => '{{WRAPPER}} .bdt-img-wrap img',
+				'selector' => '{{WRAPPER}} .bdt-img-wrap .bdt-img-item',
+			]
+		);
+
+		$this->add_responsive_control(
+			'feature_img_gap',
+			[ 
+				'label'     => esc_html__( 'Gap', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-img-wrap' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [ 
+					'show_image_album' => 'yes'
+				],
+				'separator' => 'before'
+			]
+		);
+		$this->add_control(
+			'feature_img_text_color',
+			[ 
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-album-img-count' => 'color: {{VALUE}};',
+				],
+				'condition' => [ 
+					'show_image_album' => 'yes'
+				],
+			]
+		);
+		$this->add_control(
+			'feature_img_overlay_color',
+			[ 
+				'label'     => esc_html__( 'Overlay Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-album-img-count' => 'background-color: {{VALUE}};',
+				],
+				'condition' => [ 
+					'show_image_album' => 'yes'
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'     => 'feature_img_typography',
+				'selector' => '{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-album-img-count',
+				'condition' => [ 
+					'show_image_album' => 'yes'
+				],
 			]
 		);
 
@@ -1746,19 +1811,75 @@ class Facebook_Feed extends Module_Base {
 	}
 
 	protected function render_feature_image( $data ) {
-		$settings = $this->get_settings_for_display();
 
-		if ( 'yes' !== $settings['show_feature_image'] || empty( $data['full_picture'] ) ) {
+		$settings = $this->get_settings_for_display();
+		$show_feature_image = in_array( 'yes', [$settings['show_feature_image'], $settings['show_image_album']] );
+		$attachments = $data['attachments'] ?? [];
+	
+		// Return early if feature image is not enabled or there are no attachments
+		if ( !$show_feature_image || empty( $attachments ) ) {
 			return;
 		}
-		printf(
-			'<div class="bdt-img-wrap"><a href="%1$s" target="%2$s"><img src="%3$s" alt="%4$s"></a></div>',
-			esc_url( $data['permalink_url'] ),
-			esc_attr( $settings['link_target'] ),
-			esc_url( $data['full_picture'] ),
-			esc_html( $data['from']['name'] )
-		);
+	
+		// Handle image album case
+		if ( isset( $attachments['data'] ) && is_array( $attachments['data'] ) && 'yes' === $settings['show_image_album'] ) {
+			foreach ( $attachments['data'] as $attachment ) {
+				if ( 'album' === $attachment['media_type'] && isset( $attachment['subattachments']['data'] ) ) {
+					$this->render_image_album( $attachment['subattachments']['data'], $settings, $data );
+				} else {
+					$this->render_single_image( $data, $settings );
+				}
+			}
+		} else {
+			$this->render_single_image( $data, $settings );
+		}
 	}
+	
+	protected function render_single_image( $data, $settings ) {
+		if ( isset( $data['full_picture'] ) ) {
+			printf(
+				'<div class="bdt-img-wrap"><div class="bdt-img-album-single bdt-img-item"><a href="%1$s" target="%2$s"><img src="%3$s" alt="%4$s"></a></div></div>',
+				esc_url( $data['permalink_url'] ),
+				esc_attr( $settings['link_target'] ),
+				esc_url( $data['full_picture'] ),
+				esc_html( $data['from']['name'] )
+			);
+		}
+	}
+	
+	protected function render_image_album( $subattachments, $settings, $data ) {
+		$image_count = 4; // TODO: Make this configurable
+		$skip_image_count = max( 0, count($subattachments) - $image_count );
+
+		$album_img_count = count($subattachments) - $skip_image_count;
+
+		echo '<div class="bdt-img-wrap bdt-img-album-'. $album_img_count .'">';
+		foreach ( $subattachments as $index => $subattachment ) {
+			if ( isset( $subattachment['media']['image']['src'] ) ) {
+				$image_url = $subattachment['media']['image']['src'];
+				$span = ( $index === $image_count - 1 && $skip_image_count > 0 ) 
+					? '<span class="bdt-album-img-count">+' . $skip_image_count . '</span>'
+					: '';
+	
+				printf(
+					'<div class="bdt-img-album-item bdt-img-item"><a href="%1$s" target="%2$s">%3$s<img src="%4$s" alt="%5$s"></a></div>',
+					esc_url( $subattachment['target']['url'] ),
+					esc_attr( $settings['link_target'] ),
+					$span,
+					esc_url( $image_url ),
+					esc_html( $data['from']['name'] )
+				);
+	
+				// Break the loop after the 4th image
+				if ( $index === $image_count - 1 ) {
+					break;
+				}
+			}
+		}
+		echo '</div>';
+	}
+	
+	
 
 	protected function render_desc( $data ) {
 		$settings = $this->get_settings_for_display();
@@ -1985,8 +2106,6 @@ class Facebook_Feed extends Module_Base {
 
 				return false;
 			}
-
-			// print_r($raw_feed_data);
 
 			$data = $this->transient_feed_data( $raw_feed_data );
 

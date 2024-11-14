@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, soha
 Donate link: http://bdthemes.com/
 Tags:  elementor addons, elementor widget, elementor extensions, elementor addon, addons
 Requires at least: 5.0.0
-Tested up to: 6.6.2
+Tested up to: 6.7
 Requires PHP: 7.4.0
-Stable tag: 5.10.4
+Stable tag: 5.10.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.25.4
+Elementor tested up to: 3.25.6
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -259,6 +259,14 @@ https://youtu.be/u9JRd824Mjc
 
 == Changelog ==
 
+= 5.10.5 [14th November 2024] =
+
+* Added: Grid template columns option added in countdown widget
+* Added: Album image show featute added in Facebook Feed widget (Thanks to Brandon Williams)
+* Fixed: Color format issue fixed in animated gradient background extension
+* Updated: Count columns option deprecated in countdown widget
+* Updated: Dynamic Post Content escaped from elementor caching (Thanks to Guy Whettam)
+
 = 5.10.4 [9th November 2024] =
 
 * Fixed: Show hidden item issue fixed in static carousel widget
@@ -294,24 +302,6 @@ https://youtu.be/u9JRd824Mjc
 * Added: Cookie consent widget style controls added
 * Fixed: Shadow Mode issue fixed in panel slider widget
 * Fixed: Editor mode image size issue fixed in review card carousel widget
-
-= 5.9.0 [28th September 2024] =
-
-* Fixed: Security improved
-* Fixed: Escaping on content issue fixed in Accordion widget (Thanks to Trevor Leach)
-* Removed: Caldera forms widget removed
-
-= 5.8.5 [24th September 2024] =
-
-* Fixed: JS scripts error fixed
-* Fixed: Reklo button icon issue fixed in creative button widget
-* Fixed: Time spacing issue fixed in product grid & product carousel widget
-* Fixed: Item match height issue fixed in product carousel widget
-
-= 5.8.4 [23th September 2024] =
-
-* Fixed: JS scripts error fixed
-* Fixed: Security improved
 
 Details [changelog here](https://feedback.bdthemes.com/announcements?category=category_6l495r8q)
 
