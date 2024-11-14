@@ -64,7 +64,7 @@ class Testimonial_Grid extends Module_Base {
 	}
 
 	protected function is_dynamic_content(): bool {
-		return false;
+		return true;
 	}
 
 	public function register_controls() {
