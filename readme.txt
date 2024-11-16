@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.7
 Requires PHP: 7.4.0
-Stable tag: 5.10.5
+Stable tag: 5.10.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -258,6 +258,11 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.6 [16th November 2024] =
+
+* Fixed: Security improved
+* Fixed: Lightbox icon issue fixed in image accordion widget
 
 = 5.10.5 [14th November 2024] =
 

@@ -829,10 +829,6 @@ class Lightbox extends Module_Base {
 				$this->add_render_attribute( 'lightbox-content', 'class', 'elementor-animation-' . esc_attr( $settings['hover_animation'] ) );
 			}
 		}
-		
-		if ( $settings['content_caption'] ) {			
-			$this->add_render_attribute( 'lightbox-content', 'data-caption', esc_attr( htmlspecialchars($settings['content_caption']) ) );
-		}
 
 		if ( ! empty( $settings['icon_text'] ) ) {
 			if ( 'image' == $settings['lightbox_content'] ) {
@@ -849,6 +845,10 @@ class Lightbox extends Module_Base {
 			}
 			$this->add_render_attribute( 'lightbox-icon-content', 'class', 'bdt-icon-text' );
 			$this->add_render_attribute( 'lightbox-icon-content', 'data-elementor-open-lightbox', 'no' );
+		}
+
+		if ( $settings['content_caption'] ) {
+			$this->add_render_attribute( 'lightbox-content', 'data-caption="' . htmlspecialchars( $settings['content_caption'] ) . '"' );
 		}
 
 		if ( 'image' == $settings['lightbox_content'] ) {
