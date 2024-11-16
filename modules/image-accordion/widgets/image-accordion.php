@@ -44,7 +44,7 @@ class Image_Accordion extends Module_Base {
         if ($this->ep_is_edit_mode()) {
             return ['ep-styles'];
         } else {
-            return [ 'ep-image-accordion' ];
+            return [ 'ep-font', 'ep-image-accordion' ];
         }
     }
 
@@ -1416,23 +1416,25 @@ class Image_Accordion extends Module_Base {
 
 		$image_url = wp_get_attachment_image_src($item['slide_image']['id'], 'full');
 
-		$this->add_render_attribute('lightbox', 'data-elementor-open-lightbox', 'no', true);
+		$key = 'lightbox-' . $item['_id'];
+
+		$this->add_render_attribute($key, 'data-elementor-open-lightbox', 'no');
 
 		if (!$image_url) {
-			$this->add_render_attribute('lightbox', 'href', $item['slide_image']['url'], true);
+			$this->add_render_attribute($key, 'href', $item['slide_image']['url']);
 		} else {
-			$this->add_render_attribute('lightbox', 'href', $image_url[0], true);
+			$this->add_render_attribute($key, 'href', $image_url[0]);
 		}
 
 
-		$this->add_render_attribute('lightbox', 'class', 'bdt-ep-image-accordion-lightbox', true);
+		$this->add_render_attribute($key, 'class', 'bdt-ep-image-accordion-lightbox');
 
-		$this->add_render_attribute('lightbox', 'data-caption', wp_kses( $item['image_accordion_title'], element_pack_allow_tags( 'title' ) ), true);
+		$this->add_render_attribute($key, 'data-caption="' . htmlspecialchars( $item['image_accordion_title'] ) . '"');
 
 		$icon = $settings['icon'] ?: 'plus';
 
 		?>
-		<a <?php $this->print_render_attribute_string('lightbox'); ?>>
+		<a <?php $this->print_render_attribute_string($key); ?>>
 			<?php if ('icon' == $settings['link_type']) : ?>
 				<i class="ep-icon-<?php echo esc_attr($icon); ?>" aria-hidden="true"></i>
 			<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
