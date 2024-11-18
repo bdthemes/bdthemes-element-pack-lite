@@ -1,11 +1,11 @@
-=== Element Pack Elementor Addons (Header Footer, Template Library, Dynamic Grid & Carousel, Remote Arrows)  ===
+=== Element Pack Elementor Addons (Header Footer, Template Library, Dynamic Grid, Carousel and Remote Arrows)  ===
 Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
 Donate link: http://bdthemes.com/
 Tags:  elementor addons, elementor widget, elementor extensions, elementor addon, addons
 Requires at least: 5.0.0
 Tested up to: 6.7
 Requires PHP: 7.4.0
-Stable tag: 5.10.6
+Stable tag: 5.10.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -16,218 +16,349 @@ Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that ne
 
 == Description ==
 
-Element Pack Addon for **[Elementor](https://wordpress.org/plugins/elementor/)** Page Builder is the ultimate web solution and the number #1 addon with essential web development tools for WordPress. Element Pack provides more than 70+ essential elements for everyday applications to simplify the whole web building process.
+Element Pack Addon for **[Elementor](https://wordpress.org/plugins/elementor/)** Page Builder is the ultimate web solution and the number #1 addon with essential web development tools for WordPress. It provides more than 70+ essential elements for regular applications to simplify the whole web building process.
 
-**[Element Pack](https://elementpack.pro)** addon for Elementor is developed with the best programming practice of CSS, HTML5, and PHP 8.x. The plugin is compatible with the latest version of WordPress and improved to meet the best standards for web development requirements.
+**[Element Pack](https://elementpack.pro)** addon for Elementor is developed with the best programming practice of CSS, HTML5 and PHP 8.x. The tool is compatible with the latest version of WordPress and improved to meet the best standards for web development requirements.
 
-Element Pack is very user-friendly and lets you build & manage your website with a simple drag-n-drop feature like the page builder. Element Pack combines the most commonly used elements with essential unique web kits to empower you to build the next generation of websites. You absolutely need no coding skills to use Element Pack.
+Element Pack is quite user-friendly and lets you build and manage your website with a simple drag-n-drop feature like a page builder. It combines the most commonly used elements with essential unique web kits to empower you to build the next generation of websites. You absolutely need no coding skills!
 
 ###USEFUL LINKS 👇###
-**[Live Demo](https://www.elementpack.pro/elements-demo/)** | **[Documentation](https://bdthemes.com/all-knowledge-base-of-element-pack/)** | **[Video Tutorial](https://youtube.com/playlist?list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA&si=bR91QQYCjeAtG9vC)** | **[Upgrade Pro](https://www.elementpack.pro/pricing/)** | **[Need Support?](https://bdthemes.com/support/)**
+**[Live Demo](https://www.elementpack.pro/elements-demo/)** | **[Documentation](https://bdthemes.com/all-knowledge-base-of-element-pack/)** | **[Video Tutorial](https://youtube.com/playlist?list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA&si=bR91QQYCjeAtG9vC)**
 
 
 https://www.youtube.com/watch?v=Z6XNSPSxtJw
 
-**Check, How to use the template library?**
+**Check: How to use the template library**
 
 https://www.youtube.com/watch?v=jOdWVw2TCmo
 
-**Check, How you use live copy paste?**
+**Check: How you use live copy paste**
 
 
-== Free Core Widgets for Lifetime 🔥 ==
+== Free Core Widgets for Elementor 🔥 ==
 
-= Creative Widgets 💫 =
+= Creative Elementor Widgets 💫 =
 
-* [Accordion](https://demo.elementpack.pro/element/accordion/) | [Flip Box](https://demo.elementpack.pro/element/flip-box/) | [Trailer Box](https://demo.elementpack.pro/element/trailer-box/) | [Dropbar](https://demo.elementpack.pro/element/dropbar/) | [Age Gate](https://demo.elementpack.pro/element/age-gate/) | [Business Hours](https://demo.elementpack.pro/element/business-hours/) | [Fancy list](https://demo.elementpack.pro/element/fancy-list/) | [Featured Box](https://demo.elementpack.pro/element/featured-box/) | [Lightbox](https://demo.elementpack.pro/element/lightbox/) | [Step Flow](https://demo.elementpack.pro/element/step-flow/) | [Static Grid Tab](https://demo.elementpack.pro/element/static-grid-tab/) 
-
-* [Creative Button](https://demo.elementpack.pro/element/creative-button/) | [Animated Link](https://demo.elementpack.pro/element/animated-link/) | [Dual Button](https://demo.elementpack.pro/element/dual-button/) | [Call Out](https://demo.elementpack.pro/element/call-out/) 
-
-* [Search](https://demo.elementpack.pro/element/search/) | [Toggle](https://demo.elementpack.pro/element/toggle/) | [Scroll Button](https://demo.elementpack.pro/element/scroll-button/) | [Countdown](https://demo.elementpack.pro/element/countdown/) | [Cookie Consent](https://demo.elementpack.pro/element/cookie-consent/) | [Calendly](https://demo.elementpack.pro/element/calendly/) | [Dark mode](https://demo.elementpack.pro/element/dark-mode) | [Open Street Map](https://demo.elementpack.pro/element/open-street-map/) | [Progress Pie](https://demo.elementpack.pro/element/progress-pie/) | [Reading Progress](https://demo.elementpack.pro/element/reading-progress/) | [Reading Timer](https://demo.elementpack.pro/element/reading-timer/) 
-
-* [Member](https://demo.elementpack.pro/element/member/) | [Brand Grid](https://demo.elementpack.pro/element/brand-grid/) | [Logo Grid](https://demo.elementpack.pro/element/logo-grid) | [Product Grid](https://demo.elementpack.pro/element/product-grid/) | [Pricing List](https://demo.elementpack.pro/element/pricing-list/) 
-
-* [Image Compare](https://demo.elementpack.pro/element/image-compare/) | [Image Accordion](https://demo.elementpack.pro/element/image-accordion/) | [Image Magnifier](https://demo.elementpack.pro/element/image-magnifier/) | [Image Stack](https://demo.elementpack.pro/element/image-stack/) | [SVG Image](https://demo.elementpack.pro/element/svg-image) | [Custom Gallery](https://demo.elementpack.pro/element/custom-gallery/) 
+* [Accordion](https://demo.elementpack.pro/element/accordion/) - Collapsible sections for content display
+* [Flip Box](https://demo.elementpack.pro/element/flip-box/) - Interactive flip effect for box elements
+* [Trailer Box](https://demo.elementpack.pro/element/trailer-box/) - Video trailer box with animated effect
+* [Dropbar](https://demo.elementpack.pro/element/dropbar/) - Dropdown content display for website
+* [Age Gate](https://demo.elementpack.pro/element/age-gate/) - Restrict website content by age
+* [Business Hours](https://demo.elementpack.pro/element/business-hours/) - Display business hours for customers
+* [Fancy list](https://demo.elementpack.pro/element/fancy-list/) - Stylish and customized itemized lists
+* [Featured Box](https://demo.elementpack.pro/element/featured-box/) - Showcase important features attractively
+* [Lightbox](https://demo.elementpack.pro/element/lightbox/) - Fullscreen media viewer for images/videos
+* [Step Flow](https://demo.elementpack.pro/element/step-flow/) - Guide users through step-by-step process
+* [Static Grid Tab](https://demo.elementpack.pro/element/static-grid-tab/) - Tabbed navigation with grid layout
+* [Creative Button](https://demo.elementpack.pro/element/creative-button/) - Unique animated buttons with engaging effects
+* [Animated Link](https://demo.elementpack.pro/element/animated-link/) - Interactive and stylized animated links
+* [Dual Button](https://demo.elementpack.pro/element/dual-button/) - Buttons with two distinct action options
+* [Call Out](https://demo.elementpack.pro/element/call-out/) - Highlight important messages and alerts
+* [Search](https://demo.elementpack.pro/element/search/) - Customizable and advanced search bar
+* [Toggle](https://demo.elementpack.pro/element/toggle/) - Switch between different content blocks
+* [Scroll Button](https://demo.elementpack.pro/element/scroll-button/) - Smooth scroll button for better navigation
+* [Countdown](https://demo.elementpack.pro/element/countdown/) - Countdown timer for events and offers
+* [Cookie Consent](https://demo.elementpack.pro/element/cookie-consent/) - Display cookie consent for GDPR compliance
+* [Calendly](https://demo.elementpack.pro/element/calendly/) - Embed Calendly scheduling tool on website
+* [Dark mode](https://demo.elementpack.pro/element/dark-mode) - Toggle dark and light mode for websites
+* [Open Street Map](https://demo.elementpack.pro/element/open-street-map/) - Interactive maps powered by Open Street
+* [Progress Pie](https://demo.elementpack.pro/element/progress-pie/) - Visual progress indicator with pie chart
+* [Reading Progress](https://demo.elementpack.pro/element/reading-progress/) - Display user reading progress on page
+* [Reading Timer](https://demo.elementpack.pro/element/reading-timer/) - Estimate time required to read content
+* [Member](https://demo.elementpack.pro/element/member/) - Display team members with bio information
+* [Brand Grid](https://demo.elementpack.pro/element/brand-grid/) - Showcase brands in a responsive grid
+* [Logo Grid](https://demo.elementpack.pro/element/logo-grid) - Grid layout to display brand logos
+* [Product Grid](https://demo.elementpack.pro/element/product-grid/) - Show products in an organized grid layout
+* [Pricing List](https://demo.elementpack.pro/element/pricing-list/) - Stylish pricing table to highlight plans
+* [Image Compare](https://demo.elementpack.pro/element/image-compare/) - Compare two images side by side
+* [Image Accordion](https://demo.elementpack.pro/element/image-accordion/) - Elementot accordion style image viewer for galleries
+* [Image Magnifier](https://demo.elementpack.pro/element/image-magnifier/) - Zoom in on images with magnifier effect
+* [Image Stack](https://demo.elementpack.pro/element/image-stack/) - Layer multiple images for creative effect
+* [SVG Image](https://demo.elementpack.pro/element/svg-image) - Use scalable vector graphics on website
+* [Custom Gallery](https://demo.elementpack.pro/element/custom-gallery/) - The best Elementor gallery plugin for custom layouts
 
 = Slider / Carousel 💫 =
 
-* [Panel Slider](https://demo.elementpack.pro/element/panel-slider/) | [Slider](https://demo.elementpack.pro/element/slider/) 
-* [Product Carousel](https://demo.elementpack.pro/element/product-carousel/) | [Static Carousel](https://demo.elementpack.pro/element/static-carousel/) 
+* [Panel Slider](https://demo.elementpack.pro/element/panel-slider/) - Sliding panel layouts for dynamic design
+* [Slider](https://demo.elementpack.pro/element/slider/) - Best Elementor slider plugin for image sliders
+* [Product Carousel](https://demo.elementpack.pro/element/product-carousel/) - Showcase products with stylish carousel design
+* [Static Carousel](https://demo.elementpack.pro/element/static-carousel/) - Non-animated carousel for static image display
 
 = Menu / Navigation 💫 =
 
-* [Icon Mobile Menu](https://demo.elementpack.pro/element/icon-mobile-menu/) | [Navbar](https://demo.elementpack.pro/element/navbar/) 
+Explore the best Elementor menu plugin options featuring mobile-friendly, customizable navigation ([icon mobile menu](https://demo.elementpack.pro/element/icon-mobile-menu/)) and elegant [navbar](https://demo.elementpack.pro/element/navbar/) designs for seamless user experience.
 
-= Social Elements 💫 =
+= Social Elementor Elements 💫 =
 
-* [Facebook Feed](https://demo.elementpack.pro/element/facebook-feed/) | [Twitter Grid](https://demo.elementpack.pro/element/twitter-grid/ ) | [Fancy Icons](https://demo.elementpack.pro/element/fancy-icon/) | [Review Card](https://demo.elementpack.pro/element/review-card/) | [Review Card Carousel](https://demo.elementpack.pro/element/review-card-carousel/) 
+* [Facebook Feed](https://demo.elementpack.pro/element/facebook-feed/) - Display Facebook content in dynamic feeds
+* [Twitter Grid](https://demo.elementpack.pro/element/twitter-grid/) - Stylish Twitter grid layouts for engagement
+* [Fancy Icons](https://demo.elementpack.pro/element/fancy-icon/) - Decorative icon layouts for better visuals
+* [Review Card](https://demo.elementpack.pro/element/review-card/) - Showcase user reviews with interactive cards
+* [Review Card Carousel](https://demo.elementpack.pro/element/review-card-carousel/) - Rotating review carousel for better presentation
 
 = Forms / User 💫 =
 
-* [Simple Contact Form](https://demo.elementpack.pro/element/simple-contact-form/) | [User Register](https://demo.elementpack.pro/element/user-register/) 
+* [Simple Contact Form](https://demo.elementpack.pro/element/simple-contact-form/) - Easy-to-use contact forms for users
+* [User Register](https://demo.elementpack.pro/element/user-register/) - Simple user registration form for websites
 
-== Free 3rd Party Widgets for Lifetime 🔥 ==
+== Free Extensions 🔥 ==
 
-* [Events Calendar Grid](https://demo.elementpack.pro/element/events-calendar-grid/) 
-* [Tutor LMS Course Grid](https://demo.elementpack.pro/element/tutor-lms-course-grid) | [Tutor LMS Course Carousel](https://demo.elementpack.pro/element/tutor-lms-course-carousel) 
-* [Testimonial Grid](https://demo.elementpack.pro/element/testimonial-grid/) 
+* [Animated Gradient Background](https://demo.elementpack.pro/element/animated-gradient-background/) - Stunning gradient background effects including animation
+* [Backdrop Filter](https://demo.elementpack.pro/element/backdrop-filter/) - Apply glassmorphism effect to elements
+* [Background Overlay](https://demo.elementpack.pro/element/background-overlay/) - Add stylish background overlays to sections
+* [Custom Js/Css](https://demo.elementpack.pro/element/custom-js/) - Easily add custom JavaScript or CSS
+* [Equal Height](https://demo.elementpack.pro/element/widget-equal-height) - Equalize height for different widgets
+* [Floating Effects](https://demo.elementpack.pro/element/floating-effects) - Smooth floating animation effects for elements
+* [Grid Line](https://demo.elementpack.pro/element/grid-line/) - Add stylish grid lines to layouts
+* [Transform Effects](https://demo.elementpack.pro/element/transform-example/) - Advanced visual effects and transformations
+* [Wrapper Link](https://demo.elementpack.pro/element/wrapper-link/) - Link entire sections or containers
+* [Widget Tooltip](https://demo.elementpack.pro/element/widget-tooltip/) - Add tooltips to your widgets for interaction
+* [3D Text](https://demo.elementpack.pro/element/3d-text/) - Create interactive 3D text effects
+
+== Free Features 🔥 ==
+
+Unlock the potential of your website with Elementor free templates and exclusive features. Access pre-designed [templates](https://bdthemes.com/all-knowledge-base-of-element-pack/), manage [assets](https://bdthemes.com/knowledge-base/asset-manager/) and streamline your workflow with tools like [live copy-paste](https://bdthemes.com/knowledge-base/live-copy-paste/live-copy-alternative/), [duplicator](https://bdthemes.com/knowledge-base/duplicator-feature/) and more for a seamless design experience.
+
+== Free 3rd Party Widgets 🔥 ==
+
+Explore free 3rd party widgets like [Events Calendar Grid](https://demo.elementpack.pro/element/events-calendar-grid/), [Tutor LMS Course Grid](https://demo.elementpack.pro/element/tutor-lms-course-grid/), [Tutor LMS Course Carousel](https://demo.elementpack.pro/element/tutor-lms-course-carousel/) and [Testimonial Grid](https://demo.elementpack.pro/element/testimonial-grid/) for enhancing your site’s functionality.
 
 = Forms 💫 =
 
-* [Contact Form 7](https://demo.elementpack.pro/element/contact-form-7/) | [Caldera Forms](https://demo.elementpack.pro/element/caldera-form/) | [Everest Forms](https://demo.elementpack.pro/element/everest-forms/) | [Fluent Forms](https://demo.elementpack.pro/element/fluent-forms/) | [Formidable Forms](https://demo.elementpack.pro/element/formidable-forms/) | [Ninja Forms](https://demo.elementpack.pro/element/ninja-forms/) | [WeForms](https://demo.elementpack.pro/element/weform/) 
+Create advanced and customizable forms easily with Elementor Ultimate Addon. Integrate popular form builders like [Contact Form 7](https://demo.elementpack.pro/element/contact-form-7/), [Caldera Forms](https://demo.elementpack.pro/element/caldera-form/), [Everest Forms](https://demo.elementpack.pro/element/everest-forms/), [Fluent Forms](https://demo.elementpack.pro/element/fluent-forms/), [Formidable Forms](https://demo.elementpack.pro/element/formidable-forms/), [Ninja Forms](https://demo.elementpack.pro/element/ninja-forms/) and [weForms](https://demo.elementpack.pro/element/weform/).
 
-== Free Extensions for Lifetime 🔥 ==
+More features and extensions are coming soon...
 
-* [Animated Gradient Background](https://demo.elementpack.pro/element/animated-gradient-background/) | [Backdrop Filter](https://demo.elementpack.pro/element/backdrop-filter/) (GlassMorphism) | [Background Overlay](https://demo.elementpack.pro/element/background-overlay/) | [Custom Js/Css](https://demo.elementpack.pro/element/custom-js/) | [Equal Height](https://demo.elementpack.pro/element/widget-equal-height) | [Floating Effects](https://demo.elementpack.pro/element/floating-effects) | [Grid Line](https://demo.elementpack.pro/element/grid-line/) | [Transform Effects](https://demo.elementpack.pro/element/transform-example/) | [Wrapper Link](https://demo.elementpack.pro/element/wrapper-link/) | [Widget Tooltip](https://demo.elementpack.pro/element/widget-tooltip/) | [3D Text](https://demo.elementpack.pro/element/3d-text/) 
+== Elementor Pro Widgets 🔥 ==
 
-== Free Features for Lifetime 🔥 ==
+= Advanced Widgets 💫 =  
 
-* [Asset Manager](https://bdthemes.com/knowledge-base/asset-manager/) | [Live Copy or Paste](https://bdthemes.com/knowledge-base/live-copy-paste/live-copy-alternative/) | [Template Library - in Editor](https://bdthemes.com/all-knowledge-base-of-element-pack/) | [Duplicator](https://bdthemes.com/knowledge-base/duplicator-feature/) 
+Enhance your website's interactivity and design with powerful advanced widgets like the [Advanced Button](https://demo.elementpack.pro/element/advanced-button/), [Advanced Counter](https://demo.elementpack.pro/element/advanced-Counter/) and [Advanced Heading](https://demo.elementpack.pro/element/advanced-heading/). Create visually engaging elements with [Advanced Image Gallery](https://demo.elementpack.pro/element/advanced-image-gallery/) and improve user experience using [Lottie Image](https://demo.elementpack.pro/element/lottie-image/) and [Scroll Image](https://demo.elementpack.pro/element/scroll-image/) for dynamic content.
 
-More features & extensions are coming soon...
+* [Advanced Calculator](https://demo.elementpack.pro/element/advanced-calculator/) - Perform calculations using an interactive advanced widget  
+* [Advanced Divider](https://demo.elementpack.pro/element/advanced-divider/) - Modern dividers for enhanced section separation designs  
+* [Advanced Google Map](https://demo.elementpack.pro/element/advanced-google-map/) - Enhance Google maps with advanced features integration  
+* [Animated Heading](https://demo.elementpack.pro/element/animated-heading/) - Create attractive and engaging headings with animations  
+* [Advanced Icon Box](https://demo.elementpack.pro/element/advanced-icon-box/) - Customizable icon boxes for modern and stylish display  
+* [Advanced Progress Bar](https://demo.elementpack.pro/element/advanced-progress-bar/) - Animated progress bars with sleek visual effects  
+* [Image Expand](https://demo.elementpack.pro/element/image-expand/) - Expandable images with smooth interactive hover effects  
+* [Lottie Icon Box](https://demo.elementpack.pro/element/lottie-icon-box/) - Integrate Lottie animations with interactive icon boxes  
 
-== Pro Version Core Widgets 🔥 ==
+= Creative Widgets 💫 =  
 
-= Advanced Widgets 💫 =
+Boost your website’s functionality with creative widgets such as [Audio Player](https://demo.elementpack.pro/element/audio-player/), [Hover Box](https://demo.elementpack.pro/element/hover-box/), [Pricing Table](https://demo.elementpack.pro/element/pricing-table/) and [Charts](https://demo.elementpack.pro/element/charts/) for engaging and interactive content.
 
-* [Advanced Button](https://demo.elementpack.pro/element/advanced-button/) | [Advanced Calculator](https://demo.elementpack.pro/element/advanced-calculator/) | [Advanced Counter](https://demo.elementpack.pro/element/advanced-Counter/) | [Advanced Divider](https://demo.elementpack.pro/element/advanced-divider/) | [Advanced Heading](https://demo.elementpack.pro/element/advanced-heading/) | [Advanced Google Map](https://demo.elementpack.pro/element/advanced-google-map/) | [Animated Heading](https://demo.elementpack.pro/element/animated-heading/) | [Advanced Icon Box](https://demo.elementpack.pro/element/advanced-icon-box/) | [Advanced Progress Bar](https://demo.elementpack.pro/element/advanced-progress-bar/) | [Advanced Image Gallery](https://demo.elementpack.pro/element/advanced-image-gallery/) 
+* [Iframe](https://demo.elementpack.pro/element/iframe/) - Embed external web content effortlessly and seamlessly  
+* [Marker](https://demo.elementpack.pro/element/marker/) - Add hotspots or interactive markers to your maps  
+* [Content Switcher](https://demo.elementpack.pro/element/content-switcher/) - Switch between multiple content types easily  
+* [Comparison List](https://demo.elementpack.pro/element/comparison-list/) - Display product comparisons in a clear layout  
+* [Hover Video](https://demo.elementpack.pro/element/hover-video/) - Trigger video playback on hover interaction  
+* [Table](https://demo.elementpack.pro/element/table/) - Customizable tables for presenting organized data  
+* [Thumb Gallery](https://demo.elementpack.pro/element/thumb-gallery/) - Showcase images with thumbnail gallery options  
+* [Video Player](https://demo.elementpack.pro/element/video-player/) - Custom video player with advanced configurations  
+* [Video Gallery](https://demo.elementpack.pro/element/video-gallery/) - Display videos in attractive gallery formats  
+* [Horizontal Scroller](https://demo.elementpack.pro/element/horizontal-scroller/) - Add smooth horizontal scrolling effects  
+* [Circle Info](https://demo.elementpack.pro/element/circle-info/) - Circular icons for highlighting essential information  
+* [HoneyCombs](https://demo.elementpack.pro/element/honeycombs/) - Create visually appealing honeycomb-style layouts  
+* [Offcanvas](https://demo.elementpack.pro/element/offcanvas/) - Off-canvas panels for hidden menus or widgets  
+* [Switcher](https://demo.elementpack.pro/element/switcher/) - Seamlessly toggle between different content blocks  
+* [Change Log](https://demo.elementpack.pro/element/changelog/) - Highlight product updates or version changes  
+* [Coupon Code](https://demo.elementpack.pro/element/coupon-code/) - Display promotional coupon codes effectively  
+* [Document Viewer](https://demo.elementpack.pro/element/document-viewer/) - Preview and share documents on your website  
+* [Modal](https://demo.elementpack.pro/element/modal/) - Customizable modal popups for interactive engagement  
+* [Marquee](https://demo.elementpack.pro/element/marquee/) - Add scrolling text or image animations easily  
+* [Notification](https://demo.elementpack.pro/element/notification/) - Display user notifications in a sleek style  
+* [Protected Content](https://demo.elementpack.pro/element/protected-content/) - Secure sensitive content with restricted access  
+* [QR Code](https://demo.elementpack.pro/element/qr-code/) - Generate and display QR codes dynamically  
+* [Source Code](https://demo.elementpack.pro/element/source-code/) - Display and highlight code snippets effectively  
+* [SVG Blob](https://demo.elementpack.pro/element/svg-blob/) - Create dynamic and customizable SVG blob designs  
+* [Stacker](https://demo.elementpack.pro/element/stacker/) - Layer content elements with unique stacking effects  
+* [The Newsletter](https://demo.elementpack.pro/element/the-newsletter/) - Create and manage newsletter signup forms  
+* [SVG Maps](https://demo.elementpack.pro/element/svg-maps/) - Display interactive SVG maps with customization  
+* [Weather](https://demo.elementpack.pro/element/weather/) - Live weather data with customizable display options  
+* [Timezone](https://demo.elementpack.pro/element/timezone/) - Show current local time with timezone data  
+* [Air Pollution](https://demo.elementpack.pro/element/air-pollution/) - Monitor and display real-time air quality data  
+* [Barcode](https://demo.elementpack.pro/element/barcode/) - Generate and showcase unique barcodes dynamically  
+* [Total Count](https://demo.elementpack.pro/element/total-count/) - Display live counters for real-time data tracking  
+* [Tabs](https://demo.elementpack.pro/element/tabs/) - Organize and structure content with tabbed navigation  
+* [Fancy Tabs](https://demo.elementpack.pro/element/fancy-tabs/) - Stylish and interactive tabs for structured content  
+* [Interactive Tabs](https://demo.elementpack.pro/element/interactive-tabs/) - Add interactivity to your tabbed layouts  
+* [Animated Card](https://demo.elementpack.pro/element/animated-card/) - Enhance engagement with animated card designs  
+* [Fancy Card](https://demo.elementpack.pro/element/fancy-card/) - Eye-catching and stylish card layouts for content  
+* [Interactive Card](https://demo.elementpack.pro/element/interactive-card/) - Create responsive and compelling content card designs  
 
-* [Image Expand](https://demo.elementpack.pro/element/image-expand/) | [Lottie Image](https://demo.elementpack.pro/element/lottie-image/) | [Lottie Icon Box](https://demo.elementpack.pro/element/lottie-icon-box/) | [Scroll Image](https://demo.elementpack.pro/element/scroll-image/) 
+= Slider / Carousel 💫 =  
 
-= Creative Widgets 💫 =
+Discover the best Elementor plugin for WordPress, offering stunning [sliders](https://demo.elementpack.pro/element/fancy-slider/) and [carousels](https://demo.elementpack.pro/element/custom-carousel/) to showcase content with smooth transitions.
 
-* [Audio Player](https://demo.elementpack.pro/element/audio-player/) | [Iframe](https://demo.elementpack.pro/element/iframe/) | [Marker](https://demo.elementpack.pro/element/marker/) | [Hover Box](https://demo.elementpack.pro/element/hover-box/) | [Content Switcher](https://demo.elementpack.pro/element/content-switcher/) | [Comparison List](https://demo.elementpack.pro/element/comparison-list/) | [Hover Video](https://demo.elementpack.pro/element/hover-video/) | [Table](https://demo.elementpack.pro/element/table/) | [Thumb Gallery](https://demo.elementpack.pro/element/thumb-gallery/) | [Video Player](https://demo.elementpack.pro/element/video-player/) | [Video Gallery](https://demo.elementpack.pro/element/video-gallery/) | [Horizontal Scroller](https://demo.elementpack.pro/element/horizontal-scroller/) 
-
-* [Pricing Table](https://demo.elementpack.pro/element/pricing-table/) | [Circle Info](https://demo.elementpack.pro/element/circle-info/) | [HoneyCombs](https://demo.elementpack.pro/element/honeycombs/) | [Offcanvas](https://demo.elementpack.pro/element/offcanvas/) | [Switcher](https://demo.elementpack.pro/element/switcher/) 
-
-* [Charts](https://demo.elementpack.pro/element/charts) | [Change Log](https://demo.elementpack.pro/element/changelog/) | [Coupon Code](https://demo.elementpack.pro/element/coupon-code/) | [Document Viewer](https://demo.elementpack.pro/element/document-viewer/) | [Modal](https://demo.elementpack.pro/element/modal/) | [Marquee](https://demo.elementpack.pro/element/marquee/) | [Notification](https://demo.elementpack.pro/element/notification/) | [Protected Content](https://demo.elementpack.pro/element/protected-content/ ) | [QR Code](https://demo.elementpack.pro/element/qr-code/) |[Source Code](https://demo.elementpack.pro/element/source-code/) | [SVG Blob](https://demo.elementpack.pro/element/svg-blob/) | [Stacker](https://demo.elementpack.pro/element/stacker/) | [The Newsletter](https://demo.elementpack.pro/element/the-newsletter/) 
-
-* [SVG Maps](https://demo.elementpack.pro/element/svg-maps/) | [Weather](https://demo.elementpack.pro/element/weather/) | [Timezone](https://demo.elementpack.pro/element/timezone/) | [Air Pollution](https://demo.elementpack.pro/element/air-pollution/) | [Barcode](https://demo.elementpack.pro/element/barcode/) | [Total Count](https://demo.elementpack.pro/element/total-count/) 
-
-* [Tabs](https://demo.elementpack.pro/element/tabs/) | [Fancy Tabs](https://demo.elementpack.pro/element/fancy-tabs/) | [Interactive Tabs](https://demo.elementpack.pro/element/interactive-tabs/) | [Animated Card](https://demo.elementpack.pro/element/animated-card/) | [Fancy Card](https://demo.elementpack.pro/element/fancy-card/) | [Interactive Card](https://demo.elementpack.pro/element/interactive-card/) 
-
-= Slider / Carousel 💫 =
-
-* [Device Slider](https://demo.elementpack.pro/element/device-slider/) | [Fancy Slider](https://demo.elementpack.pro/element/fancy-slider/) | [Slideshow](https://demo.elementpack.pro/element/slideshow/) 
-* [Brand Carousel](https://demo.elementpack.pro/element/brand-carousel/) | [Custom Carousel](https://demo.elementpack.pro/element/custom-carousel/) | [Dynamic Carousel](https://demo.elementpack.pro/element/dynamic-carousel/) | [Logo Carousel](https://demo.elementpack.pro/element/logo-carousel/) 
+* [Device Slider](https://demo.elementpack.pro/element/device-slider/) - Showcase device mockups with smooth slides  
+* [Slideshow](https://demo.elementpack.pro/element/slideshow/) - Create captivating and customizable image slideshows  
+* [Brand Carousel](https://demo.elementpack.pro/element/brand-carousel/) - Rotate brand logos in an elegant carousel  
+* [Dynamic Carousel](https://demo.elementpack.pro/element/dynamic-carousel/) - Display dynamic content in a sleek carousel  
+* [Logo Carousel](https://demo.elementpack.pro/element/logo-carousel/) - Present logos stylishly in scrolling carousels  
 
 = Menu / Navigation 💫 =
 
-* [Mega Menu](https://demo.elementpack.pro/element/mega-menu/) | [Sub Menu](https://demo.elementpack.pro/element/sub-menu/) | [Circle Menu](https://demo.elementpack.pro/element/circle-menu/) | [Slinky Vertical Menu](https://demo.elementpack.pro/element/slinky-vertical-menu/) | [Vertical Menu](https://demo.elementpack.pro/element/vertical-menu/) | [Icon Nav](https://demo.elementpack.pro/element/icon-nav/) | [Table of Content](https://demo.elementpack.pro/element/table-of-content-test-post/) | [Breadcrumbs](https://demo.elementpack.pro/element/breadcrumbs/) 
+Improve your site navigation with the best Elementor header plugin. Create custom [mega](https://demo.elementpack.pro/element/mega-menu/) menus, [vertical](https://demo.elementpack.pro/element/vertical-menu/) menus, [breadcrumbs](https://demo.elementpack.pro/element/breadcrumbs/) and more.
 
-= Cryptocurrency 💫 =
-
-* [Crypto Currency Card](https://demo.elementpack.pro/element/crypto-currency-card/) | [Crypto Currency Table](https://demo.elementpack.pro/element/crypto-currency-table/) | [Crypto Currency Grid](https://demo.elementpack.pro/element/crypto-currency-grid/) | [Crypto Currency List](https://demo.elementpack.pro/element/crypto-currency-list/) | [Crypto Currency Carousel](https://demo.elementpack.pro/element/crypto-currency-carousel/) | [Crypto Currency Ticker](https://demo.elementpack.pro/element/crypto-currency-ticker/) | [Crypto Currency Chart](https://demo.elementpack.pro/element/crypto-currency-chart/) | [Crypto Currency Chart Carousel](https://demo.elementpack.pro/element/crypto-currency-chart-carousel/) 
+* [Sub Menu](https://demo.elementpack.pro/element/sub-menu/) - Easily implement dropdown submenus for organized navigation.
+* [Circle Menu](https://demo.elementpack.pro/element/circle-menu/) - Unique circular navigation menus for modern designs.
+* [Slinky Vertical Menu](https://demo.elementpack.pro/element/slinky-vertical-menu/) - Smooth sliding vertical menus for enhanced user experience.
+* [Icon Nav](https://demo.elementpack.pro/element/icon-nav/) - Sleek icon-based navigation for minimalist designs.
+* [Table of Content](https://demo.elementpack.pro/element/table-of-content-test-post/) - Organize website content with a convenient table of contents.
 
 = Post / Dynamic 💫 =
 
-* [Post Slider](https://demo.elementpack.pro/element/post-slider/) | [Post Card](https://demo.elementpack.pro/element/post-card/) | [Post Grid](https://demo.elementpack.pro/element/post-grid/) | [Post Grid Tab](https://demo.elementpack.pro/element/post-grid-tab/) | [Post Gallery](https://demo.elementpack.pro/element/post-gallery/) | [Post List](https://demo.elementpack.pro/element/post-list/) | [Post Block](https://demo.elementpack.pro/element/post-block/) | [Post Block Modern](https://demo.elementpack.pro/element/post-block-modern/) | [Single Post](https://demo.elementpack.pro/element/single-post/) | [Carousel](https://demo.elementpack.pro/element/carousel) | [Timeline](https://demo.elementpack.pro/element/timeline/) | [News Ticker](https://demo.elementpack.pro/element/news-ticker/) | [Profile Card](https://demo.elementpack.pro/element/profile-card) | [Comment](https://demo.elementpack.pro/element/comment/) 
-* [Dynamic Grid](https://demo.elementpack.pro/element/dynamic-grid/) | [Floating Knowledgebase](https://demo.elementpack.pro/element/floating-knowledgebase/) | [Tags cloud](https://demo.elementpack.pro/element/tags-cloud/) 
+Showcase your posts with various layouts like [grids](https://demo.elementpack.pro/element/post-grid/), [list](https://demo.elementpack.pro/element/post-list/), [carousels](https://demo.elementpack.pro/element/carousel/), [profiles](https://demo.elementpack.pro/element/profile-card/), [timelines](https://demo.elementpack.pro/element/timeline/) and more using dynamic Elementor widgets.
+
+* [Post Slider](https://demo.elementpack.pro/element/post-slider/) - Display posts in a sliding carousel
+* [Post Card](https://demo.elementpack.pro/element/post-card/) - Stylish post card layout for your site
+* [Post Grid Tab](https://demo.elementpack.pro/element/post-grid-tab/) - Organized post grid with tabbed navigation
+* [Post Gallery](https://demo.elementpack.pro/element/post-gallery/) - Showcase posts in a gallery-style display
+* [Post Block](https://demo.elementpack.pro/element/post-block/) - Block-style layout for featured posts
+* [Post Block Modern](https://demo.elementpack.pro/element/post-block-modern/) - Modern post block layout for stylish design
+* [Single Post](https://demo.elementpack.pro/element/single-post/) - Display individual posts with detailed content
+* [News Ticker](https://demo.elementpack.pro/element/news-ticker/) - Scrolling news ticker to display latest updates
+* [Comment](https://demo.elementpack.pro/element/comment/) - Easy display of user comments for posts
+* [Dynamic Grid](https://demo.elementpack.pro/element/dynamic-grid/) - Dynamic grid layout for flexible content display
+* [Floating Knowledgebase](https://demo.elementpack.pro/element/floating-knowledgebase/) - Quick-access floating knowledgebase for your site
+* [Tags Cloud](https://demo.elementpack.pro/element/tags-cloud/) - Interactive cloud of tags to enhance navigation
 
 = Social Elements 💫 =
 
-* [Social Proof](https://demo.elementpack.pro/element/social-proof/) | [Social share](https://demo.elementpack.pro/element/social-share/) | [Facebook Feed Carousel](https://demo.elementpack.pro/element/facebook-feed-carousel/) | [Instagram](https://demo.elementpack.pro/element/instagram/) | [Instagram Feed](https://demo.elementpack.pro/element/instagram-feed/) | [Twitter Carousel](https://demo.elementpack.pro/element/twitter-carousel/ ) | [Twitter Slider](https://demo.elementpack.pro/element/twitter-slider/) | [Google Reviews](https://demo.elementpack.pro/element/google-reviews/) | [Review Card Grid](https://demo.elementpack.pro/element/review-card-grid/) | [Help Desk](https://demo.elementpack.pro/element/help-desk/) 
+Social Elements help enhance user engagement by displaying [feeds](https://demo.elementpack.pro/element/facebook-feed-carousel/), [google reviews](https://demo.elementpack.pro/element/google-reviews/) and [social proof](https://demo.elementpack.pro/element/social-proof/) to build trust and encourage interaction.
+
+* [Social Share](https://demo.elementpack.pro/element/social-share/) - Add social media sharing buttons to posts.
+* [Instagram](https://demo.elementpack.pro/element/instagram/) - Embed Instagram posts directly on your website.
+* [Instagram Feed](https://demo.elementpack.pro/element/instagram-feed/) - Showcase Instagram feed in grid layout style.
+* [Twitter Carousel](https://demo.elementpack.pro/element/twitter-carousel/) - Carousel display of your latest Twitter feed.
+* [Twitter Slider](https://demo.elementpack.pro/element/twitter-slider/) - Slide through your Twitter posts in style.
+* [Review Card Grid](https://demo.elementpack.pro/element/review-card-grid/) - Grid layout to showcase customer review cards.
+* [Help Desk](https://demo.elementpack.pro/element/help-desk/) - Provide customer support with a help desk feature.
+
+= Cryptocurrency 💫 =
+
+Explore the [Cryptocurrency](https://demo.elementpack.pro/element/crypto-currency-card/) widget for Elementor, featuring widgets to display assets, live price updates, charts, grids and carousels for an engaging crypto display.
 
 = Remote Widgets 💫 =
 
-* [Remote Arrows](https://demo.elementpack.pro/element/remote-arrows/) | [Remote Fraction](https://demo.elementpack.pro/element/remote-fraction/) | [Remote Pagination](https://demo.elementpack.pro/element/remote-pagination/) | [Remote Thumbs](https://demo.elementpack.pro/element/remote-thumbs/) 
+Explore remote navigation controls for Elementor, including [arrows](https://demo.elementpack.pro/element/remote-arrows/), fractional navigation, [pagination](https://demo.elementpack.pro/element/remote-pagination/) and thumbnail-based options for seamless site navigation.
 
 = Forms / User 💫 =
 
-* [Webhook Form](https://demo.elementpack.pro/element/webhook-form/) | [User Login](https://demo.elementpack.pro/element/user-login/) | [Mailchimp](https://demo.elementpack.pro/element/mailchimp/) 
+Integrate form submissions with [Webhook Form](https://demo.elementpack.pro/element/webhook-form/), enable secure logins with [User Login](https://demo.elementpack.pro/element/user-login/) and manage email subscriptions via [Mailchimp](https://demo.elementpack.pro/element/mailchimp/).
 
-== Pro Version 3rd Party Widgets 🔥 ==
+== Pro Extensions 🔥 ==
+
+Enhance your site with advanced effects, [sticky sections](https://elementpack.pro/demo/sticky-section/), [element parallax](https://demo.elementpack.pro/element/element-parallax/) and smooth navigation using the best Elementor responsive plugin for dynamic experiences.
+
+* [Parallax Background](https://demo.elementpack.pro/element/parallax-background/) - Create stunning and immersive parallax background effects.
+* [Parallax Section](https://demo.elementpack.pro/element/parallax-section/) - Add depth and motion with parallax sections.
+* [Scroll Navigation](https://demo.elementpack.pro/element/scrollnav/) - Implement smooth scroll navigation across your site.
+* [Schedule Content](https://demo.elementpack.pro/element/schedule-content/) - Display content based on specific scheduled times.
+* [Section Particles](https://demo.elementpack.pro/element/section-particles/) - Enhance sections with interactive particle effects.
+* [Confetti Effects](https://demo.elementpack.pro/element/confetti-effects/) - Add celebratory confetti effects during key events.
+* [Scroll Box](https://demo.elementpack.pro/element/scroll-box/) - Add scrollable boxes to your site sections.
+* [Tile Scroll](https://demo.elementpack.pro/element/tile-scroll/) - Create dynamic tile scroll animations for content.
+* [Sound Effects](https://demo.elementpack.pro/element/sound-effects/) - Add sound effects for an immersive experience.
+* [Notation](https://demo.elementpack.pro/element/notation/) - Display notations and important content notes stylishly.
+* [Reveal Effects](https://demo.elementpack.pro/element/reveal-effects/) - Use animations to reveal content smoothly.
+* [Cursor Effects](https://demo.elementpack.pro/element/cursor-effects/) - Enhance interactions with custom cursor animations.
+* [Right Click Context Menu](https://demo.elementpack.pro/element/right-click-context-menu/) - Enable custom right-click context menus for users.
+* [Hash Link](https://demo.elementpack.pro/element/hash-link/) - Implement smooth scrolling with hash link navigation.
+* [Background Expand](https://demo.elementpack.pro/element/background-expand/) - Expand backgrounds seamlessly on scroll actions.
+* [Content Protector](https://demo.elementpack.pro/element/content-protector/) - Protect your site content from unauthorized copying.
+* [Realistic Image Shadow](https://demo.elementpack.pro/element/realistic-image-shadow/) - Add realistic shadows to images for depth.
+* [AdBlock Detector](https://demo.elementpack.pro/element/adblock-detector/) - Detect and alert visitors using ad-blockers on your site.
+* [Scroll fill effect](https://demo.elementpack.pro/element/scroll-fill-effect/) - Create visually engaging scrolling fill effects.
+* [Image Hover Effects](https://demo.elementpack.pro/element/image-hover-effects/) - Add interactive hover effects to images for engagement.
+* [Ripple Effects](https://demo.elementpack.pro/element/ripple-effects/) - Add ripple effects for interactive elements and buttons.
+
+== Pro Features 🔥 ==
+
+Explore [Essential Shortcodes](https://bdthemes.com/knowledge-base/element-pack-essential-shortcodes/), add a customizable [Context Menu](https://bdthemes.com/knowledge-base/context-menu/) and enhance UX with [Smooth Scroller](https://bdthemes.com/all-knowledge-base-of-element-pack/).
+
+== Pro 3rd Party Widgets 🔥 ==
 
 = ACF Integration 💫 =
 
-* [ACF Accordion](https://demo.elementpack.pro/element/acf-accordion/) | [ACF Gallery](https://demo.elementpack.pro/element/acf-gallery/) | [ACF Slider](https://demo.elementpack.pro/element/acf-slider/) | [ACF Tabs](https://demo.elementpack.pro/element/acf-tabs/) | [ACF List](https://demo.elementpack.pro/element/acf-list/) 
-
-= bbPress 💫 =
-
-* [bbPress](https://demo.elementpack.pro/element/bbpress/) | [bbPress Forum Form](https://demo.elementpack.pro/element/bbpress-forum-form/) | [bbPress Forum Index](https://demo.elementpack.pro/element/bbpress-forum-index/) | [bbPress Single Forum](https://demo.elementpack.pro/element/bbpress-single-forum/) | [bbPress Topic Index](https://demo.elementpack.pro/element/bbpress-topic-index/) | [bbPress Topic Form](https://demo.elementpack.pro/element/bbpress-topic-form/) | [bbPress Single Topic](https://demo.elementpack.pro/element/bbpress-single-topic/) | [bbPress Reply Form](https://demo.elementpack.pro/element/bbpress-reply-form/) | [bbPress Single Reply](https://demo.elementpack.pro/element/bbpress-single-reply/) | [bbPress Topic Tags](https://demo.elementpack.pro/element/bbpress-topic-tags/) | [bbPress Single Tag](https://demo.elementpack.pro/element/bbpress-single-tag/) | [bbPress Single View](https://demo.elementpack.pro/element/bbpress-single-view/) | [bbPress Stats](https://demo.elementpack.pro/element/bbpress-stats/) 
-
-= BuddyPress 💫 =
-
-* [BuddyPress Member](https://demo.elementpack.pro/element/buddypress-member/) | [BuddyPress Friends](https://demo.elementpack.pro/element/buddypress-friends/) | [BuddyPress Group](https://demo.elementpack.pro/element/buddypress-group/) 
-
-= LearnPress / TablePress 💫 =
-
-* [LearnPress Grid](https://demo.elementpack.pro/element/learnpress-grid/) | [LearnPress Carousel](https://demo.elementpack.pro/element/learnpress-carousel/) | [TablePress](https://demo.elementpack.pro/element/tablepress/) 
-
-= Charitable 💫 = 
-
-* [Charitable Campaigns](https://demo.elementpack.pro/element/charitable-campaigns/) | [Charitable Donations](https://demo.elementpack.pro/element/charitable-donations/) | [Charitable Donors](https://demo.elementpack.pro/element/charitable-donors/) | [Charitable Donation Form](https://demo.elementpack.pro/element/charitable-donation-form/) | [Charitable Login](https://demo.elementpack.pro/element/charitable-login/) | [Charitable Profile](https://demo.elementpack.pro/element/charitable-profile/) | [Charitable Registration](https://demo.elementpack.pro/element/charitable-registration/) | [Charitable Stat](https://demo.elementpack.pro/element/charitable-stat/) 
-
-= GiveWP 💫 =
-
-* [Give Donation History](https://demo.elementpack.pro/element/give-donation-history/) | [Give Donor Wall](https://demo.elementpack.pro/element/give-donation-wall/) | [Give Form Grid](https://demo.elementpack.pro/element/give-form-grid/) | [Give Form](https://demo.elementpack.pro/element/give-form/) | [Give Goal](https://demo.elementpack.pro/element/give-goal/) | [Give Login](https://demo.elementpack.pro/element/give-login/) | [Give Profile Editor](https://demo.elementpack.pro/element/give-profile-editor/) | [Give Receipt](https://demo.elementpack.pro/element/give-receipt/) | [Give Register](https://demo.elementpack.pro/element/give-register/) | [Give Totals](https://demo.elementpack.pro/element/give-totals/)  
-
-= Easy Digital Downloads 💫 =
-
-* [Easy Digital Downloads](https://demo.elementpack.pro/element/easy-digital-downloads/) | [EDD Cart](https://demo.elementpack.pro/element/edd-cart/) | [EDD Category Grid](https://demo.elementpack.pro/element/edd-category-grid/) | [EDD Category Carousel](https://demo.elementpack.pro/element/edd-category-carousel/) | [EDD Checkout](https://demo.elementpack.pro/element/edd-checkout/) | [EDD Login](https://demo.elementpack.pro/element/edd-login/) | [EDD Mini Cart](https://demo.elementpack.pro/element/edd-mini-cart/) | [EDD Product](https://demo.elementpack.pro/element/edd-product/) | [EDD Product Carousel](https://demo.elementpack.pro/element/edd-product-carousel/) | [EDD Product Reviews](https://demo.elementpack.pro/element/edd-product-reviews/) | [EDD Product Review Carousel](https://demo.elementpack.pro/element/edd-product-review-carousel/) | [EDD Profile Editor](https://demo.elementpack.pro/element/edd-profile-editor/) | [EDD Purchase History](https://demo.elementpack.pro/element/edd-purchase-history/) | [EDD Register](https://demo.elementpack.pro/element/edd-register/) | [EDD Tabs](https://demo.elementpack.pro/element/edd-tabs/) | [EDD History](https://demo.elementpack.pro/element/easy-digital-downloads-history/) 
-
-= Events Calendar 💫 = 
-
-* [Event Calendar Countdown](https://demo.elementpack.pro/element/event-calendar-countdown/) | [Events Calendar Carousel](https://demo.elementpack.pro/element/events-calendar-carousel/) | [Events Calendar List](https://demo.elementpack.pro/element/events-calendar-list/) 
-
-= Post / Dynamic 💫 =
-
-* [Portfolio Carousel](https://demo.elementpack.pro/element/portfolio-carousel) | [Portfolio Gallery](https://demo.elementpack.pro/element/portfolio-gallery) | [Portfolio List](https://demo.elementpack.pro/element/portfolio-list) 
-* [Testimonial Carousel](https://demo.elementpack.pro/element/testimonial-carousel/) | [Testimonial Slider](https://demo.elementpack.pro/element/testimonial-slider/) 
-* [FAQ](https://demo.elementpack.pro/element/faq/)  
-
-= Forms / User 💫 =
-
-* [Forminator Forms](https://demo.elementpack.pro/element/forminator-forms/) | [Gravity Forms](https://demo.elementpack.pro/element/gravity-forms/) | [WP Forms](https://demo.elementpack.pro/element/wp-forms/) | [Mailchimp For WordPress](https://demo.elementpack.pro/element/mailchimp-for-wordpress/) | [QuForm](https://demo.elementpack.pro/element/quform/) 
+Enhance your site with ACF [Accordion](https://demo.elementpack.pro/element/acf-accordion/), [Gallery](https://demo.elementpack.pro/element/acf-gallery/), [Slider](https://demo.elementpack.pro/element/acf-slider/), [Tabs](https://demo.elementpack.pro/element/acf-tabs/) and [List](https://demo.elementpack.pro/element/acf-list/) for dynamic content. These widgets integrate seamlessly with ACF fields to create interactive, customizable sections, galleries, sliders and more.
 
 = WooCommerce 💫 =
 
-* [WooCommerce Add to Cart](https://demo.elementpack.pro/element/woocommerce-add-to-cart/) | [WooCommerce Cart Page](https://demo.elementpack.pro/element/woocommerce-cart-page/) | [WooCommerce Mini Cart](https://demo.elementpack.pro/element/woocommerce-mini-cart) | [WooCommerce Categories](https://demo.elementpack.pro/element/woocommerce-categories/) | [WooCommerce Checkout Page](https://demo.elementpack.pro/element/woocommerce-checkout-page/) | [WooCommerce Carousel](https://demo.elementpack.pro/element/woocommerce-carousel/) | [WooCommerce Products](https://demo.elementpack.pro/element/woocommerce-products/) | [WooCommerce Slider](https://demo.elementpack.pro/element/woocommerce-slider/) | [WooCommerce Tracking Form](https://demo.elementpack.pro/element/tracking-form/) | [360° Product Viewer](https://demo.elementpack.pro/element/360-product-viewer/) 
+Boost your WooCommerce store with powerful widgets like WooCommerce [Add to Cart](https://demo.elementpack.pro/element/woocommerce-add-to-cart/), [Cart Page](https://demo.elementpack.pro/element/woocommerce-cart-page/), [Mini Cart](https://demo.elementpack.pro/element/woocommerce-mini-cart/), [Categories](https://demo.elementpack.pro/element/woocommerce-categories/), [Checkout Page](https://demo.elementpack.pro/element/woocommerce-checkout-page/) and [360° Product Viewer](https://demo.elementpack.pro/element/360-product-viewer/). Improve user experience and increase conversions with dynamic product displays and seamless cart integration.
+
+= Post / Dynamic 💫 =
+
+Discover dynamic content with [Portfolio Carousel](https://demo.elementpack.pro/element/portfolio-carousel/), [Portfolio Gallery](https://demo.elementpack.pro/element/portfolio-gallery/), [Testimonial Carousel](https://demo.elementpack.pro/element/testimonial-carousel/), [Testimonial Slider](https://demo.elementpack.pro/element/testimonial-slider/) and [FAQ](https://demo.elementpack.pro/element/faq/) for enhanced user engagement.
+
+= bbPress 💫 =
+
+Enhance your forum with bbPress widgets like [Forum Form](https://demo.elementpack.pro/element/bbpress-forum-form/), [Topic Index](https://demo.elementpack.pro/element/bbpress-topic-index/), [Single Forum](https://demo.elementpack.pro/element/bbpress-single-forum/), [Topic Tags](https://demo.elementpack.pro/element/bbpress-topic-tags/) and [Stats](https://demo.elementpack.pro/element/bbpress-stats/), offering full forum integration and management tools.
+
+= BuddyPress 💫 =
+
+Enhance your community site with BuddyPress widgets like [Member](https://demo.elementpack.pro/element/buddypress-member/), [Friends](https://demo.elementpack.pro/element/buddypress-friends/) and [Group](https://demo.elementpack.pro/element/buddypress-group/), offering powerful member and group display options.
+
+= LearnPress / TablePress 💫 =
+
+Create engaging course layouts with LearnPress [Grid](https://demo.elementpack.pro/element/learnpress-grid/) and [Carousel](https://demo.elementpack.pro/element/learnpress-carousel/) and display advanced tables with [TablePress](https://demo.elementpack.pro/element/tablepress/).
+
+= Charitable 💫 = 
+
+Showcase fundraising with [Campaigns](https://demo.elementpack.pro/element/charitable-campaigns/), display donation options and manage donor profiles using [Charitable Donations](https://demo.elementpack.pro/element/charitable-donations/), [Login](https://demo.elementpack.pro/element/charitable-login/) and [Profile](https://demo.elementpack.pro/element/charitable-profile/).
+
+= GiveWP 💫 =
+
+Display donation history with [Give Donation History](https://demo.elementpack.pro/element/give-donation-history/), manage profiles, set donation goals and show [Donor Wall](https://demo.elementpack.pro/element/give-donation-wall/), [Give Form](https://demo.elementpack.pro/element/give-form/) and [Give Receipt](https://demo.elementpack.pro/element/give-receipt/).
+
+= Easy Digital Downloads 💫 =
+
+Enhance your digital store with Elementor [Easy Digital Downloads](https://demo.elementpack.pro/element/easy-digital-downloads/). Easily showcase digital products, manage checkout and offer seamless user experience for your customers.
+
+= Events Calendar 💫 = 
+
+Boost event management with Event Calendar Countdown, Carousel and [List](https://demo.elementpack.pro/element/events-calendar-list/) for dynamic event displays.
+
+= Forms 💫 =
+
+Create and manage custom forms with ease using [Forminator Forms](https://demo.elementpack.pro/element/forminator-forms/), Gravity Forms, WP Forms, [Mailchimp For WordPress](https://demo.elementpack.pro/element/mailchimp-for-wordpress/) and QuForm.
 
 = Others 💫 =
 
-* [Booked Calendar](https://demo.elementpack.pro/element/booked-calendar/) | [Download Monitor](https://demo.elementpack.pro/element/download-monitor/) | [Layer Slider](https://demo.elementpack.pro/element/layer-slider/) | [Revolution Slider](https://demo.elementpack.pro/element/revolution-slider/) 
-
-== Pro Version Extensions 🔥 ==
-
-* [Element Parallax](https://demo.elementpack.pro/element/element-parallax/) | [Parallax Background](https://demo.elementpack.pro/element/parallax-background/) | [Parallax Section](https://demo.elementpack.pro/element/parallax-section/) | [Scroll Navigation](https://demo.elementpack.pro/element/scrollnav/) | [Schedule Content](https://demo.elementpack.pro/element/schedule-content/) | [Section Particles](https://demo.elementpack.pro/element/section-particles/) | [Sticky Section](https://elementpack.pro/demo/sticky-section/) | [Confetti Effects](https://demo.elementpack.pro/element/confetti-effects/) | [Scroll Box](https://demo.elementpack.pro/element/scroll-box/) | [Tile Scroll](https://demo.elementpack.pro/element/tile-scroll/) | [Sound Effects](https://demo.elementpack.pro/element/sound-effects/) | [Notation](https://demo.elementpack.pro/element/notation/) | [Reveal Effects](https://demo.elementpack.pro/element/reveal-effects/) | [Cursor Effects](https://demo.elementpack.pro/element/cursor-effects/) | [Right Click Context Menu](https://demo.elementpack.pro/element/right-click-context-menu/) | [Hash Link](https://demo.elementpack.pro/element/hash-link/) | [Background Expand](https://demo.elementpack.pro/element/background-expand/) | [Content Protector](https://demo.elementpack.pro/element/content-protector/) | [Realistic Image Shadow](https://demo.elementpack.pro/element/realistic-image-shadow/) | [AdBlock Detector](https://demo.elementpack.pro/element/adblock-detector/) | [Scroll fill effect](https://demo.elementpack.pro/element/scroll-fill-effect/) | [Image Hover Effects](https://demo.elementpack.pro/element/image-hover-effects/) | [Ripple Effects](https://demo.elementpack.pro/element/ripple-effects/) 
-
-== Pro Version Features 🔥 ==
-
-* [Essential Shortcodes](https://bdthemes.com/knowledge-base/element-pack-essential-shortcodes/) | [Context Menu](https://bdthemes.com/knowledge-base/context-menu/) | [Smooth Scroller](https://bdthemes.com/all-knowledge-base-of-element-pack/)
+Manage appointments with [Booked Calendar](https://demo.elementpack.pro/element/booked-calendar/), track downloads using [Download Monitor](https://demo.elementpack.pro/element/download-monitor/) and create stunning sliders with Layer Slider and [Revolution Slider](https://demo.elementpack.pro/element/revolution-slider/).
 
 **[PURCHASE ELEMENT PACK PRO FROM OUR WEBSITE]( https://www.elementpack.pro/pricing/ )**
 
 == Common Issues and Solutions: 🐣 ==
 
-1. **Editor fails to load**
+* **Editor fails to load**
 Ans. It is due to your server PHP setting. You can increase PHP memory limit from wp-config.php file or php.ini file 
 [View Documentation](https://bdthemes.com/fix-elementor-stuck-on-loading-screen-instantly/)
 
 == Need Help? ==
 
-Is there any feature that you want to get in this plugins?
-Please use the suggest page to send us a message about the feature you think we should add to our products.
-Needs assistance to use this plugins? 
-Feel free to [Contact us](https://bdthemes.com/support/) 💌 or check our widget Tutorials to learn about how to use them efficiently.
+Have a feature suggestion? Share it with us on our [Feature Suggestion Page](https://feedback.bdthemes.com/b/6vr2250l/feature-requests/idea/new).
+For assistance, [Contact us](https://bdthemes.com/support/) 💌 or check out our Tutorials.
 
 == Check out our other Addons 👑 ==
 
-* **[ZoloBlocks](https://wordpress.org/plugins/zoloblocks/)** 🆕☀️ - Mind-blowing dynamic block plugin for Gutenberg with powerful and advanced features offering greater web design experience.
+Explore the best free addons for Elementor and Gutenberg to boost your site with advanced blocks, sliders and eCommerce tools.
 
-* **[Prime Slider](https://wordpress.org/plugins/bdthemes-prime-slider-lite/)** - The revolutionary slider builder addon with next-gen superb interface.
+* **[ZoloBlocks](https://wordpress.org/plugins/zoloblocks/)** 🆕☀️ - Advanced Gutenberg block plugin for powerful web design.
 
-* **[Ultimate Post Kit](https://wordpress.org/plugins/ultimate-post-kit/)** - Best blogging addon for building quality blogging website with fine-tuned features and widgets.
+* **[Prime Slider](https://wordpress.org/plugins/bdthemes-prime-slider-lite/)** - Next-gen slider builder with a sleek interface.
 
-* **[Ultimate Store Kit](https://wordpress.org/plugins/ultimate-store-kit/)** - The only eCommmerce addon for answering all your online store design problems in one package.
+* **[Ultimate Post Kit](https://wordpress.org/plugins/ultimate-post-kit/)** - Ultimate blogging addon with customizable widgets.
 
-* **[Pixel Gallery](https://wordpress.org/plugins/pixel-gallery/)** - Pixel Gallery is the first elementor based WordPress gallery addon that provides the easiest image gallery making experience.
+* **[Ultimate Store Kit](https://wordpress.org/plugins/ultimate-store-kit/)** - eCommerce addon for perfect online store designs.
 
-* **[Live Copy Paste](https://wordpress.org/plugins/live-copy-paste/)** - Superfast cross-domain copy-paste mechanism for WordPress websites with true UI copy experience.
+* **[Pixel Gallery](https://wordpress.org/plugins/pixel-gallery/)** - Easy-to-use image gallery addon for Elementor.
+
+* **[Live Copy Paste](https://wordpress.org/plugins/live-copy-paste/)** - Fast, cross-domain copy-paste for WordPress websites.
 
 
-Visit [BdThemes](https://bdthemes.com/) to learn about our services, page builder based products, informative blogs, and documentations.
-
+Visit [BdThemes](https://bdthemes.com/) for services, page builders, blogs, documentation and exclusive ultimate addons for Elementor coupons to enhance your website experience.
 
 == Installation ==
 
@@ -258,6 +389,15 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.7 [18th November 2024] =
+
+* Added: Text read more toggle added in testimonial grid widget
+* Fixed: Text effect issue fixed in slider widget
+* Fixed: JS loading in editor issue fixed on Facebook Feed Carousel widget
+* Fixed: Lightbox icon issue fixed in image accordion widget
+* Fixed: Menu Class confliction with Blocksy theme issue fixed
+* Fixed: Optimized CSS loading dependency fixed
 
 = 5.10.6 [16th November 2024] =
 
@@ -295,7 +435,7 @@ https://youtu.be/u9JRd824Mjc
 
 = 5.10.1 [14th October 2024] =
 
-* Added: Close button hide & position options added in cookie consent widget
+* Added: Close button hide and position options added in cookie consent widget
 * Added: Close all items on mobile feature added in Accordion widget (Thanks to Rys)
 * Added: Content style controls added in static carousel widget
 * Fixed: JS dependency issue fixed (Thanks to Devon Jordaan)
@@ -337,7 +477,7 @@ Details [changelog here](https://feedback.bdthemes.com/announcements?category=ca
 
 - No, we ensure that our plugin will not change or break any existing layout on your website due to an update issue. We have your backs in this matter.
 
-### How long do I get support & updates?
+### How long do I get support and updates?
 
 - As long as Element Pack exists, we will provide you with frequent updates and 24/7 support. We are committed to doing so.
 Note: we don’t provide plugin support for Adult sites.
@@ -352,7 +492,7 @@ Note: we don’t provide plugin support for Adult sites.
 
 ### Can we get more widgets in the near future?
 
-- Of course, you can. In fact, we bring new & unique widgets over the frequent updates (minor updates). With every leap of the base plugin version (major updates), we bring tones of new widgets and features to let you take advantage of our plugin.
+- Of course, you can. In fact, we bring new and unique widgets over the frequent updates (minor updates). With every leap of the base plugin version (major updates), we bring tones of new widgets and features to let you take advantage of our plugin.
 
 ### Can I use Element Pack on client sites?
 

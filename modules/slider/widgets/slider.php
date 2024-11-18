@@ -201,20 +201,7 @@ class Slider extends Module_Base {
 			$image_src = isset($item['tab_image']['id']) ? wp_get_attachment_image_src($item['tab_image']['id'], 'full') : '';
 			$image     =  $image_src ? $image_src[0] : '';
 
-			$this->add_render_attribute(
-				[
-					'slide-item' => [
-						'class' => [
-							'bdt-slide-item',
-							'swiper-slide',
-							'bdt-slide-effect-' . $settings['effect'] ? $settings['effect'] : 'left',
-						],
-					]
-				],
-				'',
-				'',
-				true
-			);
+			$this->add_render_attribute('slide-item', 'class', 'bdt-slide-item swiper-slide bdt-slide-effect-' . $settings['effect'], true);
 			
 			$link_key = 'link_' . $index;
 			$this->add_render_attribute(

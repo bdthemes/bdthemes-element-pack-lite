@@ -924,8 +924,8 @@ class Navbar extends Module_Base {
 		$nav_menu_args = array(
 			'fallback_cb'    => false,
 			'container'      => false,
-			'menu_class'     => 'bdt-navbar-nav',
-			'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+			'menu_class'     => '',
+			'items_wrap'     => '<ul class="bdt-navbar-nav %2$s">%3$s</ul>',
 			'theme_location' => 'default_navmenu', // creating a fake location for better functional control
 			'menu'           => $nav_menu,
 			'echo'           => true,
