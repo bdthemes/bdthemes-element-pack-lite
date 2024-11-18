@@ -262,6 +262,12 @@ class Element_Pack_Loader {
         if (element_pack_is_widget_enabled('dark-mode')) {
             wp_register_script('darkmode', BDTEP_ASSETS_URL . 'vendor/js/darkmode.min.js', ['jquery'], '1.1.1', true);
         }
+
+        if ( element_pack_is_widget_enabled( 'review-card' )
+			or element_pack_is_widget_enabled( 'review-card-carousel' )
+			or element_pack_is_widget_enabled( 'testimonial-grid' ) ) {
+			wp_register_script( 'ep-text-read-more-toggle', BDTEP_ASSETS_URL . 'vendor/js/ep-text-read-more-toggle.min.js', ['jquery', 'bdt-uikit'], BDTEP_VER, true );
+		}
     }
 
     public function register_site_styles() {
@@ -342,6 +348,10 @@ class Element_Pack_Loader {
                 'search_result' => esc_html_x( 'SEARCH RESULT', 'Search Widget String', 'bdthemes-element-pack' ),
                 'not_found'     => esc_html_x( 'not found', 'Search Widget String', 'bdthemes-element-pack' ),
             ],
+            'words_limit'     => [ 
+				'read_more' => esc_html_x( '[read more]', 'Read More String', 'bdthemes-element-pack' ),
+				'read_less' => esc_html_x( '[read less]', 'Read Less String', 'bdthemes-element-pack' ),
+			],
             'elements_data' => $this->elements_data,
         ];
 
