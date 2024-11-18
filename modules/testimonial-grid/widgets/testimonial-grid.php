@@ -51,7 +51,7 @@ class Testimonial_Grid extends Module_Base {
 		if ( $this->ep_is_edit_mode() ) {
 			return [ 'imagesloaded', 'ep-scripts' ];
 		} else {
-			return [ 'imagesloaded' ];
+			return [ 'imagesloaded', 'ep-text-read-more-toggle' ];
 		}
 	}
 
@@ -220,6 +220,7 @@ class Testimonial_Grid extends Module_Base {
 				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+				'separator' => 'before'
 			]
 		);
 
@@ -249,11 +250,23 @@ class Testimonial_Grid extends Module_Base {
 		);
 
 		$this->add_control(
+			'text_read_more_toggle',
+			[ 
+				'label' => esc_html__( 'Text Read More Toggle', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SWITCHER,
+				'condition'   => [ 
+					'show_text' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'show_rating',
 			[ 
 				'label'   => esc_html__( 'Rating', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+				'separator' => 'before'
 			]
 		);
 
@@ -1137,6 +1150,21 @@ class Testimonial_Grid extends Module_Base {
 		$this->end_controls_tabs();
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_gb_words_limit_style',
+			[ 
+				'label'     => esc_html__( 'Text Read More Toggle', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'text_read_more_toggle' => 'yes',
+				]
+			]
+		);
+
+		$this->gloabl_read_more_link_style_controls();
+
+		$this->end_controls_section();
 	}
 
 
@@ -1261,20 +1289,37 @@ class Testimonial_Grid extends Module_Base {
 	}
 
 	public function render_excerpt() {
+		$settings = $this->get_settings_for_display();
 
-		if ( ! $this->get_settings( 'show_text' ) ) {
+		if ( ! $settings['show_text'] ) {
 			return;
 		}
 
 		$strip_shortcode = $this->get_settings_for_display( 'strip_shortcode' );
 
+		$this->add_render_attribute( 'text-wrap', 'class', 'bdt-testimonial-grid-text', true );
+
+		if ($settings['text_read_more_toggle'] == 'yes') {
+			if ( isset( $settings['text_limit'] ) && ! empty( $settings['text_limit'] ) ) {
+				$this->add_render_attribute( 'text-wrap', 'class', 'bdt-ep-read-more-text', true );
+				$this->add_render_attribute( 'text-wrap', 'data-read-more', wp_json_encode(
+					[ 
+						'words_length' => $settings['text_limit'],
+					]
+				), true );
+			}
+			$text_limit = 0;
+		} else {
+			$text_limit = $settings['text_limit'];
+		}
+
 		?>
-		<div class="bdt-testimonial-grid-text">
+		<div <?php $this->print_render_attribute_string( 'text-wrap' ); ?>>
 			<?php
 			if ( has_excerpt() ) {
 				the_excerpt();
 			} else {
-				echo wp_kses_post(element_pack_custom_excerpt( $this->get_settings_for_display( 'text_limit' ), $strip_shortcode ));
+				echo wp_kses_post(element_pack_custom_excerpt( $text_limit, $strip_shortcode ));
 			}
 			?>
 		</div>

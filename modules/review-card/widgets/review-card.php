@@ -48,7 +48,7 @@ class Review_Card extends Module_Base {
 		if ( $this->ep_is_edit_mode() ) {
 			return [ 'ep-styles' ];
 		} else {
-			return [ 'ep-font', 'ep-review-card' ];
+			return [ 'ep-font', 'ep-text-read-more-toggle' ];
 		}
 	}
 
