@@ -153,7 +153,5 @@ class Element_Pack_Admin_Feeds {
 	}
 }
 
-// if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 	new Element_Pack_Admin_Feeds();
-// }
 
