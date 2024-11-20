@@ -509,6 +509,13 @@ $(window).on('elementor/frontend/init', function () {
 
         var $contactForm = $scope.find('.bdt-contact-form .without-recaptcha');
 
+        // Validate tel type input field
+        var $inputFieldTel = $scope.find('.bdt-contact-form input[type="tel"]');
+        $inputFieldTel.on('input', function(e) {
+            this.value = this.value.replace(/[^0-9\+]/g, ''); // Allow only numbers and the plus sign
+        });
+
+
         if (!$contactForm.length) {
             return;
         }
