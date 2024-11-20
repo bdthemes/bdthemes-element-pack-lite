@@ -15,6 +15,7 @@ class Element_Pack_Admin_Feeds {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_product_feeds_styles' ] );
 		add_action( 'wp_dashboard_setup', [ $this, 'bdthemes_element_pack_register_rss_feeds' ] );
+		error_log('Element_Pack_Admin_Feeds');
 	}
 
 	/**
@@ -34,6 +35,7 @@ class Element_Pack_Admin_Feeds {
 	 */
 
 	public function bdthemes_element_pack_register_rss_feeds() {
+		error_log( 'bdthemes_element_pack_register_rss_feeds' );
 		wp_add_dashboard_widget( 'bdt-ep-dashboard-overview', esc_html__( 'Element Pack News &amp; Updates', 'bdthemes-element-pack' ), [ 
 			$this,
 			'bdthemes_element_pack_rss_feeds_content_data'
@@ -153,7 +155,7 @@ class Element_Pack_Admin_Feeds {
 	}
 }
 
-if ( ! function_exists( 'element_pack_pro_activated' ) ) {
+// if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 	new Element_Pack_Admin_Feeds();
-}
+// }
 

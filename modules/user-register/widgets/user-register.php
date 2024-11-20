@@ -175,7 +175,129 @@ class User_Register extends Module_Base {
 					],
 				],
 				'prefix_class' => 'elementor%s-button-align-',
+
+				'selectors'    => [ 
+					'#modal{{ID}} .elementor-field-type-submit' => 'justify-content: {{VALUE}};',
+				],
+				'selectors_dictionary' => [
+					'start' => 'justify-content: start;',
+					'center' => 'justify-content: center;',
+					'end' => 'justify-content: end;',
+					'stretch' => 'width: 100%;',
+				],
+				'selectors' => [
+					'#modal{{ID}} .elementor-field-type-submit' => '{{VALUE}};',
+					'#modal{{ID}} .elementor-field-type-submit button' => '{{VALUE}};',
+				],
+				'render_type' => 'template'
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_modal_button',
+			[
+				'label' => esc_html__( 'Modal Button', 'bdthemes-element-pack' ),
+				'condition' => [
+					'_skin' => 'bdt-modal'
+				]
+			]
+		);
+
+		$this->add_control(
+			'modal_button_text',
+			[
+				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'Register', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'modal_button_size',
+			[
+				'label'   => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'sm',
+				'options' => element_pack_button_sizes(),
+			]
+		);
+
+		$this->add_responsive_control(
+			'modal_button_align',
+			[
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'    => [
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+					'justify' => [
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-justify',
+					],
+				],
+				'prefix_class' => 'elementor%s-align-',
 				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'user_register_modal_icon',
+			[
+				'label'       => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::ICONS,
+				'fa4compatibility' => 'modal_button_icon',
+			]
+		);
+
+		$this->add_control(
+			'modal_button_icon_align',
+			[
+				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'right',
+				'options' => [
+					'left'  => esc_html__( 'Before', 'bdthemes-element-pack' ),
+					'right' => esc_html__( 'After', 'bdthemes-element-pack' ),
+				],
+				'condition' => [
+					'user_register_modal_icon[value]!' => '',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'modal_button_icon_indent',
+			[
+				'label'   => esc_html__( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 8,
+				],
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'condition' => [
+					'user_register_modal_icon[value]!' => '',
+				],
+				'selectors' => [
+                    '{{WRAPPER}} .bdt-button-modal .bdt-flex-align-right' => is_rtl() ? 'margin-right: {{SIZE}}{{UNIT}};' : 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bdt-button-modal .bdt-flex-align-left' => is_rtl() ? 'margin-left: {{SIZE}}{{UNIT}};' : 'margin-right: {{SIZE}}{{UNIT}};',
+                ],
+
 			]
 		);
 
@@ -850,9 +972,349 @@ class User_Register extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
+		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'section_modal_style',
+			[
+				'label' => esc_html__( 'Modal Style', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'_skin' => 'bdt-modal'
+				]
+			]
+		);
+		$this->add_control(
+			'modal_background_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal{{ID}} .bdt-modal-dialog' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name'        => 'modal_border',
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '#modal{{ID}} .bdt-modal-dialog',
+				'separator'   => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'modal_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'#modal{{ID}} .bdt-modal-dialog' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'modal_text_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'modal_custom_width',
+			[
+				'label'   => esc_html__( 'Modal Width', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
+					'default' 	=> esc_html__( 'Default', 'bdthemes-element-pack' ),
+					'full' 		=> esc_html__( 'Full', 'bdthemes-element-pack' ),
+					'container' => esc_html__( 'Container', 'bdthemes-element-pack' ),
+					'custom'    => esc_html__( 'Custom', 'bdthemes-element-pack' ),
+				],
+				'default' 	=> 'default',
+			]
+		);
+
+		$this->add_responsive_control(
+			'modal_custom_width_custom',
+			[
+				'label' => esc_html__( 'Custom Width(px)', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 200,
+						'max' => 1200,
+					],
+				],
+				'selectors'  => [
+					'#modal{{ID}}.bdt-modal-custom .bdt-modal-dialog' => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'modal_custom_width[value]' => 'custom',
+				],
+			]
+		);
+
+		$this->add_control(
+			'modal_close_button',
+			[
+				'label'   => esc_html__( 'Close Button Style', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'separator' => 'before',
+			]
+		);
+
+		
+
+		$this->add_control(
+			'modal_header',
+			[
+				'label'   => esc_html__( 'Modal Header Style', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'modal_recaptcha',
+			[
+				'label'   => esc_html__( 'Recaptcha Text', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'modal_recaptcha_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-recaptcha-text' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'modal_recaptcha_typography',
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-recaptcha-text',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_modal_header_style',
+			[
+				'label'     => esc_html__( 'Modal Header', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'_skin' => 'bdt-modal',
+					'modal_header' => 'yes',
+				]
+			]
+		);
+		$this->add_control(
+			'modal_header_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-header .bdt-modal-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'modal_header_background',
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-header',
+				'exclude'  => [ 'image' ],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'modal_header_border',
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-header',
+				'separator' => 'before',
+			]
+		);
+		$this->add_responsive_control(
+			'modal_header_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'modal_header_typography',
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-header .bdt-modal-title',
+			]
+		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_modal_close_button_style',
+			[
+				'label' => esc_html__( 'Modal Close Button', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'modal_close_button' => 'yes',
+				],
+			]
+		);
+		$this->start_controls_tabs('tabs_modal_close_button_style');
+		$this->start_controls_tab(
+			'tab_modal_close_button_normal',
+			[
+				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+			]
+		);
+
+		$this->add_control(
+			'modal_close_button_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'modal_close_button_background',
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default',
+				'exclude'  => [ 'image' ],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'modal_close_button_border',
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default',
+				'separator' => 'before',
+			]
+		);
+		$this->add_responsive_control(
+			'modal_close_button_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'modal_close_button_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'modal_close_button_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'modal_close_button_box_shadow',
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default',
+			]
+		);
+		$this->add_responsive_control(
+			'modal_close_button_size',
+			[
+				'label'      => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_modal_close_button_hover',
+			[
+				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+			]
+		);
+
+		$this->add_control(
+			'modal_close_button_hover_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'modal_close_button_hover_background',
+				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default:hover',
+				'exclude'  => [ 'image' ],
+			]
+		);
+		$this->add_control(
+			'modal_close_button_hover_border_color',
+			[
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default:hover' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'modal_close_button_border_border!' => '',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
 		$this->end_controls_section();
 
 		$this->start_controls_section(

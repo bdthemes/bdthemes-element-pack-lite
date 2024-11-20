@@ -93,10 +93,10 @@ if (!class_exists('ElementPack_Settings_API')) :
             foreach ((array) $wp_settings_sections[$page] as $section) {
 
                 if ($section['id'] == 'element_pack_api_settings') {
-                    $section_class = ' bdt-child-width-1-3@xl';
+                    $section_class = ' bdt-grid-medium bdt-child-width-1-3@xl';
                 } elseif ($section['id'] == 'element_pack_other_settings') {
-                    $data_settings = $matched_height;
-                    $section_class = ' bdt-child-width-1-3@xl';
+                    // $data_settings = $matched_height;
+                    $section_class = ' bdt-grid-medium bdt-child-width-1-3@xl';
                 } else {
                     $section_class = ' bdt-grid-small bdt-child-width-1-4@xl';
                 }
