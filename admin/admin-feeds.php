@@ -52,7 +52,7 @@ class Element_Pack_Admin_Feeds {
 				printf( '<div class="bdt-product-feeds-content activity-block"><a href="%s" target="_blank"><img class="bdt-ep-promo-image" src="%s"></a> <p>%s</p></div>', esc_url( $feed->demo_link ), esc_url( $feed->image ), wp_kses_post( $feed->content ) );
 			}
 		endif;
-		echo wp_kses_post( $this->bdthemes_element_pack_get_feeds_posts_data() );
+		$this->bdthemes_element_pack_get_feeds_posts_data();
 	}
 
 	/**
@@ -153,7 +153,5 @@ class Element_Pack_Admin_Feeds {
 	}
 }
 
-// if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 	new Element_Pack_Admin_Feeds();
-// }
 
