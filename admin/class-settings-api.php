@@ -776,7 +776,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             foreach ($this->settings_sections as $tab) {
                 $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="%2$s">%3$s</a></li>', $tab['id'], $count++, $tab['title']);
             }
-            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="5">%2$s</a></li>', 'element_pack_get_pro', esc_html__('Get Pro', 'bdthemes-element-pack'));
+            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="5"><span></span><span></span><span></span><span></span>%2$s</a></li>', 'element_pack_get_pro', esc_html__('Get Pro', 'bdthemes-element-pack'));
 
             $html .= '</ul>';
             $html .= '</div>';

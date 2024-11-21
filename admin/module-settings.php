@@ -2302,6 +2302,27 @@ class ModuleService {
 				[
 					'name' => 'smooth_scroller_group_end',
 					'type' => 'end_group',
+                ],
+
+                [
+					'name'  => 'svg_support_group_start',
+					'label' => esc_html__('SVG Support', 'bdthemes-element-pack'),
+					'desc'  => __('Turn on this option to enable SVG support in your widgets & Upload Media Library.', 'bdthemes-element-pack'),
+					'type'  => 'start_group',
+					'content_type' => 'new',
+				],
+				[
+					'name'        => 'svg-support',
+					'label'       => esc_html__('SVG Support', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'on',
+					'widget_type' => 'free',
+					'demo_url'    => '',
+					'video_url'   => '',
+				],
+				[
+					'name' => 'svg_support_group_end',
+					'type' => 'end_group',
 				]
             ]
         ];
