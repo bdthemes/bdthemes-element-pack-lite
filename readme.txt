@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.7
 Requires PHP: 7.4.0
-Stable tag: 5.10.8
+Stable tag: 5.10.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.25.8
+Elementor tested up to: 3.25.9
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -355,6 +355,10 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.9 [21th November 2024] =
+
+* Updated: Dashboard system improved
 
 = 5.10.8 [20th November 2024] =
 
