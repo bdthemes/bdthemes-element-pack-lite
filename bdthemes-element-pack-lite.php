@@ -93,16 +93,26 @@ if ( ! element_pack_pro_installed() ) {
 	// Helper function here
 	require_once( dirname( __FILE__ ) . '/includes/helper.php' );
 	require_once( dirname( __FILE__ ) . '/includes/utils.php' );
-
-
 	require_once BDTEP_INC_PATH . 'class-pro-widget-map.php';
+
+	/**
+	 * Loads translations
+	 *
+	 * @return void
+	 */
+
+	if ( ! function_exists( 'ep_load_textdomain' ) ) {
+		function ep_load_textdomain() {
+			load_plugin_textdomain( 'bdthemes-element-pack', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		}
+		add_action( 'init', 'ep_load_textdomain' );
+	}
 
 	/**
 	 * Plugin load here correctly
 	 * Also loaded the language file from here
 	 */
 	function bdthemes_element_pack_load_plugin() {
-		load_plugin_textdomain( 'bdthemes-element-pack', false, BDTEP_PNAME . '/languages' );
 
 		if ( ! did_action( 'elementor/loaded' ) ) {
 			add_action( 'admin_notices', 'bdthemes_element_pack_fail_load' );
