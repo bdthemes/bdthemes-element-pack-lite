@@ -159,24 +159,14 @@ class Element_Pack_Loader {
             }
         }
 
-        // editor template library
-        if (!defined('BDTEP_CH') and $template_library == 'on') {
-            require_once(BDTEP_INC_PATH . 'template-library/editor/init.php');
-        }
-
-        if (is_admin()) {
-            if (!defined('BDTEP_CH')) {
-                require_once BDTEP_ADMIN_PATH . 'admin.php';
-
-                if (!defined('BDTEP_CH') and $template_library == 'on') {
-                    require_once(BDTEP_INC_PATH . 'template-library/template-library-base.php');
-                    require_once(BDTEP_INC_PATH . 'template-library/editor/manager/api.php');
-                }
-
-                // Load admin class for admin related content process
-                new Admin();
-            }
-        }
+		/**
+		 * Editor template library
+		 */
+		if ( ! defined( 'BDTEP_CH' ) and $template_library == 'on' ) {
+			require_once BDTEP_INC_PATH . 'template-library/editor/init.php';
+			require_once BDTEP_INC_PATH . 'template-library/template-library-base.php';
+			require_once BDTEP_INC_PATH . 'template-library/editor/manager/api.php';
+		}
     }
 
     /**
@@ -671,6 +661,16 @@ class Element_Pack_Loader {
         add_action('admin_init', [$this, 'enqueue_admin_scripts']);
     }
 
+	/**
+	 * Load files on init
+	 */
+	public function init() {
+		if ( is_admin() ) {
+			require_once BDTEP_ADMIN_PATH . 'admin.php';
+			new Admin();
+		}
+	}
+
     /**
      * Element_Pack_Loader constructor.
      */
@@ -686,6 +686,8 @@ class Element_Pack_Loader {
         $this->element_pack_svg_support()->init();
 
         $this->wpml_compatiblity()->init();
+
+		add_action( 'init', [ $this, 'init' ] );
     }
 }
 
