@@ -3,9 +3,9 @@ Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, soha
 Donate link: http://bdthemes.com/
 Tags:  elementor addons, elementor widget, elementor extensions, elementor addon, addons
 Requires at least: 5.0.0
-Tested up to: 6.7
+Tested up to: 6.7.1
 Requires PHP: 7.4.0
-Stable tag: 5.10.9
+Stable tag: 5.10.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -355,6 +355,10 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.10 [23th November 2024] =
+
+* Fixed: Translation issue fixed
 
 = 5.10.9 [21th November 2024] =
 

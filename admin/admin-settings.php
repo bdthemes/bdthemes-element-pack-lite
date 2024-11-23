@@ -794,7 +794,7 @@ class ElementPack_Admin_Settings {
 
 					<div>
 
-						<ul class="bdt-list bdt-list-divider bdt-text-left bdt-text-normal" style="font-size: 16px;">
+						<ul class="bdt-list bdt-list-divider bdt-text-left bdt-text-normal" style="font-size: 15px;">
 
 
 							<li class="bdt-text-bold">
@@ -951,7 +951,7 @@ class ElementPack_Admin_Settings {
 						</ul>
 
 						<div class="ep-more-features bdt-card bdt-card-body bdt-card-default bdt-margin-medium-top bdt-padding-large">
-							<ul class="bdt-list bdt-list-divider bdt-text-left bdt-margin-remove" style="font-size: 16px;">
+							<ul class="bdt-list bdt-list-divider bdt-text-left bdt-margin-remove" style="font-size: 15px;">
 								<li>
 									<div class="bdt-grid bdt-grid-small">
 										<?php
