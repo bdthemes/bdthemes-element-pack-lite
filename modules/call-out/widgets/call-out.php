@@ -194,7 +194,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_css_id',
 			[ 
-				'label'       => __( 'Button ID', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => __( 'Button ID', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 
 					'active' => true,
@@ -243,7 +243,7 @@ class Call_Out extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'text_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-callout-title',
 			]
 		);
@@ -252,7 +252,7 @@ class Call_Out extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[ 
 				'name'     => 'title_text_stroke',
-				'label'    => __( 'Text Stroke', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => __( 'Text Stroke', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-callout-title',
 			]
 		);
@@ -292,7 +292,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'description_spacing',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-description' => 'margin-top: {{SIZE}}{{UNIT}};',
@@ -382,6 +382,17 @@ class Call_Out extends Module_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
 					'{{WRAPPER}} .bdt-ep-callout-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'button_margin',
+			[ 
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-ep-callout-button-wrap' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -668,7 +679,7 @@ class Call_Out extends Module_Base {
 				<?php endif; ?>
 			</div>
 
-			<div class="bdt-width-auto@m">
+			<div class="bdt-ep-callout-button-wrap bdt-width-auto@m">
 				<a <?php $this->print_render_attribute_string( 'custom-button' ); ?>>
 
 					<span <?php $this->print_render_attribute_string( 'callout-button' ); ?>>
