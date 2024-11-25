@@ -219,7 +219,7 @@ class Product_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_additional_settings',
 			[ 
-				'label' => __( 'Additional Settings', 'bdthemes-element-pack' ),
+				'label' => __( 'Additional Options', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -791,9 +791,7 @@ class Product_Grid extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -807,11 +805,28 @@ class Product_Grid extends Module_Base {
 			]
 		);
 
+		$this->start_controls_tabs( 'tabs_image_style' );
+		$this->start_controls_tab(
+			'tab_image_normal',
+			[ 
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'image_background',
+				'selector' => '{{WRAPPER}} .bdt-ep-product-grid-image img',
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[ 
 				'name'     => 'image_border',
-				'selector' => '{{WRAPPER}} .bdt-ep-product-grid-image img'
+				'selector' => '{{WRAPPER}} .bdt-ep-product-grid-image img',
+				'separator' => 'before'
 			]
 		);
 
@@ -866,6 +881,54 @@ class Product_Grid extends Module_Base {
 			]
 		);
 
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_image_hover',
+			[ 
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'image_hover_background',
+				'selector' => '{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-image img',
+			]
+		);
+
+		$this->add_control(
+			'image_hover_border_color',
+			[ 
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => [ 
+					'image_border_border!' => '',
+				],
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-image img' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			[ 
+				'name'     => 'image_css_filters_hover',
+				'selector' => '{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-image img',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[ 
+				'name'     => 'image_hover_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-image img',
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -886,6 +949,17 @@ class Product_Grid extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-product-grid-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'title_hover_color',
+			[ 
+				'label'     => __( 'Hover Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -948,6 +1022,17 @@ class Product_Grid extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'price_hover_color',
+			[ 
+				'label'     => __( 'Hover Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-price' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'price_bottom_space',
 			[ 
@@ -995,6 +1080,17 @@ class Product_Grid extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-product-grid-text' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'text_hover_color',
+			[ 
+				'label'     => __( 'Hover Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-text' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1165,9 +1261,7 @@ class Product_Grid extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1362,6 +1456,17 @@ class Product_Grid extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-product-grid-time' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'time_hover_color',
+			[ 
+				'label'     => __( 'Hover Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-ep-product-grid-item:hover .bdt-ep-product-grid-time' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1725,12 +1830,18 @@ class Product_Grid extends Module_Base {
 
 				$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-grid-item bdt-flex bdt-flex-column', true );
 
+				if ( $settings['show_price'] && $settings['show_title'] ) {
+					$this->add_render_attribute( 'title-price', 'class', 'bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between', true );
+				} else {
+					$this->add_render_attribute( 'title-price', 'class', 'bdt-ep-product-grid-title-price', true );
+				}
+
 				?>
 				<div <?php $this->print_render_attribute_string( 'item-wrap' ); ?>>
 					<?php $this->render_image( $item, 'image_' . $index ); ?>
 					<div class="bdt-ep-product-grid-content bdt-flex bdt-flex-column bdt-flex-between">
 						<div>
-							<div class="bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between">
+							<div <?php $this->print_render_attribute_string('title-price'); ?>>
 								<?php $this->render_title( $item, 'title_' . $index ); ?>
 								<?php $this->render_price( $item ); ?>
 							</div>
