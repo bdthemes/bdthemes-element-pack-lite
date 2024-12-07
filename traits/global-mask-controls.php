@@ -130,12 +130,11 @@
 		        ]
 		    );
 
-		    $this->add_control(
+		    $this->add_responsive_control(
 		        'image_mask_shape_custom_size',
 		        [
 		            'label'      => _x('Custom Size', 'Mask Image', 'bdthemes-element-pack'),
 		            'type'       => Controls_Manager::SLIDER,
-		            'responsive' => true,
 		            'size_units' => ['px', 'em', '%', 'vw'],
 		            'range'      => [
 		                'px' => [

@@ -4506,6 +4506,13 @@ trait Global_Widget_Controls {
 				'type'        => Controls_Manager::SWITCHER,
 			]
 		);
+		$this->add_control(
+			'mousewheel',
+			[
+				'label' => __('Mousewheel', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'  => Controls_Manager::SWITCHER,
+			]
+		);
 		$this->end_controls_section();
 
 		//Style
@@ -7683,12 +7690,13 @@ trait Global_Widget_Controls {
 				'slider' => [
 					'data-settings' => [
 						wp_json_encode(array_filter([
-							"autoplay"       => ("yes" == $settings["autoplay"]) ? ["delay"          => $settings["autoplay_speed"]] : false,
+							"autoplay"       => ("yes" == $settings["autoplay"]) ? ["delay" => $settings["autoplay_speed"]] : false,
 							"loop"           => ($settings["loop"] == "yes") ? true : false,
 							"speed"          => $settings["speed"]["size"],
 							"pauseOnHover"   => ("yes" == $settings["pauseonhover"]) ? true : false,
 							"observer"       => ($settings["observer"]) ? true : false,
 							"observeParents" => ($settings["observer"]) ? true : false,
+							"mousewheel" 	 => ($settings["mousewheel"]) ? true : false,
 							"effect"         => $settings["transition"],
 							"navigation"     => [
 								"nextEl" => "#" . $id . " .bdt-navigation-next",
