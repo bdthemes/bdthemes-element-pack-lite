@@ -44,14 +44,10 @@ class Member extends Module_Base {
 	public function get_style_depends() {
 		if ( $this->ep_is_edit_mode() ) {
 			return [ 
-				'elementor-icons-fa-solid',
-				'elementor-icons-fa-brands',
 				'ep-styles'
 			];
 		} else {
 			return [ 
-				'elementor-icons-fa-solid',
-				'elementor-icons-fa-brands',
 				'ep-member'
 			];
 		}

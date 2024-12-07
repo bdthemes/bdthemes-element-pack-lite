@@ -351,6 +351,14 @@ class Call_Out extends Module_Base {
 				],
 			]
 		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'button_adv_background',
+				'types'    => [ 'gradient' ],
+				'selector' => '{{WRAPPER}} .bdt-ep-callout-button',
+			]
+		);
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(), [ 
@@ -359,6 +367,7 @@ class Call_Out extends Module_Base {
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-ep-callout-button',
+				'separator'   => 'before',
 			]
 		);
 
@@ -444,6 +453,14 @@ class Call_Out extends Module_Base {
 				],
 			]
 		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'button_adv_background_hover',
+				'types'    => [ 'gradient' ],
+				'selector' => '{{WRAPPER}} .bdt-ep-callout-button:hover',
+			]
+		);
 
 		$this->add_control(
 			'button_hover_border_color',
@@ -476,9 +493,7 @@ class Call_Out extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -493,7 +508,6 @@ class Call_Out extends Module_Base {
 		);
 
 		$this->start_controls_tabs( 'tabs_callout_icon_style' );
-
 		$this->start_controls_tab(
 			'tab_callout_icon_normal',
 			[ 
@@ -573,7 +587,6 @@ class Call_Out extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->start_controls_tab(
 			'tab_callout_icon_hover',
 			[ 
@@ -616,9 +629,7 @@ class Call_Out extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 
 	}
