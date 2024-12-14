@@ -96,19 +96,19 @@ class Module extends Element_Pack_Module_Base {
 			}
 
 			if ('widgets' == $settings['section_equal_height_selector']) {
-				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > .elementor-widget-container';
+				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > div';
 			}
 
 			if ('widgets_c1' == $settings['section_equal_height_selector']) {
-				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > .elementor-widget-container > div:nth-of-type(1)';
+				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > div > div:nth-of-type(1)';
 			}
 
 			if ('widgets_c2' == $settings['section_equal_height_selector']) {
-				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > .elementor-widget-container > div > div:nth-of-type(1)';
+				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > div > div > div:nth-of-type(1)';
 			}
 
 			if ('widgets_c3' == $settings['section_equal_height_selector']) {
-				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > .elementor-widget-container > div > div > div:nth-of-type(1)';
+				$height_option = 'target: .ep-section-eql-height .elementor-element .elementor-widget > div > div > div > div:nth-of-type(1)';
 			}
 
 			if ('custom' == $settings['section_equal_height_selector'] and $settings['section_equal_height_custom_selector']) {

@@ -1329,7 +1329,7 @@ class ModuleService {
                     'default'      => 'on',
                     'widget_type'  => 'free',
                     'content_type' => 'others',
-                    'demo_url'     => 'https://demo.elementpack.pro/element/search/',
+                    'demo_url'     => 'https://demo.elementpack.pro/element/scroll-button/',
                     'video_url'    => 'https://youtu.be/y8LJCO3tQqk',
                 ],
                 [
@@ -1865,7 +1865,7 @@ class ModuleService {
                     'default'      => 'off',
                     'widget_type'  => 'pro',
                     'demo_url'     => 'https://demo.elementpack.pro/element/reveal-effects/',
-                    'video_url'    => 'https://youtu.be/mSnoY510IUE',
+                    'video_url'    => 'https://youtu.be/A4tMF9Bl8ok?si=cDjicQQci7njUFyI',
                 ],
                 [
 					'name'        => 'ripple-effects',

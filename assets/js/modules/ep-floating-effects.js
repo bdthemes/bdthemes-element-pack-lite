@@ -32,6 +32,7 @@
             run: function () {
                 var options = this.getDefaultSettings(),
                     element = this.findElement('.elementor-widget-container').get(0);
+                    
 
                 if ( this.settings('translate_toggle') ) {
                     if ( this.settings('translate_x.sizes.from').length !== 0 || this.settings('translate_x.sizes.to').length !== 0 ) {

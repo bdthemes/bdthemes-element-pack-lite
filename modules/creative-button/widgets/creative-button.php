@@ -46,6 +46,9 @@ class Creative_Button extends Module_Base {
 		return 'https://youtu.be/6f2t-79MfnU';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
@@ -164,7 +167,7 @@ class Creative_Button extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}.elementor-widget-bdt-creative-button .elementor-widget-container' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-creative-button' => 'text-align: {{VALUE}};',
 				],
 			]
 		);

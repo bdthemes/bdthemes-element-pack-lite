@@ -63,6 +63,9 @@ class Testimonial_Grid extends Module_Base {
 		return $this->_query;
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return true;
 	}
@@ -774,7 +777,7 @@ class Testimonial_Grid extends Module_Base {
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .elementor-widget-container .bdt-rating .bdt-rating-item' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating .bdt-rating-item' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -791,7 +794,7 @@ class Testimonial_Grid extends Module_Base {
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .elementor-widget-container .bdt-rating .bdt-rating-item' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating .bdt-rating-item' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

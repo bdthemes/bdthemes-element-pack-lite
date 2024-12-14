@@ -61,6 +61,9 @@ class Contact_Form extends Module_Base {
 		return 'https://youtu.be/faIeyW7LOJ8';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return true;
 	}
@@ -607,12 +610,15 @@ class Contact_Form extends Module_Base {
 				'range'     => [ 
 					'px' => [ 
 						'min' => 0,
-						'max' => 60,
+						'max' => 100,
 					],
 				],
-				'selectors' => [ 
-					'{{WRAPPER}} .bdt-field-group:not(:last-child)'               => 'margin-bottom: {{SIZE}}{{UNIT}};margin-top: 0;',
-					'{{WRAPPER}} .bdt-name-email-inline + .bdt-name-email-inline' => 'padding-left: {{SIZE}}px',
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-contact-form .bdt-grid-small' => 'margin-left: -{{SIZE}}{{UNIT}};',
+					'(mobile){{WRAPPER}} .bdt-contact-form .bdt-grid-small' => 'margin-left: -1px;',
+					'{{WRAPPER}} .bdt-contact-form .bdt-grid-small>*' => 'padding-left: {{SIZE}}{{UNIT}};',
+					'(mobile){{WRAPPER}} .bdt-contact-form .bdt-grid-small>*' => 'padding-left: 1px;',
+					'{{WRAPPER}} .bdt-contact-form .bdt-grid+.bdt-grid-small, {{WRAPPER}} .bdt-contact-form .bdt-grid-small>.bdt-grid-margin' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
