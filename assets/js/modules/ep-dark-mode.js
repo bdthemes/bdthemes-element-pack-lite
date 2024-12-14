@@ -14,12 +14,12 @@
 
             getDefaultSettings: function () {
                 return {
-                    left            : 'unset',
-                    time            : '.5s',
-                    mixColor        : '#fff',
-                    backgroundColor : '#fff',
-                    saveInCookies   : false,
-                    label           : '🌓',
+                    left: 'unset',
+                    time: '.5s',
+                    mixColor: '#fff',
+                    backgroundColor: '#fff',
+                    saveInCookies: false,
+                    label: '🌓',
                     autoMatchOsTheme: false
                 };
             },
@@ -37,7 +37,7 @@
 
             setCookie: function (name, value, days) {
                 var expires = "";
-                if ( days ) {
+                if (days) {
                     var date = new Date();
                     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
                     expires = "; expires=" + date.toUTCString();
@@ -46,11 +46,11 @@
             },
             getCookie: function (name) {
                 var nameEQ = name + "=";
-                var ca     = document.cookie.split(';');
-                for ( var i = 0; i < ca.length; i++ ) {
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
                     var c = ca[i];
-                    while ( c.charAt(0) == ' ' ) c = c.substring(1, c.length);
-                    if ( c.indexOf(nameEQ) == 0 ) return c.substring(nameEQ.length, c.length);
+                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
                 }
                 return null;
             },
@@ -61,8 +61,7 @@
 
 
             run: function () {
-                var options = this.getDefaultSettings(),
-                    element = this.findElement('.elementor-widget-container').get(0);
+                var options = this.getDefaultSettings();
 
                 var autoMatchOsTheme = (this.settings('autoMatchOsTheme') === 'yes'
                     && this.settings('autoMatchOsTheme') !== 'undefined');
@@ -70,12 +69,12 @@
                 var saveInCookies = (this.settings('saveInCookies') === 'yes'
                     && this.settings('saveInCookies') !== 'undefined');
 
-                options.left             = 'unset';
-                options.time             = this.settings('time.size') / 1000 + 's';
-                options.mixColor         = this.settings('mix_color');
-                options.backgroundColor  = this.settings('default_background');
-                options.saveInCookies    = saveInCookies;
-                options.label            = '🌓';
+                options.left = 'unset';
+                options.time = this.settings('time.size') / 1000 + 's';
+                options.mixColor = this.settings('mix_color');
+                options.backgroundColor = this.settings('default_background');
+                options.saveInCookies = saveInCookies;
+                options.label = '🌓';
                 options.autoMatchOsTheme = autoMatchOsTheme;
 
                 $('body').removeClass(function (index, css) {
@@ -85,33 +84,31 @@
 
                 $(this.settings('ignore_element')).addClass('darkmode-ignore');
 
-                if ( options.mixColor ) {
+                if (options.mixColor) {
 
                     $('.darkmode-toggle, .darkmode-layer, .darkmode-background').remove();
 
                     var darkmode = new Darkmode(options);
                     darkmode.showWidget();
 
-                    if ( this.settings('default_mode') === 'dark' ) {
+                    if (this.settings('default_mode') === 'dark') {
                         darkmode.toggle();
                         $('body').addClass('darkmode--activated');
                         $('.darkmode-layer').addClass('darkmode-layer--simple darkmode-layer--expanded');
-                        // console.log(darkmode.isActivated()) // will return true
                     } else {
                         $('body').removeClass('darkmode--activated');
                         $('.darkmode-layer').removeClass('darkmode-layer--simple darkmode-layer--expanded');
-                        // console.log(darkmode.isActivated()) // will return true
                     }
 
                     var global_this = this,
-                        editMode    = $('body').hasClass('elementor-editor-active');
+                        editMode = $('body').hasClass('elementor-editor-active');
 
-                    if ( editMode === false && saveInCookies === true ) {
+                    if (editMode === false && saveInCookies === true) {
                         $('.darkmode-toggle').on('click', function () {
-                            if ( darkmode.isActivated() === true ) {
+                            if (darkmode.isActivated() === true) {
                                 global_this.eraseCookie('bdtDarkModeUserAction');
                                 global_this.setCookie('bdtDarkModeUserAction', 'dark', 10);
-                            } else if ( darkmode.isActivated() === false ) {
+                            } else if (darkmode.isActivated() === false) {
                                 global_this.eraseCookie('bdtDarkModeUserAction');
                                 global_this.setCookie('bdtDarkModeUserAction', 'light', 10);
                             } else {
@@ -121,8 +118,8 @@
 
                         var userCookie = this.getCookie('bdtDarkModeUserAction')
 
-                        if ( userCookie !== null && userCookie !== 'undefined' ) {
-                            if ( userCookie === 'dark' ) {
+                        if (userCookie !== null && userCookie !== 'undefined') {
+                            if (userCookie === 'dark') {
                                 darkmode.toggle();
                                 $('body').addClass('darkmode--activated');
                                 $('.darkmode-layer').addClass('darkmode-layer--simple darkmode-layer--expanded');

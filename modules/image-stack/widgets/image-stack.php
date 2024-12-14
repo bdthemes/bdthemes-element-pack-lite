@@ -58,6 +58,9 @@ class Image_Stack extends Module_Base {
 		return 'https://youtu.be/maLIlug2RwM';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
@@ -287,7 +290,7 @@ class Image_Stack extends Module_Base {
 				],
 				'default'   => 'center',
 				'selectors' => [ 
-					'{{WRAPPER}}.elementor-widget-bdt-image-stack .elementor-widget-container' => 'text-align: {{VALUE}};'
+					'{{WRAPPER}}.elementor-widget-bdt-image-stack' => 'text-align: {{VALUE}};'
 				]
 			]
 		);

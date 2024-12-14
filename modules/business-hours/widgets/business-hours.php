@@ -54,6 +54,9 @@ class Business_Hours extends Module_Base {
         return 'https://youtu.be/1QfZ-os75rQ';
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
@@ -997,7 +1000,6 @@ class Business_Hours extends Module_Base {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-business-day' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .elementor-widget-container' => 'overflow: hidden;',
                 ],
             ]
         );

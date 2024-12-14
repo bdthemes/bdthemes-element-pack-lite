@@ -48,6 +48,9 @@ class Trailer_Box extends Module_Base {
 		return 'https://youtu.be/3AR5RlBAAYg';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
@@ -163,7 +166,7 @@ class Trailer_Box extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.elementor-widget-bdt-trailer-box' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 				'separator'	=> 'before',
 			]
@@ -295,8 +298,8 @@ class Trailer_Box extends Module_Base {
 					'button_icon[value]!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container .bdt-trailer-box-button-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .elementor-widget-container .bdt-trailer-box-button-icon-left'  => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-button-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-button-icon-left'  => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1562,8 +1565,8 @@ class Trailer_Box extends Module_Base {
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container a.bdt-trailer-box-button' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .elementor-widget-container a.bdt-trailer-box-button svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .bdt-trailer-box a.bdt-trailer-box-button' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-trailer-box a.bdt-trailer-box-button svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -1919,7 +1922,9 @@ class Trailer_Box extends Module_Base {
 
 		$this->end_controls_section();
 
-		// Background Overlay
+		/**
+		 * Background Overlay
+		 */
 		$this->start_controls_section(
 			'section_advanced_background_overlay',
 			[
@@ -1932,7 +1937,6 @@ class Trailer_Box extends Module_Base {
 		);
 
 		$this->start_controls_tabs( 'tabs_background_overlay' );
-
 		$this->start_controls_tab(
 			'tab_background_overlay_normal',
 			[
@@ -1944,7 +1948,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'background_overlay',
-				'selector' => '{{WRAPPER}} .elementor-widget-container > .elementor-background-overlay',
+				'selector' => '{{WRAPPER}} .elementor-background-overlay',
 			]
 		);
 
@@ -1963,7 +1967,7 @@ class Trailer_Box extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container > .elementor-background-overlay' => 'opacity: {{SIZE}};',
+					'{{WRAPPER}} .elementor-background-overlay' => 'opacity: {{SIZE}};',
 				],
 				'condition' => [
 					'background_overlay_background' => [ 'classic', 'gradient' ],
@@ -1972,7 +1976,6 @@ class Trailer_Box extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->start_controls_tab(
 			'tab_background_overlay_hover',
 			[
@@ -1984,7 +1987,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'background_overlay_hover',
-				'selector' => '{{WRAPPER}}:hover .elementor-widget-container > .elementor-background-overlay',
+				'selector' => '{{WRAPPER}}:hover .elementor-background-overlay',
 			]
 		);
 
@@ -2003,18 +2006,15 @@ class Trailer_Box extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}:hover .elementor-widget-container > .elementor-background-overlay' => 'opacity: {{SIZE}};',
+					'{{WRAPPER}}:hover .elementor-background-overlay' => 'opacity: {{SIZE}};',
 				],
 				'condition' => [
 					'background_overlay_hover_background' => [ 'classic', 'gradient' ],
 				],
 			]
 		);
-
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 
 	}

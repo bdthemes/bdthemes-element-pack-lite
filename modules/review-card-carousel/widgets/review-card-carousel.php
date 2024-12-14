@@ -51,7 +51,7 @@ class Review_Card_Carousel extends Module_Base {
 		if ( $this->ep_is_edit_mode() ) {
 			return [ 'ep-styles' ];
 		} else {
-			return [ 'ep-font', 'ep-review-card-carousel' ];
+			return [ 'e-swiper', 'ep-font', 'ep-review-card-carousel' ];
 		}
 	}
 	public function get_script_depends() {
@@ -66,6 +66,9 @@ class Review_Card_Carousel extends Module_Base {
 		return 'https://youtu.be/7kMyajVai6E';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}

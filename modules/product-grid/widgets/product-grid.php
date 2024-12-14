@@ -58,6 +58,9 @@ class Product_Grid extends Module_Base {
 		return 'https://youtu.be/-UJhU-ak5_k';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
@@ -732,27 +735,7 @@ class Product_Grid extends Module_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'item_shadow_padding',
-			[ 
-				'label'       => __( 'Match Padding', 'bdthemes-element-pack' ),
-				'description' => __( 'You have to add padding for matching overlaping normal/hover box shadow when you used Box Shadow option.', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::SLIDER,
-				'range'       => [ 
-					'px' => [ 
-						'min'  => 0,
-						'step' => 1,
-						'max'  => 50,
-					]
-				],
-				'selectors'   => [ 
-					'{{WRAPPER}} .swiper-carousel' => 'padding: {{SIZE}}{{UNIT}}; margin: 0 -{{SIZE}}{{UNIT}};'
-				],
-			]
-		);
-
 		$this->end_controls_tab();
-
 		$this->start_controls_tab(
 			'tab_item_hover',
 			[ 

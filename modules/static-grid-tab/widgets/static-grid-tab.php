@@ -57,7 +57,7 @@ class Static_Grid_Tab extends Module_Base
 		if ($this->ep_is_edit_mode()) {
 			return ['ep-styles'];
 		} else {
-			return ['ep-font', 'ep-static-grid-tab'];
+			return ['e-swiper', 'ep-font', 'ep-static-grid-tab'];
 		}
 	}
 
@@ -75,6 +75,9 @@ class Static_Grid_Tab extends Module_Base
 		return 'https://www.youtube.com/watch?v=HIvQX9eLWU8';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}

@@ -51,7 +51,7 @@ class Panel_Slider extends Module_Base {
 		if ( $this->ep_is_edit_mode() ) {
 			return [ 'ep-styles' ];
 		} else {
-			return [ 'ep-font', 'ep-panel-slider' ];
+			return [ 'e-swiper', 'ep-font', 'ep-panel-slider' ];
 		}
 	}
 
@@ -67,6 +67,9 @@ class Panel_Slider extends Module_Base {
 		return 'https://youtu.be/_piVTeJd0g4';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
@@ -593,8 +596,8 @@ class Panel_Slider extends Module_Base {
 					'shadow_mode' => 'yes',
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .elementor-widget-container:before' => 'background: linear-gradient(to right, {{VALUE}} 5%,rgba(255,255,255,0) 100%);',
-					'{{WRAPPER}} .elementor-widget-container:after'  => 'background: linear-gradient(to right, rgba(255,255,255,0) 0%, {{VALUE}} 95%);',
+					'{{WRAPPER}}.bdt-ep-shadow-mode-yes:before' => is_rtl() ? 'background: linear-gradient(to left, {{VALUE}} 5%,rgba(255,255,255,0) 100%);' : 'background: linear-gradient(to right, {{VALUE}} 5%,rgba(255,255,255,0) 100%);',
+					'{{WRAPPER}}.bdt-ep-shadow-mode-yes:after'  => is_rtl() ? 'background: linear-gradient(to left, rgba(255,255,255,0) 0%, {{VALUE}} 95%);' : 'background: linear-gradient(to right, rgba(255,255,255,0) 0%, {{VALUE}} 95%);',
 				],
 			]
 		);

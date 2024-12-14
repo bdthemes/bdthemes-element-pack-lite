@@ -49,6 +49,9 @@ class Reading_Timer extends Module_Base {
         return 'https://youtu.be/7lRyOmR6yqo?si=KUcyEB7v3ZVrVVC8';
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return true;
 	}
@@ -268,7 +271,7 @@ class Reading_Timer extends Module_Base {
                     ],
                 ],
                 'selectors'     => [
-                    '{{WRAPPER}}.elementor-widget-bdt-reading-timer .elementor-widget-container' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}}.elementor-widget-bdt-reading-timer' => 'text-align: {{VALUE}};',
                 ],
                 'separator'     => 'before',
             ]

@@ -43,7 +43,7 @@ class Slider extends Module_Base {
 		if ($this->ep_is_edit_mode()) {
 			return ['ep-styles'];
 		} else {
-			return ['ep-slider', 'ep-font'];
+			return ['e-swiper', 'ep-slider', 'ep-font'];
 		}
 	}
 
@@ -67,6 +67,9 @@ class Slider extends Module_Base {
 		return 'https://youtu.be/SI4K4zuNOoE';
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 	protected function is_dynamic_content(): bool {
 		return true;
 	}
