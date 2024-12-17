@@ -233,33 +233,6 @@ class Module extends Element_Pack_Module_Base {
 			]
 		);
 
-		$widget->add_control(
-			'ep_background_overlay_position_relative',
-			[ 
-				'label'     => esc_html__( 'Position Relative', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'selectors' => [ 
-					'{{WRAPPER}}.bdt-background-overlay-yes' => 'position: relative;',
-				]
-			]
-		);
-
-		$widget->add_control(
-			'ep_background_overlay_widget_zindex',
-			[ 
-				'label'     => esc_html__( 'Widget Z-Index', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::NUMBER,
-				'default'   => '-1',
-				'dynamic'   => [ 
-					'active' => true,
-				],
-				'condition' => [ 'ep_background_overlay_position_relative' => 'yes' ],
-				'selectors' => [ 
-					'{{WRAPPER}}.bdt-background-overlay-yes' => 'z-index: {{VALUE}};',
-				]
-			]
-		);
-
 		$widget->end_controls_section();
 	}
 
