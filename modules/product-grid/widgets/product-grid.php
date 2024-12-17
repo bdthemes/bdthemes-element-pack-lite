@@ -959,7 +959,7 @@ class Product_Grid extends Module_Base {
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-ep-product-grid-title' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-product-grid-title-price' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
