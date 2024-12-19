@@ -49,17 +49,17 @@ class Panel_Slider extends Module_Base {
 
 	public function get_style_depends() {
 		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
+			return [ 'swiper', 'ep-styles' ];
 		} else {
-			return [ 'e-swiper', 'ep-font', 'ep-panel-slider' ];
+			return [ 'swiper', 'ep-font', 'ep-panel-slider' ];
 		}
 	}
 
 	public function get_script_depends() {
 		if ( $this->ep_is_edit_mode() ) {
-			return [ 'imagesloaded', 'bdt-parallax', 'ep-scripts' ];
+			return [ 'swiper', 'imagesloaded', 'bdt-parallax', 'ep-scripts' ];
 		} else {
-			return [ 'imagesloaded', 'bdt-parallax', 'ep-panel-slider' ];
+			return [ 'swiper', 'imagesloaded', 'bdt-parallax', 'ep-panel-slider' ];
 		}
 	}
 

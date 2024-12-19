@@ -33,17 +33,17 @@ class Image_Magnifier extends Module_Base {
 
 	public function get_style_depends() {
         if ($this->ep_is_edit_mode()) {
-            return ['ep-styles'];
+            return ['swiper', 'ep-styles'];
         } else {
-            return [ 'e-swiper', 'imagezoom' ];
+            return [ 'swiper', 'imagezoom' ];
         }
     }
 
 	public function get_script_depends() {
         if ($this->ep_is_edit_mode()) {
-            return ['imagezoom', 'imagesloaded', 'ep-scripts'];
+            return ['swiper', 'imagezoom', 'imagesloaded', 'ep-scripts'];
         } else {
-			return [ 'imagezoom', 'imagesloaded', 'ep-image-magnifier' ];
+			return [ 'swiper', 'imagezoom', 'imagesloaded', 'ep-image-magnifier' ];
         }
 	}
 
