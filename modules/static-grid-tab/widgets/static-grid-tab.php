@@ -55,18 +55,18 @@ class Static_Grid_Tab extends Module_Base
 	public function get_style_depends()
 	{
 		if ($this->ep_is_edit_mode()) {
-			return ['ep-styles'];
+			return ['swiper', 'ep-styles'];
 		} else {
-			return ['e-swiper', 'ep-font', 'ep-static-grid-tab'];
+			return ['swiper', 'ep-font', 'ep-static-grid-tab'];
 		}
 	}
 
 	public function get_script_depends()
 	{
 		if ($this->ep_is_edit_mode()) {
-			return ['gridtab', 'ep-scripts'];
+			return ['swiper', 'gridtab', 'ep-scripts'];
 		} else {
-			return ['gridtab', 'ep-static-grid-tab'];
+			return ['swiper', 'gridtab', 'ep-static-grid-tab'];
 		}
 	}
 

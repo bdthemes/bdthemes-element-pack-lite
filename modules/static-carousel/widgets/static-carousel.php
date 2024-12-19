@@ -57,17 +57,17 @@ class Static_Carousel extends Module_Base
     public function get_style_depends()
     {
         if ($this->ep_is_edit_mode()) {
-            return ['ep-styles'];
+            return ['swiper', 'ep-styles'];
         } else {
-            return ['e-swiper', 'ep-font', 'ep-static-carousel'];
+            return ['swiper', 'ep-font', 'ep-static-carousel'];
         }
     }
     public function get_script_depends()
     {
         if ($this->ep_is_edit_mode()) {
-            return ['ep-scripts'];
+            return ['swiper', 'ep-scripts'];
         } else {
-            return ['ep-static-carousel'];
+            return ['swiper', 'ep-static-carousel'];
         }
     }
 

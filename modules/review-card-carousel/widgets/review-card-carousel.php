@@ -49,16 +49,16 @@ class Review_Card_Carousel extends Module_Base {
 
 	public function get_style_depends() {
 		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
+			return [ 'swiper', 'ep-styles' ];
 		} else {
-			return [ 'e-swiper', 'ep-font', 'ep-review-card-carousel' ];
+			return [ 'swiper', 'ep-font', 'ep-review-card-carousel' ];
 		}
 	}
 	public function get_script_depends() {
 		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-scripts' ];
+			return [ 'swiper', 'ep-scripts' ];
 		} else {
-			return [ 'ep-review-card-carousel', 'ep-text-read-more-toggle' ];
+			return [ 'swiper', 'ep-review-card-carousel', 'ep-text-read-more-toggle' ];
 		}
 	}
 

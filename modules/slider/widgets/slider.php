@@ -41,17 +41,17 @@ class Slider extends Module_Base {
 
 	public function get_style_depends() {
 		if ($this->ep_is_edit_mode()) {
-			return ['ep-styles'];
+			return ['swiper', 'ep-styles'];
 		} else {
-			return ['e-swiper', 'ep-slider', 'ep-font'];
+			return ['swiper', 'ep-slider', 'ep-font'];
 		}
 	}
 
 	public function get_script_depends() {
 		if ($this->ep_is_edit_mode()) {
-			return ['imagesloaded', 'ep-scripts'];
+			return ['swiper', 'imagesloaded', 'ep-scripts'];
 		} else {
-			return ['imagesloaded', 'ep-slider'];
+			return ['swiper', 'imagesloaded', 'ep-slider'];
 		}
 	}
 
