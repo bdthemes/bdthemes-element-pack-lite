@@ -841,22 +841,27 @@ class Cookie_Consent extends Module_Base {
 
 		if ( ! empty( $settings['custom_attributes'] ) ) {
 			$attributes = explode( "\n", $settings['custom_attributes'] );
-
+		
 			$reserved_attr = [ 'role', 'href' ];
-
+		
 			foreach ( $attributes as $attribute ) {
 				if ( ! empty( $attribute ) ) {
 					$attr = explode( '|', $attribute, 2 );
+					
 					if ( ! isset( $attr[1] ) ) {
 						$attr[1] = '';
 					}
-
-					if ( ! in_array( strtolower( $attr[0] ), $reserved_attr ) ) {
-						$this->add_render_attribute( 'custom-attr', trim( $attr[0] ), trim( $attr[1] ) );
+		
+					$attr_name = sanitize_key( trim( $attr[0] ) );
+					$attr_value = esc_attr( trim( $attr[1] ) );
+		
+					if ( ! in_array( strtolower( $attr_name ), $reserved_attr ) ) {
+						$this->add_render_attribute( 'custom-attr', $attr_name, $attr_value );
 					}
 				}
 			}
 		}
+		
 
 
 		$this->add_render_attribute(

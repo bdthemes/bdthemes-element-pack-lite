@@ -32,7 +32,7 @@
 		 *
 		 * @return \WP_Error         The id of the user that was created, or error if failed.
 		 */
-		protected function element_pack_register_user( $email, $password, $is_password_required, $first_name, $last_name ) {
+		protected function element_pack_register_user( $email, $password, $is_password_required, $first_name, $last_name, $terms ) {
 			$errors = new \WP_Error();
 			
 			// Email address is used as both username and email. It is also the only
@@ -83,6 +83,7 @@
 				'first_name' => $first_name,
 				'last_name'  => $last_name,
 				'nickname'   => $first_name,
+				'meta_input' => [ 'accepted_terms' => $terms ]
 			);
 			
 			$user_data = apply_filters( 'elementor_pack_user_register_insert_data', $user_data );
@@ -95,6 +96,9 @@
 			
 			return $result;
 		}
+
+
+		
 		
 		/**
 		 * Handles the registration of a new user.
@@ -116,6 +120,8 @@
 					
 					$post_id   = $_REQUEST['page_id'];
 					$widget_id = $_REQUEST['widget_id'];
+
+					$terms = $_REQUEST['user_terms'];
 					
 					$settings = $this->get_widget_settings( $post_id, $widget_id );
 					
@@ -125,7 +131,7 @@
 					$first_name           = sanitize_text_field( $_POST['first_name'] );
 					$last_name            = sanitize_text_field( $_POST['last_name'] );
 					
-					$result = $this->element_pack_register_user( $email, $password, $is_password_required, $first_name, $last_name );
+					$result = $this->element_pack_register_user( $email, $password, $is_password_required, $first_name, $last_name, $terms );
 					
 					if ( is_wp_error( $result ) ) {
 						// Parse errors into a string and append as parameter to redirect

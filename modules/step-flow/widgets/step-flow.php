@@ -234,17 +234,6 @@ class Step_Flow extends Module_Base {
         );
 
         $this->add_control(
-            'show_indicator',
-            [
-                'label' => __('Show Direction', 'bdthemes-element-pack'),
-                'type' => Controls_Manager::SWITCHER,
-                'return_value' => 'yes',
-                'default' => 'yes',
-                'style_transfer' => true,
-            ]
-        );
-
-        $this->add_control(
             'readmore',
             [
                 'label' => __('Read More', 'bdthemes-element-pack'),
@@ -260,6 +249,35 @@ class Step_Flow extends Module_Base {
                 'default' => 'yes'
             ]
         );
+
+        $this->add_control(
+            'show_indicator',
+            [
+                'label' => __('Show Direction', 'bdthemes-element-pack'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'style_transfer' => true,
+            ]
+        );
+        $this->add_control(
+			'direction_hide_on',
+			[ 
+				'label'              => __( 'Direction Hide On', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'               => Controls_Manager::SELECT2,
+				'multiple'           => true,
+				'label_block'        => true,
+				'options'            => [ 
+					'desktop' => __( 'Desktop', 'bdthemes-element-pack' ),
+					'tablet'  => __( 'Tablet', 'bdthemes-element-pack' ),
+					'mobile'  => __( 'Mobile', 'bdthemes-element-pack' ),
+				],
+				'frontend_available' => true,
+                'condition'          => [
+                    'show_indicator' => 'yes',
+                ],
+			]
+		);
 
         $this->add_control(
             'global_link',
@@ -2227,17 +2245,34 @@ class Step_Flow extends Module_Base {
     public function render_direction() {
         $settings = $this->get_settings_for_display();
 
+        if (!$this->get_settings('show_indicator')) {
+			return;
+		}
+
+        $direction_hide_on_setup = '';
+		if ( ! empty( $settings['direction_hide_on'] ) ) {
+			foreach ( $settings['direction_hide_on'] as $element ) {
+
+				if ( $element == 'desktop' ) {
+					$direction_hide_on_setup .= ' bdt-desktop';
+				}
+				if ( $element == 'tablet' ) {
+					$direction_hide_on_setup .= ' bdt-tablet';
+				}
+				if ( $element == 'mobile' ) {
+					$direction_hide_on_setup .= ' bdt-mobile';
+				}
+			}
+		}
+
         $svg_image = BDTEP_ASSETS_URL . 'images/direction/step-' . $settings['direction_style'] . '.svg';
+        $this->add_render_attribute('direction', 'class', 'bdt-direction-svg ' . esc_attr( $direction_hide_on_setup ));
 
-        $this->add_render_attribute('direction', 'class', 'bdt-direction-svg');
-
-    ?>
-
+        ?>
         <div <?php $this->print_render_attribute_string('direction'); ?>>
             <img class="bdt-animation-stroke" data-bdt-svg="stroke-animation: true" src="<?php echo esc_url($svg_image); ?>" alt="Direction Arrows">
         </div>
-
-    <?php
+        <?php
     }
 
     protected function render() {

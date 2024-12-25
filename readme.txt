@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4.0
-Stable tag: 5.10.14
+Stable tag: 5.10.15
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.26.0
+Elementor tested up to: 3.26.3
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -355,6 +355,14 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.15 [25th December 2024] =
+
+* Added: Terms and condition field added in user register widget
+* Added: Direction hide on responsive option added in step flow widget
+* Added: Optimized Markup compatibility added in extensions
+* Fixed: Security issue fixed in Cookie Consent widget ( Thanks to zer0gh0st ) 
+* Fixed: Default item link issue fixed in Panel Slider, Facny Icons, Custom Gallery, Lightbox widgets
 
 = 5.10.14 [19th December 2024] =
 
