@@ -29,7 +29,7 @@
             run: function () {
                 var options = this.getDefaultSettings();
                 var widgetID = this.$element.data('id');
-                var widgetContainer = document.querySelector('.elementor-element-' + widgetID + ' .elementor-widget-container');
+                var widgetContainer = document.querySelector('.elementor-element-' + widgetID);
 
                 if (this.settings('tooltip_text')) {
                     options.content = EP_SAFE_HTML(this.settings('tooltip_text'));

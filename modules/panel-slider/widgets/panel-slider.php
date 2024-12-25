@@ -103,6 +103,9 @@ class Panel_Slider extends Module_Base {
 				'type'        => Controls_Manager::MEDIA,
 				'dynamic'     => [ 'active' => true ],
 				'description' => __( 'Use same size ratio image', 'bdthemes-element-pack' ),
+				'default'	   => [ 
+					'url' => BDTEP_ASSETS_URL . '/images/panel-slider.svg',
+				],
 			]
 		);
 

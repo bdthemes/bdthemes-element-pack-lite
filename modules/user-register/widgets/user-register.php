@@ -196,6 +196,29 @@ class User_Register extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'show_terms',
+			[ 
+				'label'       => esc_html__( 'Terms Field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'        => Controls_Manager::SWITCHER,
+				'separator'   => 'before',
+			]
+		);
+
+		$this->add_control(
+			'terms_link',
+			[ 
+				'label'     => esc_html__( 'Terms Link', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::URL,
+				'default'   => [ 
+					'url' => '#',
+				],
+				'condition' => [ 
+					'show_terms' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -643,6 +666,56 @@ class User_Register extends Module_Base {
 						],
 						[ 
 							'name'  => 'is_confirm_password_input',
+							'value' => 'yes',
+						],
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'terms_label',
+			[ 
+				'label'      => esc_html__( 'Terms Label', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::TEXT,
+				'default'    => esc_html__( 'I agree to the', 'bdthemes-element-pack' ),
+				'conditions' => [ 
+					'terms' => [ 
+						[ 
+							'name'  => 'show_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'custom_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'show_terms',
+							'value' => 'yes',
+						],
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'terms_link_text',
+			[ 
+				'label'      => esc_html__( 'Terms Link Text', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::TEXT,
+				'default'    => esc_html__( 'Terms and Conditions', 'bdthemes-element-pack' ),
+				'conditions' => [ 
+					'terms' => [ 
+						[ 
+							'name'  => 'show_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'custom_labels',
+							'value' => 'yes',
+						],
+						[ 
+							'name'  => 'show_terms',
 							'value' => 'yes',
 						],
 					],
@@ -1606,9 +1679,131 @@ class User_Register extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
+		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'section_terms_style',
+			[ 
+				'label'     => esc_html__( 'Terms Field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'show_terms' => 'yes',
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_terms_field_style' );
+		$this->start_controls_tab(
+			'tab_terms_text_field',
+			[ 
+				'label' => esc_html__( 'Text', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'terms_text_color',
+			[ 
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'#bdt-user-register{{ID}} .bdt-terms-label' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'terms_link_color',
+			[ 
+				'label'     => esc_html__( 'Link Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'#bdt-user-register{{ID}} .bdt-terms-label a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'terms_link_hover_color',
+			[ 
+				'label'     => esc_html__( 'Link Hover Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'#bdt-user-register{{ID}} .bdt-terms-label a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'     => 'terms_typography',
+				'selector' => '#bdt-user-register{{ID}} .bdt-terms-label',
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_terms_checkbox_field',
+			[ 
+				'label' => esc_html__( 'Checkbox', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'terms_checkbox_color',
+			[ 
+				'label'     => esc_html__( 'Checkbox Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'#bdt-user-register{{ID}} .bdt-term-input-wrapper .bdt-checkbox' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'terms_checkbox_checked_color',
+			[ 
+				'label'     => esc_html__( 'Checkbox Checked Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'#bdt-user-register{{ID}} .bdt-term-input-wrapper .bdt-checkbox:checked' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'        => 'terms_checkbox_border',
+                'selector'    => '#bdt-user-register{{ID}} .bdt-term-input-wrapper .bdt-checkbox',
+            ]
+        );
+		$this->add_responsive_control(
+			'terms_checkbox_border_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [ 
+					'#bdt-user-register{{ID}} .bdt-term-input-wrapper .bdt-checkbox' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'terms_checkbox_size',
+			[
+				'label' => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'#bdt-user-register{{ID}} .bdt-term-input-wrapper .bdt-checkbox' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -2048,6 +2243,23 @@ class User_Register extends Module_Base {
 			);
 		}
 
+		if ( isset( $settings['show_terms'] ) ) {
+			$this->add_render_attribute(
+				[ 
+					'terms_input' => [ 
+						'type'        => 'checkbox',
+						'name'        => 'user_terms',
+						'id'          => 'user_terms' . esc_attr( $id ),
+						'class'       => [ 
+							'bdt-user-register-terms',
+							'bdt-checkbox',	
+							'bdt-form-' . $settings['input_size'],
+						],
+					]
+				]
+			);
+		}
+
 		$this->add_render_attribute( 'field-group', 'class', 'elementor-field-required' )
 			->add_render_attribute( 'input', 'required', true )
 			->add_render_attribute( 'input', 'aria-required', 'true' );
@@ -2278,6 +2490,42 @@ class User_Register extends Module_Base {
 					</span>
 				</div>
 			<?php endif; ?>
+
+
+			<?php if ( isset( $settings['show_terms'] ) && 'yes' == $settings['show_terms'] ) : ?>
+				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
+					
+					<?php
+
+					if (!empty($settings['terms_link']['url'])) {
+						$this->add_link_attributes( 'terms-link', $settings['terms_link'] );
+					}
+
+					echo '<div class="bdt-margin bdt-grid-small bdt-flex bdt-flex-middle">';
+						echo '<div class="bdt-form-controls bdt-term-input-wrapper">';
+							echo '<input ' . wp_kses_post( $this->get_render_attribute_string( 'terms_input' ) ) . ' required>';
+						echo '</div>';
+
+						if ( $settings['show_labels'] ) :
+							?>
+							<label class="bdt-terms-label">
+								<?php if ( 'yes' == $settings['custom_labels'] ) : ?>
+									<?php echo esc_html($settings['terms_label']); ?>
+									<a <?php $this->print_render_attribute_string('terms-link'); ?>><?php echo esc_html($settings['terms_label']); ?></a>
+								<?php else : ?>
+									<?php echo esc_html__( 'I agree to the ', 'bdthemes-element-pack' ); ?>
+									<a <?php $this->print_render_attribute_string('terms-link'); ?>><?php echo esc_html__( 'Terms and Conditions', 'bdthemes-element-pack' ); ?></a>
+								<?php endif; ?>
+							</label>
+							<?php
+						endif;
+					echo '</div>';
+					?>
+				</div>
+			<?php endif; ?>
+
+
+
 			<?php $redirect_after_register = ( $settings['redirect_after_register'] && ! empty( $settings['redirect_url']['url'] ) ) ? $settings['redirect_url']['url'] : ''; ?>
 			<input type="hidden" name="is_password_required" class="is_password_required"
 				value="<?php echo esc_attr( $is_needed_password_input ) ?>" />

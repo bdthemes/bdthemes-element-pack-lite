@@ -23,6 +23,7 @@
                 data: {
                     'action': 'element_pack_ajax_register', //calls wp_ajax_nopriv_element_pack_ajax_register
                     'first_name': $(_this).find('.first_name').val(),
+                    'terms': $(_this).find('.user_terms').is(':checked'),
                     'last_name': $(_this).find('.last_name').val(),
                     'email': $(_this).find('.user_email').val(),
                     'password': $(_this).find('.user_password').val(),
@@ -34,7 +35,6 @@
                     'lang': element_pack_ajax_login_config.language
                 },
                 success: function (data) {
-
                     var recaptcha_field = _this.find('.element-pack-google-recaptcha');
                     if (recaptcha_field.length > 0) {
                         var recaptcha_id = recaptcha_field.attr('data-widgetid');

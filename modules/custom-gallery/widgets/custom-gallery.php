@@ -141,7 +141,7 @@ class Custom_Gallery extends Module_Base {
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
-					'url' => '//clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+					'url' => '//test-videos.co.uk/vids/bigbuckbunny/mp4/av1/1080/Big_Buck_Bunny_1080_10s_1MB.mp4',
 				],
 				'placeholder'   => '//example.com/video.mp4',
 				'label_block'   => true,
@@ -217,6 +217,9 @@ class Custom_Gallery extends Module_Base {
 					'image_link_type' => 'website',
 				],
 				'dynamic'       => [ 'active' => true ],
+				'default'       => [ 
+					'url' => 'https://elementpack.pro',
+				],
 			]
 		);
 
@@ -1270,6 +1273,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_render_attribute( 'custom-gallery', 'id', 'bdt-custom-gallery-' . $id );
 		$this->add_render_attribute( 'custom-gallery', 'class', [ 'bdt-custom-gallery', 'bdt-skin-' . esc_attr( $skin ) ] );
 		$this->add_render_attribute( 'custom-gallery', 'class', [ 'bdt-grid', 'bdt-grid-small' ] );
+		$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'video-autoplay: true;' );
 
 		if ( 'yes' === $settings['masonry'] ) {
 			$this->add_render_attribute( 'custom-gallery', 'data-bdt-grid', 'masonry: true' );
