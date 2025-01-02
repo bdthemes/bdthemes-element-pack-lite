@@ -2323,6 +2323,30 @@ class ModuleService {
 				[
 					'name' => 'svg_support_group_end',
 					'type' => 'end_group',
+                ],
+                [
+					'name'      => 'swatches_group_start',
+					'label'     => esc_html__('Variation Swatches', 'bdthemes-element-pack'),
+					'type'      => 'start_group',
+					'video_url' => '',
+					'content_type' => 'new'
+				],
+                [
+                    'name'         => 'variation-swatches',
+                    'label'        => esc_html__('Enable', 'bdthemes-element-pack'),
+                    'type'         => 'checkbox',
+                    'default'      => "off",
+                    'widget_type'  => 'pro',
+                    'plugin_name'  => 'woocommerce',
+                    'plugin_path'  => 'woocommerce/woocommerce.php',
+                    'content_type' => 'woocommerce product',
+                    'demo_url'     => 'https://demo.elementpack.pro/element/variation-swatches/',
+                    'video_url'    => '',
+                    'ep_parent_switcher'       => true,
+                ],
+                [
+					'name' => 'swatches_group_end',
+					'type' => 'end_group',
 				]
             ]
         ];
