@@ -527,6 +527,8 @@ class Dynamic_Select_Input_Module {
      */
     public function getElementorTemplates() {
         $searchText = $this->getSearchQuery();
+        $args = [];
+
         if ($searchText) {
             $args['s'] = $searchText;
         }

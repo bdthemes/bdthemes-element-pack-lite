@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4.0
-Stable tag: 5.10.15
+Stable tag: 5.10.16
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -355,6 +355,14 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.16 [2nd January 2025] =
+
+* Added: Variation swatches feature added (Pro)
+* Added: Yes/No button and Blur feature added in age gate widget
+* Added: Skin default & partait controls added in member widget
+* Fixed: Warning error fixed in Elementor Template
+* Fixed: Lightbox disable issue fixed in Custom Gallery widget (Thanks to Habets)
 
 = 5.10.15 [25th December 2024] =
 

@@ -3189,8 +3189,17 @@ $(window).on('elementor/frontend/init', function () {
                 ageVerify: function () {
                     var init = this;
                     var firedNotify = parseInt(localStorage.getItem(widgetId)) || 0;
-                    $('#' + widgetId).find('.bdt-button').on('click', function () {
-                        var input_age = parseInt($('#' + widgetId).find('.bdt-age-input').val());
+                    $('#' + widgetId).find('.bdt-button').on('click', function (e) {
+                        let input_age = parseInt($('#' + widgetId).find('.bdt-age-input').val());
+
+                        if ($(this).hasClass('data-val-yes')) {
+                            input_age = 18;
+                        }
+                        if ($(this).hasClass('data-val-no')) {
+                            requiredAge = 18;
+                            input_age = 1;
+                        }
+
                         if (input_age >= requiredAge) {
                             init.setLocalize();
                             firedNotify += 1;
@@ -3266,6 +3275,7 @@ $(window).on('elementor/frontend/init', function () {
 /**
  * End age-gate script
  */
+
 (function ($, elementor) {
 
     'use strict';

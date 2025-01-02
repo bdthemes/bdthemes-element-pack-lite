@@ -48,8 +48,8 @@ class Age_Gate extends Module_Base {
 	}
 
 	public function has_widget_inner_wrapper(): bool {
-        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-    }
+		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+	}
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
@@ -64,6 +64,19 @@ class Age_Gate extends Module_Base {
 		);
 
 		$this->add_control(
+			'layout',
+			[ 
+				'label'   => esc_html__( 'Layout Type', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'input',
+				'options' => [ 
+					'input'  => esc_html__( 'Input Age', 'bdthemes-element-pack' ),
+					'button' => esc_html__( 'Yes/No Buttons', 'bdthemes-element-pack' ),
+				],
+			]
+		);
+
+		$this->add_control(
 			'required_age',
 			[ 
 				'label'       => esc_html__( 'Required Minimum Age', 'bdthemes-element-pack' ),
@@ -71,6 +84,9 @@ class Age_Gate extends Module_Base {
 				'dynamic'     => [ 'active' => true ],
 				'default'     => 18,
 				'placeholder' => esc_html__( 'Minimum Age', 'bdthemes-element-pack' ),
+				'condition'   => [ 
+					'layout' => 'input',
+				],
 			]
 		);
 
@@ -111,18 +127,48 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'form_placeholder',
 			[ 
-				'label'   => esc_html__( 'Form Placeholder', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Your Age', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Form Placeholder', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Your Age', 'bdthemes-element-pack' ),
+				'condition' => [ 
+					'layout' => 'input',
+				],
 			]
 		);
 
 		$this->add_control(
 			'button_text',
 			[ 
-				'label'   => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Submit', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Submit', 'bdthemes-element-pack' ),
+				'condition' => [ 
+					'layout' => 'input',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_text_yes',
+			[ 
+				'label'     => esc_html__( 'Button Text (Yes)', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Yes, I\'m 18+ older', 'bdthemes-element-pack' ),
+				'condition' => [ 
+					'layout' => 'button',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_text_no',
+			[ 
+				'label'       => esc_html__( 'Button Text (No)', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::TEXT,
+				'placeholder' => esc_html__( 'No', 'bdthemes-element-pack' ),
+				'condition'   => [ 
+					'layout' => 'button',
+				],
 			]
 		);
 
@@ -724,7 +770,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'field_width',
 			[ 
-				'label'      => esc_html__( 'Width', 'elementor' ),
+				'label'      => esc_html__( 'Width', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', '%' ],
 				'range'      => [ 
@@ -746,7 +792,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'field_spacing',
 			[ 
-				'label'      => esc_html__( 'Spacing', 'elementor' ),
+				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', '%' ],
 				'range'      => [ 
@@ -901,8 +947,11 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_submit_button_style',
 			[ 
-				'label' => esc_html__( 'Submit Button', 'bdthemes-element-pack' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Submit Button', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'layout' => 'input'
+				],
 			]
 		);
 
@@ -1034,6 +1083,303 @@ class Age_Gate extends Module_Base {
 
 		$this->end_controls_tabs();
 
+		$this->end_controls_section();
+
+
+		$this->start_controls_section(
+			'section_button_yes_style',
+			[ 
+				'label'     => esc_html__( 'Button (Yes)', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'layout' => 'button'
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_button_yes_style' );
+
+		$this->start_controls_tab(
+			'tab_button_yes_normal',
+			[ 
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'button_yes_text_color',
+			[ 
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'      => 'button_yes_background_color',
+				'selector'  => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes'
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[ 
+				'name'        => 'button_yes_border',
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes',
+				'separator'   => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_yes_border_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_yes_text_padding',
+			[ 
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[ 
+				'name'     => 'button_yes_box_shadow',
+				'selector' => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'     => 'button_yes_typography',
+				'selector' => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes',
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_button_yes_hover',
+			[ 
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'button_yes_hover_color',
+			[ 
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'      => 'button_yes_background_hover_color',
+				'selector'  => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes:hover'
+			]
+		);
+
+		$this->add_control(
+			'button_yes_hover_border_color',
+			[ 
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'separator' => 'before',
+				'selectors' => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes:hover' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [ 
+					'button_yes_border_border!' => '',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_yes_hover_animation',
+			[ 
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::HOVER_ANIMATION,
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_button_no_style',
+			[ 
+				'label'     => esc_html__( 'Button (No)', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'layout' => 'button'
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_button_no_style' );
+		$this->start_controls_tab(
+			'tab_button_no_normal',
+			[ 
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'button_no_text_color',
+			[ 
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'      => 'button_no_background_color',
+				'selector'  => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no'
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[ 
+				'name'        => 'button_no_border',
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no',
+				'separator'   => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_no_border_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_no_text_padding',
+			[ 
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'button_no_margin',
+			[ 
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[ 
+				'name'     => 'button_no_box_shadow',
+				'selector' => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'     => 'button_no_typography',
+				'selector' => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no',
+			]
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_button_no_hover',
+			[ 
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'button_no_hover_color',
+			[ 
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'      => 'button_no_background_hover_color',
+				'selector'  => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no:hover'
+			]
+		);
+
+		$this->add_control(
+			'button_no_hover_border_color',
+			[ 
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'separator' => 'before',
+				'selectors' => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no:hover' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [ 
+					'button_no_border_border!' => '',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_no_hover_animation',
+			[ 
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::HOVER_ANIMATION,
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
 		$this->end_controls_section();
 
 
@@ -1191,7 +1537,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'opacity',
 			[ 
-				'label'     => esc_html__( 'Opacity', 'elementor' ),
+				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1202,6 +1548,24 @@ class Age_Gate extends Module_Base {
 				],
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal' => 'opacity: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'bg_blur',
+			[ 
+				'label'     => esc_html__( 'Background Blur', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [ 
+					'px' => [ 
+						'max'  => 100,
+						'min'  => 2,
+						'step' => 1,
+					],
+				],
+				'selectors' => [ 
+					'.bdt-age-gate-{{ID}}.bdt-modal' => 'backdrop-filter: blur({{SIZE}}px);',
 				],
 			]
 		);
@@ -1290,11 +1654,26 @@ class Age_Gate extends Module_Base {
 						</div>
 						<div <?php $this->print_render_attribute_string( 'age-gate-form' ); ?>>
 							<div class="bdt-margin-top">
-								<input class="bdt-input bdt-form-width-small bdt-age-input" type="number"
-									placeholder="<?php echo esc_html( $settings['form_placeholder'] ); ?>">
-								<button <?php $this->print_render_attribute_string( 'button' ); ?>>
-									<?php echo esc_html( $settings['button_text'] ); ?>
-								</button>
+								<?php if ( 'input' == $settings['layout'] ) : ?>
+									<input class="bdt-input bdt-form-width-small bdt-age-input" type="number"
+										placeholder="<?php echo esc_html( $settings['form_placeholder'] ); ?>">
+									<button <?php $this->print_render_attribute_string( 'button' ); ?>>
+										<?php echo esc_html( $settings['button_text'] ); ?>
+									</button>
+								<?php else : ?>
+									<div class="bdt-flex bdt-flex-center">
+										<button class="bdt-button bdt-button-primary bdt-button-medium bdt-age-layout-2 data-val-yes elementor-animation-<?php echo esc_attr( $settings['button_yes_hover_animation'] ); ?>"
+											type="button">
+											<?php echo esc_html( $settings['button_text_yes'] ); ?>
+										</button>
+										<?php if ( isset( $settings['button_text_no'] ) && ! empty( $settings['button_text_no'] ) ) : ?>
+											<button class="bdt-button bdt-button-default bdt-button-medium  bdt-age-layout-2 data-val-no elementor-animation-<?php echo esc_attr( $settings['button_no_hover_animation']); ?> bdt-margin-small-left"
+												type="button">
+												<?php echo esc_html( $settings['button_text_no'] ); ?>
+											</button>
+										<?php endif; ?>
+									</div>
+								<?php endif; ?>
 							</div>
 						</div>
 						<div <?php $this->print_render_attribute_string( 'modal-msg-text' ); ?>>
@@ -1312,7 +1691,6 @@ class Age_Gate extends Module_Base {
 				</div>
 			</div>
 		</div>
-
 		<?php
 	}
 }

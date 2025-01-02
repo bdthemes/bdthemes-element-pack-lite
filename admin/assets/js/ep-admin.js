@@ -132,4 +132,22 @@ jQuery(document).ready(function ($) {
         'vertical-align': 'middle'
     });
 
+    // Variations swatches
+    const variationSwatchesBtn = jQuery(".ep-feature-option-parent");
+
+    variationSwatchesBtn.on("change", function () {
+        if (jQuery(this).prop("checked")) {
+        jQuery(this).closest(".ep-option-item").nextAll().fadeIn(250);
+        } else {
+        jQuery(this).closest(".ep-option-item").nextAll().fadeOut(250);
+        }
+    });
+    if (variationSwatchesBtn.prop("checked")) {
+        variationSwatchesBtn.closest(".ep-option-item").nextAll().fadeIn(250);
+    } else {
+        variationSwatchesBtn.closest(".ep-option-item").nextAll().fadeOut(250);
+    }
+
+    //End Variations swatches
+
 });

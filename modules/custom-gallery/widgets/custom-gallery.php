@@ -1272,14 +1272,14 @@ class Custom_Gallery extends Module_Base {
 
 		$this->add_render_attribute( 'custom-gallery', 'id', 'bdt-custom-gallery-' . $id );
 		$this->add_render_attribute( 'custom-gallery', 'class', [ 'bdt-custom-gallery', 'bdt-skin-' . esc_attr( $skin ) ] );
-		$this->add_render_attribute( 'custom-gallery', 'class', [ 'bdt-grid', 'bdt-grid-small' ] );
-		$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'video-autoplay: true;' );
-
+		$this->add_render_attribute( 'custom-gallery', 'class', [ 'bdt-grid', 'bdt-grid-small' ] );	
+		
 		if ( 'yes' === $settings['masonry'] ) {
 			$this->add_render_attribute( 'custom-gallery', 'data-bdt-grid', 'masonry: true' );
 		}
-
+		
 		if ( $settings['show_lightbox'] ) {
+			$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'video-autoplay: true;' );
 			$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'toggle: .bdt-gallery-lightbox-item; animation:' . $settings['lightbox_animation'] . ';' );
 			if ( $settings['lightbox_autoplay'] ) {
 				$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'autoplay: 500;' );

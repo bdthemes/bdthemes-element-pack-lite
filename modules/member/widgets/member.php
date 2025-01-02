@@ -7,6 +7,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Image_Size;
+use Elementor\Group_Control_Background;
 use Elementor\Repeater;
 use Elementor\Icons_Manager;
 
@@ -308,21 +309,7 @@ class Member extends Module_Base {
 				'label'     => esc_html__( 'Member', 'bdthemes-element-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
-					'_skin' => [ '', 'bdt-band' ],
-				],
-			]
-		);
-
-		$this->add_control(
-			'band_item_background_color',
-			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [ 
-					'{{WRAPPER}} .skin-band .bdt-member-item-wrapper' => 'background: {{VALUE)}};',
-				],
-				'condition' => [ 
-					'_skin' => [ 'bdt-band' ],
+					'_skin' => [ '', 'bdt-band', 'bdt-partait' ],
 				],
 			]
 		);
@@ -337,6 +324,72 @@ class Member extends Module_Base {
 				],
 				'condition' => [ 
 					'_skin' => [ 'bdt-band' ],
+				],
+			]
+		);
+		$this->add_control(
+			'band_item_background_color',
+			[ 
+				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .skin-band .bdt-member-item-wrapper' => 'background: {{VALUE)}};',
+				],
+				'condition' => [ 
+					'_skin' => [ 'bdt-band' ],
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'member_bg_color',
+				'selector' => '{{WRAPPER}} .bdt-member',
+				'condition' => [ 
+					'_skin!' => 'bdt-band',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[ 
+				'name'     => 'member_border',
+				'selector' => '{{WRAPPER}} .bdt-member',
+				'separator' => 'before',
+			]
+		);
+		$this->add_responsive_control(
+			'member_border_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-member' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'member_padding',
+			[ 
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-member' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'desc_padding',
+			[ 
+				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-member .bdt-member-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -367,18 +420,7 @@ class Member extends Module_Base {
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member' => 'text-align: {{VALUE}};',
 				],
-			]
-		);
-
-		$this->add_control(
-			'desc_padding',
-			[ 
-				'label'      => esc_html__( 'Description Padding', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [ 
-					'{{WRAPPER}} .bdt-member .bdt-member-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
+				'separator' => 'before',
 			]
 		);
 
