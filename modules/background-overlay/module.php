@@ -30,13 +30,26 @@ class Module extends Element_Pack_Module_Base {
 			[ 
 				'label'     => BDTEP_CP . esc_html__( 'Background Over/Underlay', 'bdthemes-element-pack' ),
 				'tab'       => Controls_Manager::TAB_ADVANCED,
-				'condition' => [ 
-					'_background_background' => [ 'classic', 'gradient' ],
-				],
 			]
 		);
 
-		$widget->start_controls_tabs( 'ep_tabs_background_overlay' );
+		$widget->add_control(
+            'element_pack_background_overlay',
+            [
+                'label'         => BDTEP_CP . esc_html__('Enable', 'bdthemes-element-pack'),
+                'type'          => Controls_Manager::SWITCHER,
+				'prefix_class'  => 'bdt-background-overlay-',
+            ]
+        );
+
+		$widget->start_controls_tabs(
+			'ep_tabs_background_overlay',
+			[
+				'condition' => [
+					'element_pack_background_overlay' => 'yes',
+				]
+			]
+		);
 
 		$widget->start_controls_tab(
 			'ep_tab_background_overlay_normal',
@@ -120,8 +133,34 @@ class Module extends Element_Pack_Module_Base {
 			]
 		);
 
-		$widget->end_controls_tab();
+		$widget->add_responsive_control(
+			'ep_background_overlay_margin',
+			[ 
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'separator'  => 'before',
+				'selectors'  => [ 
+					'{{WRAPPER}}' => '--ep-overlay-margin-top: {{TOP}}{{UNIT}};  --ep-overlay-margin-right: {{RIGHT}}{{UNIT}}; --ep-overlay-margin-bottom: {{BOTTOM}}{{UNIT}}; --ep-overlay-margin-left: {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
+		$widget->add_control(
+			'ep_background_overlay_zindex',
+			[ 
+				'label'     => esc_html__( 'Z-Index', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::NUMBER,
+				'dynamic'   => [ 
+					'active' => true,
+				],
+				'selectors' => [ 
+					'{{WRAPPER}}.bdt-background-overlay-yes:before' => 'z-index: {{VALUE}};',
+				]
+			]
+		);
+
+		$widget->end_controls_tab();
 		$widget->start_controls_tab(
 			'ep_tab_background_overlay_hover',
 			[ 
@@ -203,36 +242,7 @@ class Module extends Element_Pack_Module_Base {
 		);
 
 		$widget->end_controls_tab();
-
 		$widget->end_controls_tabs();
-
-		$widget->add_responsive_control(
-			'ep_background_overlay_margin',
-			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'separator'  => 'before',
-				'selectors'  => [ 
-					'{{WRAPPER}}' => '--ep-overlay-margin-top: {{TOP}}{{UNIT}};  --ep-overlay-margin-right: {{RIGHT}}{{UNIT}}; --ep-overlay-margin-bottom: {{BOTTOM}}{{UNIT}}; --ep-overlay-margin-left: {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$widget->add_control(
-			'ep_background_overlay_zindex',
-			[ 
-				'label'     => esc_html__( 'Z-Index', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::NUMBER,
-				'dynamic'   => [ 
-					'active' => true,
-				],
-				'selectors' => [ 
-					'{{WRAPPER}}.bdt-background-overlay-yes:before' => 'z-index: {{VALUE}};',
-				]
-			]
-		);
-
 		$widget->end_controls_section();
 	}
 
@@ -245,18 +255,6 @@ class Module extends Element_Pack_Module_Base {
 
 		if ( Plugin::instance()->editor->is_edit_mode() ) {
 			return;
-		}
-
-		$overlay_bg       = isset( $settings['ep_background_overlay_background'] ) ? $settings['ep_background_overlay_background'] : '';
-		$overlay_bg_hover = isset( $settings['ep_background_overlay_hover_background'] ) ? $settings['ep_background_overlay_hover_background'] : '';
-
-		$has_background_overlay = ( in_array( $overlay_bg, [ 'classic', 'gradient' ], true ) ||
-			in_array( $overlay_bg_hover, [ 'classic', 'gradient' ], true ) );
-
-		if ( $has_background_overlay ) {
-			$widget->add_render_attribute( '_wrapper', 'class', 'bdt-background-overlay-yes' );
-
-			wp_enqueue_script( 'ep-background-overlay' );
 		}
 	}
 
