@@ -5,7 +5,7 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4.0
-Stable tag: 5.10.18
+Stable tag: 5.10.19
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -63,7 +63,7 @@ Enhance your site with creative widgets, featuring tools like [Accordion](https:
 * [Brand Grid](https://demo.elementpack.pro/element/brand-grid/) - Showcase brands in a responsive grid
 * [Logo Grid](https://demo.elementpack.pro/element/logo-grid) - Grid layout to display brand logos
 * [Product Grid](https://demo.elementpack.pro/element/product-grid/) - Show products in an organized grid layout
-* [Pricing List](https://demo.elementpack.pro/element/pricing-list/) - Stylish pricing table to highlight plans
+* [Price List](https://demo.elementpack.pro/element/price-list/) - Stylish pricing list to highlight plans
 * [Image Compare](https://demo.elementpack.pro/element/image-compare/) - Compare two images side by side
 * [Image Accordion](https://demo.elementpack.pro/element/image-accordion/) - Elementot accordion style image viewer for galleries
 * [SVG Image](https://demo.elementpack.pro/element/svg-image) - Use scalable vector graphics on website
@@ -130,7 +130,7 @@ Enhance your website's interactivity and design with powerful advanced widgets l
 
 = Creative Widgets 💫 =  
 
-Boost your website’s functionality with creative widgets such as [Audio Player](https://demo.elementpack.pro/element/audio-player/), [Hover Box](https://demo.elementpack.pro/element/hover-box/), [Pricing Table](https://demo.elementpack.pro/element/pricing-table/), [Circle Info](https://demo.elementpack.pro/element/circle-info/), [Notification](https://demo.elementpack.pro/element/notification/), [Switcher](https://demo.elementpack.pro/element/switcher/) and [Charts](https://demo.elementpack.pro/element/charts/) for engaging and interactive content.
+Boost your website’s functionality with creative widgets such as [Audio Player](https://demo.elementpack.pro/element/audio-player/), [Hover Box](https://demo.elementpack.pro/element/hover-box/), [Price Table](https://demo.elementpack.pro/element/price-table/), [Circle Info](https://demo.elementpack.pro/element/circle-info/), [Notification](https://demo.elementpack.pro/element/notification/), [Switcher](https://demo.elementpack.pro/element/switcher/) and [Charts](https://demo.elementpack.pro/element/charts/) for engaging and interactive content.
 
 * [Iframe](https://demo.elementpack.pro/element/iframe/) - Embed external web content effortlessly and seamlessly  
 * [Marker](https://demo.elementpack.pro/element/marker/) - Add hotspots or interactive markers to your maps  
@@ -355,6 +355,10 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.19 [27th January 2025] =
+
+* Updated: System improved
 
 = 5.10.18 [26th January 2025] =
 
