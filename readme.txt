@@ -336,7 +336,7 @@ e.g.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Start using it by going to the editor.
 
-https://youtu.be/u9JRd824Mjc
+https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Screenshots ==
 
