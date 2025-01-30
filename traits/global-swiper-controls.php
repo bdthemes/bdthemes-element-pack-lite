@@ -1830,6 +1830,17 @@ trait Global_Swiper_Controls {
 		);
 
 		$this->add_render_attribute('swiper', 'class', 'swiper-carousel swiper');
+
+		$direction = is_rtl() ? 'rtl' : 'ltr';
+
+		$this->add_render_attribute( [
+			'swiper' => [
+				'role' => 'region',
+				'aria-roledescription' => 'carousel',
+				'aria-label' => $this->get_title(),
+				'dir' => $direction,
+			],
+		] );
 	}
 
 	function render_navigation() {

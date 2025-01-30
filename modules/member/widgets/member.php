@@ -227,14 +227,23 @@ class Member extends Module_Base {
 			]
 		);
 
-		$repeater->add_control(
-			'social_link',
-			[ 
-				'label'   => esc_html__( 'Link', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => 'http://www.facebook.com/bdthemes/',
-			]
-		);
+		/**
+		 * TODO: It should be removed after v8.0 release
+		 */
+        $repeater->add_control(
+            'social_link',
+            [ 
+                'label'   => __( 'Link', 'bdthemes-element-pack' ),
+                'type'    => Controls_Manager::HIDDEN,
+            ]
+        );
+        $repeater->add_control(
+            'social_icon_link',
+            [ 
+                'label'   => __( 'Link', 'bdthemes-element-pack' ),
+                'type'    => Controls_Manager::URL,
+            ]
+        );
 
 		$repeater->add_control(
 			'social_share_icon',
@@ -281,19 +290,28 @@ class Member extends Module_Base {
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'social_link'       => 'http://www.facebook.com/bdthemes/',
-						'social_share_icon' => [ 'value' => 'fab fa-facebook-f', 'library' => 'fa-brands' ],
-						'social_link_title' => 'Facebook',
+						'social_icon_link'       => [ 'url' => 'http://www.facebook.com/bdthemes/' ],
+						'social_share_icon'       => [ 
+							'value'   => 'fab fa-facebook-f',
+							'library' => 'fa-brands',
+						],
+						'social_link_title' => __( 'Facebook', 'bdthemes-element-pack' ),
 					],
 					[ 
-						'social_link'       => 'http://www.twitter.com/bdthemes/',
-						'social_share_icon' => [ 'value' => 'fab fa-twitter', 'library' => 'fa-brands' ],
-						'social_link_title' => 'Twitter',
+						'social_icon_link'       => [ 'url' => 'http://www.twitter.com/bdthemes/' ],
+						'social_share_icon'       => [ 
+							'value'   => 'fab fa-twitter',
+							'library' => 'fa-brands',
+						],
+						'social_link_title' => __( 'Twitter', 'bdthemes-element-pack' ),
 					],
 					[ 
-						'social_link'       => 'http://www.linkedin.com/bdthemes/',
-						'social_share_icon' => [ 'value' => 'fab fa-linkedin-in', 'library' => 'fa-brands' ],
-						'social_link_title' => 'Linkedin',
+						'social_icon_link'       => [ 'url' => 'http://www.instagram.com/bdthemes/' ],
+						'social_share_icon'       => [ 
+							'value'   => 'fab fa-instagram',
+							'library' => 'fa-brands',
+						],
+						'social_link_title' => __( 'Instagram', 'bdthemes-element-pack' ),
 					],
 				],
 				'title_field' => '{{{ social_link_title }}}',
@@ -1217,6 +1235,59 @@ class Member extends Module_Base {
 		$this->end_controls_section();
 	}
 
+	public function render_social_icons( $class = '' ) {
+		$settings = $this->get_settings_for_display();
+
+		if ( 'yes' !== $settings['member_social_icon'] ) {
+			return;
+		}
+		$this->add_render_attribute( 'social_icons', 'class', 'bdt-member-icons ' . $class );
+
+		?>
+			<div <?php $this->print_render_attribute_string( 'social_icons' ); ?>>
+				<?php
+				foreach ( $settings['social_link_list'] as $index => $link ) :
+
+					$link_key = 'link_' . $index;
+					if ( 'yes' === $settings['social_icon_tooltip'] ) {
+						$tooltip = 'title: ' . wp_kses_post( strip_tags( $link['social_link_title'] ) ) . '; ';
+						
+						$this->add_render_attribute( $link_key, 'data-bdt-tooltip', $tooltip, true );
+					}
+
+					$this->add_render_attribute( $link_key, 'class', 'bdt-member-icon elementor-repeater-item-' . esc_attr( $link['_id'] ) );
+
+					if ( isset($link['social_icon_link']['url']) && ! empty($link['social_icon_link']['url']) ) {
+						$this->add_link_attributes($link_key, $link['social_icon_link']);
+					} else { // TODO: Condition should be removed after v8.0 
+						$this->add_render_attribute(
+							[
+								$link_key => [
+									'href' => esc_attr($link['social_link']),
+									'target' => '_blank',
+								]
+							], '', '', true );
+					}
+
+					$migrated = isset( $link['__fa4_migrated']['social_share_icon'] );
+					$is_new   = empty( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
+					?>
+
+					<a <?php $this->print_render_attribute_string( $link_key ); ?>>
+
+						<?php if ( $is_new || $migrated ) :
+							Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+						else : ?>
+							<i class="<?php echo esc_attr( $link['social_icon'] ); ?>" aria-hidden="true"></i>
+						<?php endif; ?>
+
+					</a>
+
+				<?php endforeach; ?>
+			</div>
+		<?php
+	}
+
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
@@ -1310,30 +1381,7 @@ class Member extends Module_Base {
 				<?php endif; ?>
 			</div>
 
-			<?php if ( 'yes' == $settings['member_social_icon'] ) : ?>
-				<div class="bdt-member-icons">
-					<?php
-					foreach ( $settings['social_link_list'] as $link ) :
-						$tooltip = 'yes' == $settings['social_icon_tooltip'] ? ' data-bdt-tooltip="' . wp_kses_post( $link['social_link_title'] ) . '"' : ''; ?>
-
-						<?php
-						$migrated = isset( $link['__fa4_migrated']['social_share_icon'] );
-						$is_new   = empty( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
-						?>
-
-						<a href="<?php echo esc_url( $link['social_link'] ); ?>" class="bdt-member-icon elementor-repeater-item-<?php echo esc_attr( $link['_id'] ); ?>" target="_blank" <?php echo wp_kses_post( $tooltip ); ?>>
-
-							<?php if ( $is_new || $migrated ) :
-								Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
-							else : ?>
-								<i class="<?php echo esc_attr( $link['social_icon'] ); ?>" aria-hidden="true"></i>
-							<?php endif; ?>
-
-						</a>
-
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
+			<?php $this->render_social_icons(''); ?>
 
 		</div>
 		<?php

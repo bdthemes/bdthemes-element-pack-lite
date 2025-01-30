@@ -69,12 +69,17 @@ class Admin {
 		return $plugin_meta;
 	}
 
+	/**
+	 * Plugin action links
+	 * @access public
+	 * @return array
+	 */
 
     public function plugin_action_links( $plugin_meta ) {
 
         $row_meta = [
             'settings' => '<a href="'.admin_url( 'admin.php?page=element_pack_options' ) .'" aria-label="' . esc_attr(__('Go to settings', 'bdthemes-element-pack')) . '" >' . __('Settings', 'bdthemes-element-pack') . '</b></a>',
-            'gopro' => '<a href="https://www.elementpack.pro/pricing/?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO" aria-label="' . esc_attr(__('Go get the pro version', 'bdthemes-element-pack')) . '" target="_blank" title="When you purchase through this link you will get 30% discount!" class="ep-go-pro">' . __('Go Pro', 'bdthemes-element-pack') . '</a>',
+            'gopro' => '<a href="https://www.elementpack.pro/pricing/?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO" aria-label="' . esc_attr(__('Go get the pro version', 'bdthemes-element-pack')) . '" target="_blank" title="When you purchase through this link you will get 30% discount!" class="ep-go-pro">' . __('Upgrade For 30% Off!', 'bdthemes-element-pack') . '</a>',
         ];
 
         $plugin_meta = array_merge($plugin_meta, $row_meta);
