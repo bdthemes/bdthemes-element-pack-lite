@@ -5,11 +5,11 @@ Tags:  elementor addons, elementor widget, elementor extensions, elementor addon
 Requires at least: 5.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4.0
-Stable tag: 5.10.19
+Stable tag: 5.10.20
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.27.1
+Elementor tested up to: 3.27.2
 
 Best Addon for Elementor WordPress Plugin with 70+ Most Popular Elements that need your everyday website page building.
 
@@ -26,11 +26,11 @@ Element Pack is quite user-friendly and lets you build and manage your website w
 **[Live Demo](https://www.elementpack.pro/elements-demo/)** | **[Documentation](https://bdthemes.com/all-knowledge-base-of-element-pack/)** | **[Video Tutorial](https://youtube.com/playlist?list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA&si=bR91QQYCjeAtG9vC)**
 
 
-https://www.youtube.com/watch?v=Z6XNSPSxtJw
+https://youtu.be/AumVHaQ0Bak?si=GHpqXAXDHqiO4MBN
 
 **Check: How to use the template library**
 
-https://www.youtube.com/watch?v=jOdWVw2TCmo
+https://youtu.be/TqAzb5UmnsM?si=GutrItUuSa-k3zZ_
 
 **Check: How you use live copy paste**
 
@@ -154,7 +154,6 @@ Boost your website’s functionality with creative widgets such as [Audio Player
 * [Source Code](https://demo.elementpack.pro/element/source-code/) - Display and highlight code snippets effectively  
 * [SVG Blob](https://demo.elementpack.pro/element/svg-blob/) - Create dynamic and customizable SVG blob designs  
 * [Stacker](https://demo.elementpack.pro/element/stacker/) - Layer content elements with unique stacking effects  
-* [The Newsletter](https://demo.elementpack.pro/element/the-newsletter/) - Create and manage newsletter signup forms  
 * [SVG Maps](https://demo.elementpack.pro/element/svg-maps/) - Display interactive SVG maps with customization  
 * [Weather](https://demo.elementpack.pro/element/weather/) - Live weather data with customizable display options  
 * [Timezone](https://demo.elementpack.pro/element/timezone/) - Show current local time with timezone data  
@@ -292,7 +291,8 @@ Create and manage custom forms with ease using [Forminator Forms](https://demo.e
 
 = Others 💫 =
 
-Manage appointments with [Booked Calendar](https://demo.elementpack.pro/element/booked-calendar/), track downloads using [Download Monitor](https://demo.elementpack.pro/element/download-monitor/), create stunning sliders with Layer Slider and [Revolution Slider](https://demo.elementpack.pro/element/revolution-slider/) and showcase fundraising with [Campaigns](https://demo.elementpack.pro/element/charitable-campaigns/) and [Give Donations](https://demo.elementpack.pro/element/give-donation-history/).
+Track downloads using [Download Monitor](https://demo.elementpack.pro/element/download-monitor/), create stunning sliders with Layer Slider and [Revolution Slider](https://demo.elementpack.pro/element/revolution-slider/) and showcase fundraising with [Campaigns](https://demo.elementpack.pro/element/charitable-campaigns/) and [Give Donations](https://demo.elementpack.pro/element/give-donation-history/).
+* [The Newsletter](https://demo.elementpack.pro/element/the-newsletter/) - Create and manage newsletter signup forms  
 
 **[PURCHASE ELEMENT PACK PRO FROM OUR WEBSITE]( https://www.elementpack.pro/pricing/ )**
 
@@ -355,6 +355,13 @@ https://youtu.be/u9JRd824Mjc
 
 
 == Changelog ==
+
+= 5.10.20 [30th January 2025] =
+
+* Added: aria-roledescription=carousel added to carousel/slider widget wrapper
+* Fixed: PHP warning error fixed in Image Magnifier widget 
+* Updated: Security issue improved
+* Updated: Social link controls improved in member widget
 
 = 5.10.19 [27th January 2025] =
 

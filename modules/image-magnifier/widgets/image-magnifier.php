@@ -293,7 +293,7 @@ class Image_Magnifier extends Module_Base {
 			[
 				'image-magnifier' => [
 					'class' => [ 'bdt-image-magnifier-image' ],					
-					'src'   => esc_attr($image_url[0]),
+					'src'   => isset($image_url[0]) ? esc_url($image_url[0]) : '',
 					'alt'   => '',
 				]
 			]
@@ -305,7 +305,7 @@ class Image_Magnifier extends Module_Base {
 					'data-settings' => [
 						wp_json_encode(array_filter([
 							"type"        => $settings["type"],
-							"bigImageSrc" => esc_attr($big_image_src[0]),
+							"bigImageSrc" => isset($big_image_src[0]) ? esc_url($big_image_src[0]) : '',
 							"smoothMove"  => $settings["smooth_move"] ? true : false,
 							"preload"     => $settings["preload"] ? true : false,
 							"position"    => $settings["position"],

@@ -111,32 +111,7 @@ class Skin_Calm extends Elementor_Skin_Base {
 						<?php endif; ?>
 					</div>
 
-					<?php if ( 'yes' == $settings['member_social_icon'] ) : ?>
-						<div class="bdt-member-icons bdt-transition-slide-bottom">
-							<?php
-							foreach ( $settings['social_link_list'] as $link ) :
-								$tooltip = ( 'yes' == $settings['social_icon_tooltip'] ) ? ' title="' . wp_kses_post( $link['social_link_title'] ) . '"  
-							data-bdt-tooltip' : ''; ?>
-
-								<?php
-								$migrated = isset ( $link['__fa4_migrated']['social_share_icon'] );
-								$is_new   = empty ( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
-								?>
-
-								<a href="<?php echo esc_url( $link['social_link'] ); ?>"
-									class="bdt-member-icon elementor-repeater-item-<?php echo esc_attr( $link['_id'] ); ?>"
-									target="_blank" <?php echo wp_kses_post( $tooltip ); ?>>
-
-									<?php if ( $is_new || $migrated ) :
-										Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
-									else : ?>
-										<i class="<?php echo esc_attr( $link['social_icon'] ); ?>" aria-hidden="true"></i>
-									<?php endif; ?>
-
-								</a>
-							<?php endforeach; ?>
-						</div>
-					<?php endif; ?>
+					<?php $this->parent->render_social_icons('bdt-transition-slide-bottom'); ?>
 
 				</div>
 			</div>

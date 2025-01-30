@@ -7728,6 +7728,16 @@ trait Global_Widget_Controls {
 		$is_new    = empty($settings['scroll_to_section_icon']) && Icons_Manager::is_migration_allowed();
 
 		$this->add_render_attribute('swiper', 'class', 'swiper-carousel swiper');
+		$direction = is_rtl() ? 'rtl' : 'ltr';
+
+		$this->add_render_attribute( [
+			'swiper' => [
+				'role' => 'region',
+				'aria-roledescription' => 'carousel',
+				'aria-label' => $this->get_title(),
+				'dir' => $direction,
+			],
+		] );
 
 		?>
 		<div <?php $this->print_render_attribute_string('slider'); ?>>

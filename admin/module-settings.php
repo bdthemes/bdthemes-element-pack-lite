@@ -2327,6 +2327,7 @@ class ModuleService {
                 [
 					'name'      => 'swatches_group_start',
 					'label'     => esc_html__('Variation Swatches', 'bdthemes-element-pack'),
+                    'desc'      => __('Replace dropdowns with color swatches, image swatches or text/button swatches', 'bdthemes-element-pack'),
 					'type'      => 'start_group',
 					'video_url' => '',
 					'content_type' => 'new'
