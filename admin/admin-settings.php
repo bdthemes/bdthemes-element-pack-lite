@@ -1293,9 +1293,19 @@ class ElementPack_Admin_Settings {
 			});
 
 
-			jQuery('.ep-widget-filter-nav li a').on('click', function (e) {
-				jQuery(this).closest('.bdt-widget-filter-wrapper').find('.bdt-search-input').val('');
-				jQuery(this).closest('.bdt-widget-filter-wrapper').find('.bdt-search-input').val('').attr('bdt-filter-control', '');
+			function clearSearchInputs(context) {
+				context.find('.bdt-search-input').val('').attr('bdt-filter-control', '');
+			}
+
+			jQuery('.ep-widget-filter-nav li a').on('click', function () {
+				const wrapper = jQuery(this).closest('.bdt-widget-filter-wrapper');
+				clearSearchInputs(wrapper);
+			});
+
+			jQuery('.bdt-dashboard-navigation li a').on('click', function () {
+				const tabContainer = jQuery(this).closest('.bdt-dashboard-navigation').siblings('.bdt-tab-container');
+				clearSearchInputs(tabContainer);
+					tabContainer.find('.bdt-search-input').trigger('keyup');
 			});
 
 

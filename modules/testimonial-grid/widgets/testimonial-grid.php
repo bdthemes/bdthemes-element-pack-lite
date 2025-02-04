@@ -282,37 +282,6 @@ class Testimonial_Grid extends Module_Base {
 		);
 
 		$this->add_control(
-			'show_filter_bar',
-			[ 
-				'label'     => esc_html__( 'Filter Bar', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'separator' => 'before'
-			]
-		);
-
-		$post_types = $this->getGroupControlQueryPostTypes();
-
-		foreach ( $post_types as $key => $post_type ) {
-			$taxonomies = $this->get_taxonomies( $key );
-			if ( ! $taxonomies[ $key ] ) {
-				continue;
-			}
-			$this->add_control(
-				'taxonomy_' . $key,
-				[ 
-					'label'     => __( 'Taxonomies', 'bdthemes-element-pack' ),
-					'type'      => Controls_Manager::SELECT,
-					'options'   => $taxonomies[ $key ],
-					'default'   => key( $taxonomies[ $key ] ),
-					'condition' => [ 
-						'posts_source'    => $key,
-						'show_filter_bar' => 'yes'
-					],
-				]
-			);
-		}
-
-		$this->add_control(
 			'item_match_height',
 			[ 
 				'label' => esc_html__( 'Item Match Height', 'bdthemes-element-pack' ),
@@ -357,6 +326,85 @@ class Testimonial_Grid extends Module_Base {
 				'default' => 4,
 			]
 		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'filter_bar',
+			[ 
+				'label' => esc_html__( 'Filter Bar', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'show_filter_bar',
+			[ 
+				'label'     => esc_html__( 'Filter Bar', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'separator' => 'before'
+			]
+		);
+
+		$post_types = $this->getGroupControlQueryPostTypes();
+
+		foreach ( $post_types as $key => $post_type ) {
+			$taxonomies = $this->get_taxonomies( $key );
+			if ( ! $taxonomies[ $key ] ) {
+				continue;
+			}
+			$this->add_control(
+				'taxonomy_' . $key,
+				[ 
+					'label'     => __( 'Taxonomies', 'bdthemes-element-pack' ),
+					'type'      => Controls_Manager::SELECT,
+					'options'   => $taxonomies[ $key ],
+					'default'   => key( $taxonomies[ $key ] ),
+					'condition' => [ 
+						'posts_source'    => $key,
+						'show_filter_bar' => 'yes'
+					],
+				]
+			);
+		}
+
+		$this->add_control(
+			'filter_custom_text',
+			[ 
+				'label'     => esc_html__( 'Custom Text', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'show_filter_bar' => 'yes',
+				],
+				'description' => esc_html__( 'If you active this option. You can change (All) text without translator plugin. If you wish you can use translator plugin also.', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'filter_custom_text_all',
+			[ 
+				'label'   => esc_html__( 'Custom Text (All)', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::TEXT,
+				'condition'  => [
+					'show_filter_bar' => 'yes',
+					'filter_custom_text'     => 'yes',
+				],
+				'default' => esc_html__( 'All', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'filter_custom_text_filter',
+			[ 
+				'label'     => __( 'Custom Text (Filter)', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => [ 'active' => true ],
+				'default'   => __( 'Filter', 'bdthemes-element-pack' ),
+				'condition' => [ 
+					'show_filter_bar'    => 'yes',
+					'filter_custom_text' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1379,19 +1427,30 @@ class Testimonial_Grid extends Module_Base {
 	}
 
 	public function render_filter_menu() {
+		$settings         = $this->get_settings_for_display();
 		$testi_categories = $this->filter_menu_categories(); ?>
 		<div class="bdt-ep-grid-filters-wrapper">
 			<button class="bdt-button bdt-button-default bdt-hidden@m" type="button">
-				<?php esc_html_e( 'Filter', 'bdthemes-element-pack' ); ?>
+				<?php if ( isset( $settings['filter_custom_text'] ) && ( $settings['filter_custom_text'] != 'yes' ) ) : ?>
+					<?php esc_html_e( 'Filter', 'bdthemes-element-pack' ); ?>
+				<?php else : ?>
+					<?php esc_html_e( $settings['filter_custom_text_filter'], 'bdthemes-element-pack' ); ?>
+				<?php endif; ?>
 			</button>
 			<div data-bdt-dropdown="mode: click;"
 				class="bdt-dropdown bdt-margin-remove-top bdt-margin-remove-bottom bdt-hidden@m">
 				<ul class="bdt-nav bdt-dropdown-nav">
-					<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
-						<a href="#">
-							<?php esc_html_e( 'All', 'bdthemes-element-pack' ); ?>
-						</a>
-					</li>
+					<?php if ( $settings['filter_custom_text']) : ?>
+						<?php if ( ! empty($settings['filter_custom_text_all']) ) : ?>
+							<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
+								<a href="#"><?php esc_html_e( $settings['filter_custom_text_all'], 'bdthemes-element-pack' ); ?></a>
+							</li>
+						<?php endif; ?>
+					<?php else : ?>
+						<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
+							<a href="#"><?php esc_html_e( 'All', 'bdthemes-element-pack' ); ?></a>
+						</li>
+					<?php endif; ?>
 					<?php foreach ( $testi_categories as $category ) { ?>
 						<li class="bdt-ep-grid-filter"
 							data-bdt-filter-control="[data-filter*='<?php echo esc_attr( strtolower( $category ) ); ?>']">
@@ -1405,11 +1464,17 @@ class Testimonial_Grid extends Module_Base {
 
 
 			<ul class="bdt-ep-grid-filters bdt-visible@m" data-bdt-margin>
-				<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
-					<a href="#">
-						<?php esc_html_e( 'All', 'bdthemes-element-pack' ); ?>
-					</a>
-				</li>
+				<?php if ( $settings['filter_custom_text']) : ?>
+					<?php if ( ! empty($settings['filter_custom_text_all']) ) : ?>
+						<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
+							<a href="#"><?php esc_html_e( $settings['filter_custom_text_all'], 'bdthemes-element-pack' ); ?></a>
+						</li>
+					<?php endif; ?>
+				<?php else : ?>
+					<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
+						<a href="#"><?php esc_html_e( 'All', 'bdthemes-element-pack' ); ?></a>
+					</li>
+				<?php endif; ?>
 				<?php foreach ( $testi_categories as $category ) : ?>
 					<li class="bdt-ep-grid-filter"
 						data-bdt-filter-control="[data-filter*='<?php echo esc_attr( strtolower( $category ) ); ?>']">
