@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
 Elementor tested up to: 3.27.3
 
-Get 2600+ templates, 280+ widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
+Get 2600+ templates, 290+ widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
 
 
 == Description ==
@@ -19,14 +19,14 @@ Get 2600+ templates, 280+ widgets and advanced features with Element Pack. Super
 **Element Pack - The Best Elementor Addon for Easy Website Building**
 
 
-Get started with the Element Pack free Elementor Addon and build stunning websites effortlessly. With 2600+ ready-made templates and 280+ powerful Elementor widgets, you can create professional pages in no time. No coding required!
+Get started with the Element Pack free Elementor Addon and build stunning websites effortlessly. With 2600+ ready-made templates and 290+ powerful Elementor widgets, you can create professional pages in no time. No coding required!
 
 
 ## 🚀 Why Choose Element Pack?
 ✅ 2600+ Ready-Made Templates – Use pre-designed pages, headers, footers and blocks instantly.
 
 
-✅ 280+ Advanced Widgets – Add interactive Elementor widgets to enhance your website.
+✅ 290+ Advanced Widgets – Add interactive Elementor widgets to enhance your website.
 
 
 ✅ Fully Customizable – Easily adjust elements, templates and widgets to match your style.
