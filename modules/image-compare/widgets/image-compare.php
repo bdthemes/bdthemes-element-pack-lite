@@ -458,7 +458,7 @@ class Image_Compare extends Module_Base {
 							'add_circle_blur'  		=> ('yes' == $settings['add_circle_blur']) ? true : false,
 							'add_circle_shadow'  	=> ('yes' == $settings['add_circle_shadow']) ? true : false,
 							'smoothing'  			=> ('yes' == $settings['smoothing']) ? true : false,
-							'smoothing_amount'    	=> $settings['smoothing_amount']['size'],
+							'smoothing_amount'    	=> ('yes' == $settings['smoothing']) ? $settings['smoothing_amount']['size'] : 0,
 							'bar_color'    			=> $settings['bar_color'],
 							// 'move_with_handle_only' => ('yes' == $settings['move_with_handle_only']) ? 'true' : 'false',
 							// 'click_to_move'         => ('yes' == $settings['click_to_move']) ? 'true' : 'false',

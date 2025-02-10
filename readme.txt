@@ -5,7 +5,7 @@ Tags: elementor addons, elementor widget, elementor extensions, elements, templa
 Requires at least: 5.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4.0
-Stable tag: 5.10.22
+Stable tag: 5.10.23
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -366,6 +366,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 5.10.23 [10th February 2025] =
+
+* Added: Current item style controls added in product grid widget
+* Fixed: Mobile iOS device scroll to top issue fixed in image compare widget
+* Noted: [Smooth Scroller](https://youtu.be/cQnu1LUlFL8?si=etHMhEGRTX3M1RJ_) video tutorial added
+
 = 5.10.22 [4th February 2025] =
 
 * Added: Custom Filter Text ( All, Filter ) added in filter type widgets
@@ -442,73 +448,6 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 = 5.10.10 [23th November 2024] =
 
 * Fixed: Translation issue fixed
-
-= 5.10.9 [21th November 2024] =
-
-* Updated: Dashboard system improved
-
-= 5.10.8 [20th November 2024] =
-
-* Added: Skin modal style controls added in user register widget
-* Fixed: Validate contact number field for text in Simple Contact Form widget (Thanks to Windsor)
-
-= 5.10.7 [18th November 2024] =
-
-* Added: Text read more toggle added in testimonial grid widget
-* Fixed: Text effect issue fixed in slider widget
-* Fixed: JS loading in editor issue fixed on Facebook Feed Carousel widget
-* Fixed: Lightbox icon issue fixed in image accordion widget
-* Fixed: Menu Class confliction with Blocksy theme issue fixed
-* Fixed: Optimized CSS loading dependency fixed
-
-= 5.10.6 [16th November 2024] =
-
-* Fixed: Security improved
-* Fixed: Lightbox icon issue fixed in image accordion widget
-
-= 5.10.5 [14th November 2024] =
-
-* Added: Grid template columns option added in countdown widget
-* Added: Album image show featute added in Facebook Feed widget (Thanks to Brandon Williams)
-* Fixed: Color format issue fixed in animated gradient background extension
-* Updated: Count columns option deprecated in countdown widget
-* Updated: Dynamic Post Content escaped from elementor caching (Thanks to Guy Whettam)
-
-= 5.10.4 [9th November 2024] =
-
-* Fixed: Show hidden item issue fixed in static carousel widget
-
-= 5.10.3 [3rd November 2024] =
-
-* Added: Button width auto option added in dual button widget
-* Added: Lightbox and Post details link text dynamic added in Custom Gallery, Image Accordion widget
-* Fixed: Progress undefined issue fixed in reading progress widget
-* Updated: Assets manager improved
-* Updated: Security improved within Cookie consent widget
-* Updated: Cookie improved for users Data in cookie consent widget
-* Updated: Security issue improved in Lightbox widget
-
-= 5.10.2 [28th October 2024] =
-
-* Added: Content vertical align added in fancy list widget
-* Fixed: Svg image widget issue fixed
-* Fixed: Navigation progress position issue fixed
-* Fixed: Security improved
-
-= 5.10.1 [14th October 2024] =
-
-* Added: Close button hide and position options added in cookie consent widget
-* Added: Close all items on mobile feature added in Accordion widget (Thanks to Rys)
-* Added: Content style controls added in static carousel widget
-* Fixed: JS dependency issue fixed (Thanks to Devon Jordaan)
-
-= 5.10.0 [7th October 2024] =
-
-* Added: Match padding option added in panel slider widget
-* Added: In-active item overlay color added for Image Accordion widget (Thanks to Steffen)
-* Added: Cookie consent widget style controls added
-* Fixed: Shadow Mode issue fixed in panel slider widget
-* Fixed: Editor mode image size issue fixed in review card carousel widget
 
 Details [changelog here](https://feedback.bdthemes.com/announcements?category=category_6l495r8q)
 

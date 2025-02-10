@@ -2296,7 +2296,7 @@ class ModuleService {
 					'default'     => 'off',
 					'widget_type' => 'pro',
 					'demo_url'    => '',
-					'video_url'   => '',
+					'video_url'   => 'https://youtu.be/cQnu1LUlFL8?si=5xYIZu_XlWqZOWG8',
 				],
 
 				[
