@@ -77,6 +77,14 @@ class Product_Grid extends Module_Base {
 
 		$repeater = new Repeater();
 
+		$repeater->start_controls_tabs( 'tabs_repeater_item_style' );
+		$repeater->start_controls_tab(
+			'tab_repeater_item_content',
+			[ 
+				'label' => __( 'Content', 'bdthemes-element-pack' ),
+			]
+		);
+
 		$repeater->add_control(
 			'image',
 			[ 
@@ -191,14 +199,127 @@ class Product_Grid extends Module_Base {
 			[ 
 				'label'       => __( 'Badge Text', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => 'Sale',
-				'placeholder' => 'Type Badge text',
+				'default'     => __( 'Sale', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'Type Badge text', 'bdthemes-element-pack' ),
 				'dynamic'     => [ 
 					'active' => true,
 				],
 			]
 		);
-
+		$repeater->end_controls_tab();
+		$repeater->start_controls_tab(
+			'tab_repeater_item_style',
+			[ 
+				'label' => __( 'Style', 'bdthemes-element-pack' ) . BDTEP_NC,
+			]
+		);
+		$repeater->add_control(
+			'current_item_title_color',
+			[ 
+				'label'     => esc_html__( 'Title Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$repeater->add_control(
+			'current_item_price_color',
+			[ 
+				'label'     => esc_html__( 'Price Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-price' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$repeater->add_control(
+			'current_item_text_color',
+			[ 
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-text' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$repeater->add_control(
+			'current_item_readmore_color',
+			[ 
+				'label'     => esc_html__( 'Read More Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-readmore' => 'color: {{VALUE}};',
+				],
+				'separator' => 'before',
+			]
+		);
+		$repeater->add_control(
+			'current_item_readmore_background',
+			[ 
+				'label'     => esc_html__( 'Read More Background Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-readmore' => 'background: {{VALUE}};',
+				],
+			]
+		);
+		$repeater->add_control(
+			'current_item_rating_color',
+			[ 
+				'label'     => esc_html__( 'Rating Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-rating' => 'color: {{VALUE}};',
+				],
+				'separator' => 'before',
+			]
+		);
+		$repeater->add_control(
+			'current_item_rating_text_color',
+			[ 
+				'label'     => esc_html__( 'Rating Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-rating-count' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$repeater->add_control(
+			'current_item_time_color',
+			[ 
+				'label'     => esc_html__( 'Time Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-time' => 'color: {{VALUE}};',
+				],
+				'separator' => 'before',
+			]
+		);
+		$repeater->add_control(
+			'current_item_badge_color',
+			[ 
+				'label'     => esc_html__( 'Badge Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-badge .bdt-badge' => 'color: {{VALUE}};',
+				],
+				'separator' => 'before',
+			]
+		);
+		$repeater->add_control(
+			'current_item_badge_background',
+			[ 
+				'label'     => esc_html__( 'Badge Background Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} {{CURRENT_ITEM}} .bdt-ep-product-grid-badge .bdt-badge' => 'background: {{VALUE}};',
+				],
+			]
+		);
+		$repeater->end_controls_tab();
+		$repeater->end_controls_tabs();
+		
 		$this->add_control(
 			'product_items',
 			[ 
@@ -1811,7 +1932,7 @@ class Product_Grid extends Module_Base {
 		<div <?php $this->print_render_attribute_string( 'product-grid' ); ?>>
 			<?php foreach ( $settings['product_items'] as $index => $item ) :
 
-				$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-grid-item bdt-flex bdt-flex-column', true );
+				$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-grid-item bdt-flex bdt-flex-column elementor-repeater-item-' . esc_attr( $item['_id'] ) . ' ' , true );
 
 				if ( $settings['show_price'] && $settings['show_title'] ) {
 					$this->add_render_attribute( 'title-price', 'class', 'bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between', true );
