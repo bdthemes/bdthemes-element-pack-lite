@@ -1,15 +1,15 @@
 === Element Pack Addons for Elementor - Free Templates and Widgets for Your WordPress Websites ===
-Contributors: bdthemes, selimmw, mohammaadfarid, bdkoder, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
+Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
 Donate link: http://bdthemes.com/
 Tags: elementor addons, elementor widget, elementor extensions, elements, templates
 Requires at least: 5.0.0
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 Requires PHP: 7.4.0
-Stable tag: 5.10.23
+Stable tag: 5.10.24
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.27.3
+Elementor tested up to: 3.27.6
 
 Get 2600+ templates, 290+ widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
 
@@ -365,6 +365,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 5.10.24 [19th February 2025] =
+
+* Added: Custom success message option added in simple contact form widget
+* Added: Elementor Template Kit [Taskboard](https://service-template.predesignkit.com/taskboard/) Added
+* Added: Elementor Template Kit [Read Me – Fast Track Learning](https://others-template.predesignkit.com/read-me/) Added
+* Fixed: WPML repeater items issue fixed
+* Fixed: Dashboard notice dismiss css conflict issue fixed
 
 = 5.10.23 [10th February 2025] =
 

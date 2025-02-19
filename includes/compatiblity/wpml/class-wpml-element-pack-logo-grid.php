@@ -1,11 +1,12 @@
 <?php
+namespace ElementPack\Includes;
 
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 /**
  * Class WPML_ElementPack_Logo_Grid
  */
-class WPML_ElementPack_Logo_Grid extends WPML_Elementor_Module_With_Items {
+class WPML_ElementPack_Logo_Grid extends WPML_Module_With_Items {
 
 	/**
 	 * @return string

@@ -8,7 +8,8 @@
 
     var widgetSimpleContactForm = function ($scope, $) {
 
-        var $contactForm = $scope.find('.bdt-contact-form .without-recaptcha');
+        var $contactForm = $scope.find('.bdt-contact-form .without-recaptcha'),
+        widgetID = $scope.data('id');
 
         // Validate tel type input field
         var $inputFieldTel = $scope.find('.bdt-contact-form input[type="tel"]');
@@ -22,7 +23,7 @@
         }
 
         $contactForm.submit(function (e) {
-            sendContactForm($contactForm);
+            sendContactForm($contactForm, widgetID);
             return false;
         });
 
@@ -30,7 +31,7 @@
 
     };
 
-    function sendContactForm($contactForm) {
+    function sendContactForm($contactForm, widgetID = false) {
         var langStr = window.ElementPackConfig.contact_form;
 
         $.ajax({
@@ -51,7 +52,7 @@
 
                 bdtUIkit.notification.closeAll();
                 var notification = bdtUIkit.notification({
-                    message: data
+                    message: '<div class="bdt-contact-form-success-message-' + widgetID + '">' + data + '</div>'
                 });
 
                 if (redirectURL) {

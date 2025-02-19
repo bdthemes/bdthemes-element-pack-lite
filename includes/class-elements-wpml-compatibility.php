@@ -23,11 +23,6 @@ class Element_Pack_WPML {
 
 		// WPML String Translation plugin exist check
 		if ( defined( 'WPML_ST_VERSION' ) ) {
-
-			if ( class_exists( 'WPML_Elementor_Module_With_Items' ) ) {
-				$this->load_wpml_modules();
-			}
-
 			add_filter( 'wpml_elementor_widgets_to_translate', array( $this, 'add_translatable_nodes' ) );
 		}
 
@@ -38,6 +33,9 @@ class Element_Pack_WPML {
 	 * @return void
 	 */
 	public function load_wpml_modules() {
+
+		include_once( BDTEP_INC_PATH . 'compatiblity/wpml/wpml-module-with-items.php' );
+
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-member.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-accordion.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-google-maps.php' );
@@ -84,10 +82,12 @@ class Element_Pack_WPML {
 	 */
 	public function add_translatable_nodes( $nodes_to_translate ) {
 
+		$this->load_wpml_modules();
+
 		$nodes_to_translate[ 'bdt-accordion' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-accordion' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Accordion',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Accordion',
 		];
 
 		$nodes_to_translate[ 'bdt-advanced-button' ] = [
@@ -131,7 +131,7 @@ class Element_Pack_WPML {
 					'editor_type' => 'AREA',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_GoogleMaps',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_GoogleMaps',
 		];
 
 		$nodes_to_translate[ 'bdt-advanced-heading' ] = [
@@ -201,7 +201,7 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-advanced-progress-bar' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-advanced-progress-bar' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Advanced_Progress_Bar',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Advanced_Progress_Bar',
 		];
 
 		$nodes_to_translate[ 'bdt-animated-heading' ] = [
@@ -255,13 +255,13 @@ class Element_Pack_WPML {
 					'editor_type' => 'AREA',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_Business_Hours',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Business_Hours',
 		];
 
 		$nodes_to_translate[ 'bdt-circle-info' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-circle-info' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Circle_Info',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Circle_Info',
 		];
 
 		$nodes_to_translate[ 'bdt-call-out' ] = [
@@ -315,13 +315,13 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_Chart',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Chart',
 		];
 
 		$nodes_to_translate[ 'bdt-circle-menu' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-circle-menu' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Circle_Menu',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Circle_Menu',
 		];
 
 		$nodes_to_translate[ 'bdt-contact-form' ] = [
@@ -440,19 +440,19 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-custom-carousel' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-custom-carousel' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Custom_Carousel',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Custom_Carousel',
 		];
 
 		$nodes_to_translate[ 'bdt-custom-gallery' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-custom-gallery' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Custom_Gallery',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Custom_Gallery',
 		];
 
 		$nodes_to_translate[ 'bdt-device-slider' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-device-slider' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Device_Slider',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Device_Slider',
 		];
 
 		$nodes_to_translate[ 'bdt-download-monitor' ] = [
@@ -689,73 +689,73 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-fancy-icons' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-fancy-icons' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Fancy_Icons',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Fancy_Icons',
 		];
 
 		$nodes_to_translate[ 'bdt-fancy-list' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-fancy-list' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Fancy_List',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Fancy_List',
 		];
 
 		$nodes_to_translate[ 'bdt-fancy-slider' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-fancy-slider' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Fancy_Slider',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Fancy_Slider',
 		];
 
 		$nodes_to_translate[ 'bdt-fancy-tabs' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-fancy-tabs' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Fancy_Tabs',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Fancy_Tabs',
 		];
 
 		$nodes_to_translate[ 'bdt-honeycombs' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-honeycombs' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Honeycombs',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Honeycombs',
 		];
 
 		$nodes_to_translate[ 'bdt-hover-box' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-hover-box' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Hover_Box',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Hover_Box',
 		];
 
 		$nodes_to_translate[ 'bdt-hover-video' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-hover-video' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Hover_Video',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Hover_Video',
 		];
 
 		$nodes_to_translate[ 'bdt-image-accordion' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-image-accordion' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Image_Accordion',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Image_Accordion',
 		];
 
 		$nodes_to_translate[ 'bdt-image-expand' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-image-expand' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Image_Expand',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Image_Expand',
 		];
 
 		$nodes_to_translate[ 'bdt-logo-carousel' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-logo-carousel' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Logo_Carousel',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Logo_Carousel',
 		];
 
 		$nodes_to_translate[ 'bdt-logo-grid' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-logo-grid' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Logo_Grid',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Logo_Grid',
 		];
 
 		$nodes_to_translate[ 'bdt-vertical-menu' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-vertical-menu' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Vertical_Menu',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Vertical_Menu',
 		];
 
 		$nodes_to_translate[ 'bdt-profile-card' ] = [
@@ -852,7 +852,7 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_Profile_Card',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Profile_Card',
 		];
 
 		$nodes_to_translate[ 'bdt-flip-box' ] = [
@@ -960,7 +960,7 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-iconnav' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-iconnav' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_IconNav',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_IconNav',
 		];
 
 		$nodes_to_translate[ 'bdt-image-compare' ] = [
@@ -1062,7 +1062,7 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_Marker',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Marker',
 		];
 
 		$nodes_to_translate[ 'bdt-member' ] = [
@@ -1085,7 +1085,7 @@ class Element_Pack_WPML {
 				],
 
 			],
-			'integration-class' => 'WPML_ElementPack_Team_Member',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Team_Member',
 		];
 
 		$nodes_to_translate[ 'bdt-modal' ] = [
@@ -1159,13 +1159,13 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-open-street-map' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-open-street-map' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Open_Street_Map',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Open_Street_Map',
 		];
 
 		$nodes_to_translate[ 'bdt-panel-slider' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-panel-slider' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Panel_Slider',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Panel_Slider',
 		];
 
 		$nodes_to_translate[ 'bdt-post-block' ] = [
@@ -1237,7 +1237,7 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-price-list' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-price-list' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Price_List',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Price_List',
 		];
 
 		$nodes_to_translate[ 'bdt-price-table' ] = [
@@ -1409,7 +1409,7 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-scrollnav' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-scrollnav' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Scrollnav',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Scrollnav',
 		];
 
 		$nodes_to_translate[ 'bdt-search' ] = [
@@ -1432,7 +1432,7 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_Slider',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Slider',
 		];
 
 		$nodes_to_translate[ 'bdt-slideshow' ] = [
@@ -1444,13 +1444,13 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_Slideshow',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Slideshow',
 		];
 
 		$nodes_to_translate[ 'bdt-social-share' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-social-share' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Social_Share',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Social_Share',
 		];
 
 		$nodes_to_translate[ 'bdt-switcher' ] = [
@@ -1519,7 +1519,7 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-tabs' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-tabs' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Tabs',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Tabs',
 		];
 
 		$nodes_to_translate[ 'bdt-thumb-gallery' ] = [
@@ -1542,7 +1542,7 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_Timeline',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Timeline',
 		];
 
 		$nodes_to_translate[ 'bdt-toggle' ] = [
@@ -1626,7 +1626,7 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-			'integration-class' => 'WPML_ElementPack_User_Login',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_User_Login',
 		];
 
 		$nodes_to_translate[ 'bdt-user-register' ] = [
@@ -1678,7 +1678,7 @@ class Element_Pack_WPML {
 		$nodes_to_translate[ 'bdt-video-gallery' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-video-gallery' ],
 			'fields'     => [],
-			'integration-class' => 'WPML_ElementPack_Video_Gallery',
+			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Video_Gallery',
 		];
 
 		$nodes_to_translate[ 'bdt-video-player' ] = [

@@ -1,4 +1,5 @@
 <?php
+namespace ElementPack\Includes;
 
 /**
  * Class WPML_ElementPack_Business_Hours
@@ -7,7 +8,7 @@
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 
-class WPML_ElementPack_Business_Hours extends WPML_Elementor_Module_With_Items {
+class WPML_ElementPack_Business_Hours extends WPML_Module_With_Items {
 
 	/**
 	 * @return string

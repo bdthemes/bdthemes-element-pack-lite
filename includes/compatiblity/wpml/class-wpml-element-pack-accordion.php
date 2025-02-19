@@ -1,10 +1,11 @@
 <?php
+namespace ElementPack\Includes;
 
 /**
  * Class WPML_ElementPack_Accordion
  */
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
-class WPML_ElementPack_Accordion extends WPML_Elementor_Module_With_Items {
+class WPML_ElementPack_Accordion extends WPML_Module_With_Items {
 
 	/**
 	 * @return string

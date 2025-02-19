@@ -1,11 +1,12 @@
 <?php
+namespace ElementPack\Includes;
 
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 /**
  * Class WPML_Jet_Elements_Custom_Carousel
  */
-class WPML_ElementPack_Custom_Carousel extends WPML_Elementor_Module_With_Items {
+class WPML_ElementPack_Custom_Carousel extends WPML_Module_With_Items {
 
 	/**
 	 * @return string

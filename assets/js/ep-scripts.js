@@ -494,7 +494,8 @@ function returnCurrencySymbol(currency = null) {
 
     var widgetSimpleContactForm = function ($scope, $) {
 
-        var $contactForm = $scope.find('.bdt-contact-form .without-recaptcha');
+        var $contactForm = $scope.find('.bdt-contact-form .without-recaptcha'),
+        widgetID = $scope.data('id');
 
         // Validate tel type input field
         var $inputFieldTel = $scope.find('.bdt-contact-form input[type="tel"]');
@@ -508,7 +509,7 @@ function returnCurrencySymbol(currency = null) {
         }
 
         $contactForm.submit(function (e) {
-            sendContactForm($contactForm);
+            sendContactForm($contactForm, widgetID);
             return false;
         });
 
@@ -516,7 +517,7 @@ function returnCurrencySymbol(currency = null) {
 
     };
 
-    function sendContactForm($contactForm) {
+    function sendContactForm($contactForm, widgetID = false) {
         var langStr = window.ElementPackConfig.contact_form;
 
         $.ajax({
@@ -537,7 +538,7 @@ function returnCurrencySymbol(currency = null) {
 
                 bdtUIkit.notification.closeAll();
                 var notification = bdtUIkit.notification({
-                    message: data
+                    message: '<div class="bdt-contact-form-success-message-' + widgetID + '">' + data + '</div>'
                 });
 
                 if (redirectURL) {
