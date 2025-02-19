@@ -587,7 +587,26 @@ class Contact_Form extends Module_Base {
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
+		
+		$this->add_control(
+			'custom_success_message',
+			[ 
+				'label' => esc_html__( 'Custom Success Message', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SWITCHER,
+			]
+		);
 
+		$this->add_control(
+			'success_message',
+			[
+				'type'      => Controls_Manager::TEXTAREA,
+				'default'   => esc_html__( "Hi [name], We got your e-mail. We will reply to [email] very soon. Thanks for being with us...", "bdthemes-element-pack" ),
+				'description'   => esc_html__( 'Note: you can use form submitted name and email. Just wrap with square brackets. Ex- [name], [email]', 'bdthemes-element-pack' ),
+				'condition' => [ 
+					'custom_success_message' => 'yes',
+				],
+			]
+		);
 
 		$this->end_controls_section();
 
@@ -1004,6 +1023,35 @@ class Contact_Form extends Module_Base {
 		);
 
 		$this->end_controls_section();
+		
+		$this->start_controls_section(
+			'section_success_message_style',
+			[ 
+				'label' => esc_html__( 'Success Message', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+				]
+			);
+
+			$this->add_control(
+				'success_message_text_color',
+				[ 
+					'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+					'type'      => Controls_Manager::COLOR,
+					'selectors' => [ 
+						'.bdt-contact-form-success-message-{{ID}} .bdt-text-success' => 'color: {{VALUE}} !important;',
+					],
+				]
+			);
+
+			$this->add_group_control(
+				Group_Control_Typography::get_type(),
+				[ 
+					'name'     => 'success_message_typography',
+					'selector' => '.bdt-contact-form-success-message-{{ID}} .bdt-text-success',
+				]
+			);
+		
+		$this->end_controls_section();
 	}
 
 	public function form_fields_render_attributes() {
@@ -1336,6 +1384,11 @@ class Contact_Form extends Module_Base {
 					</div>
 
 					<input name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( "simpleContactForm" ) ); ?>" type="hidden">
+					
+					<?php if ( isset($settings['success_message']) && !empty($settings['success_message']) ) { ?>
+						<input type="hidden" name="custom_success_message" value="<?php echo esc_html( $settings['success_message'] ); ?>" />						
+					<?php } ?>
+					
 
 					<input type="hidden" name="action" value="element_pack_contact_form" />
 

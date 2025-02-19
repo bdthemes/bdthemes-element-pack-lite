@@ -1,10 +1,11 @@
 <?php
+namespace ElementPack\Includes;
 
 /**
  * Class WPML_ElementPack_Advanced_Progress_Bar
  */
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
-class WPML_ElementPack_Advanced_Progress_Bar extends WPML_Elementor_Module_With_Items {
+class WPML_ElementPack_Advanced_Progress_Bar extends WPML_Module_With_Items {
 
 	/**
 	 * @return string

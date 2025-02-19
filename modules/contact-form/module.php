@@ -103,8 +103,6 @@ class Module extends Element_Pack_Module_Base {
                 $form_data[$field] = strip_tags($value);
             }
 
-
-
             foreach ($form_data as $key => $value) {
                 $value = trim($value);
                 if (empty($value)) {
@@ -112,8 +110,25 @@ class Module extends Element_Pack_Module_Base {
                     $result = $error_empty;
                 }
             }
+       
+            // Success message part
+            if (!empty($_POST['custom_success_message'])) { 
+                $custom_message = sanitize_text_field($_POST['custom_success_message']);
 
-            $success = sprintf(esc_html__('Hi, %s. We got your e-mail. We\'ll reply you very soon. Thanks for being with us...', 'bdthemes-element-pack'), $form_data['name']);
+                $placeholders = ['[name]', '[email]'];
+                $replacements = [esc_html($form_data['name']), esc_html($form_data['email'])];
+                $custom_message = str_replace($placeholders, $replacements, $custom_message);
+
+                $success = (strlen($custom_message) <= 255) 
+                    ? $custom_message 
+                    : esc_html__('Invalid length of custom success message.', 'bdthemes-element-pack');
+            } else {
+                $success = sprintf(
+                    esc_html__('Hi, %s. We got your e-mail. We\'ll reply to you very soon. Thanks for being with us...', 'bdthemes-element-pack'),
+                    esc_html($form_data['name'])
+                );
+            }
+
 
             // and if the e-mail is not valid, switch $error to TRUE and set the result text to the shortcode attribute named 'error_noemail'
             if (!is_email($form_data['email'])) {

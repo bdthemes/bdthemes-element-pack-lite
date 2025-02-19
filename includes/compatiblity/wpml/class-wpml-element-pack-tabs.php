@@ -1,10 +1,11 @@
 <?php
+namespace ElementPack\Includes;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 /**
  * Class WPML_ElementPack_Tabs
  */
-class WPML_ElementPack_Tabs extends WPML_Elementor_Module_With_Items {
+class WPML_ElementPack_Tabs extends WPML_Module_With_Items {
 
 	/**
 	 * @return string
