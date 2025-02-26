@@ -13,6 +13,7 @@ use Elementor\Icons_Manager;
 
 use ElementPack\Modules\Member\Skins;
 use ElementPack\Traits\Global_Mask_Controls;
+use WordPressVIPMinimum\Sniffs\Functions\StripTagsSniff;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -1249,10 +1250,16 @@ class Member extends Module_Base {
 				foreach ( $settings['social_link_list'] as $index => $link ) :
 
 					$link_key = 'link_' . $index;
+
+					$tooltip = '';
 					if ( 'yes' === $settings['social_icon_tooltip'] ) {
-						$tooltip = 'title: ' . wp_kses_post( strip_tags( $link['social_link_title'] ) ) . '; ';
 						
-						$this->add_render_attribute( $link_key, 'data-bdt-tooltip', $tooltip, true );
+						$tooltip_text = wp_kses_post(strip_tags( $link['social_link_title'])); // Escape for safe attribute usage
+						
+						// Build the tooltip attribute safely
+						$tooltip = 'title: ' . htmlspecialchars($tooltip_text, ENT_QUOTES) . ';';
+					
+						// $this->add_render_attribute( $link_key, 'data-bdt-tooltip', $tooltip, true );
 					}
 
 					$this->add_render_attribute( $link_key, 'class', 'bdt-member-icon elementor-repeater-item-' . esc_attr( $link['_id'] ) );
@@ -1273,7 +1280,7 @@ class Member extends Module_Base {
 					$is_new   = empty( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
 					?>
 
-					<a <?php $this->print_render_attribute_string( $link_key ); ?>>
+					<a <?php $this->print_render_attribute_string( $link_key ); ?> data-bdt-tooltip="<?php echo $tooltip; ?>">
 
 						<?php if ( $is_new || $migrated ) :
 							Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );

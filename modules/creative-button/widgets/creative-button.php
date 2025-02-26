@@ -121,7 +121,8 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'add_custom_attributes',
 			[
-				'label'     => __( 'Add Custom Attributes', 'bdthemes-element-pack' ),
+				'label'     => __( 'Add Custom Attributes (Deprecated)', 'bdthemes-element-pack' ),
+				'description' => __( 'This option will be deprecated in the future. Please use the link field above to add custom attributes.', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 			]
 		);

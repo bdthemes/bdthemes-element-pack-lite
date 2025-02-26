@@ -496,7 +496,7 @@ class Open_Street_Map extends Module_Base {
 				$marker_settings['lng']        = ( $marker_item['marker_lng'] ) ? $marker_item['marker_lng'] : '';
 				$marker_settings['title']      = ( $marker_item['marker_title'] ) ? $marker_item['marker_title'] : '';
 				$marker_settings['iconUrl']    = ( $marker_item['custom_marker']['url'] ) ? $marker_item['custom_marker']['url'] : BDTEP_ASSETS_URL . 'images/marker-icon.png';
-				$marker_settings['infoWindow'] = ( $marker_item['marker_content'] ) ? esc_attr($marker_item['marker_content']) : '';
+				$marker_settings['infoWindow'] = ( $marker_item['marker_content'] ) ? wp_kses_post( strip_tags( $marker_item['marker_content'] ) ) : '';
 
 				$all_markers[] = $marker_settings;
 

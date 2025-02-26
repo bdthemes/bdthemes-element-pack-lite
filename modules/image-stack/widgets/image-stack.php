@@ -1143,6 +1143,7 @@ class Image_Stack extends Module_Base {
 
 				$this->add_render_attribute( 'stack-item', 'class', 'bdt-ep-image-stack-item elementor-repeater-item-' . esc_attr( $item['_id'] ), true );
 
+				$tooltip = '';
 				if ( isset( $item['tooltip_text'] ) && ! empty( $item['tooltip_text'] ) ) {
 					// Tooltip settings
 					$this->add_render_attribute( 'stack-item', 'class', [ 
@@ -1151,8 +1152,12 @@ class Image_Stack extends Module_Base {
 					], true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy', '', true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy-arrow', 'true', true );
-					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', htmlspecialchars( $item['tooltip_placement'], ENT_QUOTES, 'UTF-8' ), true );
-					$this->add_render_attribute( 'stack-item', 'data-tippy-content', htmlspecialchars( $item['tooltip_text'], ENT_QUOTES, 'UTF-8' ), true );
+					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', esc_attr($item['tooltip_placement']), true);
+
+					$tooltip_text = wp_kses_post( strip_tags( $item['tooltip_text'] ) );
+					$tooltip = htmlspecialchars( $tooltip_text, ENT_QUOTES, 'UTF-8' );
+
+					// $this->add_render_attribute( 'stack-item', 'data-tippy-content', $tooltip, true);
 				}
 
 				if ( ! empty( $item['link_url']['url'] ) ) {
@@ -1161,7 +1166,7 @@ class Image_Stack extends Module_Base {
 
 				?>
 
-				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?>>
+				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?> data-tippy-content="<?php echo $tooltip; ?>">
 					<?php if ( ! empty( $item['link_url']['url'] ) ) : ?>
 						<a <?php $this->print_render_attribute_string( 'link-wrap' . $index ); ?>>
 							<?php $this->render_media( $item ); ?>

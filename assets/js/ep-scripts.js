@@ -426,6 +426,48 @@ function returnCurrencySymbol(currency = null) {
  */
 
 /**
+ * Start dual button widget script
+ */
+
+(function ($, elementor) {
+  "use strict";
+
+  var widgetDualButton = function ($scope, $) {
+    var $buttons = $scope.find(".bdt-dual-button .bdt-ep-button[data-onclick]");
+  
+    if (!$buttons.length) return;
+
+    $buttons.on("click", function (event) {
+        event.preventDefault();
+
+        var functionName = $(this).data("onclick")?.trim();
+        
+        if (functionName) {
+            functionName = functionName.replace(/[\(\);\s]/g, '');
+            
+            if (typeof window[functionName] === "function") {
+                window[functionName]();
+            } else {
+                console.warn(`Function "${functionName}" is not defined.`);
+            }
+        }
+    });
+};
+
+
+  jQuery(window).on("elementor/frontend/init", function () {
+    elementorFrontend.hooks.addAction(
+      "frontend/element_ready/bdt-dual-button.default",
+      widgetDualButton
+    );
+  });
+})(jQuery, window.elementorFrontend);
+
+/**
+ * End dual button widget script
+ */
+
+/**
  * Start advanced divider widget script
  */
 
@@ -1321,12 +1363,20 @@ function returnCurrencySymbol(currency = null) {
         }
 
         var $settings        = $image_compare.data('settings');
+
+        var sanitizeHTML = function(str) {
+          return str.replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+      };
         
         var 
         default_offset_pct   = $settings.default_offset_pct,
         orientation          = $settings.orientation,
-        before_label         = $settings.before_label,
-        after_label          = $settings.after_label,
+        before_label         = sanitizeHTML($settings.before_label || ''),
+        after_label          = sanitizeHTML($settings.after_label || ''),
         no_overlay           = $settings.no_overlay,
         on_hover             = $settings.on_hover,
         add_circle_blur      = $settings.add_circle_blur,

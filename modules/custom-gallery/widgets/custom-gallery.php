@@ -1176,7 +1176,7 @@ class Custom_Gallery extends Module_Base {
 
 		?>
 		<div class="bdt-gallery-item-text bdt-transition-slide-bottom-small">
-			<?php echo wp_kses_post( $text['image_text'] ); ?>
+		<?php echo wp_kses_post( strip_tags( $text['image_text'] ) ); ?>
 		</div>
 		<?php
 	}
