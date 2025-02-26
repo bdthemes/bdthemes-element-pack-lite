@@ -43,6 +43,14 @@ class DualButton extends Module_Base {
         }
     }
 
+	public function get_script_depends() {
+		if ( $this->ep_is_edit_mode() ) {
+			return [ 'ep-scripts' ];
+		} else {
+			return [ 'ep-dual-button' ];
+		}
+	}
+
 	public function get_custom_help_url() {
 		return 'https://youtu.be/7hWWqHEr6s8';
 	}
@@ -106,7 +114,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_width_auto',
 			[
-				'label' => __( 'Button Width Auto', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Button Width Auto', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-dual-button-width-',
 			]
@@ -230,7 +238,8 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'add_custom_a_attributes',
 			[
-				'label'     => __( 'Add Custom Attributes', 'bdthemes-element-pack' ),
+				'label'     => __( 'Add Custom Attributes (Deprecated)', 'bdthemes-element-pack' ),
+				'description' => __( 'This option will be deprecated in the future. Please use the link field above to add custom attributes.', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 			]
 		);
@@ -350,7 +359,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_css_id_a',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
@@ -398,7 +407,8 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'add_custom_b_attributes',
 			[
-				'label'     => __( 'Add Custom Attributes', 'bdthemes-element-pack' ),
+				'label'     => __( 'Add Custom Attributes (Deprecated)', 'bdthemes-element-pack' ),
+				'description' => __( 'This option will be deprecated in the future. Please use the link field above to add custom attributes.', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 			]
 		);
@@ -534,7 +544,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_css_id_b',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
@@ -1069,8 +1079,19 @@ class DualButton extends Module_Base {
 				'selector'    => '{{WRAPPER}} .bdt-ep-button .bdt-a-icon .bdt-ep-button-a-icon-inner',
 			]
 		);
+		$this->add_responsive_control(
+			'button_a_icon_radius',
+			[
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-button .bdt-a-icon .bdt-ep-button-a-icon-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'button_a_icon_padding',
 			[
 				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
@@ -1078,18 +1099,6 @@ class DualButton extends Module_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-ep-button .bdt-a-icon .bdt-ep-button-a-icon-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_a_icon_radius',
-			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-ep-button .bdt-a-icon .bdt-ep-button-a-icon-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1165,9 +1174,7 @@ class DualButton extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1220,8 +1227,19 @@ class DualButton extends Module_Base {
 				'selector'    => '{{WRAPPER}} .bdt-ep-button .bdt-btn-b-icon .bdt-b-icon-inner',
 			]
 		);
+		$this->add_responsive_control(
+			'button_b_icon_radius',
+			[
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-button .bdt-btn-b-icon .bdt-b-icon-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'button_b_icon_padding',
 			[
 				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
@@ -1229,18 +1247,6 @@ class DualButton extends Module_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-ep-button .bdt-btn-b-icon .bdt-b-icon-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_b_icon_radius',
-			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-ep-button .bdt-btn-b-icon .bdt-b-icon-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1316,9 +1322,7 @@ class DualButton extends Module_Base {
 		);
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1496,11 +1500,11 @@ class DualButton extends Module_Base {
 		}
 
 		if ( 'yes' === $settings['button_a_onclick'] ) {
-			$this->add_render_attribute( 'button_a', 'onclick', $settings['button_a_onclick_event'] );
+			$this->add_render_attribute( 'button_a', 'data-onclick', $settings['button_a_onclick_event'] );
 		}
 
 		if ( 'yes' === $settings['button_b_onclick'] ) {
-			$this->add_render_attribute( 'button_b', 'onclick', $settings['button_b_onclick_event'] );
+			$this->add_render_attribute( 'button_b', 'data-onclick', $settings['button_b_onclick_event'] );
 		}
 
 		$this->add_render_attribute( 'button_a', 'class', 'bdt-btn-a bdt-ep-button' );

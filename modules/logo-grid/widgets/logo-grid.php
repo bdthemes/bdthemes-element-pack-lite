@@ -953,6 +953,9 @@ class Logo_Grid extends Module_Base {
 				$tooltip_content = '<span class="bdt-title">' . $item['name'] . '</span>' . $item['description'];
 				$image_alt       = $item['name'] . ' : ' . $item['description'];
 				$this->add_render_attribute( $repeater_key, 'class', 'bdt-item' );
+
+				$allowed_tags = '<p><b><strong><em><u><span><br><i>';
+				$tooltip_content = strip_tags( $tooltip_content, $allowed_tags );
 				$this->add_render_attribute( $repeater_key, 'data-tippy-content', htmlspecialchars( $tooltip_content, ENT_QUOTES, 'UTF-8' ), true );
 
 				if ( $item['link']['url'] ) {

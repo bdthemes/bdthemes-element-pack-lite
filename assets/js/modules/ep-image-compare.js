@@ -14,12 +14,20 @@
         }
 
         var $settings        = $image_compare.data('settings');
+
+        var sanitizeHTML = function(str) {
+          return str.replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+      };
         
         var 
         default_offset_pct   = $settings.default_offset_pct,
         orientation          = $settings.orientation,
-        before_label         = $settings.before_label,
-        after_label          = $settings.after_label,
+        before_label         = sanitizeHTML($settings.before_label || ''),
+        after_label          = sanitizeHTML($settings.after_label || ''),
         no_overlay           = $settings.no_overlay,
         on_hover             = $settings.on_hover,
         add_circle_blur      = $settings.add_circle_blur,

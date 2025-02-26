@@ -166,14 +166,14 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'custom_attributes',
 			[ 
-				'label'       => esc_html__( 'Custom Attributes', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Custom Attributes (Deprecated)', 'bdthemes-element-pack' ) . BDTEP_NC,
 				'type'        => Controls_Manager::TEXTAREA,
 				'default'     => 'rel|noopener noreferrer nofollow',
 				'dynamic'     => [ 
 					'active' => true,
 				],
 				'placeholder' => esc_html__( 'key|value', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'Set custom attributes for the link tag. Each attribute in a separate line.', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'This option will be deprecated in the future. Please use the learn more link field above to add custom attributes.', 'bdthemes-element-pack' ),
 				'classes'     => 'elementor-control-direction-ltr',
 			]
 		);
@@ -861,9 +861,8 @@ class Cookie_Consent extends Module_Base {
 				}
 			}
 		}
-		
 
-
+		$this->add_link_attributes( 'custom-attr', $settings['learn_more_link'] );
 		$this->add_render_attribute(
 			[ 
 				'cookie-consent' => [ 
@@ -872,18 +871,18 @@ class Cookie_Consent extends Module_Base {
 							'position' => $settings['position'],
 							'static'   => ( 'top' == $settings['position'] and $settings['pushdown'] ) ? true : false,
 							'content'  => [ 
-								'message'     => htmlspecialchars( $settings['message'], ENT_QUOTES, 'UTF-8' ),
-								'dismiss'     => $settings['button_text'],
-								'link'        => $settings['learn_more_text'],
+								'message'     => esc_html( $settings['message'] ),
+								'dismiss'     => esc_html( $settings['button_text'] ),
+								'link'        => esc_html( $settings['learn_more_text'] ),
 								'href'        => esc_url( $settings['learn_more_link']['url'] ),
-								'custom_attr' => $this->get_render_attribute_string( 'custom-attr' ),
+								'custom_attr' => esc_attr( $this->get_render_attribute_string( 'custom-attr' ) ),
 							],
 							'cookie'   => [ 
 								'name'       => 'element_pack_cookie_widget',
 								'domain'     => Utils::get_site_domain(),
 								'expiryDays' => $settings['expiry_days']['size'],
 							],
-						] ),
+						], JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT ), // Extra security
 					],
 				],
 			]

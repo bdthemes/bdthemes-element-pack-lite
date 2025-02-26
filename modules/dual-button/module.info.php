@@ -6,4 +6,5 @@ return [
 	'required'           => true,
 	'default_activation' => false,
 	'has_style'			 => true,
+	'has_script'			 => true,
 ];
