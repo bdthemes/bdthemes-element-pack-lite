@@ -197,7 +197,7 @@ Create multi-level submenus to help visitors navigate your site effortlessly. Ke
 
 With Element Pack, you have everything you need to build a dynamic, engaging and user-friendly website!
 
- **[Download Element Pack Free](https://www.elementpack.pro/)**
+**[Download Element Pack Free](https://www.elementpack.pro/)**
 
 
 
@@ -264,7 +264,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 5.10.25 [26th February 2025] =
+= 5.10.25 [27th February 2025] =
 
 * Added: Responsive controls added in dual button widget
 * Added: Elementor Template Kit [Finlytics](https://service-template.predesignkit.com/finlytics/) Added
