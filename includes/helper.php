@@ -530,13 +530,13 @@ function element_pack_sidebar_options() {
  * @param string category name
  * @return array of category
  */
-function element_pack_get_terms( $taxonomy = 'category' ) {
+function element_pack_get_terms( $taxonomy = 'category', $hide_empty = false ) {
 
 	$post_options = [];
 
 	$post_categories = get_terms( [ 
 		'taxonomy'   => $taxonomy,
-		'hide_empty' => false,
+		'hide_empty' => $hide_empty,
 	] );
 
 	if ( is_wp_error( $post_categories ) ) {
@@ -568,6 +568,31 @@ function element_pack_get_only_parent_cats( $taxonomy = 'category' ) {
 	return $parent_categories;
 }
 
+function get_taxonomy_by_post_type($post_type) {
+	switch ($post_type) {
+		case 'campaign':
+			return 'campaign_category';
+		case 'lightbox_library':
+			return 'ngg_tag';
+		case 'give_forms':
+			return 'give_forms_category';
+		case 'tribe_events':
+			return 'tribe_events_cat';
+		case 'product':
+			return 'product_cat';
+		case 'portfolio':
+			return 'portfolio_filter';
+		case 'faq':
+			return 'faq_filter';
+		case 'bdthemes-testimonial':
+			return 'testimonial_categories';
+		case 'knowledge_base':
+			return 'knowledge-type';
+		default:
+			return 'category';
+	}
+} 
+
 /**
  * @param $post_type string any post type that you want to show category
  * @param $separator string separator for multiple category
@@ -575,38 +600,8 @@ function element_pack_get_only_parent_cats( $taxonomy = 'category' ) {
  * @return string
  */
 function element_pack_get_category_list( $post_type, $separator = ' ' ) {
-	switch ( $post_type ) {
-		case 'campaign':
-			$taxonomy = 'campaign_category';
-			break;
-		case 'lightbox_library':
-			$taxonomy = 'ngg_tag';
-			break;
-		case 'give_forms':
-			$taxonomy = 'give_forms_category';
-			break;
-		case 'tribe_events':
-			$taxonomy = 'tribe_events_cat';
-			break;
-		case 'product':
-			$taxonomy = 'product_cat';
-			break;
-		case 'portfolio':
-			$taxonomy = 'portfolio_filter';
-			break;
-		case 'faq':
-			$taxonomy = 'faq_filter';
-			break;
-		case 'bdthemes-testimonial':
-			$taxonomy = 'testimonial_categories';
-			break;
-		case 'knowledge_base':
-			$taxonomy = 'knowledge-type';
-			break;
-		default:
-			$taxonomy = 'category';
-			break;
-	}
+	
+	$taxonomy = get_taxonomy_by_post_type($post_type);
 
 	$categories  = get_the_terms( get_the_ID(), $taxonomy );
 	$_categories = [];

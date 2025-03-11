@@ -88,10 +88,10 @@ class Icon_Mobile_Menu extends Module_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => [ 
-					'style-1' => '01',
-					'style-2' => '02',
-					'style-3' => '03',
-					'style-4' => '04',
+					'style-1' => __( 'Default', 'bdthemes-element-pack' ),
+					'style-2' => __( 'Border', 'bdthemes-element-pack' ),
+					'style-3' => __( 'Tooltip', 'bdthemes-element-pack' ),
+					'style-4' => __( 'Circle with Tooltip', 'bdthemes-element-pack' ),
 				],
 			]
 		);

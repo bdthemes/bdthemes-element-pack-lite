@@ -165,4 +165,30 @@ trait Global_Terms_Query_Controls {
 
         $this->end_controls_section();
     }
+
+    // Get ajax post
+	protected function bdt_get_posts_by_ajax($post_type, $order, $orderby, $posts_per_page, $taxonomy, $category_slug) {
+
+		$query_args = [
+			'post_status' => 'publish',
+			'post_type' => $post_type,
+			'order' => $order,
+			'orderby' => $orderby,
+			'posts_per_page' => $posts_per_page,
+		];
+
+
+		
+		if ($category_slug !== '') {
+			$query_args['tax_query'] = [
+				[
+					'taxonomy' => $taxonomy,
+					'field' => 'slug',
+					'terms' => $category_slug,
+				]
+			];
+		}
+		
+		return new \WP_Query($query_args);
+	}
 }

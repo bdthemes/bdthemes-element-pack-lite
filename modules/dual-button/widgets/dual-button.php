@@ -1392,8 +1392,29 @@ class DualButton extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'middle_text_typography',
-				//'scheme'   => Schemes\Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .bdt-dual-button span',
+			]
+		);
+		
+		$this->add_responsive_control(
+			'middle_text_horizontal_offset',
+			[
+				'label' => __( 'Horizontal Offset', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+					'px' => [
+						'min' => 0,
+						'max' => 300,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-dual-button span' => 'left: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 
