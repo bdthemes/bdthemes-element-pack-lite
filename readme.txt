@@ -5,7 +5,7 @@ Tags: elementor addons, elementor widget, elementor extensions, woocommerce elem
 Requires at least: 5.0.0
 Tested up to: 6.7.2
 Requires PHP: 7.4.0
-Stable tag: 5.10.25
+Stable tag: 5.10.26
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -263,6 +263,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 5.10.26 [11th March 2025] =
+
+* Fixed: Scrollbar issue fixed in [Image Compare](https://www.elementpack.pro/demo/element/image-compare/) widget
+* Fixed: Js error issue fixed in [SVG Image](https://www.elementpack.pro/demo/element/svg-image/) widget
+* Fixed: Tooltip not showing issue fixed in [Icon Mobile Menu](https://www.elementpack.pro/demo/element/icon-mobile-menu/) widget
 
 = 5.10.25 [27th February 2025] =
 

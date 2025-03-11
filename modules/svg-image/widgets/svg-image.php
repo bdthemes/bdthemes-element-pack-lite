@@ -51,7 +51,7 @@ class Svg_Image extends Module_Base {
 			if ( true == is_ep_pro() ) {
 				return [ 'gsap', 'draw-svg-plugin-js', 'magic-scroll', 'magic-scroll-animation', 'scroll-trigger',  'ep-svg-image' ];
 			} else {
-				return [ 'ep-svg-image' ];
+				return [];
 			}
 		}
 	}
