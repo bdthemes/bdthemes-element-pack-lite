@@ -266,6 +266,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 = 5.10.26 [11th March 2025] =
 
+* Added: Elementor Template Kit [Swifthire - Careers Made Easy](https://business-template.predesignkit.com/swifthire/) Added
 * Fixed: Scrollbar issue fixed in [Image Compare](https://www.elementpack.pro/demo/element/image-compare/) widget
 * Fixed: Js error issue fixed in [SVG Image](https://www.elementpack.pro/demo/element/svg-image/) widget
 * Fixed: Tooltip not showing issue fixed in [Icon Mobile Menu](https://www.elementpack.pro/demo/element/icon-mobile-menu/) widget
