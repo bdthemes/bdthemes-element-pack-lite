@@ -5,11 +5,11 @@ Tags: elementor addons, elementor widget, elementor extensions, woocommerce elem
 Requires at least: 5.0.0
 Tested up to: 6.7.2
 Requires PHP: 7.4.0
-Stable tag: 5.10.26
+Stable tag: 5.10.27
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.27.6
+Elementor tested up to: 3.28.0
 
 Get 2600+ templates, 300+ elementor widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
 
@@ -263,6 +263,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 5.10.27 [23th March 2025] =
+
+* Added: [Variation Swatches](https://youtu.be/qIl2mvS7mgk) video tutorial added
+* Added: Theme Builder - [Header and Footer](https://youtu.be/tncgEY70a0A) video tutorial added
+* Added: Elementor Template Kit [Sketchlab - Effortless Design Magic](https://service-template.predesignkit.com/sketchlab/) Added
+* Fixed: Transition fade issue fixed in [Slider](https://www.elementpack.pro/demo/element/slider/) widget
 
 = 5.10.26 [11th March 2025] =
 

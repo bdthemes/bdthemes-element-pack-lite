@@ -568,7 +568,7 @@ function element_pack_get_only_parent_cats( $taxonomy = 'category' ) {
 	return $parent_categories;
 }
 
-function get_taxonomy_by_post_type($post_type) {
+function element_pack_get_taxonomy_by_post_type($post_type) {
 	switch ($post_type) {
 		case 'campaign':
 			return 'campaign_category';
@@ -601,7 +601,7 @@ function get_taxonomy_by_post_type($post_type) {
  */
 function element_pack_get_category_list( $post_type, $separator = ' ' ) {
 	
-	$taxonomy = get_taxonomy_by_post_type($post_type);
+	$taxonomy = element_pack_get_taxonomy_by_post_type($post_type);
 
 	$categories  = get_the_terms( get_the_ID(), $taxonomy );
 	$_categories = [];
