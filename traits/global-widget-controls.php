@@ -7698,6 +7698,7 @@ trait Global_Widget_Controls {
 							"observeParents" => ($settings["observer"]) ? true : false,
 							"mousewheel" 	 => ($settings["mousewheel"]) ? true : false,
 							"effect"         => $settings["transition"],
+							"fadeEffect"     => ['crossFade' => true],
 							"navigation"     => [
 								"nextEl" => "#" . $id . " .bdt-navigation-next",
 								"prevEl" => "#" . $id . " .bdt-navigation-prev",
