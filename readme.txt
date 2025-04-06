@@ -5,11 +5,11 @@ Tags: elementor addons, elementor widget, elementor extensions, woocommerce elem
 Requires at least: 5.0.0
 Tested up to: 6.7.2
 Requires PHP: 7.4.0
-Stable tag: 5.10.27
+Stable tag: 5.10.28
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.28.0
+Elementor tested up to: 3.28.3
 
 Get 2600+ templates, 300+ elementor widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
 
@@ -263,6 +263,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 5.10.28 [6th April 2025] =
+
+* Added: Custom content typography added in dropbar widget
+* Added: Elementor Template Kit [WordSnap – Instant Content Crafted](https://service-template.predesignkit.com/wordsnap/) Added (Free)
+* Added: Elementor Template Kit [Vendor – Connect Supply Grow](https://service-template.predesignkit.com/vendor/) Added
 
 = 5.10.27 [23th March 2025] =
 
