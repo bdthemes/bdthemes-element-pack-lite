@@ -357,7 +357,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'stretch',
 			[
-				'label'     => esc_html__('Stretch', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'     => esc_html__('Stretch', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'null',
 				'options' => [
@@ -397,7 +397,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'target',
 			[
-				'label' => esc_html__( 'Target', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__( 'Target', 'bdthemes-element-pack'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
@@ -410,7 +410,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'boundary',
 			[
-				'label' => esc_html__( 'Boundary', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__( 'Boundary', 'bdthemes-element-pack'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
@@ -444,7 +444,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'animate_out',
 			[
-				'label' => esc_html__('Animate Out', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__('Animate Out', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -703,7 +703,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'content_alignment',
 			[
-				'label'   => __('Alignment', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => __('Alignment', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => 'left',
 				'options' => [
@@ -782,6 +782,17 @@ class Dropbar extends Module_Base {
 			[
 				'name'     => 'content_box_shadow',
 				'selector' => '#bdt-drop-{{ID}}.bdt-drop.bdt-card-body',
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'content_typography',
+				'label'    => esc_html__('Typography', 'bdthemes-element-pack') . BDTEP_NC,
+				'selector' => '#bdt-drop-{{ID}}.bdt-drop.bdt-card-body',
+				'condition' => [
+					'source' => 'custom',
+				],
 			]
 		);
 
