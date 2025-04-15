@@ -264,7 +264,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 5.10.29 [13th April 2025] =
+= 5.10.29 [15th April 2025] =
 
 * Fixed: Security issue fixed in Countdown widget and Wrapper Link extension
 
