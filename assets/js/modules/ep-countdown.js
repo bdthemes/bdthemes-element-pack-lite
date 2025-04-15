@@ -69,7 +69,8 @@
                                     'display': 'none'
                                 });
                             }
-                            if ($settings.endActionType == 'url' && $settings.redirectUrl) {
+                            
+                            if ($settings.endActionType == 'url' && $settings.redirectUrl !== '' && $settings.redirectUrl.indexOf('http') > -1) {
                                 setInterval(function () {
                                     jQuery(location).attr('href', $settings.redirectUrl);
                                 }, $settings.redirectDelay);
