@@ -3,9 +3,9 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor addons, elementor widget, elementor extensions, woocommerce elementor, elementor
 Requires at least: 5.0.0
-Tested up to: 6.7.2
+Tested up to: 6.8
 Requires PHP: 7.4.0
-Stable tag: 5.10.29
+Stable tag: 5.10.30
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -263,6 +263,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 5.10.30 [20th April 2025] =
+
+* Added: WordPress Version 6.8 compatibility added
+* Updated: Only one plugin DCI notice will show at a time
+* Updated: Custom attributes option removed in cookie consent, creative button and dual button widgets
+* Updated: Column option improved in countdown widget
 
 = 5.10.29 [15th April 2025] =
 

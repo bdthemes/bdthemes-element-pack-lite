@@ -164,21 +164,6 @@ class Cookie_Consent extends Module_Base {
 		);
 
 		$this->add_control(
-			'custom_attributes',
-			[ 
-				'label'       => esc_html__( 'Custom Attributes (Deprecated)', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'        => Controls_Manager::TEXTAREA,
-				'default'     => 'rel|noopener noreferrer nofollow',
-				'dynamic'     => [ 
-					'active' => true,
-				],
-				'placeholder' => esc_html__( 'key|value', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'This option will be deprecated in the future. Please use the learn more link field above to add custom attributes.', 'bdthemes-element-pack' ),
-				'classes'     => 'elementor-control-direction-ltr',
-			]
-		);
-
-		$this->add_control(
 			'google_tag_assistant',
 			[ 
 				'label'       => esc_html__( 'Google Consent Mode', 'bdthemes-element-pack' ) . BDTEP_NC,
@@ -838,29 +823,6 @@ class Cookie_Consent extends Module_Base {
 		}
 
 		$this->add_render_attribute( 'cookie-consent', 'class', [ 'bdt-cookie-consent', 'bdt-hidden' ] );
-
-		if ( ! empty( $settings['custom_attributes'] ) ) {
-			$attributes = explode( "\n", $settings['custom_attributes'] );
-		
-			$reserved_attr = [ 'role', 'href' ];
-		
-			foreach ( $attributes as $attribute ) {
-				if ( ! empty( $attribute ) ) {
-					$attr = explode( '|', $attribute, 2 );
-					
-					if ( ! isset( $attr[1] ) ) {
-						$attr[1] = '';
-					}
-		
-					$attr_name = sanitize_key( trim( $attr[0] ) );
-					$attr_value = esc_attr( trim( $attr[1] ) );
-		
-					if ( ! in_array( strtolower( $attr_name ), $reserved_attr ) ) {
-						$this->add_render_attribute( 'custom-attr', $attr_name, $attr_value );
-					}
-				}
-			}
-		}
 
 		$this->add_link_attributes( 'custom-attr', $settings['learn_more_link'] );
 		$this->add_render_attribute(

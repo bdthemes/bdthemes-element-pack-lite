@@ -168,60 +168,6 @@ class Countdown extends Module_Base {
 			]
 		);
 
-		$this->add_control(
-			'grid_template_columns',
-			[ 
-				'label'        => esc_html__( 'Grid Template Columns', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'         => Controls_Manager::SWITCHER,
-				'condition'    => [ 
-					'_skin' => '',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'count_column',
-			[ 
-				'label'          => esc_html__( 'Column (Deprecated)', 'bdthemes-element-pack' ),
-				'type'           => Controls_Manager::SELECT,
-				'description'    => esc_html__( 'This option will be removed in the future. Please use Grid Template Columns option.', 'bdthemes-element-pack' ),
-				'default'        => '4',
-				'tablet_default' => '2',
-				'mobile_default' => '2',
-				'options'        => [ 
-					''  => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'1' => esc_html__( '1 Columns', 'bdthemes-element-pack' ),
-					'2' => esc_html__( '2 Columns', 'bdthemes-element-pack' ),
-					'3' => esc_html__( '3 Column', 'bdthemes-element-pack' ),
-					'4' => esc_html__( '4 Columns', 'bdthemes-element-pack' ),
-				],
-				'condition'      => [ 
-					'_skin' => '',
-					'grid_template_columns' => '',
-				],
-				'separator'      => 'before',
-			]
-		);
-
-		$this->add_control(
-			'count_gap',
-			[ 
-				'label'     => esc_html__( 'Gap', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SELECT,
-				'options'   => [ 
-					''         => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'small'    => esc_html__( 'Small', 'bdthemes-element-pack' ),
-					'medium'   => esc_html__( 'Medium', 'bdthemes-element-pack' ),
-					'large'    => esc_html__( 'Large', 'bdthemes-element-pack' ),
-					'collapse' => esc_html__( 'Collapse', 'bdthemes-element-pack' ),
-				],
-				'condition' => [ 
-					'_skin!' => 'bdt-tiny-countdown',
-					'grid_template_columns' => '',
-				],
-			]
-		);
-
 		$this->add_responsive_control(
 			'columns',
 			[
@@ -237,10 +183,10 @@ class Countdown extends Module_Base {
 					'4' => '4',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bdt-countdown-grid' => 'display: grid; grid-template-columns: repeat({{SIZE}}, 1fr);',
+					'{{WRAPPER}} .bdt-countdown-grid' => 'grid-template-columns: repeat({{SIZE}}, 1fr);',
 				],
-				'condition' => [
-					'grid_template_columns' => 'yes',
+				'condition'    => [ 
+					'_skin' => '',
 				],
 			]
 		);
@@ -256,8 +202,8 @@ class Countdown extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-countdown-grid' => 'grid-gap: {{SIZE}}{{UNIT}};',
 				],
-				'condition' => [
-					'grid_template_columns' => 'yes',
+				'condition'    => [ 
+					'_skin' => '',
 				],
 			]
 		);
@@ -2496,10 +2442,7 @@ class Countdown extends Module_Base {
 
 		$final_time = $datetime->format( 'c' );
 
-
-
-		//
-
+		
 		$ended_message    = '';
 		$wp_current_timeX = current_time( 'timestamp' ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS );
 		$end_timeX        = strtotime( $final_time );
@@ -2508,45 +2451,18 @@ class Countdown extends Module_Base {
 			$ended_message = 'ended';
 		}
 
-		if ( $settings['grid_template_columns'] == 'yes' ) {
-			$this->add_render_attribute(
-				[ 
-					'countdown' => [ 
-						'id'                 => 'bdt-countdown-' . $this->get_id() . '-timer',
-						'class'              => [ 'bdt-countdown-grid' ],
-						'data-bdt-countdown' => [ 
-							isset( $settings['loop_time'] ) && ( $settings['loop_time'] == 'yes' ) ? '' : 'date: ' . $final_time
-						],
-						'style'              => ( $settings['end_action_type'] == 'message' ) && ( ! $this->ep_is_edit_mode() ) && ( ! empty( $ended_message ) ) ? 'display:none;' : 'x'
+		$this->add_render_attribute(
+			[ 
+				'countdown' => [ 
+					'id'                 => 'bdt-countdown-' . $this->get_id() . '-timer',
+					'class'              => [ 'bdt-countdown-grid' ],
+					'data-bdt-countdown' => [ 
+						isset( $settings['loop_time'] ) && ( $settings['loop_time'] == 'yes' ) ? '' : 'date: ' . $final_time
 					],
-				]
-			);
-		} else {
-			$count_column_mobile = isset( $settings['count_column_mobile'] ) ? $settings['count_column_mobile'] : 2;
-			$count_column_tablet = isset( $settings['count_column_tablet'] ) ? $settings['count_column_tablet'] : 2;
-			$count_column        = isset( $settings['count_column'] ) ? $settings['count_column'] : 4;
-
-			$this->add_render_attribute(
-				[ 
-					'countdown' => [ 
-						'id'                 => 'bdt-countdown-' . $this->get_id() . '-timer',
-						'class'              => [ 
-							'bdt-grid',
-							$settings['count_gap'] ? 'bdt-grid-' . esc_attr( $settings['count_gap'] ) : '',
-							'bdt-child-width-1-' . esc_attr( $count_column_mobile ),
-							'bdt-child-width-1-' . esc_attr( $count_column_tablet ) . '@s',
-							'bdt-child-width-1-' . esc_attr( $count_column ) . '@m'
-						],
-						'data-bdt-countdown' => [ 
-							isset( $settings['loop_time'] ) && ( $settings['loop_time'] == 'yes' ) ? '' : 'date: ' . $final_time
-						],
-						'data-bdt-grid'      => '',
-						'style'              => ( $settings['end_action_type'] == 'message' ) && ( ! $this->ep_is_edit_mode() ) && ( ! empty( $ended_message ) ) ? 'display:none;' : 'x'
-					],
-				]
-			);
-		}
-
+					'style'              => ( $settings['end_action_type'] == 'message' ) && ( ! $this->ep_is_edit_mode() ) && ( ! empty( $ended_message ) ) ? 'display:none;' : 'x'
+				],
+			]
+		);
 		
 		$end_time = strtotime( $final_time );
 

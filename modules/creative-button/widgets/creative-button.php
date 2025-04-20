@@ -118,30 +118,6 @@ class Creative_Button extends Module_Base {
 			]
 		);
 
-		$this->add_control(
-			'add_custom_attributes',
-			[
-				'label'     => __( 'Add Custom Attributes (Deprecated)', 'bdthemes-element-pack' ),
-				'description' => __( 'This option will be deprecated in the future. Please use the link field above to add custom attributes.', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SWITCHER,
-			]
-		);
-
-		$this->add_control(
-			'custom_attributes',
-			[
-				'label' => __( 'Custom Attributes', 'bdthemes-element-pack' ),
-				'type' => Controls_Manager::TEXTAREA,
-				'dynamic' => [
-					'active' => true,
-				],
-				'placeholder' => __( 'key|value', 'bdthemes-element-pack' ),
-				'description' => sprintf( __( 'Set custom attributes for the price table button tag. Each attribute in a separate line. Separate attribute key from the value using %s character.', 'bdthemes-element-pack' ), '<code>|</code>' ),
-				'classes' => 'elementor-control-direction-ltr',
-				'condition' => ['add_custom_attributes' => 'yes']
-			]
-		);
-
 		$this->add_responsive_control(
 			'alignment',
 			[
@@ -626,25 +602,6 @@ class Creative_Button extends Module_Base {
 
 		if ( $settings['link']['nofollow'] ) {
 			$this->add_render_attribute( 'creative_button', 'rel', 'nofollow' );
-		}
-
-		if ( $settings['add_custom_attributes'] && isset( $settings['custom_attributes'] ) && ! empty( $settings['custom_attributes'] ) ) {
-			$attributes = explode( "\n", wp_kses_post( $settings['custom_attributes'] ) );
-
-			$reserved_attr = [ 'href', 'target' ];
-
-			foreach ( $attributes as $attribute ) {
-				if ( ! empty( $attribute ) ) {
-					$attr = explode( '|', $attribute, 2 );
-					if ( ! isset( $attr[1] ) ) {
-						$attr[1] = '';
-					}
-
-					if ( ! in_array( strtolower( $attr[0] ), $reserved_attr ) ) {
-						$this->add_render_attribute( 'creative_button', trim( $attr[0] ), wp_kses_post( trim( $attr[1] ) ) );
-					}
-				}
-			}
 		}
 
 		$this->add_render_attribute( 'creative_button', 'class', 'bdt-ep-creative-button' );		
