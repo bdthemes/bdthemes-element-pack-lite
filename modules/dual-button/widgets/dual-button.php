@@ -236,30 +236,6 @@ class DualButton extends Module_Base {
 		);
 
 		$this->add_control(
-			'add_custom_a_attributes',
-			[
-				'label'     => __( 'Add Custom Attributes (Deprecated)', 'bdthemes-element-pack' ),
-				'description' => __( 'This option will be deprecated in the future. Please use the link field above to add custom attributes.', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SWITCHER,
-			]
-		);
-
-		$this->add_control(
-			'custom_a_attributes',
-			[
-				'label' => __( 'Custom Attributes', 'bdthemes-element-pack' ),
-				'type' => Controls_Manager::TEXTAREA,
-				'dynamic' => [
-					'active' => true,
-				],
-				'placeholder' => __( 'key|value', 'bdthemes-element-pack' ),
-				'description' => sprintf( __( 'Set custom attributes for the price table button tag. Each attribute in a separate line. Separate attribute key from the value using %s character.', 'bdthemes-element-pack' ), '<code>|</code>' ),
-				'classes' => 'elementor-control-direction-ltr',
-				'condition' => ['add_custom_a_attributes' => 'yes']
-			]
-		);
-
-		$this->add_control(
 			'button_a_onclick',
 			[
 				'label' => esc_html__( 'OnClick', 'bdthemes-element-pack' ),
@@ -401,30 +377,6 @@ class DualButton extends Module_Base {
 				'default'     => [
 					'url' => '#',
 				],
-			]
-		);
-
-		$this->add_control(
-			'add_custom_b_attributes',
-			[
-				'label'     => __( 'Add Custom Attributes (Deprecated)', 'bdthemes-element-pack' ),
-				'description' => __( 'This option will be deprecated in the future. Please use the link field above to add custom attributes.', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SWITCHER,
-			]
-		);
-
-		$this->add_control(
-			'custom_b_attributes',
-			[
-				'label' => __( 'Custom Attributes', 'bdthemes-element-pack' ),
-				'type' => Controls_Manager::TEXTAREA,
-				'dynamic' => [
-					'active' => true,
-				],
-				'placeholder' => __( 'key|value', 'bdthemes-element-pack' ),
-				'description' => sprintf( __( 'Set custom attributes for the price table button tag. Each attribute in a separate line. Separate attribute key from the value using %s character.', 'bdthemes-element-pack' ), '<code>|</code>' ),
-				'classes' => 'elementor-control-direction-ltr',
-				'condition' => ['add_custom_b_attributes' => 'yes']
 			]
 		);
 
@@ -1536,50 +1488,12 @@ class DualButton extends Module_Base {
 			$this->add_render_attribute( 'button_a', 'id', $settings['button_css_id_a'] );
 		}
 
-		if ( $settings['add_custom_a_attributes'] and ! empty( $settings['custom_a_attributes'] ) ) {
-			$attributes = explode( "\n", $settings['custom_a_attributes'] );
-
-			$reserved_attr = [ 'href', 'target' ];
-
-			foreach ( $attributes as $attribute ) {
-				if ( ! empty( $attribute ) ) {
-					$attr = explode( '|', $attribute, 2 );
-					if ( ! isset( $attr[1] ) ) {
-						$attr[1] = '';
-					}
-
-					if ( ! in_array( strtolower( $attr[0] ), $reserved_attr ) ) {
-						$this->add_render_attribute( 'button_a', trim( $attr[0] ), trim( $attr[1] ) );
-					}
-				}
-			}
-		}
-
 		$this->add_render_attribute( 'button_b', 'class', 'bdt-btn-b bdt-ep-button' );		
 		$this->add_render_attribute( 'button_b', 'class', 'bdt-effect-' . esc_attr($settings['button_b_effect']) );
 		$this->add_render_attribute( 'button_b', 'class', 'bdt-ep-button-size-' . esc_attr($settings['dual_button_size']) );
 
 		if ( ! empty( $settings['button_css_id_b'] ) ) {
 			$this->add_render_attribute( 'button_b', 'id', $settings['button_css_id_b'] );
-		}
-
-		if ( $settings['add_custom_b_attributes'] and ! empty( $settings['custom_b_attributes'] ) ) {
-			$attributes = explode( "\n", $settings['custom_b_attributes'] );
-
-			$reserved_attr = [ 'href', 'target' ];
-
-			foreach ( $attributes as $attribute ) {
-				if ( ! empty( $attribute ) ) {
-					$attr = explode( '|', $attribute, 2 );
-					if ( ! isset( $attr[1] ) ) {
-						$attr[1] = '';
-					}
-
-					if ( ! in_array( strtolower( $attr[0] ), $reserved_attr ) ) {
-						$this->add_render_attribute( 'button_b', trim( $attr[0] ), trim( $attr[1] ) );
-					}
-				}
-			}
 		}
 
 		?>
