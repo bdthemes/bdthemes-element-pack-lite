@@ -264,6 +264,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 5.10.XX [XXth April 2025] =
+
+### Updated
+
+- Only one plugin RC notice will show at a time
+
 = 5.10.30 [20th April 2025] =
 
 * Added: WordPress Version 6.8 compatibility added
