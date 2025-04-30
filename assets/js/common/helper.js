@@ -173,23 +173,34 @@ function returnCurrencySymbol(currency = null) {
  */
 
 (function ($) {
+
   /**
    * Open Offcanvas on Mini Cart Update
-   */
-
-  jQuery(document).ajaxComplete(function (event, request, settings) {
-    if (
-      request.responseJSON &&
-      typeof request.responseJSON.cart_hash !== "undefined" &&
-      request.responseJSON.cart_hash
-    ) {
-      if (jQuery(".bdt-offcanvas").hasClass("__update_cart")) {
-        let id = jQuery(".bdt-offcanvas.__update_cart").attr("id");
-        bdtUIkit.util.ready(function () {
-          bdtUIkit.offcanvas("#" + id).show();
-        });
+   */          
+  $(document).ajaxComplete(function(event, request, settings) {
+      if (request.responseJSON && 
+          typeof request.responseJSON.cart_hash !== "undefined" && 
+          request.responseJSON.cart_hash) {
+          
+          var isCartUpdate = false;
+          
+          if (settings.url && 
+              (settings.url.indexOf('wc-ajax=add_to_cart') > -1)) {
+              isCartUpdate = true;
+          }
+          
+          if (settings.data && 
+              (settings.data.indexOf('action=add_to_cart') > -1)) {
+              isCartUpdate = true;
+          }
+          
+          if (isCartUpdate && $(".bdt-offcanvas").hasClass("__update_cart")) {
+              let id = $(".bdt-offcanvas.__update_cart").attr("id");
+              bdtUIkit.util.ready(function() {
+                  bdtUIkit.offcanvas("#" + id).show();
+              });
+          }
       }
-    }
   });
 
   /**

@@ -1,7 +1,3 @@
-/**
- * Start image accordion widget script
- */
-
 (function ($, elementor) {
   "use strict";
 
@@ -12,22 +8,36 @@
     var accordionItem = $imageAccordion.find(".bdt-ep-image-accordion-item");
     var totalItems = $imageAccordion.children().length;
 
+    // Make each accordion item focusable
+    accordionItem.attr('tabindex', '0');
+
     if (
       $settings.activeItem == true &&
       $settings.activeItemNumber <= totalItems
     ) {
-      $imageAccordion
-        .find(".bdt-ep-image-accordion-item")
-        .removeClass("active");
-      $imageAccordion
-        .children()
-        .eq($settings.activeItemNumber - 1)
-        .addClass("active");
+      $imageAccordion.find(".bdt-ep-image-accordion-item").removeClass("active");
+      $imageAccordion.children().eq($settings.activeItemNumber - 1).addClass("active");
     }
 
+    // Mouse event
     $(accordionItem).on($settings.mouse_event, function () {
       $(this).siblings().removeClass("active");
       $(this).addClass("active");
+    });
+
+    // Keyboard focus event
+    $(accordionItem).on('focus', function () {
+      $(this).siblings().removeClass("active");
+      $(this).addClass("active");
+    });
+
+    // Keydown event for Enter or Space key
+    $(accordionItem).on('keydown', function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+      }
     });
 
     if ($settings.activeItem != true) {
@@ -36,41 +46,35 @@
           e.target.$imageAccordion == "bdt-ep-image-accordion" ||
           $(e.target).closest(".bdt-ep-image-accordion").length
         ) {
+          // inside accordion, do nothing
         } else {
-          $imageAccordion
-            .find(".bdt-ep-image-accordion-item")
-            .removeClass("active");
+          $imageAccordion.find(".bdt-ep-image-accordion-item").removeClass("active");
         }
       });
     }
 
-    // Swiping
+    // Swiping (unchanged)
     function handleSwipe(event) {
       var deltaX = touchendX - touchstartX;
-
       var hasPrev = $(event.currentTarget).prev();
       var hasNext = $(event.currentTarget).next();
-      // Horizontal swipe
+
       if (deltaX > 50) {
-        // Swiped right
         if (hasPrev.length) {
           $(accordionItem).removeClass("active");
+          hasPrev.addClass("active");
         }
-        $(event.currentTarget).prev().addClass("active");
       } else if (deltaX < -50) {
-        // Swiped left
         if (hasNext.length) {
           $(accordionItem).removeClass("active");
+          hasNext.addClass("active");
         }
-        $(event.currentTarget).next().addClass("active");
       }
     }
 
     if ($settings.swiping) {
       var touchstartX = 0;
       var touchendX = 0;
-      var touchstartY = 0;
-      var touchendY = 0;
 
       $(accordionItem).on("touchstart", function (event) {
         touchstartX = event.changedTouches[0].screenX;
@@ -84,14 +88,10 @@
 
     // Inactive Item
     if ($settings.inactiveItemOverlay) {
-      console.log("inactiveItemOverlay");
       $(accordionItem).on($settings.mouse_event, function (event) {
         event.stopPropagation();
         if ($(this).hasClass("active")) {
-          $(this)
-            .removeClass("bdt-inactive")
-            .siblings()
-            .addClass("bdt-inactive");
+          $(this).removeClass("bdt-inactive").siblings().addClass("bdt-inactive");
         } else {
           $(this).siblings().removeClass("bdt-inactive");
         }
@@ -109,7 +109,3 @@
     );
   });
 })(jQuery, window.elementorFrontend);
-
-/**
- * End image accordion widget script
- */

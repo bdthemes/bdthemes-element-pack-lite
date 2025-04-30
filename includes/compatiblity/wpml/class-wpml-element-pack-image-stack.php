@@ -1,25 +1,24 @@
 <?php
 namespace ElementPack\Includes;
 
-
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
 /**
- * Class WPML_Jet_Elements_Chart
+ * Class WPML_ElementPack_Image_Stack
  */
-class WPML_ElementPack_Chart extends WPML_Module_With_Items {
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+class WPML_ElementPack_Image_Stack extends WPML_Module_With_Items {
 
 	/**
 	 * @return string
 	 */
 	public function get_items_field() {
-		return 'datasets';
+		return 'image_stack_items';
 	}
 
 	/**
 	 * @return array
 	 */
 	public function get_fields() {
-		return array( 'label', 'data' );
+		return array( 'tooltip_text' );
 	}
 
 	/**
@@ -28,11 +27,8 @@ class WPML_ElementPack_Chart extends WPML_Module_With_Items {
 	 */
 	protected function get_title( $field ) {
 		switch( $field ) {
-			case 'label':
-				return esc_html__( 'Label', 'bdthemes-element-pack' );
-
-			case 'data':
-				return esc_html__( 'Data', 'bdthemes-element-pack' );
+			case 'tooltip_text':
+				return esc_html__( 'Image Stack: Tooltip Text', 'bdthemes-element-pack' );
 
 			default:
 				return '';
@@ -45,15 +41,11 @@ class WPML_ElementPack_Chart extends WPML_Module_With_Items {
 	 */
 	protected function get_editor_type( $field ) {
 		switch( $field ) {
-			case 'label':
-				return 'LINE';
-
-			case 'data':
+			case 'tooltip_text':
 				return 'LINE';
 
 			default:
 				return '';
 		}
 	}
-
-}
+} 

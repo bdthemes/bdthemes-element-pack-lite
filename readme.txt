@@ -5,11 +5,11 @@ Tags: elementor addons, elementor widget, elementor extensions, woocommerce elem
 Requires at least: 5.0.0
 Tested up to: 6.8
 Requires PHP: 7.4.0
-Stable tag: 5.10.30
+Stable tag: 5.11.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.28.3
+Elementor tested up to: 3.28.4
 
 Get 2600+ templates, 300+ elementor widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
 
@@ -263,6 +263,18 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 5.11.0 [30th April 2025] =
+
+* Added: WPML Compatibility Added
+* Added: Share button dropdown width option added in facebook feed widget
+* Added: Elementor Template Kit [Meta Seo](https://service-template.predesignkit.com/meta-seo/) Added
+* Added: Elementor Template Kit [Besnik Cloud](https://business-template.predesignkit.com/besnik-cloud/) Added
+* Added: Elementor Template Kit [Snapshot](https://business-template.predesignkit.com/snapshot/) Added
+* Fixed: _load_textdomain_just_in_time with WordPress 6.8 issue fixed ( BackuPs )
+* Fixed: DCI Notice transition issue fixed
+* Fixed: Accessibility for tab navigation issue fixed in Image Accordion ( Thanks to Sara Giulia Donati )
+* Updated: Only one plugin RC notice will show at a time 
 
 = 5.10.30 [20th April 2025] =
 

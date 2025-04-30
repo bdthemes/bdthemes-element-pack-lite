@@ -340,10 +340,12 @@ function element_pack_post_pagination( $wp_query ) {
 	}
 
 	/** Next Post Link */
-	if ( get_next_posts_link() ) {
-		printf( '<li>%s</li>' . "\n", wp_kses_post( get_next_posts_link( '<span data-bdt-pagination-next></span>' ) ) );
+	$next_link = get_next_posts_link( '<span data-bdt-pagination-next></span>', $max);
+	if ( ! $next_link ) {
+		return;
 	}
-
+	echo '<li>' . wp_kses_post( $next_link ) . "</li>\n";
+	
 	echo '</ul>' . "\n";
 }
 
