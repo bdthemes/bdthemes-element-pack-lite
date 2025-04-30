@@ -173,23 +173,34 @@ function returnCurrencySymbol(currency = null) {
  */
 
 (function ($) {
+
   /**
    * Open Offcanvas on Mini Cart Update
-   */
-
-  jQuery(document).ajaxComplete(function (event, request, settings) {
-    if (
-      request.responseJSON &&
-      typeof request.responseJSON.cart_hash !== "undefined" &&
-      request.responseJSON.cart_hash
-    ) {
-      if (jQuery(".bdt-offcanvas").hasClass("__update_cart")) {
-        let id = jQuery(".bdt-offcanvas.__update_cart").attr("id");
-        bdtUIkit.util.ready(function () {
-          bdtUIkit.offcanvas("#" + id).show();
-        });
+   */          
+  $(document).ajaxComplete(function(event, request, settings) {
+      if (request.responseJSON && 
+          typeof request.responseJSON.cart_hash !== "undefined" && 
+          request.responseJSON.cart_hash) {
+          
+          var isCartUpdate = false;
+          
+          if (settings.url && 
+              (settings.url.indexOf('wc-ajax=add_to_cart') > -1)) {
+              isCartUpdate = true;
+          }
+          
+          if (settings.data && 
+              (settings.data.indexOf('action=add_to_cart') > -1)) {
+              isCartUpdate = true;
+          }
+          
+          if (isCartUpdate && $(".bdt-offcanvas").hasClass("__update_cart")) {
+              let id = $(".bdt-offcanvas.__update_cart").attr("id");
+              bdtUIkit.util.ready(function() {
+                  bdtUIkit.offcanvas("#" + id).show();
+              });
+          }
       }
-    }
   });
 
   /**
@@ -1232,10 +1243,6 @@ function returnCurrencySymbol(currency = null) {
 /**
  * End Flip Box widget script
  */
-/**
- * Start image accordion widget script
- */
-
 (function ($, elementor) {
   "use strict";
 
@@ -1246,22 +1253,36 @@ function returnCurrencySymbol(currency = null) {
     var accordionItem = $imageAccordion.find(".bdt-ep-image-accordion-item");
     var totalItems = $imageAccordion.children().length;
 
+    // Make each accordion item focusable
+    accordionItem.attr('tabindex', '0');
+
     if (
       $settings.activeItem == true &&
       $settings.activeItemNumber <= totalItems
     ) {
-      $imageAccordion
-        .find(".bdt-ep-image-accordion-item")
-        .removeClass("active");
-      $imageAccordion
-        .children()
-        .eq($settings.activeItemNumber - 1)
-        .addClass("active");
+      $imageAccordion.find(".bdt-ep-image-accordion-item").removeClass("active");
+      $imageAccordion.children().eq($settings.activeItemNumber - 1).addClass("active");
     }
 
+    // Mouse event
     $(accordionItem).on($settings.mouse_event, function () {
       $(this).siblings().removeClass("active");
       $(this).addClass("active");
+    });
+
+    // Keyboard focus event
+    $(accordionItem).on('focus', function () {
+      $(this).siblings().removeClass("active");
+      $(this).addClass("active");
+    });
+
+    // Keydown event for Enter or Space key
+    $(accordionItem).on('keydown', function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+      }
     });
 
     if ($settings.activeItem != true) {
@@ -1270,41 +1291,35 @@ function returnCurrencySymbol(currency = null) {
           e.target.$imageAccordion == "bdt-ep-image-accordion" ||
           $(e.target).closest(".bdt-ep-image-accordion").length
         ) {
+          // inside accordion, do nothing
         } else {
-          $imageAccordion
-            .find(".bdt-ep-image-accordion-item")
-            .removeClass("active");
+          $imageAccordion.find(".bdt-ep-image-accordion-item").removeClass("active");
         }
       });
     }
 
-    // Swiping
+    // Swiping (unchanged)
     function handleSwipe(event) {
       var deltaX = touchendX - touchstartX;
-
       var hasPrev = $(event.currentTarget).prev();
       var hasNext = $(event.currentTarget).next();
-      // Horizontal swipe
+
       if (deltaX > 50) {
-        // Swiped right
         if (hasPrev.length) {
           $(accordionItem).removeClass("active");
+          hasPrev.addClass("active");
         }
-        $(event.currentTarget).prev().addClass("active");
       } else if (deltaX < -50) {
-        // Swiped left
         if (hasNext.length) {
           $(accordionItem).removeClass("active");
+          hasNext.addClass("active");
         }
-        $(event.currentTarget).next().addClass("active");
       }
     }
 
     if ($settings.swiping) {
       var touchstartX = 0;
       var touchendX = 0;
-      var touchstartY = 0;
-      var touchendY = 0;
 
       $(accordionItem).on("touchstart", function (event) {
         touchstartX = event.changedTouches[0].screenX;
@@ -1318,14 +1333,10 @@ function returnCurrencySymbol(currency = null) {
 
     // Inactive Item
     if ($settings.inactiveItemOverlay) {
-      console.log("inactiveItemOverlay");
       $(accordionItem).on($settings.mouse_event, function (event) {
         event.stopPropagation();
         if ($(this).hasClass("active")) {
-          $(this)
-            .removeClass("bdt-inactive")
-            .siblings()
-            .addClass("bdt-inactive");
+          $(this).removeClass("bdt-inactive").siblings().addClass("bdt-inactive");
         } else {
           $(this).siblings().removeClass("bdt-inactive");
         }
@@ -1343,10 +1354,6 @@ function returnCurrencySymbol(currency = null) {
     );
   });
 })(jQuery, window.elementorFrontend);
-
-/**
- * End image accordion widget script
- */
 
 /**
  * Start image compare widget script

@@ -1,37 +1,37 @@
 <?php
+
 namespace ElementPack\Includes;
 
 
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
-/**
- * Class WPML_ElementPack_Hover_Video
- */
-class WPML_ElementPack_Hover_Video extends WPML_Module_With_Items {
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+class WPML_ElementPack_Icon_Mobile_Menu extends WPML_Module_With_Items {
 
 	/**
 	 * @return string
 	 */
 	public function get_items_field() {
-		return 'hover_video_list';
+		return 'menu_items';
 	}
 
 	/**
 	 * @return array
 	 */
 	public function get_fields() {
-		return array( 'hover_video_title' );
+		return [
+			'menu_text',
+		];
 	}
 
 	/**
 	 * @param string $field
+	 *
 	 * @return string
 	 */
 	protected function get_title( $field ) {
-		switch( $field ) {
-
-			case 'hover_video_title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
-
+		switch ( $field ) {
+			case 'menu_text':
+				return esc_html__( 'Icon Mobile Menu: Menu Text', 'bdthemes-element-pack' );
 			default:
 				return '';
 		}
@@ -39,16 +39,15 @@ class WPML_ElementPack_Hover_Video extends WPML_Module_With_Items {
 
 	/**
 	 * @param string $field
+	 *
 	 * @return string
 	 */
 	protected function get_editor_type( $field ) {
-		switch( $field ) {
-			case 'hover_video_title':
-                return 'LINE';
-
+		switch ( $field ) {
+			case 'menu_text':
+				return 'LINE';
 			default:
 				return '';
 		}
 	}
-
-}
+} 

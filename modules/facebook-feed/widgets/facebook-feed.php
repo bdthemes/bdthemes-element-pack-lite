@@ -1475,7 +1475,7 @@ class Facebook_Feed extends Module_Base {
 		$this->add_control(
 			'share_button_hover_name',
 			[ 
-				'label'     => esc_html__( 'H O V R R', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'HOVER', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -1532,6 +1532,24 @@ class Facebook_Feed extends Module_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'share_button_dropdown_width',
+			[
+				'label' => __( 'Width', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 100,
+						'max' => 500,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-dropdown' => 'min-width: {{SIZE}}{{UNIT}} !important; max-width: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[ 
@@ -1584,12 +1602,11 @@ class Facebook_Feed extends Module_Base {
 		$this->add_control(
 			'share_button_drop_title_name',
 			[ 
-				'label'     => esc_html__( 'T I T L E', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'TITLE', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
 		);
-
 
 		$this->add_control(
 			'share_button_drop_title_color',
