@@ -3,9 +3,9 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor addons, elementor widget, elementor extensions, woocommerce elementor, elementor
 Requires at least: 5.0.0
-Tested up to: 6.8
+Tested up to: 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 5.11.0
+Stable tag: 5.11.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -264,7 +264,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 5.11.X [XXth May 2025] =
+= 5.11.1 [7th May 2025] =
 
 * Fixed: JS error fixed ( Thanks to Marcel Dekker )
 
