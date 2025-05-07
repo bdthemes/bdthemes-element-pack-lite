@@ -305,7 +305,7 @@ class Element_Pack_Loader {
 		wp_enqueue_script( 'bdt-uikit' );
 
         if (!element_pack_is_asset_optimization_enabled()) {
-			wp_register_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper' . $suffix . '.js', ['jquery', 'elementor-frontend'], BDTEP_VER, true);
+			wp_register_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper' . $suffix . '.js', ['jquery'], BDTEP_VER, true);
             wp_enqueue_script('element-pack-helper');
         }
 
@@ -477,9 +477,9 @@ class Element_Pack_Loader {
         if (element_pack_is_asset_optimization_enabled() && file_exists($upload_dir)) {
             $upload_url = $this->get_upload_url() . 'js/ep-scripts.js';
 
-            wp_register_script('ep-scripts', $upload_url, ['elementor-frontend'], $version, true);
+            wp_register_script('ep-scripts', $upload_url, ['jquery'], $version, true);
         } else {
-            wp_register_script('ep-scripts', BDTEP_URL . 'assets/js/ep-scripts' . $suffix . '.js', ['elementor-frontend'], BDTEP_VER, true);
+            wp_register_script('ep-scripts', BDTEP_URL . 'assets/js/ep-scripts' . $suffix . '.js', ['jquery'], BDTEP_VER, true);
         }
 
         if (element_pack_is_asset_optimization_enabled()) {
