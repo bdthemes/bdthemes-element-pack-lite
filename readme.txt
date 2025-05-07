@@ -264,6 +264,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 5.11.X [XXth May 2025] =
+
+* Fixed: JS error fixed ( Thanks to Marcel Dekker )
+
 = 5.11.0 [30th April 2025] =
 
 * Added: WPML Compatibility Added
