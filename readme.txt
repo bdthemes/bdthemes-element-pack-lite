@@ -1,11 +1,11 @@
 === Element Pack Addons for Elementor - Best Elementor addons with Ready Templates, Blocks, Widgets and WooCommerce Builder ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
 Donate link: http://bdthemes.com/
-Tags: elementor addons, elementor widget, elementor extensions, woocommerce elementor, elementor
+Tags: elementor addons, elementor widget, mega menu, woocommerce elementor, elementor
 Requires at least: 5.0.0
 Tested up to: 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 5.11.1
+Stable tag: 5.11.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -16,18 +16,17 @@ Get 2600+ templates, 300+ elementor widgets and advanced features with Element P
 
 == Description ==
 
-Element Pack is a powerful **Elementor plugin** with **300+ widgets and 2600+ ready-made templates**. It helps create beautiful websites with great **UI and UX**.
+Want to kickstart your next website design project with Elementor - a website builder plugin? Create a clean and engaging layout using interactive design elements and add smooth animations.
 
-The addon includes **Live Copy Paste** for easy content transfer between websites. The **Mega Menu Builder** creates advanced navigation menus. **Widget Tooltip** adds helpful tooltips and **Notation** highlights important text.
+BdThemes Element Pack Lite is the ultimate Elementor addons, giving you **300+ premium widgets and features**. 
+Moreover, this addon includes **2700+ dynamic templates** and easy customization with some clicks—all in one place! One more thing, it offers cross-domain **Live Copy Paste** feature that helps you import entire web pages, sections, widgets, or designs in seconds. 
 
-For eCommerce, it offers **WooCommerce Product grids, sliders and dedicated pages**. Other key features include **Post Grid, Dynamic Grid & Carousel, Pricing Table, Advanced Buttons, Countdowns, Testimonials and more**.
-
-Element Pack makes website building simple and efficient. Download it today and enhance your **Elementor experience!** 🚀
+Trusted by **100,000+ websites**, it's the easiest way to design your stunning websites without coding.
 
 👉 **[Get Element Pack Now for Free](https://elementpack.pro)**.
 
 ## 🚀 Why Choose Element Pack?
-✅ **2600+ Ready-Made Templates** – Use pre-designed pages, headers, footers and blocks instantly.
+✅ **2700+ Ready-Made Templates** – Use pre-designed pages, headers, footers and blocks instantly.
 ✅ **300+ Advanced Widgets** – Add interactive Elementor widgets to enhance your website.
 ✅ **Fully Customizable** – Easily adjust elements, templates and widgets to match your style.
 ✅ **Seamless Integrations** – Works with WooCommerce, Easy Digital Downloads (EDD), Advanced Custom Fields (ACF) and more.
@@ -249,20 +248,22 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 == Screenshots ==
 
 1. Element Pack Elementor Addons
-2. Element Pack Features
-3. Element Pack Dashboard Widgets Panel
-4. Popular Widget List 01
-5. Popular Widget List 02
-6. 3rd Party Widgets List 01
-7. 3rd Party Widgets List 02
+2. Ready-Made Templates
+3. Powerful Widgets
+4. 3rd Party Widgets
+5. Elementor Extend Features
+6. Mega Menu Builder Demo 01
+7. Mega Menu Builder Demo 02
 8. WooCommerce Widgets List
-9. Ready Made Templates List
-10. Ready Made Template Blocks
-11. Header Footer Features
-12. Others Widgets List
+9. Header Footer Features
+10. Others Widgets List
 
 
 == Changelog ==
+
+= 5.11.2 [15th May 2025] =
+
+* Updated: Readme txt updated
 
 = 5.11.1 [7th May 2025] =
 
