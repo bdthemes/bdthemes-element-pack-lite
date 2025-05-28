@@ -5,11 +5,11 @@ Tags: elementor addons, elementor widget, mega menu, woocommerce elementor, elem
 Requires at least: 5.0.0
 Tested up to: 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 5.11.2
+Stable tag: 5.11.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.28.4
+Elementor tested up to: 3.29.0
 
 Get 2600+ templates, 300+ elementor widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
 
@@ -260,6 +260,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 5.11.3 [28th May 2025] =
+
+* Fixed: XSS vulnerability fixed in Open Street Map widget marker content sanitization ( Thanks to Robert DeVore )
 
 = 5.11.2 [15th May 2025] =
 
