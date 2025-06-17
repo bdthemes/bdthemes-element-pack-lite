@@ -736,6 +736,7 @@ class Step_Flow extends Module_Base {
             'icon_radius_advanced',
             [
                 'label' => esc_html__('Radius', 'bdthemes-element-pack'),
+                // translators: %1s is an example radius value in bold, %2s is an anchor tag with a link to the border-radius generator.
                 'description' => sprintf(__('For example: <b>%1s</b> or Go <a href="%2s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack'), '75% 25% 43% 57% / 46% 29% 71% 54%', 'https://9elements.github.io/fancy-border-radius/'),
                 'type' => Controls_Manager::TEXT,
                 'size_units' => ['px', '%'],

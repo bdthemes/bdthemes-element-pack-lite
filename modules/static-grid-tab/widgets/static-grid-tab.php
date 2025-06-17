@@ -234,7 +234,7 @@ class Static_Grid_Tab extends Module_Base
 		$this->add_control(
 			'speed',
 			[
-				'label' => esc_html__('Speed', 'plugin-name'),
+				'label' => esc_html__('Speed', 'bdthemes-element-pack'),
 				'type' => Controls_Manager::NUMBER,
 				'min' => 100,
 				'max' => 1000,

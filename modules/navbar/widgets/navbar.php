@@ -6,6 +6,15 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use ElementPack\Modules\Navbar\ep_menu_walker;
+use ElementPack\Utils;
+use Elementor\Group_Control_Background;
+use Elementor\Repeater;
+
+
+use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Text_Shadow;
+use Elementor\Widget_Base;
+use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -359,7 +368,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_link_background',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li > a' => 'background-color: {{VALUE}};',
@@ -583,7 +592,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_hover_background_color_active',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li.bdt-active > a' => 'background-color: {{VALUE}};',
@@ -638,6 +647,115 @@ class Navbar extends Module_Base {
 
 		$this->end_controls_tabs();
 
+		$this->add_control(
+			'individuL_menu_style',
+			[
+				'label'     => esc_html__( 'Individual Menu Style', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::SWITCHER,
+				'separator' => 'before',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_individual_menu_style',
+			[
+				'label' => esc_html__( 'Individual Menu Item', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => ['individuL_menu_style' => 'yes'],
+			]
+		);
+		$repeater = new Repeater();
+		$repeater->start_controls_tabs( 'tabs_individual_style' );
+		$repeater->start_controls_tab(
+			'tab_normal',
+			[ 
+				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+		$repeater->add_control(
+			'selective_menu',
+			[
+				'label'   => esc_html__( 'Selective Menu', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SWITCHER,
+			]
+		);
+		$repeater->add_control(
+			'menu_number',
+			[ 
+				'label'       => esc_html__( 'Menu Number', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::NUMBER,
+				'default'     => 3,
+				'min'         => 1,
+				'max'         => 50,
+				'condition'   => ['selective_menu' => 'yes'],
+			]	
+		);
+		$repeater->add_control(
+			'menu_color',
+			[ 
+				'label'       => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::COLOR,
+			]
+		);
+		$repeater->add_control(
+			'menu_background',
+			[
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+			]
+		);
+		$repeater->add_control(
+			'menu_border_color',
+			[
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+			]
+		);
+		$repeater->end_controls_tab();
+		$repeater->start_controls_tab(
+			'tab_hover',
+			[ 
+				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+		$repeater->add_control(
+			'menu_hover_color',
+			[ 
+				'label'       => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::COLOR,
+			]
+		);
+		$repeater->add_control(
+			'menu_hover_background',
+			[
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+			]
+		);
+		$repeater->add_control(
+			'menu_hover_border_color',
+			[
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+			]
+		);
+		$repeater->end_controls_tab();
+		$repeater->end_controls_tabs();
+		$this->add_control(
+			'repeater_field',
+			[ 
+				'label'       => esc_html__( 'Menu Items', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::REPEATER,
+				'fields'      => $repeater->get_controls(),
+				'default'     => [ 
+					[ 
+						'menu_color'     => '#08AEEC',
+					],
+				],
+			]
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -648,7 +766,6 @@ class Navbar extends Module_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
-
 		$this->add_control(
 			'dropdown_background',
 			[
@@ -659,11 +776,8 @@ class Navbar extends Module_Base {
 				],
 			]
 		);
-
 		$this->start_controls_tabs( 'dropdown_link_styles' );
-
 		$this->start_controls_tab( 'dropdown_link_normal', [ 'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ) ] );
-
 		$this->add_control(
 			'dropdown_link_color',
 			[
@@ -903,9 +1017,7 @@ class Navbar extends Module_Base {
 
 
 		$this->end_controls_tab();
-
 		$this->end_controls_tabs();
-
 		$this->end_controls_section();
 	}
 
@@ -913,6 +1025,31 @@ class Navbar extends Module_Base {
 
 		$settings = $this->get_settings_for_display();
 		$id       = 'bdt-navbar-' . $this->get_id();
+
+
+		if ( $settings['repeater_field'] ) {
+			echo '<style>';
+				foreach ( $settings['repeater_field'] as $index => $item ) {
+					$menu_number = isset( $item['menu_number'] ) ? $item['menu_number'] : $index + 1;
+					$menu_color  = $item['menu_color'] ? $item['menu_color'] : '#08AEEC';
+					$menu_background = $item['menu_background'] ? $item['menu_background'] : '';
+					$menu_border_color = $item['menu_border_color'] ? $item['menu_border_color'] : '';
+					$menu_hover_color = $item['menu_hover_color'] ? $item['menu_hover_color'] : '';
+					$menu_hover_background = $item['menu_hover_background'] ? $item['menu_hover_background'] : '';
+					$menu_hover_border_color = $item['menu_hover_border_color'] ? $item['menu_hover_border_color'] : '';
+					echo '#' . $id . ' .bdt-navbar-nav > li:nth-child(' . $menu_number . ') > a { 
+					color: ' . $menu_color . ';
+					background-color: ' . $menu_background . ';
+					border-color: ' . $menu_border_color . ';
+					}';
+					echo '#' . $id . ' .bdt-navbar-nav > li:hover:nth-child(' . $menu_number . ') > a { 
+					color: ' . $menu_hover_color . ';
+					background-color: ' . $menu_hover_background . ';
+					border-color: ' . $menu_hover_border_color . ';
+					}';
+				}
+			echo '</style>';
+		}
 		
 		if (!$settings['navbar']) {
 			element_pack_alert(__('Please select a Menu From Setting!', 'bdthemes-element-pack'));
@@ -962,6 +1099,7 @@ class Navbar extends Module_Base {
 			$this->add_render_attribute('navbar-attr', 'class', 'bdt-cd-secondary-nav');
 		}
 		$this->add_render_attribute('navbar-wrap', 'class', 'bdt-navbar-wrapper');
+		$this->add_render_attribute('navbar-attr', 'id', $id);
 
 		?>
 		<div <?php $this->print_render_attribute_string( 'navbar-wrap' ); ?>>

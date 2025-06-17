@@ -86,6 +86,7 @@ class BdThemes_Duplicator {
 			 */
 			$bdt_args = [ 
 				'post_status'    => 'draft',
+				/* translators: %1$s: Original post title */
 				'post_title'     => sprintf( __( '%1$s - [Duplicated]', 'bdthemes-element-pack' ), $bdt_post->post_title ),
 				'post_type'      => $bdt_post->post_type,
 				'post_name'      => $bdt_post->post_name,

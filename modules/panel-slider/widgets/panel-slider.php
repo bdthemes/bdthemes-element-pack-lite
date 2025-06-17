@@ -992,6 +992,7 @@ class Panel_Slider extends Module_Base {
 							"effect"          => $settings["skin"],
 							"observer"        => ( $settings["observer"] ) ? true : false,
 							"observeParents"  => ( $settings["observer"] ) ? true : false,
+							"mousewheel"      => ( $settings["mousewheel"] ) ? true : false,
 							"breakpoints"     => [ 
 								(int) $viewport_md => [ 
 									"slidesPerView"  => (int) $columns_tablet,

@@ -85,7 +85,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_layers',
 			[
-				'label' => esc_html__('Layers', 'plugin-name'),
+				'label' => esc_html__('Layers', 'bdthemes-element-pack'),
 				'type' => Controls_Manager::NUMBER,
 				'min' => 0,
 				'max' => 100,

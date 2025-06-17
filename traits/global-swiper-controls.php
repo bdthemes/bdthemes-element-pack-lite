@@ -428,6 +428,14 @@ trait Global_Swiper_Controls {
 		);
 
 		$this->add_control(
+			'mousewheel',
+			[
+				'label' => __('Mousewheel', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'  => Controls_Manager::SWITCHER,
+			]
+		);
+
+		$this->add_control(
 			'show_hidden_item',
 			[
 				'label' => __('Show Hidden Item', 'bdthemes-element-pack') . BDTEP_NC,
@@ -1790,6 +1798,7 @@ trait Global_Swiper_Controls {
 							"observeParents"        => ($settings["observer"]) ? true : false,
 							"watchSlidesVisibility" => ($settings["show_hidden_item"]) ? true : false,
 							"watchSlidesProgress" 	=> ($settings["show_hidden_item"]) ? true : false,
+							"mousewheel"            => ($settings["mousewheel"]) ? true : false,
 							"breakpoints"     => [
 								(int)$viewport_md => [
 									"slidesPerView"  => isset($settings["columns_tablet"]) ? (int)$settings["columns_tablet"] : 2,

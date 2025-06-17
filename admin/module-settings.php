@@ -2122,234 +2122,133 @@ class ModuleService {
             ],
             'element_pack_other_settings'   => [
 
-                [
-                    'name'  => 'minified_asset_manager_group_start',
-                    'label' => esc_html__('Asset Manager', 'bdthemes-element-pack'),
-                    'desc'  => __('If you want to combine your JS and css and load in a single file so enable it. When you enable it all widgets css and JS will combine in a single file.', 'bdthemes-element-pack'),
-                    'type'  => 'start_group',
-                ],
+				[
+					'name'        => 'asset-manager',
+					'label'       => esc_html__('Asset Manager', 'bdthemes-element-pack'),
+					'tooltip'  => __('If you want to combine your JS and css and load in a single file so enable it. When you enable it all widgets css and JS will combine in a single file.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'free',
+					'demo_url'    => 'https://bdthemes.com/knowledge-base/asset-manager/',
+					'video_url'   => 'https://youtu.be/nytQFZv_CSs',
+				],
 
-                [
-                    'name'      => 'asset-manager',
-                    'label'     => esc_html__('Asset Manager', 'bdthemes-element-pack'),
-                    'type'      => 'checkbox',
-                    'default'   => 'off',
-                    'widget_type' => 'free',
-                    'demo_url'  => 'https://bdthemes.com/knowledge-base/asset-manager/',
-                    'video_url' => 'https://youtu.be/nytQFZv_CSs',
+				[
+					'name'        => 'mega-menu',
+					'label'       => esc_html__('Mega Menu', 'bdthemes-element-pack'),
+					'tooltip'  => __('The Mega Menu by Element Pack Pro allows the users to create organized and oversized menus with full custom layouts having images, columns, sliders, icons, forms, buttons, and lots of links. This is one of the most demanding feature and now it is in your hands.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'demo_url'    => 'https://bdthemes.com/knowledge-base/mega-menu-widget/',
+					'video_url'   => 'https://youtu.be/ZOBLWIZvGLs',
+				],
 
-                ],
+				[
+					'name'        => 'dynamic-content',
+					'label'       => esc_html__('Dynamic Content', 'bdthemes-element-pack'),
+					'tooltip'  => __('The Dynamic Content feature allows users to automatically populate Elementor widgets with real-time data from WordPress.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'content_type' => 'new',
+					'demo_url'    => 'https://demo.elementpack.pro/element/dynamic-content/',
+					'video_url'   => 'https://youtu.be/JEqXbIETdDE',
 
-                [
-                    'name' => 'minified_asset_manager_group_end',
-                    'type' => 'end_group',
-                ],
-
-                [
-                    'name'  => 'live_copy_group_start',
-                    'label' => esc_html__('Live Copy or Paste', 'bdthemes-element-pack'),
-                    'desc'  => __('Live copy is a copy feature that allow you to copy and paste content from one domain to another. For example you can copy demo content directly from our demo website.', 'bdthemes-element-pack'),
-                    'type'  => 'start_group',
-                ],
-
-                [
-                    'name'      => 'live-copy',
-                    'label'     => esc_html__('Live Copy/Paste', 'bdthemes-element-pack'),
-                    'type'      => 'checkbox',
-                    'default'   => 'off',
-                    'widget_type' => 'free',
-                    'demo_url'  => 'https://bdthemes.com/knowledge-base/live-copy-paste/live-copy-alternative/',
-                    'video_url' => 'https://youtu.be/jOdWVw2TCmo',
-
-                ],
-
-                [
-                    'name' => 'live_copy_group_end',
-                    'type' => 'end_group',
-                ],
-
-                [
-                    'name'  => 'essential_shortcodes_group_start',
-                    'label' => esc_html__('Essential Shortcodes', 'bdthemes-element-pack'),
-                    'desc'  => __('If you need element pack essential shortcodes feature so you can do that from here. it\'s included some basic content feature that not possible by element pack.' , 'bdthemes-element-pack'),
-                    'type'  => 'start_group',
-                ],
-
-                [
-                    'name'      => 'essential-shortcodes',
-                    'label'     => esc_html__('Essential Shortcodes', 'bdthemes-element-pack'),
-                    'type'      => 'checkbox',
-                    'default'   => 'off',
-                    'widget_type' => 'pro',
-                    'demo_url'  => 'https://bdthemes.com/knowledge-base/element-pack-essential-shortcodes/',
-                    'video_url' => 'https://youtu.be/fUMoYNa_WLY',
-
-                ],
-
-                [
-                    'name' => 'essential_shortcodes_group_end',
-                    'type' => 'end_group',
-                ],
-
-                [
-                    'name'         => 'template_library_group_start',
-                    'label'        => esc_html__('Template Library (in Editor)', 'bdthemes-element-pack'),
-                    'desc'         => __('If you need to show element pack template library in your editor so please enable this option. It\'s amazing feature for elementor.', 'bdthemes-element-pack'),
-                    'type'         => 'start_group',
-                ],
-
-                [
-                    'name'      => 'template-library',
-                    'label'     => esc_html__('Template Library (in Editor)', 'bdthemes-element-pack'),
-                    'type'      => 'checkbox',
-                    'default'   => 'off',
-                    'widget_type' => 'free',
-                    'demo_url'  => '',
-                    'video_url' => 'https://youtu.be/Z6XNSPSxtJw?si=XEuoQCotMQy2vJA2',
-
-
-                ],
-
-                [
-                    'name' => 'template_library_group_end',
-                    'type' => 'end_group',
-                ],
-                
-                [
-                    'name'         => 'context_menu_group_start',
-                    'label'        => esc_html__('Context Menu', 'bdthemes-element-pack'),
-                    'desc'         => __('Turn on this switcher to enable the Context Menu inside "Site Settings" of Elementor Editor Page to use the right-click menu.', 'bdthemes-element-pack'),
-                    'type'         => 'start_group',
-                ],
-
-                [
-                    'name'      => 'context-menu',
-                    'label'     => esc_html__('Context Menu', 'bdthemes-element-pack'),
-                    'type'      => 'checkbox',
-                    'default'   => 'off',
-                    'widget_type' => 'pro',
-                    'demo_url'  => 'https://bdthemes.com/knowledge-base/context-menu/',
-                    'video_url' => 'https://youtu.be/LptQctJ22S0',
-                ],
-
-                [
-                    'name' => 'context_menu_group_end',
-                    'type' => 'end_group',
-                ],
-
-                [
-                    'name'         => 'duplicator_group_start',
-                    'label'        => esc_html__('Duplicator', 'bdthemes-element-pack'),
-                    'desc'         => __('Just hit the button below to enable the duplicator. It can duplicate anything like posts,pages and elementor templates. A masterclass duplication with just one click.', 'bdthemes-element-pack'),
-                    'type'         => 'start_group',
-                ],
-
-                [
-                    'name'        => 'duplicator',
-                    'label'       => esc_html__('Duplicator', 'bdthemes-element-pack'),
-                    'type'        => 'checkbox',
-                    'default'     => 'off',
-                    'widget_type' => 'free',
-                    'demo_url'    => 'https://bdthemes.com/knowledge-base/duplicator-feature/',
-                    'video_url'   => 'https://youtu.be/bCkCPzyPouE?si=S6zgjdrNDgGi-y7u',
-                ],
-
-                [
-                    'name' => 'duplicator_group_end',
-                    'type' => 'end_group',
-                ],
-
-                [
-                    'name'         => 'mega_menu_group_start',
-                    'label'        => esc_html__('Mega Menu', 'bdthemes-element-pack'),
-                    'desc'         => __('The Mega Menu by Element Pack Pro allows the users to create organized and oversized menus with full custom layouts having images, columns, sliders, icons, forms, buttons, and lots of links. This is one of the most demanding feature and now it is in your hands.', 'bdthemes-element-pack'),
-                    'type'         => 'start_group',
-                ],
-
-                [
-                    'name'        => 'mega-menu',
-                    'label'       => esc_html__('Mega Menu', 'bdthemes-element-pack'),
-                    'type'        => 'checkbox',
-                    'default'     => 'off',
-                    'widget_type' => 'pro',
-                    'demo_url'    => 'https://bdthemes.com/knowledge-base/mega-menu-widget/',
-                    'video_url'   => 'https://youtu.be/CefTtwL4ZqU',
-                ],
-
-                [
-                    'name' => 'mega_menu_group_end',
-                    'type' => 'end_group',
-                ],
-
-                [
-					'name'  => 'smooth_scroller_group_start',
-					'label' => esc_html__('Smooth Scroller', 'bdthemes-element-pack'),
-					'desc'  => __('Turn on this switcher to enable the Smooth Scroller Features, The Smooth Scroller feature enhances user experience by providing seamless, visually pleasing content navigation through animated transitions, ensuring a polished and user-friendly interface.', 'bdthemes-element-pack'),
-					'type'  => 'start_group',
-                    'content_type' => 'new',
 				],
 
 				[
 					'name'        => 'smooth-scroller',
 					'label'       => esc_html__('Smooth Scroller', 'bdthemes-element-pack'),
+					'tooltip'  => __('Turn on this switcher to enable the Smooth Scroller Features, The Smooth Scroller feature enhances user experience by providing seamless, visually pleasing content navigation through animated transitions.', 'bdthemes-element-pack'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
+					'content_type' => 'new',
 					'demo_url'    => '',
 					'video_url'   => 'https://youtu.be/cQnu1LUlFL8?si=5xYIZu_XlWqZOWG8',
 				],
+				
+				[
+					'name'        => 'live-copy',
+					'label'       => esc_html__('Live Copy/Paste', 'bdthemes-element-pack'),
+					'tooltip'  => __('Live copy is a copy feature that allow you to copy and paste content from one domain to another. For example you can copy demo content directly from our demo website.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'free',
+					'demo_url'    => 'https://bdthemes.com/knowledge-base/live-copy-paste/live-copy-alternative/',
+					'video_url'   => 'https://youtu.be/jOdWVw2TCmo',
+				],
+				
+				[
+					'name'        => 'essential-shortcodes',
+					'label'       => esc_html__('Essential Shortcodes', 'bdthemes-element-pack'),
+					'tooltip'  => __('If you need element pack essential shortcodes feature so you can do that from here. it\'s included some basic content feature that not possible by element pack.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'demo_url'    => 'https://bdthemes.com/knowledge-base/element-pack-essential-shortcodes/',
+					'video_url'   => 'https://youtu.be/fUMoYNa_WLY',
+				],
+				
+				[
+					'name'        => 'template-library',
+					'label'       => esc_html__('Template Library (in Editor)', 'bdthemes-element-pack'),
+					'tooltip'  => __('If you need to show element pack template library in your editor so please enable this option. It\'s amazing feature for elementor.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'free',
+					'demo_url'    => '',
+					'video_url'   => 'https://youtu.be/Z6XNSPSxtJw?si=XEuoQCotMQy2vJA2',
+				],
 
 				[
-					'name' => 'smooth_scroller_group_end',
-					'type' => 'end_group',
-                ],
-
-                [
-					'name'  => 'svg_support_group_start',
-					'label' => esc_html__('SVG Support', 'bdthemes-element-pack'),
-					'desc'  => __('Turn on this option to enable SVG support in your widgets & Upload Media Library.', 'bdthemes-element-pack'),
-					'type'  => 'start_group',
-					'content_type' => 'new',
+					'name'        => 'context-menu',
+					'label'       => esc_html__('Context Menu', 'bdthemes-element-pack'),
+					'tooltip'  => __('Turn on this switcher to enable the Context Menu inside "Site Settings" of Elementor Editor Page to use the right-click menu.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'demo_url'    => 'https://bdthemes.com/knowledge-base/context-menu/',
+					'video_url'   => 'https://youtu.be/LptQctJ22S0',
 				],
+
+				[
+					'name'        => 'duplicator',
+					'label'       => esc_html__('Duplicator', 'bdthemes-element-pack'),
+					'tooltip'  => __('Just hit the button below to enable the duplicator. It can duplicate anything like posts,pages and elementor templates. A masterclass duplication with just one click.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'free',
+					'demo_url'    => 'https://bdthemes.com/knowledge-base/duplicator-feature/',
+                    'video_url'   => 'https://youtu.be/bCkCPzyPouE?si=S6zgjdrNDgGi-y7u',
+				],
+
 				[
 					'name'        => 'svg-support',
 					'label'       => esc_html__('SVG Support', 'bdthemes-element-pack'),
+					'tooltip'  => __('Turn on this option to enable SVG support in your widgets & Upload Media Library.', 'bdthemes-element-pack'),
 					'type'        => 'checkbox',
 					'default'     => 'on',
 					'widget_type' => 'free',
+					'content_type' => 'new',
 					'demo_url'    => '',
 					'video_url'   => '',
 				],
+
 				[
-					'name' => 'svg_support_group_end',
-					'type' => 'end_group',
-                ],
-                [
-					'name'      => 'swatches_group_start',
-					'label'     => esc_html__('Variation Swatches', 'bdthemes-element-pack'),
-                    'desc'      => __('Replace dropdowns with color swatches, image swatches or text/button swatches', 'bdthemes-element-pack'),
-					'type'      => 'start_group',
-					'video_url' => '',
-					'content_type' => 'new'
+					'name'        => 'variation-swatches',
+					'label'       => esc_html__('Variation Swatches', 'bdthemes-element-pack'),
+					'tooltip'  => __('Replace dropdowns with color swatches, image swatches or text/button swatches.', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'content_type' => 'new',
+					'demo_url'     => 'https://demo.elementpack.pro/element/variation-swatches/',
+                    'video_url'    => 'https://www.youtube.com/watch?v=qIl2mvS7mgk',
 				],
-                [
-                    'name'         => 'variation-swatches',
-                    'label'        => esc_html__('Enable', 'bdthemes-element-pack'),
-                    'type'         => 'checkbox',
-                    'default'      => "off",
-                    'widget_type'  => 'pro',
-                    'plugin_name'  => 'woocommerce',
-                    'plugin_path'  => 'woocommerce/woocommerce.php',
-                    'content_type' => 'woocommerce product',
-                    'demo_url'     => 'https://demo.elementpack.pro/element/variation-swatches/',
-                    'video_url'    => '',
-                    'ep_parent_switcher'       => true,
-                ],
-                [
-					'name' => 'swatches_group_end',
-					'type' => 'end_group',
-				]
-            ]
+				
+			]
         ];
 
         $settings_fields['element_pack_third_party_widget'][] = [

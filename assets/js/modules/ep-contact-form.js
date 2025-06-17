@@ -22,7 +22,7 @@
             return;
         }
 
-        $contactForm.submit(function (e) {
+        $contactForm.on('submit', function (e) {
             sendContactForm($contactForm, widgetID);
             return false;
         });

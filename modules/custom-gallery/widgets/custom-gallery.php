@@ -710,6 +710,7 @@ class Custom_Gallery extends Module_Base {
 			[ 
 				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SWITCHER,
+				// translators: %1s: Opening anchor tag with link to MDN backdrop-filter documentation, %2s: Closing anchor tag
 				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
 				'separator'   => 'before',
 			]
@@ -1249,7 +1250,7 @@ class Custom_Gallery extends Module_Base {
 								<?php if ( 'icon' == $settings['link_type'] ) : ?>
 									<i class="ep-icon-<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
 								<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
-									<span class="bdt-text"><?php esc_html_e( $settings['link_text'] ); ?></span>
+									<span class="bdt-text"><?php esc_html_e( $settings['link_text'], 'bdthemes-element-pack' ); ?></span>
 								<?php endif; ?>
 							</a>
 						</div>

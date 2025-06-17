@@ -249,7 +249,7 @@ class DualButton extends Module_Base {
 				'label'       => __( 'OnClick Event', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'myFunction()',
-				'description' => sprintf( __('For details please look <a href="%s" target="_blank">here</a>'), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
+				'description' => sprintf( __( 'For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
 				'condition' => [
 					'button_a_onclick' => 'yes'
 				]
@@ -410,7 +410,7 @@ class DualButton extends Module_Base {
 				'label'       => __( 'OnClick Event', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'myFunction()',
-				'description' => sprintf( __('For details please look <a href="%s" target="_blank">here</a>'), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
+				'description' => sprintf( __('For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
 				'condition' => [
 					'button_b_onclick' => 'yes'
 				]

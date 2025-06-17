@@ -1666,7 +1666,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 
 						<?php if ('yes' == $settings['show_author_name']) : ?>
 							<div class="bdt-tutor-single-course-author-name">
-								<span><?php esc_html_e('by', 'tutor'); ?></span>
+								<span><?php esc_html_e('by', 'bdthemes-element-pack'); ?></span>
 								<a href="<?php echo esc_url($profile_url); ?>"><?php echo get_the_author(); ?></a>
 							</div>
 						<?php endif; ?>
@@ -1677,7 +1677,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 								$course_categories = get_tutor_course_categories();
 								if (!empty($course_categories) && is_array($course_categories) && count($course_categories)) {
 								?>
-									<span><?php esc_html_e('In', 'tutor') ?></span>
+									<span><?php esc_html_e('In', 'bdthemes-element-pack') ?></span>
 								<?php
 									foreach ($course_categories as $course_category) {
 										$category_name = $course_category->name;
@@ -1733,8 +1733,8 @@ class TutorLms_Course_Carousel extends Module_Base {
 						<div class="bdt-tutor-course-loop-price">
 							<?php
 							$course_id = get_the_ID();
-							$enroll_btn = '<div  class="tutor-loop-cart-btn-wrap"><a href="' . get_the_permalink() . '">' . __('Get Enrolled', 'tutor') . '</a></div>';
-							$price_html = '<div class="price"> ' . __('Free', 'tutor') . $enroll_btn . '</div>';
+							$enroll_btn = '<div  class="tutor-loop-cart-btn-wrap"><a href="' . get_the_permalink() . '">' . __('Get Enrolled', 'bdthemes-element-pack') . '</a></div>';
+							$price_html = '<div class="price"> ' . __('Free', 'bdthemes-element-pack') . $enroll_btn . '</div>';
 							if (tutor_utils()->is_course_purchasable()) {
 								$enroll_btn = tutor_course_loop_add_to_cart(false);
 
