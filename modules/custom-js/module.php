@@ -39,7 +39,9 @@
             $section->add_control(
                 'ep_custom_header_script',
                 [
+                    // translators: %1s and %2s are opening and closing <b> HTML tags used for bolding the word "Header".
                     'label'       => sprintf(__('%1s Header %2s CSS/Script', 'bdthemes-element-pack'), '<b>', '</b>'),
+                    // translators: %1s is the <script> tag, %2s is the <style> tag, both written as HTML entities for display.
                     'description' => sprintf(__('Please write down your custom js script or CSS style on appropriate field as per your need. add %1s tag for javascript or %2s tag for CSS here.', 'bdthemes-element-pack'), '&#x3C;script&#x3E;', '&#x3C;style&#x3E;'),
                     'type'        => Controls_Manager::CODE,
                     //'language'    => 'js',
@@ -51,7 +53,9 @@
             $section->add_control(
                 'ep_custom_footer_script',
                 [
+                    // translators: %1s and %2s are opening and closing <b> HTML tags used for bolding the word "Footer".
                     'label'       => sprintf(__('%1s Footer %2s CSS/Script', 'bdthemes-element-pack'), '<b>', '</b>'),
+                    // translators: %1s is the <script> tag, %2s is the <style> tag, both written as HTML entities for display.
                     'description' => sprintf(__('Please write down your custom js script or CSS style on appropriate field as per your need. add %1s tag for javascript or %2s tag for CSS here.', 'bdthemes-element-pack'), '&#x3C;script&#x3E;', '&#x3C;style&#x3E;'),
                     'type'        => Controls_Manager::CODE,
                     //'language'    => 'js',

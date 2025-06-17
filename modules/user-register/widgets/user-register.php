@@ -2045,12 +2045,12 @@ class User_Register extends Module_Base {
 			Group_Control_Background::get_type(),
 			[ 
 				'name'           => 'progress_background',
-				'label'          => esc_html__( 'Background', 'elementor' ),
+				'label'          => esc_html__( 'Background', 'bdthemes-element-pack' ),
 				'types'          => [ 'classic', 'gradient' ],
 				'exclude'        => [ 'image' ],
 				'fields_options' => [ 
 					'background' => [ 
-						'label' => esc_html__( 'Progress Background', 'elementor' ),
+						'label' => esc_html__( 'Progress Background', 'bdthemes-element-pack' ),
 					],
 				],
 				'selector'       => '{{WRAPPER}} .bdt-progress',

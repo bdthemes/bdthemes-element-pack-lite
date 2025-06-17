@@ -237,7 +237,8 @@ class Module extends Element_Pack_Module_Base {
             'ep_backdrop_filter_notice',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => sprintf(esc_html__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
+                /* translators: %1$s and %2$s are HTML tags for a link */
+                'raw'             => sprintf(esc_html__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
             ]
         );

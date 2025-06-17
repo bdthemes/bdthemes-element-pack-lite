@@ -64,7 +64,7 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_section(
             'section_layout',
             [
-                'label' => esc_html__('Dark Mode', 'bdthemes-dark-mode'),
+                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack'),
             ]
         );
 

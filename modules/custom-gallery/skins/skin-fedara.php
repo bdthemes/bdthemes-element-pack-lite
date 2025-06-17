@@ -152,7 +152,7 @@ class Skin_Fedara extends Elementor_Skin_Base {
 								<?php if ( 'icon' == $settings['link_type'] ) : ?>
 									<i class="ep-icon-<?php echo esc_attr( $icon); ?>" aria-hidden="true"></i>
 								<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
-									<span class="bdt-text"><?php esc_html_e( $settings['link_text'] ); ?></span>
+									<span class="bdt-text"><?php esc_html_e( $settings['link_text'], 'bdthemes-element-pack' ); ?></span>
 								<?php endif;?>
 							</a>
 						</div>

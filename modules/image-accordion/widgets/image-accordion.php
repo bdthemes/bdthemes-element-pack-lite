@@ -1164,7 +1164,8 @@ class Image_Accordion extends Module_Base {
 			'border_radius_advanced',
 			[
 				'label'       => esc_html__('Radius', 'bdthemes-element-pack'),
-				'description' => sprintf(__('For example: <b>%1s</b> or Go <a href="%2s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack'), '30% 70% 82% 18% / 46% 62% 38% 54%', 'https://9elements.github.io/fancy-border-radius/'),
+				/* translators: %1$s is example value, %2$s is link */
+				'description' => sprintf(esc_html__('For example: <b>%1$s</b> or Go <a href="%2$s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack'), '30% 70% 82% 18% / 46% 62% 38% 54%', 'https://9elements.github.io/fancy-border-radius/'),
 				'type'        => Controls_Manager::TEXT,
 				'size_units'  => [ 'px', '%' ],
 				'separator'   => 'after',
@@ -1441,7 +1442,7 @@ class Image_Accordion extends Module_Base {
 			<?php if ('icon' == $settings['link_type']) : ?>
 				<i class="ep-icon-<?php echo esc_attr($icon); ?>" aria-hidden="true"></i>
 			<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
-				<span class="bdt-text"><?php esc_html_e( $settings['link_text'] ); ?></span>
+				<span class="bdt-text"><?php esc_html_e( $settings['link_text'], 'bdthemes-element-pack' ); ?></span>
 			<?php endif; ?>
 		</a>
 		<?php

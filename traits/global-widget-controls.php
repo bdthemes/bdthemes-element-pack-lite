@@ -22,7 +22,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'bdt_link_new_tab',
 			[ 
-				'label'              => esc_html__( 'Link Open in a New Tab', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'              => esc_html__( 'Link Open in a New Tab', 'bdthemes-element-pack' ),
 				'type'               => Controls_Manager::SWITCHER,
 				'separator'          => 'before',
 				'frontend_available' => true,
@@ -34,7 +34,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'title_style',
 			[
-				'label'   => esc_html__('Style', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => esc_html__('Style', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [
@@ -527,7 +527,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'filter_mbtn_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -548,7 +548,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'filter_mbtn_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -646,7 +646,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'close_all_items_on_mobile',
 			[ 
-				'label' => __( 'Close All Items on Mobile', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Close All Items on Mobile', 'bdthemes-element-pack' ),
 				'description' => __( 'All items will be closed on mobile devices when the page is loaded.', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
@@ -736,7 +736,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'schema_activity',
 			[ 
-				'label'       => esc_html__( 'Schema Active', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Schema Active', 'bdthemes-element-pack' ),
 				'description' => esc_html__( 'Warning: If you have multiple Accordion widgets on the same page so don\'t activate schema for both Accordion widgets so you will get errors on the google index. Activate the only one which you want to show on google search.', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'separator'   => 'before',
@@ -777,7 +777,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'title_alignment',
 			[ 
-				'label'       => __( 'Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => __( 'Alignment', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => [ 
 					'flex-start' => [ 
@@ -887,7 +887,7 @@ trait Global_Widget_Controls {
 			Group_Control_Text_Stroke::get_type(),
 			[ 
 				'name'     => 'text_stroke',
-				'label'    => __( 'Text Stroke', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => __( 'Text Stroke', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-accordion-title',
 			]
 		);
@@ -932,7 +932,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'title_hover_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'title_border_border!' => '',
@@ -1011,7 +1011,7 @@ trait Global_Widget_Controls {
 		$this->start_controls_section(
 			'section_style_title_icon',
 			[ 
-				'label'     => __( 'Title Icon', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Title Icon', 'bdthemes-element-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_custom_icon' => 'yes'
@@ -1187,7 +1187,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'icon_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1199,7 +1199,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'icon_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1283,7 +1283,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'icon_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'icon_border_border!' => '',
@@ -1326,7 +1326,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'icon_active_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'icon_border_border!' => '',
@@ -1374,7 +1374,7 @@ trait Global_Widget_Controls {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'     => 'item_border',
-				'label'    => __( 'Border', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => __( 'Border', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-accordion-content',
 			]
 		);
@@ -1432,7 +1432,7 @@ trait Global_Widget_Controls {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'content_shadow',
-				'label'    => __( 'Box Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => __( 'Box Shadow', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-accordion-content',
 			]
 		);
@@ -1691,7 +1691,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'link_type',
 			[
-				'label'   => esc_html__('Link Type', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => esc_html__('Link Type', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'icon',
 				'options' => [
@@ -2311,9 +2311,10 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'overlay_blur_effect',
 			[
-				'label' => esc_html__('Glassmorphism', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__('Glassmorphism', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
-				'description' => sprintf(__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
+				/* translators: %1$s and %2$s are HTML tags that form a link */
+				'description' => sprintf(__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
 
 			]
 		);
@@ -3227,7 +3228,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'columns',
 			[ 
-				'label'          => esc_html__( 'Columns', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'          => esc_html__( 'Columns', 'bdthemes-element-pack' ),
 				'type'           => Controls_Manager::SELECT,
 				'default'        => '1',
 				'tablet_default' => '1',
@@ -3289,7 +3290,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'icon_position',
 			[ 
-				'label'                => esc_html__( 'Icon Position', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'                => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'toggle'               => true,
 				'options'              => [ 
@@ -3325,7 +3326,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'content_position',
 			[ 
-				'label'        => esc_html__( 'Content Position', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'        => esc_html__( 'Content Position', 'bdthemes-element-pack' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'default'      => 'left',
 				'toggle'       => false,
@@ -3347,7 +3348,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'content_y_align',
 			[ 
-				'label'     => esc_html__( 'Content Vertical Align', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Content Vertical Align', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'flex-start' => [ 
@@ -3485,7 +3486,7 @@ trait Global_Widget_Controls {
 		$this->start_controls_tab(
 			'list_item_tabs_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -3604,7 +3605,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'icon_number_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -3626,7 +3627,7 @@ trait Global_Widget_Controls {
 		$this->start_controls_tab(
 			'tab_number_icon_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -3746,7 +3747,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'sub_title_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -3870,7 +3871,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'icon_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -3891,7 +3892,7 @@ trait Global_Widget_Controls {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'icon_shadow',
-				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-fancy-list-icon',
 			]
 		);
@@ -3947,7 +3948,7 @@ trait Global_Widget_Controls {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'icon_shadow_hover',
-				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-fancy-list-wrap:hover .bdt-fancy-list-icon',
 			]
 		);
@@ -3990,7 +3991,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'image_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -4002,7 +4003,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'image_size',
 			[ 
-				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -4476,7 +4477,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'keyboard',
 			[
-				'label'   => __('Keyboard', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => __('Keyboard', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SWITCHER,
 
 			]
@@ -4509,7 +4510,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'mousewheel',
 			[
-				'label' => __('Mousewheel', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Mousewheel', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -6356,7 +6357,7 @@ trait Global_Widget_Controls {
         $this->start_controls_section(
             'section_content_additional',
             [
-                'label' => esc_html__('Additional', 'bdthemes-element-pack'),
+                'label' => esc_html__('Additional Settings', 'bdthemes-element-pack'),
             ]
         );
 
@@ -6441,8 +6442,10 @@ trait Global_Widget_Controls {
             [
                 'label'     => esc_html__('Offset', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::SLIDER,
+				'size_units' => ['px', '%', 'vh'],
                 'default'   => [
                     'size' => 1,
+					'unit' => 'px',
                 ],
                 'condition' => [
                     'nav_sticky_mode' => 'yes',
@@ -6560,7 +6563,7 @@ trait Global_Widget_Controls {
         $this->add_control(
             'enable_section_bg',
             [
-                'label'       => esc_html__('Connect Section Background', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'       => esc_html__('Connect Section Background', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::SWITCHER,
                 'description' => esc_html__('You will able to set Section Background as per Tab Items.', 'bdthemes-element-pack'),
                 'separator'   => 'before',
@@ -6572,7 +6575,7 @@ trait Global_Widget_Controls {
         $this->start_controls_section(
             'section_background',
             [
-                'label' => esc_html__('Section Background', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => esc_html__('Section Background', 'bdthemes-element-pack'),
                 'condition' => [
                     'enable_section_bg' => 'yes'
                 ]
@@ -6641,7 +6644,7 @@ trait Global_Widget_Controls {
         $this->start_controls_section(
             'section_tab_wrapper_style',
             [
-                'label' => esc_html__('Tab Wrapper', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => esc_html__('Tab Wrapper', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -6651,7 +6654,7 @@ trait Global_Widget_Controls {
             [
                 'name'      => 'tab_wrapper_background',
                 'types'     => ['classic', 'gradient'],
-                'selector'  => '{{WRAPPER}} .bdt-tab-wrapper > div',
+                'selector'  => '{{WRAPPER}} .bdt-tab-wrapper .bdt-tabs-wrap-inside',
             ]
         );
 
@@ -6661,7 +6664,7 @@ trait Global_Widget_Controls {
                 'name'        => 'tab_wrapper_border',
                 'placeholder' => '1px',
                 'default'     => '1px',
-                'selector'    => '{{WRAPPER}} .bdt-tab-wrapper > div',
+                'selector'    => '{{WRAPPER}} .bdt-tab-wrapper .bdt-tabs-wrap-inside',
             ]
         );
 
@@ -6672,7 +6675,7 @@ trait Global_Widget_Controls {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .bdt-tab-wrapper > div' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+                    '{{WRAPPER}} .bdt-tab-wrapper .bdt-tabs-wrap-inside' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
                 ],
             ]
         );
@@ -6684,7 +6687,7 @@ trait Global_Widget_Controls {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .bdt-tab-wrapper > div' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bdt-tab-wrapper .bdt-tabs-wrap-inside' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -6757,7 +6760,7 @@ trait Global_Widget_Controls {
         $this->add_responsive_control(
             'title_row_gap',
             [
-                'label'      => esc_html__('Row Gap', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'      => esc_html__('Row Gap', 'bdthemes-element-pack'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em'],
                 'range'      => [
@@ -6840,7 +6843,7 @@ trait Global_Widget_Controls {
         $this->add_control(
             'title_hover_border',
             [
-                'label'     => esc_html__('Border Color', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'condition' => [
                     'title_border_border!' => ''
@@ -7837,11 +7840,13 @@ trait Global_Widget_Controls {
             $this->add_render_attribute('tab-settings', 'data-bdt-height-match', 'target: > .bdt-tabs-item > .bdt-tabs-item-title; row: false;');
         }
 
+		$this->add_render_attribute('tabs-sticky', 'class', 'bdt-tabs-wrap-inside');
+
         if (isset($settings['nav_sticky_mode']) && 'yes' == $settings['nav_sticky_mode']) {
             $this->add_render_attribute('tabs-sticky', 'data-bdt-sticky', 'bottom: #bottom-anchor-' . $id . ';');
 
             if ($settings['nav_sticky_offset']['size']) {
-                $this->add_render_attribute('tabs-sticky', 'data-bdt-sticky', 'offset: ' . $settings['nav_sticky_offset']['size'] . ';');
+                $this->add_render_attribute('tabs-sticky', 'data-bdt-sticky', 'offset: ' . $settings['nav_sticky_offset']['size'] . $settings['nav_sticky_offset']['unit'] . ';');
             }
             if ($settings['nav_sticky_on_scroll_up']) {
                 $this->add_render_attribute('tabs-sticky', 'data-bdt-sticky', 'show-on-up: true; animation: bdt-animation-slide-top');
@@ -7868,7 +7873,7 @@ trait Global_Widget_Controls {
 		$this->start_controls_tab(
 			'gb_words_limit_style_normal_tab',
 			[ 
-				'label' => esc_html__( 'Normal', 'textdomain' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -7889,7 +7894,7 @@ trait Global_Widget_Controls {
 		$this->start_controls_tab(
 			'gb_words_limit_style_hover_tab',
 			[ 
-				'label' => esc_html__( 'Hover', 'textdomain' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
 			]
 		);
 

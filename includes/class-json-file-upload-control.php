@@ -32,7 +32,7 @@ class ElementPack_JSON_File_Upload_Control extends Base_Data_Control {
 
 	protected function get_default_settings() {
 		return [ 
-			'label'             => __( 'Upload JSON File', 'elementor-artbees-extension' ),
+			'label'             => __( 'Upload JSON File', 'bdthemes-element-pack' ),
 			'description'       => '',
 			'label_block'       => true,
 			'show_label'        => true,

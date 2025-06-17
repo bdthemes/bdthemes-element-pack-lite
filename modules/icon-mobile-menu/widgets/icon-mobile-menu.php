@@ -303,16 +303,16 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'item_border_type',
 			[ 
-				'label'     => esc_html_x( 'Border Type', 'Border Control', 'elementor' ),
+				'label'     => esc_html_x( 'Border Type', 'Border Control', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [ 
-					''       => esc_html__( 'Default', 'elementor' ),
-					'none'   => esc_html__( 'None', 'elementor' ),
-					'solid'  => esc_html_x( 'Solid', 'Border Control', 'elementor' ),
-					'double' => esc_html_x( 'Double', 'Border Control', 'elementor' ),
-					'dotted' => esc_html_x( 'Dotted', 'Border Control', 'elementor' ),
-					'dashed' => esc_html_x( 'Dashed', 'Border Control', 'elementor' ),
-					'groove' => esc_html_x( 'Groove', 'Border Control', 'elementor' ),
+					''       => esc_html__( 'Default', 'bdthemes-element-pack' ),
+					'none'   => esc_html__( 'None', 'bdthemes-element-pack' ),
+					'solid'  => esc_html_x( 'Solid', 'Border Control', 'bdthemes-element-pack' ),
+					'double' => esc_html_x( 'Double', 'Border Control', 'bdthemes-element-pack' ),
+					'dotted' => esc_html_x( 'Dotted', 'Border Control', 'bdthemes-element-pack' ),
+					'dashed' => esc_html_x( 'Dashed', 'Border Control', 'bdthemes-element-pack' ),
+					'groove' => esc_html_x( 'Groove', 'Border Control', 'bdthemes-element-pack' ),
 				],
 				'selectors' => [ 
 					'{{SELECTOR}} .bdt-icon-mobile-menu-wrap .bdt-icon-mobile-menu-link' => 'border-style: {{VALUE}};',

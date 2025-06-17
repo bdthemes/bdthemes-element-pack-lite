@@ -80,7 +80,7 @@ class Reading_Progress extends Module_Base {
 		$this->start_controls_section(
 			'reading_progress_layout',
 			[ 
-				'label' => esc_html__( 'Reading Progress', 'bdthemes-dark-mode' ),
+				'label' => esc_html__( 'Reading Progress', 'bdthemes-element-pack' ),
 			]
 		);
 

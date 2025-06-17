@@ -826,6 +826,37 @@ function element_pack_title_tags() {
 	return $title_tags;
 }
 
+/**
+ * Get all WooCommerce product titles as an associative array.
+ *
+ * @return array Product titles with IDs as keys, including a default 'Select Title' option.
+ */
+function element_pack_get_all_woocommerce_product_title() {
+    // Query arguments
+    $args = array(
+        'post_type'      => 'product',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+        'fields'         => 'ids',
+    );
+
+    // Get all product IDs
+    $product_ids = get_posts($args);
+
+    // Initialize with default option
+    $product_titles = array('0' => esc_html__('Select Product', 'bdthemes-element-pack'));
+
+    // Add each product: [product_id => product_title]
+    foreach ($product_ids as $id) {
+        $title = get_the_title($id);
+        $product_titles[$id] = $title ? $title : esc_html__('Untitled Product', 'bdthemes-element-pack');
+    }
+
+    return $product_titles;
+}
+
 // function element_pack_mask_shapes() {
 //     $path       = BDTEP_ASSETS_URL . 'images/mask/';
 //     $shape_name = 'shape';
@@ -2031,7 +2062,15 @@ if ( ! function_exists( 'bdt_license_validation' ) ) {
 			return false;
 		}
 
-		$license_key = get_option( Element_Pack_Base::get_lic_key_param( 'element_pack_license_key' ) );
+		// For multisite subsites, check if license is activated on main site
+		if (is_multisite() && !is_main_site()) {
+			$subsite_status = ElementPack\Base\Element_Pack_Base::get_subsite_license_status();
+			if ($subsite_status['is_subsite'] && $subsite_status['is_main_site_licensed']) {
+				return true;
+			}
+		}
+
+		$license_key = get_option( ElementPack\Base\Element_Pack_Base::get_lic_key_param( 'element_pack_license_key' ) );
 
 		if ( isset( $license_key ) && ! empty( $license_key ) ) {
 			return true;
@@ -2512,3 +2551,158 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 		return $tax_terms_map;
 	}
 }
+
+// Start: Add to cart quantity buttons conversion
+if ( ! function_exists( 'ep_display_quantity_minus' ) ) {
+	function ep_display_quantity_minus() {
+		if ( ! is_product() ) return;
+		echo '<button type="button" class="bdt-add-to-cart-qty-minus" ><i class="ep-icon-minus-3"></i></button>';
+	}
+}
+
+if ( ! function_exists( 'ep_display_quantity_plus' ) ) {
+	function ep_display_quantity_plus() {
+		if ( ! is_product() ) return;
+		echo '<button type="button" class="bdt-add-to-cart-qty-plus" ><i class="ep-icon-plus-3"></i></button>';
+	}
+}
+
+if ( ! function_exists( 'ep_add_cart_quantity_plus_minus' ) ) {
+	function ep_add_cart_quantity_plus_minus() {
+
+		echo '<style>
+			input[type="number"]::-webkit-outer-spin-button,
+			input[type="number"]::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+
+			input[type="number"] {
+				-moz-appearance: textfield; /* Firefox */
+			}		
+		</style>';
+
+		wc_enqueue_js( "
+			$(document).off('click.bdtQtyHandler'); // Remove previous handler
+			$(document).on('click.bdtQtyHandler', 'button.bdt-add-to-cart-qty-plus, button.bdt-add-to-cart-qty-minus', function(e) {
+				e.preventDefault();
+				var qty = $(this).closest('form.cart').find('.qty');
+				var val = parseFloat(qty.val()) || 0;
+				var max = parseFloat(qty.attr('max')) || Infinity;
+				var min = parseFloat(qty.attr('min')) || 0;
+				var step = parseFloat(qty.attr( 'step' ));
+
+				if ($(this).is('.bdt-add-to-cart-qty-plus')) {
+					qty.val(Math.min(val + step, max)).trigger('change');
+				} else {
+					qty.val(Math.max(val - step, min)).trigger('change');
+				}
+			});
+		");	
+	}
+}
+
+if ( ! function_exists( 'ep_setup_quantity_buttons' ) ) {
+	function ep_setup_quantity_buttons() {
+		if ( function_exists( 'is_product' ) ) {		
+			// Remove the default version
+			remove_all_actions( 'woocommerce_before_quantity_input_field' );
+			remove_all_actions( 'woocommerce_after_quantity_input_field' );
+			remove_all_actions( 'woocommerce_before_single_product' );
+
+			// Add our version
+			add_action( 'woocommerce_before_quantity_input_field', 'ep_display_quantity_minus' );
+			add_action( 'woocommerce_after_quantity_input_field', 'ep_display_quantity_plus' );
+			add_action( 'woocommerce_after_single_product', 'ep_add_cart_quantity_plus_minus' );
+		}
+		
+	}
+}
+
+//add_action( 'template_redirect', 'ep_setup_quantity_buttons' );
+// End: Add to cart quantity buttons conversion
+
+// Start: Custom CSS/JS Frontend Injection Functions
+ if ( ! function_exists( 'ep_inject_header_custom_code' ) ) {
+	function ep_inject_header_custom_code() {
+		if ( ep_is_page_excluded() ) {
+			return;
+		}
+
+		$custom_css = get_option( 'ep_custom_css', '' );
+		$custom_js = get_option( 'ep_custom_js', '' );
+
+		if ( ! empty( $custom_css ) ) {
+			echo "\n<!-- Element Pack Custom Header CSS -->\n";
+			echo '<style type="text/css">' . "\n";
+			echo $custom_css . "\n";
+			echo '</style>' . "\n";
+		}
+
+		if ( ! empty( $custom_js ) ) {
+			echo "\n<!-- Element Pack Custom Header JS -->\n";
+			echo '<script type="text/javascript">' . "\n";
+			echo $custom_js . "\n";
+			echo '</script>' . "\n";
+		}
+	}
+}
+
+if ( ! function_exists( 'ep_inject_footer_custom_code' ) ) {
+	function ep_inject_footer_custom_code() {
+		if ( ep_is_page_excluded() ) {
+			return;
+		}
+
+		$custom_css_2 = get_option( 'ep_custom_css_2', '' );
+		$custom_js_2 = get_option( 'ep_custom_js_2', '' );
+
+		if ( ! empty( $custom_css_2 ) ) {
+			echo "\n<!-- Element Pack Custom Footer CSS -->\n";
+			echo '<style type="text/css">' . "\n";
+			echo $custom_css_2 . "\n";
+			echo '</style>' . "\n";
+		}
+
+		if ( ! empty( $custom_js_2 ) ) {
+			echo "\n<!-- Element Pack Custom Footer JS -->\n";
+			echo '<script type="text/javascript">' . "\n";
+			echo $custom_js_2 . "\n";
+			echo '</script>' . "\n";
+		}
+	}
+}
+
+if ( ! function_exists( 'ep_is_page_excluded' ) ) {
+	function ep_is_page_excluded() {
+		$excluded_pages = get_option( 'ep_excluded_pages', array() );
+		
+		if ( empty( $excluded_pages ) || ! is_array( $excluded_pages ) ) {
+			return false;
+		}
+
+		$current_id = 0;
+		
+		if ( is_home() && ! is_front_page() ) {
+			$current_id = get_option( 'page_for_posts' );
+		} elseif ( is_front_page() ) {
+			$current_id = get_option( 'page_on_front' );
+		} elseif ( is_singular() ) {
+			$current_id = get_queried_object_id();
+		} elseif ( is_category() || is_tag() || is_tax() ) {
+			return false;
+		} elseif ( is_author() ) {
+			return false;
+		} elseif ( is_archive() ) {
+			return false;
+		} else {
+			$current_id = get_queried_object_id();
+		}
+		
+		$current_id = (int) $current_id;		
+		$excluded_pages = array_map( 'intval', $excluded_pages );
+
+		return $current_id > 0 && in_array( $current_id, $excluded_pages );
+	}
+}
+// End: Custom CSS/JS Frontend Injection Functions

@@ -59,7 +59,7 @@ class Fancy_List extends Module_Base {
 		$this->start_controls_section(
 			'section_layout',
 			[ 
-				'label' => esc_html__( 'Fancy List', 'bdthemes-dark-mode' ),
+				'label' => esc_html__( 'Fancy List', 'bdthemes-element-pack' ),
 			]
 		);
 

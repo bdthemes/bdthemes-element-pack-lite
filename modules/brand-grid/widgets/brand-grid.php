@@ -99,7 +99,7 @@ class Brand_Grid extends Module_Base {
 			[
 				'label'         => esc_html__('Website Url', 'bdthemes-element-pack'),
 				'type'          => Controls_Manager::URL,
-				'placeholder'   => esc_html__('https://your-link.com', 'plugin-domain'),
+				'placeholder'   => esc_html__('https://your-link.com', 'bdthemes-element-pack'),
 				'show_external' => true,
 				'default'      => [
 					'url'         => '#',

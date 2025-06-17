@@ -120,6 +120,8 @@ if ( ! element_pack_pro_installed() ) {
 			return;
 		}
 
+		require_once( dirname( __FILE__ ) . '/includes/setup-wizard/init.php' );
+
 		// Widgets filters here
 		require_once( BDTEP_INC_PATH . 'element-pack-filters.php' );
 

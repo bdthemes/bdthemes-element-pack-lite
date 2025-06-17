@@ -130,7 +130,16 @@ class Dynamic_Select_Input_Module {
      * @return array|mixed
      */
     protected function getselecedIds() {
-        return isset($_POST['ids']) ? sanitize_text_field($_POST['ids']) : [];
+        $results = [];
+        if (!empty($_POST['ids']) ){
+            if (is_array($_POST['ids'])) {
+                $results = $_POST['ids'];
+            } else {
+                $results = explode(',', $_POST['ids']);
+            }
+        }
+        $results = array_map('absint', array_filter($results, 'is_numeric'));
+        return $results;
     }
 
     /**
@@ -167,6 +176,10 @@ class Dynamic_Select_Input_Module {
             $args['post_type'] = $this->getPostType();
         } else {
             $args['post_type'] = $this->getAllPublicPostTypes();
+        }
+
+        if ($this->getPostType() == 'attachment') {
+            $args['post_status'] = 'inherit';
         }
 
         if (!empty($include)) {

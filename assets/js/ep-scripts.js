@@ -561,7 +561,7 @@ function returnCurrencySymbol(currency = null) {
             return;
         }
 
-        $contactForm.submit(function (e) {
+        $contactForm.on('submit', function (e) {
             sendContactForm($contactForm, widgetID);
             return false;
         });
@@ -3750,7 +3750,7 @@ $(window).on('elementor/frontend/init', function () {
 
                             $(this)
                                 .find("a.bdt_read_more")
-                                .click(function (event) {
+                                .on('click', function (event) {
                                     event.preventDefault();
                                     $(this).hide(); // Hide the read more link
                                     $(this).siblings(".bdt_more_text").show(); // Show the more text
