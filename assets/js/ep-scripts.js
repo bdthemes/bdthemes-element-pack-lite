@@ -3794,3 +3794,421 @@ $(window).on('elementor/frontend/init', function () {
 })(jQuery, window.elementorFrontend);
 
 // end
+
+; (function ($, elementor) {
+$(window).on('elementor/frontend/init', function () {
+    let ModuleHandler = elementorModules.frontend.handlers.Base,
+        CursorEffect;
+
+    CursorEffect = ModuleHandler.extend({
+        bindEvents: function () {
+            this.run();
+        },
+        getDefaultSettings: function () {
+            return {
+
+            };
+        },
+        onElementChange: debounce(function (prop) {
+            if (prop.indexOf('element_pack_cursor_effects_') !== -1) {
+                this.run();
+            }
+        }, 400),
+
+        settings: function (key) {
+            return this.getElementSettings('element_pack_cursor_effects_' + key);
+        },
+
+        run: function () {
+          if (this.settings("show") !== "yes") {
+            return;
+          }
+
+          // Disable on mobile
+          const disableOnMobile = this.settings("disable_on_mobile") === "yes";
+          const isMobile = window.innerWidth <= 767;
+          if (disableOnMobile && isMobile) {
+            return;
+          }
+
+          var options = this.getDefaultSettings(),
+            widgetID = this.$element.data("id"),
+            widgetContainer = ".elementor-element-" + widgetID,
+            $element = this.$element,
+            cursorStyle = this.settings("style");
+          const checkClass = $(widgetContainer).find(".bdt-cursor-effects");
+          var source = this.settings("source");
+          if ($(checkClass).length < 1) {
+            if (source === "image") {
+              var image = this.settings("image_src.url");
+              $(widgetContainer).append(
+                '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
+                  widgetID +
+                  '" class="ep-cursor-ball"><img class="bdt-cursor-image"src="' +
+                  image +
+                  '"></div></div>'
+              );
+            } else if (source === "icons") {
+              var svg = this.settings("icons.value.url");
+              var icons = this.settings("icons.value");
+              if (svg !== undefined) {
+                $(widgetContainer).append(
+                  '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
+                    widgetID +
+                    '" class="ep-cursor-ball"><img class="bdt-cursor-image" src="' +
+                    svg +
+                    '"></img></div></div>'
+                );
+              } else {
+                $(widgetContainer).append(
+                  '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
+                    widgetID +
+                    '" class="ep-cursor-ball"><i class="' +
+                    icons +
+                    ' bdt-cursor-icons"></i></div></div>'
+                );
+              }
+            } else if (source === "text") {
+              var text = this.settings("text_label");
+              $(widgetContainer).append(
+                '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
+                  widgetID +
+                  '" class="ep-cursor-ball"><span class="bdt-cursor-text">' +
+                  text +
+                  "</span></div></div>"
+              );
+            } else {
+              $(widgetContainer).append(
+                '<div class="bdt-cursor-effects ' +
+                  cursorStyle +
+                  '"><div id="bdt-ep-cursor-ball-effects-' +
+                  widgetID +
+                  '" class="ep-cursor-ball"></div><div id="bdt-ep-cursor-circle-effects-' +
+                  widgetID +
+                  '"  class="ep-cursor-circle"></div></div>'
+              );
+            }
+          }
+          const cursorBallID =
+            "#bdt-ep-cursor-ball-effects-" + this.$element.data("id");
+          const cursorBall = document.querySelector(cursorBallID);
+          options.models = widgetContainer;
+          options.speed = 1;
+          options.centerMouse = true;
+          new Cotton(cursorBall, options);
+
+          if (source === "default") {
+            const cursorCircleID =
+              "#bdt-ep-cursor-circle-effects-" + this.$element.data("id");
+            const cursorCircle = document.querySelector(cursorCircleID);
+            options.models = widgetContainer;
+            options.speed = this.settings("speed")
+              ? this.settings("speed.size")
+              : 0.725;
+            options.centerMouse = true;
+            new Cotton(cursorCircle, options);
+          }
+        }
+    });
+
+    elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+        elementorFrontend.elementsHandler.addHandler(CursorEffect, {
+            $element: $scope
+        });
+    });
+});
+})(jQuery, window.elementorFrontend);
+
+/**
+ * Start Content Switcher widget script
+ */
+
+(function ($, elementor) {
+
+    'use strict';
+
+    var widgetContentSwitcher = function ($scope, $) {
+
+        var $contentSwitcher = $scope.find('.bdt-content-switcher'),
+            $settings = $contentSwitcher.data('settings'),
+            $linkedSections = $contentSwitcher.data('linked-sections'),
+            $linkedWidgets = $contentSwitcher.data('linked-widgets'),
+            editMode = Boolean(elementorFrontend.isEditMode());
+
+        if (!$contentSwitcher.length) {
+            return;
+        }
+
+        // Handle linked sections if needed
+        if ($linkedSections !== undefined && editMode === false) {
+            const handleLinkedSections = () => {
+                var $sections = $linkedSections.sections;
+                
+                // Process each linked section
+                Object.entries($sections).forEach(([index, sectionId]) => {
+                    var $switcherContainer = $contentSwitcher.find('.bdt-switcher-content').eq(index),
+                        $sectionContent = $('.elementor').find('.elementor-element' + '#' + sectionId);
+                    
+                    if ($linkedSections.positionUnchanged !== true) {
+                        if ($switcherContainer.length && $sectionContent.length) {
+                            $($sectionContent).appendTo($switcherContainer.find('.bdt-switcher-item-content-section'));
+                        }
+                    } else {
+                        // Handle position unchanged - similar to the switcher widget
+                        var $activeClass = '';
+                        if (index == 0 && $contentSwitcher.find('.bdt-primary').hasClass('bdt-active') ||
+                            index > 0 && $contentSwitcher.find(`.bdt-switcher-content:eq(${index})`).hasClass('bdt-active')) {
+                            $activeClass = 'bdt-active';
+                        }
+                        
+                        if (!$(`#bdt-content-switcher-section-${$linkedSections.id}`).length) {
+                            $sectionContent.parent().append(`<div id="bdt-content-switcher-section-${$linkedSections.id}" class="bdt-switcher bdt-switcher-section-content"></div>`);
+                        }
+                        
+                        $($sectionContent).appendTo($(`#bdt-content-switcher-section-${$linkedSections.id}`));
+                        $sectionContent.wrap(`<div class="bdt-switcher-section-content-inner ${$activeClass}"></div>`);
+                    }
+                });
+            };
+            
+            handleLinkedSections();
+        }
+
+        // Handle linked widgets if needed
+        if ($linkedWidgets !== undefined && editMode === false) {
+            const handleLinkedWidgets = () => {
+                var $widgets = $linkedWidgets.widgets;
+                
+                // Set initial visibility of widgets
+                Object.entries($widgets).forEach(([index, widgetId]) => {
+                    var $targetWidget = $('#' + widgetId),
+                        isActive = false;
+                        
+                    if ('button' !== $settings.switcherStyle) {
+                        if (index == 0 && $contentSwitcher.find('.bdt-primary').hasClass('bdt-active')) {
+                            isActive = true;
+                        } else if (index == 1 && $contentSwitcher.find('.bdt-secondary').hasClass('bdt-active')) {
+                            isActive = true;
+                        }
+                    } else {
+                        if ($contentSwitcher.find(`.bdt-switcher-content:eq(${index})`).hasClass('bdt-active')) {
+                            isActive = true;
+                        }
+                    }
+                    
+                    $targetWidget.css({
+                        'opacity': isActive ? 1 : 0,
+                        'display': isActive ? 'block' : 'none',
+                        'grid-row-start': 1,
+                        'grid-column-start': 1
+                    });
+                    
+                    $targetWidget.parent().css({
+                        'display': 'grid'
+                    });
+                });
+            };
+            
+            handleLinkedWidgets();
+        }
+
+        if ('button' !== $settings.switcherStyle) {
+
+            // Content Switcher Checkbox
+            var $checkbox = $contentSwitcher.find('input[type="checkbox"]');
+            var primarySwitcher = $contentSwitcher.find('.bdt-primary-switcher');
+            var secondarySwitcher = $contentSwitcher.find('.bdt-secondary-switcher');
+            var primaryIcon = $contentSwitcher.find('.bdt-primary-icon');
+            var secondaryIcon = $contentSwitcher.find('.bdt-secondary-icon');
+            var primaryText = $contentSwitcher.find('.bdt-primary-text');
+            var secondaryText = $contentSwitcher.find('.bdt-secondary-text');
+            var primaryContent = $contentSwitcher.find('.bdt-switcher-content.bdt-primary');
+            var secondaryContent = $contentSwitcher.find('.bdt-switcher-content.bdt-secondary');
+
+            $checkbox.on('change', function () {
+                if (this.checked) {
+                    primarySwitcher.removeClass('bdt-active');
+                    secondarySwitcher.addClass('bdt-active');
+                    primaryIcon.removeClass('bdt-active');
+                    secondaryIcon.addClass('bdt-active');
+                    primaryText.removeClass('bdt-active');
+                    secondaryText.addClass('bdt-active');
+                    primaryContent.removeClass('bdt-active');
+                    secondaryContent.addClass('bdt-active');
+                    
+                    // Update linked sections if position unchanged is true
+                    if ($linkedSections && $linkedSections.positionUnchanged === true) {
+                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).removeClass('bdt-active');
+                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).eq(1).addClass('bdt-active');
+                    }
+                    
+                    // Update linked widgets visibility
+                    if ($linkedWidgets) {
+                        Object.entries($linkedWidgets.widgets).forEach(([index, widgetId]) => {
+                            var $targetWidget = $('#' + widgetId);
+                            var isActive = index == 1; // Show second widget when checkbox is checked
+                            
+                            $targetWidget.css({
+                                'opacity': isActive ? 1 : 0,
+                                'display': isActive ? 'block' : 'none'
+                            });
+                        });
+                    }
+                } else {
+                    primarySwitcher.addClass('bdt-active');
+                    secondarySwitcher.removeClass('bdt-active');
+                    primaryIcon.addClass('bdt-active');
+                    secondaryIcon.removeClass('bdt-active');
+                    primaryText.addClass('bdt-active');
+                    secondaryText.removeClass('bdt-active');
+                    primaryContent.addClass('bdt-active');
+                    secondaryContent.removeClass('bdt-active');
+                    
+                    // Update linked sections if position unchanged is true
+                    if ($linkedSections && $linkedSections.positionUnchanged === true) {
+                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).removeClass('bdt-active');
+                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).eq(0).addClass('bdt-active');
+                    }
+                    
+                    // Update linked widgets visibility
+                    if ($linkedWidgets) {
+                        Object.entries($linkedWidgets.widgets).forEach(([index, widgetId]) => {
+                            var $targetWidget = $('#' + widgetId);
+                            var isActive = index == 0; // Show first widget when checkbox is unchecked
+                            
+                            $targetWidget.css({
+                                'opacity': isActive ? 1 : 0,
+                                'display': isActive ? 'block' : 'none'
+                            });
+                        });
+                    }
+                }
+            });
+        }        
+
+        if ('button' == $settings.switcherStyle) {
+            var $tab = $contentSwitcher.find('.bdt-content-switcher-tab');
+
+            $tab.on('click', function () {
+                var $this = $(this);
+                var id = $this.attr('id');
+                var $content = $contentSwitcher.find('.bdt-switcher-content[data-content-id="' + id + '"]');
+                var index = $this.index();
+
+                $this.siblings().removeClass('bdt-active');
+                $this.addClass('bdt-active');
+
+                $this.parent().next().children().removeClass('bdt-active');
+                $content.addClass('bdt-active');
+                
+                // Update linked sections if position unchanged is true
+                if ($linkedSections && $linkedSections.positionUnchanged === true) {
+                    $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).removeClass('bdt-active');
+                    $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).eq(index).addClass('bdt-active');
+                }
+                
+                // Update linked widgets visibility
+                if ($linkedWidgets) {
+                    Object.entries($linkedWidgets.widgets).forEach(([widgetIndex, widgetId]) => {
+                        var $targetWidget = $('#' + widgetId);
+                        var isActive = parseInt(widgetIndex) === index;
+                        
+                        $targetWidget.css({
+                            'opacity': isActive ? 1 : 0,
+                            'display': isActive ? 'block' : 'none'
+                        });
+                    });
+                }
+            });            
+        }
+    }
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-content-switcher.default', widgetContentSwitcher);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End Content Switcher widget script
+ */
+/**
+ * Start interactive card widget script
+ */
+
+(function ($, elementor) {
+
+    'use strict';
+
+    var widgetInteractiveCard = function ($scope, $) {
+        var $i_card_main = $scope.find('.bdt-interactive-card');
+
+        if ( !$i_card_main.length ) {
+            return;
+        }
+        var $settings = $i_card_main.data('settings');
+
+        if ( $($settings).length ) {
+            var myWave = wavify(document.querySelector('#' + $settings.id), {
+                height   : 60,
+                bones    : $settings.wave_bones, //3
+                amplitude: $settings.wave_amplitude, //40
+                speed    : $settings.wave_speed //.25
+            });
+
+            setTimeout(function(){
+                $($i_card_main).addClass('bdt-wavify-active');
+            }, 1000);
+        }
+    };
+
+    jQuery(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-interactive-card.default', widgetInteractiveCard);
+    });
+
+}(jQuery, window.elementorFrontend));
+
+/**
+ * End interactive card widget script
+ */
+
+
+/**
+ * Start scrollnav widget script
+ */
+
+( function( $, elementor ) {
+
+	'use strict';
+
+	var widgetScrollNav = function( $scope, $ ) {
+
+		var $scrollnav = $scope.find( '.bdt-dotnav > li' );
+
+        if ( ! $scrollnav.length ) {
+            return;
+        }
+
+		var $tooltip = $scrollnav.find('> .bdt-tippy-tooltip'),
+			widgetID = $scope.data('id');
+		
+		$tooltip.each( function( index ) {
+			tippy( this, {
+				allowHTML: true,
+				theme: 'bdt-tippy-' + widgetID
+			});				
+		});
+
+	};
+
+
+	jQuery(window).on('elementor/frontend/init', function() {
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-scrollnav.default', widgetScrollNav );
+	});
+
+}( jQuery, window.elementorFrontend ) );
+
+/**
+ * End scrollnav widget script
+ */
+

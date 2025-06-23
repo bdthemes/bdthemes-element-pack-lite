@@ -5,11 +5,11 @@ Tags: elementor addons, elementor widget, mega menu, woocommerce elementor, elem
 Requires at least: 5.0.0
 Tested up to: 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 5.11.3
+Stable tag: 8.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.29.0
+Elementor tested up to: 3.29.2
 
 Get 2600+ templates, 300+ elementor widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
 
@@ -260,6 +260,28 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.0.0 [XX June 2025] =
+
+* Added: [Setup wizard / onboarding](https://youtu.be/WwiZzAJ4-YQ) added
+* Added: [Admin dashboard](https://youtu.be/NXiNkTS0KFg) updated
+* Added: [Image hover effects](https://www.elementpack.pro/demo/element/image-hover-effects/) extension added
+* Added: Cursor effects extension added
+* Added: Content Switcher widget added
+* Added: Document Viewer widget added
+* Added: Interactive Card widget added
+* Added: Social Share widget added
+* Added: Forminator Forms widget added
+* Added: Scroll Navigation widget added
+* Added: Style elon, reveal, glitch & gooey effects added in creative button widget
+* Added: Indivisual menu style option added in navbar widget
+* Added: Mousewheel feature added in carousel type widget
+* Added: [Dynamic Content](https://youtu.be/JEqXbIETdDE) feature added - pro
+* Added: [Background Image Parallax](https://youtu.be/6vTAGdCy1wY) extension added - pro
+* Added: [Image Masking](https://youtu.be/5aJvWL3Xn-0) extension added - pro
+* Fixed: Security issue fixed
+* Fixed: Mousewheel Issue fixed in Panel Slider widget
+* Fixed: Resolved jQuery Migrate warning ( Thanks to BackuPs )
 
 = 5.11.3 [28th May 2025] =
 
