@@ -14,6 +14,12 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+
+if (!defined('BDTEP_PC')) {
+		define('BDTEP_PC', '<span class="bdt-ep-pro-control"></span>');
+	} // pro control badge
+	define('BDTEP_IS_PC', 'bdt-ep-disabled-control');
+    
 /**
  * Main class for element pack
  */
@@ -210,6 +216,9 @@ class Element_Pack_Loader {
         $suffix       = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $api_settings = get_option('element_pack_api_settings');
 
+        if ( element_pack_is_widget_enabled( 'social-share' ) ) {
+			wp_register_script( 'goodshare', BDTEP_ASSETS_URL . 'vendor/js/goodshare.min.js', [ 'jquery' ], '4.1.2', true );
+		}
         if (element_pack_is_widget_enabled('progress-pie')) {
             wp_register_script('aspieprogress', BDTEP_ASSETS_URL . 'vendor/js/jquery-asPieProgress.min.js', ['jquery'], '0.4.7', true);
         }

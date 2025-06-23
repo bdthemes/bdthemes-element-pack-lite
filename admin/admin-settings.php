@@ -49,6 +49,9 @@ class ElementPack_Admin_Settings {
 
 		// Add custom CSS/JS functionality
 		$this->init_custom_code_functionality();
+
+		// Add AJAX handler for plugin installation
+		add_action('wp_ajax_ep_install_plugin', [$this, 'install_plugin_ajax']);
 	}
 
 	/**
@@ -1353,7 +1356,7 @@ class ElementPack_Admin_Settings {
 			bdt-scrollspy="target: > div > div > .bdt-card; cls: bdt-animation-slide-bottom-small; delay: 300">
 
 			<div class="bdt-grid" bdt-grid bdt-height-match="target: > div > .bdt-card"
-				style="max-width: 800px; margin-left: auto; margin-right: auto;">
+				style="max-width: 1180px; margin-left: auto; margin-right: auto;">
 				<div class="bdt-width-1-1@m ep-comparision bdt-text-center">
 					<div class="bdt-flex bdt-flex-between bdt-flex-middle">
 						<div class="bdt-text-left">
@@ -1467,6 +1470,34 @@ class ElementPack_Admin_Settings {
 							</li>
 							<li class="">
 								<div class="bdt-grid">
+									<div class="bdt-width-expand@m">
+										<?php echo esc_html__( 'SVG Support', 'bdthemes-element-pack' ); ?></div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+								</div>
+							</li>
+							<li class="">
+								<div class="bdt-grid">
+									<div class="bdt-width-expand@m">
+										<a href="https://www.elementpack.pro/demo/element/dynamic-content/" target="_blank">
+											<?php echo esc_html__( 'Dynamic Content', 'bdthemes-element-pack' ); ?>
+										</a>
+									</div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+								</div>
+							</li>
+							<li class="">
+								<div class="bdt-grid">
+									<div class="bdt-width-expand@m">
+										<?php echo esc_html__( 'Smooth Scroller', 'bdthemes-element-pack' ); ?></div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+								</div>
+							</li>
+							
+							<li class="">
+								<div class="bdt-grid">
 									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Header & Footer Builder', 'bdthemes-element-pack' ) . '</div>'; ?>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
@@ -1520,31 +1551,6 @@ class ElementPack_Admin_Settings {
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
 							</li>
-							<li class="">
-								<div class="bdt-grid">
-									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Dynamic Content', 'bdthemes-element-pack' ); ?></div>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-								</div>
-							</li>
-							<li class="">
-								<div class="bdt-grid">
-									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Smooth Scroller', 'bdthemes-element-pack' ); ?></div>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-								</div>
-							</li>
-							<li class="">
-								<div class="bdt-grid">
-									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'SVG Support', 'bdthemes-element-pack' ); ?></div>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-								</div>
-							</li>
-
 						</ul>
 
 						<div class="ep-more-features bdt-card bdt-card-body bdt-card-default bdt-margin-medium-top bdt-padding-large">
