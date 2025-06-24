@@ -713,14 +713,13 @@ class Forminator_Forms extends Module_Base {
 						'title' => __( 'Center', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-center',
 					],
-					'flex-end'  => [
+					'right'  => [
 						'title' => __( 'Right', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
-				'default'   => '',
 				'selectors' => [
-					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-pagination-footer, {{WRAPPER}} #bdt-forminator-forms-{{ID}} #submit'   => 'justify-content: {{VALUE}} !important; display: flex;',
+					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-row-last, {{WRAPPER}} #bdt-forminator-forms-{{ID}} #submit'   => 'text-align: {{VALUE}};',
 				],
 				'condition' => [
 					'button_width_type' => 'custom',

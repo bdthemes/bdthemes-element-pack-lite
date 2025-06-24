@@ -79,7 +79,7 @@ $active_modules = get_option( 'element_pack_active_modules', array() );
 		</div>
 		
 		<div class="wizard-navigation bdt-margin-top">
-			<button class="bdt-button bdt-button-primary element-pack-settings-save-btn" type="submit" id="save-and-continue">
+			<button class="bdt-button bdt-button-primary" type="submit" id="save-and-continue">
 				<?php esc_html_e('Save and Continue', 'bdthemes-element-pack'); ?>
 			</button>
 			<div class="bdt-close-button bdt-margin-left bdt-wizard-next" data-step="integration"><?php esc_html_e('Skip', 'bdthemes-element-pack'); ?></div>

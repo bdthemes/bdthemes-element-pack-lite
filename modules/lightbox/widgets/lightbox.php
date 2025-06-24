@@ -851,7 +851,14 @@ class Lightbox extends Module_Base {
 		}
 
 		if ( $settings['content_caption'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'data-caption="' . htmlspecialchars( $settings['content_caption'] ) . '"' );
+			// Handle multiple levels of encoding for the security
+			$caption = $settings['content_caption'];
+			// this double decode is required to handle the case where the caption is already encoded so don't remove it
+			$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+			$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+			$caption = wp_kses( $caption, element_pack_allow_tags( 'text' ) );
+			$caption = esc_js( $caption );
+			$this->add_render_attribute( 'lightbox-content', 'data-caption', $caption );
 		}
 
 		if ( 'image' == $settings['lightbox_content'] ) {

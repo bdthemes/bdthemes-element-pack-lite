@@ -1240,7 +1240,14 @@ class Custom_Gallery extends Module_Base {
 
 						$this->add_render_attribute( $element_key, 'class', [ 'bdt-gallery-item-link', 'bdt-gallery-lightbox-item' ] );
 
-						$this->add_render_attribute( $element_key, 'data-caption="' . htmlspecialchars( $content['image_title'] ) . '"' );
+						// Handle multiple levels of encoding for the security
+						$caption = $content['image_title'];
+						// this double decode is required to handle the case where the caption is already encoded so don't remove it
+						$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+						$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+						$caption = wp_kses( $caption, element_pack_allow_tags( 'text' ) );
+						$caption = esc_js( $caption );
+						$this->add_render_attribute( $element_key, 'data-caption', $caption );
 
 						$icon = $settings['icon'] ?: 'plus';
 
