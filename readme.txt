@@ -261,18 +261,18 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.0.0 [XX June 2025] =
+= 8.0.0 [24th June 2025] =
 
 * Added: [Setup wizard / onboarding](https://youtu.be/WwiZzAJ4-YQ) added
 * Added: [Admin dashboard](https://youtu.be/NXiNkTS0KFg) updated
 * Added: [Image hover effects](https://www.elementpack.pro/demo/element/image-hover-effects/) extension added
-* Added: Cursor effects extension added
-* Added: Content Switcher widget added
-* Added: Document Viewer widget added
-* Added: Interactive Card widget added
-* Added: Social Share widget added
-* Added: Forminator Forms widget added
-* Added: Scroll Navigation widget added
+* Added: [Cursor effects](https://demo.elementpack.pro/element/cursor-effects/) extension added
+* Added: [Content Switcher](https://demo.elementpack.pro/element/content-switcher/) widget added
+* Added: [Document Viewer](https://demo.elementpack.pro/element/document-viewer) widget added
+* Added: [Interactive Card](https://demo.elementpack.pro/element/interactive-card/) widget added
+* Added: [Social Share](https://demo.elementpack.pro/element/social-share/) widget added
+* Added: [Forminator Forms](https://demo.elementpack.pro/element/forminator-forms/) widget added
+* Added: [Scroll Navigation](https://demo.elementpack.pro/element/scrollnav/) widget added
 * Added: Style elon, reveal, glitch & gooey effects added in creative button widget
 * Added: Indivisual menu style option added in navbar widget
 * Added: Mousewheel feature added in carousel type widget

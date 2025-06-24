@@ -978,7 +978,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 
 														<div>
 															<ul
-																class="bdt-subnav bdt-subnav-pill ep-widget-filter ep-used-unused-widgets bdt-flex-inline bdt-visible@xl">
+																class="bdt-subnav bdt-subnav-pill ep-widget-filter ep-used-unused-widgets bdt-flex-inline">
 																<li class="ep-widget--"
 																	bdt-filter-control="filter: [data-content-type*='ep-used']; group: data-content-type">
 																	<a href="#"><?php esc_html_e('Used', 'bdthemes-element-pack'); ?>

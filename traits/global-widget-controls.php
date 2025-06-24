@@ -4025,7 +4025,7 @@ trait Global_Widget_Controls {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__('Layout', 'bdthemes-element-pack'),
+				'label' => esc_html__('Additional Settings', 'bdthemes-element-pack'),
 			]
 		);
 		$this->add_responsive_control(
@@ -4582,6 +4582,17 @@ trait Global_Widget_Controls {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bdt-slider .bdt-slide-item .bdt-slider-image-wrapper:before' => 'mix-blend-mode: {{VALUE}};'
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'wrapper_border_radius',
+			[
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-slider' => 'overflow: hidden; border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
