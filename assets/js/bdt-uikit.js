@@ -4219,7 +4219,21 @@
         {
           name: "itemshow",
           handler() {
-            html($(this.selCaption, this.$el), this.getItem().caption || "");
+            const captionElement = $(this.selCaption, this.$el);
+            if (captionElement) {
+              const caption = this.getItem().caption || "";
+              // Simple regex-based sanitization for basic formatting
+              const safeHtml = caption
+                .replace(/<script[^>]*>.*?<\/script>/gi, '')
+                .replace(/<img[^>]*>/gi, '')
+                .replace(/<iframe[^>]*>.*?<\/iframe>/gi, '')
+                .replace(/javascript:/gi, '')
+                .replace(/on\w+\s*=/gi, '')
+                .replace(/<a[^>]*href\s*=\s*["']?javascript:/gi, '<a href="#"')
+                .replace(/<a[^>]*href\s*=\s*["']?data:/gi, '<a href="#"');
+              
+              captionElement.innerHTML = safeHtml;
+            }
             for (let j = -this.preload; j <= this.preload; j++) {
               this.loadItem(this.index + j);
             }
