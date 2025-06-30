@@ -142,10 +142,6 @@ class Creative_Button extends Module_Base {
 						'title' => __( 'Right', 'bdthemes-element-pack' ),
 						'icon' => 'eicon-text-align-right',
 					],
-					'justify' => [
-						'title' => __( 'Justified', 'bdthemes-element-pack' ),
-						'icon' => 'eicon-text-align-justify',
-					],
 				],
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-creative-button' => 'text-align: {{VALUE}};',

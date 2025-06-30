@@ -1,17 +1,17 @@
-=== Element Pack Addons for Elementor - Best Elementor addons with Ready Templates, Blocks, Widgets and WooCommerce Builder ===
+=== Element Pack Elementor Addons and Templates ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
 Donate link: http://bdthemes.com/
-Tags: elementor addons, elementor widget, mega menu, woocommerce elementor, elementor
+Tags: elementor, elementor addons, elementor templates, elementor widgets, header footer builder
 Requires at least: 5.0.0
 Tested up to: 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 8.0.0
+Stable tag: 8.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
 Elementor tested up to: 3.29.2
 
-Get 2600+ templates, 300+ elementor widgets and advanced features with Element Pack. Supercharge Elementor and build stunning websites effortlessly.
+Get the best Elementor addons with 2700+ templates and 300+ widgets: megamenu, header and footer, dynamic content, sliders, WooCommerce, posts and more.
 
 
 == Description ==
@@ -31,7 +31,7 @@ Trusted by **100,000+ websites**, it's the easiest way to design your stunning w
 ✅ **Fully Customizable** – Easily adjust elements, templates and widgets to match your style.
 ✅ **Seamless Integrations** – Works with WooCommerce, Easy Digital Downloads (EDD), Advanced Custom Fields (ACF) and more.
 ✅ **Lightweight & Fast** – Optimized for performance without slowing down your site.
-✅ **Trusted by Millions** – 3,743,010+ all-time downloads and growing.
+✅ **Trusted by Millions** – 4M+ all-time downloads and growing.
 ✅ **Top Ratings** – Rated 4.7 out of 5 on WordPress.org and 4.5 out of 5 on G2.
 ✅ **Quick Support** – Our dedicated support team is ready to help with any questions or issues.
 
@@ -53,6 +53,26 @@ https://youtu.be/NhaIMIrFh1Q?si=mgsH9QFxW1Z9rYHi
 ### 300+ Free & Premium Elementor Widgets to Simplify and Improve Your Design
 
 Enhance your Elementor site with Element Pack’s powerful Elementor widgets. Get creative, improve user experience and effortlessly build stunning websites.
+
+✅ **[Image Hover Effects](https://www.elementpack.pro/demo/element/image-hover-effects/)** – Enhance images with animations on hover to boost user engagement.[New] [Free] 
+
+✅ **[Cursors Effects](https://www.elementpack.pro/demo/element/cursor-effects/)** – Transform cursor appearance for a visually appealing and interactive experience.[New] [Free] 
+
+✅ **[Content Switcher](https://www.elementpack.pro/demo/element/content-switcher/)** – Toggle between content sections to simplify navigation and display information.[New] [Free] 
+
+✅ **[Document Viewer](https://www.elementpack.pro/demo/element/document-viewer/)** – Display documents directly on websites for convenient, in-browser access.[New] [Free] 
+
+✅ **[Interactive Card](https://www.elementpack.pro/demo/element/interactive-card/)** – Present information with clickable cards to organize and engage users.[New] [Free] 
+
+✅ **[Social Share](https://www.elementpack.pro/demo/element/social-share/)** – Add sharing buttons to expand your content’s reach instantly.[New] [Free] 
+
+✅ **[Forminator Forms](https://www.elementpack.pro/demo/element/forminator-form/)** – Create customizable forms to efficiently collect user data.[New] [Free] 
+
+✅ **[Scroll Navigation](https://www.elementpack.pro/demo/element/scrollnav/)** – Guide users through content with scrolling menus for better navigation.[New] [Free] 
+
+✅ **[Dynamic Content](https://www.elementpack.pro/demo/element/dynamic-content/)** – Display automatically updating content to personalize user experiences.[New] [Pro] 
+
+✅ **[Background Image Parallax](https://www.elementpack.pro/demo/element/background-image-parallax/)** – Create depth with moving backgrounds for a visually modern design.[New] [Pro] 
 
 ✅ **[Testimonial Grid](https://www.elementpack.pro/demo/element/testimonial-grid/)** – Display client reviews in a structured and engaging layout. [Free]
 
@@ -260,6 +280,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.1.0 [30th June 2025] =
+
+* Added: Added WPML compatibility for URL field type
+* Fixed: Security issue fixed
+* Fixed: Security issue mitigated in our vendor UIKit JS until an official fix is released. (Thanks to Cristian Bejan)
+* Fixed: Submit button align issue fixed in forminator forms widget
 
 = 8.0.0 [24th June 2025] =
 
