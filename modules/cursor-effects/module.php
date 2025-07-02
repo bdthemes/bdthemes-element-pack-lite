@@ -443,8 +443,17 @@ class Module extends Element_Pack_Module_Base {
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_section' ] );
 		add_action( 'elementor/element/common/element_pack_cursor_effects_section/before_section_end', [ $this, 'register_controls' ], 10, 2 );
 
+		// Add section for settings
+		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_section' ] );
+		add_action( 'elementor/element/section/element_pack_cursor_effects_section/before_section_end', [ $this, 'register_controls' ], 10, 2 );
+
+		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_section' ] );
+		add_action( 'elementor/element/container/element_pack_cursor_effects_section/before_section_end', [ $this, 'register_controls' ], 10, 2 );
+
 		// render scripts
 		add_action( 'elementor/frontend/widget/before_render', [ $this, 'should_script_enqueue' ] );
+		add_action( 'elementor/frontend/section/before_render', [ $this, 'should_script_enqueue' ] );
+		add_action( 'elementor/frontend/container/before_render', [ $this, 'should_script_enqueue' ] );
 		add_action( 'elementor/preview/enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
 }

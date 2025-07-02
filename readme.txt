@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor templates, elementor widgets, heade
 Requires at least: 5.0.0
 Tested up to: 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 8.1.0
+Stable tag: 8.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.29.2
+Elementor tested up to: 3.30.0
 
 Get the best Elementor addons with 2700+ templates and 300+ widgets: megamenu, header and footer, dynamic content, sliders, WooCommerce, posts and more.
 
@@ -280,6 +280,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.1.1 [2nd July 2025] =
+
+* Added: Container/section support added in cursor effects extension
 
 = 8.1.0 [30th June 2025] =
 
