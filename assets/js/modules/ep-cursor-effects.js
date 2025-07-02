@@ -35,18 +35,18 @@ $(window).on('elementor/frontend/init', function () {
           }
 
           var options = this.getDefaultSettings(),
-            widgetID = this.$element.data("id"),
-            widgetContainer = ".elementor-element-" + widgetID,
+            elementID = this.$element.data("id"),
+            elementContainer = ".elementor-element-" + elementID,
             $element = this.$element,
             cursorStyle = this.settings("style");
-          const checkClass = $(widgetContainer).find(".bdt-cursor-effects");
+          const checkClass = $(elementContainer).find(".bdt-cursor-effects");
           var source = this.settings("source");
           if ($(checkClass).length < 1) {
             if (source === "image") {
               var image = this.settings("image_src.url");
-              $(widgetContainer).append(
+              $(elementContainer).append(
                 '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                  widgetID +
+                  elementID +
                   '" class="ep-cursor-ball"><img class="bdt-cursor-image"src="' +
                   image +
                   '"></div></div>'
@@ -55,17 +55,17 @@ $(window).on('elementor/frontend/init', function () {
               var svg = this.settings("icons.value.url");
               var icons = this.settings("icons.value");
               if (svg !== undefined) {
-                $(widgetContainer).append(
+                $(elementContainer).append(
                   '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                    widgetID +
+                    elementID +
                     '" class="ep-cursor-ball"><img class="bdt-cursor-image" src="' +
                     svg +
                     '"></img></div></div>'
                 );
               } else {
-                $(widgetContainer).append(
+                $(elementContainer).append(
                   '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                    widgetID +
+                    elementID +
                     '" class="ep-cursor-ball"><i class="' +
                     icons +
                     ' bdt-cursor-icons"></i></div></div>'
@@ -73,21 +73,21 @@ $(window).on('elementor/frontend/init', function () {
               }
             } else if (source === "text") {
               var text = this.settings("text_label");
-              $(widgetContainer).append(
+              $(elementContainer).append(
                 '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                  widgetID +
+                  elementID +
                   '" class="ep-cursor-ball"><span class="bdt-cursor-text">' +
                   text +
                   "</span></div></div>"
               );
             } else {
-              $(widgetContainer).append(
+              $(elementContainer).append(
                 '<div class="bdt-cursor-effects ' +
                   cursorStyle +
                   '"><div id="bdt-ep-cursor-ball-effects-' +
-                  widgetID +
+                  elementID +
                   '" class="ep-cursor-ball"></div><div id="bdt-ep-cursor-circle-effects-' +
-                  widgetID +
+                  elementID +
                   '"  class="ep-cursor-circle"></div></div>'
               );
             }
@@ -95,7 +95,7 @@ $(window).on('elementor/frontend/init', function () {
           const cursorBallID =
             "#bdt-ep-cursor-ball-effects-" + this.$element.data("id");
           const cursorBall = document.querySelector(cursorBallID);
-          options.models = widgetContainer;
+          options.models = elementContainer;
           options.speed = 1;
           options.centerMouse = true;
           new Cotton(cursorBall, options);
@@ -104,7 +104,7 @@ $(window).on('elementor/frontend/init', function () {
             const cursorCircleID =
               "#bdt-ep-cursor-circle-effects-" + this.$element.data("id");
             const cursorCircle = document.querySelector(cursorCircleID);
-            options.models = widgetContainer;
+            options.models = elementContainer;
             options.speed = this.settings("speed")
               ? this.settings("speed.size")
               : 0.725;
@@ -114,7 +114,22 @@ $(window).on('elementor/frontend/init', function () {
         }
     });
 
+    // Handle widgets
     elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+        elementorFrontend.elementsHandler.addHandler(CursorEffect, {
+            $element: $scope
+        });
+    });
+
+    // Handle sections
+    elementorFrontend.hooks.addAction('frontend/element_ready/section', function ($scope) {
+        elementorFrontend.elementsHandler.addHandler(CursorEffect, {
+            $element: $scope
+        });
+    });
+
+    // Handle containers
+    elementorFrontend.hooks.addAction('frontend/element_ready/container', function ($scope) {
         elementorFrontend.elementsHandler.addHandler(CursorEffect, {
             $element: $scope
         });
