@@ -82,6 +82,7 @@ class Module extends Element_Pack_Module_Base {
 					'element_pack_cursor_effects_show' => 'yes'
 				],
 				'classes' => BDTEP_IS_PC,
+				'render_type' => 'template',
 			]
 		);
 		$section->add_control(

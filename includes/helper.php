@@ -205,6 +205,24 @@ function element_pack_allow_tags( $tag = null ) {
 		'span'   => [ 
 			'class' => [],
 		],
+		'li' => [
+			'class' => [],
+			'id' => [],
+			'style' => [],
+		],
+		'svg' => [
+			'class' => [],
+			'xmlns' => [],
+			'viewbox' => [],
+			'width' => [],
+			'height' => [],
+			'fill' => [],
+			'aria-hidden' => [],
+		],
+		'path' => [
+			'd' => [],
+			'fill' => [],
+		],
 	];
 
 	$tag_allowed['svg'] = [ 
@@ -217,8 +235,11 @@ function element_pack_allow_tags( $tag = null ) {
 			'x'           => [],
 			'y'           => [],
 			'style'       => [],
+			'class'      => [],
 		],
-		'g'       => [],
+		'g'       => [
+			'class' => [],
+		],
 		'path'    => [ 
 			'class' => [],
 			'd'     => [],
@@ -2062,14 +2083,6 @@ if ( ! function_exists( 'bdt_license_validation' ) ) {
 			return false;
 		}
 
-		// For multisite subsites, check if license is activated on main site
-		if (is_multisite() && !is_main_site()) {
-			$subsite_status = ElementPack\Base\Element_Pack_Base::get_subsite_license_status();
-			if ($subsite_status['is_subsite'] && $subsite_status['is_main_site_licensed']) {
-				return true;
-			}
-		}
-
 		$license_key = get_option( ElementPack\Base\Element_Pack_Base::get_lic_key_param( 'element_pack_license_key' ) );
 
 		if ( isset( $license_key ) && ! empty( $license_key ) ) {
@@ -2705,4 +2718,78 @@ if ( ! function_exists( 'ep_is_page_excluded' ) ) {
 		return $current_id > 0 && in_array( $current_id, $excluded_pages );
 	}
 }
+
+/**
+ * Check if current site is the main site in a multisite installation
+ * 
+ * @return bool
+ */
+if ( ! function_exists( 'ep_is_main_site' ) ) {
+	function ep_is_main_site() {
+		if ( ! is_multisite() ) {
+			return true;
+		}
+		
+		$multisite_info = \ElementPack\Base\Element_Pack_Base::get_multisite_info();
+		return ( $multisite_info['current_site_url'] === $multisite_info['main_site_url'] );
+	}
+}
+
+/**
+ * Get all subsites in a multisite installation
+ * 
+ * @return array
+ */
+if ( ! function_exists( 'ep_get_subsites' ) ) {
+	function ep_get_subsites() {
+		if ( ! is_multisite() ) {
+			return array();
+		}
+		
+		$sites = get_sites( array( 'number' => 1000 ) );
+		$main_site_url = network_site_url();
+		$subsites = array();
+		
+		foreach ( $sites as $site ) {
+			$site_url = get_site_url( $site->blog_id );
+			if ( $site_url !== $main_site_url ) {
+				$subsites[] = array(
+					'id' => $site->blog_id,
+					'name' => $site->blogname,
+					'url' => $site_url,
+					'domain' => $site->domain,
+					'path' => $site->path
+				);
+			}
+		}
+		
+		return $subsites;
+	}
+}
+
+/**
+ * Get subsite activation source
+ * 
+ * @param int $site_id
+ * @return string
+ */
+if ( ! function_exists( 'ep_get_subsite_activation_source' ) ) {
+	function ep_get_subsite_activation_source($site_id) {
+		if ( ! is_multisite() ) {
+			return '';
+		}
+		
+		// Switch to the subsite context
+		switch_to_blog($site_id);
+		
+		// Check if there's a flag indicating activation source
+		$activation_source = get_option('element_pack_activation_source', 'manual');
+		
+		// Restore to main site
+		restore_current_blog();
+		
+		return $activation_source;
+	}
+}
+
 // End: Custom CSS/JS Frontend Injection Functions

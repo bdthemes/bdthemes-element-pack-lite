@@ -296,8 +296,9 @@ class Slider extends Module_Base {
 				<?php
 
 				} elseif ("elementor" == $item['source']) {
-					echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($item['template_id']);
-					echo element_pack_template_edit_link($item['template_id']);
+					// PHPCS - should not be escaped.
+                    echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($item['template_id']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo wp_kses( element_pack_template_edit_link($item['template_id']), element_pack_allow_tags('text') );
 				}
 				?>
 
