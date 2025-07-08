@@ -1037,15 +1037,15 @@ class Navbar extends Module_Base {
 					$menu_hover_color = $item['menu_hover_color'] ? $item['menu_hover_color'] : '';
 					$menu_hover_background = $item['menu_hover_background'] ? $item['menu_hover_background'] : '';
 					$menu_hover_border_color = $item['menu_hover_border_color'] ? $item['menu_hover_border_color'] : '';
-					echo '#' . $id . ' .bdt-navbar-nav > li:nth-child(' . $menu_number . ') > a { 
-					color: ' . $menu_color . ';
-					background-color: ' . $menu_background . ';
-					border-color: ' . $menu_border_color . ';
+					echo '#' . esc_attr( $id ) . ' .bdt-navbar-nav > li:nth-child(' . esc_attr( $menu_number ) . ') > a { 
+					color: ' . esc_attr( $menu_color ) . ';
+					background-color: ' . esc_attr( $menu_background ) . ';
+					border-color: ' . esc_attr( $menu_border_color ) . ';
 					}';
-					echo '#' . $id . ' .bdt-navbar-nav > li:hover:nth-child(' . $menu_number . ') > a { 
-					color: ' . $menu_hover_color . ';
-					background-color: ' . $menu_hover_background . ';
-					border-color: ' . $menu_hover_border_color . ';
+					echo '#' . esc_attr( $id ) . ' .bdt-navbar-nav > li:hover:nth-child(' . esc_attr( $menu_number ) . ') > a { 
+					color: ' . esc_attr( $menu_hover_color ) . ';
+					background-color: ' . esc_attr( $menu_hover_background ) . ';
+					border-color: ' . esc_attr( $menu_hover_border_color ) . ';
 					}';
 				}
 			echo '</style>';

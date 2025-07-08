@@ -65,7 +65,7 @@ $active_modules = get_option( 'element_pack_active_modules', array() );
 							data-type="<?php echo isset( $widget['content_type'] ) ? esc_attr( $widget['content_type'] ) : ''; ?>"
 							data-label="<?php echo esc_attr( strtolower( $widget['label'] ) ); ?>">
 							<div class="widget-item-clickable bdt-flex bdt-flex-middle bdt-flex-between">
-								<span class="bdt-flex"><?php echo esc_html( $widget['label'] ); ?></span>
+								<span class="bdt-flex bdt-text-left"><?php echo esc_html( $widget['label'] ); ?></span>
 								<label class="switch">
 									<input type="hidden" name="element_pack_active_modules[<?php echo esc_attr( $widget['name'] ); ?>]" value="off">
 									<input type="checkbox" name="element_pack_active_modules[<?php echo esc_attr( $widget['name'] ); ?>]" <?php echo esc_html( $is_checked ); ?> value="on" class="checkbox" id="bdt_ep_element_pack_active_modules[<?php echo esc_attr( $widget['name'] ); ?>]">

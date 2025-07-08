@@ -37,7 +37,8 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 
 			add_filter( 'elementor/frontend/builder_content_data', [ $this, 'filter_duplicate_data' ] );
 
-			echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display( $instance['template_id'] );
+			// PHPCS - should not be escaped.
+			echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display( $instance['template_id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 			remove_filter( 'elementor/frontend/builder_content_data', [ $this, 'filter_duplicate_data' ] );
 
