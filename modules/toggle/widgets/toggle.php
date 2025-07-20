@@ -155,6 +155,7 @@ class Toggle extends Module_Base {
                 'label'     => __('Widget Selector', 'bdthemes-element-pack'),
                 'description'     => __('Enter your widget ID or class (for example: #my-gallery) which widget you want to attached the toogle.', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::TEXT,
+                'dynamic'   => [ 'active' => true ],
                 'condition' => ['source' => "widget"],
             ]
         );

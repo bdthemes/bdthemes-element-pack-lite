@@ -20,8 +20,230 @@ class Notices {
 
 	public function __construct() {
 
+		add_action('admin_notices', [$this, 'show_api_notices']);
 		add_action('admin_notices', [$this, 'show_notices']);
 		add_action('wp_ajax_element-pack-notices', [$this, 'dismiss']);
+
+	}
+
+	/**
+	 * Fetch and display notices from API
+	 */
+	public function show_api_notices() {
+		$notices = $this->get_api_notices_data();
+		
+
+		
+		if (is_array($notices)) {
+			foreach ($notices as $index => $notice) {
+				// Check if notice is enabled and within date range
+				if ($this->should_show_notice($notice)) {
+					$notice_id = isset($notice->id) ? $notice->id : 'api-notice-' . $index;
+					
+					// Check if this notice should be shown (not dismissed)
+					if (!$this->is_notice_dismissed($notice_id)) {
+						self::add_notice([
+							'id' => 'api-notice-' . $notice_id,
+							'type' => isset($notice->type) ? $notice->type : 'info',
+							'dismissible' => true,
+							'dismissible-time' => isset($notice->visible_expired) ? $notice->visible_expired : HOUR_IN_SECONDS * 6,
+							'html_message' => $this->render_api_notice($notice),
+						]);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get Remote Notices Data from API
+	 *
+	 * @return array|mixed
+	 */
+	private function get_api_notices_data() {
+		// API endpoint for notices - you can change this to your actual endpoint
+		$api_url = 'https://store.bdthemes.com/api/notices/api-data-by-product';
+
+		$response = wp_remote_get($api_url, [
+			'timeout' => 30,
+			'headers' => [
+				'Accept' => 'application/json',
+			],
+		]);
+
+		if (is_wp_error($response)) {
+			return [];
+		}
+
+		$response_code = wp_remote_retrieve_response_code($response);
+
+		$response_body = wp_remote_retrieve_body($response);
+
+		$notices = json_decode($response_body);
+		
+		if( isset($notices->api) && isset($notices->api->{'element-pack'}) ) {
+			return $notices->api->{'element-pack'};
+		}
+
+		return [];
+	}
+
+	/**
+	 * Check if a notice is dismissed
+	 *
+	 * @param string $notice_id
+	 * @return bool
+	 */
+	private function is_notice_dismissed($notice_id) {
+		$dismissed_notices = get_user_meta(get_current_user_id(), 'element_pack_dismissed_notices', true);
+		
+		if (!is_array($dismissed_notices)) {
+			$dismissed_notices = [];
+		}
+
+		$is_dismissed = in_array($notice_id, $dismissed_notices);
+
+		return $is_dismissed;
+	}
+
+	/**
+	 * Check if a notice should be shown based on its enabled status and date range.
+	 *
+	 * @param object $notice The notice data from the API.
+	 * @return bool True if the notice should be shown, false otherwise.
+	 */
+	private function should_show_notice($notice) {
+		// Development override - set to true to bypass date checks for testing
+		$development_mode = false; // Set to true to bypass date checks
+		
+		if ($development_mode) {
+			return true;
+		}
+		
+		// Check if the notice is enabled
+		if (!isset($notice->is_enabled) || !$notice->is_enabled) {
+			return false;
+		}
+
+		// Check if the notice has a start date and end date
+		if (!isset($notice->start_date) || !isset($notice->end_date)) {
+			return false;
+		}
+
+		// Get timezone from notice or default to UTC
+		$timezone = isset($notice->timezone) ? $notice->timezone : 'UTC';
+		
+		// Create DateTime objects with proper timezone (using global namespace)
+		$start_date = new \DateTime($notice->start_date, new \DateTimeZone($timezone));
+		$end_date = new \DateTime($notice->end_date, new \DateTimeZone($timezone));
+		$current_date = new \DateTime('now', new \DateTimeZone($timezone));
+
+		// Convert to timestamps for comparison
+		$start_timestamp = $start_date->getTimestamp();
+		$end_timestamp = $end_date->getTimestamp();
+		$current_timestamp = $current_date->getTimestamp();
+
+		// Check if the current date is within the start and end dates
+		if ($current_timestamp < $start_timestamp || $current_timestamp > $end_timestamp) {
+			return false;
+		}
+
+		// Check if notice should be visible after a certain time
+		if (isset($notice->visible_after) && $notice->visible_after > 0) {
+			$visible_after_timestamp = $start_timestamp + $notice->visible_after;
+			if ($current_timestamp < $visible_after_timestamp) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Render API notice HTML
+	 *
+	 * @param object $notice
+	 * @return string
+	 */
+	private function render_api_notice($notice) {
+		ob_start();
+		
+		// Add custom CSS if provided
+		if (isset($notice->custom_css) && !empty($notice->custom_css)) {
+			echo '<style>' . wp_kses_post($notice->custom_css) . '</style>';
+		}
+		
+		// Prepare background styles
+		$background_style = '';
+		$wrapper_classes = 'bdt-notice-wrapper';
+		
+		if (isset($notice->background_color) && !empty($notice->background_color)) {
+			$background_style .= 'background-color: ' . esc_attr($notice->background_color) . ';';
+		}
+		
+		if (isset($notice->image) && !empty($notice->image)) {
+			$background_style .= 'background-image: url(' . esc_url($notice->image) . ');';
+			$wrapper_classes .= ' has-background-image';
+		}
+		
+		?>
+		<div class="<?php echo esc_attr($wrapper_classes); ?>" <?php echo $background_style ? 'style="' . $background_style . '"' : ''; ?>>
+			
+			
+			<?php $title = (isset($notice->title) && !empty($notice->title)) ? $notice->title : ''; ?>
+
+			<div class="bdt-plugin-logo-wrapper">
+				<img height="auto" width="40" src="<?php echo esc_url(BDTEP_ASSETS_URL); ?>images/logo.svg" alt="Element Pack Logo">
+			</div>
+
+			<div class="bdt-notice-content">
+				<?php if (isset($notice->logo) && !empty($notice->logo)) : ?>
+					<div class="bdt-notice-logo-wrapper">
+						<img width="100" src="<?php echo esc_url($notice->logo); ?>" alt="Logo">
+					</div>
+				<?php endif; ?>
+				<div class="bdt-notice-title-description">
+					<?php if (isset($title) && !empty($title)) : ?>
+						<h2 class="bdt-notice-title"><?php echo wp_kses_post($title); ?></h2>
+					<?php endif; ?>
+
+					<?php if (isset($notice->content) && !empty($notice->content)) : ?>
+						<div class="bdt-notice-html-content">
+							<?php echo wp_kses_post($notice->content); ?>
+						</div>
+					<?php endif; ?>
+				</div>
+
+				<?php 
+				// Only show countdown if it's enabled, has an end date, and the end date is in the future
+				$show_countdown = isset($notice->show_countdown) && $notice->show_countdown && isset($notice->end_date);
+				if ($show_countdown) {
+					$end_timestamp = strtotime($notice->end_date);
+					$current_timestamp = current_time('timestamp');
+					$show_countdown = $end_timestamp > $current_timestamp;
+				}
+				?>
+				<?php if ($show_countdown) : ?>
+					<div class="bdt-notice-countdown" data-end-date="<?php echo esc_attr($notice->end_date); ?>" data-timezone="<?php echo esc_attr($notice->timezone ? $notice->timezone : 'UTC'); ?>">
+						<div class="countdown-timer">Loading...</div>
+					</div>
+				<?php endif; ?>
+
+				<?php if (isset($notice->link) && !empty($notice->link)) : ?>
+					<div class="bdt-notice-btn">
+						<a href="<?php echo esc_url($notice->link); ?>" target="_blank">
+							<div class="nm-notice-btn">
+							    <?php echo isset($notice->button_text) ? esc_html($notice->button_text) : 'Read More'; ?>
+								<span class="dashicons dashicons-arrow-right-alt"></span>
+								<div class="zolo-star zolo-star-1">✦</div><div class="zolo-star zolo-star-2">✦</div><div class="zolo-star zolo-star-3">✦</div><div class="zolo-star zolo-star-4">✦</div><div class="zolo-star zolo-star-5">✦</div><div class="zolo-star zolo-star-6">✦</div>
+							</div>
+						</a>
+					</div>
+				<?php endif; ?>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	public static function add_notice($args = []) {
@@ -51,16 +273,41 @@ class Notices {
 		 * Valid inputs?
 		 */
 		if (!empty($id)) {
-			if ('user' === $meta) {
-				update_user_meta(get_current_user_id(), $id, true);
+			// Handle API notices dismissal
+			if (strpos($id, 'api-notice-') === 0) {
+				$notice_id = str_replace('api-notice-', '', $id);
+				$this->dismiss_api_notice($notice_id);
 			} else {
-				set_transient($id, true, $time);
+				// Handle regular notices
+				if ('user' === $meta) {
+					update_user_meta(get_current_user_id(), $id, true);
+				} else {
+					set_transient($id, true, $time);
+				}
 			}
 
 			wp_send_json_success();
 		}
 
 		wp_send_json_error();
+	}
+
+	/**
+	 * Dismiss API notice
+	 *
+	 * @param string $notice_id
+	 */
+	private function dismiss_api_notice($notice_id) {
+		$dismissed_notices = get_user_meta(get_current_user_id(), 'element_pack_dismissed_notices', true);
+		
+		if (!is_array($dismissed_notices)) {
+			$dismissed_notices = [];
+		}
+
+		if (!in_array($notice_id, $dismissed_notices)) {
+			$dismissed_notices[] = $notice_id;
+			update_user_meta(get_current_user_id(), 'element_pack_dismissed_notices', $dismissed_notices);
+		}
 	}
 
 	/**

@@ -106,6 +106,7 @@ class Social_Share extends Module_Base {
 			[
 				'label' => esc_html__( 'Custom Label', 'bdthemes-element-pack' ),
 				'type' => Controls_Manager::TEXT,
+				'dynamic' => ['active' => true],
 			]
 		);
 
@@ -115,6 +116,7 @@ class Social_Share extends Module_Base {
 				'label'              => esc_html__( 'Copied Text', 'bdthemes-element-pack' ),
 				'default'            => 'Copied',
 				'type'               => Controls_Manager::TEXT,
+				'dynamic'            => [ 'active' => true ],
 				'condition'          => [
 					'button' => 'link'
 				]

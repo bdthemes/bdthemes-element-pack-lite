@@ -135,7 +135,8 @@ class User_Register extends Module_Base {
 			'button_text',
 			[ 
 				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default' => esc_html__( 'Register', 'bdthemes-element-pack' ),
 			]
 		);
@@ -235,7 +236,8 @@ class User_Register extends Module_Base {
 			'modal_button_text',
 			[
 				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default' => esc_html__( 'Register', 'bdthemes-element-pack' ),
 			]
 		);
@@ -372,7 +374,6 @@ class User_Register extends Module_Base {
 			[ 
 				'label'   => esc_html__( 'Lost your password?', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'yes',
 			]
 		);
 
@@ -419,7 +420,10 @@ class User_Register extends Module_Base {
 			[ 
 				'label'   => esc_html__( 'Show Password Strength', 'bdthemes-element-pack' ) . BDTEP_NC,
 				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'yes'
+				'default' => 'yes',
+				'condition' => [ 
+					'is_needed_password_input' => 'yes'
+				]
 			]
 		);
 
@@ -430,7 +434,8 @@ class User_Register extends Module_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => [ 
-					'password_strength' => 'yes'
+					'password_strength' => 'yes',
+					'is_needed_password_input' => 'yes'
 				]
 			]
 		);
@@ -469,7 +474,8 @@ class User_Register extends Module_Base {
 			'first_name_label',
 			[ 
 				'label'     => esc_html__( 'First Name Label', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'   => esc_html__( 'First Name', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels'        => 'yes',
@@ -484,7 +490,8 @@ class User_Register extends Module_Base {
 			'first_name_placeholder',
 			[ 
 				'label'     => esc_html__( 'First Name Placeholder', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'   => esc_html__( 'John', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels'        => 'yes',
@@ -498,7 +505,8 @@ class User_Register extends Module_Base {
 			'last_name_label',
 			[ 
 				'label'     => esc_html__( 'Last Name Label', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'   => esc_html__( 'Last Name', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels'       => 'yes',
@@ -512,7 +520,8 @@ class User_Register extends Module_Base {
 			'last_name_placeholder',
 			[ 
 				'label'     => esc_html__( 'Last Name Placeholder', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'   => esc_html__( 'Doe', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels'       => 'yes',
@@ -526,7 +535,8 @@ class User_Register extends Module_Base {
 			'email_label',
 			[ 
 				'label'     => esc_html__( 'Email Label', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'   => esc_html__( 'Email', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels'   => 'yes',
@@ -539,7 +549,8 @@ class User_Register extends Module_Base {
 			'email_placeholder',
 			[ 
 				'label'     => esc_html__( 'Email Placeholder', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'   => esc_html__( 'example@email.com', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels'   => 'yes',
@@ -552,7 +563,8 @@ class User_Register extends Module_Base {
 			'password_label',
 			[ 
 				'label'      => esc_html__( 'Password Label', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'    => esc_html__( 'Password', 'bdthemes-element-pack' ),
 				'conditions' => [ 
 					'terms' => [ 
@@ -577,7 +589,8 @@ class User_Register extends Module_Base {
 			'password_placeholder',
 			[ 
 				'label'      => esc_html__( 'Password Placeholder', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'    => esc_html__( 'Enter password', 'bdthemes-element-pack' ),
 				'conditions' => [ 
 					'terms' => [ 
@@ -602,7 +615,8 @@ class User_Register extends Module_Base {
 			'confirm_password_label',
 			[ 
 				'label'      => esc_html__( 'Confirm Password Label', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'    => esc_html__( 'Confirm Password', 'bdthemes-element-pack' ),
 				'conditions' => [ 
 					'terms' => [ 
@@ -627,7 +641,8 @@ class User_Register extends Module_Base {
 			'confirm_password_msg',
 			[ 
 				'label'      => esc_html__( 'Confirm Password Message', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'    => esc_html__( 'Passwords must be same', 'bdthemes-element-pack' ),
 				'conditions' => [ 
 					'terms' => [ 
@@ -652,7 +667,8 @@ class User_Register extends Module_Base {
 			'confirm_password_placeholder',
 			[ 
 				'label'      => esc_html__( 'Confirm Password Placeholder', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'    => esc_html__( 'Confirm your password', 'bdthemes-element-pack' ),
 				'conditions' => [ 
 					'terms' => [ 
@@ -677,7 +693,8 @@ class User_Register extends Module_Base {
 			'terms_label',
 			[ 
 				'label'      => esc_html__( 'Terms Label', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'    => esc_html__( 'I agree to the', 'bdthemes-element-pack' ),
 				'conditions' => [ 
 					'terms' => [ 
@@ -702,7 +719,8 @@ class User_Register extends Module_Base {
 			'terms_link_text',
 			[ 
 				'label'      => esc_html__( 'Terms Link Text', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'    => esc_html__( 'Terms and Conditions', 'bdthemes-element-pack' ),
 				'conditions' => [ 
 					'terms' => [ 
@@ -735,7 +753,8 @@ class User_Register extends Module_Base {
 			'additional_message',
 			[ 
 				'label'     => esc_html__( 'Additional Message', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::TEXT,
+				'type' => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default'   => esc_html__( 'Note: Your password will be generated automatically and sent to your email address.', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_additional_message' => 'yes',

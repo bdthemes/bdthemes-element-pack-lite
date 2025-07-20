@@ -281,6 +281,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.1.X [XX July 2025] =
+
+* Added: Image & text controls dynamic tags compatibility added
+* Fixed: Submit button disabled issue fixed in User Register widget
+
+
 = 8.1.2 [8th July 2025] =
 
 * Updated: Security improved

@@ -114,6 +114,7 @@ class Icon_Mobile_Menu extends Module_Base {
 			[ 
 				'label' => __( 'Menu Text', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 			]
 		);
 

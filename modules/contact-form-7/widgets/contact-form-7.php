@@ -510,10 +510,12 @@ class Contact_Form_7 extends Module_Base {
 	}
 
 	public function render() {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo do_shortcode( $this->get_shortcode() );
 	}
 
 	public function render_plain_content() {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $this->get_shortcode();
 	}
 }

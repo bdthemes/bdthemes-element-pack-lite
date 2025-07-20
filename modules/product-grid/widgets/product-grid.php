@@ -93,6 +93,7 @@ class Product_Grid extends Module_Base {
 				'default' => [ 
 					'url' => Utils::get_placeholder_image_src(),
 				],
+				'dynamic'     => [ 'active' => true ],
 			]
 		);
 

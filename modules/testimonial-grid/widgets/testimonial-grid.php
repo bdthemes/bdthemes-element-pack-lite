@@ -383,6 +383,7 @@ class Testimonial_Grid extends Module_Base {
 			[ 
 				'label'   => esc_html__( 'Custom Text (All)', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'condition'  => [
 					'show_filter_bar' => 'yes',
 					'filter_custom_text'     => 'yes',

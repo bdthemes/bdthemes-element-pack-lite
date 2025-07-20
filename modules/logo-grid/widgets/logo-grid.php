@@ -87,6 +87,7 @@ class Logo_Grid extends Module_Base {
 			[ 
 				'label'   => __( 'Logo Image', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::MEDIA,
+				'dynamic' => ['active' => true],
 				'default' => [ 
 					'url' => Utils::get_placeholder_image_src(),
 				],
@@ -107,6 +108,7 @@ class Logo_Grid extends Module_Base {
 				'label'   => __( 'Brand Name', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => __( 'Brand Name', 'bdthemes-element-pack' ),
+				'dynamic' => [ 'active' => true ],
 			]
 		);
 

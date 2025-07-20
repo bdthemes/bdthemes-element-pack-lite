@@ -626,6 +626,7 @@ class Module extends Element_Pack_Module_Base {
 			[
 				'label'       => esc_html__('Duration (ms)', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'   => [ 'active' => true ],
 				'default'     => '300',
 				'condition' => [
 					'element_pack_widget_effect_transition' => 'yes',
@@ -642,6 +643,7 @@ class Module extends Element_Pack_Module_Base {
 			[
 				'label'       => esc_html__('Delay (ms)', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'   => [ 'active' => true ],
 				'condition' => [
 					'element_pack_widget_effect_transition' => 'yes',
 					'element_pack_widget_transform' => 'yes',
@@ -658,6 +660,7 @@ class Module extends Element_Pack_Module_Base {
 				'label'   => esc_html__('Easing', 'bdthemes-element-pack'),
 				'description' => sprintf(__('If you want use Cubic Bezier easing, Go %1s HERE %2s', 'bdthemes-element-pack'), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>'),
 				'type'    => Controls_Manager::TEXT,
+				'dynamic' => [ 'active' => true ],
 				'default' => 'ease-out',
 				'condition' => [
 					'element_pack_widget_effect_transition' => 'yes',

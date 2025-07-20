@@ -513,6 +513,7 @@ class Custom_Gallery extends Module_Base {
 			[
 				'label'       => esc_html__('Link Text', 'bdthemes-element-pack') . BDTEP_NC,
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => ['active' => true],
 				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack'),
 				'condition' => [
 					'show_lightbox' => 'yes',

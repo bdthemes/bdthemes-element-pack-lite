@@ -128,6 +128,7 @@ class Image_Stack extends Module_Base {
 			[ 
 				'label'       => __( 'Image', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::MEDIA,
+				'dynamic'     => ['active' => true],
 				'render_type' => 'template',
 				'default'     => [ 
 					'url' => Utils::get_placeholder_image_src(),
@@ -773,6 +774,7 @@ class Image_Stack extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Duration (ms)', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => [ 'active' => true ],
 				'default'   => '300',
 				'condition' => [ 
 					'item_effect_transition' => 'yes',
@@ -788,6 +790,7 @@ class Image_Stack extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Delay (ms)', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => [ 'active' => true ],
 				'condition' => [ 
 					'item_effect_transition' => 'yes',
 				],
@@ -803,6 +806,7 @@ class Image_Stack extends Module_Base {
 				'label'       => esc_html__( 'Easing', 'bdthemes-element-pack' ),
 				'description' => sprintf( __( 'If you want use Cubic Bezier easing, Go %1s HERE %2s', 'bdthemes-element-pack' ), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>' ),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
 				'default'     => 'ease-out',
 				'condition'   => [ 
 					'item_effect_transition' => 'yes',
@@ -1166,7 +1170,12 @@ class Image_Stack extends Module_Base {
 
 				?>
 
-				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?> data-tippy-content="<?php echo $tooltip; ?>">
+				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?> 
+					data-tippy-content="<?php 
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo $tooltip;
+					?>"
+				>
 					<?php if ( ! empty( $item['link_url']['url'] ) ) : ?>
 						<a <?php $this->print_render_attribute_string( 'link-wrap' . $index ); ?>>
 							<?php $this->render_media( $item ); ?>

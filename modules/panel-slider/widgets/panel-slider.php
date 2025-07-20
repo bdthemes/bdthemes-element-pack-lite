@@ -432,6 +432,7 @@ class Panel_Slider extends Module_Base {
 			[ 
 				'label'       => esc_html__( 'Text', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => ['active' => true],
 				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
 				'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack' ),
 			]

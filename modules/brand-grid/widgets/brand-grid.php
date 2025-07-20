@@ -77,6 +77,7 @@ class Brand_Grid extends Module_Base {
 			[
 				'label'   => esc_html__('Brand Image', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::MEDIA,
+				'dynamic' => ['active' => true],
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
 				],

@@ -246,6 +246,7 @@ class Fancy_Icons extends Module_Base {
             [
                 'label'     => esc_html__('Background Image', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::MEDIA,
+                'dynamic'   => ['active' => true],
                 'default'   => [
                     'url' => BDTEP_ASSETS_URL . 'images/gallery/item-5.svg',
                 ],

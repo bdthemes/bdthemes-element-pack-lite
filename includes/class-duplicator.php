@@ -127,6 +127,7 @@ class BdThemes_Duplicator {
 			 */
 
 			if ( $bdt_post_id ) {
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$bdt_post_meta_infos = $wpdb->get_results( $wpdb->prepare(
 					"SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d",
 					$bdt_post_id
@@ -143,6 +144,7 @@ class BdThemes_Duplicator {
 				}
 
 				$bdt_sql_query .= implode( ', ', $bdt_sql_query_sel ) . ';';
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->query( $bdt_sql_query );
 
 				/**

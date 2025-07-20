@@ -79,6 +79,7 @@ class Reading_Timer extends Module_Base {
             [
                 'label'       => esc_html__('Selector ID', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'description' => esc_html__("Just write the content selector ID here such 'my-id'. N.B: No need to add '#'.", 'bdthemes-element-pack'),
                 'frontend_available' => true,
                 'render_type' => 'none',
@@ -113,6 +114,7 @@ class Reading_Timer extends Module_Base {
             [
                 'label'       => __('Minute Text', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'placeholder' => __('min read', 'bdthemes-element-pack'),
                 'frontend_available' => true,
                 'render_type' => 'none',
@@ -124,6 +126,7 @@ class Reading_Timer extends Module_Base {
             [
                 'label'       => __('Seconds Text', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'placeholder' => __('sec read', 'bdthemes-element-pack'),
                 'frontend_available' => true,
                 'render_type' => 'none',

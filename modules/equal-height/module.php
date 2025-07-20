@@ -72,6 +72,7 @@ class Module extends Element_Pack_Module_Base {
 			[
 				'label'       => esc_html__('Custom Selector', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
 				'placeholder' => '.class-name',
 				'condition'   => [
 					'section_equal_height_on' => 'yes',

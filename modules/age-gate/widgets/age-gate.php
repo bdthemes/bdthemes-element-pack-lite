@@ -129,6 +129,7 @@ class Age_Gate extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Form Placeholder', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Your Age', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'layout' => 'input',
@@ -141,6 +142,7 @@ class Age_Gate extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Submit', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'layout' => 'input',
@@ -153,6 +155,7 @@ class Age_Gate extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Button Text (Yes)', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Yes, I\'m 18+ older', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'layout' => 'button',
@@ -165,6 +168,7 @@ class Age_Gate extends Module_Base {
 			[ 
 				'label'       => esc_html__( 'Button Text (No)', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'placeholder' => esc_html__( 'No', 'bdthemes-element-pack' ),
 				'condition'   => [ 
 					'layout' => 'button',
@@ -1649,7 +1653,8 @@ class Age_Gate extends Module_Base {
 					<div <?php $this->print_render_attribute_string( 'modal-body' ); ?>>
 						<div <?php $this->print_render_attribute_string( 'modal-body-info-text' ); ?>>
 							<?php
-							echo wp_kses_post( $this->parse_text_editor( $settings['content'] ) );
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo $this->parse_text_editor( $settings['content'] );
 							?>
 						</div>
 						<div <?php $this->print_render_attribute_string( 'age-gate-form' ); ?>>

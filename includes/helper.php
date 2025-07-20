@@ -1364,6 +1364,7 @@ function element_pack_fluent_forms_options() { {
 		if ( defined( 'FLUENTFORM' ) ) {
 			global $wpdb;
 
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$result = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}fluentform_forms" );
 
 			if ( $result ) {
