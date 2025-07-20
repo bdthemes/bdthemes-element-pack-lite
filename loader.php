@@ -401,6 +401,16 @@ class Element_Pack_Loader {
         $localize_data = [
             'pro_installed'  => element_pack_pro_installed(),
             'promotional_widgets'   => [],
+            'elementPackDynamicTags' => [
+                'enabled' => true,
+                'isProActive' => element_pack_pro_installed(),
+                'upgradeUrl' => 'https://elementpack.pro/pricing/',
+                'proFeatures' => [
+                    'title' => esc_html__('Element Pack Pro', 'bdthemes-element-pack'),
+                    'content' => esc_html__('Unlock advanced dynamic content features with Element Pack Pro. Access dozens of dynamic tags to create more personalized and dynamic sites.', 'bdthemes-element-pack'),
+                    'upgradeText' => esc_html__('Upgrade to Pro', 'bdthemes-element-pack')
+                ]
+            ]
         ];
 
         if (!element_pack_pro_installed()) {
