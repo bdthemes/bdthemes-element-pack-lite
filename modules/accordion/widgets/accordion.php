@@ -402,6 +402,7 @@ class Accordion extends Module_Base {
 								if ( 'yes' == $settings['schema_activity'] ) {
 									echo '<div itemprop="text">';
 								}
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo $this->parse_text_editor( $item['tab_content'] );
 								if ( 'yes' == $settings['schema_activity'] ) {
 									echo '</div>';

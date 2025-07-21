@@ -268,7 +268,12 @@ class Slider extends Module_Base {
 						<?php endif; ?>
 
 						<?php if ('' !== $item['tab_content']) : ?>
-							<div class="bdt-slide-text"><?php echo $this->parse_text_editor($item['tab_content']); ?></div>
+							<div class="bdt-slide-text">
+								<?php
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo $this->parse_text_editor($item['tab_content']);
+								?>
+							</div>
 						<?php endif; ?>
 
 						<?php if ((!empty($item['tab_link']['url'])) && ($settings['show_button'])) : ?>

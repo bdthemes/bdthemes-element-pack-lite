@@ -131,6 +131,7 @@ class Business_Hours extends Module_Base {
             [
                 'label'       => esc_html__( 'Custom Timezone', 'bdthemes-element-pack' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'defaut'      => '+6',
                 'placeholder' => '+6',
                 'condition'   => [

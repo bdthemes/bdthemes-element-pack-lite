@@ -1682,7 +1682,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 									foreach ($course_categories as $course_category) {
 										$category_name = $course_category->name;
 										$category_link = get_term_link($course_category->term_id);
-										echo "<a href='$category_link'>" . esc_html($category_name) . "</a>";
+										echo "<a href='" . esc_url($category_link) . "'>" . esc_html($category_name) . "</a>";
 									}
 								}
 								?>
@@ -1711,7 +1711,9 @@ class TutorLms_Course_Carousel extends Module_Base {
 						<span class="bdt-tutor-rating-count">
 							<?php
 							if ($course_rating->rating_avg > 0) {
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo apply_filters('tutor_course_rating_average', $course_rating->rating_avg);
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo '<i>(' . apply_filters('tutor_course_rating_count', $course_rating->rating_count) . ')</i>';
 							}
 							?>

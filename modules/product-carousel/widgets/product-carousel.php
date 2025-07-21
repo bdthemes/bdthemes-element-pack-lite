@@ -94,6 +94,7 @@
 					'default' => [
 						'url' => Utils::get_placeholder_image_src(),
 					],
+					'dynamic'     => [ 'active' => true ],
 				]
 			);
 
@@ -470,6 +471,7 @@
 				[
 					'label'       => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
 					'type'        => Controls_Manager::TEXT,
+					'dynamic'     => [ 'active' => true ],
 					'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
 					'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack' ),
 				]

@@ -404,6 +404,7 @@ class Static_Carousel extends Module_Base
             [
                 'label' => esc_html__('Read More Text', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'  => [ 'active' => true ],
                 'default' => esc_html__('Read More', 'bdthemes-element-pack'),
                 'placeholder' => esc_html__('Read More', 'bdthemes-element-pack'),
             ]

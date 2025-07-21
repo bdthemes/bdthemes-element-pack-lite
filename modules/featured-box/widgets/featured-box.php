@@ -82,6 +82,7 @@ class Featured_Box extends Module_Base {
 			[ 
 				'label'       => esc_html__( 'Image', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::MEDIA,
+				'dynamic'     => ['active' => true],
 				'render_type' => 'template',
 				'default'     => [ 
 					'url' => Utils::get_placeholder_image_src(),

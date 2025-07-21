@@ -228,6 +228,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::TEXT,
+				'dynamic' => ['active' => true],
 				'default' => esc_html__( 'Send Message', 'bdthemes-element-pack' ),
 			]
 		);
@@ -313,6 +314,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Label', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Name*', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -327,6 +329,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Your Name', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -353,6 +356,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Label', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Contact Number', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -366,6 +370,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Your contact number', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -392,6 +397,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Label', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Subject*', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -405,6 +411,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Your message subject', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -431,6 +438,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Label', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Email*', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -444,6 +452,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'example@email.com', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -470,6 +479,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Label', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Your Message*', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -483,6 +493,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Your Message Here', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -505,6 +516,7 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Message', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => ['active' => true],
 				'default'   => esc_html__( 'Note: You have to fill-up above all respective field, then click below button for send your message', 'bdthemes-element-pack' ),
 				'condition' => [ 
 					'show_additional_message' => 'yes',

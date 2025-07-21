@@ -1848,7 +1848,7 @@ class TutorLms_Course_Grid extends Module_Base {
 		$img_url             = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
 
 		if (!$thumbnail_html) {
-			$thumbnail_html = '<img src="' . esc_url($placeholder_img_src) . '" alt="' . get_the_title() . '">';
+			$thumbnail_html = '<img src="' . esc_url($placeholder_img_src) . '" alt="' . esc_html(get_the_title()) . '">';
 		}
 
 		?>
@@ -2024,7 +2024,9 @@ class TutorLms_Course_Grid extends Module_Base {
 			<span class="bdt-tutor-rating-count">
 				<?php
 				if ($course_rating->rating_avg > 0) {
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo apply_filters('tutor_course_rating_average', $course_rating->rating_avg);
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo '<i>(' . apply_filters('tutor_course_rating_count', $course_rating->rating_count) . ')</i>';
 				}
 				?>

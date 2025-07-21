@@ -224,6 +224,7 @@ class Member extends Module_Base {
 			[ 
 				'label'   => esc_html__( 'Title', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::TEXT,
+				'dynamic' => ['active' => true],
 				'default' => 'Facebook',
 			]
 		);
@@ -1280,7 +1281,12 @@ class Member extends Module_Base {
 					$is_new   = empty( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
 					?>
 
-					<a <?php $this->print_render_attribute_string( $link_key ); ?> data-bdt-tooltip="<?php echo $tooltip; ?>">
+					<a <?php $this->print_render_attribute_string( $link_key ); ?> 
+						data-bdt-tooltip="<?php 
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo $tooltip;
+						 ?>"
+					>
 
 						<?php if ( $is_new || $migrated ) :
 							Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );

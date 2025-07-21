@@ -1726,6 +1726,7 @@ trait Global_Widget_Controls {
 			[
 				'label'       => esc_html__('Link Text', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
 				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack'),
 				'condition' => [
 					'show_lightbox' => 'yes',
@@ -1911,6 +1912,7 @@ trait Global_Widget_Controls {
 			[
 				'label'   => esc_html__('Link Image', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::MEDIA,
+				'dynamic' => ['active' => true],
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
 				],
@@ -1931,6 +1933,7 @@ trait Global_Widget_Controls {
 			[
 				'label'       => esc_html__('Link Text', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
 				'default'     => esc_html__('Open Gallery', 'bdthemes-element-pack'),
 				'placeholder' => esc_html__('Link Text', 'bdthemes-element-pack'),
 				'condition'   => ['_skin' => 'bdt-hidden', 'lightbox_link_type' => 'simple_text'],
@@ -4150,6 +4153,7 @@ trait Global_Widget_Controls {
 			[
 				'label'       => esc_html__('Section ID', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 'active' => true ],
 				'placeholder' => 'Section ID Here',
 				'description' => 'Enter section ID of this page, ex: #my-section',
 				'label_block' => true,
@@ -6612,6 +6616,7 @@ trait Global_Widget_Controls {
             [
                 'label' => esc_html__('Select Background', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::MEDIA,
+                'dynamic' => ['active' => true],
                 'render_type' => 'template',
                 'default' => [
                     'url' => Utils::get_placeholder_image_src(),

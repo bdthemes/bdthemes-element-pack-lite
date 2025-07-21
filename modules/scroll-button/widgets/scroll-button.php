@@ -121,6 +121,7 @@ class Scroll_Button extends Module_Base {
 				'type'        => Controls_Manager::TEXT,
 				'default'     => 'my-header',
 				'description' => esc_html__( "By clicking this scroll button, to which section in your page you want to go? Just write that's section ID here such 'my-header'. N.B: No need to add '#'.", 'bdthemes-element-pack' ),
+				'dynamic'     => [ 'active' => true ],
 			]
 		);
 
