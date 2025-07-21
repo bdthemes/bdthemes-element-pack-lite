@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor, elementor addons, elementor templates, elementor widgets, header footer builder
 Requires at least: 5.0.0
-Tested up to: 6.8.1
+Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.1.2
+Stable tag: 8.1.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.30.0
+Elementor tested up to: 3.30.2
 
 Get Elementor widgets, sliders, WooCommerce widgets, live copy and paste, post grid, header and footer, templates, mega menu, dynamic content, theme builder and more.
 
@@ -281,11 +281,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.1.X [XX July 2025] =
+= 8.1.3 [21st July 2025] =
 
 * Added: Image & text controls dynamic tags compatibility added
 * Fixed: Submit button disabled issue fixed in User Register widget
-
+* Updated: Security improved
 
 = 8.1.2 [8th July 2025] =
 
