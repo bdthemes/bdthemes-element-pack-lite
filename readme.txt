@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor templates, elementor widgets, heade
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.1.3
+Stable tag: 8.1.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.30.2
+Elementor tested up to: 3.30.3
 
 Get Elementor widgets, sliders, WooCommerce widgets, live copy and paste, post grid, header and footer, templates, mega menu, dynamic content, theme builder and more.
 
@@ -107,7 +107,7 @@ Enhance your Elementor site with Element Pack’s powerful Elementor widgets. Ge
 👉 [Check All the Widgets](https://www.elementpack.pro/widgets/)
 
 
-## 2600+ Free & Pro Ready-Made Templates for Every Page & Section
+## 2700+ Free & Pro Ready-Made Templates for Every Page & Section
 
 With Element Pack Elementor Addon, you get a massive collection of professionally designed templates to build stunning websites quickly and easily. No need to start from scratch—just import, customize and launch!
 
@@ -280,6 +280,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.1.4 [24th July 2025] =
+
+* Added: Aura style added in creative button widget
+* Fixed: Open Street Map widget security issue fixed (Thanks to zer0gh0st)
 
 = 8.1.3 [21st July 2025] =
 

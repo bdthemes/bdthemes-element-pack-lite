@@ -192,4 +192,52 @@
         $(() => EPDynamicTagsOverride.init());
     }
 
+    // Elementor Control Lock (when Pro is not active)
+    if (!ElementPackConfig.pro_installed) {
+        
+        const lockElementorControls = {
+            lockedWidgets: ['bdt-creative-button', 'bdt-content-switcher'],
+            lockedOptions: {
+                'bdt-creative-button': { 'aura': 'anthe' },
+                'bdt-content-switcher': { 'button': '1', 'template': 'content', 'link_section': 'content', 'link_widget': 'content' }
+            },
+            tooltipText: 'This option is only available in Element Pack Pro',
+
+            init() {
+                this.bindEvents();
+            },
+
+            bindEvents() {
+                elementor.hooks.addAction('panel/open_editor/widget', (panel, model) => {
+                    const widgetType = model.get('widgetType');
+                    if (this.lockedWidgets.includes(widgetType)) {
+                        setTimeout(() => this.lockSelectControl(widgetType), 500);
+                    }
+                });
+            },
+
+            lockSelectControl(widgetType) {
+                const $selectControl = $('.bdt-ep-lock-control select');
+                
+                if (!$selectControl.length) return;
+                
+                const widgetLockedOptions = this.lockedOptions[widgetType];
+                if (!widgetLockedOptions) return;
+                
+                // Apply locks to all options for this widget
+                Object.keys(widgetLockedOptions).forEach(optionValue => {
+                    $selectControl
+                        .find(`option[value="${optionValue}"]`)
+                        .attr('disabled', 'disabled')
+                        .attr('title', this.tooltipText);
+                });
+                
+            },
+
+        };
+
+        // Initialize the Elementor Control Lock system
+        $(() => lockElementorControls.init());
+    }
+
 })(jQuery);

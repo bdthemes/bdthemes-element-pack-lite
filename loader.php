@@ -16,10 +16,14 @@ if (!defined('ABSPATH')) {
 
 
 if (!defined('BDTEP_PC')) {
-		define('BDTEP_PC', '<span class="bdt-ep-pro-control"></span>');
-	} // pro control badge
-	define('BDTEP_IS_PC', 'bdt-ep-disabled-control');
-    
+    define('BDTEP_PC', '<span class="bdt-ep-pro-control"></span>');
+} // pro control badge
+define('BDTEP_IS_PC', 'bdt-ep-disabled-control');
+define('BDTEP_LOCK_CLASS', 'bdt-ep-lock-control');
+
+if (!defined('BDTEP_LOCK')) {
+    define('BDTEP_LOCK', ' - Pro ✨');
+} // lock control badge
 /**
  * Main class for element pack
  */

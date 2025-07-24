@@ -79,7 +79,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switcher_style',
 			[
-				'label'   => esc_html__('Style', 'bdthemes-element-pack') . BDTEP_PC,
+				'label'   => esc_html__('Style', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '1',
 				'options' => [
@@ -92,9 +92,9 @@ class Content_Switcher extends Module_Base {
 					'7'      => esc_html__('Clean Circle', 'bdthemes-element-pack'),
 					'8'      => esc_html__('Soft Curve', 'bdthemes-element-pack'),
 					'9'      => esc_html__('Square Rotate', 'bdthemes-element-pack'),
-					'button' => esc_html__('Button Style', 'bdthemes-element-pack'),
+					'button' => esc_html__('Show all switches', 'bdthemes-element-pack') . BDTEP_LOCK,
 				],
-				'classes' => BDTEP_IS_PC,
+				'classes' => BDTEP_LOCK_CLASS,
 			]
 		);
 
@@ -113,16 +113,16 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'content_type',
 			[
-				'label'   => esc_html__('Content Type', 'bdthemes-element-pack') . BDTEP_PC,
+				'label'   => esc_html__('Content Type', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'content',
 				'options' => [
 					'content' => esc_html__('Content', 'bdthemes-element-pack'),
-					'template' => esc_html__('Saved Templates', 'bdthemes-element-pack'),
-					'link_section'  => esc_html__('Link Section', 'bdthemes-element-pack'),
-					'link_widget'  => esc_html__('Link Widget', 'bdthemes-element-pack'),
+					'template' => esc_html__('Elementor Template', 'bdthemes-element-pack') . BDTEP_LOCK,
+					'link_section'  => esc_html__('Link Section', 'bdthemes-element-pack') . BDTEP_LOCK,
+					'link_widget'  => esc_html__('Link Widget', 'bdthemes-element-pack') . BDTEP_LOCK,
 				],
-				'classes' => BDTEP_IS_PC,
+				'classes' => BDTEP_LOCK_CLASS,
 			]
 		);
 
