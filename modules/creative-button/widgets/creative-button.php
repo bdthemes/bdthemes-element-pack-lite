@@ -68,6 +68,7 @@ class Creative_Button extends Module_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'anthe',
 				'options' => [
+					'aura'     => esc_html__( 'Aura (New)', 'bdthemes-element-pack' ) . BDTEP_LOCK,
 					'anthe'    => esc_html__( 'Anthe', 'bdthemes-element-pack' ),
 					'atlas'    => esc_html__( 'Atlas', 'bdthemes-element-pack' ),
 					'bestia'   => esc_html__( 'Bestia', 'bdthemes-element-pack' ),
@@ -95,6 +96,7 @@ class Creative_Button extends Module_Base {
 					'glitch'   => esc_html__( 'Glitch', 'bdthemes-element-pack' ),
 					'gooey'    => esc_html__( 'Gooey', 'bdthemes-element-pack' ),
 				],
+				'classes' => BDTEP_LOCK_CLASS
 			]
 		);
 
@@ -332,6 +334,7 @@ class Creative_Button extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-creative-button--reveal:hover' => 'background: {{VALUE}} !important;',
 					'{{WRAPPER}} .bdt-ep-creative-button--glitch, {{WRAPPER}} .bdt-ep-creative-button--glitch::after' => 'background: linear-gradient(45deg, transparent 5%, {{VALUE}} 5%);',
 					'{{WRAPPER}} .bdt-ep-creative-button--gooey:hover' => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .bdt-ep-creative-button--aura:before' => 'background: {{VALUE}};',
 				],
 				'condition' => [
 					'button_style!' => ['fenrir', 'hati', 'surtur', 'reklo']
@@ -467,6 +470,136 @@ class Creative_Button extends Module_Base {
 			]
 		);
 
+		// line toggle popover
+		$this->add_control(
+			'creative_button_aura_line_toggle',
+			[
+				'label'     => esc_html__( 'Line & Clip Path Style', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack' ),
+				'label_on'  => esc_html__( 'On', 'bdthemes-element-pack' ),
+				'return_value' => 'yes',
+				'default' => 'no',
+				'condition' => [
+					'button_style' => ['aura']
+				]
+			]
+		);
+
+		$this->start_popover();
+
+		// line color
+		$this->add_control(
+			'creative_button_aura_line_color',
+			[
+				'label'     => esc_html__( 'Line Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(1):before, {{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(1):after, {{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(2):before, {{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(2):after' => 'background: {{VALUE}};',
+				],
+				'condition' => [
+					'button_style' => ['aura'],
+					'creative_button_aura_line_toggle' => 'yes'
+				]
+			]
+		);
+
+		// line of aura button
+		$this->add_responsive_control(
+			'creative_button_aura_line_width',
+			[
+				'label'     => esc_html__( 'Line Width', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'min' => 1,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:before, {{WRAPPER}} .bdt-ep-creative-button--aura>span:after' => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'button_style' => ['aura'],
+					'creative_button_aura_line_toggle' => 'yes'
+				]
+			]
+		);
+
+		// line of aura button height
+		$this->add_responsive_control(
+			'creative_button_aura_line_height',
+			[
+				'label'     => esc_html__( 'Line Height', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'min' => 1,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:before, {{WRAPPER}} .bdt-ep-creative-button--aura>span:after' => 'height: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'button_style' => ['aura'],
+					'creative_button_aura_line_toggle' => 'yes'
+				]
+			]
+		);
+
+		
+		//offset x y
+		$this->add_responsive_control(
+			'creative_button_aura_line_offset',
+			[
+				'label'     => esc_html__( 'Offset', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'min' => -100,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(1):after' => 'left: calc(100% - {{SIZE}}{{UNIT}}); top: calc(100% - {{SIZE}}{{UNIT}});',
+					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(1):before' => 'left: {{SIZE}}{{UNIT}}; top:{{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(2):before' => 'top: {{SIZE}}{{UNIT}}; left: calc(100% - {{SIZE}}{{UNIT}});',
+					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(2):after' => 'left: {{SIZE}}{{UNIT}}; top: calc(100% - {{SIZE}}{{UNIT}});',
+				],
+				'condition' => [
+					'button_style' => ['aura'],
+					'creative_button_aura_line_toggle' => 'yes'
+				]
+			]
+		);
+
+		// clip path
+		$this->add_responsive_control(
+			'creative_button_aura_clip_path',
+			[
+				'label'     => esc_html__( 'Clip Path', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--aura:before' => 'clip-path: polygon({{SIZE}}{{UNIT}} 0, 100% 0, 100% 0, 100% calc(100% - {{SIZE}}{{UNIT}}), calc(100% - {{SIZE}}{{UNIT}}) 100%, 0 100%, 0 100%, 0 {{SIZE}}{{UNIT}});',
+					'{{WRAPPER}} .bdt-ep-creative-button--aura:hover:before' => 'clip-path: polygon(0 0, calc(100% - {{SIZE}}{{UNIT}}) 0, 100% {{SIZE}}{{UNIT}}, 100% 100%, 100% 100%, {{SIZE}}{{UNIT}} 100%, 0 calc(100% - {{SIZE}}{{UNIT}}), 0 0);',
+				],
+				'condition' => [
+					'button_style' => ['aura'],
+					'creative_button_aura_line_toggle' => 'yes'
+				]
+			]
+		);
+
+		$this->end_popover();
+
+
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
@@ -487,6 +620,20 @@ class Creative_Button extends Module_Base {
 				],
 				'condition' => [
 					'button_style!' => ['surtur']
+				]
+			]
+		);
+
+		$this->add_control(
+			'creative_button_aura_line_hover_color',
+			[
+				'label'     => esc_html__( 'Line Hover Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(1):before, {{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(1):after, {{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(2):before, {{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(2):after' => 'background: {{VALUE}};',
+				],
+				'condition' => [
+					'button_style' => ['aura'],
 				]
 			]
 		);
@@ -532,6 +679,7 @@ class Creative_Button extends Module_Base {
 					'{{WRAPPER}} .bdt-ep-creative-button--reveal::after' => 'background: {{VALUE}};',
 					'{{WRAPPER}} .bdt-ep-creative-button--glitch:hover, {{WRAPPER}} .bdt-ep-creative-button--glitch:hover::after' => 'background: linear-gradient(45deg, transparent 5%, {{VALUE}} 5%);',
 					'{{WRAPPER}} .bdt-ep-creative-button--gooey .c-button__blobs div' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-ep-creative-button--aura:hover:before' => 'background: {{VALUE}};',
 				],
 				'condition' => [
 					'button_style!' => ['fenrir', 'hati', 'surtur', 'reklo']
@@ -803,6 +951,10 @@ class Creative_Button extends Module_Base {
 				</filter>
 			</defs>
 			</svg>
+		<?php elseif ( $settings['button_style'] == 'aura' ) : ?>
+			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>>
+				<span></span> <span> <span> <div class="aura-icon aura-icon-left"> <svg viewBox="0 0 16 16"> <path class="st1" d="M5.49,8.19s4.87-4.87,5.01-5.01"></path> <polyline class="st0" points="5.49 3.18 10.51 3.18 10.51 8.19"></polyline> </svg> </div> <span><?php echo esc_html($settings['text']); ?></span> <div class="aura-icon aura-icon-right"> <svg viewBox="0 0 16 16"> <path class="st1" d="M5.49,8.19s4.87-4.87,5.01-5.01"></path> <polyline class="st0" points="5.49 3.18 10.51 3.18 10.51 8.19"></polyline> </svg> </div> </span> </span>
+			</a>
 		<?php else: ?>
 			<a <?php $this->print_render_attribute_string( 'creative_button' ); ?>><span><?php echo esc_html($settings['text']); ?></span></a>
 		<?php endif; ?>
