@@ -550,7 +550,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__('Get 50% Payout', 'bdthemes-element-pack'),
+			esc_html__('Get Up to 60%', 'bdthemes-element-pack'),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_affiliate',
 			[$this, 'display_page']
@@ -3260,15 +3260,15 @@ class ElementPack_Admin_Settings {
 			<div class="ep-dashboard-affiliate">
 				<div class="bdt-card bdt-card-body">
 					<h1 class="ep-feature-title">
-						<?php printf(esc_html__('Earn %s as an Affiliate', 'bdthemes-element-pack'), '<strong class="ep-highlight-text">50% Commission</strong>'); ?>
+						<?php printf(esc_html__('Earn %s as an Affiliate', 'bdthemes-element-pack'), '<strong class="ep-highlight-text">Up to 60% Commission</strong>'); ?>
 					</h1>
 					<p>
-						<?php esc_html_e('Join our affiliate program and earn a 50% commission on every sale you refer. It\'s a great way to earn passive income while promoting high-quality WordPress plugins.', 'bdthemes-element-pack'); ?>
+						<?php esc_html_e('Join our affiliate program and earn a up to 60% commission on every sale you refer. It\'s a great way to earn passive income while promoting high-quality WordPress plugins.', 'bdthemes-element-pack'); ?>
 					</p>
 					<div class="ep-affiliate-features">
 						<h3 class="ep-affiliate-sub-title"><?php esc_html_e('Benefits of joining our affiliate program:', 'bdthemes-element-pack'); ?></h3>
 						<ul>
-							<li><?php esc_html_e('50% commission on all sales', 'bdthemes-element-pack'); ?></li>
+							<li><?php esc_html_e('Up to 60% commission on all sales', 'bdthemes-element-pack'); ?></li>
 							<li><?php esc_html_e('Real-time tracking of referrals and sales', 'bdthemes-element-pack'); ?></li>
 							<li><?php esc_html_e('Dedicated affiliate support', 'bdthemes-element-pack'); ?></li>
 							<li><?php esc_html_e('Marketing materials provided', 'bdthemes-element-pack'); ?></li>

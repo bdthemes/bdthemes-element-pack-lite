@@ -72,6 +72,18 @@ class Social_Share extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
+
+	protected function get_upsale_data(): array {
+		return [
+			'condition' => ! is_ep_pro(),
+			'image' => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
+			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
+			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'View -> Icon, Text', 'Count -> Show'),
+			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
+			'upgrade_text' => sprintf(__( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), 'Upgrade to Pro'),
+		];
+	}
 	
 	protected function register_controls() {
 		$this->start_controls_section(
@@ -141,19 +153,19 @@ class Social_Share extends Module_Base {
 		$this->add_control(
 			'view',
 			[
-				'label'       => esc_html__( 'View', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'label'       => esc_html__( 'View', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SELECT,
 				'label_block' => false,
 				'options'     => [
-					'icon-text' => 'Icon & Text',
-					'icon'      => 'Icon',
-					'text'      => 'Text',
+					'icon-text' => esc_html__('Icon & Text', 'bdthemes-element-pack'),
+					'icon'      => esc_html__('Icon', 'bdthemes-element-pack') . BDTEP_LOCK,
+					'text'      => esc_html__('Text', 'bdthemes-element-pack') . BDTEP_LOCK,
 				],
 				'default'      => 'icon-text',
 				'separator'    => 'before',
 				'prefix_class' => 'bdt-ss-btns-view-',
 				'render_type'  => 'template',
-				'classes' => BDTEP_IS_PC,
+				'classes' => BDTEP_LOCK_CLASS,
 			]
 		);
 

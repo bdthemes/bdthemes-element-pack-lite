@@ -98,6 +98,35 @@ class Call_Out extends Module_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'text_alignment',
+			[ 
+				'label'   => __( 'Text Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'   => [
+						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+					'justify' => [
+						'title' => __( 'Justify', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-justify',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-callout *' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -133,7 +162,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_align',
 			[ 
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Position', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [ 

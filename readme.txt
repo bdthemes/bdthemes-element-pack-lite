@@ -1,17 +1,17 @@
-=== Element Pack Elementor Addons and Templates ===
+=== Element Pack Addons for Elementor - Mega Menu, Header Footer, Dynamic Builder and Ready Templates ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
 Donate link: http://bdthemes.com/
 Tags: elementor, elementor addons, elementor templates, elementor widgets, header footer builder
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.1.4
+Stable tag: 8.1.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.30.3
+Elementor tested up to: 3.30.4
 
-Get Elementor widgets, sliders, WooCommerce widgets, live copy and paste, post grid, header and footer, templates, mega menu, dynamic content, theme builder and more.
+Best Elementor addon with live copy and paste, post grid, header and footer, templates, mega menu, dynamic builder, WooCommerce widgets and more.
 
 
 == Description ==
@@ -280,6 +280,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.1.5 [4th August 2025] =
+
+* Added: Shape Divider extension added (Pro)
+* Added: Text alignment option added in call out widget
+* Fixed: Image Masking extension editor controls fixed
+* Fixed: Editor mode edit template issue fixed
+* Updated: Image Masking updated with VISUAL CHOICE control
 
 = 8.1.4 [24th July 2025] =
 

@@ -41,9 +41,10 @@
 		            'label'          => _x('Default', 'Mask Image', 'bdthemes-element-pack'),
 		            'label_block'    => true,
 		            'show_label'     => false,
-		            'type'           => Controls_Manager::SELECT,
+		            'type'           => Controls_Manager::VISUAL_CHOICE,
+					'columns'        => 4,
 		            'default'        => 'shape-1',
-		            'options'        => element_pack_mask_shapes(),
+		            'options'        => element_pack_mask_shapes_options(),
 		            'selectors'      => [
 		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg); mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg);',
 		                '{{WRAPPER}} .bdt-image-mask:before' => 'background-image: url('.BDTEP_ASSETS_URL . 'images/mask/color-'.'{{VALUE}}.svg);',

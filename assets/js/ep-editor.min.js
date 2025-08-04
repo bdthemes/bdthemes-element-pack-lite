@@ -196,10 +196,12 @@
     if (!ElementPackConfig.pro_installed) {
         
         const lockElementorControls = {
-            lockedWidgets: ['bdt-creative-button', 'bdt-content-switcher'],
+            lockedWidgets: ['bdt-creative-button', 'bdt-content-switcher', 'bdt-social-share', 'bdt-scrollnav'],
             lockedOptions: {
                 'bdt-creative-button': { 'aura': 'anthe' },
-                'bdt-content-switcher': { 'button': '1', 'template': 'content', 'link_section': 'content', 'link_widget': 'content' }
+                'bdt-content-switcher': { 'button': '1', 'template': 'content', 'link_section': 'content', 'link_widget': 'content' },
+                'bdt-social-share': { 'icon': 'icon-text', 'text': 'icon-text' },
+                'bdt-scrollnav': { 'dot': 'default' }
             },
             tooltipText: 'This option is only available in Element Pack Pro',
 
