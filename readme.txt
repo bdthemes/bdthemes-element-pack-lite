@@ -5,7 +5,7 @@ Tags: elementor, elementor addons, elementor templates, elementor widgets, heade
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.1.5
+Stable tag: 8.1.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -280,6 +280,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.1.6 [4th August 2025] =
+
+* Fixed: Security issue fixed in open street map
 
 = 8.1.5 [4th August 2025] =
 
