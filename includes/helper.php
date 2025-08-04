@@ -153,7 +153,8 @@ function element_pack_get_posts() {
 }
 
 function element_pack_allow_tags( $tag = null ) {
-	$tag_allowed = wp_kses_allowed_html( 'post' );
+	// Define secure configurations without inheriting from wp_kses_allowed_html('post')
+	$tag_allowed = [];
 
 	$tag_allowed['input']  = [ 
 		'class'   => [],
@@ -223,6 +224,18 @@ function element_pack_allow_tags( $tag = null ) {
 			'd' => [],
 			'fill' => [],
 		],
+	];
+
+	$tag_allowed['safe_formatting'] = [ 
+		'strong' => [],
+		'br'     => [],
+		'em'     => [],
+		'i'      => [],
+		'b'      => [],
+		'u'      => [],
+		'span'   => [ 'class' => [] ],
+		'div'    => [ 'class' => [] ],
+		'p'      => [ 'class' => [] ],
 	];
 
 	$tag_allowed['svg'] = [ 

@@ -54,10 +54,44 @@
                     }
                 });
                 var greenIcon = new LeafIcon({iconUrl: markers[i]['iconUrl'] });
-                L.marker( [markers[i]['lat'], markers[i]['lng']], {icon: greenIcon} ).bindPopup(markers[i]['infoWindow']).addTo(avdOSMap);
+                // Create a safe popup content that allows HTML formatting but prevents XSS
+                var popupContent = document.createElement('div');
+                popupContent.innerHTML = markers[i]['infoWindow'];
+                // Remove any script tags and event handlers for security
+                var scripts = popupContent.querySelectorAll('script');
+                for (var j = 0; j < scripts.length; j++) {
+                    scripts[j].remove();
+                }
+                // Remove any elements with event handlers
+                var elementsWithEvents = popupContent.querySelectorAll('[onclick], [onload], [onerror], [onmouseover], [onmouseout]');
+                for (var k = 0; k < elementsWithEvents.length; k++) {
+                    elementsWithEvents[k].removeAttribute('onclick');
+                    elementsWithEvents[k].removeAttribute('onload');
+                    elementsWithEvents[k].removeAttribute('onerror');
+                    elementsWithEvents[k].removeAttribute('onmouseover');
+                    elementsWithEvents[k].removeAttribute('onmouseout');
+                }
+                L.marker( [markers[i]['lat'], markers[i]['lng']], {icon: greenIcon} ).bindPopup(popupContent).addTo(avdOSMap);
             } else {
                 if( (markers[i]['lat']) != '' && typeof (markers[i]['lat']) !== 'undefined'){ 
-                    L.marker( [markers[i]['lat'], markers[i]['lng']] ).bindPopup(markers[i]['infoWindow']).addTo(avdOSMap);
+                    // Create a safe popup content that allows HTML formatting but prevents XSS
+                    var popupContent = document.createElement('div');
+                    popupContent.innerHTML = markers[i]['infoWindow'];
+                    // Remove any script tags and event handlers for security
+                    var scripts = popupContent.querySelectorAll('script');
+                    for (var j = 0; j < scripts.length; j++) {
+                        scripts[j].remove();
+                    }
+                    // Remove any elements with event handlers
+                    var elementsWithEvents = popupContent.querySelectorAll('[onclick], [onload], [onerror], [onmouseover], [onmouseout]');
+                    for (var k = 0; k < elementsWithEvents.length; k++) {
+                        elementsWithEvents[k].removeAttribute('onclick');
+                        elementsWithEvents[k].removeAttribute('onload');
+                        elementsWithEvents[k].removeAttribute('onerror');
+                        elementsWithEvents[k].removeAttribute('onmouseover');
+                        elementsWithEvents[k].removeAttribute('onmouseout');
+                    }
+                    L.marker( [markers[i]['lat'], markers[i]['lng']] ).bindPopup(popupContent).addTo(avdOSMap);
                 }
             }
         }
