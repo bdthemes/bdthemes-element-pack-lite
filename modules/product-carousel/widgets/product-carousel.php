@@ -390,7 +390,7 @@
 			$this->add_control(
 				'show_image',
 				[
-					'label'   => __('Show Iamge', 'bdthemes-element-pack'),
+					'label'   => __('Show Image', 'bdthemes-element-pack'),
 					'type'    => Controls_Manager::SWITCHER,
 					'default' => 'yes',
 					'separator' => 'before',

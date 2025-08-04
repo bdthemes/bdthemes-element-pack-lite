@@ -865,7 +865,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 				],
 				[
 					'id' => 'element_pack_affiliate',
-					'title' => esc_html__('Get 50% Payout', 'bdthemes-element-pack'),
+					'title' => esc_html__('Get Up to 60%', 'bdthemes-element-pack'),
 					'icon' => 'dashicons dashicons-money-alt',
 				],
 			];
