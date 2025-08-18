@@ -281,6 +281,8 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 = 8.1.7 [18th August 2025] =
 
 * Added: Link to Wrapper Item option added in product grid widget
+* Added: Button a & button b padding added in dual button widget
+* Fixed: Admin API Notice loading issue fixed
 
 = 8.1.6 [4th August 2025] =
 

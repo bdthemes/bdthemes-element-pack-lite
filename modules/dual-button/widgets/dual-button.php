@@ -573,7 +573,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'dual_button_radius',
 			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -623,7 +623,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'dual_button_hover_radius',
 			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -702,19 +702,6 @@ class DualButton extends Module_Base {
 				'selector'  => '{{WRAPPER}} .bdt-btn-a, 
 								{{WRAPPER}} .bdt-btn-a.bdt-effect-i .bdt-btn-content-wrap:after,
 								{{WRAPPER}} .bdt-btn-a.bdt-effect-i .bdt-btn-content-wrap:before',
-				'separator' => 'after',
-			]
-		);
-
-		$this->add_responsive_control(
-			'button_a_border_radius',
-			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-btn-a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
 			]
 		);
 
@@ -730,6 +717,30 @@ class DualButton extends Module_Base {
 				'condition' => [
 					'button_border_style!' => 'none'
 				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_a_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_a_padding',
+			[
+				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -770,19 +781,6 @@ class DualButton extends Module_Base {
 								{{WRAPPER}} .bdt-btn-a:hover,
 								{{WRAPPER}} .bdt-btn-a.bdt-effect-i,
 								{{WRAPPER}} .bdt-btn-a.bdt-effect-h:after',
-				'separator' => 'after',
-			]
-		);
-
-		$this->add_responsive_control(
-			'button_a_hover_border_radius',
-			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-btn-a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
 			]
 		);
 
@@ -800,6 +798,18 @@ class DualButton extends Module_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'button_a_hover_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -870,19 +880,6 @@ class DualButton extends Module_Base {
 				'selector' => '{{WRAPPER}} .bdt-btn-b, 
 							   {{WRAPPER}} .bdt-btn-b.bdt-effect-i .bdt-btn-content-wrap:after, 
 							   {{WRAPPER}} .bdt-btn-b.bdt-effect-i .bdt-btn-content-wrap:before',
-				'separator' => 'after',
-			]
-		);
-
-		$this->add_responsive_control(
-			'button_b_border_radius',
-			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-btn-b' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
 			]
 		);
 
@@ -898,6 +895,30 @@ class DualButton extends Module_Base {
 				'condition' => [
 					'button_border_style!' => 'none'
 				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_b_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-b' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_b_padding',
+			[
+				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-b' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -939,19 +960,6 @@ class DualButton extends Module_Base {
 								{{WRAPPER}} .bdt-btn-b.bdt-effect-i,
 								{{WRAPPER}} .bdt-btn-b.bdt-effect-h:after
 								',
-				'separator' => 'after',
-			]
-		);
-
-		$this->add_responsive_control(
-			'button_b__hover_border_radius',
-			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-btn-b:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
 			]
 		);
 
@@ -966,6 +974,18 @@ class DualButton extends Module_Base {
 				'condition' => [
 					'button_border_style!' => 'none'
 				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_b__hover_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-b:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
