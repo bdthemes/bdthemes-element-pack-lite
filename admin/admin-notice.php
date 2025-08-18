@@ -192,54 +192,60 @@ class Notices {
 			
 			<?php $title = (isset($notice->title) && !empty($notice->title)) ? $notice->title : ''; ?>
 
-			<div class="bdt-plugin-logo-wrapper">
-				<img height="auto" width="40" src="<?php echo esc_url(BDTEP_ASSETS_URL); ?>images/logo.svg" alt="Element Pack Logo">
-			</div>
-
-			<div class="bdt-notice-content">
-				<?php if (isset($notice->logo) && !empty($notice->logo)) : ?>
-					<div class="bdt-notice-logo-wrapper">
-						<img width="100" src="<?php echo esc_url($notice->logo); ?>" alt="Logo">
-					</div>
-				<?php endif; ?>
-				<div class="bdt-notice-title-description">
-					<?php if (isset($title) && !empty($title)) : ?>
-						<h2 class="bdt-notice-title"><?php echo wp_kses_post($title); ?></h2>
-					<?php endif; ?>
-
-					<?php if (isset($notice->content) && !empty($notice->content)) : ?>
-						<div class="bdt-notice-html-content">
-							<?php echo wp_kses_post($notice->content); ?>
-						</div>
-					<?php endif; ?>
+			<div class="bdt-api-notice-content">
+				<div class="bdt-plugin-logo-wrapper">
+					<img height="auto" width="40" src="<?php echo esc_url(BDTEP_ASSETS_URL); ?>images/logo.svg" alt="Element Pack Logo">
 				</div>
 
-				<?php 
-				// Only show countdown if it's enabled, has an end date, and the end date is in the future
-				$show_countdown = isset($notice->show_countdown) && $notice->show_countdown && isset($notice->end_date);
-				if ($show_countdown) {
-					$end_timestamp = strtotime($notice->end_date);
-					$current_timestamp = current_time('timestamp');
-					$show_countdown = $end_timestamp > $current_timestamp;
-				}
-				?>
-				<?php if ($show_countdown) : ?>
-					<div class="bdt-notice-countdown" data-end-date="<?php echo esc_attr($notice->end_date); ?>" data-timezone="<?php echo esc_attr($notice->timezone ? $notice->timezone : 'UTC'); ?>">
-						<div class="countdown-timer">Loading...</div>
-					</div>
-				<?php endif; ?>
-
-				<?php if (isset($notice->link) && !empty($notice->link)) : ?>
-					<div class="bdt-notice-btn">
-						<a href="<?php echo esc_url($notice->link); ?>" target="_blank">
-							<div class="nm-notice-btn">
-							    <?php echo isset($notice->button_text) ? esc_html($notice->button_text) : 'Read More'; ?>
-								<span class="dashicons dashicons-arrow-right-alt"></span>
-								<div class="zolo-star zolo-star-1">✦</div><div class="zolo-star zolo-star-2">✦</div><div class="zolo-star zolo-star-3">✦</div><div class="zolo-star zolo-star-4">✦</div><div class="zolo-star zolo-star-5">✦</div><div class="zolo-star zolo-star-6">✦</div>
+				<div class="bdt-notice-content">
+					<div class="bdt-notice-content-inner">
+						<?php if (isset($notice->logo) && !empty($notice->logo)) : ?>
+							<div class="bdt-notice-logo-wrapper">
+								<img width="100" src="<?php echo esc_url($notice->logo); ?>" alt="Logo">
 							</div>
-						</a>
+						<?php endif; ?>
+						<div class="bdt-notice-title-description">
+							<?php if (isset($title) && !empty($title)) : ?>
+								<h2 class="bdt-notice-title"><?php echo wp_kses_post($title); ?></h2>
+							<?php endif; ?>
+		
+							<?php if (isset($notice->content) && !empty($notice->content)) : ?>
+								<div class="bdt-notice-html-content">
+									<?php echo wp_kses_post($notice->content); ?>
+								</div>
+							<?php endif; ?>
+						</div>
 					</div>
-				<?php endif; ?>
+
+					<div class="bdt-notice-content-right">
+						<?php 
+						// Only show countdown if it's enabled, has an end date, and the end date is in the future
+						$show_countdown = isset($notice->show_countdown) && $notice->show_countdown && isset($notice->end_date);
+						if ($show_countdown) {
+							$end_timestamp = strtotime($notice->end_date);
+							$current_timestamp = current_time('timestamp');
+							$show_countdown = $end_timestamp > $current_timestamp;
+						}
+						?>
+						<?php if ($show_countdown) : ?>
+							<div class="bdt-notice-countdown" data-end-date="<?php echo esc_attr($notice->end_date); ?>" data-timezone="<?php echo esc_attr($notice->timezone ? $notice->timezone : 'UTC'); ?>">
+								<div class="countdown-timer">Loading...</div>
+							</div>
+						<?php endif; ?>
+		
+						<?php if (isset($notice->link) && !empty($notice->link)) : ?>
+							<div class="bdt-notice-btn">
+								<a href="<?php echo esc_url($notice->link); ?>" target="_blank">
+									<div class="nm-notice-btn">
+										<?php echo isset($notice->button_text) ? esc_html($notice->button_text) : 'Read More'; ?>
+										<span class="dashicons dashicons-arrow-right-alt"></span>
+										<div class="zolo-star zolo-star-1">✦</div><div class="zolo-star zolo-star-2">✦</div><div class="zolo-star zolo-star-3">✦</div><div class="zolo-star zolo-star-4">✦</div><div class="zolo-star zolo-star-5">✦</div><div class="zolo-star zolo-star-6">✦</div>
+									</div>
+								</a>
+							</div>
+						<?php endif; ?>
+					</div>
+				</div>
 			</div>
 		</div>
 		<?php

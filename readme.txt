@@ -1,25 +1,22 @@
-=== Element Pack Addons for Elementor - Mega Menu, Header Footer, Dynamic Builder and Ready Templates ===
+=== Element Pack Elementor Addons and Templates ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
 Donate link: http://bdthemes.com/
-Tags: elementor, elementor addons, elementor templates, elementor widgets, header footer builder
+Tags: elementor, elementor addons, widgets, header footer builder, templates
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.1.6
+Stable tag: 8.1.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.30.4
+Elementor tested up to: 3.31.2
 
-Best Elementor addon with live copy and paste, post grid, header and footer, templates, mega menu, dynamic builder, WooCommerce widgets and more.
+Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce builder and more.
 
 
 == Description ==
 
 Element Pack is a powerful addon for Elementor that helps you build beautiful and responsive websites with ease. It offers a wide range of features, widgets and templates to simplify your website design.
-
-BdThemes Element Pack Lite is the ultimate Elementor addons, giving you **300+ premium widgets and features**. 
-Moreover, this addon includes **2700+ dynamic templates** and easy customization with some clicks—all in one place! One more thing, it offers cross-domain **Live Copy Paste** feature that helps you import entire web pages, sections, widgets, or designs in seconds. 
 
 Trusted by **100,000+ websites**, it's the easiest way to design your stunning websites without coding.
 
@@ -280,6 +277,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.1.7 [18th August 2025] =
+
+* Added: Link to Wrapper Item option added in product grid widget
 
 = 8.1.6 [4th August 2025] =
 

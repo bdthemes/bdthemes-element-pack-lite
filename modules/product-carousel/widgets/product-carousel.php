@@ -1557,7 +1557,7 @@
 				$thumb_url = $item['image']['url'];
 			}
 
-			$this->add_render_attribute( $image_key, 'class', 'bdt-ep-product-carousel-image-link bdt-position-z-index', true );
+			$this->add_render_attribute( $image_key, 'class', 'bdt-ep-product-carousel-link bdt-position-z-index', true );
 			if (!empty($item['readmore_link'])) {
 				$this->add_link_attributes($image_key, $item['readmore_link']);
 			}
@@ -1598,7 +1598,7 @@
 				return;
 			}
 
-			$this->add_render_attribute( $title_key, 'class', 'bdt-ep-product-carousel-title-link', true );
+			$this->add_render_attribute( $title_key, 'class', 'bdt-ep-product-carousel-link', true );
 			if (!empty($item['readmore_link'])) {
 				$this->add_link_attributes($title_key, $item['readmore_link']);
 			}
@@ -1771,7 +1771,7 @@
 			<?php foreach ( $settings['product_items'] as $index => $item ) : 
 				
 				$item_key = 'item_' . $index;
-				$this->add_render_attribute( $item_key, 'class', 'bdt-ep-product-carousel-item-link bdt-position-z-index', true );
+				$this->add_render_attribute( $item_key, 'class', 'bdt-ep-product-carousel-link bdt-position-z-index', true );
 
 				if (!empty($item['readmore_link'])) {
 					$this->add_link_attributes($item_key, $item['readmore_link']);

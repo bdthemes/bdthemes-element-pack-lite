@@ -550,7 +550,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__('Get Up to 60%', 'bdthemes-element-pack'),
+			esc_html__('Earn Up to 60% Commission', 'bdthemes-element-pack'),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_affiliate',
 			[$this, 'display_page']
@@ -560,7 +560,7 @@ class ElementPack_Admin_Settings {
 			add_submenu_page(
 				self::PAGE_ID,                    
 				BDTEP_TITLE,                     
-				esc_html__( 'Upgrade For 30% Off!', 'bdthemes-element-pack' ),  
+				esc_html__( 'Upgrade For Up to 83% Off!', 'bdthemes-element-pack' ),  
 				'manage_options',                 
 				self::PAGE_ID . '_upgrade',
 				[ $this, 'display_page' ]
@@ -688,7 +688,7 @@ class ElementPack_Admin_Settings {
 								target="_blank"><?php esc_html_e('Compare Free Vs Pro', 'bdthemes-element-pack'); ?></a>
 							<a href="https://store.bdthemes.com/element-pack?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO"
 								class="bdt-button bdt-dashboard-sec-btn"
-								target="_blank"><?php esc_html_e('Get Premium at 30% OFF', 'bdthemes-element-pack'); ?></a>
+								target="_blank"><?php esc_html_e('Get Premium at Up to 83% OFF', 'bdthemes-element-pack'); ?></a>
 						</div>
 					</div>
 				</div>
