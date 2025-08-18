@@ -57,14 +57,14 @@ jQuery(document).ready(function ($) {
     });
 
     /* ===================================
-       REMOTE NOTICE
+       API NOTICE
        =================================== */
     
     /**
-     * Initialize countdown timers for remote notices
+     * Initialize countdown timers for API notices
      * This function finds all countdown elements and starts the countdown timer
      */
-    function initRemoteNoticeCountdown() {
+    function initAPINoticeCountdown() {
         // Find all countdown elements on the page
         jQuery('.bdt-notice-countdown').each(function() {
             var $countdown = jQuery(this);
@@ -129,16 +129,16 @@ jQuery(document).ready(function ($) {
     }
     
     // Initialize countdown on page load
-    initRemoteNoticeCountdown();
+    initAPINoticeCountdown();
     
     // Re-initialize countdown when new notices are added (for dynamic content)
     // This ensures countdown works even if notices are loaded after page load
     jQuery(document).on('DOMNodeInserted', '.bdt-notice-countdown', function() {
-        initRemoteNoticeCountdown();
+        initAPINoticeCountdown();
     });
 
     /* ===================================
-       END REMOTE NOTICE
+       END API NOTICE
        =================================== */
 
     // Variations swatches
