@@ -452,7 +452,7 @@ class ElementPack_Admin_Settings {
 	// Redirect to Element Pack Pro pricing page
 	public function ep_redirect_to_upgrade() {
 		if (isset($_GET['page']) && $_GET['page'] === self::PAGE_ID . '_upgrade') {
-			wp_redirect('https://store.bdthemes.com/element-pack?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO');
+			wp_redirect('https://store.bdthemes.com/element-pack?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=SUMMER25');
 			exit;
 		}
 	}
@@ -686,7 +686,7 @@ class ElementPack_Admin_Settings {
 							<a href="https://www.elementpack.pro/pricing/#a2a0062"
 								class="bdt-button bdt-welcome-button bdt-margin-small-right"
 								target="_blank"><?php esc_html_e('Compare Free Vs Pro', 'bdthemes-element-pack'); ?></a>
-							<a href="https://store.bdthemes.com/element-pack?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO"
+							<a href="https://store.bdthemes.com/element-pack?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=SUMMER25"
 								class="bdt-button bdt-dashboard-sec-btn"
 								target="_blank"><?php esc_html_e('Get Premium at Up to 83% OFF', 'bdthemes-element-pack'); ?></a>
 						</div>

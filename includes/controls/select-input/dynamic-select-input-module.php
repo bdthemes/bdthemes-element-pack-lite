@@ -92,6 +92,8 @@ class Dynamic_Select_Input_Module {
                 $data = $this->getbbPressTerms();
             } elseif ($query == 'acf') {
                 $data = $acf_global->getAcfFields($field_type);
+            } elseif ($query == 'comments') {
+                $data = $this->getComments();
             } else {
                 $data = $this->getPosts();
             }
@@ -586,6 +588,55 @@ class Dynamic_Select_Input_Module {
 
         return $results;
     }
+
+    /**
+     * Get Comments Query Data
+     *
+     * @return array
+     */
+    public function getComments()
+    {
+        $include    = $this->getselecedIds();
+        $searchText = $this->getSearchQuery();
+
+        $args = [
+            'status'  => 'approve',
+            'number'  => 0, // Always get all unless explicitly limited
+        ];
+
+        if (!empty($include)) {
+            $args['comment__in'] = $include;
+        }
+
+        if ($searchText) {
+            $args['search'] = $searchText;
+        }
+
+        // Get all public post types by default (but not filtering unnecessarily)
+        $args['post_type'] = $this->getAllPublicPostTypes();
+
+        $query = new \WP_Comment_Query($args);
+        $results = [];
+
+        foreach ($query->comments as $comment) {
+            $comment_text = wp_trim_words($comment->comment_content, 10, '...');
+            $post_title   = get_the_title($comment->comment_post_ID);
+            $text = sprintf(
+                '%s: %s (%s)',
+                $comment->comment_author,
+                $comment_text,
+                $post_title
+            );
+
+            $results[] = [
+                'id'   => $comment->comment_ID,
+                'text' => esc_html($text),
+            ];
+        }
+
+        return $results;
+    }
+
 }
 
 function Dynamic_Select_Input_Module() {
