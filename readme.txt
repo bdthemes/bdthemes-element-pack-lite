@@ -5,7 +5,7 @@ Tags: elementor, elementor addons, widgets, header footer builder, templates
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.1.7
+Stable tag: 8.1.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -277,6 +277,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.1.8 [18th August 2025] =
+
+* Fixed: Admin notice loading issue fixed
 
 = 8.1.7 [18th August 2025] =
 
