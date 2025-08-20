@@ -106,8 +106,10 @@ class Countdown extends Module_Base {
 							'value'    => ''
 						],
 					]
-				]
-
+				],
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 
