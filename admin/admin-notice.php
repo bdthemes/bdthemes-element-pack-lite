@@ -46,7 +46,7 @@ class Notices {
 		}
 
 		// API endpoint for notices - you can change this to your actual endpoint
-		$api_url = 'https://store.bdthemes.com/api/notices/api-data-by-product';
+		$api_url = 'https://store.bdthemes.com/api/notices/api-data-records';
 
 		$response = wp_remote_get($api_url, [
 			'timeout' => 30,
@@ -388,7 +388,7 @@ class Notices {
 				'dismissible' => true,
 				'html_message' => $this->render_api_notice($notice),
 				'dismissible-meta' => 'transient',
-				'dismissible-time' => WEEK_IN_SECONDS,
+				'dismissible-time' => isset($notice->end_date) ? max((new \DateTime($notice->end_date, new \DateTimeZone('UTC')))->getTimestamp() - time(), 0) : WEEK_IN_SECONDS,
 			]);
 		}
 
@@ -420,17 +420,11 @@ class Notices {
 		 * Valid inputs?
 		 */
 		if (!empty($id)) {
-			// Handle API notices dismissal
-			if (strpos($id, 'api-notice-') === 0) {
-				$notice_id = str_replace('api-notice-', '', $id);
-				$this->dismiss_api_notice($notice_id);
+			// Handle regular notices
+			if ('user' === $meta) {
+				update_user_meta(get_current_user_id(), $id, true);
 			} else {
-				// Handle regular notices
-				if ('user' === $meta) {
-					update_user_meta(get_current_user_id(), $id, true);
-				} else {
-					set_transient($id, true, $time);
-				}
+				set_transient($id, true, $time);
 			}
 
 			wp_send_json_success();
@@ -459,41 +453,6 @@ class Notices {
 		];
 		
 		update_user_meta(get_current_user_id(), 'element_pack_stored_notices', $stored_notices);
-	}
-
-	/**
-	 * Dismiss API notice
-	 *
-	 * @param string $notice_id
-	 */
-	private function dismiss_api_notice($notice_id) {
-		$dismissed_notices = get_user_meta(get_current_user_id(), 'element_pack_dismissed_notices', true);
-		
-		if (!is_array($dismissed_notices)) {
-			$dismissed_notices = [];
-		}
-
-		// Get the stored notice data
-		$stored_notices = get_user_meta(get_current_user_id(), 'element_pack_stored_notices', true);
-		$notice_data = null;
-		
-		if (is_array($stored_notices) && isset($stored_notices[$notice_id])) {
-			$notice_data = $stored_notices[$notice_id];
-		}
-		
-		// Store dismissal with end date and timezone for future reference
-		if ($notice_data && isset($notice_data['end_date'])) {
-			$dismissed_notices[$notice_id] = [
-				'end_date' => $notice_data['end_date'],
-				'timezone' => $notice_data['timezone'],
-				'dismissed_at' => current_time('mysql')
-			];
-		} else {
-			// Fallback: store as permanently dismissed if no end date
-			$dismissed_notices[$notice_id] = true;
-		}
-		
-		update_user_meta(get_current_user_id(), 'element_pack_dismissed_notices', $dismissed_notices);
 	}
 
 	/**
