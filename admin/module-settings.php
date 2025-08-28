@@ -1029,7 +1029,7 @@ class ModuleService {
 					'default'      => 'on',
 					'widget_type'  => 'pro',
 					'content_type' => 'custom',
-					'demo_url'     => 'https://demo.elementpack.pro/element/pricing-table',
+					'demo_url'     => 'https://demo.elementpack.pro/element/price-table/',
 					'video_url'    => 'https://youtu.be/D8_inzgdvyg',
 				],
 				[

@@ -986,7 +986,7 @@ class Panel_Slider extends Module_Base {
 							"pauseOnHover"    => ( "yes" == $settings["pauseonhover"] ) ? true : false,
 							"slidesPerView"   => (int) $columns_mobile,
 							"slidesPerGroup"  => isset( $settings["slides_to_scroll_mobile"] ) ? (int) $settings["slides_to_scroll_mobile"] : 1,
-							"spaceBetween"    => $settings['column_space']['size'] ?: 0,
+							"spaceBetween"    => !empty($settings["column_space_mobile"]["size"]) ? (int)$settings["column_space_mobile"]["size"] : 0,
 							"centeredSlides"  => ( $settings["centered_slides"] === "yes" ) ? true : false,
 							"grabCursor"      => ( $settings["grab_cursor"] === "yes" ) ? true : false,
 							"freeMode"        => ( $settings["free_mode"] === "yes" ) ? true : false,
@@ -997,12 +997,12 @@ class Panel_Slider extends Module_Base {
 							"breakpoints"     => [ 
 								(int) $viewport_md => [ 
 									"slidesPerView"  => (int) $columns_tablet,
-									"spaceBetween"   => $settings['column_space']['size'] ?: 0,
+									"spaceBetween"   => !empty($settings["column_space_tablet"]["size"]) ? (int)$settings["column_space_tablet"]["size"] : 0,
 									"slidesPerGroup" => isset( $settings["slides_to_scroll_tablet"] ) ? (int) $settings["slides_to_scroll_tablet"] : 1,
 								],
 								(int) $viewport_lg => [ 
 									"slidesPerView"  => (int) $columns,
-									"spaceBetween"   => $settings['column_space']['size'] ?: 0,
+									"spaceBetween"   => !empty($settings["column_space"]["size"]) ? (int)$settings["column_space"]["size"] : 0,
 									"slidesPerGroup" => isset( $settings["slides_to_scroll"] ) ? (int) $settings["slides_to_scroll"] : 1,
 								]
 							],

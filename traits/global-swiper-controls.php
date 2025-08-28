@@ -13,6 +13,51 @@ defined('ABSPATH') || die();
 
 trait Global_Swiper_Controls {
 
+	//swiper carousel columns & item gap controls
+	protected function register_carousel_column_gap_controls() {
+		$this->add_responsive_control(
+			'columns',
+			[
+				'label'          => esc_html__('Columns', 'bdthemes-element-pack'),
+				'type'           => Controls_Manager::SELECT,
+				'default'        => 3,
+				'tablet_default' => 2,
+				'mobile_default' => 1,
+				'options'        => [
+					1 => '1',
+					2 => '2',
+					3 => '3',
+					4 => '4',
+					5 => '5',
+					6 => '6',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'item_gap',
+			[
+				'label'   => __('Item Gap', 'bdthemes-element-pack'),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 35,
+				],
+				'tablet_default' => [
+					'size' => 20,
+				],
+				'mobile_default' => [
+					'size' => 20,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+			]
+		);
+	}
+
 	//Navigation Controls
 	protected function register_navigation_controls() {
 
@@ -1789,7 +1834,7 @@ trait Global_Swiper_Controls {
 							"pauseOnHover"          => ("yes" == $settings["pauseonhover"]) ? true : false,
 							"slidesPerView"         => isset($settings["columns_mobile"]) ? (int)$settings["columns_mobile"] : 1,
 							"slidesPerGroup"        => isset($settings["slides_to_scroll_mobile"]) ? (int)$settings["slides_to_scroll_mobile"] : 1,
-							"spaceBetween"          => !empty($settings["item_gap"]["size"]) ? (int)$settings["item_gap"]["size"] : 20,
+							"spaceBetween"          => !empty($settings["item_gap_mobile"]["size"]) ? (int)$settings["item_gap_mobile"]["size"] : 0,
 							"centeredSlides"        => ($settings["centered_slides"] === "yes") ? true : false,
 							"grabCursor"            => ($settings["grab_cursor"] === "yes") ? true : false,
 							"freeMode"              => ($settings["free_mode"] === "yes") ? true : false,
@@ -1802,12 +1847,12 @@ trait Global_Swiper_Controls {
 							"breakpoints"     => [
 								(int)$viewport_md => [
 									"slidesPerView"  => isset($settings["columns_tablet"]) ? (int)$settings["columns_tablet"] : 2,
-									"spaceBetween"   => !empty($settings["item_gap"]["size"]) ? (int)$settings["item_gap"]["size"] : 20,
+									"spaceBetween"   => !empty($settings["item_gap_tablet"]["size"]) ? (int)$settings["item_gap_tablet"]["size"] : 0,
 									"slidesPerGroup" => isset($settings["slides_to_scroll_tablet"]) ? (int)$settings["slides_to_scroll_tablet"] : 1,
 								],
 								(int)$viewport_lg => [
 									"slidesPerView"  => isset($settings["columns"]) ? (int)$settings["columns"] : 3,
-									"spaceBetween"   => !empty($settings["item_gap"]["size"]) ? (int)$settings["item_gap"]["size"] : 20,
+									"spaceBetween"   => !empty($settings["item_gap"]["size"]) ? (int)$settings["item_gap"]["size"] : 0,
 									"slidesPerGroup" => isset($settings["slides_to_scroll"]) ? (int)$settings["slides_to_scroll"] : 1,
 								]
 							],
