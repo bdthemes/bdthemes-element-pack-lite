@@ -97,40 +97,8 @@ class TutorLms_Course_Carousel extends Module_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'columns',
-			[
-				'label'          => esc_html__('Columns', 'bdthemes-element-pack'),
-				'type'           => Controls_Manager::SELECT,
-				'default'        => '3',
-				'tablet_default' => '2',
-				'mobile_default' => '1',
-				'options'        => [
-					'1' => '1',
-					'2' => '2',
-					'3' => '3',
-					'4' => '4',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'item_gap',
-			[
-				'label'   => esc_html__('Column Gap', 'bdthemes-element-pack'),
-				'type'    => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 35,
-				],
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 5,
-					],
-				],
-			]
-		);
+		//swiper carousel columns & item gap controls
+		$this->register_carousel_column_gap_controls();
 
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),

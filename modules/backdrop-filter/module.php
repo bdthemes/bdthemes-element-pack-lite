@@ -23,7 +23,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_backdrop_filter',
             [
-                'label'         => BDTEP_CP . esc_html__('Backdrop Filter', 'bdthemes-element-pack'),
+                'label'         => BDTEP_CP . esc_html__('Backdrop Filter/Liquid Glass Effects', 'bdthemes-element-pack'),
                 'type'          => Controls_Manager::POPOVER_TOGGLE,
                 'return_value'  => 'yes',
                 'separator'    => 'before',
@@ -32,6 +32,24 @@ class Module extends Element_Pack_Module_Base {
         );
 
         $widget->start_popover();
+
+        $widget->add_control(
+            'element_pack_backdrop_filter_type',
+            [
+                'label'     => esc_html__('Effect Type', 'bdthemes-element-pack'),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => 'backdrop',
+                'options'   => [
+                    'backdrop' => esc_html__('Backdrop Filter', 'bdthemes-element-pack'),
+                    'liquid_glass'    => esc_html__('Liquid Glass Effects', 'bdthemes-element-pack') . BDTEP_LOCK,
+                ],
+                'condition' => [
+                    'element_pack_backdrop_filter' => 'yes'
+                ],
+                'prefix_class' => 'bdt-filter-',
+                'classes' => BDTEP_LOCK_CLASS,
+            ]
+        );
 
 
         $widget->add_control(
@@ -47,7 +65,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-blur: {{SIZE}}px;'
@@ -70,7 +89,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-brightness: {{SIZE}}%;'
@@ -92,7 +112,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-contrast: {{SIZE}};'
@@ -114,7 +135,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-grayscale: {{SIZE}};'
@@ -136,7 +158,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-invert: {{SIZE}};'
@@ -158,7 +181,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-opacity: {{SIZE}};'
@@ -180,7 +204,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-sepia: {{SIZE}};'
@@ -202,7 +227,8 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-saturate: {{SIZE}};'
@@ -223,10 +249,52 @@ class Module extends Element_Pack_Module_Base {
                     ],
                 ],
                 'condition' => [
-                    'element_pack_backdrop_filter' => 'yes'
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'backdrop'
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => '--ep-backdrop-filter-hue-rotate: {{SIZE}}deg;'
+                ],
+            ]
+        );
+
+
+
+        // Liquid Glass Effects Controls
+        $widget->add_control(
+            'element_pack_liquid_glass_effects_blur',
+            [
+                'label' => esc_html__('Blur', 'bdthemes-element-pack'),
+                'type'  => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 0.5,
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 25,
+                        'step' => 0.1,
+                    ],
+                ],
+                'condition' => [
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'liquid_glass'
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}' => '--ep-liquid-glass-effects-blur: {{SIZE}}px;'
+                ],
+            ]
+        );
+
+        $widget->add_control(
+            'ep_liquid_glass_effects_notice',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => esc_html__('Liquid glass effect works best with transparent or semi-transparent backgrounds. For optimal results, ensure the parent section has a background image or color.', 'bdthemes-element-pack'),
+                'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+                'condition' => [
+                    'element_pack_backdrop_filter' => 'yes',
+                    'element_pack_backdrop_filter_type' => 'liquid_glass'
                 ],
             ]
         );
@@ -247,8 +315,73 @@ class Module extends Element_Pack_Module_Base {
     protected function add_actions() {
         add_action('elementor/element/column/section_style/before_section_end', [$this, 'register_controls'], 10, 2);
         add_action('elementor/element/common/_section_background/before_section_end', [$this, 'register_controls'], 10, 2);
-
-		add_action('elementor/element/container/section_background/before_section_end', [$this, 'register_controls'], 10, 2);
-
+        add_action('elementor/element/container/section_background/before_section_end', [$this, 'register_controls'], 10, 2);
+        add_action('elementor/element/section/section_background/before_section_end', [$this, 'register_controls'], 10, 2);
+        
+        // Add CSS to frontend for liquid glass effects
+        add_action('wp_head', [$this, 'add_liquid_glass_effects_svg_filter']);
     }
+
+    public function add_liquid_glass_effects_svg_filter() {
+        ?>
+        <svg style="display: none">
+      <filter
+        id="bdt-frosted"
+        x="0%"
+        y="0%"
+        width="100%"
+        height="100%"
+        filterUnits="objectBoundingBox"
+      >
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.01 0.01"
+          numOctaves="1"
+          seed="5"
+          result="turbulence"
+        />
+        <!-- Seeds: 14, 17,  -->
+
+        <feComponentTransfer in="turbulence" result="mapped">
+          <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
+          <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+          <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+        </feComponentTransfer>
+
+        <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+
+        <feSpecularLighting
+          in="softMap"
+          surfaceScale="5"
+          specularConstant="1"
+          specularExponent="100"
+          lighting-color="white"
+          result="specLight"
+        >
+          <fePointLight x="-200" y="-200" z="300" />
+        </feSpecularLighting>
+
+        <feComposite
+          in="specLight"
+          operator="arithmetic"
+          k1="0"
+          k2="1"
+          k3="1"
+          k4="0"
+          result="litImage"
+        />
+
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="softMap"
+          scale="150"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+</svg>
+        <?php
+    }
+
+
 }

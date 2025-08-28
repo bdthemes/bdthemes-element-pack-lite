@@ -195,51 +195,183 @@
     // Elementor Control Lock (when Pro is not active)
     if (!ElementPackConfig.pro_installed) {
         
-        const lockElementorControls = {
-            lockedWidgets: ['bdt-creative-button', 'bdt-content-switcher', 'bdt-social-share', 'bdt-scrollnav'],
-            lockedOptions: {
-                'bdt-creative-button': { 'aura': 'anthe' },
-                'bdt-content-switcher': { 'button': '1', 'template': 'content', 'link_section': 'content', 'link_widget': 'content' },
-                'bdt-social-share': { 'icon': 'icon-text', 'text': 'icon-text' },
-                'bdt-scrollnav': { 'dot': 'default' }
+        const ElementPackControlLock = {
+            // Configuration for locked widgets and extensions
+            config: {
+                widgets: {
+                    'bdt-creative-button': { 'aura': 'anthe' },
+                    'bdt-content-switcher': { 'button': '1', 'template': 'content', 'link_section': 'content', 'link_widget': 'content' },
+                    'bdt-social-share': { 'icon': 'icon-text', 'text': 'icon-text' },
+                    'bdt-scrollnav': { 'dot': 'default' }
+                },
+                // Default configuration for all extensions
+                extensionDefaults: {
+                    selectors: ['.bdt-ep-lock-control select'],
+                    contexts: ['section', 'column', 'container']
+                },
+                extensions: {
+                    'bdt-backdrop-filter': {
+                        options: { 'liquid_glass': 'backdrop' }
+                    }
+                }
             },
-            tooltipText: 'This option is only available in Element Pack Pro',
+            
+            // State management
+            state: {
+                currentContext: null,
+                currentType: null,
+                debounceTimer: null
+            },
+            
+            // Constants
+            TOOLTIP_TEXT: 'This option is only available in Element Pack Pro',
+            DEBOUNCE_DELAY: 200,
+            LOCK_DELAY: 300,
 
             init() {
                 this.bindEvents();
             },
 
             bindEvents() {
+                // Unified panel opening handler
+                this.bindPanelEvents();
+                
+                // Section activation handler
+                elementor.channels.editor.on('section:activated', () => {
+                    this.handleSectionActivation();
+                });
+
+                // Panel changes observer
+                this.observePanelChanges();
+            },
+
+            bindPanelEvents() {
+                // Widget panel opening
                 elementor.hooks.addAction('panel/open_editor/widget', (panel, model) => {
                     const widgetType = model.get('widgetType');
-                    if (this.lockedWidgets.includes(widgetType)) {
-                        setTimeout(() => this.lockSelectControl(widgetType), 500);
+                    this.updateContext('widget', widgetType);
+                    this.scheduleLock();
+                });
+
+                // Extension contexts (using common defaults)
+                this.config.extensionDefaults.contexts.forEach(context => {
+                    elementor.hooks.addAction(`panel/open_editor/${context}`, () => {
+                        // Check all extensions for this context
+                        Object.keys(this.config.extensions).forEach(extensionKey => {
+                            this.updateContext('extension', extensionKey);
+                        });
+                        this.scheduleLock();
+                    });
+                });
+            },
+
+            updateContext(type, identifier) {
+                this.state.currentType = type;
+                this.state.currentContext = identifier;
+            },
+
+            handleSectionActivation() {
+                if (this.shouldLockCurrentContext()) {
+                    this.scheduleLock();
+                }
+                // Always check extensions on section activation
+                this.lockAllExtensions();
+            },
+
+            shouldLockCurrentContext() {
+                const { currentType, currentContext } = this.state;
+                
+                if (currentType === 'widget') {
+                    return Object.keys(this.config.widgets).includes(currentContext);
+                }
+                
+                if (currentType === 'extension') {
+                    return Object.keys(this.config.extensions).includes(currentContext);
+                }
+                
+                return false;
+            },
+
+            scheduleLock(delay = this.LOCK_DELAY) {
+                setTimeout(() => {
+                    if (this.state.currentType === 'widget') {
+                        this.lockWidget(this.state.currentContext);
+                    } else if (this.state.currentType === 'extension') {
+                        this.lockExtension(this.state.currentContext);
                     }
+                }, delay);
+            },
+
+            observePanelChanges() {
+                if (!window.MutationObserver) return;
+                
+                const targetNode = document.getElementById('elementor-panel-content-wrapper');
+                if (!targetNode) return;
+
+                const observer = new MutationObserver(() => {
+                    clearTimeout(this.state.debounceTimer);
+                    this.state.debounceTimer = setTimeout(() => {
+                        this.handlePanelMutation();
+                    }, this.DEBOUNCE_DELAY);
+                });
+                
+                observer.observe(targetNode, { childList: true, subtree: true });
+            },
+
+            handlePanelMutation() {
+                if (this.shouldLockCurrentContext()) {
+                    if (this.state.currentType === 'widget') {
+                        this.lockWidget(this.state.currentContext);
+                    } else if (this.state.currentType === 'extension') {
+                        this.lockExtension(this.state.currentContext);
+                    }
+                }
+                // Always check all extensions
+                this.lockAllExtensions();
+            },
+
+            lockWidget(widgetType) {
+                const lockedOptions = this.config.widgets[widgetType];
+                if (!lockedOptions) return;
+
+                this.lockSelectOptions('.bdt-ep-lock-control select', lockedOptions);
+            },
+
+            lockExtension(extensionKey) {
+                const extension = this.config.extensions[extensionKey];
+                if (!extension) return;
+
+                // Use common selectors for all extensions
+                this.config.extensionDefaults.selectors.forEach(selector => {
+                    this.lockSelectOptions(selector, extension.options);
                 });
             },
 
-            lockSelectControl(widgetType) {
-                const $selectControl = $('.bdt-ep-lock-control select');
-                
-                if (!$selectControl.length) return;
-                
-                const widgetLockedOptions = this.lockedOptions[widgetType];
-                if (!widgetLockedOptions) return;
-                
-                // Apply locks to all options for this widget
-                Object.keys(widgetLockedOptions).forEach(optionValue => {
-                    $selectControl
-                        .find(`option[value="${optionValue}"]`)
-                        .attr('disabled', 'disabled')
-                        .attr('title', this.tooltipText);
+            lockAllExtensions() {
+                Object.keys(this.config.extensions).forEach(extensionKey => {
+                    this.lockExtension(extensionKey);
                 });
-                
             },
 
+            lockSelectOptions(selector, lockedOptions) {
+                const $selectControls = $(selector);
+                if (!$selectControls.length) return;
+
+                $selectControls.each((index, select) => {
+                    const $select = $(select);
+                    Object.keys(lockedOptions).forEach(optionValue => {
+                        const $option = $select.find(`option[value="${optionValue}"]`);
+                        if ($option.length && !$option.prop('disabled')) {
+                            $option.prop('disabled', true)
+                                   .attr('title', this.TOOLTIP_TEXT);
+                        }
+                    });
+                });
+            }
         };
 
-        // Initialize the Elementor Control Lock system
-        $(() => lockElementorControls.init());
+        // Initialize the Element Pack Control Lock system
+        $(() => ElementPackControlLock.init());
     }
 
 })(jQuery);

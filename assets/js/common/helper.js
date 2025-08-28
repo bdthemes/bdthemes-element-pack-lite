@@ -307,5 +307,62 @@ function returnCurrencySymbol(currency = null) {
       });
 
     /** /Toggle Pass */
+
+    /**
+     * Backdrop Filter and Liquid Glass Effects
+     * Handles both backdrop filter and liquid glass effect functionality
+     */
+    var BackdropFilterGlassEffect = {
+        init: function () {
+            this.initGlassEffect();
+        },
+
+        initGlassEffect: function () {
+            // Find all elements with glass effect enabled (legacy)
+            jQuery('.bdt-glass-effect-yes').each(function () {
+                var $element = jQuery(this);
+                
+                // Check if the overlay already exists to prevent duplicates
+                if ($element.data('glass-effect-overlay-added')) {
+                    return;
+                }
+
+                // Create glass effect overlay div
+                var $glassOverlay = jQuery('<div class="bdt-glass-effect-overlay"></div>');
+
+                // Insert after the element
+                $element.prepend($glassOverlay);
+
+                //Apply glass effect styles
+                $glassOverlay.css({
+                    'position': 'absolute',
+                    'z-index': '0',
+                    'inset': '0',
+                    'filter': 'url(#glass-distortion)',
+                    'overflow': 'hidden',
+                    'isolation': 'isolate',
+                    'backdrop-filter': 'blur(var(--ep-glass-effect-blur, 3px))',
+                    //'will-change': 'filter, backdrop-filter'
+                });
+
+                // Mark element to prevent re-adding overlay
+                $element.data('glass-effect-overlay-added', true);
+            });
+        },
+    };
+
+    // Initialize glass effects when document is ready
+    BackdropFilterGlassEffect.init();
+
+    // Re-initialize for dynamic content (Elementor frontend)
+    if (typeof elementorFrontend !== 'undefined') {
+        elementorFrontend.hooks.addAction('frontend/element_ready/global', function () {
+            BackdropFilterGlassEffect.init();
+        });
+    }
+    /**
+     * /Backdrop Filter and Liquid Glass Effects
+     */
+
   });
 })(jQuery);

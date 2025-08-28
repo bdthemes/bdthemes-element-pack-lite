@@ -201,41 +201,8 @@ class Static_Carousel extends Module_Base
             ]
         );
 
-        $this->add_responsive_control(
-            'columns',
-            [
-                'label' => __('Columns', 'bdthemes-element-pack'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 3,
-                'tablet_default' => 2,
-                'mobile_default' => 1,
-                'options' => [
-                    1 => '1',
-                    2 => '2',
-                    3 => '3',
-                    4 => '4',
-                    5 => '5',
-                    6 => '6',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'item_gap',
-            [
-                'label' => __('Item Gap', 'bdthemes-element-pack'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'size' => 20,
-                ],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
-            ]
-        );
+        //swiper carousel columns & item gap controls
+		$this->register_carousel_column_gap_controls();
 
         $this->add_control(
             'item_match_height',

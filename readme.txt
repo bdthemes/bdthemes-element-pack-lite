@@ -5,7 +5,7 @@ Tags: elementor, elementor addons, widgets, header footer builder, templates
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.1.10
+Stable tag: 8.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
@@ -277,6 +277,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.2.0 [28th August 2025] =
+
+* Added: Liquid Glass Effects added to the Backdrop Filter extension
+* Added: Swiper carousel widgets item gap responsive feature added
+* Fixed: Hash URL issue fixed in Wrapper Link extension ( Thanks to Jason )
+* Fixed: Swiper carousel widgets item gap ( 0 Value ) not working issue fixed
 
 = 8.1.10 [21st August 2025] =
 
