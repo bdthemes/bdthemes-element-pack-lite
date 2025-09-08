@@ -4,14 +4,14 @@
  * Plugin Name: Element Pack Lite - Addons for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: The all-new <a href="https://elementpack.pro/">Element Pack</a> brings incredibly advanced, and super-flexible widgets, and A to Z essential addons to the Elementor page builder for WordPress. Explore expertly-coded widgets with first-class support by experts.
- * Version: 8.2.0
+ * Version: 8.2.1
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
  * Text Domain: bdthemes-element-pack
  * Domain Path: /languages
  * License: GPL3
  * Elementor requires at least: 3.22
- * Elementor tested up to: 3.31.2
+ * Elementor tested up to: 3.31.3
  */
 
 
@@ -82,7 +82,7 @@ if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 if ( ! element_pack_pro_installed() ) {
 
 	// Some pre defined value for easy use
-	define( 'BDTEP_VER', '8.2.0' );
+	define( 'BDTEP_VER', '8.2.1' );
 	define( 'BDTEP_TPL_DB_VER', '1.0.0' );
 	define( 'BDTEP__FILE__', __FILE__ );
 	if ( ! defined( 'BDTEP_TITLE' ) ) {
@@ -226,41 +226,5 @@ if ( ! element_pack_pro_installed() ) {
 
 		}
 		add_action( 'admin_init', 'rc_ep_lite_plugin' );
-	}
-
-
-	/**
-	 * SDK Integration
-	 */
-
-	if ( ! function_exists( 'dci_plugin_element_pack_lite' ) ) {
-		function dci_plugin_element_pack_lite() {
-
-			// Include DCI SDK.
-			require_once dirname( __FILE__ ) . '/dci/start.php';
-
-			wp_register_style( 'dci-sdk-ep-lite', plugins_url( 'dci/assets/css/dci.css', __FILE__ ), array(), '1.2.1', 'all' );
-			wp_enqueue_style( 'dci-sdk-ep-lite' );
-
-			dci_dynamic_init( array(
-				'sdk_version'          => '1.2.1',
-				'product_id'           => 4,
-				'plugin_name'          => 'Element Pack Lite', // make simple, must not empty
-				'plugin_title'         => 'Love using Element Pack Lite? Congrats 🎉  ( Never miss an Important Update )', // You can describe your plugin title here
-				'plugin_icon'          => BDTEP_ASSETS_URL . 'images/logo.svg',
-				'api_endpoint'         => 'https://analytics.bdthemes.com/wp-json/dci/v1/data-insights',
-				'slug'                 => 'bdthemes-element-pack-lite',
-				'plugin_deactivate_id' => 'bdthemes-element-pack-lite',
-				'menu'                 => array(
-					'slug' => 'element_pack_options',
-				),
-				'public_key'           => 'pk_ilWmdZmKDWVCdkkKvf5SnD5ib3nZmLJr',
-				'is_premium'           => true,
-				'popup_notice'         => false,
-				'deactivate_feedback'  => true,
-				'plugin_msg'           => '<p>Be Top-contributor by sharing non-sensitive plugin data and create an impact to the global WordPress community today! You can receive valuable emails periodically.</p>',
-			) );
-		}
-		add_action( 'admin_init', 'dci_plugin_element_pack_lite' );
 	}
 }

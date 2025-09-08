@@ -100,96 +100,93 @@ jQuery(document).ready(function ($) {
     });
 
     // Fetch API notices after full page load, with try/catch
-    $(window).on('load', function () {
-        // Add small delay to ensure DOM is fully ready
-        setTimeout(function() {
-            try {
-                $.ajax({
-                url: (window.ElementPackNoticeConfig && ElementPackNoticeConfig.ajaxurl) ? ElementPackNoticeConfig.ajaxurl : (typeof ajaxurl !== 'undefined' ? ajaxurl : ''),
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    action: 'ep_fetch_api_notices',
-                    _wpnonce: ElementPackNoticeConfig.nonce
+    setTimeout(function() {
+        try {
+            $.ajax({
+            url: (window.ElementPackNoticeConfig && ElementPackNoticeConfig.ajaxurl) ? ElementPackNoticeConfig.ajaxurl : (typeof ajaxurl !== 'undefined' ? ajaxurl : ''),
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                action: 'ep_fetch_api_notices',
+                _wpnonce: ElementPackNoticeConfig.nonce
+            }
+        })
+        .done(function (res) {
+            if (res && res.success && res.data && res.data.html) {
+                var $markup = $(res.data.html);
+                var $target = $('#wpbody-content .wrap').first();
+
+                if (!$target.length) {
+                    $target = $('.wrap').first();
                 }
-            })
-            .done(function (res) {
-                if (res && res.success && res.data && res.data.html) {
-                    var $markup = $(res.data.html);
-                    var $target = $('#wpbody-content .wrap').first();
+                if (!$target.length) {
+                    $target = $('#wpbody-content');
+                }
 
-                    if (!$target.length) {
-                        $target = $('.wrap').first();
-                    }
-                    if (!$target.length) {
-                        $target = $('#wpbody-content');
-                    }
-
-                    // Check for existing notices with same class to avoid duplicates
-                     var shouldInsert = true;
-                     $markup.each(function() {
-                         var $notice = $(this);
-                         var noticeId = $notice.attr('id');
-                         
-                         // Extract class pattern from notice ID (e.g., bdt-admin-notice-api-notice-class-xxxxx)
-                         if (noticeId && noticeId.indexOf('bdt-admin-notice-api-notice-class-') !== -1) {
-                             var classPattern = noticeId.substring(noticeId.indexOf('bdt-admin-notice-api-notice-class-'));
-                             
-                             // Check if any existing notice in DOM has similar class pattern from any plugin
-                             var existingNotices = $('[id$="' + classPattern + '"]');
-                             if (existingNotices.length > 0) {
-                                 shouldInsert = false;
-                                 return false; // break out of each loop
-                             }
-                         }
-                     });
-
-                    // Only insert if no duplicate class pattern found
-                    if (shouldInsert) {
-                        // insert right after the <h1> if exists, otherwise at top
-                        if ($target.children('hr.wp-header-end').length) {
-                            $target.children('hr.wp-header-end').first().after($markup);
-                        } else if ($target.children('h1').length) {
-                            $target.children('h1').first().after($markup);
-                        } else {
-                            $target.prepend($markup);
+                // Check for existing notices with same class to avoid duplicates
+                    var shouldInsert = true;
+                    $markup.each(function() {
+                        var $notice = $(this);
+                        var noticeId = $notice.attr('id');
+                        
+                        // Extract class pattern from notice ID (e.g., bdt-admin-notice-api-notice-class-xxxxx)
+                        if (noticeId && noticeId.indexOf('bdt-admin-notice-api-notice-class-') !== -1) {
+                            var classPattern = noticeId.substring(noticeId.indexOf('bdt-admin-notice-api-notice-class-'));
+                            
+                            // Check if any existing notice in DOM has similar class pattern from any plugin
+                            var existingNotices = $('[id$="' + classPattern + '"]');
+                            if (existingNotices.length > 0) {
+                                shouldInsert = false;
+                                return false; // break out of each loop
+                            }
                         }
-                    }
+                    });
 
-                    // Re-initialize WP dismiss buttons for dynamically added notices
-                    if (typeof wp !== 'undefined' && wp.a11y && window.jQuery) {
-                        $(document).trigger('wp-updates-notice-added');
+                // Only insert if no duplicate class pattern found
+                if (shouldInsert) {
+                    // insert right after the <h1> if exists, otherwise at top
+                    if ($target.children('hr.wp-header-end').length) {
+                        $target.children('hr.wp-header-end').first().after($markup);
+                    } else if ($target.children('h1').length) {
+                        $target.children('h1').first().after($markup);
                     } else {
-                        // fallback: manually add close button + click handler
-                        $markup.each(function () {
-                            var $el = $(this);
-                            if ($el.hasClass('is-dismissible') && !$el.find('.notice-dismiss').length) {
-                                var $button = $('<button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>');
-                                $el.append($button);
-                                $button.on('click', function () {
-                                    $el.fadeTo(100, 0, function () {
-                                        $el.slideUp(100, function () {
-                                            $el.remove();
-                                        });
+                        $target.prepend($markup);
+                    }
+                }
+
+                // Re-initialize WP dismiss buttons for dynamically added notices
+                if (typeof wp !== 'undefined' && wp.a11y && window.jQuery) {
+                    $(document).trigger('wp-updates-notice-added');
+                } else {
+                    // fallback: manually add close button + click handler
+                    $markup.each(function () {
+                        var $el = $(this);
+                        if ($el.hasClass('is-dismissible') && !$el.find('.notice-dismiss').length) {
+                            var $button = $('<button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>');
+                            $el.append($button);
+                            $button.on('click', function () {
+                                $el.fadeTo(100, 0, function () {
+                                    $el.slideUp(100, function () {
+                                        $el.remove();
                                     });
                                 });
-                            }
-                        });
-                    }
-
-
-                    // Initialize countdowns in injected content
-                    initAPINoticeCountdown();
+                            });
+                        }
+                    });
                 }
-            })
-            .fail(function () {
-                // swallow errors silently
-            });
-            } catch (e) {
-                // ignore
+
+
+                // Initialize countdowns in injected content
+                initAPINoticeCountdown();
             }
-        }, 100); // 100ms delay to ensure DOM is ready
-    });
+        })
+        .fail(function () {
+            // swallow errors silently
+        });
+        } catch (e) {
+            // ignore
+        }
+    }, 100); // 100ms delay to ensure DOM is ready
 
     /* ===================================
        END Admin Store API NOTICE
