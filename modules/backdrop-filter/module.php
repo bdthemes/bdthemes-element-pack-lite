@@ -326,7 +326,7 @@ class Module extends Element_Pack_Module_Base {
     public function add_liquid_glass_effects_svg_filter( $element ) {
         if ( !\ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() && !\ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
             $settings = $element->get_settings_for_display();
-            if ( 'liquid_glass' !== $settings['element_pack_backdrop_filter_type'] ) {
+            if ( !isset($settings['element_pack_backdrop_filter_type']) || 'liquid_glass' !== $settings['element_pack_backdrop_filter_type'] ) {
                 return;
             }
         }
