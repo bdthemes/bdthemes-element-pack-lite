@@ -6,6 +6,11 @@ use Elementor\Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+/**
+ * Document Viewer Widget
+ * 
+ * A widget that allows viewing documents using Google Docs viewer or browser native viewer.
+ */
 class Document_Viewer extends Module_Base {
 
 	public function get_name() {
@@ -25,7 +30,7 @@ class Document_Viewer extends Module_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'document', 'viewer', 'record', 'file' ];
+		return [ 'document', 'viewer', 'record', 'file', 'local' ];
 	}
 
 	public function get_custom_help_url() {
@@ -51,7 +56,7 @@ class Document_Viewer extends Module_Base {
 			'file_source',
 			[
 				'label'         => esc_html__( 'File Source', 'bdthemes-element-pack' ),
-				'description'   => esc_html__( 'any type of document file: pdf, xls, docx, ppt etc', 'bdthemes-element-pack' ),
+				'description'   => esc_html__( 'Enter the URL of your document', 'bdthemes-element-pack' ),
 				'type'          => Controls_Manager::URL,
 				'dynamic'       => [ 'active' => true ],
 				'placeholder'   => esc_html__( 'https://example.com/sample.pdf', 'bdthemes-element-pack' ),
@@ -81,30 +86,83 @@ class Document_Viewer extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'viewer_type',
+			[
+				'label' => esc_html__( 'Viewer Type', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type' => Controls_Manager::SELECT,
+				'default' => 'google_docs',
+				'options' => [
+					'google_docs' => esc_html__( 'Google Docs (Public URLs Only)', 'bdthemes-element-pack' ),
+					'browser' => esc_html__( 'Browser Native', 'bdthemes-element-pack' ),
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 	}
 
 	public function render() {
 		$settings  = $this->get_settings_for_display();
-		// old
-		// $final_url = ($settings['file_source']['url']) ? '//docs.google.com/viewer?url='. esc_url($settings['file_source']['url']) : false;
+		$source_url = $settings['file_source']['url'] ? $settings['file_source']['url'] : false;
+		$viewer_type = $settings['viewer_type'];
 
-		// fixed 19 Dec 2020
-		$final_url = ($settings['file_source']['url']) ? '//docs.google.com/viewer?url='. esc_url($settings['file_source']['url']) .'&embedded=true' : false;
-		?>
+		if (!$source_url) {
+			echo '<div class="bdt-alert-warning" bdt-alert>';
+			echo '<a class="bdt-alert-close" bdt-close></a>';
+			echo '<p>' . esc_html__('Please enter correct URL of your document.', 'bdthemes-element-pack') . '</p>';
+			echo '</div>';
+			return;
+		}
 
-		<?php if ($final_url) : ?>
-        <div class="bdt-document-viewer">
-        	<iframe src="<?php echo esc_url($final_url); ?>" class="bdt-document"></iframe>
-        </div>
-        <?php else : ?>
-        	<div class="bdt-alert-warning" bdt-alert>
-        	    <a class="bdt-alert-close" bdt-close></a>
-        	    <p><?php esc_html_e( 'Please enter correct URL of your document.', 'bdthemes-element-pack' ); ?></p>
-        	</div>
-        <?php endif; ?>
+		// Check file extension
+		$file_ext = pathinfo($source_url, PATHINFO_EXTENSION);
+		$file_ext = strtolower($file_ext);
 
-		<?php
+		if ($viewer_type === 'google_docs') {
+			// Google Docs viewer (for public URLs only)
+			$viewer_base = 'https://docs.google.com/viewer?';
+			$query_params = http_build_query([
+				'url' => $source_url,
+				'embedded' => 'true'
+			]);
+			$final_url = $viewer_base . $query_params;
+			
+			// Check if URL is local
+			$is_local_url = false;
+			$parsed_url = parse_url($source_url);
+			if (isset($parsed_url['host'])) {
+				$host = $parsed_url['host'];
+				// Check for localhost, IP addresses, or local domains
+				if ($host === 'localhost' || 
+					preg_match('/^127\.\d+\.\d+\.\d+$/', $host) || 
+					preg_match('/^192\.168\.\d+\.\d+$/', $host) || 
+					preg_match('/^10\.\d+\.\d+\.\d+$/', $host) || 
+					preg_match('/^172\.(1[6-9]|2[0-9]|3[0-1])\.\d+\.\d+$/', $host) || 
+					strpos($host, '.local') !== false || 
+					strpos($host, '.test') !== false || 
+					strpos($host, '.localhost') !== false) {
+					$is_local_url = true;
+				}
+			}
+			?>
+			<div class="bdt-document-viewer">
+				<?php if ($is_local_url): ?>
+				<div class="bdt-alert-info" bdt-alert>
+					<p><?php echo esc_html__('Note: Google Docs viewer only works with publicly accessible URLs, not local network files.', 'bdthemes-element-pack'); ?></p>
+				</div>
+				<?php endif; ?>
+				<iframe src="<?php echo $final_url; ?>" class="bdt-document"></iframe>
+			</div>
+			<?php
+		} else {
+			// Browser native viewer
+			?>
+			<div class="bdt-document-viewer">
+				<iframe src="<?php echo esc_url($source_url); ?>" class="bdt-document"></iframe>
+			</div>
+			<?php
+		}
 	}
 }

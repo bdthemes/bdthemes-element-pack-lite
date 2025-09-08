@@ -20,7 +20,7 @@ class Notices {
 
 	public function __construct() {
 
-		add_action('admin_notices', [$this, 'show_notices']);
+		add_action('admin_notices', [$this, 'show_notices'], 99);
 		add_action('wp_ajax_element-pack-notices', [$this, 'dismiss']);
 
 		// AJAX endpoint to fetch API notices on demand (after page load)

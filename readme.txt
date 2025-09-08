@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, widgets, header footer builder, templates
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.2.0
+Stable tag: 8.2.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.31.2
+Elementor tested up to: 3.31.3
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce builder and more.
 
@@ -277,6 +277,15 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.2.1 [8th September 2025] =
+
+* Added: Viewer Type added in Document Viewer widget
+* Fixed: Admin dashboard widget search issue fixed
+* Fixed: Favicon issue fixed in Backdrop Filter extension ( Thanks to Kent )
+* Fixed: jQuery migration warning fixed ( Thanks to BackuPs )
+* Fixed: JS API data condition fixed in Open Street Map widget
+* Fixed: DCI Notice removed for security reason
 
 = 8.2.0 [28th August 2025] =
 

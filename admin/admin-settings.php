@@ -1989,7 +1989,7 @@ class ElementPack_Admin_Settings {
 					behavior: 'smooth'
 				});
 				
-				const tabContainer = jQuery(this).closest('.bdt-dashboard-navigation').siblings('.bdt-tab-container');
+				const tabContainer = jQuery(this).closest('.ep-dashboard-nav-container-wrapper').siblings('.bdt-tab-container');
 				clearSearchInputs(tabContainer);
 				tabContainer.find('.bdt-search-input').trigger('keyup');
 			});

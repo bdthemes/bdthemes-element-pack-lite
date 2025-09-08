@@ -1673,7 +1673,7 @@ function returnCurrencySymbol(currency = null) {
                 settings.zoom
             );
 
-        if (settings.mapboxToken !== '') {
+        if (settings.mapboxToken !== '' && settings.mapboxToken !== false) {
           tileSource = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + settings.mapboxToken;
             L.tileLayer( tileSource, {
                 maxZoom: 18,
