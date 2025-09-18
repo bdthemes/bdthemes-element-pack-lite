@@ -290,7 +290,7 @@ class Module extends Element_Pack_Module_Base {
             'ep_liquid_glass_effects_notice',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__('Liquid glass effect works best with transparent or semi-transparent backgrounds. For optimal results, ensure the parent section has a background image or color.', 'bdthemes-element-pack'),
+                'raw'             => esc_html__('Liquid glass effect works best with transparent backgrounds. For optimal results, ensure the parent section has a background image.', 'bdthemes-element-pack'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
                 'condition' => [
                     'element_pack_backdrop_filter' => 'yes',

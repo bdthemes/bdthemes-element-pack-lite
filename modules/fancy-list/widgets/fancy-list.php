@@ -180,6 +180,9 @@ class Fancy_List extends Module_Base {
 					$this->add_inline_editing_attributes( $repeater_setting_key );
 
 					$this->add_render_attribute( 'list_title_tags', 'class', 'bdt-fancy-list-title', true );
+					
+					// Check render <li> at all
+					if ( ! empty( $item['text'] ) || ! empty( $item['text_details'] ) || ! empty( $item['list_icon']['value'] ) || ! empty( $item['img']['url'] ) ) : 
 					?>
 					<li>
 						<?php
@@ -218,15 +221,22 @@ class Fancy_List extends Module_Base {
 									?>
 								</div>
 							<?php endif; ?>
+							
+							<?php if ( ! empty( $item['text'] ) || ! empty( $item['text_details'] ) ) : ?>
 							<div class="bdt-fancy-list-content">
+								<?php if ( !empty($item['text'])) :?>
 								<<?php echo esc_attr( Utils::get_valid_html_tag( $settings['title_tags'] ) ); ?>
 									<?php $this->print_render_attribute_string( 'list_title_tags' ); ?>>
 									<?php echo wp_kses_post( $item['text'] ); ?>
 								</<?php echo esc_attr( Utils::get_valid_html_tag( $settings['title_tags'] ) ); ?>>
+								<?php endif; ?>
+								<?php if ( ! empty( $item['text_details'] ) ) : ?>
 								<p class="bdt-fancy-list-text">
 									<?php echo wp_kses_post( $item['text_details'] ); ?>
 								</p>
+								<?php endif; ?>
 							</div>
+							<?php endif; ?>
 							<?php if ( ! empty ( $item['list_icon']['value'] ) ) : ?>
 								<div class="bdt-fancy-list-icon">
 									<?php Icons_Manager::render_icon( $item['list_icon'], [ 'aria-hidden' => 'true' ] ); ?>
@@ -238,11 +248,12 @@ class Fancy_List extends Module_Base {
 							?>
 							</a>
 						<?php else : ?>
-				</div>
-			<?php endif; ?>
-			</li>
-		<?php endforeach; ?>
-		</ul>
+						</div>
+						<?php endif; ?>
+					</li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</ul>
 		</div>
 		<?php
 	}

@@ -39,9 +39,7 @@ class Ninja_Forms extends Module_Base {
 	public function has_widget_inner_wrapper(): bool {
         return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
     }
-	protected function is_dynamic_content(): bool {
-		return true;
-	}
+	
 
 	protected function register_controls() {
 		$this->start_controls_section(
@@ -246,7 +244,7 @@ class Ninja_Forms extends Module_Base {
 				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .field-wrap input[type*=button]' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -257,7 +255,7 @@ class Ninja_Forms extends Module_Base {
 				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .field-wrap input[type*=button]' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -269,7 +267,7 @@ class Ninja_Forms extends Module_Base {
 				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
-				'selector'    => '{{WRAPPER}} .field-wrap input[type*=button]',
+				'selector'    => '{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]',
 				'separator'   => 'before',
 			]
 		);
@@ -281,7 +279,7 @@ class Ninja_Forms extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .field-wrap input[type*=button]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -290,7 +288,7 @@ class Ninja_Forms extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'button_box_shadow',
-				'selector' => '{{WRAPPER}} .wpcf7-submit',
+				'selector' => '{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]',
 			]
 		);
 
@@ -301,7 +299,7 @@ class Ninja_Forms extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .field-wrap input[type*=button]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 			]
@@ -313,7 +311,7 @@ class Ninja_Forms extends Module_Base {
 				'name'      => 'button_typography',
 				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
-				'selector'  => '{{WRAPPER}} .field-wrap input[type*=button]',
+				'selector'  => '{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]',
 				'separator' => 'before',
 			]
 		);
@@ -333,7 +331,7 @@ class Ninja_Forms extends Module_Base {
 				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .field-wrap input[type*=button]:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -344,7 +342,7 @@ class Ninja_Forms extends Module_Base {
 				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .field-wrap input[type*=button]:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -358,7 +356,7 @@ class Ninja_Forms extends Module_Base {
 					'border_border!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .field-wrap input[type*=button]:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -406,7 +404,7 @@ class Ninja_Forms extends Module_Base {
 				'label'     => esc_html__( 'Fullwidth Button', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'selectors' => [
-					'{{WRAPPER}} .field-wrap>div input[type*="button"]' => 'width: 100%;',
+					'{{WRAPPER}} .field-wrap>div input[type="submit"], {{WRAPPER}} .field-wrap>div input[type="button"], {{WRAPPER}} .field-wrap>div button' => 'width: 100%;',
 				],
 			]
 		);

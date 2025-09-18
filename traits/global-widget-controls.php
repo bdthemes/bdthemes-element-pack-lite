@@ -4193,6 +4193,7 @@ trait Global_Widget_Controls {
 			[
 				'label'       => esc_html__('Button Text', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
+				'dynamic'    => ['active' => true],
 				'default'     => esc_html__('Read More', 'bdthemes-element-pack'),
 				'placeholder' => esc_html__('Read More', 'bdthemes-element-pack'),
 			]
@@ -6314,7 +6315,7 @@ trait Global_Widget_Controls {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .bdt-tab .bdt-tabs-item'                                                                 => 'padding-left: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .bdt-tab'                                                                                => 'margin-left: -{{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bdt-tab'                                                                                => 'margin-left: -{{SIZE}}{{UNIT}}; row-gap: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .bdt-tab.bdt-tab-left .bdt-tabs-item, {{WRAPPER}} .bdt-tab.bdt-tab-right .bdt-tabs-item' => 'padding-top: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .bdt-tab.bdt-tab-left, {{WRAPPER}} .bdt-tab.bdt-tab-right'                               => 'margin-top: -{{SIZE}}{{UNIT}};',
                 ],

@@ -77,9 +77,6 @@ class Events_Calendar_Grid extends Module_Base {
 	public function has_widget_inner_wrapper(): bool {
         return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
     }
-	protected function is_dynamic_content(): bool {
-		return false;
-	}
 	
 	public function register_controls() {
 
@@ -169,6 +166,15 @@ class Events_Calendar_Grid extends Module_Base {
 				'default' => 'yes',
 			]
 		);
+
+		$this->add_control(
+			'show_time',
+			[
+				'label'   => __('Show Time', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+			]
+		);
+
 
 		$this->add_control(
 			'show_excerpt',
@@ -782,23 +788,6 @@ class Events_Calendar_Grid extends Module_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'title_spacing',
-			[
-				'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-event-calendar .bdt-event-intro, {{WRAPPER}} .skin-annal .bdt-event-title-wrap' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -858,8 +847,52 @@ class Events_Calendar_Grid extends Module_Base {
 			]
 		);
 
-
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_time',
+			[
+				'label'     => esc_html__('Time', 'bdthemes-element-pack'),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'show_time' => ['yes'],
+				],
+			]
+		);
+
+		$this->add_control(
+			'time_color',
+			[
+				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-event-calendar .bdt-event-time' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'time_typography',
+				'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
+				'selector' => '{{WRAPPER}} .bdt-event-calendar .bdt-event-time',
+			]
+		);
+
+		$this->add_responsive_control(
+			'time_margin',
+			[
+				'label'      => __('Margin', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%', 'em'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-event-calendar .bdt-event-time' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				],
+			]
+		);
+		
+		$this->end_controls_section();
+
 
 		$this->start_controls_section(
 			'section_style_excerpt',
@@ -889,6 +922,19 @@ class Events_Calendar_Grid extends Module_Base {
 				'name'     => 'excerpt_typography',
 				'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
 				'selector' => '{{WRAPPER}} .bdt-event-calendar .bdt-event-excerpt',
+			]
+		);
+
+		// Margin control added here
+		$this->add_responsive_control(
+			'title_spacing',
+			[
+				'label'      => __('Margin', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%', 'em'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-event-calendar .bdt-event-excerpt' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				],
 			]
 		);
 
@@ -1261,6 +1307,7 @@ class Events_Calendar_Grid extends Module_Base {
 			
 		]);
 
+
 		if('upcoming_events' === $settings['source']){
 			/** @var Tribe__Context $context */
 			$context = tribe('context');
@@ -1316,7 +1363,7 @@ class Events_Calendar_Grid extends Module_Base {
 			$image_html = '<img src="' . esc_url($placeholder_image_src) . '" alt="' . get_the_title() . '">';
 		}
 
-?>
+		?>
 
 		<div class="bdt-event-image bdt-background-cover">
 			<a href="<?php echo ($settings['anchor_link'] == 'yes') ? esc_url(the_permalink()) : 'javascript:void(0);'; ?>" 
@@ -1333,7 +1380,6 @@ class Events_Calendar_Grid extends Module_Base {
 		if (!$this->get_settings('show_title')) {
 			return;
 		}
-
 	?>
 
 		<h3 class="bdt-event-title-wrap">
@@ -1369,6 +1415,22 @@ class Events_Calendar_Grid extends Module_Base {
 			</a>
 		</span>
 	<?php
+	}
+
+	// Time Render Function Added here
+	public function render_time() {
+		if (!$this->get_settings('show_time')) {
+			return;
+		}
+
+		$start_time = tribe_get_start_date(null, false, 'g:i a');
+		$end_time = tribe_get_end_date(null, false, 'g:i a');
+
+ 		?>
+		<div class="bdt-event-time" title="<?php esc_html_e('Start Time:', 'bdthemes-element-pack'); echo esc_html($start_time); ?>  - <?php esc_html_e('End Time:', 'bdthemes-element-pack'); ?> <?php	echo esc_html($end_time);?> ">
+			<?php echo esc_html($start_time); ?> - <?php echo esc_html($end_time); ?>
+		</div>
+		<?php
 	}
 
 	public function render_excerpt($post) {
@@ -1490,8 +1552,11 @@ class Events_Calendar_Grid extends Module_Base {
 					<div class="bdt-event-intro">
 
 						<?php $this->render_date(); ?>
-
-						<?php $this->render_title(); ?>
+						<!-- Added New Header Wrapper -->
+						<div class="bdt-event-header">
+							<?php $this->render_title(); ?>
+							<?php $this->render_time(); ?>
+						</div>	
 
 					</div>
 

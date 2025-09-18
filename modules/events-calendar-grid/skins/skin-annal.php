@@ -120,6 +120,8 @@ class Skin_Annal extends Elementor_Skin_Base {
 				<div class="bdt-event-content">
 
 					<?php $this->render_date(); ?>
+					<!-- Called the Time Render Function -->
+					<?php $this->parent->render_time(); ?>
 
 					<?php $this->parent->render_title(); ?>
 

@@ -93,6 +93,7 @@ class Skin_Acara extends Elementor_Skin_Base {
 	<?php
 	}
 
+
 	public function render_price() {
 		$settings = $this->parent->get_settings_for_display();
 
@@ -171,15 +172,18 @@ class Skin_Acara extends Elementor_Skin_Base {
 			<div class="bdt-event-item-inner">
 
 				<div class="bdt-event-image-wrap">
-					<?php $this->parent->render_image(); ?>
-					<?php $this->render_date(); ?>
+						<?php $this->parent->render_image(); ?>
+						<?php $this->render_date(); ?>
 					<?php $this->render_price(); ?>
 				</div>
 
 				<div class="bdt-event-content">
 					<div class="bdt-event-intro bdt-flex bdt-flex-between bdt-flex-middle">
-
-						<?php $this->parent->render_title(); ?>
+						<!-- Added New Wrapper class Here -->
+						<div class="bdt-event-intro-wrapper">
+							<?php $this->parent->render_time(); ?>
+							<?php $this->parent->render_title(); ?>
+						</div>
 						<?php $this->render_website_address(); ?>
 
 					</div>
