@@ -41,9 +41,6 @@ class Contact_Form_7 extends Module_Base {
 	public function has_widget_inner_wrapper(): bool {
         return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
     }
-	protected function is_dynamic_content(): bool {
-		return true;
-	}
 
 	protected function register_controls() {
 		$this->start_controls_section(
@@ -382,6 +379,36 @@ class Contact_Form_7 extends Module_Base {
 			]
 		);
 
+		// Alignment
+		$this->add_responsive_control(
+			'button_alignment',
+			[
+				'label' => esc_html__('Alignment', 'bdthemes-element-pack'). BDTEP_NC,
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'icon' => 'eicon-text-align-right',
+					],
+				],
+				'default' => 'left',
+				'toggle' => true,
+				'selectors' => [
+					// Select the <p> tag containing the submit button
+					'{{WRAPPER}} .wpcf7-form p:has(.wpcf7-submit)' => 'text-align: {{VALUE}};',
+				],
+				'separator' => 'before',
+			]
+		);
+	
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(

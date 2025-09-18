@@ -1,22 +1,22 @@
-=== Element Pack Elementor Addons and Templates ===
+=== Element Pack Addons for Elementor ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
 Donate link: http://bdthemes.com/
-Tags: elementor, elementor addons, widgets, header footer builder, templates
+Tags: elementor, elementor addons, elementor template, elementor widgets, dynamic builder
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.2.1
+Stable tag: 8.2.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.31.3
+Elementor tested up to: 3.32.1
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce builder and more.
 
 
 == Description ==
 
-Element Pack is a powerful addon for Elementor that helps you build beautiful and responsive websites with ease. It offers a wide range of features, widgets and templates to simplify your website design.
+Element Pack is a powerful addon for Elementor that helps you build beautiful and responsive websites with ease. It also offers exclusive features, including 300+ widgets and 2,700+ templates, giving you everything you need to design WordPress websites with ease.
 
 Trusted by **100,000+ websites**, it's the easiest way to design your stunning websites without coding.
 
@@ -277,6 +277,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.2.2 [18th September 2025] =
+
+* Added: Time feature added in events calendar grid widget
+* Added: Contact Form 7 Submit button Alignment Added ( Thanks to Emrah yavsan)
+* Fixed: Ninja forms submit button style & fullwidth controls issue fixed
+* Fixed: Empty DOM loading issues fixed Fancy List Widget
 
 = 8.2.1 [8th September 2025] =
 
