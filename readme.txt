@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4.0
-Stable tag: 8.2.2
+Stable tag: 8.2.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.22
-Elementor tested up to: 3.32.1
+Elementor tested up to: 3.32.2
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce builder and more.
 
@@ -278,6 +278,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.2.3 [28th September 2025] =
+
+* Added: New widgets & extensions tutorial video added in - [Dynamic Grid](https://youtu.be/-BdpQ2lttSo?si=vpEHqHl_pTzQxhyY), [Dynamic Carousel](https://youtu.be/uc08OzVbq_g?si=3vCt8T4zeFSw4oiU), [SVG Maps](https://youtu.be/LZMtIMqBTZY?si=JvfHuTJWFWPXE5mc), [Text Gradient Background](https://youtu.be/J1DNE_Jx4Rs?si=l8Q5Y0ddMl9YzqEh), [Shape Divider](https://youtu.be/Onlgq2ND5EM?si=AceE8KxbPD46vlbS), [White Label](https://youtu.be/sXEgAgAKNDc?si=Rsw0nxFYylNhWuaQ), [Custom CSS & Js](https://youtu.be/2kWiUA_TcRY?si=6l0q7byh8-kT_zU4)
+* Fixed: Backdrop filter container inner widget issue fixed
+* Fixed: Resolved deprecation error in PHP 8.4
+* Fixed: Nav items alignment responsive issue fixed in scroll navigation widget
+* Fixed: Google Docs viewer for google sheets issue fixed in Document Viewer widget
+
 = 8.2.2 [18th September 2025] =
 
 * Added: Time feature added in events calendar grid widget
@@ -378,100 +386,6 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 * Fixed: Security issue fixed
 * Fixed: Mousewheel Issue fixed in Panel Slider widget
 * Fixed: Resolved jQuery Migrate warning ( Thanks to BackuPs )
-
-= 5.11.3 [28th May 2025] =
-
-* Fixed: XSS vulnerability fixed in Open Street Map widget marker content sanitization ( Thanks to Robert DeVore )
-
-= 5.11.2 [15th May 2025] =
-
-* Updated: Readme txt updated
-
-= 5.11.1 [7th May 2025] =
-
-* Fixed: JS error fixed ( Thanks to Marcel Dekker )
-
-= 5.11.0 [30th April 2025] =
-
-* Added: WPML Compatibility Added
-* Added: Share button dropdown width option added in facebook feed widget
-* Added: Elementor Template Kit [Meta Seo](https://service-template.predesignkit.com/meta-seo/) Added
-* Added: Elementor Template Kit [Besnik Cloud](https://business-template.predesignkit.com/besnik-cloud/) Added
-* Added: Elementor Template Kit [Snapshot](https://business-template.predesignkit.com/snapshot/) Added
-* Fixed: _load_textdomain_just_in_time with WordPress 6.8 issue fixed ( BackuPs )
-* Fixed: DCI Notice transition issue fixed
-* Fixed: Accessibility for tab navigation issue fixed in Image Accordion ( Thanks to Sara Giulia Donati )
-* Updated: Only one plugin RC notice will show at a time 
-
-= 5.10.30 [20th April 2025] =
-
-* Added: WordPress Version 6.8 compatibility added
-* Updated: Only one plugin DCI notice will show at a time
-* Updated: Custom attributes option removed in cookie consent, creative button and dual button widgets
-* Updated: Column option improved in countdown widget
-
-= 5.10.29 [15th April 2025] =
-
-* Fixed: Security issue fixed in Countdown widget and Wrapper Link extension
-
-= 5.10.28 [6th April 2025] =
-
-* Added: Custom content typography added in dropbar widget
-* Added: Elementor Template Kit [WordSnap – Instant Content Crafted](https://service-template.predesignkit.com/wordsnap/) Added (Free)
-* Added: Elementor Template Kit [Vendor – Connect Supply Grow](https://service-template.predesignkit.com/vendor/) Added
-
-= 5.10.27 [23th March 2025] =
-
-* Added: [Variation Swatches](https://youtu.be/qIl2mvS7mgk) video tutorial added
-* Added: Theme Builder - [Header and Footer](https://youtu.be/tncgEY70a0A) video tutorial added
-* Added: Elementor Template Kit [Sketchlab - Effortless Design Magic](https://service-template.predesignkit.com/sketchlab/) Added
-* Fixed: Transition fade issue fixed in [Slider](https://www.elementpack.pro/demo/element/slider/) widget
-
-= 5.10.26 [11th March 2025] =
-
-* Added: Elementor Template Kit [Swifthire - Careers Made Easy](https://business-template.predesignkit.com/swifthire/) Added
-* Fixed: Scrollbar issue fixed in [Image Compare](https://www.elementpack.pro/demo/element/image-compare/) widget
-* Fixed: Js error issue fixed in [SVG Image](https://www.elementpack.pro/demo/element/svg-image/) widget
-* Fixed: Tooltip not showing issue fixed in [Icon Mobile Menu](https://www.elementpack.pro/demo/element/icon-mobile-menu/) widget
-
-= 5.10.25 [27th February 2025] =
-
-* Added: Responsive controls added in dual button widget
-* Added: Elementor Template Kit [Finlytics](https://service-template.predesignkit.com/finlytics/) Added
-* Added: Elementor Template Kit [Tripvista](https://others-template.predesignkit.com/tripvista/) Added
-* Fixed: Security issue fixed
-
-= 5.10.24 [19th February 2025] =
-
-* Added: Custom success message option added in simple contact form widget
-* Added: Elementor Template Kit [Taskboard](https://service-template.predesignkit.com/taskboard/) Added
-* Added: Elementor Template Kit [Read Me – Fast Track Learning](https://others-template.predesignkit.com/read-me/) Added
-* Fixed: WPML repeater items issue fixed
-* Fixed: Dashboard notice dismiss css conflict issue fixed
-
-= 5.10.23 [10th February 2025] =
-
-* Added: Current item style controls added in product grid widget
-* Fixed: Mobile iOS device scroll to top issue fixed in image compare widget
-* Noted: [Smooth Scroller](https://youtu.be/cQnu1LUlFL8?si=etHMhEGRTX3M1RJ_) video tutorial added
-
-= 5.10.22 [4th February 2025] =
-
-* Added: Custom Filter Text ( All, Filter ) added in filter type widgets
-* Fixed: Equal height extension issue fixed
-* Updated: Dashboard widgets searching system improved
-
-= 5.10.21 [30th January 2025] =
-
-* Updated: System improved
-
-= 5.10.20 [30th January 2025] =
-
-* Added: aria-roledescription=carousel added to carousel/slider widget wrapper
-* Fixed: PHP warning error fixed in Image Magnifier widget 
-* Updated: Security issue improved
-* Updated: Social link controls improved in member widget
-
 
 Details [changelog here](https://feedback.bdthemes.com/announcements?category=category_6l495r8q)
 

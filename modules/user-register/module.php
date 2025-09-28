@@ -56,12 +56,12 @@
 			}
 			
 			/** Recaptcha*/
-			$post_id   = (int) $_REQUEST['page_id'];
-			$widget_id = (int) $_REQUEST['widget_id'];
+			$post_id   = isset($_REQUEST['page_id']) ? (int) $_REQUEST['page_id'] : 0;
+			$widget_id = isset($_REQUEST['widget_id']) ? (int) $_REQUEST['widget_id'] : 0;
 			
 			$result = $this->get_widget_settings( $post_id, $widget_id );
 			if ( isset( $result['show_recaptcha_checker'] ) && $result['show_recaptcha_checker'] == 'yes' ) {
-				$gRecaptcha = esc_textarea( $_REQUEST['g-recaptcha-response'] );
+				$gRecaptcha = isset($_REQUEST['g-recaptcha-response']) ? sanitize_text_field( wp_unslash($_REQUEST['g-recaptcha-response']) ) : '';
 				if ( ! apply_filters( 'element_pack_google_recaptcha_validation', $gRecaptcha ) ) {
 					$errors->add( 'recaptcha_invalid', __( 'reCAPTCHA is invalid!.', 'bdthemes-element-pack' ) );
 					
@@ -108,7 +108,7 @@
 			
 			check_ajax_referer( 'ajax-login-nonce', 'security' );
 			
-			if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
+			if ( isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 				if ( ! get_option( 'users_can_register' ) ) {
 					// Registration closed, display error
 					echo wp_json_encode(
@@ -118,18 +118,18 @@
 						] );
 				} else {
 					
-					$post_id   = $_REQUEST['page_id'];
-					$widget_id = $_REQUEST['widget_id'];
+					$post_id   = isset($_REQUEST['page_id']) ? (int) $_REQUEST['page_id'] : 0;
+					$widget_id = isset($_REQUEST['widget_id']) ? (int) $_REQUEST['widget_id'] : 0;
 
-					$terms = $_REQUEST['user_terms'];
+					$terms = isset($_REQUEST['user_terms']) ? sanitize_text_field( wp_unslash( $_REQUEST['user_terms'] ) ) : '';
 					
 					$settings = $this->get_widget_settings( $post_id, $widget_id );
 					
-					$email                = wp_unslash( $_POST['email'] );
-					$password             =  isset($_POST['password']) ? sanitize_text_field( $_POST['password'] ) : NULL  ;
-					$is_password_required = sanitize_text_field( $_POST['is_password_required'] );
-					$first_name           = sanitize_text_field( $_POST['first_name'] );
-					$last_name            = sanitize_text_field( $_POST['last_name'] );
+					$email                = isset($_REQUEST['email']) ? sanitize_email( wp_unslash( $_REQUEST['email'] ) ) : '';
+					$password             = isset($_REQUEST['password']) ? wp_unslash( $_REQUEST['password'] ) : NULL  ;
+					$is_password_required = isset($_REQUEST['is_password_required']) ? wp_unslash( $_REQUEST['is_password_required'] ) : '';
+					$first_name           = isset($_REQUEST['first_name']) ? sanitize_text_field( wp_unslash( $_REQUEST['first_name'] ) ) : '';
+					$last_name            = isset($_REQUEST['last_name']) ? sanitize_text_field( wp_unslash( $_REQUEST['last_name'] ) ) : '';
 					
 					$result = $this->element_pack_register_user( $email, $password, $is_password_required, $first_name, $last_name, $terms );
 					

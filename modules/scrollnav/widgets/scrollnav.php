@@ -227,6 +227,7 @@ class Scrollnav extends Module_Base {
 				],
 				'selectors'   => [ 
 					'{{WRAPPER}} .bdt-scrollnav' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .bdt-navbar-nav' => 'justify-content: {{VALUE}};',
 				],
 			]
 		);

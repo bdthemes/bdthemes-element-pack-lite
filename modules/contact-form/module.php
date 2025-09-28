@@ -25,7 +25,7 @@ class Module extends Element_Pack_Module_Base {
         $ep_api_settings = get_option('element_pack_api_settings');
 
         if (isset($_POST['g-recaptcha-response']) and !empty($ep_api_settings['recaptcha_secret_key'])) {
-            $request  = wp_remote_get('https://www.google.com/recaptcha/api/siteverify?secret=' . $ep_api_settings['recaptcha_secret_key'] . '&response=' . esc_textarea($_POST["g-recaptcha-response"]) . '&remoteip=' . $_SERVER["REMOTE_ADDR"]);
+            $request  = wp_remote_get('https://www.google.com/recaptcha/api/siteverify?secret=' . $ep_api_settings['recaptcha_secret_key'] . '&response=' . esc_textarea( sanitize_text_field( wp_unslash( $_POST["g-recaptcha-response"] ) ) ) . '&remoteip=' . isset( $_SERVER["REMOTE_ADDR"] ) ? sanitize_text_field( wp_unslash( $_SERVER["REMOTE_ADDR"] ) ) : '' );
             $response = wp_remote_retrieve_body($request);
 
             $result = json_decode($response, TRUE);
@@ -79,16 +79,16 @@ class Module extends Element_Pack_Module_Base {
             $email = $ep_api_settings['contact_form_email'];
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ( isset( $_SERVER['REQUEST_METHOD'] ) && $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
-            if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'simpleContactForm')) {
+            if (!isset($_REQUEST['_wpnonce']) && !wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'simpleContactForm')) {
                 $result = esc_html__('Security check failed!', 'bdthemes-element-pack');
                 echo '<span class="bdt-text-warning">' . esc_html($result) . '</span>';
                 wp_die();
             }
 
-            $post_id   = sanitize_text_field($_REQUEST['page_id']);
-            $widget_id = sanitize_text_field($_REQUEST['widget_id']);
+            $post_id   = isset( $_REQUEST['page_id'] ) ? absint($_REQUEST['page_id']) : 0;
+            $widget_id = isset( $_REQUEST['widget_id'] ) ? absint($_REQUEST['widget_id']) : 0;
 
             $error = false;
 
@@ -113,7 +113,7 @@ class Module extends Element_Pack_Module_Base {
        
             // Success message part
             if (!empty($_POST['custom_success_message'])) { 
-                $custom_message = sanitize_text_field($_POST['custom_success_message']);
+                $custom_message = sanitize_text_field( wp_unslash( $_POST['custom_success_message'] ) );
 
                 $placeholders = ['[name]', '[email]'];
                 $replacements = [esc_html($form_data['name']), esc_html($form_data['email'])];

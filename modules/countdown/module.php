@@ -31,7 +31,7 @@ class Module extends Element_Pack_Module_Base {
 
 	public function countdown_end(){ 
 		$wp_current_time = current_time( 'timestamp' ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS );
-		$end_time = (int) $_POST['endTime'];
+		$end_time = isset($_POST['endTime']) ? (int) $_POST['endTime'] : 0;
 
 		if( $wp_current_time > $end_time ){
 			echo "ended";

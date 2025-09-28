@@ -552,7 +552,7 @@ class ModuleService {
 					'widget_type'  => 'pro',
 					'content_type' => 'others',
 					'demo_url'     => 'https://demo.elementpack.pro/element/dynamic-grid/',
-					'video_url'    => 'https://youtu.be/3H6eSrLkse4',
+					'video_url'    => 'https://youtu.be/-BdpQ2lttSo?si=vpEHqHl_pTzQxhyY',
 
 				],
 				[
@@ -563,7 +563,7 @@ class ModuleService {
 					'widget_type'  => 'pro',
 					'content_type' => 'others',
 					'demo_url'     => 'https://demo.elementpack.pro/element/dynamic-carousel/',
-					'video_url'    => 'https://youtu.be/0j1KGXujc78',
+					'video_url'    => 'https://youtu.be/uc08OzVbq_g?si=3vCt8T4zeFSw4oiU',
 
 				],
 				[
@@ -1522,7 +1522,7 @@ class ModuleService {
 					'widget_type'  => 'pro',
 					'content_type' => 'others',
 					'demo_url'     => 'https://demo.elementpack.pro/element/svg-maps/',
-					'video_url'    => 'https://youtu.be/07WomY1e9-U',
+					'video_url'    => 'https://youtu.be/LZMtIMqBTZY?si=JvfHuTJWFWPXE5mc',
 				],
 				[
 					'name'         => 'tabs',
@@ -1992,7 +1992,7 @@ class ModuleService {
 					'widget_type' => 'pro',
 					'content_type' => 'new',
 					'demo_url'    => 'https://demo.elementpack.pro/element/shape-divider',
-					'video_url'   => '',
+					'video_url'   => 'https://youtu.be/Onlgq2ND5EM?si=AceE8KxbPD46vlbS',
 				],
 				[
 					'name'        => 'threed-text',
@@ -2011,6 +2011,16 @@ class ModuleService {
 					'widget_type' => 'pro',
 					'demo_url'    => 'https://demo.elementpack.pro/element/tile-scroll/',
 					'video_url'   => 'https://youtu.be/rH4h03C4FE0',
+				],
+				[
+					'name'        => 'text-gradient-background',
+					'label'       => esc_html__('Text Gradient Background', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'content_type' => 'new',
+					'demo_url'    => 'https://demo.elementpack.pro/element/text-gradient-background/',
+					'video_url'   => 'https://youtu.be/J1DNE_Jx4Rs?si=l8Q5Y0ddMl9YzqEh',
 				],
 				[
 					'name'        => 'realistic-image-shadow',
