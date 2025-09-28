@@ -54,8 +54,8 @@ class Module extends Element_Pack_Module_Base {
 		global $post;
 
 		$result       = array( 'results' => array() );
-		$search_input = isset( $_REQUEST['s'] ) ? sanitize_text_field( ( $_REQUEST['s'] ) ) : '';
-		$settings     = isset( $_POST['settings'] ) ? $_POST['settings'] : array();
+		$search_input = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
+		$settings     = isset( $_POST['settings'] ) ? wp_unslash( $_POST['settings'] ) : [];
 
 		if ( strlen( $search_input ) >= 3 ) {
 

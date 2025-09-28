@@ -236,6 +236,12 @@ function element_pack_allow_tags( $tag = null ) {
 		'span'   => [ 'class' => [] ],
 		'div'    => [ 'class' => [] ],
 		'p'      => [ 'class' => [] ],
+		'img'    => [ 
+			'src' => [],
+			'alt' => [],
+			'class'  => [],
+			'style' => [],
+		],
 	];
 
 	$tag_allowed['svg'] = [ 

@@ -197,7 +197,6 @@ class Everest_Forms extends Module_Base {
 				{{WRAPPER}} .bdt-everest-forms input[type="url"],
 				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'separator' => 'after',
 			]
         );
         
@@ -217,84 +216,7 @@ class Everest_Forms extends Module_Base {
 				'separator' => 'after',
 			]
         );
-        
-		$this->start_controls_tabs( 'tabs_input_field_style' );
-		$this->start_controls_tab(
-			'tab_input_field_normal',
-			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-			]
-        );
-        
-		$this->add_control(
-			'input_field_color',
-			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-everest-forms input[type="text"],
-				{{WRAPPER}} .bdt-everest-forms input[type="email"],
-				{{WRAPPER}} .bdt-everest-forms input[type="number"],
-				{{WRAPPER}} .bdt-everest-forms input[type="url"],
-				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select' => 'color: {{VALUE}};',
-				],
-			]
-        );
-        
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'      => 'input_field_bg',
-				'types'     => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bdt-everest-forms input[type="text"],
-				{{WRAPPER}} .bdt-everest-forms input[type="email"],
-				{{WRAPPER}} .bdt-everest-forms input[type="number"],
-				{{WRAPPER}} .bdt-everest-forms input[type="url"],
-				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select',
-			]
-        );
-        
-        $this->end_controls_tab();
-        
-		$this->start_controls_tab(
-			'tab_input_field_focus',
-			[
-				'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
-			]
-        );
-        
-		$this->add_control(
-			'input_field_focus_color',
-			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-everest-forms input[type="text"]:focus,
-				{{WRAPPER}} .bdt-everest-forms input[type="email"]:focus,
-				{{WRAPPER}} .bdt-everest-forms input[type="number"]:focus,
-				{{WRAPPER}} .bdt-everest-forms input[type="url"]:focus,
-				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select:focus' => 'color: {{VALUE}};',
-				],
-			]
-        );
-        
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'      => 'input_field_focus_bg',
-				'types'     => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bdt-everest-forms input[type="text"]:focus,
-				{{WRAPPER}} .bdt-everest-forms input[type="email"]:focus,
-				{{WRAPPER}} .bdt-everest-forms input[type="number"]:focus,
-				{{WRAPPER}} .bdt-everest-forms input[type="url"]:focus,
-				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select:focus',
-			]
-        );
-        
-        $this->end_controls_tab();
-        
-        $this->end_controls_tabs();
-        
+
 		$this->add_control(
 			'input_border_options',
 			[
@@ -364,19 +286,43 @@ class Everest_Forms extends Module_Base {
 				],
 			]
         );
-        
-        $this->start_controls_tabs( 'tabs_border_style' );
-        
+		
+		$this->start_controls_tabs( 'tabs_input_field_style' );
 		$this->start_controls_tab(
-			'tab_border_normal',
+			'tab_input_field_normal',
 			[
 				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-				'condition' => [
-					'box_border' => 'yes',
+			]
+        );
+        
+		$this->add_control(
+			'input_field_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-everest-forms input[type="text"],
+				{{WRAPPER}} .bdt-everest-forms input[type="email"],
+				{{WRAPPER}} .bdt-everest-forms input[type="number"],
+				{{WRAPPER}} .bdt-everest-forms input[type="url"],
+				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select' => 'color: {{VALUE}};',
 				],
 			]
         );
         
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'input_field_bg',
+				'types'     => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bdt-everest-forms input[type="text"],
+				{{WRAPPER}} .bdt-everest-forms input[type="email"],
+				{{WRAPPER}} .bdt-everest-forms input[type="number"],
+				{{WRAPPER}} .bdt-everest-forms input[type="url"],
+				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select',
+			]
+        );
+
 		$this->add_control(
 			'box_border_color',
 			[
@@ -414,19 +360,56 @@ class Everest_Forms extends Module_Base {
 				],
 			]
         );
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-everest-forms input[type="text"],
+				{{WRAPPER}} .bdt-everest-forms input[type="email"],
+				{{WRAPPER}} .bdt-everest-forms input[type="number"],
+				{{WRAPPER}} .bdt-everest-forms input[type="url"],
+				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select',
+			]
+        );
         
         $this->end_controls_tab();
         
 		$this->start_controls_tab(
-			'tab_border_hover',
+			'tab_input_field_focus',
 			[
 				'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
-				'condition' => [
-					'box_border' => 'yes',
+			]
+        );
+        
+		$this->add_control(
+			'input_field_focus_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-everest-forms input[type="text"]:focus,
+				{{WRAPPER}} .bdt-everest-forms input[type="email"]:focus,
+				{{WRAPPER}} .bdt-everest-forms input[type="number"]:focus,
+				{{WRAPPER}} .bdt-everest-forms input[type="url"]:focus,
+				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select:focus' => 'color: {{VALUE}};',
 				],
 			]
         );
         
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'input_field_focus_bg',
+				'types'     => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bdt-everest-forms input[type="text"]:focus,
+				{{WRAPPER}} .bdt-everest-forms input[type="email"]:focus,
+				{{WRAPPER}} .bdt-everest-forms input[type="number"]:focus,
+				{{WRAPPER}} .bdt-everest-forms input[type="url"]:focus,
+				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select:focus',
+			]
+        );
+
 		$this->add_control(
 			'box_border_hover_color',
 			[
@@ -464,50 +447,7 @@ class Everest_Forms extends Module_Base {
 				],
 			]
         );
-        
-        $this->end_controls_tab();
-        
-        $this->end_controls_tabs();
-        
-		$this->add_control(
-			'shadow_options',
-			[
-				'label' => esc_html__( 'Box Shadow Options', 'bdthemes-element-pack' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-        );
-        
-        $this->start_controls_tabs( 'tabs_shadow_style' );
-        
-		$this->start_controls_tab(
-			'tab_shadow_normal',
-			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-			]
-        );
-        
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'box_shadow',
-				'selector' => '{{WRAPPER}} .bdt-everest-forms input[type="text"],
-				{{WRAPPER}} .bdt-everest-forms input[type="email"],
-				{{WRAPPER}} .bdt-everest-forms input[type="number"],
-				{{WRAPPER}} .bdt-everest-forms input[type="url"],
-				{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row select',
-			]
-        );
-        
-        $this->end_controls_tab();
-        
-		$this->start_controls_tab(
-			'tab_shadow_hover',
-			[
-				'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
-			]
-        );
-        
+
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -543,7 +483,6 @@ class Everest_Forms extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'separator' => 'after',
 			]
         );
         
@@ -556,7 +495,6 @@ class Everest_Forms extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'separator' => 'after',
 			]
         );
         
@@ -578,68 +516,6 @@ class Everest_Forms extends Module_Base {
 				],
 			]
         );
-        
-        $this->start_controls_tabs( 'tabs_textarea_field_style' );
-
-        $this->start_controls_tab(
-            'tab_textarea_field_normal',
-            [
-                'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-            ]
-        );
-
-        $this->add_control(
-            'textarea_field_color',
-            [
-                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name'      => 'textarea_field_bg',
-                'types'     => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea',
-            ]
-        );
-
-        $this->end_controls_tab();
-        
-        $this->start_controls_tab(
-            'tab_textarea_field_focus',
-            [
-                'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
-            ]
-        );
-
-        $this->add_control(
-            'textarea_field_focus_color',
-            [
-                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea:focus' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name'      => 'textarea_field_focus_bg',
-                'types'     => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea:focus',
-            ]
-        );
-
-        $this->end_controls_tab();
-
-        $this->end_controls_tabs();	
 		
 		$this->add_control(
 			'textarea_border_options',
@@ -702,20 +578,37 @@ class Everest_Forms extends Module_Base {
 				],
 			]
         );
-        
-        $this->start_controls_tabs( 'tabs_ta_border_style' );
+
+		$this->start_controls_tabs( 'tabs_textarea_field_style' );
 
         $this->start_controls_tab(
-            'tab_ta_border_normal',
+            'tab_textarea_field_normal',
             [
                 'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-                'condition' => [
-                    'ta_box_border' => 'yes',
-                ],						
             ]
         );
 
         $this->add_control(
+            'textarea_field_color',
+            [
+                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'textarea_field_bg',
+                'types'     => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea',
+            ]
+        );
+
+		$this->add_control(
             'ta_box_border_color',
             [
                 'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
@@ -744,19 +637,44 @@ class Everest_Forms extends Module_Base {
             ]
         );
 
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'ta_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea',
+			]
+        );
+
         $this->end_controls_tab();
         
         $this->start_controls_tab(
-            'tab_ta_border_hover',
+            'tab_textarea_field_focus',
             [
                 'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
-                'condition' => [
-                    'ta_box_border' => 'yes',
-                ],
             ]
         );
 
         $this->add_control(
+            'textarea_field_focus_color',
+            [
+                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea:focus' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'textarea_field_focus_bg',
+                'types'     => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea:focus',
+            ]
+        );
+
+		$this->add_control(
             'ta_box_border_hover_color',
             [
                 'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
@@ -786,45 +704,6 @@ class Everest_Forms extends Module_Base {
             ]
         );
 
-        $this->end_controls_tab();
-
-        $this->end_controls_tabs();
-
-        $this->add_control(
-            'ta_shadow_options',
-            [
-                'label' => esc_html__( 'Box Shadow Options', 'bdthemes-element-pack' ),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->start_controls_tabs( 'tabs_ta_shadow_style' );
-
-		$this->start_controls_tab(
-			'tab_ta_shadow_normal',
-			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-			]
-        );
-        
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'ta_box_shadow',
-				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea',
-			]
-        );
-        
-        $this->end_controls_tab();
-        
-		$this->start_controls_tab(
-			'tab_ta_shadow_hover',
-			[
-				'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
-			]
-        );
-        
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -832,9 +711,9 @@ class Everest_Forms extends Module_Base {
 				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea:focus',
 			]
         );
-        
+
         $this->end_controls_tab();
-        
+
         $this->end_controls_tabs();	
         	
         $this->end_controls_section();
@@ -1285,69 +1164,7 @@ class Everest_Forms extends Module_Base {
 				'separator' => 'after',
 			]
         );
-        
-        $this->start_controls_tabs( 'tabs_button_style' );
-        
-		$this->start_controls_tab(
-			'tab_button_normal',
-			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-			]
-        );
-        
-		$this->add_control(
-			'button_color',
-			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]' => 'color: {{VALUE}};',
-				],
-			]
-        );
-        
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'      => 'button_bg',
-				'types'     => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]',
-			]
-        );
-        
-        $this->end_controls_tab();
-        
-		$this->start_controls_tab(
-			'tab_button_hover',
-			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
-			]
-        );
-        
-		$this->add_control(
-			'button_hover_color',
-			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit]:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]:hover' => 'color: {{VALUE}};',
-				],
-			]
-        );
-        
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'      => 'button_hover_bg',
-				'types'     => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit]:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]:hover',
-			]
-        );
-        
-        $this->end_controls_tab();
-        
-        $this->end_controls_tabs();
-        
+
 		$this->add_control(
 			'button_border_options',
 			[
@@ -1410,18 +1227,35 @@ class Everest_Forms extends Module_Base {
 			]
         );
         
-        $this->start_controls_tabs( 'tabs_button_border_style' );
+        $this->start_controls_tabs( 'tabs_button_style' );
         
 		$this->start_controls_tab(
-			'tab_button_border_normal',
+			'tab_button_normal',
 			[
 				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-				'condition' => [
-					'button_box_border' => 'yes',
+			]
+        );
+        
+		$this->add_control(
+			'button_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]' => 'color: {{VALUE}};',
 				],
 			]
         );
         
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'button_bg',
+				'types'     => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]',
+			]
+        );
+
 		$this->add_control(
 			'button_box_border_color',
 			[
@@ -1450,19 +1284,44 @@ class Everest_Forms extends Module_Base {
 				],
 			]
         );
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'button_shadow',
+				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]',
+			]
+        );
         
         $this->end_controls_tab();
         
 		$this->start_controls_tab(
-			'tab_button_border_hover',
+			'tab_button_hover',
 			[
 				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
-				'condition' => [
-					'button_box_border' => 'yes',
+			]
+        );
+        
+		$this->add_control(
+			'button_hover_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit]:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]:hover' => 'color: {{VALUE}};',
 				],
 			]
         );
         
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'button_hover_bg',
+				'types'     => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit]:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]:hover',
+			]
+        );
+
 		$this->add_control(
 			'button_box_border_hover_color',
 			[
@@ -1492,46 +1351,7 @@ class Everest_Forms extends Module_Base {
 				],
 			]
         );
-        
-        $this->end_controls_tab();
-        
-        $this->end_controls_tabs();
-        
-		$this->add_control(
-			'button_shadow_options',
-			[
-				'label' => esc_html__( 'Box Shadow Options', 'bdthemes-element-pack' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-        );
-        
-        $this->start_controls_tabs( 'tabs_button_shadow_style' );
-        
-		$this->start_controls_tab(
-			'tab_button_shadow_normal',
-			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
-			]
-        );
-        
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'button_shadow',
-				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]',
-			]
-        );
-        
-        $this->end_controls_tab();
-        
-		$this->start_controls_tab(
-			'tab_button_shadow_hover',
-			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
-			]
-        );
-        
+
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[

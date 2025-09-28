@@ -135,7 +135,7 @@ class Setup_Wizard {
 	public function get_wizard_html() {
 		ob_start();
 		?>
-		<div class="bdt-setup-wizard-overlay">
+		<div class="bdt-setup-wizard-overlay ep-setup-wizard">
 			<div class="bdt-setup-wizard content-loaded">
 				<?php
 				require_once plugin_dir_path( BDTEP__FILE__ ) . 'includes/setup-wizard/views/render.php';
@@ -199,7 +199,7 @@ class Setup_Wizard {
 
 	public function display_page() {
 		?>
-		<div class="bdt-setup-wizard-overlay">
+		<div class="bdt-setup-wizard-overlay ep-setup-wizard">
 			<div class="bdt-setup-wizard content-loaded">
 				<?php
 				require_once plugin_dir_path( BDTEP__FILE__ ) . 'includes/setup-wizard/views/render.php';

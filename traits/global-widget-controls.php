@@ -6719,6 +6719,31 @@ trait Global_Widget_Controls {
             ]
         );
 
+		$this->add_responsive_control(
+			'tabs_title_alignment',
+			[
+				'label'        => esc_html__('Text Align', 'bdthemes-element-pack'),
+				'type'         => Controls_Manager::CHOOSE,
+				'options'      => [
+					'flex-start' => [
+						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-h-align-center',
+					],
+					'flex-end' => [
+						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tabs .bdt-tabs-item-title' => 'justify-content: {{VALUE}};',
+				],
+			]
+		);
+
         $this->start_controls_tabs('tabs_title_style');
 
         $this->start_controls_tab(
@@ -7127,31 +7152,75 @@ trait Global_Widget_Controls {
             ]
         );
 
+		$this->add_responsive_control(
+            'icon_align',
+            [
+                'label'   => esc_html__('Position', 'bdthemes-element-pack'),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left'  => [
+                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
+                        'icon'  => 'eicon-h-align-left',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
+                        'icon'  => 'eicon-h-align-right',
+                    ],
+					'top' => [
+						'title' => esc_html__('Top', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'bottom' => [
+						'title' => esc_html__('Bottom', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+                ],
+                'default' => is_rtl() ? 'right' : 'left',
+				'selectors_dictionary' => [
+					'left' => 'flex-direction: row;',
+					'right' => 'flex-direction: row-reverse;',
+					'top' => 'flex-direction: column;',
+					'bottom' => 'flex-direction: column-reverse;',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tab-title-icon-wrapper' => '{{VALUE}}',
+				],
+            ]
+        );
+		$this->add_responsive_control(
+			'icon_alignment',
+			[
+				'label'        => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'type'         => Controls_Manager::CHOOSE,
+				'options'      => [
+					'flex-start' => [
+						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-h-align-center',
+					],
+					'flex-end' => [
+						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tab-title-icon-wrapper' => 'align-items: {{VALUE}};',
+				],
+				'condition' => [
+					'icon_align' => ['top', 'bottom'],
+				],
+			]
+		);
+
         $this->start_controls_tabs('tabs_icon_style');
 
         $this->start_controls_tab(
             'tab_icon_normal',
             [
                 'label' => esc_html__('Normal', 'bdthemes-element-pack'),
-            ]
-        );
-
-        $this->add_control(
-            'icon_align',
-            [
-                'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
-                'type'    => Controls_Manager::CHOOSE,
-                'options' => [
-                    'left'  => [
-                        'title' => esc_html__('Start', 'bdthemes-element-pack'),
-                        'icon'  => 'eicon-h-align-left',
-                    ],
-                    'right' => [
-                        'title' => esc_html__('End', 'bdthemes-element-pack'),
-                        'icon'  => 'eicon-h-align-right',
-                    ],
-                ],
-                'default' => is_rtl() ? 'right' : 'left',
             ]
         );
 
@@ -7166,11 +7235,48 @@ trait Global_Widget_Controls {
                 ],
             ]
         );
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'icon_background',
+				'selector'  => '{{WRAPPER}} .bdt-tab .bdt-tabs-item-title .bdt-tab-title-icon',
+				'exclude'   => [ 'image' ],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'      => 'icon_border',
+				'selector'  => '{{WRAPPER}} .bdt-tab .bdt-tabs-item-title .bdt-tab-title-icon',
+			]
+		);
+		$this->add_responsive_control(
+			'icon_border_radius',
+			[
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tab .bdt-tabs-item-title .bdt-tab-title-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'icon_padding',
+			[
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tab .bdt-tabs-item-title .bdt-tab-title-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
         $this->add_responsive_control(
             'icon_space',
             [
-                'label'     => esc_html__('Spacing', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Gap', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::SLIDER,
                 'range'     => [
                     'px' => [
@@ -7182,8 +7288,7 @@ trait Global_Widget_Controls {
                     'size' => 8,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-tabs .bdt-tabs-item-title .bdt-button-icon-align-right' => is_rtl() ? 'margin-right: {{SIZE}}{{UNIT}};' : 'margin-left: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .bdt-tabs .bdt-tabs-item-title .bdt-button-icon-align-left' => is_rtl() ? 'margin-left: {{SIZE}}{{UNIT}};' : 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bdt-tab-title-icon-wrapper' => 'gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -7208,6 +7313,27 @@ trait Global_Widget_Controls {
                 ],
             ]
         );
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'icon_hover_background',
+				'selector'  => '{{WRAPPER}} .bdt-tabs .bdt-tabs-item:hover .bdt-tabs-item-title .bdt-tab-title-icon',
+				'exclude'   => [ 'image' ],
+			]
+		);
+		$this->add_control(
+			'icon_hover_border_color',
+			[
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tabs .bdt-tabs-item:hover .bdt-tabs-item-title .bdt-tab-title-icon' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'icon_border_border!' => '',
+				],
+			]
+		);
 
         $this->end_controls_tab();
 
@@ -7229,6 +7355,27 @@ trait Global_Widget_Controls {
                 ],
             ]
         );
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'icon_active_background',
+				'selector'  => '{{WRAPPER}} .bdt-tabs .bdt-tabs-item.bdt-active .bdt-tabs-item-title .bdt-tab-title-icon',
+				'exclude'   => [ 'image' ],
+			]
+		);
+		$this->add_control(
+			'icon_active_border_color',
+			[
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tabs .bdt-tabs-item.bdt-active .bdt-tabs-item-title .bdt-tab-title-icon' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'icon_border_border!' => '',
+				],
+			]
+		);
 
         $this->end_controls_tab();
 

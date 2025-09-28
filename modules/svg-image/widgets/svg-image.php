@@ -855,7 +855,7 @@ class Svg_Image extends Module_Base {
 		?>
 		<img src="<?php echo esc_url( $svg_file ); ?>" alt="<?php echo esc_html( get_the_title() ); ?>" class="bdt-svg-image"
 			data-bdt-svg="stroke-animation: true" data-bdt-svg />
-		<?
+		<?php
 	}
 
 	public function render_image() {

@@ -99,6 +99,18 @@ class Document_Viewer extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'document_viewer_notice',
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Google Docs viewer only works with publicly accessible URLs, not local network files.', 'bdthemes-element-pack' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+				'condition' => [
+					'viewer_type' => 'google_docs',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 	}
@@ -122,12 +134,23 @@ class Document_Viewer extends Module_Base {
 
 		if ($viewer_type === 'google_docs') {
 			// Google Docs viewer (for public URLs only)
-			$viewer_base = 'https://docs.google.com/viewer?';
-			$query_params = http_build_query([
-				'url' => $source_url,
-				'embedded' => 'true'
-			]);
-			$final_url = $viewer_base . $query_params;
+			// $viewer_base = 'https://docs.google.com/viewer?';
+			// $query_params = http_build_query([
+			// 	'url' => $source_url,
+			// 	'embedded' => 'true'
+			// ]);
+
+			// Special case: if it's a Google Sheets link
+			if (strpos($source_url, 'docs.google.com/spreadsheets') !== false) {
+				$final_url = $source_url . (strpos($source_url, '?') === false ? '?' : '&') . 'widget=true&headers=false';
+			} else {
+				$viewer_base = 'https://docs.google.com/viewer?';
+				$query_params = http_build_query([
+					'url' => $source_url,
+					'embedded' => 'true'
+				]);
+				$final_url = $viewer_base . $query_params;
+			}
 			
 			// Check if URL is local
 			$is_local_url = false;
@@ -153,7 +176,7 @@ class Document_Viewer extends Module_Base {
 					<p><?php echo esc_html__('Note: Google Docs viewer only works with publicly accessible URLs, not local network files.', 'bdthemes-element-pack'); ?></p>
 				</div>
 				<?php endif; ?>
-				<iframe src="<?php echo $final_url; ?>" class="bdt-document"></iframe>
+				<iframe src="<?php echo esc_url( $final_url ); ?>" class="bdt-document"></iframe>
 			</div>
 			<?php
 		} else {
