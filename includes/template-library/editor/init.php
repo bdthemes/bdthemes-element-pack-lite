@@ -11,28 +11,30 @@ class ElementPack_Template_Library_Editor_Init {
 	function __construct() {
 		$this->dir = dirname( __FILE__ ) . '/';
 
-		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_scripts' ), 1 );
+		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'editor_styles' ) );
+		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_scripts' ), 9999 );
 
 		// print views and tab variables on footer.
 		add_action( 'elementor/editor/footer', array( $this, 'admin_inline_js' ) );
 		add_action( 'elementor/editor/footer', array( $this, 'print_views' ) );
 
-		// enqueue editor css.
-		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'editor_styles' ) );
 
 		// enqueue modal's preview css.
 		add_action( 'elementor/preview/enqueue_styles', array( $this, 'preview_styles' ) );
 	}
 
 	public function enqueue_scripts() {
-
-		wp_enqueue_script(
+		// register script
+		wp_register_script(
 			'bdt-template-library-editor-scripts',
 			BDTEP_URL . 'includes/template-library/editor/assets/js/editor-template-library.min.js',
 			array( 'jquery', 'underscore', 'backbone-marionette' ),
 			BDTEP_VER,
 			true
 		);
+
+		//enqueue 
+		wp_enqueue_script( 'bdt-template-library-editor-scripts' );
 	}
 
 	public function editor_styles() {

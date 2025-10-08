@@ -48,17 +48,9 @@ class Review_Card extends Module_Base {
 		if ( $this->ep_is_edit_mode() ) {
 			return [ 'ep-styles' ];
 		} else {
-			return [ 'ep-font', 'ep-text-read-more-toggle' ];
+			return [ 'ep-font', 'ep-text-read-more-toggle', 'ep-review-card' ];
 		}
 	}
-
-	public function get_script_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-scripts'];
-        } else {
-            return ['ep-review-card'];
-        }
-    }
 
 	public function get_custom_help_url() {
 		return 'https://youtu.be/xFtjeR1qgSE';
@@ -1061,6 +1053,37 @@ class Review_Card extends Module_Base {
 
 		$this->gloabl_read_more_link_style_controls();
 
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_additional_style',
+			[ 
+				'label'     => esc_html__( 'Additional Style', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_responsive_control(
+			'additional_margin',
+			[ 
+				'label'      => esc_html__( 'Content Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-review-card-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'additional_padding',
+			[ 
+				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-review-card-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 		$this->end_controls_section();
 
 

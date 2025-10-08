@@ -51,6 +51,25 @@ function element_pack_is_preview() {
 	return Plugin::$instance->preview->is_preview_mode();
 }
 
+function bdt_get_widget_badge( $widget_name ) {
+	if ( ! class_exists( '\ElementPack\Admin\ElementPack_Permission_Manager' ) ) {
+		return '';
+	}
+
+	$allowed_widgets = new \ElementPack\Admin\ElementPack_Permission_Manager();
+
+	if ( ! element_pack_pro_activated() ) {
+		return ' <span class="bdt-ep-pro-badge elementor-element--promotion eicon-lock">' . esc_html__( '', 'bdthemes-element-pack' ) . '</span>';
+	}
+
+	if ( ! $allowed_widgets->bdt_get_allowed_widgets_for_user( $widget_name ) ) {
+		return '<span class="bdt-ep-restricted-badge">' . esc_html__( 'Restricted', 'bdthemes-element-pack' ) . '</span>';
+	}
+
+	return ''; // No badge needed
+}
+
+
 /**
  * Show any alert by this function
  *

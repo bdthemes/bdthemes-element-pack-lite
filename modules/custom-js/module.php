@@ -32,7 +32,7 @@
                 'element_pack_custom_js_section',
                 [
                     'tab'   => Controls_Manager::TAB_ADVANCED,
-                    'label' => BDTEP_CP . esc_html__( 'Custom CSS/JavaScript', 'bdthemes-element-pack' ),
+                    'label' => BDTEP_CP . esc_html__( 'Custom CSS / JS', 'bdthemes-element-pack' ),
                 ]
             );
             
