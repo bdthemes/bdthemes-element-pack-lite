@@ -1194,6 +1194,37 @@ class Review_Card_Carousel extends Module_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'section_additional_style',
+			[ 
+				'label'     => esc_html__( 'Additional Style', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_responsive_control(
+			'additional_margin',
+			[ 
+				'label'      => esc_html__( 'Content Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-review-card-carousel-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'additional_padding',
+			[ 
+				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-ep-review-card-carousel-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->end_controls_section();
+
 		//Navigation Style
 		$this->start_controls_section(
 			'section_style_navigation',

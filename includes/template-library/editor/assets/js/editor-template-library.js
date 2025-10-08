@@ -85,10 +85,73 @@
             }), e.EpTemplatePreviewView = Marionette.ItemView.extend({
                 template: '#view-bdt-elementpack-template-library-preview',
                 id      : 'elementor-template-library-preview',
-                ui      : {iframe: 'iframe'},
+                ui      : {
+                    iframe: 'iframe',
+                    fallbackButton: '.ep-preview-fallback-button'
+                },
+                events  : {
+                    'click @ui.fallbackButton': 'onFallbackButtonClick'
+                },
                 onRender: function () {
                     EpModel.hideHeaderLogo();
-                    this.ui.iframe.attr('src', this.getOption('preview'));
+                    
+                    let url = this.getOption('preview');
+                    if (url.includes('http://')) {
+                        url = url.replace('http://', 'https://');
+                    }
+                    
+                    // Store URL for fallback button
+                    this.previewUrl = url;
+                    
+                    // Add fallback button HTML
+                    this.$el.append('<div class="ep-template-library-preview-fallback" style="display:none; text-align:center; padding:20px;"><p>Preview failed to load. Click below to open in new tab:</p><button class="ep-preview-fallback-button" border-radius:3px; cursor:pointer;">Open Preview</button></div>');
+                    
+                    // Set iframe source and handle load errors
+                    this.ui.iframe.attr('src', url);
+                    
+                    // Show fallback button if iframe fails to load
+                    var self = this;
+                    var fallbackShown = false;
+                    var loadSuccess = false;
+                    
+                    // Check if iframe loads successfully
+                    this.ui.iframe.on('load', function() {
+                        loadSuccess = true;
+                        
+                        // Check if iframe is actually visible and has content
+                        setTimeout(function() {
+                            if (!fallbackShown) {
+                                var iframeElement = self.ui.iframe[0];
+                                
+                                // Check for sites known to refuse iframe embedding
+                                if (url.includes('predesignkit.com')) {
+                                    fallbackShown = true;
+                                    self.$('.ep-template-library-preview-fallback').show();
+                                    self.ui.iframe.hide();
+                                    return;
+                                }
+                                
+                                // Try to check iframe content for "refused to connect"
+                                try {
+                                    var iframeDoc = iframeElement.contentDocument || iframeElement.contentWindow.document;
+                                    if (iframeDoc && iframeDoc.body) {
+                                        var content = iframeDoc.body.innerText || iframeDoc.body.textContent || '';
+                                        if (content.includes('refused to connect')) {
+                                            fallbackShown = true;
+                                            self.$('.ep-template-library-preview-fallback').show();
+                                            self.ui.iframe.hide();
+                                            return;
+                                        }
+                                    }
+                                } catch (e) {
+                                    // Cross-origin access blocked - iframe is probably working fine
+                                }
+                            }
+                        }, 2000); // Wait 2 seconds for content to load
+                    });
+                },
+                onFallbackButtonClick: function() {
+                    window.open(this.previewUrl, '_blank');
                 }
             }), e.EpTemplateHeaderBack = Marionette.ItemView.extend({
                 template   : '#view-bdt-elementpack-template-library-header-back',
@@ -120,7 +183,7 @@
                             if (data == 'required_activated_license') {
                                 EpModel.layout.showLicenseError();
                             } else {
-                                alert('An error occurred. Pls try again!');
+                                alert(data);
                             }
                         }
                     }) && jQuery.extend(!0, params, requestFn), elementorCommon.ajax.addRequest("get_bdt_elementpack_template_data", params)
@@ -270,6 +333,10 @@
                     this.modalContent.show(new e.EpTemplateLoadingView)
                 }, showLicenseError : function () {
                     this.modalContent.show(new e.EpTemplateErrorView)
+                }, showPreviewError : function (errorMessage) {
+                    console.log('Preview error:', errorMessage);
+                    // Could show a specific preview error view or fallback
+                    // For now, we handle this in the preview view itself
                 }, showTemplatesView: function (i, n) {
                     this.getRegion("modalContent").show(new e.EpTemplateBodyView);
                     var l = this.getContentView(), r = this.getHeaderView();

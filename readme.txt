@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor, elementor addons, elementor template, elementor widgets, dynamic builder
 Requires at least: 5.0.0
-Tested up to: 6.8.2
+Tested up to: 6.8.3
 Requires PHP: 7.4.0
-Stable tag: 8.2.3
+Stable tag: 8.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Elementor requires at least: 3.22
-Elementor tested up to: 3.32.2
+Elementor requires at least: 3.28
+Elementor tested up to: 3.32.4
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce builder and more.
 
@@ -277,6 +277,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.2.4 [8th October 2025] =
+
+* Added: Template Library preview fallback added
+* Added: Content style controls added in review card grid & carousel widgets
+* Fixed: CSS file missing issue fixed in review card widget
+* Updated: Error handling updated in Template Library
 
 = 8.2.3 [28th September 2025] =
 

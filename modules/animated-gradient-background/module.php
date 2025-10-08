@@ -23,6 +23,7 @@ class Module extends Element_Pack_Module_Base {
 	}
 
 	public function register_section( $element ) {
+
 		$element->start_controls_section(
 			'element_pack_agbg_section',
 			[ 

@@ -155,7 +155,15 @@ class Library_Source extends Source_Base {
 			)
 		);
 
-		return wp_remote_retrieve_body( $response );
+		$body = wp_remote_retrieve_body( $response );
+
+		// Detect reCAPTCHA HTML
+		if ( strpos( $body, 'recaptcha/api.js' ) !== false || 
+			strpos( $body, 'Verifying that you are not a robot') !== false ) {
+			throw new \Exception('Blocked by reCAPTCHA instead of JSON response');
+		}
+
+		return $body;
 	}
 
 	/**

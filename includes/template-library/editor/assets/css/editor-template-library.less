@@ -215,7 +215,8 @@
     padding: 0;
     width: auto;
     font-size: 13px;
-    color: #6d7882
+    color: #6d7882;
+    border-block-end: none;
 }
 
 #bdt-elementpack-template-library-header-search-filters .header-search-input.elementor-template-library-menu-item {
@@ -287,6 +288,7 @@
     position: relative;
     text-align: left;
     padding: 12px 0;
+    color: #64666a;
 }
 
 #bdt-elementpack-template-library-content .bdt-elementpack-template-library-filter-label input[type=radio] {
@@ -366,6 +368,10 @@
 #bdt-elementpack-template-library-templates-container .elementor-template-library-template-remote {
     width: ~'calc(33% - 24px)';
     margin: 12px;
+    border-color: #e6e8ea;
+    &:hover {
+        background-color: transparent;
+    }
 }
 
 #bdt-elementpack-template-library-content:not(.library-tab-local) #bdt-elementpack-template-library-templates-container .elementor-template-library-template-controls {
@@ -401,7 +407,8 @@
 
 #bdt-elementpack-template-library-content:not(.library-tab-local) #bdt-elementpack-template-library-templates-container .elementor-template-library-template-name {
     padding: 5px 0 0 0;
-    display: block !important
+    display: block !important;
+    color: #444;
 }
 
 #bdt-elementpack-template-library-content:not(.library-tab-local) #bdt-elementpack-template-library-templates-container .elementor-template-library-template-name-holder {
@@ -524,12 +531,17 @@
     color: #64666a
 }
 
-.bdt-elementpack-templates-wrap .elementor-template-library-order-input {
-    display: none;
-}
-
-.bdt-elementpack-templates-wrap  div#elementor-template-library-toolbar {
-    padding: 0 15px;
+.bdt-elementpack-templates-wrap  {
+    .elementor-template-library-order-input {
+        display: none;
+    }
+    div#elementor-template-library-toolbar {
+        padding: 0 15px;
+    }
+    #elementor-template-library-filter-text {
+        background-color: #fff;
+        color: #515962;
+    }
 }
 
 /* ----------------- extra css ----------------- */
@@ -632,8 +644,33 @@
 
 div#bdt-elementpack-template-library-header-logo-area {
     margin-left: 15px;
+    .elementor-templates-modal__header__logo__title {
+        color: #444;
+    }
 }
 
 #bdt-elementpack-template-library-header-back {
     text-align: left;
+}
+
+
+// fallback
+.ep-template-library-preview-fallback {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    p {
+        color: #faa05a;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    button {
+        padding: 12px 18px;
+        color: #fff;
+        background: linear-gradient(to right, #49e0af, #3fb8e1);
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
 }

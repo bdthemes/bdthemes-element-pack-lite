@@ -1873,7 +1873,7 @@ class Facebook_Feed extends Module_Base {
 
 		$album_img_count = count($subattachments) - $skip_image_count;
 
-		echo '<div class="bdt-img-wrap bdt-img-album-'. $album_img_count .'">';
+		echo '<div class="bdt-img-wrap bdt-img-album-'. esc_attr($album_img_count) .'">';
 		foreach ( $subattachments as $index => $subattachment ) {
 			if ( isset( $subattachment['media']['image']['src'] ) ) {
 				$image_url = $subattachment['media']['image']['src'];
@@ -1885,7 +1885,7 @@ class Facebook_Feed extends Module_Base {
 					'<div class="bdt-img-album-item bdt-img-item"><a href="%1$s" target="%2$s">%3$s<img src="%4$s" alt="%5$s"></a></div>',
 					esc_url( $subattachment['target']['url'] ),
 					esc_attr( $settings['link_target'] ),
-					$span,
+					wp_kses_post($span),
 					esc_url( $image_url ),
 					esc_html( $data['from']['name'] )
 				);

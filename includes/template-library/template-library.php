@@ -21,7 +21,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
     protected $new_demo_rang_date = '';
 
     function __construct() {
-        if ( ! defined( 'BDTEP_HIDE' ) ) {
+        if ( ! BDTEP_HIDE ) {
             add_action( 'admin_menu', [ $this, 'admin_menu' ], 201 );
         }
 
@@ -33,8 +33,6 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
         add_action( 'wp_ajax_ep_elementor_demo_importer_data_sync_demo_with_server', array( $this, 'sync_demo_with_server' ) );
         add_action( 'wp_ajax_ep_elementor_demo_importer_send_report', array( $this, 'send_report' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-        add_action( 'admin_notices', [$this, 'admin_notice'] );
     }
 
 
@@ -170,19 +168,6 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
         foreach ( $demoData as $data ):
             include 'template-parts/demo-template-item.php';
         endforeach;
-    }
-
-    public function admin_notice(){
-
-        Notices::add_notice(
-            [
-                'id'               => 'template-library-issue',
-                'type'             => 'warning',
-                'dismissible'      => true,
-                'dismissible-time' => 1043200,
-                'message'          => __( 'This template library will be deprecated soon so please use our brand new template library in your editor (Make sure you activated it from <a href="admin.php?page=element_pack_options#element_pack_other_settings">element pack settings</a>).', 'bdthemes-element-pack' ),
-            ]
-        );
     }
 
 
