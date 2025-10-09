@@ -752,6 +752,7 @@ function element_pack_blend_options() {
 		'saturation'  => esc_html__( 'Saturation', 'bdthemes-element-pack' ),
 		'color'       => esc_html__( 'Color', 'bdthemes-element-pack' ),
 		'luminosity'  => esc_html__( 'Luminosity', 'bdthemes-element-pack' ),
+		'normal'      => esc_html__( 'Normal', 'bdthemes-element-pack' ),
 	];
 
 	return $blend_options;
