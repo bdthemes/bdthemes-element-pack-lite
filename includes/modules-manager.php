@@ -13,20 +13,6 @@ final class Manager {
 
     public function register_module_and_assets() {
 
-        // Determine if we should bypass filtering
-        // Bypass filtering if we're in the editor or if we need full widget list for permission management
-        $bypass_filter = false;
-        
-        // Check if we're in Elementor editor
-        if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::$instance->editor && \Elementor\Plugin::$instance->editor->is_edit_mode()) {
-            $bypass_filter = true;
-        }
-        
-        // Check if we're in admin and not on the permission manager page
-        if (is_admin() && (!isset($_GET['page']) || $_GET['page'] !== 'element_pack_options')) {
-            $bypass_filter = true;
-        }
-
         ModuleService::get_widget_settings(function ($settings) {
             $core_widgets        = $settings['settings_fields']['element_pack_active_modules'];
             $extensions          = $settings['settings_fields']['element_pack_elementor_extend'];
@@ -62,7 +48,7 @@ final class Manager {
             }
             // Static module if need
             $this->load_module_instance(['name' => 'elementor']);
-        }, $bypass_filter);
+        });
     }
 
     public function load_module_instance($module) {

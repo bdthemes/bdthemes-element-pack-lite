@@ -8,6 +8,7 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Text_Stroke;
 use Elementor\Icons_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
@@ -323,6 +324,18 @@ class Fancy_Icons extends Module_Base {
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
+        $this->add_control(
+			'blend_type',
+			[
+				'label'     => esc_html__('Blend Type', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'multiply',
+				'options'   => element_pack_blend_options(),
+				'selectors' => [
+					'{{WRAPPER}} .bdt-fancy-icons-item' => 'mix-blend-mode: {{VALUE}};'
+				],
+			]
+		);
 
         $this->add_control(
             'item_background_color',
@@ -490,24 +503,12 @@ class Fancy_Icons extends Module_Base {
             ]
         );
 
-        $this->add_responsive_control(
-            'text_size',
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
             [
-                'label'      => esc_html__('Size', 'bdthemes-element-pack'),
-                'type'       => Controls_Manager::SLIDER,
-                'size_units' => ['vw'],
-                'range'      => [
-                    'vw' => [
-                        'min' => 1,
-                        'max' => 50,
-                    ],
-                ],
-                'default'    => [
-                    'unit' => 'vw',
-                ],
-                'selectors'  => [
-                    '{{WRAPPER}} .bdt-fancy-icons-item a.text' => 'font-size: {{SIZE}}{{UNIT}};',
-                ],
+                'name' => 'text_size',
+                'label' => esc_html__('Typography', 'bdthemes-element-pack'),
+                'selector' => '{{WRAPPER}} .bdt-fancy-icons-item a.text',
             ]
         );
 
