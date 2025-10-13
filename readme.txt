@@ -5,7 +5,7 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.8.3
 Requires PHP: 7.4.0
-Stable tag: 8.2.5
+Stable tag: 8.2.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
@@ -278,6 +278,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.2.6 [13th October 2025] =
+
+* Fixed: Security: Privilege escalation vulnerability fixed in Setup Wizard template import endpoints
+* Fixed: Navigation dots size issue fixed in editor mode
+
 = 8.2.5 [9th October 2025] =
 
 * Added: Item blend mode & text typography added in fancy icons widget
@@ -448,3 +453,7 @@ Note: we don’t provide plugin support for Adult sites.
 ### Can I use Element Pack on client sites?
 
 - Yes, definitely. You can use our plugin on any website, self or client, within the allowed number of licenses provided by the package you purchase. There are no bindings to the usage.
+
+###  How can I report security bugs? 
+
+-  You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/9e5fbc2f-c2b2-434c-b42e-2516005fddbc)
