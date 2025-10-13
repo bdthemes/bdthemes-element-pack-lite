@@ -420,6 +420,11 @@ use Elementor\TemplateLibrary\Source_Local;
 add_action('wp_ajax_import_elementor_template', function () {
 		check_ajax_referer( 'setup_wizard_nonce', 'nonce' );
 
+		// Capability check - only administrators can import templates
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to perform this action.', 'bdthemes-element-pack' ) ] );
+		}
+
 		$json_url = isset( $_POST['import_url'] ) ? esc_url_raw( wp_unslash( $_POST['import_url'] ) ) : '';
 
         $response = wp_remote_get($json_url, array(
@@ -510,6 +515,11 @@ add_action('wp_ajax_import_elementor_template', function () {
 add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
     check_ajax_referer('setup_wizard_nonce', 'nonce');
 
+    // Capability check - only administrators can import templates
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to perform this action.', 'bdthemes-element-pack' ) ] );
+    }
+
     $file_url = isset($_POST['import_url']) ? esc_url_raw(wp_unslash($_POST['import_url'])) : '';
 
     if (!filter_var($file_url, FILTER_VALIDATE_URL) || 0 !== strpos($file_url, 'http')) {
@@ -599,6 +609,11 @@ add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
 
 add_action('wp_ajax_import_ep_elementor_bundle_runner_template', function () {
     check_ajax_referer('setup_wizard_nonce', 'nonce');
+
+    // Capability check - only administrators can import templates
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to perform this action.', 'bdthemes-element-pack' ) ] );
+    }
 
     $runner = isset($_POST['runner']) ? sanitize_text_field(wp_unslash($_POST['runner'])) : '';
     $sessionId = isset($_POST['sessionId']) ? sanitize_text_field(wp_unslash($_POST['sessionId'])) : '';

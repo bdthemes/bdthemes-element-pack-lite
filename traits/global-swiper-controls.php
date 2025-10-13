@@ -430,7 +430,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'free_mode',
 			[
-				'label' => __('Drag Free Mode', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Drag Free Mode', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -475,7 +475,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'mousewheel',
 			[
-				'label' => __('Mousewheel', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Mousewheel', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -483,7 +483,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'show_hidden_item',
 			[
-				'label' => __('Show Hidden Item', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Show Hidden Item', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-show-hidden-item--',
 				'render_type' => 'template'
@@ -493,7 +493,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'hidden_item_opacity',
 			[
-				'label' => __('Hidden Item Opacity', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Hidden Item Opacity', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -771,7 +771,7 @@ trait Global_Swiper_Controls {
 				'label'     => __('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet' => 'background-color: {{VALUE}}',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -782,7 +782,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'dots_space_between',
 			[
-				'label'     => __('Space Between', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'     => __('Space Between', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}}' => '--ep-swiper-dots-space-between: {{SIZE}}{{UNIT}};',
@@ -805,7 +805,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -817,7 +817,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'advanced_dots_size',
 			[
-				'label'     => __('Advanced Size', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'     => __('Advanced Size', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -837,7 +837,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet' => 'width: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -858,7 +858,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -874,7 +874,7 @@ trait Global_Swiper_Controls {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
-					'{{WRAPPER}} .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -887,7 +887,7 @@ trait Global_Swiper_Controls {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'dots_box_shadow',
-				'selector' => '{{WRAPPER}} .swiper-pagination-bullet',
+				'selector' => '{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet',
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
 				],
@@ -912,7 +912,7 @@ trait Global_Swiper_Controls {
 				'label'     => __('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet-active' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet-active' => 'background-color: {{VALUE}}',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -932,7 +932,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet-active' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet-active' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}}' => '--ep-swiper-dots-active-height: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
@@ -954,7 +954,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet-active' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet-active' => 'width: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -975,7 +975,7 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .swiper-pagination-bullet-active' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet-active' => 'height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}}' => '--ep-swiper-dots-active-height: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
@@ -992,7 +992,7 @@ trait Global_Swiper_Controls {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
-					'{{WRAPPER}} .swiper-pagination-bullet-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -1034,7 +1034,7 @@ trait Global_Swiper_Controls {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'dots_active_box_shadow',
-				'selector' => '{{WRAPPER}} .swiper-pagination-bullet-active',
+				'selector' => '{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet-active',
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
 				],

@@ -452,7 +452,7 @@ class ElementPack_Admin_Settings {
 	// Redirect to Element Pack Pro pricing page
 	public function ep_redirect_to_upgrade() {
 		if (isset($_GET['page']) && $_GET['page'] === self::PAGE_ID . '_upgrade') {
-			wp_redirect('https://store.bdthemes.com/element-pack?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=SUMMER25');
+			wp_redirect('https://www.elementpack.pro/pricing?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO');
 			exit;
 		}
 	}
@@ -473,6 +473,15 @@ class ElementPack_Admin_Settings {
 			[ $this, 'plugin_page' ],
 			$this->element_pack_icon(),
 			58
+		);
+
+		add_submenu_page(
+			self::PAGE_ID,
+			esc_html__('Dashboard', 'bdthemes-element-pack'),
+			esc_html__('Dashboard', 'bdthemes-element-pack'),
+			'manage_options',
+			self::PAGE_ID,
+			[$this, 'plugin_page'],
 		);
 
 		add_submenu_page(
@@ -686,7 +695,7 @@ class ElementPack_Admin_Settings {
 							<a href="https://www.elementpack.pro/pricing/#a2a0062"
 								class="bdt-button bdt-welcome-button bdt-margin-small-right"
 								target="_blank"><?php esc_html_e('Compare Free Vs Pro', 'bdthemes-element-pack'); ?></a>
-							<a href="https://store.bdthemes.com/element-pack?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=SUMMER25"
+							<a href="https://www.elementpack.pro/pricing?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO"
 								class="bdt-button bdt-dashboard-sec-btn"
 								target="_blank"><?php esc_html_e('Get Premium at Up to 83% OFF', 'bdthemes-element-pack'); ?></a>
 						</div>
@@ -792,370 +801,220 @@ class ElementPack_Admin_Settings {
 	 * Others Plugin
 	 */
 
-	public function element_pack_others_plugin() {
-		// Define plugins with their paths and install URLs
-		$plugins = [
-			'prime_slider' => [
-				'path' => 'bdthemes-prime-slider-lite/bdthemes-prime-slider.php',
-				'install_url' => 'https://wordpress.org/plugins/bdthemes-prime-slider-lite/',
-				'website_url' => 'https://primeslider.pro/'
-			],
-			'ultimate_post_kit' => [
-				'path' => 'ultimate-post-kit/ultimate-post-kit.php', 
-				'install_url' => 'https://wordpress.org/plugins/ultimate-post-kit/',
-				'website_url' => 'https://postkit.pro/'
-			],
-			'ultimate_store_kit' => [
-				'path' => 'ultimate-store-kit/ultimate-store-kit.php',
-				'install_url' => 'https://wordpress.org/plugins/ultimate-store-kit/',
-				'website_url' => 'https://storekit.pro/'
-			],
-			'pixel_gallery' => [
-				'path' => 'pixel-gallery/pixel-gallery.php',
-				'install_url' => 'https://wordpress.org/plugins/pixel-gallery/',
-				'website_url' => 'https://pixelgallery.pro/'
-			],
-			'live_copy_paste' => [
-				'path' => 'live-copy-paste/live-copy-paste.php',
-				'install_url' => 'https://wordpress.org/plugins/live-copy-paste/',
-				'website_url' => 'https://www.youtube.com/watch?v=KWxbZfPIcqU'
-			],
-			'zoloblocks' => [
-				'path' => 'zoloblocks/zoloblocks.php',
-				'install_url' => 'https://wordpress.org/plugins/zoloblocks/',
-				'website_url' => 'https://zoloblocks.com/'
-			],
-			'spin_wheel' => [
-				'path' => 'spin-wheel/spin-wheel.php',
-				'install_url' => 'https://wordpress.org/plugins/spin-wheel/',
-				'website_url' => 'https://spinwheel.bdthemes.com/'
-			],
-			'ai_image' => [
-				'path' => 'ai-image/ai-image.php',
-				'install_url' => 'https://wordpress.org/plugins/ai-image/',
-				'website_url' => 'https://www.youtube.com/watch?v=cGmPFU_ju4s'
-			],
-			'dark_reader' => [
-				'path' => 'dark-reader/dark-reader.php',
-				'install_url' => 'https://wordpress.org/plugins/dark-reader/',
-				'website_url' => 'https://wordpress.org/plugins/dark-reader/'
-			],
-			'ar_viewer' => [
-				'path' => 'ar-viewer/ar-viewer.php',
-				'install_url' => 'https://wordpress.org/plugins/ar-viewer/',
-				'website_url' => 'https://wordpress.org/plugins/ar-viewer/'
-			]
-		];
+	 public function element_pack_others_plugin() {
+		// Include the Plugin Integration Helper and API Fetcher
+		require_once BDTEP_INC_PATH . 'setup-wizard/class-plugin-api-fetcher.php';
+		require_once BDTEP_INC_PATH . 'setup-wizard/class-plugin-integration-helper.php';
+
+		// Define plugin slugs to fetch data for (same as integration view)
+		$plugin_slugs = array(
+			'bdthemes-prime-slider-lite',
+			'ultimate-post-kit',
+			'ultimate-store-kit',
+			'zoloblocks',
+			'pixel-gallery',
+			'live-copy-paste',
+			'spin-wheel',
+			'ai-image',
+			'dark-reader',
+			'ar-viewer',
+			'smart-admin-assistant',
+		);
+
+		// Get plugin data using the helper (same as integration view)
+		$ep_plugins = \ElementPack\SetupWizard\Plugin_Integration_Helper::build_plugin_data($plugin_slugs);
+
+		// Helper function for time formatting (same as integration view)
+		if (!function_exists('format_last_updated_ep')) {
+			function format_last_updated_ep($date_string) {
+				if (empty($date_string)) {
+					return __('Unknown', 'bdthemes-element-pack');
+				}
+				
+				$date = strtotime($date_string);
+				if (!$date) {
+					return __('Unknown', 'bdthemes-element-pack');
+				}
+				
+				$diff = current_time('timestamp') - $date;
+				
+				if ($diff < 60) {
+					return __('Just now', 'bdthemes-element-pack');
+				} elseif ($diff < 3600) {
+					$minutes = floor($diff / 60);
+					return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'bdthemes-element-pack'), $minutes);
+				} elseif ($diff < 86400) {
+					$hours = floor($diff / 3600);
+					return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'bdthemes-element-pack'), $hours);
+				} elseif ($diff < 2592000) { // 30 days
+					$days = floor($diff / 86400);
+					return sprintf(_n('%d day ago', '%d days ago', $days, 'bdthemes-element-pack'), $days);
+				} elseif ($diff < 31536000) { // 1 year
+					$months = floor($diff / 2592000);
+					return sprintf(_n('%d month ago', '%d months ago', $months, 'bdthemes-element-pack'), $months);
+				} else {
+					$years = floor($diff / 31536000);
+					return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack'), $years);
+				}
+			}
+		}
+
+		// Helper function for fallback URLs (same as integration view)
+		if (!function_exists('get_plugin_fallback_urls_ep')) {
+			function get_plugin_fallback_urls_ep($plugin_slug) {
+				// Handle different plugin slug formats
+				if (strpos($plugin_slug, '/') !== false) {
+					// If it's a file path like 'plugin-name/plugin-name.php', extract directory
+					$plugin_slug_clean = dirname($plugin_slug);
+				} else {
+					// If it's just the plugin directory name, use it directly
+					$plugin_slug_clean = $plugin_slug;
+				}
+				
+				// Custom icon URLs for specific plugins that might not be on WordPress.org
+				$custom_icons = [
+					'live-copy-paste' => [
+						'https://ps.w.org/live-copy-paste/assets/icon-256x256.png',
+						'https://ps.w.org/live-copy-paste/assets/icon-128x128.png',
+					],
+					'spin-wheel' => [
+						'https://ps.w.org/spin-wheel/assets/icon-256x256.png',
+						'https://ps.w.org/spin-wheel/assets/icon-128x128.png',
+					],
+					'ai-image' => [
+						'https://ps.w.org/ai-image/assets/icon-256x256.png',
+						'https://ps.w.org/ai-image/assets/icon-128x128.png',
+					],
+					'smart-admin-assistant' => [
+						'https://ps.w.org/smart-admin-assistant/assets/icon-256x256.png',
+						'https://ps.w.org/smart-admin-assistant/assets/icon-128x128.png',
+					]
+				];
+				
+				// Return custom icons if available, otherwise use default WordPress.org URLs
+				if (isset($custom_icons[$plugin_slug_clean])) {
+					return $custom_icons[$plugin_slug_clean];
+				}
+				
+				return [
+					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-256x256.gif",  // Try GIF first
+					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-256x256.png",  // Then PNG
+					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-128x128.gif",  // Medium GIF
+					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-128x128.png",  // Medium PNG
+				];
+			}
+		}
 		?>
 		<div class="ep-dashboard-panel"
 			bdt-scrollspy="target: > div > div > .bdt-card; cls: bdt-animation-slide-bottom-small; delay: 300">
 			<div class="ep-dashboard-others-plugin">
-				<!-- Prime Slider -->
+				
+				<?php foreach ($ep_plugins as $plugin) : 
+					$is_active = is_plugin_active($plugin['slug']);
+					
+					// Get plugin logo with fallback
+					$logo_url = $plugin['logo'] ?? '';
+					$plugin_name = $plugin['name'] ?? '';
+					$plugin_slug = $plugin['slug'] ?? '';
+					
+					if (empty($logo_url) || !filter_var($logo_url, FILTER_VALIDATE_URL)) {
+						// Generate fallback URLs for WordPress.org
+						$actual_slug = str_replace('.php', '', basename($plugin_slug));
+						$fallback_urls = get_plugin_fallback_urls_ep($actual_slug);
+						$logo_url = $fallback_urls[0];
+					}
+				?>
+				
 				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/prime-slider.svg'; ?>" alt="Prime Slider">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Prime Slider', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('100k+ active users', 'bdthemes-element-pack'); ?></span>
+					<div class="bdt-others-plugin-content">
+						<div class="bdt-plugin-logo-wrap bdt-flex bdt-flex-middle">
+							<div class="bdt-plugin-logo-container">
+								<img src="<?php echo esc_url($logo_url); ?>" 
+									alt="<?php echo esc_attr($plugin_name); ?>" 
+									class="bdt-plugin-logo"
+									onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+								<div class="default-plugin-icon" style="display:none;">📦</div>
 							</div>
-							
-							<p><?php _e('The revolutionary slider builder addon for Elementor with next-gen superb interface. It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
 
-							<div class="bdt-others-plugin-rating bdt-margin-small-top bdt-flex bdt-flex-middle">
-								<span class="bdt-others-plugin-rating-stars">
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-half"></i>
-								</span>
-								<span class="bdt-others-plugin-rating-text bdt-margin-small-left">
-									<?php _e('4.5 out of 5 stars.', 'bdthemes-element-pack'); ?>
-								</span>
+							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
+								<h1 class="ep-feature-title"><?php echo esc_html($plugin_name); ?></h1>
 							</div>
 						</div>
 						
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-				    	<?php echo $this->get_plugin_action_button($plugins['prime_slider']['path'], $plugins['prime_slider']['install_url']); ?>
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['prime_slider']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
+						<div class="bdt-others-plugin-content-text bdt-margin-top">
 
-					
-				</div>
-				<!-- Ultimate Post Kit -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/ultimate-post-kit.svg'; ?>" alt="zoloblocks">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Ultimate Post Kit', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('30k+ active users', 'bdthemes-element-pack'); ?></span>
+							<?php if (!empty($plugin['description'])) : ?>
+								<p><?php echo esc_html($plugin['description']); ?></p>
+							<?php endif; ?>
+
+							<span class="active-installs bdt-margin-small-top">
+								<?php esc_html_e('Active Installs: ', 'bdthemes-element-pack'); 
+								// echo wp_kses_post($plugin['active_installs'] ?? '0'); 
+								if (isset($plugin['active_installs_count']) && $plugin['active_installs_count'] > 0) {
+									echo ' <span class="installs-count">' . number_format($plugin['active_installs_count']) . '+' . '</span>';
+								} else {
+									echo ' <span class="installs-count">Fewer than 10' . '</span>';
+								}
+								?>
+							</span>
+
+							<div class="bdt-others-plugin-rating bdt-margin-small-top bdt-flex bdt-flex-middle">
+								<span class="bdt-others-plugin-rating-stars">
+									<?php 
+									$rating = floatval($plugin['rating'] ?? 0);
+									$full_stars = floor($rating);
+									$has_half_star = ($rating - $full_stars) >= 0.5;
+									$empty_stars = 5 - $full_stars - ($has_half_star ? 1 : 0);
+									
+									// Full stars
+									for ($i = 0; $i < $full_stars; $i++) {
+										echo '<i class="dashicons dashicons-star-filled"></i>';
+									}
+									
+									// Half star
+									if ($has_half_star) {
+										echo '<i class="dashicons dashicons-star-half"></i>';
+									}
+									
+									// Empty stars
+									for ($i = 0; $i < $empty_stars; $i++) {
+										echo '<i class="dashicons dashicons-star-empty"></i>';
+									}
+									?>
+								</span>
+								<span class="bdt-others-plugin-rating-text bdt-margin-small-left">
+									<?php echo esc_html($plugin['rating'] ?? '0'); ?> <?php esc_html_e('out of 5 stars.', 'bdthemes-element-pack'); ?>
+									<?php if (isset($plugin['num_ratings']) && $plugin['num_ratings'] > 0): ?>
+										<span class="rating-count">(<?php echo number_format($plugin['num_ratings']); ?> <?php esc_html_e('ratings', 'bdthemes-element-pack'); ?>)</span>
+									<?php endif; ?>
+								</span>
 							</div>
 							
-							<p><?php _e('Best blogging addon for building quality blogging website with fine-tuned features and widgets. It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-
-							<div class="bdt-others-plugin-rating bdt-margin-small-top bdt-flex bdt-flex-middle">
-								<span class="bdt-others-plugin-rating-stars">
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-								</span>
-								<span class="bdt-others-plugin-rating-text bdt-margin-small-left">
-									<?php _e('4.8 out of 5 stars.', 'bdthemes-element-pack'); ?>
-								</span>
-							</div>
-
+							<?php if (isset($plugin['downloaded_formatted']) && !empty($plugin['downloaded_formatted'])): ?>
+								<div class="bdt-others-plugin-downloads bdt-margin-small-top">
+									<span><?php esc_html_e('Downloads: ', 'bdthemes-element-pack'); ?><?php echo esc_html($plugin['downloaded_formatted']); ?></span>
+								</div>
+							<?php endif; ?>
+							
+							<?php if (isset($plugin['last_updated']) && !empty($plugin['last_updated'])): ?>
+								<div class="bdt-others-plugin-updated bdt-margin-small-top">
+									<span><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack'); ?><?php echo esc_html(format_last_updated_ep($plugin['last_updated'])); ?></span>
+								</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				
 					<div class="bdt-others-plugins-link">
-				     	<?php echo $this->get_plugin_action_button($plugins['ultimate_post_kit']['path'], $plugins['ultimate_post_kit']['install_url']); ?>
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['ultimate_post_kit']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
+						<?php echo $this->get_plugin_action_button($plugin['slug'], 'https://wordpress.org/plugins/' . dirname($plugin['slug']) . '/'); ?>
+						<?php if (!empty($plugin['homepage'])) : ?>
+							<a class="bdt-button bdt-dashboard-sec-btn" target="_blank" href="<?php echo esc_url($plugin['homepage']); ?>">
+								<?php esc_html_e('Learn More', 'bdthemes-element-pack'); ?>
+							</a>
+						<?php endif; ?>
 					</div>
 				</div>
-				<!-- Ultimate Store Kit -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/ultimate-store-kit.svg'; ?>" alt="zoloblocks">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Ultimate Store Kit', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('1000+ active users', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('The only eCommmerce addon for answering all your online store design problems in one package. It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-
-							<div class="bdt-others-plugin-rating bdt-margin-small-top bdt-flex bdt-flex-middle">
-								<span class="bdt-others-plugin-rating-stars">
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-half"></i>
-								</span>
-								<span class="bdt-others-plugin-rating-text bdt-margin-small-left">
-									<?php _e('4.4 out of 5 stars.', 'bdthemes-element-pack'); ?>
-								</span>
-							</div>
-
-						</div>
-					</div>
 				
-					<div class="bdt-others-plugins-link">
-					    <?php echo $this->get_plugin_action_button($plugins['ultimate_store_kit']['path'], $plugins['ultimate_store_kit']['install_url']); ?>
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['ultimate_store_kit']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
-				<!-- Pixel Gallery -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/pixel-gallery.svg'; ?>" alt="Pixel Gallery">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Pixel Gallery', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('3000+ active users', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('Pixel Gallery provides more than 30+ essential elements for everyday applications to simplify the whole web building process. It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-
-							<div class="bdt-others-plugin-rating bdt-margin-small-top bdt-flex bdt-flex-middle">
-								<span class="bdt-others-plugin-rating-stars">
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-								</span>
-								<span class="bdt-others-plugin-rating-text bdt-margin-small-left">
-									<?php _e('5 out of 5 stars.', 'bdthemes-element-pack'); ?>
-								</span>
-							</div>
-
-						</div>
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-						<?php echo $this->get_plugin_action_button($plugins['pixel_gallery']['path'], $plugins['pixel_gallery']['install_url']); ?>
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['pixel_gallery']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
-				<!-- Live Copy Paste -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/live-copy-paste.svg'; ?>" alt="live copy paste">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Live Copy Paste', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('3000+ active users', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('Superfast cross-domain copy-paste mechanism for WordPress websites with true UI copy experience. It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-
-							<div class="bdt-others-plugin-rating bdt-margin-small-top bdt-flex bdt-flex-middle">
-								<span class="bdt-others-plugin-rating-stars">
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-half"></i>
-								</span>
-								<span class="bdt-others-plugin-rating-text bdt-margin-small-left">
-									<?php _e('4.3 out of 5 stars.', 'bdthemes-element-pack'); ?>
-								</span>
-							</div>
-
-						</div>
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-				        <?php echo $this->get_plugin_action_button($plugins['live_copy_paste']['path'], $plugins['live_copy_paste']['install_url']); ?>
-
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['live_copy_paste']['website_url']); ?>">
-							<?php _e('Video Tutorial', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
-				<!-- ZoloBlocks -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/zoloblocks.svg'; ?>" alt="zoloblocks">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('ZoloBlocks', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('300+ active users', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('ZoloBlocks is a collection of blocks for the new WordPress block editor (Gutenberg). It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-
-							<div class="bdt-others-plugin-rating bdt-margin-small-top bdt-flex bdt-flex-middle">
-								<span class="bdt-others-plugin-rating-stars">
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-									<i class="dashicons dashicons-star-filled"></i>
-								</span>
-								<span class="bdt-others-plugin-rating-text bdt-margin-small-left">
-									<?php _e('5 out of 5 stars.', 'bdthemes-element-pack'); ?>
-								</span>
-							</div>
-
-						</div>
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-						<?php echo $this->get_plugin_action_button($plugins['zoloblocks']['path'], $plugins['zoloblocks']['install_url']); ?>
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['zoloblocks']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
-				<!-- Spin Wheel -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/spin-wheel.svg'; ?>" alt="spin wheel">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Spin Wheel', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('100+ active users', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('Add a fun, interactive spin wheel to offer instant coupons, boost engagement, and grow your email list. It\'s free!.', 'bdthemes-element-pack'); ?></p>
-						</div>
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-				        <?php echo $this->get_plugin_action_button($plugins['spin_wheel']['path'], $plugins['spin_wheel']['install_url']); ?>
-
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['spin_wheel']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
-
-				<!-- Instant Image Generator -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/instant-image-generator.svg'; ?>" alt="instant image generator">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Instant Image Generator', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('100+ active users', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('Instant Image Generator (One Click Image Uploads from Pixabay, Pexels and OpenAI). It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-						</div>
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-				        <?php echo $this->get_plugin_action_button($plugins['ai_image']['path'], $plugins['ai_image']['install_url']); ?>
-
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['ai_image']['website_url']); ?>">
-							<?php _e('Video Tutorial', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
-
-				<!-- Dark Reader -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/dark-reader.svg'; ?>" alt="dark reader">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('Dark Reader', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('New', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('Add beautiful dark mode to your WordPress site with customizable settings. Reduce eye strain and improve accessibility. It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-						</div>
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-				        <?php echo $this->get_plugin_action_button($plugins['dark_reader']['path'], $plugins['dark_reader']['install_url']); ?>
-
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['dark_reader']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
-
-				<!-- AR Viewer -->
-				<div class="bdt-card bdt-card-body bdt-flex bdt-flex-middle bdt-flex-between">
-					<div class="bdt-others-plugin-content bdt-flex bdt-flex-middle ">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/ar-viewer.svg'; ?>" alt="ar viewer">
-						<div class="bdt-others-plugin-content-text">
-							<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">
-								<h1 class="ep-feature-title "><?php _e('AR Viewer', 'bdthemes-element-pack'); ?></h1>
-								<span class="bdt-others-plugin-user"><?php esc_html_e('60+ active users', 'bdthemes-element-pack'); ?></span>
-							</div>
-							<p><?php _e('Augmented Reality Viewer – 3D Model Viewer. It\'s Free! Download it.', 'bdthemes-element-pack'); ?></p>
-						</div>
-					</div>
-				
-					<div class="bdt-others-plugins-link">
-				        <?php echo $this->get_plugin_action_button($plugins['ar_viewer']['path'], $plugins['ar_viewer']['install_url']); ?>
-
-						<a class="bdt-button bdt-dashboard-sec-btn" target="_blank"
-							href="<?php echo esc_url($plugins['ar_viewer']['website_url']); ?>">
-							<?php _e('View Website', 'bdthemes-element-pack'); ?>
-						</a>
-					</div>
-				</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 		<?php
