@@ -312,26 +312,25 @@ class Module extends Element_Pack_Module_Base {
         );
     }
 
+    public function inject_liquid_glass_effects_svg() {
+		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
+			$this->bdt_liquid_glass_effects_svg();
+		}
+	}
+
     protected function add_actions() {
         add_action('elementor/element/column/section_style/before_section_end', [$this, 'register_controls'], 10, 2);
         add_action('elementor/element/common/_section_background/before_section_end', [$this, 'register_controls'], 10, 2);
         add_action('elementor/element/container/section_background/before_section_end', [$this, 'register_controls'], 10, 2);
         add_action('elementor/element/section/section_background/before_section_end', [$this, 'register_controls'], 10, 2);
         
-        add_action('elementor/frontend/before_render', [$this, 'add_liquid_glass_effects_svg_filter'], 10, 1);
-        add_action('elementor/preview/enqueue_scripts', [$this, 'add_liquid_glass_effects_svg_filter'], 10, 1);
+        add_action('elementor/frontend/before_render', [$this, 'should_script_enqueue'], 10, 1);
+        add_action( 'wp_footer', [ $this, 'inject_liquid_glass_effects_svg' ] );
 
     }
-    
-    public function add_liquid_glass_effects_svg_filter( $element ) {
-        if ( !\ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() && !\ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
-            $settings = $element->get_settings_for_display();
-            if ( !isset($settings['element_pack_backdrop_filter_type']) || 'liquid_glass' !== $settings['element_pack_backdrop_filter_type'] ) {
-                return;
-            }
-        }
-	
-        ?>
+
+    public function bdt_liquid_glass_effects_svg() {
+       ?>
         <svg style="display: none">
       <filter
         id="bdt-frosted"
@@ -389,6 +388,13 @@ class Module extends Element_Pack_Module_Base {
       </filter>
 </svg>
         <?php
+    }
+    
+    public function should_script_enqueue( $element ) {
+        $settings = $element->get_settings_for_display();
+        if ('liquid_glass' === $settings['element_pack_backdrop_filter_type'] ) {
+            echo $this->bdt_liquid_glass_effects_svg();
+        }
     }
 
 

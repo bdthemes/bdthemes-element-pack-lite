@@ -1039,7 +1039,7 @@ class Facebook_Feed extends Module_Base {
 				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-social-button .bdt-like-icon' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-social-button' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

@@ -208,6 +208,7 @@ function returnCurrencySymbol(currency = null) {
    */
 
   jQuery(document).ready(function () {
+
     /**
      * Start used on Social Share
      */
@@ -309,16 +310,18 @@ function returnCurrencySymbol(currency = null) {
     /** /Toggle Pass */
 
     /**
-     * Backdrop Filter and Liquid Glass Effects
-     * Handles both backdrop filter and liquid glass effect functionality
-     */
+   * Backdrop Filter and Liquid Glass Effects
+   * Handles both backdrop filter and liquid glass effect functionality
+   * Only runs on Elementor pages
+   */
+  if (document.body.classList.contains('elementor-page')) {
     var BackdropFilterGlassEffect = {
         init: function () {
             this.initGlassEffect();
         },
 
         initGlassEffect: function () {
-            // Find all elements with glass effect enabled (legacy)
+            // Find all elements with glass effect enabled
             jQuery('.bdt-glass-effect-yes').each(function () {
                 var $element = jQuery(this);
                 
@@ -351,18 +354,20 @@ function returnCurrencySymbol(currency = null) {
         },
     };
 
-    // Initialize glass effects when document is ready
+    // Initialize glass effects
     BackdropFilterGlassEffect.init();
 
     // Re-initialize for dynamic content (Elementor frontend)
     if (typeof elementorFrontend !== 'undefined') {
-        elementorFrontend.hooks.addAction('frontend/element_ready/global', function () {
-            BackdropFilterGlassEffect.init();
-        });
+      elementorFrontend.hooks.addAction('frontend/element_ready/global', function () {
+          BackdropFilterGlassEffect.init();
+      });
     }
-    /**
-     * /Backdrop Filter and Liquid Glass Effects
-     */
+  }
+  /**
+   * /Backdrop Filter and Liquid Glass Effects
+   */
 
   });
+
 })(jQuery);

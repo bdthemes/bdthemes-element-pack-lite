@@ -30,6 +30,8 @@ class Module extends Element_Pack_Module_Base {
 
             $result = json_decode($response, TRUE);
 
+            error_log( print_r( $request, true ) );
+
             if (isset($result['success']) && $result['success'] == 1) {
                 // Captcha ok
                 return true;
@@ -88,7 +90,7 @@ class Module extends Element_Pack_Module_Base {
             }
 
             $post_id   = isset( $_REQUEST['page_id'] ) ? absint($_REQUEST['page_id']) : 0;
-            $widget_id = isset( $_REQUEST['widget_id'] ) ? absint($_REQUEST['widget_id']) : 0;
+            $widget_id = isset( $_REQUEST['widget_id'] ) ? $_REQUEST['widget_id'] : 0;
 
             $error = false;
 
@@ -160,8 +162,6 @@ class Module extends Element_Pack_Module_Base {
             }
 
             /** Recaptcha*/
-
-
             $result_recaptcha = $this->get_widget_settings($post_id, $widget_id);
 
             if (isset($result_recaptcha['show_recaptcha']) && $result_recaptcha['show_recaptcha'] == 'yes') {
@@ -170,6 +170,9 @@ class Module extends Element_Pack_Module_Base {
                         $error  = true;
                         $result = esc_html__("reCAPTCHA is invalid!", "bdthemes-element-pack");
                     }
+                } else {
+                    $error  = true;
+                    $result = esc_html__("reCAPTCHA API keys are not set properly! Go to the Element Pack API settings page to configure them.", "bdthemes-element-pack");
                 }
             }
 
