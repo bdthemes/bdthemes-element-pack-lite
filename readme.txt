@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.8.3
 Requires PHP: 7.4.0
-Stable tag: 8.2.6
+Stable tag: 8.3.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 3.32.4
+Elementor tested up to: 3.32.5
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce builder and more.
 
@@ -42,7 +42,7 @@ Element Pack gives you everything you need to build high-quality websites quickl
 ***"An excellent pack of tools to customize your website easily"*** - G2
 
 
-https://youtu.be/NhaIMIrFh1Q?si=mgsH9QFxW1Z9rYHi
+https://youtu.be/Shxejp20pW0?si=Md3CwBSHS6HRR_Lt
 
 ## Supercharge your Elementor experience with Element Pack – the most comprehensive Elementor addon. 
 
@@ -277,6 +277,15 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.3.0 [26th October 2025] =
+
+* Added: Animated card widget added
+* Added: Accordion items controls added in accordion widget
+* Added: Rating (Above Text) feature added in testimonial grid widget
+* Fixed: Backdrop filter liquid glass issue fixed
+* Fixed: reCAPTCHA issue fixed in Simple Contact Form, User Register widget
+* Updated: Security improved
 
 = 8.2.6 [13th October 2025] =
 

@@ -66,6 +66,11 @@ jQuery(document).ready(function ($) {
         jQuery(document).on('click', '#adminmenu .wp-submenu a, .toplevel_page_element_pack_options .wp-submenu a', function(e) {
             var href = jQuery(this).attr('href');
             
+            // Allow upgrade link and license renew to navigate normally
+            if (href && (href.includes('element_pack_options_upgrade') || href.includes('element_pack_options_license_renew'))) {
+                return true; // Let it navigate normally
+            }
+            
             // Check if clicking Dashboard menu item while already on Element Pack page
             if (href && href.includes('page=element_pack_options')) {
                 // Get current page query without hash

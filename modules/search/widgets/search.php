@@ -1934,7 +1934,7 @@ class Search extends Module_Base {
 
 		<?php if ('' == $settings['show_ajax_search']) : ?>
 			<button type="submit" class="bdt-search-button">
-				<?php echo esc_html__($settings['button_text'], 'bdthemes-element-pack'); ?>
+				<?php echo esc_html( $settings['button_text'] ); ?>
 				<?php Icons_Manager::render_icon($settings['button_icon'], ['aria-hidden' => 'true']); ?>
 			</button>
 		<?php endif; ?>

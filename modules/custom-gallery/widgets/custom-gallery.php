@@ -1258,7 +1258,7 @@ class Custom_Gallery extends Module_Base {
 								<?php if ( 'icon' == $settings['link_type'] ) : ?>
 									<i class="ep-icon-<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
 								<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
-									<span class="bdt-text"><?php esc_html_e( $settings['link_text'], 'bdthemes-element-pack' ); ?></span>
+									<span class="bdt-text"><?php echo esc_html( $settings['link_text'] ); ?></span>
 								<?php endif; ?>
 							</a>
 						</div>

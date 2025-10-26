@@ -57,7 +57,7 @@
 			
 			/** Recaptcha*/
 			$post_id   = isset($_REQUEST['page_id']) ? (int) $_REQUEST['page_id'] : 0;
-			$widget_id = isset($_REQUEST['widget_id']) ? (int) $_REQUEST['widget_id'] : 0;
+			$widget_id = isset($_REQUEST['widget_id']) ? $_REQUEST['widget_id'] : 0;
 			
 			$result = $this->get_widget_settings( $post_id, $widget_id );
 			if ( isset( $result['show_recaptcha_checker'] ) && $result['show_recaptcha_checker'] == 'yes' ) {
@@ -119,7 +119,7 @@
 				} else {
 					
 					$post_id   = isset($_REQUEST['page_id']) ? (int) $_REQUEST['page_id'] : 0;
-					$widget_id = isset($_REQUEST['widget_id']) ? (int) $_REQUEST['widget_id'] : 0;
+					$widget_id = isset($_REQUEST['widget_id']) ? $_REQUEST['widget_id'] : 0;
 
 					$terms = isset($_REQUEST['user_terms']) ? sanitize_text_field( wp_unslash( $_REQUEST['user_terms'] ) ) : '';
 					

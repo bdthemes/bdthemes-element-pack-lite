@@ -141,7 +141,7 @@ class ModuleService {
 					'label'        => esc_html__('Animated Card', 'bdthemes-element-pack'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
-					'widget_type'  => 'pro',
+					'widget_type'  => 'free',
 					'content_type' => 'others',
 					'demo_url'     => 'https://demo.elementpack.pro/element/animated-card/',
 					'video_url'    => 'https://youtu.be/gfXpQ-dTr9g',
