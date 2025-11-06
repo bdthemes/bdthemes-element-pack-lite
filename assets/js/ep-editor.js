@@ -200,7 +200,7 @@
             config: {
                 widgets: {
                     'bdt-creative-button': { 'aura': 'anthe' },
-                    'bdt-content-switcher': { 'button': '1', 'template': 'content', 'link_section': 'content', 'link_widget': 'content' },
+                    'bdt-content-switcher': { 'button': '1', 'template': 'content', 'link_section': 'content', 'link_widget': 'content', 'price_card': 'content' },
                     'bdt-social-share': { 'icon': 'icon-text', 'text': 'icon-text' },
                     'bdt-scrollnav': { 'dot': 'default' }
                 },
