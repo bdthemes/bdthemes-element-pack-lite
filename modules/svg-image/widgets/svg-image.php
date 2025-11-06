@@ -63,9 +63,6 @@ class Svg_Image extends Module_Base {
 	public function has_widget_inner_wrapper(): bool {
         return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
     }
-	protected function is_dynamic_content(): bool {
-		return false;
-	}
 
 	protected function register_controls() {
 
@@ -87,6 +84,7 @@ class Svg_Image extends Module_Base {
 				'default' => [ 
 					'url' => BDTEP_ASSETS_URL . 'images/crane.svg',
 				],
+				'media_type' => 'svg',
 			]
 		);
 
@@ -852,10 +850,37 @@ class Svg_Image extends Module_Base {
 	public function render_svg() {
 		$settings = $this->get_settings_for_display();
 		$svg_file = $settings['image']['url'];
-		?>
-		<img src="<?php echo esc_url( $svg_file ); ?>" alt="<?php echo esc_html( get_the_title() ); ?>" class="bdt-svg-image"
-			data-bdt-svg="stroke-animation: true" data-bdt-svg />
-		<?php
+		$svg_content = '';
+		if ( ! empty( $svg_file ) ) {
+			// Try to get the SVG file contents
+			if ( strpos( $svg_file, get_site_url() ) === 0 ) {
+				// Local file, convert URL to path
+				$upload_dir = wp_upload_dir();
+				$baseurl = $upload_dir['baseurl'];
+				$basedir = $upload_dir['basedir'];
+				if ( strpos( $svg_file, $baseurl ) === 0 ) {
+					$svg_path = $basedir . substr( $svg_file, strlen( $baseurl ) );
+					if ( file_exists( $svg_path ) ) {
+						$svg_content = file_get_contents( $svg_path );
+					}
+				}
+			}
+			// If not found, fallback to remote fetch (not recommended, but for completeness)
+			if ( empty( $svg_content ) ) {
+				$response = wp_remote_get( $svg_file );
+				if ( ! is_wp_error( $response ) && ! empty( $response['body'] ) ) {
+					$svg_content = $response['body'];
+				}
+			}
+		}
+		if ( ! empty( $svg_content ) ) {
+			// Add class and data attributes to the SVG tag
+			$svg_content = preg_replace( '/<svg(\s|>)/', '<svg class="bdt-svg-image-inner" data-bdt-svg="stroke-animation: true" ', $svg_content, 1 );
+			echo $svg_content;
+		} else {
+			// fallback to <img> if SVG can't be loaded
+			echo '<img src="' . esc_url( $svg_file ) . '" alt="' . esc_html( get_the_title() ) . '" class="bdt-svg-image-inner" data-bdt-svg="stroke-animation: true" data-bdt-svg />';
+		}
 	}
 
 	public function render_image() {

@@ -114,8 +114,6 @@
 
             if (contactFormAction && contactFormAction !== '') {
                 sendContactForm($contactForm);
-            } else {
-                // console.log($contactForm);
             }
 
             grecaptcha.reset();

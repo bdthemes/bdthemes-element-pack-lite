@@ -569,8 +569,7 @@ function returnCurrencySymbol(currency = null) {
             }else{
                 offset_val = dynamic_timezone;
             }
-
-            // console.log(offset_val);
+            
             if(timeNotation == '12h'){
                 timeFormat = '%I:%M:%S %p';
             } 
@@ -715,8 +714,6 @@ function returnCurrencySymbol(currency = null) {
 
             if (contactFormAction && contactFormAction !== '') {
                 sendContactForm($contactForm);
-            } else {
-                // console.log($contactForm);
             }
 
             grecaptcha.reset();
@@ -905,7 +902,7 @@ function returnCurrencySymbol(currency = null) {
                         } 
                     },
                     error: function () {
-                        console.log("Error");
+                        // error handling code can be added here if needed
                     }
                 });
             },
@@ -946,7 +943,7 @@ function returnCurrencySymbol(currency = null) {
                          }
                     },
                     error: function () {
-                        //console.log("Error");
+                        // error handling code can be added here if needed
                     }
                 });
             },

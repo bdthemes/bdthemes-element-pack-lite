@@ -5,7 +5,7 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.8.3
 Requires PHP: 7.4.0
-Stable tag: 8.3.0
+Stable tag: 8.3.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
@@ -277,6 +277,19 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.3.1 [6th November 2025] =
+
+* Added: Shape builder extension added (Pro)
+* Added: Permission Manager feature added (Pro)
+* Added: Custom Fonts upload feature added (Pro)
+* Added: Custom Icons Library feature added (Pro)
+* Added: Switcher knob size added in content switcher widget
+* Added: Content type price card added in content switcher widget
+* Fixed: reCAPTCHA issue fixed in Simple Contact Form widget
+* Fixed: SVG Draw Animation issue fixed in SVG Image widget
+* Fixed: JS confliction with Zoloblocks fixed
+* Fixed: Backdrop filter grid layout issue fixed
 
 = 8.3.0 [26th October 2025] =
 

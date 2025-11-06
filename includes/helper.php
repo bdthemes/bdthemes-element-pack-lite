@@ -2270,16 +2270,7 @@ if ( ! function_exists( 'ep_crypto_data' ) ) {
 			$data = json_decode( $body );
 
 			if ( isset( $data->status->error_code ) && ! empty( $data->status->error_code ) ) {
-				// echo $data->status->error_code;
 				$data = get_transient( 'ep-bitcoin' );
-				// $dataset = array(
-				//     "apiErrors" => true,
-				//     "data" => isset($data->status->error_message) ? $data->status->error_message : 'API Errors.'
-				// );
-				// echo json_encode($dataset);
-				// wp_die();
-				// print_r($data->status->error_code);
-				// echo 'API Errors - ' . $market_url;
 			}
 
 			$resultArray = [];

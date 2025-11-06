@@ -28,8 +28,6 @@ abstract class Element_Pack_Module_Base extends Module {
         foreach ($this->get_widgets() as $widget) {
             $class_name = $this->get_reflection()->getNamespaceName() . '\Widgets\\' . $widget;
 
-            //var_dump($class_name);
-
             $widget_manager->register(new $class_name());
         }
     }

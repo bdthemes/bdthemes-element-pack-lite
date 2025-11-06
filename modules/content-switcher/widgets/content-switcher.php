@@ -120,6 +120,27 @@ class Content_Switcher extends Module_Base {
 		);
 
 		$repeater->add_control(
+			'switcher_icon',
+			[
+				'label'       => esc_html__('Icon', 'bdthemes-element-pack'),
+				'type'        => Controls_Manager::ICONS,
+				'label_block' => false,
+				'skin'        => 'inline',
+			]
+		);
+
+		$repeater->add_control(
+			'switcher_active',
+			[
+				'label'        => esc_html__('Active', 'bdthemes-element-pack'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__('Yes', 'bdthemes-element-pack'),
+				'label_off'    => esc_html__('No', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+
+		$repeater->add_control(
 			'content_type',
 			[
 				'label'   => esc_html__('Content Type', 'bdthemes-element-pack'),
@@ -130,8 +151,188 @@ class Content_Switcher extends Module_Base {
 					'template' => esc_html__('Elementor Template', 'bdthemes-element-pack') . BDTEP_LOCK,
 					'link_section'  => esc_html__('Link Section', 'bdthemes-element-pack') . BDTEP_LOCK,
 					'link_widget'  => esc_html__('Link Widget', 'bdthemes-element-pack') . BDTEP_LOCK,
+					'price_card'  => esc_html__('Price Card', 'bdthemes-element-pack') . BDTEP_LOCK,
 				],
 				'classes' => BDTEP_LOCK_CLASS,
+			]
+		);
+
+		$repeater->add_control(
+			'price_card_content',
+			[
+				'label'       => esc_html__('Price Title', 'bdthemes-element-pack'),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__('Starting From', 'bdthemes-element-pack'),
+				'label_block' => true,
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+		$repeater->add_control(
+			'currency_symbol',
+			[ 
+				'label'   => __( 'Currency Symbol', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [ 
+					''             => __( 'None', 'bdthemes-element-pack' ),
+					'dollar'       => '&#36; ' . _x( 'Dollar', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'euro'         => '&#128; ' . _x( 'Euro', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'baht'         => '&#3647; ' . _x( 'Baht', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'franc'        => '&#8355; ' . _x( 'Franc', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'guilder'      => '&fnof; ' . _x( 'Guilder', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'krona'        => 'kr ' . _x( 'Krona', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'lira'         => '&#8356; ' . _x( 'Lira', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'peseta'       => '&#8359 ' . _x( 'Peseta', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'peso'         => '&#8369; ' . _x( 'Peso', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'pound'        => '&#163; ' . _x( 'Pound Sterling', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'real'         => 'R$ ' . _x( 'Real', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'ruble'        => '&#8381; ' . _x( 'Ruble', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'rupee'        => '&#8360; ' . _x( 'Rupee', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'indian_rupee' => '&#8377; ' . _x( 'Rupee (Indian)', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'shekel'       => '&#8362; ' . _x( 'Shekel', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'yen'          => '&#165; ' . _x( 'Yen/Yuan', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'bdt'          => '&#2547; ' . _x( 'Taka', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'won'          => '&#8361; ' . _x( 'Won', 'Currency Symbol', 'bdthemes-element-pack' ),
+					'custom'       => __( 'Custom', 'bdthemes-element-pack' ),
+				],
+				'default' => 'dollar',
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'currency_symbol_custom',
+			[ 
+				'label'     => __( 'Custom Symbol', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::TEXT,
+				'condition' => [ 
+					'currency_symbol' => 'custom',
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'price',
+			[ 
+				'label'   => __( 'Price', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => '49.99',
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+
+		$repeater->add_control(
+			'currency_format',
+			[ 
+				'label'   => __( 'Currency Format', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [ 
+					''  => '1,234.56 (Default)',
+					',' => '1.234,56',
+				],
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'sale',
+			[ 
+				'label'     => __( 'Sale', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'separator' => 'before',
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'original_price',
+			[ 
+				'label'     => __( 'Original Price', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => '79',
+				'condition' => [ 
+					'sale' => 'yes',
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'period',
+			[ 
+				'label'   => __( 'Period', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => __( 'Monthly', 'bdthemes-element-pack' ),
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'price_card_additional_text',
+			[
+				'label'       => esc_html__('Additional Text', 'bdthemes-element-pack'),
+				'type'        => Controls_Manager::WYSIWYG,
+				'default'     => esc_html__('Enjoy our special offer!', 'bdthemes-element-pack'),
+				'label_block' => true,
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'button_text',
+			[ 
+				'label'   => __( 'Button Text', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => __( 'Select Plan', 'bdthemes-element-pack' ),
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'link',
+			[ 
+				'label'       => __( 'Link', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::URL,
+				'placeholder' => 'http://your-link.com',
+				'default'     => [ 
+					'url' => '#',
+					'content_type' => 'price_card',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'button_css_id',
+			[ 
+				'label'       => __( 'Button ID', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => [ 
+					'active' => true,
+				],
+				'default'     => '',
+				'title'       => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'separator'   => 'before',
+				'condition'   => [
+					'content_type' => 'price_card',
+				],
 			]
 		);
 
@@ -199,27 +400,6 @@ class Content_Switcher extends Module_Base {
 				'condition'   => [
 					'content_type' => 'link_widget',
 				],
-			]
-		);
-
-		$repeater->add_control(
-			'switcher_icon',
-			[
-				'label'       => esc_html__('Icon', 'bdthemes-element-pack'),
-				'type'        => Controls_Manager::ICONS,
-				'label_block' => false,
-				'skin'        => 'inline',
-			]
-		);
-
-		$repeater->add_control(
-			'switcher_active',
-			[
-				'label'        => esc_html__('Active', 'bdthemes-element-pack'),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__('Yes', 'bdthemes-element-pack'),
-				'label_off'    => esc_html__('No', 'bdthemes-element-pack'),
-				'return_value' => 'yes',
 			]
 		);
 
@@ -908,9 +1088,9 @@ class Content_Switcher extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-content-switcher .button' => 'width: {{SIZE}}{{UNIT}};',
 				],
-				'condition' => [
-					'switcher_style!' => '9',
-				],
+				// 'condition' => [
+				// 	'switcher_style!' => '9',
+				// ],
 			]
 		);
 
@@ -933,9 +1113,31 @@ class Content_Switcher extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-content-switcher .button' => 'height: {{SIZE}}{{UNIT}};',
 				],
-				'condition' => [
-					'switcher_style!' => '9',
+				// 'condition' => [
+				// 	'switcher_style!' => '9',
+				// ],
+			]
+		);
+
+		// knob size
+		$this->add_responsive_control(
+			'switcher_knob_size',
+			[
+				'label' => esc_html__('Knob Size', 'bdthemes-element-pack'),
+				'type'  => Controls_Manager::SLIDER,
+				'size_units' => ['px'],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+					],
 				],
+				'selectors' => [
+                    '{{WRAPPER}}' => '--ep-knob-size: {{SIZE}}px;'
+                ],
+				// 'condition' => [
+				// 	'switcher_style!' => '9',
+				// ],
 			]
 		);
 
@@ -1379,6 +1581,934 @@ class Content_Switcher extends Module_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'section_style_pricing',
+			[ 
+				'label' => __( 'Pricing', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_responsive_control(
+			'pricing_align',
+			[ 
+				'label'                => __( 'Alignment', 'bdthemes-element-pack' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [ 
+					'left'   => [ 
+						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [ 
+						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [ 
+						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors_dictionary' => [ 
+					'left'   => 'justify-content: flex-start; text-align: left;',
+					'right'  => 'justify-content: flex-end; text-align: right;',
+					'center' => '    justify-content: center; text-align: center;',
+				],
+				'selectors'            => [ 
+					'{{WRAPPER}} .bdt-price-card-price' => '{{VALUE}};',
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_pricing_style' );
+
+		$this->start_controls_tab(
+			'tabs_pricing_normal',
+			[ 
+				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'price_color',
+			[ 
+				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-currency, {{WRAPPER}} .bdt-price-card-integer-part, {{WRAPPER}} .bdt-price-card-fractional-part' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'pricing_element_bg_color',
+				'selector' => '{{WRAPPER}} .bdt-price-card-price',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[ 
+				'name'     => 'pricing_border',
+				'selector' => '{{WRAPPER}} .bdt-price-card-price',
+			]
+		);
+
+		$this->add_responsive_control(
+			'readmore_border_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-price-card-price' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'pricing_element_padding',
+			[ 
+				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-price-card-price' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'pricing_element_margin',
+			[ 
+				'label'      => __( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-price-card-price' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[ 
+				'name'     => 'price_shadow',
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'selector' => '{{WRAPPER}} .bdt-price-card-currency, {{WRAPPER}} .bdt-price-card-integer-part, {{WRAPPER}} .bdt-price-card-fractional-part',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'     => 'price_typography',
+				'selector' => '{{WRAPPER}} .bdt-price-card-price',
+			]
+		);
+
+		$this->add_control(
+			'heading_currency_style',
+			[ 
+				'label'     => __( 'Currency Symbol', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'currency_size',
+			[ 
+				'label'     => __( 'Size', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [ 
+					'px' => [ 
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-currency' => 'font-size: calc({{SIZE}}em/100)',
+				],
+			]
+		);
+
+		$this->add_control(
+			'currency_horizontal_position',
+			[ 
+				'label'     => __( 'Position', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'default'   => 'left',
+				'options'   => [ 
+					'left'  => [ 
+						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'right' => [ 
+						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'currency_vertical_position',
+			[ 
+				'label'                => __( 'Vertical Position', 'bdthemes-element-pack' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [ 
+					'top'    => [ 
+						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'middle' => [ 
+						'title' => __( 'Middle', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'bottom' => [ 
+						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'default'              => 'top',
+				'selectors_dictionary' => [ 
+					'top'    => 'flex-start',
+					'middle' => 'center',
+					'bottom' => 'flex-end',
+				],
+				'selectors'            => [ 
+					'{{WRAPPER}} .bdt-price-card-currency' => 'align-self: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'fractional_part_style',
+			[ 
+				'label'     => __( 'Fractional Part', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'fractional-part_size',
+			[ 
+				'label'     => __( 'Size', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [ 
+					'px' => [ 
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-fractional-part' => 'font-size: calc({{SIZE}}em/100)',
+				],
+			]
+		);
+
+		$this->add_control(
+			'fractional_part_vertical_position',
+			[ 
+				'label'                => __( 'Vertical Position', 'bdthemes-element-pack' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [ 
+					'top'    => [ 
+						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'middle' => [ 
+						'title' => __( 'Middle', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'bottom' => [ 
+						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'default'              => 'top',
+				'selectors_dictionary' => [ 
+					'top'    => 'flex-start',
+					'middle' => 'center',
+					'bottom' => 'flex-end',
+				],
+				'selectors'            => [ 
+					'{{WRAPPER}} .bdt-price-card-after-price' => 'justify-content: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'heading_original_price_style',
+			[ 
+				'label'     => __( 'Original Price', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'original_price_color',
+			[ 
+				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-original-price' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'      => 'original_price_typography',
+				'selector'  => '{{WRAPPER}} .bdt-price-card-original-price',
+			]
+		);
+
+		$this->add_control(
+			'original_price_vertical_position',
+			[ 
+				'label'                => __( 'Vertical Position', 'bdthemes-element-pack' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [ 
+					'top'    => [ 
+						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'middle' => [ 
+						'title' => __( 'Middle', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'bottom' => [ 
+						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'selectors_dictionary' => [ 
+					'top'    => 'top: 0;',
+					'middle' => 'top: 40%;',
+					'bottom' => 'bottom: 0;',
+				],
+				'default'              => 'middle',
+				'selectors'            => [ 
+					'{{WRAPPER}} .bdt-price-card-original-price' => '{{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'original_price_offset_toggle',
+			[ 
+				'label'        => __( 'Offset', 'bdthemes-element-pack' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => __( 'None', 'bdthemes-element-pack' ),
+				'label_on'     => __( 'Custom', 'bdthemes-element-pack' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->start_popover();
+
+		$this->add_responsive_control(
+			'original_price_horizontal_offset',
+			[ 
+				'label'          => __( 'Horizontal Offset', 'bdthemes-element-pack' ),
+				'type'           => Controls_Manager::SLIDER,
+				'default'        => [ 
+					'size' => 0,
+				],
+				'tablet_default' => [ 
+					'size' => 0,
+				],
+				'mobile_default' => [ 
+					'size' => 0,
+				],
+				'range'          => [ 
+					'px' => [ 
+						'min'  => -300,
+						'step' => 2,
+						'max'  => 300,
+					],
+				],
+				'render_type'    => 'ui',
+				'selectors'      => [ 
+					'{{WRAPPER}}' => '--ep-pt-original-price-h-offset: {{SIZE}}px;'
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'original_price_vertical_offset',
+			[ 
+				'label'          => __( 'Vertical Offset', 'bdthemes-element-pack' ),
+				'type'           => Controls_Manager::SLIDER,
+				'default'        => [ 
+					'size' => 0,
+				],
+				'tablet_default' => [ 
+					'size' => 0,
+				],
+				'mobile_default' => [ 
+					'size' => 0,
+				],
+				'range'          => [ 
+					'px' => [ 
+						'min'  => -300,
+						'step' => 2,
+						'max'  => 300,
+					],
+				],
+				'render_type'    => 'ui',
+				'selectors'      => [ 
+					'{{WRAPPER}}' => '--ep-pt-original-price-v-offset: {{SIZE}}px;'
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'original_price_rotate',
+			[ 
+				'label'          => esc_html__( 'Rotate', 'bdthemes-element-pack' ),
+				'type'           => Controls_Manager::SLIDER,
+				'default'        => [ 
+					'size' => 0,
+				],
+				'tablet_default' => [ 
+					'size' => 0,
+				],
+				'mobile_default' => [ 
+					'size' => 0,
+				],
+				'range'          => [ 
+					'px' => [ 
+						'min'  => -360,
+						'max'  => 360,
+						'step' => 5,
+					],
+				],
+				'render_type'    => 'ui',
+				'selectors'      => [ 
+					'{{WRAPPER}}' => '--ep-pt-original-price-rotate: {{SIZE}}deg;'
+				],
+			]
+		);
+
+		$this->end_popover();
+
+		$this->add_control(
+			'heading_period_style',
+			[ 
+				'label'     => __( 'Period', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'period_color',
+			[ 
+				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-period' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'      => 'period_typography',
+				'selector'  => '{{WRAPPER}} .bdt-price-card-period',
+			]
+		);
+
+		$this->add_control(
+			'period_position',
+			[ 
+				'label'     => __( 'Position', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [ 
+					'below'  => 'Below',
+					'beside' => 'Beside',
+				],
+				'default'   => 'below',
+			]
+		);
+
+		$this->add_control(
+			'heading_price_title_style',
+			[ 
+				'label'     => __( 'Price Title', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'price_title_color',
+			[ 
+				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'      => 'price_title_typography',
+				'selector'  => '{{WRAPPER}} .bdt-price-title',
+			]
+		);
+
+		$this->add_control(
+			'heading_price_additional_text_style',
+			[ 
+				'label'     => __( 'Additional Text', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'price_additional_text_color',
+			[ 
+				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-additional-text' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'      => 'price_additional_text_typography',
+				'selector'  => '{{WRAPPER}} .bdt-price-additional-text',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tabs_pricing_hover',
+			[ 
+				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'price_hover_color',
+			[ 
+				'label'     => __( 'Price Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-currency, {{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-integer-part, {{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-fractional-part' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'     => 'pricing_element_hover_bg_color',
+				'selector' => '{{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-price',
+			]
+		);
+
+		$this->add_control(
+			'pricing_table_border_color',
+			[ 
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => [ 
+					'pricing_border_border!' => '',
+				],
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-price' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'period_hover_color',
+			[ 
+				'label'     => __( 'Period Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-period' => 'color: {{VALUE}}',
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_price_button',
+			[ 
+				'label' => __( 'Button', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_button_style' );
+		$this->start_controls_tab(
+			'tab_button_normal',
+			[ 
+				'label'     => __( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'button_text_color',
+			[ 
+				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-button' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'      => 'button_background_color',
+				'selector'  => '{{WRAPPER}} .bdt-price-card-button',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[ 
+				'name'        => 'button_border',
+				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '{{WRAPPER}} .bdt-price-card-button',
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_border_radius',
+			[ 
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-price-card-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_margin',
+			[ 
+				'label'      => __( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-price-card-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_text_padding',
+			[ 
+				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-price-card-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'button_width',
+			[ 
+				'label'     => __( 'Width', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'vw', '%' ],
+				'range'     => [ 
+					'px' => [ 
+						'min' => 100,
+						'max' => 1000,
+					],
+					'vw' => [ 
+						'min' => 10,
+						'max' => 100,
+					],
+					'%' => [ 
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-button' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'button_vertical_offset',
+			[ 
+				'label'          => __( 'Vertical offset', 'bdthemes-element-pack' ),
+				'type'           => Controls_Manager::SLIDER,
+				'default'        => [ 
+					'size' => 0,
+				],
+				'tablet_default' => [ 
+					'size' => 0,
+				],
+				'mobile_default' => [ 
+					'size' => 0,
+				],
+				'range'          => [ 
+					'px' => [ 
+						'min' => -200,
+						'max' => 200,
+					],
+				],
+				'selectors'      => [ 
+					'{{WRAPPER}} .bdt-price-card-btn-wrap' => 'transform: translateY({{SIZE}}px)',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[ 
+				'name'     => 'button_shadow',
+				'selector' => '{{WRAPPER}} .bdt-price-card-button',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[ 
+				'name'      => 'button_typography',
+				'selector'  => '{{WRAPPER}} .bdt-price-card-button',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_button_hover',
+			[ 
+				'label'     => __( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'button_hover_color',
+			[ 
+				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-button:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[ 
+				'name'      => 'button_background_hover_color',
+				'selector'  => '{{WRAPPER}} .bdt-price-card-button:hover',
+			]
+		);
+
+		$this->add_control(
+			'button_hover_border_color',
+			[ 
+				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [ 
+					'{{WRAPPER}} .bdt-price-card-button:hover' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_hover_animation',
+			[ 
+				'label'     => __( 'Animation', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::HOVER_ANIMATION,
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->end_controls_section();
+
+	}
+
+	private function get_currency_symbol( $symbol_name ) {
+		$symbols = [ 
+			'dollar'       => '&#36;',
+			'baht'         => '&#3647;',
+			'euro'         => '&#128;',
+			'franc'        => '&#8355;',
+			'guilder'      => '&fnof;',
+			'indian_rupee' => '&#8377;',
+			'krona'        => 'kr',
+			'lira'         => '&#8356;',
+			'peseta'       => '&#8359',
+			'peso'         => '&#8369;',
+			'pound'        => '&#163;',
+			'real'         => 'R$',
+			'ruble'        => '&#8381;',
+			'rupee'        => '&#8360;',
+			'bdt'          => '&#2547;',
+			'shekel'       => '&#8362;',
+			'won'          => '&#8361;',
+			'yen'          => '&#165;',
+		];
+		return isset( $symbols[ $symbol_name ] ) ? $symbols[ $symbol_name ] : '';
+	}
+
+	public function render_price($settings) {
+		$price_settings = $this->get_settings_for_display();
+
+		$symbol = '';
+		$image  = '';
+
+		if ( ! empty( $settings['currency_symbol'] ) ) {
+			if ( 'custom' !== $settings['currency_symbol'] ) {
+				$symbol = $this->get_currency_symbol( $settings['currency_symbol'] );
+			} else {
+				$symbol = $settings['currency_symbol_custom'];
+			}
+		}
+
+
+		$currency_format = empty( $settings['currency_format'] ) ? '.' : $settings['currency_format'];
+		$price           = explode( $currency_format, $settings['price'] );
+		$intpart         = $price[0];
+		$fraction        = '';
+		if ( 2 === count( $price ) ) {
+			$fraction = $price[1];
+		}
+
+
+		// $price    = explode( '.', $settings['price'] );
+		// $intpart  = $price[0];
+		// $fraction = '';
+
+		// if ( 2 === sizeof( $price ) ) {
+		// 	$fraction = $price[1];
+		// }
+
+		$period_position = $price_settings['period_position'];
+		$period_class    = ( $period_position == 'below' ) ? ' bdt-price-card-period-position-below' : ' bdt-price-card-period-position-beside';
+		$period_element  = '<span class="bdt-price-card-period elementor-typo-excluded' . $period_class . '">' . $settings['period'] . '</span>';
+
+		$currency_position = $price_settings['currency_horizontal_position'];
+
+		$id = 'bdt-price-card-' . $this->get_id();
+
+		$this->add_render_attribute( 'pricing', [ 
+			'class' => 'bdt-price-card-price'
+		] );
+
+		?>
+
+		<div class="bdt-price-card">
+			<div class="bdt-price-title"><?php echo wp_kses_post($settings['price_card_content']); ?></div>
+
+			<div <?php $this->print_render_attribute_string( 'pricing' ); ?>>
+				<?php if ( $settings['sale'] && ! empty( $settings['original_price'] ) ) : ?>
+					<span class="bdt-price-card-original-price elementor-typo-excluded bdt-display-block">
+						<?php echo esc_html( $symbol . $settings['original_price'] ); ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $symbol ) && is_numeric( $intpart ) && 'left' === $currency_position ) : ?>
+					<span class="bdt-price-card-currency">
+						<?php echo esc_html( $symbol ); ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $intpart ) || 0 <= $intpart ) : ?>
+					<span class="bdt-price-card-integer-part">
+						<?php echo esc_attr( $intpart ); ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ( 0 < $fraction || ( ! empty( $settings['period'] ) && 'beside' === $period_position ) ) : ?>
+					<div class="bdt-price-card-after-price">
+						<span class="bdt-price-card-fractional-part">
+							<?php echo esc_attr( $fraction ); ?>
+						</span>
+						<?php if ( ! empty( $settings['period'] ) && 'beside' === $period_position ) : ?>
+							<?php echo wp_kses_post( $period_element ); ?>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $symbol ) && is_numeric( $intpart ) && 'right' === $currency_position ) : ?>
+					<span class="bdt-price-card-currency">
+						<?php echo esc_html( $symbol ); ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $settings['period'] ) && 'below' === $period_position ) : ?>
+					<?php echo wp_kses_post( $period_element ); ?>
+				<?php endif; ?>
+			</div>
+
+			<div class="bdt-price-additional-text"><?php echo wp_kses_post($settings['price_card_additional_text']); ?></div>
+
+			<?php $this->render_button( $settings ); ?>
+		</div>
+		<?php
+	}
+
+	public function render_button($settings) {
+		$button_settings = $this->get_settings_for_display();
+		$button_animation = ( ! empty( $button_settings['button_hover_animation'] ) ) ? ' elementor-animation-' . $button_settings['button_hover_animation'] : '';
+
+		$this->add_render_attribute(
+			'button',
+			'class',
+			[ 
+				'bdt-price-card-button',
+				'elementor-button',
+			]
+		);
+
+		if ( ! empty( $settings['button_css_id'] ) ) {
+			$this->add_render_attribute( 'button', 'id', $settings['button_css_id'] );
+		}
+
+		if ( ! empty( $settings['link']['url'] ) ) {
+			$this->add_link_attributes( 'button', $settings['link'] );
+		}
+
+		if ( ! empty( $button_settings['button_hover_animation'] ) ) {
+			$this->add_render_attribute( 'button', 'class', 'elementor-animation-' . $button_settings['button_hover_animation'] );
+		}
+
+		if ( ! empty( $settings['button_text'] ) ) : ?>
+			<div class="bdt-price-card-btn-wrap">
+				<a <?php $this->print_render_attribute_string( 'button' ); ?>>
+					<?php echo esc_html( $settings['button_text'] ); ?>
+				</a>
+			</div>
+		<?php endif;
+
 	}
 
 	public function render_badge(){
@@ -1558,7 +2688,10 @@ class Content_Switcher extends Module_Base {
 						} elseif ($primary['content_type'] == 'link_widget' && !empty($primary['link_widget_id'])) {
 							// Widget linked content is handled by JavaScript
 							echo '<div class="bdt-switcher-item-linked-widget"></div>';
+						} elseif ($primary['content_type'] == 'price_card') {
+							$this->render_price($primary);
 						}
+							// Widget linked content is handled by JavaScript
 						?>
 					</div>
 					<div class="bdt-switcher-content bdt-secondary <?php echo esc_attr(($secondary['switcher_active'] == 'yes') ? 'bdt-active' : ''); ?>">
@@ -1573,6 +2706,8 @@ class Content_Switcher extends Module_Base {
 						} elseif ($secondary['content_type'] == 'link_widget' && !empty($secondary['link_widget_id'])) {
 							// Widget linked content is handled by JavaScript
 							echo '<div class="bdt-switcher-item-linked-widget"></div>';
+						} elseif ($secondary['content_type'] == 'price_card') {
+							$this->render_price($secondary);
 						}
 						?>
 					</div>
@@ -1601,6 +2736,8 @@ class Content_Switcher extends Module_Base {
 							} elseif ($item['content_type'] == 'link_widget' && !empty($item['link_widget_id'])) {
 								// Widget linked content is handled by JavaScript
 								echo '<div class="bdt-switcher-item-linked-widget"></div>';
+							} elseif ($item['content_type'] == 'price_card') {
+								$this->render_price($item);
 							}
 							?>
 						</div>
