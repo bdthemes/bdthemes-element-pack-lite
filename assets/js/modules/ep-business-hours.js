@@ -27,8 +27,7 @@
             }else{
                 offset_val = dynamic_timezone;
             }
-
-            // console.log(offset_val);
+            
             if(timeNotation == '12h'){
                 timeFormat = '%I:%M:%S %p';
             } 

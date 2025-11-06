@@ -78,7 +78,7 @@
                         } 
                     },
                     error: function () {
-                        console.log("Error");
+                        // error handling code can be added here if needed
                     }
                 });
             },
@@ -119,7 +119,7 @@
                          }
                     },
                     error: function () {
-                        //console.log("Error");
+                        // error handling code can be added here if needed
                     }
                 });
             },

@@ -1985,6 +1985,16 @@ class ModuleService {
 					'video_url'   => 'https://youtu.be/L1Sy1ZDfp3A',
 				],
 				[
+					'name'        => 'shape-builder',
+					'label'       => esc_html__('Shape Builder', 'bdthemes-element-pack'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'content_type' => 'new',
+					'demo_url'    => 'https://demo.elementpack.pro/element/shape-builder',
+					'video_url'   => '',
+				],
+				[
 					'name'        => 'shape-divider',
 					'label'       => esc_html__('Shape Divider', 'bdthemes-element-pack'),
 					'type'        => 'checkbox',

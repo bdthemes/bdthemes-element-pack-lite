@@ -21,27 +21,34 @@ class Module extends Element_Pack_Module_Base {
     }
 
     public function is_valid_captcha() {
-
         $ep_api_settings = get_option('element_pack_api_settings');
 
-        if (isset($_POST['g-recaptcha-response']) and !empty($ep_api_settings['recaptcha_secret_key'])) {
-            $request  = wp_remote_get('https://www.google.com/recaptcha/api/siteverify?secret=' . $ep_api_settings['recaptcha_secret_key'] . '&response=' . esc_textarea( sanitize_text_field( wp_unslash( $_POST["g-recaptcha-response"] ) ) ) . '&remoteip=' . isset( $_SERVER["REMOTE_ADDR"] ) ? sanitize_text_field( wp_unslash( $_SERVER["REMOTE_ADDR"] ) ) : '' );
-            $response = wp_remote_retrieve_body($request);
+        if (isset($_POST['g-recaptcha-response']) && !empty($ep_api_settings['recaptcha_secret_key'])) {
+            $remote_ip = isset($_SERVER["REMOTE_ADDR"]) ? sanitize_text_field( wp_unslash( $_SERVER["REMOTE_ADDR"] ) ) : '';
 
-            $result = json_decode($response, TRUE);
+            $response = wp_remote_post(
+                'https://www.google.com/recaptcha/api/siteverify',
+                array(
+                    'body' => array(
+                        'secret'   => $ep_api_settings['recaptcha_secret_key'],
+                        'response' => sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) ),
+                        'remoteip' => $remote_ip,
+                    ),
+                )
+            );
 
-            error_log( print_r( $request, true ) );
-
-            if (isset($result['success']) && $result['success'] == 1) {
-                // Captcha ok
-                return true;
-            } else {
-                // Captcha failed;
+            if (is_wp_error($response)) {
                 return false;
             }
+
+            $result = json_decode(wp_remote_retrieve_body($response), true);
+
+            return (isset($result['success']) && $result['success'] === true);
         }
+
         return false;
     }
+
 
 
 	public function normalize_email( $email ) {
