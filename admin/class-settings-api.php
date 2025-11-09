@@ -863,11 +863,11 @@ if (!class_exists('ElementPack_Settings_API')) :
 					'title' => esc_html__('Other Plugins', 'bdthemes-element-pack'),
 					'icon' => 'dashicons dashicons-admin-plugins',
 				],
-				[
-					'id' => 'element_pack_affiliate',
-					'title' => esc_html__('Earn Up to 60% Commission', 'bdthemes-element-pack'),
-					'icon' => 'dashicons dashicons-money-alt',
-				],
+				// [
+				// 	'id' => 'element_pack_affiliate',
+				// 	'title' => esc_html__('Earn Up to 60% Commission', 'bdthemes-element-pack'),
+				// 	'icon' => 'dashicons dashicons-money-alt',
+				// ],
 			];
 			
 			// Check if each content section exists in settings sections, if not add it

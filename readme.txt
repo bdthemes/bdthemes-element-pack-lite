@@ -18,6 +18,8 @@ Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post gri
 
 Element Pack is a powerful addon for Elementor that helps you build beautiful and responsive websites with ease. It also offers exclusive features, including 300+ widgets and 2,700+ templates, giving you everything you need to design WordPress websites with ease.
 
+### [🎉 Black Friday Offer: Upgrade to Pro and Save up to 87% on All Plugins! 🎊](https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack)
+
 Trusted by **100,000+ websites**, it's the easiest way to design your stunning websites without coding.
 
 👉 **[Get Element Pack Now for Free](https://elementpack.pro)**.
