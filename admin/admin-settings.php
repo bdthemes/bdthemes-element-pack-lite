@@ -452,7 +452,7 @@ class ElementPack_Admin_Settings {
 	// Redirect to Element Pack Pro pricing page
 	public function ep_redirect_to_upgrade() {
 		if (isset($_GET['page']) && $_GET['page'] === self::PAGE_ID . '_upgrade') {
-			wp_redirect('https://www.elementpack.pro/pricing?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO');
+			wp_redirect('https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack');
 			exit;
 		}
 	}
@@ -560,7 +560,7 @@ class ElementPack_Admin_Settings {
 			add_submenu_page(
 				self::PAGE_ID,                    
 				BDTEP_TITLE,                     
-				esc_html__( 'Upgrade For Up to 83% Off!', 'bdthemes-element-pack' ),  
+				esc_html__( 'Black Friday Limited Offer up to 87%', 'bdthemes-element-pack' ),  
 				'manage_options',                 
 				self::PAGE_ID . '_upgrade',
 				[ $this, 'display_page' ]
@@ -3091,15 +3091,6 @@ class ElementPack_Admin_Settings {
 
 		return $pages_options;
 	}
-
-	/**
-	 * Display Affiliate Content
-	 *
-	 * @access public
-	 * @return void
-	 */
-
-
 
 	/**
 	 * Display Analytics and System Requirements
