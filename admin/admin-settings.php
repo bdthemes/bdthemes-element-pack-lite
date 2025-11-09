@@ -555,15 +555,6 @@ class ElementPack_Admin_Settings {
 			self::PAGE_ID . '#element_pack_other_plugins',
 			[$this, 'display_page']
 		);
-		
-		add_submenu_page(
-			self::PAGE_ID,
-			BDTEP_TITLE,
-			esc_html__('Earn Up to 60% Commission', 'bdthemes-element-pack'),
-			'manage_options',
-			self::PAGE_ID . '#element_pack_affiliate',
-			[$this, 'display_page']
-		);
 
 		if ( ! defined( 'BDTEP_LO' ) ) {
 			add_submenu_page(
@@ -1728,10 +1719,6 @@ class ElementPack_Admin_Settings {
 
 						<div id="element_pack_other_plugins_page" class="ep-option-page group">
 							<?php $this->element_pack_others_plugin(); ?>
-						</div>
-
-						<div id="element_pack_affiliate_page" class="ep-option-page group">
-							<?php $this->element_pack_affiliate_content(); ?>
 						</div>
 
 						<div id="element_pack_get_pro_page" class="ep-option-page group">
@@ -3112,35 +3099,7 @@ class ElementPack_Admin_Settings {
 	 * @return void
 	 */
 
-	public function element_pack_affiliate_content() {
-		?>
-		<div class="ep-dashboard-panel"
-			bdt-scrollspy="target: > div > div > .bdt-card; cls: bdt-animation-slide-bottom-small; delay: 300">
-			<div class="ep-dashboard-affiliate">
-				<div class="bdt-card bdt-card-body">
-					<h1 class="ep-feature-title">
-						<?php printf(esc_html__('Earn %s as an Affiliate', 'bdthemes-element-pack'), '<strong class="ep-highlight-text">Up to 60% Commission</strong>'); ?>
-					</h1>
-					<p>
-						<?php esc_html_e('Join our affiliate program and earn a up to 60% commission on every sale you refer. It\'s a great way to earn passive income while promoting high-quality WordPress plugins.', 'bdthemes-element-pack'); ?>
-					</p>
-					<div class="ep-affiliate-features">
-						<h3 class="ep-affiliate-sub-title"><?php esc_html_e('Benefits of joining our affiliate program:', 'bdthemes-element-pack'); ?></h3>
-						<ul>
-							<li><?php esc_html_e('Up to 60% commission on all sales', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Real-time tracking of referrals and sales', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Dedicated affiliate support', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Marketing materials provided', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Monthly payments via PayPal', 'bdthemes-element-pack'); ?></li>
-						</ul>
-					</div>
-					<a href="https://bdthemes.com/affiliate/?utm_sourcce=ep_wp_dashboard&utm_medium=affiliate_payout&utm_campaign=affiliate_onboarding" target="_blank"
-						class="bdt-button bdt-welcome-button bdt-margin-small-top"><?php esc_html_e('Join Our Affiliate Program', 'bdthemes-element-pack'); ?></a>
-				</div>
-			</div>
-		</div>
-		<?php
-	}
+
 
 	/**
 	 * Display Analytics and System Requirements
