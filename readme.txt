@@ -1,5 +1,5 @@
 === Element Pack Addons for Elementor ===
-Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam
+Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam, syedfarhanreza, shmusuf, arafatakashakku
 Donate link: http://bdthemes.com/
 Tags: elementor, elementor addons, elementor template, elementor widgets, dynamic builder
 Requires at least: 5.0.0
