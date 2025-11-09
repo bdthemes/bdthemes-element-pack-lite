@@ -802,18 +802,16 @@ if (!class_exists('ElementPack_Settings_API')) :
 
             $count = 1;
 
-			// Get all sections including manually created ones
-			$all_sections = $this->get_all_sections();
+		// Get all sections including manually created ones
+		$all_sections = $this->get_all_sections();
 
             foreach ($all_sections as $tab) {
                 $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="%2$s"><i class="%4$s"></i>%3$s</a></li>', $tab['id'], $count++, $tab['title'], $tab['icon']);
             }
-            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="10">👑 %2$s</a></li>', 'element_pack_get_pro', esc_html__('Get Pro', 'bdthemes-element-pack'));
+            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="%2$s">👑 %3$s</a></li>', 'element_pack_get_pro', $count++, esc_html__('Get Pro', 'bdthemes-element-pack'));
 
             $html .= '</ul>';
-            $html .= '</div>';
-
-            echo wp_kses($html, array(
+            $html .= '</div>';            echo wp_kses($html, array(
 				'div' => array(
 					'class' => true,
 				),
@@ -863,11 +861,6 @@ if (!class_exists('ElementPack_Settings_API')) :
 					'title' => esc_html__('Other Plugins', 'bdthemes-element-pack'),
 					'icon' => 'dashicons dashicons-admin-plugins',
 				],
-				// [
-				// 	'id' => 'element_pack_affiliate',
-				// 	'title' => esc_html__('Earn Up to 60% Commission', 'bdthemes-element-pack'),
-				// 	'icon' => 'dashicons dashicons-money-alt',
-				// ],
 			];
 			
 			// Check if each content section exists in settings sections, if not add it
