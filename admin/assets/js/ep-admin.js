@@ -129,7 +129,7 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    jQuery('.element-pack-notice.notice-error img').css({
+    jQuery('.element-pack-biggopti.biggopti-error img').css({
         'margin-right': '8px',
         'vertical-align': 'middle'
     });
