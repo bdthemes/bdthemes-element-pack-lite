@@ -167,7 +167,7 @@ trait Global_Terms_Query_Controls {
     }
 
     // Get ajax post
-	protected function bdt_get_posts_by_ajax($post_type, $order, $orderby, $posts_per_page, $taxonomy, $category_slug) {
+	protected function bdt_get_posts_by_ajax($post_type, $order, $orderby, $posts_per_page, $taxonomy, $category_slug, $include_term_ids = '', $exclude_term_ids = '') {
 
 		$query_args = [
 			'post_status' => 'publish',
@@ -180,6 +180,7 @@ trait Global_Terms_Query_Controls {
 
 		
 		if ($category_slug !== '') {
+			// Specific category selected
 			$query_args['tax_query'] = [
 				[
 					'taxonomy' => $taxonomy,
@@ -187,6 +188,44 @@ trait Global_Terms_Query_Controls {
 					'terms' => $category_slug,
 				]
 			];
+		} else {
+			// "ALL" filter - apply include/exclude term restrictions
+			$tax_query = [];
+			
+			if (!empty($include_term_ids)) {
+				$include_ids = is_array($include_term_ids) ? $include_term_ids : explode(',', $include_term_ids);
+				$include_ids = array_map('intval', array_filter($include_ids));
+				
+				if (!empty($include_ids)) {
+					$tax_query[] = [
+						'taxonomy' => $taxonomy,
+						'field' => 'term_id',
+						'terms' => $include_ids,
+						'operator' => 'IN',
+					];
+				}
+			}
+			
+			if (!empty($exclude_term_ids)) {
+				$exclude_ids = is_array($exclude_term_ids) ? $exclude_term_ids : explode(',', $exclude_term_ids);
+				$exclude_ids = array_map('intval', array_filter($exclude_ids));
+				
+				if (!empty($exclude_ids)) {
+					$tax_query[] = [
+						'taxonomy' => $taxonomy,
+						'field' => 'term_id',
+						'terms' => $exclude_ids,
+						'operator' => 'NOT IN',
+					];
+				}
+			}
+			
+			if (!empty($tax_query)) {
+				if (count($tax_query) > 1) {
+					$tax_query['relation'] = 'AND';
+				}
+				$query_args['tax_query'] = $tax_query;
+			}
 		}
 		
 		return new \WP_Query($query_args);
