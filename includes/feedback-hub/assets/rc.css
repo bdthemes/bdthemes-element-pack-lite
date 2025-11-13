@@ -7,6 +7,7 @@
     background-color: #fff;
     position: relative;
     margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .rc-global-biggopti .rc-global-header {
@@ -203,8 +204,8 @@
 
 .rc-biggopti-dismiss {
     position: absolute;
-    top: 2px;
-    right: 8px;
+    top: 10px;
+    right: 16px;
     cursor: pointer;
     background: transparent;
     border: none;
