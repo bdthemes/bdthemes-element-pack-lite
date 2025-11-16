@@ -290,7 +290,7 @@ class Open_Street_Map extends Module_Base {
 						'marker_lat'     => '24.82391',
 						'marker_lng'     => '89.38414',
 						'marker_title'   => esc_html__( 'Marker #1', 'bdthemes-element-pack' ),
-						'marker_content' => esc_html__( '<strong>BdThemes Limited</strong>,<br>Latifpur, Bogra - 5800,<br>Bangladesh', 'bdthemes-element-pack'),
+						'marker_content' => '<strong>BdThemes Limited</strong>,<br>Latifpur, Bogra - 5800,<br>Bangladesh',
 					],
 				],
 				'title_field' => '{{{ marker_title }}}',
@@ -496,7 +496,9 @@ class Open_Street_Map extends Module_Base {
 				$marker_settings['lng']        = ( $marker_item['marker_lng'] ) ? $marker_item['marker_lng'] : '';
 				$marker_settings['title']      = ( $marker_item['marker_title'] ) ? sanitize_text_field( $marker_item['marker_title'] ) : '';
 				$marker_settings['iconUrl']    = ( $marker_item['custom_marker']['url'] ) ? $marker_item['custom_marker']['url'] : BDTEP_ASSETS_URL . 'images/marker-icon.png';
-				$marker_settings['infoWindow'] = ( $marker_item['marker_content'] ) ? wp_kses( $marker_item['marker_content'], element_pack_allow_tags('safe_formatting') ) : '';
+				// $marker_settings['infoWindow'] = ( $marker_item['marker_content'] ) ? wp_kses( $marker_item['marker_content'], element_pack_allow_tags('safe_formatting') ) : '';
+				$marker_settings['infoWindow'] = $marker_item['marker_content'] ? wp_kses_post( htmlspecialchars( $marker_item['marker_content'], ENT_QUOTES ) ) : '';
+
 
 				$all_markers[] = $marker_settings;
 
