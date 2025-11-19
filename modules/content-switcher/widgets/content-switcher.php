@@ -2480,8 +2480,11 @@ class Content_Switcher extends Module_Base {
 		$button_settings = $this->get_settings_for_display();
 		$button_animation = ( ! empty( $button_settings['button_hover_animation'] ) ) ? ' elementor-animation-' . $button_settings['button_hover_animation'] : '';
 
+		// Generate unique button key using item ID to prevent attribute accumulation
+		$button_key = 'button_' . $settings['_id'];
+
 		$this->add_render_attribute(
-			'button',
+			$button_key,
 			'class',
 			[ 
 				'bdt-price-card-button',
@@ -2490,20 +2493,20 @@ class Content_Switcher extends Module_Base {
 		);
 
 		if ( ! empty( $settings['button_css_id'] ) ) {
-			$this->add_render_attribute( 'button', 'id', $settings['button_css_id'] );
+			$this->add_render_attribute( $button_key, 'id', $settings['button_css_id'] );
 		}
 
 		if ( ! empty( $settings['link']['url'] ) ) {
-			$this->add_link_attributes( 'button', $settings['link'] );
+			$this->add_link_attributes( $button_key, $settings['link'] );
 		}
 
 		if ( ! empty( $button_settings['button_hover_animation'] ) ) {
-			$this->add_render_attribute( 'button', 'class', 'elementor-animation-' . $button_settings['button_hover_animation'] );
+			$this->add_render_attribute( $button_key, 'class', 'elementor-animation-' . $button_settings['button_hover_animation'] );
 		}
 
 		if ( ! empty( $settings['button_text'] ) ) : ?>
 			<div class="bdt-price-card-btn-wrap">
-				<a <?php $this->print_render_attribute_string( 'button' ); ?>>
+				<a <?php $this->print_render_attribute_string( $button_key ); ?>>
 					<?php echo esc_html( $settings['button_text'] ); ?>
 				</a>
 			</div>

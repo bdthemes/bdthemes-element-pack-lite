@@ -49,9 +49,9 @@ class Testimonial_Grid extends Module_Base {
 
 	public function get_script_depends() {
 		if ( $this->ep_is_edit_mode() ) {
-			return [ 'imagesloaded', 'ep-scripts' ];
+			return [ 'ep-scripts' ];
 		} else {
-			return [ 'imagesloaded', 'ep-text-read-more-toggle' ];
+			return [ 'ep-text-read-more-toggle' ];
 		}
 	}
 
@@ -237,6 +237,22 @@ class Testimonial_Grid extends Module_Base {
 				],
 			]
 		);
+		$this->add_control(
+            'ellipsis',
+            [
+                'label' => esc_html__('Ellipsis', 'bdthemes-element-pack') . BDTEP_NC,
+                'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
+                'condition' => [
+                    'show_text' => 'yes',
+					'text_limit!' => [0, ''],
+					'text_read_more_toggle' => ''
+                ],
+				'ai' => [
+                    'active' => false,
+                ],
+            ]
+        );
 
 		$this->add_control(
 			'strip_shortcode',
@@ -305,6 +321,7 @@ class Testimonial_Grid extends Module_Base {
 			[ 
 				'label' => esc_html__( 'Masonry', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'render_type' => 'template'
 			]
 		);
 
@@ -1447,6 +1464,7 @@ class Testimonial_Grid extends Module_Base {
 		} else {
 			$text_limit = $settings['text_limit'];
 		}
+		$ellipsis = isset($settings['ellipsis']) ? $settings['ellipsis'] : '' ;
 
 		?>
 		<div <?php $this->print_render_attribute_string( 'text-wrap' ); ?>>
@@ -1454,7 +1472,7 @@ class Testimonial_Grid extends Module_Base {
 			if ( has_excerpt() ) {
 				the_excerpt();
 			} else {
-				echo wp_kses_post(element_pack_custom_excerpt( $text_limit, $strip_shortcode ));
+				echo wp_kses_post(element_pack_custom_excerpt( $text_limit, $strip_shortcode, $ellipsis ));
 			}
 			?>
 		</div>
