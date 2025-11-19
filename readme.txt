@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.8.3
 Requires PHP: 7.4.0
-Stable tag: 8.3.5
+Stable tag: 8.3.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 3.33.0
+Elementor tested up to: 3.33.1
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce and more.
 
@@ -279,6 +279,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.3.6 [19th November 2025] =
+
+* Added: Ellipsis added in testimonial grid widget
+* Fixed: Button URL issue fixed in Content Switcher widget ( Thanks to Shohan Khan )
 
 = 8.3.5 [16th November 2025] =
 
