@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.8.3
 Requires PHP: 7.4.0
-Stable tag: 8.3.7
+Stable tag: 8.3.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 3.33.1
+Elementor tested up to: 3.33.2
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce and more.
 
@@ -279,6 +279,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.3.8 [26th November 2025] =
+
+* Added: Always Active All Items control added in accordion widget
+* Fixed: Proper condition applied for text, read more and like/comments controls in the facebook feed widget
 
 = 8.3.7 [20th November 2025] =
 

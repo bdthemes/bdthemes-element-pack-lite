@@ -337,9 +337,13 @@ class Accordion extends Module_Base {
 
 					$item_key = 'bdt-item-' . $index;
 
-					$this->add_render_attribute( $item_key, [ 
-						'class' => ( $acc_count === $settings['active_item'] ) ? 'bdt-ep-accordion-item bdt-open' : 'bdt-ep-accordion-item',
-					] );
+					if ( $settings['multiple'] == 'yes' && $settings['always_active_all_items'] === 'yes' ) {
+						$this->add_render_attribute( $item_key, 'class', 'bdt-ep-accordion-item bdt-open' );
+					} else {
+						$this->add_render_attribute( $item_key, [ 
+							'class' => ( $acc_count === $settings['active_item'] ) ? 'bdt-ep-accordion-item bdt-open' : 'bdt-ep-accordion-item',
+						] );
+					}
 
 					if ( $settings['schema_activity'] == 'yes' ) {
 						$this->add_render_attribute( $item_key, 'itemscope' );
