@@ -150,7 +150,16 @@ class Facebook_Feed extends Module_Base {
 		$this->start_controls_section(
 			'section_additional',
 			[ 
-				'label' => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'post_limit',
+			[ 
+				'label'   => esc_html__( 'Post Limit', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 6,
 			]
 		);
 
@@ -287,7 +296,7 @@ class Facebook_Feed extends Module_Base {
 		$this->add_control(
 			'show_image_album',
 			[ 
-				'label'   => esc_html__( 'Show Image Album', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Show Image Album', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 			]
 		);
@@ -328,6 +337,7 @@ class Facebook_Feed extends Module_Base {
 				'label'   => esc_html__( 'Show Date', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+				'separator' => 'before'
 			]
 		);
 
@@ -350,15 +360,6 @@ class Facebook_Feed extends Module_Base {
 		);
 
 		$this->add_control(
-			'show_read_more',
-			[ 
-				'label'   => esc_html__( 'Show Read More', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'yes',
-			]
-		);
-
-		$this->add_control(
 			'show_share',
 			[ 
 				'label'   => esc_html__( 'Show Share', 'bdthemes-element-pack' ),
@@ -368,11 +369,25 @@ class Facebook_Feed extends Module_Base {
 		);
 
 		$this->add_control(
+			'show_read_more',
+			[ 
+				'label'   => esc_html__( 'Show Read More', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'separator' => 'before'
+			]
+		);
+
+		$this->add_control(
 			'read_more_text',
 			[ 
 				'label'   => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => 'See More',
+				'dynamic' => [ 'active' => true ],
+				'default' => esc_html__( 'See More', 'bdthemes-element-pack' ),
+				'condition' => [ 
+					'show_read_more' => 'yes'
+				]
 			]
 		);
 
@@ -386,16 +401,9 @@ class Facebook_Feed extends Module_Base {
 					'_blank' => esc_html__( 'Open in new window', 'bdthemes-element-pack' ),
 				],
 				'default'   => '_blank',
-				'separator' => 'before'
-			]
-		);
-
-		$this->add_control(
-			'post_limit',
-			[ 
-				'label'   => esc_html__( 'Post Limit', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 6,
+				'condition' => [ 
+					'show_read_more' => 'yes'
+				]
 			]
 		);
 
@@ -536,19 +544,43 @@ class Facebook_Feed extends Module_Base {
 			[ 
 				'label' => esc_html__( 'Author', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'conditions' => [ 
+					'relation' => 'or',
+					'terms'    => 
+					[
+						[
+							'name'     => 'show_author_name',
+							'operator' => '===',
+							'value'    => 'yes'
+						],
+						[
+							'name'     => 'show_author_image',
+							'operator' => '===',
+							'value'    => 'yes'
+						]
+					]
+				]
 			]
 		);
 
 		$this->add_control(
 			'author_name',
 			[ 
-				'label' => esc_html__( 'N A M E', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'NAME', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::HEADING,
+				'condition' => [ 
+					'show_author_name' => 'yes'
+				]
 			]
 		);
 
 		$this->start_controls_tabs(
-			'style_name_tabs'
+			'style_name_tabs',
+			[ 
+				'condition' => [ 
+					'show_author_name' => 'yes'
+				]
+			]
 		);
 
 		$this->start_controls_tab(
@@ -620,11 +652,24 @@ class Facebook_Feed extends Module_Base {
 		$this->end_controls_tabs();
 
 		$this->add_control(
+			'fb_feed_author_divider',
+			[
+				'type' 		=> Controls_Manager::DIVIDER,
+				'condition' => [ 
+					'show_author_name'  => 'yes',
+					'show_author_image' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
 			'author_img',
 			[ 
-				'label'     => esc_html__( 'I M A G E', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'IMAGE', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'condition' => [ 
+					'show_author_image' => 'yes'
+				]
 			]
 		);
 
@@ -642,6 +687,9 @@ class Facebook_Feed extends Module_Base {
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-icon-img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
+				'condition' => [ 
+					'show_author_image' => 'yes'
+				]
 			]
 		);
 
@@ -654,6 +702,9 @@ class Facebook_Feed extends Module_Base {
 				'selectors'  => [ 
 					'{{WRAPPER}} .bdt-icon-img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition' => [ 
+					'show_author_image' => 'yes'
+				]
 			]
 		);
 
@@ -664,6 +715,9 @@ class Facebook_Feed extends Module_Base {
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-icon-img',
+				'condition' => [ 
+					'show_author_image' => 'yes'
+				]
 			]
 		);
 
@@ -676,6 +730,9 @@ class Facebook_Feed extends Module_Base {
 				'selectors'  => [ 
 					'{{WRAPPER}} .bdt-icon-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
 				],
+				'condition' => [ 
+					'show_author_image' => 'yes'
+				]
 			]
 		);
 
@@ -684,6 +741,9 @@ class Facebook_Feed extends Module_Base {
 			[ 
 				'name'     => 'author_img_background',
 				'selector' => '{{WRAPPER}} .bdt-icon-img',
+				'condition' => [ 
+					'show_author_image' => 'yes'
+				]
 			]
 		);
 
@@ -692,6 +752,9 @@ class Facebook_Feed extends Module_Base {
 			[ 
 				'name'     => 'author_img_shadow',
 				'selector' => '{{WRAPPER}} .bdt-icon-img',
+				'condition' => [ 
+					'show_author_image' => 'yes'
+				]
 			]
 		);
 
@@ -743,6 +806,9 @@ class Facebook_Feed extends Module_Base {
 			[ 
 				'label' => esc_html__( 'Text', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'show_desc' => 'yes'
+				]
 			]
 		);
 
@@ -1018,6 +1084,21 @@ class Facebook_Feed extends Module_Base {
 			[ 
 				'label' => esc_html__( 'Like/Comments', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'conditions' => [
+					'relation' => 'or',
+					'terms'    => [
+						[
+							'name'     => 'show_like',
+							'operator' => '===',
+							'value'    => 'yes',
+						],
+						[
+							'name'     => 'show_comments',
+							'operator' => '===',
+							'value'    => 'yes',
+						],
+					],
+				],
 			]
 		);
 
@@ -1030,6 +1111,10 @@ class Facebook_Feed extends Module_Base {
 				'selectors'  => [ 
 					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-social-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition' => [
+					'show_like' => 'yes',
+					'show_comments' => 'yes'
+				]
 			]
 		);
 
@@ -1041,6 +1126,10 @@ class Facebook_Feed extends Module_Base {
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-facebook-feed-wrap .bdt-social-button' => 'gap: {{SIZE}}{{UNIT}};',
 				],
+				'condition' => [
+					'show_like' => 'yes',
+					'show_comments' => 'yes'
+				]
 			]
 		);
 
@@ -1535,7 +1624,7 @@ class Facebook_Feed extends Module_Base {
 		$this->add_responsive_control(
 			'share_button_dropdown_width',
 			[
-				'label' => __( 'Width', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Width', 'bdthemes-element-pack' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -1705,14 +1794,17 @@ class Facebook_Feed extends Module_Base {
 			return;
 		}
 		printf(
-			'<div class="bdt-read-more"><a href="%1$s" target="%2$s">%3$s
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="one bi bi-arrow-right" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-           </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="two bi bi-arrow-right" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-          </svg>
-            </a></div>',
+			'<div class="bdt-read-more">
+				<a href="%1$s" target="%2$s">
+					%3$s
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="one bi bi-arrow-right" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="two bi bi-arrow-right" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+					</svg>
+				</a>
+			</div>',
 			esc_url( $data['permalink_url'] ),
 			esc_attr( $settings['link_target'] ),
 			esc_html( $settings['read_more_text'] )
@@ -2048,9 +2140,12 @@ class Facebook_Feed extends Module_Base {
 								if ( 'yes' == $settings['show_read_more'] || 'yes' == $settings['show_share'] ) {
 									printf( '<div class="bdt-share-and-readmore">' );
 								}
-
-								$this->render_read_more( $item );
-								$this->render_main_share( $item );
+								if ( 'yes' === $settings['show_read_more'] ) {
+									$this->render_read_more( $item );
+								}
+								if ( 'yes' === $settings['show_share'] ) {
+									$this->render_main_share( $item );
+								}
 
 								if ( 'yes' == $settings['show_read_more'] || 'yes' == $settings['show_share'] ) {
 									printf( '</div>' );

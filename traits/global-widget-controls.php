@@ -622,7 +622,7 @@ trait Global_Widget_Controls {
 		$this->start_controls_section(
 			'section_content_additional',
 			[ 
-				'label' => __( 'Additional', 'bdthemes-element-pack' ),
+				'label' => __( 'Additional Options', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -640,6 +640,16 @@ trait Global_Widget_Controls {
 			[ 
 				'label' => __( 'Multiple Open', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
+			]
+		);
+		$this->add_control(
+			'always_active_all_items',
+			[ 
+				'label'   => __( 'Always Active All Items', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'multiple' => 'yes'
+				]
 			]
 		);
 

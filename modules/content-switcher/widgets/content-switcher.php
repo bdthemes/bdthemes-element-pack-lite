@@ -313,6 +313,8 @@ class Content_Switcher extends Module_Base {
 				'placeholder' => 'http://your-link.com',
 				'default'     => [ 
 					'url' => '#',
+				],
+				'condition'   => [
 					'content_type' => 'price_card',
 				],
 			]

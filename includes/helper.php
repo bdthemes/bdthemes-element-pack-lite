@@ -1365,7 +1365,7 @@ function element_pack_parse_csv( $csv, $delimiter = ';', $header = true ) {
 			$html .= '<tr>';
 		}
 
-		foreach ( str_getcsv( $row, $delimiter ) as $cell ) {
+		foreach ( str_getcsv( $row, $delimiter, '"', '\\' ) as $cell ) {
 
 			$cell = trim( $cell );
 
