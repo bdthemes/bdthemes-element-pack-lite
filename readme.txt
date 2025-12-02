@@ -3,9 +3,9 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor, elementor addons, elementor template, elementor widgets, dynamic builder
 Requires at least: 5.0.0
-Tested up to: 6.8.3
+Tested up to: 6.9
 Requires PHP: 7.4.0
-Stable tag: 8.3.8
+Stable tag: 8.3.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
@@ -279,6 +279,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.3.9 [2nd December 2025] =
+
+* Added: Added support for configuring the Contact Number field as optional ( Thanks to Marc Landman )
+* Updated: Made compatible with WordPress version 6.9
 
 = 8.3.8 [26th November 2025] =
 

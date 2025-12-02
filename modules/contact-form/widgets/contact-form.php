@@ -91,9 +91,21 @@ class Contact_Form extends Module_Base {
 		);
 
 		$this->add_control(
+			'contact_number_required',
+			[ 
+				'label'     => esc_html__( 'Contact Number Required', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+				'condition' => [ 
+					'contact_number' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'show_subject',
 			[ 
-				'label'   => esc_html__( 'Subject Field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Subject Field', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -102,7 +114,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'show_message',
 			[ 
-				'label'   => esc_html__( 'Message Field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Message Field', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -125,7 +137,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'two_columns',
 			[ 
-				'label'     => esc_html__( 'Two Columns', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Two Columns', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'all_field_inline' => ''
@@ -148,7 +160,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'all_field_inline',
 			[ 
-				'label'        => esc_html__( 'All Field Inline', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'        => esc_html__( 'All Field Inline', 'bdthemes-element-pack' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-all-field-inline--',
 				'condition'    => [ 
@@ -160,7 +172,7 @@ class Contact_Form extends Module_Base {
 		$this->add_responsive_control(
 			'alignment',
 			[ 
-				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'     => [ 
@@ -524,7 +536,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'show_recaptcha',
 			[ 
-				'label'       => esc_html__( 'reCAPTCHA Enable', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'reCAPTCHA Enable', 'bdthemes-element-pack' ),
 				'description' => esc_html__( 'Make sure you set the invisible reCAPTCHA key in settings.', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
@@ -546,7 +558,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'message_rows',
 			[ 
-				'label'   => esc_html__( 'Message Rows', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Message Rows', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '5',
 				'options' => [ 
@@ -567,7 +579,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'redirect_after_submit',
 			[ 
-				'label'     => esc_html__( 'Redirect After Submit', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Redirect After Submit', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -592,7 +604,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'reset_after_submit',
 			[ 
-				'label' => esc_html__( 'Reset After Submit', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Reset After Submit', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -600,7 +612,7 @@ class Contact_Form extends Module_Base {
 		$this->add_control(
 			'custom_success_message',
 			[ 
-				'label' => esc_html__( 'Custom Success Message', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Custom Success Message', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -1292,7 +1304,10 @@ class Contact_Form extends Module_Base {
 						?>
 					</div>
 
-					<?php if ( $settings['contact_number'] ) : ?>
+					<?php if ( $settings['contact_number'] ) : 
+						$contact_required = ( isset( $settings['contact_number_required'] ) && $settings['contact_number_required'] === 'yes' ) ? true : false;
+						$contact_required_attr = $contact_required ? ' required="required"' : '';
+						?>
 						<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>
 							<?php
 
@@ -1300,11 +1315,12 @@ class Contact_Form extends Module_Base {
 								if ( 'yes' == $settings['custom_text'] ) {
 									echo '<label ' . wp_kses_post( $this->get_render_attribute_string( 'contact_label' ) ) . '>' . wp_kses_post( $settings['contact_label'] ) . '</label>';
 								} else {
-									echo '<label ' . wp_kses_post( $this->get_render_attribute_string( 'contact_label' ) ) . '>' . esc_html__( 'Contact Number*', 'bdthemes-element-pack' ) . '</label>';
+									$contact_label = $contact_required ? esc_html__( 'Contact Number*', 'bdthemes-element-pack' ) : esc_html__( 'Contact Number', 'bdthemes-element-pack' );
+									echo '<label ' . wp_kses_post( $this->get_render_attribute_string( 'contact_label' ) ) . '>' . $contact_label . '</label>';
 								}
 							}
 							echo '<div class="bdt-form-controls">';
-							echo '<input ' . wp_kses_post( $this->get_render_attribute_string( 'contact_input' ) ) . '>';
+							echo '<input ' . wp_kses_post( $this->get_render_attribute_string( 'contact_input' ) ) . $contact_required_attr . '>';
 							echo '</div>';
 
 							?>
