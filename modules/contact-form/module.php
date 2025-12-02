@@ -112,8 +112,16 @@ class Module extends Element_Pack_Module_Base {
                 $form_data[$field] = strip_tags($value);
             }
 
+            // Get widget settings to check if contact number is required
+            $widget_settings = $this->get_widget_settings($post_id, $widget_id);
+            $contact_required = isset($widget_settings['contact_number_required']) && $widget_settings['contact_number_required'] === 'yes';
+
             foreach ($form_data as $key => $value) {
                 $value = trim($value);
+                // Skip validation for contact field if it's optional and empty
+                if ($key === 'contact' && !$contact_required && empty($value)) {
+                    continue;
+                }
                 if (empty($value)) {
                     $error  = true;
                     $result = $error_empty;
