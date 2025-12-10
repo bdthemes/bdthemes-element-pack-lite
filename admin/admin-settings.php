@@ -799,7 +799,7 @@ class ElementPack_Admin_Settings {
 
 		// Define plugin slugs to fetch data for (same as integration view)
 		$plugin_slugs = array(
-			'bdthemes-prime-slider-lite',
+			'bdthemes-prime-slider-lite/bdthemes-prime-slider.php',
 			'ultimate-post-kit',
 			'ultimate-store-kit',
 			'zoloblocks',
@@ -810,6 +810,7 @@ class ElementPack_Admin_Settings {
 			'dark-reader',
 			'ar-viewer',
 			'smart-admin-assistant',
+			'website-accessibility',
 		);
 
 		// Get plugin data using the helper (same as integration view)
@@ -864,22 +865,22 @@ class ElementPack_Admin_Settings {
 				
 				// Custom icon URLs for specific plugins that might not be on WordPress.org
 				$custom_icons = [
-					'live-copy-paste' => [
-						'https://ps.w.org/live-copy-paste/assets/icon-256x256.png',
-						'https://ps.w.org/live-copy-paste/assets/icon-128x128.png',
+					'ar-viewer' => [
+						'https://ps.w.org/ar-viewer/assets/icon-256x256.gif',
+						'https://ps.w.org/ar-viewer/assets/icon-128x128.gif',
 					],
-					'spin-wheel' => [
-						'https://ps.w.org/spin-wheel/assets/icon-256x256.png',
-						'https://ps.w.org/spin-wheel/assets/icon-128x128.png',
-					],
-					'ai-image' => [
-						'https://ps.w.org/ai-image/assets/icon-256x256.png',
-						'https://ps.w.org/ai-image/assets/icon-128x128.png',
-					],
-					'smart-admin-assistant' => [
-						'https://ps.w.org/smart-admin-assistant/assets/icon-256x256.png',
-						'https://ps.w.org/smart-admin-assistant/assets/icon-128x128.png',
-					]
+					// 'spin-wheel' => [
+					// 	'https://ps.w.org/spin-wheel/assets/icon-256x256.png',
+					// 	'https://ps.w.org/spin-wheel/assets/icon-128x128.png',
+					// ],
+					// 'ai-image' => [
+					// 	'https://ps.w.org/ai-image/assets/icon-256x256.png',
+					// 	'https://ps.w.org/ai-image/assets/icon-128x128.png',
+					// ],
+					// 'smart-admin-assistant' => [
+					// 	'https://ps.w.org/smart-admin-assistant/assets/icon-256x256.png',
+					// 	'https://ps.w.org/smart-admin-assistant/assets/icon-128x128.png',
+					// ]
 				];
 				
 				// Return custom icons if available, otherwise use default WordPress.org URLs
@@ -888,10 +889,10 @@ class ElementPack_Admin_Settings {
 				}
 				
 				return [
-					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-256x256.gif",  // Try GIF first
 					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-256x256.png",  // Then PNG
-					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-128x128.gif",  // Medium GIF
 					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-128x128.png",  // Medium PNG
+					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-256x256.gif",  // Try GIF first
+					"https://ps.w.org/{$plugin_slug_clean}/assets/icon-128x128.gif",  // Medium GIF
 				];
 			}
 		}
@@ -910,7 +911,7 @@ class ElementPack_Admin_Settings {
 					
 					if (empty($logo_url) || !filter_var($logo_url, FILTER_VALIDATE_URL)) {
 						// Generate fallback URLs for WordPress.org
-						$actual_slug = str_replace('.php', '', basename($plugin_slug));
+						$actual_slug = str_replace('.php', '', dirname($plugin_slug));
 						$fallback_urls = get_plugin_fallback_urls_ep($actual_slug);
 						$logo_url = $fallback_urls[0];
 					}

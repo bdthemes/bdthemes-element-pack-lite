@@ -542,7 +542,10 @@ class Dynamic_Select_Input_Module {
      */
     public function getElementorTemplates() {
         $searchText = $this->getSearchQuery();
-        $args = [];
+        // Explicitly specify all template types to avoid registration timing issues
+        $args = [
+            'type' => ['page', 'section', 'container', 'widget', 'header', 'footer', 'single-post', 'single-page', 'archive', 'search-results', 'error-404', 'loop-item', 'popup', 'floating-buttons', 'dce_email']
+        ];
 
         if ($searchText) {
             $args['s'] = $searchText;
