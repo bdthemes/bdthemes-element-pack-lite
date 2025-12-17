@@ -76,7 +76,7 @@ class Lightbox extends Module_Base {
 				'label'       => esc_html__( 'Select Lightbox Toggler', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'poster',
-				'label_block' => true,
+				// 'label_block' => true,
 				'options'     => [ 
 					'poster' => esc_html__( 'Poster', 'bdthemes-element-pack' ),
 					'button' => esc_html__( 'Button', 'bdthemes-element-pack' ),
@@ -299,7 +299,7 @@ class Lightbox extends Module_Base {
 				'label'       => esc_html__( 'Select Lightbox Content', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'image',
-				'label_block' => true,
+				// 'label_block' => true,
 				'options'     => [ 
 					'image'      => esc_html__( 'Image', 'bdthemes-element-pack' ),
 					'video'      => esc_html__( 'Video', 'bdthemes-element-pack' ),
@@ -801,6 +801,31 @@ class Lightbox extends Module_Base {
 
 		?>
 		<span <?php $this->print_render_attribute_string( 'content-wrapper' ); ?>>
+
+			<?php if ( 'left' === $settings['icon_align'] ) : ?>
+				<?php if ( ! empty( $settings['button_icon']['value'] ) ) : ?>
+					<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
+
+						<?php if ( $is_new || $migrated ) :
+							Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+						else : ?>
+							<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
+						<?php endif; ?>
+
+					</span>
+				<?php endif; ?>
+			<?php endif; ?>
+
+			<span <?php $this->print_render_attribute_string( 'text' ); ?>>
+				<?php
+				echo wp_kses(
+					$settings['button_text'],
+					element_pack_allow_tags( 'title' )
+				);
+				?>
+			</span>
+
+			<?php if ( 'right' === $settings['icon_align'] ) : ?>
 			<?php if ( ! empty( $settings['button_icon']['value'] ) ) : ?>
 				<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
 
@@ -812,7 +837,7 @@ class Lightbox extends Module_Base {
 
 				</span>
 			<?php endif; ?>
-			<span <?php $this->print_render_attribute_string( 'text' ); ?>><?php echo wp_kses( $settings['button_text'], element_pack_allow_tags( 'title' ) ); ?></span>
+			<?php endif; ?>
 		</span>
 		<?php
 	}

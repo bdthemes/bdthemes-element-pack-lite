@@ -64,9 +64,8 @@ class Dynamic_Select_Input_Module {
             $post_type = isset($_POST['post_type']) ? sanitize_text_field($_POST['post_type']) : '';
             $field_type = isset($_POST['field_type']) ? array_map('sanitize_text_field', $_POST['field_type']) : '';
 
-            if (is_plugin_active('bdthemes-element-pack/bdthemes-element-pack.php')) {
-                $acf_global = new ACF_Global();
-            }
+            // Initialize ACF_Global
+            $acf_global = new ACF_Global();
 
             if ($query == 'terms') {
                 $data = $this->getTerms();
