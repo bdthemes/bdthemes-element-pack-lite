@@ -1896,7 +1896,8 @@ class Facebook_Feed extends Module_Base {
 			return;
 		}
 		$page_url   = "https://facebook.com/{$data['from']['id']}";
-		$avatar_url = "https://graph.facebook.com/v4.0/{$data['from']['id']}/picture";
+		// Use cached avatar if available, otherwise use Facebook URL
+		$avatar_url = ! empty( $data['from']['avatar_cached'] ) ? $data['from']['avatar_cached'] : "https://graph.facebook.com/v4.0/{$data['from']['id']}/picture";
 		printf(
 			'<a href="%1$s" target="%2$s" class="bdt-icon-img-wrap"><img class="bdt-icon-img" src="%3$s" alt="%4$s"></a>',
 			esc_url( $page_url ),
@@ -1949,11 +1950,13 @@ class Facebook_Feed extends Module_Base {
 	
 	protected function render_single_image( $data, $settings ) {
 		if ( isset( $data['full_picture'] ) ) {
+			// Use cached image if available, otherwise use Facebook URL
+			$image_url = ! empty( $data['full_picture_cached'] ) ? $data['full_picture_cached'] : $data['full_picture'];
 			printf(
 				'<div class="bdt-img-wrap"><div class="bdt-img-album-single bdt-img-item"><a href="%1$s" target="%2$s"><img src="%3$s" alt="%4$s"></a></div></div>',
 				esc_url( $data['permalink_url'] ),
 				esc_attr( $settings['link_target'] ),
-				esc_url( $data['full_picture'] ),
+				esc_url( $image_url ),
 				esc_html( $data['from']['name'] )
 			);
 		}
@@ -1968,7 +1971,8 @@ class Facebook_Feed extends Module_Base {
 		echo '<div class="bdt-img-wrap bdt-img-album-'. esc_attr($album_img_count) .'">';
 		foreach ( $subattachments as $index => $subattachment ) {
 			if ( isset( $subattachment['media']['image']['src'] ) ) {
-				$image_url = $subattachment['media']['image']['src'];
+				// Use cached image if available, otherwise use Facebook URL
+				$image_url = ! empty( $subattachment['media']['image']['src_cached'] ) ? $subattachment['media']['image']['src_cached'] : $subattachment['media']['image']['src'];
 				$span = ( $index === $image_count - 1 && $skip_image_count > 0 ) 
 					? '<span class="bdt-album-img-count">+' . $skip_image_count . '</span>'
 					: '';
@@ -2200,6 +2204,11 @@ class Facebook_Feed extends Module_Base {
 		 */
 
 		if ( ! $data ) {
+			// Clean up old images before fetching fresh data
+			if ( $settings['data_cache'] == 'yes' ) {
+				$this->cleanup_page_images( $fb_page_id );
+			}
+			
 			$request_url   = sprintf( $this->api_url, $fb_page_id, $this->api_queries, $fb_access_token );
 			$raw_feed_data = $this->data_remote_request( $request_url );
 
@@ -2233,7 +2242,21 @@ class Facebook_Feed extends Module_Base {
 			if ( $settings['data_cache'] == 'yes' ) {
 				set_transient( $transient_key, $data, apply_filters( 'element-pack/facebook-feed/cached-time', $expireTime ) );
 			}
-			return $data;
+		}
+
+		// Process and cache images only when cache is enabled
+		if ( $settings['data_cache'] == 'yes' && ! empty( $data ) ) {
+			$downloaded_images = array();
+			foreach ( $data as $key => $item ) {
+				$result = $this->cache_feed_images( $item );
+				$data[$key] = $result['data'];
+				$downloaded_images = array_merge( $downloaded_images, $result['images'] );
+			}
+			
+			// Store list of downloaded images for cleanup
+			$image_list_key = $transient_key . '_images';
+			$expireTime = $this->get_transient_expire( $settings );
+			set_transient( $image_list_key, $downloaded_images, apply_filters( 'element-pack/facebook-feed/cached-time', $expireTime ) );
 		}
 
 		return $data;
@@ -2274,5 +2297,181 @@ class Facebook_Feed extends Module_Base {
 			</p>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Get the upload directory for cached Facebook images
+	 */
+	private function get_upload_dir() {
+		$upload_dir = wp_upload_dir();
+		$fb_cache_dir = trailingslashit( $upload_dir['basedir'] ) . 'element-pack/facebook-feed/';
+		$fb_cache_url = trailingslashit( $upload_dir['baseurl'] ) . 'element-pack/facebook-feed/';
+		
+		if ( ! file_exists( $fb_cache_dir ) ) {
+			wp_mkdir_p( $fb_cache_dir );
+			// Add .htaccess to protect directory
+			file_put_contents( $fb_cache_dir . '.htaccess', 'Options -Indexes' );
+		}
+		
+		return array(
+			'dir' => $fb_cache_dir,
+			'url' => $fb_cache_url
+		);
+	}
+
+	/**
+	 * Download and cache a single image locally
+	 */
+	private function download_and_cache_image( $image_url, $identifier = '' ) {
+		if ( empty( $image_url ) ) {
+			return array( 'url' => $image_url, 'filename' => null );
+		}
+		
+		// Generate unique filename based on URL
+		$filename = md5( $image_url . $identifier ) . '.jpg';
+		$upload_info = $this->get_upload_dir();
+		$file_path = $upload_info['dir'] . $filename;
+		$file_url = $upload_info['url'] . $filename;
+		
+		// If file already exists and is recent, return local URL
+		if ( file_exists( $file_path ) ) {
+			return array( 'url' => $file_url, 'filename' => $filename );
+		}
+		
+		// Download image
+		$response = wp_remote_get( $image_url, array(
+			'timeout' => 30,
+			'sslverify' => false
+		) );
+		
+		if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+			return array( 'url' => $image_url, 'filename' => null ); // Return original URL if download fails
+		}
+		
+		$image_data = wp_remote_retrieve_body( $response );
+		
+		if ( empty( $image_data ) ) {
+			return array( 'url' => $image_url, 'filename' => null );
+		}
+		
+		// Save image locally
+		$saved = file_put_contents( $file_path, $image_data );
+		
+		if ( $saved === false ) {
+			return array( 'url' => $image_url, 'filename' => null );
+		}
+		
+		return array( 'url' => $file_url, 'filename' => $filename );
+	}
+
+	/**
+	 * Cache all images in a feed item
+	 */
+	private function cache_feed_images( $item ) {
+		if ( empty( $item ) ) {
+			return array( 'data' => $item, 'images' => array() );
+		}
+		
+		$downloaded_files = array();
+		
+		// Cache main feature image
+		if ( ! empty( $item['full_picture'] ) ) {
+			$result = $this->download_and_cache_image( $item['full_picture'], 'full' );
+			$item['full_picture_cached'] = $result['url'];
+			if ( $result['filename'] ) {
+				$downloaded_files[] = $result['filename'];
+			}
+		}
+		
+		// Cache author profile image
+		if ( ! empty( $item['from']['id'] ) ) {
+			$avatar_url = "https://graph.facebook.com/v4.0/{$item['from']['id']}/picture";
+			$result = $this->download_and_cache_image( $avatar_url, 'avatar_' . $item['from']['id'] );
+			$item['from']['avatar_cached'] = $result['url'];
+			if ( $result['filename'] ) {
+				$downloaded_files[] = $result['filename'];
+			}
+		}
+		
+		// Cache album images
+		if ( ! empty( $item['attachments']['data'] ) && is_array( $item['attachments']['data'] ) ) {
+			foreach ( $item['attachments']['data'] as $att_key => $attachment ) {
+				if ( isset( $attachment['subattachments']['data'] ) && is_array( $attachment['subattachments']['data'] ) ) {
+					foreach ( $attachment['subattachments']['data'] as $sub_key => $subattachment ) {
+						if ( isset( $subattachment['media']['image']['src'] ) ) {
+							$result = $this->download_and_cache_image( 
+								$subattachment['media']['image']['src'], 
+								'album_' . $sub_key 
+							);
+							$item['attachments']['data'][$att_key]['subattachments']['data'][$sub_key]['media']['image']['src_cached'] = $result['url'];
+							if ( $result['filename'] ) {
+								$downloaded_files[] = $result['filename'];
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return array(
+			'data' => $item,
+			'images' => $downloaded_files
+		);
+	}
+
+	/**
+	 * Clean up old cached images
+	 */
+	public function cleanup_old_images( $max_age_days = 30 ) {
+		$upload_info = $this->get_upload_dir();
+		$cache_dir = $upload_info['dir'];
+		
+		if ( ! file_exists( $cache_dir ) ) {
+			return;
+		}
+		
+		$files = glob( $cache_dir . '*.jpg' );
+		$now = time();
+		$max_age = $max_age_days * DAY_IN_SECONDS;
+		
+		foreach ( $files as $file ) {
+			if ( is_file( $file ) ) {
+				$file_age = $now - filemtime( $file );
+				if ( $file_age > $max_age ) {
+					@unlink( $file );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Clean up images for a specific page when transient expires
+	 */
+	private function cleanup_page_images( $page_id ) {
+		$upload_info = $this->get_upload_dir();
+		$cache_dir = $upload_info['dir'];
+		
+		if ( ! file_exists( $cache_dir ) ) {
+			return;
+		}
+		
+		// Get transient key to track when it was last set
+		$transient_key = sprintf( 'bdt-facebook-feed-data-%s', md5( $page_id ) );
+		$image_list_key = $transient_key . '_images';
+		
+		// Get list of images from previous cache
+		$old_images = get_transient( $image_list_key );
+		
+		if ( ! empty( $old_images ) && is_array( $old_images ) ) {
+			foreach ( $old_images as $image_file ) {
+				$file_path = $cache_dir . $image_file;
+				if ( file_exists( $file_path ) ) {
+					@unlink( $file_path );
+				}
+			}
+		}
+		
+		// Clear the image list
+		delete_transient( $image_list_key );
 	}
 }
