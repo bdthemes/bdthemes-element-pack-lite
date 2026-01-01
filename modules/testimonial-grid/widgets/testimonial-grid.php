@@ -106,6 +106,10 @@ class Testimonial_Grid extends Module_Base {
 					'4' => '4',
 				],
 				'frontend_available' => true,
+				'selectors'       => [ 
+					'{{WRAPPER}} .bdt-testimonial-grid-default' => 'grid-template-columns: repeat({{SIZE}}, 1fr);',
+					'{{WRAPPER}} .bdt-testimonial-grid-masonry' => 'columns: {{SIZE}};',
+				],
 			]
 		);
 
@@ -142,8 +146,8 @@ class Testimonial_Grid extends Module_Base {
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-testimonial-grid > .bdt-grid'     => 'margin-left: -{{SIZE}}px',
-					'{{WRAPPER}} .bdt-testimonial-grid > .bdt-grid > *' => 'padding-left: {{SIZE}}px',
+					'{{WRAPPER}} .bdt-testimonial-grid-default' => 'grid-column-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-testimonial-grid-masonry' => 'column-gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -164,8 +168,8 @@ class Testimonial_Grid extends Module_Base {
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-testimonial-grid > .bdt-grid'     => 'margin-top: -{{SIZE}}px',
-					'{{WRAPPER}} .bdt-testimonial-grid > .bdt-grid > *' => 'margin-top: {{SIZE}}px',
+					'{{WRAPPER}} .bdt-testimonial-grid-default' => 'grid-row-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-testimonial-grid-masonry .bdt-testimonial-grid-item' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1627,15 +1631,17 @@ class Testimonial_Grid extends Module_Base {
 
 		$wp_query = $this->render_query( $settings['posts_per_page'] );
 
-		$this->add_render_attribute( 'testimonial-grid', 'data-bdt-grid', '' );
-		$this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-grid' );
+		// $this->add_render_attribute( 'testimonial-grid', 'data-bdt-grid', '' );
+		// $this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-grid' );
 
 		if ( $settings['item_match_height'] ) {
 			$this->add_render_attribute( 'testimonial-grid', 'data-bdt-height-match', 'div > .bdt-testimonial-grid-item-inner' );
 		}
 
 		if ( $settings['item_masonry'] ) {
-			$this->add_render_attribute( 'testimonial-grid', 'data-bdt-grid', 'masonry: true;' );
+			$this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-testimonial-grid-masonry' );
+		} else {
+			$this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-testimonial-grid-default' );
 		}
 
 		if ( $wp_query->have_posts() ) {
@@ -1648,14 +1654,14 @@ class Testimonial_Grid extends Module_Base {
 				while ( $wp_query->have_posts() ) :
 					$wp_query->the_post();
 
-					$columns_mobile = isset( $settings['columns_mobile'] ) ? $settings['columns_mobile'] : 1;
-					$columns_tablet = isset( $settings['columns_tablet'] ) ? $settings['columns_tablet'] : 2;
-					$columns        = isset( $settings['columns'] ) ? $settings['columns'] : 2;
+					// $columns_mobile = isset( $settings['columns_mobile'] ) ? $settings['columns_mobile'] : 1;
+					// $columns_tablet = isset( $settings['columns_tablet'] ) ? $settings['columns_tablet'] : 2;
+					// $columns        = isset( $settings['columns'] ) ? $settings['columns'] : 2;
 
 
-					$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns_mobile ) );
-					$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns_tablet ) . '@s' );
-					$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns ) . '@m' );
+					// $this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns_mobile ) );
+					// $this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns_tablet ) . '@s' );
+					// $this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns ) . '@m' );
 
 					$platform = get_post_meta( get_the_ID(), 'bdthemes_tm_platform', true );
 

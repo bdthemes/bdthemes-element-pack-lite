@@ -35,11 +35,11 @@ class Biggopties {
 	private function get_api_biggopties_data() {
 
 		// 6-hour transient cache for API response
-		$transient_key = 'bdt_api_biggopties';
-		$cached = get_transient($transient_key);
-		if ($cached !== false && is_array($cached)) {
-			return $cached;
-		}
+		// $transient_key = 'bdt_api_biggopties';
+		// $cached = get_transient($transient_key);
+		// if ($cached !== false && is_array($cached)) {
+		// 	return $cached;
+		// }
 
 		// API endpoint for biggopties - you can change this to your actual endpoint
 		$api_url = 'https://api.sigmative.io/prod/store/api/biggopti/api-data-records';
@@ -65,8 +65,8 @@ class Biggopties {
 		if( isset($biggopties) && isset($biggopties->{'element-pack'}) ) {
 			$data = $biggopties->{'element-pack'};
 			if (is_array($data)) {
-				$ttl = apply_filters('bdt_api_biggopties_cache_ttl', 6 * HOUR_IN_SECONDS);
-				set_transient($transient_key, $data, $ttl);
+				// $ttl = apply_filters('bdt_api_biggopties_cache_ttl', 6 * HOUR_IN_SECONDS);
+				// set_transient($transient_key, $data, $ttl);
 				return $data;
 			}
 		}

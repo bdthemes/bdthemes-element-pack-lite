@@ -22,6 +22,9 @@ class Facebook_Feed extends Module_Base {
 	public $api_url = 'https://graph.facebook.com/v4.0/%1$s/posts?%2$s&access_token=%3$s';
 
 	public $api_queries = 'fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments{type,media_type,title,description,unshimmed_url,subattachments},comments.summary(total_count),reactions.summary(total_count)';
+	
+	// Cache version - increment this to force cache refresh
+	private $cache_version = '1.1';
 
 	
 
@@ -2190,7 +2193,7 @@ class Facebook_Feed extends Module_Base {
 		}
 
 		$id            = $fb_page_id;
-		$transient_key = sprintf( 'bdt-facebook-feed-data-%s', md5( $id ) );
+		$transient_key = sprintf( 'bdt-facebook-feed-data-%s-v%s', md5( $id ), $this->cache_version );
 
 		if ( $settings['data_cache'] == 'yes' ) {
 			$data = get_transient( $transient_key );
@@ -2237,26 +2240,26 @@ class Facebook_Feed extends Module_Base {
 				return false;
 			}
 
+			// Process and cache images BEFORE saving transient
+			if ( $settings['data_cache'] == 'yes' && ! empty( $data ) ) {
+				$downloaded_images = array();
+				foreach ( $data as $key => $item ) {
+					$result = $this->cache_feed_images( $item );
+					$data[$key] = $result['data'];
+					$downloaded_images = array_merge( $downloaded_images, $result['images'] );
+				}
+				
+				// Store list of downloaded images for cleanup
+				$image_list_key = $transient_key . '_images';
+				$expireTime = $this->get_transient_expire( $settings );
+				set_transient( $image_list_key, $downloaded_images, apply_filters( 'element-pack/facebook-feed/cached-time', $expireTime ) );
+			}
+
 			$expireTime = $this->get_transient_expire( $settings );
 
 			if ( $settings['data_cache'] == 'yes' ) {
 				set_transient( $transient_key, $data, apply_filters( 'element-pack/facebook-feed/cached-time', $expireTime ) );
 			}
-		}
-
-		// Process and cache images only when cache is enabled
-		if ( $settings['data_cache'] == 'yes' && ! empty( $data ) ) {
-			$downloaded_images = array();
-			foreach ( $data as $key => $item ) {
-				$result = $this->cache_feed_images( $item );
-				$data[$key] = $result['data'];
-				$downloaded_images = array_merge( $downloaded_images, $result['images'] );
-			}
-			
-			// Store list of downloaded images for cleanup
-			$image_list_key = $transient_key . '_images';
-			$expireTime = $this->get_transient_expire( $settings );
-			set_transient( $image_list_key, $downloaded_images, apply_filters( 'element-pack/facebook-feed/cached-time', $expireTime ) );
 		}
 
 		return $data;
