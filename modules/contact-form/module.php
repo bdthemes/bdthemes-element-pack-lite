@@ -90,7 +90,7 @@ class Module extends Element_Pack_Module_Base {
 
         if ( isset( $_SERVER['REQUEST_METHOD'] ) && $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
-            if (!isset($_REQUEST['_wpnonce']) && !wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'simpleContactForm')) {
+            if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'simpleContactForm')) {
                 $result = esc_html__('Security check failed!', 'bdthemes-element-pack');
                 echo '<span class="bdt-text-warning">' . esc_html($result) . '</span>';
                 wp_die();
