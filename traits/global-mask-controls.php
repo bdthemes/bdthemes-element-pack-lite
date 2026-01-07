@@ -47,7 +47,7 @@
 		            'options'        => element_pack_mask_shapes_options(),
 		            'selectors'      => [
 		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg); mask-image: url('.BDTEP_ASSETS_URL . 'images/mask/'.'{{VALUE}}.svg);',
-		                '{{WRAPPER}} .bdt-image-mask:before' => 'background-image: url('.BDTEP_ASSETS_URL . 'images/mask/color-'.'{{VALUE}}.svg);',
+		                // '{{WRAPPER}} .bdt-image-mask:before' => 'background-image: url('.BDTEP_ASSETS_URL . 'images/mask/color-'.'{{VALUE}}.svg);',
 		            ],
 		            'condition'      => [
 		                'image_mask_popover' => 'yes',
