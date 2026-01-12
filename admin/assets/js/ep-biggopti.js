@@ -108,7 +108,8 @@ jQuery(document).ready(function ($) {
             dataType: 'json',
             data: {
                 action: 'ep_fetch_api_biggopti',
-                _wpnonce: ElementPackBiggoptiConfig.nonce
+                _wpnonce: ElementPackBiggoptiConfig.nonce,
+                current_url: window.location.href
             }
         })
         .done(function (res) {

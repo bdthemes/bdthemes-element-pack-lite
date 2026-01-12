@@ -105,6 +105,9 @@ class Module extends Element_Pack_Module_Base {
             foreach ($_POST as $field => $value) {
                 if (is_email($value)) {
                     $value = sanitize_email($value);
+                } elseif (in_array($field, ['name', 'subject', 'contact'])) {
+                    // Use sanitize_text_field for single-line fields to prevent header injection
+                    $value = sanitize_text_field($value);
                 } else {
                     $value = sanitize_textarea_field($value);
                 }
@@ -202,7 +205,9 @@ class Module extends Element_Pack_Module_Base {
                 // get the message from the form and add the IP address of the user below it
                 $email_message = $this->message_html($form_data['message'], $form_data['name'], $form_data['email'], $contact_number);
                 // set the e-mail headers with the user's name, e-mail address and character encoding
-                $headers = "Reply-To: " . $form_data['name'] . " <" . $form_data['email'] . ">\n";
+                // Explicitly remove newlines to prevent header injection
+                $safe_name = str_replace(["\r", "\n"], '', $form_data['name']);
+                $headers = "Reply-To: " . $safe_name . " <" . $form_data['email'] . ">\n";
                 $headers .= "Content-Type: text/html; charset=UTF-8\n";
                 $headers .= "Content-Transfer-Encoding: 8bit\n";
                 // send the e-mail with the shortcode attribute named 'email' and the POSTed data
