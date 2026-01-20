@@ -524,7 +524,7 @@ class Element_Pack_Loader {
 
     public function enqueue_admin_scripts() {
 		wp_enqueue_style( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-biggopti.css', [], BDTEP_VER, 'all' );
-		wp_enqueue_script( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-biggopti.js', [ 'jquery' ], BDTEP_VER, true );
+		wp_enqueue_script( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
 
 		$script_config = [ 
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
