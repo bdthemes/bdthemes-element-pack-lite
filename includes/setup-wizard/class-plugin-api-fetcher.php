@@ -24,12 +24,33 @@ class Plugin_Api_Fetcher {
     const API_BASE_URL = 'https://api.wordpress.org/plugins/info/1.2/';
 
     /**
-     * Get plugin data from WordPress.org API with caching
+     * Check if we should fetch remote data (only on Element Pack options page)
+     *
+     * @return bool True if we should fetch remote data
+     */
+    private static function should_fetch_remote_data() {
+        // Check if the remote data handler function exists
+        if (function_exists('ep_is_element_pack_page')) {
+            return ep_is_element_pack_page();
+        }
+        
+        // Fallback check if function doesn't exist yet
+        if (!is_admin()) {
+            return false;
+        }
+        
+        $page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
+        return $page === 'element_pack_options';
+    }
+
+    /**
+     * Fetch plugin data from WordPress.org API (bypassing page check for background use)
      *
      * @param string $plugin_slug Plugin slug (e.g., 'bdthemes-element-pack-lite' or 'plugin-name/plugin-name.php')
+     * @param bool $bypass_check Whether to bypass the page check (for background fetching)
      * @return array|false Plugin data or false on failure
      */
-    public static function get_plugin_data($plugin_slug) {
+    public static function get_plugin_data($plugin_slug, $bypass_check = false) {
         // Extract the directory slug from full plugin path if needed
         // For example: 'bdthemes-prime-slider-lite/bdthemes-prime-slider.php' -> 'bdthemes-prime-slider-lite'
         $api_slug = (strpos($plugin_slug, '/') !== false) ? dirname($plugin_slug) : $plugin_slug;
@@ -38,6 +59,12 @@ class Plugin_Api_Fetcher {
         $cached_data = self::get_cached_data($api_slug);
         if ($cached_data !== false) {
             return $cached_data;
+        }
+
+        // Only fetch fresh data if we're on the Element Pack options page or bypassing check
+        // This prevents blocking other admin pages
+        if (!$bypass_check && !self::should_fetch_remote_data()) {
+            return false;
         }
 
         // Fetch fresh data from API

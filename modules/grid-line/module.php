@@ -239,6 +239,51 @@ class Module extends Element_Pack_Module_Base {
 			]
 		);
 
+		$section->add_control(
+			'ep_grid_line_horizontal',
+			[
+				'label'       => esc_html__('Horizontal Line?', 'bdthemes-element-pack'),
+				'type'        => Controls_Manager::SWITCHER,
+				'render_type' => 'template',
+				'condition'   => [
+					'ep_grid_line_enable' => 'yes'
+				],
+			]
+		);
+
+		$section->add_control(
+			'ep_grid_line_horizontal_output',
+			[
+				'type'      => Controls_Manager::HIDDEN,
+				'default'   => '1',
+				'selectors' => [
+					'body'         => 'position: relative;',
+					'body::after' => '
+									content       : "";
+									position      : absolute;
+									top           : 0;
+									right         : 0;
+									bottom        : 0;
+									left          : 0;
+									margin-right  : auto;
+									margin-left   : auto;
+									pointer-events: none;
+									z-index       : var(--ep-grid-line-z-index, 0);
+									min-height    : 100vh;
+
+									width           : calc(100% - (2 * 0px));
+									max-width       : var(--ep-grid-line-max-width, 100%);
+									background-size : calc(100% + var(--ep-grid-line-width, 1px)) 100%;
+									background-image: repeating-linear-gradient(0, transparent, transparent calc((100% / var(--ep-grid-line-columns, 12)) - var(--ep-grid-line-width, 1px)), var(--ep-grid-line-color, #eee) calc((100% / var(--ep-grid-line-columns, 12)) - var(--ep-grid-line-width, 1px)), var(--ep-grid-line-color, #eee) calc(100% / var(--ep-grid-line-columns, 12)));'
+
+				],
+				'condition' => [
+					'ep_grid_line_enable' => 'yes',
+					'ep_grid_line_horizontal' => 'yes',
+				]
+			]
+		);
+
 		$section->end_controls_section();
 	}
 

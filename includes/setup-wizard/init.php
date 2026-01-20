@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Load the Remote Data Handler
+require_once __DIR__ . '/class-remote-data-handler.php';
+
 use ElementPack\Admin\ModuleService;
 use Elementor\Plugin;
 /**
