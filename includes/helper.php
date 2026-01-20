@@ -982,10 +982,15 @@ function element_pack_mask_shapes_options() {
 /**
  * This is a svg file converter function which return a svg content
  *
- * @param string file
- * @return false content
+ * @param string $icon Icon name (alphanumeric, hyphen, underscore only). No path components.
+ * @return string|false SVG content or false on failure.
  */
 function element_pack_svg_icon( $icon ) {
+
+	// Prevent path traversal: only allow safe icon names (no /, \, .., or other path components).
+	if ( ! is_string( $icon ) || $icon === '' || preg_match( '/[^a-zA-Z0-9_-]/', $icon ) ) {
+		return false;
+	}
 
 	$icon_path = BDTEP_ASSETS_PATH . "images/svg/{$icon}.svg";
 
@@ -993,9 +998,21 @@ function element_pack_svg_icon( $icon ) {
 		return false;
 	}
 
+	// Ensure resolved path stays within plugin assets (defense in depth).
+	$base   = realpath( BDTEP_ASSETS_PATH );
+	$resolved = realpath( $icon_path );
+	if ( $base === false || $resolved === false || strpos( $resolved, $base ) !== 0 ) {
+		return false;
+	}
+
+	$ext = strtolower( pathinfo( $resolved, PATHINFO_EXTENSION ) );
+	if ( $ext !== 'svg' ) {
+		return false;
+	}
+
 	ob_start();
 
-	include $icon_path;
+	include $resolved;
 
 	$svg = ob_get_clean();
 
@@ -1005,17 +1022,43 @@ function element_pack_svg_icon( $icon ) {
 /**
  * This is a svg file converter function which return a svg content
  *
- * @return false content
+ * @param string $icon Full path to an SVG file. Must be under BDTEP_ASSETS_PATH.
+ * @return string|false SVG content or false on failure.
  */
 function element_pack_load_svg( $icon ) {
+
+	if ( ! is_string( $icon ) || $icon === '' ) {
+		return false;
+	}
 
 	if ( ! file_exists( $icon ) ) {
 		return false;
 	}
 
+	$base = realpath( BDTEP_ASSETS_PATH );
+	if ( $base === false ) {
+		return false;
+	}
+
+	$path = realpath( $icon );
+	if ( $path === false ) {
+		return false;
+	}
+
+	// Prevent path traversal: resolved path must be inside plugin assets.
+	if ( strpos( $path, $base ) !== 0 ) {
+		return false;
+	}
+
+	// Only allow .svg files to avoid including .php or other executable types.
+	$ext = strtolower( pathinfo( $path, PATHINFO_EXTENSION ) );
+	if ( $ext !== 'svg' ) {
+		return false;
+	}
+
 	ob_start();
 
-	include $icon;
+	include $path;
 
 	$svg = ob_get_clean();
 
