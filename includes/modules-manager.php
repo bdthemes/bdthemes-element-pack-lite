@@ -73,7 +73,7 @@ final class Manager {
                 }
                 // register widget JS
                 if (ModuleService::has_module_script($module_id)) {
-                    wp_register_script('ep-' . $module_id, BDTEP_URL . 'assets/js/modules/ep-' . $module_id . $suffix . '.js', ['jquery', 'bdt-uikit'], BDTEP_VER, true);
+                    wp_register_script('ep-' . $module_id, BDTEP_URL . 'assets/js/modules/ep-' . $module_id . '.min.js', ['jquery', 'bdt-uikit'], BDTEP_VER, true);
                 }
             }
         }

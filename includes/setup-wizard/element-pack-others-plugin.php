@@ -33,7 +33,6 @@ class ElementPack_Others_Plugin_Manager {
      */
     public function render_others_plugin() {
         // Include the required classes
-        require_once BDTEP_INC_PATH . 'setup-wizard/class-plugin-api-fetcher.php';
         require_once BDTEP_INC_PATH . 'setup-wizard/class-plugin-integration-helper.php';
         require_once BDTEP_INC_PATH . 'setup-wizard/class-remote-data-handler.php';
         
@@ -248,6 +247,8 @@ class ElementPack_Others_Plugin_Manager {
                     html = '<div class="bdt-text-center bdt-padding-large"><p><?php esc_html_e('No plugins available.', 'bdthemes-element-pack'); ?></p></div>';
                 } else {
                     plugins.forEach(function(plugin) {
+                        // Skip own plugin (Element Pack) when printing only; data still includes it for other plugins
+                        if (plugin.slug === 'bdthemes-element-pack-lite') return;
                         var isActive = false; // We'll determine this via PHP in the actual implementation
                         var logoUrl = plugin.logo || '';
                         var pluginName = plugin.name || '';

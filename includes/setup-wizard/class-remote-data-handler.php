@@ -12,25 +12,24 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Ensure Plugin_Api_Fetcher is available
-require_once __DIR__ . '/class-plugin-api-fetcher.php';
+
 
 class Remote_Data_Handler {
 
     /**
-     * Cache duration in seconds (12 hours)
+     * Cache duration in seconds (7 days)
      */
-    const CACHE_DURATION = 12 * HOUR_IN_SECONDS;
+    const CACHE_DURATION = 7 * DAY_IN_SECONDS;
 
     /**
      * Transient key for remote plugins data
      */
-    const CACHE_KEY = 'ep_remote_plugins_data';
+    const CACHE_KEY = 'bdt_remote_plugins_data';
 
     /**
      * Cron hook name for background fetch
      */
-    const CRON_HOOK = 'ep_fetch_remote_plugins_cron';
+    const CRON_HOOK = 'bdt_fetch_remote_plugins_cron';
 
     /**
      * Initialize the remote data handler
@@ -46,8 +45,6 @@ class Remote_Data_Handler {
      * WP-Cron callback for fetching plugins
      */
     public static function cron_fetch_plugins() {
-        // Log that cron is running
-        error_log('Element Pack: Running cron fetch for remote plugins');
         self::fetch_remote_plugins_now();
     }
 
@@ -114,6 +111,7 @@ class Remote_Data_Handler {
     public static function fetch_remote_plugins_now() {
         // Define plugin slugs to fetch
         $plugin_slugs = [
+            'bdthemes-element-pack-lite',
             'bdthemes-prime-slider-lite',
             'ultimate-post-kit', 
             'ultimate-store-kit',
@@ -132,8 +130,8 @@ class Remote_Data_Handler {
         $errors = [];
 
         foreach ($plugin_slugs as $slug) {
-            // Use the fully qualified class name with bypass_check=true for background fetching
-            $data = \ElementPack\SetupWizard\Plugin_Api_Fetcher::get_plugin_data($slug, true);
+            // Direct API fetch - no external dependencies
+            $data = self::fetch_plugin_from_api($slug);
             if ($data !== false) {
                 $results[$slug] = $data;
             } else {
@@ -141,12 +139,7 @@ class Remote_Data_Handler {
             }
         }
 
-        // Log errors for debugging
-        if (!empty($errors)) {
-            error_log('Element Pack: Failed to fetch data for plugins: ' . implode(', ', $errors));
-        }
-
-        // Cache the results even if some failed
+        // Cache the results for 7 days
         set_transient(self::CACHE_KEY, $results, self::CACHE_DURATION);
         
         return $results;
@@ -164,17 +157,34 @@ class Remote_Data_Handler {
         // Get cached data
         $plugins_data = self::get_remote_plugins();
         
-        // If cache is empty, try to fetch immediately (but don't block)
+        // If cache is empty, fetch immediately for better UX
         if (empty($plugins_data)) {
-            // Schedule background fetch if not already done
-            self::schedule_remote_fetch();
+            // Try to fetch data immediately (this is an AJAX request, so it's async already)
+            $plugins_data = self::fetch_remote_plugins_now();
             
-            // Return empty response with flag indicating data is loading
-            wp_send_json_success([
-                'plugins' => [],
-                'loading' => true,
-                'message' => __('Loading plugin data...', 'bdthemes-element-pack')
-            ]);
+            // If still empty after fetch, schedule background cron for retry
+            if (empty($plugins_data)) {
+                self::schedule_remote_fetch();
+                
+                // Return empty response with flag indicating data is loading
+                wp_send_json_success([
+                    'plugins' => [],
+                    'loading' => true,
+                    'message' => __('Loading plugin data...', 'bdthemes-element-pack')
+                ]);
+            }
+        }
+
+        // Get recommended flags from Plugin_Integration_Helper (key may be 'slug' or 'slug/script.php')
+        $recommended_by_slug = [];
+        $helper_file = __DIR__ . '/class-plugin-integration-helper.php';
+        if (file_exists($helper_file)) {
+            require_once $helper_file;
+            $predefined = \ElementPack\SetupWizard\Plugin_Integration_Helper::get_predefined_plugins();
+            foreach ($predefined as $key => $config) {
+                $dir = (strpos($key, '/') !== false) ? dirname($key) : $key;
+                $recommended_by_slug[$dir] = !empty($config['recommended']);
+            }
         }
 
         // Format the response for frontend use
@@ -209,7 +219,8 @@ class Remote_Data_Handler {
                 'homepage' => $data['homepage'] ?? '',
                 'status' => $plugin_status,
                 'plugin_file' => $plugin_file,
-                'activate_nonce' => $plugin_file ? wp_create_nonce('activate-plugin_' . $plugin_file) : ''
+                'activate_nonce' => $plugin_file ? wp_create_nonce('activate-plugin_' . $plugin_file) : '',
+                'recommended' => !empty($recommended_by_slug[$slug])
             ];
         }
 
@@ -228,21 +239,6 @@ class Remote_Data_Handler {
         if (!wp_next_scheduled(self::CRON_HOOK)) {
             // Don't schedule immediately, only when needed
         }
-    }
-
-    /**
-     * Clear the remote plugins cache
-     */
-    public static function clear_cache() {
-        delete_transient(self::CACHE_KEY);
-    }
-
-    /**
-     * Force refresh of remote data
-     */
-    public static function force_refresh() {
-        self::clear_cache();
-        return self::fetch_remote_plugins_now();
     }
 
     /**
@@ -330,6 +326,229 @@ class Remote_Data_Handler {
         } else {
             $years = floor($diff / 31536000);
             return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack'), $years);
+        }
+    }
+
+    /**
+     * Fetch plugin data from WordPress.org API
+     *
+     * @param string $plugin_slug Plugin slug
+     * @return array|false Plugin data or false on failure
+     */
+    private static function fetch_plugin_from_api($plugin_slug) {
+        $api_url = add_query_arg([
+            'action' => 'plugin_information',
+            'request' => [
+                'slug' => $plugin_slug,
+                'fields' => [
+                    'icons' => true,
+                    'short_description' => true,
+                    'active_installs' => true,
+                    'rating' => true,
+                    'num_ratings' => true,
+                    'downloaded' => true,
+                    'last_updated' => true,
+                    'homepage' => true,
+                    'tested' => true,
+                    'requires' => true,
+                    'requires_php' => true,
+                    'sections' => false,
+                    'compatibility' => false,
+                    'banners' => false,
+                    'contributors' => false,
+                    'tags' => false,
+                    'reviews' => false,
+                    'versions' => false,
+                    'installation' => false,
+                    'faq' => false,
+                    'changelog' => false,
+                    'screenshots' => false,
+                    'donate_link' => false,
+                ]
+            ]
+        ], 'https://api.wordpress.org/plugins/info/1.2/');
+
+        // Security: Use wp_safe_remote_get instead of wp_remote_get
+        $response = wp_safe_remote_get($api_url, [
+            'timeout' => 30,
+            'user-agent' => 'Element Pack Setup Wizard'
+        ]);
+
+        if (is_wp_error($response)) {
+            return false;
+        }
+
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+
+        if (empty($data) || !is_array($data)) {
+            return false;
+        }
+
+        $formatted_data = self::format_plugin_data($data);
+        
+        if (empty($formatted_data['name']) && empty($formatted_data['slug'])) {
+            return false;
+        }
+
+        return $formatted_data;
+    }
+
+    /**
+     * Format plugin data for our use
+     *
+     * @param array $raw_data Raw API data
+     * @return array Formatted plugin data
+     */
+    private static function format_plugin_data($raw_data) {
+        // Get the best available icon with validation
+        $icon_url = self::get_valid_plugin_icon($raw_data['icons'] ?? []);
+
+        // Format active installs with null safety and real data
+        $active_installs_raw = $raw_data['active_installs'] ?? 0;
+        $active_installs = self::format_active_installs($active_installs_raw);
+        $active_installs_count = self::get_numeric_active_installs($active_installs_raw);
+
+        // Calculate rating percentage with null safety and real data
+        $rating_percentage = 0;
+        $rating_raw = $raw_data['rating'] ?? 0;
+        $num_ratings_raw = $raw_data['num_ratings'] ?? 0;
+        
+        if (!empty($rating_raw) && !empty($num_ratings_raw)) {
+            $rating_percentage = ($rating_raw / 100) * 5; // Convert to 5-star scale
+        }
+
+        // Get downloaded count for additional metrics
+        $downloaded_count = $raw_data['downloaded'] ?? 0;
+
+        return [
+            'name' => $raw_data['name'] ?? '',
+            'slug' => $raw_data['slug'] ?? '',
+            'logo' => $icon_url,
+            'description' => $raw_data['short_description'] ?? '',
+            'active_installs' => $active_installs,
+            'active_installs_count' => $active_installs_count,
+            'rating' => round($rating_percentage, 1),
+            'rating_percentage' => $rating_raw,
+            'num_ratings' => $num_ratings_raw,
+            'downloaded' => $downloaded_count,
+            'downloaded_formatted' => self::format_downloaded_count($downloaded_count),
+            'last_updated' => $raw_data['last_updated'] ?? '',
+            'homepage' => $raw_data['homepage'] ?? '',
+            'version' => $raw_data['version'] ?? '',
+            'tested' => $raw_data['tested'] ?? '',
+            'requires' => $raw_data['requires'] ?? '',
+            'requires_php' => $raw_data['requires_php'] ?? '',
+            'fetched_at' => current_time('timestamp')
+        ];
+    }
+
+    /**
+     * Get valid plugin icon with format validation
+     *
+     * @param array $icons Array of icon URLs
+     * @return string Valid icon URL or empty string
+     */
+    private static function get_valid_plugin_icon($icons) {
+        $valid_extensions = ['gif', 'png', 'jpg', 'jpeg', 'svg'];
+        $icon_sizes = ['256', '128', 'default'];
+        
+        foreach ($icon_sizes as $size) {
+            if (!empty($icons[$size])) {
+                $icon_url = $icons[$size];
+                
+                // Check if URL is valid and has correct extension
+                if (self::is_valid_image_url($icon_url, $valid_extensions)) {
+                    return $icon_url;
+                }
+            }
+        }
+        
+        return '';
+    }
+
+    /**
+     * Validate image URL and extension
+     *
+     * @param string $url Image URL
+     * @param array $valid_extensions Allowed extensions
+     * @return bool True if valid
+     */
+    private static function is_valid_image_url($url, $valid_extensions) {
+        if (empty($url) || !is_string($url)) {
+            return false;
+        }
+        
+        // Check if URL is valid
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+        
+        // Get file extension
+        $path_info = pathinfo(parse_url($url, PHP_URL_PATH));
+        $extension = strtolower($path_info['extension'] ?? '');
+        
+        return in_array($extension, $valid_extensions);
+    }
+
+    /**
+     * Format active installs number with null safety
+     *
+     * @param mixed $installs Number of active installs
+     * @return string Formatted installs string
+     */
+    private static function format_active_installs($installs) {
+        // Handle null, empty, or non-numeric values
+        if (is_null($installs) || $installs === '' || !is_numeric($installs)) {
+            return '0';
+        }
+        
+        $installs = intval($installs);
+        
+        if ($installs >= 1000000) {
+            return round($installs / 1000000, 1) . 'M+';
+        } elseif ($installs >= 1000) {
+            return round($installs / 1000, 1) . 'K+';
+        } else {
+            return number_format($installs);
+        }
+    }
+
+    /**
+     * Get numeric active installs count
+     *
+     * @param mixed $installs Number of active installs
+     * @return int Numeric installs count
+     */
+    private static function get_numeric_active_installs($installs) {
+        // Handle null, empty, or non-numeric values
+        if (is_null($installs) || $installs === '' || !is_numeric($installs)) {
+            return 0;
+        }
+        
+        return intval($installs);
+    }
+
+    /**
+     * Format downloaded count
+     *
+     * @param mixed $downloaded Number of downloads
+     * @return string Formatted downloads string
+     */
+    private static function format_downloaded_count($downloaded) {
+        // Handle null, empty, or non-numeric values
+        if (is_null($downloaded) || $downloaded === '' || !is_numeric($downloaded)) {
+            return '0';
+        }
+        
+        $downloaded = intval($downloaded);
+        
+        if ($downloaded >= 1000000) {
+            return round($downloaded / 1000000, 1) . 'M+';
+        } elseif ($downloaded >= 1000) {
+            return round($downloaded / 1000, 1) . 'K+';
+        } else {
+            return number_format($downloaded);
         }
     }
 }

@@ -153,15 +153,10 @@ class Plugin_Integration_Helper {
     public static function build_plugin_data($plugin_slugs = []) {
         $predefined = self::get_predefined_plugins();
         
-        // Use new non-blocking approach - get cached data only
+        // Use new non-blocking approach - get cached data only from Remote_Data_Handler
         $fetched_data = [];
         if (function_exists('ep_get_remote_plugins')) {
             $fetched_data = ep_get_remote_plugins();
-        } else {
-            // Fallback to old method but only if we're on Element Pack page
-            if (function_exists('ep_is_element_pack_page') && ep_is_element_pack_page()) {
-                $fetched_data = Plugin_Api_Fetcher::get_multiple_plugins_data($plugin_slugs);
-            }
         }
         
         $plugins = [];
