@@ -242,12 +242,13 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'ep_grid_line_horizontal',
 			[
-				'label'       => esc_html__('Horizontal Line?', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Horizontal Line?', 'bdthemes-element-pack') . BDTEP_PC,
 				'type'        => Controls_Manager::SWITCHER,
 				'render_type' => 'template',
 				'condition'   => [
 					'ep_grid_line_enable' => 'yes'
 				],
+				'classes' => BDTEP_IS_PC,
 			]
 		);
 

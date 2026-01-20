@@ -10,7 +10,6 @@ if (!defined('ABSPATH')) {
 }
 
 // Include the required classes
-require_once __DIR__ . '/../class-plugin-api-fetcher.php';
 require_once __DIR__ . '/../class-plugin-integration-helper.php';
 require_once __DIR__ . '/../class-remote-data-handler.php';
 
@@ -118,10 +117,40 @@ if (!$has_cached_data) {
     </div>
 
     <form method="POST" id="ep-install-plugins">
+        <!-- Loading state - shown during plugin installation -->
+        <div class="ep-loading-state" id="ep-install-loading" style="display: none; text-align: center; padding: 40px;">
+            <div class="ep-loading-dots">
+                <div class="ep-loading-dot"></div>
+                <div class="ep-loading-dot"></div>
+                <div class="ep-loading-dot"></div>
+            </div>
+            <p style="margin-top: 20px;" id="ep-loading-message"><?php esc_html_e('Installing plugins...', 'bdthemes-element-pack'); ?></p>
+        </div>
+
+        <!-- Initial loading state - shown while fetching plugin data -->
+        <?php if (!$has_cached_data): ?>
+        <div class="ep-loading-state" id="ep-initial-loading" style="text-align: center; padding: 40px;">
+            <div class="ep-loading-dots">
+                <div class="ep-loading-dot"></div>
+                <div class="ep-loading-dot"></div>
+                <div class="ep-loading-dot"></div>
+            </div>
+            <p style="margin-top: 20px;"><?php esc_html_e('Loading plugin data...', 'bdthemes-element-pack'); ?></p>
+        </div>
+        <?php endif; ?>
+
         <div class="bdt-plugin-list" id="ep-integration-plugin-list">
             <?php if ($has_cached_data): ?>
                 <?php
-                foreach ($ep_plugins as $plugin) :
+                $predefined = \ElementPack\SetupWizard\Plugin_Integration_Helper::get_predefined_plugins();
+                $recommended_by_slug = [];
+                foreach ($predefined as $key => $config) {
+                    $dir = (strpos($key, '/') !== false) ? dirname($key) : $key;
+                    $recommended_by_slug[ $dir ] = !empty($config['recommended']);
+                }
+                foreach ($ep_plugins as $slug_key => $plugin) :
+                    // Skip own plugin (Element Pack) when printing only; data still includes it for other plugins
+                    if ($slug_key === 'bdthemes-element-pack-lite') continue;
                     // Use enhanced status if available, otherwise fall back to old method
                     $plugin_status = $plugin['status'] ?? 'unknown';
                     if ($plugin_status === 'unknown') {
@@ -131,7 +160,8 @@ if (!$has_cached_data) {
                         // Use enhanced status
                         $is_active = ($plugin_status === 'active');
                     }
-                    $is_recommended = ($plugin['recommended'] ?? false) && !$is_active;
+                    $plugin_recommended = !empty($recommended_by_slug[ $slug_key ]);
+                    $is_recommended = $plugin_recommended && !$is_active;
                 ?>
                     <label class="plugin-item" data-slug="<?php echo esc_attr($plugin['slug']); ?>">
                         <span class="bdt-flex bdt-flex-middle bdt-flex-between bdt-margin-small-bottom">
@@ -168,7 +198,7 @@ if (!$has_cached_data) {
                              <?php
                              if (!$is_active) : ?>
                                  <label class="switch">
-                                     <input type="checkbox" class="plugin-slider-checkbox" <?php echo ($plugin['recommended'] ?? false) ? 'checked' : ''; ?>
+                                     <input type="checkbox" class="plugin-slider-checkbox" <?php echo $plugin_recommended ? 'checked' : ''; ?>
                                             name="plugins[]<?php echo isset($plugin['slug']) ? wp_kses_post($plugin['slug']) : ''; ?>">
                                      <span class="slider round"></span>
                                  </label>
@@ -240,16 +270,6 @@ if (!$has_cached_data) {
                     </label>
                 <?php
                 endforeach; ?>
-            <?php else: ?>
-                <!-- Loading state - will be populated by JavaScript -->
-                <div class="ep-loading-state" style="text-align: center; padding: 40px;">
-                    <div class="ep-loading-dots">
-                        <div class="ep-loading-dot"></div>
-                        <div class="ep-loading-dot"></div>
-                        <div class="ep-loading-dot"></div>
-                    </div>
-                    <p style="margin-top: 20px;"><?php esc_html_e('Loading plugin data...', 'bdthemes-element-pack'); ?></p>
-                </div>
             <?php endif; ?>
         </div>
         
@@ -318,18 +338,10 @@ jQuery(document).ready(function($) {
         if (integrationDataLoaded) return;
         
         const $pluginList = $('#ep-integration-plugin-list');
+        const $initialLoading = $('#ep-initial-loading');
         
-        // Show loading state
-        $pluginList.html(`
-            <div class="ep-loading-state" style="text-align: center; padding: 40px;">
-                <div class="ep-loading-dots">
-                    <div class="ep-loading-dot"></div>
-                    <div class="ep-loading-dot"></div>
-                    <div class="ep-loading-dot"></div>
-                </div>
-                <p style="margin-top: 20px;"><?php esc_html_e('Loading plugin data...', 'bdthemes-element-pack'); ?></p>
-            </div>
-        `);
+        // Don't add another loading state if initial loading is visible
+        // Just keep the existing one
         
         // Make AJAX request to get plugin data
         $.ajax({
@@ -341,6 +353,8 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response.success && response.data.plugins) {
+                    // Hide the initial loading div
+                    $initialLoading.hide();
                     renderPluginList(response.data.plugins);
                     integrationDataLoaded = true;
                 } else {
@@ -362,6 +376,8 @@ jQuery(document).ready(function($) {
             html = '<div class="ep-no-plugins" style="text-align: center; padding: 40px;"><p>No plugins found.</p></div>';
         } else {
             plugins.forEach(function(plugin) {
+                // Skip own plugin (Element Pack) when printing only; data still includes it for other plugins
+                if (plugin.slug === 'bdthemes-element-pack-lite') return;
                 const isActive = plugin.status === 'active';
                 const isRecommended = plugin.recommended && !isActive;
                 
@@ -442,10 +458,16 @@ jQuery(document).ready(function($) {
     // Function to show error
     function showError(message) {
         const $pluginList = $('#ep-integration-plugin-list');
+        const $initialLoading = $('#ep-initial-loading');
+        
+        // Hide initial loading
+        $initialLoading.hide();
+        
+        // Show error in plugin list
         $pluginList.html(`
             <div class="ep-error-state" style="text-align: center; padding: 40px;">
                 <p style="color: #d63638;">${message}</p>
-                <button type="button" class="bdt-button bdt-button-secondary" onclick="loadIntegrationData()">Retry</button>
+                <button type="button" class="bdt-button bdt-button-secondary" onclick="location.reload()">Retry</button>
             </div>
         `);
     }
