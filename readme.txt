@@ -280,6 +280,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.3.X [XX January 2026] =
+
+* Added: Horizontal line added in grid line extension
+* Fixed: Vulnerability for Local File Inclusion issue fixed ( Thanks to Phat RiO )
+
 = 8.3.16 [12th January 2026] =
 
 * Fixed: Email header injection vulnerability fixed in Contact Form widget

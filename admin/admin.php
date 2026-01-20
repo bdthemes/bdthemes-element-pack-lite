@@ -47,7 +47,7 @@ class Admin {
 		wp_enqueue_style('ep-editor', BDTEP_ASSETS_URL . 'css/ep-editor' . $direction_suffix . '.css', [], BDTEP_VER);
 		wp_enqueue_style('ep-admin', BDTEP_ADMIN_URL . 'assets/css/ep-admin' . $direction_suffix . '.css', [], BDTEP_VER);
 
-		wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit' . $suffix . '.js', ['jquery'], '3.21.7');
+		wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit.min.js', ['jquery'], '3.21.7');
 	}
 
 	/**
@@ -112,7 +112,7 @@ class Admin {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		if ( is_admin() ) { // for Admin Dashboard Only
 			wp_enqueue_script('chart', BDTEP_ASSETS_URL . 'vendor/js/chart.min.js', ['jquery'], '2.7.3', true);
-			wp_enqueue_script('ep-admin', BDTEP_ADMIN_URL  . 'assets/js/ep-admin' . $suffix . '.js', ['jquery'], BDTEP_VER, true);
+			wp_enqueue_script('ep-admin', BDTEP_ADMIN_URL  . 'assets/js/ep-admin.min.js', ['jquery'], BDTEP_VER, true);
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-form');
 		}
