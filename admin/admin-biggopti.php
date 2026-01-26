@@ -135,6 +135,28 @@ class Biggopties {
 	}
 
 	/**
+	 * Check if current user has extended license
+	 *
+	 * @return bool True if user has extended license, false otherwise.
+	 */
+	private function has_extended_license() {
+		$license_info = \ElementPack\Base\Element_Pack_Base::get_register_info();
+		
+		if (empty($license_info) || empty($license_info->license_title)) {
+			return false;
+		}
+		
+		$license_title = strtolower($license_info->license_title);
+		
+		// Check if license title contains 'extended'
+		if (strpos($license_title, 'extended') !== false) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	/**
 	 * Check if a biggopti is compatible with the current plugin installation
 	 *
 	 * @param object $biggopti The biggopti data from the API.
@@ -314,6 +336,11 @@ class Biggopties {
 
 		if (!current_user_can('manage_options')) {
 			wp_send_json_error([ 'message' => 'forbidden' ]);
+		}
+
+		// Skip biggopti execution for extended license holders
+		if ($this->has_extended_license()) {
+			wp_send_json_success([ 'html' => '' ]);
 		}
 
 		// Don't show biggopties on plugin/theme install and upload pages
