@@ -74,7 +74,7 @@ class Asset_Minifier {
         $direction = is_rtl() ? '.rtl' : '';
 
         foreach ( $widgets as $widget ) {
-            $jsPath  = BDTEP_PATH . 'assets/js/modules/ep-' . $widget . '.js';
+            $jsPath  = BDTEP_PATH . 'assets/js/modules/ep-' . $widget . '.min.js';
             $cssPath = BDTEP_PATH . 'assets/css/ep-' . $widget . $direction . '.css';
 
             $script = [];
@@ -116,7 +116,7 @@ class Asset_Minifier {
     public function minifyJs() {
         $scripts = array_merge([
             // global js path goes there
-            BDTEP_ASSETS_PATH . 'js/common/helper.js'
+            BDTEP_ASSETS_PATH . 'js/common/helper.min.js'
         ], $this->getJsPaths());
 
         $scripts  = apply_filters('elementpack/optimization/assets/scripts', $scripts);
