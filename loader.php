@@ -313,12 +313,12 @@ class Element_Pack_Loader {
 
         $suffix           = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-		wp_register_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit' . $suffix . '.js', ['jquery'], '3.21.7', true);
+		wp_register_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit.min.js', ['jquery'], '3.21.7', true);
 
 		wp_enqueue_script( 'bdt-uikit' );
 
         if (!element_pack_is_asset_optimization_enabled()) {
-			wp_register_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper' . $suffix . '.js', ['jquery'], BDTEP_VER, true);
+			wp_register_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper.min.js', ['jquery'], BDTEP_VER, true);
             wp_enqueue_script('element-pack-helper');
         }
 

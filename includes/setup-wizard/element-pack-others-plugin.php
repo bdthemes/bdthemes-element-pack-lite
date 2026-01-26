@@ -38,6 +38,7 @@ class ElementPack_Others_Plugin_Manager {
         
         // Define plugin slugs for reference
         $plugin_slugs = array(
+            'bdthemes-element-pack-lite',
             'bdthemes-prime-slider-lite/bdthemes-prime-slider.php',
             'ultimate-post-kit',
             'ultimate-store-kit',
@@ -174,7 +175,7 @@ class ElementPack_Others_Plugin_Manager {
         .ep-loading-dot {
             width: 12px;
             height: 12px;
-            background-color: #0073aa;
+            background-color: #49ddb4;
             border-radius: 50%;
             animation: ep-wave 1.4s ease-in-out infinite both;
         }
@@ -197,6 +198,11 @@ class ElementPack_Others_Plugin_Manager {
         #ep-plugins-list {
             position: relative;
             min-height: 200px;
+        }
+
+        #ep-plugins-list p {
+            max-width: none;
+            margin-top: 60px !important;
         }
         </style>
         

@@ -82,6 +82,7 @@ if (!function_exists('get_plugin_fallback_urls_ep')) {
 
 // Define plugin slugs
 $plugin_slugs = array(
+    'bdthemes-element-pack-lite',
     'bdthemes-prime-slider-lite/bdthemes-prime-slider.php',
     'ultimate-post-kit',
     'ultimate-store-kit',
@@ -300,7 +301,7 @@ if (!$has_cached_data) {
 .ep-loading-dot {
     width: 12px;
     height: 12px;
-    background-color: #0073aa;
+    background-color: #49ddb4;
     border-radius: 50%;
     animation: ep-wave 1.4s ease-in-out infinite both;
 }
