@@ -339,8 +339,8 @@ class Biggopties {
 		}
 
 		// Skip biggopti execution for extended license holders
-		if ($this->has_extended_license()) {
-			wp_send_json_success([ 'html' => '' ]);
+		if (class_exists('\ElementPack\Base\Element_Pack_Base') && $this->has_extended_license()) {
+			wp_send_json_success(['html' => '']);
 		}
 
 		// Don't show biggopties on plugin/theme install and upload pages

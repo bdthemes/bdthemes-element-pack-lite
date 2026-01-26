@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.9
 Requires PHP: 7.4.0
-Stable tag: 8.3.16
+Stable tag: 8.3.17
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 3.34.1
+Elementor tested up to: 3.34.2
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce and more.
 
@@ -280,7 +280,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.3.X [XX January 2026] =
+= 8.3.17 [26th January 2026] =
 
 * Added: Horizontal line added in grid line extension
 * Fixed: Vulnerability for Local File Inclusion issue fixed ( Thanks to Phat RiO )
