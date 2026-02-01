@@ -280,9 +280,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.3.17 [26th January 2026] =
+= 8.3.17 [1st February 2026] =
 
 * Added: Horizontal line added in grid line extension
+* Added: In Text Controls, dynamic tag compatibility added to the countdown widget
 * Fixed: Vulnerability for Local File Inclusion issue fixed ( Thanks to Phat RiO )
 
 = 8.3.16 [12th January 2026] =
