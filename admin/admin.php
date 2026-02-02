@@ -79,14 +79,22 @@ class Admin {
 
     public function plugin_action_links( $plugin_meta ) {
 
-        $row_meta = [
-            'settings' => '<a href="'.admin_url( 'admin.php?page=element_pack_options' ) .'" aria-label="' . esc_attr(__('Go to settings', 'bdthemes-element-pack')) . '" >' . __('Settings', 'bdthemes-element-pack') . '</b></a>',
-            'gopro' => '<a href="https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack" aria-label="' . esc_attr(__('Go get the pro version', 'bdthemes-element-pack')) . '" target="_blank" title="When you purchase through this link you will get Up to 87% discount!" class="ep-go-pro">' . __('Black Friday Limited Offer Up To 87% Off!', 'bdthemes-element-pack') . '</a>',
-        ];
+		$row_meta = [
+			'settings' => '<a href="' . admin_url( 'admin.php?page=element_pack_options' ) . '" aria-label="' . esc_attr( __( 'Go to settings', 'bdthemes-element-pack' ) ) . '">' . __( 'Settings', 'bdthemes-element-pack' ) . '</a>',
+		];
 
-        $plugin_meta = array_merge($plugin_meta, $row_meta);
+		$offer = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
+		$offer = (array) $offer[0];
+		
+		if ( $offer !== null && $offer['is_enabled'] && !empty($offer['title']) && isset( $offer['link'] ) ) {
+			$title = esc_html( $offer['title'] );
+			$url   = esc_url( $offer['link'] );
+			$row_meta['gopro'] = '<a href="' . $url . '" aria-label="' . esc_attr( $title ) . '" target="_blank" rel="noopener noreferrer" class="ep-go-pro">' . $title . '</a>';
+		}
 
-        return $plugin_meta;
+		$plugin_meta = array_merge( $plugin_meta, $row_meta );
+
+		return $plugin_meta;
     }
 
 	/**
