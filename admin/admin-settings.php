@@ -396,13 +396,24 @@ class ElementPack_Admin_Settings {
 
 		//initialize settings
 		$this->settings_api->admin_init();
-		$this->ep_redirect_to_upgrade();
+		$this->ep_redirect_to_promotion_page();
 	}
 
 	// Redirect to Element Pack Pro pricing page
-	public function ep_redirect_to_upgrade() {
-		if (isset($_GET['page']) && $_GET['page'] === self::PAGE_ID . '_upgrade') {
-			wp_redirect('https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack');
+	public function ep_redirect_to_promotion_page() {
+		if ( isset( $_GET['page'] ) && $_GET['page'] === self::PAGE_ID . '_upgrade' ) {
+
+			$offer       = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
+			$offer = (array) $offer[0];
+			if ( $offer !== null && $offer['is_enabled'] && isset( $offer['link'] ) ) {
+				wp_redirect( $offer['link'] );
+				exit;
+				
+			}
+		}
+		// Promotion submenu: slug is a page slug, so redirect to the actual offer URL when clicked
+		if ( isset( $_GET['page'] ) && $_GET['page'] === self::PAGE_ID . '_go_pro' ) {
+			wp_redirect( 'https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack' );
 			exit;
 		}
 	}
@@ -508,29 +519,29 @@ class ElementPack_Admin_Settings {
 
 		if ( ! defined( 'BDTEP_LO' ) ) {
 			add_submenu_page(
-				self::PAGE_ID,                    
-				BDTEP_TITLE, 
-
-				$this->get_biggopties_title(),
-				'manage_options',                 
-				$this->get_biggopties_link(),
+				self::PAGE_ID,
+				BDTEP_TITLE,
+				$this->get_promotion_title(),
+				'manage_options',
+				self::PAGE_ID . $this->get_promotion_link(),
 				[ $this, 'display_page' ]
 			);
 		}
 	}
 
-	public function get_biggopties_title() {
-		$offer = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();	
-			$offer = (array) $offer[0];
-			return ( $offer !== null && $offer['is_enabled'] && !empty($offer['title']) ) ? $offer['title'] : esc_html__( 'Go Pro', 'bdthemes-element-pack' );
-	}
-
-	public function get_biggopties_link() {
-
-		return '<a href="https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack" target="_blank">Go Pro</a>';
+	public function get_promotion_title() {
 		$offer = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
 		$offer = (array) $offer[0];
-		return ( $offer !== null && $offer['is_enabled'] && isset( $offer['link'] ) ) ? esc_url($offer['link']) : 'https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack';
+		return ( $offer !== null && $offer['is_enabled'] && ! empty( $offer['title'] ) ) ? $offer['title'] : esc_html__( 'Go Pro', 'bdthemes-element-pack' );
+	}
+
+	public function get_promotion_link() {
+		$offer       = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
+		$offer = (array) $offer[0];
+		if ( $offer !== null && $offer['is_enabled'] && isset( $offer['link'] ) ) {
+			return '_upgrade';
+		}
+		return '_go_pro';
 	}
 
 

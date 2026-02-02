@@ -89,9 +89,13 @@ class Admin {
 		if ( $offer !== null && $offer['is_enabled'] && !empty($offer['title']) && isset( $offer['link'] ) ) {
 			$title = esc_html( $offer['title'] );
 			$url   = esc_url( $offer['link'] );
-			$row_meta['gopro'] = '<a href="' . $url . '" aria-label="' . esc_attr( $title ) . '" target="_blank" rel="noopener noreferrer" class="ep-go-pro">' . $title . '</a>';
+		} else {
+			$url = 'https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack';
+			$title = esc_html__( 'Go Pro', 'bdthemes-element-pack' );
 		}
 
+		$row_meta['gopro'] = '<a href="' . $url . '" aria-label="' . esc_attr( $title ) . '" target="_blank" rel="noopener noreferrer" class="ep-go-pro">' . $title . '</a>';
+		
 		$plugin_meta = array_merge( $plugin_meta, $row_meta );
 
 		return $plugin_meta;
