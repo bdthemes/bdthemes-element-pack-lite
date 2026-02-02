@@ -35,6 +35,7 @@ class ElementPack_Admin_Settings {
 
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 201 );
+		add_action( 'admin_footer', [ $this, 'bdt_promotion_link_target_blank_script' ], 20 );
 
 		// Add custom CSS/JS functionality
 		$this->init_custom_code_functionality();
@@ -544,7 +545,31 @@ class ElementPack_Admin_Settings {
 		return '_go_pro';
 	}
 
-
+	/**
+	 * Print script in admin_footer so "Go Pro" / upgrade menu links open in a new tab.
+	 * Runs on every admin page so it works regardless of which page is displayed.
+	 */
+	public function bdt_promotion_link_target_blank_script() {
+		?>
+		<script>
+		(function() {
+			var selector = 'a[href*="element_pack_options_upgrade"], a[href*="element_pack_options_go_pro"]';
+			function setTargetBlank() {
+				document.querySelectorAll(selector).forEach(function(a) {
+					a.setAttribute('target', '_blank');
+					a.setAttribute('rel', 'noopener noreferrer');
+				});
+			}
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', setTargetBlank);
+			} else {
+				setTargetBlank();
+			}
+			setTimeout(setTargetBlank, 500);
+		})();
+		</script>
+		<?php
+	}
 
 	/**
 	 * Get SVG Icons of Element Pack
@@ -2802,12 +2827,6 @@ class ElementPack_Admin_Settings {
 				});
 			});
 
-			jQuery(document).ready(function ($) {
-                const getProLink = $('a[href="admin.php?page=element_pack_options_upgrade"]');
-                if (getProLink.length) {
-                    getProLink.attr('target', '_blank');
-                }
-            });
 		</script>
 		<?php
 	}
