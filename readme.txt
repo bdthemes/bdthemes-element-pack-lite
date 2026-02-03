@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.9
 Requires PHP: 7.4.0
-Stable tag: 8.3.17
+Stable tag: 8.3.18
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 3.34.2
+Elementor tested up to: 3.35.0
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce and more.
 
@@ -17,8 +17,6 @@ Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post gri
 == Description ==
 
 Element Pack is a powerful addon for Elementor that helps you build beautiful and responsive websites with ease. It also offers exclusive features, including 300+ widgets and 2,700+ templates, giving you everything you need to design WordPress websites with ease.
-
-### [🎉 Black Friday Offer: Upgrade to Pro and Save up to 87% on All Plugins! 🎊](https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack)
 
 Trusted by **100,000+ websites**, it's the easiest way to design your stunning websites without coding.
 
@@ -279,6 +277,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.3.18 [3rd February 2026] =
+
+* Fixed: Path traversal vulnerability fixed in SVG Image widget
 
 = 8.3.17 [1st February 2026] =
 
