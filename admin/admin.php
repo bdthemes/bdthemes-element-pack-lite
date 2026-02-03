@@ -83,7 +83,7 @@ class Admin {
 			'settings' => '<a href="' . admin_url( 'admin.php?page=element_pack_options' ) . '" aria-label="' . esc_attr( __( 'Go to settings', 'bdthemes-element-pack' ) ) . '">' . __( 'Settings', 'bdthemes-element-pack' ) . '</a>',
 		];
 
-		$offer = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
+		$offer = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data(true);
 		$offer = (array) $offer[0];
 		
 		if ( $offer !== null && $offer['is_enabled'] && !empty($offer['title']) && isset( $offer['link'] ) ) {

@@ -404,7 +404,7 @@ class ElementPack_Admin_Settings {
 	public function ep_redirect_to_promotion_page() {
 		if ( isset( $_GET['page'] ) && $_GET['page'] === self::PAGE_ID . '_upgrade' ) {
 
-			$offer       = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
+			$offer       = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data(true);
 			$offer = (array) $offer[0];
 			if ( $offer !== null && $offer['is_enabled'] && isset( $offer['link'] ) ) {
 				wp_redirect( $offer['link'] );
@@ -531,13 +531,13 @@ class ElementPack_Admin_Settings {
 	}
 
 	public function get_promotion_title() {
-		$offer = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
+		$offer = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data(true);
 		$offer = (array) $offer[0];
 		return ( $offer !== null && $offer['is_enabled'] && ! empty( $offer['title'] ) ) ? $offer['title'] : esc_html__( 'Go Pro', 'bdthemes-element-pack' );
 	}
 
 	public function get_promotion_link() {
-		$offer       = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data();
+		$offer       = \ElementPack\Biggopties::get_instance()->get_api_biggopties_data(true);
 		$offer = (array) $offer[0];
 		if ( $offer !== null && $offer['is_enabled'] && isset( $offer['link'] ) ) {
 			return '_upgrade';
