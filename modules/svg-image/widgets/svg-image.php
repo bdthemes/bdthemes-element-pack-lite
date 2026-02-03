@@ -854,14 +854,24 @@ class Svg_Image extends Module_Base {
 		if ( ! empty( $svg_file ) ) {
 			// Try to get the SVG file contents
 			if ( strpos( $svg_file, get_site_url() ) === 0 ) {
-				// Local file, convert URL to path
+				// Local file, convert URL to path with path traversal protection
 				$upload_dir = wp_upload_dir();
-				$baseurl = $upload_dir['baseurl'];
-				$basedir = $upload_dir['basedir'];
+				$baseurl    = $upload_dir['baseurl'];
+				$basedir    = $upload_dir['basedir'];
 				if ( strpos( $svg_file, $baseurl ) === 0 ) {
-					$svg_path = $basedir . substr( $svg_file, strlen( $baseurl ) );
-					if ( file_exists( $svg_path ) ) {
-						$svg_content = file_get_contents( $svg_path );
+					$relative_path = substr( $svg_file, strlen( $baseurl ) );
+					$relative_path = ltrim( $relative_path, '/' );
+					// Reject path traversal sequences
+					if ( strpos( $relative_path, '..' ) === false ) {
+						$svg_path  = $basedir . ( $relative_path !== '' ? '/' . $relative_path : '' );
+						$real_path = realpath( $svg_path );
+						$real_base = realpath( $basedir );
+						// Ensure resolved path is inside upload directory
+						if ( $real_path !== false && $real_base !== false && ( $real_path === $real_base || strpos( $real_path, $real_base . DIRECTORY_SEPARATOR ) === 0 ) ) {
+							if ( file_exists( $real_path ) && is_file( $real_path ) ) {
+								$svg_content = file_get_contents( $real_path );
+							}
+						}
 					}
 				}
 			}
