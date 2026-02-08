@@ -877,7 +877,7 @@ class Svg_Image extends Module_Base {
 			}
 			// If not found, fallback to remote fetch (not recommended, but for completeness)
 			if ( empty( $svg_content ) ) {
-				$response = wp_remote_get( $svg_file );
+				$response = wp_safe_remote_get( $svg_file );
 				if ( ! is_wp_error( $response ) && ! empty( $response['body'] ) ) {
 					$svg_content = $response['body'];
 				}

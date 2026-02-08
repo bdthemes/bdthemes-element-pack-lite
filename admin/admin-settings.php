@@ -36,17 +36,6 @@ class ElementPack_Admin_Settings {
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 201 );
 
-		/**
-		 * black_friday_notice
-		 * Will be not show after 2024-12-06 00:00:00
-		 */
-		$current_date = date( 'Y-m-d H:i:s' );
-		$end_date     = '2024-12-06 00:00:00';
-
-		if ( strtotime( $current_date ) < strtotime( $end_date ) ) {
-			add_action( 'admin_notices', [ $this, 'black_friday_notice' ], 10, 3 );
-		}
-
 		// Add custom CSS/JS functionality
 		$this->init_custom_code_functionality();
 
@@ -110,45 +99,6 @@ class ElementPack_Admin_Settings {
 				'white_label_nonce' => wp_create_nonce( 'ep_white_label_nonce' )
 			] );
 		}
-	}
-
-	/**
-	 *Black Friday Notice
-	 *
-	 * @access public
-	 */
-	public function black_friday_notice() {
-		Notices::add_notice(
-			[ 
-				'id'               => 'black-friday',
-				'type'             => 'success',
-				'dismissible'      => true,
-				'dismissible-time' => HOUR_IN_SECONDS * 72,
-				'html_message'     => $this->black_friday_offer_notice_message(),
-			]
-		);
-	}
-
-	public function black_friday_offer_notice_message() {
-		$plugin_icon  = BDTEP_ASSETS_URL . 'images/logo.svg';
-		$plugin_title = __( 'Best Savings On Black Friday Deals - ⚡Up To 85% Off🔥', 'bdthemes-element-pack' );
-		ob_start();
-		?>
-				<div class="bdt-license-notice-global element_pack_pro">
-					<div class="bdt-license-notice-content">
-						<h3>
-							<?php echo wp_kses_post( $plugin_title ); ?>
-						</h3>
-						<div class="bdt-license-notice-button-wrap">
-							<a href="https://bdthemes.com/black-friday/" target="_blank" class="bdt-button bdt-button-allow">
-								<?php esc_html_e( 'Get Deals Now', 'bdthemes-element-pack' ); ?>
-							</a>
-						</div>
-					</div>
-					<a href="https://bdthemes.com/black-friday/" target="_blank" class="bdt-link-btn"></a>
-				</div>
-				<?php
-				return ob_get_clean();
 	}
 
 	/**
@@ -452,7 +402,7 @@ class ElementPack_Admin_Settings {
 	// Redirect to Element Pack Pro pricing page
 	public function ep_redirect_to_upgrade() {
 		if (isset($_GET['page']) && $_GET['page'] === self::PAGE_ID . '_upgrade') {
-			wp_redirect('https://bdthemes.com/deals/?utm_source=WordPress_org&utm_medium=bfcm_cta&utm_campaign=element_pack');
+			wp_redirect('https://www.elementpack.pro/pricing/');
 			exit;
 		}
 	}
@@ -560,7 +510,7 @@ class ElementPack_Admin_Settings {
 			add_submenu_page(
 				self::PAGE_ID,                    
 				BDTEP_TITLE,                     
-				esc_html__( 'Black Friday Limited Offer up to 87%', 'bdthemes-element-pack' ),  
+				esc_html__( 'Get Pro', 'bdthemes-element-pack' ),  
 				'manage_options',                 
 				self::PAGE_ID . '_upgrade',
 				[ $this, 'display_page' ]
