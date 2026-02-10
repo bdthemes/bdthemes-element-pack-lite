@@ -202,7 +202,6 @@ class ElementPack_Others_Plugin_Manager {
 
         #ep-plugins-list p {
             max-width: none;
-            margin-top: 60px !important;
         }
         </style>
         

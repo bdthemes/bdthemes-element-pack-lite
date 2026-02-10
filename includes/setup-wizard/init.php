@@ -214,7 +214,7 @@ class Setup_Wizard {
 
 	// Enqueue necessary scripts
 	public function enqueue_scripts() {
-		wp_register_script( 'bdt-setup-wizard', plugins_url( 'assets/js/setup-wizard.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
+		wp_register_script( 'bdt-setup-wizard', plugins_url( 'assets/js/setup-wizard.min.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
 		wp_register_style( 'bdt-setup-wizard', plugins_url( 'assets/css/setup-wizard.css', __FILE__ ), array(), '1.0.0' );
 
 		wp_enqueue_script( 'bdt-setup-wizard' );

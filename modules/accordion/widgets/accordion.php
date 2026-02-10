@@ -304,7 +304,8 @@ class Accordion extends Module_Base {
 		$active_migrated = isset( $settings['__fa4_migrated']['accordion_active_icon'] );
 		$active_is_new   = empty( $settings['icon_active'] ) && Icons_Manager::is_migration_allowed();
 
-		if ( $settings['schema_activity'] == 'yes' ) {
+		$output_schema = element_pack_should_output_faq_schema( $settings );
+		if ( $output_schema ) {
 			$this->add_render_attribute( 'accordion', 'itemscope' );
 			$this->add_render_attribute( 'accordion', [ 'itemtype' => 'https://schema.org/FAQPage' ] );
 		}
@@ -345,7 +346,7 @@ class Accordion extends Module_Base {
 						] );
 					}
 
-					if ( $settings['schema_activity'] == 'yes' ) {
+					if ( $output_schema ) {
 						$this->add_render_attribute( $item_key, 'itemscope' );
 						$this->add_render_attribute( $item_key, 'itemprop', 'mainEntity' );
 						$this->add_render_attribute( $item_key, 'itemtype', 'https://schema.org/Question' );
@@ -386,7 +387,7 @@ class Accordion extends Module_Base {
 								</span>
 							<?php endif; ?>
 
-							<span role="heading" class="bdt-ep-title-text bdt-flex-inline bdt-flex-middle" <?php echo ( 'yes' == $settings['schema_activity']) ? 'itemprop="name"' : ''; ?>>
+							<span role="heading" class="bdt-ep-title-text bdt-flex-inline bdt-flex-middle" <?php echo $output_schema ? 'itemprop="name"' : ''; ?>>
 
 								<?php if ( ! empty( $item['repeater_icon']['value'] ) and $settings['show_custom_icon'] == 'yes' ) : ?>
 									<span class="bdt-ep-accordion-custom-icon">
@@ -400,12 +401,12 @@ class Accordion extends Module_Base {
 						<div <?php $this->print_render_attribute_string( $tab_content_setting_key ); ?>>
 							<?php
 							if ( 'custom' == $item['source'] and ! empty( $item['tab_content'] ) ) {
-								if ( 'yes' == $settings['schema_activity'] ) {
+								if ( $output_schema ) {
 									echo '<div itemprop="text">';
 								}
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo $this->parse_text_editor( $item['tab_content'] );
-								if ( 'yes' == $settings['schema_activity'] ) {
+								if ( $output_schema ) {
 									echo '</div>';
 								}
 							} elseif ( "elementor" == $item['source'] and ! empty( $item['template_id'] ) ) {

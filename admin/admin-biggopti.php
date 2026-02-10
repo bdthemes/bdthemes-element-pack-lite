@@ -60,7 +60,7 @@ class Biggopties {
 		
 		$response_body = wp_remote_retrieve_body($response);
 
-		/// error_log($response_body);
+		// error_log($response_body);
 
 		$biggopties = json_decode($response_body);
 		

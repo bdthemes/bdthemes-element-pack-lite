@@ -181,7 +181,7 @@ class Module extends Element_Pack_Module_Base {
 			[
 				'label'       => esc_html__('Z-index', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::NUMBER,
-				'min'         => -9999,
+				'min'         => 0,
 				'max'         => 9999,
 				'render_type' => 'none',
 				'condition'   => [
