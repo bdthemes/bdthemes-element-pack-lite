@@ -183,11 +183,12 @@ class Module extends Element_Pack_Module_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'separator'    => 'before',
+				'prefix_class' => 'bdt-cursor-effects-disable-default-cursor-',
 				'condition'    => [ 
 					'element_pack_cursor_effects_show' => 'yes'
 				],
 				'selectors'    => [ 
-					'{{WRAPPER}}.bdt-cursor-effects-yes' => 'cursor: none'
+					'{{WRAPPER}}.bdt-cursor-effects-yes' => 'cursor: none !important;'
 				],
 				'classes' => BDTEP_IS_PC,
 			]

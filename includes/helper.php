@@ -43,6 +43,84 @@ function is_ep_pro() {
 	return apply_filters( 'bdt_ep_init_pro', false );
 }
 
+/**
+ * Check if an SEO plugin that outputs structured data (FAQ schema) is active.
+ * When these plugins are active, they typically add JSON-LD to the head.
+ * Duplicate DOM microdata from Element Pack would conflict and cause Google Search Console errors.
+ *
+ * @return bool True if an SEO plugin that may output FAQ/structured data is active.
+ */
+function element_pack_is_seo_plugin_active() {
+	$seo_plugins = [
+		// Yoast SEO (Free & Premium)
+		'WPSEO_VERSION' => 'defined',
+		// Rank Math
+		'RANK_MATH_VERSION' => 'defined',
+		// All in One SEO (Free & Pro)
+		'AIOSEO_VERSION' => 'defined',
+		// SEOPress
+		'SEOPRESS_VERSION' => 'defined',
+		// The SEO Framework
+		'THE_SEO_FRAMEWORK_VERSION' => 'defined',
+		// Squirrly SEO
+		'SQ_VERSION' => 'defined',
+	];
+
+	foreach ( $seo_plugins as $check => $type ) {
+		if ( 'defined' === $type && defined( $check ) ) {
+			return true;
+		}
+	}
+
+	// Fallback: is_plugin_active for plugins that may not define constants early
+	if ( ! function_exists( 'is_plugin_active' ) ) {
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+
+	$plugin_paths = [
+		'wordpress-seo/wp-seo.php',
+		'wordpress-seo-premium/wp-seo-premium.php',
+		'seo-by-rank-math/rank-math.php',
+		'all-in-one-seo-pack/all_in_one_seo_pack.php',
+		'all-in-one-seo-pack-pro/all_in_one_seo_pack.php',
+		'wp-seopress/seopress.php',
+		'autodescription/autodescription.php',
+		'squirrly-seo/squirrly-seo.php',
+		'semrush-seo-writing-assistant/semrush-seo-writing-assistant.php',
+	];
+
+	foreach ( $plugin_paths as $path ) {
+		if ( is_plugin_active( $path ) ) {
+			return true;
+		}
+	}
+
+	return apply_filters( 'element_pack_is_seo_plugin_active', false );
+}
+
+/**
+ * Determine if DOM FAQ schema should be output for Accordion/FAQ widgets.
+ * Auto-disables when SEO plugins are active to prevent duplicate schema conflicts,
+ * unless the user has explicitly overridden via schema_override_seo.
+ *
+ * @param array $settings Widget settings containing schema_activity and schema_override_seo.
+ * @return bool True if schema markup should be output.
+ */
+function element_pack_should_output_faq_schema( $settings ) {
+	if ( empty( $settings['schema_activity'] ) || 'yes' !== $settings['schema_activity'] ) {
+		return false;
+	}
+
+	// If SEO plugin is active and user has not overridden, do not output DOM schema
+	if ( element_pack_is_seo_plugin_active() ) {
+		if ( empty( $settings['schema_override_seo'] ) || 'yes' !== $settings['schema_override_seo'] ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 function element_pack_is_edit() {
 	return Plugin::$instance->editor->is_edit_mode();
 }

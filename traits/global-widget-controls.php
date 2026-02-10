@@ -747,9 +747,21 @@ trait Global_Widget_Controls {
 			'schema_activity',
 			[ 
 				'label'       => esc_html__( 'Schema Active', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'Warning: If you have multiple Accordion widgets on the same page so don\'t activate schema for both Accordion widgets so you will get errors on the google index. Activate the only one which you want to show on google search.', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'Adds FAQ structured data (microdata) for rich results. Note: Schema is auto-disabled when SEO plugins (Yoast, Rank Math, etc.) are active to prevent duplicate markup. Use the override below if you need to force-enable.', 'bdthemes-element-pack' ) . ( element_pack_is_seo_plugin_active() ? ' ' . esc_html__( 'An SEO plugin is detected on your site.', 'bdthemes-element-pack' ) : '' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'separator'   => 'before',
+			]
+		);
+
+		$this->add_control(
+			'schema_override_seo',
+			[ 
+				'label'       => esc_html__( 'Override SEO Plugin Detection', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'Force output schema markup even when an SEO plugin is active. Use only if you have disabled FAQ schema in your SEO plugin to avoid duplicate markup errors in Google Search Console.', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'condition'   => [ 
+					'schema_activity' => 'yes',
+				],
 			]
 		);
 

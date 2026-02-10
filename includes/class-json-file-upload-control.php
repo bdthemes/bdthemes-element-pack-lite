@@ -16,6 +16,7 @@ class ElementPack_JSON_File_Upload_Control extends Base_Data_Control {
 	public function __construct() {
 		parent::__construct();
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_wp_media_files' ] );
+		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'enqueue_editor_scripts' ] );
 		add_filter( 'upload_mimes', [ $this, 'elementor_pack_allow_json_file_upload_mime_types' ], 10, 1 );
 		add_filter( 'wp_check_filetype_and_ext', [ $this, 'elementor_pack_allow_json_file_upload_ext' ], 10, 4 );
 
@@ -62,7 +63,8 @@ class ElementPack_JSON_File_Upload_Control extends Base_Data_Control {
 		<?php
 	}
 
-	public function enqueue() {
+	public function enqueue_editor_scripts() {
+
 		wp_register_script( 'element-pack-json-file-import-control', BDTEP_ASSETS_URL . 'js/controls/element-pack-json-file-upload-control.min.js' );
 		wp_enqueue_script( 'element-pack-json-file-import-control' );
 	}

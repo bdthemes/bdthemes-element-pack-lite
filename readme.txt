@@ -278,6 +278,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.3.X [XX February 2026] =
+
+* Updated: Security improved
+
 = 8.3.19 [8th February 2026] =
 
 * Updated: Security improved
