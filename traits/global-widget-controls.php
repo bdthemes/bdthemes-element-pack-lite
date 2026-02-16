@@ -765,6 +765,64 @@ trait Global_Widget_Controls {
 			]
 		);
 
+		$this->add_control(
+			'accordion_animation',
+			[ 
+				'label'   => __( 'Animation', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'duration',
+			[ 
+				'label'   => __( 'Duration', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 200,
+				'condition' => [ 
+					'accordion_animation' => 'yes',
+				],
+				'classes' => BDTEP_IS_PC,
+			]
+		);
+
+		$this->add_control(
+			'transition',
+			[ 
+				'label'   => __( 'Transition', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'type'    => Controls_Manager::SELECT,
+				'options' => [ 
+					'' => 'None', 
+					'ease-in-out' => 'Ease In Out', 
+					'ease-out' => 'Ease Out', 
+					'ease-in' => 'Ease In',
+					'linear' => 'Linear',
+					'custom' => 'Custom',
+				],
+				'default' => 'ease-in-out',
+				'condition' => [ 
+					'accordion_animation' => 'yes',
+				],
+				'classes' => BDTEP_IS_PC,
+			]
+		);
+
+		$this->add_control(
+			'custom_transition',
+			[ 
+				'label'   => __( 'Custom Transition', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => 'cubic-bezier(0.4, 0, 0.2, 1)',
+				'condition' => [ 
+					'transition' => 'custom',
+					'accordion_animation' => 'yes',
+				],
+				'placeholder' => 'cubic-bezier(0.4, 0, 0.2, 1)',
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**

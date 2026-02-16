@@ -1544,6 +1544,9 @@
             };
             var updateProgress = function (percnt) {
                 var per = Math.round(100 * percnt);
+                if (typeof percnt !== 'number' || !isFinite(percnt) || per < 0 || per > 100) {
+                    per = 0;
+                }
                 var deg = per * 360 / 100;
                 if (deg <= 180) {
                     $('.' + borderContainer, container).css('background-image', 'linear-gradient(' + (90 + deg) + 'deg, transparent 50%, ' + colorBg + ' 50%),linear-gradient(90deg, ' + colorBg + ' 50%, transparent 50%)');
@@ -1566,11 +1569,14 @@
 
                 };
             var init = function () {
+                    getHeight();
                     prepare();
                     $(window).on('scroll', function () {
-                        var getOffset = window.pageYOffset || document.documentElement.scrollTop,
-                        per = Math.max(0, Math.min(1, getOffset / netHeight));
-                        updateProgress(per);
+                        var getOffset = window.pageYOffset || document.documentElement.scrollTop;
+                        var percnt = (typeof netHeight === 'number' && isFinite(netHeight) && netHeight > 0)
+                            ? Math.max(0, Math.min(1, getOffset / netHeight))
+                            : 0;
+                        updateProgress(percnt);
                     });
                     $(window).on('resize', function () {
                         getHeight();
@@ -1580,6 +1586,7 @@
                         getHeight();
                         addEvent();
                     });
+                    addEvent();
                 };
                  init();
             });

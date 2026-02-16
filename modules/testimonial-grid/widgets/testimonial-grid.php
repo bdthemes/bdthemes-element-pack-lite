@@ -329,6 +329,47 @@ class Testimonial_Grid extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'schema_rich_results',
+			[ 
+				'label'       => esc_html__( 'Google Rich Results (Schema)', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'description' => esc_html__( 'Improves compliance with Google Review structured data. Set the item being reviewed (e.g. your business or product).', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'default'     => 'yes',
+				'separator'   => 'before',
+			]
+		);
+
+		$this->add_control(
+			'schema_item_reviewed_name',
+			[ 
+				'label'       => esc_html__( 'Item Reviewed Name', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'The name of the product, organization, or service being reviewed (e.g. your company or product name).', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => get_bloginfo( 'name' ),
+				'condition'   => [ 
+					'schema_rich_results' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'schema_item_reviewed_type',
+			[ 
+				'label'     => esc_html__( 'Item Reviewed Type', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'Organization',
+				'options'   => [ 
+					'Organization'  => esc_html__( 'Organization', 'bdthemes-element-pack' ),
+					'Product'       => esc_html__( 'Product', 'bdthemes-element-pack' ),
+					'LocalBusiness' => esc_html__( 'Local Business', 'bdthemes-element-pack' ),
+				],
+				'condition' => [ 
+					'schema_rich_results' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		//New Query Builder Settings
@@ -715,7 +756,7 @@ class Testimonial_Grid extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
-					'{{WRAPPER}} .bdt-testimonial-grid .bdt-testimonial-grid-address' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-testimonial-grid-address' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
 				],
 			]
 		);
@@ -1420,14 +1461,28 @@ class Testimonial_Grid extends Module_Base {
 		}
 
 		$company_name = get_post_meta( $post_id, 'bdthemes_tm_company_name', true );
+		$author_name  = get_the_title( $post_id );
+		$use_schema   = ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'];
 
-		?>
-		<h4 class="bdt-testimonial-grid-title bdt-margin-remove-bottom bdt-margin-remove-top">
-			<?php echo esc_attr( get_the_title( $post_id ) ); ?><?php if ( $settings['show_comma'] ) {
-				echo ( ( $settings['show_title'] ) and ( $settings['show_address'] ) and $company_name ) ? ', ' : '';
-			} ?>
-		</h4>
-		<?php
+		if ( $use_schema ) {
+			?>
+			<h4 class="bdt-testimonial-grid-title bdt-margin-remove-bottom bdt-margin-remove-top">
+				<span itemprop="author" itemscope itemtype="https://schema.org/Person">
+					<span itemprop="name"><?php echo esc_html( $author_name ); ?></span>
+				</span><?php if ( $settings['show_comma'] && $settings['show_address'] && $company_name ) {
+					echo ', ';
+				} ?>
+			</h4>
+			<?php
+		} else {
+			?>
+			<h4 class="bdt-testimonial-grid-title bdt-margin-remove-bottom bdt-margin-remove-top">
+				<?php echo esc_html( $author_name ); ?><?php if ( $settings['show_comma'] && $settings['show_address'] && $company_name ) {
+					echo ', ';
+				} ?>
+			</h4>
+			<?php
+		}
 	}
 
 	public function render_address( $post_id ) {
@@ -1454,6 +1509,9 @@ class Testimonial_Grid extends Module_Base {
 		$strip_shortcode = $this->get_settings_for_display( 'strip_shortcode' );
 
 		$this->add_render_attribute( 'text-wrap', 'class', 'bdt-testimonial-grid-text', true );
+		if ( ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'] ) {
+			$this->add_render_attribute( 'text-wrap', 'itemprop', 'description', true );
+		}
 
 		if ($settings['text_read_more_toggle'] == 'yes') {
 			if ( isset( $settings['text_limit'] ) && ! empty( $settings['text_limit'] ) ) {
@@ -1511,17 +1569,81 @@ class Testimonial_Grid extends Module_Base {
 		<?php
 	}
 
+	/**
+	 * Returns sanitized rating 1–5 for schema and display.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return int
+	 */
+	protected function get_sanitized_rating( $post_id ) {
+		$raw = get_post_meta( $post_id, 'bdthemes_tm_rating', true );
+		$num = intval( $raw );
+		if ( $num < 1 && is_string( $raw ) && preg_match( '/\d+/', $raw, $m ) ) {
+			$num = intval( $m[0] );
+		}
+		return max( 1, min( 5, $num ) );
+	}
+
+	/**
+	 * Outputs Schema.org itemReviewed (Organization/Product/LocalBusiness) for Google Rich Results.
+	 */
+	public function render_schema_item_reviewed() {
+		$settings = $this->get_settings_for_display();
+		if ( empty( $settings['schema_rich_results'] ) || 'yes' !== $settings['schema_rich_results'] ) {
+			return;
+		}
+		$name = ! empty( $settings['schema_item_reviewed_name'] ) ? $settings['schema_item_reviewed_name'] : get_bloginfo( 'name' );
+		$type = ! empty( $settings['schema_item_reviewed_type'] ) ? $settings['schema_item_reviewed_type'] : 'Organization';
+		$type = in_array( $type, [ 'Organization', 'Product', 'LocalBusiness' ], true ) ? $type : 'Organization';
+		$visually_hidden_style = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
+		?>
+		<span class="bdt-ep-schema-item-reviewed" style="<?php echo esc_attr( $visually_hidden_style ); ?>" itemprop="itemReviewed" itemscope itemtype="https://schema.org/<?php echo esc_attr( $type ); ?>">
+			<meta itemprop="name" content="<?php echo esc_attr( $name ); ?>">
+		</span>
+		<?php
+	}
+
+	/**
+	 * Outputs schema.org rating and date only (for when rating display is off but schema is on).
+	 */
+	public function render_rating_schema_only( $post_id ) {
+		$settings = $this->get_settings_for_display();
+		if ( empty( $settings['schema_rich_results'] ) || 'yes' !== $settings['schema_rich_results'] ) {
+			return;
+		}
+		if ( ! empty( $settings['show_rating'] ) && 'yes' === $settings['show_rating'] ) {
+			return;
+		}
+		$rating = $this->get_sanitized_rating( $post_id );
+		$date_published = get_the_date( 'c', $post_id );
+		$hidden_style = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
+		?>
+		<meta itemprop="datePublished" content="<?php echo esc_attr( $date_published ); ?>">
+		<span style="<?php echo esc_attr( $hidden_style ); ?>" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+			<meta itemprop="worstRating" content="1">
+			<meta itemprop="ratingValue" content="<?php echo absint( $rating ); ?>">
+			<meta itemprop="bestRating" content="5">
+		</span>
+		<?php
+	}
+
 	public function render_rating( $post_id ) {
 		$settings = $this->get_settings_for_display();
 
-		if ( ! $settings['show_rating'] ) {
+		if ( 'yes' != $settings['show_rating'] ) {
 			return;
 		}
 
+		$rating = $this->get_sanitized_rating( $post_id );
+		$date_published = get_the_date( 'c', $post_id );
 		?>
 		<div class="bdt-testimonial-grid-rating">
-			<ul class="bdt-rating bdt-rating-<?php echo wp_kses_post(get_post_meta( $post_id, 'bdthemes_tm_rating', true )); ?> bdt-grid bdt-grid-collapse"
-				data-bdt-grid>
+			<meta itemprop="datePublished" content="<?php echo esc_attr( $date_published ); ?>">
+			<ul class="bdt-rating bdt-rating-<?php echo absint( $rating ); ?> bdt-grid bdt-grid-collapse"
+				data-bdt-grid itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+				<meta itemprop="worstRating" content="1">
+				<meta itemprop="ratingValue" content="<?php echo absint( $rating ); ?>">
+				<meta itemprop="bestRating" content="5">
 				<li class="bdt-rating-item"><i class="ep-icon-star-full" aria-hidden="true"></i></li>
 				<li class="bdt-rating-item"><i class="ep-icon-star-full" aria-hidden="true"></i></li>
 				<li class="bdt-rating-item"><i class="ep-icon-star-full" aria-hidden="true"></i></li>
@@ -1666,6 +1788,11 @@ class Testimonial_Grid extends Module_Base {
 					$platform = get_post_meta( get_the_ID(), 'bdthemes_tm_platform', true );
 
 					$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-testimonial-grid-item bdt-review-' . strtolower( $platform ) );
+					if ( ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'] ) {
+						$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'itemprop', 'review' );
+						$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'itemscope', '' );
+						$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'itemtype', 'https://schema.org/Review' );
+					}
 
 					?>
 					<?php if ( $settings['show_filter_bar'] ) {
@@ -1673,6 +1800,10 @@ class Testimonial_Grid extends Module_Base {
 					} ?>
 
 					<div <?php $this->print_render_attribute_string( 'testimonial-grid-item' . esc_attr( get_the_Id() ) ); ?>>
+						<?php $this->render_schema_item_reviewed(); ?>
+						<?php if ( ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'] && ( empty( $settings['show_rating'] ) || 'yes' !== $settings['show_rating'] ) ) : ?>
+							<?php $this->render_rating_schema_only( get_the_ID() ); ?>
+						<?php endif; ?>
 						<?php if ( '1' == $settings['layout'] ) : ?>
 							<div class="bdt-testimonial-grid-item-inner">
 								<div class="bdt-grid bdt-position-relative bdt-grid-small bdt-flex-middle" data-bdt-grid>

@@ -249,7 +249,7 @@ class Accordion extends Module_Base {
 		$this->add_control(
 			'show_custom_icon',
 			[ 
-				'label'     => esc_html__( 'Show Title Icon', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Show Title Icon', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -274,7 +274,9 @@ class Accordion extends Module_Base {
 						wp_json_encode( [ 
 							"collapsible" => $settings["collapsible"] ? true : false,
 							"multiple"    => $settings["multiple"] ? true : false,
-							"transition"  => "ease-in-out",
+							"animation"   => $settings["accordion_animation"] ? true : false,
+							"transition"  => $settings["transition"] == 'custom' ? $settings["custom_transition"] : $settings["transition"],
+							"duration"    => $settings["duration"],
 						] )
 					]
 				]
