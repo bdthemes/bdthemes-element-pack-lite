@@ -422,7 +422,7 @@ class ElementPack_Admin_Settings {
 			self::PAGE_ID,
 			[ $this, 'plugin_page' ],
 			$this->element_pack_icon(),
-			58
+			3
 		);
 
 		add_submenu_page(
