@@ -97,10 +97,30 @@ class Module extends Element_Pack_Module_Base {
 					'url' => BDTEP_ASSETS_URL . 'images/logo.svg',
 				],
 				'condition'          => [ 
+					'element_pack_cursor_effects_show'   => 'yes',
 					'element_pack_cursor_effects_source' => 'image'
 				]
 			]
 		);
+		$section->add_control(
+			'element_pack_cursor_effects_image_gsap_animation',
+			[ 
+				'label'              => esc_html__( 'Enable Smooth Animation', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'description'        => esc_html__( 'Smooth image follows the cursor with GSAP-powered animation on hover.', 'bdthemes-element-pack' ),
+				'type'               => Controls_Manager::SWITCHER,
+				'return_value'       => 'yes',
+				'separator'          => 'before',
+				'frontend_available' => true,
+				'render_type'        => 'template',
+				'condition'          => [ 
+					'element_pack_cursor_effects_source' => 'image',
+					'element_pack_cursor_effects_show'   => 'yes',
+				],
+				'prefix_class' => 'cursor-effects-smooth-animation-',
+				'classes' => BDTEP_IS_PC,
+			]
+		);
+		
 		$section->add_control(
 			'element_pack_cursor_effects_icons',
 			[ 
@@ -376,8 +396,47 @@ class Module extends Element_Pack_Module_Base {
 					'{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-image' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
 				],
 				'condition' => [ 
-					'element_pack_cursor_effects_source' => 'image'
+					'element_pack_cursor_effects_source' => 'image',
+					'element_pack_cursor_effects_image_gsap_animation' => '',
 				]
+			]
+		);
+		$section->add_control(
+			'element_pack_cursor_effects_gsap_width',
+			[ 
+				'label'              => esc_html__( 'Image Width', 'bdthemes-element-pack' ),
+				'type'               => Controls_Manager::SLIDER,
+				'size_units'         => [ 'px' ],
+				'range'              => [ 
+					'px' => [ 'min' => 50, 'max' => 800, 'step' => 10 ],
+				],
+				'default'            => [ 'unit' => 'px', 'size' => 385 ],
+				'frontend_available' => true,
+				'render_type'        => 'none',
+				'condition'          => [ 
+					'element_pack_cursor_effects_source'               => 'image',
+					'element_pack_cursor_effects_show'                 => 'yes',
+					'element_pack_cursor_effects_image_gsap_animation' => 'yes',
+				],
+			]
+		);
+		$section->add_control(
+			'element_pack_cursor_effects_gsap_height',
+			[ 
+				'label'              => esc_html__( 'Image Height', 'bdthemes-element-pack' ),
+				'type'               => Controls_Manager::SLIDER,
+				'size_units'         => [ 'px' ],
+				'range'              => [ 
+					'px' => [ 'min' => 50, 'max' => 600, 'step' => 10 ],
+				],
+				'default'            => [ 'unit' => 'px', 'size' => 280 ],
+				'frontend_available' => true,
+				'render_type'        => 'none',
+				'condition'          => [ 
+					'element_pack_cursor_effects_source'               => 'image',
+					'element_pack_cursor_effects_show'                 => 'yes',
+					'element_pack_cursor_effects_image_gsap_animation' => 'yes',
+				],
 			]
 		);
 		$section->add_group_control(
@@ -387,7 +446,8 @@ class Module extends Element_Pack_Module_Base {
 				'label'     => esc_html__( 'Border', 'bdthemes-element-pack' ),
 				'selector'  => '{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-image',
 				'condition' => [ 
-					'element_pack_cursor_effects_source' => 'image'
+					'element_pack_cursor_effects_source' => 'image',	
+					'element_pack_cursor_effects_image_gsap_animation' => '',
 				]
 			]
 		);
@@ -401,7 +461,8 @@ class Module extends Element_Pack_Module_Base {
 					'{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [ 
-					'element_pack_cursor_effects_source' => 'image'
+					'element_pack_cursor_effects_source' => 'image',
+					'element_pack_cursor_effects_image_gsap_animation' => '',
 				]
 			]
 		);
@@ -426,9 +487,11 @@ class Module extends Element_Pack_Module_Base {
 
 	public function enqueue_scripts() {
 		wp_register_script( 'cotton-js', BDTEP_ASSETS_URL . 'vendor/js/cotton.min.js', [], '5.3.5' );
+		wp_register_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', [], '3.12.5', true );
 
 		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
 			wp_enqueue_script( 'cotton-js' );
+			wp_enqueue_script( 'gsap-js' );
 		}
 	}
 	public function should_script_enqueue( $section ) {
@@ -437,6 +500,11 @@ class Module extends Element_Pack_Module_Base {
 			wp_enqueue_script( 'cotton-js' );
 			wp_enqueue_style( 'ep-cursor-effects' );
 			wp_enqueue_script( 'ep-cursor-effects' );
+
+			if ( 'image' === $section->get_settings_for_display( 'element_pack_cursor_effects_source' )
+				&& 'yes' === $section->get_settings_for_display( 'element_pack_cursor_effects_image_gsap_animation' ) ) {
+				wp_enqueue_script( 'gsap-js' );
+			}
 		}
 	}
 
