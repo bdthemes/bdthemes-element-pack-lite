@@ -9,11 +9,9 @@ use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 
-use ElementPack\Element_Pack_Loader;
-
-if ( ! defined( 'ABSPATH' ) )
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
-
+}
 class Age_Gate extends Module_Base {
 	public function get_name() {
 		return 'bdt-age-gate';
@@ -36,11 +34,7 @@ class Age_Gate extends Module_Base {
 	}
 
 	public function get_script_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-scripts' ];
-		} else {
-			return [ 'ep-age-gate' ];
-		}
+		return [ $this->ep_is_edit_mode() ? 'ep-scripts' : 'ep-age-gate' ];
 	}
 
 	public function get_custom_help_url() {
@@ -197,7 +191,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'age_invalid_msg',
 			[ 
-				'label'       => esc_html__( 'Age Invalid Message', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Age Invalid Message', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'default'     => esc_html__( 'Sorry, your entered age is not suitable for our condition.', 'bdthemes-element-pack' ),
 				'placeholder' => esc_html__( 'Enter your message', 'bdthemes-element-pack' ),
@@ -234,7 +228,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'display_times_expire',
 			[ 
-				'label'       => esc_html__( 'Times Expiry (Hour)', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Times Expiry (Hour)', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::NUMBER,
 				'description' => esc_html__( 'Default 72 hours.', 'bdthemes-element-pack' ),
 				'default'     => 72,
@@ -1390,7 +1384,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'invalid_msg_style',
 			[ 
-				'label'     => esc_html__( 'Invalid Message', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Invalid Message', 'bdthemes-element-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'age_invalid_msg!' => '',
@@ -1412,7 +1406,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'invalid_text_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1559,7 +1553,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'bg_blur',
 			[ 
-				'label'     => esc_html__( 'Background Blur', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Background Blur', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1578,71 +1572,56 @@ class Age_Gate extends Module_Base {
 	}
 
 	public function render() {
-		$settings  = $this->get_settings_for_display();
-		$id        = 'bdt-age-gate-' . $this->get_id();
-		$edit_mode = Element_Pack_Loader::elementor()->editor->is_edit_mode();
+		$settings = $this->get_settings_for_display();
+		$id       = 'bdt-age-gate-' . $this->get_id();
 
-		$this->add_render_attribute( 'button', 'class', [ 'bdt-modal-button', 'elementor-button' ] );
+		$this->add_render_attribute( 'modal', [
+			'id'             => $id,
+			'class'          => [ 'bdt-age-gate-' . $this->get_id(), 'bdt-age-gate', 'bdt-modal' ],
+			'data-bdt-modal' => 'bg-close: false',
+			'data-settings'  => wp_json_encode( [
+				'widgetId'           => $id,
+				'closeBtnDelayShow'  => ( 'yes' === $settings['close_btn_delay_show'] ),
+				'delayTime'          => isset( $settings['close_btn_delay_time']['size'] ) ? $settings['close_btn_delay_time']['size'] * 1000 : false,
+				'displayTimesExpire' => ! empty( $settings['display_times_expire'] ) ? (int) $settings['display_times_expire'] : 24,
+				'requiredAge'        => (int) $settings['required_age'],
+				'redirect_link'      => ! empty( $settings['redirect_link']['url'] ) ? esc_url( $settings['redirect_link']['url'] ) : false,
+			] ),
+		] );
 
-		$this->add_render_attribute( 'modal', 'id', $id );
-		$this->add_render_attribute( 'modal', 'class', 'bdt-age-gate-' . $this->get_id() );
-		$this->add_render_attribute( 'modal', 'data-bdt-modal', 'bg-close: false' );
-
-		$this->add_render_attribute( 'modal', 'class', 'bdt-age-gate bdt-modal' );
-
-		if ( $settings['modal_center'] === 'yes' ) {
+		if ( 'yes' === $settings['modal_center'] ) {
 			$this->add_render_attribute( 'modal', 'class', 'bdt-flex-top' );
-		}
-
-		$this->add_render_attribute( 'modal-dialog', 'class', 'bdt-modal-dialog' );
-
-		if ( $settings['modal_center'] === 'yes' ) {
 			$this->add_render_attribute( 'modal-dialog', 'class', 'bdt-margin-auto-vertical' );
 		}
 
-		$this->add_render_attribute( 'modal-body', 'class', 'bdt-modal-body' );
-		// $this->add_render_attribute('modal-body', 'class', 'bdt-text-' . esc_attr($settings['content_align']));
+		$this->add_render_attribute( 'modal-dialog', 'class', 'bdt-modal-dialog' );
 		$this->add_render_attribute( 'modal-body-info-text', 'class', 'modal-body-info-text bdt-text-' . esc_attr( $settings['content_align'] ) );
-
 		$this->add_render_attribute( 'age-gate-form', 'class', 'bdt-age-gate-form bdt-text-' . esc_attr( $settings['form_align'] ) );
 
-		$this->add_render_attribute( 'button', 'class', 'bdt-button bdt-button-default bdt-age-submit' );
+		$this->add_render_attribute( 'button', 'class', [ 'bdt-modal-button', 'elementor-button', 'bdt-button', 'bdt-button-default', 'bdt-age-submit' ] );
+
 		if ( $settings['button_hover_animation'] ) {
 			$this->add_render_attribute( 'button', 'class', 'elementor-animation-' . $settings['button_hover_animation'] );
 		}
 
-		$this->add_render_attribute( 'modal-msg-text', 'class', 'modal-msg-text bdt-margin-top bdt-text-warning bdt-hidden bdt-text-' . esc_attr( $settings['content_align'] ) );
-
-		$this->add_render_attribute(
-			[ 
-				'modal' => [ 
-					'data-settings' => [ 
-						wp_json_encode( [ 
-							"widgetId"           => $id,
-							"closeBtnDelayShow"  => ( "yes" == $settings["close_btn_delay_show"] ) ? true : false,
-							"delayTime"          => isset( $settings["close_btn_delay_time"]['size'] ) ? $settings["close_btn_delay_time"]['size'] * 1000 : false,
-							"displayTimesExpire" => isset( $settings['display_times_expire'] ) && ! empty( $settings['display_times_expire'] ) ? (int) $settings['display_times_expire'] : 24,
-							'requiredAge'        => (int) $settings['required_age'],
-							'redirect_link'      => ! empty( $settings['redirect_link']['url'] ) ? esc_url( $settings['redirect_link']['url'] ) : false,
-						] )
-					]
-				]
-			]
-		);
+		$this->add_render_attribute( 'modal-msg-text', 'class', [
+			'modal-msg-text',
+			'bdt-margin-top',
+			'bdt-text-warning',
+			'bdt-hidden',
+			'bdt-text-' . esc_attr( $settings['content_align'] ),
+		] );
 
 		?>
 		<div class="bdt-modal-wrapper">
-
 			<div <?php $this->print_render_attribute_string( 'modal' ); ?>>
 				<div <?php $this->print_render_attribute_string( 'modal-dialog' ); ?>>
 
-					<?php if ( $settings['close_button'] != 'none' ) : ?>
-						<button
-							class="bdt-modal-close-<?php echo esc_attr( $settings['close_button'] ); ?> elementor-animation-<?php echo esc_attr( $settings['close_button_hover_animation'] ); ?>"
-							id="bdt-modal-close-button" type="button" data-bdt-close></button>
+					<?php if ( 'none' !== $settings['close_button'] ) : ?>
+						<button class="bdt-modal-close-<?php echo esc_attr( $settings['close_button'] ); ?> elementor-animation-<?php echo esc_attr( $settings['close_button_hover_animation'] ); ?>" id="bdt-modal-close-button" type="button" data-bdt-close></button>
 					<?php endif; ?>
 
-					<?php if ( $settings['header'] and $settings['show_modal_header'] ) : ?>
+					<?php if ( ! empty( $settings['header'] ) && 'yes' === $settings['show_modal_header'] ) : ?>
 						<div class="bdt-modal-header bdt-text-<?php echo esc_attr( $settings['header_align'] ); ?>">
 							<h3 class="bdt-modal-title">
 								<?php echo wp_kses_post( $settings['header'] ); ?>
@@ -1650,7 +1629,7 @@ class Age_Gate extends Module_Base {
 						</div>
 					<?php endif; ?>
 
-					<div <?php $this->print_render_attribute_string( 'modal-body' ); ?>>
+					<div class="bdt-modal-body">
 						<div <?php $this->print_render_attribute_string( 'modal-body-info-text' ); ?>>
 							<?php
 							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -1659,21 +1638,18 @@ class Age_Gate extends Module_Base {
 						</div>
 						<div <?php $this->print_render_attribute_string( 'age-gate-form' ); ?>>
 							<div class="bdt-margin-top">
-								<?php if ( 'input' == $settings['layout'] ) : ?>
-									<input class="bdt-input bdt-form-width-small bdt-age-input" type="number"
-										placeholder="<?php echo esc_html( $settings['form_placeholder'] ); ?>">
+								<?php if ( 'input' === $settings['layout'] ) : ?>
+									<input class="bdt-input bdt-form-width-small bdt-age-input" type="number" placeholder="<?php echo esc_attr( $settings['form_placeholder'] ); ?>">
 									<button <?php $this->print_render_attribute_string( 'button' ); ?>>
 										<?php echo esc_html( $settings['button_text'] ); ?>
 									</button>
 								<?php else : ?>
 									<div class="bdt-flex bdt-flex-center">
-										<button class="bdt-button bdt-button-primary bdt-button-medium bdt-age-layout-2 data-val-yes elementor-animation-<?php echo esc_attr( $settings['button_yes_hover_animation'] ); ?>"
-											type="button">
+										<button class="bdt-button bdt-button-primary bdt-button-medium bdt-age-layout-2 data-val-yes elementor-animation-<?php echo esc_attr( $settings['button_yes_hover_animation'] ); ?>" type="button">
 											<?php echo esc_html( $settings['button_text_yes'] ); ?>
 										</button>
-										<?php if ( isset( $settings['button_text_no'] ) && ! empty( $settings['button_text_no'] ) ) : ?>
-											<button class="bdt-button bdt-button-default bdt-button-medium  bdt-age-layout-2 data-val-no elementor-animation-<?php echo esc_attr( $settings['button_no_hover_animation']); ?> bdt-margin-small-left"
-												type="button">
+										<?php if ( ! empty( $settings['button_text_no'] ) ) : ?>
+											<button class="bdt-button bdt-button-default bdt-button-medium bdt-age-layout-2 data-val-no elementor-animation-<?php echo esc_attr( $settings['button_no_hover_animation'] ); ?> bdt-margin-small-left" type="button">
 												<?php echo esc_html( $settings['button_text_no'] ); ?>
 											</button>
 										<?php endif; ?>
@@ -1682,13 +1658,11 @@ class Age_Gate extends Module_Base {
 							</div>
 						</div>
 						<div <?php $this->print_render_attribute_string( 'modal-msg-text' ); ?>>
-							<?php
-							echo wp_kses_post( $settings['age_invalid_msg'] );
-							?>
+							<?php echo wp_kses_post( $settings['age_invalid_msg'] ); ?>
 						</div>
 					</div>
 
-					<?php if ( $settings['footer'] and $settings['show_modal_footer'] ) : ?>
+					<?php if ( ! empty( $settings['footer'] ) && 'yes' === $settings['show_modal_footer'] ) : ?>
 						<div class="bdt-modal-footer bdt-text-<?php echo esc_attr( $settings['footer_align'] ); ?>">
 							<?php echo wp_kses_post( $settings['footer'] ); ?>
 						</div>
