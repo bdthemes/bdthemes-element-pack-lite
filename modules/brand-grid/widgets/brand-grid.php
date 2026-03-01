@@ -102,7 +102,7 @@ class Brand_Grid extends Module_Base
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__('Brand Name', 'bdthemes-element-pack'),
 				'label_block' => true,
-				'dynamic' => ['active' => true],
+				'dynamic'     => ['active' => true],
 			]
 		);
 
@@ -113,13 +113,13 @@ class Brand_Grid extends Module_Base
 				'type' => Controls_Manager::URL,
 				'placeholder' => esc_html__('https://your-link.com', 'bdthemes-element-pack'),
 				'show_external' => true,
-				'default' => [
-					'url' => '#',
+				'default'       => [
+					'url'         => '#',
 					'is_external' => true,
 					'nofollow' => true,
 				],
-				'label_block' => true,
-				'dynamic' => ['active' => true],
+				'label_block'   => true,
+				'dynamic'       => ['active' => true],
 			]
 		);
 
@@ -131,25 +131,25 @@ class Brand_Grid extends Module_Base
 				'default' => esc_html__('www.example.com', 'bdthemes-element-pack'),
 				'placeholder' => esc_html__('Paste URL Text or Type', 'bdthemes-element-pack'),
 				'label_block' => true,
-				'dynamic' => ['active' => true],
+				'dynamic'     => ['active' => true],
 			]
 		);
 
 		$this->add_control(
 			'brand_items',
 			[
-				'show_label' => false,
-				'type' => Controls_Manager::REPEATER,
-				'fields' => $repeater->get_controls(),
-				'title_field' => '{{{ name }}}',
-				'default' => [
+				'show_label'  => false,
+				'type'        => Controls_Manager::REPEATER,
+				'fields'      => $repeater->get_controls(),
+				'title_field' => '{{{ brand_name }}}',
+				'default'     => [
 					['image' => ['url' => Utils::get_placeholder_image_src()]],
 					['image' => ['url' => Utils::get_placeholder_image_src()]],
 					['image' => ['url' => Utils::get_placeholder_image_src()]],
 					['image' => ['url' => Utils::get_placeholder_image_src()]],
 					['image' => ['url' => Utils::get_placeholder_image_src()]],
 					['image' => ['url' => Utils::get_placeholder_image_src()]],
-				]
+				],
 			]
 		);
 
@@ -159,7 +159,7 @@ class Brand_Grid extends Module_Base
 				'name' => 'thumbnail',
 				'default' => 'medium',
 				'separator' => 'before',
-				'exclude' => ['custom']
+				'exclude'   => ['custom'],
 			]
 		);
 
@@ -189,7 +189,7 @@ class Brand_Grid extends Module_Base
 					5 => '5',
 					6 => '6',
 				],
-				'selectors' => [
+				'selectors'       => [
 					'{{WRAPPER}} .bdt-ep-brand-grid' => 'grid-template-columns: repeat({{SIZE}}, 1fr);',
 				],
 			]
@@ -198,9 +198,9 @@ class Brand_Grid extends Module_Base
 		$this->add_responsive_control(
 			'column_gap',
 			[
-				'label' => esc_html__('Column Gap', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
+				'label'     => esc_html__('Column Gap', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
 					'size' => 20,
 				],
 				'selectors' => [
@@ -212,9 +212,9 @@ class Brand_Grid extends Module_Base
 		$this->add_responsive_control(
 			'row_gap',
 			[
-				'label' => esc_html__('Row Gap', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
+				'label'     => esc_html__('Row Gap', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
 					'size' => 20,
 				],
 				'selectors' => [
@@ -226,62 +226,62 @@ class Brand_Grid extends Module_Base
 		$this->add_control(
 			'show_brand_name',
 			[
-				'label' => esc_html__('Show Brand Name', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SWITCHER,
-				'default' => 'yes',
-				'separator' => 'before'
+				'label'     => esc_html__('Show Brand Name', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+				'separator' => 'before',
 			]
 		);
 
 		$this->add_control(
 			'brand_html_tag',
 			[
-				'label' => esc_html__('Name HTML Tag', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'h3',
-				'options' => element_pack_title_tags(),
+				'label'     => esc_html__('Name HTML Tag', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'h3',
+				'options'   => element_pack_title_tags(),
 				'condition' => [
-					'show_brand_name' => 'yes'
-				]
+					'show_brand_name' => 'yes',
+				],
 			]
 		);
 
 		$this->add_control(
 			'show_website_link',
 			[
-				'label' => esc_html__('Show Link Text', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SWITCHER,
-				'default' => 'yes',
-				'separator' => 'before'
+				'label'     => esc_html__('Show Link Text', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+				'separator' => 'before',
 			]
 		);
 
 		$this->add_control(
 			'brand_event',
 			[
-				'label' => esc_html__('Select Event ', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'hover-icon',
-				'options' => [
-					'click' => esc_html__('Click', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Select Event ', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'hover-icon',
+				'options'   => [
+					'click'      => esc_html__('Click', 'bdthemes-element-pack'),
 					'hover-icon' => esc_html__('Icon Hover', 'bdthemes-element-pack'),
 					'hover-item' => esc_html__('Item Hover', 'bdthemes-element-pack'),
 				],
-				'separator' => 'before'
+				'separator' => 'before',
 			]
 		);
 
 		$this->add_control(
 			'icon_position',
 			[
-				'label' => esc_html__('Icon Position', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'bottom-left',
-				'options' => [
-					'top-left' => esc_html__('Top Start', 'bdthemes-element-pack'),
-					'top-right' => esc_html__('Top End', 'bdthemes-element-pack'),
-					'bottom-left' => esc_html__('Bottom Start', 'bdthemes-element-pack'),
-					'bottom-right' => esc_html__('Bottom End', 'bdthemes-element-pack'),
+				'label'        => esc_html__('Icon Position', 'bdthemes-element-pack'),
+				'type'         => Controls_Manager::SELECT,
+				'default'      => 'bottom-left',
+				'options'      => [
+					'top-left'      => esc_html__('Top Left', 'bdthemes-element-pack'),
+					'top-right'     => esc_html__('Top Right', 'bdthemes-element-pack'),
+					'bottom-left'   => esc_html__('Bottom Left', 'bdthemes-element-pack'),
+					'bottom-right'  => esc_html__('Bottom Right', 'bdthemes-element-pack'),
 					'center-center' => esc_html__('Center Center', 'bdthemes-element-pack'),
 				],
 				'prefix_class' => 'bdt-ep-icon--',
@@ -311,7 +311,7 @@ class Brand_Grid extends Module_Base
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'item_background',
+				'name'     => 'item_background',
 				'selector' => '{{WRAPPER}} .bdt-ep-brand-grid-item',
 			]
 		);
@@ -357,22 +357,21 @@ class Brand_Grid extends Module_Base
 			]
 		);
 
-
 		$this->add_control(
 			'image_heading',
 			[
-				'label' => esc_html__('Image', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before'
+				'label'     => esc_html__('Image', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
 		$this->add_responsive_control(
 			'brand_image_size',
 			[
-				'label' => esc_html__('Size', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
+				'label'     => esc_html__('Size', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
 					'px' => [
 						'min' => 10,
 						'max' => 500,
@@ -451,7 +450,7 @@ class Brand_Grid extends Module_Base
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'icon_background',
+				'name'     => 'icon_background',
 				'selector' => '{{WRAPPER}} .bdt-ep-brand-grid-checkbox, {{WRAPPER}} .bdt-ep-brand-grid-content',
 			]
 		);
@@ -459,8 +458,8 @@ class Brand_Grid extends Module_Base
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'icon_border',
-				'selector' => '{{WRAPPER}} .bdt-ep-brand-grid-checkbox, {{WRAPPER}} .bdt-ep-brand-grid-content'
+				'name'     => 'icon_border',
+				'selector' => '{{WRAPPER}} .bdt-ep-brand-grid-checkbox, {{WRAPPER}} .bdt-ep-brand-grid-content',
 			]
 		);
 
@@ -491,9 +490,9 @@ class Brand_Grid extends Module_Base
 		$this->add_responsive_control(
 			'icon_size',
 			[
-				'label' => esc_html__('Size', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
+				'label'     => esc_html__('Size', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
 					'px' => [
 						'min' => 10,
 						'max' => 100,
@@ -508,8 +507,8 @@ class Brand_Grid extends Module_Base
 		$this->add_responsive_control(
 			'icon_font_size',
 			[
-				'label' => esc_html__('Font Size', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::SLIDER,
+				'label'     => esc_html__('Font Size', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-brand-grid-icon' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
@@ -519,8 +518,8 @@ class Brand_Grid extends Module_Base
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'img_shadow',
-				'selector' => '{{WRAPPER}} .bdt-ep-brand-grid-checkbox, {{WRAPPER}} .bdt-ep-brand-grid-content'
+				'name'     => 'img_shadow',
+				'selector' => '{{WRAPPER}} .bdt-ep-brand-grid-checkbox, {{WRAPPER}} .bdt-ep-brand-grid-content',
 			]
 		);
 
@@ -529,11 +528,11 @@ class Brand_Grid extends Module_Base
 		$this->start_controls_section(
 			'section_style_name',
 			[
-				'label' => esc_html__('Name', 'bdthemes-element-pack'),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__('Name', 'bdthemes-element-pack'),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_brand_name' => 'yes',
-				]
+				],
 			]
 		);
 
@@ -559,8 +558,8 @@ class Brand_Grid extends Module_Base
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
-				'name' => 'name_shadow',
-				'label' => esc_html__('Text Shadow', 'bdthemes-element-pack'),
+				'name'     => 'name_shadow',
+				'label'    => esc_html__('Text Shadow', 'bdthemes-element-pack'),
 				'selector' => '{{WRAPPER}} .bdt-ep-brand-grid-name',
 			]
 		);
@@ -570,11 +569,11 @@ class Brand_Grid extends Module_Base
 		$this->start_controls_section(
 			'section_style_website_link',
 			[
-				'label' => esc_html__('Text', 'bdthemes-element-pack'),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__('Text', 'bdthemes-element-pack'),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_website_link' => 'yes',
-				]
+				],
 			]
 		);
 
@@ -632,66 +631,70 @@ class Brand_Grid extends Module_Base
 	{
 		$settings = $this->get_settings_for_display();
 
-		if (empty($settings['brand_items'])) {
+		if ( empty( $settings['brand_items'] ) ) {
 			return;
 		}
 
-		$this->add_render_attribute('brand-grid', 'class', 'bdt-ep-brand-grid');
+		$this->add_render_attribute( 'brand-grid', 'class', 'bdt-ep-brand-grid' );
+
+		$brand_items    = $settings['brand_items'];
+		$brand_html_tag = Utils::get_valid_html_tag( $settings['brand_html_tag'] );
+		$brand_event    = $settings['brand_event'];
 
 		?>
-		<div <?php $this->print_render_attribute_string('brand-grid'); ?>>
-			<?php foreach ($settings['brand_items'] as $index => $item):
+		<div <?php $this->print_render_attribute_string( 'brand-grid' ); ?>>
+			<?php foreach ( $brand_items as $index => $item ) :
 
-				if ($settings['brand_event'] == 'hover-item') {
-					$this->add_render_attribute('item-wrap', 'class', 'bdt-ep-brand-grid-item bdt-ep-brand-grid-item-hover', true);
-				} else {
-					$this->add_render_attribute('item-wrap', 'class', 'bdt-ep-brand-grid-item', true);
+				$item_key = 'item-wrap' . $index;
+				$this->add_render_attribute( $item_key, 'class', 'bdt-ep-brand-grid-item' );
+
+				if ( 'hover-item' === $brand_event ) {
+					$this->add_render_attribute( $item_key, 'class', 'bdt-ep-brand-grid-item-hover' );
 				}
 
-				$this->add_render_attribute('name-wrap', 'class', 'bdt-ep-brand-grid-name', true);
+				$this->add_render_attribute( 'name-wrap' . $index, 'class', 'bdt-ep-brand-grid-name' );
 
 				$link_key = 'link_' . $index;
-				$this->add_render_attribute($link_key, 'class', 'bdt-ep-brand-grid-link', true);
-				$this->add_link_attributes($link_key, $item['link']);
+				$this->add_render_attribute( $link_key, 'class', 'bdt-ep-brand-grid-link' );
+				$this->add_link_attributes( $link_key, $item['link'] );
 
 				?>
-				<div <?php $this->print_render_attribute_string('item-wrap'); ?>>
+				<div <?php $this->print_render_attribute_string( $item_key ); ?>>
 					<div class="bdt-ep-brand-grid-image">
 						<?php
-						$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail', $settings);
-						if (!$thumb_url) {
-							printf('<img src="%1$s" alt="%2$s">', esc_url($item['image']['url']), esc_html($item['brand_name']));
-						} else {
-							print (wp_get_attachment_image(
+						if ( ! empty( $item['image']['id'] ) ) {
+							echo wp_get_attachment_image(
 								$item['image']['id'],
 								$settings['thumbnail_size'],
 								false,
 								[
-									'alt' => esc_html($item['brand_name'])
+									'alt'   => esc_html( $item['brand_name'] ),
+									'class' => 'bdt-brand-image',
 								]
-							));
+							);
+						} elseif ( ! empty( $item['image']['url'] ) ) {
+							printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), esc_html( $item['brand_name'] ) );
 						}
 						?>
 					</div>
-					<?php if ($settings['brand_event'] == 'click'): ?>
-						<input class="bdt-ep-brand-grid-checkbox" type="checkbox">
+					<?php if ( 'click' === $brand_event ) : ?>
+						<input class="bdt-ep-brand-grid-checkbox" type="checkbox" aria-label="<?php echo esc_attr( $item['brand_name'] ); ?>">
 					<?php endif; ?>
 					<div class="bdt-ep-brand-grid-content">
 						<div class="bdt-ep-brand-grid-icon">
 							<i class="ep-icon-plus-2" aria-hidden="true"></i>
 						</div>
 						<div class="bdt-ep-brand-grid-inner">
-							<?php if ($item['brand_name'] && $settings['show_brand_name']): ?>
-								<<?php echo esc_attr(Utils::get_valid_html_tag($settings['brand_html_tag'])); ?>
-									<?php $this->print_render_attribute_string('name-wrap'); ?>>
-									<?php echo wp_kses($item['brand_name'], element_pack_allow_tags('brand_name')); ?>
-								</<?php echo esc_attr(Utils::get_valid_html_tag($settings['brand_html_tag'])); ?>>
+							<?php if ( $item['brand_name'] && $settings['show_brand_name'] ) : ?>
+								<<?php echo esc_attr( $brand_html_tag ); ?> <?php $this->print_render_attribute_string( 'name-wrap' . $index ); ?>>
+									<?php echo wp_kses( $item['brand_name'], element_pack_allow_tags( 'brand_name' ) ); ?>
+								</<?php echo esc_attr( $brand_html_tag ); ?>>
 							<?php endif; ?>
 
-							<?php if (!empty($item['link']['url']) && $settings['show_website_link']): ?>
+							<?php if ( ! empty( $item['link']['url'] ) && $settings['show_website_link'] ) : ?>
 								<div class="bdt-ep-brand-grid-text">
-									<a <?php $this->print_render_attribute_string($link_key); ?>>
-										<?php echo esc_html($item['website_link_text']); ?>
+									<a <?php $this->print_render_attribute_string( $link_key ); ?>>
+										<?php echo esc_html( $item['website_link_text'] ); ?>
 									</a>
 								</div>
 							<?php endif; ?>
