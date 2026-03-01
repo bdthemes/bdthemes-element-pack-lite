@@ -15,8 +15,10 @@ use Elementor\Group_Control_Text_Stroke;
 use ElementPack\Utils;
 
 use ElementPack\Traits\Global_Mask_Controls;
- 
-if ( !defined('ABSPATH') ) exit; // Exit if accessed directly
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Interactive_Card extends Module_Base {
 
@@ -42,21 +44,13 @@ class Interactive_Card extends Module_Base {
         return ['advanced', 'interactive', 'image', 'services', 'card', 'box', 'features'];
     }
 
-    public function get_style_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-styles'];
-        } else {
-            return ['ep-font', 'ep-interactive-card'];
-        }
-    }
+	public function get_style_depends() {
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-font', 'ep-interactive-card' ];
+	}
 
-    public function get_script_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['gsap', 'wavify', 'ep-scripts'];
-        } else {
-            return ['gsap', 'wavify', 'ep-interactive-card'];
-        }
-    }
+	public function get_script_depends() {
+		return $this->ep_is_edit_mode() ? [ 'gsap', 'wavify', 'ep-scripts' ] : [ 'gsap', 'wavify', 'ep-interactive-card' ];
+	}
 
     public function get_custom_help_url() {
         return 'https://youtu.be/r8IXJUD3PA4';
@@ -442,7 +436,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
 			'button_css_id',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
@@ -605,7 +599,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_card',
             [
-                'label' => __('Card Wrapper', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => __('Card Wrapper', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -996,7 +990,7 @@ class Interactive_Card extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name' => 'title_text_stroke',
-                'label' => __('Text Stroke', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => __('Text Stroke', 'bdthemes-element-pack'),
 				'selector' => '{{WRAPPER}} .bdt-interactive-card-title',
 			]
 		);
@@ -1514,199 +1508,198 @@ class Interactive_Card extends Module_Base {
 
     }
 
-    public function render_interactive_card_badge() {
-        $settings = $this->get_settings_for_display();
+	public function render_interactive_card_badge( $settings ) {
+		if ( empty( $settings['badge'] ) || $settings['badge'] !== 'yes' || empty( $settings['badge_text'] ) ) {
+			return;
+		}
+		$badge_position = isset( $settings['badge_position'] ) ? $settings['badge_position'] : 'top-right';
+		?>
+		<div class="bdt-interactive-card-badge bdt-position-small bdt-position-<?php echo esc_attr( $badge_position ); ?>">
+			<span class="bdt-badge bdt-padding-small"><?php echo esc_html( $settings['badge_text'] ); ?></span>
+		</div>
+		<?php
+	}
 
-        ?>
-        <?php if ( $settings['badge'] and '' != $settings['badge_text'] ) : ?>
-            <div class="bdt-interactive-card-badge bdt-position-small bdt-position-<?php echo esc_attr($settings['badge_position']); ?>">
-                <span class="bdt-badge bdt-padding-small"><?php echo esc_html($settings['badge_text']); ?></span>
-            </div>
-        <?php endif; ?>
-        <?php
-    }
+	public function render_interactive_card_image( $settings ) {
+		$id = esc_attr( $this->get_id() );
 
-    public function render_interactive_card_image() {
-        $settings = $this->get_settings_for_display();
-        $id       = $this->get_id();
+		if ( ! empty( $settings['image_hover_effect'] ) && $settings['image_hover_effect'] === 'yes' ) {
+			$this->add_render_attribute( 'image-effect', 'class', 'bdt-image-hover-effect' );
+		}
+		$this->add_render_attribute( 'image-effect', 'class', 'bdt-interactive-card-image' );
 
-        if ( $settings['image_hover_effect'] == 'yes') {
-            $this->add_render_attribute('image-effect', 'class', 'bdt-image-hover-effect');
-        }
-        $this->add_render_attribute('image-effect', 'class', 'bdt-interactive-card-image');
+		$image_mask = ( ! empty( $settings['image_mask_popover'] ) && $settings['image_mask_popover'] === 'yes' ) ? ' bdt-image-mask' : '';
+		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-position-relative' . $image_mask );
 
-        $image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
-		$this->add_render_attribute('image-wrap', 'class', 'bdt-position-relative' . $image_mask);
+		$img_id = isset( $settings['image']['id'] ) ? $settings['image']['id'] : 0;
+		$img_url = isset( $settings['image']['url'] ) ? $settings['image']['url'] : '';
+		$alt_text = isset( $settings['title_text'] ) ? $settings['title_text'] : '';
+		$size_name = isset( $settings['thumbnail_size_size'] ) ? $settings['thumbnail_size_size'] : 'full';
 
-        ?>
-        <div class="bdt-position-relative">
-            <?php $this->render_interactive_card_badge(); ?>
-            <div <?php $this->print_render_attribute_string('image-effect'); ?>>
-                <div <?php $this->print_render_attribute_string('image-wrap'); ?>>
-                    <?php 
-                    $thumb_url = Group_Control_Image_Size::get_attachment_image_src($settings['image']['id'], 'thumbnail_size', $settings);
-                    if (!$thumb_url) {
-                        printf('<img src="%1$s" alt="%2$s">', esc_url($settings['image']['url']), esc_html($settings['title_text']));
-                    } else {
-                        print(wp_get_attachment_image(
-                            $settings['image']['id'],
-                            $settings['thumbnail_size_size'],
-                            false,
-                            [
-                                'alt' => esc_html($settings['title_text'])
-                            ]
-                        ));
-                    }
-                    ?>
-                </div>
-            </div>
-            <?php if ( 'yes' == $settings['show_wavify_effect'] ) : ?>
-                <div class="bdt-wavify-effect">
-                    <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                        <defs></defs>
-                        <path id="wave-<?php echo esc_attr($id) ?>" d=""/>
-                    </svg>
-                </div>
-            <?php endif; ?>
-        </div>
-        <?php
-    }
+		$thumb_url = $img_id ? Group_Control_Image_Size::get_attachment_image_src( $img_id, 'thumbnail_size', $settings ) : false;
+		?>
+		<div class="bdt-position-relative">
+			<?php $this->render_interactive_card_badge( $settings ); ?>
+			<div <?php $this->print_render_attribute_string( 'image-effect' ); ?>>
+				<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
+					<?php
+					if ( $thumb_url && $img_id ) {
+						echo wp_get_attachment_image(
+							$img_id,
+							$size_name,
+							false,
+							[ 'alt' => esc_attr( $alt_text ) ]
+						);
+					} elseif ( $img_url !== '' ) {
+						printf( '<img src="%1$s" alt="%2$s">', esc_url( $img_url ), esc_attr( $alt_text ) );
+					}
+					?>
+				</div>
+			</div>
+			<?php if ( ! empty( $settings['show_wavify_effect'] ) && $settings['show_wavify_effect'] === 'yes' ) : ?>
+				<div class="bdt-wavify-effect">
+					<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<defs></defs>
+						<path id="wave-<?php echo esc_attr( $id ); ?>" d=""/>
+					</svg>
+				</div>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
 
-    public function render_interactive_card_content() {
-        $settings = $this->get_settings_for_display();
-
-        $this->add_render_attribute('interactive-card-title', 'class', 'bdt-interactive-card-title');
-        if ( 'yes' == $settings['title_link'] and $settings['title_link_url']['url'] ) {
-
-            $target = $settings['title_link_url']['is_external'] ? '_blank' : '_self';
-
-            $this->add_render_attribute('interactive-card-title', 'onclick', "window.open('" . esc_url($settings['title_link_url']['url']) . "', '$target')");
-        }
-
-        $this->add_render_attribute('interactive-card-sub-title', 'class', 'bdt-interactive-card-sub-title');
-
-        $this->add_render_attribute('description_text', 'class', 'bdt-interactive-card-text');
-
-        $this->add_inline_editing_attributes('title_text', 'none');
-        $this->add_inline_editing_attributes('description_text');
-
-
-        $this->add_render_attribute('readmore', 'class', 'bdt-interactive-card-readmore bdt-flex bdt-flex-middle');
-
-        if ( !empty($settings['readmore_link']['url']) ) {
-            $this->add_link_attributes('readmore', $settings['readmore_link']);
-        }
-
-        if ( $settings['readmore_attention'] ) {
-            $this->add_render_attribute('readmore', 'class', 'bdt-ep-attention-button');
-        }
-
-        if ( $settings['readmore_hover_animation'] ) {
-            $this->add_render_attribute('readmore', 'class', 'elementor-animation-' . $settings['readmore_hover_animation']);
-        }
-
-        if ( ! empty( $settings['button_css_id'] ) ) {
-			$this->add_render_attribute( 'readmore', 'id', $settings['button_css_id'] );
+	public function render_interactive_card_content( $settings ) {
+		$this->add_render_attribute( 'interactive-card-title', 'class', 'bdt-interactive-card-title' );
+		$title_link_url = isset( $settings['title_link_url']['url'] ) ? $settings['title_link_url']['url'] : '';
+		if ( ! empty( $settings['title_link'] ) && $settings['title_link'] === 'yes' && $title_link_url !== '' ) {
+			$target = ( ! empty( $settings['title_link_url']['is_external'] ) && $settings['title_link_url']['is_external'] ) ? '_blank' : '_self';
+			$this->add_render_attribute(
+				'interactive-card-title',
+				'onclick',
+				"window.open('" . esc_url( $title_link_url ) . "', '" . esc_attr( $target ) . "')"
+			);
 		}
 
-        ?>
-        <?php if ( 'yes' == $settings['show_sub_title'] ) : ?>
-            <div <?php $this->print_render_attribute_string('interactive-card-sub-title'); ?>>
-                <?php echo wp_kses($settings['sub_title_text'], element_pack_allow_tags('title')); ?>
-            </div>
-        <?php endif; ?>
+		$this->add_render_attribute( 'interactive-card-sub-title', 'class', 'bdt-interactive-card-sub-title' );
+		$this->add_render_attribute( 'description_text', 'class', 'bdt-interactive-card-text' );
+		$this->add_inline_editing_attributes( 'title_text', 'none' );
+		$this->add_inline_editing_attributes( 'description_text' );
 
-        <?php if ( $settings['title_text'] ) : ?>
-            <<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_size'])); ?> <?php $this->print_render_attribute_string('interactive-card-title'); ?>>
-            <span <?php $this->print_render_attribute_string('title_text'); ?>>
-                <?php echo wp_kses($settings['title_text'], element_pack_allow_tags('title')); ?>
-            </span>
-            </<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_size'])); ?>>
-        <?php endif; ?>
+		$this->add_render_attribute( 'readmore', 'class', 'bdt-interactive-card-readmore bdt-flex bdt-flex-middle' );
 
-        <?php if ( $settings['description_text'] ) : ?>
-            <div <?php $this->print_render_attribute_string('description_text'); ?>>
-                <?php echo wp_kses_post($settings['description_text']); ?>
-            </div>
-        <?php endif; ?>
+		if ( ! empty( $settings['readmore_link']['url'] ) ) {
+			$this->add_link_attributes( 'readmore', $settings['readmore_link'] );
+		}
 
-        <?php if ( $settings['readmore'] ) : ?>
-            <div class="bdt-interactive-card-button">
-                <a <?php $this->print_render_attribute_string('readmore'); ?>>
-                    <span class="ep-icon-long-arrow-right"></span>
-                    <span class="bdt-ic-readme-text bdt-position-relative">
-						<?php echo esc_html($settings['readmore_text']); ?>
+		if ( ! empty( $settings['readmore_attention'] ) && $settings['readmore_attention'] === 'yes' ) {
+			$this->add_render_attribute( 'readmore', 'class', 'bdt-ep-attention-button' );
+		}
+
+		if ( ! empty( $settings['readmore_hover_animation'] ) ) {
+			$this->add_render_attribute( 'readmore', 'class', 'elementor-animation-' . sanitize_html_class( $settings['readmore_hover_animation'] ) );
+		}
+
+		if ( ! empty( $settings['button_css_id'] ) ) {
+			$this->add_render_attribute( 'readmore', 'id', sanitize_key( $settings['button_css_id'] ) );
+		}
+
+		$title_tag = Utils::get_valid_html_tag( isset( $settings['title_size'] ) ? $settings['title_size'] : 'h3' );
+		?>
+		<?php if ( ! empty( $settings['show_sub_title'] ) && $settings['show_sub_title'] === 'yes' && ! empty( $settings['sub_title_text'] ) ) : ?>
+			<div <?php $this->print_render_attribute_string( 'interactive-card-sub-title' ); ?>>
+				<?php echo wp_kses( $settings['sub_title_text'], element_pack_allow_tags( 'title' ) ); ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if ( ! empty( $settings['title_text'] ) ) : ?>
+			<<?php echo esc_attr( $title_tag ); ?> <?php $this->print_render_attribute_string( 'interactive-card-title' ); ?>>
+				<span <?php $this->print_render_attribute_string( 'title_text' ); ?>>
+					<?php echo wp_kses( $settings['title_text'], element_pack_allow_tags( 'title' ) ); ?>
+				</span>
+			</<?php echo esc_attr( $title_tag ); ?>>
+		<?php endif; ?>
+
+		<?php if ( ! empty( $settings['description_text'] ) ) : ?>
+			<div <?php $this->print_render_attribute_string( 'description_text' ); ?>>
+				<?php echo wp_kses_post( $settings['description_text'] ); ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if ( ! empty( $settings['readmore'] ) && $settings['readmore'] === 'yes' ) : ?>
+			<div class="bdt-interactive-card-button">
+				<a <?php $this->print_render_attribute_string( 'readmore' ); ?>>
+					<span class="ep-icon-long-arrow-right"></span>
+					<span class="bdt-ic-readme-text bdt-position-relative">
+						<?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : __( 'Read More', 'bdthemes-element-pack' ) ); ?>
 					</span>
-                </a>
-            </div>
-        <?php endif ?>
-        <?php
-    }
+				</a>
+			</div>
+		<?php endif; ?>
+		<?php
+	}
 
-    public function render() {
-        $settings = $this->get_settings_for_display();
+	public function render() {
+		$settings = $this->get_settings_for_display();
 
-        $this->add_render_attribute('interactive-card', 'class', ['bdt-interactive-card', 'bdt-interactive-card-default']);
+		$this->add_render_attribute( 'interactive-card', 'class', [ 'bdt-interactive-card', 'bdt-interactive-card-default' ] );
 
-        if ( 'top' == $settings['content_position'] ) {
-            $this->add_render_attribute('interactive-card-wrapper', 'class', ['bdt-grid bdt-grid-collapse bdt-card-effect-top']);
-            $this->add_render_attribute('interactive-card-width', 'class', ['bdt-width-1-1']);
-        } elseif ( 'bottom' == $settings['content_position'] ) {
-            $this->add_render_attribute('interactive-card-wrapper', 'class', ['bdt-grid bdt-grid-collapse bdt-flex-column bdt-flex-column-reverse bdt-card-effect-bottom']);
-            $this->add_render_attribute('interactive-card-width', 'class', ['bdt-width-1-1']);
-        } elseif ( 'left' == $settings['content_position'] ) {
-            $this->add_render_attribute('interactive-card-wrapper', 'class', ['bdt-grid bdt-grid-collapse bdt-flex bdt-flex-middle bdt-card-effect-left']);
-            $this->add_render_attribute('interactive-card-width', 'class', ['bdt-width-1-1 bdt-width-1-2@s']);
-        } elseif ( 'right' == $settings['content_position'] ) {
-            $this->add_render_attribute('interactive-card-wrapper', 'class', ['bdt-grid bdt-grid-collapse bdt-flex bdt-flex-middle bdt-flex-row bdt-flex-row-reverse bdt-card-effect-right']);
-            $this->add_render_attribute('interactive-card-width', 'class', ['bdt-width-1-1 bdt-width-1-2@s']);
-        }
-
-        if ( 'yes' == $settings['show_wavify_effect'] ) {
-            $this->add_render_attribute(
-                [
-                    'interactive-card' => [
-                        'id'            => 'interactive-card-' . $this->get_id(),
-                        'data-settings' => [
-                            wp_json_encode(array_filter([
-                                    'id'             => 'wave-' . $this->get_id(),
-                                    'wave_bones'     => ("yes" == $settings["wavify_toggle"]) ? $settings["wave_bones"]["size"] : 3,
-                                    'wave_amplitude' => ("yes" == $settings["wavify_toggle"]) ? $settings["wave_amplitude"]["size"] : 40,
-                                    'wave_speed'     => ("yes" == $settings["wavify_toggle"]) ? $settings["wave_speed"]["size"] : 0.25,
-                                ])
-                            ),
-                        ],
-                    ],
-                ]
-            );
-        }
-
-        if ('yes' == $settings['global_link'] and $settings['global_link_url']['url']) {
-
-			$target = $settings['global_link_url']['is_external'] ? '_blank' : '_self';
-
-			$this->add_render_attribute( 'interactive-card', 'onclick', "window.open('" . esc_url($settings['global_link_url']['url']) . "', '$target')" );
+		$content_position = isset( $settings['content_position'] ) ? $settings['content_position'] : 'top';
+		if ( $content_position === 'top' ) {
+			$this->add_render_attribute( 'interactive-card-wrapper', 'class', [ 'bdt-grid', 'bdt-grid-collapse', 'bdt-card-effect-top' ] );
+			$this->add_render_attribute( 'interactive-card-width', 'class', [ 'bdt-width-1-1' ] );
+		} elseif ( $content_position === 'bottom' ) {
+			$this->add_render_attribute( 'interactive-card-wrapper', 'class', [ 'bdt-grid', 'bdt-grid-collapse', 'bdt-flex-column', 'bdt-flex-column-reverse', 'bdt-card-effect-bottom' ] );
+			$this->add_render_attribute( 'interactive-card-width', 'class', [ 'bdt-width-1-1' ] );
+		} elseif ( $content_position === 'left' ) {
+			$this->add_render_attribute( 'interactive-card-wrapper', 'class', [ 'bdt-grid', 'bdt-grid-collapse', 'bdt-flex', 'bdt-flex-middle', 'bdt-card-effect-left' ] );
+			$this->add_render_attribute( 'interactive-card-width', 'class', [ 'bdt-width-1-1', 'bdt-width-1-2@s' ] );
+		} elseif ( $content_position === 'right' ) {
+			$this->add_render_attribute( 'interactive-card-wrapper', 'class', [ 'bdt-grid', 'bdt-grid-collapse', 'bdt-flex', 'bdt-flex-middle', 'bdt-flex-row', 'bdt-flex-row-reverse', 'bdt-card-effect-right' ] );
+			$this->add_render_attribute( 'interactive-card-width', 'class', [ 'bdt-width-1-1', 'bdt-width-1-2@s' ] );
 		}
 
-        ?>
-        <div <?php $this->print_render_attribute_string('interactive-card'); ?>>
+		if ( ! empty( $settings['show_wavify_effect'] ) && $settings['show_wavify_effect'] === 'yes' ) {
+			$wavify_toggle = ! empty( $settings['wavify_toggle'] ) && $settings['wavify_toggle'] === 'yes';
+			$wave_bones = $wavify_toggle && isset( $settings['wave_bones']['size'] ) ? (int) $settings['wave_bones']['size'] : 3;
+			$wave_amplitude = $wavify_toggle && isset( $settings['wave_amplitude']['size'] ) ? (int) $settings['wave_amplitude']['size'] : 40;
+			$wave_speed = $wavify_toggle && isset( $settings['wave_speed']['size'] ) ? (float) $settings['wave_speed']['size'] : 0.25;
+			$id = esc_attr( $this->get_id() );
 
-            <div <?php $this->print_render_attribute_string('interactive-card-wrapper'); ?>>
+			$this->add_render_attribute(
+				[
+					'interactive-card' => [
+						'id'            => 'interactive-card-' . $id,
+						'data-settings' => [
+							wp_json_encode( array_filter( [
+								'id'             => 'wave-' . $id,
+								'wave_bones'     => $wave_bones,
+								'wave_amplitude' => $wave_amplitude,
+								'wave_speed'     => $wave_speed,
+							] ) ),
+						],
+					],
+				]
+			);
+		}
 
-                <div <?php $this->print_render_attribute_string('interactive-card-width'); ?>>
-                    <?php $this->render_interactive_card_image(); ?>
-                </div>
-
-                <div <?php $this->print_render_attribute_string('interactive-card-width'); ?>>
-                    <div class="bdt-interactive-card-content">
-                        <?php $this->render_interactive_card_content(); ?>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <?php
-    }
+		$global_link_url = isset( $settings['global_link_url']['url'] ) ? $settings['global_link_url']['url'] : '';
+		if ( ! empty( $settings['global_link'] ) && $settings['global_link'] === 'yes' && $global_link_url !== '' ) {
+			$target = ( ! empty( $settings['global_link_url']['is_external'] ) && $settings['global_link_url']['is_external'] ) ? '_blank' : '_self';
+			$this->add_render_attribute( 'interactive-card', 'onclick', "window.open('" . esc_url( $global_link_url ) . "', '" . esc_attr( $target ) . "')" );
+		}
+		?>
+		<div <?php $this->print_render_attribute_string( 'interactive-card' ); ?>>
+			<div <?php $this->print_render_attribute_string( 'interactive-card-wrapper' ); ?>>
+				<div <?php $this->print_render_attribute_string( 'interactive-card-width' ); ?>>
+					<?php $this->render_interactive_card_image( $settings ); ?>
+				</div>
+				<div <?php $this->print_render_attribute_string( 'interactive-card-width' ); ?>>
+					<div class="bdt-interactive-card-content">
+						<?php $this->render_interactive_card_content( $settings ); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
 }

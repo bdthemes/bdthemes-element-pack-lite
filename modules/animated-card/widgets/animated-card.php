@@ -1104,8 +1104,7 @@ class Animated_Card extends Module_Base {
 		$this->end_controls_section();
 	}
 
-	public function render_animated_image() {
-		$settings = $this->get_settings_for_display();
+	public function render_animated_image($settings) {
 		if ( $settings['image']['id'] ) {
 			$image = Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail_size', $settings );
 			if ( ! $image ) {
@@ -1120,8 +1119,7 @@ class Animated_Card extends Module_Base {
 		echo '</div>';
 	}
 
-	public function render_animated_content() {
-		$settings = $this->get_settings_for_display();
+	public function render_animated_content($settings) {
 
 		$this->add_render_attribute( 'animated-title', 'class', 'bdt-ep-animated-card-title' );
 		if ( $settings['title_link_url']['url'] ) {
@@ -1209,9 +1207,9 @@ class Animated_Card extends Module_Base {
 			<div class="bdt-ep-animated-card-item">
 				<div class="bdt-ep-animated-card-circle"></div>
 				<div class="bdt-ep-animated-card-content">
-					<?php $this->render_animated_content(); ?>
+					<?php $this->render_animated_content($settings); ?>
 				</div>
-				<?php $this->render_animated_image(); ?>
+				<?php $this->render_animated_image($settings); ?>
 			</div>
 		</div>
 		<?php

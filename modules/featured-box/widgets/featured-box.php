@@ -18,8 +18,9 @@ use ElementPack\Utils;
 use ElementPack\Modules\FeaturedBox\Skins;
 use ElementPack\Traits\Global_Mask_Controls;
 
-if ( ! defined( 'ABSPATH' ) )
-	exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Featured_Box extends Module_Base {
 
@@ -46,11 +47,7 @@ class Featured_Box extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
-		} else {
-			return [ 'ep-featured-box' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-featured-box' ];
 	}
 
 	public function get_custom_help_url() {
@@ -1467,144 +1464,143 @@ class Featured_Box extends Module_Base {
 		$this->end_controls_section();
 	}
 
-	public function render_featured_badge() {
-		$settings = $this->get_settings_for_display();
+	public function render_featured_badge( $settings = null ) {
+		if ( null === $settings ) {
+			$settings = $this->get_settings_for_display();
+		}
 
+		if ( empty( $settings['badge'] ) || $settings['badge'] !== 'yes' || empty( $settings['badge_text'] ) ) {
+			return;
+		}
+		$position = isset( $settings['badge_position'] ) ? $settings['badge_position'] : 'top-right';
 		?>
-		<?php if ( $settings['badge'] and '' != $settings['badge_text'] ) : ?>
-			<div
-				class="bdt-ep-featured-box-badge bdt-position-small bdt-position-<?php echo esc_attr( $settings['badge_position'] ); ?>">
-				<span class="bdt-badge bdt-padding-small">
-					<?php echo esc_html( $settings['badge_text'] ); ?>
-				</span>
-			</div>
-		<?php endif; ?>
-	<?php
+		<div class="bdt-ep-featured-box-badge bdt-position-small bdt-position-<?php echo esc_attr( $position ); ?>">
+			<span class="bdt-badge bdt-padding-small"><?php echo esc_html( $settings['badge_text'] ); ?></span>
+		</div>
+		<?php
 	}
 
-	public function render_featured_image() {
-		$settings  = $this->get_settings_for_display();
-		$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $settings['image']['id'], 'thumbnail_size', $settings );
+	public function render_featured_image( $settings = null ) {
+		if ( null === $settings ) {
+			$settings = $this->get_settings_for_display();
+		}
 
-		$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
+		if ( empty( $settings['image']['url'] ) ) {
+			return;
+		}
+		$image_mask = ! empty( $settings['image_mask_popover'] ) && $settings['image_mask_popover'] === 'yes' ? ' bdt-image-mask' : '';
 		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-position-relative' . $image_mask );
 
+		$img_id   = isset( $settings['image']['id'] ) ? $settings['image']['id'] : 0;
+		$alt_text = isset( $settings['title_text'] ) ? $settings['title_text'] : '';
+		$size_name = isset( $settings['thumbnail_size_size'] ) ? $settings['thumbnail_size_size'] : 'full';
+
+		$thumb_url = $img_id ? Group_Control_Image_Size::get_attachment_image_src( $img_id, 'thumbnail_size', $settings ) : false;
 		?>
 		<div class="bdt-ep-featured-box-image">
 			<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
 				<?php
-				if ( ! $thumb_url ) {
-					printf( '<img src="%1$s" alt="%2$s">', esc_url( $settings['image']['url'] ), esc_html( $settings['title_text'] ) );
-				} else {
-					print( wp_get_attachment_image(
-						$settings['image']['id'],
-						$settings['thumbnail_size_size'],
+				if ( $thumb_url && $img_id ) {
+					echo wp_get_attachment_image(
+						$img_id,
+						$size_name,
 						false,
-						[ 
-							'alt' => esc_html( $settings['title_text'] )
-						]
-					) );
+						[ 'alt' => esc_attr( $alt_text ) ]
+					);
+				} else {
+					printf( '<img src="%1$s" alt="%2$s">', esc_url( $settings['image']['url'] ), esc_attr( $alt_text ) );
 				}
-
-				$this->render_featured_badge();
+				$this->render_featured_badge( $settings );
 				?>
 			</div>
 		</div>
 		<?php
 	}
 
-	public function render_featured_content() {
-		$settings = $this->get_settings_for_display();
+	public function render_featured_content( $settings = null ) {
+		if ( null === $settings ) {
+			$settings = $this->get_settings_for_display();
+		}
+
+		$title_tag = Utils::get_valid_html_tag( isset( $settings['title_size'] ) ? $settings['title_size'] : 'h3' );
 
 		$this->add_render_attribute( 'feature-title', 'class', 'bdt-ep-featured-box-title' );
-		if ( 'yes' == $settings['title_link'] and $settings['title_link_url']['url'] ) {
-
-			$target = $settings['title_link_url']['is_external'] ? '_blank' : '_self';
-
-			$this->add_render_attribute( 'feature-title', 'onclick', "window.open('" . esc_url($settings['title_link_url']['url']) . "', '$target')" );
+		$title_link_url = isset( $settings['title_link_url']['url'] ) ? $settings['title_link_url']['url'] : '';
+		if ( ! empty( $settings['title_link'] ) && $settings['title_link'] === 'yes' && $title_link_url !== '' ) {
+			$target = ( ! empty( $settings['title_link_url']['is_external'] ) && $settings['title_link_url']['is_external'] ) ? '_blank' : '_self';
+			$this->add_render_attribute(
+				'feature-title',
+				'onclick',
+				"window.open('" . esc_url( $title_link_url ) . "', '" . esc_attr( $target ) . "')"
+			);
 		}
 
 		$this->add_render_attribute( 'feature-sub-title', 'class', 'bdt-ep-featured-box-sub-title' );
-
 		$this->add_render_attribute( 'description_text', 'class', 'bdt-ep-featured-box-text' );
-
 		$this->add_inline_editing_attributes( 'title_text', 'none' );
 		$this->add_inline_editing_attributes( 'description_text' );
 
-
 		$this->add_render_attribute( 'readmore', 'class', [ 'bdt-ep-featured-box-readmore', 'bdt-display-inline-block' ] );
-
 		if ( ! empty( $settings['readmore_link']['url'] ) ) {
 			$this->add_link_attributes( 'readmore', $settings['readmore_link'] );
 		}
-
-		if ( $settings['readmore_attention'] ) {
+		if ( ! empty( $settings['readmore_attention'] ) && $settings['readmore_attention'] === 'yes' ) {
 			$this->add_render_attribute( 'readmore', 'class', 'bdt-ep-attention-button' );
 		}
-
-		if ( $settings['readmore_hover_animation'] ) {
-			$this->add_render_attribute( 'readmore', 'class', 'elementor-animation-' . $settings['readmore_hover_animation'] );
+		if ( ! empty( $settings['readmore_hover_animation'] ) ) {
+			$this->add_render_attribute( 'readmore', 'class', 'elementor-animation-' . sanitize_html_class( $settings['readmore_hover_animation'] ) );
 		}
-
 		if ( ! empty( $settings['button_css_id'] ) ) {
-			$this->add_render_attribute( 'readmore', 'id', $settings['button_css_id'] );
+			$this->add_render_attribute( 'readmore', 'id', sanitize_key( $settings['button_css_id'] ) );
 		}
-
 		?>
-		<?php if ( 'yes' == $settings['show_sub_title'] ) : ?>
+		<?php if ( ! empty( $settings['show_sub_title'] ) && $settings['show_sub_title'] === 'yes' && isset( $settings['sub_title_text'] ) && $settings['sub_title_text'] !== '' ) : ?>
 			<div <?php $this->print_render_attribute_string( 'feature-sub-title' ); ?>>
 				<?php echo wp_kses( $settings['sub_title_text'], element_pack_allow_tags( 'title' ) ); ?>
 			</div>
 		<?php endif; ?>
 
-		<?php if ( $settings['title_text'] ) : ?>
-			<<?php echo esc_attr( Utils::get_valid_html_tag( $settings['title_size'] ) ); ?>
-				<?php $this->print_render_attribute_string( 'feature-title' ); ?>>
+		<?php if ( ! empty( $settings['title_text'] ) ) : ?>
+			<<?php echo esc_attr( $title_tag ); ?> <?php $this->print_render_attribute_string( 'feature-title' ); ?>>
 				<span <?php $this->print_render_attribute_string( 'title_text' ); ?>>
-					<?php echo wp_kses_post( $settings['title_text'], element_pack_allow_tags( 'title' ) ); ?>
+					<?php echo wp_kses( $settings['title_text'], element_pack_allow_tags( 'title' ) ); ?>
 				</span>
-			</<?php echo esc_attr( Utils::get_valid_html_tag( $settings['title_size'] ) ); ?>>
+			</<?php echo esc_attr( $title_tag ); ?>>
 		<?php endif; ?>
 
-		<?php if ( $settings['description_text'] ) : ?>
+		<?php if ( ! empty( $settings['description_text'] ) ) : ?>
 			<div <?php $this->print_render_attribute_string( 'description_text' ); ?>>
 				<?php echo wp_kses( $settings['description_text'], element_pack_allow_tags( 'text' ) ); ?>
 			</div>
 		<?php endif; ?>
 
-		<?php if ( $settings['readmore'] ) : ?>
+		<?php if ( ! empty( $settings['readmore'] ) && $settings['readmore'] === 'yes' ) : ?>
 			<div class="bdt-ep-featured-box-button">
 				<a <?php $this->print_render_attribute_string( 'readmore' ); ?>>
-					<?php echo esc_html( $settings['readmore_text'] ); ?>
-					<?php if ( $settings['advanced_readmore_icon']['value'] ) : ?>
-						<span class="bdt-button-icon-align-<?php echo esc_attr( $settings['readmore_icon_align'] ); ?>">
+					<?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : __( 'Read More', 'bdthemes-element-pack' ) ); ?>
+					<?php if ( ! empty( $settings['advanced_readmore_icon']['value'] ) ) : ?>
+						<span class="bdt-button-icon-align-<?php echo esc_attr( isset( $settings['readmore_icon_align'] ) ? $settings['readmore_icon_align'] : 'right' ); ?>">
 							<?php Icons_Manager::render_icon( $settings['advanced_readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
 						</span>
 					<?php endif; ?>
 				</a>
 			</div>
-		<?php endif ?>
-	<?php
+		<?php endif; ?>
+		<?php
 	}
 
 	public function render() {
 		$settings = $this->get_settings_for_display();
+		$content_position = isset( $settings['content_position'] ) ? $settings['content_position'] : 'center-left';
 
 		$this->add_render_attribute( 'featured-box', 'class', [ 'bdt-ep-featured-box', 'bdt-ep-featured-box-default' ] );
-
 		?>
 		<div <?php $this->print_render_attribute_string( 'featured-box' ); ?>>
-
-			<?php $this->render_featured_image(); ?>
-
-			<div class="bdt-ep-featured-box-content bdt-position-<?php echo esc_attr( $settings['content_position'] ); ?>">
-
-				<?php $this->render_featured_content(); ?>
-
+			<?php $this->render_featured_image( $settings ); ?>
+			<div class="bdt-ep-featured-box-content bdt-position-<?php echo esc_attr( $content_position ); ?>">
+				<?php $this->render_featured_content( $settings ); ?>
 			</div>
-
 		</div>
-
 		<?php
 	}
 }

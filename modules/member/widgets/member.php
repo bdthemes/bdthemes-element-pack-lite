@@ -13,7 +13,6 @@ use Elementor\Icons_Manager;
 
 use ElementPack\Modules\Member\Skins;
 use ElementPack\Traits\Global_Mask_Controls;
-use WordPressVIPMinimum\Sniffs\Functions\StripTagsSniff;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -43,16 +42,8 @@ class Member extends Module_Base {
 		return [ 'member', 'team', 'experts' ];
 	}
 
-	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 
-				'ep-styles'
-			];
-		} else {
-			return [ 
-				'ep-member'
-			];
-		}
+	public function get_style_depends(): array {
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-member' ];
 	}
 
 	public function get_custom_help_url() {
@@ -340,7 +331,7 @@ class Member extends Module_Base {
 				'label'     => __( 'Overlay Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'{{WRAPPER}} .skin-band .bdt-member-photo:before' => 'background: {{VALUE)}};',
+					'{{WRAPPER}} .skin-band .bdt-member-photo:before' => 'background: {{VALUE}};',
 				],
 				'condition' => [ 
 					'_skin' => [ 'bdt-band' ],
@@ -353,7 +344,7 @@ class Member extends Module_Base {
 				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
-					'{{WRAPPER}} .skin-band .bdt-member-item-wrapper' => 'background: {{VALUE)}};',
+					'{{WRAPPER}} .skin-band .bdt-member-item-wrapper' => 'background: {{VALUE}};',
 				],
 				'condition' => [ 
 					'_skin' => [ 'bdt-band' ],
@@ -1237,67 +1228,72 @@ class Member extends Module_Base {
 		$this->end_controls_section();
 	}
 
-	public function render_social_icons( $class = '' ) {
-		$settings = $this->get_settings_for_display();
+	/**
+	 * Renders social icons. Called from default skin (with $settings) and from other skins (with class string only).
+	 *
+	 * @param array<string, mixed>|string|null $settings_or_class Settings from render (single call site) or class name when invoked by skins.
+	 * @param string                           $class            Extra CSS class when first argument is settings.
+	 */
+	public function render_social_icons( $settings_or_class = null, string $class = '' ) {
+		if ( is_array( $settings_or_class ) ) {
+			$settings = $settings_or_class;
+		} else {
+			$settings = $this->get_settings_for_display();
+			$class    = is_string( $settings_or_class ) ? $settings_or_class : '';
+		}
 
-		if ( 'yes' !== $settings['member_social_icon'] ) {
+		if ( ( isset( $settings['member_social_icon'] ) && $settings['member_social_icon'] !== 'yes' )
+			|| empty( $settings['social_link_list'] )
+			|| ! is_array( $settings['social_link_list'] ) ) {
 			return;
 		}
-		$this->add_render_attribute( 'social_icons', 'class', 'bdt-member-icons ' . $class );
 
+		$this->add_render_attribute( 'social_icons', 'class', 'bdt-member-icons ' . esc_attr( $class ) );
 		?>
-			<div <?php $this->print_render_attribute_string( 'social_icons' ); ?>>
-				<?php
-				foreach ( $settings['social_link_list'] as $index => $link ) :
+		<div <?php $this->print_render_attribute_string( 'social_icons' ); ?>>
+			<?php
+			foreach ( $settings['social_link_list'] as $index => $link ) {
+				$link_key = 'link_' . $index;
 
-					$link_key = 'link_' . $index;
+				$tooltip = '';
+				if ( isset( $settings['social_icon_tooltip'] ) && $settings['social_icon_tooltip'] === 'yes' ) {
+					$title_raw   = isset( $link['social_link_title'] ) ? $link['social_link_title'] : '';
+					$tooltip_raw = wp_kses_post( strip_tags( (string) $title_raw ) );
+					$tooltip     = 'title: ' . esc_attr( $tooltip_raw ) . ';';
+				}
 
-					$tooltip = '';
-					if ( 'yes' === $settings['social_icon_tooltip'] ) {
-						
-						$tooltip_text = wp_kses_post(strip_tags( $link['social_link_title'])); // Escape for safe attribute usage
-						
-						// Build the tooltip attribute safely
-						$tooltip = 'title: ' . htmlspecialchars($tooltip_text, ENT_QUOTES) . ';';
-					
-						// $this->add_render_attribute( $link_key, 'data-bdt-tooltip', $tooltip, true );
+				$link_id = isset( $link['_id'] ) ? $link['_id'] : '';
+				$this->add_render_attribute( $link_key, 'class', 'bdt-member-icon elementor-repeater-item-' . esc_attr( $link_id ) );
+
+				$link_url = isset( $link['social_icon_link']['url'] ) ? $link['social_icon_link']['url'] : '';
+				if ( $link_url !== '' ) {
+					$this->add_link_attributes( $link_key, $link['social_icon_link'] );
+				} else {
+					$fallback_url = isset( $link['social_link'] ) ? $link['social_link'] : '#';
+					$this->add_render_attribute(
+						[ $link_key => [ 'href' => esc_url( $fallback_url ), 'target' => '_blank' ] ],
+						'',
+						'',
+						true
+					);
+				}
+
+				$migrated = isset( $link['__fa4_migrated']['social_share_icon'] );
+				$is_new   = empty( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
+				?>
+				<a <?php $this->print_render_attribute_string( $link_key ); ?> data-bdt-tooltip="<?php echo esc_attr( $tooltip ); ?>">
+					<?php
+					if ( $is_new || $migrated ) {
+						Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+					} else {
+						echo '<i class="' . esc_attr( $link['social_icon'] ?? '' ) . '" aria-hidden="true"></i>';
 					}
-
-					$this->add_render_attribute( $link_key, 'class', 'bdt-member-icon elementor-repeater-item-' . esc_attr( $link['_id'] ) );
-
-					if ( isset($link['social_icon_link']['url']) && ! empty($link['social_icon_link']['url']) ) {
-						$this->add_link_attributes($link_key, $link['social_icon_link']);
-					} else { // TODO: Condition should be removed after v8.0 
-						$this->add_render_attribute(
-							[
-								$link_key => [
-									'href' => esc_attr($link['social_link']),
-									'target' => '_blank',
-								]
-							], '', '', true );
-					}
-
-					$migrated = isset( $link['__fa4_migrated']['social_share_icon'] );
-					$is_new   = empty( $link['social_icon'] ) && Icons_Manager::is_migration_allowed();
 					?>
-
-					<a <?php $this->print_render_attribute_string( $link_key ); ?> 
-						data-bdt-tooltip="<?php 
-						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo $tooltip;
-						 ?>"
-					>
-
-						<?php if ( $is_new || $migrated ) :
-							Icons_Manager::render_icon( $link['social_share_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
-						else : ?>
-							<i class="<?php echo esc_attr( $link['social_icon'] ); ?>" aria-hidden="true"></i>
-						<?php endif; ?>
-
-					</a>
-
-				<?php endforeach; ?>
-			</div>
+				</a>
+				<?php
+			}
+			?>
+		</div>
 		<?php
 	}
 
@@ -1305,98 +1301,78 @@ class Member extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if ( ! isset( $settings['social_icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
-			// add old default
 			$settings['social_icon'] = 'fab fa-facebook-f';
 		}
 
-		$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
+		$image_mask = ( isset( $settings['image_mask_popover'] ) && $settings['image_mask_popover'] === 'yes' ) ? ' bdt-image-mask' : '';
 		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-member-photo-wrapper' . $image_mask );
 
+		$member_name = isset( $settings['name'] ) ? $settings['name'] : '';
+		$thumb_size  = isset( $settings['thumbnail_size_size'] ) ? $settings['thumbnail_size_size'] : 'full';
 		?>
-
 		<div class="bdt-member skin-default bdt-transition-toggle">
 			<?php
-
-			if ( ! empty( $settings['photo']['url'] ) ) :
-				$photo_hover_animation = ( '' != $settings['photo_hover_animation'] ) ? ' bdt-transition-scale-' . $settings['photo_hover_animation'] : ''; ?>
-
+			if ( ! empty( $settings['photo']['url'] ) ) {
+				$photo_hover_animation = ( isset( $settings['photo_hover_animation'] ) && $settings['photo_hover_animation'] !== '' )
+					? ' bdt-transition-scale-' . esc_attr( $settings['photo_hover_animation'] )
+					: '';
+				$has_alt_photo = ! empty( $settings['member_alternative_photo'] ) && ! empty( $settings['alternative_photo']['url'] );
+				?>
 				<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
-
-					<?php if ( ( $settings['member_alternative_photo'] ) and ( ! empty( $settings['alternative_photo']['url'] ) ) ) : ?>
+					<?php if ( $has_alt_photo ) : ?>
 						<div class="bdt-position-relative bdt-overflow-hidden bdt-position-z-index"
 							data-bdt-toggle="target: > .bdt-member-photo-flip; mode: hover; animation: bdt-animation-fade; queued: true; duration: 300;">
-
 							<div class="bdt-member-photo-flip bdt-position-absolute bdt-position-z-index">
-
-								<?php
-								$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $settings['alternative_photo']['id'], 'thumbnail_size', $settings );
-								if ( ! $thumb_url ) {
-									printf( '<img src="%1$s" alt="%2$s">', esc_url( $settings['alternative_photo']['url'] ), esc_html( $settings['name'] ) );
-								} else {
-									print( wp_get_attachment_image(
-										$settings['alternative_photo']['id'],
-										$settings['thumbnail_size_size'],
-										false,
-										[ 
-											'alt' => esc_html( $settings['name'] )
-										]
-									) );
-								}
-								?>
-
+								<?php $this->render_member_image( $settings['alternative_photo'], $thumb_size, $member_name, $settings ); ?>
 							</div>
 						<?php endif; ?>
 
-						<div class="bdt-member-photo">
-							<div class="<?php echo esc_attr( $photo_hover_animation ); ?>">
-
-								<?php
-								$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $settings['photo']['id'], 'thumbnail_size', $settings );
-								if ( ! $thumb_url ) {
-									printf( '<img src="%1$s" alt="%2$s">', esc_url( $settings['photo']['url'] ), esc_html( $settings['name'] ) );
-								} else {
-									print( wp_get_attachment_image(
-										$settings['photo']['id'],
-										$settings['thumbnail_size_size'],
-										false,
-										[ 
-											'alt' => esc_html( $settings['name'] )
-										]
-									) );
-								}
-								?>
-
-							</div>
+					<div class="bdt-member-photo">
+						<div class="<?php echo esc_attr( $photo_hover_animation ); ?>">
+							<?php $this->render_member_image( $settings['photo'], $thumb_size, $member_name, $settings ); ?>
 						</div>
-
-						<?php if ( ( $settings['member_alternative_photo'] ) and ( ! empty( $settings['alternative_photo']['url'] ) ) ) : ?>
+					</div>
+					<?php if ( $has_alt_photo ) : ?>
 						</div>
 					<?php endif; ?>
-
 				</div>
-			<?php endif; ?>
+			<?php } ?>
 
 			<div class="bdt-member-content">
-				<?php if ( ! empty( $settings['name'] ) ) : ?>
-					<span class="bdt-member-name">
-						<?php echo wp_kses( $settings['name'], element_pack_allow_tags( 'title' ) ); ?>
-					</span>
+				<?php if ( $member_name !== '' ) : ?>
+					<span class="bdt-member-name"><?php echo wp_kses( $member_name, element_pack_allow_tags( 'title' ) ); ?></span>
 				<?php endif; ?>
 				<?php if ( ! empty( $settings['role'] ) ) : ?>
-					<span class="bdt-member-role">
-						<?php echo wp_kses( $settings['role'], element_pack_allow_tags( 'title' ) ); ?>
-					</span>
+					<span class="bdt-member-role"><?php echo wp_kses( $settings['role'], element_pack_allow_tags( 'title' ) ); ?></span>
 				<?php endif; ?>
 				<?php if ( ! empty( $settings['description_text'] ) ) : ?>
-					<div class="bdt-member-text bdt-content-wrap">
-						<?php echo wp_kses( $settings['description_text'], element_pack_allow_tags( 'text' ) ); ?>
-					</div>
+					<div class="bdt-member-text bdt-content-wrap"><?php echo wp_kses( $settings['description_text'], element_pack_allow_tags( 'text' ) ); ?></div>
 				<?php endif; ?>
 			</div>
-
-			<?php $this->render_social_icons(''); ?>
-
+			<?php $this->render_social_icons( $settings, '' ); ?>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Outputs member photo (img or wp_get_attachment_image). Single place for image logic and escaping.
+	 *
+	 * @param array<string, mixed> $photo    Media control value (id, url).
+	 * @param string               $size     Image size key.
+	 * @param string               $alt_text Alt attribute value.
+	 * @param array<string, mixed> $settings Widget settings (from render) for image size control.
+	 */
+	protected function render_member_image( array $photo, string $size, string $alt_text, array $settings ) {
+		$id  = isset( $photo['id'] ) ? (int) $photo['id'] : 0;
+		$url = isset( $photo['url'] ) ? $photo['url'] : '';
+		if ( $url === '' ) {
+			return;
+		}
+		$thumb_url = $id > 0 ? Group_Control_Image_Size::get_attachment_image_src( $id, 'thumbnail_size', $settings ) : null;
+		if ( ! $thumb_url ) {
+			printf( '<img src="%1$s" alt="%2$s">', esc_url( $url ), esc_attr( $alt_text ) );
+			return;
+		}
+		echo wp_get_attachment_image( $id, $size, false, [ 'alt' => esc_attr( $alt_text ) ] );
 	}
 }

@@ -13,7 +13,9 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Icons_Manager;
 
 
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Flip_Box extends Module_Base {
 
@@ -38,19 +40,11 @@ class Flip_Box extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ($this->ep_is_edit_mode()) {
-			return ['ep-styles'];
-		} else {
-			return ['ep-flip-box'];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-flip-box' ];
 	}
 
 	public function get_script_depends() {
-		if ($this->ep_is_edit_mode()) {
-			return ['ep-scripts'];
-		} else {
-			return ['ep-flip-box'];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-scripts' ] : [ 'ep-flip-box' ];
 	}
 
 	public function get_custom_help_url() {
@@ -1399,10 +1393,14 @@ class Flip_Box extends Module_Base {
 	}
 
 	protected function render() {
-		$settings    = $this->get_settings_for_display();
-		$animation   = ($settings['button_hover_animation']) ? ' elementor-animation-' . $settings['button_hover_animation'] : '';
-		$wrapper_tag = 'div';
-		$button_tag  = 'a';
+		$settings = $this->get_settings_for_display();
+
+		$button_animation = ! empty( $settings['button_hover_animation'] ) ? ' elementor-animation-' . sanitize_html_class( $settings['button_hover_animation'] ) : '';
+		$button_size      = isset( $settings['button_size'] ) ? $settings['button_size'] : 'sm';
+		$wrapper_tag      = 'div';
+		$button_tag       = 'a';
+		$front_title_tag  = Utils::get_valid_html_tag( isset( $settings['front_title_tags'] ) ? $settings['front_title_tags'] : 'h3' );
+		$back_title_tag   = Utils::get_valid_html_tag( isset( $settings['back_title_tags'] ) ? $settings['back_title_tags'] : 'h3' );
 
 		$this->add_render_attribute(
 			'button',
@@ -1410,120 +1408,116 @@ class Flip_Box extends Module_Base {
 			[
 				'bdt-flip-box-button',
 				'elementor-button',
-				'elementor-size-' . $settings['button_size'],
-				$animation,
+				'elementor-size-' . sanitize_html_class( $button_size ),
+				$button_animation,
 			]
 		);
 
-		$this->add_render_attribute('wrapper', 'class', 'bdt-flip-box-layer bdt-flip-box-back');
+		$this->add_render_attribute( 'wrapper', 'class', 'bdt-flip-box-layer bdt-flip-box-back' );
 
-		if (!empty($settings['link']['url'])) {
-			if ('box' === $settings['link_click']) {
+		if ( ! empty( $settings['link']['url'] ) ) {
+			if ( isset( $settings['link_click'] ) && $settings['link_click'] === 'box' ) {
 				$wrapper_tag = 'a';
-				$button_tag = 'button';
-				$this->add_link_attributes('wrapper', $settings['link']);
+				$button_tag  = 'button';
+				$this->add_link_attributes( 'wrapper', $settings['link'] );
 			} else {
-				$this->add_link_attributes('button', $settings['link']);
+				$this->add_link_attributes( 'button', $settings['link'] );
 			}
 		}
 
-		if ('icon' === $settings['graphic_element']) {
-			$this->add_render_attribute('icon-wrapper', 'class', 'elementor-icon-wrapper');
-			$this->add_render_attribute('icon-wrapper', 'class', 'elementor-view-' . $settings['icon_view']);
-			if ('default' != $settings['icon_view']) {
-				$this->add_render_attribute('icon-wrapper', 'class', 'elementor-shape-' . $settings['icon_shape']);
+		$graphic_element = isset( $settings['graphic_element'] ) ? $settings['graphic_element'] : 'icon';
+		if ( $graphic_element === 'icon' ) {
+			$this->add_render_attribute( 'icon-wrapper', 'class', 'elementor-icon-wrapper' );
+			$icon_view = isset( $settings['icon_view'] ) ? $settings['icon_view'] : 'default';
+			$this->add_render_attribute( 'icon-wrapper', 'class', 'elementor-view-' . sanitize_html_class( $icon_view ) );
+			if ( $icon_view !== 'default' ) {
+				$icon_shape = isset( $settings['icon_shape'] ) ? $settings['icon_shape'] : 'circle';
+				$this->add_render_attribute( 'icon-wrapper', 'class', 'elementor-shape-' . sanitize_html_class( $icon_shape ) );
 			}
-			if (!empty($settings['icon'])) {
-				$this->add_render_attribute('icon', 'class', $settings['icon']);
+			if ( ! empty( $settings['icon'] ) ) {
+				$this->add_render_attribute( 'icon', 'class', $settings['icon'] );
 			}
 		}
 
-		$this->add_render_attribute('box_front_title_tags', 'class', 'bdt-flip-box-layer-title');
+		$this->add_render_attribute( 'box_front_title_tags', 'class', 'bdt-flip-box-layer-title' );
 
-		if (!isset($settings['icon']) && !Icons_Manager::is_migration_allowed()) {
-			// add old default
+		if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
 			$settings['icon'] = 'fas fa-heart';
 		}
 
-		$migrated  = isset($settings['__fa4_migrated']['flip_box_icon']);
-		$is_new    = empty($settings['icon']) && Icons_Manager::is_migration_allowed();
+		$migrated = isset( $settings['__fa4_migrated']['flip_box_icon'] );
+		$is_new   = empty( $settings['icon'] ) && Icons_Manager::is_migration_allowed();
 
-
+		$flip_trigger = ( isset( $settings['flip_trigger'] ) && $settings['flip_trigger'] === 'click' ) ? 'click' : 'hover';
 		$this->add_render_attribute(
 			[
 				'flip-box' => [
-					'class' => 'bdt-flip-box',
+					'class'         => 'bdt-flip-box',
 					'data-settings' => [
-						wp_json_encode([
-							"flipTrigger"     => ("click" == $settings["flip_trigger"]) ? 'click' : 'hover',
-						])
-					]
-				]
+						wp_json_encode( [ 'flipTrigger' => $flip_trigger ] ),
+					],
+				],
 			]
 		);
-
-
-?>
-		<div <?php $this->print_render_attribute_string('flip-box'); ?>>
+		?>
+		<div <?php $this->print_render_attribute_string( 'flip-box' ); ?>>
 			<div class="bdt-flip-box-layer bdt-flip-box-front">
 				<div class="bdt-flip-box-layer-overlay">
 					<div class="bdt-flip-box-layer-inner">
-						<?php if ('image' === $settings['graphic_element'] && !empty($settings['image']['url'])) : ?>
+						<?php if ( $graphic_element === 'image' && ! empty( $settings['image']['url'] ) ) : ?>
 							<div class="bdt-flip-box-image">
-								<?php echo wp_kses_post(Group_Control_Image_Size::get_attachment_image_html($settings)); ?>
+								<?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings ) ); ?>
 							</div>
-						<?php elseif ('icon' === $settings['graphic_element'] && !empty($settings['flip_box_icon']['value'])) : ?>
-							<div <?php $this->print_render_attribute_string('icon-wrapper'); ?>>
+						<?php elseif ( $graphic_element === 'icon' && ! empty( $settings['flip_box_icon']['value'] ) ) : ?>
+							<div <?php $this->print_render_attribute_string( 'icon-wrapper' ); ?>>
 								<div class="elementor-icon">
-
-									<?php if ($is_new || $migrated) :
-										Icons_Manager::render_icon($settings['flip_box_icon'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
-									else : ?>
-										<i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+									<?php if ( $is_new || $migrated ) : ?>
+										<?php Icons_Manager::render_icon( $settings['flip_box_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+									<?php else : ?>
+										<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
 									<?php endif; ?>
-
 								</div>
 							</div>
 						<?php endif; ?>
 
-						<?php if (!empty($settings['front_title_text'])) : ?>
-							<<?php echo esc_attr(Utils::get_valid_html_tag($settings['front_title_tags'])); ?> <?php $this->print_render_attribute_string('box_front_title_tags'); ?>>
-								<?php echo wp_kses($settings['front_title_text'], element_pack_allow_tags('title')); ?>
-							</<?php echo esc_attr(Utils::get_valid_html_tag($settings['front_title_tags'])); ?>>
+						<?php if ( ! empty( $settings['front_title_text'] ) ) : ?>
+							<<?php echo esc_attr( $front_title_tag ); ?> <?php $this->print_render_attribute_string( 'box_front_title_tags' ); ?>>
+								<?php echo wp_kses( $settings['front_title_text'], element_pack_allow_tags( 'title' ) ); ?>
+							</<?php echo esc_attr( $front_title_tag ); ?>>
 						<?php endif; ?>
 
-						<?php if (!empty($settings['front_description_text'])) : ?>
+						<?php if ( ! empty( $settings['front_description_text'] ) ) : ?>
 							<div class="bdt-flip-box-layer-desc">
-								<?php echo wp_kses($settings['front_description_text'], element_pack_allow_tags('text')); ?>
+								<?php echo wp_kses( $settings['front_description_text'], element_pack_allow_tags( 'text' ) ); ?>
 							</div>
 						<?php endif; ?>
 					</div>
 				</div>
 			</div>
-			<<?php echo esc_attr($wrapper_tag); ?> <?php $this->print_render_attribute_string('wrapper'); ?>>
+			<<?php echo esc_attr( $wrapper_tag ); ?> <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 				<div class="bdt-flip-box-layer-overlay">
 					<div class="bdt-flip-box-layer-inner">
-						<?php if (!empty($settings['back_title_text'])) : ?>
-							<<?php echo esc_attr(Utils::get_valid_html_tag($settings['back_title_tags'])); ?> <?php $this->print_render_attribute_string('box_front_title_tags'); ?>>
-								<?php echo wp_kses($settings['back_title_text'], element_pack_allow_tags('title')); ?>
-							</<?php echo esc_attr(Utils::get_valid_html_tag($settings['back_title_tags'])); ?>>
+						<?php if ( ! empty( $settings['back_title_text'] ) ) : ?>
+							<<?php echo esc_attr( $back_title_tag ); ?> <?php $this->print_render_attribute_string( 'box_front_title_tags' ); ?>>
+								<?php echo wp_kses( $settings['back_title_text'], element_pack_allow_tags( 'title' ) ); ?>
+							</<?php echo esc_attr( $back_title_tag ); ?>>
 						<?php endif; ?>
 
-						<?php if (!empty($settings['back_description_text'])) : ?>
+						<?php if ( ! empty( $settings['back_description_text'] ) ) : ?>
 							<div class="bdt-flip-box-layer-desc">
-								<?php echo wp_kses($settings['back_description_text'], element_pack_allow_tags('text')); ?>
+								<?php echo wp_kses( $settings['back_description_text'], element_pack_allow_tags( 'text' ) ); ?>
 							</div>
 						<?php endif; ?>
 
-						<?php if (!empty($settings['button_text'])) : ?>
-							<<?php echo esc_attr($button_tag); ?> <?php $this->print_render_attribute_string('button'); ?>>
-								<?php echo wp_kses($settings['button_text'], element_pack_allow_tags('title')); ?>
-							</<?php echo esc_attr($button_tag); ?>>
+						<?php if ( ! empty( $settings['button_text'] ) ) : ?>
+							<<?php echo esc_attr( $button_tag ); ?> <?php $this->print_render_attribute_string( 'button' ); ?>>
+								<?php echo wp_kses( $settings['button_text'], element_pack_allow_tags( 'title' ) ); ?>
+							</<?php echo esc_attr( $button_tag ); ?>>
 						<?php endif; ?>
 					</div>
 				</div>
-			</<?php echo esc_attr($wrapper_tag); ?>>
+			</<?php echo esc_attr( $wrapper_tag ); ?>>
 		</div>
-	<?php
+		<?php
 	}
 }

@@ -111,8 +111,7 @@ class Skin_Fedara extends Elementor_Skin_Base {
 		$this->end_controls_section();
 	}
 
-	public function render_overlay($content, $element_key) {
-		$settings                    = $this->parent->get_settings();
+	public function render_overlay($content, $element_key, $settings) {
 
         if ( ! $settings['show_lightbox'] ) {
             return;
@@ -163,12 +162,12 @@ class Skin_Fedara extends Elementor_Skin_Base {
 		<?php
 	}
 
-	public function render_title($title) {
-		if ( ! $this->parent->get_settings( 'show_title' ) ) {
+	public function render_title($title, $settings) {
+		if ( ! $settings['show_title'] ) {
 			return;
 		}
 
-		$tag = $this->parent->get_settings( 'title_tag' );
+		$tag = $settings['title_tag'];
 		?>
 		<<?php echo esc_attr( Utils::get_valid_html_tag( $tag ) ); ?> class="bdt-gallery-item-title">
 			<?php echo wp_kses( $title['image_title'], element_pack_allow_tags( 'text' ) ); ?>
@@ -176,8 +175,8 @@ class Skin_Fedara extends Elementor_Skin_Base {
 		<?php
 	}
 
-	public function render_text($text) {
-		if ( ! $this->parent->get_settings( 'show_text' ) ) {
+	public function render_text($text, $settings) {
+		if ( ! $settings['show_text'] ) {
 			return;
 		}
 
@@ -186,9 +185,7 @@ class Skin_Fedara extends Elementor_Skin_Base {
 		<?php
 	}
 
-	public function render_desc($content) {
-
-		$settings = $this->parent->get_settings();
+	public function render_desc($content, $settings) {
 
         if ( '' == $settings['show_title'] and '' == $settings['show_text'] ) {
             return;
@@ -198,8 +195,8 @@ class Skin_Fedara extends Elementor_Skin_Base {
 		<div class="bdt-skin-fedara-desc bdt-padding-small">
 			
 			<?php
-			$this->render_title($content); 
-			$this->render_text($content);
+			$this->render_title($content, $settings); 
+			$this->render_text($content, $settings);
 			?>
 			
 		</div>
@@ -207,7 +204,7 @@ class Skin_Fedara extends Elementor_Skin_Base {
 	}
 
 	public function render() {
-		$settings = $this->parent->get_settings();
+		$settings = $this->parent->get_settings_for_display();
 
 		$columns_mobile = isset($settings['columns_mobile']) ? $settings['columns_mobile'] : 1;
 		$columns_tablet = isset($settings['columns_tablet']) ? $settings['columns_tablet'] : 2;
@@ -218,7 +215,7 @@ class Skin_Fedara extends Elementor_Skin_Base {
 		$this->parent->add_render_attribute('custom-gallery-item', 'class', 'bdt-width-1-'. $columns_tablet .'@s');
 		$this->parent->add_render_attribute('custom-gallery-item', 'class', 'bdt-width-1-'. $columns .'@m');
 
-		$this->parent->render_header('fedara');
+		$this->parent->render_header($settings, 'fedara');
 		
 		$this->parent->add_render_attribute('custom-gallery-item-inner', 'class', 'bdt-custom-gallery-item-inner');
 		
@@ -249,8 +246,8 @@ class Skin_Fedara extends Elementor_Skin_Base {
 
 					<div <?php $this->parent->print_render_attribute_string( 'item-inner' ); ?>>
 						<?php 
-						$this->parent->render_thumbnail($item, 'gallery-item-' . $index);
-						$this->render_overlay($item, 'gallery-item-' . $index);
+						$this->parent->render_thumbnail($item, $settings);
+						$this->render_overlay($item, 'gallery-item-' . $index, $settings);
 						?>
 					</div>
 
@@ -258,7 +255,7 @@ class Skin_Fedara extends Elementor_Skin_Base {
 						</a>
 					<?php endif; ?>
 
-					<?php $this->render_desc($item); ?>
+					<?php $this->render_desc($item, $settings); ?>
 				</div>
 			</div>
 

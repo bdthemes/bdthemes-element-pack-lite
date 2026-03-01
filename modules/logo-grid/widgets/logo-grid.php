@@ -44,19 +44,11 @@ class Logo_Grid extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
-		} else {
-			return [ 'ep-logo-grid', 'tippy' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-logo-grid', 'tippy' ];
 	}
 
 	public function get_script_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'popper', 'tippyjs', 'ep-scripts' ];
-		} else {
-			return [ 'popper', 'tippyjs', 'ep-logo-grid' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'popper', 'tippyjs', 'ep-scripts' ] : [ 'popper', 'tippyjs', 'ep-logo-grid' ];
 	}
 
 	public function get_custom_help_url() {
@@ -97,8 +89,9 @@ class Logo_Grid extends Module_Base {
 		$repeater->add_control(
 			'link',
 			[ 
-				'label' => __( 'Website Url', 'bdthemes-element-pack' ),
-				'type'  => Controls_Manager::URL,
+				'label'   => __( 'Website Url', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::URL,
+				'dynamic' => ['active' => true],
 			]
 		);
 
@@ -117,6 +110,7 @@ class Logo_Grid extends Module_Base {
 			[ 
 				'label'   => __( 'Description', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::TEXTAREA,
+				'dynamic' => ['active' => true],
 				'default' => __( 'Brand Short Description Type Here.', 'bdthemes-element-pack' ),
 			]
 		);
@@ -934,101 +928,110 @@ class Logo_Grid extends Module_Base {
 
 		$this->add_render_attribute( 'logo-grid', 'class', 'bdt-logo-grid-wrapper' );
 
-		if ( $settings['grid_animation_type'] !== '' ) {
-			$this->add_render_attribute( 'logo-grid', 'bdt-scrollspy', 'cls: bdt-animation-' . esc_attr( $settings['grid_animation_type'] ) . ';' );
-			$this->add_render_attribute( 'logo-grid', 'bdt-scrollspy', 'delay: ' . esc_attr( $settings['grid_anim_delay']['size'] ) . ';' );
-			$this->add_render_attribute( 'logo-grid', 'bdt-scrollspy', 'target: > .bdt-item' . ';' );
+		$grid_animation_type = isset( $settings['grid_animation_type'] ) ? $settings['grid_animation_type'] : '';
+		if ( $grid_animation_type !== '' ) {
+			$this->add_render_attribute( 'logo-grid', 'bdt-scrollspy', 'cls: bdt-animation-' . sanitize_html_class( $grid_animation_type ) . ';' );
+			$grid_anim_delay = isset( $settings['grid_anim_delay']['size'] ) ? (int) $settings['grid_anim_delay']['size'] : 300;
+			$this->add_render_attribute( 'logo-grid', 'bdt-scrollspy', 'delay: ' . $grid_anim_delay . ';' );
+			$this->add_render_attribute( 'logo-grid', 'bdt-scrollspy', 'target: > .bdt-item;' );
 		}
 
-		if ( empty( $settings['logo_list'] ) ) {
+		$logo_list = isset( $settings['logo_list'] ) ? $settings['logo_list'] : [];
+		if ( empty( $logo_list ) ) {
 			return;
 		}
 
-		?>
+		$thumbnail_size = isset( $settings['thumbnail_size'] ) ? $settings['thumbnail_size'] : 'full';
+		$hover_animation = isset( $settings['hover_animation'] ) ? sanitize_html_class( $settings['hover_animation'] ) : '';
+		$image_mask_popover = ! empty( $settings['image_mask_popover'] ) && $settings['image_mask_popover'] === 'yes';
+		$image_mask_class = $image_mask_popover ? ' bdt-image-mask' : '';
 
+		$logo_tooltip_animation = isset( $settings['logo_tooltip_animation'] ) ? sanitize_key( $settings['logo_tooltip_animation'] ) : '';
+		$logo_tooltip_x_offset = isset( $settings['logo_tooltip_x_offset']['size'] ) ? (int) $settings['logo_tooltip_x_offset']['size'] : 0;
+		$logo_tooltip_y_offset = isset( $settings['logo_tooltip_y_offset']['size'] ) ? (int) $settings['logo_tooltip_y_offset']['size'] : 0;
+		$logo_tooltip_arrow = ! empty( $settings['logo_tooltip_arrow'] ) && $settings['logo_tooltip_arrow'] === 'yes';
+		$logo_tooltip_trigger = ! empty( $settings['logo_tooltip_trigger'] ) && $settings['logo_tooltip_trigger'] === 'yes';
+
+		?>
 		<div <?php $this->print_render_attribute_string( 'logo-grid' ); ?>>
 			<?php
-			foreach ( $settings['logo_list'] as $index => $item ) :
-				$image           = wp_get_attachment_image_url( $item['image']['id'], $settings['thumbnail_size'] );
-				$repeater_key    = 'grid_item' . $index;
-				$tag             = 'div ';
-				$tooltip_content = '<span class="bdt-title">' . $item['name'] . '</span>' . $item['description'];
-				$image_alt       = $item['name'] . ' : ' . $item['description'];
+			foreach ( $logo_list as $index => $item ) :
+				$item_image_id   = isset( $item['image']['id'] ) ? $item['image']['id'] : 0;
+				$item_name       = isset( $item['name'] ) ? $item['name'] : '';
+				$item_description = isset( $item['description'] ) ? $item['description'] : '';
+				$item_link_url   = isset( $item['link']['url'] ) ? $item['link']['url'] : '';
+				$item_logo_tooltip = ! empty( $item['logo_tooltip'] ) && $item['logo_tooltip'] === 'yes';
+				$item_tooltip_placement = isset( $item['logo_tooltip_placement'] ) ? $item['logo_tooltip_placement'] : '';
+
+				$image = $item_image_id ? wp_get_attachment_image_url( $item_image_id, $thumbnail_size ) : false;
+				$repeater_key = 'grid_item' . $index;
+				$item_tag = ! empty( $item_link_url ) ? 'a' : 'div';
+				$image_alt = $item_name . ' : ' . $item_description;
+
 				$this->add_render_attribute( $repeater_key, 'class', 'bdt-item' );
 
+				$tooltip_content = '<span class="bdt-title">' . esc_html( $item_name ) . '</span>' . esc_html( $item_description );
 				$allowed_tags = '<p><b><strong><em><u><span><br><i>';
 				$tooltip_content = strip_tags( $tooltip_content, $allowed_tags );
-				$this->add_render_attribute( $repeater_key, 'data-tippy-content', htmlspecialchars( $tooltip_content, ENT_QUOTES, 'UTF-8' ), true );
+				$this->add_render_attribute( $repeater_key, 'data-tippy-content', wp_kses_post( $tooltip_content ), true );
 
-				if ( $item['link']['url'] ) {
-					$tag = 'a ';
+				if ( ! empty( $item_link_url ) ) {
 					$this->add_render_attribute( $repeater_key, 'class', 'bdt-logo-grid-link' );
 					$this->add_link_attributes( $repeater_key, $item['link'] );
 				}
 
-				if ( $item['name'] and $item['description'] and $item['logo_tooltip'] ) {
-					// Tooltip settings
+				if ( ! empty( $item_name ) && ! empty( $item_description ) && $item_logo_tooltip ) {
 					$this->add_render_attribute( $repeater_key, 'class', 'bdt-tippy-tooltip' );
 					$this->add_render_attribute( $repeater_key, 'data-tippy', '', true );
 
-					if ( $item['logo_tooltip_placement'] ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-placement', $item['logo_tooltip_placement'], true );
+					if ( ! empty( $item_tooltip_placement ) ) {
+						$this->add_render_attribute( $repeater_key, 'data-tippy-placement', esc_attr( $item_tooltip_placement ), true );
 					}
 
-					if ( $settings['logo_tooltip_animation'] ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-animation', $settings['logo_tooltip_animation'], true );
+					if ( ! empty( $logo_tooltip_animation ) ) {
+						$this->add_render_attribute( $repeater_key, 'data-tippy-animation', esc_attr( $logo_tooltip_animation ), true );
 					}
 
-					if ( $settings['logo_tooltip_x_offset']['size'] or $settings['logo_tooltip_y_offset']['size'] ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-offset', '[' . $settings['logo_tooltip_x_offset']['size'] . ',' . $settings['logo_tooltip_y_offset']['size'] . ']', true );
+					if ( $logo_tooltip_x_offset !== 0 || $logo_tooltip_y_offset !== 0 ) {
+						$this->add_render_attribute( $repeater_key, 'data-tippy-offset', '[' . esc_js( (string) $logo_tooltip_x_offset ) . ',' . esc_js( (string) $logo_tooltip_y_offset ) . ']', true );
 					}
 
-					if ( 'yes' == $settings['logo_tooltip_arrow'] ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-arrow', 'true', true );
-					} else {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-arrow', 'false', true );
-					}
+					$this->add_render_attribute( $repeater_key, 'data-tippy-arrow', $logo_tooltip_arrow ? 'true' : 'false', true );
 
-					if ( 'yes' == $settings['logo_tooltip_trigger'] ) {
+					if ( $logo_tooltip_trigger ) {
 						$this->add_render_attribute( $repeater_key, 'data-tippy-trigger', 'click', true );
 					}
-
 				}
 
-				$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
-				$this->add_render_attribute( 'image-wrap', 'class', 'bdt-logo-grid-figure' . $image_mask );
+				$this->add_render_attribute( 'image-wrap', 'class', 'bdt-logo-grid-figure' . $image_mask_class );
 
 				?>
-				<<?php echo esc_attr( $tag ) . ' '; ?>
-					<?php $this->print_render_attribute_string( $repeater_key ); ?>>
+				<<?php echo esc_attr( $item_tag ); ?> <?php $this->print_render_attribute_string( $repeater_key ); ?>>
 					<figure <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
-						<?php if ( $image ) :
-
-
+						<?php
+						if ( $image && $item_image_id ) {
 							echo wp_get_attachment_image(
-								$item['image']['id'],
-								$settings['thumbnail_size'],
+								$item_image_id,
+								$thumbnail_size,
 								false,
-								[ 
-									'class' => 'bdt-logo-grid-img elementor-animation-' . esc_attr( $settings['hover_animation'] ),
+								[
+									'class' => 'bdt-logo-grid-img elementor-animation-' . esc_attr( $hover_animation ),
 									'alt'   => esc_attr( $image_alt ),
 								]
 							);
-
-						else :
+						} else {
 							printf(
 								'<img class="bdt-logo-grid-img elementor-animation-%s" src="%s" alt="%s">',
-								esc_attr( $settings['hover_animation'] ),
+								esc_attr( $hover_animation ),
 								esc_url( Utils::get_placeholder_image_src() ),
 								esc_attr( $image_alt )
 							);
-						endif; ?>
-
+						}
+						?>
 					</figure>
-				</<?php echo esc_attr( $tag ); ?>>
+				</<?php echo esc_attr( $item_tag ); ?>>
 			<?php endforeach; ?>
 		</div>
-
 		<?php
 	}
 }

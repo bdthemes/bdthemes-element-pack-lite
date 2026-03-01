@@ -2381,23 +2381,22 @@ class Content_Switcher extends Module_Base {
 		return isset( $symbols[ $symbol_name ] ) ? $symbols[ $symbol_name ] : '';
 	}
 
-	public function render_price($settings) {
-		$price_settings = $this->get_settings_for_display();
+	public function render_price($item, $settings) {
 
 		$symbol = '';
 		$image  = '';
 
-		if ( ! empty( $settings['currency_symbol'] ) ) {
-			if ( 'custom' !== $settings['currency_symbol'] ) {
-				$symbol = $this->get_currency_symbol( $settings['currency_symbol'] );
+		if ( ! empty( $item['currency_symbol'] ) ) {
+			if ( 'custom' !== $item['currency_symbol'] ) {
+				$symbol = $this->get_currency_symbol( $item['currency_symbol'] );
 			} else {
-				$symbol = $settings['currency_symbol_custom'];
+				$symbol = $item['currency_symbol_custom'];
 			}
 		}
 
 
-		$currency_format = empty( $settings['currency_format'] ) ? '.' : $settings['currency_format'];
-		$price           = explode( $currency_format, $settings['price'] );
+		$currency_format = empty( $item['currency_format'] ) ? '.' : $item['currency_format'];
+		$price           = explode( $currency_format, $item['price'] );
 		$intpart         = $price[0];
 		$fraction        = '';
 		if ( 2 === count( $price ) ) {
@@ -2405,7 +2404,7 @@ class Content_Switcher extends Module_Base {
 		}
 
 
-		// $price    = explode( '.', $settings['price'] );
+		// $price    = explode( '.', $item['price'] );
 		// $intpart  = $price[0];
 		// $fraction = '';
 
@@ -2413,11 +2412,11 @@ class Content_Switcher extends Module_Base {
 		// 	$fraction = $price[1];
 		// }
 
-		$period_position = $price_settings['period_position'];
+		$period_position = $settings['period_position'];
 		$period_class    = ( $period_position == 'below' ) ? ' bdt-price-card-period-position-below' : ' bdt-price-card-period-position-beside';
-		$period_element  = '<span class="bdt-price-card-period elementor-typo-excluded' . $period_class . '">' . $settings['period'] . '</span>';
+		$period_element  = '<span class="bdt-price-card-period elementor-typo-excluded' . $period_class . '">' . $item['period'] . '</span>';
 
-		$currency_position = $price_settings['currency_horizontal_position'];
+		$currency_position = $settings['currency_horizontal_position'];
 
 		$id = 'bdt-price-card-' . $this->get_id();
 
@@ -2428,12 +2427,12 @@ class Content_Switcher extends Module_Base {
 		?>
 
 		<div class="bdt-price-card">
-			<div class="bdt-price-title"><?php echo wp_kses_post($settings['price_card_content']); ?></div>
+			<div class="bdt-price-title"><?php echo wp_kses_post($item['price_card_content']); ?></div>
 
 			<div <?php $this->print_render_attribute_string( 'pricing' ); ?>>
-				<?php if ( $settings['sale'] && ! empty( $settings['original_price'] ) ) : ?>
+				<?php if ( $item['sale'] && ! empty( $item['original_price'] ) ) : ?>
 					<span class="bdt-price-card-original-price elementor-typo-excluded bdt-display-block">
-						<?php echo esc_html( $symbol . $settings['original_price'] ); ?>
+						<?php echo esc_html( $symbol . $item['original_price'] ); ?>
 					</span>
 				<?php endif; ?>
 
@@ -2449,12 +2448,12 @@ class Content_Switcher extends Module_Base {
 					</span>
 				<?php endif; ?>
 
-				<?php if ( 0 < $fraction || ( ! empty( $settings['period'] ) && 'beside' === $period_position ) ) : ?>
+				<?php if ( 0 < $fraction || ( ! empty( $item['period'] ) && 'beside' === $period_position ) ) : ?>
 					<div class="bdt-price-card-after-price">
 						<span class="bdt-price-card-fractional-part">
 							<?php echo esc_attr( $fraction ); ?>
 						</span>
-						<?php if ( ! empty( $settings['period'] ) && 'beside' === $period_position ) : ?>
+						<?php if ( ! empty( $item['period'] ) && 'beside' === $period_position ) : ?>
 							<?php echo wp_kses_post( $period_element ); ?>
 						<?php endif; ?>
 					</div>
@@ -2466,24 +2465,23 @@ class Content_Switcher extends Module_Base {
 					</span>
 				<?php endif; ?>
 
-				<?php if ( ! empty( $settings['period'] ) && 'below' === $period_position ) : ?>
+				<?php if ( ! empty( $item['period'] ) && 'below' === $period_position ) : ?>
 					<?php echo wp_kses_post( $period_element ); ?>
 				<?php endif; ?>
 			</div>
 
-			<div class="bdt-price-additional-text"><?php echo wp_kses_post($settings['price_card_additional_text']); ?></div>
+			<div class="bdt-price-additional-text"><?php echo wp_kses_post($item['price_card_additional_text']); ?></div>
 
-			<?php $this->render_button( $settings ); ?>
+			<?php $this->render_button( $item, $settings ); ?>
 		</div>
 		<?php
 	}
 
-	public function render_button($settings) {
-		$button_settings = $this->get_settings_for_display();
-		$button_animation = ( ! empty( $button_settings['button_hover_animation'] ) ) ? ' elementor-animation-' . $button_settings['button_hover_animation'] : '';
+	public function render_button($item, $settings) {
+		$button_animation = ( ! empty( $settings['button_hover_animation'] ) ) ? ' elementor-animation-' . $settings['button_hover_animation'] : '';
 
 		// Generate unique button key using item ID to prevent attribute accumulation
-		$button_key = 'button_' . $settings['_id'];
+		$button_key = 'button_' . $item['_id'];
 
 		$this->add_render_attribute(
 			$button_key,
@@ -2494,31 +2492,29 @@ class Content_Switcher extends Module_Base {
 			]
 		);
 
-		if ( ! empty( $settings['button_css_id'] ) ) {
-			$this->add_render_attribute( $button_key, 'id', $settings['button_css_id'] );
+		if ( ! empty( $item['button_css_id'] ) ) {
+			$this->add_render_attribute( $button_key, 'id', $item['button_css_id'] );
 		}
 
-		if ( ! empty( $settings['link']['url'] ) ) {
-			$this->add_link_attributes( $button_key, $settings['link'] );
+		if ( ! empty( $item['link']['url'] ) ) {
+			$this->add_link_attributes( $button_key, $item['link'] );
 		}
 
-		if ( ! empty( $button_settings['button_hover_animation'] ) ) {
-			$this->add_render_attribute( $button_key, 'class', 'elementor-animation-' . $button_settings['button_hover_animation'] );
+		if ( ! empty( $settings['button_hover_animation'] ) ) {
+			$this->add_render_attribute( $button_key, 'class', 'elementor-animation-' . $settings['button_hover_animation'] );
 		}
 
-		if ( ! empty( $settings['button_text'] ) ) : ?>
+		if ( ! empty( $item['button_text'] ) ) : ?>
 			<div class="bdt-price-card-btn-wrap">
 				<a <?php $this->print_render_attribute_string( $button_key ); ?>>
-					<?php echo esc_html( $settings['button_text'] ); ?>
+					<?php echo esc_html( $item['button_text'] ); ?>
 				</a>
 			</div>
 		<?php endif;
 
 	}
 
-	public function render_badge(){
-		$settings = $this->get_settings_for_display();
-
+	public function render_badge($settings){
 		if ( 'yes' !== $settings['badge'] ) {
 			return;
 		}
@@ -2608,7 +2604,7 @@ class Content_Switcher extends Module_Base {
 
 				<?php if ('button' !== $settings['switcher_style']) : ?>
 
-					<?php $this->render_badge(); ?>
+					<?php $this->render_badge($settings); ?>
 
 					<?php if (!empty($primary['title']) or !empty($primary['switcher_icon']['value'])) : ?>
 					<div class="bdt-package-text bdt-primary-text <?php echo esc_attr(($primary['switcher_active'] == 'yes') ? 'bdt-active' : '') ?>">
@@ -2670,7 +2666,7 @@ class Content_Switcher extends Module_Base {
 						</a>
 					<?php endforeach; ?>
 
-					<?php $this->render_badge(); ?>
+					<?php $this->render_badge($settings); ?>
 
 				<?php endif; ?>
 
@@ -2694,7 +2690,7 @@ class Content_Switcher extends Module_Base {
 							// Widget linked content is handled by JavaScript
 							echo '<div class="bdt-switcher-item-linked-widget"></div>';
 						} elseif ($primary['content_type'] == 'price_card') {
-							$this->render_price($primary);
+							$this->render_price($primary, $settings);
 						}
 							// Widget linked content is handled by JavaScript
 						?>
@@ -2712,7 +2708,7 @@ class Content_Switcher extends Module_Base {
 							// Widget linked content is handled by JavaScript
 							echo '<div class="bdt-switcher-item-linked-widget"></div>';
 						} elseif ($secondary['content_type'] == 'price_card') {
-							$this->render_price($secondary);
+							$this->render_price($secondary, $settings);
 						}
 						?>
 					</div>
@@ -2742,7 +2738,7 @@ class Content_Switcher extends Module_Base {
 								// Widget linked content is handled by JavaScript
 								echo '<div class="bdt-switcher-item-linked-widget"></div>';
 							} elseif ($item['content_type'] == 'price_card') {
-								$this->render_price($item);
+								$this->render_price($item, $settings);
 							}
 							?>
 						</div>
