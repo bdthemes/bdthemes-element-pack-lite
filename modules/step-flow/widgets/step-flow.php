@@ -14,48 +14,43 @@ use Elementor\Icons_Manager;
 use ElementPack\Utils;
 
 
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Step_Flow extends Module_Base {
 
-    public function get_name() {
-        return 'bdt-step-flow';
-    }
+	public function get_name() {
+		return 'bdt-step-flow';
+	}
 
-    public function get_title() {
-        return BDTEP . esc_html__('Step Flow', 'bdthemes-element-pack');
-    }
+	public function get_title() {
+		return BDTEP . esc_html__( 'Step Flow', 'bdthemes-element-pack' );
+	}
 
-    public function get_icon() {
-        return 'bdt-wi-step-flow';
-    }
+	public function get_icon() {
+		return 'bdt-wi-step-flow';
+	}
 
-    public function get_categories() {
-        return ['element-pack'];
-    }
+	public function get_categories() {
+		return [ 'element-pack' ];
+	}
 
-    public function get_keywords() {
-        return ['step', 'process', 'icon', 'features'];
-    }
+	public function get_keywords() {
+		return [ 'step', 'process', 'icon', 'features' ];
+	}
 
-    public function get_style_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-styles'];
-        } else {
-            return ['ep-step-flow'];
-        }
-    }
-    public function get_script_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-scripts'];
-        } else {
-            return ['ep-step-flow'];
-        }
-    }
+	public function get_style_depends() {
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-step-flow' ];
+	}
 
-    public function get_custom_help_url() {
-        return 'https://youtu.be/YNjbt-5GO4k';
-    }
+	public function get_script_depends() {
+		return $this->ep_is_edit_mode() ? [ 'ep-scripts' ] : [ 'ep-step-flow' ];
+	}
+
+	public function get_custom_help_url() {
+		return 'https://youtu.be/YNjbt-5GO4k';
+	}
 
 	public function has_widget_inner_wrapper(): bool {
         return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
@@ -64,7 +59,7 @@ class Step_Flow extends Module_Base {
 		return false;
 	}
     
-    protected function register_controls() {
+	protected function register_controls() {
         $this->start_controls_section(
             'section_content_step_flow',
             [
@@ -264,7 +259,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
 			'direction_hide_on',
 			[ 
-				'label'              => __( 'Direction Hide On', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'              => __( 'Direction Hide On', 'bdthemes-element-pack' ),
 				'type'               => Controls_Manager::SELECT2,
 				'multiple'           => true,
 				'label_block'        => true,
@@ -470,7 +465,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'button_css_id',
             [
-                'label' => __('Button ID', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => __('Button ID', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => [
                     'active' => true,
@@ -1892,7 +1887,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'direction_animation',
             [
-                'label'     => __('Hover Animation', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'     => __('Hover Animation', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-direction-animation--',
                 'condition' => [
@@ -1905,7 +1900,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'infinite_animation',
             [
-                'label'     => __('Infinite Animation', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'     => __('Infinite Animation', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-infinite-animation--',
             ]
@@ -2162,217 +2157,182 @@ class Step_Flow extends Module_Base {
         $this->end_controls_section();
     }
 
-    protected function render_icon() {
-        $settings = $this->get_settings_for_display();
+	protected function render_icon( $settings ) {
+		$has_icon = ! empty( $settings['selected_icon'] );
+		$has_image = ! empty( $settings['image']['url'] );
 
-        $has_icon = !empty($settings['selected_icon']);
-
-        $has_image = !empty($settings['image']['url']);
-
-        ?>
-
-        <?php if ($has_icon or $has_image) : ?>
-            <div class="bdt-step-flow-icon">
-                <span class="bdt-icon-wrapper">
-
-
-                    <?php if ('icon' == $settings['icon_type']) { ?>
-
-                        <?php Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']); ?>
-
-                    <?php } elseif ($has_image and 'image' == $settings['icon_type']) { 
-                        $thumb_url = Group_Control_Image_Size::get_attachment_image_src($settings['image']['id'], 'thumbnail_size', $settings);
-						if (!$thumb_url) {
-						printf('<img src="%1$s" alt="%2$s">', esc_url($settings['image']['url']), esc_html($settings['title_text']));
-						} else {
-							print(wp_get_attachment_image(
-								$settings['image']['id'],
-								$settings['thumbnail_size_size'],
-								false,
-								[
-									'alt' => esc_html($settings['title_text'])
-								]
-							));
-						}
-                    } ?>
-                </span>
-            </div>
-        <?php endif; ?>
-
-    <?php
-    }
-
-    protected function render_title() {
-        $settings = $this->get_settings_for_display();
-
-        $this->add_render_attribute('step-flow-title', 'class', 'bdt-step-flow-title');
-
-        if ('yes' == $settings['title_link'] and $settings['title_link_url']['url']) {
-
-            $target = $settings['title_link_url']['is_external'] ? '_blank' : '_self';
-
-            $this->add_render_attribute('step-flow-title', 'onclick', "window.open('" . esc_url($settings['title_link_url']['url']) . "', '$target')");
-        }
-    ?>
-
-        <?php if ($settings['title_text']) : ?>
-            <<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_size'])) . ' '; ?><?php $this->print_render_attribute_string('step-flow-title'); ?>>
-                <span <?php $this->print_render_attribute_string('title_text'); ?>>
-                    <?php echo wp_kses($settings['title_text'], element_pack_allow_tags('title')); ?>
-                </span>
-            </<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_size'])); ?>>
-        <?php endif; ?>
-
-    <?php
-
-    }
-
-    public function render_separator() {
-        $settings = $this->get_settings_for_display();
-
-        $this->add_render_attribute('svg-image', 'class', 'bdt-animation-stroke');
-        $this->add_render_attribute('svg-image', 'bdt-svg', 'stroke-animation: true;');
-
-        $align = ('left' == $settings['divider_align'] or 'right' == $settings['divider_align']) ? '-' . $settings['divider_align'] : '';
-        $svg_image = BDTEP_ASSETS_URL . 'images/divider/' . $settings['title_separator_type'] . $align . '.svg';
-
-        $line_cap = $settings['line_cap'];
-
-    ?>
-
-        <img class="bdt-animation-stroke <?php echo esc_attr($line_cap); ?>" src="<?php echo esc_url($svg_image); ?>" alt="advanced divider">
-
-    <?php
-    }
-
-    public function render_direction() {
-        $settings = $this->get_settings_for_display();
-
-        if (!$this->get_settings('show_indicator')) {
+		if ( ! $has_icon && ! $has_image ) {
 			return;
 		}
 
-        $direction_hide_on_setup = '';
-		if ( ! empty( $settings['direction_hide_on'] ) ) {
-			foreach ( $settings['direction_hide_on'] as $element ) {
+		$icon_type = isset( $settings['icon_type'] ) ? $settings['icon_type'] : 'icon';
+		?>
+		<div class="bdt-step-flow-icon">
+			<span class="bdt-icon-wrapper">
+				<?php if ( $icon_type === 'icon' ) : ?>
+					<?php Icons_Manager::render_icon( $settings['selected_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+				<?php elseif ( $has_image && $icon_type === 'image' ) : ?>
+					<?php
+					$image_id  = isset( $settings['image']['id'] ) ? (int) $settings['image']['id'] : 0;
+					$thumb_url = $image_id ? Group_Control_Image_Size::get_attachment_image_src( $image_id, 'thumbnail_size', $settings ) : '';
+					$title_alt = isset( $settings['title_text'] ) ? $settings['title_text'] : '';
+                    
+					if ( $thumb_url && isset( $settings['thumbnail_size_size'] ) ) {
+						echo wp_get_attachment_image(
+							$image_id,
+							$settings['thumbnail_size_size'],
+							false,
+							[ 'alt' => esc_attr( $title_alt ) ]
+						);
+					} else {
+						$url = isset( $settings['image']['url'] ) ? $settings['image']['url'] : '';
+						if ( $url !== '' ) {
+							printf(
+								'<img src="%1$s" alt="%2$s">',
+								esc_url( $url ),
+								esc_attr( $title_alt )
+							);
+						}
+					}
+					?>
+				<?php endif; ?>
+			</span>
+		</div>
+		<?php
+	}
 
-				if ( $element == 'desktop' ) {
+	protected function render_title( $settings ) {
+
+		$this->add_render_attribute( 'step-flow-title', 'class', 'bdt-step-flow-title' );
+
+		if ( ! empty( $settings['title_link'] ) && $settings['title_link'] === 'yes' && ! empty( $settings['title_link_url']['url'] ) ) {
+			$target = ! empty( $settings['title_link_url']['is_external'] ) ? '_blank' : '_self';
+			$this->add_render_attribute( 'step-flow-title', 'onclick', "window.open('" . esc_url( $settings['title_link_url']['url'] ) . "', '$target')" );
+		}
+
+		$title_tag = isset( $settings['title_size'] ) ? Utils::get_valid_html_tag( $settings['title_size'] ) : 'h3';
+		?>
+		<<?php echo esc_attr( $title_tag ); ?> <?php $this->print_render_attribute_string( 'step-flow-title' ); ?>>
+			<span <?php $this->print_render_attribute_string( 'title_text' ); ?>>
+				<?php echo wp_kses( $settings['title_text'], element_pack_allow_tags( 'title' ) ); ?>
+			</span>
+		</<?php echo esc_attr( $title_tag ); ?>>
+		<?php
+	}
+
+	public function render_separator( $settings ) {
+		$divider_align = isset( $settings['divider_align'] ) ? $settings['divider_align'] : 'center';
+		$align         = ( $divider_align === 'left' || $divider_align === 'right' ) ? '-' . $divider_align : '';
+		$separator_type = isset( $settings['title_separator_type'] ) ? $settings['title_separator_type'] : 'line';
+		$svg_image     = BDTEP_ASSETS_URL . 'images/divider/' . $separator_type . $align . '.svg';
+		$line_cap      = isset( $settings['line_cap'] ) ? $settings['line_cap'] : 'ep_square';
+		?>
+		<img class="bdt-animation-stroke <?php echo esc_attr( $line_cap ); ?>" src="<?php echo esc_url( $svg_image ); ?>" alt="advanced divider">
+		<?php
+	}
+
+	public function render_direction( $settings ) {
+		if ( empty( $settings['show_indicator'] ) || $settings['show_indicator'] !== 'yes' ) {
+			return;
+		}
+
+		$direction_hide_on_setup = '';
+		if ( ! empty( $settings['direction_hide_on'] ) && is_array( $settings['direction_hide_on'] ) ) {
+			foreach ( $settings['direction_hide_on'] as $element ) {
+				if ( $element === 'desktop' ) {
 					$direction_hide_on_setup .= ' bdt-desktop';
-				}
-				if ( $element == 'tablet' ) {
+				} elseif ( $element === 'tablet' ) {
 					$direction_hide_on_setup .= ' bdt-tablet';
-				}
-				if ( $element == 'mobile' ) {
+				} elseif ( $element === 'mobile' ) {
 					$direction_hide_on_setup .= ' bdt-mobile';
 				}
 			}
 		}
 
-        $svg_image = BDTEP_ASSETS_URL . 'images/direction/step-' . $settings['direction_style'] . '.svg';
-        $this->add_render_attribute('direction', 'class', 'bdt-direction-svg ' . esc_attr( $direction_hide_on_setup ));
+		$direction_style = isset( $settings['direction_style'] ) ? $settings['direction_style'] : '1';
+		$svg_image      = BDTEP_ASSETS_URL . 'images/direction/step-' . $direction_style . '.svg';
+		$this->add_render_attribute( 'direction', 'class', 'bdt-direction-svg' . esc_attr( $direction_hide_on_setup ) );
+		?>
+		<div <?php $this->print_render_attribute_string( 'direction' ); ?>>
+			<img class="bdt-animation-stroke" data-bdt-svg="stroke-animation: true" src="<?php echo esc_url( $svg_image ); ?>" alt="Direction Arrows">
+		</div>
+		<?php
+	}
 
-        ?>
-        <div <?php $this->print_render_attribute_string('direction'); ?>>
-            <img class="bdt-animation-stroke" data-bdt-svg="stroke-animation: true" src="<?php echo esc_url($svg_image); ?>" alt="Direction Arrows">
-        </div>
-        <?php
-    }
+	protected function render() {
+		$settings = $this->get_settings_for_display();
 
-    protected function render() {
-        $settings = $this->get_settings_for_display();
+		$this->add_render_attribute( 'description_text', 'class', 'bdt-step-flow-description' );
+		$this->add_inline_editing_attributes( 'title_text', 'none' );
+		$this->add_inline_editing_attributes( 'description_text' );
 
-        $this->add_render_attribute('description_text', 'class', 'bdt-step-flow-description');
+		$readmore_classes = [ 'bdt-step-flow-readmore', 'bdt-display-inline-block' ];
+		if ( ! empty( $settings['readmore_attention'] ) && $settings['readmore_attention'] === 'yes' ) {
+			$readmore_classes[] = 'bdt-ep-attention-button';
+		}
+		if ( ! empty( $settings['readmore_hover_animation'] ) && $settings['readmore_hover_animation'] !== '' ) {
+			$readmore_classes[] = 'elementor-animation-' . $settings['readmore_hover_animation'];
+		}
+		$this->add_render_attribute( 'readmore', 'class', $readmore_classes );
 
-        $this->add_inline_editing_attributes('title_text', 'none');
-        $this->add_inline_editing_attributes('description_text');
+		if ( ! empty( $settings['readmore_link']['url'] ) ) {
+			$this->add_link_attributes( 'readmore', $settings['readmore_link'] );
+		}
 
+		if ( ! empty( $settings['button_css_id'] ) ) {
+			$this->add_render_attribute( 'readmore', 'id', $settings['button_css_id'] );
+		}
 
-        $this->add_render_attribute('readmore', 'class', ['bdt-step-flow-readmore', 'bdt-display-inline-block']);
+		$this->add_render_attribute( 'step-flow', 'class', 'bdt-step-flow' );
 
-        if (!empty($settings['readmore_link']['url'])) {
-            $this->add_link_attributes( 'readmore', $settings['readmore_link'] );
-        }
-
-        if ($settings['readmore_attention']) {
-            $this->add_render_attribute('readmore', 'class', 'bdt-ep-attention-button');
-        }
-
-        if ($settings['readmore_hover_animation']) {
-            $this->add_render_attribute('readmore', 'class', 'elementor-animation-' . $settings['readmore_hover_animation']);
-        }
-
-        if (!empty($settings['button_css_id'])) {
-            $this->add_render_attribute('readmore', 'id', $settings['button_css_id']);
-        }
-
-        $this->add_render_attribute('step-flow', 'class', 'bdt-step-flow');
-
-        if ('yes' == $settings['global_link'] and $settings['global_link_url']['url']) {
-
-            $target = $settings['global_link_url']['is_external'] ? '_blank' : '_self';
-
-            $this->add_render_attribute('step-flow', 'onclick', "window.open('" . esc_url($settings['global_link_url']['url']) . "', '$target')");
-        }
-
-
-    ?>
-        <div <?php $this->print_render_attribute_string('step-flow'); ?>>
-
-            <?php $this->render_icon(); ?>
-
-            <div class="bdt-step-flow-content">
-
-                <?php $this->render_title(); ?>
-
-                <?php if ($settings['show_separator']) : ?>
-                    <?php if ('line' == $settings['title_separator_type']) : ?>
-                        <div class="bdt-title-separator-wrapper">
-                            <div class="bdt-title-separator"></div>
-                        </div>
-                    <?php elseif ('line' != $settings['title_separator_type']) : ?>
-                        <div class="bdt-title-separator-wrapper">
-                            <?php $this->render_separator(); ?>
-                        </div>
-                    <?php endif; ?>
-                <?php endif; ?>
-
-                <?php if ($settings['description_text']) : ?>
-                    <div <?php $this->print_render_attribute_string('description_text'); ?>>
-                        <?php echo wp_kses($settings['description_text'], element_pack_allow_tags('text')); ?>
-                    </div>
-                <?php endif; ?>
-
-                <?php if ($settings['readmore']) : ?>
-                    <a <?php $this->print_render_attribute_string('readmore'); ?>>
-                        <?php echo esc_html($settings['readmore_text']); ?>
-
-                        <?php if ($settings['advanced_readmore_icon']['value']) : ?>
-
-                            <span class="bdt-button-icon-align-<?php echo esc_attr($settings['readmore_icon_align']); ?>">
-
-                                <?php Icons_Manager::render_icon($settings['advanced_readmore_icon'], ['aria-hidden' => 'true', 'class' => 'fa-fw']); ?>
-
-                            </span>
-
-                        <?php endif; ?>
-                    </a>
-                <?php endif ?>
-
-            </div>
-
-            <?php if ($settings['show_indicator'] === 'yes') : ?>
-                <?php $this->render_direction(); ?>
-
-            <?php endif; ?>
-
-        </div>
-
-        <?php if ($settings['badge'] and '' != $settings['badge_text']) : ?>
-            <div class="bdt-step-flow-badge bdt-position-<?php echo esc_attr($settings['badge_position']); ?>">
-                <span class="bdt-badge"><?php echo esc_html($settings['badge_text']); ?></span>
-            </div>
-        <?php endif; ?>
-
-<?php
-    }
+		if ( ! empty( $settings['global_link'] ) && $settings['global_link'] === 'yes' && ! empty( $settings['global_link_url']['url'] ) ) {
+			$target = ! empty( $settings['global_link_url']['is_external'] ) ? '_blank' : '_self';
+			$this->add_render_attribute( 'step-flow', 'onclick', "window.open('" . esc_url( $settings['global_link_url']['url'] ) . "', '$target')" );
+		}
+		?>
+		<div <?php $this->print_render_attribute_string( 'step-flow' ); ?>>
+			<?php $this->render_icon( $settings ); ?>
+			<div class="bdt-step-flow-content">
+				<?php $this->render_title( $settings ); ?>
+				<?php if ( ! empty( $settings['show_separator'] ) && $settings['show_separator'] === 'yes' ) : ?>
+					<?php
+					$separator_type = isset( $settings['title_separator_type'] ) ? $settings['title_separator_type'] : 'line';
+					if ( $separator_type === 'line' ) :
+						?>
+						<div class="bdt-title-separator-wrapper">
+							<div class="bdt-title-separator"></div>
+						</div>
+					<?php else : ?>
+						<div class="bdt-title-separator-wrapper">
+							<?php $this->render_separator( $settings ); ?>
+						</div>
+					<?php endif; ?>
+				<?php endif; ?>
+				<?php if ( ! empty( $settings['description_text'] ) ) : ?>
+					<div <?php $this->print_render_attribute_string( 'description_text' ); ?>>
+						<?php echo wp_kses( $settings['description_text'], element_pack_allow_tags( 'text' ) ); ?>
+					</div>
+				<?php endif; ?>
+				<?php if ( ! empty( $settings['readmore'] ) && $settings['readmore'] === 'yes' ) : ?>
+					<a <?php $this->print_render_attribute_string( 'readmore' ); ?>>
+						<?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : esc_html__( 'Read More', 'bdthemes-element-pack' ) ); ?>
+						<?php if ( ! empty( $settings['advanced_readmore_icon']['value'] ) ) : ?>
+							<span class="bdt-button-icon-align-<?php echo esc_attr( isset( $settings['readmore_icon_align'] ) ? $settings['readmore_icon_align'] : 'right' ); ?>">
+								<?php Icons_Manager::render_icon( $settings['advanced_readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+							</span>
+						<?php endif; ?>
+					</a>
+				<?php endif; ?>
+			</div>
+			<?php if ( ! empty( $settings['show_indicator'] ) && $settings['show_indicator'] === 'yes' ) : ?>
+				<?php $this->render_direction( $settings ); ?>
+			<?php endif; ?>
+		</div>
+		<?php if ( ! empty( $settings['badge'] ) && $settings['badge'] === 'yes' && ! empty( $settings['badge_text'] ) ) : ?>
+			<div class="bdt-step-flow-badge bdt-position-<?php echo esc_attr( isset( $settings['badge_position'] ) ? $settings['badge_position'] : 'top-center' ); ?>">
+				<span class="bdt-badge"><?php echo esc_html( $settings['badge_text'] ); ?></span>
+			</div>
+		<?php endif; ?>
+		<?php
+	}
 }

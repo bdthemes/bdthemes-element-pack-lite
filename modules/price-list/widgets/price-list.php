@@ -316,7 +316,7 @@ class Price_List extends Module_Base {
 					'size' => 14,
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-price-list-cart-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-price-list-cart-icon' => 'margin-inline-start: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

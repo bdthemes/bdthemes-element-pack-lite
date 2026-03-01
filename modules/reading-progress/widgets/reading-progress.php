@@ -91,10 +91,10 @@ class Reading_Progress extends Module_Base {
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'bottom-right',
 				'options'   => [ 
-					'bottom-right' => __( 'Bottom Right', 'bdthemes-element-pack' ),
-					'bottom-left'  => __( 'Bottom Left', 'bdthemes-element-pack' ),
-					'top-right'    => __( 'Top Right', 'bdthemes-element-pack' ),
-					'top-left'     => __( 'Top Left', 'bdthemes-element-pack' ),
+					'bottom-right' => __( 'Bottom End', 'bdthemes-element-pack' ),
+					'bottom-left'  => __( 'Bottom Start', 'bdthemes-element-pack' ),
+					'top-right'    => __( 'Top End', 'bdthemes-element-pack' ),
+					'top-left'     => __( 'Top Start', 'bdthemes-element-pack' ),
 				],
 				'condition' => [ 
 					'_skin' => [ '', 'bdt-back-to-top-with-progress' ],

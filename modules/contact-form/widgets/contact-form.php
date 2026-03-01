@@ -202,18 +202,18 @@ class Contact_Form extends Module_Base {
 			[ 
 				'label'     => esc_html__( 'Text Align', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::CHOOSE,
-				'default'   => 'left',
+				'default'   => 'start',
 				'options'   => [ 
-					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+					'start'   => [ 
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
 						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'right'  => [ 
-							'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+					'end'  => [ 
+							'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
 							'icon'  => 'eicon-text-align-right',
 						],
 				],

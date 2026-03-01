@@ -25,7 +25,7 @@ class Svg_Image extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'SVG', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'SVG Image', 'bdthemes-element-pack' );
 	}
 
 	public function get_icon() {
@@ -40,16 +40,16 @@ class Svg_Image extends Module_Base {
 		return [ 'image', 'svg image', 'svg' ];
 	}
 
-	public function get_script_depends() {
+		public function get_script_depends() {
 		if ( $this->ep_is_edit_mode() ) {
 			if ( true == is_ep_pro() ) {
-				return [ 'draw-svg-plugin-js', 'scroll-trigger', 'magic-scroll', 'magic-scroll-animation', 'ep-scripts' ];
+				return [ 'draw-svg-plugin-js', 'scroll-trigger', 'ep-scripts' ];
 			} else {
 				return [ 'ep-scripts' ];
 			}
 		} else {
 			if ( true == is_ep_pro() ) {
-				return [ 'gsap', 'draw-svg-plugin-js', 'magic-scroll', 'magic-scroll-animation', 'scroll-trigger',  'ep-svg-image' ];
+				return [ 'gsap', 'draw-svg-plugin-js', 'scroll-trigger', 'ep-svg-image' ];
 			} else {
 				return [];
 			}
@@ -345,6 +345,145 @@ class Svg_Image extends Module_Base {
 					'condition'          => [ 
 						'svg_image_drawer_type!' => 'viewport',
 						'svg_image_draw'         => 'yes'
+					],
+					'frontend_available' => true,
+				]
+			);
+
+			$this->add_control(
+				'svg_image_easing',
+				[ 
+					'label'              => esc_html__( 'Easing', 'bdthemes-element-pack' ),
+					'type'               => Controls_Manager::SELECT,
+					'options'            => [ 
+						'none'         => esc_html__( 'None (Linear)', 'bdthemes-element-pack' ),
+						'power1.out'   => esc_html__( 'Power1 Out', 'bdthemes-element-pack' ),
+						'power1.in'    => esc_html__( 'Power1 In', 'bdthemes-element-pack' ),
+						'power1.inOut' => esc_html__( 'Power1 InOut', 'bdthemes-element-pack' ),
+						'power2.out'   => esc_html__( 'Power2 Out', 'bdthemes-element-pack' ),
+						'power2.in'    => esc_html__( 'Power2 In', 'bdthemes-element-pack' ),
+						'power2.inOut' => esc_html__( 'Power2 InOut', 'bdthemes-element-pack' ),
+						'power3.out'   => esc_html__( 'Power3 Out', 'bdthemes-element-pack' ),
+						'power3.in'    => esc_html__( 'Power3 In', 'bdthemes-element-pack' ),
+						'power3.inOut' => esc_html__( 'Power3 InOut', 'bdthemes-element-pack' ),
+						'power4.out'   => esc_html__( 'Power4 Out', 'bdthemes-element-pack' ),
+						'power4.inOut' => esc_html__( 'Power4 InOut', 'bdthemes-element-pack' ),
+						'back.out'     => esc_html__( 'Back Out', 'bdthemes-element-pack' ),
+						'back.inOut'   => esc_html__( 'Back InOut', 'bdthemes-element-pack' ),
+						'elastic.out'  => esc_html__( 'Elastic Out', 'bdthemes-element-pack' ),
+						'bounce.out'   => esc_html__( 'Bounce Out', 'bdthemes-element-pack' ),
+					],
+					'default'            => 'power2.out',
+					'condition'          => [ 
+						'svg_image_draw' => 'yes'
+					],
+					'frontend_available' => true,
+				]
+			);
+
+			$this->add_control(
+				'svg_image_stagger',
+				[ 
+					'label'              => esc_html__( 'Stagger Delay', 'bdthemes-element-pack' ),
+					'type'               => Controls_Manager::SLIDER,
+					'description'        => esc_html__( 'Delay between each SVG path animation.', 'bdthemes-element-pack' ),
+					'range'              => [ 
+						'px' => [ 
+							'min'  => 0,
+							'max'  => 2,
+							'step' => 0.05,
+						]
+					],
+					'default'            => [ 
+						'unit' => 'px',
+						'size' => 0.1,
+					],
+					'condition'          => [ 
+						'svg_image_draw' => 'yes'
+					],
+					'frontend_available' => true,
+				]
+			);
+
+			$this->add_control(
+				'svg_image_stagger_from',
+				[ 
+					'label'              => esc_html__( 'Stagger From', 'bdthemes-element-pack' ),
+					'type'               => Controls_Manager::SELECT,
+					'options'            => [ 
+						'start'  => esc_html__( 'Start', 'bdthemes-element-pack' ),
+						'center'  => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'end'     => esc_html__( 'End', 'bdthemes-element-pack' ),
+						'edges'   => esc_html__( 'Edges', 'bdthemes-element-pack' ),
+						'random'  => esc_html__( 'Random', 'bdthemes-element-pack' ),
+					],
+					'default'            => 'start',
+					'condition'          => [ 
+						'svg_image_draw' => 'yes'
+					],
+					'frontend_available' => true,
+				]
+			);
+
+			$this->add_control(
+				'svg_image_draw_live',
+				[ 
+					'label'              => esc_html__( 'Responsive (Live)', 'bdthemes-element-pack' ),
+					'type'               => Controls_Manager::SWITCHER,
+					'description'        => esc_html__( 'Recalculate path length on resize for responsive SVGs.', 'bdthemes-element-pack' ),
+					'default'            => 'no',
+					'condition'          => [ 
+						'svg_image_draw' => 'yes'
+					],
+					'frontend_available' => true,
+				]
+			);
+
+			$this->add_control(
+				'svg_image_scrub',
+				[ 
+					'label'              => esc_html__( 'Scrub Smoothness', 'bdthemes-element-pack' ),
+					'type'               => Controls_Manager::SLIDER,
+					'description'        => esc_html__( 'Higher value = smoother scroll-linked animation. 0 = instant.', 'bdthemes-element-pack' ),
+					'range'              => [ 
+						'px' => [ 
+							'min'  => 0,
+							'max'  => 3,
+							'step' => 0.1,
+						]
+					],
+					'default'            => [ 
+						'unit' => 'px',
+						'size' => 1,
+					],
+					'condition'          => [ 
+						'svg_image_draw'         => 'yes',
+						'svg_image_drawer_type' => 'viewport',
+					],
+					'frontend_available' => true,
+				]
+			);
+
+			$this->add_control(
+				'svg_image_scroll_length',
+				[ 
+					'label'              => esc_html__( 'Scroll Length (px)', 'bdthemes-element-pack' ),
+					'type'               => Controls_Manager::SLIDER,
+					'description'        => esc_html__( 'Scroll distance to complete the draw animation.', 'bdthemes-element-pack' ),
+					'range'              => [ 
+						'px' => [ 
+							'min'  => 100,
+							'max'  => 1500,
+							'step' => 50,
+						]
+					],
+					'default'            => [ 
+						'unit' => 'px',
+						'size' => 600,
+					],
+					'condition'          => [ 
+						'svg_image_draw'         => 'yes',
+						'svg_image_drawer_type' => 'viewport',
 					],
 					'frontend_available' => true,
 				]

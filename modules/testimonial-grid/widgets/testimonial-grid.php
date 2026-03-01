@@ -4,17 +4,16 @@ namespace ElementPack\Modules\TestimonialGrid\Widgets;
 
 use ElementPack\Base\Module_Base;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes;
 use Elementor\Group_Control_Border;
-use Elementor\Icons_Manager;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Background;
 use ElementPack\Includes\Controls\GroupQuery\Group_Control_Query;
 use ElementPack\Traits\Global_Widget_Controls;
 
-if ( ! defined( 'ABSPATH' ) )
-	exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 class Testimonial_Grid extends Module_Base {
 	use Group_Control_Query;
 	use Global_Widget_Controls;
@@ -40,19 +39,11 @@ class Testimonial_Grid extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
-		} else {
-			return [ 'ep-font', 'ep-testimonial-grid' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-font', 'ep-testimonial-grid' ];
 	}
 
 	public function get_script_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-scripts' ];
-		} else {
-			return [ 'ep-text-read-more-toggle' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-scripts' ] : [ 'ep-text-read-more-toggle' ];
 	}
 
 	public function get_custom_help_url() {
@@ -64,9 +55,8 @@ class Testimonial_Grid extends Module_Base {
 	}
 
 	public function has_widget_inner_wrapper(): bool {
-        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-    }
-	
+		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+	}
 
 	public function register_controls() {
 
@@ -112,15 +102,6 @@ class Testimonial_Grid extends Module_Base {
 				],
 			]
 		);
-
-		// $this->add_control(
-		//     'posts',
-		//     [
-		//         'label'   => esc_html__('Posts Per Page', 'bdthemes-element-pack'),
-		//         'type'    => Controls_Manager::NUMBER,
-		//         'default' => 4,
-		//     ]
-		// );
 
 		$this->add_control(
 			'show_pagination',
@@ -216,6 +197,11 @@ class Testimonial_Grid extends Module_Base {
 			[ 
 				'label' => esc_html__( 'Show Comma After Title', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'show_title' => 'yes',
+					'show_address' => 'yes',
+					'meta_multi_line!' => 'yes',
+				],
 			]
 		);
 
@@ -863,11 +849,11 @@ class Testimonial_Grid extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#FFCC00',
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-1 .bdt-rating-item:nth-child(1)'    => 'color: {{VALUE}};',
-					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-2 .bdt-rating-item:nth-child(-n+2)' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-3 .bdt-rating-item:nth-child(-n+3)' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-4 .bdt-rating-item:nth-child(-n+4)' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-5 .bdt-rating-item:nth-child(-n+5)' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-1 .bdt-rating-item:nth-of-type(1)'    => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-2 .bdt-rating-item:nth-of-type(-n+2)' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-3 .bdt-rating-item:nth-of-type(-n+3)' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-4 .bdt-rating-item:nth-of-type(-n+4)' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-testimonial-grid .bdt-rating.bdt-rating-5 .bdt-rating-item:nth-of-type(-n+5)' => 'color: {{VALUE}};',
 				],
 				'condition' => [ 
 					'original_color' => ''
@@ -1366,215 +1352,172 @@ class Testimonial_Grid extends Module_Base {
 
 
 	public function get_taxonomies( $post_type = '' ) {
-		$_taxonomies = [];
+		$result = [];
 		if ( $post_type ) {
-			$taxonomies              = get_taxonomies( [ 'public' => true, 'object_type' => [ $post_type ] ], 'object' );
-			$tax                     = array_diff_key( wp_list_pluck( $taxonomies, 'label', 'name' ), [] );
-			$_taxonomies[ $post_type ] = count( $tax ) !== 0 ? $tax : '';
+			$taxonomies = get_taxonomies( [ 'public' => true, 'object_type' => [ $post_type ] ], 'object' );
+			$tax       = array_diff_key( wp_list_pluck( $taxonomies, 'label', 'name' ), [] );
+			$result[ $post_type ] = $tax !== [] ? $tax : '';
 		}
-		return $_taxonomies;
+		return $result;
 	}
 
-	public function filter_menu_terms() {
-
-		$settings    = $this->get_settings_for_display();
-		$taxonomy    = $settings[ 'taxonomy_' . $settings['posts_source'] ];
-		$categories  = get_the_terms( get_the_ID(), $taxonomy );
-		$_categories = [];
-		if ( $categories ) {
-			foreach ( $categories as $category ) {
-				$_categories[ $category->slug ] = strtolower( $category->slug );
-			}
+	public function filter_menu_terms( $settings ) {
+		$source   = $settings['posts_source'] ?? '';
+		$tax_key  = 'taxonomy_' . $source;
+		$taxonomy = $settings[ $tax_key ] ?? '';
+		if ( $taxonomy === '' ) {
+			return '';
 		}
-		return implode( ' ', $_categories );
+		$categories = get_the_terms( get_the_ID(), $taxonomy );
+		if ( ! is_array( $categories ) ) {
+			return '';
+		}
+		$slugs = [];
+		foreach ( $categories as $term ) {
+			$slugs[ $term->slug ] = strtolower( $term->slug );
+		}
+		return implode( ' ', $slugs );
 	}
-	protected function filter_menu_categories() {
-		$settings           = $this->get_settings_for_display();
-		$include_Categories = $settings['posts_include_term_ids'];
-		$exclude_Categories = $settings['posts_exclude_term_ids'];
-		$post_options       = [];
-		if ( isset( $settings[ 'taxonomy_' . $settings['posts_source'] ] ) ) {
-			$taxonomy        = $settings[ 'taxonomy_' . $settings['posts_source'] ];
-			$params          = [ 
-				'taxonomy'   => $taxonomy,
-				'hide_empty' => true,
-				'include'    => $include_Categories,
-				'exclude'    => $exclude_Categories,
-			];
-			$post_categories = get_terms( $params );
-			if ( is_wp_error( $post_categories ) ) {
-				return $post_options;
-			}
-			if ( false !== $post_categories and is_array( $post_categories ) ) {
-				foreach ( $post_categories as $category ) {
-					$post_options[ $category->slug ] = $category->name;
-				}
-			}
-		}
 
+	protected function filter_menu_categories( $settings ) {
+		$post_options = [];
+		$source       = $settings['posts_source'] ?? '';
+		$tax_key      = 'taxonomy_' . $source;
+		if ( ! isset( $settings[ $tax_key ] ) ) {
+			return $post_options;
+		}
+		$taxonomy = $settings[ $tax_key ];
+		$params   = [
+			'taxonomy'   => $taxonomy,
+			'hide_empty' => true,
+			'include'    => $settings['posts_include_term_ids'] ?? [],
+			'exclude'    => $settings['posts_exclude_term_ids'] ?? [],
+		];
+		$terms = get_terms( $params );
+		if ( is_wp_error( $terms ) || ! is_array( $terms ) ) {
+			return $post_options;
+		}
+		foreach ( $terms as $term ) {
+			$post_options[ $term->slug ] = $term->name;
+		}
 		return $post_options;
 	}
 
 
 	public function render_query( $posts_per_page ) {
-		$settings               = $this->get_settings();
-		$args                   = [];
-		$args['posts_per_page'] = $posts_per_page;
-		if ( $settings['show_pagination'] ) {
+		$raw     = $this->get_settings();
+		$args    = [
+			'posts_per_page' => $posts_per_page,
+		];
+		if ( ! empty( $raw['show_pagination'] ) ) {
 			$args['paged'] = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 		}
-
-		$default = $this->getGroupControlQueryArgs();
-		$args    = array_merge( $default, $args );
-
-		return $this->_query = new \WP_Query( $args );
+		$args         = array_merge( $this->getGroupControlQueryArgs(), $args );
+		$this->_query = new \WP_Query( $args );
+		return $this->_query;
 	}
-	public function render_image( $image_id ) {
-		$settings = $this->get_settings_for_display();
 
-		if ( ! $settings['show_image'] ) {
+	public function render_image( $image_id, $settings ) {
+
+		if ( ! isset( $settings['show_image'] ) || $settings['show_image'] !== 'yes' ) {
 			return;
 		}
-
-		$testimonial_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $image_id ), 'medium' );
-
-		if ( ! $testimonial_thumb ) {
-			$testimonial_thumb = BDTEP_ASSETS_URL . 'images/member.svg';
-		} else {
-			$testimonial_thumb = $testimonial_thumb[0];
-		}
-
+		$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $image_id ), 'medium' );
+		$src   = ( $thumb && isset( $thumb[0] ) ) ? $thumb[0] : BDTEP_ASSETS_URL . 'images/member.svg';
+		$title = get_the_title( $image_id );
 		?>
 		<div class="bdt-flex bdt-position-relative">
 			<div class="bdt-testimonial-grid-img-wrapper bdt-overflow-hidden bdt-border-circle bdt-background-cover">
-				<img src="<?php echo esc_url( $testimonial_thumb ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" />
+				<img src="<?php echo esc_url( $src ); ?>" alt="<?php echo esc_attr( $title ); ?>" />
 			</div>
-			<?php $this->render_review_platform( get_the_ID() ); ?>
+			<?php $this->render_review_platform( $image_id, $settings ); ?>
 		</div>
 		<?php
 	}
 
-	public function render_title( $post_id ) {
-		$settings = $this->get_settings_for_display();
-		if ( ! $settings['show_title'] ) {
+	public function render_title( $post_id, $settings ) {
+
+		if ( $settings['show_title'] !== 'yes' ) {
 			return;
 		}
-
 		$company_name = get_post_meta( $post_id, 'bdthemes_tm_company_name', true );
 		$author_name  = get_the_title( $post_id );
-		$use_schema   = ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'];
-
-		if ( $use_schema ) {
-			?>
-			<h4 class="bdt-testimonial-grid-title bdt-margin-remove-bottom bdt-margin-remove-top">
+		$use_schema   = $settings['schema_rich_results'] === 'yes';
+		$show_comma   = $settings['show_comma'] === 'yes'
+			&& $settings['show_address'] === 'yes'
+			&& $company_name !== '';
+		?>
+		<h4 class="bdt-testimonial-grid-title bdt-margin-remove-bottom bdt-margin-remove-top">
+			<?php if ( $use_schema ) : ?>
 				<span itemprop="author" itemscope itemtype="https://schema.org/Person">
 					<span itemprop="name"><?php echo esc_html( $author_name ); ?></span>
-				</span><?php if ( $settings['show_comma'] && $settings['show_address'] && $company_name ) {
-					echo ', ';
-				} ?>
-			</h4>
-			<?php
-		} else {
-			?>
-			<h4 class="bdt-testimonial-grid-title bdt-margin-remove-bottom bdt-margin-remove-top">
-				<?php echo esc_html( $author_name ); ?><?php if ( $settings['show_comma'] && $settings['show_address'] && $company_name ) {
-					echo ', ';
-				} ?>
-			</h4>
-			<?php
-		}
+				</span><?php if ( $show_comma ) { echo ', '; } ?>
+			<?php else : ?>
+				<?php echo esc_html( $author_name ); ?><?php if ( $show_comma ) { echo ', '; } ?>
+			<?php endif; ?>
+		</h4>
+		<?php
 	}
 
-	public function render_address( $post_id ) {
-		$settings = $this->get_settings_for_display();
+	public function render_address( $post_id, $settings ) {
 
-		if ( ! $settings['show_address'] ) {
+		if ( $settings['show_address'] !== 'yes' ) {
 			return;
 		}
-
+		$company = get_post_meta( $post_id, 'bdthemes_tm_company_name', true );
 		?>
 		<p class="bdt-testimonial-grid-address bdt-text-meta bdt-margin-remove">
-			<?php echo wp_kses_post(get_post_meta( $post_id, 'bdthemes_tm_company_name', true )); ?>
+			<?php echo wp_kses_post( $company ); ?>
 		</p>
 		<?php
 	}
 
-	public function render_excerpt() {
-		$settings = $this->get_settings_for_display();
+	public function render_excerpt( $settings ) {
 
-		if ( ! $settings['show_text'] ) {
+		if ( $settings['show_text'] !== 'yes' ) {
 			return;
 		}
-
-		$strip_shortcode = $this->get_settings_for_display( 'strip_shortcode' );
-
+		$strip_shortcode = $settings['strip_shortcode'] === 'yes';
 		$this->add_render_attribute( 'text-wrap', 'class', 'bdt-testimonial-grid-text', true );
-		if ( ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'] ) {
+		if ( $settings['schema_rich_results'] === 'yes' ) {
 			$this->add_render_attribute( 'text-wrap', 'itemprop', 'description', true );
 		}
-
-		if ($settings['text_read_more_toggle'] == 'yes') {
-			if ( isset( $settings['text_limit'] ) && ! empty( $settings['text_limit'] ) ) {
-				$this->add_render_attribute( 'text-wrap', 'class', 'bdt-ep-read-more-text', true );
-				$this->add_render_attribute( 'text-wrap', 'data-read-more', wp_json_encode(
-					[ 
-						'words_length' => $settings['text_limit'],
-					]
-				), true );
-			}
+		$read_more = $settings['text_read_more_toggle'] === 'yes';
+		if ( $read_more && $settings['text_limit'] > 0 ) {
+			$this->add_render_attribute( 'text-wrap', 'class', 'bdt-ep-read-more-text', true );
+			$this->add_render_attribute( 'text-wrap', 'data-read-more', wp_json_encode( [ 'words_length' => $settings['text_limit'] ] ), true );
 			$text_limit = 0;
 		} else {
 			$text_limit = $settings['text_limit'];
 		}
-		$ellipsis = isset($settings['ellipsis']) ? $settings['ellipsis'] : '' ;
-
+		$ellipsis = ! empty( $settings['ellipsis'] ) ? $settings['ellipsis'] : '';
 		?>
 		<div <?php $this->print_render_attribute_string( 'text-wrap' ); ?>>
 			<?php
 			if ( has_excerpt() ) {
 				the_excerpt();
 			} else {
-				echo wp_kses_post(element_pack_custom_excerpt( $text_limit, $strip_shortcode, $ellipsis ));
+				echo wp_kses_post( element_pack_custom_excerpt( $text_limit, $strip_shortcode, $ellipsis ) );
 			}
 			?>
 		</div>
 		<?php
-
 	}
 
-	public function render_review_platform( $post_id ) {
-		$settings = $this->get_settings_for_display();
+	public function render_review_platform( $post_id, $settings ) {
 
-		if ( ! $settings['show_review_platform'] ) {
+		if ( $settings['show_review_platform'] !== 'yes' ) {
 			return;
 		}
-
-		$platform    = get_post_meta( $post_id, 'bdthemes_tm_platform', true );
-		$review_link = get_post_meta( $post_id, 'bdthemes_tm_review_link', true );
-
-		if ( ! $platform ) {
-			$platform = 'self';
-		}
-
-		if ( ! $review_link ) {
-			$review_link = '#';
-		}
-
+		$platform    = get_post_meta( $post_id, 'bdthemes_tm_platform', true ) ?: 'self';
+		$review_link = get_post_meta( $post_id, 'bdthemes_tm_review_link', true ) ?: '#';
 		?>
-		<a href="<?php echo esc_url($review_link); ?>" class="bdt-review-platform bdt-flex-inline"
-			bdt-tooltip="<?php echo esc_html( $platform ); ?>">
-			<i class="ep-icon-<?php echo esc_attr( strtolower( $platform ) ); ?> bdt-platform-icon bdt-flex bdt-flex-middle bdt-flex-center"
-				aria-hidden="true"></i>
+		<a href="<?php echo esc_url( $review_link ); ?>" class="bdt-review-platform bdt-flex-inline" bdt-tooltip="<?php echo esc_attr( $platform ); ?>">
+			<i class="ep-icon-<?php echo esc_attr( strtolower( $platform ) ); ?> bdt-platform-icon bdt-flex bdt-flex-middle bdt-flex-center" aria-hidden="true"></i>
 		</a>
 		<?php
 	}
 
-	/**
-	 * Returns sanitized rating 1–5 for schema and display.
-	 *
-	 * @param int $post_id Post ID.
-	 * @return int
-	 */
 	protected function get_sanitized_rating( $post_id ) {
 		$raw = get_post_meta( $post_id, 'bdthemes_tm_rating', true );
 		$num = intval( $raw );
@@ -1584,42 +1527,35 @@ class Testimonial_Grid extends Module_Base {
 		return max( 1, min( 5, $num ) );
 	}
 
-	/**
-	 * Outputs Schema.org itemReviewed (Organization/Product/LocalBusiness) for Google Rich Results.
-	 */
-	public function render_schema_item_reviewed() {
-		$settings = $this->get_settings_for_display();
-		if ( empty( $settings['schema_rich_results'] ) || 'yes' !== $settings['schema_rich_results'] ) {
+	public function render_schema_item_reviewed( $settings ) {
+
+		if ( $settings['schema_rich_results'] !== 'yes' ) {
 			return;
 		}
 		$name = ! empty( $settings['schema_item_reviewed_name'] ) ? $settings['schema_item_reviewed_name'] : get_bloginfo( 'name' );
-		$type = ! empty( $settings['schema_item_reviewed_type'] ) ? $settings['schema_item_reviewed_type'] : 'Organization';
+		$type = $settings['schema_item_reviewed_type'] ?? 'Organization';
 		$type = in_array( $type, [ 'Organization', 'Product', 'LocalBusiness' ], true ) ? $type : 'Organization';
-		$visually_hidden_style = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
+		$hidden_style = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
 		?>
-		<span class="bdt-ep-schema-item-reviewed" style="<?php echo esc_attr( $visually_hidden_style ); ?>" itemprop="itemReviewed" itemscope itemtype="https://schema.org/<?php echo esc_attr( $type ); ?>">
+		<span class="bdt-ep-schema-item-reviewed" style="<?php echo esc_attr( $hidden_style ); ?>" itemprop="itemReviewed" itemscope itemtype="https://schema.org/<?php echo esc_attr( $type ); ?>">
 			<meta itemprop="name" content="<?php echo esc_attr( $name ); ?>">
 		</span>
 		<?php
 	}
 
-	/**
-	 * Outputs schema.org rating and date only (for when rating display is off but schema is on).
-	 */
-	public function render_rating_schema_only( $post_id ) {
-		$settings = $this->get_settings_for_display();
-		if ( empty( $settings['schema_rich_results'] ) || 'yes' !== $settings['schema_rich_results'] ) {
+	public function render_rating_schema_only( $post_id, $settings ) {
+		if ( $settings['schema_rich_results'] !== 'yes' ) {
 			return;
 		}
-		if ( ! empty( $settings['show_rating'] ) && 'yes' === $settings['show_rating'] ) {
+		if ( $settings['show_rating'] === 'yes' ) {
 			return;
 		}
-		$rating = $this->get_sanitized_rating( $post_id );
-		$date_published = get_the_date( 'c', $post_id );
-		$hidden_style = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
+		$rating   = $this->get_sanitized_rating( $post_id );
+		$date     = get_the_date( 'c', $post_id );
+		$hidden   = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
 		?>
-		<meta itemprop="datePublished" content="<?php echo esc_attr( $date_published ); ?>">
-		<span style="<?php echo esc_attr( $hidden_style ); ?>" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+		<meta itemprop="datePublished" content="<?php echo esc_attr( $date ); ?>">
+		<span style="<?php echo esc_attr( $hidden ); ?>" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
 			<meta itemprop="worstRating" content="1">
 			<meta itemprop="ratingValue" content="<?php echo absint( $rating ); ?>">
 			<meta itemprop="bestRating" content="5">
@@ -1627,20 +1563,16 @@ class Testimonial_Grid extends Module_Base {
 		<?php
 	}
 
-	public function render_rating( $post_id ) {
-		$settings = $this->get_settings_for_display();
-
-		if ( 'yes' != $settings['show_rating'] ) {
+	public function render_rating( $post_id, $settings ) {
+		if ( $settings['show_rating'] !== 'yes' ) {
 			return;
 		}
-
 		$rating = $this->get_sanitized_rating( $post_id );
-		$date_published = get_the_date( 'c', $post_id );
+		$date   = get_the_date( 'c', $post_id );
 		?>
 		<div class="bdt-testimonial-grid-rating">
-			<meta itemprop="datePublished" content="<?php echo esc_attr( $date_published ); ?>">
-			<ul class="bdt-rating bdt-rating-<?php echo absint( $rating ); ?> bdt-grid bdt-grid-collapse"
-				data-bdt-grid itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+			<meta itemprop="datePublished" content="<?php echo esc_attr( $date ); ?>">
+			<ul class="bdt-rating bdt-rating-<?php echo absint( $rating ); ?> bdt-grid bdt-grid-collapse" data-bdt-grid itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
 				<meta itemprop="worstRating" content="1">
 				<meta itemprop="ratingValue" content="<?php echo absint( $rating ); ?>">
 				<meta itemprop="bestRating" content="5">
@@ -1654,61 +1586,38 @@ class Testimonial_Grid extends Module_Base {
 		<?php
 	}
 
-	public function render_filter_menu() {
-		$settings         = $this->get_settings_for_display();
-		$testi_categories = $this->filter_menu_categories(); ?>
+	public function render_filter_menu( $settings ) {
+		$testi_categories = $this->filter_menu_categories( $settings );
+		$custom_text      = $settings['filter_custom_text'] === 'yes';
+		$filter_label     = $custom_text ? ( $settings['filter_custom_text_filter'] ) : __( 'Filter', 'bdthemes-element-pack' );
+		$all_label        = $custom_text && ! empty( $settings['filter_custom_text_all'] ) ? $settings['filter_custom_text_all'] : __( 'All', 'bdthemes-element-pack' );
+		$show_all_item    = $custom_text ? ! empty( $settings['filter_custom_text_all'] ) : true;
+		?>
 		<div class="bdt-ep-grid-filters-wrapper">
-			<button class="bdt-button bdt-button-default bdt-hidden@m" type="button">
-				<?php if ( isset( $settings['filter_custom_text'] ) && ( $settings['filter_custom_text'] != 'yes' ) ) : ?>
-					<?php esc_html_e( 'Filter', 'bdthemes-element-pack' ); ?>
-				<?php else : ?>
-					<?php echo esc_html( $settings['filter_custom_text_filter'] ); ?>
-				<?php endif; ?>
-			</button>
-			<div data-bdt-dropdown="mode: click;"
-				class="bdt-dropdown bdt-margin-remove-top bdt-margin-remove-bottom bdt-hidden@m">
+			<button class="bdt-button bdt-button-default bdt-hidden@m" type="button"><?php echo esc_html( $filter_label ); ?></button>
+			<div data-bdt-dropdown="mode: click;" class="bdt-dropdown bdt-margin-remove-top bdt-margin-remove-bottom bdt-hidden@m">
 				<ul class="bdt-nav bdt-dropdown-nav">
-					<?php if ( $settings['filter_custom_text']) : ?>
-						<?php if ( ! empty($settings['filter_custom_text_all']) ) : ?>
-							<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
-								<a href="#"><?php echo esc_html( $settings['filter_custom_text_all'] ); ?></a>
-							</li>
-						<?php endif; ?>
-					<?php else : ?>
+					<?php if ( $show_all_item ) : ?>
 						<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
-							<a href="#"><?php esc_html_e( 'All', 'bdthemes-element-pack' ); ?></a>
+							<a href="#"><?php echo esc_html( $all_label ); ?></a>
 						</li>
 					<?php endif; ?>
-					<?php foreach ( $testi_categories as $category ) { ?>
-						<li class="bdt-ep-grid-filter"
-							data-bdt-filter-control="[data-filter*='<?php echo esc_attr( strtolower( $category ) ); ?>']">
-							<a href="#">
-								<?php echo esc_html( $category ); ?>
-							</a>
+					<?php foreach ( $testi_categories as $slug => $name ) : ?>
+						<li class="bdt-ep-grid-filter" data-bdt-filter-control="[data-filter*='<?php echo esc_attr( strtolower( $slug ) ); ?>']">
+							<a href="#"><?php echo esc_html( $name ); ?></a>
 						</li>
-					<?php } ?>
+					<?php endforeach; ?>
 				</ul>
 			</div>
-
-
 			<ul class="bdt-ep-grid-filters bdt-visible@m" data-bdt-margin>
-				<?php if ( $settings['filter_custom_text']) : ?>
-					<?php if ( ! empty($settings['filter_custom_text_all']) ) : ?>
-						<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
-							<a href="#"><?php echo esc_html( $settings['filter_custom_text_all'] ); ?></a>
-						</li>
-					<?php endif; ?>
-				<?php else : ?>
+				<?php if ( $show_all_item ) : ?>
 					<li class="bdt-ep-grid-filter bdt-active" data-bdt-filter-control>
-						<a href="#"><?php esc_html_e( 'All', 'bdthemes-element-pack' ); ?></a>
+						<a href="#"><?php echo esc_html( $all_label ); ?></a>
 					</li>
 				<?php endif; ?>
-				<?php foreach ( $testi_categories as $category ) : ?>
-					<li class="bdt-ep-grid-filter"
-						data-bdt-filter-control="[data-filter*='<?php echo esc_attr( strtolower( $category ) ); ?>']">
-						<a href="#">
-							<?php echo esc_html( $category ); ?>
-						</a>
+				<?php foreach ( $testi_categories as $slug => $name ) : ?>
+					<li class="bdt-ep-grid-filter" data-bdt-filter-control="[data-filter*='<?php echo esc_attr( strtolower( $slug ) ); ?>']">
+						<a href="#"><?php echo esc_html( $name ); ?></a>
 					</li>
 				<?php endforeach; ?>
 			</ul>
@@ -1716,27 +1625,21 @@ class Testimonial_Grid extends Module_Base {
 		<?php
 	}
 
-	public function render_header() {
-		$settings = $this->get_settings_for_display();
-
-		$this->add_render_attribute( 'testimonial-grid-wrapper', 'class', [ 'bdt-testimonial-grid-layout-' . $settings['layout'], 'bdt-testimonial-grid', 'bdt-ep-grid-filter-container' ] );
-
-
-
-		if ( $settings['show_filter_bar'] ) {
+	public function render_header( $settings ) {
+		$this->add_render_attribute( 'testimonial-grid-wrapper', 'class', [
+			'bdt-testimonial-grid-layout-' . $settings['layout'],
+			'bdt-testimonial-grid',
+			'bdt-ep-grid-filter-container',
+		] );
+		if ( $settings['show_filter_bar'] === 'yes' ) {
 			$this->add_render_attribute( 'testimonial-grid-wrapper', 'data-bdt-filter', 'target: #bdt-testimonial-grid-' . $this->get_id() );
 		}
-
 		?>
 		<div <?php $this->print_render_attribute_string( 'testimonial-grid-wrapper' ); ?>>
-
-			<?php if ( $settings['show_filter_bar'] ) {
-				$this->render_filter_menu();
-			}
-
-			?>
-
-			<?php
+			<?php if ( $settings['show_filter_bar'] === 'yes' ) : ?>
+				<?php $this->render_filter_menu( $settings ); ?>
+			<?php endif; ?>
+		<?php
 	}
 
 	public function render_footer() {
@@ -1747,173 +1650,152 @@ class Testimonial_Grid extends Module_Base {
 
 
 
-	public function render_loop_item() {
-		$settings = $this->get_settings_for_display();
-		$id	   = $this->get_id();
+	public function render_loop_item( $settings ) {
+		$widget_id = $this->get_id();
+		$per_page  = isset( $settings['posts_per_page'] ) ? (int) $settings['posts_per_page'] : 4;
+		$wp_query  = $this->render_query( $per_page );
 
-		$wp_query = $this->render_query( $settings['posts_per_page'] );
-
-		// $this->add_render_attribute( 'testimonial-grid', 'data-bdt-grid', '' );
-		// $this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-grid' );
-
-		if ( $settings['item_match_height'] ) {
+		if ( ! empty( $settings['item_match_height'] ) ) {
 			$this->add_render_attribute( 'testimonial-grid', 'data-bdt-height-match', 'div > .bdt-testimonial-grid-item-inner' );
 		}
+		$grid_class = ! empty( $settings['item_masonry'] ) ? 'bdt-testimonial-grid-masonry' : 'bdt-testimonial-grid-default';
+		$this->add_render_attribute( 'testimonial-grid', 'class', $grid_class );
 
-		if ( $settings['item_masonry'] ) {
-			$this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-testimonial-grid-masonry' );
-		} else {
-			$this->add_render_attribute( 'testimonial-grid', 'class', 'bdt-testimonial-grid-default' );
+		if ( ! $wp_query->have_posts() ) {
+			echo '<div class="bdt-alert-warning" bdt-alert>' . esc_html_x( 'Oppps!! There is no post, please select actual post or categories.', 'Frontend', 'bdthemes-element-pack' ) . '</div>';
+			return;
 		}
+		?>
+		<div id="bdt-testimonial-grid-<?php echo esc_attr( $widget_id ); ?>" <?php $this->print_render_attribute_string( 'testimonial-grid' ); ?>>
+			<?php
+			$layout        = $settings['layout'];
+			$columns       = $settings['columns'];
+			$show_filter   = $settings['show_filter_bar'] === 'yes';
+			$schema_on     = $settings['schema_rich_results'] === 'yes';
+			$show_rating   = $settings['show_rating'] === 'yes';
+			$meta_multi    = ! empty( $settings['meta_multi_line'] );
+			$rating_above  = ! empty( $settings['show_rating_above_text'] );
+			$show_title    = $settings['show_title'] === 'yes';
+			$show_address  = $settings['show_address'] === 'yes';
 
-		if ( $wp_query->have_posts() ) {
+			while ( $wp_query->have_posts() ) :
+				$wp_query->the_post();
+				$post_id  = get_the_ID();
+				$platform = get_post_meta( $post_id, 'bdthemes_tm_platform', true );
+				$platform = $platform !== '' ? strtolower( $platform ) : '';
 
+				$item_key = 'testimonial-grid-item' . $post_id;
+				$this->add_render_attribute( $item_key, 'class', 'bdt-testimonial-grid-item bdt-review-' . $platform );
+				if ( $schema_on ) {
+					$this->add_render_attribute( $item_key, 'itemprop', 'review' );
+					$this->add_render_attribute( $item_key, 'itemscope', '' );
+					$this->add_render_attribute( $item_key, 'itemtype', 'https://schema.org/Review' );
+				}
+				if ( $show_filter ) {
+					$this->add_render_attribute( $item_key, 'data-filter', $this->filter_menu_terms( $settings ) );
+				}
+				?>
+				<div <?php $this->print_render_attribute_string( $item_key ); ?>>
+					<?php $this->render_schema_item_reviewed( $settings ); ?>
+					<?php if ( $schema_on && ! $show_rating ) : ?>
+						<?php $this->render_rating_schema_only( $post_id, $settings ); ?>
+					<?php endif; ?>
 
-			?>
-			<div id="bdt-testimonial-grid-<?php echo esc_attr($id); ?>" <?php $this->print_render_attribute_string( 'testimonial-grid' ); ?>>
-				<?php
-
-				while ( $wp_query->have_posts() ) :
-					$wp_query->the_post();
-
-					// $columns_mobile = isset( $settings['columns_mobile'] ) ? $settings['columns_mobile'] : 1;
-					// $columns_tablet = isset( $settings['columns_tablet'] ) ? $settings['columns_tablet'] : 2;
-					// $columns        = isset( $settings['columns'] ) ? $settings['columns'] : 2;
-
-
-					// $this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns_mobile ) );
-					// $this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns_tablet ) . '@s' );
-					// $this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-width-1-' . esc_attr( $columns ) . '@m' );
-
-					$platform = get_post_meta( get_the_ID(), 'bdthemes_tm_platform', true );
-
-					$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'class', 'bdt-testimonial-grid-item bdt-review-' . strtolower( $platform ) );
-					if ( ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'] ) {
-						$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'itemprop', 'review' );
-						$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'itemscope', '' );
-						$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'itemtype', 'https://schema.org/Review' );
-					}
-
-					?>
-					<?php if ( $settings['show_filter_bar'] ) {
-						$this->add_render_attribute( 'testimonial-grid-item' . get_the_Id(), 'data-filter', $this->filter_menu_terms() );
-					} ?>
-
-					<div <?php $this->print_render_attribute_string( 'testimonial-grid-item' . esc_attr( get_the_Id() ) ); ?>>
-						<?php $this->render_schema_item_reviewed(); ?>
-						<?php if ( ! empty( $settings['schema_rich_results'] ) && 'yes' === $settings['schema_rich_results'] && ( empty( $settings['show_rating'] ) || 'yes' !== $settings['show_rating'] ) ) : ?>
-							<?php $this->render_rating_schema_only( get_the_ID() ); ?>
-						<?php endif; ?>
-						<?php if ( '1' == $settings['layout'] ) : ?>
-							<div class="bdt-testimonial-grid-item-inner">
-								<div class="bdt-grid bdt-position-relative bdt-grid-small bdt-flex-middle" data-bdt-grid>
-									<?php $this->render_image( get_the_ID() ); ?>
-									<?php if ( $settings['show_title'] || $settings['show_address'] ) : ?>
-										<div
-											class="bdt-testimonial-grid-title-address <?php echo ( $settings['meta_multi_line'] ) ? 'bdt-meta-multi-line' : ''; ?>">
-											<?php
-											$this->render_title( get_the_ID() );
-											$this->render_address( get_the_ID() );
-
-											if ( $settings['show_rating_above_text'] === '' ) : ?>
-												<?php if ( $settings['show_rating'] ) : ?>
-													<?php if ( '3' <= $settings['columns'] ) : ?>
-														<?php $this->render_rating( get_the_ID() ); ?>
-													<?php endif; ?>
-
-													<?php if ( '2' >= $settings['columns'] ) : ?>
-														<div class="bdt-position-center-right bdt-text-right">
-															<?php $this->render_rating( get_the_ID() ); ?>
-														</div>
-													<?php endif; ?>
-												<?php endif; ?>
-											<?php endif; ?>
-
-										</div>
-									<?php endif; ?>
-								</div>
-
-								<?php if ( $settings['show_rating_above_text'] or $settings['show_text'] ) : ?>
-								<div class="bdt-testimonial-text-rating-wrapper bdt-margin-top">
-									<?php if ( $settings['show_rating_above_text'] ) : ?>
-										<?php $this->render_rating( get_the_ID() ); ?>
-									<?php endif; ?>
-									<?php $this->render_excerpt(); ?>
-								</div>
-								<?php endif; ?>
-							</div>
-						<?php endif; ?>
-
-						<?php if ( '2' == $settings['layout'] ) : ?>
-							<div class="bdt-testimonial-grid-item-inner bdt-position-relative bdt-text-center">
-								<div class="bdt-position-relative bdt-flex-inline">
-									<?php $this->render_image( get_the_ID() ); ?>
-								</div>
-								<?php if ( $settings['show_title'] || $settings['show_address'] ) : ?>
-									<div
-										class="bdt-testimonial-grid-title-address <?php echo ( $settings['meta_multi_line'] ) ? 'bdt-meta-multi-line' : ''; ?>">
+					<?php if ( $layout === '1' ) : ?>
+						<div class="bdt-testimonial-grid-item-inner">
+							<div class="bdt-grid bdt-position-relative bdt-grid-small bdt-flex-middle" data-bdt-grid>
+								<?php $this->render_image( $post_id, $settings ); ?>
+								<?php if ( $show_title || $show_address ) : ?>
+									<div class="bdt-testimonial-grid-title-address <?php echo $meta_multi ? 'bdt-meta-multi-line' : ''; ?>">
 										<?php
-										$this->render_title( get_the_ID() );
-										$this->render_address( get_the_ID() );
+										$this->render_title( $post_id, $settings );
+										$this->render_address( $post_id, $settings );
+										if ( ! $rating_above && $show_rating ) :
+											if ( (int) $columns >= 3 ) :
+												$this->render_rating( $post_id, $settings );
+											elseif ( (int) $columns <= 2 ) : ?>
+												<div class="bdt-position-center-right bdt-text-right">
+													<?php $this->render_rating( $post_id, $settings ); ?>
+												</div>
+											<?php endif;
+										endif;
 										?>
 									</div>
 								<?php endif; ?>
-								<?php $this->render_excerpt(); ?>
-								<?php $this->render_rating( get_the_ID() ); ?>
 							</div>
-						<?php endif; ?>
-
-						<?php if ( '3' == $settings['layout'] ) : ?>
-							<div class="bdt-testimonial-grid-item-inner">
-								<?php $this->render_excerpt(); ?>
-								<div class="bdt-grid bdt-position-relative bdt-grid-small bdt-flex-middle" data-bdt-grid>
-									<?php $this->render_image( get_the_ID() ); ?>
-									<?php if ( $settings['show_title'] || $settings['show_address'] ) : ?>
-										<div
-											class="bdt-testimonial-grid-title-address <?php echo ( $settings['meta_multi_line'] ) ? 'bdt-meta-multi-line' : ''; ?>">
-											<?php
-											$this->render_title( get_the_ID() );
-											$this->render_address( get_the_ID() );
-
-											if ( $settings['show_rating'] ) : ?>
-												<?php if ( '3' <= $settings['columns'] ) : ?>
-													<?php $this->render_rating( get_the_ID() ); ?>
-												<?php endif; ?>
-
-												<?php if ( '2' >= $settings['columns'] ) : ?>
-													<div class="bdt-position-center-right bdt-text-right">
-														<?php $this->render_rating( get_the_ID() ); ?>
-													</div>
-												<?php endif; ?>
-											<?php endif; ?>
-
-										</div>
+							<?php if ( $rating_above || $settings['show_text'] === 'yes' ) : ?>
+								<div class="bdt-testimonial-text-rating-wrapper bdt-margin-top">
+									<?php if ( $rating_above ) : ?>
+										<?php $this->render_rating( $post_id, $settings ); ?>
 									<?php endif; ?>
+									<?php $this->render_excerpt( $settings ); ?>
 								</div>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if ( $layout === '2' ) : ?>
+						<div class="bdt-testimonial-grid-item-inner bdt-position-relative bdt-text-center">
+							<div class="bdt-position-relative bdt-flex-inline">
+								<?php $this->render_image( $post_id, $settings ); ?>
 							</div>
-						<?php endif; ?>
-					</div>
-				<?php endwhile; ?>
+							<?php if ( $show_title || $show_address ) : ?>
+								<div class="bdt-testimonial-grid-title-address <?php echo $meta_multi ? 'bdt-meta-multi-line' : ''; ?>">
+									<?php
+									$this->render_title( $post_id, $settings );
+									$this->render_address( $post_id, $settings );
+									?>
+								</div>
+							<?php endif; ?>
+							<?php $this->render_excerpt( $settings ); ?>
+							<?php $this->render_rating( $post_id, $settings ); ?>
+						</div>
+					<?php endif; ?>
 
-			</div>
-
-			<?php
-			if ( $settings['show_pagination'] ) { ?>
-				<div class="ep-pagination">
-					<?php element_pack_post_pagination( $wp_query ); ?>
+					<?php if ( $layout === '3' ) : ?>
+						<div class="bdt-testimonial-grid-item-inner">
+							<?php $this->render_excerpt( $settings ); ?>
+							<div class="bdt-grid bdt-position-relative bdt-grid-small bdt-flex-middle" data-bdt-grid>
+								<?php $this->render_image( $post_id, $settings ); ?>
+								<?php if ( $show_title || $show_address ) : ?>
+									<div class="bdt-testimonial-grid-title-address <?php echo $meta_multi ? 'bdt-meta-multi-line' : ''; ?>">
+										<?php
+										$this->render_title( $post_id, $settings );
+										$this->render_address( $post_id, $settings );
+										if ( $show_rating ) :
+											if ( (int) $columns >= 3 ) :
+												$this->render_rating( $post_id, $settings );
+											elseif ( (int) $columns <= 2 ) : ?>
+												<div class="bdt-position-center-right bdt-text-right">
+													<?php $this->render_rating( $post_id, $settings ); ?>
+												</div>
+											<?php endif;
+										endif;
+										?>
+									</div>
+								<?php endif; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 				</div>
-				<?php
-			}
-
-			wp_reset_postdata();
-		} else {
-			echo '<div class="bdt-alert-warning" bdt-alert> '. esc_html_x('Oppps!! There is no post, please select actual post or categories.', 'Frontend', 'bdthemes-element-pack') .' <div>';
-		}
+			<?php endwhile; ?>
+		</div>
+		<?php
+		if ( $settings['show_pagination'] === 'yes' ) :
+			?>
+			<div class="ep-pagination">
+				<?php element_pack_post_pagination( $wp_query ); ?>
+			</div>
+			<?php
+		endif;
+		wp_reset_postdata();
 	}
 
 	public function render() {
-		$this->render_header();
-		$this->render_loop_item();
+		$settings = $this->get_settings_for_display();
+
+		$this->render_header( $settings );
+		$this->render_loop_item( $settings );
 		$this->render_footer();
 	}
 }

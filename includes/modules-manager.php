@@ -8,14 +8,16 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-final class Manager {
+final class Manager
+{
 
 
-    public function register_module_and_assets() {
+    public function register_module_and_assets()
+    {
 
         ModuleService::get_widget_settings(function ($settings) {
-            $core_widgets        = $settings['settings_fields']['element_pack_active_modules'];
-            $extensions          = $settings['settings_fields']['element_pack_elementor_extend'];
+            $core_widgets = $settings['settings_fields']['element_pack_active_modules'];
+            $extensions = $settings['settings_fields']['element_pack_elementor_extend'];
             $third_party_widgets = $settings['settings_fields']['element_pack_third_party_widget'];
 
             /**
@@ -51,16 +53,17 @@ final class Manager {
         });
     }
 
-    public function load_module_instance($module) {
+    public function load_module_instance($module)
+    {
 
-        if(isset($_GET['page']) && 'element_pack_options' ==  $_GET['page']){
+        if (isset($_GET['page']) && 'element_pack_options' == $_GET['page']) {
             return;
         }
 
         $direction = is_rtl() ? '.rtl' : '';
-        $suffix    = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+        $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-        $module_id  = $module['name'];
+        $module_id = $module['name'];
         $class_name = str_replace('-', ' ', $module_id);
         $class_name = str_replace(' ', '', ucwords($class_name));
         $class_name = __NAMESPACE__ . '\\Modules\\' . $class_name . '\\Module';
@@ -68,8 +71,11 @@ final class Manager {
         if (!element_pack_is_asset_optimization_enabled()) {
             if (!element_pack_is_preview()) {
                 // register widgets css
+                // if (ModuleService::has_module_style($module_id)) {
+                //     wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . $direction . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
+                // }
                 if (ModuleService::has_module_style($module_id)) {
-                    wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . $direction . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
+                    wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
                 }
                 // register widget JS
                 if (ModuleService::has_module_script($module_id)) {
@@ -83,7 +89,8 @@ final class Manager {
         }
     }
 
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->register_module_and_assets();
     }

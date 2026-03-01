@@ -93,7 +93,7 @@ class DualButton extends Module_Base {
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'start' => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Start', 'bdthemes-element-pack' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
@@ -101,7 +101,7 @@ class DualButton extends Module_Base {
 						'icon' => 'eicon-text-align-center',
 					],
 					'end' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'End', 'bdthemes-element-pack' ),
 						'icon' => 'eicon-text-align-right',
 					],
 				],
@@ -194,7 +194,7 @@ class DualButton extends Module_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .bdt-btn-a' => 'margin-right: {{SIZE}}px;',
+					'{{WRAPPER}} .bdt-btn-a' => 'margin-inline-end: {{SIZE}}px;',
 				],
 				'condition' => [
 					'show_middle_text!' => 'yes',
@@ -263,16 +263,16 @@ class DualButton extends Module_Base {
 				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+					'start' => [
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+					'end' => [
+						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -425,16 +425,16 @@ class DualButton extends Module_Base {
 				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+					'start' => [
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+					'end' => [
+						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],

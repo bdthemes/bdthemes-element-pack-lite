@@ -122,8 +122,8 @@ class Cookie_Consent extends Module_Base {
 				'default'   => 'bottom',
 				'options'   => [ 
 					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
-					'bottom-left'  => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
-					'bottom-right' => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
+					'bottom-left'  => esc_html__( 'Bottom Start', 'bdthemes-element-pack' ),
+					'bottom-right' => esc_html__( 'Bottom End', 'bdthemes-element-pack' ),
 					'top'          => esc_html__( 'Top', 'bdthemes-element-pack' ),
 				],
 				'separator' => 'before',

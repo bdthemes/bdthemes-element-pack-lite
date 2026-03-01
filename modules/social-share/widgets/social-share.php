@@ -276,7 +276,7 @@ class Social_Share extends Module_Base {
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
@@ -284,7 +284,7 @@ class Social_Share extends Module_Base {
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
@@ -384,35 +384,6 @@ class Social_Share extends Module_Base {
 				'type'    => Controls_Manager::DIVIDER,
 			]
 		);
-
-		// $this->add_responsive_control(
-		// 	'column_gap',
-		// 	[
-		// 		'label'   => esc_html__( 'Columns Gap', 'bdthemes-element-pack' ),
-		// 		'type'    => Controls_Manager::SLIDER,
-		// 		'default' => [
-		// 			'size' => 10,
-		// 		],
-		// 		'selectors' => [
-		// 			'{{WRAPPER}} .bdt-ss-btn' => 'margin-right: calc({{SIZE}}{{UNIT}} / 2); margin-left: calc({{SIZE}}{{UNIT}} / 2);',
-		// 			'{{WRAPPER}} .bdt-ep-grid'             => 'margin-right: calc(-{{SIZE}}{{UNIT}} / 2); margin-left: calc(-{{SIZE}}{{UNIT}} / 2);',
-		// 		],
-		// 	]
-		// );
-
-		// $this->add_responsive_control(
-		// 	'row_gap',
-		// 	[
-		// 		'label'   => esc_html__( 'Rows Gap', 'bdthemes-element-pack' ),
-		// 		'type'    => Controls_Manager::SLIDER,
-		// 		'default' => [
-		// 			'size' => 10,
-		// 		],
-		// 		'selectors' => [
-		// 			'{{WRAPPER}} .bdt-ss-btn' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
 
 		$this->add_responsive_control(
 			'button_size',
