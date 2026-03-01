@@ -93,9 +93,6 @@ class Module extends Element_Pack_Module_Base {
 				'dynamic'            => ['active' => true],
 				'frontend_available' => true,
 				'render_type'        => 'template',
-				'default'            => [ 
-					'url' => BDTEP_ASSETS_URL . 'images/logo.svg',
-				],
 				'condition'          => [ 
 					'element_pack_cursor_effects_show'   => 'yes',
 					'element_pack_cursor_effects_source' => 'image'

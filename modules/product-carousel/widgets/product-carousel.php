@@ -20,12 +20,12 @@
 	
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit;
-	} // Exit if accessed directly
+	}
 	
 	class Product_Carousel extends Module_Base {
 
 		use Global_Swiper_Controls;
-    	use Global_Mask_Controls;
+		use Global_Mask_Controls;
 		
 		public function get_name() {
 			return 'bdt-product-carousel';
@@ -48,19 +48,11 @@
 		}
 		
 		public function get_style_depends() {
-			if ( $this->ep_is_edit_mode() ) {
-				return [ 'swiper', 'ep-styles' ];
-			} else {
-				return [ 'swiper', 'ep-font', 'ep-product-carousel' ];
-			}
+			return $this->ep_is_edit_mode() ? [ 'swiper', 'ep-styles' ] : [ 'swiper', 'ep-font', 'ep-product-carousel' ];
 		}
 
 		public function get_script_depends() {
-			if ($this->ep_is_edit_mode()) {
-				return ['swiper', 'ep-scripts'];
-			} else {
-				return ['swiper', 'ep-product-carousel'];
-			}
+			return $this->ep_is_edit_mode() ? [ 'swiper', 'ep-scripts' ] : [ 'swiper', 'ep-product-carousel' ];
 		}
 		
 		public function get_custom_help_url() {
@@ -1509,127 +1501,106 @@
 			$this->register_navigation_style_controls('swiper-carousel');
 	
 			$this->end_controls_section();
-			
+
 		}
 
-		public function render_image($item, $image_key) {
-			$settings = $this->get_settings_for_display();
-	
-			if ( ! $settings['show_image'] ) {
+		public function render_image( $item, $image_key, $settings ) {
+
+			if ( empty( $settings['show_image'] ) ) {
 				return;
 			}
-	
-			$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
-			if ( !$thumb_url ) {
-				$thumb_url = $item['image']['url'];
-			}
+
+			$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'thumbnail_size', $settings );
+			$thumb_url = $thumb_url ? $thumb_url : ( $item['image']['url'] );
 
 			$this->add_render_attribute( $image_key, 'class', 'bdt-ep-product-carousel-link bdt-position-z-index', true );
-			if (!empty($item['readmore_link'])) {
-				$this->add_link_attributes($image_key, $item['readmore_link']);
+			if ( ! empty( $item['readmore_link'] ) ) {
+				$this->add_link_attributes( $image_key, $item['readmore_link'] );
 			}
-
-			$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
-			$this->add_render_attribute('image-wrap', 'class', 'bdt-ep-product-carousel-image bdt-flex-inline' . $image_mask, true);
-	
+			$image_mask = $settings['image_mask_popover'] === 'yes' ? ' bdt-image-mask' : '';
+			$this->add_render_attribute( 'image-wrap', 'class', 'bdt-ep-product-carousel-image bdt-flex-inline' . $image_mask, true );
+			$title_attr = $item['title'];
+			
 			?>
-			<div <?php $this->print_render_attribute_string('image-wrap'); ?>>
-
-				<?php 
-				$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['image']['id'], 'thumbnail_size', $settings);
-				if (!$thumb_url) {
-					printf('<img src="%1$s" alt="%2$s">', esc_url($item['image']['url']), esc_html($item['title']));
-				} else {
-					print(wp_get_attachment_image(
-						$item['image']['id'],
-						$settings['thumbnail_size_size'],
-						false,
-						[
-							'alt' => esc_html($item['title'])
-						]
-					));
+			<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
+				<?php
+				if ( !empty( $thumb_url ) ) {
+					printf( '<img src="%1$s" alt="%2$s">', esc_url( $thumb_url ), esc_attr( $title_attr ) );
 				}
 				?>
-
-				<?php if($settings['readmore_link_to'] == 'image') : ?>
-				<a <?php $this->print_render_attribute_string( $image_key ); ?>></a>
+				<?php if ( $settings['readmore_link_to'] === 'image' ) : ?>
+					<a <?php $this->print_render_attribute_string( $image_key ); ?>></a>
 				<?php endif; ?>
 			</div>
 			<?php
 		}
 	
-		public function render_title($item, $title_key) {
-			$settings = $this->get_settings_for_display();
-	
+		public function render_title( $item, $title_key, $settings ) {
+
 			if ( ! $settings['show_title'] ) {
 				return;
 			}
 
 			$this->add_render_attribute( $title_key, 'class', 'bdt-ep-product-carousel-link', true );
-			if (!empty($item['readmore_link'])) {
-				$this->add_link_attributes($title_key, $item['readmore_link']);
+			if ( ! empty( $item['readmore_link']['url'] ) ) {
+				$this->add_link_attributes( $title_key, $item['readmore_link'] );
 			}
-	
-			$this->add_render_attribute('title-wrap', 'class', 'bdt-ep-product-carousel-title', true);
-	
+			$this->add_render_attribute( 'title-wrap', 'class', 'bdt-ep-product-carousel-title', true );
+			$title_tag = Utils::get_valid_html_tag( $settings['title_tag'] );
+
 			?>
-			<?php if ( $item['title'] ) : ?>
-				<<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tag'])); ?> <?php $this->print_render_attribute_string('title-wrap'); ?>>
-					<?php echo wp_kses($item['title'], element_pack_allow_tags('title')); ?>
-					<?php if($settings['readmore_link_to'] == 'title') : ?>
-					<a <?php $this->print_render_attribute_string( $title_key ); ?>></a>
+			<?php if ( ! empty( $item['title'] ) ) : ?>
+				<<?php echo esc_attr( $title_tag ); ?> <?php $this->print_render_attribute_string( 'title-wrap' ); ?>>
+					<?php echo wp_kses( $item['title'], element_pack_allow_tags( 'title' ) ); ?>
+					<?php if ( $settings['readmore_link_to'] === 'title' ) : ?>
+						<a <?php $this->print_render_attribute_string( $title_key ); ?>></a>
 					<?php endif; ?>
-				</<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tag'])); ?>>
+				</<?php echo esc_attr( $title_tag ); ?>>
 			<?php endif; ?>
 			<?php
 		}
 	
-		public function render_price($item) {
-			$settings = $this->get_settings_for_display();
-	
+		public function render_price( $item, $settings ) {
+
 			if ( ! $settings['show_price'] ) {
 				return;
 			}
-	
-			$this->add_render_attribute('price-wrap', 'class', 'bdt-ep-product-carousel-price', true);
-	
+
+			$this->add_render_attribute( 'price-wrap', 'class', 'bdt-ep-product-carousel-price', true );
 			?>
-			<?php if ( $item['price'] ) : ?>
-				<div <?php $this->print_render_attribute_string('price-wrap'); ?>>
-					<?php echo wp_kses($item['price'], element_pack_allow_tags('price')); ?>
+			<?php if ( ! empty( $item['price'] ) ) : ?>
+				<div <?php $this->print_render_attribute_string( 'price-wrap' ); ?>>
+					<?php echo wp_kses( $item['price'], element_pack_allow_tags( 'price' ) ); ?>
 				</div>
 			<?php endif; ?>
 			<?php
 		}
 	
-		public function render_time($item) {
-			$settings = $this->get_settings_for_display();
-	
+		public function render_time( $item, $settings ) {
+
 			if ( ! $settings['show_time'] ) {
 				return;
 			}
-	
-			$this->add_render_attribute('time-wrap', 'class', 'bdt-ep-product-carousel-time', true);
-	
+
+			$this->add_render_attribute( 'time-wrap', 'class', 'bdt-ep-product-carousel-time', true );
 			?>
-			<?php if ( $item['time'] ) : ?>
-				<div <?php $this->print_render_attribute_string('time-wrap'); ?>>
+			<?php if ( ! empty( $item['time'] ) ) : ?>
+				<div <?php $this->print_render_attribute_string( 'time-wrap' ); ?>>
 					<i class="ep-icon-clock-o" aria-hidden="true"></i>
-					<?php echo wp_kses($item['time'], element_pack_allow_tags('time')); ?>
+					<?php echo wp_kses( $item['time'], element_pack_allow_tags( 'time' ) ); ?>
 				</div>
 			<?php endif; ?>
 			<?php
 		}
 	
-		public function render_text($item) {
-			$settings = $this->get_settings_for_display();
-	
+		public function render_text( $item, $settings ) {
+
 			if ( ! $settings['show_text'] ) {
 				return;
 			}
-	
+
 			?>
-			<?php if ( $item['text'] ) : ?>
+			<?php if ( ! empty( $item['text'] ) ) : ?>
 				<div class="bdt-ep-product-carousel-text">
 					<?php echo wp_kses_post( $item['text'] ); ?>
 				</div>
@@ -1637,30 +1608,33 @@
 			<?php
 		}
 	
-		public function render_readmore($item, $readmore_key) {
-			$settings = $this->get_settings_for_display();
-
+		public function render_readmore( $item, $readmore_key, $settings ) {
+			$animation_class = ! empty( $settings['readmore_hover_animation'] ) ? 'elementor-animation-' . esc_attr( $settings['readmore_hover_animation'] ) : '';
 			$this->add_render_attribute(
 				[
 					$readmore_key => [
-						'class' => [
+						'class' => array_filter( [
 							'bdt-ep-product-carousel-readmore',
-							$settings['readmore_hover_animation'] ? 'elementor-animation-' . $settings['readmore_hover_animation'] : '',
-						],
-					]
-				], '', '', true
+							$animation_class,
+						] ),
+					],
+				],
+				'',
+				'',
+				true
 			);
-			if (!empty($item['readmore_link'])) {
-				$this->add_link_attributes($readmore_key, $item['readmore_link']);
+			if ( ! empty( $item['readmore_link'] ) ) {
+				$this->add_link_attributes( $readmore_key, $item['readmore_link'] );
 			}
-	
+			$readmore_text = $settings['readmore_text'] ?? __( 'Read More', 'bdthemes-element-pack' );
+			$icon_align = $settings['icon_align'] ?? 'right';
 			?>
-			<?php if (( ! empty( $item['readmore_link']['url'] )) && ( $settings['readmore_link_to'] == 'button' )): ?>
+			<?php if ( ! empty( $item['readmore_link']['url'] ) && ( $settings['readmore_link_to'] ?? '' ) === 'button' ) : ?>
 				<div class="bdt-ep-product-carousel-readmore-wrap">
 					<a <?php $this->print_render_attribute_string( $readmore_key ); ?>>
-						<?php echo esc_html($settings['readmore_text']); ?>
-						<?php if ($settings['readmore_icon']['value']) : ?>
-							<span class="bdt-button-icon-align-<?php echo esc_attr($settings['icon_align']); ?>">
+						<?php echo esc_html( $readmore_text ); ?>
+						<?php if ( ! empty( $settings['readmore_icon']['value'] ) ) : ?>
+							<span class="bdt-button-icon-align-<?php echo esc_attr( $icon_align ); ?>">
 								<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
 							</span>
 						<?php endif; ?>
@@ -1670,125 +1644,119 @@
 			<?php
 		}
 
-		public function render_review_rating($item) {
-			$settings = $this->get_settings_for_display();
-	
-			if ( !$settings['show_rating'] ) {
+		public function render_review_rating( $item, $settings ) {
+
+			if ( empty( $settings['show_rating'] ) ) {
 				return;
 			}
-	
-			$rating_number = $item['rating_number']['size'];
-	
-			if (preg_match('/\./', $rating_number)) {
-				$ratingValue = explode(".",$rating_number);
-				$firstVal    = ( $ratingValue[0] <= 5 ) ? $ratingValue[0] : 5;
-				$secondVal   = ( $ratingValue[1] < 5 ) ? 0 : 5;
+
+			$rating_number = isset( $item['rating_number']['size'] ) ? (float) $item['rating_number']['size'] : 0;
+			$rating_str    = (string) $rating_number;
+			if ( strpos( $rating_str, '.' ) !== false ) {
+				$parts     = explode( '.', $rating_str );
+				$first_val = isset( $parts[0] ) && (int) $parts[0] <= 5 ? (int) $parts[0] : 5;
+				$second_val = isset( $parts[1] ) && (int) $parts[1] < 5 ? 0 : 5;
 			} else {
-				$firstVal    = ( $rating_number <= 5 ) ? $rating_number : 5;
-				$secondVal   = 0;
+				$first_val  = $rating_number <= 5 ? (int) $rating_number : 5;
+				$second_val = 0;
 			}
-			
-			$score       = $firstVal . '-' . $secondVal;
-			
-	
+			$score    = $first_val . '-' . $second_val;
+			$rating_type = $settings['rating_type'] ?? 'number';
+
 			?>
 			<div>
-				<div class="bdt-ep-product-carousel-rating bdt-flex-inline bdt-flex-middle bdt-<?php echo esc_attr($settings['rating_type']) ?>">
-					<?php if ( $settings['rating_type'] === 'number' ) : ?>
-						<span><?php echo esc_html( $item['rating_number']['size'] ); ?></span>
+				<div class="bdt-ep-product-carousel-rating bdt-flex-inline bdt-flex-middle bdt-<?php echo esc_attr( $rating_type ); ?>">
+					<?php if ( $rating_type === 'number' ) : ?>
+						<span><?php echo esc_html( (string) $rating_number ); ?></span>
 						<i class="ep-icon-star-full" aria-hidden="true"></i>
 					<?php else : ?>
-						<span class="epsc-rating epsc-rating-<?php echo esc_attr($score); ?>">
+						<span class="epsc-rating epsc-rating-<?php echo esc_attr( $score ); ?>">
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
 							<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
 						</span>
-						<?php endif; ?>
+					<?php endif; ?>
 				</div>
-				<span class="bdt-ep-product-carousel-rating-count"><?php echo esc_html( $item['rating_count'] ); ?></span>
+				<span class="bdt-ep-product-carousel-rating-count"><?php echo esc_html( $item['rating_count'] ?? '' ); ?></span>
 			</div>
 			<?php
 		}
 
-		public function render_badge($item) {
-			$settings = $this->get_settings_for_display();
-	
+		public function render_badge( $item, $settings ) {
+
+			if ( empty( $settings['badge'] ) || ( $item['badge_text'] ?? '' ) === '' ) {
+				return;
+			}
+
+			$badge_position = $settings['badge_position'] ?? 'top-right';
+			$badge_text = $item['badge_text'] ?? '';
+
 			?>
-			<?php if ( $settings['badge'] and '' != $item['badge_text'] ) : ?>
-				<div class="bdt-ep-product-carousel-badge bdt-position-small bdt-position-<?php echo esc_attr($settings['badge_position']); ?>">
-					<span class="bdt-badge bdt-padding-small"><?php echo esc_html($item['badge_text']); ?></span>
-				</div>
-			<?php endif; ?>
+			<div class="bdt-ep-product-carousel-badge bdt-position-small bdt-position-<?php echo esc_attr( $badge_position ); ?>">
+				<span class="bdt-badge bdt-padding-small"><?php echo esc_html( $badge_text ); ?></span>
+			</div>
 			<?php
 		}
 
-		public function render_carosuel_item() {
-			$settings = $this->get_settings_for_display();
-	
-			if ( empty($settings['product_items'] ) ) {
+		public function render_carosuel_item( $settings ) {
+
+			if ( empty( $settings['product_items'] ) ) {
 				return;
 			}
-	
-			$this->add_render_attribute('item-wrap', 'class', 'bdt-ep-product-carousel-item swiper-slide bdt-flex bdt-flex-column', true);
 
-			?>
+			$product_items = $settings['product_items'] ?? [];
 
-			<?php foreach ( $settings['product_items'] as $index => $item ) : 
-				
+			$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-carousel-item swiper-slide bdt-flex bdt-flex-column', true );
+			foreach ( $product_items as $index => $item ) {
 				$item_key = 'item_' . $index;
 				$this->add_render_attribute( $item_key, 'class', 'bdt-ep-product-carousel-link bdt-position-z-index', true );
-
-				if (!empty($item['readmore_link'])) {
-					$this->add_link_attributes($item_key, $item['readmore_link']);
+				if ( ! empty( $item['readmore_link'] ) ) {
+					$this->add_link_attributes( $item_key, $item['readmore_link'] );
 				}
-				
 				?>
-				<div <?php $this->print_render_attribute_string('item-wrap'); ?>>
-					<?php $this->render_image($item, 'image_'.$index); ?>
+				<div <?php $this->print_render_attribute_string( 'item-wrap' ); ?>>
+					<?php $this->render_image( $item, 'image_' . $index, $settings ); ?>
 					<div class="bdt-ep-product-carousel-content bdt-flex bdt-flex-column bdt-flex-between">
 						<div>
 							<div class="bdt-ep-product-carousel-title-price bdt-flex bdt-flex-middle bdt-flex-between">
-								<?php $this->render_title($item, 'title_'.$index); ?>
-								<?php $this->render_price($item); ?>
+								<?php $this->render_title( $item, 'title_' . $index, $settings ); ?>
+								<?php $this->render_price( $item, $settings ); ?>
 							</div>
-							<?php $this->render_text($item); ?>
-							<?php $this->render_readmore($item, 'link_'.$index); ?>
+							<?php $this->render_text( $item, $settings ); ?>
+							<?php $this->render_readmore( $item, 'link_' . $index, $settings ); ?>
 						</div>
 						<div class="bdt-ep-product-carousel-rating-time bdt-flex bdt-flex-middle bdt-flex-between bdt-flex-wrap">
-							<?php $this->render_review_rating($item); ?>
-							<?php $this->render_time($item); ?>
+							<?php $this->render_review_rating( $item, $settings ); ?>
+							<?php $this->render_time( $item, $settings ); ?>
 						</div>
 					</div>
-					<?php $this->render_badge($item); ?>
-
-					<?php if($settings['readmore_link_to'] == 'item') : ?>
-					<a <?php $this->print_render_attribute_string( $item_key ); ?>></a>
+					<?php $this->render_badge( $item, $settings ); ?>
+					<?php if ( ( $settings['readmore_link_to'] ?? '' ) === 'item' ) : ?>
+						<a <?php $this->print_render_attribute_string( $item_key ); ?>></a>
 					<?php endif; ?>
-
 				</div>
-			<?php endforeach;
+				<?php
+			}
 		}
 		
 		public function render_header() {
-			$settings = $this->get_settings_for_display();
-	
-			//Global Function
-			$this->render_swiper_header_attribute( 'product-carousel');
-	
+			$this->render_swiper_header_attribute( 'product-carousel' );
 			$this->add_render_attribute( 'carousel', 'class', 'bdt-ep-product-carousel' );
-	
 			?>
 			<div <?php $this->print_render_attribute_string( 'carousel' ); ?>>
-				<div <?php $this->print_render_attribute_string('swiper'); ?>>
+				<div <?php $this->print_render_attribute_string( 'swiper' ); ?>>
 					<div class="swiper-wrapper">
 			<?php
 		}
-	
+
 		public function render() {
+
+			$settings = $this->get_settings_for_display();
+			
 			$this->render_header();
-			$this->render_carosuel_item();
+			$this->render_carosuel_item( $settings );
 			$this->render_footer();
 		}
 	}

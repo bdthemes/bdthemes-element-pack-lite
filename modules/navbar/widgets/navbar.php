@@ -85,7 +85,7 @@ class Navbar extends Module_Base {
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center' => [
@@ -93,7 +93,7 @@ class Navbar extends Module_Base {
 						'icon'  => 'eicon-h-align-center',
 					],
 					'flex-end'  => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],

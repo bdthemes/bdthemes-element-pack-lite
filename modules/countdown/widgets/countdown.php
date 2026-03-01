@@ -294,7 +294,7 @@ class Countdown extends Module_Base {
 				'type'         => Controls_Manager::CHOOSE,
 				'options'      => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
@@ -302,7 +302,7 @@ class Countdown extends Module_Base {
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],

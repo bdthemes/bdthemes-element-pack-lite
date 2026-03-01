@@ -47,11 +47,7 @@ class Product_Grid extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
-		} else {
-			return [ 'ep-font', 'ep-product-grid' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-font', 'ep-product-grid' ];
 	}
 
 	public function get_custom_help_url() {
@@ -59,21 +55,22 @@ class Product_Grid extends Module_Base {
 	}
 
 	public function has_widget_inner_wrapper(): bool {
-        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-    }
+		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+	}
+
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
 
 	protected function get_upsale_data(): array {
 		return [
-			'condition' => ! is_ep_pro(),
-			'image' => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
-			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
-			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Link to -> Wrapper Item'),
-			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
-			'upgrade_text' => sprintf(__( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), 'Upgrade to Pro'),
+			'condition'    => ! is_ep_pro(),
+			'image'        => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
+			'title'        => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
+			'description'  => sprintf( __( '<ul class="bdt-widget-promotion-list"><li>%1$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Link to -> Wrapper Item' ),
+			'upgrade_url'  => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
+			'upgrade_text' => sprintf( __( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), 'Upgrade to Pro' ),
 		];
 	}
 
@@ -214,16 +211,15 @@ class Product_Grid extends Module_Base {
 				'type'        => Controls_Manager::TEXT,
 				'default'     => __( 'Sale', 'bdthemes-element-pack' ),
 				'placeholder' => __( 'Type Badge text', 'bdthemes-element-pack' ),
-				'dynamic'     => [ 
-					'active' => true,
-				],
+				'dynamic'     => [ 'active' => true ],
 			]
 		);
+
 		$repeater->end_controls_tab();
 		$repeater->start_controls_tab(
 			'tab_repeater_item_style',
 			[ 
-				'label' => __( 'Style', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Style', 'bdthemes-element-pack' ),
 			]
 		);
 		$repeater->add_control(
@@ -601,6 +597,7 @@ class Product_Grid extends Module_Base {
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
 				'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack' ),
+				'dynamic'     => [ 'active' => true ],
 			]
 		);
 
@@ -1713,8 +1710,7 @@ class Product_Grid extends Module_Base {
 
 	}
 
-	public function render_image( $item, $image_key ) {
-		$settings = $this->get_settings_for_display();
+	public function render_image( $item, $image_key, $settings ) {
 
 		if ( ! $settings['show_image'] ) {
 			return;
@@ -1759,8 +1755,7 @@ class Product_Grid extends Module_Base {
 		<?php
 	}
 
-	public function render_title( $item, $title_key ) {
-		$settings = $this->get_settings_for_display();
+	public function render_title( $item, $title_key, $settings ) {
 
 		if ( ! $settings['show_title'] ) {
 			return;
@@ -1786,8 +1781,7 @@ class Product_Grid extends Module_Base {
 	<?php
 	}
 
-	public function render_price( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_price( $item, $settings ) {
 
 		if ( ! $settings['show_price'] ) {
 			return;
@@ -1804,8 +1798,7 @@ class Product_Grid extends Module_Base {
 	<?php
 	}
 
-	public function render_time( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_time( $item, $settings ) {
 
 		if ( ! $settings['show_time'] ) {
 			return;
@@ -1823,8 +1816,7 @@ class Product_Grid extends Module_Base {
 	<?php
 	}
 
-	public function render_text( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_text( $item, $settings ) {
 
 		if ( ! $settings['show_text'] ) {
 			return;
@@ -1839,8 +1831,7 @@ class Product_Grid extends Module_Base {
 	<?php
 	}
 
-	public function render_readmore( $item, $readmore_key ) {
-		$settings = $this->get_settings_for_display();
+	public function render_readmore( $item, $readmore_key, $settings ) {
 
 		$this->add_render_attribute(
 			[ 
@@ -1872,8 +1863,7 @@ class Product_Grid extends Module_Base {
 	<?php
 	}
 
-	public function render_review_rating( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_review_rating( $item, $settings ) {
 
 		if ( ! $settings['show_rating'] ) {
 			return;
@@ -1919,8 +1909,7 @@ class Product_Grid extends Module_Base {
 		<?php
 	}
 
-	public function render_badge( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_badge( $item, $settings ) {
 
 		?>
 		<?php if ( $settings['badge'] and '' != $item['badge_text'] ) : ?>
@@ -1941,13 +1930,14 @@ class Product_Grid extends Module_Base {
 			return;
 		}
 
+		$product_items = $settings['product_items'];
+
 		$this->add_render_attribute( 'product-grid', 'class', 'bdt-ep-product-grid' );
 
 		?>
 		<div <?php $this->print_render_attribute_string( 'product-grid' ); ?>>
-			<?php foreach ( $settings['product_items'] as $index => $item ) :
-
-				$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-grid-item bdt-flex bdt-flex-column elementor-repeater-item-' . esc_attr( $item['_id'] ) . ' ' , true );
+			<?php foreach ( $product_items as $index => $item ) :
+				$this->add_render_attribute( 'item-wrap', 'class', 'bdt-ep-product-grid-item bdt-flex bdt-flex-column elementor-repeater-item-' . esc_attr( $item['_id'] ), true );
 
 				if ( $settings['show_price'] && $settings['show_title'] ) {
 					$this->add_render_attribute( 'title-price', 'class', 'bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between', true );
@@ -1955,8 +1945,8 @@ class Product_Grid extends Module_Base {
 					$this->add_render_attribute( 'title-price', 'class', 'bdt-ep-product-grid-title-price', true );
 				}
 
-				if ( $settings['readmore_link_to'] == 'wrapper' ) {
-					$item_key = 'item-wrap-' . $index;
+				$item_key = 'item-wrap-' . $index;
+				if ( 'wrapper' === $settings['readmore_link_to'] ) {
 					$this->add_render_attribute( $item_key, 'class', 'bdt-ep-product-grid-link bdt-position-z-index', true );
 					if ( ! empty( $item['readmore_link'] ) ) {
 						$this->add_link_attributes( $item_key, $item['readmore_link'] );
@@ -1965,23 +1955,23 @@ class Product_Grid extends Module_Base {
 
 				?>
 				<div <?php $this->print_render_attribute_string( 'item-wrap' ); ?>>
-					<?php $this->render_image( $item, 'image_' . $index ); ?>
+					<?php $this->render_image( $item, 'image_' . $index, $settings ); ?>
 					<div class="bdt-ep-product-grid-content bdt-flex bdt-flex-column bdt-flex-between">
 						<div>
-							<div <?php $this->print_render_attribute_string('title-price'); ?>>
-								<?php $this->render_title( $item, 'title_' . $index ); ?>
-								<?php $this->render_price( $item ); ?>
+							<div <?php $this->print_render_attribute_string( 'title-price' ); ?>>
+								<?php $this->render_title( $item, 'title_' . $index, $settings ); ?>
+								<?php $this->render_price( $item, $settings ); ?>
 							</div>
-							<?php $this->render_text( $item ); ?>
-							<?php $this->render_readmore( $item, 'link_' . $index ); ?>
+							<?php $this->render_text( $item, $settings ); ?>
+							<?php $this->render_readmore( $item, 'link_' . $index, $settings ); ?>
 						</div>
 						<div class="bdt-ep-product-grid-rating-time bdt-flex bdt-flex-middle bdt-flex-between bdt-flex-wrap">
-							<?php $this->render_review_rating( $item ); ?>
-							<?php $this->render_time( $item ); ?>
+							<?php $this->render_review_rating( $item, $settings ); ?>
+							<?php $this->render_time( $item, $settings ); ?>
 						</div>
 					</div>
-					<?php $this->render_badge( $item ); ?>
-					<?php if ( $settings['readmore_link_to'] == 'wrapper' ) : ?>
+					<?php $this->render_badge( $item, $settings ); ?>
+					<?php if ( 'wrapper' === $settings['readmore_link_to'] ) : ?>
 						<a <?php $this->print_render_attribute_string( $item_key ); ?>></a>
 					<?php endif; ?>
 				</div>

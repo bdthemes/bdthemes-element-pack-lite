@@ -90,20 +90,11 @@ class Dark_Mode extends Module_Base {
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'bottom-right',
                 'options' => [
-                    'top-left'     => esc_html__('Top Left', 'bdthemes-element-pack'),
-                    'top-right'    => esc_html__('Top Right', 'bdthemes-element-pack'),
-                    'bottom-left'  => esc_html__('Bottom Left', 'bdthemes-element-pack'),
-                    'bottom-right' => esc_html__('Bottom Right', 'bdthemes-element-pack'),
+                    'top-left'     => esc_html__('Top Start', 'bdthemes-element-pack'),
+                    'top-right'    => esc_html__('Top End', 'bdthemes-element-pack'),
+                    'bottom-left'  => esc_html__('Bottom Start', 'bdthemes-element-pack'),
+                    'bottom-right' => esc_html__('Bottom End', 'bdthemes-element-pack'),
                 ],
-                // 'selectors_dictionary' => [
-                //     'top-left'      => 'top:var(--bdt-vertical-offset, 32px); left:var(--bdt-horizontal-offset) !important; bottom:unset; right:unset !important;',
-                //     'top-right'     => 'top:var(--bdt-vertical-offset, 32px); right:var(--bdt-horizontal-offset) !important; bottom:unset; left:unset !important;',
-                //     'bottom-left'   => 'bottom:var(--bdt-vertical-offset, 32px); left:var(--bdt-horizontal-offset, 32px); top:unset; right:unset;',
-                //     'bottom-right'  => 'bottom:var(--bdt-vertical-offset, 32px); right:var(--bdt-horizontal-offset, 32px); top:unset; left:unset;',
-                // ],
-                // 'selectors'            => [
-                //     '.darkmode-toggle, .darkmode-layer' => '{{VALUE}}',
-                // ],
                 'frontend_available' => true,
                 'render_type'        => 'none'
             ]

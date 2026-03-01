@@ -1,124 +1,230 @@
 /**
  * Start accordion widget script
+ * Optimized version - No jQuery dependency
  */
 
-(function ($, elementor) {
+(() => {
   "use strict";
-  var widgetAccordion = function ($scope, $) {
-    var $accrContainer = $scope.find(".bdt-ep-accordion-container"),
-      $accordion = $accrContainer.find(".bdt-ep-accordion"),
-      $activeItem = $accrContainer.find(".bdt-ep-accordion-item.bdt-open");
-    if (!$accrContainer.length) {
-      return;
-    }
-    var $settings = $accordion.data("settings"),
-      activeHash = $settings.activeHash,
-      hashTopOffset = $settings.hashTopOffset,
-      hashScrollspyTime = $settings.hashScrollspyTime,
-      activeScrollspy = $settings.activeScrollspy,
-      closeAllItemsOnMobile = $settings.closeAllItemsOnMobile;
 
-    if (closeAllItemsOnMobile) {
-      if (isMobileDevice()) {
-        $activeItem.removeClass("bdt-open");
-        $activeItem.find(".bdt-ep-accordion-content").prop("hidden", true);
-      }
-    }
+  /**
+   * Check if device is mobile
+   * @returns {boolean}
+   */
+  const isMobileDevice = () => window.matchMedia("(max-width: 767px)").matches;
 
-    function isMobileDevice() {
-      return window.matchMedia("(max-width: 767px)").matches;
-    }
+  /**
+   * Smooth scroll to element
+   * @param {HTMLElement} element - Target element
+   * @param {number} offset - Top offset in pixels
+   * @param {number} duration - Animation duration in milliseconds
+   * @returns {Promise}
+   */
+  const smoothScrollTo = (element, offset = 0, duration = 1000) => {
+    return new Promise((resolve) => {
+      const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
 
-    if (activeScrollspy === null || typeof activeScrollspy === "undefined") {
-      activeScrollspy = "no";
-    }
+      const animation = (currentTime) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        // Easing function (ease-in-out)
+        const ease = progress < 0.5 
+          ? 2 * progress * progress 
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        
+        window.scrollTo(0, startPosition + distance * ease);
 
-    function hashHandler($accordion, hashScrollspyTime, hashTopOffset) {
-      if (window.location.hash) {
-        if (
-          $($accordion).find(
-            '[data-title="' + window.location.hash.substring(1) + '"]'
-          ).length
-        ) {
-          var hashTarget = $(
-            '[data-title="' + window.location.hash.substring(1) + '"]'
-          )
-            .closest($accordion)
-            .attr("id");
-
-          if (activeScrollspy == "yes") {
-            $("html, body")
-              .animate(
-                {
-                  easing: "slow",
-                  scrollTop: $("#" + hashTarget).offset().top - hashTopOffset,
-                },
-                hashScrollspyTime,
-                function () {}
-              )
-              .promise()
-              .then(function () {
-                bdtUIkit
-                  .accordion($accordion)
-                  .toggle(
-                    $(
-                      '[data-title="' + window.location.hash.substring(1) + '"]'
-                    ).data("accordion-index"),
-                    false
-                  );
-              });
-          } else {
-            bdtUIkit
-              .accordion($accordion)
-              .toggle(
-                $(
-                  '[data-title="' + window.location.hash.substring(1) + '"]'
-                ).data("accordion-index"),
-                true
-              );
-          }
-        }
-      }
-    }
-    if (activeHash == "yes") {
-      $(window).on("load", function () {
-        if (activeScrollspy == "yes") {
-          hashHandler($accordion, hashScrollspyTime, hashTopOffset);
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
         } else {
-          bdtUIkit
-            .accordion($accordion)
-            .toggle(
-              $(
-                '[data-title="' + window.location.hash.substring(1) + '"]'
-              ).data("accordion-index"),
-              false
-            );
+          resolve();
         }
-      });
-      $($accordion)
-        .find(".bdt-ep-accordion-title")
-        .off("click")
-        .on("click", function (event) {
-          window.location.hash = $.trim($(this).attr("data-title"));
-          hashHandler($accordion, (hashScrollspyTime = 1000), hashTopOffset);
-        });
-      $(window).on("hashchange", function (e) {
-        hashHandler($accordion, (hashScrollspyTime = 1000), hashTopOffset);
-      });
+      };
+
+      requestAnimationFrame(animation);
+    });
+  };
+
+  /**
+   * Get element by data-title attribute
+   * @param {HTMLElement} accordion - Accordion container
+   * @param {string} title - Data title value
+   * @returns {HTMLElement|null}
+   */
+  const getElementByDataTitle = (accordion, title) => {
+    return accordion.querySelector(`[data-title="${title}"]`);
+  };
+
+  /**
+   * Handle hash navigation and accordion toggle
+   * @param {HTMLElement} accordion - Accordion element
+   * @param {Object} settings - Accordion settings
+   * @param {number} scrollTime - Scroll animation time
+   */
+  const handleHash = async (accordion, settings, scrollTime) => {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const hashValue = hash.substring(1);
+    const targetElement = getElementByDataTitle(accordion, hashValue);
+    
+    if (!targetElement) return;
+
+    const accordionIndex = targetElement.dataset.accordionIndex;
+    const accordionContainer = targetElement.closest('.bdt-ep-accordion');
+    const accordionId = accordionContainer?.id;
+
+    if (!accordionIndex || !accordionContainer) return;
+
+    const bdtAccordion = window.bdtUIkit?.accordion(accordion);
+    if (!bdtAccordion) return;
+
+    // Scroll if scrollspy is enabled
+    if (settings.activeScrollspy === "yes" && accordionId) {
+      const targetContainer = document.getElementById(accordionId);
+      if (targetContainer) {
+        await smoothScrollTo(targetContainer, settings.hashTopOffset, scrollTime);
+      }
+      bdtAccordion.toggle(parseInt(accordionIndex), false);
+    } else {
+      bdtAccordion.toggle(parseInt(accordionIndex), true);
     }
   };
 
-  jQuery(window).on("elementor/frontend/init", function () {
-    elementorFrontend.hooks.addAction(
-      "frontend/element_ready/bdt-accordion.default",
-      widgetAccordion
-    );
-    elementorFrontend.hooks.addAction(
-      "frontend/element_ready/bdt-acf-accordion.default",
-      widgetAccordion
-    );
+  /**
+   * Initialize accordion widget
+   * @param {HTMLElement|jQuery} scope - Widget scope element (can be jQuery object or DOM element)
+   */
+  const widgetAccordion = (scope) => {
+    // Handle both jQuery objects and native DOM elements
+    const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+    
+    const accrContainer = scopeElement.querySelector(".bdt-ep-accordion-container");
+    if (!accrContainer) return;
+
+    const accordion = accrContainer.querySelector(".bdt-ep-accordion");
+    if (!accordion) return;
+
+    const activeItems = accrContainer.querySelectorAll(".bdt-ep-accordion-item.bdt-open");
+    
+    // Get settings from data attribute
+    const settingsData = accordion.dataset.settings;
+    if (!settingsData) return;
+
+    let settings;
+    try {
+      settings = typeof settingsData === 'string' ? JSON.parse(settingsData) : settingsData;
+    } catch (e) {
+      console.error('Failed to parse accordion settings:', e);
+      return;
+    }
+
+    // Destructure settings with defaults
+    const {
+      activeHash = "no",
+      hashTopOffset = 0,
+      hashScrollspyTime = 1000,
+      activeScrollspy = "no",
+      closeAllItemsOnMobile = false
+    } = settings;
+
+    // Update settings object with defaults
+    settings.activeScrollspy = activeScrollspy;
+
+    // Close all items on mobile if enabled
+    if (closeAllItemsOnMobile && isMobileDevice()) {
+      activeItems.forEach(item => {
+        item.classList.remove("bdt-open");
+        const content = item.querySelector(".bdt-ep-accordion-content");
+        if (content) {
+          content.hidden = true;
+        }
+      });
+    }
+
+    // Hash navigation functionality
+    if (activeHash === "yes") {
+      const abortController = new AbortController();
+      const signal = abortController.signal;
+
+      // Handle initial hash on page load
+      const handleLoad = () => {
+        const hash = window.location.hash;
+        if (!hash) return;
+
+        const hashValue = hash.substring(1);
+        const targetElement = getElementByDataTitle(accordion, hashValue);
+        
+        if (targetElement && targetElement.dataset.accordionIndex) {
+          const accordionIndex = parseInt(targetElement.dataset.accordionIndex);
+          const bdtAccordion = window.bdtUIkit?.accordion(accordion);
+          
+          if (bdtAccordion) {
+            if (activeScrollspy === "yes") {
+              handleHash(accordion, settings, hashScrollspyTime);
+            } else {
+              bdtAccordion.toggle(accordionIndex, false);
+            }
+          }
+        }
+      };
+
+      // Handle accordion title clicks
+      const handleTitleClick = (event) => {
+        const title = event.currentTarget.dataset.title;
+        if (title) {
+          window.location.hash = title.trim();
+          handleHash(accordion, settings, 1000);
+        }
+      };
+
+      // Handle hash changes
+      const handleHashChange = () => {
+        handleHash(accordion, settings, 1000);
+      };
+
+      // Check if page has already loaded
+      if (document.readyState === 'complete') {
+        // Page already loaded, handle hash immediately
+        handleLoad();
+      } else {
+        // Page still loading, wait for load event
+        window.addEventListener("load", handleLoad, { signal, once: true });
+      }
+      
+      // Always listen for hash changes
+      window.addEventListener("hashchange", handleHashChange, { signal });
+
+      const accordionTitles = accordion.querySelectorAll(".bdt-ep-accordion-title");
+      accordionTitles.forEach(title => {
+        title.addEventListener("click", handleTitleClick, { signal });
+      });
+
+      // Store cleanup function for potential future use
+      accordion._cleanupAccordion = () => {
+        abortController.abort();
+      };
+    }
+  };
+
+  // Initialize on Elementor frontend ready
+  window.addEventListener("elementor/frontend/init", () => {
+    if (window.elementorFrontend?.hooks) {
+      elementorFrontend.hooks.addAction(
+        "frontend/element_ready/bdt-accordion.default",
+        widgetAccordion
+      );
+      elementorFrontend.hooks.addAction(
+        "frontend/element_ready/bdt-acf-accordion.default",
+        widgetAccordion
+      );
+    }
   });
-})(jQuery, window.elementorFrontend);
+})();
 
 /**
  * End accordion widget script
@@ -128,321 +234,362 @@
  * Start dual button widget script
  */
 
-(function ($, elementor) {
-  "use strict";
+(() => {
+    'use strict';
 
-  var widgetDualButton = function ($scope, $) {
-    var $buttons = $scope.find(".bdt-dual-button .bdt-ep-button[data-onclick]");
-  
-    if (!$buttons.length) return;
+    const widgetDualButton = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
 
-    $buttons.on("click", function (event) {
-        event.preventDefault();
+        const buttons = scopeEl.querySelectorAll('.bdt-dual-button .bdt-ep-button[data-onclick]');
+        if (!buttons.length) return;
 
-        var functionName = $(this).data("onclick")?.trim();
-        
-        if (functionName) {
-            functionName = functionName.replace(/[\(\);\s]/g, '');
-            
-            if (typeof window[functionName] === "function") {
-                window[functionName]();
-            } else {
-                console.warn(`Function "${functionName}" is not defined.`);
-            }
-        }
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                const functionName = btn.dataset.onclick?.trim().replace(/[\(\);\s]/g, '');
+                if (!functionName) return;
+
+                if (typeof window[functionName] === 'function') {
+                    window[functionName]();
+                } else {
+                    console.warn(`Function "${functionName}" is not defined.`);
+                }
+            });
+        });
+    };
+
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-dual-button.default', widgetDualButton);
     });
-};
 
-
-  jQuery(window).on("elementor/frontend/init", function () {
-    elementorFrontend.hooks.addAction(
-      "frontend/element_ready/bdt-dual-button.default",
-      widgetDualButton
-    );
-  });
-})(jQuery, window.elementorFrontend);
+})();
 
 /**
  * End dual button widget script
  */
 
 /**
- * Start advanced divider widget script
+ * Start business hours widget script
+ * Optimized version - Minimal jQuery (required for jclock)
  */
 
-(function($, elementor) {
-    'use strict'; 
-    var widgetBusinessHours = function($scope, $) {
-        var $businessHoursContainer = $scope.find('.bdt-ep-business-hours'),
-        $businessHours = $businessHoursContainer.find('.bdt-ep-business-hours-current-time');
-        if (!$businessHoursContainer.length) {
-            return;
-        }
-        var $settings = $businessHoursContainer.data('settings');
-        var dynamic_timezone = $settings.dynamic_timezone;
-        var timeNotation = $settings.timeNotation;
-        var business_hour_style = $settings.business_hour_style;
+(() => {
+  "use strict";
 
-        if (business_hour_style != 'dynamic') return;
+  /**
+   * Initialize business hours widget
+   * @param {HTMLElement|jQuery} scope - Widget scope element
+   */
+  const widgetBusinessHours = (scope) => {
+    // Handle both jQuery objects and native DOM elements
+    const scopeElement = scope instanceof jQuery ? scope[0] : scope;
 
-        $(document).ready(function() {
-            var offset_val;
-            var timeFormat = '%H:%M:%S', timeZoneFormat; 
-            var dynamic_timezone = $settings.dynamic_timezone;
-            
-            if(business_hour_style == 'static'){
-                offset_val = $settings.dynamic_timezone_default;
-            }else{
-                offset_val = dynamic_timezone;
-            }
-            
-            if(timeNotation == '12h'){
-                timeFormat = '%I:%M:%S %p';
-            } 
-            if (offset_val == '') return;
-            var options = {
-                // format:'<span class=\"dt\">%A, %d %B %I:%M:%S %P</span>',
-                //    format:'<span class=\"dt\">  %I:%M:%S </span>',
-                format: timeFormat,
-                timeNotation: timeNotation, //'24h',
-                am_pm: true,
-                utc: true,
-                utc_offset: offset_val
-            }
-            $($businessHoursContainer).find('.bdt-ep-business-hours-current-time').jclock(options);
+    const businessHoursContainer = scopeElement.querySelector(".bdt-ep-business-hours");
+    if (!businessHoursContainer) return;
 
-        });
+    const currentTimeElement = businessHoursContainer.querySelector(
+      ".bdt-ep-business-hours-current-time"
+    );
+    if (!currentTimeElement) return;
 
+    // Get settings from data attribute
+    const settingsData = businessHoursContainer.dataset.settings;
+    if (!settingsData) return;
+
+    let settings;
+    try {
+      settings = typeof settingsData === "string" ? JSON.parse(settingsData) : settingsData;
+    } catch (e) {
+      console.error("Failed to parse business hours settings:", e);
+      return;
+    }
+
+    const { business_hour_style, timeNotation, dynamic_timezone, dynamic_timezone_default } = settings;
+
+    // Only proceed if style is dynamic
+    if (business_hour_style !== "dynamic") return;
+
+    // Validate jclock library (requires jQuery)
+    if (typeof jQuery === "undefined" || !jQuery.fn.jclock) {
+      console.error("jclock library is not loaded");
+      return;
+    }
+
+    // Determine timezone offset
+    const offsetVal =
+      business_hour_style === "static" ? dynamic_timezone_default : dynamic_timezone;
+
+    if (!offsetVal) {
+      console.warn("Timezone offset is not set");
+      return;
+    }
+
+    // Determine time format based on notation
+    const timeFormat = timeNotation === "12h" ? "%I:%M:%S %p" : "%H:%M:%S";
+
+    // Configure jclock options
+    const options = {
+      format: timeFormat,
+      timeNotation: timeNotation,
+      am_pm: true,
+      utc: true,
+      utc_offset: offsetVal,
     };
-    jQuery(window).on('elementor/frontend/init', function() {
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-business-hours.default', widgetBusinessHours);
-    });
-}(jQuery, window.elementorFrontend));
+
+    // Initialize jclock (requires jQuery)
+    jQuery(currentTimeElement).jclock(options);
+  };
+
+  // Initialize on Elementor frontend ready
+  window.addEventListener("elementor/frontend/init", () => {
+    if (window.elementorFrontend?.hooks) {
+      elementorFrontend.hooks.addAction(
+        "frontend/element_ready/bdt-business-hours.default",
+        widgetBusinessHours
+      );
+    }
+  });
+})();
 
 /**
  * End business hours widget script
  */
 
-
 /**
  * Start contact form widget script
  */
 
-(function ($, elementor) {
-
+(() => {
     'use strict';
 
-    var widgetSimpleContactForm = function ($scope, $) {
+    /**
+     * Submit form data via fetch and handle response notifications
+     * @param {HTMLFormElement} formEl
+     * @param {string|false}    widgetID
+     */
+    const sendContactForm = async (formEl, widgetID = false) => {
+        const langStr = window.ElementPackConfig.contact_form;
 
-        var $contactForm = $scope.find('.bdt-contact-form .without-recaptcha'),
-        widgetID = $scope.data('id');
-
-        // Validate tel type input field
-        var $inputFieldTel = $scope.find('.bdt-contact-form input[type="tel"]');
-        $inputFieldTel.on('input', function(e) {
-            this.value = this.value.replace(/[^0-9\+]/g, ''); // Allow only numbers and the plus sign
+        bdtUIkit.notification({
+            message : `<div bdt-spinner></div> ${langStr.sending_msg}`,
+            timeout : false,
+            status  : 'primary'
         });
 
+        try {
+            const response = await fetch(formEl.getAttribute('action'), {
+                method  : 'POST',
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body    : new URLSearchParams(new FormData(formEl)).toString()
+            });
 
-        if (!$contactForm.length) {
-            return;
+            const data = await response.text();
+
+            const doc        = new DOMParser().parseFromString(data, 'text/html');
+            const responseEl = doc.body.firstElementChild;
+
+            const redirectURL = responseEl?.dataset.redirect;
+            const isExternal  = responseEl?.dataset.external;
+            const resetStatus = responseEl?.dataset.resetstatus;
+
+            bdtUIkit.notification.closeAll();
+
+            const notification = bdtUIkit.notification({
+                message: `<div class="bdt-contact-form-success-message-${widgetID}">${data}</div>`
+            });
+
+            if (redirectURL && redirectURL !== 'no') {
+                bdtUIkit.util.on(document, 'close', (evt) => {
+                    if (evt.detail[0] === notification) {
+                        window.open(redirectURL, isExternal);
+                    }
+                });
+            }
+
+            localStorage.setItem('bdtCouponCode', formEl.id);
+
+            if (resetStatus && resetStatus !== 'no') {
+                formEl.reset();
+            }
+
+        } catch (e) {
+            console.error('Contact form submission error:', e);
         }
-
-        $contactForm.on('submit', function (e) {
-            sendContactForm($contactForm, widgetID);
-            return false;
-        });
-
-        return false;
-
     };
 
-    function sendContactForm($contactForm, widgetID = false) {
-        var langStr = window.ElementPackConfig.contact_form;
+    /**
+     * Google invisible reCAPTCHA callback
+     * @returns {Promise}
+     */
+    const elementPackGIC = () => {
+        const langStr = window.ElementPackConfig.contact_form;
 
-        $.ajax({
-            url: $contactForm.attr('action'),
-            type: 'POST',
-            data: $contactForm.serialize(),
-            beforeSend: function () {
+        return new Promise((resolve, reject) => {
+
+            if (typeof grecaptcha === 'undefined') {
                 bdtUIkit.notification({
-                    message: '<div bdt-spinner></div> ' + langStr.sending_msg,
-                    timeout: false,
-                    status: 'primary'
+                    message : `<div bdt-spinner></div> ${langStr.captcha_nd}`,
+                    timeout : false,
+                    status  : 'warning'
                 });
-            },
-            success: function (data) {
-                var redirectURL = $(data).data('redirect'),
-                    isExternal = $(data).data('external'),
-                    resetStatus = $(data).data('resetstatus');
-
-                bdtUIkit.notification.closeAll();
-                var notification = bdtUIkit.notification({
-                    message: '<div class="bdt-contact-form-success-message-' + widgetID + '">' + data + '</div>'
-                });
-
-                if (redirectURL) {
-                    if (redirectURL != 'no') {
-                        bdtUIkit.util.on(document, 'close', function (evt) {
-                            if (evt.detail[0] === notification) {
-                                window.open(redirectURL, isExternal);
-                            }
-                        });
-                    }
-                }
-
-                localStorage.setItem("bdtCouponCode", $contactForm.attr('id'));
-
-                if (resetStatus) {
-                    if (resetStatus !== 'no') {
-                        $contactForm[0].reset();
-                    }
-                }
-
-                // $contactForm[0].reset();
-            }
-        });
-        return false;
-    }
-
-    // google invisible captcha
-    function elementPackGIC() {
-
-        var langStr = window.ElementPackConfig.contact_form;
-
-        return new Promise(function (resolve, reject) {
-
-            if (grecaptcha === undefined) {
-                bdtUIkit.notification({
-                    message: '<div bdt-spinner></div> ' + langStr.captcha_nd,
-                    timeout: false,
-                    status: 'warning'
-                });
-                reject();
+                return reject();
             }
 
-            var response = grecaptcha.getResponse();
+            const response = grecaptcha.getResponse();
 
             if (!response) {
                 bdtUIkit.notification({
-                    message: '<div bdt-spinner></div> ' + langStr.captcha_nr,
-                    timeout: false,
-                    status: 'warning'
+                    message : `<div bdt-spinner></div> ${langStr.captcha_nr}`,
+                    timeout : false,
+                    status  : 'warning'
                 });
-                reject();
+                return reject();
             }
 
-            var $contactForm = $('textarea.g-recaptcha-response').filter(function () {
-                return $(this).val() === response;
-            }).closest('form.bdt-contact-form-form');
+            const recaptchaTextarea = Array.from(
+                document.querySelectorAll('textarea.g-recaptcha-response')
+            ).find(el => el.value === response);
 
-            var contactFormAction = $contactForm.attr('action');
+            const formEl = recaptchaTextarea?.closest('form.bdt-contact-form-form');
+            const action = formEl?.getAttribute('action');
 
-            if (contactFormAction && contactFormAction !== '') {
-                sendContactForm($contactForm);
+            if (action && action !== '') {
+                sendContactForm(formEl);
             }
 
             grecaptcha.reset();
+        });
+    };
 
-        }); //end promise
-
-    }
-
-    //Contact form recaptcha callback, if needed
+    // Expose reCAPTCHA callback globally
     window.elementPackGICCB = elementPackGIC;
 
-    jQuery(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-contact-form.default', widgetSimpleContactForm);
+    /**
+     * Initialize contact form widget
+     * @param {jQuery} scope - Widget scope element
+     */
+    const widgetSimpleContactForm = (scope) => {
+        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+
+        const widgetID = scopeElement.dataset.id;
+
+        // Tel input validation — applies regardless of form variant
+        scopeElement.querySelectorAll('.bdt-contact-form input[type="tel"]').forEach(input => {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/[^0-9+]/g, '');
+            });
+        });
+
+        const formEl = scopeElement.querySelector('.bdt-contact-form .without-recaptcha');
+        if (!formEl) return;
+
+        formEl.addEventListener('submit', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            sendContactForm(formEl, widgetID);
+        });
+    };
+
+    window.addEventListener('elementor/frontend/init', () => {
+        if (window.elementorFrontend?.hooks) {
+            elementorFrontend.hooks.addAction('frontend/element_ready/bdt-contact-form.default', widgetSimpleContactForm);
+        }
     });
 
-
-}(jQuery, window.elementorFrontend));
+})();
 
 /**
  * End contact form widget script
  */
+
 /**
  * Start cookie consent widget script
  */
 
-(function ($, elementor) {
+(() => {
+    'use strict';
 
-	'use strict';
+    /**
+     * Initialize cookie consent widget
+     * @param {jQuery} scope - Widget scope element
+     */
+    const widgetCookieConsent = (scope) => {
+        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
 
-	var widgetCookieConsent = function ($scope, $) {
+        const cookieConsentEl = scopeElement.querySelector('.bdt-cookie-consent');
+        if (!cookieConsentEl) return;
 
-		var $cookieConsent = $scope.find('.bdt-cookie-consent'),
-			$settings = $cookieConsent.data('settings'),
-			editMode = Boolean(elementorFrontend.isEditMode()),
-			gtagSettings = $cookieConsent.data('gtag');
+        const editMode = Boolean(elementorFrontend.isEditMode());
+        if (editMode) return;
 
-		if (!$cookieConsent.length || editMode) {
-			return;
-		}
+        const parseData = (key) => {
+            const raw = cookieConsentEl.dataset[key];
+            if (!raw) return undefined;
+            try {
+                return typeof raw === 'string' ? JSON.parse(raw) : raw;
+            } catch (e) {
+                console.error(`Failed to parse cookie consent data-${key}:`, e);
+                return undefined;
+            }
+        };
 
-		window.cookieconsent.initialise($settings);
+        const settings     = parseData('settings');
+        const gtagSettings = parseData('gtag');
 
-		$('.cc-compliance').append(
-			`<button class="btn-denyCookie bdt-cc-close-btn cc-btn cc-dismiss">
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                </svg>
-           </button>`
-		);
+        window.cookieconsent.initialise(settings);
 
-		/**
-		 * Dismiss if user click close button
-		 */
-		$('.cc-btn.btn-denyCookie').on('click', function () {
-			$('.bdt-cookie-consent').hide();
-			document.cookie = 'element_pack_cookie_widget_gtag=denied; max-age=' + 60 * 60 * 24 * 7 + '; path=/';
-			return;
-		});
+        // Append deny/close button to the compliance bar
+        const compliance = document.querySelector('.cc-compliance');
+        const denyBtn    = document.createElement('button');
+        denyBtn.className = 'btn-denyCookie bdt-cc-close-btn cc-btn cc-dismiss';
+        denyBtn.innerHTML = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+        </svg>`;
+        compliance?.appendChild(denyBtn);
 
-		if (document.cookie.indexOf('element_pack_cookie_widget_gtag=denied') !== -1) {
-			$('.bdt-cookie-consent').hide();
-			return;
-		}
+        denyBtn.addEventListener('click', () => {
+            cookieConsentEl.style.display = 'none';
+            document.cookie = `element_pack_cookie_widget_gtag=denied; max-age=${60 * 60 * 24 * 7}; path=/`;
+        });
 
-		/**
-		 * gtag consent update
-		 */
-		if (gtagSettings === undefined) {
-			return;
-		}
+        if (document.cookie.includes('element_pack_cookie_widget_gtag=denied')) {
+            cookieConsentEl.style.display = 'none';
+            return;
+        }
 
-		if (gtagSettings.gtag_enabled !== true) {
-			return;
-		}
+        if (!gtagSettings?.gtag_enabled) return;
 
-		function consentGrantedAdStorage(args) {
-			gtag('consent', 'update', args);
-		}
+        const updateGtagConsent = (args) => gtag('consent', 'update', args);
 
-		let gtagAttrObj = {
-			'ad_user_data': gtagSettings.ad_user_data,
-			'ad_personalization': gtagSettings.ad_personalization,
-			'ad_storage': gtagSettings.ad_storage,
-			'analytics_storage': gtagSettings.analytics_storage,
-		};
+        const gtagConsentObj = {
+            ad_user_data       : gtagSettings.ad_user_data,
+            ad_personalization : gtagSettings.ad_personalization,
+            ad_storage         : gtagSettings.ad_storage,
+            analytics_storage  : gtagSettings.analytics_storage,
+        };
 
-		$('.cc-btn.cc-dismiss').on('click', function () {
-			consentGrantedAdStorage(gtagAttrObj);
-		});
+        document.querySelector('.cc-btn.cc-dismiss')?.addEventListener('click', () => {
+            updateGtagConsent(gtagConsentObj);
+        });
 
-		$('.cc-btn.btn-denyCookie').on('click', function () {
-			consentGrantedAdStorage({
-				'ad_storage': 'denied',
-				'analytics_storage': 'denied'
-			});
-		});
-	};
+        denyBtn.addEventListener('click', () => {
+            updateGtagConsent({
+                ad_storage        : 'denied',
+                analytics_storage : 'denied'
+            });
+        });
+    };
 
-	jQuery(window).on('elementor/frontend/init', function () {
-		elementorFrontend.hooks.addAction('frontend/element_ready/bdt-cookie-consent.default', widgetCookieConsent);
-	});
+    window.addEventListener('elementor/frontend/init', () => {
+        if (window.elementorFrontend?.hooks) {
+            elementorFrontend.hooks.addAction('frontend/element_ready/bdt-cookie-consent.default', widgetCookieConsent);
+        }
+    });
 
-}(jQuery, window.elementorFrontend));
+})();
 
 /**
  * End cookie consent widget script
@@ -451,304 +598,247 @@
 /**
  * Start countdown widget script
  */
- 
-(function ($, elementor) {
+
+(() => {
     'use strict';
-    var widgetCountdown = function ($scope, $) {
-        var $countdown = $scope.find('.bdt-countdown-wrapper');
-        if (!$countdown.length) {
+
+    /**
+     * Set a cookie with an optional expiry in hours
+     * @param {string} name
+     * @param {string} value
+     * @param {number} hours
+     */
+    const setCookie = (name, value, hours) => {
+        let expires = '';
+        if (hours) {
+            const date = new Date();
+            date.setTime(date.getTime() + hours * 60 * 60 * 1000);
+            expires = `; expires=${date.toUTCString()}`;
+        }
+        document.cookie = `${name}=${value ?? ''}${expires}; path=/`;
+    };
+
+    /**
+     * Read a cookie value by name, returns null if not found
+     * @param {string} name
+     * @returns {string|null}
+     */
+    const getCookie = (name) => {
+        const match = document.cookie
+            .split(';')
+            .find(c => c.trimStart().startsWith(name + '='));
+        return match ? match.trimStart().slice(name.length + 1) : null;
+    };
+
+    /**
+     * Random integer between min and max (inclusive)
+     * @param {number} min
+     * @param {number} max
+     * @returns {number}
+     */
+    const randomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+    /**
+     * Get remaining time components from a target date
+     * @param {Date} date
+     * @returns {{ total: number, seconds: number }}
+     */
+    const getTimeSpan = (date) => {
+        const total = date - Date.now();
+        return {
+            total,
+            seconds : Math.floor(total / 1000 % 60),
+        };
+    };
+
+    /**
+     * POST to the admin AJAX endpoint and handle all countdown-end actions
+     * @param {object} settings
+     * @param {string|number} endTime
+     */
+    const handleCountdownEnd = async (settings, endTime) => {
+        try {
+            const body = new URLSearchParams({
+                action         : 'element_pack_countdown_end',
+                endTime,
+                couponTrickyId : settings.couponTrickyId
+            });
+
+            const response = await fetch(settings.adminAjaxUrl, { method: 'POST', body });
+            const data     = await response.text();
+
+            if (data !== 'ended') return;
+
+            if (settings.endActionType === 'message') {
+                document.querySelector(settings.msgId)?.style.setProperty('display', 'block');
+                document.querySelector(`${settings.id}-timer`)?.style.setProperty('display', 'none');
+            }
+
+            if (settings.endActionType === 'url' && settings.redirectUrl?.includes('http')) {
+                setTimeout(() => { window.location.href = settings.redirectUrl; }, settings.redirectDelay);
+            }
+
+            if (settings.triggerId) {
+                setTimeout(() => {
+                    document.getElementById(settings.triggerId)?.click();
+                }, 1500);
+            }
+
+        } catch (e) {
+            console.error('Countdown end action failed:', e);
+        }
+    };
+
+    /**
+     * Initialize countdown widget
+     * @param {jQuery} scope - Widget scope element
+     */
+    const widgetCountdown = (scope) => {
+        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+
+        const countdownWrapper = scopeElement.querySelector('.bdt-countdown-wrapper');
+        if (!countdownWrapper) return;
+
+        const settingsData = countdownWrapper.dataset.settings;
+        if (!settingsData) return;
+
+        let settings;
+        try {
+            settings = typeof settingsData === 'string' ? JSON.parse(settingsData) : settingsData;
+        } catch (e) {
+            console.error('Failed to parse countdown settings:', e);
             return;
         }
-        var $settings = $countdown.data('settings'),
-            endTime = $settings.endTime,
-            loopHours = $settings.loopHours,
-            isLogged = $settings.isLogged;
 
-           
- 
-        var countDownObj = {
-            setCookie: function (name, value, hours) {
-                var expires = "";
-                if (hours) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
-                    expires = "; expires=" + date.toUTCString();
-                }
-                document.cookie = name + "=" + (value || "") + expires + "; path=/";
-            },
-            getCookie: function (name) {
-                var nameEQ = name + "=";
-                var ca = document.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-                }
-                return null;
-            },
-            randomIntFromInterval: function (min, max) { // min and max included 
-                return Math.floor(Math.random() * (max - min + 1) + min)
-            },
-            getTimeSpan: function (date) {
-                var total = date - Date.now();
+        const { endTime, loopHours, isLogged } = settings;
+        const isEditMode = document.body.classList.contains('elementor-editor-active');
 
-                return {
-                    total,
-                    seconds: total / 1000 % 60,
-                    minutes: total / 1000 / 60 % 60,
-                    hours: total / 1000 / 60 / 60 % 24,
-                    days: total / 1000 / 60 / 60 / 24
-                };
-            },
-            showPost: function (endTime) {
-                jQuery.ajax({
-                    url: $settings.adminAjaxUrl,
-                    type: 'post',
-                    data: {
-                        action: 'element_pack_countdown_end',
-                        endTime: endTime,
-                        couponTrickyId: $settings.couponTrickyId
-                    },
-                    success: function (data) {
-                        if (data == 'ended') {
-                            if ($settings.endActionType == 'message') {
-                                jQuery($settings.msgId).css({
-                                    'display': 'block'
-                                });
-                                jQuery($settings.id + '-timer').css({
-                                    'display': 'none'
-                                });
-                            }
-                            
-                            if ($settings.endActionType == 'url' && $settings.redirectUrl !== '' && $settings.redirectUrl.indexOf('http') > -1) {
-                                setInterval(function () {
-                                    jQuery(location).attr('href', $settings.redirectUrl);
-                                }, $settings.redirectDelay);
-                            }
-                        } 
-                    },
-                    error: function () {
-                        // error handling code can be added here if needed
+        // ── Fixed countdown ──────────────────────────────────────────────────
+
+        if (!loopHours) {
+            const timerEl  = document.querySelector(`${settings.id}-timer`);
+            const countdown = bdtUIkit.countdown(timerEl, { date: settings.finalTime });
+
+            const interval = setInterval(() => {
+                const { seconds } = getTimeSpan(countdown.date);
+
+                if (seconds < 0) {
+                    clearInterval(interval);
+
+                    if (!isEditMode) {
+                        document.querySelector(`${settings.id}-msg`)?.style.setProperty('display', 'none');
+
+                        if (settings.endActionType !== 'none' || settings.triggerId) {
+                            handleCountdownEnd(settings, endTime);
+                        }
                     }
-                });
-            },
-            couponCode: function(){
-                jQuery.ajax({
-                    url: $settings.adminAjaxUrl,
-                    type: 'post',
-                    data: {
-                        action: 'element_pack_countdown_end',
-                        endTime: endTime,
-                        couponTrickyId: $settings.couponTrickyId
-                    },
-                    success: function (data) {
-                    },
-                    error: function () {
-                    }
-                });
-            },
-            triggerFire : function(){
-                jQuery.ajax({
-                    url: $settings.adminAjaxUrl,
-                    type: 'post',
-                    data: {
-                        action: 'element_pack_countdown_end',
-                        endTime: endTime,
-                        couponTrickyId: $settings.couponTrickyId
-                    },
-                    success: function (data) {
-                         if (data == 'ended') {
-                             setTimeout(function () {
-                                if ($settings.triggerId){
-                                    document.getElementById($settings.triggerId).click();
-                                    
-                                }
-                                // document.getElementById($settings.triggerId).click();
-                                //  jQuery('#' + $settings.triggerId).trigger('click');
-                             }, 1500);
-                         }
-                    },
-                    error: function () {
-                        // error handling code can be added here if needed
-                    }
-                });
-            },
-            clearInterVal: function (myInterVal) {
-                clearInterval(myInterVal);
-            }
-
-        };
-
-
-        if (loopHours == false) {
-            var countdown = bdtUIkit.countdown($($settings.id + '-timer'), {
-                date: $settings.finalTime
-            });
-
-            var myInterVal = setInterval(function () {
-                var seconds = countDownObj.getTimeSpan(countdown.date).seconds.toFixed(0);
-                var finalSeconds = parseInt(seconds);
-                if (finalSeconds < 0) {
-                    if (!jQuery('body').hasClass('elementor-editor-active')) {
-                        jQuery($settings.id + '-msg').css({
-                            'display': 'none'
-                        });
-                        if ($settings.endActionType != 'none') {
-                            countDownObj.showPost(endTime)
-                        };
-                    }
-                    countDownObj.clearInterVal(myInterVal);
                 }
             }, 1000);
-            
-            // for coupon code
-            if ($settings.endActionType == 'coupon-code') {
-                var myInterVal2 = setInterval(function () {
-                    var seconds = countDownObj.getTimeSpan(countdown.date).seconds.toFixed(0);
-                    var finalSeconds = parseInt(seconds);
-                    if (finalSeconds < 0) {
-                        if (!jQuery('body').hasClass('elementor-editor-active')) {
-                            if ($settings.endActionType == 'coupon-code') {
-                                countDownObj.couponCode(endTime)
-                            };
-                        }
-                        countDownObj.clearInterVal(myInterVal2);
-                    }
-                }, 1000);
-            }
-            // custom trigger on the end
-
-            if ($settings.triggerId !== false) {
-                var myInterVal2 = setInterval(function () {
-                    var seconds = countDownObj.getTimeSpan(countdown.date).seconds.toFixed(0);
-                    var finalSeconds = parseInt(seconds);
-                    if (finalSeconds < 0) {
-                        if (!jQuery('body').hasClass('elementor-editor-active')) {
-                                countDownObj.triggerFire();
-                        }
-                        countDownObj.clearInterVal(myInterVal2);
-                    }
-                }, 1000);
-            }
- 
         }
 
+        // ── Loop countdown ───────────────────────────────────────────────────
 
-        if (loopHours !== false) {
-            var now = new Date(),
-                randMinute = countDownObj.randomIntFromInterval(6, 14),
-                hours = loopHours * 60 * 60 * 1000 - (randMinute * 60 * 1000),
-                timer = new Date(now.getTime() + hours),
-                loopTime = timer.toISOString(),
-                getCookieLoopTime = countDownObj.getCookie('bdtCountdownLoopTime');
+        if (loopHours) {
+            const randMinute        = randomInRange(6, 14);
+            const hours             = loopHours * 60 * 60 * 1000 - randMinute * 60 * 1000;
+            const loopTime          = new Date(Date.now() + hours).toISOString();
+            const cookieLoopTime    = getCookie('bdtCountdownLoopTime');
+            const cookieIsEmpty     = cookieLoopTime === null || cookieLoopTime === 'undefined';
 
-
-            if ((getCookieLoopTime == null || getCookieLoopTime == 'undefined') && isLogged === false) {
-                countDownObj.setCookie('bdtCountdownLoopTime', loopTime, loopHours);
+            if (cookieIsEmpty && isLogged === false) {
+                setCookie('bdtCountdownLoopTime', loopTime, loopHours);
             }
 
-            var setLoopTimer;
+            const setLoopTimer = isLogged !== false ? loopTime : getCookie('bdtCountdownLoopTime');
 
-            if (isLogged === false) {
-                setLoopTimer = countDownObj.getCookie('bdtCountdownLoopTime');
-            } else {
-                setLoopTimer = loopTime;
-            }
+            const timerEl = document.querySelector(`${settings.id}-timer`);
+            timerEl?.setAttribute('data-bdt-countdown', `date: ${setLoopTimer}`);
 
-            $($settings.id + '-timer').attr('data-bdt-countdown', 'date: ' + setLoopTimer);
-            var countdown = bdtUIkit.countdown($($settings.id + '-timer'), {
-                date: setLoopTimer
-            });
+            const countdown     = bdtUIkit.countdown(timerEl, { date: setLoopTimer });
+            const countdownDate = countdown.date;
 
-            var countdownDate = countdown.date;
+            setInterval(() => {
+                const { seconds } = getTimeSpan(countdownDate);
 
-            setInterval(function () {
-                var seconds = countDownObj.getTimeSpan(countdownDate).seconds.toFixed(0);
-                var finalSeconds = parseInt(seconds);
-                // console.log(finalSeconds);
-                if (finalSeconds > 0) {
-                    if ((getCookieLoopTime == null || getCookieLoopTime == 'undefined') && isLogged === false) {
-                        countDownObj.setCookie('bdtCountdownLoopTime', loopTime, loopHours);
-                        bdtUIkit.countdown($($settings.id + '-timer'), {
-                            date: setLoopTimer
-                        });
-                    }
+                if (seconds > 0 && cookieIsEmpty && isLogged === false) {
+                    setCookie('bdtCountdownLoopTime', loopTime, loopHours);
+                    bdtUIkit.countdown(timerEl, { date: setLoopTimer });
                 }
-
             }, 1000);
-
-
         }
-
-
     };
-    jQuery(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-countdown.default', widgetCountdown);
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-countdown.bdt-tiny-countdown', widgetCountdown);
+
+    window.addEventListener('elementor/frontend/init', () => {
+        if (window.elementorFrontend?.hooks) {
+            elementorFrontend.hooks.addAction('frontend/element_ready/bdt-countdown.default',          widgetCountdown);
+            elementorFrontend.hooks.addAction('frontend/element_ready/bdt-countdown.bdt-tiny-countdown', widgetCountdown);
+        }
     });
-}(jQuery, window.elementorFrontend));
+
+})();
 
 /**
  * End countdown widget script
  */
+
 /**
  * Start bdt custom gallery widget script
  */
 
-(function($, elementor) {
-
+(() => {
     'use strict';
 
-    var widgetCustomGallery = function($scope, $) {
+    const widgetCustomGallery = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
 
-        var $customGallery = $scope.find('.bdt-custom-gallery'),
-            $settings 	= $customGallery.data('settings');
-          
-        if (!$customGallery.length) {
-            return;
-        }
+        const customGalleryEl = scopeEl.querySelector('.bdt-custom-gallery');
+        if (!customGalleryEl) return;
 
-        if ($settings.tiltShow == true) {
-            var elements = document.querySelectorAll($settings.id + " [data-tilt]");
+        const settings = JSON.parse(customGalleryEl.dataset.settings || '{}');
+
+        if (settings.tiltShow === true) {
+            const elements = document.querySelectorAll(settings.id + ' [data-tilt]');
             VanillaTilt.init(elements);
         }
-
     };
 
-    jQuery(window).on('elementor/frontend/init', function() {
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-custom-gallery.default', widgetCustomGallery);
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-custom-gallery.default',    widgetCustomGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-custom-gallery.bdt-abetis', widgetCustomGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-custom-gallery.bdt-fedara', widgetCustomGallery);
     });
 
-}(jQuery, window.elementorFrontend));
+})();
 
 /**
  * End bdt custom gallery widget script
  */
 
-
-; (function ($, elementor) {
+(() => {
     'use strict';
-    $(window).on('elementor/frontend/init', function () {
 
-        var ModuleHandler = elementorModules.frontend.handlers.Base, FloatingEffect;
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
 
-        FloatingEffect = ModuleHandler.extend({
+        const ModuleHandler = elementorModules.frontend.handlers.Base;
 
-            bindEvents: function () {
+        const FloatingEffect = ModuleHandler.extend({
+
+            bindEvents() {
                 this.run();
             },
 
-            getDefaultSettings: function () {
+            getDefaultSettings() {
                 return {
                     direction: 'alternate',
                     easing: 'easeInOutSine',
-                    loop: true
+                    loop: true,
                 };
             },
 
-            settings: function (key) {
+            settings(key) {
                 return this.getElementSettings('ep_floating_effects_' + key);
             },
 
@@ -759,16 +849,16 @@
                 }
             }, 400),
 
-            run: function () {
-                var options = this.getDefaultSettings(),
-                    element = this.$element[0];
+            run() {
+                const options = this.getDefaultSettings();
+                const element = this.$element[0];
 
                 if (this.settings('translate_toggle')) {
                     if (this.settings('translate_x.sizes.from').length !== 0 || this.settings('translate_x.sizes.to').length !== 0) {
                         options.translateX = {
                             value: [this.settings('translate_x.sizes.from') || 0, this.settings('translate_x.sizes.to') || 0],
                             duration: this.settings('translate_duration.size'),
-                            delay: this.settings('translate_delay.size') || 0
+                            delay: this.settings('translate_delay.size') || 0,
                         };
                     }
 
@@ -776,7 +866,7 @@
                         options.translateY = {
                             value: [this.settings('translate_y.sizes.from') || 0, this.settings('translate_y.sizes.to') || 0],
                             duration: this.settings('translate_duration.size'),
-                            delay: this.settings('translate_delay.size') || 0
+                            delay: this.settings('translate_delay.size') || 0,
                         };
                     }
                 }
@@ -787,21 +877,21 @@
                             options.rotateX = {
                                 value: [this.settings('rotate_x.sizes.from') || 0, this.settings('rotate_x.sizes.to') || 0],
                                 duration: this.settings('rotate_duration.size'),
-                                delay: this.settings('rotate_delay.size') || 0
+                                delay: this.settings('rotate_delay.size') || 0,
                             };
                         }
                         if (this.settings('rotate_y.sizes.from').length !== 0 || this.settings('rotate_y.sizes.to').length !== 0) {
                             options.rotateY = {
                                 value: [this.settings('rotate_y.sizes.from') || 0, this.settings('rotate_y.sizes.to') || 0],
                                 duration: this.settings('rotate_duration.size'),
-                                delay: this.settings('rotate_delay.size') || 0
+                                delay: this.settings('rotate_delay.size') || 0,
                             };
                         }
                         if (this.settings('rotate_z.sizes.from').length !== 0 || this.settings('rotate_z.sizes.to').length !== 0) {
                             options.rotateZ = {
                                 value: [this.settings('rotate_z.sizes.from') || 0, this.settings('rotate_z.sizes.to') || 0],
                                 duration: this.settings('rotate_duration.size'),
-                                delay: this.settings('rotate_delay.size') || 0
+                                delay: this.settings('rotate_delay.size') || 0,
                             };
                         }
                     }
@@ -812,14 +902,14 @@
                         options.scaleX = {
                             value: [this.settings('scale_x.sizes.from') || 0, this.settings('scale_x.sizes.to') || 0],
                             duration: this.settings('scale_duration.size'),
-                            delay: this.settings('scale_delay.size') || 0
+                            delay: this.settings('scale_delay.size') || 0,
                         };
                     }
                     if (this.settings('scale_y.sizes.from').length !== 0 || this.settings('scale_y.sizes.to').length !== 0) {
                         options.scaleY = {
                             value: [this.settings('scale_y.sizes.from') || 0, this.settings('scale_y.sizes.to') || 0],
                             duration: this.settings('scale_duration.size'),
-                            delay: this.settings('scale_delay.size') || 0
+                            delay: this.settings('scale_delay.size') || 0,
                         };
                     }
                 }
@@ -829,25 +919,25 @@
                         options.skewX = {
                             value: [this.settings('skew_x.sizes.from') || 0, this.settings('skew_x.sizes.to') || 0],
                             duration: this.settings('skew_duration.size'),
-                            delay: this.settings('skew_delay.size') || 0
+                            delay: this.settings('skew_delay.size') || 0,
                         };
                     }
                     if (this.settings('skew_y.sizes.from').length !== 0 || this.settings('skew_y.sizes.to').length !== 0) {
                         options.skewY = {
                             value: [this.settings('skew_y.sizes.from') || 0, this.settings('skew_y.sizes.to') || 0],
                             duration: this.settings('skew_duration.size'),
-                            delay: this.settings('skew_delay.size') || 0
+                            delay: this.settings('skew_delay.size') || 0,
                         };
                     }
                 }
 
                 if (this.settings('border_radius_toggle')) {
-                    jQuery(element).css('overflow', 'hidden');
+                    element.style.overflow = 'hidden';
                     if (this.settings('border_radius.sizes.from').length !== 0 || this.settings('border_radius.sizes.to').length !== 0) {
                         options.borderRadius = {
                             value: [this.settings('border_radius.sizes.from') || 0, this.settings('border_radius.sizes.to') || 0],
                             duration: this.settings('border_radius_duration.size'),
-                            delay: this.settings('border_radius_delay.size') || 0
+                            delay: this.settings('border_radius_delay.size') || 0,
                         };
                     }
                 }
@@ -857,7 +947,7 @@
                         options.opacity = {
                             value: [this.settings('opacity_start.size') || 1, this.settings('opacity_end.size') || 0],
                             duration: this.settings('opacity_duration.size'),
-                            easing: 'linear'
+                            easing: 'linear',
                         };
                     }
                 }
@@ -879,398 +969,375 @@
                         this.anime = window.anime && window.anime(options);
                     }
                 }
-
-            }
+            },
         });
 
-        elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
-            elementorFrontend.elementsHandler.addHandler(FloatingEffect, {
-                $element: $scope
-            });
+        elementorFrontend.hooks.addAction('frontend/element_ready/widget', ($scope) => {
+            elementorFrontend.elementsHandler.addHandler(FloatingEffect, { $element: $scope });
         });
     });
-}(jQuery, window.elementorFrontend));
+
+})();
 
 /**
  * Start Flip Box widget script
  */
 
-(function ($, elementor) {
+(() => {
     'use strict';
-    var widgetFlipBox = function ($scope, $) {
-        var $flipBox = $scope.find('.bdt-flip-box'),
-            $settings = $flipBox.data('settings');
-        if (!$flipBox.length) {
-            return;
-        }
 
-        if ('click' === $settings.flipTrigger) {
-            $($flipBox).on('click', function () {
-                $(this).toggleClass('bdt-active');
-            });
-        }
-        if ('hover' === $settings.flipTrigger) {
-            $($flipBox).on('mouseenter', function () {
-                $(this).addClass('bdt-active');
-            });
-            $($flipBox).on('mouseleave', function () {
-                $(this).removeClass('bdt-active');
-            });
-        }
+    const widgetFlipBox = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
 
+        const flipBoxes = scopeEl.querySelectorAll('.bdt-flip-box');
+        if (!flipBoxes.length) return;
 
+        const firstBox = flipBoxes[0];
+        const rawSettings = firstBox.dataset.settings;
+        const settings    = rawSettings ? JSON.parse(rawSettings) : {};
+        if (!settings) return;
+
+        const trigger = settings.flipTrigger;
+
+        flipBoxes.forEach(boxEl => {
+            if (trigger === 'click') {
+                boxEl.addEventListener('click', () => boxEl.classList.toggle('bdt-active'));
+            } else if (trigger === 'hover') {
+                boxEl.addEventListener('mouseenter', () => boxEl.classList.add('bdt-active'));
+                boxEl.addEventListener('mouseleave', () => boxEl.classList.remove('bdt-active'));
+            }
+        });
     };
-    jQuery(window).on('elementor/frontend/init', function () {
+
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-flip-box.default', widgetFlipBox);
     });
-}(jQuery, window.elementorFrontend));
+
+})();
 
 /**
  * End Flip Box widget script
  */
-(function ($, elementor) {
-  "use strict";
 
-  var widgetImageAccordion = function ($scope, $) {
-    var $imageAccordion = $scope.find(".bdt-ep-image-accordion"),
-      $settings = $imageAccordion.data("settings");
+/**
+ * Start image accordion widget script
+ */
 
-    var accordionItem = $imageAccordion.find(".bdt-ep-image-accordion-item");
-    var totalItems = $imageAccordion.children().length;
+(function () {
+    'use strict';
 
-    // Make each accordion item focusable
-    accordionItem.attr('tabindex', '0');
+    const setActive = (item, siblings) => {
+        siblings.forEach((sib) => sib.classList.remove('active'));
+        item.classList.add('active');
+    };
 
-    if (
-      $settings.activeItem == true &&
-      $settings.activeItemNumber <= totalItems
-    ) {
-      $imageAccordion.find(".bdt-ep-image-accordion-item").removeClass("active");
-      $imageAccordion.children().eq($settings.activeItemNumber - 1).addClass("active");
-    }
+    const getSiblings = (el) => {
+        const parent = el.parentElement;
+        return parent ? [...parent.children].filter((c) => c !== el) : [];
+    };
 
-    // Mouse event
-    $(accordionItem).on($settings.mouse_event, function () {
-      $(this).siblings().removeClass("active");
-      $(this).addClass("active");
+    const widgetImageAccordion = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const imageAccordion = scopeEl.querySelector('.bdt-ep-image-accordion');
+        if (!imageAccordion) return;
+
+        let settings = {};
+        try {
+            const raw = imageAccordion.dataset.settings;
+            settings = raw ? JSON.parse(raw) : {};
+        } catch (_) {}
+
+        const accordionItems = imageAccordion.querySelectorAll('.bdt-ep-image-accordion-item');
+        const totalItems = accordionItems.length;
+
+        accordionItems.forEach((item) => item.setAttribute('tabindex', '0'));
+
+        if (settings.activeItem === true && settings.activeItemNumber <= totalItems) {
+            accordionItems.forEach((item) => item.classList.remove('active'));
+            const activeIndex = settings.activeItemNumber - 1;
+            if (accordionItems[activeIndex]) accordionItems[activeIndex].classList.add('active');
+        }
+
+        const mouseEvent = settings.mouse_event || 'click';
+        const siblings = (el) => getSiblings(el);
+
+        accordionItems.forEach((item) => {
+            item.addEventListener(mouseEvent, function () {
+                setActive(this, siblings(this));
+            });
+
+            item.addEventListener('focus', function () {
+                setActive(this, siblings(this));
+            });
+
+            item.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setActive(this, siblings(this));
+                }
+            });
+        });
+
+        if (settings.activeItem !== true) {
+            document.body.addEventListener(mouseEvent, function (e) {
+                if (imageAccordion.contains(e.target)) return;
+                accordionItems.forEach((item) => item.classList.remove('active'));
+            });
+        }
+
+        if (settings.swiping) {
+            let touchstartX = 0;
+            let touchendX = 0;
+
+            accordionItems.forEach((item) => {
+                item.addEventListener('touchstart', function (e) {
+                    touchstartX = e.changedTouches[0]?.screenX ?? 0;
+                });
+
+                item.addEventListener('touchend', function (e) {
+                    touchendX = e.changedTouches[0]?.screenX ?? 0;
+                    const deltaX = touchendX - touchstartX;
+                    const prev = item.previousElementSibling;
+                    const next = item.nextElementSibling;
+
+                    if (deltaX > 50 && prev) {
+                        accordionItems.forEach((i) => i.classList.remove('active'));
+                        prev.classList.add('active');
+                    } else if (deltaX < -50 && next) {
+                        accordionItems.forEach((i) => i.classList.remove('active'));
+                        next.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        if (settings.inactiveItemOverlay) {
+            accordionItems.forEach((item) => {
+                item.addEventListener(mouseEvent, function (e) {
+                    e.stopPropagation();
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('bdt-inactive');
+                        siblings(this).forEach((s) => s.classList.add('bdt-inactive'));
+                    } else {
+                        siblings(this).forEach((s) => s.classList.remove('bdt-inactive'));
+                    }
+                });
+            });
+
+            document.addEventListener(mouseEvent, function () {
+                accordionItems.forEach((item) => item.classList.remove('bdt-inactive'));
+            });
+        }
+    };
+
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-image-accordion.default', widgetImageAccordion);
     });
+})();
 
-    // Keyboard focus event
-    $(accordionItem).on('focus', function () {
-      $(this).siblings().removeClass("active");
-      $(this).addClass("active");
-    });
-
-    // Keydown event for Enter or Space key
-    $(accordionItem).on('keydown', function (e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        $(this).siblings().removeClass("active");
-        $(this).addClass("active");
-      }
-    });
-
-    if ($settings.activeItem != true) {
-      $("body").on($settings.mouse_event, function (e) {
-        if (
-          e.target.$imageAccordion == "bdt-ep-image-accordion" ||
-          $(e.target).closest(".bdt-ep-image-accordion").length
-        ) {
-          // inside accordion, do nothing
-        } else {
-          $imageAccordion.find(".bdt-ep-image-accordion-item").removeClass("active");
-        }
-      });
-    }
-
-    // Swiping (unchanged)
-    function handleSwipe(event) {
-      var deltaX = touchendX - touchstartX;
-      var hasPrev = $(event.currentTarget).prev();
-      var hasNext = $(event.currentTarget).next();
-
-      if (deltaX > 50) {
-        if (hasPrev.length) {
-          $(accordionItem).removeClass("active");
-          hasPrev.addClass("active");
-        }
-      } else if (deltaX < -50) {
-        if (hasNext.length) {
-          $(accordionItem).removeClass("active");
-          hasNext.addClass("active");
-        }
-      }
-    }
-
-    if ($settings.swiping) {
-      var touchstartX = 0;
-      var touchendX = 0;
-
-      $(accordionItem).on("touchstart", function (event) {
-        touchstartX = event.changedTouches[0].screenX;
-      });
-
-      $(accordionItem).on("touchend", function (event) {
-        touchendX = event.changedTouches[0].screenX;
-        handleSwipe(event);
-      });
-    }
-
-    // Inactive Item
-    if ($settings.inactiveItemOverlay) {
-      $(accordionItem).on($settings.mouse_event, function (event) {
-        event.stopPropagation();
-        if ($(this).hasClass("active")) {
-          $(this).removeClass("bdt-inactive").siblings().addClass("bdt-inactive");
-        } else {
-          $(this).siblings().removeClass("bdt-inactive");
-        }
-      });
-      $(document).on($settings.mouse_event, function () {
-        $(accordionItem).removeClass("bdt-inactive");
-      });
-    }
-  };
-
-  jQuery(window).on("elementor/frontend/init", function () {
-    elementorFrontend.hooks.addAction(
-      "frontend/element_ready/bdt-image-accordion.default",
-      widgetImageAccordion
-    );
-  });
-})(jQuery, window.elementorFrontend);
+/**
+ * End image accordion widget script
+ */
 
 /**
  * Start image compare widget script
  */
 
-( function( $, elementor ) {
+(function () {
+    'use strict';
 
-	'use strict';
+    const sanitizeHTML = (str) => {
+        if (typeof str !== 'string') return '';
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    };
 
-	var widgetImageCompare = function( $scope, $ ) {
-        var $image_compare_main = $scope.find('.bdt-image-compare');
-        var $image_compare      = $scope.find('.image-compare');
-        if ( !$image_compare.length ) {
-            return;
-        }
+    const widgetImageCompare = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const imageCompareEls = scopeEl.querySelectorAll('.image-compare');
+        if (!imageCompareEls.length) return;
 
-        var $settings        = $image_compare.data('settings');
+        const firstEl = imageCompareEls[0];
+        let settings = {};
+        try {
+            const raw = firstEl.dataset.settings;
+            settings = raw ? JSON.parse(raw) : {};
+        } catch (_) {}
 
-        var sanitizeHTML = function(str) {
-          return str.replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#039;');
-      };
-        
-        var 
-        default_offset_pct   = $settings.default_offset_pct,
-        orientation          = $settings.orientation,
-        before_label         = sanitizeHTML($settings.before_label || ''),
-        after_label          = sanitizeHTML($settings.after_label || ''),
-        no_overlay           = $settings.no_overlay,
-        on_hover             = $settings.on_hover,
-        add_circle_blur      = $settings.add_circle_blur,
-        add_circle_shadow    = $settings.add_circle_shadow,
-        add_circle           = $settings.add_circle,
-        smoothing            = $settings.smoothing,
-        smoothing_amount     = $settings.smoothing_amount,
-        bar_color            = $settings.bar_color,
-        move_slider_on_hover = $settings.move_slider_on_hover;
-      
-        var viewers = document.querySelectorAll('#' + $settings.id);
-  
-        var options = {
-
-            // UI Theme Defaults
-            controlColor : bar_color,
-            controlShadow: add_circle_shadow,
-            addCircle    : add_circle,
-            addCircleBlur: add_circle_blur,
-          
-            // Label Defaults
-            showLabels   : no_overlay,
-            labelOptions : {
-              before       : before_label,
-              after        : after_label,
-              onHover      : on_hover
+        const options = {
+            controlColor: settings.bar_color,
+            controlShadow: settings.add_circle_shadow,
+            addCircle: settings.add_circle,
+            addCircleBlur: settings.add_circle_blur,
+            showLabels: settings.no_overlay,
+            labelOptions: {
+                before: sanitizeHTML(settings.before_label || ''),
+                after: sanitizeHTML(settings.after_label || ''),
+                onHover: settings.on_hover
             },
-          
-            // Smoothing
-            smoothing      : smoothing,
-            smoothingAmount: smoothing_amount,
-          
-            // Other options
-            hoverStart     : move_slider_on_hover,
-            verticalMode   : orientation,
-            startingPoint  : default_offset_pct,
-            fluidMode      : false
-          };
+            smoothing: settings.smoothing,
+            smoothingAmount: settings.smoothing_amount ?? 0,
+            hoverStart: settings.move_slider_on_hover,
+            verticalMode: settings.orientation,
+            startingPoint: settings.default_offset_pct,
+            fluidMode: false
+        };
 
-          viewers.forEach(function (element){
-            var view = new ImageCompare(element, options).mount();
-          });
+        imageCompareEls.forEach((element) => {
+            new ImageCompare(element, options).mount();
+        });
+    };
 
-	};
-
-	jQuery(window).on('elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-image-compare.default', widgetImageCompare );
-	});
-
-}( jQuery, window.elementorFrontend ) );
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-image-compare.default', widgetImageCompare);
+    });
+})();
 
 /**
  * End image compare widget script
  */
 
-
 /**
  * Start image magnifier widget script
  */
 
-( function( $, elementor ) {
+(function () {
+    'use strict';
 
-	'use strict';
+    const widgetImageMagnifier = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const imageMagnifier = scopeEl.querySelector('.bdt-image-magnifier');
+        if (!imageMagnifier) return;
 
-	var widgetImageMagnifier = function( $scope, $ ) {
+        const magnifier = imageMagnifier.querySelector(':scope > .bdt-image-magnifier-image');
+        if (!magnifier) return;
 
-		var $imageMagnifier = $scope.find( '.bdt-image-magnifier' ),
-            settings        = $imageMagnifier.data('settings'),
-            magnifier       = $imageMagnifier.find('> .bdt-image-magnifier-image');
+        let settings = {};
+        try {
+            const raw = imageMagnifier.dataset.settings;
+            settings = raw ? JSON.parse(raw) : {};
+        } catch (_) {}
 
-        if ( ! $imageMagnifier.length ) {
-            return;
-        }
+        // ImageZoom is a jQuery plugin - requires jQuery
+        jQuery(magnifier).ImageZoom(settings);
+    };
 
-        $(magnifier).ImageZoom(settings);
-
-	};
-
-
-	jQuery(window).on('elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-image-magnifier.default', widgetImageMagnifier );
-	});
-
-}( jQuery, window.elementorFrontend ) );
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-image-magnifier.default', widgetImageMagnifier);
+    });
+})();
 
 /**
  * End image magnifier widget script
  */
 
-
 /**
- * Start price table widget script
+ * Start image stack widget script
  */
 
- ( function( $, elementor ) {
+(function () {
+    'use strict';
 
-	'use strict';
+    const widgetImageStack = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const imageStack = scopeEl.querySelector('.bdt-image-stack');
+        if (!imageStack) return;
 
-	var widgetImageStack = function( $scope, $ ) {
+        const tooltips = imageStack.querySelectorAll('.bdt-tippy-tooltip');
+        const widgetID = scopeEl.dataset.id || '';
 
-		var $imageStack = $scope.find( '.bdt-image-stack' );
-
-        if ( ! $imageStack.length ) {
-            return;
-        }
-
-        var $tooltip = $imageStack.find('.bdt-tippy-tooltip'),
-        	widgetID = $scope.data('id');
-		
-		$tooltip.each( function( index ) {
-			tippy( this, {
-				allowHTML: true,
-				theme: 'bdt-tippy-' + widgetID
-			});				
-		});
-
+        tooltips.forEach((el) => {
+            tippy(el, {
+                allowHTML: true,
+                theme: 'bdt-tippy-' + widgetID
+            });
+        });
     };
-    
-	jQuery(window).on('elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-image-stack.default', widgetImageStack );
-	});
 
-}( jQuery, window.elementorFrontend ) );
-
-/**
- * End price table widget script
- */
-/**
- * Start marker widget script
- */
-
-( function( $, elementor ) {
-
-	'use strict';
-
-	var widgetIconMobileMenu = function( $scope, $ ) {
-
-		var $marker = $scope.find( '.bdt-icon-mobile-menu-wrap' );
-
-        if ( ! $marker.length ) {
-            return;
-        }
-
-		var $tooltip = $marker.find('ul > li > .bdt-tippy-tooltip'),
-			widgetID = $scope.data('id');
-		
-		$tooltip.each( function( index ) {
-			tippy( this, {
-				allowHTML: true,
-				theme: 'bdt-tippy-' + widgetID
-			});				
-		});
-
-	};
-
-
-	jQuery(window).on('elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/bdt-icon-mobile-menu.default', widgetIconMobileMenu );
-	});
-
-}( jQuery, window.elementorFrontend ) );
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-image-stack.default', widgetImageStack);
+    });
+})();
 
 /**
- * End marker widget script
+ * End image stack widget script
  */
 
+/**
+ * Start icon mobile menu widget script
+ */
+
+(function () {
+    'use strict';
+
+    const widgetIconMobileMenu = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const marker = scopeEl.querySelector('.bdt-icon-mobile-menu-wrap');
+        if (!marker) return;
+
+        const tooltips = marker.querySelectorAll('ul > li > .bdt-tippy-tooltip');
+        const widgetID = scopeEl.dataset.id || '';
+
+        tooltips.forEach((el) => {
+            tippy(el, {
+                allowHTML: true,
+                theme: 'bdt-tippy-' + widgetID
+            });
+        });
+    };
+
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-icon-mobile-menu.default', widgetIconMobileMenu);
+    });
+})();
+
+/**
+ * End icon mobile menu widget script
+ */
 
 /**
  * Start logo grid widget script
  */
 
-(function($, elementor) {
+(function () {
+    'use strict';
 
-    'use strict'; 
+    const widgetLogoGrid = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const logoGrid = scopeEl.querySelector('.bdt-logo-grid-wrapper');
+        if (!logoGrid) return;
 
-    var widgetLogoGrid = function($scope, $) {
+        const tooltips = logoGrid.querySelectorAll(':scope > .bdt-tippy-tooltip');
+        const widgetID = scopeEl.dataset.id || '';
 
-        var $logogrid = $scope.find('.bdt-logo-grid-wrapper');
-
-        if (!$logogrid.length) {
-            return;
-        }
-
-        var $tooltip = $logogrid.find('> .bdt-tippy-tooltip'),
-            widgetID = $scope.data('id');
-
-        $tooltip.each(function(index) {
-            tippy(this, {
+        tooltips.forEach((el) => {
+            tippy(el, {
                 allowHTML: true,
                 theme: 'bdt-tippy-' + widgetID
             });
         });
-
     };
 
-
-    jQuery(window).on('elementor/frontend/init', function() {
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-logo-grid.default', widgetLogoGrid);
     });
+})();
 
-}(jQuery, window.elementorFrontend));
+/**
+ * End logo grid widget script
+ */
 
 /**
  * Start open street map widget script
@@ -2913,331 +2980,410 @@ $(window).on('elementor/frontend/init', function () {
 
 /**
  * Start age-gate script
+ * Optimized version - No jQuery dependency
  */
 
-(function ($, elementor) {
+(() => {
+  "use strict";
 
-    'use strict';
+  /**
+   * Age Gate Modal Handler Class
+   */
+  class AgeGateModal {
+    constructor(element, settings, isEditMode) {
+      this.element = element;
+      this.settings = settings;
+      this.isEditMode = isEditMode;
+      this.widgetId = settings.widgetId;
+      this.abortController = new AbortController();
+      this.signal = this.abortController.signal;
+    }
 
-    var widgetAgeGate = function ($scope, $) {
+    /**
+     * Set localStorage with expiration
+     */
+    setLocalize() {
+      if (this.isEditMode) {
+        this.clearLocalize();
+        return;
+      }
 
-        var $modal = $scope.find('.bdt-age-gate');
+      this.clearLocalize();
 
-        if (!$modal.length) {
-            return;
-        }
+      const hours = this.settings.displayTimesExpire;
+      const expires = hours * 60 * 60; // Convert to seconds
+      const now = Date.now();
+      const schedule = now + expires * 1000;
 
-        $.each($modal, function (index, val) {
+      if (localStorage.getItem(this.widgetId) === null) {
+        localStorage.setItem(this.widgetId, "0");
+        localStorage.setItem(`${this.widgetId}_expiresIn`, schedule.toString());
+      }
 
-            var $this = $(this),
-                $settings = $this.data('settings'),
-                modalID = $settings.id,
-                displayTimes = $settings.displayTimes,
-                closeBtnDelayShow = $settings.closeBtnDelayShow,
-                delayTime = $settings.delayTime,
-                widgetId = $settings.widgetId,
-                requiredAge = $settings.requiredAge,
-                redirect_link = $settings.redirect_link;
-            var editMode = Boolean(elementorFrontend.isEditMode());
+      if (localStorage.getItem(this.widgetId) !== null) {
+        let count = parseInt(localStorage.getItem(this.widgetId)) || 0;
+        count++;
+        localStorage.setItem(this.widgetId, count.toString());
+      }
+    }
 
-            if (editMode) {
-                redirect_link = false;
+    /**
+     * Clear expired localStorage
+     */
+    clearLocalize() {
+      const localizeExpiry = parseInt(
+        localStorage.getItem(`${this.widgetId}_expiresIn`)
+      );
+      const now = Date.now();
+
+      if (now >= localizeExpiry) {
+        localStorage.removeItem(`${this.widgetId}_expiresIn`);
+        localStorage.removeItem(this.widgetId);
+      }
+    }
+
+    /**
+     * Show modal based on display times
+     */
+    modalFire() {
+      const displayTimes = this.settings.displayTimes || 1;
+      const firedNotify = parseInt(localStorage.getItem(this.widgetId)) || 0;
+
+      if (displayTimes !== false && firedNotify >= displayTimes) {
+        return;
+      }
+
+      if (window.bdtUIkit?.modal) {
+        window.bdtUIkit.modal(this.element, {
+          bgclose: false,
+          keyboard: false,
+        }).show();
+      }
+    }
+
+    /**
+     * Handle age verification
+     */
+    setupAgeVerify() {
+      let firedNotify = parseInt(localStorage.getItem(this.widgetId)) || 0;
+      const modal = this.element;
+      const buttons = modal.querySelectorAll(".bdt-button");
+      const redirectLink = this.isEditMode ? false : this.settings.redirect_link;
+      let requiredAge = this.settings.requiredAge;
+
+      buttons.forEach((button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const ageInput = modal.querySelector(".bdt-age-input");
+            let inputAge = parseInt(ageInput?.value) || 0;
+
+            // Handle yes/no buttons
+            if (button.classList.contains("data-val-yes")) {
+              inputAge = 18;
+            }
+            if (button.classList.contains("data-val-no")) {
+              requiredAge = 18;
+              inputAge = 1;
             }
 
-            var modal = {
-                setLocalize: function () {
-                    if (editMode) {
-                        this.clearLocalize();
-                        return;
-                    }
-                    this.clearLocalize();
-                    var widgetID = widgetId,
-                        localVal = 0,
-                        // hours = 4;
-                        hours = $settings.displayTimesExpire;
+            // Verify age
+            if (inputAge >= requiredAge) {
+              this.setLocalize();
+              firedNotify += 1;
+              if (window.bdtUIkit?.modal) {
+                window.bdtUIkit.modal(this.element).hide();
+              }
+            } else {
+              // Show error message
+              const msgText = document.querySelector(".modal-msg-text");
+              if (msgText) {
+                msgText.classList.remove("bdt-hidden");
+              }
 
-                    var expires = (hours * 60 * 60);
-                    var now = Date.now();
-                    var schedule = now + expires * 1000;
+              // Redirect if link is provided
+              if (redirectLink !== false) {
+                window.location.replace(redirectLink);
+              }
+            }
+          },
+          { signal: this.signal }
+        );
+      });
 
-                    if (localStorage.getItem(widgetID) === null) {
-                        localStorage.setItem(widgetID, localVal);
-                        localStorage.setItem(widgetID + '_expiresIn', schedule);
-                    }
-                    if (localStorage.getItem(widgetID) !== null) {
-                        var count = parseInt(localStorage.getItem(widgetID));
-                        count++;
-                        localStorage.setItem(widgetID, count);
-                        // this.clearLocalize();
-                    }
-                },
-                clearLocalize: function () {
-                    var localizeExpiry = parseInt(localStorage.getItem(widgetId + '_expiresIn'));
-                    var now = Date.now(); //millisecs since epoch time, lets deal only with integer
-                    var schedule = now;
-                    if (schedule >= localizeExpiry) {
-                        localStorage.removeItem(widgetId + '_expiresIn');
-                        localStorage.removeItem(widgetId);
-                    }
-                },
-                modalFire: function () {
-                    var displayTimes = 1;
-                    var firedNotify = parseInt(localStorage.getItem(widgetId)) || 0;
+      // Handle modal hidden event
+      if (window.bdtUIkit?.util) {
+        window.bdtUIkit.util.on(this.element, "hidden", () => {
+          if (this.isEditMode) {
+            return;
+          }
 
-                    if ((displayTimes !== false) && (firedNotify >= displayTimes)) {
-                        return;
-                    }
-                    bdtUIkit.modal($this, {
-                        bgclose: false,
-                        keyboard: false
-                    }).show();
-                },
-                ageVerify: function () {
-                    var init = this;
-                    var firedNotify = parseInt(localStorage.getItem(widgetId)) || 0;
-                    $('#' + widgetId).find('.bdt-button').on('click', function (e) {
-                        let input_age = parseInt($('#' + widgetId).find('.bdt-age-input').val());
+          if (redirectLink === false && firedNotify <= 0) {
+            setTimeout(() => {
+              this.modalFire();
+            }, 1500);
+            return;
+          }
 
-                        if ($(this).hasClass('data-val-yes')) {
-                            input_age = 18;
-                        }
-                        if ($(this).hasClass('data-val-no')) {
-                            requiredAge = 18;
-                            input_age = 1;
-                        }
-
-                        if (input_age >= requiredAge) {
-                            init.setLocalize();
-                            firedNotify += 1;
-                            bdtUIkit.modal($this).hide();
-                        } else {
-                            if (redirect_link == false) {
-                                $('.modal-msg-text').removeClass('bdt-hidden');
-                                return;
-                            } else {
-                                $('.modal-msg-text').removeClass('bdt-hidden');
-                            }
-                            window.location.replace(redirect_link);
-                        }
-                    });
-
-                    bdtUIkit.util.on($this, 'hidden', function () {
-
-                        if(editMode){
-                            return;
-                        }
-
-                        if (redirect_link == false && firedNotify <= 0) {
-
-                            setTimeout( function(){
-                                init.modalFire();
-                            }, 1500);
-
-                            return;
-                        }
-
-                        if (redirect_link !== false && firedNotify <= 0) {
-                            window.location.replace(redirect_link);
-                        }
-                    });
-                },
-                closeBtnDelayShow: function () {
-                    var $modal = $('#' + modalID);
-                    $modal.find('#bdt-modal-close-button').hide(0);
-                    $modal.on("shown", function () {
-                            $('#bdt-modal-close-button').hide(0).fadeIn(delayTime);
-                        })
-                        .on("hide", function () {
-                            $modal.find('#bdt-modal-close-button').hide(0);
-                        });
-                },
-
-                default: function () {
-                    this.modalFire();
-                },
-                init: function () {
-                    var init = this;
-                    init.default();
-                    init.ageVerify();
-
-                    if (closeBtnDelayShow) {
-                        init.closeBtnDelayShow();
-                    }
-                }
-            };
-
-            // kick the modal
-            modal.init();
-
+          if (redirectLink !== false && firedNotify <= 0) {
+            window.location.replace(redirectLink);
+          }
         });
-    };
+      }
+    }
 
-    jQuery(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-age-gate.default', widgetAgeGate);
+    /**
+     * Handle close button delay
+     */
+    setupCloseBtnDelay() {
+      const { id: modalID, delayTime } = this.settings;
+      const modalElement = document.getElementById(modalID);
+      if (!modalElement) return;
+
+      const closeButton = modalElement.querySelector("#bdt-modal-close-button");
+      if (!closeButton) return;
+
+      // Hide initially
+      closeButton.style.display = "none";
+
+      // Show on modal shown
+      if (window.bdtUIkit?.util) {
+        window.bdtUIkit.util.on(modalElement, "shown", () => {
+          closeButton.style.display = "none";
+          setTimeout(() => {
+            closeButton.style.display = "";
+            closeButton.style.opacity = "0";
+            closeButton.style.transition = "opacity 0.3s";
+            setTimeout(() => {
+              closeButton.style.opacity = "1";
+            }, 10);
+          }, delayTime);
+        });
+
+        window.bdtUIkit.util.on(modalElement, "hide", () => {
+          closeButton.style.display = "none";
+        });
+      }
+    }
+
+    /**
+     * Initialize modal
+     */
+    init() {
+      this.modalFire();
+      this.setupAgeVerify();
+
+      if (this.settings.closeBtnDelayShow) {
+        this.setupCloseBtnDelay();
+      }
+    }
+
+    /**
+     * Cleanup
+     */
+    destroy() {
+      this.abortController.abort();
+    }
+  }
+
+  /**
+   * Initialize age gate widget
+   * @param {HTMLElement|jQuery} scope - Widget scope element
+   */
+  const widgetAgeGate = (scope) => {
+    // Handle both jQuery objects and native DOM elements
+    const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+
+    const modals = scopeElement.querySelectorAll(".bdt-age-gate");
+    if (modals.length === 0) return;
+
+    const isEditMode = Boolean(window.elementorFrontend?.isEditMode());
+
+    modals.forEach((modal) => {
+      // Get settings from data attribute
+      const settingsData = modal.dataset.settings;
+      if (!settingsData) return;
+
+      let settings;
+      try {
+        settings = typeof settingsData === "string" ? JSON.parse(settingsData) : settingsData;
+      } catch (e) {
+        console.error("Failed to parse age gate settings:", e);
+        return;
+      }
+
+      // Create and initialize modal instance
+      const ageGateModal = new AgeGateModal(modal, settings, isEditMode);
+      ageGateModal.init();
+
+      // Store instance for cleanup
+      modal._ageGateInstance = ageGateModal;
     });
+  };
 
-}(jQuery, window.elementorFrontend));
+  // Initialize on Elementor frontend ready
+  window.addEventListener("elementor/frontend/init", () => {
+    if (window.elementorFrontend?.hooks) {
+      elementorFrontend.hooks.addAction(
+        "frontend/element_ready/bdt-age-gate.default",
+        widgetAgeGate
+      );
+    }
+  });
+})();
 
 /**
  * End age-gate script
  */
 
-(function ($, elementor) {
-
+(() => {
     'use strict';
 
-    $(window).on('elementor/frontend/init', function () {
-        var ModuleHandler = elementorModules.frontend.handlers.Base,
-            widgetDarkMode;
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
 
-        widgetDarkMode = ModuleHandler.extend({
+        const ModuleHandler = elementorModules.frontend.handlers.Base;
 
-            bindEvents: function () {
+        const widgetDarkMode = ModuleHandler.extend({
+
+            bindEvents() {
                 this.run();
             },
 
-            getDefaultSettings: function () {
+            getDefaultSettings() {
                 return {
-                    left: 'unset',
-                    time: '.5s',
-                    mixColor: '#fff',
-                    backgroundColor: '#fff',
-                    saveInCookies: false,
-                    label: '🌓',
-                    autoMatchOsTheme: false
+                    left             : 'unset',
+                    time             : '.5s',
+                    mixColor         : '#fff',
+                    backgroundColor  : '#fff',
+                    saveInCookies    : false,
+                    label            : '🌓',
+                    autoMatchOsTheme : false,
                 };
             },
 
-
-            onElementChange: debounce(function (prop) {
-                // if (prop.indexOf('time.size') !== -1) {
+            onElementChange: debounce(function () {
                 this.run();
-                // }
             }, 400),
 
-            settings: function (key) {
+            settings(key) {
                 return this.getElementSettings(key);
             },
 
-            setCookie: function (name, value, days) {
-                var expires = "";
+            setCookie(name, value, days) {
+                let expires = '';
                 if (days) {
-                    var date = new Date();
+                    const date = new Date();
                     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    expires = "; expires=" + date.toUTCString();
+                    expires = '; expires=' + date.toUTCString();
                 }
-                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                document.cookie = name + '=' + (value || '') + expires + '; path=/';
             },
-            getCookie: function (name) {
-                var nameEQ = name + "=";
-                var ca = document.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+
+            getCookie(name) {
+                const nameEQ = name + '=';
+                for (let c of document.cookie.split(';')) {
+                    c = c.trim();
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
                 }
                 return null;
             },
 
-            eraseCookie: function (name) {
+            eraseCookie(name) {
                 document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             },
 
+            run() {
+                const options = this.getDefaultSettings();
 
-            run: function () {
-                var options = this.getDefaultSettings();
+                options.time             = this.settings('time.size') / 1000 + 's';
+                options.mixColor         = this.settings('mix_color');
+                options.backgroundColor  = this.settings('default_background');
+                options.saveInCookies    = this.settings('saveInCookies') === 'yes';
+                options.autoMatchOsTheme = this.settings('autoMatchOsTheme') === 'yes';
 
-                var autoMatchOsTheme = (this.settings('autoMatchOsTheme') === 'yes'
-                    && this.settings('autoMatchOsTheme') !== 'undefined');
+                // Remove any previously applied dark-mode position classes
+                const toRemove = [...document.body.classList].filter(c => /^bdt-dark-mode-\S+/.test(c));
+                document.body.classList.remove(...toRemove);
+                document.body.classList.add('bdt-dark-mode-position-' + this.settings('toggle_position'));
 
-                var saveInCookies = (this.settings('saveInCookies') === 'yes'
-                    && this.settings('saveInCookies') !== 'undefined');
-
-                options.left = 'unset';
-                options.time = this.settings('time.size') / 1000 + 's';
-                options.mixColor = this.settings('mix_color');
-                options.backgroundColor = this.settings('default_background');
-                options.saveInCookies = saveInCookies;
-                options.label = '🌓';
-                options.autoMatchOsTheme = autoMatchOsTheme;
-
-                $('body').removeClass(function (index, css) {
-                    return (css.match(/\bbdt-dark-mode-\S+/g) || []).join(' '); // removes anything that starts with "page-"
-                });
-                $('body').addClass('bdt-dark-mode-position-' + this.settings('toggle_position'));
-
-                $(this.settings('ignore_element')).addClass('darkmode-ignore');
-
-                if (options.mixColor) {
-
-                    $('.darkmode-toggle, .darkmode-layer, .darkmode-background').remove();
-
-                    var darkmode = new Darkmode(options);
-                    darkmode.showWidget();
-
-                    if (this.settings('default_mode') === 'dark') {
-                        darkmode.toggle();
-                        $('body').addClass('darkmode--activated');
-                        $('.darkmode-layer').addClass('darkmode-layer--simple darkmode-layer--expanded');
-                    } else {
-                        $('body').removeClass('darkmode--activated');
-                        $('.darkmode-layer').removeClass('darkmode-layer--simple darkmode-layer--expanded');
-                    }
-
-                    var global_this = this,
-                        editMode = $('body').hasClass('elementor-editor-active');
-
-                    if (editMode === false && saveInCookies === true) {
-                        $('.darkmode-toggle').on('click', function () {
-                            if (darkmode.isActivated() === true) {
-                                global_this.eraseCookie('bdtDarkModeUserAction');
-                                global_this.setCookie('bdtDarkModeUserAction', 'dark', 10);
-                            } else if (darkmode.isActivated() === false) {
-                                global_this.eraseCookie('bdtDarkModeUserAction');
-                                global_this.setCookie('bdtDarkModeUserAction', 'light', 10);
-                            } else {
-
-                            }
-                        });
-
-                        var userCookie = this.getCookie('bdtDarkModeUserAction')
-
-                        if (userCookie !== null && userCookie !== 'undefined') {
-                            if (userCookie === 'dark') {
-                                darkmode.toggle();
-                                $('body').addClass('darkmode--activated');
-                                $('.darkmode-layer').addClass('darkmode-layer--simple darkmode-layer--expanded');
-                            } else {
-                                $('body').removeClass('darkmode--activated');
-                                $('.darkmode-layer').removeClass('darkmode-layer--simple darkmode-layer--expanded');
-                            }
-
-                        }
-                    }
-
+                const ignoreSelector = this.settings('ignore_element');
+                if (ignoreSelector) {
+                    document.querySelectorAll(ignoreSelector).forEach(el => el.classList.add('darkmode-ignore'));
                 }
 
+                if (!options.mixColor) return;
 
-            }
+                document.querySelectorAll('.darkmode-toggle, .darkmode-layer, .darkmode-background')
+                    .forEach(el => el.remove());
+
+                const darkmode = new Darkmode(options);
+                darkmode.showWidget();
+
+                if (this.settings('default_mode') === 'dark') {
+                    darkmode.toggle();
+                    document.body.classList.add('darkmode--activated');
+                    document.querySelectorAll('.darkmode-layer').forEach(el => {
+                        el.classList.add('darkmode-layer--simple', 'darkmode-layer--expanded');
+                    });
+                } else {
+                    document.body.classList.remove('darkmode--activated');
+                    document.querySelectorAll('.darkmode-layer').forEach(el => {
+                        el.classList.remove('darkmode-layer--simple', 'darkmode-layer--expanded');
+                    });
+                }
+
+                const editMode = document.body.classList.contains('elementor-editor-active');
+
+                if (!editMode && options.saveInCookies) {
+                    document.querySelectorAll('.darkmode-toggle').forEach(el => {
+                        el.addEventListener('click', () => {
+                            this.eraseCookie('bdtDarkModeUserAction');
+                            this.setCookie('bdtDarkModeUserAction', darkmode.isActivated() ? 'dark' : 'light', 10);
+                        });
+                    });
+
+                    const userCookie = this.getCookie('bdtDarkModeUserAction');
+                    if (userCookie !== null && userCookie !== 'undefined') {
+                        if (userCookie === 'dark') {
+                            darkmode.toggle();
+                            document.body.classList.add('darkmode--activated');
+                            document.querySelectorAll('.darkmode-layer').forEach(el => {
+                                el.classList.add('darkmode-layer--simple', 'darkmode-layer--expanded');
+                            });
+                        } else {
+                            document.body.classList.remove('darkmode--activated');
+                            document.querySelectorAll('.darkmode-layer').forEach(el => {
+                                el.classList.remove('darkmode-layer--simple', 'darkmode-layer--expanded');
+                            });
+                        }
+                    }
+                }
+            },
         });
 
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-dark-mode.default', function ($scope) {
+        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-dark-mode.default', ($scope) => {
             elementorFrontend.elementsHandler.addHandler(widgetDarkMode, { $element: $scope });
-
         });
     });
 
-
-}(jQuery, window.elementorFrontend));
+})();
 
 /**
  * End Dark Mode widget script
  */
 
-(function ($, elementor) {
-  $(window).on("elementor/frontend/init", function () {
-    var ModuleHandler = elementorModules.frontend.handlers.Base,
-      AnimatedGradientBackground;
+/**
+ * Start animated gradient background widget script
+ * Optimized version - No jQuery dependency
+ */
+
+(() => {
+  "use strict";
+
+  window.addEventListener("elementor/frontend/init", () => {
+    const ModuleHandler = elementorModules.frontend.handlers.Base;
+    let AnimatedGradientBackground;
 
     AnimatedGradientBackground = ModuleHandler.extend({
       bindEvents: function () {
@@ -3251,81 +3397,120 @@ $(window).on('elementor/frontend/init', function () {
       },
 
       onElementChange: debounce(function (prop) {
-        if (prop.indexOf('element_pack_agbg_') !== -1) {
+        if (prop.indexOf("element_pack_agbg_") !== -1) {
           this.run();
         }
       }, 400),
 
       settings: function (key) {
-        return this.getElementSettings("element_pack_agbg_" + key);
+        return this.getElementSettings(`element_pack_agbg_${key}`);
       },
 
-      // Helper function to parse and standardize colors to desired formats
+      /**
+       * Parse and standardize colors to desired formats
+       * @param {string} color - Color string to parse
+       * @returns {string} Standardized color
+       */
       parseColor: function (color) {
         // Convert RGBA to 6-digit HEX if alpha is 1
         if (/^rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*([\d.]*)\)$/.test(color)) {
-          const [_, r, g, b, a = 1] = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*([\d.]*)\)$/);
+          const [, r, g, b, a = "1"] = color.match(
+            /^rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*([\d.]*)\)$/
+          );
           const alpha = parseFloat(a);
+
           if (alpha === 1) {
-            // If alpha is 1, convert to 6-digit HEX format
-            return `#${((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1)}`;
+            // Convert to 6-digit HEX format
+            return `#${((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b))
+              .toString(16)
+              .slice(1)}`;
           }
-          return `rgba(${r}, ${g}, ${b}, .${a.toString().split('.')[1] || 0})`; // Format as .decimal if alpha < 1
+
+          // Format as .decimal if alpha < 1
+          const decimalPart = a.toString().split(".")[1] || "0";
+          return `rgba(${r}, ${g}, ${b}, .${decimalPart})`;
         }
 
         // Convert 8-digit HEXA (#RRGGBBAA) to 6-digit HEX if alpha is 1
         if (/^#([A-Fa-f0-9]{8})$/.test(color)) {
           const rgba = color.match(/[A-Fa-f0-9]{2}/g).map((hex) => parseInt(hex, 16));
           const alpha = parseFloat((rgba[3] / 255).toFixed(2));
+
           if (alpha === 1) {
             return `#${color.slice(1, 7)}`; // Remove alpha part if 100% opaque
           }
-          return `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, .${alpha.toString().split('.')[1] || 0})`;
+
+          const decimalPart = alpha.toString().split(".")[1] || "0";
+          return `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, .${decimalPart})`;
         }
 
-        // Convert 6-digit HEX to standard 6-digit HEX (no changes needed)
+        // Convert 6-digit HEX to standard 6-digit HEX (lowercase)
         if (/^#([A-Fa-f0-9]{6})$/.test(color)) {
           return color.toLowerCase();
         }
 
         // Handle HSLA, standardizing alpha to .decimal format
         if (/^hsla?\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,?\s*([\d.]*)\)$/.test(color)) {
-          const [_, h, s, l, a = 1] = color.match(/^hsla?\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,?\s*([\d.]*)\)$/);
+          const [, h, s, l, a = "1"] = color.match(
+            /^hsla?\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,?\s*([\d.]*)\)$/
+          );
           const alpha = parseFloat(a);
+
           if (alpha === 1) {
             return `hsl(${h}, ${s}%, ${l}%)`; // No alpha if fully opaque
           }
-          return `hsla(${h}, ${s}%, ${l}%, .${a.toString().split('.')[1] || 0})`; // .decimal format for alpha < 1
+
+          const decimalPart = a.toString().split(".")[1] || "0";
+          return `hsla(${h}, ${s}%, ${l}%, .${decimalPart})`;
         }
 
-        return color; // Return color as-is for named colors or other formats
+        // Return color as-is for named colors or other formats
+        return color;
       },
 
       run: function () {
-        if (this.settings('show') !== 'yes') {
+        if (this.settings("show") !== "yes") {
           return;
         }
-        const sectionID = this.$element.data("id");
-        const widgetContainer = document.querySelector(".elementor-element-" + sectionID);
-        const checkClass = $(widgetContainer).find(".bdt-animated-gradient-background");
 
-        if ($(checkClass).length < 1) {
-          $(widgetContainer).prepend('<canvas id="canvas-basic-' + sectionID + '" class="bdt-animated-gradient-background"></canvas>');
+        const sectionID = this.$element.data("id");
+        const widgetContainer = document.querySelector(`.elementor-element-${sectionID}`);
+
+        if (!widgetContainer) return;
+
+        // Check if canvas already exists
+        let canvasElement = widgetContainer.querySelector(".bdt-animated-gradient-background");
+
+        if (!canvasElement) {
+          // Create canvas element
+          canvasElement = document.createElement("canvas");
+          canvasElement.id = `canvas-basic-${sectionID}`;
+          canvasElement.className = "bdt-animated-gradient-background";
+          widgetContainer.prepend(canvasElement);
         }
 
-        const gradientID = $(widgetContainer).find(".bdt-animated-gradient-background").attr("id");
+        const gradientID = canvasElement.id;
 
-        let color_list = this.settings("color_list");
-        let colors = color_list.map((color) => [
+        // Parse colors
+        const colorList = this.settings("color_list");
+        const colors = colorList.map((color) => [
           this.parseColor(color.start_color),
-          this.parseColor(color.end_color)
+          this.parseColor(color.end_color),
         ]);
 
-        var direction = (this.settings("direction") !== undefined) ? this.settings('direction') : 'diagonal';
-        var transitionSpeed = (this.settings("transitionSpeed") !== undefined) ? this.settings('transitionSpeed.size') : '5500';
-        
-        var granimInstance = new Granim({
-          element: "#" + gradientID,
+        // Get settings with defaults
+        const direction = this.settings("direction") || "diagonal";
+        const transitionSpeed = this.settings("transitionSpeed.size") || 5500;
+
+        // Validate Granim library
+        if (typeof Granim === "undefined") {
+          console.error("Granim library is not loaded");
+          return;
+        }
+
+        // Initialize Granim
+        const granimInstance = new Granim({
+          element: `#${gradientID}`,
           direction: direction,
           isPausedWhenNotInView: true,
           states: {
@@ -3338,26 +3523,31 @@ $(window).on('elementor/frontend/init', function () {
       },
     });
 
+    // Register handlers for sections
     elementorFrontend.hooks.addAction(
       "frontend/element_ready/section",
-      function ($scope) {
+      (scope) => {
         elementorFrontend.elementsHandler.addHandler(AnimatedGradientBackground, {
-          $element: $scope,
+          $element: scope,
         });
       }
     );
 
+    // Register handlers for containers
     elementorFrontend.hooks.addAction(
       "frontend/element_ready/container",
-      function ($scope) {
+      (scope) => {
         elementorFrontend.elementsHandler.addHandler(AnimatedGradientBackground, {
-          $element: $scope,
+          $element: scope,
         });
       }
     );
-
   });
-})(jQuery, window.elementorFrontend);
+})();
+
+/**
+ * End animated gradient background widget script
+ */
 
 ; (function ($, elementor) {
     $(window).on('elementor/frontend/init', function () {
@@ -3661,255 +3851,235 @@ $(window).on('elementor/frontend/init', function () {
  * Start Content Switcher widget script
  */
 
-(function ($, elementor) {
-
+(() => {
     'use strict';
 
-    var widgetContentSwitcher = function ($scope, $) {
+    /**
+     * Initialize content switcher widget
+     * @param {jQuery} scope - Widget scope element
+     */
+    const widgetContentSwitcher = (scope) => {
+        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
 
-        var $contentSwitcher = $scope.find('.bdt-content-switcher'),
-            $settings = $contentSwitcher.data('settings'),
-            $linkedSections = $contentSwitcher.data('linked-sections'),
-            $linkedWidgets = $contentSwitcher.data('linked-widgets'),
-            editMode = Boolean(elementorFrontend.isEditMode());
+        const contentSwitcher = scopeElement.querySelector('.bdt-content-switcher');
+        if (!contentSwitcher) return;
 
-        if (!$contentSwitcher.length) {
-            return;
-        }
+        const parseData = (key) => {
+            const raw = contentSwitcher.dataset[key];
+            if (!raw) return undefined;
+            try {
+                return typeof raw === 'string' ? JSON.parse(raw) : raw;
+            } catch (e) {
+                console.error(`Failed to parse content switcher data-${key}:`, e);
+                return undefined;
+            }
+        };
 
-        // Handle linked sections if needed
-        if ($linkedSections !== undefined && editMode === false) {
-            const handleLinkedSections = () => {
-                var $sections = $linkedSections.sections;
-                
-                // Process each linked section
-                Object.entries($sections).forEach(([index, sectionId]) => {
-                    var $switcherContainer = $contentSwitcher.find('.bdt-switcher-content').eq(index),
-                        $sectionContent = $('.elementor').find('.elementor-element' + '#' + sectionId);
-                    
-                    if ($linkedSections.positionUnchanged !== true) {
-                        if ($switcherContainer.length && $sectionContent.length) {
-                            $($sectionContent).appendTo($switcherContainer.find('.bdt-switcher-item-content-section'));
-                        }
-                    } else {
-                        // Handle position unchanged - similar to the switcher widget
-                        var $activeClass = '';
-                        if (index == 0 && $contentSwitcher.find('.bdt-primary').hasClass('bdt-active') ||
-                            index > 0 && $contentSwitcher.find(`.bdt-switcher-content:eq(${index})`).hasClass('bdt-active')) {
-                            $activeClass = 'bdt-active';
-                        }
-                        
-                        if (!$(`#bdt-content-switcher-section-${$linkedSections.id}`).length) {
-                            $sectionContent.parent().append(`<div id="bdt-content-switcher-section-${$linkedSections.id}" class="bdt-switcher bdt-switcher-section-content"></div>`);
-                        }
-                        
-                        $($sectionContent).appendTo($(`#bdt-content-switcher-section-${$linkedSections.id}`));
-                        $sectionContent.wrap(`<div class="bdt-switcher-section-content-inner ${$activeClass}"></div>`);
-                    }
-                });
-            };
-            
-            handleLinkedSections();
-        }
+        const settings       = parseData('settings');
+        const linkedSections = parseData('linkedSections');
+        const linkedWidgets  = parseData('linkedWidgets');
+        const editMode       = Boolean(elementorFrontend.isEditMode());
 
-        // Handle linked widgets if needed
-        if ($linkedWidgets !== undefined && editMode === false) {
-            const handleLinkedWidgets = () => {
-                var $widgets = $linkedWidgets.widgets;
-                
-                // Set initial visibility of widgets
-                Object.entries($widgets).forEach(([index, widgetId]) => {
-                    var $targetWidget = $('#' + widgetId),
-                        isActive = false;
-                        
-                    if ('button' !== $settings.switcherStyle) {
-                        if (index == 0 && $contentSwitcher.find('.bdt-primary').hasClass('bdt-active')) {
-                            isActive = true;
-                        } else if (index == 1 && $contentSwitcher.find('.bdt-secondary').hasClass('bdt-active')) {
-                            isActive = true;
-                        }
-                    } else {
-                        if ($contentSwitcher.find(`.bdt-switcher-content:eq(${index})`).hasClass('bdt-active')) {
-                            isActive = true;
-                        }
-                    }
-                    
-                    $targetWidget.css({
-                        'opacity': isActive ? 1 : 0,
-                        'display': isActive ? 'block' : 'none',
-                        'grid-row-start': 1,
-                        'grid-column-start': 1
-                    });
-                    
-                    $targetWidget.parent().css({
-                        'display': 'grid'
-                    });
-                });
-            };
-            
-            handleLinkedWidgets();
-        }
+        // ── Shared helpers ──────────────────────────────────────────────────
 
-        if ('button' !== $settings.switcherStyle) {
+        const sectionContainerId = linkedSections ? `bdt-content-switcher-section-${linkedSections.id}` : null;
 
-            // Content Switcher Checkbox
-            var $checkbox = $contentSwitcher.find('input[type="checkbox"]');
-            var primarySwitcher = $contentSwitcher.find('.bdt-primary-switcher');
-            var secondarySwitcher = $contentSwitcher.find('.bdt-secondary-switcher');
-            var primaryIcon = $contentSwitcher.find('.bdt-primary-icon');
-            var secondaryIcon = $contentSwitcher.find('.bdt-secondary-icon');
-            var primaryText = $contentSwitcher.find('.bdt-primary-text');
-            var secondaryText = $contentSwitcher.find('.bdt-secondary-text');
-            var primaryContent = $contentSwitcher.find('.bdt-switcher-content.bdt-primary');
-            var secondaryContent = $contentSwitcher.find('.bdt-switcher-content.bdt-secondary');
+        const updateLinkedSectionActive = (index) => {
+            if (!linkedSections?.positionUnchanged || !sectionContainerId) return;
+            const items = document.querySelectorAll(`#${sectionContainerId} .bdt-switcher-section-content-inner`);
+            items.forEach(item => item.classList.remove('bdt-active'));
+            items[index]?.classList.add('bdt-active');
+        };
 
-            $checkbox.on('change', function () {
-                if (this.checked) {
-                    primarySwitcher.removeClass('bdt-active');
-                    secondarySwitcher.addClass('bdt-active');
-                    primaryIcon.removeClass('bdt-active');
-                    secondaryIcon.addClass('bdt-active');
-                    primaryText.removeClass('bdt-active');
-                    secondaryText.addClass('bdt-active');
-                    primaryContent.removeClass('bdt-active');
-                    secondaryContent.addClass('bdt-active');
-                    
-                    // Update linked sections if position unchanged is true
-                    if ($linkedSections && $linkedSections.positionUnchanged === true) {
-                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).removeClass('bdt-active');
-                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).eq(1).addClass('bdt-active');
-                    }
-                    
-                    // Update linked widgets visibility
-                    if ($linkedWidgets) {
-                        Object.entries($linkedWidgets.widgets).forEach(([index, widgetId]) => {
-                            var $targetWidget = $('#' + widgetId);
-                            var isActive = index == 1; // Show second widget when checkbox is checked
-                            
-                            $targetWidget.css({
-                                'opacity': isActive ? 1 : 0,
-                                'display': isActive ? 'block' : 'none'
-                            });
-                        });
+        const updateLinkedWidgets = (activeIndex) => {
+            if (!linkedWidgets) return;
+            Object.entries(linkedWidgets.widgets).forEach(([idx, widgetId]) => {
+                const widget = document.getElementById(widgetId);
+                if (!widget) return;
+                const isActive = +idx === activeIndex;
+                widget.style.opacity = isActive ? '1' : '0';
+                widget.style.display = isActive ? 'block' : 'none';
+            });
+        };
+
+        // ── Handle linked sections ───────────────────────────────────────────
+
+        if (linkedSections !== undefined && !editMode) {
+            Object.entries(linkedSections.sections).forEach(([index, sectionId]) => {
+                const idx              = +index;
+                const switcherContainer = contentSwitcher.querySelectorAll('.bdt-switcher-content')[idx];
+                const sectionContent   = document.getElementById(sectionId);
+
+                if (!sectionContent) return;
+
+                if (linkedSections.positionUnchanged !== true) {
+                    const target = switcherContainer?.querySelector('.bdt-switcher-item-content-section');
+                    if (switcherContainer && target) {
+                        target.appendChild(sectionContent);
                     }
                 } else {
-                    primarySwitcher.addClass('bdt-active');
-                    secondarySwitcher.removeClass('bdt-active');
-                    primaryIcon.addClass('bdt-active');
-                    secondaryIcon.removeClass('bdt-active');
-                    primaryText.addClass('bdt-active');
-                    secondaryText.removeClass('bdt-active');
-                    primaryContent.addClass('bdt-active');
-                    secondaryContent.removeClass('bdt-active');
-                    
-                    // Update linked sections if position unchanged is true
-                    if ($linkedSections && $linkedSections.positionUnchanged === true) {
-                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).removeClass('bdt-active');
-                        $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).eq(0).addClass('bdt-active');
+                    const switchers       = contentSwitcher.querySelectorAll('.bdt-switcher-content');
+                    const isPrimaryActive = contentSwitcher.querySelector('.bdt-primary')?.classList.contains('bdt-active');
+                    const isIndexActive   = switchers[idx]?.classList.contains('bdt-active');
+                    const activeClass     = (idx === 0 && isPrimaryActive) || (idx > 0 && isIndexActive) ? 'bdt-active' : '';
+
+                    if (!document.getElementById(sectionContainerId)) {
+                        sectionContent.parentElement.insertAdjacentHTML(
+                            'beforeend',
+                            `<div id="${sectionContainerId}" class="bdt-switcher bdt-switcher-section-content"></div>`
+                        );
                     }
-                    
-                    // Update linked widgets visibility
-                    if ($linkedWidgets) {
-                        Object.entries($linkedWidgets.widgets).forEach(([index, widgetId]) => {
-                            var $targetWidget = $('#' + widgetId);
-                            var isActive = index == 0; // Show first widget when checkbox is unchecked
-                            
-                            $targetWidget.css({
-                                'opacity': isActive ? 1 : 0,
-                                'display': isActive ? 'block' : 'none'
-                            });
-                        });
-                    }
+
+                    const container = document.getElementById(sectionContainerId);
+                    container.appendChild(sectionContent);
+
+                    const wrapper = document.createElement('div');
+                    wrapper.className = `bdt-switcher-section-content-inner ${activeClass}`.trim();
+                    sectionContent.parentNode.insertBefore(wrapper, sectionContent);
+                    wrapper.appendChild(sectionContent);
                 }
             });
-        }        
-
-        if ('button' == $settings.switcherStyle) {
-            var $tab = $contentSwitcher.find('.bdt-content-switcher-tab');
-
-            $tab.on('click', function () {
-                var $this = $(this);
-                var id = $this.attr('id');
-                var $content = $contentSwitcher.find('.bdt-switcher-content[data-content-id="' + id + '"]');
-                var index = $this.index();
-
-                $this.siblings().removeClass('bdt-active');
-                $this.addClass('bdt-active');
-
-                $this.parent().next().children().removeClass('bdt-active');
-                $content.addClass('bdt-active');
-                
-                // Update linked sections if position unchanged is true
-                if ($linkedSections && $linkedSections.positionUnchanged === true) {
-                    $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).removeClass('bdt-active');
-                    $(`#bdt-content-switcher-section-${$linkedSections.id} .bdt-switcher-section-content-inner`).eq(index).addClass('bdt-active');
-                }
-                
-                // Update linked widgets visibility
-                if ($linkedWidgets) {
-                    Object.entries($linkedWidgets.widgets).forEach(([widgetIndex, widgetId]) => {
-                        var $targetWidget = $('#' + widgetId);
-                        var isActive = parseInt(widgetIndex) === index;
-                        
-                        $targetWidget.css({
-                            'opacity': isActive ? 1 : 0,
-                            'display': isActive ? 'block' : 'none'
-                        });
-                    });
-                }
-            });            
         }
-    }
 
-    jQuery(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/bdt-content-switcher.default', widgetContentSwitcher);
+        // ── Handle linked widgets initial state ──────────────────────────────
+
+        if (linkedWidgets !== undefined && !editMode) {
+            Object.entries(linkedWidgets.widgets).forEach(([index, widgetId]) => {
+                const widget = document.getElementById(widgetId);
+                if (!widget) return;
+
+                const idx        = +index;
+                const switchers  = contentSwitcher.querySelectorAll('.bdt-switcher-content');
+                let isActive     = false;
+
+                if (settings?.switcherStyle !== 'button') {
+                    if (idx === 0) {
+                        isActive = contentSwitcher.querySelector('.bdt-primary')?.classList.contains('bdt-active') ?? false;
+                    } else if (idx === 1) {
+                        isActive = contentSwitcher.querySelector('.bdt-secondary')?.classList.contains('bdt-active') ?? false;
+                    }
+                } else {
+                    isActive = switchers[idx]?.classList.contains('bdt-active') ?? false;
+                }
+
+                Object.assign(widget.style, {
+                    opacity         : isActive ? '1' : '0',
+                    display         : isActive ? 'block' : 'none',
+                    gridRowStart    : '1',
+                    gridColumnStart : '1'
+                });
+
+                widget.parentElement.style.display = 'grid';
+            });
+        }
+
+        // ── Toggle switcher (checkbox style) ────────────────────────────────
+
+        if (settings?.switcherStyle !== 'button') {
+            const checkbox        = contentSwitcher.querySelector('input[type="checkbox"]');
+            const primarySwitcher = contentSwitcher.querySelector('.bdt-primary-switcher');
+            const secondarySwitcher = contentSwitcher.querySelector('.bdt-secondary-switcher');
+            const primaryIcon     = contentSwitcher.querySelector('.bdt-primary-icon');
+            const secondaryIcon   = contentSwitcher.querySelector('.bdt-secondary-icon');
+            const primaryText     = contentSwitcher.querySelector('.bdt-primary-text');
+            const secondaryText   = contentSwitcher.querySelector('.bdt-secondary-text');
+            const primaryContent  = contentSwitcher.querySelector('.bdt-switcher-content.bdt-primary');
+            const secondaryContent = contentSwitcher.querySelector('.bdt-switcher-content.bdt-secondary');
+
+            const toggleCheckboxState = (isChecked) => {
+                [primarySwitcher, primaryIcon, primaryText, primaryContent].forEach(el => {
+                    el?.classList.toggle('bdt-active', !isChecked);
+                });
+                [secondarySwitcher, secondaryIcon, secondaryText, secondaryContent].forEach(el => {
+                    el?.classList.toggle('bdt-active', isChecked);
+                });
+                updateLinkedSectionActive(isChecked ? 1 : 0);
+                updateLinkedWidgets(isChecked ? 1 : 0);
+            };
+
+            checkbox?.addEventListener('change', (e) => toggleCheckboxState(e.target.checked));
+
+        } else {
+
+        // ── Button / tab switcher ────────────────────────────────────────────
+
+            const tabs = contentSwitcher.querySelectorAll('.bdt-content-switcher-tab');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const id      = tab.id;
+                    const content = contentSwitcher.querySelector(`.bdt-switcher-content[data-content-id="${id}"]`);
+                    const index   = [...tab.parentElement.children].indexOf(tab);
+
+                    [...tab.parentElement.children].forEach(t => t.classList.remove('bdt-active'));
+                    tab.classList.add('bdt-active');
+
+                    [...(tab.parentElement.nextElementSibling?.children ?? [])].forEach(c => c.classList.remove('bdt-active'));
+                    content?.classList.add('bdt-active');
+
+                    updateLinkedSectionActive(index);
+                    updateLinkedWidgets(index);
+                });
+            });
+        }
+    };
+
+    window.addEventListener('elementor/frontend/init', () => {
+        if (window.elementorFrontend?.hooks) {
+            elementorFrontend.hooks.addAction('frontend/element_ready/bdt-content-switcher.default', widgetContentSwitcher);
+        }
     });
 
-}(jQuery, window.elementorFrontend));
+})();
 
 /**
  * End Content Switcher widget script
  */
+
 /**
  * Start interactive card widget script
  */
 
-(function ($, elementor) {
-
+(function () {
     'use strict';
 
-    var widgetInteractiveCard = function ($scope, $) {
-        var $i_card_main = $scope.find('.bdt-interactive-card');
+    const widgetInteractiveCard = (scope) => {
+        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const iCardMain = scopeEl.querySelector('.bdt-interactive-card');
+        if (!iCardMain) return;
 
-        if ( !$i_card_main.length ) {
-            return;
-        }
-        var $settings = $i_card_main.data('settings');
+        let settings = {};
+        try {
+            const raw = iCardMain.dataset.settings;
+            settings = raw ? JSON.parse(raw) : {};
+        } catch (_) {}
 
-        if ( $($settings).length ) {
-            var myWave = wavify(document.querySelector('#' + $settings.id), {
-                height   : 60,
-                bones    : $settings.wave_bones, //3
-                amplitude: $settings.wave_amplitude, //40
-                speed    : $settings.wave_speed //.25
-            });
+        if (!settings.id) return;
 
-            setTimeout(function(){
-                $($i_card_main).addClass('bdt-wavify-active');
-            }, 1000);
-        }
+        const waveEl = document.getElementById(settings.id);
+        if (!waveEl || typeof wavify !== 'function') return;
+
+        wavify(waveEl, {
+            height: 60,
+            bones: settings.wave_bones ?? 3,
+            amplitude: settings.wave_amplitude ?? 40,
+            speed: settings.wave_speed ?? 0.25
+        });
+
+        setTimeout(() => {
+            iCardMain.classList.add('bdt-wavify-active');
+        }, 1000);
     };
 
-    jQuery(window).on('elementor/frontend/init', function () {
+    window.addEventListener('elementor/frontend/init', () => {
+        if (!window.elementorFrontend?.hooks) return;
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-interactive-card.default', widgetInteractiveCard);
     });
-
-}(jQuery, window.elementorFrontend));
+})();
 
 /**
  * End interactive card widget script
  */
-
 
 /**
  * Start scrollnav widget script

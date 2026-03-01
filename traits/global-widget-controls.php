@@ -4211,15 +4211,15 @@ trait Global_Widget_Controls {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'center',
 				'options' => [
-					'top-left'      => esc_html__('Top Left', 'bdthemes-element-pack'),
+					'top-left'      => esc_html__('Top Start', 'bdthemes-element-pack'),
 					'top-center'    => esc_html__('Top Center', 'bdthemes-element-pack'),
-					'top-right'     => esc_html__('Top Right', 'bdthemes-element-pack'),
+					'top-right'     => esc_html__('Top End', 'bdthemes-element-pack'),
 					'center'        => esc_html__('Center', 'bdthemes-element-pack'),
-					'center-left'   => esc_html__('Center Left', 'bdthemes-element-pack'),
-					'center-right'  => esc_html__('Center Right', 'bdthemes-element-pack'),
-					'bottom-left'   => esc_html__('Bottom Left', 'bdthemes-element-pack'),
+					'center-left'   => esc_html__('Center Start', 'bdthemes-element-pack'),
+					'center-right'  => esc_html__('Center End', 'bdthemes-element-pack'),
+					'bottom-left'   => esc_html__('Bottom Start', 'bdthemes-element-pack'),
 					'bottom-center' => esc_html__('Bottom Center', 'bdthemes-element-pack'),
-					'bottom-right'  => esc_html__('Bottom Right', 'bdthemes-element-pack'),
+					'bottom-right'  => esc_html__('Bottom End', 'bdthemes-element-pack'),
 				]
 			]
 		);
@@ -6418,7 +6418,7 @@ trait Global_Widget_Controls {
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'        => [
-                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Start', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center'  => [
@@ -6426,7 +6426,7 @@ trait Global_Widget_Controls {
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'   => [
-                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('End', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                     'justify' => [

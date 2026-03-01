@@ -18,8 +18,9 @@ use ElementPack\Traits\Global_Swiper_Controls;
 use ElementPack\Traits\Global_Mask_Controls;
 use ElementPack\Traits\Global_Widget_Controls;
 
-if ( ! defined( 'ABSPATH' ) )
-	exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Review_Card_Carousel extends Module_Base {
 
@@ -48,18 +49,11 @@ class Review_Card_Carousel extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'swiper', 'ep-styles' ];
-		} else {
-			return [ 'swiper', 'ep-font', 'ep-review-card-carousel' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'swiper', 'ep-styles' ] : [ 'swiper', 'ep-font', 'ep-review-card-carousel' ];
 	}
+
 	public function get_script_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'swiper', 'ep-scripts' ];
-		} else {
-			return [ 'swiper', 'ep-review-card-carousel', 'ep-text-read-more-toggle' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'swiper', 'ep-scripts' ] : [ 'swiper', 'ep-review-card-carousel', 'ep-text-read-more-toggle' ];
 	}
 
 	public function get_custom_help_url() {
@@ -74,7 +68,6 @@ class Review_Card_Carousel extends Module_Base {
 	}
 
 	protected function register_controls() {
-
 		$this->start_controls_section(
 			'section_reviewer_content',
 			[ 
@@ -271,7 +264,7 @@ class Review_Card_Carousel extends Module_Base {
 				'label'     => __( 'Show Rating', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
-				'separator' => 'before'
+				'separator' => 'before',
 			]
 		);
 
@@ -281,13 +274,13 @@ class Review_Card_Carousel extends Module_Base {
 				'label'     => __( 'Rating Type', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'star',
-				'options'   => [ 
+				'options'   => [
 					'star'   => __( 'Star', 'bdthemes-element-pack' ),
 					'number' => __( 'Number', 'bdthemes-element-pack' ),
 				],
-				'condition' => [ 
-					'show_rating' => 'yes'
-				]
+				'condition' => [
+					'show_rating' => 'yes',
+				],
 			]
 		);
 
@@ -297,13 +290,13 @@ class Review_Card_Carousel extends Module_Base {
 				'label'     => __( 'Rating Position', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'before',
-				'options'   => [ 
+				'options'   => [
 					'before' => __( 'Before Review Text', 'bdthemes-element-pack' ),
 					'after'  => __( 'After Review Text', 'bdthemes-element-pack' ),
 				],
-				'condition' => [ 
-					'show_rating' => 'yes'
-				]
+				'condition' => [
+					'show_rating' => 'yes',
+				],
 			]
 		);
 
@@ -346,7 +339,7 @@ class Review_Card_Carousel extends Module_Base {
 				'toggle'               => false,
 				'options'              => [ 
 					'left'  => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'top'   => [ 
@@ -354,7 +347,7 @@ class Review_Card_Carousel extends Module_Base {
 						'icon'  => 'eicon-v-align-top',
 					],
 					'right' => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -440,17 +433,18 @@ class Review_Card_Carousel extends Module_Base {
 			[ 
 				'label'     => __( 'Alignment', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::CHOOSE,
+				'default'   => 'start',
 				'options'   => [ 
-					'left'    => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+					'start'    => [ 
+						'title' => __( 'Start', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
 						'title' => __( 'Center', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'right'   => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+					'end'   => [ 
+						'title' => __( 'End', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [ 
@@ -1270,125 +1264,106 @@ class Review_Card_Carousel extends Module_Base {
 		$this->end_controls_section();
 	}
 
-	public function render_reviewer_image( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_reviewer_image( $item, $settings ) {
 
-		if ( ! $settings['show_reviewer_image'] ) {
+		if ( empty( $settings['show_reviewer_image'] ) || empty( $item['image']['url'] ) ) {
 			return;
 		}
 
-		$image_mask = $settings['image_mask_popover'] == 'yes' ? ' bdt-image-mask' : '';
+		$image_mask    = ! empty( $settings['image_mask_popover'] ) && $settings['image_mask_popover'] === 'yes' ? ' bdt-image-mask' : '';
+        $attachment_id = ! empty( $item['image']['id'] ) ? (int) $item['image']['id'] : 0;
+        $thumb_url     = $attachment_id ? Group_Control_Image_Size::get_attachment_image_src( $attachment_id, 'thumbnail_size', $settings ) : '';
+		$alt           = ! empty( $item['reviewer_name'] ) ? esc_attr( $item['reviewer_name'] ) : '';
+
 		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-ep-review-card-carousel-image' . $image_mask, true );
+
 		?>
 		<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
-
 			<?php
-			$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'thumbnail_size', $settings );
-			if ( ! $thumb_url ) {
-				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), esc_html( $item['reviewer_name'] ) );
+			if ( empty( $thumb_url ) ) {
+				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), $alt );
 			} else {
-				print ( wp_get_attachment_image(
-					$item['image']['id'],
-					$settings['thumbnail_size_size'],
-					false,
-					[ 
-						'alt' => esc_html( $item['reviewer_name'] )
-					]
-				) );
+				print(wp_get_attachment_image(
+                    $attachment_id,
+                    $settings['thumbnail_size_size'],
+                    false,
+                    [
+                        'alt' => $alt
+                    ]
+                ));
 			}
 			?>
-
 		</div>
 		<?php
 	}
 
-	public function render_reviewer_name( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_reviewer_name( $item, $settings ) {
 
-		if ( ! $settings['show_reviewer_name'] ) {
+		if ( empty( $settings['show_reviewer_name'] ) || empty( $item['reviewer_name'] ) ) {
 			return;
 		}
 
 		$this->add_render_attribute( 'review-name', 'class', 'bdt-ep-review-card-carousel-name', true );
-
+		$tag = Utils::get_valid_html_tag( $settings['review_name_tag'] );
 		?>
-		<?php if ( $item['reviewer_name'] ) : ?>
-			<<?php echo esc_attr( Utils::get_valid_html_tag( $settings['review_name_tag'] ) ); ?>
-				<?php $this->print_render_attribute_string( 'review-name' ); ?>>
-				<?php echo wp_kses( $item['reviewer_name'], element_pack_allow_tags( 'title' ) ); ?>
-			</<?php echo esc_attr( Utils::get_valid_html_tag( $settings['review_name_tag'] ) ); ?>>
-		<?php endif; ?>
-	<?php
+		<<?php echo esc_attr( $tag ); ?> <?php $this->print_render_attribute_string( 'review-name' ); ?>>
+			<?php echo wp_kses( $item['reviewer_name'], element_pack_allow_tags( 'title' ) ); ?>
+		</<?php echo esc_attr( $tag ); ?>>
+		<?php
 	}
 
-	public function render_reviewer_job_title( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_reviewer_job_title( $item, $settings ) {
 
-		if ( ! $settings['show_reviewer_job_title'] ) {
+		if ( empty( $settings['show_reviewer_job_title'] ) || empty( $item['reviewer_job_title'] ) ) {
 			return;
 		}
 
 		?>
-		<?php if ( $item['reviewer_job_title'] ) : ?>
-			<div class="bdt-ep-review-card-carousel-job-title">
-				<?php echo esc_html( $item['reviewer_job_title'] ); ?>
-			</div>
-		<?php endif; ?>
-	<?php
+		<div class="bdt-ep-review-card-carousel-job-title">
+			<?php echo esc_html( $item['reviewer_job_title'] ); ?>
+		</div>
+		<?php
 	}
 
-	public function render_review_text( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_review_text( $item, $settings ) {
 
-		if ( ! $settings['show_review_text'] ) {
+		if ( empty( $settings['show_review_text'] ) || empty( $item['review_text'] ) ) {
 			return;
 		}
 
-		if ( isset( $settings['review_words_length'] ) && ! empty( $settings['review_words_length'] ) ) {
-			$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-review-card-carousel-text bdt-ep-read-more-text', true );
-			$this->add_render_attribute( 'review-text', 'data-read-more', wp_json_encode(
-				[ 
-					'words_length' => $settings['review_words_length'],
-				]
-            ), true );
-		} else {
-			$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-review-card-carousel-text', true );
+		$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-review-card-carousel-text', true );
+		if ( ! empty( $settings['review_words_length'] ) ) {
+			$this->add_render_attribute( 'review-text', 'class', 'bdt-ep-read-more-text', true );
+			$this->add_render_attribute( 'review-text', 'data-read-more', wp_json_encode( [ 'words_length' => $settings['review_words_length'] ] ), true );
 		}
-
 		?>
-		<?php if ( $item['review_text'] ) : ?>
-			<div <?php $this->print_render_attribute_string( 'review-text' ); ?>>
-				<?php echo wp_kses_post( $item['review_text'] ); ?>
-			</div>
-		<?php endif; ?>
-	<?php
+		<div <?php $this->print_render_attribute_string( 'review-text' ); ?>>
+			<?php echo wp_kses_post( $item['review_text'] ); ?>
+		</div>
+		<?php
 	}
 
-	public function render_review_rating( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_review_rating( $item, $settings ) {
 
-		if ( ! $settings['show_rating'] ) {
+		if ( empty( $settings['show_rating'] ) ) {
 			return;
 		}
 
-		$rating_number = $item['rating_number']['size'];
+		$rating_number = isset( $item['rating_number']['size'] ) ? (float) $item['rating_number']['size'] : 0.0;
+		$rating_number = min( 5.0, max( 0, $rating_number ) );
 
-		if ( preg_match( '/\./', $rating_number ) ) {
-			$ratingValue = explode( ".", $rating_number );
-			$firstVal    = ( $ratingValue[0] <= 5 ) ? $ratingValue[0] : 5;
-			$secondVal   = ( $ratingValue[1] < 5 ) ? 0 : 5;
-		} else {
-			$firstVal  = ( $rating_number <= 5 ) ? $rating_number : 5;
-			$secondVal = 0;
-		}
+		$first_val  = (int) floor( $rating_number );
+		$second_val = ( $rating_number - $first_val ) >= 0.5 ? 5 : 0;
+		$score      = $first_val . '-' . $second_val;
 
-		$score = $firstVal . '-' . $secondVal;
+		$rating_type   = $settings['rating_type'] ?? 'star';
+		$rating_pos    = $settings['rating_position'] ?? 'before';
+		$rating_display = isset( $item['rating_number']['size'] ) ? $item['rating_number']['size'] : '';
 
 		?>
-		<div
-			class="bdt-ep-review-card-carousel-rating bdt-flex-inline bdt-flex-middle bdt-<?php echo esc_attr( $settings['rating_type'] ) ?> bdt-<?php echo esc_attr( $settings['rating_position'] ) ?>">
-			<?php if ( $settings['rating_type'] === 'number' ) : ?>
-				<span><?php echo esc_html( $item['rating_number']['size'] ); ?></span>
+		<div class="bdt-ep-review-card-carousel-rating bdt-flex-inline bdt-flex-middle bdt-<?php echo esc_attr( $rating_type ); ?> bdt-<?php echo esc_attr( $rating_pos ); ?>">
+			<?php if ( $rating_type === 'number' ) : ?>
+				<span><?php echo esc_html( (string) $rating_display ); ?></span>
 				<i class="ep-icon-star-full" aria-hidden="true"></i>
 			<?php else : ?>
 				<span class="epsc-rating epsc-rating-<?php echo esc_attr( $score ); ?>">
@@ -1403,86 +1378,81 @@ class Review_Card_Carousel extends Module_Base {
 		<?php
 	}
 
-	public function render_review_item() {
-		$settings = $this->get_settings_for_display();
+	public function render_review_item( $settings ) {
 
-		if ( empty( $settings['review_items'] ) ) {
+		if ( empty( $settings['review_items'] ) || ! is_array( $settings['review_items'] ) ) {
 			return;
 		}
 
 		$this->add_render_attribute( 'review-item', 'class', 'bdt-ep-review-card-carousel-item swiper-slide', true );
 
-		if ( 'right' == $settings['iamge_position'] ) {
+		$image_position = $settings['iamge_position'] ?? 'top';
+		$image_inline   = $settings['image_inline'] ?? '';
+		$rating_pos     = $settings['rating_position'] ?? 'before';
+
+		if ( $image_position === 'right' ) {
 			$this->add_render_attribute( 'image-inline', 'class', 'bdt-ep-img-inline bdt-flex bdt-flex-row-reverse' );
 		} else {
 			$this->add_render_attribute( 'image-inline', 'class', 'bdt-ep-img-inline bdt-flex' );
 		}
 
-		?>
+		foreach ( $settings['review_items'] as $item ) {
+			$item = is_array( $item ) ? $item : [];
 
-		<?php foreach ( $settings['review_items'] as $index => $item ) : ?>
+			?>
 			<div <?php $this->print_render_attribute_string( 'review-item' ); ?>>
-
-				<?php if ( '' == $settings['image_inline'] ) : ?>
-					<?php $this->render_reviewer_image( $item ); ?>
+				<?php if ( $image_inline !== 'yes' ) : ?>
+					<?php $this->render_reviewer_image( $item, $settings ); ?>
 				<?php endif; ?>
 
 				<div class="bdt-ep-review-card-carousel-content">
-
-					<?php if ( 'yes' == $settings['image_inline'] ) : ?>
+					<?php if ( $image_inline === 'yes' ) : ?>
 						<div <?php $this->print_render_attribute_string( 'image-inline' ); ?>>
-
-							<?php $this->render_reviewer_image( $item ); ?>
-
+							<?php $this->render_reviewer_image( $item, $settings ); ?>
 							<div class="bdt-flex bdt-flex-column bdt-flex-center">
-								<?php $this->render_reviewer_name( $item ); ?>
-								<?php $this->render_reviewer_job_title( $item ); ?>
-
-								<?php if ( $settings['rating_position'] == 'before' ) : ?>
-									<?php $this->render_review_rating( $item ); ?>
+								<?php $this->render_reviewer_name( $item, $settings ); ?>
+								<?php $this->render_reviewer_job_title( $item, $settings ); ?>
+								<?php if ( $rating_pos === 'before' ) : ?>
+									<?php $this->render_review_rating( $item, $settings ); ?>
 								<?php endif; ?>
 							</div>
 						</div>
 					<?php endif; ?>
 
-					<?php if ( '' == $settings['image_inline'] ) : ?>
-						<?php $this->render_reviewer_name( $item ); ?>
-						<?php $this->render_reviewer_job_title( $item ); ?>
-
-						<?php if ( $settings['rating_position'] == 'before' ) : ?>
-							<?php $this->render_review_rating( $item ); ?>
+					<?php if ( $image_inline !== 'yes' ) : ?>
+						<?php $this->render_reviewer_name( $item, $settings ); ?>
+						<?php $this->render_reviewer_job_title( $item, $settings ); ?>
+						<?php if ( $rating_pos === 'before' ) : ?>
+							<?php $this->render_review_rating( $item, $settings ); ?>
 						<?php endif; ?>
 					<?php endif; ?>
 
+					<?php $this->render_review_text( $item, $settings ); ?>
 
-					<?php $this->render_review_text( $item ); ?>
-
-					<?php if ( $settings['rating_position'] == 'after' ) : ?>
-						<?php $this->render_review_rating( $item ); ?>
+					<?php if ( $rating_pos === 'after' ) : ?>
+						<?php $this->render_review_rating( $item, $settings ); ?>
 					<?php endif; ?>
 				</div>
 			</div>
-		<?php endforeach;
+			<?php
+		}
 	}
 
 	public function render_header() {
-		$settings = $this->get_settings_for_display();
-
-		//Global Function
 		$this->render_swiper_header_attribute( 'review-card-carousel' );
-
 		$this->add_render_attribute( 'carousel', 'class', 'bdt-review-card-carousel' );
-
 		?>
 		<div <?php $this->print_render_attribute_string( 'carousel' ); ?>>
 			<div <?php $this->print_render_attribute_string( 'swiper' ); ?>>
 				<div class="swiper-wrapper">
-					<?php
+		<?php
 	}
 
-	public function render() {
+	protected function render() {
+		$settings = $this->get_settings_for_display();
+
 		$this->render_header();
-		$this->render_review_item();
+		$this->render_review_item( $settings );
 		$this->render_footer();
 	}
 }
