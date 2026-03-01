@@ -24,6 +24,8 @@ class Admin {
 			add_action('admin_init', [$this, 'admin_script']);
 		}
 
+		add_action('admin_init', [$this, 'admin_api_biggopti_script']);
+
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
 		
         add_filter('plugin_row_meta', [$this, 'plugin_row_meta'], 10, 2);
@@ -81,7 +83,6 @@ class Admin {
 
         $row_meta = [
             'settings' => '<a href="'.admin_url( 'admin.php?page=element_pack_options' ) .'" aria-label="' . esc_attr(__('Go to settings', 'bdthemes-element-pack')) . '" >' . __('Settings', 'bdthemes-element-pack') . '</b></a>',
-            'gopro' => '<a href="https://www.elementpack.pro/pricing/" aria-label="' . esc_attr(__('Go get the pro version', 'bdthemes-element-pack')) . '" target="_blank" title="When you purchase through this link you will get Up to 87% discount!" class="ep-go-pro">' . __('Get Pro', 'bdthemes-element-pack') . '</a>',
         ];
 
         $plugin_meta = array_merge($plugin_meta, $row_meta);
@@ -116,6 +117,41 @@ class Admin {
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-form');
 		}
+	}
+
+	public function admin_api_biggopti_script() {
+		wp_enqueue_style( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-biggopti.css', [], BDTEP_VER, 'all' );
+		wp_enqueue_script( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
+
+		wp_enqueue_style( 'ep-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-admin-api-biggopti.css', [], BDTEP_VER, 'all' );
+		wp_enqueue_script( 'ep-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-admin-api-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
+
+		$dismissals = get_option('bdt_biggopti_dismissals', []);
+		$dismissed_display_ids = [];
+		$prefix = 'bdt-admin-biggopti-api-biggopti-';
+		foreach (array_keys($dismissals) as $key) {
+			if (strpos($key, $prefix) === 0) {
+				$dismissed_display_ids[] = substr($key, strlen($prefix));
+			} else {
+				$dismissed_display_ids[] = $key;
+			}
+		}
+
+		$current_sector = '';
+		if ( isset( $_GET['page'] ) && $_GET['page'] === 'element_pack_options' ) {
+			$current_sector = 'plugin_dashboard';
+		}
+		
+		$script_config = [ 
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'element-pack' ),
+			'isPro'             	=> function_exists('element_pack_pro_activated') && element_pack_pro_activated(),
+			'assetsUrl'         	=> defined('BDTEP_ASSETS_URL') ? BDTEP_ASSETS_URL : '',
+			'dismissedDisplayIds'	=> $dismissed_display_ids,
+			'currentSector'      	=> $current_sector,
+		];
+		wp_localize_script( 'ep-biggopti', 'ElementPackBiggoptiConfig', $script_config );
+		wp_localize_script( 'ep-admin-api-biggopti', 'ElementPackAdminApiBiggoptiConfig', $script_config);
 	}
 
 	/**

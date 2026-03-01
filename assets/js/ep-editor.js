@@ -160,7 +160,7 @@
                 
                 const combinedContent = `
                     <div class="ep-combined-promotion">
-                        <div class="ep-promotion-section">
+                        <div class="bdt-promotion-section">
                             <h4 style="margin: 0 0 10px 0; color: #333; font-size: 16px;">🚀 ${config.title}</h4>
                             <p style="margin: 0 0 15px 0; color: #666; line-height: 1.5;">${config.content}</p>
                             <a href="${upgradeUrl}" target="_blank" style="display: inline-block; background: #007cba; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; margin-right: 10px;">${config.upgradeText}</a>

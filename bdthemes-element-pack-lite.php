@@ -127,9 +127,6 @@ if ( ! element_pack_pro_installed() ) {
 
 		// Element pack widget and assets loader
 		require_once( BDTEP_PATH . 'loader.php' );
-
-		// Notice class
-		require_once( BDTEP_ADMIN_PATH . 'admin-biggopti.php' );
 	}
 
 	add_action( 'plugins_loaded', 'bdthemes_element_pack_load_plugin', 9 );
