@@ -5,7 +5,7 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.9
 Requires PHP: 7.4.0
-Stable tag: 8.4.1
+Stable tag: 8.4.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
@@ -277,6 +277,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.4.2 [1st March 2026] =
+
+* Fixed: Placeholder image replication for import template issue fixed in Cursor Effects extension
+* Fixed: Testimonial rating issue fixed ( Thanks to Nikolaos Koulouridis )
 
 = 8.4.1 [24th February 2026] =
 
