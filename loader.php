@@ -519,21 +519,6 @@ class Element_Pack_Loader {
     }
 
     /**
-     * To load biggopti JS file
-     */
-
-    public function enqueue_admin_scripts() {
-		wp_enqueue_style( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-biggopti.css', [], BDTEP_VER, 'all' );
-		wp_enqueue_script( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
-
-		$script_config = [ 
-			'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			'nonce'   => wp_create_nonce( 'element-pack' ),
-		];
-		wp_localize_script( 'ep-biggopti', 'ElementPackBiggoptiConfig', $script_config );
-    }
-
-    /**
      * Callback to shortcodes template
      * @param array $atts attributes for shortcode.
      */
@@ -679,9 +664,6 @@ class Element_Pack_Loader {
         if (!is_user_logged_in()) {
             add_action('elementor/init', [$this, 'element_pack_ajax_login_init']);
         }
-
-        // load WordPress dashboard scripts
-        add_action('admin_init', [$this, 'enqueue_admin_scripts']);
     }
 
 	/**
@@ -689,8 +671,12 @@ class Element_Pack_Loader {
 	 */
 	public function init() {
 		if ( is_admin() ) {
+            // Notice class
 			require_once BDTEP_ADMIN_PATH . 'admin.php';
 			new Admin();
+
+            require_once( BDTEP_ADMIN_PATH . 'admin-biggopti.php' );
+            require_once( BDTEP_ADMIN_PATH . 'admin-api-biggopti.php' );
 		}
 	}
 

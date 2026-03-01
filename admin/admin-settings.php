@@ -505,17 +505,6 @@ class ElementPack_Admin_Settings {
 			self::PAGE_ID . '#element_pack_other_plugins',
 			[$this, 'display_page']
 		);
-
-		if ( ! defined( 'BDTEP_LO' ) ) {
-			add_submenu_page(
-				self::PAGE_ID,                    
-				BDTEP_TITLE,                     
-				esc_html__( 'Get Pro', 'bdthemes-element-pack' ),  
-				'manage_options',                 
-				self::PAGE_ID . '_upgrade',
-				[ $this, 'display_page' ]
-			);
-		}
 	}
 
 	/**
