@@ -11,7 +11,9 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Fancy_Icons extends Module_Base {
 
@@ -40,11 +42,7 @@ class Fancy_Icons extends Module_Base {
     }
 
     public function get_style_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-styles'];
-        } else {
-            return ['ep-fancy-icons'];
-        }
+        return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-fancy-icons' ];
     }
 
     public function get_custom_help_url() {
@@ -516,104 +514,122 @@ class Fancy_Icons extends Module_Base {
     }
 
 
-    protected function rendar_item_video($link) {
-        $video_src = $link['video_link'];
-
-?>
+    /**
+     * Renders the video background (HTML5 video).
+     *
+     * @param array $settings Widget settings; uses 'video_link'.
+     */
+    protected function render_item_video( $settings ) {
+        $video_src = isset( $settings['video_link'] ) ? $settings['video_link'] : '';
+        if ( $video_src === '' ) {
+            return;
+        }
+        ?>
         <video autoplay loop muted playsinline>
-            <source src="<?php echo esc_html($video_src); ?>" type="video/mp4">
+            <source src="<?php echo esc_url( $video_src ); ?>" type="video/mp4">
         </video>
-    <?php
+        <?php
     }
 
-    protected function rendar_item_youtube($link) {
-
-        $id  = (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $link['youtube_link'], $match)) ? $match[1] : false;
-        $url = '//www.youtube.com/embed/' . $id . '?autoplay=1&mute=1&amp;controls=0&amp;showinfo=0&amp;rel=0&amp;loop=1&amp;modestbranding=1&amp;wmode=transparent&amp;playsinline=1&playlist=' . $id;
-
-    ?>
-        <iframe src="<?php echo esc_url($url); ?>" allowfullscreen></iframe>
-    <?php
+    /**
+     * Renders the YouTube iframe background.
+     *
+     * @param array $settings Widget settings; uses 'youtube_link'.
+     */
+    protected function render_item_youtube( $settings ) {
+        $youtube_link = isset( $settings['youtube_link'] ) ? $settings['youtube_link'] : '';
+        if ( $youtube_link === '' ) {
+            return;
+        }
+        $id = ( preg_match( '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $youtube_link, $match ) ) ? $match[1] : false;
+        if ( $id === false ) {
+            return;
+        }
+        $url = 'https://www.youtube.com/embed/' . esc_attr( $id ) . '?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&modestbranding=1&wmode=transparent&playsinline=1&playlist=' . esc_attr( $id );
+        ?>
+        <iframe src="<?php echo esc_url( $url ); ?>" allowfullscreen></iframe>
+        <?php
     }
 
     public function render() {
         $settings = $this->get_settings_for_display();
-        $id       = $this->get_id();
 
-        $desktop_cols = isset($settings['columns']) ? $settings['columns'] : 2;
-        $tablet_cols  = isset($settings['columns_tablet']) ? $settings['columns_tablet'] : 2;
-        $mobile_cols  = isset($settings['columns_mobile']) ? $settings['columns_mobile'] : 1;
+        $desktop_cols = isset( $settings['columns'] ) ? $settings['columns'] : '2';
+        $tablet_cols  = isset( $settings['columns_tablet'] ) ? $settings['columns_tablet'] : '2';
+        $mobile_cols  = isset( $settings['columns_mobile'] ) ? $settings['columns_mobile'] : '1';
 
-        $this->add_render_attribute('advanced-icons', 'class', 'bdt-fancy-icons');
+        $this->add_render_attribute( 'advanced-icons', 'class', 'bdt-fancy-icons' );
 
-
-
-        if ($settings['background_type'] == 'image') {
-
-            $thumb_url = Group_Control_Image_Size::get_attachment_image_src($settings['background_image']['id'], 'thumbnail_size', $settings);
-
-            if (!$thumb_url) {
+        $background_type = isset( $settings['background_type'] ) ? $settings['background_type'] : 'image';
+        if ( $background_type === 'image' && ! empty( $settings['background_image']['url'] ) ) {
+            $thumb_url = Group_Control_Image_Size::get_attachment_image_src(
+                $settings['background_image']['id'],
+                'thumbnail_size',
+                $settings
+            );
+            if ( ! $thumb_url ) {
                 $thumb_url = $settings['background_image']['url'];
             }
-
-
-            $this->add_render_attribute('advanced-icons', 'style', 'background-image: url(' . esc_url($thumb_url) . '); background-attachment:' . esc_attr($settings['background_attachment']) . ')');
+            $attachment = isset( $settings['background_attachment'] ) ? $settings['background_attachment'] : 'inherit';
+            $this->add_render_attribute(
+                'advanced-icons',
+                'style',
+                'background-image: url(' . esc_url( $thumb_url ) . '); background-attachment: ' . esc_attr( $attachment ) . ';'
+            );
         }
-
-    ?>
-        <div <?php $this->print_render_attribute_string('advanced-icons'); ?>>
-
+        ?>
+        <div <?php $this->print_render_attribute_string( 'advanced-icons' ); ?>>
             <div class="bdt-fancy-icons-background">
-                <?php if (($settings['background_type'] == 'youtube') && $settings['youtube_link']) : ?>
-                    <?php $this->rendar_item_youtube($settings); ?>
-
-                <?php elseif (($settings['background_type'] == 'video') && $settings['video_link']) : ?>
-                    <?php $this->rendar_item_video($settings); ?>
-                <?php endif; ?>
+                <?php
+                if ( $background_type === 'youtube' && ! empty( $settings['youtube_link'] ) ) {
+                    $this->render_item_youtube( $settings );
+                } elseif ( $background_type === 'video' && ! empty( $settings['video_link'] ) ) {
+                    $this->render_item_video( $settings );
+                }
+                ?>
             </div>
 
-            <div class="bdt-grid bdt-grid-collapse bdt-child-width-1-<?php echo esc_attr($mobile_cols); ?> bdt-child-width-1-<?php echo esc_attr($tablet_cols); ?>@s bdt-child-width-1-<?php echo esc_attr($desktop_cols); ?>@l" data-bdt-grid>
-
+            <div class="bdt-grid bdt-grid-collapse bdt-child-width-1-<?php echo esc_attr( $mobile_cols ); ?> bdt-child-width-1-<?php echo esc_attr( $tablet_cols ); ?>@s bdt-child-width-1-<?php echo esc_attr( $desktop_cols ); ?>@l" data-bdt-grid>
                 <?php
-                foreach ($settings['share_items'] as $index => $item) :
+                $share_items = isset( $settings['share_items'] ) ? $settings['share_items'] : [];
+                foreach ( $share_items as $index => $item ) :
                     $link_key = 'link_' . $index;
+                    $item_id  = isset( $item['_id'] ) ? $item['_id'] : $index;
+                    $social_type = isset( $item['social_type'] ) ? $item['social_type'] : 'icon';
 
-                    $this->add_render_attribute('share-item', 'class', 'bdt-fancy-icons-item bdt-flex bdt-flex-middle bdt-flex-center elementor-repeater-item-' . esc_attr($item['_id']), true);
+                    $this->add_render_attribute(
+                        'share-item',
+                        'class',
+                        'bdt-fancy-icons-item bdt-flex bdt-flex-middle bdt-flex-center elementor-repeater-item-' . esc_attr( $item_id ),
+                        true
+                    );
+                    $this->add_render_attribute( $link_key, 'class', [ esc_attr( $social_type ) ], true );
 
-                    $this->add_render_attribute($link_key, 'class', [esc_attr($item['social_type'])], true);
+                    $has_icon = ( $social_type === 'icon' && ! empty( $item['social_icon']['value'] ) );
+                    $has_text = ( $social_type === 'text' && ! empty( $item['social_name'] ) );
 
-                    $has_icon = !empty($item['social_icon']);
-                    $has_text = !empty($item['social_name']);
-
-
-                    if (!empty($item['social_link']['url'])) {
-                        $this->add_link_attributes($link_key, $item['social_link']);
+                    if ( ! empty( $item['social_link']['url'] ) ) {
+                        $this->add_link_attributes( $link_key, $item['social_link'] );
                     }
-
-                ?>
-                    <div <?php $this->print_render_attribute_string('share-item'); ?>>
-                        <a <?php $this->print_render_attribute_string($link_key); ?>>
-
-                            <?php if ($has_icon or $has_text) : ?>
+                    ?>
+                    <div <?php $this->print_render_attribute_string( 'share-item' ); ?>>
+                        <a <?php $this->print_render_attribute_string( $link_key ); ?>>
+                            <?php if ( $has_icon || $has_text ) : ?>
                                 <span class="bdt-icon-wrapper">
-                                    <?php if ($has_icon and 'icon' == $item['social_type']) { ?>
-
-                                        <?php Icons_Manager::render_icon($item['social_icon'], ['aria-hidden' => 'true']); ?>
-
-                                    <?php } elseif ($has_text and 'text' == $item['social_type']) { ?>
-                                        <?php echo wp_kses($item['social_name'], element_pack_allow_tags('title')); ?>
-                                    <?php } ?>
+                                    <?php
+                                    if ( $has_icon ) {
+                                        Icons_Manager::render_icon( $item['social_icon'], [ 'aria-hidden' => 'true' ] );
+                                    } elseif ( $has_text ) {
+                                        echo wp_kses( $item['social_name'], element_pack_allow_tags( 'title' ) );
+                                    }
+                                    ?>
                                 </span>
                             <?php endif; ?>
-
                         </a>
-
                     </div>
                 <?php endforeach; ?>
-
             </div>
-
         </div>
-<?php
+        <?php
     }
 }

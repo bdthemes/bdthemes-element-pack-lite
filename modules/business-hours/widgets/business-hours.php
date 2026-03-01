@@ -1141,8 +1141,7 @@ class Business_Hours extends Module_Base {
 
     }
 
-    public function set_time_zone(){
-        $settingsTimeZone = $this->get_settings_for_display();
+    public function set_time_zone($settingsTimeZone){
         if($settingsTimeZone['business_hour_style'] != 'default'){ //static & dynamic checking
             if($settingsTimeZone['dynamic_timezone'] != 'default'){ // timezone default checking
                 // $ct_input = $settingsTimeZone['custom_timezone_input']; // ct = custom timezone
@@ -1217,7 +1216,7 @@ class Business_Hours extends Module_Base {
                         if($settings['business_hour_style'] == 'default'){
 	                        echo wp_kses_post(date_i18n( get_option('time_format'), current_time( 'timestamp' ) ));
                         }else{
-                            $cur_time   =   strtotime($this->set_time_zone());
+                            $cur_time   =   strtotime($this->set_time_zone($settings));
 	                        echo wp_kses_post(date_i18n( 'h:i a', $cur_time ));
                         }
                         ?>
@@ -1231,7 +1230,7 @@ class Business_Hours extends Module_Base {
                         if($settings['business_hour_style'] == 'default'){
 	                        echo wp_kses_post(date_i18n( get_option( 'date_format' ), current_time( 'timestamp' ) ));
                         } else {
-                            $cur_time   =   strtotime(  $this->set_time_zone()  );
+                            $cur_time   =   strtotime(  $this->set_time_zone($settings)  );
 	                        echo wp_kses_post(date_i18n( get_option( 'date_format' ), $cur_time ));
                         }
                         ?>
@@ -1299,7 +1298,7 @@ class Business_Hours extends Module_Base {
            } ?>
        </div>
    <?php } }else{
-    $this->dynamicRender();
+    $this->dynamicRender($settings);
 }?>
 
 </div>
@@ -1308,8 +1307,7 @@ class Business_Hours extends Module_Base {
 
 
 
-public function dynamicRender(){
-    $settings = $this->get_settings_for_display();
+public function dynamicRender($settings){
     if ( count( $settings['dynamic_days_times'] ) ) {
         $count = 0;
         $availabelStatus = null;
@@ -1393,7 +1391,7 @@ public function dynamicRender(){
                    if($settings['dynamic_timezone'] == 'default'){
                        $cur_Date   =   date('D') ;
                    }else{
-                       $cur_Date   =   strtotime(  $this->set_time_zone()  );
+                       $cur_Date   =   strtotime(  $this->set_time_zone($settings)  );
                        $cur_Date   =    date('D', $cur_Date)  ;
                    }
                    if($cur_Date == $thisDay){
@@ -1442,9 +1440,9 @@ if(isset($exStats['2']) && isset($exStats['3'])){
     $st_time    =   strtotime($exStats['2']);
     $end_time   =   strtotime($exStats['3']);
     if($settings['dynamic_timezone'] == 'default'){
-        $cur_time   =   strtotime( $this->set_time_zone() );;
+        $cur_time   =   strtotime( $this->set_time_zone($settings) );;
     } else {
-        $cur_time   =   strtotime(  $this->set_time_zone()  );
+        $cur_time   =   strtotime(  $this->set_time_zone($settings)  );
         $cur_time   =   strtotime( date('g:i:s A', $cur_time) );
     }
     if($cur_time >= $st_time && $cur_time <= $end_time){

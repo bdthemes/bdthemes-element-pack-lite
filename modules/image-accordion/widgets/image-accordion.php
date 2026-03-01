@@ -11,8 +11,10 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Text_Stroke;
 use Elementor\Repeater;
 use ElementPack\Utils;
- 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Image_Accordion extends Module_Base {
 
@@ -41,19 +43,11 @@ class Image_Accordion extends Module_Base {
 	}
 
 	public function get_style_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-styles'];
-        } else {
-            return [ 'ep-font', 'ep-image-accordion' ];
-        }
-    }
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-font', 'ep-image-accordion' ];
+	}
 
 	public function get_script_depends() {
-        if ($this->ep_is_edit_mode()) {
-            return ['ep-scripts'];
-        } else {
-			return [ 'ep-image-accordion' ];
-        }
+		return $this->ep_is_edit_mode() ? [ 'ep-scripts' ] : [ 'ep-image-accordion' ];
 	}
 
 	public function get_custom_help_url() {
@@ -79,7 +73,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'skin_type',
 			[
-				'label'	   => __( 'Style', 'bdthemes-element-pack' ) . BDTEP_UC,
+				'label'	   => __( 'Style', 'bdthemes-element-pack' ),
 				'type' 	   => Controls_Manager::SELECT,
 				'options'  => [
 					'default' 	=> __( 'Horizontal', 'bdthemes-element-pack' ),
@@ -331,7 +325,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'swiping',
 			[
-				'label'   => esc_html__('Touch Screen Swiping', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => esc_html__('Touch Screen Swiping', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SWITCHER,
 				//'separator' => 'before'
 			]
@@ -405,7 +399,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'items_content_vertical_align',
 			[
-				'label'   => __( 'Vertical Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => __( 'Vertical Alignment', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
@@ -430,7 +424,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'active_item',
 			[
-				'label'   => esc_html__( 'Active Item', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Active Item', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -478,7 +472,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'inactive_item_overlay',
 			[
-				'label'   => esc_html__( 'In-active Item Overlay', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'In-active Item Overlay', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-ep-inactive-item-overlay-',
 				'render_type'  => 'template',
@@ -542,7 +536,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'show_lightbox',
 			[
-				'label'   => esc_html__('Show Lightbox', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => esc_html__('Show Lightbox', 'bdthemes-element-pack'),
 				'type'    => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -666,7 +660,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'link_text',
 			[
-				'label'       => esc_html__('Link Text', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'       => esc_html__('Link Text', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack'),
 				'condition' => [
@@ -787,7 +781,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'image_accordion_inactive_item_overlay_color',
 			[
-				'label'     => __( 'In-active Item Overlay Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'In-active Item Overlay Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-item.bdt-inactive:before'  => 'background: {{VALUE}};',
@@ -896,7 +890,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'enable_item_style',
 			[
-				'label' => esc_html__('Enable Item Style', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__('Enable Item Style', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -993,7 +987,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name' => 'title_text_stroke',
-                'label' => __('Text Stroke', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => __('Text Stroke', 'bdthemes-element-pack'),
 				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-title',
 			]
 		);
@@ -1411,215 +1405,222 @@ class Image_Accordion extends Module_Base {
 
 	}
 
-	public function render_lightbox($item) {
-		$settings = $this->get_settings_for_display();
-
-		if ( ! $settings['show_lightbox'] ) {
+	public function render_lightbox( $item, $settings ) {
+		if ( empty( $settings['show_lightbox'] ) || $settings['show_lightbox'] !== 'yes' ) {
 			return;
 		}
 
-		$image_url = wp_get_attachment_image_src($item['slide_image']['id'], 'full');
+		$img_id = isset( $item['slide_image']['id'] ) ? $item['slide_image']['id'] : 0;
+		$image_url = $img_id ? wp_get_attachment_image_src( $img_id, 'full' ) : false;
+		$item_id = isset( $item['_id'] ) ? $item['_id'] : '';
+		$key = 'lightbox-' . esc_attr( $item_id );
 
-		$key = 'lightbox-' . $item['_id'];
+		$this->add_render_attribute( $key, 'data-elementor-open-lightbox', 'no' );
 
-		$this->add_render_attribute($key, 'data-elementor-open-lightbox', 'no');
-
-		if (!$image_url) {
-			$this->add_render_attribute($key, 'href', $item['slide_image']['url']);
+		if ( ! $image_url ) {
+			$img_url = isset( $item['slide_image']['url'] ) ? $item['slide_image']['url'] : '';
+			if ( $img_url !== '' ) {
+				$this->add_render_attribute( $key, 'href', esc_url( $img_url ) );
+			}
 		} else {
-			$this->add_render_attribute($key, 'href', $image_url[0]);
+			$this->add_render_attribute( $key, 'href', esc_url( $image_url[0] ) );
 		}
 
-		$this->add_render_attribute($key, 'class', 'bdt-ep-image-accordion-lightbox');
+		$this->add_render_attribute( $key, 'class', 'bdt-ep-image-accordion-lightbox' );
 
-		// Handle multiple levels of encoding for the security
-		$caption = $item['image_accordion_title'];
-		// this double decode is required to handle the case where the caption is already encoded so don't remove it
-		$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
-		$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
-		$caption = wp_kses( $caption, element_pack_allow_tags( 'text' ) );
-		$caption = esc_js( $caption );
-		$this->add_render_attribute($key, 'data-caption', $caption );
+		$caption = isset( $item['image_accordion_title'] ) ? $item['image_accordion_title'] : '';
+		if ( $caption !== '' ) {
+			$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+			$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+			$caption = wp_kses( $caption, element_pack_allow_tags( 'text' ) );
+			$caption = esc_js( $caption );
+			$this->add_render_attribute( $key, 'data-caption', $caption );
+		}
 
-		$icon = $settings['icon'] ?: 'plus';
-
+		$icon = isset( $settings['icon'] ) && $settings['icon'] !== '' ? $settings['icon'] : 'plus';
+		$link_type = isset( $settings['link_type'] ) ? $settings['link_type'] : 'icon';
 		?>
-		<a <?php $this->print_render_attribute_string($key); ?>>
-			<?php if ('icon' == $settings['link_type']) : ?>
-				<i class="ep-icon-<?php echo esc_attr($icon); ?>" aria-hidden="true"></i>
-			<?php elseif ( 'text' == $settings['link_type'] && $settings['link_text'] ) : ?>
+		<a <?php $this->print_render_attribute_string( $key ); ?>>
+			<?php if ( $link_type === 'icon' ) : ?>
+				<i class="ep-icon-<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+			<?php elseif ( $link_type === 'text' && ! empty( $settings['link_text'] ) ) : ?>
 				<span class="bdt-text"><?php echo esc_html( $settings['link_text'] ); ?></span>
 			<?php endif; ?>
 		</a>
 		<?php
 	}
 
-	public function render_accordion_content($item, $title_key, $button_key) {
-        $settings = $this->get_settings_for_display();
-
+	public function render_accordion_content( $item, $title_key, $button_key, $settings ) {
 		$this->add_render_attribute( 'bdt-ep-image-accordion-title', 'class', 'bdt-ep-image-accordion-title', true );
 		$this->add_render_attribute( 'bdt-ep-image-accordion-sub-title', 'class', 'bdt-ep-image-accordion-sub-title', true );
 		$this->add_render_attribute( 'bdt-ep-image-accordion-text', 'class', 'bdt-ep-image-accordion-text', true );
 		$this->add_render_attribute( 'bdt-ep-image-accordion-button', 'class', 'bdt-ep-image-accordion-button', true );
 
-		if ( 'yes' == $settings['hide_on_mobile_title'] ) {
+		if ( ! empty( $settings['hide_on_mobile_title'] ) && $settings['hide_on_mobile_title'] === 'yes' ) {
 			$this->add_render_attribute( 'bdt-ep-image-accordion-title', 'class', 'bdt-ep-image-accordion-title bdt-visible@s', true );
 		}
-		if ( 'yes' == $settings['hide_on_mobile_sub_title'] ) {
+		if ( ! empty( $settings['hide_on_mobile_sub_title'] ) && $settings['hide_on_mobile_sub_title'] === 'yes' ) {
 			$this->add_render_attribute( 'bdt-ep-image-accordion-sub-title', 'class', 'bdt-ep-image-accordion-sub-title bdt-visible@s', true );
 		}
-		if ( 'yes' == $settings['hide_on_mobile_text'] ) {
+		if ( ! empty( $settings['hide_on_mobile_text'] ) && $settings['hide_on_mobile_text'] === 'yes' ) {
 			$this->add_render_attribute( 'bdt-ep-image-accordion-text', 'class', 'bdt-ep-image-accordion-text bdt-visible@s', true );
 		}
-		if ( 'yes' == $settings['hide_on_mobile_button'] ) {
+		if ( ! empty( $settings['hide_on_mobile_button'] ) && $settings['hide_on_mobile_button'] === 'yes' ) {
 			$this->add_render_attribute( 'bdt-ep-image-accordion-button', 'class', 'bdt-ep-image-accordion-button bdt-visible@s', true );
 		}
 
-		if (!empty($item['title_link']['url'])) {
-			$this->add_link_attributes( $title_key, $item['title_link'] );
+		$title_link_url = isset( $item['title_link']['url'] ) ? $item['title_link']['url'] : '';
+		if ( $title_link_url !== '' ) {
+			$this->add_link_attributes( $title_key, isset( $item['title_link'] ) ? $item['title_link'] : [] );
 		}
 
-		if (!empty($item['button_link']['url'])) {
-			$this->add_link_attributes( $button_key, $item['button_link'] );
+		$button_link_url = isset( $item['button_link']['url'] ) ? $item['button_link']['url'] : '';
+		if ( $button_link_url !== '' ) {
+			$this->add_link_attributes( $button_key, isset( $item['button_link'] ) ? $item['button_link'] : [] );
 		}
 
-        ?>
-        <div class="bdt-ep-image-accordion-content">
-			<?php if ( $item['image_accordion_sub_title'] && ( 'yes' == $settings['show_sub_title'] ) ) : ?>
-				<div <?php $this->print_render_attribute_string('bdt-ep-image-accordion-sub-title'); ?>>
-					<?php echo wp_kses( $item['image_accordion_sub_title'], element_pack_allow_tags('title') ); ?>
+		$title_tag = Utils::get_valid_html_tag( isset( $settings['title_tags'] ) ? $settings['title_tags'] : 'h3' );
+		?>
+		<div class="bdt-ep-image-accordion-content">
+			<?php if ( ! empty( $item['image_accordion_sub_title'] ) && ! empty( $settings['show_sub_title'] ) && $settings['show_sub_title'] === 'yes' ) : ?>
+				<div <?php $this->print_render_attribute_string( 'bdt-ep-image-accordion-sub-title' ); ?>>
+					<?php echo wp_kses( $item['image_accordion_sub_title'], element_pack_allow_tags( 'title' ) ); ?>
 				</div>
 			<?php endif; ?>
 
-			<?php if ( $item['image_accordion_title'] && ( 'yes' == $settings['show_title'] ) ) : ?>
-				<?php if ( '' !== $item['title_link']['url'] ) : ?>
-					<a <?php $this->print_render_attribute_string($title_key); ?>>
+			<?php if ( ! empty( $item['image_accordion_title'] ) && ! empty( $settings['show_title'] ) && $settings['show_title'] === 'yes' ) : ?>
+				<?php if ( $title_link_url !== '' ) : ?>
+					<a <?php $this->print_render_attribute_string( $title_key ); ?>>
 				<?php endif; ?>
-					<<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tags'])); ?> <?php $this->print_render_attribute_string('bdt-ep-image-accordion-title'); ?>>
-						<?php echo wp_kses( $item['image_accordion_title'], element_pack_allow_tags('title') ); ?>
-					</<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_tags'])); ?>>
-				<?php if ( '' !== $item['title_link']['url'] ) : ?>
+				<<?php echo esc_attr( $title_tag ); ?> <?php $this->print_render_attribute_string( 'bdt-ep-image-accordion-title' ); ?>>
+					<?php echo wp_kses( $item['image_accordion_title'], element_pack_allow_tags( 'title' ) ); ?>
+				</<?php echo esc_attr( $title_tag ); ?>>
+				<?php if ( $title_link_url !== '' ) : ?>
 					</a>
 				<?php endif; ?>
 			<?php endif; ?>
 
-			<?php if ( $item['image_accordion_text'] && ( 'yes' == $settings['show_text'] ) ) : ?>
-				<div <?php $this->print_render_attribute_string('bdt-ep-image-accordion-text'); ?>>
-					<?php echo wp_kses_post($this->parse_text_editor( $item['image_accordion_text'] )); ?>
+			<?php if ( ! empty( $item['image_accordion_text'] ) && ! empty( $settings['show_text'] ) && $settings['show_text'] === 'yes' ) : ?>
+				<div <?php $this->print_render_attribute_string( 'bdt-ep-image-accordion-text' ); ?>>
+					<?php echo wp_kses_post( $this->parse_text_editor( $item['image_accordion_text'] ) ); ?>
 				</div>
 			<?php endif; ?>
 
-			<?php if ($item['image_accordion_button'] && ( 'yes' == $settings['show_button'] )) : ?>
-				<div <?php $this->print_render_attribute_string('bdt-ep-image-accordion-button'); ?>>
-					<?php if ( '' !== $item['button_link']['url'] ) : ?>
-						<a <?php $this->print_render_attribute_string($button_key); ?>>
+			<?php if ( ! empty( $item['image_accordion_button'] ) && ! empty( $settings['show_button'] ) && $settings['show_button'] === 'yes' ) : ?>
+				<div <?php $this->print_render_attribute_string( 'bdt-ep-image-accordion-button' ); ?>>
+					<?php if ( $button_link_url !== '' ) : ?>
+						<a <?php $this->print_render_attribute_string( $button_key ); ?>>
 					<?php endif; ?>
-						<?php echo wp_kses_post($item['image_accordion_button']); ?>
-					<?php if ( '' !== $item['button_link']['url'] ) : ?>
+					<?php echo wp_kses_post( $item['image_accordion_button'] ); ?>
+					<?php if ( $button_link_url !== '' ) : ?>
 						</a>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		</div>
-        <?php
-    }
+		<?php
+	}
 
-	public function render_image($item) {
-        $settings = $this->get_settings_for_display();
+	public function render_image( $item, $settings ) {
+		$img_id = isset( $item['slide_image']['id'] ) ? $item['slide_image']['id'] : 0;
+		$img_url = isset( $item['slide_image']['url'] ) ? $item['slide_image']['url'] : '';
+		$alt_text = isset( $item['image_accordion_title'] ) ? $item['image_accordion_title'] : '';
+		$size_name = isset( $settings['thumbnail_size_size'] ) ? $settings['thumbnail_size_size'] : 'full';
 
-        ?>
-        <div class="bdt-ep-image-accordion-img">
-			<?php 
-			$thumb_url = Group_Control_Image_Size::get_attachment_image_src($item['slide_image']['id'], 'thumbnail_size', $settings);
-			if (!$thumb_url) {
-				printf('<img src="%1$s" alt="%2$s">', esc_url($item['slide_image']['url']), esc_html($item['image_accordion_title']));
-			} else {
-				print(wp_get_attachment_image(
-					$item['slide_image']['id'],
-					$settings['thumbnail_size_size'],
+		$thumb_url = $img_id ? Group_Control_Image_Size::get_attachment_image_src( $img_id, 'thumbnail_size', $settings ) : false;
+		?>
+		<div class="bdt-ep-image-accordion-img">
+			<?php
+			if ( $thumb_url && $img_id ) {
+				echo wp_get_attachment_image(
+					$img_id,
+					$size_name,
 					false,
-					[
-						'alt' => esc_html($item['image_accordion_title'])
-					]
-				));
+					[ 'alt' => esc_attr( $alt_text ) ]
+				);
+			} elseif ( $img_url !== '' ) {
+				printf( '<img src="%1$s" alt="%2$s">', esc_url( $img_url ), esc_attr( $alt_text ) );
 			}
 			?>
-
-			<?php $this->render_lightbox($item); ?>
-
+			<?php $this->render_lightbox( $item, $settings ); ?>
 		</div>
-        <?php
-    }
+		<?php
+	}
 
 	public function render() {
 		$settings = $this->get_settings_for_display();
-		$id       = $this->get_id();
+		$image_accordion_items = isset( $settings['image_accordion_items'] ) && is_array( $settings['image_accordion_items'] ) ? $settings['image_accordion_items'] : [];
 
-		if ($settings['image_accordion_event']) {
-			$imageAccordionEvent = $settings['image_accordion_event'];
-		} else {
-			$imageAccordionEvent = false;
+		if ( empty( $image_accordion_items ) ) {
+			return;
 		}
+
+		$id = esc_attr( $this->get_id() );
+		$imageAccordionEvent = ! empty( $settings['image_accordion_event'] ) ? $settings['image_accordion_event'] : false;
+
+		$active_item = ( ! empty( $settings['active_item'] ) && $settings['active_item'] === 'yes' );
+		$active_item_number = isset( $settings['active_item_number'] ) ? (int) $settings['active_item_number'] : 1;
+		$swiping = isset( $settings['swiping'] ) ? $settings['swiping'] : '';
+		$inactive_overlay = isset( $settings['inactive_item_overlay'] ) ? $settings['inactive_item_overlay'] : '';
 
 		$this->add_render_attribute(
 			[
 				'image-accordion' => [
-					'id' => 'bdt-ep-image-accordion-' . $this->get_id(),
-					'class' => 'bdt-ep-image-accordion',
+					'id'            => 'bdt-ep-image-accordion-' . $id,
+					'class'         => 'bdt-ep-image-accordion',
 					'data-settings' => [
-						wp_json_encode(array_filter([
-					        'tabs_id' => 'bdt-ep-image-accordion-' . $this->get_id(),
-							'mouse_event' => $imageAccordionEvent,
-							'activeItem' => $settings['active_item'] == 'yes' ? true : false,
-							'activeItemNumber' => $settings['active_item_number'],
-							'swiping' => $settings['swiping'],
-							'inactiveItemOverlay' => $settings['inactive_item_overlay'],
-						]))
-					]
-				]
+						wp_json_encode( array_filter( [
+							'tabs_id'             => 'bdt-ep-image-accordion-' . $id,
+							'mouse_event'         => $imageAccordionEvent,
+							'activeItem'          => $active_item,
+							'activeItemNumber'    => $active_item_number,
+							'swiping'             => $swiping,
+							'inactiveItemOverlay' => $inactive_overlay,
+						] ) ),
+					],
+				],
 			]
 		);
 
-		if ($settings['show_lightbox']) {
-			$this->add_render_attribute('image-accordion', 'data-bdt-lightbox', 'toggle: .bdt-ep-image-accordion-lightbox; animation:' . $settings['lightbox_animation'] . ';');
-			if ($settings['lightbox_autoplay']) {
-				$this->add_render_attribute('image-accordion', 'data-bdt-lightbox', 'autoplay: 500;');
-
-				if ($settings['lightbox_pause']) {
-					$this->add_render_attribute('image-accordion', 'data-bdt-lightbox', 'pause-on-hover: true;');
+		if ( ! empty( $settings['show_lightbox'] ) && $settings['show_lightbox'] === 'yes' ) {
+			$lightbox_animation = isset( $settings['lightbox_animation'] ) ? $settings['lightbox_animation'] : 'slide';
+			$this->add_render_attribute( 'image-accordion', 'data-bdt-lightbox', 'toggle: .bdt-ep-image-accordion-lightbox; animation:' . esc_attr( $lightbox_animation ) . ';' );
+			if ( ! empty( $settings['lightbox_autoplay'] ) && $settings['lightbox_autoplay'] === 'yes' ) {
+				$this->add_render_attribute( 'image-accordion', 'data-bdt-lightbox', 'autoplay: 500;' );
+				if ( ! empty( $settings['lightbox_pause'] ) && $settings['lightbox_pause'] === 'yes' ) {
+					$this->add_render_attribute( 'image-accordion', 'data-bdt-lightbox', 'pause-on-hover: true;' );
 				}
 			}
 		}
 
+		$skin_type = isset( $settings['skin_type'] ) ? $settings['skin_type'] : 'default';
 		?>
-
 		<div <?php $this->print_render_attribute_string( 'image-accordion' ); ?>>
-			<?php foreach ( $settings['image_accordion_items'] as $index => $item ) : 
-
-				$title_key = 'title_to_' . $index;
+			<?php foreach ( $image_accordion_items as $index => $item ) :
+				$title_key  = 'title_to_' . $index;
 				$button_key = 'button_to_' . $index;
-				
-                $slide_image = Group_Control_Image_Size::get_attachment_image_src( $item['slide_image']['id'], 'thumbnail_size', $settings);
-                if ( ! $slide_image ) {
-                    $slide_image = $item['slide_image']['url'];
-                }
+
+				$img_id = isset( $item['slide_image']['id'] ) ? $item['slide_image']['id'] : 0;
+				$slide_image = $img_id ? Group_Control_Image_Size::get_attachment_image_src( $img_id, 'thumbnail_size', $settings ) : false;
+				if ( ! $slide_image ) {
+					$slide_image = isset( $item['slide_image']['url'] ) ? $item['slide_image']['url'] : '';
+				}
+
 				$this->add_render_attribute( 'image-accordion-item', 'class', 'bdt-ep-image-accordion-item', true );
 				?>
-
-				<?php if( $settings['skin_type'] !== 'sliding-box' ) : ?>
-					<div <?php $this->print_render_attribute_string( 'image-accordion-item' ); ?> style="background-image: url('<?php echo esc_url( $slide_image); ?>');">
-						<?php $this->render_lightbox($item); ?>
-						<?php $this->render_accordion_content($item, $title_key, $button_key); ?>
+				<?php if ( $skin_type !== 'sliding-box' ) : ?>
+					<div <?php $this->print_render_attribute_string( 'image-accordion-item' ); ?> style="background-image: url('<?php echo esc_url( $slide_image ); ?>');">
+						<?php $this->render_lightbox( $item, $settings ); ?>
+						<?php $this->render_accordion_content( $item, $title_key, $button_key, $settings ); ?>
 					</div>
-				<?php else: ?>
+				<?php else : ?>
 					<div <?php $this->print_render_attribute_string( 'image-accordion-item' ); ?>>
-						<?php $this->render_image($item); ?>
-						<?php $this->render_accordion_content($item, $title_key, $button_key); ?>
+						<?php $this->render_image( $item, $settings ); ?>
+						<?php $this->render_accordion_content( $item, $title_key, $button_key, $settings ); ?>
 					</div>
 				<?php endif; ?>
-
 			<?php endforeach; ?>
 		</div>
-		<?php 
+		<?php
 	}
 }

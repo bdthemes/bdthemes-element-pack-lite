@@ -1130,8 +1130,7 @@ class Custom_Gallery extends Module_Base {
 		$this->end_controls_section();
 	}
 
-	public function render_thumbnail( $item ) {
-		$settings = $this->get_settings_for_display();
+	public function render_thumbnail( $item, $settings ) {
 
 		?>
 
@@ -1157,12 +1156,12 @@ class Custom_Gallery extends Module_Base {
 		<?php
 	}
 
-	public function render_title( $title ) {
-		if ( ! $this->get_settings_for_display( 'show_title' ) ) {
+	public function render_title( $title, $settings ) {
+		if ( ! $settings['show_title'] ) {
 			return;
 		}
 
-		$tag = $this->get_settings_for_display( 'title_tag' );
+		$tag = $settings['title_tag'];
 		?>
 		<<?php echo esc_attr( Utils::get_valid_html_tag( $tag ) ); ?> class="bdt-gallery-item-title
 			bdt-transition-slide-top-small">
@@ -1171,8 +1170,8 @@ class Custom_Gallery extends Module_Base {
 		<?php
 	}
 
-	public function render_text( $text ) {
-		if ( ! $this->get_settings_for_display( 'show_text' ) ) {
+	public function render_text( $text, $settings ) {
+		if ( ! $settings['show_text'] ) {
 			return;
 		}
 
@@ -1215,8 +1214,7 @@ class Custom_Gallery extends Module_Base {
 		}
 	}
 
-	public function render_overlay( $content, $element_key ) {
-		$settings = $this->get_settings_for_display();
+	public function render_overlay( $content, $element_key, $settings ) {
 
 		if ( ! $settings['show_title'] and ! $settings['show_text'] and ! $settings['show_lightbox'] ) {
 			return;
@@ -1265,8 +1263,8 @@ class Custom_Gallery extends Module_Base {
 					<?php endif; ?>
 
 					<?php
-					$this->render_title( $content );
-					$this->render_text( $content );
+					$this->render_title( $content, $settings );
+					$this->render_text( $content, $settings );
 					?>
 
 				</div>
@@ -1275,8 +1273,7 @@ class Custom_Gallery extends Module_Base {
 		<?php
 	}
 
-	public function render_header( $skin = 'default' ) {
-		$settings = $this->get_settings_for_display();
+	public function render_header( $settings, $skin = 'default' ) {
 		$id       = $this->get_id();
 
 		$this->add_render_attribute( 'custom-gallery', 'id', 'bdt-custom-gallery-' . $id );
@@ -1352,7 +1349,7 @@ class Custom_Gallery extends Module_Base {
 			$this->add_render_attribute( 'custom-gallery-inner', 'data-tilt', '' );
 		}
 
-		$this->render_header();
+		$this->render_header($settings);
 		foreach ( $settings['gallery'] as $index => $item ) :
 
 			?>
@@ -1373,8 +1370,8 @@ class Custom_Gallery extends Module_Base {
 						<?php endif; ?>
 
 						<?php
-						$this->render_thumbnail( $item );
-						$this->render_overlay( $item, 'overlay-item-' . $index );
+						$this->render_thumbnail( $item, $settings );
+						$this->render_overlay( $item, 'overlay-item-' . $index, $settings );
 						?>
 
 						<?php if ( 'yes' !== $settings['show_lightbox'] and $settings['direct_link'] ) : ?>

@@ -3,16 +3,13 @@
 namespace ElementPack\Modules\IconMobileMenu\Widgets;
 
 use ElementPack\Base\Module_Base;
-use Elementor\Group_Control_Css_Filter;
 use Elementor\Repeater;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Icons_Manager;
-use Elementor\Utils;
 
 use ElementPack\Traits\Global_Mask_Controls;
 
@@ -45,19 +42,11 @@ class Icon_Mobile_Menu extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
-		} else {
-			return [ 'ep-icon-mobile-menu', 'tippy' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-icon-mobile-menu', 'tippy' ];
 	}
 
 	public function get_script_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'popper', 'tippyjs', 'ep-scripts' ];
-		} else {
-			return [ 'popper', 'tippyjs', 'ep-icon-mobile-menu' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'popper', 'tippyjs', 'ep-scripts' ] : [ 'popper', 'tippyjs', 'ep-icon-mobile-menu' ];
 	}
 
 	public function get_custom_help_url() {
@@ -903,79 +892,79 @@ class Icon_Mobile_Menu extends Module_Base {
 	}
 
 	protected function render() {
+		
 		$settings = $this->get_settings_for_display();
-
-		$this->add_render_attribute( 'icon-mobile-menu', 'class', 'bdt-icon-mobile-menu-wrap bdt-icon-mobile-menu-' . $settings['menu_style'] );
-
-		if ( empty( $settings['menu_items'] ) ) {
+		$menu_items = isset( $settings['menu_items'] ) && is_array( $settings['menu_items'] ) ? $settings['menu_items'] : [];
+		
+		if ( empty( $menu_items ) ) {
 			return;
 		}
 
-		?>
+		$menu_style = isset( $settings['menu_style'] ) ? $settings['menu_style'] : 'style-1';
+		$this->add_render_attribute( 'icon-mobile-menu', 'class', 'bdt-icon-mobile-menu-wrap bdt-icon-mobile-menu-' . esc_attr( $menu_style ) );
 
+		$menu_tooltip = ! empty( $settings['menu_tooltip'] ) && $settings['menu_tooltip'] === 'yes';
+		?>
 		<div <?php $this->print_render_attribute_string( 'icon-mobile-menu' ); ?>>
 			<ul>
 				<?php
-				foreach ( $settings['menu_items'] as $index => $item ) :
-					$repeater_key    = 'menu_item' . $index;
-					$tag             = 'div ';
-					$tooltip_content = '<span class="bdt-title">' . $item['menu_text'] . '</span>';
+				foreach ( $menu_items as $index => $item ) :
+					$repeater_key = 'menu_item' . $index;
+					$tag          = 'div';
+					$link_url     = isset( $item['link']['url'] ) ? $item['link']['url'] : '';
+					$menu_text    = isset( $item['menu_text'] ) ? $item['menu_text'] : '';
+
 					$this->add_render_attribute( $repeater_key, 'class', 'bdt-icon-mobile-menu-link', true );
-					$this->add_render_attribute( $repeater_key, 'data-tippy-content', htmlspecialchars( $tooltip_content, ENT_QUOTES, 'UTF-8' ), true );
 
-					if ( $item['link']['url'] ) {
-						$tag = 'a ';
-						$this->add_render_attribute( $repeater_key, 'class', 'bdt-icon-mobile-menu-link', true );
-
-						$this->add_link_attributes( $repeater_key, $item['link'] );
+					if ( $link_url !== '' ) {
+						$tag = 'a';
+						$this->add_link_attributes( $repeater_key, isset( $item['link'] ) ? $item['link'] : [] );
 					}
 
-					if ( $item['menu_text'] and $settings['menu_tooltip'] ) {
-						// Tooltip settings
+					if ( $menu_text !== '' && $menu_tooltip ) {
+						$tooltip_content = '<span class="bdt-title">' . esc_html( $menu_text ) . '</span>';
 						$this->add_render_attribute( $repeater_key, 'class', 'bdt-tippy-tooltip' );
 						$this->add_render_attribute( $repeater_key, 'data-tippy', '', true );
+						$this->add_render_attribute( $repeater_key, 'data-tippy-content', wp_kses_post( $tooltip_content ), true );
 
-						if ( $settings['menu_tooltip_placement'] ) {
-							$this->add_render_attribute( $repeater_key, 'data-tippy-placement', $settings['menu_tooltip_placement'], true );
+						$tooltip_placement = isset( $settings['menu_tooltip_placement'] ) ? $settings['menu_tooltip_placement'] : '';
+						if ( $tooltip_placement !== '' ) {
+							$this->add_render_attribute( $repeater_key, 'data-tippy-placement', esc_attr( $tooltip_placement ), true );
 						}
 
-						if ( $settings['menu_tooltip_animation'] ) {
-							$this->add_render_attribute( $repeater_key, 'data-tippy-animation', $settings['menu_tooltip_animation'], true );
+						$tooltip_animation = isset( $settings['menu_tooltip_animation'] ) ? $settings['menu_tooltip_animation'] : '';
+						if ( $tooltip_animation !== '' ) {
+							$this->add_render_attribute( $repeater_key, 'data-tippy-animation', esc_attr( $tooltip_animation ), true );
 						}
 
-						if ( $settings['menu_tooltip_x_offset']['size'] or $settings['menu_tooltip_y_offset']['size'] ) {
-							$this->add_render_attribute( $repeater_key, 'data-tippy-offset', '[' . $settings['menu_tooltip_x_offset']['size'] . ',' . $settings['menu_tooltip_y_offset']['size'] . ']', true );
+						$x_offset = isset( $settings['menu_tooltip_x_offset']['size'] ) ? $settings['menu_tooltip_x_offset']['size'] : 0;
+						$y_offset = isset( $settings['menu_tooltip_y_offset']['size'] ) ? $settings['menu_tooltip_y_offset']['size'] : 0;
+						if ( $x_offset !== 0 || $y_offset !== 0 ) {
+							$this->add_render_attribute( $repeater_key, 'data-tippy-offset', '[' . esc_attr( (string) $x_offset ) . ',' . esc_attr( (string) $y_offset ) . ']', true );
 						}
 
-						if ( 'yes' == $settings['menu_tooltip_arrow'] ) {
-							$this->add_render_attribute( $repeater_key, 'data-tippy-arrow', 'true', true );
-						} else {
-							$this->add_render_attribute( $repeater_key, 'data-tippy-arrow', 'false', true );
-						}
+						$tooltip_arrow = ( ! empty( $settings['menu_tooltip_arrow'] ) && $settings['menu_tooltip_arrow'] === 'yes' ) ? 'true' : 'false';
+						$this->add_render_attribute( $repeater_key, 'data-tippy-arrow', $tooltip_arrow, true );
 
-						if ( 'yes' == $settings['menu_tooltip_trigger'] ) {
+						if ( ! empty( $settings['menu_tooltip_trigger'] ) && $settings['menu_tooltip_trigger'] === 'yes' ) {
 							$this->add_render_attribute( $repeater_key, 'data-tippy-trigger', 'click', true );
 						}
 					}
-
 					?>
 					<li class="bdt-icon-mobile-menu-list">
-						<<?php echo esc_attr( $tag ) . ' '; ?> 			<?php $this->print_render_attribute_string( $repeater_key ); ?>>
-
+						<<?php echo esc_attr( $tag ); ?> <?php $this->print_render_attribute_string( $repeater_key ); ?>>
 							<?php if ( ! empty( $item['menu_icon']['value'] ) ) : ?>
 								<span class="bdt-icon-mobile-menu">
 									<?php Icons_Manager::render_icon( $item['menu_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 								</span>
 							<?php endif; ?>
 
-							<span class="bdt-text-mobile-menu"><?php echo wp_kses_post( $item['menu_text'] ); ?></span>
-
+							<span class="bdt-text-mobile-menu"><?php echo wp_kses_post( $menu_text ); ?></span>
 						</<?php echo esc_attr( $tag ); ?>>
 					</li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
-
 		<?php
 	}
 }

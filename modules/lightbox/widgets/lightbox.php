@@ -10,8 +10,9 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Utils;
 use Elementor\Icons_Manager;
 
-if ( ! defined( 'ABSPATH' ) )
-	exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Lightbox extends Module_Base {
 	public function get_name() {
@@ -35,19 +36,11 @@ class Lightbox extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
-		} else {
-			return [ 'ep-lightbox' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-lightbox' ];
 	}
 
 	public function get_script_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'imagesloaded', 'ep-scripts' ];
-		} else {
-			return [ 'imagesloaded' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'imagesloaded', 'ep-scripts' ] : [ 'imagesloaded' ];
 	}
 
 	public function get_custom_help_url() {
@@ -773,111 +766,110 @@ class Lightbox extends Module_Base {
 		$this->end_controls_section();
 	}
 
-	protected function render_text() {
-		$settings = $this->get_settings_for_display();
+	protected function render_text( $settings ) {
+		$icon_align = isset( $settings['icon_align'] ) ? sanitize_html_class( $settings['icon_align'] ) : 'left';
+		$button_text = isset( $settings['button_text'] ) ? $settings['button_text'] : '';
+		$button_icon = isset( $settings['button_icon'] ) ? $settings['button_icon'] : [];
+		$old_icon = isset( $settings['icon'] ) ? $settings['icon'] : '';
 
-		$this->add_render_attribute( [ 
-			'content-wrapper' => [ 
+		$this->add_render_attribute( [
+			'content-wrapper' => [
 				'class' => 'elementor-button-content-wrapper',
 			],
-			'icon-align'      => [ 
-				'class' => [ 
+			'icon-align'      => [
+				'class' => [
 					'elementor-button-icon',
-					'elementor-align-icon-' . $settings['icon_align'],
+					'elementor-align-icon-' . $icon_align,
 				],
 			],
-			'text'            => [ 
+			'text'            => [
 				'class' => 'elementor-button-text',
 			],
 		] );
 
 		if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
 			// add old default
-			$settings['icon'] = 'fas fa-play';
+			$old_icon = 'fas fa-play';
 		}
 
 		$migrated = isset( $settings['__fa4_migrated']['button_icon'] );
-		$is_new   = empty( $settings['icon'] ) && Icons_Manager::is_migration_allowed();
+		$is_new   = empty( $old_icon ) && Icons_Manager::is_migration_allowed();
+		$has_icon = ! empty( $button_icon['value'] );
 
 		?>
 		<span <?php $this->print_render_attribute_string( 'content-wrapper' ); ?>>
-
-			<?php if ( 'left' === $settings['icon_align'] ) : ?>
-				<?php if ( ! empty( $settings['button_icon']['value'] ) ) : ?>
-					<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
-
-						<?php if ( $is_new || $migrated ) :
-							Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
-						else : ?>
-							<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
-						<?php endif; ?>
-
-					</span>
-				<?php endif; ?>
+			<?php if ( $icon_align === 'left' && $has_icon ) : ?>
+				<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
+					<?php if ( $is_new || $migrated ) :
+						Icons_Manager::render_icon( $button_icon, [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+					else : ?>
+						<i class="<?php echo esc_attr( $old_icon ); ?>" aria-hidden="true"></i>
+					<?php endif; ?>
+				</span>
 			<?php endif; ?>
 
 			<span <?php $this->print_render_attribute_string( 'text' ); ?>>
-				<?php
-				echo wp_kses(
-					$settings['button_text'],
-					element_pack_allow_tags( 'title' )
-				);
-				?>
+				<?php echo wp_kses( $button_text, element_pack_allow_tags( 'title' ) ); ?>
 			</span>
 
-			<?php if ( 'right' === $settings['icon_align'] ) : ?>
-			<?php if ( ! empty( $settings['button_icon']['value'] ) ) : ?>
+			<?php if ( $icon_align === 'right' && $has_icon ) : ?>
 				<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
-
 					<?php if ( $is_new || $migrated ) :
-						Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+						Icons_Manager::render_icon( $button_icon, [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
 					else : ?>
-						<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
+						<i class="<?php echo esc_attr( $old_icon ); ?>" aria-hidden="true"></i>
 					<?php endif; ?>
-
 				</span>
-			<?php endif; ?>
 			<?php endif; ?>
 		</span>
 		<?php
 	}
 
 	protected function render() {
-
 		$settings = $this->get_settings_for_display();
-		$id       = $this->get_id();
+		$id = esc_attr( $this->get_id() );
 
 		// remove global lightbox
 		$this->add_render_attribute( 'lightbox-content', 'data-elementor-open-lightbox', 'no' );
 
-		if ( 'poster' != $settings['lightbox_toggler'] ) {
+		$lightbox_toggler = isset( $settings['lightbox_toggler'] ) ? $settings['lightbox_toggler'] : 'poster';
+		if ( $lightbox_toggler !== 'poster' ) {
 			$this->add_render_attribute( 'lightbox-content', 'class', 'elementor-button elementor-size-md' );
 
-			if ( $settings['hover_animation'] ) {
-				$this->add_render_attribute( 'lightbox-content', 'class', 'elementor-animation-' . esc_attr( $settings['hover_animation'] ) );
+			$hover_animation = isset( $settings['hover_animation'] ) ? $settings['hover_animation'] : '';
+			if ( ! empty( $hover_animation ) ) {
+				$this->add_render_attribute( 'lightbox-content', 'class', 'elementor-animation-' . sanitize_html_class( $hover_animation ) );
 			}
 		}
 
-		if ( ! empty( $settings['icon_text'] ) ) {
-			if ( 'image' == $settings['lightbox_content'] ) {
-				$this->add_render_attribute( 'lightbox-icon-content', 'href', esc_url( $settings['content_image']['url'] ) );
-			} elseif ( 'video' == $settings['lightbox_content'] and '' != $settings['content_video'] ) {
-				$this->add_render_attribute( 'lightbox-icon-content', 'href', esc_url( $settings['content_video']['url'] ) );
-			} elseif ( 'youtube' == $settings['lightbox_content'] and '' != $settings['content_youtube'] ) {
-				$this->add_render_attribute( 'lightbox-icon-content', 'href', esc_url( $settings['content_youtube']['url'] ) );
-			} elseif ( 'vimeo' == $settings['lightbox_content'] and '' != $settings['content_vimeo'] ) {
-				$this->add_render_attribute( 'lightbox-icon-content', 'href', esc_url( $settings['content_vimeo']['url'] ) );
+		$icon_text = isset( $settings['icon_text'] ) ? $settings['icon_text'] : '';
+		$lightbox_content = isset( $settings['lightbox_content'] ) ? $settings['lightbox_content'] : 'image';
+		if ( ! empty( $icon_text ) ) {
+			$icon_content_url = '';
+			if ( $lightbox_content === 'image' && isset( $settings['content_image']['url'] ) ) {
+				$icon_content_url = $settings['content_image']['url'];
+			} elseif ( $lightbox_content === 'video' && ! empty( $settings['content_video']['url'] ) ) {
+				$icon_content_url = $settings['content_video']['url'];
+			} elseif ( $lightbox_content === 'youtube' && ! empty( $settings['content_youtube']['url'] ) ) {
+				$icon_content_url = $settings['content_youtube']['url'];
+			} elseif ( $lightbox_content === 'vimeo' && ! empty( $settings['content_vimeo']['url'] ) ) {
+				$icon_content_url = $settings['content_vimeo']['url'];
 			} elseif ( isset( $settings['content_google_map']['url'] ) ) {
-				$this->add_render_attribute( 'lightbox-icon-content', 'href', esc_url( $settings['content_google_map']['url'] ) );
+				$icon_content_url = $settings['content_google_map']['url'];
 				$this->add_render_attribute( 'lightbox-icon-content', 'data-type', 'iframe' );
+			}
+
+			if ( ! empty( $icon_content_url ) ) {
+				$this->add_render_attribute( 'lightbox-icon-content', 'href', esc_url( $icon_content_url ) );
 			}
 			$this->add_render_attribute( 'lightbox-icon-content', 'class', 'bdt-icon-text' );
 			$this->add_render_attribute( 'lightbox-icon-content', 'data-elementor-open-lightbox', 'no' );
 		}
 
-		if ( $settings['content_caption'] ) {
+		$content_caption = isset( $settings['content_caption'] ) ? $settings['content_caption'] : '';
+		if ( ! empty( $content_caption ) ) {
 			// Handle multiple levels of encoding for the security
-			$caption = $settings['content_caption'];
+			$caption = $content_caption;
 			// this double decode is required to handle the case where the caption is already encoded so don't remove it
 			$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 			$caption = html_entity_decode( $caption, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
@@ -886,87 +878,97 @@ class Lightbox extends Module_Base {
 			$this->add_render_attribute( 'lightbox-content', 'data-caption', $caption );
 		}
 
-		if ( 'image' == $settings['lightbox_content'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'href', esc_url( $settings['content_image']['url'] ) );
-		} elseif ( 'video' == $settings['lightbox_content'] and '' != $settings['content_video'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'href', esc_url( $settings['content_video']['url'] ) );
-		} elseif ( 'youtube' == $settings['lightbox_content'] and '' != $settings['content_youtube'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'href', esc_url( $settings['content_youtube']['url'] ) );
-		} elseif ( 'vimeo' == $settings['lightbox_content'] and '' != $settings['content_vimeo'] ) {
-			$this->add_render_attribute( 'lightbox-content', 'href', esc_url( $settings['content_vimeo']['url'] ) );
+		$content_url = '';
+		if ( $lightbox_content === 'image' && isset( $settings['content_image']['url'] ) ) {
+			$content_url = $settings['content_image']['url'];
+		} elseif ( $lightbox_content === 'video' && ! empty( $settings['content_video']['url'] ) ) {
+			$content_url = $settings['content_video']['url'];
+		} elseif ( $lightbox_content === 'youtube' && ! empty( $settings['content_youtube']['url'] ) ) {
+			$content_url = $settings['content_youtube']['url'];
+		} elseif ( $lightbox_content === 'vimeo' && ! empty( $settings['content_vimeo']['url'] ) ) {
+			$content_url = $settings['content_vimeo']['url'];
 		} elseif ( isset( $settings['content_google_map']['url'] ) ) {
-			$this->add_render_attribute( 'lightbox-content', 'href', esc_url( $settings['content_google_map']['url'] ) );
+			$content_url = $settings['content_google_map']['url'];
 			$this->add_render_attribute( 'lightbox-content', 'data-type', 'iframe' );
+		}
+
+		if ( ! empty( $content_url ) ) {
+			$this->add_render_attribute( 'lightbox-content', 'href', esc_url( $content_url ) );
 		}
 
 		$this->add_render_attribute( 'lightbox', 'data-bdt-lightbox', '' );
 
-		if ( $settings['lightbox_animation'] ) {
-			$this->add_render_attribute( 'lightbox', 'data-bdt-lightbox', 'animation: ' . wp_kses_post( $settings['lightbox_animation'] ) . ';' );
+		$lightbox_animation = isset( $settings['lightbox_animation'] ) ? $settings['lightbox_animation'] : '';
+		if ( ! empty( $lightbox_animation ) ) {
+			$this->add_render_attribute( 'lightbox', 'data-bdt-lightbox', 'animation: ' . wp_kses_post( $lightbox_animation ) . ';' );
 		}
 
-		if ( $settings['video_autoplay'] ) {
+		$video_autoplay = isset( $settings['video_autoplay'] ) ? $settings['video_autoplay'] : '';
+		if ( ! empty( $video_autoplay ) ) {
 			$this->add_render_attribute( 'lightbox', 'data-bdt-lightbox', 'video-autoplay: true;' );
 		}
 
-		if ( 'poster' == $settings['lightbox_toggler'] ) {
+		$poster_url = '';
+		if ( $lightbox_toggler === 'poster' ) {
+			$poster_image_id = isset( $settings['poster_image']['id'] ) ? $settings['poster_image']['id'] : 0;
+			$poster_image_url = isset( $settings['poster_image']['url'] ) ? $settings['poster_image']['url'] : '';
 
-			$poster_url = Group_Control_Image_Size::get_attachment_image_src( $settings['poster_image']['id'], 'poster_image_size', $settings );
+			if ( $poster_image_id ) {
+				$poster_url = Group_Control_Image_Size::get_attachment_image_src( $poster_image_id, 'poster_image_size', $settings );
+			}
 
-			if ( ! $poster_url ) {
-				$poster_url = $settings['poster_image']['url'];
+			if ( empty( $poster_url ) && ! empty( $poster_image_url ) ) {
+				$poster_url = $poster_image_url;
 			}
 		}
 
-
-		if ( ! isset( $settings['toggler_icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
+		$toggler_icon = isset( $settings['toggler_icon'] ) ? $settings['toggler_icon'] : '';
+		if ( empty( $toggler_icon ) && ! Icons_Manager::is_migration_allowed() ) {
 			// add old default
-			$settings['toggler_icon'] = 'fas fa-play';
+			$toggler_icon = 'fas fa-play';
 		}
 
 		$migrated = isset( $settings['__fa4_migrated']['lightbox_toggler_icon'] );
-		$is_new   = empty( $settings['toggler_icon'] ) && Icons_Manager::is_migration_allowed();
+		$is_new   = empty( $toggler_icon ) && Icons_Manager::is_migration_allowed();
+		$lightbox_toggler_icon = isset( $settings['lightbox_toggler_icon'] ) ? $settings['lightbox_toggler_icon'] : [];
 
-		if ( 'shadow-pulse' == $settings['fancy_animation'] ) {
-			$this->add_render_attribute( 'lightbox-wrapper', 'class', 'bdt-lightbox-wrapper bdt-shadow-pulse' );
-		} elseif ( 'line-bounce' == $settings['fancy_animation'] ) {
-			$this->add_render_attribute( 'lightbox-wrapper', 'class', 'bdt-lightbox-wrapper bdt-line-bounce' );
-		} elseif ( 'multi-shadow' == $settings['fancy_animation'] ) {
-			$this->add_render_attribute( 'lightbox-wrapper', 'class', 'bdt-lightbox-wrapper bdt-multi-shadow' );
-		} else {
-			$this->add_render_attribute( 'lightbox-wrapper', 'class', 'bdt-lightbox-wrapper' );
+		$fancy_animation = isset( $settings['fancy_animation'] ) ? $settings['fancy_animation'] : '';
+		$wrapper_classes = [ 'bdt-lightbox-wrapper' ];
+		if ( $fancy_animation === 'shadow-pulse' ) {
+			$wrapper_classes[] = 'bdt-shadow-pulse';
+		} elseif ( $fancy_animation === 'line-bounce' ) {
+			$wrapper_classes[] = 'bdt-line-bounce';
+		} elseif ( $fancy_animation === 'multi-shadow' ) {
+			$wrapper_classes[] = 'bdt-multi-shadow';
 		}
+		$this->add_render_attribute( 'lightbox-wrapper', 'class', $wrapper_classes );
 
 		?>
 		<div id="bdt-lightbox-<?php echo esc_attr( $id ); ?>" <?php $this->print_render_attribute_string( 'lightbox-wrapper' ); ?>>
 			<div <?php $this->print_render_attribute_string( 'lightbox' ); ?>>
-
 				<a <?php $this->print_render_attribute_string( 'lightbox-content' ); ?>>
-
-					<?php if ( 'poster' == $settings['lightbox_toggler'] ) : ?>
-						<div class="bdt-toggler-poster bdt-background-cover"
-							style="background-image: url('<?php echo esc_url( $poster_url ); ?>');"></div>
+					<?php if ( $lightbox_toggler === 'poster' && ! empty( $poster_url ) ) : ?>
+						<div class="bdt-toggler-poster bdt-background-cover" style="background-image: url('<?php echo esc_url( $poster_url ); ?>');"></div>
 					<?php endif; ?>
 
-					<?php if ( 'icon' == $settings['lightbox_toggler'] ) : ?>
+					<?php if ( $lightbox_toggler === 'icon' ) : ?>
 						<span <?php $this->print_render_attribute_string( 'icon-align' ); ?>>
 							<?php if ( $is_new || $migrated ) :
-								Icons_Manager::render_icon( $settings['lightbox_toggler_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+								Icons_Manager::render_icon( $lightbox_toggler_icon, [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
 							else : ?>
-								<i class="<?php echo esc_attr( $settings['toggler_icon'] ); ?>" aria-hidden="true"></i>
+								<i class="<?php echo esc_attr( $toggler_icon ); ?>" aria-hidden="true"></i>
 							<?php endif; ?>
 						</span>
 					<?php endif; ?>
 
-					<?php if ( 'button' == $settings['lightbox_toggler'] ) : ?>
-						<?php $this->render_text(); ?>
+					<?php if ( $lightbox_toggler === 'button' ) : ?>
+						<?php $this->render_text( $settings ); ?>
 					<?php endif; ?>
 				</a>
 
-				<?php if ( ! empty( $settings['icon_text'] ) ) : ?>
-					<a <?php $this->print_render_attribute_string( 'lightbox-icon-content' ); ?>><?php echo wp_kses( $settings['icon_text'], element_pack_allow_tags( 'title' ) ); ?></a>
+				<?php if ( ! empty( $icon_text ) ) : ?>
+					<a <?php $this->print_render_attribute_string( 'lightbox-icon-content' ); ?>><?php echo wp_kses( $icon_text, element_pack_allow_tags( 'title' ) ); ?></a>
 				<?php endif; ?>
-
 			</div>
 		</div>
 		<?php

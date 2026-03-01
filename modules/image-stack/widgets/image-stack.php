@@ -8,13 +8,13 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Css_Filter;
 use Elementor\Icons_Manager;
 use Elementor\Repeater;
 use ElementPack\Utils;
 
-if ( ! defined( 'ABSPATH' ) )
-	exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Image_Stack extends Module_Base {
 
@@ -39,19 +39,11 @@ class Image_Stack extends Module_Base {
 	}
 
 	public function get_style_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'ep-styles' ];
-		} else {
-			return [ 'ep-image-stack', 'tippy' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'ep-styles' ] : [ 'ep-image-stack', 'tippy' ];
 	}
 
 	public function get_script_depends() {
-		if ( $this->ep_is_edit_mode() ) {
-			return [ 'popper', 'tippyjs', 'ep-scripts' ];
-		} else {
-			return [ 'popper', 'tippyjs', 'ep-image-stack' ];
-		}
+		return $this->ep_is_edit_mode() ? [ 'popper', 'tippyjs', 'ep-scripts' ] : [ 'popper', 'tippyjs', 'ep-image-stack' ];
 	}
 
 	public function get_custom_help_url() {
@@ -1108,85 +1100,78 @@ class Image_Stack extends Module_Base {
 
 	}
 
-	protected function render_media( $item ) {
-		$settings = $this->get_settings_for_display();
-
-		?>
-
-		<?php if ( 'icon' == $item['media_type'] ) { ?>
-			<?php Icons_Manager::render_icon( $item['selected_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-		<?php } elseif ( 'image' == $item['media_type'] ) {
-			$thumb_url = Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'thumbnail_size', $settings );
-			if ( ! $thumb_url ) {
-				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), esc_html( $item['tooltip_text'] ) );
-			} else {
-				print ( wp_get_attachment_image(
-					$item['image']['id'],
-					$settings['thumbnail_size_size'],
-					false,
-					[ 
-						'alt' => esc_html( $item['tooltip_text'] )
-					]
-				) );
+	protected function render_media( $item, $settings ) {
+		$media_type = isset( $item['media_type'] ) ? $item['media_type'] : 'image';
+		if ( $media_type === 'icon' ) {
+			if ( ! empty( $item['selected_icon']['value'] ) ) {
+				Icons_Manager::render_icon( $item['selected_icon'], [ 'aria-hidden' => 'true' ] );
 			}
-		} ?>
+		} elseif ( $media_type === 'image' ) {
+			$img_id = isset( $item['image']['id'] ) ? $item['image']['id'] : 0;
+			$img_url = isset( $item['image']['url'] ) ? $item['image']['url'] : '';
+			$alt_text = isset( $item['tooltip_text'] ) ? $item['tooltip_text'] : '';
+			$size_name = isset( $settings['thumbnail_size_size'] ) ? $settings['thumbnail_size_size'] : 'full';
 
-		<?php
+			$thumb_url = $img_id ? Group_Control_Image_Size::get_attachment_image_src( $img_id, 'thumbnail_size', $settings ) : false;
+			if ( $thumb_url && $img_id ) {
+				echo wp_get_attachment_image(
+					$img_id,
+					$size_name,
+					false,
+					[ 'alt' => esc_attr( $alt_text ) ]
+				);
+			} elseif ( $img_url !== '' ) {
+				printf( '<img src="%1$s" alt="%2$s">', esc_url( $img_url ), esc_attr( $alt_text ) );
+			}
+		}
 	}
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+		$image_stack_items = isset( $settings['image_stack_items'] ) && is_array( $settings['image_stack_items'] ) ? $settings['image_stack_items'] : [];
 
-		if ( empty( $settings['image_stack_items'] ) ) {
+		if ( empty( $image_stack_items ) ) {
 			return;
 		}
-
 		?>
 		<div class="bdt-image-stack">
-			<?php foreach ( $settings['image_stack_items'] as $index => $item ) :
-
-				$this->add_render_attribute( 'stack-item', 'class', 'bdt-ep-image-stack-item elementor-repeater-item-' . esc_attr( $item['_id'] ), true );
+			<?php foreach ( $image_stack_items as $index => $item ) :
+				$item_id = isset( $item['_id'] ) ? $item['_id'] : '';
+				$this->add_render_attribute( 'stack-item', 'class', 'bdt-ep-image-stack-item elementor-repeater-item-' . esc_attr( $item_id ), true );
 
 				$tooltip = '';
-				if ( isset( $item['tooltip_text'] ) && ! empty( $item['tooltip_text'] ) ) {
-					// Tooltip settings
-					$this->add_render_attribute( 'stack-item', 'class', [ 
-						'bdt-ep-image-stack-item elementor-repeater-item-' . esc_attr( $item['_id'] ),
+				$tooltip_text = isset( $item['tooltip_text'] ) ? $item['tooltip_text'] : '';
+				if ( $tooltip_text !== '' ) {
+					$this->add_render_attribute( 'stack-item', 'class', [
+						'bdt-ep-image-stack-item',
+						'elementor-repeater-item-' . esc_attr( $item_id ),
 						'bdt-tippy-tooltip',
 					], true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy', '', true );
 					$this->add_render_attribute( 'stack-item', 'data-tippy-arrow', 'true', true );
-					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', esc_attr($item['tooltip_placement']), true);
+					$tooltip_placement = isset( $item['tooltip_placement'] ) ? $item['tooltip_placement'] : 'top';
+					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', esc_attr( $tooltip_placement ), true );
 
-					$tooltip_text = wp_kses_post( strip_tags( $item['tooltip_text'] ) );
-					$tooltip = htmlspecialchars( $tooltip_text, ENT_QUOTES, 'UTF-8' );
-
-					// $this->add_render_attribute( 'stack-item', 'data-tippy-content', $tooltip, true);
+					$tooltip_text = wp_kses_post( strip_tags( $tooltip_text ) );
+					$tooltip = esc_attr( $tooltip_text );
 				}
 
-				if ( ! empty( $item['link_url']['url'] ) ) {
-					$this->add_link_attributes( 'link-wrap' . $index, $item['link_url'] );
+				$link_url = isset( $item['link_url']['url'] ) ? $item['link_url']['url'] : '';
+				if ( $link_url !== '' ) {
+					$this->add_link_attributes( 'link-wrap' . $index, isset( $item['link_url'] ) ? $item['link_url'] : [] );
 				}
-
 				?>
-
-				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?> 
-					data-tippy-content="<?php 
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo $tooltip;
-					?>"
-				>
-					<?php if ( ! empty( $item['link_url']['url'] ) ) : ?>
+				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?> data-tippy-content="<?php echo $tooltip; ?>">
+					<?php if ( $link_url !== '' ) : ?>
 						<a <?php $this->print_render_attribute_string( 'link-wrap' . $index ); ?>>
-							<?php $this->render_media( $item ); ?>
+							<?php $this->render_media( $item, $settings ); ?>
 						</a>
 					<?php else : ?>
 						<span>
-							<?php $this->render_media( $item ); ?>
+							<?php $this->render_media( $item, $settings ); ?>
 						</span>
 					<?php endif; ?>
 				</div>
-
 			<?php endforeach; ?>
 		</div>
 		<?php
