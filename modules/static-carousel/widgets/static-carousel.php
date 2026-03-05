@@ -202,7 +202,7 @@ class Static_Carousel extends Module_Base {
 			[
 				'label'     => __( 'Title HTML Tag', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h3',
+				'default'   => 'h2',
 				'options'   => element_pack_title_tags(),
 				'condition' => [ 'show_title' => 'yes' ],
 			]
@@ -223,7 +223,7 @@ class Static_Carousel extends Module_Base {
 			[
 				'label'     => __( 'Sub Title HTML Tag', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h4',
+				'default'   => 'h3',
 				'options'   => element_pack_title_tags(),
 				'condition' => [ 'show_sub_title' => 'yes' ],
 			]
@@ -1036,8 +1036,8 @@ class Static_Carousel extends Module_Base {
 			<div <?php $this->print_render_attribute_string( 'carousel-item' ); ?>>
 				<?php $this->render_image( $item, 'image_' . $index, $settings ); ?>
 				<div class="bdt-ep-static-carousel-content">
-					<?php $this->render_sub_title( $item, $settings ); ?>
 					<?php $this->render_title( $item, 'title_' . $index, $settings ); ?>
+					<?php $this->render_sub_title( $item, $settings ); ?>
 					<?php $this->render_text( $item, $settings ); ?>
 					<?php $this->render_readmore( $item, 'link_' . $index, $settings ); ?>
 				</div>

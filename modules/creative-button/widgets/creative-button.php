@@ -76,7 +76,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'button_style',
 			[
-				'label'   => esc_html__( 'Style', 'bdthemes-element-pack' ) . BDTEP_UC,
+				'label'   => esc_html__( 'Style', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'anthe',
 				'options' => [

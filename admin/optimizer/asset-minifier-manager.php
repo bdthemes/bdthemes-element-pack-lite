@@ -71,11 +71,10 @@ class Asset_Minifier {
         $widgets = $this->getWidgetIds();
 
         $scripts   = [];
-        $direction = is_rtl() ? '.rtl' : '';
 
         foreach ( $widgets as $widget ) {
             $jsPath  = BDTEP_PATH . 'assets/js/modules/ep-' . $widget . '.min.js';
-            $cssPath = BDTEP_PATH . 'assets/css/ep-' . $widget . $direction . '.css';
+            $cssPath = BDTEP_PATH . 'assets/css/ep-' . $widget . '.css';
 
             $script = [];
             if ( file_exists($jsPath) ) {
