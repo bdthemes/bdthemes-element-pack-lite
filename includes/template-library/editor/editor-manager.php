@@ -34,10 +34,9 @@ class ElementPack_Template_Library_Editor_Init {
 	}
 
 	public function editor_styles() {
-		$direction_suffix = is_rtl() ? '.rtl' : '';
 
 		wp_enqueue_style( 'bdt-template-library-editor-style',
-			BDTEP_URL . 'includes/template-library/editor/assets/css/editor-template-library' . $direction_suffix . '.css',
+			BDTEP_URL . 'includes/template-library/editor/assets/css/editor-template-library.css',
 			array(),
 			BDTEP_VER
 		);
@@ -45,10 +44,8 @@ class ElementPack_Template_Library_Editor_Init {
 
 	public function preview_styles() {
 
-		$direction_suffix = is_rtl() ? '.rtl' : '';
-
 		wp_enqueue_style( 'bdt-template-library-preview-style',
-			BDTEP_URL . 'includes/template-library/editor/assets/css/editor-template-preview' . $direction_suffix . '.css',
+			BDTEP_URL . 'includes/template-library/editor/assets/css/editor-template-preview.css',
 			array(),
 			BDTEP_VER
 		);

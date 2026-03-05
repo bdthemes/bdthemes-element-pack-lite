@@ -60,9 +60,6 @@ final class Manager
             return;
         }
 
-        $direction = is_rtl() ? '.rtl' : '';
-        $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
         $module_id = $module['name'];
         $class_name = str_replace('-', ' ', $module_id);
         $class_name = str_replace(' ', '', ucwords($class_name));
@@ -71,9 +68,6 @@ final class Manager
         if (!element_pack_is_asset_optimization_enabled()) {
             if (!element_pack_is_preview()) {
                 // register widgets css
-                // if (ModuleService::has_module_style($module_id)) {
-                //     wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . $direction . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
-                // }
                 if (ModuleService::has_module_style($module_id)) {
                     wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
                 }
