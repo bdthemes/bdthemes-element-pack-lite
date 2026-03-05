@@ -284,9 +284,9 @@ class Element_Pack_Loader {
         /**
          * ?TODO: Need to separate wc widget css
          */
-        wp_register_style('ep-tutor-lms', BDTEP_ASSETS_URL . 'css/ep-tutor-lms' . $direction_suffix . '.css', [], BDTEP_VER);
+        wp_register_style('ep-tutor-lms', BDTEP_ASSETS_URL . 'css/ep-tutor-lms.css', [], BDTEP_VER);
         // Vendor style register
-        wp_register_style('tippy', BDTEP_ASSETS_URL . 'css/tippy' . $direction_suffix . '.css', [], BDTEP_VER);
+        wp_register_style('tippy', BDTEP_ASSETS_URL . 'css/tippy.css', [], BDTEP_VER);
     }
 
     /**
@@ -298,7 +298,7 @@ class Element_Pack_Loader {
         $direction_suffix = is_rtl() ? '.rtl' : '';
 
         wp_register_style('bdt-uikit', BDTEP_ASSETS_URL . 'css/bdt-uikit' . $direction_suffix . '.css', [], '3.21.7');
-        wp_register_style('ep-helper', BDTEP_ASSETS_URL . 'css/ep-helper' . $direction_suffix . '.css', [], BDTEP_VER);
+        wp_register_style('ep-helper', BDTEP_ASSETS_URL . 'css/ep-helper.css', [], BDTEP_VER);
 
 		wp_enqueue_style( 'bdt-uikit' );
 		wp_enqueue_style( 'ep-helper' );
@@ -449,22 +449,19 @@ class Element_Pack_Loader {
      * @return [type] [description]
      */
     public function enqueue_preview_styles() {
-        $direction_suffix = is_rtl() ? '.rtl' : '';
 
-        wp_enqueue_style('ep-preview', BDTEP_ASSETS_URL . 'css/ep-preview' . $direction_suffix . '.css', '', BDTEP_VER);
+        wp_enqueue_style('ep-preview', BDTEP_ASSETS_URL . 'css/ep-preview.css', '', BDTEP_VER);
     }
 
 
     public function enqueue_editor_styles() {
-        $direction_suffix = is_rtl() ? '.rtl' : '';
 
-        wp_register_style('ep-editor', BDTEP_ASSETS_URL . 'css/ep-editor' . $direction_suffix . '.css', '', BDTEP_VER);
+        wp_register_style('ep-editor', BDTEP_ASSETS_URL . 'css/ep-editor.css', '', BDTEP_VER);
         wp_enqueue_style('ep-editor');
     }
 
 
     public function enqueue_minified_css() {
-        $direction_suffix = is_rtl() ? '.rtl' : '';
 
         $upload_dir = $this->get_upload_dir() . 'css/ep-styles.css';
         $version    = get_option('element-pack-minified-asset-manager-version');
@@ -473,8 +470,8 @@ class Element_Pack_Loader {
             $upload_url = $this->get_upload_url() . 'css/ep-styles.css';
             wp_register_style('ep-styles', $upload_url, [], $version);
         } else {
-            wp_register_style('ep-styles', BDTEP_URL . 'assets/css/ep-styles' . $direction_suffix . '.css', [], BDTEP_VER);
-            wp_register_style('ep-font', BDTEP_ASSETS_URL . 'css/ep-font' . $direction_suffix . '.css', [], BDTEP_VER);
+            wp_register_style('ep-styles', BDTEP_URL . 'assets/css/ep-styles.css', [], BDTEP_VER);
+            wp_register_style('ep-font', BDTEP_ASSETS_URL . 'css/ep-font.css', [], BDTEP_VER);
         }
 
         if (element_pack_is_asset_optimization_enabled()) {

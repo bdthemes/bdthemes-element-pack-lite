@@ -43,11 +43,10 @@ class Admin {
 	public function enqueue_styles() {
 
 		$direction_suffix = is_rtl() ? '.rtl' : '';
-		$suffix           = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_enqueue_style('bdt-uikit', BDTEP_ASSETS_URL . 'css/bdt-uikit' . $direction_suffix . '.css', [], '3.21.7');
-		wp_enqueue_style('ep-editor', BDTEP_ASSETS_URL . 'css/ep-editor' . $direction_suffix . '.css', [], BDTEP_VER);
-		wp_enqueue_style('ep-admin', BDTEP_ADMIN_URL . 'assets/css/ep-admin' . $direction_suffix . '.css', [], BDTEP_VER);
+		wp_enqueue_style('ep-editor', BDTEP_ASSETS_URL . 'css/ep-editor.css', [], BDTEP_VER);
+		wp_enqueue_style('ep-admin', BDTEP_ADMIN_URL . 'assets/css/ep-admin.css', [], BDTEP_VER);
 
 		wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit.min.js', ['jquery'], '3.21.7');
 	}
@@ -122,6 +121,8 @@ class Admin {
 	public function admin_api_biggopti_script() {
 		wp_enqueue_style( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-biggopti.css', [], BDTEP_VER, 'all' );
 		wp_enqueue_script( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
+
+		wp_enqueue_style( 'bdt-product-feed', BDTEP_ADMIN_URL . 'assets/css/ep-product-feed.css', [], BDTEP_VER, 'all' );
 
 		wp_enqueue_style( 'ep-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-admin-api-biggopti.css', [], BDTEP_VER, 'all' );
 		wp_enqueue_script( 'ep-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-admin-api-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
