@@ -396,7 +396,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'menu_bottom_spacing',
 			[
-				'label' => esc_html__( 'Row Gap', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Row Gap', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -459,7 +459,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'auto_hiding_menu_both_side_color',
 			[
-				'label'     => esc_html__( 'Auto Hiding Menu Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Auto Hiding Menu Shadow', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-auto-hide-menu .bdt-cd-secondary-nav::before' => 'background: linear-gradient(to right, {{VALUE}}, rgba(37,40,61,0));',
@@ -648,7 +648,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'individuL_menu_style',
 			[
-				'label'     => esc_html__( 'Individual Menu Style', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Individual Menu Style', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -659,7 +659,7 @@ class Navbar extends Module_Base {
 		$this->start_controls_section(
 			'section_individual_menu_style',
 			[
-				'label' => esc_html__( 'Individual Menu Item', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Individual Menu Item', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => ['individuL_menu_style' => 'yes'],
 			]

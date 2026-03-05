@@ -425,9 +425,8 @@ class Module extends Element_Pack_Module_Base {
 	}
 
 	public function enqueue_scripts() {
-		$suffix           = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		$direction_suffix = is_rtl() ? '.rtl' : '';
-		wp_register_style( 'tippy', BDTEP_ASSETS_URL . 'css/tippy' . $direction_suffix . '.css', [], BDTEP_VER );
+
+		wp_register_style( 'tippy', BDTEP_ASSETS_URL . 'css/tippy.css', [], BDTEP_VER );
 		wp_register_script( 'popper', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', [ 'jquery' ], null );
 		wp_register_script( 'tippyjs', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', [ 'jquery' ], null );
 

@@ -68,7 +68,7 @@ class Admin_Feeds {
 					<p>
 						<?php echo wp_kses_post( wp_trim_words( wp_strip_all_tags( $feed->content ), 50 ) ); ?>
 						<a href="<?php echo esc_url( $feed->demo_link ); ?>" target="_blank">
-							<?php esc_html_e( 'Learn more...', 'bdthemes-element-pack' ); ?>
+							<?php esc_html_e( 'Learn more...', $this->settings['text_domain'] ); ?>
 						</a>
 					</p>
 				</div>
@@ -130,7 +130,7 @@ class Admin_Feeds {
 			$rss = fetch_feed( $this->settings['feed_link'] );
 
 			if ( is_wp_error( $rss ) ) {
-				return '<li>' . esc_html__( 'Items Not Found', 'bdthemes-element-pack' ) . '.</li>';
+				return '<li>' . esc_html__( 'Items Not Found', $this->settings['text_domain'] ) . '.</li>';
 			}
 
 			$maxitems  = $rss->get_item_quantity( 5 );
@@ -154,21 +154,24 @@ class Admin_Feeds {
 
 		ob_start();
 		?>
-		<div class="rss-widget">
+		<div class="bdt-widget">
 			<ul>
 				<?php if ( empty( $rss_items ) ) : ?>
-					<li><?php esc_html_e( 'Items Not Found', 'bdthemes-element-pack' ); ?>.</li>
+					<li><?php esc_html_e( 'Items Not Found', $this->settings['text_domain'] ); ?>.</li>
 				<?php else : ?>
 					<?php foreach ( $rss_items as $item ) : ?>
 						<li>
 							<a target="_blank" href="<?php echo esc_url( $item['link'] ); ?>"
 								title="<?php echo esc_html( $item['date'] ); ?>">
+								<?php if ( $this->is_feed_item_new( $item['date'] ) ) : ?>
+									<span class="bdt-feed-badge bdt-feed-badge--new"><?php esc_html_e( 'New', $this->settings['text_domain'] ); ?></span>
+								<?php endif; ?>
 								<?php echo esc_html( $item['title'] ); ?>
 							</a>
-							<span class="rss-date" style="display: block; margin: 0;">
-								<?php echo esc_html( human_time_diff( $item['date'], current_time( 'timestamp' ) ) . ' ' . __( 'ago', 'bdthemes-element-pack' ) ); ?>
+							<span class="bdt-date" style="display: block; margin: 0;">
+								<?php echo esc_html( human_time_diff( $item['date'], current_time( 'timestamp' ) ) . ' ' . __( 'ago', $this->settings['text_domain'] ) ); ?>
 							</span>
-							<div class="rss-summary">
+							<div class="bdt-summary">
 								<?php echo esc_html( wp_html_excerpt( $item['content'], 120 ) . ' [...]' ); ?>
 							</div>
 						</li>
@@ -194,6 +197,21 @@ class Admin_Feeds {
 		<?php
 		return ob_get_clean();
 	}
+
+	/**
+	 * Check if a feed item is "new" (published within the last 7 days).
+	 *
+	 * @param int|string $date Unix timestamp.
+	 * @return bool
+	 */
+	private function is_feed_item_new( $date ) {
+		$timestamp = is_numeric( $date ) ? (int) $date : strtotime( $date );
+		if ( ! $timestamp ) {
+			return false;
+		}
+		$cutoff = time() - ( 7 * DAY_IN_SECONDS );
+		return $timestamp >= $cutoff;
+	}
 }
 
 $settings = array(
@@ -201,7 +219,7 @@ $settings = array(
 	'transient_key'    => 'bdthemes_product_feeds',
 	'feed_link'        => 'https://bdthemes.com/feed',
 	'remote_feed_link' => 'https://dashboard.bdthemes.io/wp-json/bdthemes/v1/product-feed/?product_category=element-pack',
-	'text_domain'      => 'bdthemes-element-pack',
+	'text_domain'      => 'bdthemes',
 	'footer_links'     => [ 
 		[ 
 			'url'   => 'https://bdthemes.com/blog/',
@@ -223,3 +241,4 @@ $settings = array(
 );
 
 new Admin_Feeds( $settings );
+
