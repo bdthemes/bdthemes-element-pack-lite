@@ -3,7 +3,6 @@
 namespace ElementPack\Modules\CursorEffects;
 
 use Elementor\Controls_Manager;
-use Elementor\Utils;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Background;
@@ -51,6 +50,21 @@ class Module extends Element_Pack_Module_Base {
 				'render_type'        => 'template',
 			]
 		);
+
+		$section->add_control(
+			'important_note',
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'If the cursor icon is not visible in the editor or preview, please navigate to Elementor Settings and enable Font Awesome support.', 'bdthemes-element-pack' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+				'condition'       => [
+					'element_pack_cursor_effects_show'   => 'yes',
+					'element_pack_cursor_effects_source' => 'icons'
+				],
+				'separator' => 'before',
+			]
+		);
+
 		$section->start_controls_tabs(
 			'element_pack_cursor_effects_tabs'
 		);

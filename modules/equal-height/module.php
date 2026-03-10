@@ -43,7 +43,7 @@ class Module extends Element_Pack_Module_Base {
 				'label'        => esc_html__('Enable Equal Height', 'bdthemes-element-pack'),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
-				'description'  => esc_html__('You can equal your column/widgets height equal by enable this option.', 'bdthemes-element-pack'),
+				'description'  => esc_html__('You can make your columns or widgets have equal height by enabling this option.', 'bdthemes-element-pack'),
 			]
 		);
 
@@ -78,6 +78,19 @@ class Module extends Element_Pack_Module_Base {
 					'section_equal_height_on' => 'yes',
 					'section_equal_height_selector' => 'custom',
 				],
+			]
+		);
+
+		$section->add_control(
+			'equal_height_important_note',
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'If the Equal Height feature is not visible in the editor, please visit the preview page to see the changes.', 'bdthemes-element-pack' ),
+				'separator'       => 'before',
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+				'condition'       => [
+					'section_equal_height_on' => 'yes',
+				]
 			]
 		);
 	}

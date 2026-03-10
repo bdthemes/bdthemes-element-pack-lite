@@ -1405,14 +1405,27 @@ class Testimonial_Grid extends Module_Base {
 
 
 	public function render_query( $posts_per_page ) {
-		$raw     = $this->get_settings();
-		$args    = [
-			'posts_per_page' => $posts_per_page,
-		];
-		if ( ! empty( $raw['show_pagination'] ) ) {
-			$args['paged'] = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
+		$raw              = $this->get_settings();
+		$posts_per_page   = isset( $posts_per_page ) ? (int) $posts_per_page : 0;
+		$args             = $this->getGroupControlQueryArgs();
+		$is_current_query = ( ! empty( $raw['posts_source'] ) && $raw['posts_source'] === 'current_query' );
+
+		if ( $is_current_query ) {
+			unset( $args['offset'] );
+			unset( $args['no_found_rows'] );
+			$posts_per_page = 0;
 		}
-		$args         = array_merge( $this->getGroupControlQueryArgs(), $args );
+
+		if ( $posts_per_page > 0 ) {
+			$args['posts_per_page'] = $posts_per_page;
+		} else {
+			$args['posts_per_page'] = (int) get_option( 'posts_per_page', 10 );
+		}
+
+		if ( ! empty( $raw['show_pagination'] ) ) {
+			$args['paged'] = max( 1, (int) get_query_var( 'paged' ), (int) get_query_var( 'page' ) );
+		}
+
 		$this->_query = new \WP_Query( $args );
 		return $this->_query;
 	}

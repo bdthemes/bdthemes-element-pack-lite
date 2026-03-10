@@ -295,6 +295,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.4.X [XX March 2026] =
+
+* Fixed: Undefined array key issue fixed in trailer box widget
+
 = 8.4.2 [1st March 2026] =
 
 * Fixed: Placeholder image replication for import template issue fixed in Cursor Effects extension
