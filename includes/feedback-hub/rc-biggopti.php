@@ -213,7 +213,7 @@ if ( ! class_exists( 'RC_Reviews_Collector' ) ) {
 		 * @since 1.0.0
 		 */
 		public function rc_enqueue_scripts() {
-			wp_enqueue_style( 'rc-sdk', plugins_url( 'assets/css/rc.css', __FILE__ ), array(), '1.0.0' );
+			wp_enqueue_style( 'rc-sdk', plugins_url( 'assets/css/feedback-hub.css', __FILE__ ), array(), '1.0.0' );
 			wp_enqueue_script( 'rc-sdk', plugins_url( 'assets/js/rc.min.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
 			
 			// Add inline style to hide all but the first biggopti on page load
