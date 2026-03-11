@@ -2820,7 +2820,7 @@ jQuery(document).ready(function () {
     jQuery('body').on('click', '.bdt-element-link', function () {
         var $el = jQuery(this)
           , settings = $el.data("ep-wrapper-link");
-        if (settings && settings.url && (/^https?:\/\//.test(settings.url) || settings.url.startsWith("#"))) {
+        if (settings && settings.url && (/^(https?:\/\/|tel:|mailto:|sms:)/.test(settings.url) || settings.url.startsWith("#"))) {
             var id = "bdt-element-link-" + $el.data("id");
             0 === jQuery("#" + id).length && jQuery("body").append(jQuery("<a/>").prop({
                 target: settings.is_external ? "_blank" : "_self",
@@ -3653,7 +3653,11 @@ $(window).on('elementor/frontend/init', function () {
             },
 
             run: function () {
+                var elementID = this.$element.data("id");
+                var cursorWrapId = "bdt-cursor-effects-wrap-" + elementID;
                 if (this.settings("show") !== "yes") {
+                    var stale = document.getElementById(cursorWrapId);
+                    if (stale) stale.remove();
                     return;
                 }
 
@@ -3661,15 +3665,15 @@ $(window).on('elementor/frontend/init', function () {
                 const disableOnMobile = this.settings("disable_on_mobile") === "yes";
                 const isMobile = window.innerWidth <= 767;
                 if (disableOnMobile && isMobile) {
+                    var mobileStale = document.getElementById(cursorWrapId);
+                    if (mobileStale) mobileStale.remove();
                     return;
                 }
 
                 var options = this.getDefaultSettings(),
-                    elementID = this.$element.data("id"),
                     elementContainer = ".elementor-element-" + elementID,
                     $element = this.$element,
                     cursorStyle = this.settings("style");
-                const checkClass = $(elementContainer).find(".bdt-cursor-effects");
                 var source = this.settings("source");
                 var gsapId = "bdt-ep-cursor-gsap-" + elementID;
                 var elementEl = $element[0];
@@ -3679,8 +3683,10 @@ $(window).on('elementor/frontend/init', function () {
 
                 // ── GSAP cleanup: runs whenever GSAP mode is toggled off ──────────
                 if (!isGsap) {
-                    var stale = document.getElementById(gsapId);
-                    if (stale) { stale.parentNode.removeChild(stale); }
+                    var staleGsap = document.getElementById(gsapId);
+                    if (staleGsap) staleGsap.remove();
+                    var staleWrap = document.getElementById(cursorWrapId);
+                    if (staleWrap) staleWrap.remove();
                     if (elementEl._bdtGsapTicker) {
                         gsap.ticker.remove(elementEl._bdtGsapTicker);
                         elementEl._bdtGsapTicker = null;
@@ -3694,13 +3700,15 @@ $(window).on('elementor/frontend/init', function () {
 
                 // ── GSAP Image Animation Mode ────────────────────────────────────
                 if (isGsap) {
+                    var staleWrap = document.getElementById(cursorWrapId);
+                    if (staleWrap) staleWrap.remove();
                     var gsapImage = this.settings("image_src.url");
                     var gsapWidth = this.settings("gsap_width.size") || 385;
                     var gsapHeight = this.settings("gsap_height.size") || 280;
 
                     // Rebuild gallery on each run() so size/image changes apply
                     var existing = document.getElementById(gsapId);
-                    if (existing) { existing.parentNode.removeChild(existing); }
+                    if (existing) existing.remove();
 
                     // position:fixed at 0,0 — movement via transform x/y for GPU compositing
                     $("body").append(
@@ -3751,75 +3759,88 @@ $(window).on('elementor/frontend/init', function () {
                 }
                 // ── End GSAP Mode ────────────────────────────────────────────────
 
-                if ($(checkClass).length < 1) {
+                var cursorInnerHtml = "";
                     if (source === "image") {
                         var image = this.settings("image_src.url");
-                        $(elementContainer).append(
+                        cursorInnerHtml =
                             '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
                             elementID +
                             '" class="ep-cursor-ball"><img class="bdt-cursor-image"src="' +
                             image +
-                            '"></div></div>'
-                        );
+                            '"></div></div>';
                     } else if (source === "icons") {
                         var svg = this.settings("icons.value.url");
                         var icons = this.settings("icons.value");
                         if (svg !== undefined) {
-                            $(elementContainer).append(
+                            cursorInnerHtml =
                                 '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
                                 elementID +
                                 '" class="ep-cursor-ball"><img class="bdt-cursor-image" src="' +
                                 svg +
-                                '"></img></div></div>'
-                            );
+                                '"></img></div></div>';
                         } else {
-                            $(elementContainer).append(
+                            cursorInnerHtml =
                                 '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
                                 elementID +
                                 '" class="ep-cursor-ball"><i class="' +
                                 icons +
-                                ' bdt-cursor-icons"></i></div></div>'
-                            );
+                                ' bdt-cursor-icons"></i></div></div>';
                         }
                     } else if (source === "text") {
                         var text = this.settings("text_label");
-                        $(elementContainer).append(
+                        cursorInnerHtml =
                             '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
                             elementID +
                             '" class="ep-cursor-ball"><span class="bdt-cursor-text">' +
                             text +
-                            "</span></div></div>"
-                        );
+                            "</span></div></div>";
                     } else {
-                        $(elementContainer).append(
+                        cursorInnerHtml =
                             '<div class="bdt-cursor-effects ' +
                             cursorStyle +
                             '"><div id="bdt-ep-cursor-ball-effects-' +
                             elementID +
                             '" class="ep-cursor-ball"></div><div id="bdt-ep-cursor-circle-effects-' +
                             elementID +
-                            '"  class="ep-cursor-circle"></div></div>'
-                        );
+                            '"  class="ep-cursor-circle"></div></div>';
                     }
-                }
-                const cursorBallID =
+
+                    if (cursorInnerHtml) {
+                        document.getElementById(cursorWrapId) && document.getElementById(cursorWrapId).remove();
+                        var wrapper = document.createElement("div");
+                        wrapper.id = cursorWrapId;
+                        wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap";
+                        wrapper.innerHTML = cursorInnerHtml;
+                        var computed = window.getComputedStyle(elementEl);
+                        var cursorVars = ["cursor-ball-color", "cursor-ball-size", "cursor-circle-color", "cursor-circle-size", "cursor-text-label"];
+                        cursorVars.forEach(function (name) {
+                            var val = computed.getPropertyValue("--" + name).trim();
+                            if (val) wrapper.style.setProperty("--" + name, val);
+                        });
+                        document.body.appendChild(wrapper);
+                    }
+                var cursorBallID =
                     "#bdt-ep-cursor-ball-effects-" + this.$element.data("id");
                 const cursorBall = document.querySelector(cursorBallID);
-                options.models = elementContainer;
-                options.speed = 1;
-                options.centerMouse = true;
-                new Cotton(cursorBall, options);
-
-                if (source === "default") {
-                    const cursorCircleID =
-                        "#bdt-ep-cursor-circle-effects-" + this.$element.data("id");
-                    const cursorCircle = document.querySelector(cursorCircleID);
+                if (cursorBall) {
                     options.models = elementContainer;
-                    options.speed = this.settings("speed")
-                        ? this.settings("speed.size")
-                        : 0.725;
+                    options.speed = 1;
                     options.centerMouse = true;
-                    new Cotton(cursorCircle, options);
+                    new Cotton(cursorBall, options);
+
+                    if (source === "default") {
+                        const cursorCircleID =
+                            "#bdt-ep-cursor-circle-effects-" + this.$element.data("id");
+                        const cursorCircle = document.querySelector(cursorCircleID);
+                        if (cursorCircle) {
+                            options.models = elementContainer;
+                            options.speed = this.settings("speed")
+                                ? this.settings("speed.size")
+                                : 0.725;
+                            options.centerMouse = true;
+                            new Cotton(cursorCircle, options);
+                        }
+                    }
                 }
             }
         });

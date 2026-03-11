@@ -380,8 +380,8 @@ class Featured_Box extends Module_Base {
 					'readmore_text!'                 => '',
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-ep-featured-box-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-right: {{SIZE}}{{UNIT}};' : 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bdt-ep-featured-box-readmore .bdt-button-icon-align-left'  => is_rtl() ? 'margin-left: {{SIZE}}{{UNIT}};' : 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-featured-box-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-inline-end: {{SIZE}}{{UNIT}};' : 'margin-inline-start: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-featured-box-readmore .bdt-button-icon-align-left'  => is_rtl() ? 'margin-inline-start: {{SIZE}}{{UNIT}};' : 'margin-inline-end: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

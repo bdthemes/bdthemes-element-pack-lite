@@ -392,7 +392,7 @@ class Module extends Element_Pack_Module_Base {
     
     public function should_script_enqueue( $element ) {
         $settings = $element->get_settings_for_display();
-        if ('liquid_glass' === $settings['element_pack_backdrop_filter_type'] ) {
+        if ( ! empty( $settings['element_pack_backdrop_filter_type'] ) && 'liquid_glass' === $settings['element_pack_backdrop_filter_type'] ) {
             echo $this->bdt_liquid_glass_effects_svg();
         }
     }
