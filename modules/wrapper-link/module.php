@@ -60,7 +60,7 @@ class Module extends Element_Pack_Module_Base {
 		$element_link = $widget->get_settings_for_display( 'element_pack_wrapper_link' );
 
 		if ( $element_link && ! empty( $element_link['url'] ) ) {
-			$element_link['url'] = esc_url( $element_link['url'] );
+			$element_link['url'] = esc_url( $element_link['url'], [ 'http', 'https', 'tel', 'mailto', 'sms' ] );
 
 			$widget->add_render_attribute(
 				'_wrapper',

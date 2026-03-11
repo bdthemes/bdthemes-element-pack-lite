@@ -297,7 +297,9 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 = 8.4.X [XX March 2026] =
 
+* Added: tel:, mailto: and sms: protocol support added in wrapper link extension
 * Fixed: Undefined array key issue fixed in trailer box widget
+* Updated: Removed RTL CSS files and added modern CSS support
 
 = 8.4.2 [1st March 2026] =
 
