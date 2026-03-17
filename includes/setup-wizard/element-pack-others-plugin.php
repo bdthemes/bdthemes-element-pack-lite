@@ -24,7 +24,6 @@ class ElementPack_Others_Plugin_Manager {
     public function __construct() {
         // Add AJAX handlers
         add_action('wp_ajax_ep_get_plugins', [$this, 'ajax_get_plugins']);
-        add_action('wp_ajax_nopriv_ep_get_plugins', [$this, 'ajax_get_plugins']);
         add_action('wp_ajax_ep_install_plugin', [$this, 'install_plugin_ajax']);
     }
 

@@ -1349,7 +1349,7 @@ trait Global_Widget_Controls {
 		$this->add_responsive_control(
 			'icon_space',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Space Between', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 

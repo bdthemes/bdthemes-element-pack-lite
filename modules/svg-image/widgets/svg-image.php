@@ -1023,7 +1023,8 @@ class Svg_Image extends Module_Base {
 			}
 		}
 		if ( ! empty( $svg_content ) ) {
-			// Add class and data attributes to the SVG tag
+			$svg_content = preg_replace( '/<script[^>]*>.*?<\/script>/si', '', $svg_content );
+			$svg_content = preg_replace( '/\bon\w+\s*=\s*["\'][^"\']*["\']/i', '', $svg_content );
 			$svg_content = preg_replace( '/<svg(\s|>)/', '<svg class="bdt-svg-image-inner" data-bdt-svg="stroke-animation: true" ', $svg_content, 1 );
 			echo $svg_content;
 		} else {
@@ -1101,7 +1102,7 @@ class Svg_Image extends Module_Base {
 		?>
 		<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 			<?php if ( $has_caption ) : ?>
-				<figure class="wp-caption">
+				<figure class="ep-caption">
 				<?php endif; ?>
 				<?php if ( $link ) : ?>
 					<a <?php $this->print_render_attribute_string( 'link' ); ?>>
@@ -1116,7 +1117,7 @@ class Svg_Image extends Module_Base {
 				<?php endif; ?>
 				<?php
 				if ( $has_caption ) : ?>
-					<figcaption class="widget-image-caption wp-caption-text">
+					<figcaption class="widget-image-caption ep-caption-text">
 						<?php echo wp_kses_post( $this->get_caption( $settings ) ); ?>
 					</figcaption>
 				<?php endif; ?>

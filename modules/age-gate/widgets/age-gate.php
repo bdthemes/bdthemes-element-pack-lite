@@ -408,7 +408,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_additional',
 			[ 
-				'label' => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -432,6 +432,9 @@ class Age_Gate extends Module_Base {
 			[ 
 				'label' => esc_html__( 'Close Button Delay Show', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'close_button!' => 'none',
+				],
 			]
 		);
 
@@ -451,6 +454,7 @@ class Age_Gate extends Module_Base {
 				],
 				'condition' => [ 
 					'close_btn_delay_show' => 'yes',
+					'close_button!' => 'none',
 				],
 			]
 		);

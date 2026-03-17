@@ -53,14 +53,22 @@ class Module extends Element_Pack_Module_Base {
 	public function element_pack_ajax_search() {
 		global $post;
 
+		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_REQUEST['nonce'] ), 'element-pack-site' ) ) {
+			die( json_encode( array( 'results' => array() ) ) );
+		}
+
 		$result       = array( 'results' => array() );
 		$search_input = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
-		$settings     = isset( $_POST['settings'] ) ? wp_unslash( $_POST['settings'] ) : [];
+		$settings     = isset( $_POST['settings'] ) ? array_map( 'sanitize_text_field', wp_unslash( (array) $_POST['settings'] ) ) : [];
 
 		if ( strlen( $search_input ) >= 3 ) {
 
+			$allowed_post_types = get_post_types( array( 'public' => true ) );
+			$requested_type = isset( $settings['post_type'] ) ? $settings['post_type'] : 'post';
+			$post_type = isset( $allowed_post_types[ $requested_type ] ) ? $requested_type : 'post';
+
 			$query_args = [ 
-				'post_type'      => isset( $settings['post_type'] ) ? $settings['post_type'] : 'post',
+				'post_type'      => $post_type,
 				's'              => sanitize_text_field( $search_input ),
 				'posts_per_page' => ( $settings['per_page'] ) ? sanitize_text_field( $settings['per_page'] ) : 5,
 				'post_status'    => 'publish',

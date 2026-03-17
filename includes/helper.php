@@ -422,10 +422,15 @@ function element_pack_post_pagination( $wp_query ) {
 		return;
 	}
 
-	if ( is_front_page() ) {
-		$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
+	/** Use the passed query's current page so the active bullet matches (e.g. current_query source) */
+	if ( isset( $wp_query->query_vars['paged'] ) && $wp_query->query_vars['paged'] > 0 ) {
+		$paged = (int) $wp_query->query_vars['paged'];
+	} elseif ( isset( $wp_query->query_vars['page'] ) && $wp_query->query_vars['page'] > 0 ) {
+		$paged = (int) $wp_query->query_vars['page'];
+	} elseif ( is_front_page() ) {
+		$paged = ( get_query_var( 'page' ) ) ? (int) get_query_var( 'page' ) : 1;
 	} else {
-		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		$paged = ( get_query_var( 'paged' ) ) ? (int) get_query_var( 'paged' ) : 1;
 	}
 
 	$max = intval( $wp_query->max_num_pages );
