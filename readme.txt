@@ -3,7 +3,7 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor, elementor addons, elementor template, elementor widgets, dynamic builder
 Requires at least: 5.0.0
-Tested up to: 6.9
+Tested up to: 6.9.4
 Requires PHP: 7.4.0
 Stable tag: 8.5.0
 License: GPLv3
