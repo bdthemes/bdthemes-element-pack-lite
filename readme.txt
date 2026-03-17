@@ -5,11 +5,11 @@ Tags: elementor, elementor addons, elementor template, elementor widgets, dynami
 Requires at least: 5.0.0
 Tested up to: 6.9
 Requires PHP: 7.4.0
-Stable tag: 8.4.2
+Stable tag: 8.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 3.35.5
+Elementor tested up to: 3.35.7
 
 Ultimate Elementor addon with 300+ widgets, templates, live copy paste, post grid, header footer, mega menu, dynamic builder, WooCommerce and more.
 
@@ -295,10 +295,19 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.4.X [XX March 2026] =
+= 8.5.0 [17th March 2026] =
 
 * Added: tel:, mailto: and sms: protocol support added in wrapper link extension
+* Added: Enable smooth animation added in cursor effects extension
 * Fixed: Undefined array key issue fixed in trailer box widget
+* Fixed: Svg image widget caption duplicate issue fixed
+* Fixed: Undefined array key "element_pack_backdrop_filter_type" issue fixed in backdrop filter extension
+* Fixed: Page Speed issue fixed in Static Carousel widget ( Thanks to Nikolaos Koulouridis )
+* Fixed: Testimonial rating issue fixed ( Thanks to Nikolaos Koulouridis )
+* Fixed: Placeholder image replication for import template issue fixed in Cursor Effects extension
+* Fixed: Resolved clip-path and hover styling issues in the anthe style of the creative button widget
+* Fixed: The image hover effects extension issue has been fixed
+* Fixed: Added notice for invisible cursor icons in the cursor effects extension
 * Updated: Removed RTL CSS files and added modern CSS support
 
 = 8.4.2 [1st March 2026] =

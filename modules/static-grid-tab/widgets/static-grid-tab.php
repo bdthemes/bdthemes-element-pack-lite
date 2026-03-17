@@ -419,10 +419,9 @@ class Static_Grid_Tab extends Module_Base {
 				'default'   => [ 'size' => 8 ],
 				'range'     => [ 'px' => [ 'max' => 50 ] ],
 				'condition' => [ 'readmore_icon[value]!' => '' ],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-static-grid-tab-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-inline-end: {{SIZE}}{{UNIT}};' : 'margin-inline-start: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bdt-ep-static-grid-tab-readmore .bdt-button-icon-align-left'  => is_rtl() ? 'margin-inline-start: {{SIZE}}{{UNIT}};' : 'margin-inline-end: {{SIZE}}{{UNIT}};',
-				],
+			'selectors' => [
+				'{{WRAPPER}} .bdt-ep-static-grid-tab-readmore' => 'gap: {{SIZE}}{{UNIT}};',
+			],
 			]
 		);
 
@@ -1085,14 +1084,17 @@ class Static_Grid_Tab extends Module_Base {
 		$icon_align   = isset( $settings['icon_align'] ) ? $settings['icon_align'] : 'right';
 		?>
 		<div class="bdt-ep-static-grid-tab-readmore-wrap">
-			<a <?php $this->print_render_attribute_string( $readmore_key ); ?>>
+		<a <?php $this->print_render_attribute_string( $readmore_key ); ?>>
+			<?php if ( $has_icon && $icon_align === 'left' ) : ?>
+				<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+			<?php endif; ?>
+			<span class="bdt-ep-static-grid-tab-readmore-text">
 				<?php echo esc_html( $readmore_text ); ?>
-				<?php if ( $has_icon ) : ?>
-					<span class="bdt-button-icon-align-<?php echo esc_attr( $icon_align ); ?>">
-						<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
-					</span>
-				<?php endif; ?>
-			</a>
+			</span>
+			<?php if ( $has_icon && $icon_align === 'right' ) : ?>
+				<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+			<?php endif; ?>
+		</a>
 		</div>
 		<?php
 	}

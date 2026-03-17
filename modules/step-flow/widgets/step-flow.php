@@ -389,8 +389,7 @@ class Step_Flow extends Module_Base {
                     'readmore_text!' => '',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bdt-step-flow-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-inline-end: {{SIZE}}{{UNIT}};' : 'margin-inline-start: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .bdt-step-flow-readmore .bdt-button-icon-align-left' => is_rtl() ? 'margin-inline-start: {{SIZE}}{{UNIT}};' : 'margin-inline-end: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bdt-step-flow-readmore' => 'gap: {{SIZE}}{{UNIT}};' ,
                 ],
             ]
         );
@@ -2266,7 +2265,7 @@ class Step_Flow extends Module_Base {
 		$this->add_inline_editing_attributes( 'title_text', 'none' );
 		$this->add_inline_editing_attributes( 'description_text' );
 
-		$readmore_classes = [ 'bdt-step-flow-readmore', 'bdt-display-inline-block' ];
+		$readmore_classes = [ 'bdt-step-flow-readmore' ];
 		if ( ! empty( $settings['readmore_attention'] ) && $settings['readmore_attention'] === 'yes' ) {
 			$readmore_classes[] = 'bdt-ep-attention-button';
 		}
@@ -2315,13 +2314,30 @@ class Step_Flow extends Module_Base {
 				<?php endif; ?>
 				<?php if ( ! empty( $settings['readmore'] ) && $settings['readmore'] === 'yes' ) : ?>
 					<a <?php $this->print_render_attribute_string( 'readmore' ); ?>>
-						<?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : esc_html__( 'Read More', 'bdthemes-element-pack' ) ); ?>
-						<?php if ( ! empty( $settings['advanced_readmore_icon']['value'] ) ) : ?>
-							<span class="bdt-button-icon-align-<?php echo esc_attr( isset( $settings['readmore_icon_align'] ) ? $settings['readmore_icon_align'] : 'right' ); ?>">
-								<?php Icons_Manager::render_icon( $settings['advanced_readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
-							</span>
-						<?php endif; ?>
-					</a>
+                    <?php if ( $settings['readmore_icon_align'] === 'left' ) : ?>
+                        <?php Icons_Manager::render_icon(
+                            $settings['advanced_readmore_icon'],
+                            [
+                                'aria-hidden' => 'true',
+                                'class'       => 'fa-fw',
+                            ]
+                        ); ?>
+                    <?php endif; ?>
+
+                    <span class="bdt-step-flow-readmore-text">
+                        <?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : esc_html__( 'Read More', 'bdthemes-element-pack' ) ); ?>
+                    </span>
+
+                    <?php if ( $settings['readmore_icon_align'] === 'right' ) : ?>
+                        <?php Icons_Manager::render_icon(
+                            $settings['advanced_readmore_icon'],
+                            [
+                                'aria-hidden' => 'true',
+                                'class'       => 'fa-fw',
+                            ]
+                        ); ?>
+                    <?php endif; ?>
+                    </a>
 				<?php endif; ?>
 			</div>
 			<?php if ( ! empty( $settings['show_indicator'] ) && $settings['show_indicator'] === 'yes' ) : ?>

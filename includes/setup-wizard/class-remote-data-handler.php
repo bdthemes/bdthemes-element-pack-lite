@@ -38,7 +38,6 @@ class Remote_Data_Handler {
         add_action('init', [__CLASS__, 'schedule_cron']);
         add_action(self::CRON_HOOK, [__CLASS__, 'cron_fetch_plugins']);
         add_action('wp_ajax_ep_get_plugins', [__CLASS__, 'ajax_get_plugins']);
-        add_action('wp_ajax_nopriv_ep_get_plugins', [__CLASS__, 'ajax_get_plugins']);
     }
 
     /**

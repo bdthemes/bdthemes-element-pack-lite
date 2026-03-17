@@ -141,7 +141,7 @@ class Module extends Element_Pack_Module_Base {
 				'size_units' => [ 'px', '%' ],
 				'separator'  => 'before',
 				'selectors'  => [ 
-					'{{WRAPPER}}' => '--ep-overlay-margin-top: {{TOP}}{{UNIT}};  --ep-overlay-margin-right: {{RIGHT}}{{UNIT}}; --ep-overlay-margin-bottom: {{BOTTOM}}{{UNIT}}; --ep-overlay-margin-left: {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}}.bdt-background-overlay-yes:before' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -223,7 +223,7 @@ class Module extends Element_Pack_Module_Base {
 				],
 				'separator' => 'before',
 				'selectors' => [ 
-					'{{WRAPPER}}.bdt-background-overlay-yes:before' => 'transition: background {{SIZE}}s;',
+					'{{WRAPPER}}.bdt-background-overlay-yes:before' => 'transition: all {{SIZE}}s ease-in-out;',
 				]
 			]
 		);

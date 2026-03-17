@@ -135,17 +135,17 @@ class BdThemes_Duplicator {
 			}
 
 			if ( isset( $bdt_post_meta_infos ) && is_array( $bdt_post_meta_infos ) ) {
-				$bdt_sql_query     = "INSERT INTO {$wpdb->postmeta} ( post_id, meta_key, meta_value ) VALUES ";
-				$bdt_sql_query_sel = [];
-
 				foreach ( $bdt_post_meta_infos as $bdt_meta_info ) {
-					$bdt_meta_value      = wp_slash( $bdt_meta_info->meta_value );
-					$bdt_sql_query_sel[] = "( $bdt_new_post_id, '{$bdt_meta_info->meta_key}', '{$bdt_meta_value}' )";
+					$wpdb->insert(
+						$wpdb->postmeta,
+						array(
+							'post_id'    => $bdt_new_post_id,
+							'meta_key'   => $bdt_meta_info->meta_key,
+							'meta_value' => $bdt_meta_info->meta_value,
+						),
+						array( '%d', '%s', '%s' )
+					);
 				}
-
-				$bdt_sql_query .= implode( ', ', $bdt_sql_query_sel ) . ';';
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-				$wpdb->query( $bdt_sql_query );
 
 				/**
 				 * fix template type issues
@@ -171,7 +171,7 @@ class BdThemes_Duplicator {
 			$current_post_type = get_post_type( $post_id );
 
 			if ( is_array( $bdt_names ) && in_array( $current_post_type, $bdt_names ) ) {
-				wp_redirect( admin_url( 'edit.php?post_type=' . $current_post_type ) );
+				wp_safe_redirect( admin_url( 'edit.php?post_type=' . $current_post_type ) );
 			}
 
 			exit;

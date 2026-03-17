@@ -3136,24 +3136,28 @@ $(window).on('elementor/frontend/init', function () {
      * Handle close button delay
      */
     setupCloseBtnDelay() {
-      const { id: modalID, delayTime } = this.settings;
-      const modalElement = document.getElementById(modalID);
-      if (!modalElement) return;
+      const { widgetId, delayTime } = this.settings;
+      const modalElement = document.getElementById(widgetId);
+      if (!modalElement) {
+        return;
+      }
 
       const closeButton = modalElement.querySelector("#bdt-modal-close-button");
       if (!closeButton) return;
 
-      // Hide initially
+      // Hide initially so it doesn't show before the delay
       closeButton.style.display = "none";
 
-      // Show on modal shown
+      // Show on modal shown, after configured delay
       if (window.bdtUIkit?.util) {
         window.bdtUIkit.util.on(modalElement, "shown", () => {
           closeButton.style.display = "none";
+
           setTimeout(() => {
             closeButton.style.display = "";
             closeButton.style.opacity = "0";
             closeButton.style.transition = "opacity 0.3s";
+
             setTimeout(() => {
               closeButton.style.opacity = "1";
             }, 10);

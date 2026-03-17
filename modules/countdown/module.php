@@ -29,7 +29,11 @@ class Module extends Element_Pack_Module_Base {
 	}
 
 
-	public function countdown_end(){ 
+	public function countdown_end(){
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'element-pack-site' ) ) {
+			wp_die( 'Security check failed' );
+		}
+
 		$wp_current_time = current_time( 'timestamp' ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS );
 		$end_time = isset($_POST['endTime']) ? (int) $_POST['endTime'] : 0;
 

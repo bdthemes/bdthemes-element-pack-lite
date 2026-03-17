@@ -1420,7 +1420,7 @@ $count++;
 $officeStatus = $settings['dynamic_open_day'];
 $officeStatusLogic = 'open';
 
-$exStats = explode('-', $availabelStatus);
+$exStats = explode('-', $availabelStatus ?? '');
 if(isset($exStats['1'])){
     if($exStats['0'] == 'Closed'){
         $closeDay = ucwords(substr($exStats['1'], 0,3));
