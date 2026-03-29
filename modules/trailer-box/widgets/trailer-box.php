@@ -298,8 +298,7 @@ class Trailer_Box extends Module_Base {
 					'button_icon[value]!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-button-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-button-icon-left'  => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-button' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -2030,7 +2029,8 @@ class Trailer_Box extends Module_Base {
 			return;
 		}
 		$migrated = isset( $settings['__fa4_migrated']['button_icon'] );
-		$is_new   = empty( $settings['button_icon'] ) && Icons_Manager::is_migration_allowed();
+		// Match Elementor button trait / Timeline: fa4 field is `icon`, not `button_icon`.
+		$is_new = empty( $settings['icon'] ?? '' ) && Icons_Manager::is_migration_allowed();
 		$this->add_link_attributes( 'trailer-box-button', $settings['button'] );
 		$button_classes = [ 'bdt-trailer-box-button' ];
 		if ( ! empty( $settings['button_hover_animation'] ) ) {
@@ -2049,15 +2049,30 @@ class Trailer_Box extends Module_Base {
 		?>
 		<div <?php $this->print_render_attribute_string( 'trailer-box-button-position' ); ?>>
 			<a <?php $this->print_render_attribute_string( 'trailer-box-button' ); ?>>
-				<?php echo esc_html( $button_text ); ?>
-				<?php if ( ! empty( $settings['button_icon']['value'] ) ) : ?>
-					<span class="bdt-trailer-box-button-icon-<?php echo esc_attr( $settings['icon_align'] ?? 'right' ); ?>">
-						<?php if ( $is_new || $migrated ) : ?>
-							<?php Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
-						<?php else : ?>
-							<i class="<?php echo esc_attr( $settings['button_icon'] ); ?>" aria-hidden="true"></i>
-						<?php endif; ?>
-					</span>
+				<?php
+				$icon_align    = isset( $settings['icon_align'] ) ? $settings['icon_align'] : 'right';
+				$use_render_icon = ( $is_new || $migrated ) && ! empty( $settings['button_icon']['library'] );
+				$use_legacy_icon = ! $use_render_icon && ! empty( $settings['icon'] );
+				
+				if ( ( $use_render_icon || $use_legacy_icon ) && 'left' === $icon_align ) :
+					if ( $use_render_icon ) :
+						Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+					else :
+						?>
+						<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
+						<?php
+					endif;
+				endif;
+				?>
+				<span class="bdt-trailer-box-button-text">
+					<?php echo esc_html( $button_text ); ?>
+				</span>
+				<?php if ( ( $use_render_icon || $use_legacy_icon ) && 'right' === $icon_align ) : ?>
+					<?php if ( $use_render_icon ) : ?>
+						<?php Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+					<?php else : ?>
+						<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
+					<?php endif; ?>
 				<?php endif; ?>
 			</a>
 		</div>

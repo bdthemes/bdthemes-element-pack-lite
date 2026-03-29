@@ -11,9 +11,13 @@ use Elementor\Schemes\Color;
 
 use ElementPack\Utils;
 use Elementor\Skin_Base as Elementor_Skin_Base;
+use ElementPack\Modules\Countdown\Widgets\Countdown;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+/**
+ * @property Countdown $parent
+ */
 class Skin_Tiny_Countdown extends Elementor_Skin_Base {
 	
 	public function get_id() {
@@ -34,10 +38,16 @@ class Skin_Tiny_Countdown extends Elementor_Skin_Base {
 
 		$final_time    = $datetime->format('c');
 
+		$countdown_classes = [];
+		if ( ! empty( $settings['glassmorphism_effect'] ) && $settings['glassmorphism_effect'] === 'yes' ) {
+			$countdown_classes[] = 'bdt-countdown-glassmorphism-yes';
+		}
+
 		$this->parent->add_render_attribute(
 			[
 				'countdown' => [
 					'id' 	=> 'bdt-countdown-' . $this->get_id() . '-timer',
+					'class' => $countdown_classes,
 					'data-bdt-countdown' => [
 						isset($settings['loop_time']) && ($settings['loop_time'] == 'yes') ?  '' : 'date: ' . $final_time
 					],

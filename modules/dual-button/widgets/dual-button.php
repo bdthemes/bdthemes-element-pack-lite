@@ -263,16 +263,16 @@ class DualButton extends Module_Base {
 				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'start' => [
-						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
+					'left' => [
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'end' => [
-						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
+					'right' => [
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -425,16 +425,16 @@ class DualButton extends Module_Base {
 				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'start' => [
-						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
+					'left' => [
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'end' => [
-						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
+					'right' => [
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -1402,7 +1402,14 @@ class DualButton extends Module_Base {
 		if ( 'left' == $settings['button_a_icon_align'] or 'right' == $settings['button_a_icon_align'] ) {
 			$this->add_render_attribute( 'content-wrapper-a', 'class', 'bdt-flex bdt-flex-middle' );
 		}
-		$this->add_render_attribute( 'content-wrapper-a', 'class', 'bdt-flex-' . $settings['button_a_align'] );
+
+		if ( ! empty( $settings['button_a_select_icon']['value'] ) ) {
+			$icon_align = 'bdt-flex-' . $settings['button_a_align'];
+		} else {
+			$icon_align = 'bdt-text-' . $settings['button_a_align'];
+		}
+
+		$this->add_render_attribute( 'content-wrapper-a', 'class', $icon_align );
 
 		$this->add_render_attribute( 'content-wrapper-a', 'class', ( 'top' == $settings['button_a_icon_align'] ) ? 'bdt-flex bdt-flex-column' : '' );
 		$this->add_render_attribute( 'content-wrapper-a', 'class', ( 'bottom' == $settings['button_a_icon_align'] ) ? 'bdt-flex bdt-flex-column-reverse' : '' );
@@ -1445,7 +1452,14 @@ class DualButton extends Module_Base {
 		if ( 'left' == $settings['button_b_icon_align'] or 'right' == $settings['button_b_icon_align'] ) {
 			$this->add_render_attribute( 'content-wrapper-b', 'class', 'bdt-flex bdt-flex-middle' );
 		}
-		$this->add_render_attribute( 'content-wrapper-b', 'class', 'bdt-flex-' . $settings['button_b_align'] );
+
+		if ( ! empty( $settings['button_b_select_icon']['value'] ) ) {
+			$icon_align = 'bdt-flex-' . $settings['button_b_align'];
+		} else {
+			$icon_align = 'bdt-text-' . $settings['button_b_align'];
+		}
+
+		$this->add_render_attribute( 'content-wrapper-b', 'class', $icon_align );
 
 		$this->add_render_attribute( 'content-wrapper-b', 'class', ( 'top' == $settings['button_b_icon_align'] ) ? 'bdt-flex bdt-flex-column' : '' );
 		$this->add_render_attribute( 'content-wrapper-b', 'class', ( 'bottom' == $settings['button_b_icon_align'] ) ? 'bdt-flex bdt-flex-column-reverse' : '' );

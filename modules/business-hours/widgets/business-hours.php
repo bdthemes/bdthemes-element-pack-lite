@@ -1170,13 +1170,119 @@ class Business_Hours extends Module_Base {
         return $data;
     }
 
+    /**
+     * Normalize Elementor background video start/end (seconds), matching Group_Control_Background keys.
+     *
+     * @param array $settings Widget display settings.
+     * @return int[] { 0 => start seconds, 1 => end seconds (0 = not set) }
+     */
+    protected function get_background_video_time_range( array $settings ) {
+        $start_raw = $settings['background_video_start'] ?? null;
+        $end_raw   = $settings['background_video_end'] ?? null;
+        $start     = ( null !== $start_raw && '' !== $start_raw ) ? (int) $start_raw : 0;
+        $end       = ( null !== $end_raw && '' !== $end_raw ) ? (int) $end_raw : 0;
+        if ( $start < 0 ) {
+            $start = 0;
+        }
+        if ( $end < 0 ) {
+            $end = 0;
+        }
+        if ( $end > 0 && $end <= $start ) {
+            $end = 0;
+        }
+        return [ $start, $end ];
+    }
+
+    protected function render_header_background_video( array $settings ) {
+        if ( 'video' !== ( $settings['background_background'] ?? '' ) ) {
+            return;
+        }
+
+        $raw = $settings['background_video_link'] ?? '';
+        if ( is_array( $raw ) && ! empty( $raw['url'] ) ) {
+            $raw = $raw['url'];
+        }
+        $url = trim( (string) $raw );
+        if ( '' === $url ) {
+            return;
+        }
+
+        list( $t_start, $t_end ) = $this->get_background_video_time_range( $settings );
+
+        $wrap_class = 'bdt-ep-bh-v-wrap';
+        if ( empty( $settings['background_play_on_mobile'] ) ) {
+            $wrap_class .= ' bdt-ep-bh-v-wrap--hide-mobile';
+        }
+        $once = ( 'yes' === ( $settings['background_play_once'] ?? '' ) );
+        $priv = ( 'yes' === ( $settings['background_privacy_mode'] ?? '' ) );
+
+        echo '<div class="' . esc_attr( $wrap_class ) . '">';
+
+        if ( preg_match( '/(?:youtube\.com\/(?:watch\?(?:[^#&]*&)?v=|embed\/)|youtu\.be\/)([a-z0-9_-]{6,})/i', $url, $yt ) ) {
+            $id   = $yt[1];
+            $host = $priv ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
+            $qs   = 'autoplay=1&mute=1&controls=0&playsinline=1&rel=0';
+            if ( ! $once ) {
+                $qs .= '&loop=1&playlist=' . rawurlencode( $id );
+            }
+            if ( $t_start > 0 ) {
+                $qs .= '&start=' . $t_start;
+            }
+            if ( $t_end > 0 ) {
+                $qs .= '&end=' . $t_end;
+            }
+            $src = $host . '/embed/' . rawurlencode( $id ) . '?' . $qs;
+            printf(
+                '<iframe class="bdt-ep-bh-v" src="%s" allow="autoplay; encrypted-media" loading="lazy" title=""></iframe>',
+                esc_url( $src )
+            );
+        } elseif ( preg_match( '/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $vm ) ) {
+            $loop = $once ? '0' : '1';
+            $dnt  = $priv ? '1' : '0';
+            $vimeo_params = [
+                'background' => '1',
+                'autoplay'   => '1',
+                'muted'      => '1',
+                'loop'       => $loop,
+                'dnt'        => $dnt,
+            ];
+            if ( $t_start > 0 ) {
+                $vimeo_params['start_time'] = (string) $t_start;
+            }
+            if ( $t_end > 0 ) {
+                $vimeo_params['end_time'] = (string) $t_end;
+                if ( ! isset( $vimeo_params['start_time'] ) ) {
+                    $vimeo_params['start_time'] = '0';
+                }
+            }
+            $src = 'https://player.vimeo.com/video/' . rawurlencode( $vm[1] ) . '?' . http_build_query( $vimeo_params, '', '&', PHP_QUERY_RFC3986 );
+            printf(
+                '<iframe class="bdt-ep-bh-v" src="%s" allow="autoplay" loading="lazy" title=""></iframe>',
+                esc_url( $src )
+            );
+        } else {
+            $loop_attr = $once ? '' : ' loop';
+            $file_url  = $url;
+            if ( $t_start > 0 || $t_end > 0 ) {
+                $file_url .= '#t=' . $t_start;
+                if ( $t_end > 0 ) {
+                    $file_url .= ',' . $t_end;
+                }
+            }
+            printf(
+                '<video class="bdt-ep-bh-v" src="%s" autoplay muted playsinline%s></video>',
+                esc_url( $file_url ),
+                $loop_attr // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- literal attribute
+            );
+        }
+
+        echo '</div>';
+    }
 
     public function render() {
         $settings = $this->get_settings_for_display();
         $timeNotation	= (get_option('time_format') == 'H:i') ? '24h' : '12h';
         $ct_input = get_option('gmt_offset');
-
-        // echo $ct_input;
 
         if($settings['dynamic_timezone'] == 'custom'){
            $ct_input = (isset($settings['custom_timezone_input']) && !empty($settings['custom_timezone_input'])) ? $settings['custom_timezone_input'] : '+6';
@@ -1209,6 +1315,8 @@ class Business_Hours extends Module_Base {
 
         <?php if ('yes' == $settings['show_header']) : ?>
             <div class="bdt-ep-business-hours-header">
+
+                <?php $this->render_header_background_video( $settings ); ?>
 
                 <?php if ('yes' == $settings['show_current_time']) : ?>
                     <div class="bdt-ep-business-hours-current-time">

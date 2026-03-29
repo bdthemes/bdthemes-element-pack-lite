@@ -986,6 +986,75 @@ class Svg_Image extends Module_Base {
 		return $caption;
 	}
 
+	/**
+	 * Sanitize raw SVG markup by removing all event handlers, script elements,
+	 * autofocus attributes, and javascript: URIs before the content is echoed.
+	 *
+	 * Uses DOMDocument to parse the SVG so that sanitization is applied
+	 * regardless of attribute quoting style, whitespace, or encoding — unlike
+	 * the regex-only approach which can be bypassed with unquoted values.
+	 *
+	 * @param string $svg_content Raw SVG string.
+	 * @return string Sanitized SVG string, or empty string on parse failure.
+	 */
+	private function sanitize_svg( $svg_content ) {
+		// Strip script elements before DOM parsing as an extra layer of defence.
+		$svg_content = preg_replace( '/<script[\s\S]*?<\/script>/si', '', $svg_content );
+
+		$dom = new \DOMDocument();
+		libxml_use_internal_errors( true );
+		$loaded = $dom->loadXML( $svg_content );
+		libxml_clear_errors();
+
+		if ( ! $loaded || ! $dom->documentElement ) {
+			return '';
+		}
+
+		$xpath = new \DOMXPath( $dom );
+
+		// Remove inherently dangerous elements entirely.
+		$dangerous_tags = array( 'script', 'foreignObject' );
+		foreach ( $dangerous_tags as $tag ) {
+			$nodes = $xpath->query( '//' . $tag );
+			if ( $nodes ) {
+				foreach ( iterator_to_array( $nodes ) as $node ) {
+					$node->parentNode->removeChild( $node );
+				}
+			}
+		}
+
+		// Walk every element and strip unsafe attributes.
+		$all_nodes = $xpath->query( '//*' );
+		if ( $all_nodes ) {
+			foreach ( $all_nodes as $element ) {
+				$remove = array();
+				foreach ( $element->attributes as $attr ) {
+					$name  = strtolower( $attr->nodeName );
+					$value = $attr->nodeValue;
+
+					// Remove all event-handler attributes (on*).
+					if ( substr( $name, 0, 2 ) === 'on' ) {
+						$remove[] = $attr->nodeName;
+
+					// Remove javascript: URIs in link/source attributes.
+					} elseif ( in_array( $name, array( 'href', 'xlink:href', 'src', 'action', 'formaction' ), true )
+						&& preg_match( '/^\s*javascript:/i', $value ) ) {
+						$remove[] = $attr->nodeName;
+
+					// Remove autofocus — prevents auto-fired focus events on load.
+					} elseif ( $name === 'autofocus' ) {
+						$remove[] = $attr->nodeName;
+					}
+				}
+				foreach ( $remove as $attr_name ) {
+					$element->removeAttribute( $attr_name );
+				}
+			}
+		}
+
+		return $dom->saveXML( $dom->documentElement );
+	}
+
 	public function render_svg() {
 		$settings = $this->get_settings_for_display();
 		$svg_file = $settings['image']['url'];
@@ -1023,8 +1092,10 @@ class Svg_Image extends Module_Base {
 			}
 		}
 		if ( ! empty( $svg_content ) ) {
-			$svg_content = preg_replace( '/<script[^>]*>.*?<\/script>/si', '', $svg_content );
-			$svg_content = preg_replace( '/\bon\w+\s*=\s*["\'][^"\']*["\']/i', '', $svg_content );
+			$svg_content = $this->sanitize_svg( $svg_content );
+		}
+
+		if ( ! empty( $svg_content ) ) {
 			$svg_content = preg_replace( '/<svg(\s|>)/', '<svg class="bdt-svg-image-inner" data-bdt-svg="stroke-animation: true" ', $svg_content, 1 );
 			echo $svg_content;
 		} else {

@@ -330,8 +330,7 @@ class Scrollnav extends Module_Base {
 					],
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-scrollnav .bdt-button-icon-align-right' => 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bdt-scrollnav .bdt-button-icon-align-left'  => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-scrollnav .bdt-navbar-nav > li > a' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [ 
 					'nav_style' => 'default',
@@ -1146,16 +1145,25 @@ class Scrollnav extends Module_Base {
 			?>
 			<li>
 				<a <?php $this->print_render_attribute_string( $link_key ); ?>>
-					<?php echo esc_attr( $nav['nav_title'] ); ?>
-					<?php if ( $nav['scroll_nav_icon']['value'] ) : ?>
-						<span class="bdt-button-icon-align-<?php echo esc_attr( $settings['icon_align'] ); ?>">
-
+					<?php if ( ! empty( $nav['scroll_nav_icon']['value'] ) && 'left' === $settings['icon_align'] ) : ?>
+						<span class="bdt-button-icon-align-left">
 							<?php if ( $is_new || $migrated ) :
 								Icons_Manager::render_icon( $nav['scroll_nav_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
 							else : ?>
 								<i class="<?php echo esc_attr( $nav['nav_icon'] ); ?>" aria-hidden="true"></i>
 							<?php endif; ?>
+						</span>
+					<?php endif; ?>
 
+					<?php echo esc_html( $nav['nav_title'] ); ?>
+
+					<?php if ( ! empty( $nav['scroll_nav_icon']['value'] ) && 'right' === $settings['icon_align'] ) : ?>
+						<span class="bdt-button-icon-align-right">
+							<?php if ( $is_new || $migrated ) :
+								Icons_Manager::render_icon( $nav['scroll_nav_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+							else : ?>
+								<i class="<?php echo esc_attr( $nav['nav_icon'] ); ?>" aria-hidden="true"></i>
+							<?php endif; ?>
 						</span>
 					<?php endif; ?>
 				</a>
