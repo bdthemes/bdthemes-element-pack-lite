@@ -8,9 +8,13 @@ use Elementor\Scheme_Typography;
 use Elementor\Icons_Manager;
 
 use Elementor\Skin_Base as Elementor_Skin_Base;
+use ElementPack\Modules\Countdown\Widgets\Countdown;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+/**
+ * @property Countdown $parent
+ */
 class Skin_Event_Countdown extends Elementor_Skin_Base {
 	public function _register_controls_actions() {
 		parent::_register_controls_actions();
@@ -528,14 +532,19 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 			$datetime      = new \DateTime($with_gmt_time);
 			$final_time    = $datetime->format('c');
 
+			$countdown_classes = [
+				'bdt-grid',
+				'bdt-flex-middle bdt-flex-' . esc_attr($settings['alignment']),
+				$this->get_instance_value('column_gap') ? 'bdt-grid-'.$this->get_instance_value('column_gap') : '',
+			];
+			if ( ! empty( $settings['glassmorphism_effect'] ) && $settings['glassmorphism_effect'] === 'yes' ) {
+				$countdown_classes[] = 'bdt-countdown-glassmorphism-yes';
+			}
+
 			$this->parent->add_render_attribute(
 				[
 					'countdown' => [
-						'class' => [
-							'bdt-grid',
-							'bdt-flex-middle bdt-flex-' . esc_attr($settings['alignment']),
-							$this->get_instance_value('column_gap') ? 'bdt-grid-'.$this->get_instance_value('column_gap') : '',
-						],
+						'class' => $countdown_classes,
 						'data-bdt-countdown' => [
 							'date: ' . $final_time
 						],

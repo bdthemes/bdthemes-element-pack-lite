@@ -482,8 +482,7 @@ class Panel_Slider extends Module_Base {
 					'panel_slider_icon[value]!' => '',
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-panel-slider .bdt-button-icon-align-right' => is_rtl() ? 'margin-inline-end: {{SIZE}}{{UNIT}};' : 'margin-inline-start: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bdt-panel-slider .bdt-button-icon-align-left'  => is_rtl() ? 'margin-inline-start: {{SIZE}}{{UNIT}};' : 'margin-inline-end: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-panel-slider .bdt-panel-slide-link' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1140,11 +1139,22 @@ class Panel_Slider extends Module_Base {
 								<?php if ( ! empty( $item['tab_link']['url'] ) ) : ?>
 									<?php if ( $settings['button'] == 'yes' ) : ?>
 										<a <?php $this->print_render_attribute_string( $element_key ); ?>>
+											<?php if ( ! empty( $settings['panel_slider_icon']['value'] ) && isset( $settings['icon_align'] ) && 'left' === $settings['icon_align'] ) : ?>
+												<span class="bdt-button-icon-align-left">
+
+													<?php if ( $is_new || $migrated ) :
+														Icons_Manager::render_icon( $settings['panel_slider_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );
+													else : ?>
+														<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
+													<?php endif; ?>
+
+												</span>
+											<?php endif; ?>
 											<span>
 												<?php echo esc_html( $settings['button_text'] ); ?>
 											</span>
-											<?php if ( $settings['panel_slider_icon']['value'] ) : ?>
-												<span class="bdt-button-icon-align-<?php echo esc_attr( $settings['icon_align'] ); ?>">
+											<?php if ( ! empty( $settings['panel_slider_icon']['value'] ) && ( ! isset( $settings['icon_align'] ) || 'right' === $settings['icon_align'] ) ) : ?>
+												<span class="bdt-button-icon-align-right">
 
 													<?php if ( $is_new || $migrated ) :
 														Icons_Manager::render_icon( $settings['panel_slider_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] );

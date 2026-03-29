@@ -651,8 +651,7 @@ class Product_Grid extends Module_Base {
 					'readmore_icon[value]!' => '',
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-ep-product-grid-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-inline-end: {{SIZE}}{{UNIT}};' : 'margin-inline-start: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bdt-ep-product-grid-readmore .bdt-button-icon-align-left'  => is_rtl() ? 'margin-inline-start: {{SIZE}}{{UNIT}};' : 'margin-inline-end: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-product-grid-readmore' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1832,6 +1831,7 @@ class Product_Grid extends Module_Base {
 	}
 
 	public function render_readmore( $item, $readmore_key, $settings ) {
+		$icon_align = $settings['icon_align'] ?? 'right';
 
 		$this->add_render_attribute(
 			[ 
@@ -1851,9 +1851,16 @@ class Product_Grid extends Module_Base {
 		<?php if ( ( ! empty( $item['readmore_link']['url'] ) ) && ( $settings['readmore_link_to'] == 'button' ) ) : ?>
 			<div class="bdt-ep-product-grid-readmore-wrap">
 				<a <?php $this->print_render_attribute_string( $readmore_key ); ?>>
+					<?php if ( ! empty( $settings['readmore_icon']['value'] ) && 'left' === $icon_align ) : ?>
+						<span class="bdt-button-icon-align-left">
+							<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+						</span>
+					<?php endif; ?>
+
 					<?php echo esc_html( $settings['readmore_text'] ); ?>
-					<?php if ( $settings['readmore_icon']['value'] ) : ?>
-						<span class="bdt-button-icon-align-<?php echo esc_attr( $settings['icon_align'] ); ?>">
+
+					<?php if ( ! empty( $settings['readmore_icon']['value'] ) && 'right' === $icon_align ) : ?>
+						<span class="bdt-button-icon-align-right">
 							<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
 						</span>
 					<?php endif; ?>

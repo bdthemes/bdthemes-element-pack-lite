@@ -1086,13 +1086,17 @@ class Static_Grid_Tab extends Module_Base {
 		<div class="bdt-ep-static-grid-tab-readmore-wrap">
 		<a <?php $this->print_render_attribute_string( $readmore_key ); ?>>
 			<?php if ( $has_icon && $icon_align === 'left' ) : ?>
-				<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+				<span class="bdt-button-icon-align-left">
+					<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+				</span>
 			<?php endif; ?>
 			<span class="bdt-ep-static-grid-tab-readmore-text">
 				<?php echo esc_html( $readmore_text ); ?>
 			</span>
 			<?php if ( $has_icon && $icon_align === 'right' ) : ?>
-				<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+				<span class="bdt-button-icon-align-right">
+					<?php Icons_Manager::render_icon( $settings['readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+				</span>
 			<?php endif; ?>
 		</a>
 		</div>

@@ -1559,8 +1559,8 @@ trait Global_Swiper_Controls {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .bdt-navigation-prev' => 'left: {{SIZE}}px;',
-					'{{WRAPPER}} .bdt-navigation-next' => 'right: {{SIZE}}px;',
+					'{{WRAPPER}} .bdt-navigation-prev' => is_rtl() ? 'right: {{SIZE}}px;' : 'left: {{SIZE}}px;',
+					'{{WRAPPER}} .bdt-navigation-next' => is_rtl() ? 'left: {{SIZE}}px;' : 'right: {{SIZE}}px;',
 				],
 				'conditions' => [
 					'terms' => [

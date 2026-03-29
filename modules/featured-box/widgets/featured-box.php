@@ -380,8 +380,7 @@ class Featured_Box extends Module_Base {
 					'readmore_text!'                 => '',
 				],
 				'selectors' => [ 
-					'{{WRAPPER}} .bdt-ep-featured-box-readmore .bdt-button-icon-align-right' => is_rtl() ? 'margin-inline-end: {{SIZE}}{{UNIT}};' : 'margin-inline-start: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bdt-ep-featured-box-readmore .bdt-button-icon-align-left'  => is_rtl() ? 'margin-inline-start: {{SIZE}}{{UNIT}};' : 'margin-inline-end: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-ep-featured-box-readmore' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1540,7 +1539,7 @@ class Featured_Box extends Module_Base {
 		$this->add_inline_editing_attributes( 'title_text', 'none' );
 		$this->add_inline_editing_attributes( 'description_text' );
 
-		$this->add_render_attribute( 'readmore', 'class', [ 'bdt-ep-featured-box-readmore', 'bdt-display-inline-block' ] );
+		$this->add_render_attribute( 'readmore', 'class', [ 'bdt-ep-featured-box-readmore' ] );
 		if ( ! empty( $settings['readmore_link']['url'] ) ) {
 			$this->add_link_attributes( 'readmore', $settings['readmore_link'] );
 		}
@@ -1577,9 +1576,16 @@ class Featured_Box extends Module_Base {
 		<?php if ( ! empty( $settings['readmore'] ) && $settings['readmore'] === 'yes' ) : ?>
 			<div class="bdt-ep-featured-box-button">
 				<a <?php $this->print_render_attribute_string( 'readmore' ); ?>>
+					<?php if ( ! empty( $settings['advanced_readmore_icon']['value'] ) && isset( $settings['readmore_icon_align'] ) && 'left' === $settings['readmore_icon_align'] ) : ?>
+						<span class="bdt-button-icon-align-left">
+							<?php Icons_Manager::render_icon( $settings['advanced_readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
+						</span>
+					<?php endif; ?>
+
 					<?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : __( 'Read More', 'bdthemes-element-pack' ) ); ?>
-					<?php if ( ! empty( $settings['advanced_readmore_icon']['value'] ) ) : ?>
-						<span class="bdt-button-icon-align-<?php echo esc_attr( isset( $settings['readmore_icon_align'] ) ? $settings['readmore_icon_align'] : 'right' ); ?>">
+
+					<?php if ( ! empty( $settings['advanced_readmore_icon']['value'] ) && ( ! isset( $settings['readmore_icon_align'] ) || 'right' === $settings['readmore_icon_align'] ) ) : ?>
+						<span class="bdt-button-icon-align-right">
 							<?php Icons_Manager::render_icon( $settings['advanced_readmore_icon'], [ 'aria-hidden' => 'true', 'class' => 'fa-fw' ] ); ?>
 						</span>
 					<?php endif; ?>
