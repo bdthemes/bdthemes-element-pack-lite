@@ -276,6 +276,9 @@ class DualButton extends Module_Base {
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-a, {{WRAPPER}} .bdt-btn-a .bdt-btn-icon' => 'justify-content: {{VALUE}};',
+				],
 			]
 		);
 
@@ -437,6 +440,9 @@ class DualButton extends Module_Base {
 						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-text-align-right',
 					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-dual-button .bdt-btn-b, {{WRAPPER}} .bdt-btn-b .bdt-btn-icon' => 'justify-content: {{VALUE}};',
 				],
 			]
 		);
@@ -1403,14 +1409,6 @@ class DualButton extends Module_Base {
 			$this->add_render_attribute( 'content-wrapper-a', 'class', 'bdt-flex bdt-flex-middle' );
 		}
 
-		if ( ! empty( $settings['button_a_select_icon']['value'] ) ) {
-			$icon_align = 'bdt-flex-' . $settings['button_a_align'];
-		} else {
-			$icon_align = 'bdt-text-' . $settings['button_a_align'];
-		}
-
-		$this->add_render_attribute( 'content-wrapper-a', 'class', $icon_align );
-
 		$this->add_render_attribute( 'content-wrapper-a', 'class', ( 'top' == $settings['button_a_icon_align'] ) ? 'bdt-flex bdt-flex-column' : '' );
 		$this->add_render_attribute( 'content-wrapper-a', 'class', ( 'bottom' == $settings['button_a_icon_align'] ) ? 'bdt-flex bdt-flex-column-reverse' : '' );
 		$this->add_render_attribute( 'content-wrapper-a', 'data-text', esc_html($settings['button_a_text']));
@@ -1452,14 +1450,6 @@ class DualButton extends Module_Base {
 		if ( 'left' == $settings['button_b_icon_align'] or 'right' == $settings['button_b_icon_align'] ) {
 			$this->add_render_attribute( 'content-wrapper-b', 'class', 'bdt-flex bdt-flex-middle' );
 		}
-
-		if ( ! empty( $settings['button_b_select_icon']['value'] ) ) {
-			$icon_align = 'bdt-flex-' . $settings['button_b_align'];
-		} else {
-			$icon_align = 'bdt-text-' . $settings['button_b_align'];
-		}
-
-		$this->add_render_attribute( 'content-wrapper-b', 'class', $icon_align );
 
 		$this->add_render_attribute( 'content-wrapper-b', 'class', ( 'top' == $settings['button_b_icon_align'] ) ? 'bdt-flex bdt-flex-column' : '' );
 		$this->add_render_attribute( 'content-wrapper-b', 'class', ( 'bottom' == $settings['button_b_icon_align'] ) ? 'bdt-flex bdt-flex-column-reverse' : '' );
