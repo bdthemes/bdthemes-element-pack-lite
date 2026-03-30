@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4.0
-Stable tag: 8.5.1
+Stable tag: 8.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
@@ -414,16 +414,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.5.1 [30th March 2026] =
-
-* Fixed: SVG Image widget: Stored XSS vulnerability fixed ( Thanks to Webbernaut )
-* Fixed: Glassmorphism issue fixed in the countdown widget
-* Fixed: Button a & button b alignment issue fixed in dual button widget
-
-= 8.5.0 [17th March 2026] =
+= 8.5.0 [30th March 2026] =
 
 * Added: tel:, mailto: and sms: protocol support added in wrapper link extension
 * Added: Enable smooth animation added in cursor effects extension
+* Fixed: SVG Image widget: Stored XSS vulnerability fixed ( Thanks to Webbernaut )
+* Fixed: Glassmorphism issue fixed in the countdown widget
+* Fixed: Button a & button b alignment issue fixed in dual button widget
 * Fixed: Undefined array key issue fixed in trailer box widget
 * Fixed: Svg image widget caption duplicate issue fixed
 * Fixed: Undefined array key "element_pack_backdrop_filter_type" issue fixed in backdrop filter extension
