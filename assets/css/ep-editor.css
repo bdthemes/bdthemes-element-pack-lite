@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'element-pack-widgets-icon';
   src:
-    url('../fonts/element-pack-widgets-icon.woff2?e7boom') format('woff2'),
-    url('../fonts/element-pack-widgets-icon.ttf?e7boom') format('truetype'),
-    url('../fonts/element-pack-widgets-icon.woff?e7boom') format('woff'),
-    url('../fonts/element-pack-widgets-icon.svg?e7boom#element-pack-widgets-icon') format('svg');
+    url('../fonts/element-pack-widgets-icon.woff2?gu3f7p') format('woff2'),
+    url('../fonts/element-pack-widgets-icon.ttf?gu3f7p') format('truetype'),
+    url('../fonts/element-pack-widgets-icon.woff?gu3f7p') format('woff'),
+    url('../fonts/element-pack-widgets-icon.svg?gu3f7p#element-pack-widgets-icon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -561,6 +561,12 @@
 }
 .bdt-wi-fooevents-calendar:before {
   content: "\ea39";
+}
+.bdt-wi-fooevents-calendar-events:before {
+  content: "\ea3a";
+}
+.bdt-wi-fooevents-calendar-carousel:before {
+  content: "\ea3b";
 }
 .bdt-wi-acf-list:before {
   content: "\ea29";
