@@ -3162,6 +3162,45 @@ class ModuleService {
 		];
 
 		$settings_fields['element_pack_third_party_widget'][] = [
+			'name'        => 'fooevents-calendar',
+			'label'       => esc_html__('FooEvents Calendar', 'bdthemes-element-pack'),
+			'type'        => 'checkbox',
+			'default'     => 'off',
+			'plugin_name' => 'fooevents-calendar',
+			'plugin_path' => 'fooevents-calendar/fooevents-calendar.php',
+			'widget_type' => 'pro',
+			'content_type' => 'others new',
+			'demo_url'    => 'https://demo.elementpack.pro/element/fooevents-calendar/',
+			'video_url'   => '',
+		];
+
+		$settings_fields['element_pack_third_party_widget'][] = [
+			'name'         => 'fooevents-calendar-events',
+			'label'        => esc_html__( 'FooEvents Calendar Events', 'bdthemes-element-pack' ),
+			'type'         => 'checkbox',
+			'default'      => 'off',
+			'plugin_name'  => 'fooevents-calendar',
+			'plugin_path'  => 'fooevents-calendar/fooevents-calendar.php',
+			'widget_type'  => 'pro',
+			'content_type' => 'others new',
+			'demo_url'     => 'https://demo.elementpack.pro/element/fooevents-calendar-events/',
+			'video_url'    => '',
+		];
+
+		$settings_fields['element_pack_third_party_widget'][] = [
+			'name'         => 'fooevents-calendar-carousel',
+			'label'        => esc_html__( 'FooEvents Calendar Carousel', 'bdthemes-element-pack' ),
+			'type'         => 'checkbox',
+			'default'      => 'off',
+			'plugin_name'  => 'fooevents-calendar',
+			'plugin_path'  => 'fooevents-calendar/fooevents-calendar.php',
+			'widget_type'  => 'pro',
+			'content_type' => 'others new',
+			'demo_url'     => 'https://demo.elementpack.pro/element/fooevents-calendar-carousel/',
+			'video_url'    => '',
+		];
+
+		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'faq',
 			'label'        => esc_html__('FAQ', 'bdthemes-element-pack'),
 			'type'         => 'checkbox',

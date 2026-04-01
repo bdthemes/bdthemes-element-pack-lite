@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4.0
-Stable tag: 8.5.0
+Stable tag: 8.5.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 3.35.9
+Elementor tested up to: 4.0.0
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -413,6 +413,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.5.1 [1st April 2026] =
+
+* Updated: Made compatible with Elementor version 4.0.0
 
 = 8.5.0 [30th March 2026] =
 
