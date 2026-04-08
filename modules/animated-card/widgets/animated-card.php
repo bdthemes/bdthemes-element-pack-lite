@@ -58,7 +58,7 @@ class Animated_Card extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 
 		$this->start_controls_section(
@@ -199,13 +199,13 @@ class Animated_Card extends Module_Base {
 				'toggle'  => false,
 				'default' => 'style-1',
 				'options' => [ 
-					'style-2' => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-h-align-right',
-					],
 					'style-1' => [ 
 						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
 						'icon'  => 'eicon-h-align-left',
+					],
+					'style-2' => [ 
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'icon'  => 'eicon-h-align-right',
 					],
 				],
 			]
@@ -1210,6 +1210,57 @@ class Animated_Card extends Module_Base {
 					<?php $this->render_animated_content($settings); ?>
 				</div>
 				<?php $this->render_animated_image($settings); ?>
+			</div>
+		</div>
+		<?php
+	}
+
+	protected function content_template() {
+		?>
+		<#
+		var rmIconHTML = elementor.helpers.renderIcon( view, settings.advanced_readmore_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var rmMigrated = elementor.helpers.isIconMigrated( settings, 'advanced_readmore_icon' );
+
+		var rmHref     = ( settings.readmore_link && settings.readmore_link.url ) ? settings.readmore_link.url : '#';
+		var rmTarget   = ( settings.readmore_link && settings.readmore_link.is_external ) ? ' target="_blank"' : '';
+		var rmNoFollow = ( settings.readmore_link && settings.readmore_link.nofollow )    ? ' rel="nofollow"'  : '';
+
+		var cardClass = 'bdt-ep-animated-card bdt-' + settings.layout_direction;
+		#>
+		<div class="{{ cardClass }}">
+			<div class="bdt-ep-animated-card-item">
+				<div class="bdt-ep-animated-card-circle"></div>
+				<div class="bdt-ep-animated-card-content">
+
+					<# if ( 'yes' === settings.show_sub_title && settings.sub_title_text ) { #>
+						<{{{ settings.sub_title_size }}} class="bdt-ep-animated-card-sub-title">{{{ settings.sub_title_text }}}</{{{ settings.sub_title_size }}}>
+					<# } #>
+
+					<# if ( 'yes' === settings.show_title && settings.title_text ) { #>
+						<{{{ settings.title_size }}} class="bdt-ep-animated-card-title">{{{ settings.title_text }}}</{{{ settings.title_size }}}>
+					<# } #>
+
+					<# if ( 'yes' === settings.show_description && settings.description_text ) { #>
+						<div class="bdt-ep-animated-card-text">{{{ settings.description_text }}}</div>
+					<# } #>
+
+					<# if ( settings.readmore ) { #>
+						<div class="bdt-ep-animated-card-btn-wrap">
+							<a class="bdt-ep-animated-card-btn bdt-display-inline-block" href="{{ rmHref }}"{{{ rmTarget }}}{{{ rmNoFollow }}}>
+								{{ settings.readmore_text }}
+								<# if ( rmIconHTML && rmIconHTML.rendered ) { #>
+									<span class="bdt-button-icon-align-{{ settings.readmore_icon_align }}">{{{ rmIconHTML.value }}}</span>
+								<# } #>
+							</a>
+						</div>
+					<# } #>
+				</div>
+
+				<# if ( settings.image && settings.image.url ) { #>
+					<div class="bdt-ep-animated-card-img-wrap">
+						<img src="{{ settings.image.url }}" alt="{{ settings.title_text }}" class="bdt-ep-animated-card-img">
+					</div>
+				<# } #>
 			</div>
 		</div>
 		<?php

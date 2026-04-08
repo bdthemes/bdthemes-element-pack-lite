@@ -1263,4 +1263,95 @@ class Review_Card extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var ratingNumber = settings.rating_number && settings.rating_number.size ? parseFloat( settings.rating_number.size ) : 0;
+		ratingNumber = Math.min( 5.0, Math.max( 0.5, ratingNumber ) );
+		var firstVal  = Math.floor( ratingNumber );
+		var secondVal = ( ratingNumber - firstVal ) >= 0.5 ? 5 : 0;
+		var score     = firstVal + '-' + secondVal;
+		var ratingType     = settings.rating_type || 'star';
+		var ratingPosition = settings.rating_position || 'before';
+		var imageInline    = settings.image_inline || '';
+		var imagePosition  = settings.iamge_position || 'top';
+		var imageInlineRowClass = ( imagePosition === 'right' ) ? 'bdt-ep-img-inline bdt-flex bdt-flex-row-reverse' : 'bdt-ep-img-inline bdt-flex';
+		var imageMaskClass = ( settings.image_mask_popover === 'yes' ) ? ' bdt-image-mask' : '';
+		var readMoreData = '';
+		if ( settings.review_words_length ) {
+			readMoreData = JSON.stringify( { words_length: settings.review_words_length } );
+		}
+
+		var renderRating = function() {
+			var ratingDisplay = settings.rating_number && settings.rating_number.size !== undefined ? settings.rating_number.size : '';
+			var html = '<div><div class="bdt-ep-review-card-rating bdt-' + ratingType + ' bdt-' + ratingPosition + '">';
+			if ( ratingType === 'number' ) {
+				html += '<span>' + ratingDisplay + '</span><i class="ep-icon-star-full" aria-hidden="true"></i>';
+			} else {
+				html += '<span class="epsc-rating epsc-rating-' + score + '">';
+				for ( var s = 0; s < 5; s++ ) {
+					html += '<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>';
+				}
+				html += '</span>';
+			}
+			html += '</div></div>';
+			return html;
+		};
+		#>
+		<div class="bdt-review-card bdt-review-card-style-1">
+			<div class="bdt-ep-review-card-item">
+
+				<# if ( imageInline !== 'yes' && settings.show_reviewer_image === 'yes' && settings.image && settings.image.url ) { #>
+				<div class="bdt-ep-review-card-image<# print( imageMaskClass ); #>">
+					<img src="{{ settings.image.url }}" alt="{{ settings.reviewer_name }}">
+				</div>
+				<# } #>
+
+				<div class="bdt-ep-review-card-content">
+					<# if ( imageInline === 'yes' && settings.show_reviewer_image === 'yes' ) { #>
+					<div class="<# print( imageInlineRowClass ); #>">
+						<# if ( settings.image && settings.image.url ) { #>
+						<div class="bdt-ep-review-card-image<# print( imageMaskClass ); #>">
+							<img src="{{ settings.image.url }}" alt="{{ settings.reviewer_name }}">
+						</div>
+						<# } #>
+						<div class="bdt-flex bdt-flex-column bdt-flex-center">
+							<# if ( settings.show_reviewer_name === 'yes' && settings.reviewer_name ) { #>
+							<{{ settings.review_name_tag }} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{ settings.review_name_tag }}>
+							<# } #>
+							<# if ( settings.show_reviewer_job_title === 'yes' && settings.reviewer_job_title ) { #>
+							<div class="bdt-ep-review-card-job-title">{{{ settings.reviewer_job_title }}}</div>
+							<# } #>
+							<# if ( settings.show_rating === 'yes' && ratingPosition === 'before' ) { #>
+							{{{ renderRating() }}}
+							<# } #>
+						</div>
+					</div>
+					<# } #>
+
+					<# if ( imageInline !== 'yes' ) { #>
+					<# if ( settings.show_reviewer_name === 'yes' && settings.reviewer_name ) { #>
+					<{{ settings.review_name_tag }} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{ settings.review_name_tag }}>
+					<# } #>
+					<# if ( settings.show_reviewer_job_title === 'yes' && settings.reviewer_job_title ) { #>
+					<div class="bdt-ep-review-card-job-title">{{{ settings.reviewer_job_title }}}</div>
+					<# } #>
+					<# if ( settings.show_rating === 'yes' && ratingPosition === 'before' ) { #>
+					{{{ renderRating() }}}
+					<# } #>
+					<# } #>
+
+					<# if ( settings.show_review_text === 'yes' && settings.review_text ) { #>
+					<div class="bdt-ep-review-card-text<# if ( settings.review_words_length ) { #> bdt-ep-read-more-text<# } #>"<# if ( settings.review_words_length ) { #> data-read-more="<# print( _.escape( readMoreData ) ); #>"<# } #>>{{{ settings.review_text }}}</div>
+					<# } #>
+
+					<# if ( settings.show_rating === 'yes' && ratingPosition === 'after' ) { #>
+					{{{ renderRating() }}}
+					<# } #>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
 }

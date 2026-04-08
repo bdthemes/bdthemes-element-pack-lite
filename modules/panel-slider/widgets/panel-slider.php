@@ -73,7 +73,6 @@ class Panel_Slider extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
 	protected function register_controls() {
 
 		$this->start_controls_section(
@@ -1180,5 +1179,262 @@ class Panel_Slider extends Module_Base {
 					endforeach; ?>
 
 					<?php $this->render_footer();
+	}
+
+	protected function content_template() {
+		$fallback_image = esc_url( BDTEP_ASSETS_URL . '/images/panel-slider.svg' );
+		$elementor_vp_lg = get_option( 'elementor_viewport_lg' );
+		$elementor_vp_md = get_option( 'elementor_viewport_md' );
+		$viewport_lg       = ! empty( $elementor_vp_lg ) ? (int) $elementor_vp_lg - 1 : 1023;
+		$viewport_md       = ! empty( $elementor_vp_md ) ? (int) $elementor_vp_md - 1 : 767;
+		?>
+		<#
+		var viewport_lg = <?php echo (int) $viewport_lg; ?>;
+		var viewport_md = <?php echo (int) $viewport_md; ?>;
+
+		var skin = settings._skin || '';
+		var skinClass = 'bdt-skin-default';
+		if ( skin === 'bdt-middle' ) {
+			skinClass = 'bdt-skin-middle';
+		} else if ( skin === 'always-visible' ) {
+			skinClass = 'bdt-text-on-always';
+		}
+
+		var nav = settings.navigation || 'arrows';
+		var navAlignClass = '';
+		if ( nav === 'arrows' && settings.arrows_position ) {
+			navAlignClass = 'bdt-arrows-align-' + settings.arrows_position;
+		} else if ( nav === 'dots' && settings.dots_position ) {
+			navAlignClass = 'bdt-dots-align-' + settings.dots_position;
+		} else if ( nav === 'both' && settings.both_position ) {
+			navAlignClass = 'bdt-arrows-dots-align-' + settings.both_position;
+		} else if ( nav === 'arrows-fraction' && settings.arrows_fraction_position ) {
+			navAlignClass = 'bdt-arrows-dots-align-' + settings.arrows_fraction_position;
+		}
+
+		var panelId = 'bdt-panel-slider-' + view.getID();
+		var pidSelector = '#' + panelId;
+
+		var columns = ( skin === 'bdt-middle' ) ? settings.skin_columns : settings.columns;
+		var columns_tablet = ( skin === 'bdt-middle' ) ? settings.skin_columns_tablet : settings.columns_tablet;
+		var columns_mobile = ( skin === 'bdt-middle' ) ? settings.skin_columns_mobile : settings.columns_mobile;
+		columns = parseInt( columns, 10 ) || 3;
+		columns_tablet = parseInt( columns_tablet, 10 ) || 2;
+		columns_mobile = parseInt( columns_mobile, 10 ) || 1;
+
+		var paginationType = '';
+		if ( nav === 'arrows-fraction' ) {
+			paginationType = 'fraction';
+		} else if ( nav === 'both' || nav === 'dots' ) {
+			paginationType = 'bullets';
+		} else if ( nav === 'progressbar' ) {
+			paginationType = 'progressbar';
+		}
+
+		var speedSize = ( settings.speed && settings.speed.size !== undefined ) ? parseInt( settings.speed.size, 10 ) : 500;
+
+		var swiperSettings = {
+			speed: speedSize,
+			loop: settings.loop === 'yes',
+			pauseOnHover: settings.pauseonhover === 'yes',
+			slidesPerView: columns_mobile,
+			slidesPerGroup: parseInt( settings.slides_to_scroll_mobile, 10 ) || 1,
+			spaceBetween: ( settings.column_space_mobile && settings.column_space_mobile.size ) ? parseInt( settings.column_space_mobile.size, 10 ) : 0,
+			centeredSlides: settings.centered_slides === 'yes',
+			grabCursor: settings.grab_cursor === 'yes',
+			freeMode: settings.free_mode === 'yes',
+			effect: settings.skin || 'carousel',
+			observer: !! settings.observer,
+			observeParents: !! settings.observer,
+			mousewheel: !! settings.mousewheel,
+			breakpoints: {}
+		};
+		swiperSettings.breakpoints[ viewport_md ] = {
+			slidesPerView: columns_tablet,
+			spaceBetween: ( settings.column_space_tablet && settings.column_space_tablet.size ) ? parseInt( settings.column_space_tablet.size, 10 ) : 0,
+			slidesPerGroup: parseInt( settings.slides_to_scroll_tablet, 10 ) || 1
+		};
+		swiperSettings.breakpoints[ viewport_lg ] = {
+			slidesPerView: columns,
+			spaceBetween: ( settings.column_space && settings.column_space.size ) ? parseInt( settings.column_space.size, 10 ) : 0,
+			slidesPerGroup: parseInt( settings.slides_to_scroll, 10 ) || 1
+		};
+
+		if ( settings.autoplay === 'yes' ) {
+			swiperSettings.autoplay = { delay: parseInt( settings.autoplay_speed, 10 ) || 3000 };
+		}
+
+		swiperSettings.navigation = {
+			nextEl: pidSelector + ' .bdt-navigation-next',
+			prevEl: pidSelector + ' .bdt-navigation-prev'
+		};
+		swiperSettings.pagination = {
+			el: pidSelector + ' .swiper-pagination',
+			type: paginationType,
+			clickable: 'true',
+			dynamicBullets: settings.dynamic_bullets === 'yes'
+		};
+		swiperSettings.scrollbar = {
+			el: pidSelector + ' .swiper-scrollbar',
+			hide: 'true'
+		};
+
+		var cfOn = settings.coverflow_toggle === 'yes';
+		swiperSettings.coverflowEffect = {
+			rotate: ( cfOn && settings.coverflow_rotate && settings.coverflow_rotate.size !== undefined ) ? settings.coverflow_rotate.size : 50,
+			stretch: ( cfOn && settings.coverflow_stretch && settings.coverflow_stretch.size !== undefined ) ? settings.coverflow_stretch.size : 0,
+			depth: ( cfOn && settings.coverflow_depth && settings.coverflow_depth.size !== undefined ) ? settings.coverflow_depth.size : 100,
+			modifier: ( cfOn && settings.coverflow_modifier && settings.coverflow_modifier.size !== undefined ) ? settings.coverflow_modifier.size : 1,
+			slideShadows: true
+		};
+
+		var widgetSettings = {
+			id: pidSelector,
+			mouseInteractivity: settings.mouse_interactivity === 'yes'
+		};
+
+		var ds = JSON.stringify( swiperSettings );
+		var dw = JSON.stringify( widgetSettings );
+
+		var fallbackImg = '<?php echo esc_js( $fallback_image ); ?>';
+		var hideArrowMobile = settings.hide_arrow_on_mobile === 'yes' ? ' bdt-visible@m' : '';
+		var hideArrowMobileClass = hideArrowMobile.trim();
+		var titleTag = settings.title_tags || 'h3';
+		#>
+		<div id="<# print( panelId ); #>" class="bdt-panel-slider <# print( navAlignClass ); #> <# print( skinClass ); #>" data-settings='<# print( ds ); #>' data-widget-settings='<# print( dw ); #>'>
+			<div class="swiper-carousel swiper">
+				<div class="swiper-wrapper">
+					<# _.each( settings.tabs || [], function( item ) { #>
+					<#
+					var imageUrl = ( item.tab_image && item.tab_image.url ) ? item.tab_image.url : fallbackImg;
+					var linkUrl = ( item.tab_link && item.tab_link.url ) ? item.tab_link.url : '';
+					var btnAnim = settings.button_hover_animation ? ' elementor-animation-' + settings.button_hover_animation : '';
+					var slideOnclick = '';
+					if ( settings.global_link === 'yes' && linkUrl ) {
+						var t = ( item.tab_link && item.tab_link.is_external ) ? '_blank' : '_self';
+						slideOnclick = 'window.open(' + JSON.stringify( linkUrl ) + ', ' + JSON.stringify( t ) + ')';
+					}
+					#>
+					<div class="bdt-panel-slide-item swiper-slide bdt-transition-toggle"<# if ( slideOnclick !== '' ) { #> onclick="<# print( slideOnclick ); #>"<# } #>>
+						<div class="bdt-panel-slide-thumb-wrapper">
+							<div class="bdt-panel-slide-thumb bdt-background-cover" data-depth="0.2" style="background-image: url('<# print( imageUrl ); #>');"></div>
+						</div>
+						<div class="bdt-panel-slide-desc bdt-position-bottom-left bdt-position-z-index">
+							<# if ( settings.show_title === 'yes' && item.tab_title ) { #>
+							<# print( '<' + titleTag + ' class="bdt-panel-slide-title bdt-transition-slide-bottom">' ); #>
+								{{{ item.tab_title }}}
+							<# print( '</' + titleTag + '>' ); #>
+							<# } #>
+							<# if ( item.tab_content ) { #>
+							<div class="bdt-panel-slide-text bdt-transition-slide-bottom">
+								{{{ item.tab_content }}}
+							</div>
+							<# } #>
+							<# if ( linkUrl && settings.button === 'yes' ) { #>
+							<a class="bdt-panel-slide-link bdt-transition-slide-bottom<# print( btnAnim ); #>" href="<# print( linkUrl ); #>">
+								<# if ( settings.panel_slider_icon && settings.panel_slider_icon.value && settings.icon_align === 'left' ) { #>
+								<span class="bdt-button-icon-align-left">
+									<# var iconHTML = elementor.helpers.renderIcon( view, settings.panel_slider_icon, { 'aria-hidden': true }, 'i', 'object' ); #>
+									{{{ iconHTML.value }}}
+								</span>
+								<# } #>
+								<span>{{ settings.button_text }}</span>
+								<# if ( settings.panel_slider_icon && settings.panel_slider_icon.value && settings.icon_align !== 'left' ) { #>
+								<span class="bdt-button-icon-align-right">
+									<# var iconHTMLRight = elementor.helpers.renderIcon( view, settings.panel_slider_icon, { 'aria-hidden': true }, 'i', 'object' ); #>
+									{{{ iconHTMLRight.value }}}
+								</span>
+								<# } #>
+							</a>
+							<# } #>
+						</div>
+						<# if ( item.tab_content || settings.show_title === 'yes' ) { #>
+						<div class="bdt-transition-fade bdt-position-cover bdt-overlay bdt-overlay-gradient"></div>
+						<# } #>
+					</div>
+					<# } ); #>
+				</div>
+				<# if ( settings.show_scrollbar === 'yes' ) { #>
+				<div class="swiper-scrollbar"></div>
+				<# } #>
+			</div>
+
+			<# if ( nav === 'both' ) { #>
+			<div class="bdt-position-z-index bdt-position-{{ settings.both_position }}">
+				<div class="bdt-arrows-dots-container bdt-slidenav-container ">
+					<div class="bdt-flex bdt-flex-middle">
+						<div class="<# print( hideArrowMobileClass ); #>">
+							<div class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
+								<i class="ep-icon-arrow-left-{{ settings.nav_arrows_icon }}" aria-hidden="true"></i>
+							</div>
+						</div>
+						<# if ( settings.both_position !== 'center' ) { #>
+						<div class="swiper-pagination"></div>
+						<# } #>
+						<div class="<# print( hideArrowMobileClass ); #>">
+							<div class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
+								<i class="ep-icon-arrow-right-{{ settings.nav_arrows_icon }}" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<# if ( settings.both_position === 'center' ) { #>
+			<div class="bdt-position-z-index bdt-position-bottom">
+				<div class="bdt-dots-container">
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<# } #>
+			<# } else if ( nav === 'arrows-fraction' ) { #>
+			<div class="bdt-position-z-index bdt-position-{{ settings.arrows_fraction_position }}">
+				<div class="bdt-arrows-fraction-container bdt-slidenav-container ">
+					<div class="bdt-flex bdt-flex-middle">
+						<div class="<# print( hideArrowMobileClass ); #>">
+							<div class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
+								<i class="ep-icon-arrow-left-{{ settings.nav_arrows_icon }}" aria-hidden="true"></i>
+							</div>
+						</div>
+						<# if ( settings.arrows_fraction_position !== 'center' ) { #>
+						<div class="swiper-pagination"></div>
+						<# } #>
+						<div class="<# print( hideArrowMobileClass ); #>">
+							<div class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
+								<i class="ep-icon-arrow-right-{{ settings.nav_arrows_icon }}" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<# if ( settings.arrows_fraction_position === 'center' ) { #>
+			<div class="bdt-dots-container">
+				<div class="swiper-pagination"></div>
+			</div>
+			<# } #>
+			<# } else { #>
+			<# if ( nav === 'dots' ) { #>
+			<div class="bdt-position-z-index bdt-position-{{ settings.dots_position }}">
+				<div class="bdt-dots-container">
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<# } else if ( nav === 'progressbar' ) { #>
+			<div class="swiper-pagination bdt-position-z-index bdt-position-{{ settings.progress_position }}"></div>
+			<# } #>
+			<# if ( nav === 'arrows' ) { #>
+			<div class="bdt-position-z-index bdt-position-{{ settings.arrows_position }}<# print( hideArrowMobile ); #>">
+				<div class="bdt-arrows-container bdt-slidenav-container">
+					<div class="bdt-navigation-prev bdt-slidenav-previous bdt-icon bdt-slidenav">
+						<i class="ep-icon-arrow-left-{{ settings.nav_arrows_icon }}" aria-hidden="true"></i>
+					</div>
+					<div class="bdt-navigation-next bdt-slidenav-next bdt-icon bdt-slidenav">
+						<i class="ep-icon-arrow-right-{{ settings.nav_arrows_icon }}" aria-hidden="true"></i>
+					</div>
+				</div>
+			</div>
+			<# } #>
+			<# } #>
+		</div>
+		<?php
 	}
 }

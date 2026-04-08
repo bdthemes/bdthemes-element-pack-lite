@@ -58,7 +58,7 @@ class Step_Flow extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-    
+
 	protected function register_controls() {
         $this->start_controls_section(
             'section_content_step_flow',
@@ -1416,6 +1416,7 @@ class Step_Flow extends Module_Base {
                     'zigzag-dot' => esc_html__('Zigzag Dot', 'bdthemes-element-pack'),
                     'zozobe' => esc_html__('Zozobe', 'bdthemes-element-pack'),
                 ],
+                'render_type' => 'template',
             ]
         );
 
@@ -2349,6 +2350,72 @@ class Step_Flow extends Module_Base {
 				<span class="bdt-badge"><?php echo esc_html( $settings['badge_text'] ); ?></span>
 			</div>
 		<?php endif; ?>
+		<?php
+	}
+
+    protected function content_template() {
+		?>
+		<#
+		var iconHTML       = elementor.helpers.renderIcon( view, settings.selected_icon, { 'aria-hidden': true }, 'i', 'object' );
+		var migrated       = elementor.helpers.isIconMigrated( settings, 'selected_icon' );
+		var readmoreIcon   = elementor.helpers.renderIcon( view, settings.advanced_readmore_icon, { 'aria-hidden': true }, 'i', 'object' );
+		#>
+		<div class="bdt-step-flow">
+			<div class="bdt-step-flow-icon">
+				<span class="bdt-icon-wrapper">
+					<# if ( 'image' === settings.icon_type ) { #>
+					<# if ( settings.image && settings.image.url ) { #>
+					<img src="{{ settings.image.url }}" alt="{{ settings.title_text }}">
+					<# } #>
+					<# } else { #>
+					<# if ( iconHTML && iconHTML.rendered ) { #>
+					{{{ iconHTML.value }}}
+					<# } #>
+					<# } #>
+				</span>
+			</div>
+			<div class="bdt-step-flow-content">
+				<{{ settings.title_size }} class="bdt-step-flow-title">
+					<span>{{ settings.title_text }}</span>
+				</{{ settings.title_size }}>
+				<# if ( 'yes' === settings.show_separator ) { #>
+				<#
+				var sepType = settings.title_separator_type || 'line';
+				var divAlign = settings.divider_align || 'center';
+				var alignSuffix = ( 'left' === divAlign || 'right' === divAlign ) ? '-' + divAlign : '';
+				var lineCapClass = settings.line_cap || 'ep_square';
+				var assetsBase = '<?php echo esc_url( BDTEP_ASSETS_URL ); ?>';
+				var dividerSrc = assetsBase + 'images/divider/' + sepType + alignSuffix + '.svg';
+				#>
+				<div class="bdt-title-separator-wrapper">
+				<# if ( 'line' === sepType ) { #>
+					<div class="bdt-title-separator"></div>
+				<# } else { #>
+					<img class="bdt-animation-stroke <# print( lineCapClass ); #>" src="<# print( dividerSrc ); #>" alt="advanced divider">
+				<# } #>
+				</div>
+				<# } #>
+				<# if ( settings.description_text ) { #>
+				<div class="bdt-step-flow-description">{{ settings.description_text }}</div>
+				<# } #>
+				<# if ( 'yes' === settings.readmore && settings.readmore_link && settings.readmore_link.url ) { #>
+				<a href="{{ settings.readmore_link.url }}" class="bdt-step-flow-readmore">
+					<# if ( readmoreIcon && readmoreIcon.rendered && 'left' === settings.readmore_icon_align ) { #>
+					{{{ readmoreIcon.value }}}
+					<# } #>
+					<span class="bdt-step-flow-readmore-text">{{ settings.readmore_text }}</span>
+					<# if ( readmoreIcon && readmoreIcon.rendered && 'right' === settings.readmore_icon_align ) { #>
+					{{{ readmoreIcon.value }}}
+					<# } #>
+				</a>
+				<# } #>
+			</div>
+		</div>
+		<# if ( 'yes' === settings.badge && settings.badge_text ) { #>
+		<div class="bdt-step-flow-badge bdt-position-{{ settings.badge_position }}">
+			<span class="bdt-badge">{{ settings.badge_text }}</span>
+		</div>
+		<# } #>
 		<?php
 	}
 }

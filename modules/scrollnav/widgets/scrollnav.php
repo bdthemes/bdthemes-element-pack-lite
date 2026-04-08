@@ -1220,4 +1220,82 @@ class Scrollnav extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var navStyle   = settings.nav_style || 'default';
+		var iconAlign  = settings.icon_align || 'right';
+		var ulClass    = '';
+		if ( navStyle !== 'dot' ) {
+			ulClass = settings.vertical_nav ? 'bdt-nav bdt-nav-default' : 'bdt-navbar-nav';
+		} else {
+			ulClass = settings.vertical_nav ? 'bdt-dotnav bdt-dotnav-vertical' : 'bdt-dotnav';
+		}
+		var offset = settings.content_offset && settings.content_offset.size ? settings.content_offset.size : 0;
+		var navPos = settings.fixed_nav === 'yes' ? 'bdt-position-' + settings.nav_position + ' bdt-position-z-index' : '';
+		#>
+		<div class="bdt-scrollnav bdt-navbar-container bdt-navbar-transparent bdt-navbar {{ navPos }}" data-bdt-navbar>
+			<div>
+				<ul class="{{ ulClass }}" data-bdt-scrollspy-nav="closest: li; scroll: true; offset: {{ offset }};">
+					<# if ( settings.navs && settings.navs.length ) { #>
+					<# _.each( settings.navs, function( item ) {
+						var linkHref = ( item.nav_link && item.nav_link.url ) ? item.nav_link.url : '#';
+						var linkTarget = ( item.nav_link && item.nav_link.is_external ) ? ' target="_blank"' : '';
+						var relParts = [];
+						if ( item.nav_link && item.nav_link.is_external ) {
+							relParts.push( 'noopener', 'noreferrer' );
+						}
+						if ( item.nav_link && item.nav_link.nofollow ) {
+							relParts.push( 'nofollow' );
+						}
+						var linkRel = relParts.length ? ' rel="' + relParts.join( ' ' ) + '"' : '';
+						var tippyExtra = '';
+						if ( navStyle === 'dot' ) {
+							tippyExtra += ' class="bdt-tippy-tooltip"';
+							tippyExtra += ' data-tippy';
+							tippyExtra += ' data-tippy-content="' + _.escape( item.nav_title || '' ) + '"';
+							if ( settings.dotnav_tooltip_placement ) {
+								tippyExtra += ' data-tippy-placement="' + settings.dotnav_tooltip_placement + '"';
+							}
+							if ( settings.dotnav_tooltip_animation ) {
+								tippyExtra += ' data-tippy-animation="' + settings.dotnav_tooltip_animation + '"';
+							}
+							var ox = ( settings.dotnav_tooltip_x_offset && settings.dotnav_tooltip_x_offset.size ) ? settings.dotnav_tooltip_x_offset.size : 0;
+							var oy = ( settings.dotnav_tooltip_y_offset && settings.dotnav_tooltip_y_offset.size ) ? settings.dotnav_tooltip_y_offset.size : 0;
+							if ( ox || oy ) {
+								tippyExtra += ' data-tippy-offset="[' + ox + ',' + oy + ']"';
+							}
+							if ( settings.dotnav_tooltip_arrow === 'yes' ) {
+								tippyExtra += ' data-tippy-arrow="true"';
+							} else {
+								tippyExtra += ' data-tippy-arrow="false"';
+							}
+							if ( settings.dotnav_tooltip_trigger === 'yes' ) {
+								tippyExtra += ' data-tippy-trigger="click"';
+							}
+						}
+					#>
+					<li>
+						<a href="<# print( linkHref ); #>"<# print( linkTarget ); #><# print( linkRel ); #><# print( tippyExtra ); #>>
+							<# if ( item.scroll_nav_icon && item.scroll_nav_icon.value && iconAlign === 'left' ) { #>
+							<span class="bdt-button-icon-align-left">
+								<i class="{{ item.scroll_nav_icon.value }}" aria-hidden="true"></i>
+							</span>
+							<# } #>
+							{{ item.nav_title }}
+							<# if ( item.scroll_nav_icon && item.scroll_nav_icon.value && iconAlign === 'right' ) { #>
+							<span class="bdt-button-icon-align-right">
+								<i class="{{ item.scroll_nav_icon.value }}" aria-hidden="true"></i>
+							</span>
+							<# } #>
+						</a>
+					</li>
+					<# } ); #>
+					<# } #>
+				</ul>
+			</div>
+		</div>
+		<?php
+	}
 }

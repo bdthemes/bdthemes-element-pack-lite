@@ -50,7 +50,7 @@ class Fancy_List extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 
 		$this->start_controls_section(
@@ -257,6 +257,74 @@ class Fancy_List extends Module_Base {
 						?>
 					</li>
 				<?php endforeach; ?>
+			</ul>
+		</div>
+		<?php
+	}
+
+	protected function content_template() {
+		?>
+		<#
+		var layout     = settings.layout_style || 'style-1';
+		var titleTag   = settings.title_tags || 'h4';
+		var showNumber = settings.show_number_icon === 'yes';
+		var lineNum    = 1;
+		#>
+		<div class="bdt-fancy-list bdt-fancy-list-{{ layout }}">
+			<ul class="bdt-list bdt-fancy-list-group">
+				<# _.each( settings.icon_list, function( item ) {
+					var hasImg  = item.img && item.img.url;
+					var hasText = item.text || item.text_details;
+					var hasIcon = item.list_icon && item.list_icon.value;
+					if ( ! hasImg && ! hasText && ! hasIcon ) {
+						return;
+					}
+					var iconHTML   = elementor.helpers.renderIcon( view, item.list_icon, { 'aria-hidden': true }, 'i', 'object' );
+					var linkUrl    = item.link && item.link.url ? item.link.url : '';
+					var currentNum = showNumber ? lineNum++ : 0;
+				#>
+				<li>
+					<# if ( linkUrl ) { #>
+					<a class="bdt-fancy-list-wrap" href="{{ linkUrl }}"<# if ( item.link && item.link.is_external ) { #> target="_blank"<# } #><# if ( item.link && item.link.nofollow ) { #> rel="nofollow"<# } #>>
+					<# } else { #>
+					<div class="bdt-fancy-list-wrap">
+					<# } #>
+						<div class="bdt-flex flex-wrap">
+							<# if ( showNumber ) { #>
+							<div class="bdt-fancy-list-number-icon"><span><# print( currentNum ); #></span></div>
+							<# } #>
+							<# if ( hasImg ) { #>
+							<div class="bdt-fancy-list-img">
+								<img src="{{ item.img.url }}" alt="{{ item.text }}">
+							</div>
+							<# } #>
+							<# if ( item.text || item.text_details ) { #>
+							<div class="bdt-fancy-list-content">
+								<# if ( item.text ) { #>
+								<{{ titleTag }} class="bdt-fancy-list-title">{{{ item.text }}}</{{ titleTag }}>
+								<# } #>
+								<# if ( item.text_details ) { #>
+								<p class="bdt-fancy-list-text">{{{ item.text_details }}}</p>
+								<# } #>
+							</div>
+							<# } #>
+							<# if ( hasIcon ) { #>
+							<div class="bdt-fancy-list-icon">
+								<# if ( iconHTML && iconHTML.rendered ) { #>
+									{{{ iconHTML.value }}}
+								<# } else if ( item.list_icon && item.list_icon.value ) { #>
+									<i class="{{ item.list_icon.value }}" aria-hidden="true"></i>
+								<# } #>
+							</div>
+							<# } #>
+						</div>
+					<# if ( linkUrl ) { #>
+					</a>
+					<# } else { #>
+					</div>
+					<# } #>
+				</li>
+				<# } ); #>
 			</ul>
 		</div>
 		<?php

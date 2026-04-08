@@ -54,7 +54,7 @@ class Trailer_Box extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_layout',
@@ -2153,6 +2153,60 @@ class Trailer_Box extends Module_Base {
 		<?php if ( $link_type === 'item' && $button_url ) : ?>
 			</div>
 		<?php endif; ?>
+		<?php
+	}
+
+	protected function content_template() {
+		?>
+		<#
+		var origin   = 'bdt-position-' + ( settings.origin || 'bottom-left' );
+		var titleTag = settings.title_tags || 'h3';
+		var iconHTML = elementor.helpers.renderIcon( view, settings.button_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var migrated = elementor.helpers.isIconMigrated( settings, 'button_icon' );
+		#>
+		<div class="bdt-trailer-box bdt-position-relative">
+			<div class="bdt-trailer-box-desc {{ origin }}">
+				<div class="bdt-trailer-box-desc-inner">
+					<# if ( settings.pre_title ) { #>
+						<div class="bdt-trailer-box-pre-title">{{{ settings.pre_title }}}</div>
+					<# } #>
+					<# if ( settings.title ) { #>
+						<div class="bdt-trailer-box-title-wrap">
+							<{{ titleTag }} class="bdt-trailer-box-title">{{{ settings.title }}}</{{ titleTag }}>
+						</div>
+					<# } #>
+					<# if ( settings.content ) { #>
+						<div class="bdt-trailer-box-text">{{{ settings.content }}}</div>
+					<# } #>
+					<# if ( 'button' === settings.link_type && ! settings.button_position ) { #>
+						<div class="bdt-trailer-box-button-position">
+							<a class="bdt-trailer-box-button">
+								<# if ( iconHTML && iconHTML.rendered && 'left' === settings.icon_align ) { #>
+									{{{ iconHTML.value }}}
+								<# } #>
+								<span class="bdt-trailer-box-button-text">{{ settings.button_text }}</span>
+								<# if ( iconHTML && iconHTML.rendered && 'right' === settings.icon_align ) { #>
+									{{{ iconHTML.value }}}
+								<# } #>
+							</a>
+						</div>
+					<# } #>
+				</div>
+			</div>
+		</div>
+		<# if ( 'button' === settings.link_type && settings.button_position ) { #>
+			<div class="bdt-trailer-box-button-position bdt-position-{{ settings.button_position }}">
+				<a class="bdt-trailer-box-button">
+					<# if ( iconHTML && iconHTML.rendered && 'left' === settings.icon_align ) { #>
+						{{{ iconHTML.value }}}
+					<# } #>
+					<span class="bdt-trailer-box-button-text">{{ settings.button_text }}</span>
+					<# if ( iconHTML && iconHTML.rendered && 'right' === settings.icon_align ) { #>
+						{{{ iconHTML.value }}}
+					<# } #>
+				</a>
+			</div>
+		<# } #>
 		<?php
 	}
 }

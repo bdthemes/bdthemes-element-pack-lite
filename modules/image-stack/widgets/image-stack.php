@@ -1176,4 +1176,44 @@ class Image_Stack extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<div class="bdt-image-stack">
+			<# _.each( settings.image_stack_items, function( item ) {
+				var itemId = item._id || '';
+				var mediaType = item.media_type || 'image';
+				var tooltipText = item.tooltip_text || '';
+				var tooltipPlacement = item.tooltip_placement || 'top';
+				var linkUrl = ( item.link_url && item.link_url.url ) ? item.link_url.url : '';
+				var itemClasses = 'bdt-ep-image-stack-item elementor-repeater-item-' + itemId;
+				var tooltipAttrs = '';
+				if ( tooltipText ) {
+					itemClasses += ' bdt-tippy-tooltip';
+					tooltipAttrs = 'data-tippy="" data-tippy-arrow="true" data-tippy-placement="' + tooltipPlacement + '" data-tippy-content="' + tooltipText + '"';
+				}
+				var iconHTML = elementor.helpers.renderIcon( view, item.selected_icon, { 'aria-hidden': 'true' }, 'i', 'object' );
+				var imageUrl = ( item.image && item.image.url ) ? item.image.url : '';
+			#>
+			<div class="{{ itemClasses }}" {{{ tooltipAttrs }}}>
+				<# if ( linkUrl ) { #>
+				<a href="{{ linkUrl }}">
+				<# } else { #>
+				<span>
+				<# } #>
+					<# if ( mediaType === 'icon' && iconHTML && iconHTML.rendered ) { #>
+						{{{ iconHTML.value }}}
+					<# } else if ( mediaType === 'image' && imageUrl ) { #>
+						<img src="{{ imageUrl }}" alt="{{ tooltipText }}">
+					<# } #>
+				<# if ( linkUrl ) { #>
+				</a>
+				<# } else { #>
+				</span>
+				<# } #>
+			</div>
+			<# } ); #>
+		</div>
+		<?php
+	}
 }

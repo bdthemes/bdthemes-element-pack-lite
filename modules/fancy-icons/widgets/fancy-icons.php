@@ -55,7 +55,7 @@ class Fancy_Icons extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-    
+
     protected function register_controls() {
 
         $this->start_controls_section(
@@ -98,6 +98,10 @@ class Fancy_Icons extends Module_Base {
                 'fa4compatibility' => 'icon',
                 'condition' => [
                     'social_type' => 'icon',
+                ],
+                'default' => [
+                    'value' => 'fab fa-facebook-f',
+                    'library' => 'fa-brands',
                 ],
                 'skin' => 'inline',
                 'label_block' => false
@@ -180,8 +184,8 @@ class Fancy_Icons extends Module_Base {
                         'social_icon' => ['value' => 'fab fa-facebook-f', 'library' => 'fa-brands'],
                     ],
                     [
-                        'social_name' => esc_html__('Twitter', 'bdthemes-element-pack'),
-                        'social_icon' => ['value' => 'fab fa-twitter', 'library' => 'fa-brands'],
+                        'social_name' => esc_html__('X', 'bdthemes-element-pack'),
+                        'social_icon' => ['value' => 'fab fa-x-twitter', 'library' => 'fa-brands'],
                     ],
                     [
                         'social_name' => esc_html__('Linkedin', 'bdthemes-element-pack'),
@@ -628,6 +632,60 @@ class Fancy_Icons extends Module_Base {
                         </a>
                     </div>
                 <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+    }
+
+    protected function content_template() {
+        ?>
+        <#
+        var bgType = settings.background_type || 'image';
+        var bgStyle = '';
+        if ( bgType === 'image' && settings.background_image && settings.background_image.url ) {
+            bgStyle = 'background-image: url(' + settings.background_image.url + ');';
+            if ( settings.background_attachment ) {
+                bgStyle += 'background-attachment: ' + settings.background_attachment + ';';
+            }
+        }
+        var desktopCols = settings.columns || '2';
+        var tabletCols  = settings.columns_tablet || '2';
+        var mobileCols  = settings.columns_mobile || '1';
+        #>
+        <div class="bdt-fancy-icons" style="{{ bgStyle }}">
+            <div class="bdt-fancy-icons-background">
+                <# if ( bgType === 'video' && settings.video_link ) { #>
+                <video autoplay loop muted playsinline>
+                    <source src="{{ settings.video_link }}" type="video/mp4">
+                </video>
+                <# } else if ( bgType === 'youtube' && settings.youtube_link ) { #>
+                <iframe src="" allowfullscreen></iframe>
+                <# } #>
+            </div>
+            <div class="bdt-grid bdt-grid-collapse bdt-child-width-1-{{ mobileCols }} bdt-child-width-1-{{ tabletCols }}@s bdt-child-width-1-{{ desktopCols }}@l" data-bdt-grid>
+                <# _.each( settings.share_items, function( item ) {
+                    var socialType = item.social_type || 'icon';
+                    var hasIcon = ( socialType === 'icon' && item.social_icon && item.social_icon.value );
+                    var hasText = ( socialType === 'text' && item.social_name );
+                    var iconHTML = hasIcon ? elementor.helpers.renderIcon( view, item.social_icon, { 'aria-hidden': true }, 'i', 'object' ) : null;
+                    var linkUrl = item.social_link && item.social_link.url ? item.social_link.url : '#';
+                #>
+                <div class="bdt-fancy-icons-item bdt-flex bdt-flex-middle bdt-flex-center elementor-repeater-item-{{ item._id }}">
+                    <a class="{{ socialType }}" href="{{ linkUrl }}">
+                        <# if ( hasIcon || hasText ) { #>
+                        <span class="bdt-icon-wrapper">
+                            <# if ( hasIcon && iconHTML && iconHTML.rendered ) { #>
+                                {{{ iconHTML.value }}}
+                            <# } else if ( hasIcon ) { #>
+                                <i class="{{ item.social_icon.value }}" aria-hidden="true"></i>
+                            <# } else if ( hasText ) { #>
+                                {{{ item.social_name }}}
+                            <# } #>
+                        </span>
+                        <# } #>
+                    </a>
+                </div>
+                <# } ); #>
             </div>
         </div>
         <?php

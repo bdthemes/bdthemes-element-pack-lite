@@ -781,5 +781,98 @@ class Social_Share extends Module_Base {
 		
 	}
 
+	protected function content_template() {
+		$medias_for_js = [];
+		foreach ( Module::get_social_media() as $name => $data ) {
+			$medias_for_js[ $name ] = [
+				'title'       => $data['title'],
+				'has_counter' => ! empty( $data['has_counter'] ),
+			];
+		}
+		global $wp;
+		$link_current_url = ( is_object( $wp ) && isset( $wp->request ) )
+			? home_url( add_query_arg( [], $wp->request ) )
+			: home_url( '/' );
+		?>
+		<#
+		var mediasMap = <?php echo wp_json_encode( $medias_for_js ); ?>;
+		var linkButtonDataUrl = <?php echo wp_json_encode( $link_current_url ); ?>;
+		var getIconClass = function( name ) {
+			if ( name === 'email' ) {
+				return 'ep-icon-envelope';
+			}
+			if ( name === 'vkontakte' ) {
+				return 'ep-icon-vk';
+			}
+			return 'ep-icon-' + name;
+		};
+		var getViewMode = function() {
+			var v;
+			if ( settings && typeof settings.get === 'function' ) {
+				v = settings.get( 'view' );
+			}
+			if ( v === undefined || v === null || v === '' ) {
+				v = settings.view;
+			}
+			if ( v === undefined || v === null || v === '' ) {
+				v = settings['view'];
+			}
+			if ( v === undefined || v === null || v === '' ) {
+				v = 'icon-text';
+			}
+			return v;
+		};
+		var viewMode = getViewMode();
+		var showLabel = 'yes' === settings.show_label;
+		var showText = 'text' === viewMode || showLabel;
+		var hasCounterFor = function( socialName ) {
+			var m = mediasMap[ socialName ];
+			return viewMode !== 'icon' && settings.show_counter === 'yes' && m && m.has_counter;
+		};
+		#>
+		<div class="bdt-social-share bdt-ep-grid">
+			<# _.each( settings.share_buttons || [], function( button ) {
+				var socialName = button.button;
+				var media = mediasMap[ socialName ] || {};
+				var titleFallback = media.title || socialName;
+				var hasCounter = hasCounterFor( socialName );
+				var showTitle = showLabel || 'text' === viewMode;
+				var divAttrs = ' class="bdt-ss-btn bdt-ss-' + _.escape( socialName ) + '" data-social="' + _.escape( socialName ) + '"';
+				if ( socialName === 'link' ) {
+					divAttrs += ' data-url="' + _.escape( linkButtonDataUrl ) + '"';
+				} else if ( settings.share_url_type === 'custom' && settings.share_url && settings.share_url.url ) {
+					divAttrs += ' data-url="' + _.escape( settings.share_url.url ) + '"';
+				}
+				if ( button.copied_text ) {
+					var orginal = button.text ? button.text : titleFallback;
+					divAttrs += ' data-orginal="' + _.escape( orginal ) + '" data-copied="' + _.escape( button.copied_text ) + '"';
+				}
+			#>
+			<div class="bdt-social-share-item bdt-ep-grid-item">
+				<div<# print( divAttrs ); #>>
+					<# if ( 'icon' === viewMode || 'icon-text' === viewMode ) { #>
+					<span class="bdt-ss-icon">
+						<i class="<# print( getIconClass( socialName ) ); #>"></i>
+					</span>
+					<# } #>
+					<# if ( showText || hasCounter ) { #>
+					<div class="bdt-social-share-text">
+						<# if ( showTitle ) { #>
+						<span class="bdt-social-share-title">
+							<# if ( button.text ) { #>{{ button.text }}<# } else { #><# print( _.escape( titleFallback ) ); #><# } #>
+						</span>
+						<# } #>
+						<# if ( hasCounter ) { #>
+						<span class="bdt-social-share-counter" data-counter="<# print( _.escape( socialName ) ); #>"></span>
+						<# } #>
+					</div>
+					<# } #>
+				</div>
+			</div>
+			<# } ); #>
+		</div>
+		<?php
+	}
+
 	
 }

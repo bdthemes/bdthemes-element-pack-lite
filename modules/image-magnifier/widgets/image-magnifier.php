@@ -351,7 +351,7 @@ class Image_Magnifier extends Module_Base {
             <?php
         } else {
         	?>
-        	<div class="bdt-alert-warning bdt-text-center">Opps!! You didn't choose any image for magnifying action</div>
+        	<div class="bdt-alert-warning bdt-text-center"><?php esc_html_e('Opps!! You didn\'t choose any image for magnifying action', 'bdthemes-element-pack'); ?></div>
         	<?php
         }
 	}
