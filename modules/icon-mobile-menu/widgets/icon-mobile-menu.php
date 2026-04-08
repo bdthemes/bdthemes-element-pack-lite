@@ -585,6 +585,9 @@ class Icon_Mobile_Menu extends Module_Base {
 			[ 
 				'label' => __( 'Menu Text', 'bdthemes-element-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [ 
+					'menu_style' => [ 'style-1', 'style-2' ],
+				],
 			]
 		);
 
@@ -750,7 +753,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'menu_tooltip_width',
 			[ 
-				'label'       => esc_html__( 'Width', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Max Width', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SLIDER,
 				'size_units'  => [ 
 					'px',
@@ -784,17 +787,6 @@ class Icon_Mobile_Menu extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .bdt-title' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'menu_tooltip_color',
-			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -963,6 +955,56 @@ class Icon_Mobile_Menu extends Module_Base {
 						</<?php echo esc_attr( $tag ); ?>>
 					</li>
 				<?php endforeach; ?>
+			</ul>
+		</div>
+		<?php
+	}
+
+	protected function content_template() {
+		?>
+		<#
+		var menuStyle = settings.menu_style || 'style-1';
+		var wrapperClass = 'bdt-icon-mobile-menu-wrap bdt-icon-mobile-menu-' + menuStyle;
+		var menuItems = settings.menu_items || [];
+		var menuTooltip = settings.menu_tooltip === 'yes';
+		var tp = settings.menu_tooltip_placement || '';
+		var ta = settings.menu_tooltip_animation || '';
+		var xOff = ( settings.menu_tooltip_x_offset && settings.menu_tooltip_x_offset.size !== undefined ) ? settings.menu_tooltip_x_offset.size : 0;
+		var yOff = ( settings.menu_tooltip_y_offset && settings.menu_tooltip_y_offset.size !== undefined ) ? settings.menu_tooltip_y_offset.size : 0;
+		var tippyOffsetAttr = ( xOff !== 0 || yOff !== 0 ) ? '[' + xOff + ',' + yOff + ']' : '';
+		var tippyArrow = settings.menu_tooltip_arrow === 'yes' ? 'true' : 'false';
+		var tippyTriggerClick = settings.menu_tooltip_trigger === 'yes';
+		#>
+		<div class="{{ wrapperClass }}">
+			<ul>
+				<# _.each( menuItems, function( item ) {
+					var linkUrl = ( item.link && item.link.url ) ? item.link.url : '';
+					var iconHTML = elementor.helpers.renderIcon( view, item.menu_icon, { 'aria-hidden': 'true' }, 'i', 'object' );
+					var menuText = item.menu_text || '';
+					var tooltipHtml = '';
+					if ( menuTooltip && menuText ) {
+						tooltipHtml = '<span class="bdt-title">' + menuText + '</span>';
+					}
+				#>
+				<li class="bdt-icon-mobile-menu-list">
+					<# if ( linkUrl ) { #>
+					<a href="{{ linkUrl }}" class="bdt-icon-mobile-menu-link<# if ( menuTooltip && menuText ) { #> bdt-tippy-tooltip<# } #>"<# if ( menuTooltip && menuText ) { #> data-tippy data-tippy-content="{{ tooltipHtml }}"<# if ( tp ) { #> data-tippy-placement="{{ tp }}"<# } #><# if ( ta ) { #> data-tippy-animation="{{ ta }}"<# } #><# if ( tippyOffsetAttr ) { #> data-tippy-offset="{{ tippyOffsetAttr }}"<# } #> data-tippy-arrow="{{ tippyArrow }}"<# if ( tippyTriggerClick ) { #> data-tippy-trigger="click"<# } #><# } #>>
+					<# } else { #>
+					<div class="bdt-icon-mobile-menu-link<# if ( menuTooltip && menuText ) { #> bdt-tippy-tooltip<# } #>"<# if ( menuTooltip && menuText ) { #> data-tippy data-tippy-content="{{ tooltipHtml }}"<# if ( tp ) { #> data-tippy-placement="{{ tp }}"<# } #><# if ( ta ) { #> data-tippy-animation="{{ ta }}"<# } #><# if ( tippyOffsetAttr ) { #> data-tippy-offset="{{ tippyOffsetAttr }}"<# } #> data-tippy-arrow="{{ tippyArrow }}"<# if ( tippyTriggerClick ) { #> data-tippy-trigger="click"<# } #><# } #>>
+					<# } #>
+						<# if ( item.menu_icon && item.menu_icon.value ) { #>
+						<span class="bdt-icon-mobile-menu">
+							{{{ iconHTML.value }}}
+						</span>
+						<# } #>
+						<span class="bdt-text-mobile-menu">{{{ item.menu_text }}}</span>
+					<# if ( linkUrl ) { #>
+					</a>
+					<# } else { #>
+					</div>
+					<# } #>
+				</li>
+				<# } ); #>
 			</ul>
 		</div>
 		<?php

@@ -1520,4 +1520,90 @@ class Flip_Box extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var flipTrigger = ( settings.flip_trigger === 'click' ) ? 'click' : 'hover';
+		var flipSettings = JSON.stringify( { flipTrigger: flipTrigger } );
+
+		var graphicElement  = settings.graphic_element || 'icon';
+		var iconView        = settings.icon_view || 'default';
+		var iconShape       = ( iconView !== 'default' ) ? ( settings.icon_shape || 'circle' ) : '';
+		var frontTitleTag   = settings.front_title_tags || 'h3';
+		var backTitleTag    = settings.back_title_tags || 'h3';
+		var buttonSize      = settings.button_size || 'sm';
+		var linkUrl         = settings.link && settings.link.url ? settings.link.url : '';
+		var linkClick       = settings.link_click || 'button';
+		var wrapBackAsLink  = linkUrl && linkClick === 'box';
+		var btnHref         = ( linkUrl && linkClick !== 'box' ) ? linkUrl : 'javascript:void(0);';
+		var btnAnim         = settings.button_hover_animation ? ' elementor-animation-' + settings.button_hover_animation : '';
+		var btnClasses      = 'bdt-flip-box-button elementor-button elementor-size-' + buttonSize + btnAnim;
+
+		var iconHTML     = elementor.helpers.renderIcon( view, settings.flip_box_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var migrated     = elementor.helpers.isIconMigrated( settings, 'flip_box_icon' );
+
+		var iconWrapperClasses = 'elementor-icon-wrapper elementor-view-' + iconView;
+		if ( iconShape ) {
+			iconWrapperClasses += ' elementor-shape-' + iconShape;
+		}
+		#>
+		<div class="bdt-flip-box" data-settings="{{ flipSettings }}">
+			<div class="bdt-flip-box-layer bdt-flip-box-front">
+				<div class="bdt-flip-box-layer-overlay">
+					<div class="bdt-flip-box-layer-inner">
+						<# if ( graphicElement === 'image' && settings.image && settings.image.url ) { #>
+						<div class="bdt-flip-box-image">
+							<img src="{{ settings.image.url }}" alt="{{ settings.front_title_text }}">
+						</div>
+						<# } else if ( graphicElement === 'icon' && settings.flip_box_icon && settings.flip_box_icon.value ) { #>
+						<div class="{{ iconWrapperClasses }}">
+							<div class="elementor-icon">
+								<# if ( iconHTML && iconHTML.rendered && ( ! settings.icon || migrated ) ) { #>
+									{{{ iconHTML.value }}}
+								<# } else { #>
+									<i class="{{ settings.icon }}" aria-hidden="true"></i>
+								<# } #>
+							</div>
+						</div>
+						<# } #>
+						<# if ( settings.front_title_text ) { #>
+						<{{ frontTitleTag }} class="bdt-flip-box-layer-title">{{{ settings.front_title_text }}}</{{ frontTitleTag }}>
+						<# } #>
+						<# if ( settings.front_description_text ) { #>
+						<div class="bdt-flip-box-layer-desc">{{{ settings.front_description_text }}}</div>
+						<# } #>
+					</div>
+				</div>
+			</div>
+			<# if ( wrapBackAsLink ) { #>
+			<a class="bdt-flip-box-layer bdt-flip-box-back" href="{{ linkUrl }}"<# if ( settings.link && settings.link.is_external ) { #> target="_blank"<# } #><# if ( settings.link && settings.link.nofollow ) { #> rel="nofollow"<# } #>>
+			<# } else { #>
+			<div class="bdt-flip-box-layer bdt-flip-box-back">
+			<# } #>
+				<div class="bdt-flip-box-layer-overlay">
+					<div class="bdt-flip-box-layer-inner">
+						<# if ( settings.back_title_text ) { #>
+						<{{ backTitleTag }} class="bdt-flip-box-layer-title">{{{ settings.back_title_text }}}</{{ backTitleTag }}>
+						<# } #>
+						<# if ( settings.back_description_text ) { #>
+						<div class="bdt-flip-box-layer-desc">{{{ settings.back_description_text }}}</div>
+						<# } #>
+						<# if ( settings.button_text ) { #>
+							<# if ( wrapBackAsLink ) { #>
+							<button type="button" class="{{ btnClasses }}">{{{ settings.button_text }}}</button>
+							<# } else { #>
+							<a class="{{ btnClasses }}" href="{{ btnHref }}"<# if ( linkUrl && settings.link && settings.link.is_external ) { #> target="_blank"<# } #><# if ( linkUrl && settings.link && settings.link.nofollow ) { #> rel="nofollow"<# } #>>{{{ settings.button_text }}}</a>
+							<# } #>
+						<# } #>
+					</div>
+				</div>
+			<# if ( wrapBackAsLink ) { #>
+			</a>
+			<# } else { #>
+			</div>
+			<# } #>
+		</div>
+		<?php
+	}
 }

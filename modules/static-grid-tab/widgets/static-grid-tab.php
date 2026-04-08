@@ -1171,4 +1171,98 @@ class Static_Grid_Tab extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var gridId = 'bdt-ep-static-grid-tab-' + view.getID();
+		var borderW = ( settings.item_border_width && settings.item_border_width.size !== undefined ) ? parseInt( settings.item_border_width.size, 10 ) : 2;
+		var gridTabData = {
+			grid: settings.columns ? parseInt( settings.columns, 10 ) : 4,
+			borderWidth: borderW,
+			config: {
+				layout: settings.layout_type || 'grid',
+				speed: settings.speed ? parseInt( settings.speed, 10 ) : 500,
+				activeTab: settings.active_tab_no || '',
+				showClose: settings.show_close === 'yes',
+				scrollToTab: settings.scroll_to_tab === 'yes',
+				rtl: <?php echo is_rtl() ? 'true' : 'false'; ?>
+			}
+		};
+		var dataSettings = JSON.stringify( gridTabData );
+
+		var iconHTML = elementor.helpers.renderIcon( view, settings.readmore_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var readmoreLabel = settings.readmore_text || '<?php echo esc_js( __( 'Read More', 'bdthemes-element-pack' ) ); ?>';
+
+		var linkAttrs = function( link ) {
+			if ( ! link || ! link.url ) {
+				return '';
+			}
+			var a = ' href="' + _.escape( link.url ) + '"';
+			if ( link.is_external ) {
+				a += ' target="_blank"';
+			}
+			if ( link.nofollow ) {
+				a += ' rel="nofollow"';
+			}
+			return a;
+		};
+		#>
+		<div class="bdt-static-grid-tab" data-settings="<# print( _.escape( dataSettings ) ); #>">
+			<dl id="<# print( gridId ); #>" class="gridtab">
+				<# _.each( settings.static_tabs_item || [], function( item ) {
+					var gridTabType = settings.grid_tab_type || 'image';
+					var readmoreAnim = ( settings.readmore_hover_animation && settings.readmore_hover_animation !== '' ) ? ' elementor-animation-' + settings.readmore_hover_animation : '';
+					var readmoreClass = 'bdt-ep-static-grid-tab-readmore' + readmoreAnim;
+					var hasRmIcon = iconHTML && iconHTML.rendered;
+					var iconAlign = settings.icon_align || 'right';
+				#>
+				<dt>
+					<# if ( gridTabType === 'title' && settings.show_title === 'yes' && item.title ) { #>
+					<div class="bdt-ep-static-grid-tab-title">{{{ item.title }}}</div>
+					<# } else if ( gridTabType !== 'title' && settings.show_image === 'yes' && item.image && item.image.url ) { #>
+					<div class="bdt-ep-static-grid-tab-thumbnail">
+						<img src="{{ item.image.url }}" alt="{{ item.title }}">
+					</div>
+					<# } #>
+				</dt>
+				<dd>
+					<div class="bdt-ep-static-grid-tab-item">
+						<# if ( 'yes' === settings.show_image && item.image && item.image.url ) { #>
+						<div class="bdt-ep-static-grid-tab-image">
+							<div class="bdt-ep-static-grid-tab-image-inner bdt-gt-mh bdt-cover-container">
+								<img src="{{ item.image.url }}" alt="{{ item.title }}">
+							</div>
+						</div>
+						<# } #>
+						<div class="bdt-ep-static-grid-tab-desc">
+							<div class="bdt-post-grid-desc-inner bdt-gt-mh">
+								<# if ( 'yes' === settings.show_title && item.title ) { #>
+								<{{ settings.title_tag }} class="bdt-ep-static-grid-tab-main-title">{{{ item.title }}}</{{ settings.title_tag }}>
+								<# } #>
+								<# if ( 'yes' === settings.show_text && item.text ) { #>
+								<div class="bdt-ep-static-grid-tab-excerpt">{{{ item.text }}}</div>
+								<# } #>
+								<# if ( 'yes' === settings.show_readmore && item.readmore_link && item.readmore_link.url ) { #>
+								<div class="bdt-ep-static-grid-tab-readmore-wrap">
+									<a class="<# print( readmoreClass ); #>"<# print( linkAttrs( item.readmore_link ) ); #>>
+										<# if ( hasRmIcon && 'left' === iconAlign ) { #>
+										<span class="bdt-button-icon-align-left">{{{ iconHTML.value }}}</span>
+										<# } #>
+										<span class="bdt-ep-static-grid-tab-readmore-text"><# print( _.escape( readmoreLabel ) ); #></span>
+										<# if ( hasRmIcon && 'right' === iconAlign ) { #>
+										<span class="bdt-button-icon-align-right">{{{ iconHTML.value }}}</span>
+										<# } #>
+									</a>
+								</div>
+								<# } #>
+							</div>
+						</div>
+					</div>
+				</dd>
+				<# } ); #>
+			</dl>
+		</div>
+		<?php
+	}
 }

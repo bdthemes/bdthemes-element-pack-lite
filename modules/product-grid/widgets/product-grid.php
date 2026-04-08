@@ -1987,4 +1987,141 @@ class Product_Grid extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var rmIconHTML = elementor.helpers.renderIcon( view, settings.readmore_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var rmMigrated = elementor.helpers.isIconMigrated( settings, 'readmore_icon' );
+		var iconAlign  = settings.icon_align || 'right';
+		#>
+		<div class="bdt-ep-product-grid">
+			<# _.each( settings.product_items, function( item ) {
+
+				var imageMaskClass = ( settings.image_mask_popover === 'yes' ) ? ' bdt-image-mask' : '';
+
+				var ratingNum = parseFloat( ( item.rating_number && item.rating_number.size ) ? item.rating_number.size : 0 );
+				var ratingStr = ratingNum.toString();
+				var firstVal, secondVal;
+				if ( ratingStr.indexOf('.') !== -1 ) {
+					var parts = ratingStr.split('.');
+					firstVal  = parseInt( parts[0] ) <= 5 ? parseInt( parts[0] ) : 5;
+					secondVal = parseInt( parts[1] ) < 5 ? 0 : 5;
+				} else {
+					firstVal  = ratingNum <= 5 ? Math.floor( ratingNum ) : 5;
+					secondVal = 0;
+				}
+				var score = firstVal + '-' + secondVal;
+
+				var itemHref   = ( item.readmore_link && item.readmore_link.url ) ? item.readmore_link.url : '#';
+				var itemTarget = ( item.readmore_link && item.readmore_link.is_external ) ? ' target="_blank"' : '';
+				var itemRel    = ( item.readmore_link && item.readmore_link.nofollow ) ? ' rel="nofollow"' : '';
+
+				var titlePriceClass = ( settings.show_price === 'yes' && settings.show_title === 'yes' )
+					? 'bdt-ep-product-grid-title-price bdt-flex bdt-flex-middle bdt-flex-between'
+					: 'bdt-ep-product-grid-title-price';
+			#>
+			<div class="bdt-ep-product-grid-item bdt-flex bdt-flex-column elementor-repeater-item-{{ item._id }}">
+
+				<# if ( settings.show_image === 'yes' && item.image && item.image.url ) { #>
+				<div class="bdt-ep-product-grid-image bdt-flex-inline{{ imageMaskClass }}">
+					<img src="{{ item.image.url }}" alt="{{ item.title }}">
+					<# if ( settings.readmore_link_to === 'image' ) { #>
+						<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-grid-link bdt-position-z-index"></a>
+					<# } #>
+				</div>
+				<# } #>
+
+				<div class="bdt-ep-product-grid-content bdt-flex bdt-flex-column bdt-flex-between">
+					<div>
+						<div class="{{ titlePriceClass }}">
+							<# if ( settings.show_title === 'yes' && item.title ) { #>
+							<{{ settings.title_tag }} class="bdt-ep-product-grid-title">
+								{{{ item.title }}}
+								<# if ( settings.readmore_link_to === 'title' ) { #>
+									<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-grid-link"></a>
+								<# } #>
+							</{{ settings.title_tag }}>
+							<# } #>
+
+							<# if ( settings.show_price === 'yes' && item.price ) { #>
+							<div class="bdt-ep-product-grid-price">{{{ item.price }}}</div>
+							<# } #>
+						</div>
+
+						<# if ( settings.show_text === 'yes' && item.text ) { #>
+						<div class="bdt-ep-product-grid-text">{{{ item.text }}}</div>
+						<# } #>
+
+						<# if ( settings.readmore_link_to === 'button' && item.readmore_link && item.readmore_link.url ) { #>
+						<div class="bdt-ep-product-grid-readmore-wrap">
+							<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-grid-readmore<# if ( settings.readmore_hover_animation ) { #> elementor-animation-{{ settings.readmore_hover_animation }}<# } #>">
+								<# if ( settings.readmore_icon && settings.readmore_icon.value && iconAlign === 'left' ) { #>
+								<span class="bdt-button-icon-align-left">
+									<# if ( rmIconHTML && rmIconHTML.rendered && rmMigrated ) { #>
+										{{{ rmIconHTML.value }}}
+									<# } else { #>
+										<i class="{{ settings.readmore_icon.value }}" aria-hidden="true"></i>
+									<# } #>
+								</span>
+								<# } #>
+								{{{ settings.readmore_text }}}
+								<# if ( settings.readmore_icon && settings.readmore_icon.value && iconAlign === 'right' ) { #>
+								<span class="bdt-button-icon-align-right">
+									<# if ( rmIconHTML && rmIconHTML.rendered && rmMigrated ) { #>
+										{{{ rmIconHTML.value }}}
+									<# } else { #>
+										<i class="{{ settings.readmore_icon.value }}" aria-hidden="true"></i>
+									<# } #>
+								</span>
+								<# } #>
+							</a>
+						</div>
+						<# } #>
+					</div>
+
+					<div class="bdt-ep-product-grid-rating-time bdt-flex bdt-flex-middle bdt-flex-between bdt-flex-wrap">
+						<# if ( settings.show_rating === 'yes' ) { #>
+						<div>
+							<div class="bdt-ep-product-grid-rating bdt-flex-inline bdt-flex-middle bdt-{{ settings.rating_type }}">
+								<# if ( settings.rating_type === 'number' ) { #>
+									<span>{{ ratingNum }}</span>
+									<i class="ep-icon-star-full" aria-hidden="true"></i>
+								<# } else { #>
+									<span class="epsc-rating epsc-rating-{{ score }}">
+										<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
+										<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
+										<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
+										<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
+										<span class="epsc-rating-item"><i class="ep-icon-star" aria-hidden="true"></i></span>
+									</span>
+								<# } #>
+							</div>
+							<span class="bdt-ep-product-grid-rating-count">{{ item.rating_count }}</span>
+						</div>
+						<# } #>
+
+						<# if ( settings.show_time === 'yes' && item.time ) { #>
+						<div class="bdt-ep-product-grid-time">
+							<i class="ep-icon-clock-o" aria-hidden="true"></i>
+							{{{ item.time }}}
+						</div>
+						<# } #>
+					</div>
+				</div>
+
+				<# if ( settings.badge === 'yes' && item.badge_text ) { #>
+				<div class="bdt-ep-product-grid-badge bdt-position-small bdt-position-{{ settings.badge_position }}">
+					<span class="bdt-badge bdt-padding-small">{{{ item.badge_text }}}</span>
+				</div>
+				<# } #>
+
+				<# if ( settings.readmore_link_to === 'wrapper' ) { #>
+					<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-grid-link bdt-position-z-index"></a>
+				<# } #>
+			</div>
+			<# } ); #>
+		</div>
+		<?php
+	}
 }

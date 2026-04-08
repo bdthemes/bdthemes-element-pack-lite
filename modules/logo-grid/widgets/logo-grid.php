@@ -1034,4 +1034,84 @@ class Logo_Grid extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var logoList = settings.logo_list || [];
+		var hoverAnim = settings.hover_animation || '';
+		var imageMask = settings.image_mask_popover === 'yes';
+		var logoTooltipAnimation = settings.logo_tooltip_animation || '';
+		var logoTooltipX = ( settings.logo_tooltip_x_offset && settings.logo_tooltip_x_offset.size !== undefined ) ? parseInt( settings.logo_tooltip_x_offset.size, 10 ) : 0;
+		var logoTooltipY = ( settings.logo_tooltip_y_offset && settings.logo_tooltip_y_offset.size !== undefined ) ? parseInt( settings.logo_tooltip_y_offset.size, 10 ) : 0;
+		var logoTooltipArrow = settings.logo_tooltip_arrow === 'yes';
+		var logoTooltipTrigger = settings.logo_tooltip_trigger === 'yes';
+		var tippyArrowStr = logoTooltipArrow ? 'true' : 'false';
+
+		var scrollspyAttr = '';
+		if ( settings.grid_animation_type ) {
+			var gsDelay = ( settings.grid_anim_delay && settings.grid_anim_delay.size !== undefined ) ? parseInt( settings.grid_anim_delay.size, 10 ) : 300;
+			scrollspyAttr = 'cls: bdt-animation-' + settings.grid_animation_type + '; delay: ' + gsDelay + '; target: > .bdt-item;';
+		}
+
+		var placeholderUrl = '<?php echo esc_url( Utils::get_placeholder_image_src() ); ?>';
+		#>
+		<div class="bdt-logo-grid-wrapper"<# if ( scrollspyAttr ) { #> bdt-scrollspy="{{ scrollspyAttr }}"<# } #>>
+			<# _.each( logoList, function( item ) {
+				var itemName = item.name || '';
+				var itemDesc = item.description || '';
+				var imageAlt = itemName + ' : ' + itemDesc;
+				var itemLinkUrl = ( item.link && item.link.url ) ? item.link.url : '';
+				var linkTarget = ( item.link && item.link.is_external ) ? '_blank' : '_self';
+				var linkRel = '';
+				if ( item.link && item.link.is_external ) {
+					linkRel = 'noopener noreferrer';
+				}
+				if ( item.link && item.link.nofollow ) {
+					linkRel = linkRel ? linkRel + ' nofollow' : 'nofollow';
+				}
+				var hasTooltip = itemName && itemDesc && item.logo_tooltip === 'yes';
+				var tooltipHtml = '<span class="bdt-title">' + _.escape( itemName ) + '</span>' + _.escape( itemDesc );
+				var tooltipAttr = tooltipHtml.replace( /"/g, '&quot;' );
+				var itemClasses = 'bdt-item';
+				if ( itemLinkUrl ) {
+					itemClasses += ' bdt-logo-grid-link';
+				}
+				if ( hasTooltip ) {
+					itemClasses += ' bdt-tippy-tooltip';
+				}
+				var figureClass = 'bdt-logo-grid-figure';
+				if ( imageMask ) {
+					figureClass += ' bdt-image-mask';
+				}
+				var imgClass = 'bdt-logo-grid-img';
+				if ( hoverAnim ) {
+					imgClass += ' elementor-animation-' + hoverAnim;
+				}
+			#>
+				<# if ( itemLinkUrl ) { #>
+				<a class="{{ itemClasses }}" data-tippy-content="<# print( tooltipAttr ); #>"<# if ( hasTooltip ) { #> data-tippy=""<# if ( item.logo_tooltip_placement ) { #> data-tippy-placement="{{ item.logo_tooltip_placement }}"<# } #><# if ( logoTooltipAnimation ) { #> data-tippy-animation="{{ logoTooltipAnimation }}"<# } #><# if ( logoTooltipX !== 0 || logoTooltipY !== 0 ) { #> data-tippy-offset="[{{ logoTooltipX }},{{ logoTooltipY }}]"<# } #> data-tippy-arrow="{{ tippyArrowStr }}"<# if ( logoTooltipTrigger ) { #> data-tippy-trigger="click"<# } #><# } #> href="{{ itemLinkUrl }}" target="{{ linkTarget }}"<# if ( linkRel ) { #> rel="{{ linkRel }}"<# } #>>
+					<figure class="{{ figureClass }}">
+						<# if ( item.image && item.image.url ) { #>
+							<img class="{{ imgClass }}" src="{{ item.image.url }}" alt="{{ imageAlt }}">
+						<# } else { #>
+							<img class="{{ imgClass }}" src="{{ placeholderUrl }}" alt="{{ imageAlt }}">
+						<# } #>
+					</figure>
+				</a>
+				<# } else { #>
+				<div class="{{ itemClasses }}" data-tippy-content="<# print( tooltipAttr ); #>"<# if ( hasTooltip ) { #> data-tippy=""<# if ( item.logo_tooltip_placement ) { #> data-tippy-placement="{{ item.logo_tooltip_placement }}"<# } #><# if ( logoTooltipAnimation ) { #> data-tippy-animation="{{ logoTooltipAnimation }}"<# } #><# if ( logoTooltipX !== 0 || logoTooltipY !== 0 ) { #> data-tippy-offset="[{{ logoTooltipX }},{{ logoTooltipY }}]"<# } #> data-tippy-arrow="{{ tippyArrowStr }}"<# if ( logoTooltipTrigger ) { #> data-tippy-trigger="click"<# } #><# } #>>
+					<figure class="{{ figureClass }}">
+						<# if ( item.image && item.image.url ) { #>
+							<img class="{{ imgClass }}" src="{{ item.image.url }}" alt="{{ imageAlt }}">
+						<# } else { #>
+							<img class="{{ imgClass }}" src="{{ placeholderUrl }}" alt="{{ imageAlt }}">
+						<# } #>
+					</figure>
+				</div>
+				<# } #>
+			<# } ); #>
+		</div>
+		<?php
+	}
 }

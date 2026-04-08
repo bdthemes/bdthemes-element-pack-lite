@@ -1826,4 +1826,53 @@ class Price_List extends Module_Base {
 				</ul>
 				<?php
 	}
+
+	protected function content_template() {
+		?>
+		<ul class="bdt-price-list">
+			<# _.each( settings.price_list, function( item ) { #>
+			<li class="bdt-price-list-item">
+				<# if ( settings.item_counter === 'yes' ) { #>
+				<div class="bdt-price-list-counter"></div>
+				<# } #>
+				<# if ( settings.show_badge === 'yes' && item.item_badge ) { #>
+				<span class="bdt-price-list-badge">{{ item.item_badge }}</span>
+				<# } #>
+				<div class="bdt-grid bdt-grid-collapse bdt-flex-middle" bdt-grid>
+					<# if ( item.image && item.image.url ) { #>
+					<div class="bdt-price-list-image bdt-width-auto">
+						<img src="{{ item.image.url }}" alt="{{ item.title }}">
+					</div>
+					<# } #>
+					<div class="bdt-price-list-text bdt-width-expand">
+						<div>
+							<div class="bdt-price-list-header bdt-grid bdt-grid-small bdt-flex-middle" bdt-grid>
+								<span class="bdt-price-list-title">{{ item.title }}</span>
+								<span class="bdt-price-list-separator bdt-width-expand"></span>
+							</div>
+							<# if ( item.item_description ) { #>
+							<p class="bdt-price-list-description">{{{ item.item_description }}}</p>
+							<# } #>
+						</div>
+					</div>
+					<div class="bdt-width-auto bdt-flex-inline bdt-flex-middle">
+						<# if ( item.old_price && settings.show_old_price === 'yes' ) { #>
+						<span class="bdt-price-list-old-price bdt-flex bdt-flex-middle bdt-flex-center"><del>{{ item.old_price }}</del></span>
+						<# } #>
+						<span class="bdt-price-list-price bdt-flex bdt-flex-middle bdt-flex-center">{{ item.price }}</span>
+					</div>
+					<# if ( settings.show_cart === 'yes' && settings.cart_icon && settings.cart_icon.value ) { #>
+					<div class="bdt-width-auto bdt-flex-inline">
+						<span class="bdt-price-list-cart-icon">
+							<# var cartIconHTML = elementor.helpers.renderIcon( view, settings.cart_icon, { 'aria-hidden': true }, 'i', 'object' ); #>
+							{{{ cartIconHTML.value }}}
+						</span>
+					</div>
+					<# } #>
+				</div>
+			</li>
+			<# } ); #>
+		</ul>
+		<?php
+	}
 }

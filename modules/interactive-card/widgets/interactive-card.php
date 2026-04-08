@@ -62,7 +62,7 @@ class Interactive_Card extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-    
+
     protected function register_controls() {
         $this->start_controls_section(
             'section_interactive-card_layout',
@@ -119,6 +119,7 @@ class Interactive_Card extends Module_Base {
                 ],
                 'default'     => __('Interactive Card Title', 'bdthemes-element-pack'),
                 'placeholder' => __('Enter your title', 'bdthemes-element-pack'),
+                'label_block' => true,
             ]
         );
 
@@ -1696,6 +1697,139 @@ class Interactive_Card extends Module_Base {
 				<div <?php $this->print_render_attribute_string( 'interactive-card-width' ); ?>>
 					<div class="bdt-interactive-card-content">
 						<?php $this->render_interactive_card_content( $settings ); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
+    protected function content_template() {
+		?>
+		<#
+		var contentPosition = settings.content_position || 'top';
+		var wrapperClasses = 'bdt-grid bdt-grid-collapse';
+		var widthClass = 'bdt-width-1-1';
+		if ( contentPosition === 'top' ) {
+			wrapperClasses += ' bdt-card-effect-top';
+		} else if ( contentPosition === 'bottom' ) {
+			wrapperClasses += ' bdt-flex-column bdt-flex-column-reverse bdt-card-effect-bottom';
+		} else if ( contentPosition === 'left' ) {
+			wrapperClasses += ' bdt-flex bdt-flex-middle bdt-card-effect-left';
+			widthClass = 'bdt-width-1-1 bdt-width-1-2@s';
+		} else if ( contentPosition === 'right' ) {
+			wrapperClasses += ' bdt-flex bdt-flex-middle bdt-flex-row bdt-flex-row-reverse bdt-card-effect-right';
+			widthClass = 'bdt-width-1-1 bdt-width-1-2@s';
+		}
+		var imageUrl = ( settings.image && settings.image.url ) ? settings.image.url : '';
+		var titleTag = settings.title_size || 'h3';
+		var badgePosition = settings.badge_position || 'top-right';
+
+		var imageEffectClass = 'bdt-interactive-card-image';
+		if ( settings.image_hover_effect === 'yes' ) {
+			imageEffectClass += ' bdt-image-hover-effect';
+		}
+		var imageWrapClass = 'bdt-position-relative';
+		if ( settings.image_mask_popover === 'yes' ) {
+			imageWrapClass += ' bdt-image-mask';
+		}
+
+		var showWavify = settings.show_wavify_effect === 'yes';
+		var cardId = 'interactive-card-' + view.getID();
+		var waveId = 'wave-' + view.getID();
+		var dataSettings = '';
+		if ( showWavify ) {
+			var wavifyToggle = settings.wavify_toggle === 'yes';
+			var waveBones = wavifyToggle && settings.wave_bones && settings.wave_bones.size !== undefined ? parseInt( settings.wave_bones.size, 10 ) : 3;
+			var waveAmplitude = wavifyToggle && settings.wave_amplitude && settings.wave_amplitude.size !== undefined ? parseInt( settings.wave_amplitude.size, 10 ) : 40;
+			var waveSpeed = wavifyToggle && settings.wave_speed && settings.wave_speed.size !== undefined ? parseFloat( settings.wave_speed.size ) : 0.25;
+			dataSettings = JSON.stringify( {
+				id: waveId,
+				wave_bones: waveBones,
+				wave_amplitude: waveAmplitude,
+				wave_speed: waveSpeed
+			} );
+		}
+
+		var globalOnclick = '';
+		if ( settings.global_link === 'yes' && settings.global_link_url && settings.global_link_url.url ) {
+			var gTarget = ( settings.global_link_url.is_external ) ? '_blank' : '_self';
+			globalOnclick = "window.open('" + String( settings.global_link_url.url ).replace( /\\/g, '\\\\' ).replace( /'/g, "\\'" ) + "', '" + gTarget + "')";
+		}
+
+		var titleOnclick = '';
+		if ( settings.title_link === 'yes' && settings.title_link_url && settings.title_link_url.url ) {
+			var tTarget = ( settings.title_link_url.is_external ) ? '_blank' : '_self';
+			titleOnclick = "window.open('" + String( settings.title_link_url.url ).replace( /\\/g, '\\\\' ).replace( /'/g, "\\'" ) + "', '" + tTarget + "')";
+		}
+
+		var readmoreLinkUrl = ( settings.readmore_link && settings.readmore_link.url ) ? settings.readmore_link.url : '';
+		var rmTarget = ( settings.readmore_link && settings.readmore_link.is_external ) ? '_blank' : '_self';
+		var rmRel = '';
+		if ( settings.readmore_link && settings.readmore_link.is_external ) {
+			rmRel = 'noopener noreferrer';
+		}
+		if ( settings.readmore_link && settings.readmore_link.nofollow ) {
+			rmRel = rmRel ? rmRel + ' nofollow' : 'nofollow';
+		}
+		var readmoreClasses = 'bdt-interactive-card-readmore bdt-flex bdt-flex-middle';
+		if ( settings.readmore_attention === 'yes' ) {
+			readmoreClasses += ' bdt-ep-attention-button';
+		}
+		if ( settings.readmore_hover_animation ) {
+			readmoreClasses += ' elementor-animation-' + settings.readmore_hover_animation;
+		}
+		var readmoreText = settings.readmore_text ? settings.readmore_text : 'Read More';
+		#>
+		<div class="bdt-interactive-card bdt-interactive-card-default"<# if ( showWavify ) { #> id="{{ cardId }}" data-settings='{{{ dataSettings }}}'<# } #><# if ( globalOnclick ) { #> onclick="{{ globalOnclick }}"<# } #>>
+			<div class="{{ wrapperClasses }}">
+				<div class="{{ widthClass }}">
+					<div class="bdt-position-relative">
+						<# if ( settings.badge === 'yes' && settings.badge_text ) { #>
+						<div class="bdt-interactive-card-badge bdt-position-small bdt-position-{{ badgePosition }}">
+							<span class="bdt-badge bdt-padding-small">{{ settings.badge_text }}</span>
+						</div>
+						<# } #>
+						<div class="{{ imageEffectClass }}">
+							<div class="{{ imageWrapClass }}">
+								<# if ( imageUrl ) { #>
+								<img src="{{ imageUrl }}" alt="{{ settings.title_text }}">
+								<# } #>
+							</div>
+						</div>
+						<# if ( showWavify ) { #>
+						<div class="bdt-wavify-effect">
+							<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+								<defs></defs>
+								<path id="{{ waveId }}" d=""/>
+							</svg>
+						</div>
+						<# } #>
+					</div>
+				</div>
+				<div class="{{ widthClass }}">
+					<div class="bdt-interactive-card-content">
+						<# if ( settings.show_sub_title === 'yes' && settings.sub_title_text ) { #>
+						<div class="bdt-interactive-card-sub-title">{{{ settings.sub_title_text }}}</div>
+						<# } #>
+						<# if ( settings.title_text ) { #>
+						<{{ titleTag }} class="bdt-interactive-card-title"<# if ( titleOnclick ) { #> onclick="{{ titleOnclick }}"<# } #>>
+							<span class="elementor-inline-editing" data-elementor-setting-key="title_text">{{{ settings.title_text }}}</span>
+						</{{ titleTag }}>
+						<# } #>
+						<# if ( settings.description_text ) { #>
+						<div class="bdt-interactive-card-text elementor-inline-editing" data-elementor-setting-key="description_text">{{{ settings.description_text }}}</div>
+						<# } #>
+						<# if ( settings.readmore === 'yes' ) { #>
+						<div class="bdt-interactive-card-button">
+							<a class="{{ readmoreClasses }}" href="{{ readmoreLinkUrl }}"<# if ( readmoreLinkUrl ) { #> target="{{ rmTarget }}"<# if ( rmRel ) { #> rel="{{ rmRel }}"<# } #><# } #><# if ( settings.button_css_id ) { #> id="{{ settings.button_css_id }}"<# } #>>
+								<span class="ep-icon-long-arrow-right"></span>
+								<span class="bdt-ic-readme-text bdt-position-relative">
+									{{ readmoreText }}
+								</span>
+							</a>
+						</div>
+						<# } #>
 					</div>
 				</div>
 			</div>

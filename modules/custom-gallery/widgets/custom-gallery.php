@@ -526,8 +526,9 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'tilt_show',
 			[ 
-				'label' => esc_html__( 'Tilt Effect', 'bdthemes-element-pack' ),
-				'type'  => Controls_Manager::SWITCHER,
+				'label'       => esc_html__( 'Tilt Effect', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'render_type' => 'template',
 			]
 		);
 
@@ -1383,5 +1384,154 @@ class Custom_Gallery extends Module_Base {
 		<?php endforeach; ?>
 
 		<?php $this->render_footer();
+	}
+
+	protected function content_template() {
+		?>
+		<#
+		var icon = settings.icon ? settings.icon : 'plus';
+		var overlayClass = 'bdt-overlay bdt-overlay-default bdt-position-cover';
+		if ( settings.overlay_animation ) {
+			overlayClass += ' bdt-transition-' + settings.overlay_animation;
+		}
+		var columns_mobile = settings.columns_mobile ? settings.columns_mobile : 1;
+		var columns_tablet = settings.columns_tablet ? settings.columns_tablet : 2;
+		var columns = settings.columns ? settings.columns : 3;
+		var widthClasses = ' bdt-width-1-' + columns_mobile + ' bdt-width-1-' + columns_tablet + '@s bdt-width-1-' + columns + '@m';
+
+		var skinId = settings._skin || '';
+		var skinSlug = 'default';
+		if ( skinId === 'bdt-fedara' ) {
+			skinSlug = 'fedara';
+		} else if ( skinId === 'bdt-abetis' ) {
+			skinSlug = 'abetis';
+		}
+
+		var galleryClass = 'bdt-custom-gallery bdt-skin-' + skinSlug + ' bdt-grid bdt-grid-small';
+		var galleryId = 'bdt-custom-gallery-' + view.getID();
+		var dataSettings = JSON.stringify( {
+			id: '#bdt-custom-gallery-' + view.getID(),
+			tiltShow: settings.tilt_show === 'yes'
+		} );
+
+		var itemClass = 'bdt-gallery-item bdt-transition-toggle' + widthClasses;
+		var innerClass = 'bdt-custom-gallery-inner';
+		if ( settings.image_mask_popover === 'yes' ) {
+			innerClass += ' bdt-image-mask';
+		}
+		var skinInnerClass = 'bdt-custom-gallery-inner bdt-transition-toggle bdt-position-relative';
+		if ( settings.image_mask_popover === 'yes' ) {
+			skinInnerClass += ' bdt-image-mask';
+		}
+
+		var lightboxAttr = '';
+		if ( settings.show_lightbox === 'yes' ) {
+			lightboxAttr = 'video-autoplay: true; toggle: .bdt-gallery-lightbox-item; animation: ' + ( settings.lightbox_animation || 'fade' ) + ';';
+			if ( settings.lightbox_autoplay === 'yes' ) {
+				lightboxAttr += ' autoplay: 500;';
+				if ( settings.lightbox_pause === 'yes' ) {
+					lightboxAttr += ' pause-on-hover: true;';
+				}
+			}
+		}
+
+		var scrollspyAttr = '';
+		if ( settings.grid_animation_type ) {
+			var gridDelay = ( settings.grid_anim_delay && settings.grid_anim_delay.size ) ? settings.grid_anim_delay.size : 0;
+			scrollspyAttr = 'cls: bdt-animation-' + settings.grid_animation_type + '; delay: ' + gridDelay + '; target: > div > .bdt-custom-gallery-inner;';
+		}
+		#>
+		<div id="{{ galleryId }}" class="{{ galleryClass }}" data-settings="{{ dataSettings }}"
+			<# if ( settings.masonry === 'yes' ) { #> data-bdt-grid="masonry: true"<# } #>
+			<# if ( settings.show_lightbox === 'yes' ) { #> data-bdt-lightbox="{{ lightboxAttr }}"<# } #>
+			<# if ( settings.grid_animation_type ) { #> data-bdt-scrollspy="{{ scrollspyAttr }}"<# } #>
+			>
+			<# if ( skinSlug === 'default' ) { #>
+			<# _.each( settings.gallery, function( item ) { #>
+			<div class="{{ itemClass }}">
+				<div class="{{ innerClass }}"<# if ( settings.tilt_show === 'yes' ) { #> data-tilt<# } #>>
+					<div class="bdt-gallery-thumbnail">
+						<# if ( item.gallery_image && item.gallery_image.url ) { #>
+						<img src="{{ item.gallery_image.url }}" alt="{{ item.image_title }}">
+						<# } #>
+					</div>
+					<# if ( settings.show_title === 'yes' || settings.show_text === 'yes' || settings.show_lightbox === 'yes' ) { #>
+					<div class="{{ overlayClass }}">
+						<div class="bdt-custom-gallery-content">
+							<div class="bdt-custom-gallery-content-inner">
+								<# if ( settings.show_lightbox === 'yes' ) { #>
+								<div class="bdt-flex-inline bdt-gallery-item-link-wrapper">
+									<a class="bdt-gallery-item-link bdt-gallery-lightbox-item">
+										<# if ( 'icon' === settings.link_type ) { #>
+											<i class="ep-icon-{{ icon }}" aria-hidden="true"></i>
+										<# } else if ( 'text' === settings.link_type && settings.link_text ) { #>
+											<span class="bdt-text">{{ settings.link_text }}</span>
+										<# } #>
+									</a>
+								</div>
+								<# } #>
+								<# if ( settings.show_title === 'yes' && item.image_title ) { #>
+								<{{ settings.title_tag }} class="bdt-gallery-item-title bdt-transition-slide-top-small">
+									{{{ item.image_title }}}
+								</{{ settings.title_tag }}>
+								<# } #>
+								<# if ( settings.show_text === 'yes' && item.image_text ) { #>
+								<div class="bdt-gallery-item-text bdt-transition-slide-bottom-small">
+									{{{ item.image_text }}}
+								</div>
+								<# } #>
+							</div>
+						</div>
+					</div>
+					<# } #>
+				</div>
+			</div>
+			<# } ); #>
+			<# } else { #>
+			<# _.each( settings.gallery, function( item ) { #>
+			<div class="bdt-gallery-item{{ widthClasses }}">
+				<div class="bdt-custom-gallery-item-inner"<# if ( settings.tilt_show === 'yes' ) { #> data-tilt<# } #>>
+					<div class="{{ skinInnerClass }}">
+						<div class="bdt-gallery-thumbnail">
+							<# if ( item.gallery_image && item.gallery_image.url ) { #>
+							<img src="{{ item.gallery_image.url }}" alt="{{ item.image_title }}">
+							<# } #>
+						</div>
+						<# if ( settings.show_lightbox === 'yes' ) { #>
+						<div class="{{ overlayClass }}">
+							<div class="bdt-custom-gallery-content">
+								<div class="bdt-custom-gallery-content-inner">
+									<div class="bdt-flex-inline bdt-gallery-item-link-wrapper">
+										<a class="bdt-gallery-item-link bdt-gallery-lightbox-item">
+											<# if ( 'icon' === settings.link_type ) { #>
+											<i class="ep-icon-{{ icon }}" aria-hidden="true"></i>
+											<# } else if ( 'text' === settings.link_type && settings.link_text ) { #>
+											<span class="bdt-text">{{ settings.link_text }}</span>
+											<# } #>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<# } #>
+					</div>
+					<# if ( ( settings.show_title === 'yes' && item.image_title ) || ( settings.show_text === 'yes' && item.image_text ) ) { #>
+					<div class="bdt-skin-{{ skinSlug }}-desc bdt-padding-small">
+						<# if ( settings.show_title === 'yes' && item.image_title ) { #>
+						<{{ settings.title_tag }} class="bdt-gallery-item-title">
+							{{{ item.image_title }}}
+						</{{ settings.title_tag }}>
+						<# } #>
+						<# if ( settings.show_text === 'yes' && item.image_text ) { #>
+						<div class="bdt-gallery-item-text">{{{ item.image_text }}}</div>
+						<# } #>
+					</div>
+					<# } #>
+				</div>
+			</div>
+			<# } ); #>
+			<# } #>
+		</div>
+		<?php
 	}
 }

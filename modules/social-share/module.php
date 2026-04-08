@@ -84,7 +84,7 @@ class Module extends Element_Pack_Module_Base {
 			'title' => 'Surfingbird',
 		],
 		'twitter' => [
-			'title' => 'Twitter',
+			'title' => 'X',
 		],
 		'vkontakte' => [
 			'title'       => 'Vkontakte',

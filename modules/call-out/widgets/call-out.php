@@ -55,7 +55,7 @@ class Call_Out extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_layout',
@@ -749,4 +749,54 @@ class Call_Out extends Module_Base {
 		<?php
 	}
 
+	protected function content_template() {
+		?>
+		<#
+		var iconHTML = elementor.helpers.renderIcon( view, settings.callout_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var migrated = elementor.helpers.isIconMigrated( settings, 'callout_icon' );
+		var titleTag = settings.title_size || 'h3';
+		var titleHtml = settings.title ? '<' + titleTag + ' class="bdt-ep-callout-title">' + settings.title + '</' + titleTag + '>' : '';
+		var calloutClass = 'bdt-ep-callout bdt-ep-callout-button-align-' + settings.button_align;
+		if ( settings.button_align !== 'center' ) {
+			calloutClass += ' bdt-grid bdt-grid-large bdt-flex-middle';
+		}
+		var btnClass = 'bdt-ep-callout-button';
+		if ( settings.button_hover_animation ) {
+			btnClass += ' elementor-animation-' + settings.button_hover_animation;
+		}
+		if ( settings.attention_button ) {
+			btnClass += ' bdt-ep-attention-button';
+		}
+		var btnHref = ( settings.link && settings.link.url ) ? settings.link.url : 'javascript:void(0);';
+		#>
+		<div class="{{ calloutClass }}">
+			<div class="bdt-width-expand bdt-first-column">
+				<# if ( settings.title ) { #>
+				{{{ titleHtml }}}
+				<# } #>
+				<# if ( settings.description ) { #>
+				<div class="bdt-ep-callout-description">
+					{{ settings.description }}
+				</div>
+				<# } #>
+			</div>
+			<div class="bdt-ep-callout-button-wrap bdt-width-auto@m">
+				<a class="{{ btnClass }}" href="{{ btnHref }}">
+					<span class="bdt-flex bdt-flex-middle">
+						{{ settings.button_text }}
+						<# if ( settings.callout_icon && settings.callout_icon.value ) { #>
+						<span class="bdt-ep-callout-button-icon bdt-flex-align-{{ settings.icon_align }}">
+							<# if ( iconHTML && iconHTML.rendered && ( ! settings.icon || migrated ) ) { #>
+							{{{ iconHTML.value }}}
+							<# } else { #>
+							<i class="{{ settings.icon }}" aria-hidden="true"></i>
+							<# } #>
+						</span>
+						<# } #>
+					</span>
+				</a>
+			</div>
+		</div>
+		<?php
+	}
 }

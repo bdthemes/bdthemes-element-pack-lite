@@ -70,6 +70,49 @@ class Brand_Grid extends Module_Base
 		return false;
 	}
 
+	protected function content_template() {
+		?>
+		<#
+		var nameTag = settings.brand_html_tag || 'h3';
+		#>
+		<div class="bdt-ep-brand-grid">
+			<# _.each( settings.brand_items, function( item ) {
+				var itemClass = 'bdt-ep-brand-grid-item';
+				if ( settings.brand_event === 'hover-item' ) {
+					itemClass += ' bdt-ep-brand-grid-item-hover';
+				}
+				var nameHtml = '<' + nameTag + ' class="bdt-ep-brand-grid-name">' + item.brand_name + '</' + nameTag + '>';
+			#>
+			<div class="{{ itemClass }}">
+				<div class="bdt-ep-brand-grid-image">
+					<# if ( item.image && item.image.url ) { #>
+					<img src="{{ item.image.url }}" alt="{{ item.brand_name }}">
+					<# } #>
+				</div>
+				<# if ( settings.brand_event === 'click' ) { #>
+				<input class="bdt-ep-brand-grid-checkbox" type="checkbox">
+				<# } #>
+				<div class="bdt-ep-brand-grid-content">
+					<div class="bdt-ep-brand-grid-icon">
+						<i class="ep-icon-plus-2" aria-hidden="true"></i>
+					</div>
+					<div class="bdt-ep-brand-grid-inner">
+						<# if ( item.brand_name && settings.show_brand_name === 'yes' ) { #>
+						{{{ nameHtml }}}
+						<# } #>
+						<# if ( item.link && item.link.url && settings.show_website_link === 'yes' ) { #>
+						<div class="bdt-ep-brand-grid-text">
+							<a href="{{ item.link.url }}" class="bdt-ep-brand-grid-link">{{ item.website_link_text }}</a>
+						</div>
+						<# } #>
+					</div>
+				</div>
+			</div>
+			<# } ); #>
+		</div>
+		<?php
+	}
+
 	protected function register_controls()
 	{
 

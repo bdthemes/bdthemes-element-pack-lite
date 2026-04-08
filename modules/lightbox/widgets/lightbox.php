@@ -973,4 +973,120 @@ class Lightbox extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var iconHTML = elementor.helpers.renderIcon( view, settings.lightbox_toggler_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var buttonIconHTML = elementor.helpers.renderIcon( view, settings.button_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+
+		var lightboxId = 'bdt-lightbox-' + view.getID();
+		var lc = settings.lightbox_content || 'image';
+		var contentUrl = '';
+		if ( lc === 'image' && settings.content_image && settings.content_image.url ) {
+			contentUrl = settings.content_image.url;
+		} else if ( lc === 'video' && settings.content_video && settings.content_video.url ) {
+			contentUrl = settings.content_video.url;
+		} else if ( lc === 'youtube' && settings.content_youtube && settings.content_youtube.url ) {
+			contentUrl = settings.content_youtube.url;
+		} else if ( lc === 'vimeo' && settings.content_vimeo && settings.content_vimeo.url ) {
+			contentUrl = settings.content_vimeo.url;
+		} else if ( settings.content_google_map && settings.content_google_map.url ) {
+			contentUrl = settings.content_google_map.url;
+		}
+		var mainDataIframe = ( lc === 'google-map' && contentUrl );
+
+		var iconTextStr = settings.icon_text ? String( settings.icon_text ) : '';
+		var shouldShowIconText = settings.lightbox_toggler === 'icon' && iconTextStr.trim() !== '';
+
+		var iconContentUrl = '';
+		if ( shouldShowIconText ) {
+			if ( lc === 'image' && settings.content_image && settings.content_image.url ) {
+				iconContentUrl = settings.content_image.url;
+			} else if ( lc === 'video' && settings.content_video && settings.content_video.url ) {
+				iconContentUrl = settings.content_video.url;
+			} else if ( lc === 'youtube' && settings.content_youtube && settings.content_youtube.url ) {
+				iconContentUrl = settings.content_youtube.url;
+			} else if ( lc === 'vimeo' && settings.content_vimeo && settings.content_vimeo.url ) {
+				iconContentUrl = settings.content_vimeo.url;
+			} else if ( settings.content_google_map && settings.content_google_map.url ) {
+				iconContentUrl = settings.content_google_map.url;
+			}
+		}
+		var iconDataIframe = ( lc === 'google-map' && iconContentUrl );
+
+		var lbParts = [];
+		if ( settings.lightbox_animation ) {
+			lbParts.push( 'animation: ' + settings.lightbox_animation + ';' );
+		}
+		if ( settings.video_autoplay === 'yes' ) {
+			lbParts.push( 'video-autoplay: true;' );
+		}
+		var innerLbAttr = lbParts.join( ' ' );
+
+		var wrapperClasses = 'bdt-lightbox-wrapper';
+		var fa = settings.fancy_animation || '';
+		if ( fa === 'shadow-pulse' ) {
+			wrapperClasses += ' bdt-shadow-pulse';
+		} else if ( fa === 'line-bounce' ) {
+			wrapperClasses += ' bdt-line-bounce';
+		} else if ( fa === 'multi-shadow' ) {
+			wrapperClasses += ' bdt-multi-shadow';
+		}
+
+		var mainLinkClasses = '';
+		if ( settings.lightbox_toggler !== 'poster' ) {
+			mainLinkClasses = 'elementor-button elementor-size-md';
+			if ( settings.hover_animation ) {
+				mainLinkClasses += ' elementor-animation-' + settings.hover_animation;
+			}
+		}
+
+		var hasButtonIcon = settings.button_icon && settings.button_icon.value;
+		#>
+		<div id="{{ lightboxId }}" class="{{ wrapperClasses }}">
+			<div data-bdt-lightbox="{{ innerLbAttr }}">
+				<a data-elementor-open-lightbox="no"<# if ( contentUrl ) { #> href="{{ contentUrl }}"<# } #><# if ( settings.content_caption ) { #> data-caption="{{ settings.content_caption }}"<# } #><# if ( mainDataIframe ) { #> data-type="iframe"<# } #><# if ( mainLinkClasses ) { #> class="{{ mainLinkClasses }}"<# } #>>
+					<# if ( settings.lightbox_toggler === 'poster' && settings.poster_image && settings.poster_image.url ) { #>
+						<div class="bdt-toggler-poster bdt-background-cover" style="background-image: url('{{ settings.poster_image.url }}');"></div>
+					<# } #>
+
+					<# if ( settings.lightbox_toggler === 'icon' ) { #>
+						<span>
+							<# if ( iconHTML && iconHTML.rendered ) { #>
+								{{{ iconHTML.value }}}
+							<# } else { #>
+								<i class="fas fa-play" aria-hidden="true"></i>
+							<# } #>
+						</span>
+					<# } #>
+
+					<# if ( settings.lightbox_toggler === 'button' ) { #>
+						<span class="elementor-button-content-wrapper">
+							<# if ( settings.icon_align === 'left' && hasButtonIcon ) { #>
+								<span class="elementor-button-icon elementor-align-icon-left">
+									<# if ( buttonIconHTML && buttonIconHTML.rendered ) { #>
+										{{{ buttonIconHTML.value }}}
+									<# } #>
+								</span>
+							<# } #>
+							<span class="elementor-button-text">{{{ settings.button_text }}}</span>
+							<# if ( settings.icon_align === 'right' && hasButtonIcon ) { #>
+								<span class="elementor-button-icon elementor-align-icon-right">
+									<# if ( buttonIconHTML && buttonIconHTML.rendered ) { #>
+										{{{ buttonIconHTML.value }}}
+									<# } #>
+								</span>
+							<# } #>
+						</span>
+					<# } #>
+				</a>
+
+				<# if ( shouldShowIconText ) { #>
+					<a class="bdt-icon-text" data-elementor-open-lightbox="no"<# if ( iconContentUrl ) { #> href="{{ iconContentUrl }}"<# } #><# if ( iconDataIframe ) { #> data-type="iframe"<# } #>>{{{ settings.icon_text }}}</a>
+				<# } #>
+			</div>
+		</div>
+		<?php
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace ElementPack\Modules\BusinessHours\Widgets;
 
 use ElementPack\Base\Module_Base;
@@ -8,76 +9,88 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Repeater;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (! defined('ABSPATH')) exit; // Exit if accessed directly
 
-class Business_Hours extends Module_Base {
+class Business_Hours extends Module_Base
+{
 
     //protected $_has_template_content = false;
 
-    public function get_name() {
+    public function get_name()
+    {
         return 'bdt-business-hours';
     }
 
-    public function get_title() {
-        return BDTEP . esc_html__( 'Business Hours', 'bdthemes-element-pack' );
+    public function get_title()
+    {
+        return BDTEP . esc_html__('Business Hours', 'bdthemes-element-pack');
     }
 
-    public function get_icon() {
+    public function get_icon()
+    {
         return 'bdt-wi-business-hours';
     }
 
-    public function get_categories() {
-        return [ 'element-pack' ];
+    public function get_categories()
+    {
+        return ['element-pack'];
     }
 
-    public function get_keywords() {
-        return [ 'business', 'hours', 'time', 'duty', 'schedule' ];
+    public function get_keywords()
+    {
+        return ['business', 'hours', 'time', 'duty', 'schedule'];
     }
 
-    public function get_style_depends() {
+    public function get_style_depends()
+    {
         if ($this->ep_is_edit_mode()) {
             return ['ep-styles'];
         } else {
-            return [ 'ep-business-hours' ];
+            return ['ep-business-hours'];
         }
     }
 
-    public function get_script_depends() {
+    public function get_script_depends()
+    {
         if ($this->ep_is_edit_mode()) {
             return ['jclock', 'ep-scripts'];
         } else {
-            return [ 'jclock', 'ep-business-hours' ];
+            return ['jclock', 'ep-business-hours'];
         }
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://youtu.be/1QfZ-os75rQ';
     }
 
-	public function has_widget_inner_wrapper(): bool {
-        return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    public function has_widget_inner_wrapper(): bool
+    {
+        return ! \Elementor\Plugin::$instance->experiments->is_feature_active('e_optimized_markup');
     }
-	protected function is_dynamic_content(): bool {
-		return false;
-	}
-    
-    protected function register_controls() {
+    protected function is_dynamic_content(): bool
+    {
+        return false;
+    }
+
+    protected function register_controls()
+    {
 
         $this->start_controls_section(
             'section_business_houes_layout',
             [
-                'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Layout', 'bdthemes-element-pack'),
             ]
         );
 
         $this->add_control(
             'business_hour_style',
             [
-                'label'     => esc_html__( 'Style', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Style', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::SELECT,
                 'options'   => [
-                    'default' => esc_html__( 'Static', 'bdthemes-element-pack' ),
-                    'dynamic' => esc_html__( 'Dynamic', 'bdthemes-element-pack' ),
+                    'default' => esc_html__('Static', 'bdthemes-element-pack'),
+                    'dynamic' => esc_html__('Dynamic', 'bdthemes-element-pack'),
                 ],
                 'default'   => 'default',
             ]
@@ -86,7 +99,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'dynamic_timezone',
             [
-                'label'   => esc_html__( 'Timezone', 'bdthemes-element-pack' ),
+                'label'   => esc_html__('Timezone', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'default',
                 'options' => [
@@ -120,7 +133,7 @@ class Business_Hours extends Module_Base {
                     '-12'     => 'IDLW  - GMT-12',
                     'custom'  => "Custom",
                 ],
-                'condition'		=> [
+                'condition'        => [
                     'business_hour_style' => 'dynamic',
                 ],
             ]
@@ -129,9 +142,9 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'custom_timezone_input',
             [
-                'label'       => esc_html__( 'Custom Timezone', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Custom Timezone', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
-                'dynamic'     => [ 'active' => true ],
+                'dynamic'     => ['active' => true],
                 'defaut'      => '+6',
                 'placeholder' => '+6',
                 'condition'   => [
@@ -144,7 +157,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'show_header',
             [
-                'label' => esc_html__( 'Show Header', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Show Header', 'bdthemes-element-pack'),
                 'type'  => Controls_Manager::SWITCHER,
             ]
         );
@@ -154,7 +167,7 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'section_business_days_layout',
             [
-                'label'     => esc_html__( 'Business Days & Times', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Business Days & Times', 'bdthemes-element-pack'),
                 'condition' => [
                     'business_hour_style' => 'default',
                 ]
@@ -166,10 +179,10 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'enter_day',
             [
-                'label'       => esc_html__( 'Enter Day', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Enter Day', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => 'Monday', 
+                'default'     => 'Monday',
                 'dynamic'     => ['active' => true],
             ]
         );
@@ -177,7 +190,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'enter_time',
             [
-                'label'       => esc_html__( 'Enter Time', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Enter Time', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default'     => '10:00 AM - 6:00 PM',
@@ -188,7 +201,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'current_styling_heading',
             [
-                'label'     => esc_html__( 'Styling', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Styling', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -197,7 +210,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'highlight_this',
             [
-                'label'        => esc_html__( 'Style This Day', 'bdthemes-element-pack' ),
+                'label'        => esc_html__('Style This Day', 'bdthemes-element-pack'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -208,7 +221,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'single_business_day_color',
             [
-                'label'     => esc_html__( 'Day Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Day Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -224,7 +237,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'single_business_timing_color',
             [
-                'label'     => esc_html__( 'Time Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Time Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -240,7 +253,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'single_business_background_color',
             [
-                'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-inner {{CURRENT_ITEM}}.border-divider' => 'background-color: {{VALUE}}',
@@ -259,32 +272,32 @@ class Business_Hours extends Module_Base {
                 'fields'      => $repeater->get_controls(),
                 'default'     => [
                     [
-                        'enter_day'  => esc_html__( 'Monday', 'bdthemes-element-pack' ),
+                        'enter_day'  => esc_html__('Monday', 'bdthemes-element-pack'),
                         'enter_time' => '10:00 AM - 6:00 PM',
                     ],
                     [
-                        'enter_day'  => esc_html__( 'Tuesday', 'bdthemes-element-pack' ),
+                        'enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack'),
                         'enter_time' => '10:00 AM - 6:00 PM',
                     ],
                     [
-                        'enter_day'  => esc_html__( 'Wednesday', 'bdthemes-element-pack' ),
+                        'enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack'),
                         'enter_time' => '10:00 AM - 6:00 PM',
                     ],
                     [
-                        'enter_day'  => esc_html__( 'Thursday', 'bdthemes-element-pack' ),
+                        'enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack'),
                         'enter_time' => '10:00 AM - 6:00 PM',
                     ],
                     [
-                        'enter_day'  => esc_html__( 'Friday', 'bdthemes-element-pack' ),
+                        'enter_day'  => esc_html__('Friday', 'bdthemes-element-pack'),
                         'enter_time' => '10:00 AM - 6:00 PM',
                     ],
                     [
-                        'enter_day'      => esc_html__( 'Saturday', 'bdthemes-element-pack' ),
+                        'enter_day'      => esc_html__('Saturday', 'bdthemes-element-pack'),
                         'enter_time'     => '10:00 AM - 6:00 PM',
                     ],
                     [
-                        'enter_day'      => esc_html__( 'Sunday', 'bdthemes-element-pack' ),
-                        'enter_time'     => esc_html__( 'Closed', 'bdthemes-element-pack' ),
+                        'enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack'),
+                        'enter_time'     => esc_html__('Closed', 'bdthemes-element-pack'),
                         'highlight_this' => 'yes',
                     ],
                 ],
@@ -297,7 +310,7 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'section_header',
             [
-                'label'     => esc_html__( 'Header', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Header', 'bdthemes-element-pack'),
                 'tab'       => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'show_header' => 'yes'
@@ -308,7 +321,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'show_current_time',
             [
-                'label'   => esc_html__( 'Show Current Time', 'bdthemes-element-pack' ),
+                'label'   => esc_html__('Show Current Time', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes'
             ]
@@ -317,7 +330,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'show_current_date',
             [
-                'label'   => esc_html__( 'Show Current Date', 'bdthemes-element-pack' ),
+                'label'   => esc_html__('Show Current Date', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes'
             ]
@@ -326,23 +339,23 @@ class Business_Hours extends Module_Base {
         $this->add_responsive_control(
             'bs_header_text_align',
             [
-                'label'   => __( 'Alignment', 'bdthemes-element-pack' ),
+                'label'   => __('Alignment', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __( 'Left', 'bdthemes-element-pack' ),
+                        'title' => __('Left', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __( 'Center', 'bdthemes-element-pack' ),
+                        'title' => __('Center', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __( 'Right', 'bdthemes-element-pack' ),
+                        'title' => __('Right', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                        'title' => __( 'Justified', 'bdthemes-element-pack' ),
+                        'title' => __('Justified', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-justify',
                     ],
                 ],
@@ -360,9 +373,9 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'section_dynamic_repeater',
             [
-                'label' => __( 'Dynamic Days & Times', 'bdthemes-element-pack' ),
+                'label' => __('Dynamic Days & Times', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
-                'condition' =>[
+                'condition' => [
                     'business_hour_style' => 'dynamic',
                 ]
             ]
@@ -373,17 +386,17 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_enter_day',
             [
-                'label'   => esc_html__( 'Select Day', 'bdthemes-element-pack' ),
+                'label'   => esc_html__('Select Day', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'Monday',
                 'options' => [
-                    'Monday'    => esc_html__( 'Monday', 'bdthemes-element-pack' ),
-                    'Tuesday'   => esc_html__( 'Tuesday', 'bdthemes-element-pack' ),
-                    'Wednesday' => esc_html__( 'Wednesday', 'bdthemes-element-pack' ),
-                    'Thursday'  => esc_html__( 'Thursday', 'bdthemes-element-pack' ),
-                    'Friday'    => esc_html__( 'Friday', 'bdthemes-element-pack' ),
-                    'Saturday'  => esc_html__( 'Saturday', 'bdthemes-element-pack' ),
-                    'Sunday'    => esc_html__( 'Sunday', 'bdthemes-element-pack' ),
+                    'Monday'    => esc_html__('Monday', 'bdthemes-element-pack'),
+                    'Tuesday'   => esc_html__('Tuesday', 'bdthemes-element-pack'),
+                    'Wednesday' => esc_html__('Wednesday', 'bdthemes-element-pack'),
+                    'Thursday'  => esc_html__('Thursday', 'bdthemes-element-pack'),
+                    'Friday'    => esc_html__('Friday', 'bdthemes-element-pack'),
+                    'Saturday'  => esc_html__('Saturday', 'bdthemes-element-pack'),
+                    'Sunday'    => esc_html__('Sunday', 'bdthemes-element-pack'),
                 ],
             ]
         );
@@ -391,21 +404,21 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_enter_day_level',
             [
-                'label'       => esc_html__( 'Day Level', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Day Level', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
-                'dynamic'     => [ 'active' => true, ],
+                'dynamic'     => ['active' => true,],
             ]
         );
 
         $repeater->add_control(
             'dynamic_start_time',
             [
-                'label'       => esc_html__( 'Start Time', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Start Time', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'default'     => '09:00 AM',
                 'placeholder' => '09:00 AM',
-                'dynamic'     => [ 'active' => true, ],
-                'condition'	  => [
+                'dynamic'     => ['active' => true,],
+                'condition'      => [
                     'dynamic_close_this!' => 'yes',
                 ]
             ]
@@ -414,12 +427,12 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_end_time',
             [
-                'label'       => esc_html__( 'End Time', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('End Time', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'default'     => '05:00 PM',
                 'placeholder' => '05:00 PM',
-                'dynamic'     => [ 'active' => true, ],
-                'condition'	  => [
+                'dynamic'     => ['active' => true,],
+                'condition'      => [
                     'dynamic_close_this!' => 'yes',
                 ]
             ]
@@ -428,7 +441,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_close_this',
             [
-                'label'        => esc_html__( 'Close This Day', 'bdthemes-element-pack' ),
+                'label'        => esc_html__('Close This Day', 'bdthemes-element-pack'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -439,11 +452,11 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_close_text',
             [
-                'label'       => esc_html__( 'Close Level', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Close Level', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => __( 'Closed', 'bdthemes-element-pack' ),
-                'dynamic'     => [ 'active' => true, ],
-                'condition'	  => [
+                'default'     => __('Closed', 'bdthemes-element-pack'),
+                'dynamic'     => ['active' => true,],
+                'condition'      => [
                     'dynamic_close_this' => 'yes',
                 ],
             ]
@@ -452,7 +465,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_current_styling_heading',
             [
-                'label'     => esc_html__( 'Styling', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Styling', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -461,7 +474,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_highlight_this',
             [
-                'label'        => esc_html__( 'Style This Day', 'bdthemes-element-pack' ),
+                'label'        => esc_html__('Style This Day', 'bdthemes-element-pack'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -472,7 +485,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_single_business_day_color',
             [
-                'label'     => esc_html__( 'Day Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Day Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -488,7 +501,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_single_business_timing_color',
             [
-                'label'     => esc_html__( 'Time Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Time Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -504,7 +517,7 @@ class Business_Hours extends Module_Base {
         $repeater->add_control(
             'dynamic_single_business_background_color',
             [
-                'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-inner {{CURRENT_ITEM}}.border-divider' => 'background-color: {{VALUE}}',
@@ -517,7 +530,7 @@ class Business_Hours extends Module_Base {
         );
 
 
-        $this->add_control( 
+        $this->add_control(
             'dynamic_days_times',
             [
                 'type'        => Controls_Manager::REPEATER,
@@ -525,43 +538,43 @@ class Business_Hours extends Module_Base {
                 'default'     => [
 
                     [
-                        'dynamic_enter_day'  => esc_html__( 'Monday', 'bdthemes-element-pack' ),
+                        'dynamic_enter_day'  => esc_html__('Monday', 'bdthemes-element-pack'),
                         'dynamic_start_time' => '09:00 AM',
                         'dynamic_end_time'   => '05:00 PM',
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__( 'Tuesday', 'bdthemes-element-pack' ),
+                        'dynamic_enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack'),
                         'dynamic_start_time' => '09:00 AM',
                         'dynamic_end_time'   => '05:00 PM',
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__( 'Wednesday', 'bdthemes-element-pack' ),
+                        'dynamic_enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack'),
                         'dynamic_start_time' => '09:00 AM',
                         'dynamic_end_time'   => '05:00 PM',
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__( 'Thursday', 'bdthemes-element-pack' ),
+                        'dynamic_enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack'),
                         'dynamic_start_time' => '09:00 AM',
                         'dynamic_end_time'   => '05:00 PM',
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__( 'Friday', 'bdthemes-element-pack' ),
+                        'dynamic_enter_day'  => esc_html__('Friday', 'bdthemes-element-pack'),
                         'dynamic_start_time' => '09:00 AM',
                         'dynamic_end_time'   => '05:00 PM',
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__( 'Saturday', 'bdthemes-element-pack' ),
+                        'dynamic_enter_day'  => esc_html__('Saturday', 'bdthemes-element-pack'),
                         'dynamic_start_time' => '09:00 AM',
                         'dynamic_end_time'   => '05:00 PM',
                     ],
 
                     [
-                        'dynamic_enter_day'      => esc_html__( 'Sunday', 'bdthemes-element-pack' ),
+                        'dynamic_enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack'),
                         'dynamic_start_time'     => '09:00 AM',
                         'dynamic_end_time'       => '05:00 PM',
                         'dynamic_close_this'     => 'yes',
@@ -578,9 +591,9 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'section_dynamic_additional',
             [
-                'label' => __( 'Additional', 'bdthemes-element-pack' ),
+                'label' => __('Additional', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
-                'condition' =>[
+                'condition' => [
                     'business_hour_style' => 'dynamic',
                 ]
             ]
@@ -590,11 +603,11 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'dynamic_open_day',
             [
-                'label'       => esc_html__( 'Open Status', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Open Status', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::WYSIWYG,
-                'default'     => __( 'Office Open. Right now we are available for service.', 'bdthemes-element-pack' ),
-                'dynamic'     => [ 'active' => true, ],
-                'condition'	  => [
+                'default'     => __('Office Open. Right now we are available for service.', 'bdthemes-element-pack'),
+                'dynamic'     => ['active' => true,],
+                'condition'      => [
                     'business_hour_style' => 'dynamic',
                 ],
             ]
@@ -603,11 +616,11 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'dynamic_close_day',
             [
-                'label'       => esc_html__( 'Close Status', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Close Status', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::WYSIWYG,
-                'default'     => esc_html__( 'Office Closed. Right now we are not available.', 'bdthemes-element-pack' ),
-                'dynamic'     => [ 'active' => true, ],
-                'condition'	  => [
+                'default'     => esc_html__('Office Closed. Right now we are not available.', 'bdthemes-element-pack'),
+                'dynamic'     => ['active' => true,],
+                'condition'      => [
                     'business_hour_style' => 'dynamic',
                 ],
             ]
@@ -616,14 +629,14 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'dynamic_time_separator',
             [
-                'label'       => esc_html__( 'Separator', 'bdthemes-element-pack' ),
+                'label'       => esc_html__('Separator', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'default'     => '-',
-                'dynamic'     => [ 'active' => true, ],
-                'condition'	  => [
+                'dynamic'     => ['active' => true,],
+                'condition'      => [
                     'business_hour_style' => 'dynamic',
                 ],
-                'separator'	  => 'before',
+                'separator'      => 'before',
             ]
         );
 
@@ -636,7 +649,7 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'style_bs_header',
             [
-                'label' => esc_html__( 'Header', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Header', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_header' => 'yes'
@@ -648,7 +661,7 @@ class Business_Hours extends Module_Base {
             Group_Control_Background::get_type(),
             [
                 'name'     => 'background',
-                'types'    => [ 'classic', 'gradient', 'video' ],
+                'types'    => ['classic', 'gradient', 'video'],
                 'selector' => '{{WRAPPER}} .bdt-ep-business-hours-header',
             ]
         );
@@ -656,9 +669,9 @@ class Business_Hours extends Module_Base {
         $this->add_responsive_control(
             'bs_header_padding',
             [
-                'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
+                'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .bdt-ep-business-hours-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -668,7 +681,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'bs_header_current_time_heading',
             [
-                'label'     => esc_html__( 'Current Time', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Current Time', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -680,7 +693,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'current_time_color',
             [
-                'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-current-time' => 'color: {{VALUE}};',
@@ -695,7 +708,7 @@ class Business_Hours extends Module_Base {
             Group_Control_Text_Shadow::get_type(),
             [
                 'name'      => 'current_time_text_shadow',
-                'label'     => __( 'Text Shadow', 'bdthemes-element-pack' ),
+                'label'     => __('Text Shadow', 'bdthemes-element-pack'),
                 'selector'  => '{{WRAPPER}} .bdt-ep-business-hours-current-time',
                 'condition' => [
                     'show_current_time' => 'yes',
@@ -717,7 +730,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'bs_current_time_sapcing',
             [
-                'label' => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -736,7 +749,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'bs_header_current_date_heading',
             [
-                'label'     => esc_html__( 'Current Date', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Current Date', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -748,7 +761,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'current_date_color',
             [
-                'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-current-date' => 'color: {{VALUE}};',
@@ -763,7 +776,7 @@ class Business_Hours extends Module_Base {
             Group_Control_Text_Shadow::get_type(),
             [
                 'name'      => 'current_date_text_shadow',
-                'label'     => __( 'Text Shadow', 'bdthemes-element-pack' ),
+                'label'     => __('Text Shadow', 'bdthemes-element-pack'),
                 'selector'  => '{{WRAPPER}} .bdt-ep-business-hours-current-date',
                 'condition' => [
                     'show_current_date' => 'yes',
@@ -785,7 +798,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'bs_current_date_sapcing',
             [
-                'label' => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -806,7 +819,7 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'section_bs_general',
             [
-                'label' => esc_html__( 'General', 'bdthemes-element-pack' ),
+                'label' => esc_html__('General', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -814,9 +827,9 @@ class Business_Hours extends Module_Base {
         $this->add_responsive_control(
             'section_bs_list_padding',
             [
-                'label'      => esc_html__( 'Row Spacing', 'bdthemes-element-pack' ),
+                'label'      => esc_html__('Row Spacing', 'bdthemes-element-pack'),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
+                'size_units' => ['px', 'em', '%'],
                 'default'    => ['top' => 5, 'right' => 5, 'bottom' => 5, 'left' => 5],
                 'selectors'  => [
                     '{{WRAPPER}} div.bdt-ep-business-hours-inner div' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -827,9 +840,9 @@ class Business_Hours extends Module_Base {
         $this->add_responsive_control(
             'bs_genarel_padding',
             [
-                'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
+                'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .bdt-ep-business-hours-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -841,7 +854,7 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'section_bs_divider',
             [
-                'label' => esc_html__( 'Divider', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Divider', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -849,7 +862,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'day_divider',
             [
-                'label'        => esc_html__( 'Divider', 'bdthemes-element-pack' ),
+                'label'        => esc_html__('Divider', 'bdthemes-element-pack'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -859,12 +872,12 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'day_divider_style',
             [
-                'label'     => esc_html__( 'Style', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Style', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::SELECT,
                 'options'   => [
-                    'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
-                    'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
-                    'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
+                    'solid'  => esc_html__('Solid', 'bdthemes-element-pack'),
+                    'dotted' => esc_html__('Dotted', 'bdthemes-element-pack'),
+                    'dashed' => esc_html__('Dashed', 'bdthemes-element-pack'),
                 ],
                 'default'   => 'solid',
                 'selectors' => [
@@ -879,7 +892,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'day_divider_color',
             [
-                'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#e8e8e8',
                 'selectors' => [
@@ -894,7 +907,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'day_divider_weight',
             [
-                'label'     => esc_html__( 'Weight', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Weight', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::SLIDER,
                 'default'   => [
                     'size' => 1,
@@ -920,7 +933,7 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'section_business_day_style',
             [
-                'label' => esc_html__( 'Day and Time', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Day and Time', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -929,37 +942,37 @@ class Business_Hours extends Module_Base {
             'bs_note_heading',
             [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw'  => sprintf( '<p style="font-size: 12px;font-style: italic;line-height: 1.4;color: #a4afb7;">%s</p>', esc_html__( 'Note: By default, the color & typography options will inherit from parent styling. If you wish you can override that styling from here.', 'bdthemes-element-pack' ) ),
+                'raw'  => sprintf('<p style="font-size: 12px;font-style: italic;line-height: 1.4;color: #a4afb7;">%s</p>', esc_html__('Note: By default, the color & typography options will inherit from parent styling. If you wish you can override that styling from here.', 'bdthemes-element-pack')),
             ]
         );
 
         $this->add_responsive_control(
-			'bs_day_cutom_width',
-			[
-				'label' => esc_html__('Days Area Width(%)', 'bdthemes-element-pack') . BDTEP_NC,
-				'type'  => Controls_Manager::SLIDER,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-ep-business-hours .heading-date.bdt-width-1-2' => 'width: {{SIZE}}%;',
-				],
-			]
-		);
+            'bs_day_cutom_width',
+            [
+                'label' => esc_html__('Days Area Width(%)', 'bdthemes-element-pack') . BDTEP_NC,
+                'type'  => Controls_Manager::SLIDER,
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-ep-business-hours .heading-date.bdt-width-1-2' => 'width: {{SIZE}}%;',
+                ],
+            ]
+        );
 
         $this->add_responsive_control(
             'business_hours_day_align',
             [
-                'label'     => esc_html__( 'Day Alignment', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Day Alignment', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+                        'title' => esc_html__('Center', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -972,19 +985,19 @@ class Business_Hours extends Module_Base {
         $this->add_responsive_control(
             'business_hours_time_align',
             [
-                'label'     => esc_html__( 'Time Alignment', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Time Alignment', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+                        'title' => esc_html__('Center', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -997,7 +1010,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'business_day_color',
             [
-                'label'     => esc_html__( 'Day Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Day Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-business-day' => 'color: {{VALUE}};',
@@ -1008,7 +1021,7 @@ class Business_Hours extends Module_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'label'    => esc_html__( 'Day Typography', 'bdthemes-element-pack' ),
+                'label'    => esc_html__('Day Typography', 'bdthemes-element-pack'),
                 'name'     => 'business_day_typography',
                 'selector' => '{{WRAPPER}} .heading-date',
             ]
@@ -1017,7 +1030,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'business_timing_color',
             [
-                'label'     => esc_html__( 'Time Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Time Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-business-time' => 'color: {{VALUE}};',
@@ -1028,7 +1041,7 @@ class Business_Hours extends Module_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'label'    => esc_html__( 'Time Typography', 'bdthemes-element-pack' ),
+                'label'    => esc_html__('Time Typography', 'bdthemes-element-pack'),
                 'name'     => 'business_timings_typography',
                 'selector' => '{{WRAPPER}} .heading-time',
             ]
@@ -1037,7 +1050,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'business_hours_striped',
             [
-                'label'        => esc_html__( 'Striped Effect', 'bdthemes-element-pack' ),
+                'label'        => esc_html__('Striped Effect', 'bdthemes-element-pack'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -1047,7 +1060,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'business_hours_striped_odd_color',
             [
-                'label'     => esc_html__( 'Striped Odd Rows Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Striped Odd Rows Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#eaeaea',
                 'selectors' => [
@@ -1062,7 +1075,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'striped_effect_even',
             [
-                'label'     => esc_html__( 'Striped Even Rows Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Striped Even Rows Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#FFFFFF',
                 'selectors' => [
@@ -1079,7 +1092,7 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'dynamic_business_day_separator',
             [
-                'label' => esc_html__( 'Separator', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Separator', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'dynamic_time_separator!' => '',
@@ -1090,7 +1103,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'dynamic_separator_color',
             [
-                'label'     => esc_html__( 'Separator Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__('Separator Color', 'bdthemes-element-pack'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .dynamic-separator' => 'color: {{VALUE}};',
@@ -1104,18 +1117,18 @@ class Business_Hours extends Module_Base {
         $this->start_controls_section(
             'dynamic_business_msg',
             [
-                'label' => esc_html__( 'Message', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Message', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'business_hour_style' => 'dynamic',
-                ], 
+                ],
             ]
         );
 
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+                'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
                 'name'     => 'business_dynamic_msg_typography',
                 'selector' => '{{WRAPPER}} .bdt-ep-business-hours .bdt-live-status',
             ]
@@ -1124,7 +1137,7 @@ class Business_Hours extends Module_Base {
         $this->add_control(
             'dynamic_business_msg_sapcing',
             [
-                'label' => esc_html__( 'Top Spacing', 'bdthemes-element-pack' ),
+                'label' => esc_html__('Top Spacing', 'bdthemes-element-pack'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1138,35 +1151,36 @@ class Business_Hours extends Module_Base {
         );
 
         $this->end_controls_section();
-
     }
 
-    public function set_time_zone($settingsTimeZone){
-        if($settingsTimeZone['business_hour_style'] != 'default'){ //static & dynamic checking
-            if($settingsTimeZone['dynamic_timezone'] != 'default'){ // timezone default checking
+    public function set_time_zone($settingsTimeZone)
+    {
+        if ($settingsTimeZone['business_hour_style'] != 'default') { //static & dynamic checking
+            if ($settingsTimeZone['dynamic_timezone'] != 'default') { // timezone default checking
                 // $ct_input = $settingsTimeZone['custom_timezone_input']; // ct = custom timezone
                 // dynamic_timezone
-                if($settingsTimeZone['dynamic_timezone'] == 'custom'){ // timezone custom checking
+                if ($settingsTimeZone['dynamic_timezone'] == 'custom') { // timezone custom checking
                     $ct_input = (isset($settingsTimeZone['custom_timezone_input']) && !empty($settingsTimeZone['custom_timezone_input'])) ? $settingsTimeZone['custom_timezone_input'] : '+6';
-                }else{
+                } else {
                     $ct_input = $settingsTimeZone['dynamic_timezone'];
                 }
-                
+
                 return $this->set_gmt_zone($ct_input);
-            }else{
+            } else {
                 return $this->set_gmt_zone(get_option('gmt_offset'));
             }
         }
     }
 
-    public function set_gmt_zone($reseive){
+    public function set_gmt_zone($reseive)
+    {
         // $min    = 60 * get_option('gmt_offset');
         $min    = 60 * $reseive;
         $sign   = $min < 0 ? "-" : "+";
         $absmin = abs($min);
-// $tz     = sprintf("UTC%s%02d:%02d", $sign, $absmin/60, $absmin%60);
-        $tz     = sprintf("%s%02d", $sign, $absmin/60, $absmin%60);
-        $data = gmdate("g:i:s A", time() + 3600*($tz+date("I")));
+        // $tz     = sprintf("UTC%s%02d:%02d", $sign, $absmin/60, $absmin%60);
+        $tz     = sprintf("%s%02d", $sign, $absmin / 60, $absmin % 60);
+        $data = gmdate("g:i:s A", time() + 3600 * ($tz + date("I")));
         return $data;
     }
 
@@ -1176,67 +1190,69 @@ class Business_Hours extends Module_Base {
      * @param array $settings Widget display settings.
      * @return int[] { 0 => start seconds, 1 => end seconds (0 = not set) }
      */
-    protected function get_background_video_time_range( array $settings ) {
+    protected function get_background_video_time_range(array $settings)
+    {
         $start_raw = $settings['background_video_start'] ?? null;
         $end_raw   = $settings['background_video_end'] ?? null;
-        $start     = ( null !== $start_raw && '' !== $start_raw ) ? (int) $start_raw : 0;
-        $end       = ( null !== $end_raw && '' !== $end_raw ) ? (int) $end_raw : 0;
-        if ( $start < 0 ) {
+        $start     = (null !== $start_raw && '' !== $start_raw) ? (int) $start_raw : 0;
+        $end       = (null !== $end_raw && '' !== $end_raw) ? (int) $end_raw : 0;
+        if ($start < 0) {
             $start = 0;
         }
-        if ( $end < 0 ) {
+        if ($end < 0) {
             $end = 0;
         }
-        if ( $end > 0 && $end <= $start ) {
+        if ($end > 0 && $end <= $start) {
             $end = 0;
         }
-        return [ $start, $end ];
+        return [$start, $end];
     }
 
-    protected function render_header_background_video( array $settings ) {
-        if ( 'video' !== ( $settings['background_background'] ?? '' ) ) {
+    protected function render_header_background_video(array $settings)
+    {
+        if ('video' !== ($settings['background_background'] ?? '')) {
             return;
         }
 
         $raw = $settings['background_video_link'] ?? '';
-        if ( is_array( $raw ) && ! empty( $raw['url'] ) ) {
+        if (is_array($raw) && ! empty($raw['url'])) {
             $raw = $raw['url'];
         }
-        $url = trim( (string) $raw );
-        if ( '' === $url ) {
+        $url = trim((string) $raw);
+        if ('' === $url) {
             return;
         }
 
-        list( $t_start, $t_end ) = $this->get_background_video_time_range( $settings );
+        list($t_start, $t_end) = $this->get_background_video_time_range($settings);
 
         $wrap_class = 'bdt-ep-bh-v-wrap';
-        if ( empty( $settings['background_play_on_mobile'] ) ) {
+        if (empty($settings['background_play_on_mobile'])) {
             $wrap_class .= ' bdt-ep-bh-v-wrap--hide-mobile';
         }
-        $once = ( 'yes' === ( $settings['background_play_once'] ?? '' ) );
-        $priv = ( 'yes' === ( $settings['background_privacy_mode'] ?? '' ) );
+        $once = ('yes' === ($settings['background_play_once'] ?? ''));
+        $priv = ('yes' === ($settings['background_privacy_mode'] ?? ''));
 
-        echo '<div class="' . esc_attr( $wrap_class ) . '">';
+        echo '<div class="' . esc_attr($wrap_class) . '">';
 
-        if ( preg_match( '/(?:youtube\.com\/(?:watch\?(?:[^#&]*&)?v=|embed\/)|youtu\.be\/)([a-z0-9_-]{6,})/i', $url, $yt ) ) {
+        if (preg_match('/(?:youtube\.com\/(?:watch\?(?:[^#&]*&)?v=|embed\/)|youtu\.be\/)([a-z0-9_-]{6,})/i', $url, $yt)) {
             $id   = $yt[1];
             $host = $priv ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
             $qs   = 'autoplay=1&mute=1&controls=0&playsinline=1&rel=0';
-            if ( ! $once ) {
-                $qs .= '&loop=1&playlist=' . rawurlencode( $id );
+            if (! $once) {
+                $qs .= '&loop=1&playlist=' . rawurlencode($id);
             }
-            if ( $t_start > 0 ) {
+            if ($t_start > 0) {
                 $qs .= '&start=' . $t_start;
             }
-            if ( $t_end > 0 ) {
+            if ($t_end > 0) {
                 $qs .= '&end=' . $t_end;
             }
-            $src = $host . '/embed/' . rawurlencode( $id ) . '?' . $qs;
+            $src = $host . '/embed/' . rawurlencode($id) . '?' . $qs;
             printf(
                 '<iframe class="bdt-ep-bh-v" src="%s" allow="autoplay; encrypted-media" loading="lazy" title=""></iframe>',
-                esc_url( $src )
+                esc_url($src)
             );
-        } elseif ( preg_match( '/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $vm ) ) {
+        } elseif (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $vm)) {
             $loop = $once ? '0' : '1';
             $dnt  = $priv ? '1' : '0';
             $vimeo_params = [
@@ -1246,32 +1262,32 @@ class Business_Hours extends Module_Base {
                 'loop'       => $loop,
                 'dnt'        => $dnt,
             ];
-            if ( $t_start > 0 ) {
+            if ($t_start > 0) {
                 $vimeo_params['start_time'] = (string) $t_start;
             }
-            if ( $t_end > 0 ) {
+            if ($t_end > 0) {
                 $vimeo_params['end_time'] = (string) $t_end;
-                if ( ! isset( $vimeo_params['start_time'] ) ) {
+                if (! isset($vimeo_params['start_time'])) {
                     $vimeo_params['start_time'] = '0';
                 }
             }
-            $src = 'https://player.vimeo.com/video/' . rawurlencode( $vm[1] ) . '?' . http_build_query( $vimeo_params, '', '&', PHP_QUERY_RFC3986 );
+            $src = 'https://player.vimeo.com/video/' . rawurlencode($vm[1]) . '?' . http_build_query($vimeo_params, '', '&', PHP_QUERY_RFC3986);
             printf(
                 '<iframe class="bdt-ep-bh-v" src="%s" allow="autoplay" loading="lazy" title=""></iframe>',
-                esc_url( $src )
+                esc_url($src)
             );
         } else {
             $loop_attr = $once ? '' : ' loop';
             $file_url  = $url;
-            if ( $t_start > 0 || $t_end > 0 ) {
+            if ($t_start > 0 || $t_end > 0) {
                 $file_url .= '#t=' . $t_start;
-                if ( $t_end > 0 ) {
+                if ($t_end > 0) {
                     $file_url .= ',' . $t_end;
                 }
             }
             printf(
                 '<video class="bdt-ep-bh-v" src="%s" autoplay muted playsinline%s></video>',
-                esc_url( $file_url ),
+                esc_url($file_url),
                 $loop_attr // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- literal attribute
             );
         }
@@ -1279,316 +1295,434 @@ class Business_Hours extends Module_Base {
         echo '</div>';
     }
 
-    public function render() {
+    public function render()
+    {
         $settings = $this->get_settings_for_display();
-        $timeNotation	= (get_option('time_format') == 'H:i') ? '24h' : '12h';
+        $timeNotation    = (get_option('time_format') == 'H:i') ? '24h' : '12h';
         $ct_input = get_option('gmt_offset');
 
-        if($settings['dynamic_timezone'] == 'custom'){
-           $ct_input = (isset($settings['custom_timezone_input']) && !empty($settings['custom_timezone_input'])) ? $settings['custom_timezone_input'] : '+6';
-       }else{
-        $ct_input = $settings['dynamic_timezone'];
-    }
+        if ($settings['dynamic_timezone'] == 'custom') {
+            $ct_input = (isset($settings['custom_timezone_input']) && !empty($settings['custom_timezone_input'])) ? $settings['custom_timezone_input'] : '+6';
+        } else {
+            $ct_input = $settings['dynamic_timezone'];
+        }
 
-    
-    $this->add_render_attribute(
-        [
-            'bdt-ep-business-hours-data' => [ 
-                'data-settings' => [
-                    wp_json_encode(array_filter([
-                        "id"         => 'business-hours-' . $this->get_id(),
-                        'business_hour_style' => $settings['business_hour_style'] == 'default'? 'static' : 'dynamic',
-                        "dynamic_timezone_default"   =>  get_option('gmt_offset'),
-                        "dynamic_timezone"   => ($settings['dynamic_timezone'] == 'default') ?  get_option('gmt_offset') : $ct_input,
-                        "timeNotation" => $timeNotation,
-                    ])
-                ),
+
+        $this->add_render_attribute(
+            [
+                'bdt-ep-business-hours-data' => [
+                    'data-settings' => [
+                        wp_json_encode(
+                            array_filter([
+                                "id"         => 'business-hours-' . $this->get_id(),
+                                'business_hour_style' => $settings['business_hour_style'] == 'default' ? 'static' : 'dynamic',
+                                "dynamic_timezone_default"   =>  get_option('gmt_offset'),
+                                "dynamic_timezone"   => ($settings['dynamic_timezone'] == 'default') ?  get_option('gmt_offset') : $ct_input,
+                                "timeNotation" => $timeNotation,
+                            ])
+                        ),
+                    ],
                 ],
-            ],
-        ]
-    );
-
-
-    ?>
-
-    <div class="bdt-ep-business-hours" <?php $this->print_render_attribute_string('bdt-ep-business-hours-data'); ?>>
-
-        <?php if ('yes' == $settings['show_header']) : ?>
-            <div class="bdt-ep-business-hours-header">
-
-                <?php $this->render_header_background_video( $settings ); ?>
-
-                <?php if ('yes' == $settings['show_current_time']) : ?>
-                    <div class="bdt-ep-business-hours-current-time">
-                        <?php
-                        if($settings['business_hour_style'] == 'default'){
-	                        echo wp_kses_post(date_i18n( get_option('time_format'), current_time( 'timestamp' ) ));
-                        }else{
-                            $cur_time   =   strtotime($this->set_time_zone($settings));
-	                        echo wp_kses_post(date_i18n( 'h:i a', $cur_time ));
-                        }
-                        ?>
-
-                    </div>
-                <?php endif; ?>
-
-                <?php if ('yes' == $settings['show_current_date']) : ?>
-                    <div class="bdt-ep-business-hours-current-date">
-                        <?php
-                        if($settings['business_hour_style'] == 'default'){
-	                        echo wp_kses_post(date_i18n( get_option( 'date_format' ), current_time( 'timestamp' ) ));
-                        } else {
-                            $cur_time   =   strtotime(  $this->set_time_zone($settings)  );
-	                        echo wp_kses_post(date_i18n( get_option( 'date_format' ), $cur_time ));
-                        }
-                        ?>
-
-                    </div>
-                <?php endif; ?>
-
-            </div>
-        <?php endif; ?>
-
-
-        <?php
-        if($settings['business_hour_style'] == 'default'){
-            if ( count( $settings['business_days_times'] ) ) {
-                $count = 0;
-                ?>
-                <div class="bdt-ep-business-hours-inner">
-                    <?php
-                    foreach ( $settings['business_days_times'] as $item ) {
-                        $day_settings = $this->get_repeater_setting_key( 'enter_day', 'business_days_times', $count );
-                        $this->add_inline_editing_attributes( $day_settings );
-
-                        $time_settings = $this->get_repeater_setting_key( 'enter_time', 'business_days_times', $count );
-                        $this->add_inline_editing_attributes( $time_settings );
-
-                        $this->add_render_attribute( 'bdt-inner-element', 'class', 'bdt-inner bdt-grid bdt-grid-collapse', true );
-                        $this->add_render_attribute( 'bdt-inner-heading-time', 'class', 'inner-heading-time' );
-                        $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'elementor-repeater-item-' . $item['_id'] );
-                        $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'border-divider' );
-
-                        if ( 'yes' === $item['highlight_this'] ) {
-                            $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'bdt-highlight-bg' );
-                        } elseif ( 'yes' === $settings['business_hours_striped'] ) {
-                            $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'stripes' );
-                        }
-
-                        $this->add_render_attribute( 'bdt-highlight-day' . $item['_id'], 'class', 'heading-date bdt-width-1-2' );
-                        $this->add_render_attribute( 'bdt-highlight-time' . $item['_id'], 'class', 'heading-time bdt-width-expand' );
-
-                        if ( 'yes' === $item['highlight_this'] ) {
-                            $this->add_render_attribute( 'bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day-off' );
-                            $this->add_render_attribute( 'bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time-off' );
-                        } else {
-                            $this->add_render_attribute( 'bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day' );
-                            $this->add_render_attribute( 'bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time' );
-                        }
-                        ?>
-                        <div <?php $this->print_render_attribute_string( 'bdt-bs-background' . $item['_id'] ); ?>>
-                            <div <?php $this->print_render_attribute_string( 'bdt-inner-element' ); ?>>
-                                <span <?php $this->print_render_attribute_string( 'bdt-highlight-day' . $item['_id'] ); ?>>
-                                 <span <?php $this->print_render_attribute_string( $day_settings ); ?>><?php echo esc_html($item['enter_day']); ?></span>
-                             </span>
-
-                             <?php if ( ! empty($item['enter_time']) ) : ?>
-                                <span <?php $this->print_render_attribute_string( 'bdt-highlight-time' . $item['_id'] ); ?>>
-                                  <span <?php $this->print_render_attribute_string( 'bdt-inner-heading-time' ); ?>>
-                                   <span <?php $this->print_render_attribute_string( $time_settings ); ?>><?php echo esc_html($item['enter_time']); ?></span>
-                               </span>
-                           </span>
-                       <?php endif; ?>
-                   </div>
-               </div>
-               <?php
-               $count++;
-           } ?>
-       </div>
-   <?php } }else{
-    $this->dynamicRender($settings);
-}?>
-
-</div>
-<?php
-}
-
-
-
-public function dynamicRender($settings){
-    if ( count( $settings['dynamic_days_times'] ) ) {
-        $count = 0;
-        $availabelStatus = null;
-        ?>
-        <div class="bdt-ep-business-hours-inner">
-            <?php
-            foreach ( $settings['dynamic_days_times'] as $item ) {
-                $day_settings = $this->get_repeater_setting_key( 'dynamic_enter_day', 'dynamic_days_times', $count );
-                $this->add_inline_editing_attributes( $day_settings );
-
-                $time_settings = $this->get_repeater_setting_key( 'dynamic_enter_time', 'dynamic_days_times', $count );
-                $this->add_inline_editing_attributes( $time_settings );
-
-                $this->add_render_attribute( 'bdt-inner-element', 'class', 'bdt-inner bdt-grid bdt-grid-collapse', true );
-                $this->add_render_attribute( 'bdt-inner-heading-time', 'class', 'inner-heading-time' );
-                $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'elementor-repeater-item-' . $item['_id'] );
-                $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'border-divider' );
-
-                if ( 'yes' === $item['dynamic_highlight_this'] ) {
-                    $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'bdt-highlight-bg' );
-                }elseif ( 'yes' === $settings['business_hours_striped'] ) {
-                    $this->add_render_attribute( 'bdt-bs-background' . $item['_id'], 'class', 'stripes' );
-                }
-
-                $this->add_render_attribute( 'bdt-highlight-day' . $item['_id'], 'class', 'heading-date bdt-width-1-2' );
-                $this->add_render_attribute( 'bdt-highlight-time' . $item['_id'], 'class', 'heading-time bdt-width-expand' );
-
-                if ( 'yes' === $item['dynamic_highlight_this'] ) {
-                    $this->add_render_attribute( 'bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day-off' );
-                    $this->add_render_attribute( 'bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time-off' );
-                } else {
-                    $this->add_render_attribute( 'bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day' );
-                    $this->add_render_attribute( 'bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time' );
-                }
-                
-                ?>
-                <div <?php $this->print_render_attribute_string( 'bdt-bs-background' . $item['_id'] ); ?>>
-                    <div <?php $this->print_render_attribute_string( 'bdt-inner-element' ); ?>>
-                     <span <?php $this->print_render_attribute_string( 'bdt-highlight-day' . $item['_id'] ); ?>>
-                        <span <?php $this->print_render_attribute_string( $day_settings ); ?>>
-                           <?php
-                           if($item['dynamic_enter_day_level'] == '')
-                            echo esc_html( ucwords($item['dynamic_enter_day']) );
-                        else
-                            echo esc_html( $item['dynamic_enter_day_level'] );
-                        ?>
-
-                    </span>
-                </span>
-                
-                <?php //if ( ! empty($item['dynamic_start_time']) ) : ?>
-                <span <?php $this->print_render_attribute_string( 'bdt-highlight-time' . $item['_id'] ); ?>>
-                   <span <?php $this->print_render_attribute_string( 'bdt-inner-heading-time' ); ?>>
-                      <span <?php $this->print_render_attribute_string( $time_settings ); ?>>
-
-                         <?php
-                         if ($item['dynamic_close_this'] !='yes'){
-                            echo esc_html($item['dynamic_start_time']);
-                        }else{
-                            echo esc_html($item['dynamic_close_text']);
-                            
-                        }
-                        
-                        ?>
-
-                    </span>
-                    <span class="dynamic-separator">
-                        <?php
-                        if ($item['dynamic_close_this'] !='yes')
-                           echo esc_html($settings['dynamic_time_separator']);
-                       ?>
-                    </span>
-                <span>
-                 <?php
-                    if ($item['dynamic_close_this'] !='yes'){
-                       echo esc_html($item['dynamic_end_time']);
-                   }
-                   $thisDay = substr(ucwords($item['dynamic_enter_day']), 0,3);
-                                               // echo $thisDay;
-                                               // echo date('D');
-                   if($settings['dynamic_timezone'] == 'default'){
-                       $cur_Date   =   date('D') ;
-                   }else{
-                       $cur_Date   =   strtotime(  $this->set_time_zone($settings)  );
-                       $cur_Date   =    date('D', $cur_Date)  ;
-                   }
-                   if($cur_Date == $thisDay){
-
-                       if ($item['dynamic_end_time'] !=''  && $item['dynamic_close_this'] !='yes') {
-                           $availabelStatus = 'Open-'.
-                           $item['dynamic_enter_day'].'-'.
-                           $item['dynamic_start_time'].'-'.
-                           $item['dynamic_end_time'];
-                       }else{
-                           $availabelStatus = 'Closed-'.
-                           $item['dynamic_enter_day'];
-                       }
-                  }
-
-                  ?>
-                </span>
-        </span>
-    </span>
-    <?php //endif; ?>
-</div>
-</div>
-<?php
-$count++;
-}
-$officeStatus = $settings['dynamic_open_day'];
-$officeStatusLogic = 'open';
-
-$exStats = explode('-', $availabelStatus ?? '');
-if(isset($exStats['1'])){
-    if($exStats['0'] == 'Closed'){
-        $closeDay = ucwords(substr($exStats['1'], 0,3));
-    }
-}
-
-
-
-if(isset($closeDay)){
-    if($closeDay == date('D')){
-        $officeStatus = $settings['dynamic_close_day'];
-        $officeStatusLogic = 'close';
-    }
-}
-                    //by time
-if(isset($exStats['2']) && isset($exStats['3'])){
-    $st_time    =   strtotime($exStats['2']);
-    $end_time   =   strtotime($exStats['3']);
-    if($settings['dynamic_timezone'] == 'default'){
-        $cur_time   =   strtotime( $this->set_time_zone($settings) );;
-    } else {
-        $cur_time   =   strtotime(  $this->set_time_zone($settings)  );
-        $cur_time   =   strtotime( date('g:i:s A', $cur_time) );
-    }
-    if($cur_time >= $st_time && $cur_time <= $end_time){
-        $officeStatus = $settings['dynamic_open_day'];
-        $officeStatusLogic = 'open';
-    } else {
-        $officeStatus = $settings['dynamic_close_day'];
-        $officeStatusLogic = 'close';
-    }
-}
+            ]
+        );
 
 
 ?>
 
-</div>
-<div class="bdt-live-status">
-    <?php
-    if($officeStatusLogic == 'open'):
-        ?>
-        <div class="bdt-alert-success" data-bdt-alert >
-            <a class="bdt-alert-close" data-bdt-close></a>
+        <div class="bdt-ep-business-hours" <?php $this->print_render_attribute_string('bdt-ep-business-hours-data'); ?>>
 
-            <?php echo wp_kses_post($officeStatus); ?>
+            <?php if ('yes' == $settings['show_header']) : ?>
+                <div class="bdt-ep-business-hours-header">
+
+                    <?php $this->render_header_background_video($settings); ?>
+
+                    <?php if ('yes' == $settings['show_current_time']) : ?>
+                        <div class="bdt-ep-business-hours-current-time">
+                            <?php
+                            if ($settings['business_hour_style'] == 'default') {
+                                echo wp_kses_post(date_i18n(get_option('time_format'), current_time('timestamp')));
+                            } else {
+                                $cur_time   =   strtotime($this->set_time_zone($settings));
+                                echo wp_kses_post(date_i18n('h:i a', $cur_time));
+                            }
+                            ?>
+
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ('yes' == $settings['show_current_date']) : ?>
+                        <div class="bdt-ep-business-hours-current-date">
+                            <?php
+                            if ($settings['business_hour_style'] == 'default') {
+                                echo wp_kses_post(date_i18n(get_option('date_format'), current_time('timestamp')));
+                            } else {
+                                $cur_time   =   strtotime($this->set_time_zone($settings));
+                                echo wp_kses_post(date_i18n(get_option('date_format'), $cur_time));
+                            }
+                            ?>
+
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+            <?php endif; ?>
+
+
+            <?php
+            if ($settings['business_hour_style'] == 'default') {
+                if (count($settings['business_days_times'])) {
+                    $count = 0;
+            ?>
+                    <div class="bdt-ep-business-hours-inner">
+                        <?php
+                        foreach ($settings['business_days_times'] as $item) {
+                            $day_settings = $this->get_repeater_setting_key('enter_day', 'business_days_times', $count);
+                            $this->add_inline_editing_attributes($day_settings);
+
+                            $time_settings = $this->get_repeater_setting_key('enter_time', 'business_days_times', $count);
+                            $this->add_inline_editing_attributes($time_settings);
+
+                            $this->add_render_attribute('bdt-inner-element', 'class', 'bdt-inner bdt-grid bdt-grid-collapse', true);
+                            $this->add_render_attribute('bdt-inner-heading-time', 'class', 'inner-heading-time');
+                            $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'elementor-repeater-item-' . $item['_id']);
+                            $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'border-divider');
+
+                            if ('yes' === $item['highlight_this']) {
+                                $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'bdt-highlight-bg');
+                            } elseif ('yes' === $settings['business_hours_striped']) {
+                                $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'stripes');
+                            }
+
+                            $this->add_render_attribute('bdt-highlight-day' . $item['_id'], 'class', 'heading-date bdt-width-1-2');
+                            $this->add_render_attribute('bdt-highlight-time' . $item['_id'], 'class', 'heading-time bdt-width-expand');
+
+                            if ('yes' === $item['highlight_this']) {
+                                $this->add_render_attribute('bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day-off');
+                                $this->add_render_attribute('bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time-off');
+                            } else {
+                                $this->add_render_attribute('bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day');
+                                $this->add_render_attribute('bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time');
+                            }
+                        ?>
+                            <div <?php $this->print_render_attribute_string('bdt-bs-background' . $item['_id']); ?>>
+                                <div <?php $this->print_render_attribute_string('bdt-inner-element'); ?>>
+                                    <span <?php $this->print_render_attribute_string('bdt-highlight-day' . $item['_id']); ?>>
+                                        <span <?php $this->print_render_attribute_string($day_settings); ?>><?php echo esc_html($item['enter_day']); ?></span>
+                                    </span>
+
+                                    <?php if (! empty($item['enter_time'])) : ?>
+                                        <span <?php $this->print_render_attribute_string('bdt-highlight-time' . $item['_id']); ?>>
+                                            <span <?php $this->print_render_attribute_string('bdt-inner-heading-time'); ?>>
+                                                <span <?php $this->print_render_attribute_string($time_settings); ?>><?php echo esc_html($item['enter_time']); ?></span>
+                                            </span>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php
+                            $count++;
+                        } ?>
+                    </div>
+            <?php }
+            } else {
+                $this->dynamicRender($settings);
+            } ?>
 
         </div>
-        <?php else: ?>
-            <div class="bdt-alert-danger" data-bdt-alert >
-                <a class="bdt-alert-close" data-bdt-close></a>
+        <?php
+    }
 
-                <?php echo wp_kses_post($officeStatus); ?>
+
+
+    public function dynamicRender($settings)
+    {
+        if (count($settings['dynamic_days_times'])) {
+            $count = 0;
+            $availabelStatus = null;
+        ?>
+            <div class="bdt-ep-business-hours-inner">
+                <?php
+                foreach ($settings['dynamic_days_times'] as $item) {
+                    $day_settings = $this->get_repeater_setting_key('dynamic_enter_day', 'dynamic_days_times', $count);
+                    $this->add_inline_editing_attributes($day_settings);
+
+                    $time_settings = $this->get_repeater_setting_key('dynamic_enter_time', 'dynamic_days_times', $count);
+                    $this->add_inline_editing_attributes($time_settings);
+
+                    $this->add_render_attribute('bdt-inner-element', 'class', 'bdt-inner bdt-grid bdt-grid-collapse', true);
+                    $this->add_render_attribute('bdt-inner-heading-time', 'class', 'inner-heading-time');
+                    $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'elementor-repeater-item-' . $item['_id']);
+                    $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'border-divider');
+
+                    if ('yes' === $item['dynamic_highlight_this']) {
+                        $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'bdt-highlight-bg');
+                    } elseif ('yes' === $settings['business_hours_striped']) {
+                        $this->add_render_attribute('bdt-bs-background' . $item['_id'], 'class', 'stripes');
+                    }
+
+                    $this->add_render_attribute('bdt-highlight-day' . $item['_id'], 'class', 'heading-date bdt-width-1-2');
+                    $this->add_render_attribute('bdt-highlight-time' . $item['_id'], 'class', 'heading-time bdt-width-expand');
+
+                    if ('yes' === $item['dynamic_highlight_this']) {
+                        $this->add_render_attribute('bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day-off');
+                        $this->add_render_attribute('bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time-off');
+                    } else {
+                        $this->add_render_attribute('bdt-highlight-day' . $item['_id'], 'class', 'bdt-business-day');
+                        $this->add_render_attribute('bdt-highlight-time' . $item['_id'], 'class', 'bdt-business-time');
+                    }
+
+                ?>
+                    <div <?php $this->print_render_attribute_string('bdt-bs-background' . $item['_id']); ?>>
+                        <div <?php $this->print_render_attribute_string('bdt-inner-element'); ?>>
+                            <span <?php $this->print_render_attribute_string('bdt-highlight-day' . $item['_id']); ?>>
+                                <span <?php $this->print_render_attribute_string($day_settings); ?>>
+                                    <?php
+                                    if ($item['dynamic_enter_day_level'] == '')
+                                        echo esc_html(ucwords($item['dynamic_enter_day']));
+                                    else
+                                        echo esc_html($item['dynamic_enter_day_level']);
+                                    ?>
+
+                                </span>
+                            </span>
+
+                            <?php //if ( ! empty($item['dynamic_start_time']) ) : 
+                            ?>
+                            <span <?php $this->print_render_attribute_string('bdt-highlight-time' . $item['_id']); ?>>
+                                <span <?php $this->print_render_attribute_string('bdt-inner-heading-time'); ?>>
+                                    <span <?php $this->print_render_attribute_string($time_settings); ?>>
+
+                                        <?php
+                                        if ($item['dynamic_close_this'] != 'yes') {
+                                            echo esc_html($item['dynamic_start_time']);
+                                        } else {
+                                            echo esc_html($item['dynamic_close_text']);
+                                        }
+
+                                        ?>
+
+                                    </span>
+                                    <span class="dynamic-separator">
+                                        <?php
+                                        if ($item['dynamic_close_this'] != 'yes')
+                                            echo esc_html($settings['dynamic_time_separator']);
+                                        ?>
+                                    </span>
+                                    <span>
+                                        <?php
+                                        if ($item['dynamic_close_this'] != 'yes') {
+                                            echo esc_html($item['dynamic_end_time']);
+                                        }
+                                        $thisDay = substr(ucwords($item['dynamic_enter_day']), 0, 3);
+                                        // echo $thisDay;
+                                        // echo date('D');
+                                        if ($settings['dynamic_timezone'] == 'default') {
+                                            $cur_Date   =   date('D');
+                                        } else {
+                                            $cur_Date   =   strtotime($this->set_time_zone($settings));
+                                            $cur_Date   =    date('D', $cur_Date);
+                                        }
+                                        if ($cur_Date == $thisDay) {
+
+                                            if ($item['dynamic_end_time'] != ''  && $item['dynamic_close_this'] != 'yes') {
+                                                $availabelStatus = 'Open-' .
+                                                    $item['dynamic_enter_day'] . '-' .
+                                                    $item['dynamic_start_time'] . '-' .
+                                                    $item['dynamic_end_time'];
+                                            } else {
+                                                $availabelStatus = 'Closed-' .
+                                                    $item['dynamic_enter_day'];
+                                            }
+                                        }
+
+                                        ?>
+                                    </span>
+                                </span>
+                            </span>
+                            <?php //endif; 
+                            ?>
+                        </div>
+                    </div>
+                <?php
+                    $count++;
+                }
+                $officeStatus = $settings['dynamic_open_day'];
+                $officeStatusLogic = 'open';
+
+                $exStats = explode('-', $availabelStatus ?? '');
+                if (isset($exStats['1'])) {
+                    if ($exStats['0'] == 'Closed') {
+                        $closeDay = ucwords(substr($exStats['1'], 0, 3));
+                    }
+                }
+
+
+
+                if (isset($closeDay)) {
+                    if ($closeDay == date('D')) {
+                        $officeStatus = $settings['dynamic_close_day'];
+                        $officeStatusLogic = 'close';
+                    }
+                }
+                //by time
+                if (isset($exStats['2']) && isset($exStats['3'])) {
+                    $st_time    =   strtotime($exStats['2']);
+                    $end_time   =   strtotime($exStats['3']);
+                    if ($settings['dynamic_timezone'] == 'default') {
+                        $cur_time   =   strtotime($this->set_time_zone($settings));;
+                    } else {
+                        $cur_time   =   strtotime($this->set_time_zone($settings));
+                        $cur_time   =   strtotime(date('g:i:s A', $cur_time));
+                    }
+                    if ($cur_time >= $st_time && $cur_time <= $end_time) {
+                        $officeStatus = $settings['dynamic_open_day'];
+                        $officeStatusLogic = 'open';
+                    } else {
+                        $officeStatus = $settings['dynamic_close_day'];
+                        $officeStatusLogic = 'close';
+                    }
+                }
+
+
+                ?>
 
             </div>
-            <?php
-        endif;
+            <div class="bdt-live-status">
+                <?php
+                if ($officeStatusLogic == 'open'):
+                ?>
+                    <div class="bdt-alert-success" data-bdt-alert>
+                        <a class="bdt-alert-close" data-bdt-close></a>
+
+                        <?php echo wp_kses_post($officeStatus); ?>
+
+                    </div>
+                <?php else: ?>
+                    <div class="bdt-alert-danger" data-bdt-alert>
+                        <a class="bdt-alert-close" data-bdt-close></a>
+
+                        <?php echo wp_kses_post($officeStatus); ?>
+
+                    </div>
+                <?php
+                endif;
+                ?>
+            </div>
+
+        <?php }
+    }
+
+    protected function content_template()
+    {
+        $bh_preview_time = date_i18n(get_option('time_format'), current_time('timestamp'));
+        $bh_preview_date = date_i18n(get_option('date_format'), current_time('timestamp'));
         ?>
-    </div>
-
-<?php }
-}
-
+        <#
+        var style = settings.business_hour_style || 'default';
+        var bhStyleJson = ( 'default' === style ) ? 'static' : 'dynamic';
+        var gmtDefault = <?php echo wp_json_encode(get_option('gmt_offset')); ?>;
+        var dynTz = settings.dynamic_timezone || 'default';
+        var ctInput;
+        if ( 'custom' === dynTz ) {
+            ctInput = ( settings.custom_timezone_input && settings.custom_timezone_input !== '' ) ? settings.custom_timezone_input : '+6';
+        } else {
+            ctInput = dynTz;
+        }
+        var dynamicTimezoneJson = ( 'default' === dynTz ) ? gmtDefault : ctInput;
+        var dataSettings = JSON.stringify({
+            id: 'business-hours-' + view.getID(),
+            business_hour_style: bhStyleJson,
+            dynamic_timezone_default: gmtDefault,
+            dynamic_timezone: dynamicTimezoneJson,
+            timeNotation: <?php echo wp_json_encode((get_option('time_format') == 'H:i') ? '24h' : '12h'); ?>
+        });
+        #>
+            <div class="bdt-ep-business-hours" data-settings="{{ dataSettings }}">
+                <# if ( settings.show_header==='yes' ) { #>
+                    <div class="bdt-ep-business-hours-header">
+                        <# if ( settings.show_current_time==='yes' ) { #>
+                            <div class="bdt-ep-business-hours-current-time"><?php echo esc_html($bh_preview_time); ?></div>
+                            <# } #>
+                                <# if ( settings.show_current_date==='yes' ) { #>
+                                    <div class="bdt-ep-business-hours-current-date"><?php echo esc_html($bh_preview_date); ?></div>
+                                    <# } #>
+                    </div>
+                    <# } #>
+                        <# if ( style==='default' ) { #>
+                            <div class="bdt-ep-business-hours-inner">
+                                <# _.each( settings.business_days_times, function( item ) {
+                                    var rowClass='elementor-repeater-item-' + item._id + ' border-divider' ;
+                                    if ( item.highlight_this==='yes' ) {
+                                    rowClass +=' bdt-highlight-bg' ;
+                                    } else if ( settings.business_hours_striped==='yes' ) {
+                                    rowClass +=' stripes' ;
+                                    }
+                                    var dayClass='heading-date bdt-width-1-2' ;
+                                    var timeClass='heading-time bdt-width-expand' ;
+                                    if ( item.highlight_this==='yes' ) {
+                                    dayClass +=' bdt-business-day-off' ;
+                                    timeClass +=' bdt-business-time-off' ;
+                                    } else {
+                                    dayClass +=' bdt-business-day' ;
+                                    timeClass +=' bdt-business-time' ;
+                                    }
+                                    #>
+                                    <div class="{{ rowClass }}">
+                                        <div class="bdt-inner bdt-grid bdt-grid-collapse">
+                                            <span class="{{ dayClass }}">
+                                                <span>{{ item.enter_day }}</span>
+                                            </span>
+                                            <# if ( item.enter_time ) { #>
+                                                <span class="{{ timeClass }}">
+                                                    <span class="inner-heading-time">
+                                                        <span>{{ item.enter_time }}</span>
+                                                    </span>
+                                                </span>
+                                                <# } #>
+                                        </div>
+                                    </div>
+                                    <# } ); #>
+                            </div>
+                            <# } else { #>
+                                <div class="bdt-ep-business-hours-inner">
+                                    <# _.each( settings.dynamic_days_times, function( item ) {
+                                        var rowClass='elementor-repeater-item-' + item._id + ' border-divider' ;
+                                        if ( item.dynamic_highlight_this==='yes' ) {
+                                        rowClass +=' bdt-highlight-bg' ;
+                                        } else if ( settings.business_hours_striped==='yes' ) {
+                                        rowClass +=' stripes' ;
+                                        }
+                                        var dayClass='heading-date bdt-width-1-2' ;
+                                        var timeClass='heading-time bdt-width-expand' ;
+                                        if ( item.dynamic_highlight_this==='yes' ) {
+                                        dayClass +=' bdt-business-day-off' ;
+                                        timeClass +=' bdt-business-time-off' ;
+                                        } else {
+                                        dayClass +=' bdt-business-day' ;
+                                        timeClass +=' bdt-business-time' ;
+                                        }
+                                        var dayLabel=item.dynamic_enter_day_level || item.dynamic_enter_day;
+                                        var separator=settings.dynamic_time_separator || '-' ;
+                                        var timeLabel=( item.dynamic_close_this==='yes' )
+                                        ? item.dynamic_close_text
+                                        : ( item.dynamic_start_time + ' ' + separator + ' ' + item.dynamic_end_time );
+                                        #>
+                                        <div class="{{ rowClass }}">
+                                            <div class="bdt-inner bdt-grid bdt-grid-collapse">
+                                                <span class="{{ dayClass }}">
+                                                    <span>{{ dayLabel }}</span>
+                                                </span>
+                                                <span class="{{ timeClass }}">
+                                                    <span class="inner-heading-time">
+                                                        <span>{{ timeLabel }}</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <# } ); #>
+                                </div>
+                                <# } #>
+            </div>
+    <?php
+    }
 }

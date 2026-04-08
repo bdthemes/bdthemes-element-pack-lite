@@ -1609,4 +1609,115 @@ class Featured_Box extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var skinId = settings._skin || '';
+		var contentPosition = settings.content_position || 'center-left';
+		var titleTag        = settings.title_size || 'h3';
+		var imgUrl          = settings.image && settings.image.url ? settings.image.url : '';
+		var showSubTitle    = settings.show_sub_title === 'yes';
+		var showBadge       = settings.badge === 'yes';
+		var showReadmore    = settings.readmore === 'yes';
+		var badgePosition   = settings.badge_position || 'top-right';
+		var rmIconAlign     = settings.readmore_icon_align || 'right';
+		var rmHref          = settings.readmore_link && settings.readmore_link.url ? settings.readmore_link.url : '#';
+		var iconHTML        = elementor.helpers.renderIcon( view, settings.advanced_readmore_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
+		var migrated        = elementor.helpers.isIconMigrated( settings, 'advanced_readmore_icon' );
+
+		var skinPos = settings.skin_content_position || 'left';
+		var splitGridClass = ( skinPos === 'right' ) ? 'bdt-grid bdt-flex-row bdt-flex-row-reverse' : 'bdt-grid';
+		#>
+		<# if ( skinId === 'split' ) { #>
+		<div class="bdt-ep-featured-box bdt-ep-featured-box-skin-split">
+			<div class="{{ splitGridClass }}">
+				<div class="bdt-width-1-1 bdt-width-2-5@s">
+					<div class="bdt-ep-featured-box-content bdt-position-z-index bdt-position-center-{{ skinPos }} bdt-text-{{ skinPos }}">
+						<# if ( showSubTitle && settings.sub_title_text ) { #>
+						<div class="bdt-ep-featured-box-sub-title">{{{ settings.sub_title_text }}}</div>
+						<# } #>
+						<# if ( settings.title_text ) { #>
+						<{{ titleTag }} class="bdt-ep-featured-box-title">
+							<span>{{{ settings.title_text }}}</span>
+						</{{ titleTag }}>
+						<# } #>
+						<# if ( settings.description_text ) { #>
+						<div class="bdt-ep-featured-box-text">{{{ settings.description_text }}}</div>
+						<# } #>
+						<# if ( showReadmore ) { #>
+						<div class="bdt-ep-featured-box-button">
+							<a class="bdt-ep-featured-box-readmore" href="{{ rmHref }}"<# if ( settings.readmore_link && settings.readmore_link.is_external ) { #> target="_blank"<# } #><# if ( settings.readmore_link && settings.readmore_link.nofollow ) { #> rel="nofollow"<# } #>>
+								<# if ( iconHTML && iconHTML.rendered && ( ! settings.readmore_icon || migrated ) && rmIconAlign === 'left' ) { #>
+								<span class="bdt-button-icon-align-left">{{{ iconHTML.value }}}</span>
+								<# } #>
+								{{ settings.readmore_text || 'Read More' }}
+								<# if ( iconHTML && iconHTML.rendered && ( ! settings.readmore_icon || migrated ) && rmIconAlign !== 'left' ) { #>
+								<span class="bdt-button-icon-align-right">{{{ iconHTML.value }}}</span>
+								<# } #>
+							</a>
+						</div>
+						<# } #>
+					</div>
+				</div>
+				<div class="bdt-width-1-1 bdt-width-3-5@s">
+					<# if ( imgUrl ) { #>
+					<div class="bdt-ep-featured-box-image">
+						<div class="bdt-position-relative">
+							<img src="{{ imgUrl }}" alt="{{ settings.title_text }}">
+							<# if ( showBadge && settings.badge_text ) { #>
+							<div class="bdt-ep-featured-box-badge bdt-position-small bdt-position-{{ badgePosition }}">
+								<span class="bdt-badge bdt-padding-small">{{ settings.badge_text }}</span>
+							</div>
+							<# } #>
+						</div>
+					</div>
+					<# } #>
+				</div>
+			</div>
+		</div>
+		<# } else { #>
+		<div class="bdt-ep-featured-box bdt-ep-featured-box-default">
+			<# if ( imgUrl ) { #>
+			<div class="bdt-ep-featured-box-image">
+				<div class="bdt-position-relative">
+					<img src="{{ imgUrl }}" alt="{{ settings.title_text }}">
+					<# if ( showBadge && settings.badge_text ) { #>
+					<div class="bdt-ep-featured-box-badge bdt-position-small bdt-position-{{ badgePosition }}">
+						<span class="bdt-badge bdt-padding-small">{{ settings.badge_text }}</span>
+					</div>
+					<# } #>
+				</div>
+			</div>
+			<# } #>
+			<div class="bdt-ep-featured-box-content bdt-position-{{ contentPosition }}">
+				<# if ( showSubTitle && settings.sub_title_text ) { #>
+				<div class="bdt-ep-featured-box-sub-title">{{{ settings.sub_title_text }}}</div>
+				<# } #>
+				<# if ( settings.title_text ) { #>
+				<{{ titleTag }} class="bdt-ep-featured-box-title">
+					<span>{{{ settings.title_text }}}</span>
+				</{{ titleTag }}>
+				<# } #>
+				<# if ( settings.description_text ) { #>
+				<div class="bdt-ep-featured-box-text">{{{ settings.description_text }}}</div>
+				<# } #>
+				<# if ( showReadmore ) { #>
+				<div class="bdt-ep-featured-box-button">
+					<a class="bdt-ep-featured-box-readmore" href="{{ rmHref }}"<# if ( settings.readmore_link && settings.readmore_link.is_external ) { #> target="_blank"<# } #><# if ( settings.readmore_link && settings.readmore_link.nofollow ) { #> rel="nofollow"<# } #>>
+						<# if ( iconHTML && iconHTML.rendered && ( ! settings.readmore_icon || migrated ) && rmIconAlign === 'left' ) { #>
+						<span class="bdt-button-icon-align-left">{{{ iconHTML.value }}}</span>
+						<# } #>
+						{{ settings.readmore_text || 'Read More' }}
+						<# if ( iconHTML && iconHTML.rendered && ( ! settings.readmore_icon || migrated ) && rmIconAlign !== 'left' ) { #>
+						<span class="bdt-button-icon-align-right">{{{ iconHTML.value }}}</span>
+						<# } #>
+					</a>
+				</div>
+				<# } #>
+			</div>
+		</div>
+		<# } #>
+		<?php
+	}
 }

@@ -58,7 +58,7 @@ class Image_Compare extends Module_Base {
 	protected function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content_layout',
@@ -479,6 +479,44 @@ class Image_Compare extends Module_Base {
 			</div>
 		</div>
 
+		<?php
+	}
+
+	protected function content_template() {
+		?>
+		<#
+		var widgetId = 'image-compare-' + view.getID();
+		var beforeImage = ( settings.before_image && settings.before_image.url ) ? settings.before_image.url : '';
+		var afterImage  = ( settings.after_image && settings.after_image.url ) ? settings.after_image.url : '';
+		var defaultOffset = ( settings.default_offset_pct && settings.default_offset_pct.size !== undefined ) ? settings.default_offset_pct.size : 50;
+		if ( defaultOffset < 1 ) { defaultOffset = defaultOffset * 100; }
+		var isVertical = ( settings.orientation === 'vertical' );
+		var overlayClass = ( settings.no_overlay === 'yes' ) ? ' bdt-image-compare-overlay' : '';
+		var smoothingYes = settings.smoothing === 'yes';
+		var smoothingAmount = ( smoothingYes && settings.smoothing_amount && settings.smoothing_amount.size !== undefined ) ? settings.smoothing_amount.size : 0;
+		var dataSettings = JSON.stringify({
+			id: widgetId,
+			default_offset_pct: defaultOffset,
+			orientation: isVertical,
+			before_label: settings.before_label || '',
+			after_label: settings.after_label || '',
+			no_overlay: settings.no_overlay === 'yes',
+			on_hover: settings.on_hover === 'yes',
+			move_slider_on_hover: settings.move_slider_on_hover === 'yes',
+			add_circle: settings.add_circle === 'yes',
+			add_circle_blur: settings.add_circle_blur === 'yes',
+			add_circle_shadow: settings.add_circle_shadow === 'yes',
+			smoothing: smoothingYes,
+			smoothing_amount: smoothingAmount,
+			bar_color: settings.bar_color || ''
+		});
+		#>
+		<div class="bdt-image-compare bdt-position-relative">
+			<div id="{{ widgetId }}" class="image-compare{{ overlayClass }}" data-settings='{{{ dataSettings }}}'>
+				<# if ( beforeImage ) { #><img src="{{ beforeImage }}" alt="{{ settings.before_label }}"><# } #>
+				<# if ( afterImage ) { #><img src="{{ afterImage }}" alt="{{ settings.after_label }}"><# } #>
+			</div>
+		</div>
 		<?php
 	}
 }

@@ -974,4 +974,102 @@ class Creative_Button extends Module_Base {
 		<?php
 	}
 
+	protected function content_template() {
+		?>
+		<#
+		var link = settings.link || {};
+		var btnHref = link.url ? link.url : 'javascript:void(0);';
+		var targetAttr = link.is_external ? ' target="_blank"' : '';
+		var relParts = [];
+		if ( link.is_external ) {
+			relParts.push( 'noopener', 'noreferrer' );
+		}
+		if ( link.nofollow ) {
+			relParts.push( 'nofollow' );
+		}
+		var relAttr = relParts.length ? ' rel="' + relParts.join( ' ' ) + '"' : '';
+		var idAttr = ( settings.button_css_id && String( settings.button_css_id ).trim() !== '' ) ? ' id="' + settings.button_css_id + '"' : '';
+		var extraAttrs = idAttr + targetAttr + relAttr;
+
+		var btnClasses = 'bdt-ep-creative-button bdt-ep-creative-button--' + settings.button_style;
+		if ( settings.hover_animation ) {
+			btnClasses += ' elementor-animation-' + settings.hover_animation;
+		}
+		#>
+		<# if ( 'hyperion' === settings.button_style || 'telesto' === settings.button_style || 'narvi' === settings.button_style || 'helene' === settings.button_style || 'greip' === settings.button_style || 'skoll' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>><span><span>{{ settings.text }}</span></span></a>
+		<# } else if ( 'atlas' === settings.button_style || 'kari' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>
+				<span>{{ settings.text }}</span>
+				<div class="bdt-ep-creative-button-marquee" aria-hidden="true">
+					<div class="bdt-ep-creative-button-marquee__inner">
+						<span>{{ settings.text }}</span>
+						<span>{{ settings.text }}</span>
+						<span>{{ settings.text }}</span>
+						<span>{{ settings.text }}</span>
+					</div>
+				</div>
+			</a>
+		<# } else if ( 'pallene' === settings.button_style || 'glitch' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>{{ settings.text }}</a>
+		<# } else if ( 'bestia' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>
+				<div class="bdt-ep-creative-button__bg"></div><span>{{ settings.text }}</span>
+			</a>
+		<# } else if ( 'surtur' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>
+				<svg class="textcircle" viewBox="0 0 500 500">
+					<title>{{ settings.text }}</title>
+					<defs><path id="textcircle" d="M250,400 a150,150 0 0,1 0,-300a150,150 0 0,1 0,300Z"
+					/></defs>
+					<text><textPath xlink:href="#textcircle" aria-label="{{ settings.text }}" textLength="900">{{ settings.text }}</textPath></text>
+				</svg>
+				<svg aria-hidden="true" class="eye" width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+					<path class="eye__outer" d="M10.5 35.308c5.227-7.98 14.248-13.252 24.5-13.252s19.273 5.271 24.5 13.252c-5.227 7.98-14.248 13.253-24.5 13.253s-19.273-5.272-24.5-13.253z"/>
+					<path class="eye__lashes-up" d="M35 8.802v8.836M49.537 11.383l-3.31 8.192M20.522 11.684l3.31 8.192" />
+					<path class="eye__lashes-down" d="M35 61.818v-8.836 8.836zM49.537 59.237l-3.31-8.193 3.31 8.193zM20.522 58.936l3.31-8.193-3.31 8.193z" />
+					<circle class="eye__iris" cx="35" cy="35.31" r="5.221" />
+					<circle class="eye__inner" cx="35" cy="35.31" r="10.041" />
+				</svg>
+			</a>
+		<# } else if ( 'fenrir' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>
+				<svg aria-hidden="true" class="progress" width="70" height="70" viewbox="0 0 70 70">
+					<path class="progress__circle" d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" />
+					<path class="progress__path" d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" pathLength="1" />
+				</svg>
+				<span>{{ settings.text }}</span>
+			</a>
+		<# } else if ( 'reklo' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>
+				<span>{{ settings.text }}</span>
+				<i class="ep-icon-arrow-right-0"></i>
+			</a>
+		<# } else if ( 'gooey' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>
+				{{ settings.text }}
+				<div class="c-button__blobs">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</a>
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+			<defs>
+				<filter id="goo">
+				<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+				<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+				<feBlend in="SourceGraphic" in2="goo"></feBlend>
+				</filter>
+			</defs>
+			</svg>
+		<# } else if ( 'aura' === settings.button_style ) { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>>
+				<span></span> <span> <span> <div class="aura-icon aura-icon-left"> <svg viewBox="0 0 16 16"> <path class="st1" d="M5.49,8.19s4.87-4.87,5.01-5.01"></path> <polyline class="st0" points="5.49 3.18 10.51 3.18 10.51 8.19"></polyline> </svg> </div> <span>{{ settings.text }}</span> <div class="aura-icon aura-icon-right"> <svg viewBox="0 0 16 16"> <path class="st1" d="M5.49,8.19s4.87-4.87,5.01-5.01"></path> <polyline class="st0" points="5.49 3.18 10.51 3.18 10.51 8.19"></polyline> </svg> </div> </span> </span>
+			</a>
+		<# } else { #>
+			<a class="{{ btnClasses }}" href="{{ btnHref }}"<# print( extraAttrs ); #>><span>{{ settings.text }}</span></a>
+		<# } #>
+		<?php
+	}
 }

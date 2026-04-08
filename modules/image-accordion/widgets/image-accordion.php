@@ -1623,4 +1623,179 @@ class Image_Accordion extends Module_Base {
 		</div>
 		<?php
 	}
+
+	protected function content_template() {
+		?>
+		<#
+		var skinType = settings.skin_type || 'default';
+		var titleTag = settings.title_tags || 'h3';
+		var items = settings.image_accordion_items || [];
+
+		var accordionId = 'bdt-ep-image-accordion-' + view.getID();
+		var mouseEvent = settings.image_accordion_event || 'mouseover';
+		var activeItem = settings.active_item === 'yes';
+		var activeItemNumber = parseInt( settings.active_item_number, 10 );
+		if ( isNaN( activeItemNumber ) || activeItemNumber < 1 ) {
+			activeItemNumber = 1;
+		}
+		var swiping = settings.swiping === 'yes' ? 'yes' : '';
+		var inactiveOverlay = settings.inactive_item_overlay === 'yes' ? 'yes' : '';
+
+		var ds = { tabs_id: accordionId, mouse_event: mouseEvent, activeItemNumber: activeItemNumber };
+		if ( activeItem === true ) {
+			ds.activeItem = true;
+		}
+		if ( swiping ) {
+			ds.swiping = swiping;
+		}
+		if ( inactiveOverlay ) {
+			ds.inactiveItemOverlay = inactiveOverlay;
+		}
+		var dataSettings = JSON.stringify( ds );
+
+		var lbAttr = '';
+		if ( settings.show_lightbox === 'yes' ) {
+			lbAttr = 'toggle: .bdt-ep-image-accordion-lightbox; animation:' + ( settings.lightbox_animation || 'slide' ) + ';';
+			if ( settings.lightbox_autoplay === 'yes' ) {
+				lbAttr += ' autoplay: 500;';
+				if ( settings.lightbox_pause === 'yes' ) {
+					lbAttr += ' pause-on-hover: true;';
+				}
+			}
+		}
+
+		var subTitleClass = 'bdt-ep-image-accordion-sub-title';
+		if ( settings.hide_on_mobile_sub_title === 'yes' ) {
+			subTitleClass += ' bdt-visible@s';
+		}
+		var titleClass = 'bdt-ep-image-accordion-title';
+		if ( settings.hide_on_mobile_title === 'yes' ) {
+			titleClass += ' bdt-visible@s';
+		}
+		var textClass = 'bdt-ep-image-accordion-text';
+		if ( settings.hide_on_mobile_text === 'yes' ) {
+			textClass += ' bdt-visible@s';
+		}
+		var buttonWrapClass = 'bdt-ep-image-accordion-button';
+		if ( settings.hide_on_mobile_button === 'yes' ) {
+			buttonWrapClass += ' bdt-visible@s';
+		}
+		#>
+		<div id="{{ accordionId }}" class="bdt-ep-image-accordion" data-settings='{{{ dataSettings }}}'<# if ( lbAttr ) { #> data-bdt-lightbox="{{ lbAttr }}"<# } #>>
+			<# _.each( items, function( item ) {
+				var slideImage = ( item.slide_image && item.slide_image.url ) ? item.slide_image.url : '';
+				var titleLinkUrl = ( item.title_link && item.title_link.url ) ? item.title_link.url : '';
+				var buttonLinkUrl = ( item.button_link && item.button_link.url ) ? item.button_link.url : '';
+				var titleTarget = ( item.title_link && item.title_link.is_external ) ? '_blank' : '_self';
+				var titleRel = '';
+				if ( item.title_link && item.title_link.is_external ) {
+					titleRel = 'noopener noreferrer';
+				}
+				if ( item.title_link && item.title_link.nofollow ) {
+					titleRel = titleRel ? titleRel + ' nofollow' : 'nofollow';
+				}
+				var btnTarget = ( item.button_link && item.button_link.is_external ) ? '_blank' : '_self';
+				var btnRel = '';
+				if ( item.button_link && item.button_link.is_external ) {
+					btnRel = 'noopener noreferrer';
+				}
+				if ( item.button_link && item.button_link.nofollow ) {
+					btnRel = btnRel ? btnRel + ' nofollow' : 'nofollow';
+				}
+				var caption = item.image_accordion_title || '';
+			#>
+			<# if ( skinType !== 'sliding-box' ) { #>
+			<div class="bdt-ep-image-accordion-item" style="background-image: url('{{ slideImage }}');">
+				<# if ( settings.show_lightbox === 'yes' && slideImage ) { #>
+				<a class="bdt-ep-image-accordion-lightbox" href="{{ slideImage }}" data-elementor-open-lightbox="no"<# if ( caption ) { #> data-caption="{{ caption }}"<# } #>>
+					<# if ( settings.link_type === 'text' && settings.link_text ) { #>
+					<span class="bdt-text">{{{ settings.link_text }}}</span>
+					<# } else { #>
+					<i class="ep-icon-{{ settings.icon || 'plus' }}" aria-hidden="true"></i>
+					<# } #>
+				</a>
+				<# } #>
+				<div class="bdt-ep-image-accordion-content">
+					<# if ( settings.show_sub_title === 'yes' && item.image_accordion_sub_title ) { #>
+					<div class="{{ subTitleClass }}">{{{ item.image_accordion_sub_title }}}</div>
+					<# } #>
+					<# if ( settings.show_title === 'yes' && item.image_accordion_title ) { #>
+					<# if ( titleLinkUrl ) { #>
+					<a href="{{ titleLinkUrl }}" target="{{ titleTarget }}"<# if ( titleRel ) { #> rel="{{ titleRel }}"<# } #>>
+					<# } #>
+					<{{ titleTag }} class="{{ titleClass }}">
+						{{{ item.image_accordion_title }}}
+					</{{ titleTag }}>
+					<# if ( titleLinkUrl ) { #>
+					</a>
+					<# } #>
+					<# } #>
+					<# if ( settings.show_text === 'yes' && item.image_accordion_text ) { #>
+					<div class="{{ textClass }}">{{{ item.image_accordion_text }}}</div>
+					<# } #>
+					<# if ( settings.show_button === 'yes' && item.image_accordion_button ) { #>
+					<div class="{{ buttonWrapClass }}">
+						<# if ( buttonLinkUrl ) { #>
+						<a href="{{ buttonLinkUrl }}" target="{{ btnTarget }}"<# if ( btnRel ) { #> rel="{{ btnRel }}"<# } #>>
+						<# } #>
+						{{{ item.image_accordion_button }}}
+						<# if ( buttonLinkUrl ) { #>
+						</a>
+						<# } #>
+					</div>
+					<# } #>
+				</div>
+			</div>
+			<# } else { #>
+			<div class="bdt-ep-image-accordion-item">
+				<div class="bdt-ep-image-accordion-img">
+					<# if ( slideImage ) { #>
+					<img src="{{ slideImage }}" alt="{{ item.image_accordion_title }}">
+					<# } #>
+					<# if ( settings.show_lightbox === 'yes' && slideImage ) { #>
+					<a class="bdt-ep-image-accordion-lightbox" href="{{ slideImage }}" data-elementor-open-lightbox="no"<# if ( caption ) { #> data-caption="{{ caption }}"<# } #>>
+						<# if ( settings.link_type === 'text' && settings.link_text ) { #>
+						<span class="bdt-text">{{{ settings.link_text }}}</span>
+						<# } else { #>
+						<i class="ep-icon-{{ settings.icon || 'plus' }}" aria-hidden="true"></i>
+						<# } #>
+					</a>
+					<# } #>
+				</div>
+				<div class="bdt-ep-image-accordion-content">
+					<# if ( settings.show_sub_title === 'yes' && item.image_accordion_sub_title ) { #>
+					<div class="{{ subTitleClass }}">{{{ item.image_accordion_sub_title }}}</div>
+					<# } #>
+					<# if ( settings.show_title === 'yes' && item.image_accordion_title ) { #>
+					<# if ( titleLinkUrl ) { #>
+					<a href="{{ titleLinkUrl }}" target="{{ titleTarget }}"<# if ( titleRel ) { #> rel="{{ titleRel }}"<# } #>>
+					<# } #>
+					<{{ titleTag }} class="{{ titleClass }}">
+						{{{ item.image_accordion_title }}}
+					</{{ titleTag }}>
+					<# if ( titleLinkUrl ) { #>
+					</a>
+					<# } #>
+					<# } #>
+					<# if ( settings.show_text === 'yes' && item.image_accordion_text ) { #>
+					<div class="{{ textClass }}">{{{ item.image_accordion_text }}}</div>
+					<# } #>
+					<# if ( settings.show_button === 'yes' && item.image_accordion_button ) { #>
+					<div class="{{ buttonWrapClass }}">
+						<# if ( buttonLinkUrl ) { #>
+						<a href="{{ buttonLinkUrl }}" target="{{ btnTarget }}"<# if ( btnRel ) { #> rel="{{ btnRel }}"<# } #>>
+						<# } #>
+						{{{ item.image_accordion_button }}}
+						<# if ( buttonLinkUrl ) { #>
+						</a>
+						<# } #>
+					</div>
+					<# } #>
+				</div>
+			</div>
+			<# } #>
+			<# } ); #>
+		</div>
+		<?php
+	}
 }
