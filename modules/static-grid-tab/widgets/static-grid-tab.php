@@ -272,6 +272,7 @@ class Static_Grid_Tab extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-static-grid-tab-title, {{WRAPPER}} .bdt-ep-static-grid-tab-thumbnail' => 'text-align: {{VALUE}};',
 				],
+				'condition' => [ 'grid_tab_type' => 'title' ],
 			]
 		);
 

@@ -51,20 +51,6 @@ class Module extends Element_Pack_Module_Base {
 			]
 		);
 
-		$section->add_control(
-			'important_note',
-			[
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'If the cursor icon is not visible in the editor or preview, please navigate to Elementor Settings and enable Font Awesome support.', 'bdthemes-element-pack' ),
-				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
-				'condition'       => [
-					'element_pack_cursor_effects_show'   => 'yes',
-					'element_pack_cursor_effects_source' => 'icons'
-				],
-				'separator' => 'before',
-			]
-		);
-
 		$section->start_controls_tabs(
 			'element_pack_cursor_effects_tabs'
 		);
@@ -146,6 +132,19 @@ class Module extends Element_Pack_Module_Base {
 					'value'   => 'fas fa-laugh-wink',
 					'library' => 'fa-solid',
 				],
+			]
+		);
+		$section->add_control(
+			'important_note',
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'If the cursor icon is not visible in the editor or preview, please navigate to Elementor Settings and enable Font Awesome support.', 'bdthemes-element-pack' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+				'condition'       => [
+					'element_pack_cursor_effects_show'   => 'yes',
+					'element_pack_cursor_effects_source' => 'icons'
+				],
+				'separator' => 'before',
 			]
 		);
 		$section->add_control(
@@ -484,7 +483,7 @@ class Module extends Element_Pack_Module_Base {
 				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
-					'{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-icons' => 'font-size:{{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.bdt-cursor-effects-yes' => '--cursor-ball-size:{{SIZE}}{{UNIT}};',
 				],
 				'condition' => [ 
 					'element_pack_cursor_effects_source' => 'icons'
