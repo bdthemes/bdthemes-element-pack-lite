@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4.0
-Stable tag: 8.5.2
+Stable tag: 8.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 4.0.1
+Elementor tested up to: 4.0.2
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -413,6 +413,24 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.6.0 [15th April 2026] =
+
+* Added: Give donation history widget unlocked from pro
+* Added: Give donor wall widget unlocked from pro
+* Added: Give form widget unlocked from pro
+* Added: Give form grid widget unlocked from pro
+* Added: Give goal widget unlocked from pro
+* Added: Give login widget unlocked from pro
+* Added: Give profile editor widget unlocked from pro
+* Added: Give receipt widget unlocked from pro
+* Added: Give register widget unlocked from pro
+* Added: Give totals widget unlocked from pro
+* Added: Object fit and object position control added in the animated card widget
+* Fixed: Icon size issue fixed in cursor effects extension
+* Fixed: Plus grid style borders fixed in logo grid widget
+* Fixed: Setup wizard template image missing issue fixed
+* Fixed: Tab text align control condition corrected to show only when "grid tab type" is set to "Title" in static grid tab widget
 
 = 8.5.2 [8th April 2026] =
 

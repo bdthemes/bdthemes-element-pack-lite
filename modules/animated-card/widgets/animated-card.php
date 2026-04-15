@@ -558,6 +558,52 @@ class Animated_Card extends Module_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'image_object_fit',
+			[
+				'label'   => esc_html__( 'Object Fit', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'contain',
+
+				'options' => [
+					''           => esc_html__( 'Default', 'bdthemes-element-pack' ),
+					'fill'       => esc_html__( 'Fill', 'bdthemes-element-pack' ),
+					'cover'      => esc_html__( 'Cover', 'bdthemes-element-pack' ),
+					'contain'    => esc_html__( 'Contain', 'bdthemes-element-pack' ),
+					'scale-down' => esc_html__( 'Scale Down', 'bdthemes-element-pack' ),
+				],
+
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-animated-card-img' => 'object-fit: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'image_object_position',
+			[
+				'label'   => esc_html__( 'Object Position', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'center center',
+
+				'options' => [
+					'center center'  => esc_html__( 'Center Center', 'bdthemes-element-pack' ),
+					'center left'    => esc_html__( 'Center Left', 'bdthemes-element-pack' ),
+					'center right'   => esc_html__( 'Center Right', 'bdthemes-element-pack' ),
+					'top center'     => esc_html__( 'Top Center', 'bdthemes-element-pack' ),
+					'top left'       => esc_html__( 'Top Left', 'bdthemes-element-pack' ),
+					'top right'      => esc_html__( 'Top Right', 'bdthemes-element-pack' ),
+					'bottom center'  => esc_html__( 'Bottom Center', 'bdthemes-element-pack' ),
+					'bottom left'    => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
+					'bottom right'   => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
+				],
+
+				'selectors' => [
+					'{{WRAPPER}} .bdt-ep-animated-card-img' => 'object-position: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Css_Filter::get_type(),
 			[ 

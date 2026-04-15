@@ -497,7 +497,7 @@ class Logo_Grid extends Module_Base {
 					'(mobile){{WRAPPER}}.bdt-logo-grid--border.bdt-lg-col--mobile5 .bdt-item:nth-child(-n+5)' => 'border-top-width: var(--ep-grid-border-width, 2px);',
 					'(mobile){{WRAPPER}}.bdt-logo-grid--border.bdt-lg-col--mobile6 .bdt-item:nth-child(-n+6)' => 'border-top-width: var(--ep-grid-border-width, 2px);',
 
-					'{{WRAPPER}}.bdt-logo-grid--tictactoe .bdt-item'                                          => 'border-top-width: {{SIZE}}{{UNIT}}; border-right-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.bdt-logo-grid--tictactoe .bdt-item'                                          => 'border-inline-start-width: 0; border-block-end-width: 0 !important; border-bottom-width: 0 !important; border-inline-end-width: var(--ep-grid-border-width, 2px); border-block-start-width: var(--ep-grid-border-width, 2px);',
 
 					'{{WRAPPER}}.bdt-logo-grid--box .bdt-item'                                                => 'border-width: {{SIZE}}{{UNIT}};',
 				],
