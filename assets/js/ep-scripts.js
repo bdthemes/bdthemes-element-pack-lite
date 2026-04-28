@@ -366,18 +366,50 @@
     'use strict';
 
     /**
+     * Read optional notification z-index from the widget wrapper (set in Elementor).
+     * @param {HTMLFormElement|null|undefined} formEl
+     * @returns {string|null}
+     */
+    const getNotificationZIndex = (formEl) => {
+        const holder = formEl && formEl.closest('[data-bdt-notification-z-index]');
+        const raw    = holder && holder.dataset ? holder.dataset.bdtNotificationZIndex : '';
+        return raw !== undefined && raw !== '' ? raw : null;
+    };
+
+    /**
+     * Apply z-index to the UIkit notification container (parent of the message node).
+     * @param {*} notificationInstance
+     * @param {string|null} zIndexRaw
+     */
+    const applyNotificationZIndex = (notificationInstance, zIndexRaw) => {
+        if (notificationInstance == null || zIndexRaw === null) {
+            return;
+        }
+        const z = Number(zIndexRaw);
+        if (!Number.isFinite(z)) {
+            return;
+        }
+        const containerEl = notificationInstance.$el && notificationInstance.$el.parentElement;
+        if (containerEl) {
+            containerEl.style.zIndex = String(z);
+        }
+    };
+
+    /**
      * Submit form data via fetch and handle response notifications
      * @param {HTMLFormElement} formEl
      * @param {string|false}    widgetID
      */
     const sendContactForm = async (formEl, widgetID = false) => {
         const langStr = window.ElementPackConfig.contact_form;
+        const zIndex  = getNotificationZIndex(formEl);
 
-        bdtUIkit.notification({
+        const loadingNote = bdtUIkit.notification({
             message : `<div bdt-spinner></div> ${langStr.sending_msg}`,
             timeout : false,
             status  : 'primary'
         });
+        applyNotificationZIndex(loadingNote, zIndex);
 
         try {
             const response = await fetch(formEl.getAttribute('action'), {
@@ -400,6 +432,7 @@
             const notification = bdtUIkit.notification({
                 message: `<div class="bdt-contact-form-success-message-${widgetID}">${data}</div>`
             });
+            applyNotificationZIndex(notification, zIndex);
 
             if (redirectURL && redirectURL !== 'no') {
                 bdtUIkit.util.on(document, 'close', (evt) => {
@@ -2027,6 +2060,7 @@
           type: 'post',
           data: {
             action: 'element_pack_search',
+            nonce: window.ElementPackConfig.nonce,
             s: $search,
             settings: $settings,
           },
@@ -3306,6 +3340,15 @@ $(window).on('elementor/frontend/init', function () {
                 options.saveInCookies    = this.settings('saveInCookies') === 'yes';
                 options.autoMatchOsTheme = this.settings('autoMatchOsTheme') === 'yes';
 
+                const dayToggleBg = this.settings('day_mode_icon_background');
+                const darkToggleBg = this.settings('dark_mode_icon_background');
+                if (dayToggleBg) {
+                    options.buttonColorDark = dayToggleBg;
+                }
+                if (darkToggleBg) {
+                    options.buttonColorLight = darkToggleBg;
+                }
+
                 // Remove any previously applied dark-mode position classes
                 const toRemove = [...document.body.classList].filter(c => /^bdt-dark-mode-\S+/.test(c));
                 document.body.classList.remove(...toRemove);
@@ -3813,7 +3856,7 @@ $(window).on('elementor/frontend/init', function () {
                         document.getElementById(cursorWrapId) && document.getElementById(cursorWrapId).remove();
                         var wrapper = document.createElement("div");
                         wrapper.id = cursorWrapId;
-                        wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap";
+                        wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap" + (source === "icons" ? " bdt-cursor-effects--icons" : "");
                         wrapper.innerHTML = cursorInnerHtml;
                         var computed = window.getComputedStyle(elementEl);
                         var cursorVars = ["cursor-ball-color", "cursor-ball-size", "cursor-circle-color", "cursor-circle-size", "cursor-text-label"];

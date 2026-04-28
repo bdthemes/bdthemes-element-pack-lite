@@ -332,6 +332,20 @@ if (!$has_cached_data) {
 
 <script>
 jQuery(document).ready(function($) {
+    const epI18n = <?php echo wp_json_encode( [
+        'unable_to_load'      => __( 'Unable to load plugin data.', 'bdthemes-element-pack' ),
+        'network_error'       => __( 'Network error occurred while loading plugin data.', 'bdthemes-element-pack' ),
+        'no_plugins_found'    => __( 'No plugins found.', 'bdthemes-element-pack' ),
+        'recommended'         => __( 'Recommended', 'bdthemes-element-pack' ),
+        'active'              => __( 'ACTIVE', 'bdthemes-element-pack' ),
+        'active_installs'     => __( 'Active Installs:', 'bdthemes-element-pack' ),
+        'downloads'           => __( 'Downloads:', 'bdthemes-element-pack' ),
+        'last_updated'        => __( 'Last Updated:', 'bdthemes-element-pack' ),
+        'out_of_5_stars'      => __( 'out of 5 stars', 'bdthemes-element-pack' ),
+        'ratings'             => __( 'ratings', 'bdthemes-element-pack' ),
+        'fewer_than_10'       => __( 'Fewer than 10', 'bdthemes-element-pack' ),
+        'retry'               => __( 'Retry', 'bdthemes-element-pack' ),
+    ] ); ?>;
     let integrationDataLoaded = false;
     
     // Function to load integration data
@@ -359,11 +373,11 @@ jQuery(document).ready(function($) {
                     renderPluginList(response.data.plugins);
                     integrationDataLoaded = true;
                 } else {
-                    showError('Unable to load plugin data.');
+                    showError(epI18n.unable_to_load);
                 }
             },
             error: function() {
-                showError('Network error occurred while loading plugin data.');
+                showError(epI18n.network_error);
             }
         });
     }
@@ -374,7 +388,7 @@ jQuery(document).ready(function($) {
         let html = '';
         
         if (plugins.length === 0) {
-            html = '<div class="ep-no-plugins" style="text-align: center; padding: 40px;"><p>No plugins found.</p></div>';
+            html = '<div class="ep-no-plugins" style="text-align: center; padding: 40px;"><p>' + epI18n.no_plugins_found + '</p></div>';
         } else {
             plugins.forEach(function(plugin) {
                 // Skip own plugin (Element Pack) when printing only; data still includes it for other plugins
@@ -389,8 +403,8 @@ jQuery(document).ready(function($) {
                                 ${generatePluginLogo(plugin)}
                             </span>
                             <div class="bdt-plugin-badge-switch-wrap">
-                                ${isRecommended ? '<span class="recommended-badge">Recommended</span>' : ''}
-                                ${isActive ? '<span class="active-badge">ACTIVE</span>' : ''}
+                                ${isRecommended ? '<span class="recommended-badge">' + epI18n.recommended + '</span>' : ''}
+                                ${isActive ? '<span class="active-badge">' + epI18n.active + '</span>' : ''}
                                 ${!isActive ? `
                                     <label class="switch">
                                         <input type="checkbox" class="plugin-slider-checkbox" ${plugin.recommended ? 'checked' : ''} name="plugins[]${plugin.slug}">
@@ -403,20 +417,20 @@ jQuery(document).ready(function($) {
                             <span class="bdt-plugin-name">${plugin.name}</span>
                         </div>
                         <span class="active-installs">
-                            Active Installs: 
-                            <span class="installs-count">${plugin.active_installs_count > 0 ? plugin.active_installs_count.toLocaleString() + '+' : 'Fewer than 10'}</span>
+                            ${epI18n.active_installs}
+                            <span class="installs-count">${plugin.active_installs_count > 0 ? plugin.active_installs_count.toLocaleString() + '+' : epI18n.fewer_than_10}</span>
                         </span>
-                        ${plugin.downloaded_formatted ? `<span class="downloads">Downloads: ${plugin.downloaded_formatted}</span>` : ''}
+                        ${plugin.downloaded_formatted ? `<span class="downloads">${epI18n.downloads} ${plugin.downloaded_formatted}</span>` : ''}
                         <div class="rating-section">
-                            <div class="wporg-ratings" title="${plugin.rating} out of 5 stars" style="color:var(--wp--preset--color--pomegrade-1, #e26f56);">
+                            <div class="wporg-ratings" title="${plugin.rating} ${epI18n.out_of_5_stars}" style="color:var(--wp--preset--color--pomegrade-1, #e26f56);">
                                 ${generateStarRating(plugin.rating)}
                             </div>
                             <span class="rating-text">
-                                ${plugin.rating} out of 5 stars.
-                                ${plugin.num_ratings > 0 ? `<span class="rating-count">(${plugin.num_ratings.toLocaleString()} ratings)</span>` : ''}
+                                ${plugin.rating} ${epI18n.out_of_5_stars}.
+                                ${plugin.num_ratings > 0 ? `<span class="rating-count">(${plugin.num_ratings.toLocaleString()} ${epI18n.ratings})</span>` : ''}
                             </span>
                         </div>
-                        ${plugin.last_updated_formatted ? `<span class="last-updated">Last Updated: ${plugin.last_updated_formatted}</span>` : ''}
+                        ${plugin.last_updated_formatted ? `<span class="last-updated">${epI18n.last_updated} ${plugin.last_updated_formatted}</span>` : ''}
                     </label>
                 `;
             });
@@ -468,7 +482,7 @@ jQuery(document).ready(function($) {
         $pluginList.html(`
             <div class="ep-error-state" style="text-align: center; padding: 40px;">
                 <p style="color: #d63638;">${message}</p>
-                <button type="button" class="bdt-button bdt-button-secondary" onclick="location.reload()">Retry</button>
+                <button type="button" class="bdt-button bdt-button-secondary" onclick="location.reload()">${epI18n.retry}</button>
             </div>
         `);
     }

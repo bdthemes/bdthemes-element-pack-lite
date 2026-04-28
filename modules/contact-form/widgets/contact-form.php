@@ -629,6 +629,19 @@ class Contact_Form extends Module_Base {
 			]
 		);
 
+		$this->add_control(
+			'notification_z_index',
+			[
+				'label'       => esc_html__( 'Notification Z-Index', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'Set a stacking value for submit notifications so they appear above theme headers or overlays. Leave empty for default behavior.', 'bdthemes-element-pack' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => -2147483648,
+				'max'         => 2147483647,
+				'dynamic'     => [ 'active' => true ],
+				'separator'   => 'before',
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1222,6 +1235,11 @@ class Contact_Form extends Module_Base {
 
 
 	public function render() {
+		$settings = $this->get_settings_for_display();
+		if ( isset( $settings['notification_z_index'] ) && $settings['notification_z_index'] !== '' && is_numeric( $settings['notification_z_index'] ) ) {
+			$this->add_render_attribute( '_wrapper', 'data-bdt-notification-z-index', (string) (int) $settings['notification_z_index'] );
+		}
+
 		$this->form_fields_render_attributes();
 
 		?>

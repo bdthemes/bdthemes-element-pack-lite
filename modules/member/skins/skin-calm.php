@@ -4,6 +4,7 @@ namespace ElementPack\Modules\Member\Skins;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Image_Size;
+use Elementor\Group_Control_Border;
 use Elementor\Icons_Manager;
 use ElementPack\Base\Module_Base;
 
@@ -45,6 +46,26 @@ class Skin_Calm extends Elementor_Skin_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-overlay' => 'background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,{{VALUE)}} 100%); background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,{{VALUE)}} 100%);',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[ 
+				'name'        => 'calm_border',
+				'selector'    => '{{WRAPPER}} .bdt-member',
+			]
+		);
+
+		$this->add_control(
+			'calm_border_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-member' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
