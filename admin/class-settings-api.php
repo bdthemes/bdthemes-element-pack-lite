@@ -166,7 +166,7 @@ if (!class_exists('ElementPack_Settings_API')) :
                 $data_type = ' data-widget-type="' . esc_attr($field['args']['widget_type']) . '" data-content-type="' . esc_attr($field['args']['content_type']) . esc_attr($widget_used_status) . '" data-widget-name="' . strtolower($field['args']['name']) . '"';
 
                 if (!empty($field['args']['widget_type']) && 'pro' == $field['args']['widget_type'] && true !== element_pack_pro_activated()) {
-                    $data_type .= ' bdt-tooltip="'.esc_html__('Pro widget only works with Pro version.', 'ultimate-post-kit').'"';
+                    $data_type .= ' bdt-tooltip="' . esc_attr__( 'Pro widget only works with Pro version.', 'bdthemes-element-pack-lite' ) . '"';
                 }
 
                 echo "<div class='ep-option-item {$class} {$widget_used_status}' {$data_type}>";
@@ -400,10 +400,10 @@ if (!class_exists('ElementPack_Settings_API')) :
 
 			$html .= '<div class="ep-option-links">';
 			if ($args['demo_url']) {
-				$html .= '<a href=' . $args['demo_url'] . ' target="_blank" class="ep-option-demo" title="' . esc_html__('View ' . $args['name'] . ' Widget Demo', 'bdthemes-element-pack') . '">' . esc_html__('Demo', 'bdthemes-element-pack') . '<i class="bdt-wi-preview" aria-hidden="true"></i></a>';
+				$html .= '<a href="' . esc_url( $args['demo_url'] ) . '" target="_blank" class="ep-option-demo" title="' . esc_attr( sprintf( __( 'View %s Widget Demo', 'bdthemes-element-pack-lite' ), $args['name'] ) ) . '">' . esc_html__( 'Demo', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-preview" aria-hidden="true"></i></a>';
 			}
 			if ($args['video_url']) {
-				$html .= '<a href=' . $args['video_url'] . ' target="_blank" class="ep-option-video" title="View ' . $args['name'] . ' Video Tutorial">Video<i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
+				$html .= '<a href="' . esc_url( $args['video_url'] ) . '" target="_blank" class="ep-option-video" title="' . esc_attr( sprintf( __( 'View %s Video Tutorial', 'bdthemes-element-pack-lite' ), $args['name'] ) ) . '">' . esc_html__( 'Video', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
 			}
 			$html .= '</div>';
 			$html .= '</div>';

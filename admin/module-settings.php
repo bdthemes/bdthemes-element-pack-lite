@@ -2167,7 +2167,7 @@ class ModuleService {
                     'name'              => 'contact_form_email',
                     'label'             => esc_html__('Contact Form Email', 'bdthemes-element-pack'),
                     'desc'              => __('You can set alternative email for simple contact form', 'bdthemes-element-pack'),
-                    'placeholder'       => 'example@email.com',
+                    'placeholder'       => esc_attr__( 'example@email.com', 'bdthemes-element-pack-lite' ),
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
@@ -2175,7 +2175,7 @@ class ModuleService {
                     'name'              => 'contact_form_spam_email',
                     'label'             => esc_html__('Spam Email List', 'bdthemes-element-pack'),
                     'desc'              => __('add spam email here for block spamming from your contact form. multiple email separated by comma (,).', 'bdthemes-element-pack'),
-                    'placeholder'       => 'example@email.com, example2@email.com',
+                    'placeholder'       => esc_attr__( 'example@email.com, example2@email.com', 'bdthemes-element-pack-lite' ),
                     'type'              => 'textarea',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
@@ -2189,7 +2189,7 @@ class ModuleService {
                     'name'              => 'open_street_map_access_token',
                     'label'             => esc_html__('MapBox Access Token (for Open Street Map)', 'bdthemes-element-pack'),
                     'desc'              => __('<a href="https://www.mapbox.com/account/access-tokens" target="_blank">Click Here</a> to get access token. This Access Token needs for show Open Street Map widget correctly.', 'bdthemes-element-pack'),
-                    'placeholder'       => '------------- -------------------------',
+                    'placeholder'       => esc_attr__( '------------- -------------------------', 'bdthemes-element-pack-lite' ),
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
