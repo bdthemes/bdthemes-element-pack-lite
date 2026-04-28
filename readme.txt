@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4.0
-Stable tag: 8.6.0
+Stable tag: 8.6.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 4.0.2
+Elementor tested up to: 4.0.3
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -413,6 +413,18 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.6.1 [28th April 2026] =
+
+* Added: Skin calm, ekip, phaedra Border & border radius controls added in member widget
+* Added: Notification Z-Index control added in Simple Contact Form widget ( Thanks to Chiara Scrigner )
+* Fixed: Icon hover effects now apply correctly for all effect in the step flow widget
+* Fixed: Search widget: Ajax live search always showing no results fixed (request now includes the required security nonce)
+* Fixed: Cursor Effects extension: Style → Size control now applies to SVG icons (uploaded SVG as image and inline SVG), not only icon fonts
+* Fixed: Fixed toggle icon background styling and button border-radius control issues in the dark mode widget
+* Fixed: Fixed hard-coded/untranslatable strings and translation-unsafe formatting in settings screens and setup wizard views
+* Fixed: Implemented translatable Select2 UI strings via Select2 language defaults
+* Fixed: Fixed WordPress escaping issues in the template edit link title and user register logout text
 
 = 8.6.0 [15th April 2026] =
 

@@ -2296,7 +2296,7 @@ class User_Register extends Module_Base {
 					echo esc_html( ' ' . $current_user->display_name );
 					?>
 					<a href="<?php echo esc_url( wp_logout_url( $current_url ) ); ?>">
-						<?php echo esc_html_e( 'Logout', 'bdthemes-element-pack' ); ?>
+						<?php esc_html_e( 'Logout', 'bdthemes-element-pack' ); ?>
 					</a>
 				</div>
 				<?php

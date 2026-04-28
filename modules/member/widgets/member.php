@@ -606,7 +606,7 @@ class Member extends Module_Base {
 				'label'     => esc_html__( 'Photo', 'bdthemes-element-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
-					'_skin!' => 'bdt-flip',
+					'_skin!' => ['bdt-calm', 'bdt-ekip', 'bdt-phaedra', 'bdt-flip'],
 				],
 			]
 		);

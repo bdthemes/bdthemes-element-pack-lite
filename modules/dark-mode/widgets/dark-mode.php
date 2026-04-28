@@ -68,7 +68,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'default_mode',
             [
-                'label'   => esc_html__('Default Mode', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'   => esc_html__('Default Mode', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'light',
                 'options' => [
@@ -83,7 +83,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'toggle_position',
             [
-                'label'   => esc_html__('Toggle Position', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'   => esc_html__('Toggle Position', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'bottom-right',
                 'options' => [
@@ -157,7 +157,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'ignore_element',
             [
-                'label'       => esc_html__('Ignore Elements', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'       => esc_html__('Ignore Elements', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXTAREA,
                 'placeholder' => '.my-image, .my-widget',
                 'dynamic'     => [
@@ -181,7 +181,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'saveInCookies',
             [
-                'label'              => esc_html__('Save User Action', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'              => esc_html__('Save User Action', 'bdthemes-element-pack'),
                 'type'               => Controls_Manager::SWITCHER,
                 'return_value'       => 'yes',
                 'frontend_available' => true,
@@ -355,7 +355,7 @@ class Dark_Mode extends Module_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '.darkmode-toggle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.darkmode-toggle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
                 ],
             ]
         );
@@ -390,7 +390,7 @@ class Dark_Mode extends Module_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#100f2c',
                 'selectors' => [
-                    '.darkmode-toggle' => 'background: {{VALUE}}',
+                    '.darkmode-toggle:not(.darkmode-toggle--white)' => 'background: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -424,7 +424,7 @@ class Dark_Mode extends Module_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '.darkmode-toggle.darkmode-toggle--white' => 'background: {{VALUE}}',
+                    '.darkmode-toggle.darkmode-toggle--white' => 'background: {{VALUE}} !important;',
                 ],
             ]
         );

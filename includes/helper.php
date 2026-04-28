@@ -517,7 +517,7 @@ function element_pack_template_on_modal_with_iframe( $template_id, $id ) {
 		?>
 		<a class="bdt-template-modal-iframe-edit-link bdt-elementor-template-edit-link"
 			data-modal-element=".<?php echo esc_attr( $modalSelector ) ?>" href="javascript:void(0)"
-			title="<?php esc_html__( 'Edit Template', 'bdthemes-element-pack' ) ?>" target="_blank">
+			title="<?php echo esc_attr__( 'Edit Template', 'bdthemes-element-pack' ) ?>" target="_blank">
 			<i class="eicon-edit"></i>
 		</a>
 		<div class="<?php echo esc_attr( $modalSelector ) ?> bdt-flex-top" bdt-modal>
