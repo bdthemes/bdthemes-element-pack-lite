@@ -414,6 +414,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.6.X [XXth April 2026] =
+
+* Fixed: Replaced hard-coded strings with proper translation support
+
 = 8.6.1 [28th April 2026] =
 
 * Added: Skin calm, ekip, phaedra Border & border radius controls added in member widget
