@@ -400,15 +400,25 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_image_size',
 			[ 
-				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SLIDER,
-				'selectors' => [ 
-					'{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-image' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
+				'label'      => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem', '%', 'vw', 'vh' ],
+				'range'      => [ 
+					'px' => [ 'min' => 10, 'max' => 500, 'step' => 1 ],
+					'em' => [ 'min' => 0.5, 'max' => 20, 'step' => 0.1 ],
+					'rem' => [ 'min' => 0.5, 'max' => 20, 'step' => 0.1 ],
+					'%' => [ 'min' => 5, 'max' => 100 ],
+					'vw' => [ 'min' => 1, 'max' => 100 ],
+					'vh' => [ 'min' => 1, 'max' => 100 ],
+				],
+				'default'    => [ 'unit' => 'px', 'size' => 50 ],
+				'selectors' => [
+					'{{WRAPPER}}.bdt-cursor-effects-yes' => '--cursor-image-size: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [ 
 					'element_pack_cursor_effects_source' => 'image',
 					'element_pack_cursor_effects_image_gsap_animation' => '',
-				]
+				],
 			]
 		);
 		$section->add_control(

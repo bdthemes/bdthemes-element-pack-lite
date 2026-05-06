@@ -73,7 +73,7 @@ class Content_Switcher extends Module_Base {
 			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
 			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Style -> Show Multiple Switches', 'Content Type -> Elementor Template, Link Section, Link Widget'),
 			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
-			'upgrade_text' => sprintf(__( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), 'Upgrade to Pro'),
+			'upgrade_text' => sprintf( __( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' ) ),
 		];
 	}
 
@@ -2683,7 +2683,7 @@ class Content_Switcher extends Module_Base {
 							echo wp_kses_post($primary['content']);
 						} elseif ($primary['content_type'] == 'template') {
 							// PHPCS - should not be escaped.
-							echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($primary['saved_templates']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($primary['saved_templates'], true); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						} elseif ($primary['content_type'] == 'link_section' && !empty($primary['link_section_id']) && $settings['content_position_unchanged'] !== 'yes') {
 							echo '<div class="bdt-switcher-item-content-section bdt-switcher-item-' . esc_attr($primary['link_section_id']) . '"></div>';
 						} elseif ($primary['content_type'] == 'link_widget' && !empty($primary['link_widget_id'])) {
@@ -2701,7 +2701,7 @@ class Content_Switcher extends Module_Base {
 							echo wp_kses_post($secondary['content']);
 						} elseif ($secondary['content_type'] == 'template') {
 							// PHPCS - should not be escaped.
-							echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($secondary['saved_templates']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($secondary['saved_templates'], true); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						} elseif ($secondary['content_type'] == 'link_section' && !empty($secondary['link_section_id']) && $settings['content_position_unchanged'] !== 'yes') {
 							echo '<div class="bdt-switcher-item-content-section bdt-switcher-item-' . esc_attr($secondary['link_section_id']) . '"></div>';
 						} elseif ($secondary['content_type'] == 'link_widget' && !empty($secondary['link_widget_id'])) {
@@ -2731,7 +2731,7 @@ class Content_Switcher extends Module_Base {
 								echo wp_kses_post($item['content']);
 							} elseif ($item['content_type'] == 'template') {
 								// PHPCS - should not be escaped.
-								echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($item['saved_templates']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display($item['saved_templates'], true); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							} elseif ($item['content_type'] == 'link_section' && !empty($item['link_section_id']) && $settings['content_position_unchanged'] !== 'yes') {
 								echo '<div class="bdt-switcher-item-content-section bdt-switcher-item-' . esc_attr($item['link_section_id']) . '"></div>';
 							} elseif ($item['content_type'] == 'link_widget' && !empty($item['link_widget_id'])) {

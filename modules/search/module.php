@@ -50,6 +50,79 @@ class Module extends Element_Pack_Module_Base {
 		return $tax_terms_map;
 	}
 
+	/**
+	 * Normalize string for title/search comparison (trim, collapse spaces, lowercase).
+	 *
+	 * @param string $text Raw text.
+	 * @return string
+	 */
+	private function normalize_search_compare_string( $text ) {
+		$text = wp_strip_all_tags( (string) $text );
+		$text = trim( preg_replace( '/\s+/u', ' ', $text ) );
+		if ( function_exists( 'mb_strtolower' ) ) {
+			return mb_strtolower( $text, 'UTF-8' );
+		}
+		return strtolower( $text );
+	}
+
+	/**
+	 * Normalize for title ranking: ignore trailing sentence punctuation so
+	 * "Some title." matches a stored title without the period.
+	 *
+	 * @param string $text Already lowercased normalized text.
+	 * @return string
+	 */
+	private function normalize_search_for_title_ranking( $text ) {
+		return preg_replace( '/[\s\.!?…:]+$/u', '', $text );
+	}
+
+	/**
+	 * Lower rank = earlier in results (exact/prefix matches first).
+	 *
+	 * @param \WP_Post $post               Post object.
+	 * @param string   $search_normalized Output of normalize_search_compare_string() for the query.
+	 * @return int 0–3
+	 */
+	private function get_ajax_search_title_rank( $post, $needle_norm, $needle_rank ) {
+		if ( '' === $needle_norm ) {
+			return 3;
+		}
+		$title         = $this->normalize_search_compare_string( $post->post_title );
+		$title_for_cmp = $this->normalize_search_for_title_ranking( $title );
+
+		if ( $title === $needle_norm || $title_for_cmp === $needle_rank ) {
+			return 0;
+		}
+		if ( function_exists( 'mb_strpos' ) ) {
+			if ( mb_strpos( $title, $needle_norm, 0, 'UTF-8' ) === 0 ) {
+				return 1;
+			}
+			if ( mb_strpos( $title_for_cmp, $needle_rank, 0, 'UTF-8' ) === 0 ) {
+				return 1;
+			}
+			if ( false !== mb_strpos( $title, $needle_norm, 0, 'UTF-8' ) ) {
+				return 2;
+			}
+			if ( '' !== $needle_rank && false !== mb_strpos( $title_for_cmp, $needle_rank, 0, 'UTF-8' ) ) {
+				return 2;
+			}
+		} else {
+			if ( 0 === strpos( $title, $needle_norm ) ) {
+				return 1;
+			}
+			if ( '' !== $needle_rank && 0 === strpos( $title_for_cmp, $needle_rank ) ) {
+				return 1;
+			}
+			if ( false !== strpos( $title, $needle_norm ) ) {
+				return 2;
+			}
+			if ( '' !== $needle_rank && false !== strpos( $title_for_cmp, $needle_rank ) ) {
+				return 2;
+			}
+		}
+		return 3;
+	}
+
 	public function element_pack_ajax_search() {
 		global $post;
 
@@ -67,10 +140,25 @@ class Module extends Element_Pack_Module_Base {
 			$requested_type = isset( $settings['post_type'] ) ? $settings['post_type'] : 'post';
 			$post_type = isset( $allowed_post_types[ $requested_type ] ) ? $requested_type : 'post';
 
-			$query_args = [ 
+			$response_limit = isset( $settings['per_page'] ) ? absint( $settings['per_page'] ) : 5;
+			if ( $response_limit < 1 ) {
+				$response_limit = 5;
+			}
+			if ( $response_limit > 50 ) {
+				$response_limit = 50;
+			}
+
+			/*
+			 * Fetch many more matches than we return: core search orders by date/relevance and
+			 * can omit an exact title match from the first N rows. We rank by title client-side
+			 * and slice — full-site search shows more rows so the same post appears "on top" there.
+			 */
+			$fetch_pool = min( 200, max( 80, $response_limit * 25 ) );
+
+			$query_args = [
 				'post_type'      => $post_type,
 				's'              => sanitize_text_field( $search_input ),
-				'posts_per_page' => ( $settings['per_page'] ) ? sanitize_text_field( $settings['per_page'] ) : 5,
+				'posts_per_page' => $fetch_pool,
 				'post_status'    => 'publish',
 			];
 
@@ -96,7 +184,6 @@ class Module extends Element_Pack_Module_Base {
 
 			if ( ! empty( $exclude_users ) ) {
 				$query_args['author__not_in'] = $exclude_users;
-				;
 			}
 
 			/**
@@ -150,6 +237,20 @@ class Module extends Element_Pack_Module_Base {
 
 			$query_posts = get_posts( $query_args );
 			if ( ! empty( $query_posts ) ) {
+				$needle_norm = $this->normalize_search_compare_string( $search_input );
+				$needle_rank = $this->normalize_search_for_title_ranking( $needle_norm );
+
+				usort(
+					$query_posts,
+					function ( $a, $b ) use ( $needle_norm, $needle_rank ) {
+						$ra = $this->get_ajax_search_title_rank( $a, $needle_norm, $needle_rank );
+						$rb = $this->get_ajax_search_title_rank( $b, $needle_norm, $needle_rank );
+						return $ra <=> $rb;
+					}
+				);
+
+				$query_posts = array_slice( $query_posts, 0, $response_limit );
+
 				foreach ( $query_posts as $post ) {
 					$content = ! empty( $post->post_excerpt ) ? strip_tags( strip_shortcodes( $post->post_excerpt ) ) : strip_tags( strip_shortcodes( $post->post_content ) );
 					if ( strlen( $content ) > 180 ) {

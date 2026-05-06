@@ -854,6 +854,7 @@ class Step_Flow extends Module_Base {
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow .bdt-icon-wrapper i' => 'transform: rotate({{SIZE}}{{UNIT}});',
                     '{{WRAPPER}} .bdt-step-flow .bdt-icon-wrapper img' => 'transform: rotate({{SIZE}}{{UNIT}});',
+                    '{{WRAPPER}} .bdt-step-flow .bdt-icon-wrapper svg' => 'transform: rotate({{SIZE}}{{UNIT}});',
                 ],
             ]
         );

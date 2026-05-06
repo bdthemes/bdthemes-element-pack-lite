@@ -297,7 +297,7 @@ BDT;
 
         // return self::$elementor_instance->frontend->get_builder_content_for_display($id);
         // Using the correct Elementor method to get builder content
-        return Plugin::instance()->frontend->get_builder_content_for_display($id);
+        return Plugin::instance()->frontend->get_builder_content_for_display($id, true);
     }
 }
 
