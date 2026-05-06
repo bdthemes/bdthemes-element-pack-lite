@@ -69,7 +69,7 @@ class Scrollnav extends Module_Base {
 			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
 			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li><li>%3$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Nav View -> Dots', 'Vertical Nav -> Show', 'Fixed Nav -> Show'),
 			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
-			'upgrade_text' => sprintf(__( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), 'Upgrade to Pro'),
+			'upgrade_text' => sprintf( __( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' ) ),
 		];
 	}
 

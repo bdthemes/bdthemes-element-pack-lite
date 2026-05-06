@@ -61,7 +61,7 @@ class Creative_Button extends Module_Base {
 			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
 			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Button Style -> Aura (New)'),
 			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
-			'upgrade_text' => sprintf(__( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), 'Upgrade to Pro'),
+			'upgrade_text' => sprintf( __( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' ) ),
 		];
 	}
 

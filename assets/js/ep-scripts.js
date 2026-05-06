@@ -3859,7 +3859,7 @@ $(window).on('elementor/frontend/init', function () {
                         wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap" + (source === "icons" ? " bdt-cursor-effects--icons" : "");
                         wrapper.innerHTML = cursorInnerHtml;
                         var computed = window.getComputedStyle(elementEl);
-                        var cursorVars = ["cursor-ball-color", "cursor-ball-size", "cursor-circle-color", "cursor-circle-size", "cursor-text-label"];
+                        var cursorVars = ["cursor-ball-color", "cursor-ball-size", "cursor-circle-color", "cursor-circle-size", "cursor-text-label", "cursor-image-size"];
                         cursorVars.forEach(function (name) {
                             var val = computed.getPropertyValue("--" + name).trim();
                             if (val) wrapper.style.setProperty("--" + name, val);

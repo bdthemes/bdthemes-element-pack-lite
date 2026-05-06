@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4.0
-Stable tag: 8.6.1
+Stable tag: 8.6.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 4.0.3
+Elementor tested up to: 4.0.6
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -414,8 +414,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.6.X [XXth April 2026] =
+= 8.6.2 [6th May 2026] =
 
+* Fixed: Resolved the exact keyword matching issue in the Search widget
+* Fixed: ScrollTrigger error fixed
+* Fixed: Icon rotate isssue fixed in the step flow widget
+* Fixed: Image size issue fixed in cursor effects extension
 * Fixed: Replaced hard-coded strings with proper translation support
 
 = 8.6.1 [28th April 2026] =

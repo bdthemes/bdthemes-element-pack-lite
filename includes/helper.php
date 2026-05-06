@@ -2020,12 +2020,24 @@ function element_pack_money_format( $value ) {
  * @param int $limit default limit is 25 word
  * @param bool $strip_shortcode if you want to strip shortcode from excert text
  * @param string $trail trail string default is ...
+ * @param int|\WP_Post|null $post Optional post ID or object; uses global post when omitted.
  *
  * @return string return custom limited excerpt text
  */
-function element_pack_custom_excerpt( $limit = 25, $strip_shortcode = false, $trail = '' ) {
+function element_pack_custom_excerpt( $limit = 25, $strip_shortcode = false, $trail = '', $post = null ) {
 
-	$output = get_the_content();
+	$post_id = null;
+	if ( $post instanceof \WP_Post ) {
+		$post_id = (int) $post->ID;
+	} elseif ( is_numeric( $post ) && (int) $post > 0 ) {
+		$post_id = (int) $post;
+	}
+
+	if ( $post_id ) {
+		$output = get_the_content( null, false, $post_id );
+	} else {
+		$output = get_the_content();
+	}
 
 	if ( $limit ) {
 		$output = wp_trim_words( $output, $limit, $trail );
