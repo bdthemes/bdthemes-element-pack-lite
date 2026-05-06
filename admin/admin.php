@@ -124,7 +124,7 @@ class Admin {
 
 		wp_enqueue_style( 'bdt-product-feed', BDTEP_ADMIN_URL . 'assets/css/ep-product-feed.css', [], BDTEP_VER, 'all' );
 
-		wp_enqueue_style( 'ep-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-admin-api-biggopti.css', [], BDTEP_VER, 'all' );
+		wp_enqueue_style( 'bdt-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-admin-api-biggopti.css', [], BDTEP_VER, 'all' );
 		wp_enqueue_script( 'ep-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-admin-api-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
 
 		$dismissals = get_option('bdt_biggopti_dismissals', []);
