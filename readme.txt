@@ -420,6 +420,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 * Fixed: ScrollTrigger error fixed
 * Fixed: Icon rotate isssue fixed in the step flow widget
 * Fixed: Image size issue fixed in cursor effects extension
+* Fixed: Replaced hard-coded strings with proper translation support
 
 = 8.6.1 [28th April 2026] =
 
