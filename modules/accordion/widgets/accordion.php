@@ -413,11 +413,11 @@ class Accordion extends Module_Base {
 								}
 							} elseif ( "elementor" == $item['source'] and ! empty( $item['template_id'] ) ) {
 								// PHPCS - should not be escaped.
-								echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display( $item['template_id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display( $item['template_id'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo wp_kses( element_pack_template_edit_link( $item['template_id'] ), element_pack_allow_tags('text') );
 							} elseif ( 'anywhere' == $item['source'] and ! empty( $item['anywhere_id'] ) ) {
 								// PHPCS - should not be escaped.
-								echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display( $item['anywhere_id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo Element_Pack_Loader::elementor()->frontend->get_builder_content_for_display( $item['anywhere_id'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo wp_kses( element_pack_template_edit_link( $item['anywhere_id'] ), element_pack_allow_tags('text') );
 							}
 							?>
