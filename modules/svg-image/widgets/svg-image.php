@@ -174,22 +174,6 @@ class Svg_Image extends Module_Base {
 		);
 
 		$this->add_control(
-			'open_lightbox',
-			[ 
-				'label'     => esc_html__( 'Lightbox', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'yes',
-				'options'   => [ 
-					'yes' => esc_html__( 'Yes', 'bdthemes-element-pack' ),
-					'no'  => esc_html__( 'No', 'bdthemes-element-pack' ),
-				],
-				'condition' => [ 
-					'link_to' => 'file',
-				],
-			]
-		);
-
-		$this->add_control(
 			'view',
 			[ 
 				'label'   => esc_html__( 'View', 'bdthemes-element-pack' ),
@@ -1157,10 +1141,6 @@ class Svg_Image extends Module_Base {
 		if ( $link ) {
 
 			$this->add_render_attribute( 'link', 'data-elementor-open-lightbox', 'no' );
-
-			if ( 'yes' == $settings['open_lightbox'] ) {
-				$this->add_render_attribute( 'wrapper', 'bdt-lightbox', '' );
-			}
 
 			if ( Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
 				$this->add_render_attribute( 'link', [ 
