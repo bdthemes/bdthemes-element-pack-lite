@@ -579,6 +579,18 @@ class Panel_Slider extends Module_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'slider_border_radius',
+			[ 
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [ 
+					'{{WRAPPER}} .bdt-panel-slide-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+				],
+			]
+		);
+
 		$this->add_control(
 			'shadow_mode',
 			[ 
@@ -992,6 +1004,8 @@ class Panel_Slider extends Module_Base {
 							"observer"        => ( $settings["observer"] ) ? true : false,
 							"observeParents"  => ( $settings["observer"] ) ? true : false,
 							"mousewheel"      => ( $settings["mousewheel"] ) ? true : false,
+							"watchSlidesVisibility" => ( isset( $settings["show_hidden_item"] ) && 'yes' === $settings["show_hidden_item"] ) ? true : false,
+							"watchSlidesProgress"   => ( isset( $settings["show_hidden_item"] ) && 'yes' === $settings["show_hidden_item"] ) ? true : false,
 							"breakpoints"     => [ 
 								(int) $viewport_md => [ 
 									"slidesPerView"  => (int) $columns_tablet,
@@ -1249,6 +1263,10 @@ class Panel_Slider extends Module_Base {
 			mousewheel: !! settings.mousewheel,
 			breakpoints: {}
 		};
+		if ( settings.show_hidden_item === 'yes' ) {
+			swiperSettings.watchSlidesVisibility = true;
+			swiperSettings.watchSlidesProgress = true;
+		}
 		swiperSettings.breakpoints[ viewport_md ] = {
 			slidesPerView: columns_tablet,
 			spaceBetween: ( settings.column_space_tablet && settings.column_space_tablet.size ) ? parseInt( settings.column_space_tablet.size, 10 ) : 0,

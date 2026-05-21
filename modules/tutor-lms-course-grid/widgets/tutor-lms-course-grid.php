@@ -251,6 +251,52 @@ class TutorLms_Course_Grid extends Module_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'section_tlms_price_cart',
+			[
+				'label'     => esc_html__('Price & Cart', 'bdthemes-element-pack'),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => [
+					'show_cart_btn_price' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'free_course_label',
+			[
+				'label'       => esc_html__('Free Course Label', 'bdthemes-element-pack'),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Free', 'bdthemes-element-pack' ),
+				'label_block' => true,
+			]
+		);
+
+		$this->add_control(
+			'free_enroll_button_text',
+			[
+				'label'       => esc_html__('Free Course Button Text', 'bdthemes-element-pack'),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Get Enrolled', 'bdthemes-element-pack' ),
+				'label_block' => true,
+			]
+		);
+
+		$this->add_control(
+			'ajax_add_to_cart',
+			[
+				'label'        => esc_html__('AJAX Add to Cart', 'bdthemes-element-pack'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'bdthemes-element-pack' ),
+				'label_off'    => esc_html__( 'No', 'bdthemes-element-pack' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'description'  => esc_html__( 'Disable (default) for a more reliable cart in Elementor and carousels; enable for add-to-cart without a full page reload.', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->end_controls_section();
+
 		// $this->start_controls_section(
 		// 	'section_query',
 		// 	[
@@ -958,7 +1004,8 @@ class TutorLms_Course_Grid extends Module_Base {
 				'label'     => __('Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .tutor-star-rating-group' => 'color: {{VALUE}};',
+					// Tutor renders stars inside .tutor-ratings-stars (<i> or <span>); .tutor-star-rating-group is not used here.
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap .tutor-ratings-stars > i,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap .tutor-ratings-stars > span' => 'color: {{VALUE}};',
 				],
 				'condition'	=> [
 					'show_rating' => 'yes',
@@ -977,7 +1024,7 @@ class TutorLms_Course_Grid extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .tutor-star-rating-group i'  => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap .tutor-ratings-stars > i:not(:last-of-type),{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap .tutor-ratings-stars > span:not(:last-of-type)'  => 'margin-inline-end: {{SIZE}}{{UNIT}};',
 				],
 				'condition'	=> [
 					'show_rating' => 'yes',
@@ -990,7 +1037,7 @@ class TutorLms_Course_Grid extends Module_Base {
 			[
 				'name'      => 'tlms_cg_content_rating_typography',
 				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
-				'selector'  => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap',
+				'selector'  => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap .bdt-tutor-rating-count, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap .tutor-ratings-stars',
 				'condition'	=> [
 					'show_rating' => 'yes',
 				],
@@ -1008,7 +1055,7 @@ class TutorLms_Course_Grid extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .tutor-star-rating-group'  => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-rating-wrap .tutor-ratings-stars'  => 'margin-block-end: {{SIZE}}{{UNIT}};',
 				],
 				'condition'	=> [
 					'show_rating' => 'yes',
@@ -1417,41 +1464,221 @@ class TutorLms_Course_Grid extends Module_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_responsive_control(
+			'tlms_cg_footer_area_margin',
 			[
-				'name'      => 'tlms_cg_footer_price_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
-				'selector'  => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price',
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-course-footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_area_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-loop-course-footer',
+			]
+		);
+
+		$this->add_control(
+			'tlms_cg_footer_price_row_heading',
+			[
+				'label'     => esc_html__('Price Row', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'tlms_cg_footer_loop_price_margin',
+			[
+				'label'      => esc_html__('Outer Margin', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'tlms_cg_footer_price_inner_background',
+			[
+				'label'     => esc_html__('Inner Background', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_price_inner_border',
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price',
+			]
+		);
+
+		$this->add_responsive_control(
+			'tlms_cg_footer_price_inner_padding',
+			[
+				'label'      => esc_html__('Inner Padding', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'tlms_cg_footer_price_row_gap',
+			[
+				'label'      => esc_html__('Space Between Price & Button', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em'],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 80,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 5,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price' => 'gap: {{SIZE}}{{UNIT}}; column-gap: {{SIZE}}{{UNIT}}; row-gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_price_inner_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price',
 			]
 		);
 
 		$this->add_control(
 			'tlms_cg_footer_price_heading',
 			[
-				'label' => esc_html__('Price', 'bdthemes-element-pack'),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before'
+				'label'     => esc_html__('Price Text', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_price_typography',
+				'label'    => esc_html__('Current Price Typography', 'bdthemes-element-pack'),
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price ins, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price ins .woocommerce-Price-amount, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price > span.woocommerce-Price-amount, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price > span.amount, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .subscription-details',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_price_old_typography',
+				'label'    => esc_html__('Old Price Typography', 'bdthemes-element-pack'),
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price del, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price del .woocommerce-Price-amount',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_price_free_typography',
+				'label'    => esc_html__('Free Label Typography', 'bdthemes-element-pack'),
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .bdt-tutor-price-free',
+			]
+		);
+
+		$this->add_control(
+			'tlms_cg_footer_price_colors_heading',
+			[
+				'label'     => esc_html__('Price Colors', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
 		$this->add_control(
 			'tlms_cg_footer_price_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Current Price', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price *' => 'color: {{VALUE}};',
+					// Avoid `.price *` and avoid `del` amounts so “Old Price” control can style sales.
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price ins' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price ins .woocommerce-Price-amount' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price > span.woocommerce-Price-amount' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price > span.amount' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .subscription-details' => 'color: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'tlms_cg_footer_cart_heading',
+			'tlms_cg_footer_price_old_color',
 			[
-				'label' => esc_html__('Cart Button', 'bdthemes-element-pack'),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before'
+				'label'     => esc_html__('Old Price', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price del' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price del .woocommerce-Price-amount' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'tlms_cg_footer_price_free_color',
+			[
+				'label'     => esc_html__('Free Label', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .bdt-tutor-price-free' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_tlms_add_to_cart_button_style',
+			[
+				'label'     => esc_html__('Cart/Enroll Button', 'bdthemes-element-pack'),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'show_cart_btn_price' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'tlms_cg_footer_cart_intro',
+			[
+				'raw'       => esc_html__('Styles WooCommerce/Tutor cart links inside the footer price row: Add to cart, View cart, free enroll.', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::RAW_HTML,
+				'content_classes' => 'elementor-descriptor',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_cart_typography',
+				'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a .cart-text,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn',
 			]
 		);
 
@@ -1467,10 +1694,67 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_control(
 			'tlms_cg_footer_cart_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a::before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a .cart-text,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'tlms_cg_footer_cart_icon_color',
+			[
+				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:not(.add_to_cart_button):not(.added_to_cart)::before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a .tutor-icon-cart-line::before,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button .tutor-icon-cart-line::before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a .tutor-icon-cart-line,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button .tutor-icon-cart-line' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a [class*="tutor-icon"],{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button [class*="tutor-icon"]' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'tlms_cg_footer_cart_icon_size',
+			[
+				'label'      => esc_html__('Icon Size', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em'],
+				'range'      => [
+					'px' => [
+						'min' => 8,
+						'max' => 48,
+					],
+					'em' => [
+						'min' => 0.5,
+						'max' => 3,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:not(.add_to_cart_button):not(.added_to_cart)::before' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a .tutor-icon-cart-line,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button .tutor-icon-cart-line' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn .tutor-icon-cart-line::before' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'tlms_cg_footer_cart_icon_gap',
+			[
+				'label'      => esc_html__('Space After Icon', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em'],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 40,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:not(.add_to_cart_button):not(.added_to_cart)::before' => 'margin-inline-end: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a .tutor-icon-cart-line,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button .tutor-icon-cart-line,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn .tutor-icon-cart-line::before' => 'margin-inline-end: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1481,7 +1765,7 @@ class TutorLms_Course_Grid extends Module_Base {
 				'label'     => __('Background', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -1489,19 +1773,19 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'tlms_cg_footer_cart_border',
-				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a',
+				'name'     => 'tlms_cg_footer_cart_border',
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn',
 			]
 		);
 
 		$this->add_responsive_control(
 			'tlms_cg_footer_cart_radius',
 			[
-				'label' => __('Radius', 'bdthemes-element-pack'),
-				'type' => Controls_Manager::DIMENSIONS,
+				'label'      => __('Radius', 'bdthemes-element-pack'),
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1513,8 +1797,16 @@ class TutorLms_Course_Grid extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'tlms_cg_footer_cart_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn',
 			]
 		);
 
@@ -1530,10 +1822,25 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_control(
 			'tlms_cg_footer_cart_hover_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a:hover, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a:hover:before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:hover,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:hover .cart-text,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button:hover,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart:hover, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'tlms_cg_footer_cart_icon_hover_color',
+			[
+				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:not(.add_to_cart_button):not(.added_to_cart):hover::before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:hover .tutor-icon-cart-line::before,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button:hover .tutor-icon-cart-line::before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:hover .tutor-icon-cart-line,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button:hover .tutor-icon-cart-line' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:hover [class*="tutor-icon"],{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button:hover [class*="tutor-icon"]' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn:hover .tutor-icon-cart-line::before' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1544,7 +1851,7 @@ class TutorLms_Course_Grid extends Module_Base {
 				'label'     => __('Background', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a:hover' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:hover,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button:hover,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart:hover, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn:hover' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -1555,7 +1862,7 @@ class TutorLms_Course_Grid extends Module_Base {
 				'label'     => __('Border Color', 'bdthemes-element-pack'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price > .price .tutor-loop-cart-btn-wrap a:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-loop-cart-btn-wrap a:hover,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.add_to_cart_button:hover,{{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price a.added_to_cart:hover, {{WRAPPER}} .bdt-tutor-course .bdt-tutor-course-loop-price .price .tutor-btn:hover' => 'border-color: {{VALUE}};',
 				],
 				'condition' => [
 					'tlms_cg_footer_cart_border_border!' => '',
@@ -1864,17 +2171,14 @@ class TutorLms_Course_Grid extends Module_Base {
 			<div class="bdt-tutor-course-loop-header-meta">
 				<?php
 				$is_wishlisted = tutor_utils()->is_wishlisted($course_id);
-				$has_wish_list = '';
-				if ($is_wishlisted) {
-					$has_wish_list = 'has-wish-listed';
-				}
+				$wishlist_icon_class = $is_wishlisted ? 'tutor-icon-bookmark-bold' : 'tutor-icon-bookmark-line';
 
 				if ('yes' == $settings['show_meta_label']) {
 					echo '<span class="bdt-tutor-course-loop-level">' . esc_html(get_tutor_course_level()) . '</span>';
 				}
 
 				if ('yes' == $settings['show_meta_wishlist']) {
-					echo '<span class="bdt-tutor-course-wishlist"><a href="javascript:void(0);" class="tutor-icon-fav-line tutor-course-wishlist-btn ' . esc_attr($has_wish_list) . ' " data-course-id="' . esc_attr($course_id) . '"></a> </span>';
+					echo '<span class="bdt-tutor-course-wishlist"><a href="javascript:void(0);" class="tutor-course-wishlist-btn" data-course-id="' . esc_attr($course_id) . '"><i class="' . esc_attr($wishlist_icon_class) . '" aria-hidden="true"></i></a> </span>';
 				}
 
 				?>
@@ -2023,10 +2327,10 @@ class TutorLms_Course_Grid extends Module_Base {
 	?>
 
 		<div class="bdt-tutor-loop-rating-wrap">
-			<?php
-			$course_rating = tutor_utils()->get_course_rating();
-			tutor_utils()->star_rating_generator($course_rating->rating_avg);
-			?>
+			<?php $course_rating = tutor_utils()->get_course_rating(); ?>
+			<div class="tutor-ratings-stars">
+				<?php tutor_utils()->star_rating_generator_course( $course_rating->rating_avg ); ?>
+			</div>
 			<span class="bdt-tutor-rating-count">
 				<?php
 				if ($course_rating->rating_avg > 0) {
@@ -2053,21 +2357,116 @@ class TutorLms_Course_Grid extends Module_Base {
 		<div class="bdt-tutor-loop-course-footer">
 			<div class="bdt-tutor-course-loop-price">
 				<?php
-				$course_id = get_the_ID();
-				$enroll_btn = '<div  class="tutor-loop-cart-btn-wrap"><a href="' . get_the_permalink() . '">' . __('Get Enrolled', 'bdthemes-element-pack') . '</a></div>';
-				$price_html = '<div class="price"> ' . __('Free', 'bdthemes-element-pack') . $enroll_btn . '</div>';
-				if (tutor_utils()->is_course_purchasable()) {
-					$enroll_btn = tutor_course_loop_add_to_cart(false);
+				$course_id  = get_the_ID();
+				$free_label = ! empty( $settings['free_course_label'] ) ? $settings['free_course_label'] : esc_html__( 'Free', 'bdthemes-element-pack' );
+				$free_enroll = ! empty( $settings['free_enroll_button_text'] ) ? $settings['free_enroll_button_text'] : esc_html__( 'Get Enrolled', 'bdthemes-element-pack' );
+				$use_ajax    = ! empty( $settings['ajax_add_to_cart'] ) && 'yes' === $settings['ajax_add_to_cart'];
 
-					$product_id = tutor_utils()->get_course_product_id($course_id);
-					$product    = wc_get_product($product_id);
+				$enroll_btn = '<div class="tutor-loop-cart-btn-wrap"><a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( $free_enroll ) . '</a></div>';
 
-					if ($product) {
-						$price_html = '<div class="price"> ' . $product->get_price_html() . $enroll_btn . ' </div>';
+				$monetization = tutor_utils()->get_option( 'monetize_by' );
+
+				// Must pass $course_id — bare is_course_purchasable() can read the wrong post in custom queries.
+				$show_monetized = tutor_utils()->is_course_purchasable( $course_id );
+
+				// Tutor marks subscription / some WC setups as non-purchasable; WooCommerce filter only allows price_type "paid" + product.
+				if ( ! $show_monetized && 'wc' === $monetization && tutor_utils()->has_wc() && function_exists( 'wc_get_product' ) ) {
+					$product_id = tutor_utils()->get_course_product_id( $course_id );
+					$product    = $product_id ? wc_get_product( $product_id ) : false;
+					if ( $product && $product->exists() ) {
+						$ptype = tutor_utils()->price_type( $course_id );
+						if ( class_exists( '\TUTOR\Course' ) ) {
+							if ( \TUTOR\Course::PRICE_TYPE_SUBSCRIPTION === $ptype || \TUTOR\Course::PRICE_TYPE_PAID === $ptype ) {
+								$show_monetized = true;
+							} elseif ( '' !== $ptype && \TUTOR\Course::PRICE_TYPE_FREE !== $ptype ) {
+								$show_monetized = true;
+							}
+						}
+						if ( ! $show_monetized && ( ! class_exists( '\TUTOR\Course' ) || \TUTOR\Course::PRICE_TYPE_FREE !== $ptype ) ) {
+							$raw_price = $product->get_price();
+							if ( '' !== $raw_price && is_numeric( $raw_price ) && (float) $raw_price > 0 ) {
+								$show_monetized = true;
+							}
+						}
+						if ( function_exists( 'tutor' ) && ! empty( tutor()->bundle_post_type ) && tutor()->bundle_post_type === get_post_type( $course_id ) ) {
+							$show_monetized = true;
+						}
 					}
 				}
 
-				echo wp_kses_post($price_html);
+				if ( ! $show_monetized && tutor_utils()->is_monetize_by_tutor() ) {
+					$ptype = tutor_utils()->price_type( $course_id );
+					if ( class_exists( '\TUTOR\Course' ) ) {
+						if ( \TUTOR\Course::PRICE_TYPE_PAID === $ptype || \TUTOR\Course::PRICE_TYPE_SUBSCRIPTION === $ptype ) {
+							$show_monetized = true;
+						} elseif ( '' !== $ptype && \TUTOR\Course::PRICE_TYPE_FREE !== $ptype ) {
+							$show_monetized = true;
+						}
+					}
+				}
+
+				if ( $show_monetized ) {
+					if ( ! $use_ajax ) {
+						$wc_loop_no_ajax_cart = static function ( $args, $product ) {
+							if ( ! empty( $args['class'] ) && is_string( $args['class'] ) ) {
+								$args['class'] = trim( preg_replace( '/\sajax_add_to_cart\b/', ' ', $args['class'] ) );
+								$args['class'] = preg_replace( '/\s{2,}/', ' ', $args['class'] );
+							}
+							return $args;
+						};
+						add_filter( 'woocommerce_loop_add_to_cart_args', $wc_loop_no_ajax_cart, 99, 2 );
+
+						$enroll_btn = tutor_course_loop_add_to_cart( false );
+
+						remove_filter( 'woocommerce_loop_add_to_cart_args', $wc_loop_no_ajax_cart, 99 );
+					} else {
+						$enroll_btn = tutor_course_loop_add_to_cart( false );
+					}
+
+					$enroll_btn = trim( (string) $enroll_btn );
+					if ( '' !== $enroll_btn && false === strpos( $enroll_btn, 'tutor-loop-cart-btn-wrap' ) ) {
+						$enroll_btn = '<div class="tutor-loop-cart-btn-wrap">' . $enroll_btn . '</div>';
+					}
+
+					$display_price = '';
+
+					if ( 'wc' === $monetization && tutor_utils()->has_wc() && function_exists( 'wc_get_product' ) ) {
+						$product_id = tutor_utils()->get_course_product_id( $course_id );
+						$product    = wc_get_product( $product_id );
+
+						if ( $product ) {
+							$display_price = apply_filters( 'tutor_loop_wc_price_html', $product->get_price_html(), $product );
+						}
+					}
+
+					if ( ! $display_price ) {
+						$display_price = tutor_utils()->get_course_price( $course_id );
+					}
+
+					if ( ! $display_price && 'wc' === $monetization && tutor_utils()->has_wc() && function_exists( 'wc_get_product' ) ) {
+						$fallback_id = tutor_utils()->get_course_product_id( $course_id );
+						$fallback_pd = $fallback_id ? wc_get_product( $fallback_id ) : false;
+						if ( $fallback_pd ) {
+							$display_price = $fallback_pd->get_price_html();
+						}
+					}
+
+					if ( ! $display_price && tutor_utils()->is_monetize_by_tutor() && function_exists( 'tutor_get_course_formatted_price_html' ) ) {
+						$display_price = tutor_get_course_formatted_price_html( $course_id, false );
+					}
+
+					echo '<div class="price"> ';
+					if ( $display_price ) {
+						echo wp_kses_post( $display_price );
+					} else {
+						echo '<span class="bdt-tutor-price-free">' . esc_html( $free_label ) . '</span>';
+					}
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Tutor/WooCommerce loop cart markup (must keep data-* for WC scripts).
+					echo $enroll_btn;
+					echo ' </div>';
+				} else {
+					echo '<div class="price"> <span class="bdt-tutor-price-free">' . esc_html( $free_label ) . '</span>' . $enroll_btn . ' </div>';
+				}
 				?>
 			</div>
 		</div>

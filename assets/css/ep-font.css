@@ -3,8 +3,8 @@
   src:
     url('../fonts/element-pack.woff2?vkz0b1') format('woff2'),
     url('../fonts/element-pack.ttf?vkz0b1') format('truetype'),
-    url('../fonts/element-pack.woff?vkz0b1') format('woff'),
-    url('../fonts/element-pack.svg?vkz0b1#element-pack') format('svg');
+    url('../fonts/element-pack.woff?vkz0b1') format('woff');
+    /* url('../fonts/element-pack.svg?vkz0b1#element-pack') format('svg'); */
   font-weight: normal;
   font-style: normal;
   font-display: block;
