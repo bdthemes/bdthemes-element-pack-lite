@@ -175,6 +175,15 @@ class Testimonial_Grid extends Module_Base {
         );
 
         $this->add_control(
+            'show_designation',
+            [
+                'label'   => esc_html__( 'Designation', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'    => Controls_Manager::SWITCHER,
+                'default' => '',
+            ]
+        );
+
+        $this->add_control(
             'show_address',
             [ 
                 'label'   => esc_html__( 'Address', 'bdthemes-element-pack' ),
@@ -708,6 +717,49 @@ class Testimonial_Grid extends Module_Base {
                 'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
                 //'scheme'   => Schemes\Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .bdt-testimonial-grid .bdt-testimonial-grid-title',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'section_style_designation',
+            [
+                'label'     => esc_html__( 'Designation', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [ 'show_designation' => 'yes' ],
+            ]
+        );
+
+        $this->add_control(
+            'designation_color',
+            [
+                'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-testimonial-grid .bdt-testimonial-grid-designation' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'designation_margin',
+            [
+                'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .bdt-testimonial-grid .bdt-testimonial-grid-designation' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'designation_typography',
+                'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+                'selector' => '{{WRAPPER}} .bdt-testimonial-grid .bdt-testimonial-grid-designation',
             ]
         );
 
@@ -1485,6 +1537,22 @@ class Testimonial_Grid extends Module_Base {
         <?php
     }
 
+    public function render_designation( $post_id, $settings ) {
+
+        if ( $settings['show_designation'] !== 'yes' ) {
+            return;
+        }
+        $designation = get_post_meta( $post_id, 'bdthemes_tm_designation', true );
+        if ( empty( $designation ) ) {
+            return;
+        }
+        ?>
+        <p class="bdt-testimonial-grid-designation bdt-text-meta bdt-margin-remove">
+            <?php echo esc_html( $designation ); ?>
+        </p>
+        <?php
+    }
+
     public function render_excerpt( $settings ) {
 
         if ( $settings['show_text'] !== 'yes' ) {
@@ -1724,6 +1792,7 @@ class Testimonial_Grid extends Module_Base {
                                     <div class="bdt-testimonial-grid-title-address <?php echo $meta_multi ? 'bdt-meta-multi-line' : ''; ?>">
                                         <?php
                                         $this->render_title( $post_id, $settings );
+                                        $this->render_designation( $post_id, $settings );
                                         $this->render_address( $post_id, $settings );
                                         if ( ! $rating_above && $show_rating ) :
                                             if ( (int) $columns >= 3 ) :
@@ -1758,6 +1827,7 @@ class Testimonial_Grid extends Module_Base {
                                 <div class="bdt-testimonial-grid-title-address <?php echo $meta_multi ? 'bdt-meta-multi-line' : ''; ?>">
                                     <?php
                                     $this->render_title( $post_id, $settings );
+                                    $this->render_designation( $post_id, $settings );
                                     $this->render_address( $post_id, $settings );
                                     ?>
                                 </div>
@@ -1776,6 +1846,9 @@ class Testimonial_Grid extends Module_Base {
                                     <div class="bdt-testimonial-grid-title-address <?php echo $meta_multi ? 'bdt-meta-multi-line' : ''; ?>">
                                         <?php
                                         $this->render_title( $post_id, $settings );
+                                        if ( $show_address ) {
+                                            $this->render_designation( $post_id, $settings );
+                                        }
                                         $this->render_address( $post_id, $settings );
                                         if ( $show_rating ) :
                                             if ( (int) $columns >= 3 ) :

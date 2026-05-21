@@ -1,10 +1,9 @@
 @font-face {
   font-family: 'element-pack-widgets-icon';
   src:
-    url('../fonts/element-pack-widgets-icon.woff2?gu3f7p') format('woff2'),
-    url('../fonts/element-pack-widgets-icon.ttf?gu3f7p') format('truetype'),
-    url('../fonts/element-pack-widgets-icon.woff?gu3f7p') format('woff'),
-    url('../fonts/element-pack-widgets-icon.svg?gu3f7p#element-pack-widgets-icon') format('svg');
+    url('../fonts/element-pack-widgets-icon.woff2?mly1dt') format('woff2'),
+    url('../fonts/element-pack-widgets-icon.ttf?mly1dt') format('truetype'),
+    url('../fonts/element-pack-widgets-icon.woff?mly1dt') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -852,6 +851,9 @@
 }
 .bdt-wi-wp-forms:before {
   content: "\e9ec";
+}
+.bdt-wi-global-badge:before {
+  content: "\ea3c";
 }
 .bdt-wi-shape-builder:before {
   content: "\ea38";

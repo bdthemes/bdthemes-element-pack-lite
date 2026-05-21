@@ -2869,99 +2869,222 @@ jQuery(document).ready(function () {
 });
 
 ; (function ($, elementor) {
-$(window).on('elementor/frontend/init', function () {
-    var ModuleHandler = elementorModules.frontend.handlers.Base,
-        ThreedText;
+	'use strict';
 
-    ThreedText = ModuleHandler.extend({
+	$(window).on('elementor/frontend/init', function () {
+		var ModuleHandler = elementorModules.frontend.handlers.Base,
+			ThreedText;
 
-        bindEvents: function () {
-            this.run();
-        },
+		function parseJSON(value) {
+			if (!value || 'string' !== typeof value) {
+				return null;
+			}
 
-        getDefaultSettings: function () {
-            return {
-                depth: '30px',
-                layers: 8,
-            };
-        },
+			try {
+				return JSON.parse(value);
+			} catch (error) {
+				return null;
+			}
+		}
 
-        onElementChange: debounce(function (prop) {
-            if (prop.indexOf('ep_threed_text_') !== -1) {
-                this.run();
-            }
-        }, 400),
+		function unwrapAtomicValue(value) {
+			if (value && 'object' === typeof value && Object.prototype.hasOwnProperty.call(value, 'value')) {
+				return unwrapAtomicValue(value.value);
+			}
 
-        settings: function (key) {
-            return this.getElementSettings('ep_threed_text_' + key);
-        },
+			return value;
+		}
 
-        run: function () {
-            var options = this.getDefaultSettings(),
-                $element = this.findElement('.elementor-heading-title, .bdt-main-heading-inner'),
-                $widgetId = 'ep-' + this.getID(),
-                $widgetIdSelect = '#' + $widgetId;
+		function normalizeAtomicSettings(settings) {
+			if (!settings) {
+				return null;
+			}
 
-            jQuery($element).attr('id', $widgetId);
+			if (settings.active || settings.depth || settings.layers) {
+				return settings;
+			}
 
-            if (this.settings('depth.size')) {
-                options.depth = this.settings('depth.size') + this.settings('depth.unit') || '30px';
-            }
-            if (this.settings('layers')) {
-                options.layers = this.settings('layers') || 8;
-            }
-            if (this.settings('perspective.size')) {
-                options.perspective = this.settings('perspective.size') + 'px' || '500px';
-            }
-            if (this.settings('fade')) {
-                options.fade = !!this.settings('fade');
-            }
-            // if (this.settings('direction')) {
-            //     options.direction = this.settings('direction') || 'forwards';
-            // }
-            if (this.settings('event')) {
-                options.event = this.settings('event') || 'pointer';
-            }
-            if (this.settings('event_rotation') && this.settings('event') != 'none') {
-                options.eventRotation = this.settings('event_rotation.size') + 'deg' || '35deg';
-            }
-            if (this.settings('event_direction') && this.settings('event') != 'none') {
-                options.eventDirection = this.settings('event_direction') || 'default';
-            }
+			if (unwrapAtomicValue(settings.ep_threed_text_active) !== true && unwrapAtomicValue(settings.ep_threed_text_active) !== 'yes') {
+				return null;
+			}
 
-            if (this.settings('active') == 'yes') {
+			return {
+				active: 'yes',
+				depth: { size: parseFloat(unwrapAtomicValue(settings.ep_threed_text_depth) || 30), unit: 'px' },
+				layers: parseInt(unwrapAtomicValue(settings.ep_threed_text_layers) || 8, 10),
+				depth_color: unwrapAtomicValue(settings.ep_threed_text_depth_color) || '',
+				perspective: { size: parseFloat(unwrapAtomicValue(settings.ep_threed_text_perspective) || 500), unit: 'px' },
+				fade: unwrapAtomicValue(settings.ep_threed_text_fade) ? 'yes' : '',
+				event: unwrapAtomicValue(settings.ep_threed_text_event) || 'none',
+				event_rotation: { size: parseFloat(unwrapAtomicValue(settings.ep_threed_text_event_rotation) || 35), unit: 'deg' },
+				event_direction: unwrapAtomicValue(settings.ep_threed_text_event_direction) || 'default'
+			};
+		}
 
-                var $text = $($widgetIdSelect).html();
-                $($widgetIdSelect).parent().append('<div class="ep-z-text-duplicate" style="display:none;">' + $text + '</div>');
+		function applyThreeDText($heading, settings, forcedId) {
+			if (!$heading.length || !settings || settings.active !== 'yes') {
+				return;
+			}
 
-                $text = $($widgetIdSelect).parent().find('.ep-z-text-duplicate:first').html();
+			var node = $heading.get(0);
+			var headingId = forcedId || $heading.attr('id') || ('ep-atomic-' + Date.now() + '-' + Math.floor(Math.random() * 10000));
+			var selector = '#' + headingId;
+			var options = {
+				depth: '30px',
+				layers: 8
+			};
 
-                $($widgetIdSelect).find('.z-text').remove();
+			$heading.attr('id', headingId);
 
-                var ztxt = new Ztextify($widgetIdSelect, options, $text);
-            }
+			if (settings.depth && settings.depth.size) {
+				options.depth = settings.depth.size + (settings.depth.unit || 'px');
+			}
+			if (settings.layers) {
+				options.layers = settings.layers;
+			}
+			if (settings.perspective && settings.perspective.size) {
+				options.perspective = settings.perspective.size + 'px';
+			}
+			if (settings.fade) {
+				options.fade = settings.fade === 'yes' || settings.fade === true;
+			}
+			if (settings.event) {
+				options.event = settings.event;
+			}
+			if (settings.event_rotation && settings.event !== 'none') {
+				options.eventRotation = settings.event_rotation.size + 'deg';
+			}
+			if (settings.event_direction && settings.event !== 'none') {
+				options.eventDirection = settings.event_direction;
+			}
 
-            if (this.settings('depth_color')) {
-                var depthColor = this.settings('depth_color') || '#fafafa';
-                $($widgetIdSelect).find('.z-layers .z-layer:not(:first-child)').css('color', depthColor);
-            }
+			var text = $heading.html();
+			$heading.parent().find('.ep-z-text-duplicate').remove();
+			$heading.parent().append('<div class="ep-z-text-duplicate" style="display:none;">' + text + '</div>');
+			text = $heading.parent().find('.ep-z-text-duplicate:first').html();
 
-            // if (this.settings('bg_color')) {
-            //     var bgColor = this.settings('bg_color') || 'rgba(96, 125, 139, .5)';
-            //     $($widgetIdSelect).find('.z-text > .z-layers').css('background', bgColor);
-            // }
+			$heading.find('.z-text').remove();
+			new Ztextify(selector, options, text);
 
-        }
-    });
+			if (settings.depth_color) {
+				$(selector).find('.z-layers .z-layer:not(:first-child)').css('color', settings.depth_color);
+			} else if (node) {
+				var computedColor = window.getComputedStyle(node).color;
+				$(selector).find('.z-layers .z-layer:not(:first-child)').css('color', computedColor);
+			}
+		}
 
-    elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
-        elementorFrontend.elementsHandler.addHandler(ThreedText, {
-            $element: $scope
-        });
-    });
+		function runAtomicThreedText() {
+			jQuery('.elementor-widget-e-heading .e-heading-base, [data-widget_type^="e-heading"] .e-heading-base, .e-heading-base[data-ep-threed-text]').each(function () {
+				var heading = this;
+				var wrapper = heading.closest('[data-id]');
+				var settings = parseJSON(heading.getAttribute('data-ep-threed-text'));
 
-});
-}) (jQuery, window.elementorFrontend);
+				if (!settings && wrapper) {
+					settings = parseJSON(wrapper.getAttribute('data-ep-threed-text'));
+				}
+
+				if (!settings && wrapper) {
+					settings = jQuery(wrapper).data('settings') || parseJSON(wrapper.getAttribute('data-settings'));
+				}
+
+				settings = normalizeAtomicSettings(settings);
+
+				if (!settings) {
+					return;
+				}
+
+				applyThreeDText(jQuery(heading), settings, 'ep-atomic-' + (wrapper ? wrapper.getAttribute('data-id') : Date.now()));
+			});
+		}
+
+		ThreedText = ModuleHandler.extend({
+
+			bindEvents: function () {
+				this.run();
+			},
+
+			getDefaultSettings: function () {
+				return {
+					depth: '30px',
+					layers: 8,
+				};
+			},
+
+			onElementChange: debounce(function (prop) {
+				if (prop.indexOf('ep_threed_text_') !== -1) {
+					this.run();
+				}
+			}, 400),
+
+			settings: function (key) {
+				return this.getElementSettings('ep_threed_text_' + key);
+			},
+
+			run: function () {
+				var options = this.getDefaultSettings(),
+					$element = this.findElement('.elementor-heading-title, .bdt-main-heading-inner'),
+					$widgetId = 'ep-' + this.getID(),
+					$widgetIdSelect = '#' + $widgetId;
+
+				jQuery($element).attr('id', $widgetId);
+
+				if (this.settings('depth.size')) {
+					options.depth = this.settings('depth.size') + this.settings('depth.unit') || '30px';
+				}
+				if (this.settings('layers')) {
+					options.layers = this.settings('layers') || 8;
+				}
+				if (this.settings('perspective.size')) {
+					options.perspective = this.settings('perspective.size') + 'px' || '500px';
+				}
+				if (this.settings('fade')) {
+					options.fade = !!this.settings('fade');
+				}
+				if (this.settings('event')) {
+					options.event = this.settings('event') || 'pointer';
+				}
+				if (this.settings('event_rotation') && this.settings('event') != 'none') {
+					options.eventRotation = this.settings('event_rotation.size') + 'deg' || '35deg';
+				}
+				if (this.settings('event_direction') && this.settings('event') != 'none') {
+					options.eventDirection = this.settings('event_direction') || 'default';
+				}
+
+				if (this.settings('active') == 'yes') {
+
+					var $text = $($widgetIdSelect).html();
+					$($widgetIdSelect).parent().append('<div class="ep-z-text-duplicate" style="display:none;">' + $text + '</div>');
+
+					$text = $($widgetIdSelect).parent().find('.ep-z-text-duplicate:first').html();
+
+					$($widgetIdSelect).find('.z-text').remove();
+
+					new Ztextify($widgetIdSelect, options, $text);
+				}
+
+				if (this.settings('depth_color')) {
+					var depthColor = this.settings('depth_color') || '#fafafa';
+					$($widgetIdSelect).find('.z-layers .z-layer:not(:first-child)').css('color', depthColor);
+				}
+			}
+		});
+
+		elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+			elementorFrontend.elementsHandler.addHandler(ThreedText, {
+				$element: $scope
+			});
+		});
+
+		elementorFrontend.hooks.addAction('frontend/element_ready/e-heading.default', function () {
+			runAtomicThreedText();
+		});
+
+		runAtomicThreedText();
+		jQuery(window).on('load', runAtomicThreedText);
+	});
+})(jQuery, window.elementorFrontend);
+
 /**
  * Start twitter carousel widget script
  */
@@ -3595,6 +3718,989 @@ $(window).on('elementor/frontend/init', function () {
 /**
  * End animated gradient background widget script
  */
+
+;
+(function ($, elementorFrontend) {
+    'use strict';
+
+    var STYLE_PRESETS = [
+        'default',
+        'custom-layout',
+        'stripe',
+        'ribbon',
+        'corner',
+        'flag',
+        'pill',
+        'bubble',
+        'normal',
+        'bookmark',
+        'bookmark-vertical',
+    ];
+
+    $(window).on('elementor/frontend/init', function () {
+        if (!elementorFrontend?.hooks || window.__epGlobalBadgeInitialized) {
+            return;
+        }
+
+        window.__epGlobalBadgeInitialized = true;
+
+        var GlobalBadge = elementorModules.frontend.handlers.Base.extend({
+
+            bindEvents: function () {
+                this.run();
+            },
+
+            settings: function (key) {
+                return this.getElementSettings('ep_global_badge_' + key);
+            },
+
+            isEditMode: function () {
+                return $('body').hasClass('elementor-editor-active')
+                    || (elementorFrontend.isEditMode && elementorFrontend.isEditMode());
+            },
+
+            shouldRenderBadgeViaJs: function () {
+                return this.isEditMode();
+            },
+
+            getSvgCode: function () {
+                var code = this.getElementSettings('ep_global_badge_svg_code');
+
+                if (typeof code === 'string' && code.trim()) {
+                    return code;
+                }
+
+                return this.settings('svg_code') || '';
+            },
+
+            hasSvgLayer: function () {
+                return this.settings('svg_layer') === 'yes' && !!this.getSvgCode();
+            },
+
+            getSvgInnerStyle: function () {
+                var width, size, unit;
+
+                if (!this.hasSvgLayer()) {
+                    return '';
+                }
+
+                width = this.getElementSettings('ep_global_badge_svg_width');
+                size = width && width.size !== undefined && width.size !== '' ? width.size : 100;
+                unit = width && width.unit ? width.unit : 'px';
+
+                return 'overflow:visible;min-inline-size:' + size + unit + ';min-block-size:' + size + unit + ';';
+            },
+
+            getEditor: function () {
+                return window.elementor || (window.parent && window.parent.elementor);
+            },
+
+            getElementorHelpers: function () {
+                var editor = this.getEditor();
+
+                return editor && editor.helpers ? editor.helpers : null;
+            },
+
+            refreshBadgeAfterSvgIconLoad: function () {
+                if (!this.shouldRenderBadgeViaJs() || this.settings('enable') !== 'yes') {
+                    return;
+                }
+
+                this.updateBadgeMarkup();
+                this.syncBadgePositionClass();
+                this.syncBadgeStyleClass();
+                this.syncBadgeLayoutStyles();
+                this.ensureBadgePlacement();
+                this.initFloatingIfNeeded();
+                this.initBadgeLottie(this.getBadgeElement());
+            },
+
+            getSvgIconHtml: function (icon) {
+                var helpers = this.getElementorHelpers(),
+                    rendered,
+                    svgValue = icon.value,
+                    self = this;
+
+                if (!svgValue || !svgValue.url) {
+                    return '';
+                }
+
+                if (helpers && helpers.renderIcon) {
+                    rendered = helpers.renderIcon(null, icon, { 'aria-hidden': true });
+
+                    if (rendered && rendered.value) {
+                        return rendered.value;
+                    }
+                }
+
+                if (svgValue.id && helpers && helpers.fetchInlineSvg && this._pendingSvgIconId !== svgValue.id) {
+                    this._pendingSvgIconId = svgValue.id;
+
+                    helpers.fetchInlineSvg(svgValue.url, function (data) {
+                        self._pendingSvgIconId = null;
+
+                        if (!data) {
+                            return;
+                        }
+
+                        if (helpers._inlineSvg) {
+                            helpers._inlineSvg[svgValue.id] = data;
+                        }
+
+                        self.refreshBadgeAfterSvgIconLoad();
+                    });
+                }
+
+                return '';
+            },
+
+            needsMarkupRefresh: function (prop) {
+                var keys = [
+                    'ep_global_badge_enable',
+                    'ep_global_badge_text',
+                    'ep_global_badge_icon',
+                    'ep_global_badge_icon_type',
+                    'ep_global_badge_icon_selected',
+                    'ep_global_badge_lottie_json_source',
+                    'ep_global_badge_lottie_json_path',
+                    'ep_global_badge_lottie_upload_json_file',
+                    'ep_global_badge_lottie_json_code',
+                    'ep_global_badge_lottie_loop',
+                    'ep_global_badge_lottie_speed',
+                    'ep_global_badge_lottie_start_point',
+                    'ep_global_badge_lottie_end_point',
+                    'ep_global_badge_lottie_renderer',
+                    'ep_global_badge_clip_path',
+                    'ep_global_badge_clip_path_value',
+                    'ep_global_badge_svg_layer',
+                    'ep_global_badge_svg_code',
+                ];
+
+                return keys.some(function (key) {
+                    return prop === key || prop.indexOf(key) === 0;
+                });
+            },
+
+            getBadgeIconType: function () {
+                return this.settings('icon_type') === 'lottie' ? 'lottie' : 'icon';
+            },
+
+            hasLottieContent: function () {
+                var source = this.settings('lottie_json_source') || 'url',
+                    uploadFile;
+
+                if (source === 'url') {
+                    return !!this.settings('lottie_json_path');
+                }
+
+                if (source === 'local') {
+                    uploadFile = this.getElementSettings('ep_global_badge_lottie_upload_json_file');
+
+                    if (typeof uploadFile === 'string' && uploadFile) {
+                        return true;
+                    }
+
+                    if (uploadFile && (uploadFile.url || uploadFile.id)) {
+                        return true;
+                    }
+
+                    return !!this.settings('lottie_upload_json_file');
+                }
+
+                if (source === 'custom') {
+                    return !!(this.settings('lottie_json_code') || '').trim();
+                }
+
+                return false;
+            },
+
+            hasBadgeIconContent: function () {
+                var icon;
+
+                if (this.settings('icon') !== 'yes') {
+                    return false;
+                }
+
+                if (this.getBadgeIconType() === 'lottie') {
+                    return this.hasLottieContent();
+                }
+
+                icon = this.settings('icon_selected');
+
+                return !!(icon && icon.value);
+            },
+
+            getLottieDataSettings: function () {
+                var source = this.settings('lottie_json_source') || 'url',
+                    jsonPath = '',
+                    jsonCode = '',
+                    isJsonUrl = true,
+                    uploadFile,
+                    startPoint,
+                    endPoint,
+                    speed;
+
+                if (source === 'url') {
+                    jsonPath = this.settings('lottie_json_path') || '';
+                } else if (source === 'local') {
+                    uploadFile = this.getElementSettings('ep_global_badge_lottie_upload_json_file');
+
+                    if (typeof uploadFile === 'string') {
+                        jsonPath = uploadFile;
+                    } else if (uploadFile && uploadFile.url) {
+                        jsonPath = uploadFile.url;
+                    } else {
+                        jsonPath = this.settings('lottie_upload_json_file') || '';
+                    }
+                } else if (source === 'custom') {
+                    jsonCode = this.settings('lottie_json_code') || '';
+                    isJsonUrl = false;
+                }
+
+                startPoint = this.getElementSettings('ep_global_badge_lottie_start_point');
+                endPoint = this.getElementSettings('ep_global_badge_lottie_end_point');
+                speed = this.getElementSettings('ep_global_badge_lottie_speed');
+
+                return {
+                    loop: this.settings('lottie_loop') === 'yes',
+                    is_json_url: isJsonUrl,
+                    json_path: jsonPath,
+                    json_code: jsonCode,
+                    speed: speed && speed.size !== undefined ? speed.size : 1,
+                    play_action: 'autoplay',
+                    start_point: startPoint && startPoint.size !== undefined ? startPoint.size : 0,
+                    end_point: endPoint && endPoint.size !== undefined ? endPoint.size : 100,
+                    lottie_renderer: this.settings('lottie_renderer') || 'svg',
+                };
+            },
+
+            getLottieHtml: function () {
+                var lottieId = 'bdt-ep-global-badge-lottie-' + this.getID(),
+                    dataSettings;
+
+                if (!this.hasLottieContent()) {
+                    return '';
+                }
+
+                dataSettings = JSON.stringify(this.getLottieDataSettings())
+                    .replace(/"/g, '&quot;');
+
+                return '<div id="' + lottieId + '" class="bdt-lottie-container" data-settings="' + dataSettings + '" aria-hidden="true"></div>';
+            },
+
+            initBadgeLottie: function ($badge) {
+                var self = this;
+
+                if (!$badge || !$badge.length || typeof window.lottie === 'undefined') {
+                    return;
+                }
+
+                $badge.find('.bdt-lottie-container').each(function () {
+                    var lottieEl = this,
+                        settings = {},
+                        jsonPathUrl,
+                        animation;
+
+                    if (lottieEl._epGlobalBadgeLottie) {
+                        lottieEl._epGlobalBadgeLottie.destroy();
+                        lottieEl._epGlobalBadgeLottie = null;
+                    }
+
+                    try {
+                        settings = lottieEl.dataset.settings ? JSON.parse(lottieEl.dataset.settings) : {};
+                    } catch (e) {
+                        settings = {};
+                    }
+
+                    if (settings.is_json_url == 1 || settings.is_json_url === true) {
+                        if (settings.json_path) {
+                            jsonPathUrl = settings.json_path;
+                        }
+                    } else if (settings.json_code) {
+                        jsonPathUrl = URL.createObjectURL(new Blob([settings.json_code], { type: 'application/javascript' }));
+                    }
+
+                    if (!jsonPathUrl) {
+                        return;
+                    }
+
+                    animation = window.lottie.loadAnimation({
+                        container: lottieEl,
+                        path: jsonPathUrl,
+                        renderer: settings.lottie_renderer || 'svg',
+                        autoplay: settings.play_action === 'autoplay',
+                        loop: settings.loop,
+                    });
+
+                    if (jsonPathUrl.indexOf('blob:') === 0) {
+                        URL.revokeObjectURL(jsonPathUrl);
+                    }
+
+                    animation.addEventListener('DOMLoaded', function () {
+                        var firstFrame = animation.firstFrame,
+                            totalFrame = animation.totalFrames,
+                            getFrameNumberByPercent = function (percent) {
+                                percent = Math.min(100, Math.max(0, percent));
+                                return firstFrame + (totalFrame - firstFrame) * percent / 100;
+                            },
+                            startPoint = getFrameNumberByPercent(settings.start_point ?? 0),
+                            endPoint = getFrameNumberByPercent(settings.end_point ?? 100);
+
+                        animation.playSegments([startPoint, endPoint], true);
+                    });
+
+                    animation.setSpeed(settings.speed ?? 1);
+                    lottieEl._epGlobalBadgeLottie = animation;
+                });
+            },
+
+            needsLayoutRefresh: function (prop) {
+                return /ep_global_badge_(offset_x|offset_y|rotate|horizontal|vertical|style)/.test(prop);
+            },
+
+            normalizeStyleSlug: function (style) {
+                if ('custom-layout' === style) {
+                    return 'custom-layout';
+                }
+
+                return 'default';
+            },
+
+            onElementChange: function (prop) {
+                if (prop.indexOf('ep_global_badge_') === -1) {
+                    return;
+                }
+
+                if (this.animeInstance) {
+                    this.animeInstance.pause();
+                    this.animeInstance = null;
+                }
+
+                if (prop === 'ep_global_badge_enable') {
+                    this.syncWrapperClasses();
+
+                    if (this.settings('enable') === 'yes') {
+                        this.updateBadgeMarkup();
+                        this.initFloatingIfNeeded();
+                    } else {
+                        this.removeAllBadges();
+                    }
+
+                    return;
+                }
+
+                if (this.needsMarkupRefresh(prop)) {
+                    this.debouncedMarkupRefresh();
+                    return;
+                }
+
+                if (this.needsLayoutRefresh(prop)) {
+                    this.scheduleLayoutRefresh();
+                    return;
+                }
+
+                if (this.isEditMode()) {
+                    this.ensureBadgeExists();
+                    this.ensureBadgePlacement();
+                }
+            },
+
+            debouncedMarkupRefresh: debounce(function () {
+                if (!this.shouldRenderBadgeViaJs()) {
+                    return;
+                }
+
+                this.updateBadgeMarkup();
+                this.ensureBadgePlacement();
+                this.initFloatingIfNeeded();
+                this.initBadgeLottie(this.getBadgeElement());
+            }, 200),
+
+            scheduleLayoutRefresh: function () {
+                var self = this;
+
+                if (this._layoutRaf) {
+                    return;
+                }
+
+                this._layoutRaf = requestAnimationFrame(function () {
+                    self._layoutRaf = null;
+                    self.syncBadgePositionClass();
+                    self.syncBadgeStyleClass();
+                    self.syncBadgeLayoutStyles();
+                    self.ensureBadgePlacement();
+                });
+            },
+
+            onDestroy: function () {
+                if (this._layoutRaf) {
+                    cancelAnimationFrame(this._layoutRaf);
+                    this._layoutRaf = null;
+                }
+
+                if (this.animeInstance) {
+                    this.animeInstance.pause();
+                    this.animeInstance = null;
+                }
+            },
+
+            escapeHtml: function (text) {
+                return $('<div/>').text(text || '').html();
+            },
+
+            getBadgeMountElement: function () {
+                var id = this.getID(),
+                    $mount;
+
+                if (id) {
+                    $mount = $('.elementor-element-' + id);
+
+                    if ($mount.length) {
+                        return $mount.first();
+                    }
+                }
+
+                $mount = this.$element;
+
+                if ($mount.hasClass('e-con-inner')) {
+                    $mount = $mount.closest('.e-con.elementor-element');
+                }
+
+                if ($mount.hasClass('elementor-widget') || $mount.hasClass('e-con')) {
+                    return $mount;
+                }
+
+                if ($mount.hasClass('elementor-element')) {
+                    return $mount;
+                }
+
+                $mount = $mount.closest('.elementor-element.e-con, .elementor-element.elementor-widget');
+
+                return $mount.length ? $mount.first() : this.$element;
+            },
+
+            getElementType: function () {
+                return this.getBadgeMountElement().attr('data-element_type') || '';
+            },
+
+            isContainerElement: function () {
+                return this.getElementType() === 'container';
+            },
+
+            isWidgetElement: function () {
+                return this.getElementType() === 'widget';
+            },
+
+            getBadgeForAttr: function () {
+                return String(this.getID() || '');
+            },
+
+            unwrapWidgetMount: function () {
+                var $mount = this.getBadgeMountElement(),
+                    $wrap = $mount.parent('.bdt-ep-global-badge-mount');
+
+                if (!$wrap.length) {
+                    return;
+                }
+
+                $wrap.children('.bdt-ep-global-badge').appendTo($mount);
+                $mount.unwrap();
+            },
+
+            getBadgeInsertParent: function () {
+                var $mount = this.getBadgeMountElement(),
+                    $inner;
+
+                if (this.isWidgetElement()) {
+                    return $mount;
+                }
+
+                if (this.isContainerElement()) {
+                    $inner = $mount.children('.e-con-inner').first();
+
+                    if ($inner.length) {
+                        return $inner;
+                    }
+                }
+
+                $inner = $mount.children('.elementor-container, .elementor-widget-wrap').first();
+
+                return $inner.length ? $inner : $mount;
+            },
+
+            syncWrapperClasses: function () {
+                var $mount = this.getBadgeMountElement();
+
+                if (this.settings('enable') === 'yes') {
+                    $mount.addClass('bdt-ep-global-badge-active');
+                } else {
+                    $mount.removeClass('bdt-ep-global-badge-active');
+                }
+            },
+
+            getBadgeElement: function () {
+                var forId = this.getBadgeForAttr();
+
+                if (!forId) {
+                    return $();
+                }
+
+                return $('.bdt-ep-global-badge[data-ep-global-badge-for="' + forId + '"]').first();
+            },
+
+            dedupeBadges: function () {
+                var forId = this.getBadgeForAttr(),
+                    $badges;
+
+                if (!forId) {
+                    return;
+                }
+
+                $badges = $('.bdt-ep-global-badge[data-ep-global-badge-for="' + forId + '"]');
+
+                if ($badges.length <= 1) {
+                    return;
+                }
+
+                $badges.slice(1).remove();
+            },
+
+            removeAllBadges: function () {
+                var forId = this.getBadgeForAttr();
+
+                if (!forId) {
+                    return;
+                }
+
+                $('.bdt-ep-global-badge[data-ep-global-badge-for="' + forId + '"]').remove();
+            },
+
+            /**
+             * Container: badge inside .e-con-inner (or section/column inner wrap).
+             * Widget: badge inside data-element_type="widget" element.
+             */
+            ensureBadgePlacement: function () {
+                var $mount = this.getBadgeMountElement(),
+                    $badge = this.getBadgeElement(),
+                    $parent;
+
+                if (!$badge.length) {
+                    return;
+                }
+
+                if (this.isWidgetElement()) {
+                    this.unwrapWidgetMount();
+
+                    if ($badge.parent()[0] !== $mount[0]) {
+                        $badge.detach().appendTo($mount);
+                    }
+
+                    return;
+                }
+
+                $parent = this.getBadgeInsertParent();
+
+                if (!$parent.length) {
+                    return;
+                }
+
+                if ($badge.parent()[0] !== $parent[0]) {
+                    $badge.detach().appendTo($parent);
+                }
+            },
+
+            rehomeBadgeIntoMount: function () {
+                this.dedupeBadges();
+                this.ensureBadgePlacement();
+            },
+
+            getPositionClass: function () {
+                var horizontal = this.settings('horizontal') || 'right',
+                    vertical = this.settings('vertical') || 'top',
+                    map = {
+                        left: { top: 'top-left', bottom: 'bottom-left' },
+                        right: { top: 'top-right', bottom: 'bottom-right' },
+                    };
+
+                return (map[horizontal] && map[horizontal][vertical]) ? map[horizontal][vertical] : 'top-right';
+            },
+
+            getSliderCSSValue: function (key) {
+                var data = this.getElementSettings('ep_global_badge_' + key);
+
+                if (!data || data.size === '' || data.size === undefined || data.size === null) {
+                    return null;
+                }
+
+                return String(data.size) + (data.unit || 'px');
+            },
+
+            getLayoutTransformValue: function () {
+                var offsetX = this.getSliderCSSValue('offset_x') || '0px',
+                    offsetY = this.getSliderCSSValue('offset_y') || '0px',
+                    rotate = this.getSliderCSSValue('rotate') || '0deg';
+
+                return 'translate(' + offsetX + ', ' + offsetY + ') rotate(' + rotate + ')';
+            },
+
+            clearWrapperLayoutVars: function () {
+                var mount = this.getBadgeMountElement()[0];
+
+                if (!mount) {
+                    return;
+                }
+
+                mount.style.removeProperty('--ep-global-badge-offset-x');
+                mount.style.removeProperty('--ep-global-badge-offset-y');
+                mount.style.removeProperty('--ep-global-badge-rotate');
+            },
+
+            syncBadgeLayoutStyles: function () {
+                var $badge = this.getBadgeElement();
+
+                this.clearWrapperLayoutVars();
+
+                if (!$badge.length) {
+                    return;
+                }
+
+                $badge.css('transform', this.getLayoutTransformValue());
+            },
+
+            syncBadgePositionClass: function () {
+                var $badge = this.getBadgeElement(),
+                    positionClass,
+                    positionClasses,
+                    i;
+
+                if (!$badge.length) {
+                    return;
+                }
+
+                positionClass = this.getPositionClass();
+                positionClasses = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'top', 'bottom', 'left', 'right'];
+
+                for (i = 0; i < positionClasses.length; i++) {
+                    $badge.removeClass('bdt-position-' + positionClasses[i]);
+                }
+
+                $badge.addClass('bdt-position-' + positionClass);
+            },
+
+            syncBadgeStyleClass: function () {
+                var $badge = this.getBadgeElement(),
+                    style,
+                    i;
+
+                if (!$badge.length) {
+                    return;
+                }
+
+                style = this.normalizeStyleSlug(this.settings('style') || 'default');
+
+                for (i = 0; i < STYLE_PRESETS.length; i++) {
+                    $badge.removeClass('bdt-ep-global-badge--' + STYLE_PRESETS[i]);
+                }
+
+                $badge.addClass('bdt-ep-global-badge--' + style);
+            },
+
+            getIconHtml: function () {
+                var icon = this.settings('icon_selected'),
+                    helpers,
+                    iconType = this.getBadgeIconType();
+
+                if (!this.hasBadgeIconContent()) {
+                    return '';
+                }
+
+                if (iconType === 'lottie') {
+                    return this.getLottieHtml();
+                }
+
+                if (!icon || !icon.value) {
+                    return '';
+                }
+
+                if (icon.library === 'svg') {
+                    return this.getSvgIconHtml(icon);
+                }
+
+                helpers = this.getElementorHelpers();
+
+                if (helpers && helpers.enqueueIconFonts && icon.library) {
+                    helpers.enqueueIconFonts(icon.library);
+                }
+
+                return '<i class="' + icon.value + '" aria-hidden="true"></i>';
+            },
+
+            getBadgeIconWrapHtml: function (iconHtml) {
+                if (!iconHtml) {
+                    return '';
+                }
+
+                return '<span class="bdt-ep-global-badge-icon bdt-ep-global-badge-icon--' + this.getBadgeIconType() + '">' + iconHtml + '</span>';
+            },
+
+            updateBadgeMarkup: function () {
+                var $mount = this.getBadgeMountElement(),
+                    style, positionClass, text, innerStyle, svgHtml, iconHtml, textHtml, badgeHtml,
+                    transform = this.getLayoutTransformValue(),
+                    forId = this.getBadgeForAttr(),
+                    $parent;
+
+                this.removeAllBadges();
+
+                if (this.settings('enable') !== 'yes') {
+                    return;
+                }
+
+                style = this.normalizeStyleSlug(this.settings('style') || 'default');
+                positionClass = this.getPositionClass();
+                text = this.settings('text') || '';
+                var hasSvg = this.hasSvgLayer();
+
+                innerStyle = this.getSvgInnerStyle();
+
+                if (this.settings('clip_path') === 'yes' && this.settings('clip_path_value')) {
+                    innerStyle += 'clip-path:' + this.settings('clip_path_value') + ';-webkit-clip-path:' + this.settings('clip_path_value') + ';';
+                }
+
+                svgHtml = '';
+
+                if (hasSvg) {
+                    svgHtml = '<div class="bdt-ep-global-badge-svg" aria-hidden="true">' + this.getSvgCode() + '</div>';
+                }
+
+                iconHtml = this.getIconHtml();
+                textHtml = '';
+
+                if (text) {
+                    textHtml = '<span class="bdt-ep-global-badge-text">' + this.escapeHtml(text) + '</span>';
+                }
+
+                badgeHtml =
+                    '<div class="bdt-ep-global-badge bdt-position-small bdt-position-' + positionClass + ' bdt-ep-global-badge--' + style + (hasSvg ? ' bdt-ep-global-badge-has-svg' : '') + '" data-ep-global-badge-for="' + forId + '" style="transform:' + transform + '">' +
+                        '<div class="bdt-ep-global-badge-inner"' + (innerStyle ? ' style="' + innerStyle + '"' : '') + '>' +
+                            svgHtml +
+                            '<div class="bdt-ep-global-badge-content">' +
+                                this.getBadgeIconWrapHtml(iconHtml) +
+                                textHtml +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+
+                $parent = this.getBadgeInsertParent();
+
+                if ($parent.length) {
+                    $parent.append(badgeHtml);
+                } else {
+                    $mount.append(badgeHtml);
+                }
+
+                this.ensureBadgePlacement();
+                this.initBadgeLottie(this.getBadgeElement());
+            },
+
+            ensureBadgeExists: function () {
+                if (this.settings('enable') === 'yes' && !this.getBadgeElement().length && this.shouldRenderBadgeViaJs()) {
+                    this.updateBadgeMarkup();
+                }
+            },
+
+            getSpeedDuration: function (speedKey) {
+                var speed = parseFloat(this.settings(speedKey + '.size')) || 1;
+                return Math.max(300, Math.round(3000 / speed));
+            },
+
+            hasRangeValue: function (key) {
+                var from = this.settings(key + '.sizes.from'),
+                    to = this.settings(key + '.sizes.to');
+
+                if (from === undefined && to === undefined) {
+                    return false;
+                }
+
+                return Number(from) !== Number(to);
+            },
+
+            initFloatingIfNeeded: function () {
+                var $badgeInner = this.getBadgeElement().find('.bdt-ep-global-badge-inner').first();
+
+                if (!$badgeInner.length || this.settings('floating') !== 'yes') {
+                    return;
+                }
+
+                this.initFloating($badgeInner[0]);
+            },
+
+            run: function () {
+                if (this.settings('enable') !== 'yes') {
+                    this.removeAllBadges();
+                    this.syncWrapperClasses();
+                    return;
+                }
+
+                if (this.isWidgetElement()) {
+                    this.unwrapWidgetMount();
+                }
+
+                this.syncWrapperClasses();
+                this.rehomeBadgeIntoMount();
+
+                if (this.getBadgeElement().find('.bdt-ep-global-badge-svg').length) {
+                    this.getBadgeElement().addClass('bdt-ep-global-badge-has-svg');
+                }
+
+                if (!this.getBadgeElement().length && this.shouldRenderBadgeViaJs()) {
+                    this.updateBadgeMarkup();
+                }
+
+                this.syncBadgePositionClass();
+                this.syncBadgeStyleClass();
+                this.syncBadgeLayoutStyles();
+                this.ensureBadgePlacement();
+                this.initFloatingIfNeeded();
+                this.initBadgeLottie(this.getBadgeElement());
+            },
+
+            initFloating: function (target) {
+                var options, hasAnimation, self = this;
+
+                if (typeof window.anime !== 'function') {
+                    return;
+                }
+
+                options = {
+                    targets: target,
+                    direction: 'alternate',
+                    loop: true,
+                    easing: 'easeInOutSine',
+                };
+
+                hasAnimation = false;
+
+                if (this.settings('floating_translate_toggle') === 'yes') {
+                    var duration = this.getSpeedDuration('floating_translate_speed');
+
+                    if (this.hasRangeValue('floating_translate_x')) {
+                        options.translateX = {
+                            value: [
+                                this.settings('floating_translate_x.sizes.from') || 0,
+                                this.settings('floating_translate_x.sizes.to') || 0,
+                            ],
+                            duration: duration,
+                        };
+                        hasAnimation = true;
+                    }
+
+                    if (this.hasRangeValue('floating_translate_y')) {
+                        options.translateY = {
+                            value: [
+                                this.settings('floating_translate_y.sizes.from') || 0,
+                                this.settings('floating_translate_y.sizes.to') || 0,
+                            ],
+                            duration: duration,
+                        };
+                        hasAnimation = true;
+                    }
+                }
+
+                if (this.settings('floating_rotate_toggle') === 'yes') {
+                    var rotateDuration = this.getSpeedDuration('floating_rotate_speed');
+
+                    ['x', 'y', 'z'].forEach(function (axis) {
+                        var key = 'floating_rotate_' + axis;
+
+                        if (!self.hasRangeValue(key)) {
+                            return;
+                        }
+
+                        var prop = 'rotate' + axis.toUpperCase();
+
+                        options[prop] = {
+                            value: [
+                                self.settings(key + '.sizes.from') || 0,
+                                self.settings(key + '.sizes.to') || 0,
+                            ],
+                            duration: rotateDuration,
+                        };
+                        hasAnimation = true;
+                    });
+                }
+
+                if (this.settings('floating_opacity_toggle') === 'yes') {
+                    var start = this.settings('floating_opacity_start.size'),
+                        end = this.settings('floating_opacity_end.size');
+
+                    if (start !== undefined || end !== undefined) {
+                        options.opacity = {
+                            value: [start !== undefined ? start : 1, end !== undefined ? end : 0.5],
+                            duration: this.getSpeedDuration('floating_opacity_speed'),
+                            easing: 'linear',
+                        };
+                        hasAnimation = true;
+                    }
+                }
+
+                if (this.settings('floating_blur_toggle') === 'yes') {
+                    var blurStart = this.settings('floating_blur_start.size') || 0,
+                        blurEnd = this.settings('floating_blur_end.size') || 4;
+
+                    options.filter = {
+                        value: ['blur(' + blurStart + 'px)', 'blur(' + blurEnd + 'px)'],
+                        duration: this.getSpeedDuration('floating_blur_speed'),
+                    };
+                    hasAnimation = true;
+                }
+
+                if (!hasAnimation) {
+                    return;
+                }
+
+                this.animeInstance = window.anime(options);
+            },
+        });
+
+        var addBadgeHandler = function ($scope) {
+            var $target = $scope;
+
+            if ($scope.hasClass('e-con-inner')) {
+                $target = $scope.closest('.e-con.elementor-element');
+            }
+
+            if (!$target.length) {
+                $target = $scope;
+            }
+
+            elementorFrontend.elementsHandler.addHandler(GlobalBadge, {
+                $element: $target,
+            });
+        };
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/widget', addBadgeHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/container', addBadgeHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/section', addBadgeHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/column', addBadgeHandler);
+
+        // Containers enabled before script init (e.g. toggle in panel).
+        elementorFrontend.hooks.addAction('frontend/element_ready/global', function ($scope) {
+            var $mount = $scope.hasClass('e-con') ? $scope : $scope.find('.e-con').first();
+
+            if (!$mount.length || !$mount.hasClass('bdt-ep-global-badge-yes')) {
+                return;
+            }
+
+            if ($mount.find('.bdt-ep-global-badge[data-ep-global-badge-for]').length) {
+                return;
+            }
+
+            addBadgeHandler($mount);
+        });
+    });
+
+}(jQuery, window.elementorFrontend));
 
 ; (function ($, elementor) {
     $(window).on('elementor/frontend/init', function () {

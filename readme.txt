@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4.0
-Stable tag: 8.6.3
+Stable tag: 8.7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.28
-Elementor tested up to: 4.0.7
+Elementor tested up to: 4.0.9
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -413,6 +413,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.0 [21th May 2026] =
+
+* Added: Added compatibility for the 3D Text and Wrapper Link extensions in Atomic Widgets
+* Added: Designation field support added in testimonial grid widget
+* Added: Course price compatibility added in tutor lms course grid & tutor lms course carousel widget
+* Fixed: Hidden item opacity issue fixed in the panel slider widget
+* Updated: Made compatible with WordPress version 7.0
 
 = 8.6.3 [10th May 2026] =
 
