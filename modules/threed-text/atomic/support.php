@@ -72,15 +72,16 @@ class Support
 
 	public function register_controls(array $controls): array
 	{
-		foreach ($controls as $item) {
-			if (! ($item instanceof Section) || 'settings' !== $item->get_id()) {
-				continue;
-			}
+		$item = Section::make()
+			->set_id('ep_section_threed_text')
+			->set_label(esc_html__('3D Text', 'bdthemes-element-pack'))
+			->set_items([]);
+
+		$controls[] = $item;
 
 			$item->add_item(
 				Switch_Control::bind_to(self::ACTIVE_KEY)
 					->set_label(esc_html__('3D Text', 'bdthemes-element-pack'))
-					->set_meta(['topDivider' => true])
 			);
 
 			$item->add_item(
@@ -149,9 +150,6 @@ class Support
 						]
 					)
 			);
-
-			break;
-		}
 
 		return $controls;
 	}
