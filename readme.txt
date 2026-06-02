@@ -1,15 +1,15 @@
 === Element Pack – Widgets, Templates & Addons for Elementor ===
-Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, rakibulpk, muhammadasik, tauhidalam, syedfarhanreza, shmusuf, arafatakashakku, shaikatazim, shamim496
+Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik,  syedfarhanreza, shmusuf, arafatakashakku, shaikatazim, shamim496
 Donate link: http://bdthemes.com/
 Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets
 Requires at least: 5.0.0
-Tested up to: 6.9.4
+Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.0
+Stable tag: 8.7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Elementor requires at least: 3.28
-Elementor tested up to: 4.0.9
+Elementor requires at least: 4.0.0
+Elementor tested up to: 4.1.1
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -413,6 +413,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.1 [2nd June 2026] =
+
+* Added: Collapsible extension sections in Atomic widgets for 3D Text and Wrapper Link (collapsed by default with enable/disable switch)
+* Fixed: Template library import issue fixed
 
 = 8.7.0 [21th May 2026] =
 

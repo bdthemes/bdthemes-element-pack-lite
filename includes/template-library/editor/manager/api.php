@@ -80,9 +80,9 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         $catTable       = $this->table_cat;
 
         $demoData = $this->wpdb->get_results("SELECT COUNT(*) as ttotal, {$catTable}.* FROM {$postTable}
- LEFT JOIN {$postCatTable}  ON {$postTable}.demo_id = {$postCatTable} .demo_id
-LEFT JOIN {$catTable} ON {$catTable}.term_id = {$table_prefix}ep_template_library_cat_post.term_id
- WHERE type={$demoDataType} GROUP BY term_id", ARRAY_A);
+ LEFT JOIN {$postCatTable} ON {$postTable}.demo_id = {$postCatTable}.demo_id
+ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
+ WHERE {$postTable}.type={$demoDataType} GROUP BY {$catTable}.term_id", ARRAY_A);
 
         $navItems = array();
         $totalDemo = 0;
@@ -94,7 +94,7 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$table_prefix}ep_template_librar
         $this->demo_total = $totalDemo;
         $firstItem = array( 'term_slug' => '', 'term_name' => 'All Templates','term_id' => 0,'count'=> $totalDemo);
 
-        return array_merge_recursive([$firstItem], $navItems);
+        return array_merge([$firstItem], $navItems);
     }
 
     public function get_layouts()
@@ -120,7 +120,7 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$table_prefix}ep_template_librar
 
         $this->termSlug = 'demo_term_all';
         if(isset($_REQUEST['term_slug']) && !empty($_REQUEST['term_slug'])){
-            $this->termSlug = $_REQUEST['term_slug'];
+            $this->termSlug = sanitize_text_field($_REQUEST['term_slug']);
         }
 
         $this->perPage = 500000;

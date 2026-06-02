@@ -89,29 +89,20 @@ class Module extends Element_Pack_Module_Base {
 		if ( ! isset( $schema[ self::ATOMIC_LINK_PROP_KEY ] ) ) {
 			return $controls;
 		}
-		
-		foreach ( $controls as $item ) {
-			if ( ! ( $item instanceof \Elementor\Modules\AtomicWidgets\Controls\Section ) ) {
-				continue;
-			}
 
-			if ( 'settings' !== $item->get_id() ) {
-				continue;
-			}
+		$section = \Elementor\Modules\AtomicWidgets\Controls\Section::make()
+			->set_id( 'ep_section_wrapper_link' )
+			->set_label( esc_html__( 'Wrapper Link', 'bdthemes-element-pack' ) )
+			->set_items( [] );
 
-			$item->add_item(
-				Link_Control::bind_to( self::ATOMIC_LINK_PROP_KEY )
-					->set_placeholder( esc_html__( 'Type or paste a URL', 'bdthemes-element-pack' ) )
-					->set_label( esc_html__( 'Wrapper Link', 'bdthemes-element-pack' ) )
-					->set_meta(
-						[
-							'topDivider' => true,
-						]
-					)
-					->set_description( esc_html__( 'If the URL is not a link, the link will be opened in a new tab.', 'bdthemes-element-pack' ) )
-			);
-			break;
-		}
+		$controls[] = $section;
+
+		$section->add_item(
+			Link_Control::bind_to( self::ATOMIC_LINK_PROP_KEY )
+				->set_placeholder( esc_html__( 'Type or paste a URL', 'bdthemes-element-pack' ) )
+				->set_label( esc_html__( 'Wrapper Link', 'bdthemes-element-pack' ) )
+				->set_description( esc_html__( 'If the URL is not a link, the link will be opened in a new tab.', 'bdthemes-element-pack' ) )
+		);
 
 		return $controls;
 	}

@@ -54,7 +54,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
     public function enqueue_scripts() {
 
-        wp_enqueue_script( 'ep-elementor-demo-importer-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/element-pack-template-library.js', array( 'jquery' ), BDTEP_VER, false );
+        wp_enqueue_script( 'ep-elementor-demo-importer-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/element-pack-template-library.min.js', array( 'jquery' ), BDTEP_VER, false );
 
     }
 
@@ -63,7 +63,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
         $response = wp_remote_get( $url, array(
             'timeout'   => 60,
-            'sslverify' => false
+            'sslverify' => true
         ) );
 
         $result = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -77,11 +77,11 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
     public function ajax_import_data() {
 
         if ( isset( $_REQUEST ) ) {
-            $demo_url         = $_REQUEST['demo_url'];
-            $demo_id          = $_REQUEST['demo_id'];
-            $page_title       = $_REQUEST['page_title'];
-            $defaultPageTitle = $_REQUEST['default_page_title'];
-            $importType       = $_REQUEST['demo_import_type'];
+            $demo_url         = isset($_REQUEST['demo_url']) ? esc_url_raw($_REQUEST['demo_url']) : '';
+            $demo_id          = isset($_REQUEST['demo_id']) ? absint($_REQUEST['demo_id']) : 0;
+            $page_title       = isset($_REQUEST['page_title']) ? sanitize_text_field($_REQUEST['page_title']) : '';
+            $defaultPageTitle = isset($_REQUEST['default_page_title']) ? sanitize_text_field($_REQUEST['default_page_title']) : '';
+            $importType       = isset($_REQUEST['demo_import_type']) ? sanitize_text_field($_REQUEST['demo_import_type']) : '';
 
             $response_data = $this->templates_get_content_remote_request( $demo_url );
             $sourceData    = "";
@@ -385,21 +385,21 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
     public function send_report(){
         if(isset($_REQUEST['demo_id']) && $_REQUEST['demo_id'] > 0 && isset($_REQUEST['demo_json_url'])){
-            $demo_id        = $_REQUEST['demo_id'];
-            $demo_json_url  = $_REQUEST['demo_json_url'];
-            $json_url       = 'Demo ID:'+$demo_id;
+            $demo_id        = absint($_REQUEST['demo_id']);
+            $demo_json_url  = esc_url_raw($_REQUEST['demo_json_url']);
+            $json_url       = 'Demo ID:' . $demo_id;
             $demo_url       = $demo_json_url;
             $demo_title     = 'No Demo Title';
 
             $postTable      = $this->table_post;
-            $resultData = $this->wpdb->get_row("SELECT * FROM $postTable WHERE demo_id=$demo_id");
+            $resultData = $this->wpdb->get_row(
+                $this->wpdb->prepare("SELECT * FROM {$postTable} WHERE demo_id = %d", $demo_id)
+            );
 
             if($resultData){
                 $json_url       = $resultData->json_url;
                 $demo_url       = $resultData->demo_url;
                 $demo_title     = $resultData->title;
-            }elseif($error = $this->wpdb->last_error){
-                $demo_title     = $error;
             }
 
             $data['json_url']   = $json_url;
@@ -432,10 +432,11 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
     protected function sendMail($data){
         $emailTo = 'selimmw@gmail.com';
-        if(isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME'])){
-            $fromEmail = "noreply@".$_SERVER['SERVER_NAME'];
+        $site_host = wp_parse_url( home_url(), PHP_URL_HOST );
+        if( $site_host ){
+            $fromEmail = "noreply@" . sanitize_text_field( $site_host );
         }else{
-            $fromEmail = $data['user_email'];
+            $fromEmail = sanitize_email( $data['user_email'] );
         }
         /*******************************Custom Mailing HTML*********************************/
         $headers = 'MIME-Version: 1.0' . "\r\n";

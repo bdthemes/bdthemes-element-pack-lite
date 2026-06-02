@@ -172,12 +172,19 @@
                         unique_id: template_id,
                         data     : {edit_mode: !0, display: !0, template_id: template_id}
                     }, (requestFn = {
-                        success: function (e) {
-                            $e.run('document/elements/import', {
+                        success: function (data) {
+                            var importArgs = {
                                 model  : window.elementor.elementsModel,
-                                data   : e,
+                                data   : data,
                                 options: {}
-                            }), EpModel.closeModal();
+                            };
+                            if (EpModel.importContainer) {
+                                importArgs.container = EpModel.importContainer;
+                            }
+                            if (null !== EpModel.importAt && void 0 !== EpModel.importAt) {
+                                importArgs.options.at = EpModel.importAt;
+                            }
+                            $e.run('document/elements/import', importArgs), EpModel.dismissInlineAddStripAfterInsert(), EpModel.clearImportPlacement(), EpModel.closeModal();
                         },
                         error  : function error(data) {
                             if (data == 'required_activated_license') {
@@ -356,29 +363,45 @@
         defaultTab        : "",
         countResult       : 0,
         channels          : {},
-        atIndex           : null,
+        importContainer   : null,
+        importAt          : null,
+        stripReferenceElementId: null,
         init              : function () {
             window.elementor.on("preview:loaded", window._.bind(EpModel.onPreviewLoaded, EpModel)), EpControler.init();
         },
         onPreviewLoaded   : function () {
-            let e = setInterval(() => {
-                window.elementor.$previewContents.find(".elementor-add-new-section").length && (this.initLibraryButton(), clearInterval(e))
+            let epAddSectionInterval = setInterval(() => {
+                window.elementor.$previewContents.find(".elementor-add-new-section").length && (this.initLibraryButton(), clearInterval(epAddSectionInterval))
             }, 100);
-            window.elementor.$previewContents.on("click", ".elementor-editor-element-setting.elementor-editor-element-add", this.initLibraryButton), window.elementor.$previewContents.on("click.addBdtElementPackTemplate", ".elementor-add-ep-button", _.bind(this.showTemplatesModal, this)), this.channels = {
+            window.elementor.$previewContents.on("click", ".elementor-editor-element-setting.elementor-editor-element-add", function () {
+                setTimeout(function () {
+                    EpModel.initLibraryButton();
+                }, 0);
+            }), window.elementor.$previewContents.on("click.addBdtElementPackTemplate", ".elementor-add-ep-button", function (ev) {
+                EpModel.captureImportPlacementFromEpButton(ev.currentTarget), EpModel.showTemplatesModal();
+            }), window.elementor.$previewContents.on("click.addBdtElementPackSectionAdd", ".elementor-editor-section-settings .elementor-editor-element-add", function () {
+                var btnHtml = '<div class="elementor-add-section-area-button elementor-add-ep-button"><i class="ep-icon-element-pack"></i></div>',
+                    topSection = e(this).closest(".elementor-top-section");
+                EpConfig.libraryButton && topSection.prev(".elementor-add-section").find(".elementor-add-new-section").each(function () {
+                    var $row = e(this);
+                    $row.find(".elementor-add-ep-button").length || $row.prepend(btnHtml)
+                })
+            }), this.channels = {
                 templates: Backbone.Radio.channel("EP_THEME_EDITOR:templates"),
                 tabs     : Backbone.Radio.channel("EP_THEME_EDITOR:tabs"),
                 layout   : Backbone.Radio.channel("EP_THEME_EDITOR:layout")
             }, this.tabs = EpConfig.tabs, this.defaultTab = EpConfig.defaultTab
         },
         initLibraryButton : function () {
-            var sectionBtnArea = window.elementor.$previewContents.find(".elementor-add-new-section"),
-                btnHtml        = '<div class="elementor-add-section-area-button elementor-add-ep-button"><i class="ep-icon-element-pack"></i></div>';
-            sectionBtnArea.find(".elementor-add-ep-button").length || (sectionBtnArea.length && EpConfig.libraryButton && e(btnHtml).prependTo(sectionBtnArea), window.elementor.$previewContents.on("click.addBdtElementPackTemplate", ".elementor-editor-section-settings .elementor-editor-element-add", function () {
-                var topSection = e(this).closest(".elementor-top-section"), l = topSection.data("model-cid");
-                (window.elementor.sections && window.elementor.sections.currentView.collection.length && e.each(window.elementor.sections.currentView.collection.models, function (e, topSection) {
-                    l === topSection.cid && (EpModel.atIndex = e)
-                }), EpConfig.libraryButton) && topSection.prev(".elementor-add-section").find(".elementor-add-new-section").prepend(btnHtml)
-            }))
+            var btnHtml = '<div class="elementor-add-section-area-button elementor-add-ep-button"><i class="ep-icon-element-pack"></i></div>',
+                $areas = window.elementor.$previewContents.find(".elementor-add-new-section");
+            if (!EpConfig.libraryButton) {
+                return;
+            }
+            $areas.each(function () {
+                var $area = e(this);
+                $area.find(".elementor-add-ep-button").length || $area.prepend(btnHtml)
+            })
         },
         getFilter         : function (e) {
             return this.channels.templates.request("filter:" + e)
@@ -403,6 +426,65 @@
         },
         setPreview        : function (e, t) {
             this.channels.layout.reply("preview", e), t || this.channels.layout.trigger("preview:change")
+        },
+        captureImportPlacementFromEpButton: function (epButtonEl) {
+            this.clearImportPlacement();
+            if (!window.$e || !$e.components) {
+                return;
+            }
+            var $addSection = e(epButtonEl).closest(".elementor-add-section");
+            if (!$addSection.length) {
+                return;
+            }
+            var $next = $addSection.next(".elementor-element");
+            if (!$next.length) {
+                return;
+            }
+            var id = $next.data("id");
+            if (!id) {
+                return;
+            }
+            var docUtils = $e.components.get("document") && $e.components.get("document").utils;
+            if (!docUtils || !docUtils.findViewById) {
+                return;
+            }
+            var view = docUtils.findViewById(id);
+            if (!view || !view.getContainer || !view.model || !view.model.collection) {
+                return;
+            }
+            var childContainer = view.getContainer(),
+                parentContainer = childContainer.parent;
+            if (!parentContainer) {
+                return;
+            }
+            var at = view.model.collection.indexOf(view.model);
+            if (at < 0) {
+                return;
+            }
+            this.importContainer = parentContainer;
+            this.importAt = at;
+            this.stripReferenceElementId = id;
+        },
+        dismissInlineAddStripAfterInsert: function () {
+            var refId = this.stripReferenceElementId;
+            this.stripReferenceElementId = null;
+            if (!refId || !window.$e || !$e.components) {
+                return;
+            }
+            var docUtils = $e.components.get("document") && $e.components.get("document").utils;
+            if (!docUtils || !docUtils.findViewById) {
+                return;
+            }
+            var view = docUtils.findViewById(refId);
+            if (!view || !view.addSectionView || view.addSectionView.isDestroyed) {
+                return;
+            }
+            view.addSectionView.fadeToDeath();
+        },
+        clearImportPlacement: function () {
+            this.importContainer = null;
+            this.importAt = null;
+            this.stripReferenceElementId = null;
         },
         showTemplatesModal: function () {
             this.getModal().show(), this.layout || (this.layout = new EpControler.EpTemplateLayoutView, this.layout.showLoadingView()), this.setTab(this.defaultTab, !0), this.getTemplatedata(this.defaultTab), this.setPreview("initial")
@@ -475,8 +557,7 @@
             e('#bdt-elementpack-template-library-content .search-result-counter span').html(0);
         },
         closeModal        : function () {
-            this.getModal().hide()
-            this.showHeaderLogo();
+            this.clearImportPlacement(), this.getModal().hide(), this.showHeaderLogo();
         },
         getModal          : function () {
             return this.modal || (this.modal = elementor.dialogsManager.createWidget("lightbox", {
