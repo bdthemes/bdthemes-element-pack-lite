@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.1
+Stable tag: 8.7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -413,6 +413,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.2 [4th June 2026] =
+
+* Fixed: Atomic widgets - Threed Text extension frontend issue fixed
 
 = 8.7.1 [2nd June 2026] =
 

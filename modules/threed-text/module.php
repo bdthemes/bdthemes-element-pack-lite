@@ -241,9 +241,31 @@ class Module extends Element_Pack_Module_Base {
 		);
 	}
 
+	/**
+	 * 3D text boots on elementor/frontend/init — load after elementor-frontend.
+	 */
+	public function ensure_frontend_script_deps() {
+		$scripts = wp_scripts();
+
+		if ( empty( $scripts->registered['ep-threed-text'] ) ) {
+			return;
+		}
+
+		$deps = $scripts->registered['ep-threed-text']->deps;
+
+		foreach ( [ 'elementor-frontend', 'elementor-frontend-modules' ] as $handle ) {
+			if ( wp_script_is( $handle, 'registered' ) && ! in_array( $handle, $deps, true ) ) {
+				$deps[] = $handle;
+			}
+		}
+
+		$scripts->registered['ep-threed-text']->deps = $deps;
+	}
+
 	public function enqueue_scripts() {
 		wp_register_script('ztext-js', BDTEP_ASSETS_URL . 'vendor/js/ztext.min.js', ['jquery'], '0.0.2');
 		wp_register_script( 'ep-threed-text', BDTEP_ASSETS_URL . 'js/modules/ep-threed-text.min.js', [ 'jquery', 'ztext-js' ], BDTEP_VER, true );
+		$this->ensure_frontend_script_deps();
 
 		if (\ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode()) {
 			wp_enqueue_script('ztext-js');
@@ -410,6 +432,7 @@ class Module extends Element_Pack_Module_Base {
 		add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue_scripts']);
 		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'enqueue_editor_scripts' ] );
 		add_filter( 'elementor/widget/render_content', [ $this, 'inject_atomic_threed_text_data' ], 10, 2 );
+		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'ensure_frontend_script_deps' ] );
 
 		if (did_action('elementor/init')) {
 			$this->maybe_register_atomic_hooks();
