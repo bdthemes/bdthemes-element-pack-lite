@@ -2,17 +2,18 @@
 
 namespace ElementPack\Admin;
 
-if ( !defined('ABSPATH') ) {
-    exit;
+if (!defined('ABSPATH')) {
+	exit;
 } // Exit if accessed directly
 
-if ( !function_exists('is_plugin_active') ) {
-    include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+if (!function_exists('is_plugin_active')) {
+	include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 }
 
 class ModuleService {
 
-    public static function get_widget_settings($callable) {
+
+	public static function get_widget_settings($callable) {
 
         $settings_fields = [
            'element_pack_active_modules'   => [
@@ -3804,46 +3805,270 @@ class ModuleService {
         return $callable($settings);
     }
 
-    private static function _is_plugin_installed($plugin, $plugin_path)
-    {
-        $installed_plugins = get_plugins();
-        return isset($installed_plugins[$plugin_path]);
-    }
+	private static function _is_plugin_installed($plugin, $plugin_path) {
+		$installed_plugins = get_plugins();
+		return isset($installed_plugins[$plugin_path]);
+	}
 
-    public static function is_module_active($module_id, $options) {
-        if ( !isset($options[$module_id]) ) {
-            if ( file_exists(BDTEP_MODULES_PATH . $module_id . '/module.info.php') ) {
-                $module_data = require BDTEP_MODULES_PATH . $module_id . '/module.info.php';
-                return $module_data['default_activation'];
-            }
-        } else {
-            return $options[$module_id] == 'on';
-        }
-    }
+	/**
+	 * Per-request cache of parsed module.info.php files.
+	 *
+	 * Previously is_module_active(), has_module_style() and has_module_script()
+	 * each ran their own file_exists() + require on every call, so the same
+	 * module.info.php was stat'd and parsed up to 3x per module per page load
+	 * (and the script/style checks run for every enabled module). Caching the
+	 * parsed array collapses that to a single read per module per request.
+	 *
+	 * @var array<string, array|null>
+	 */
+	private static $module_info_cache = [];
 
-    public static function is_plugin_active($plugin_path) {
-        if ( $plugin_path ) {
-            return is_plugin_active($plugin_path);
-        }
-    }
+	/**
+	 * Read and memoize a module's module.info.php metadata.
+	 *
+	 * @param string $module_id
+	 * @return array|null Parsed metadata, or null when the module has no info file.
+	 */
+	private static function get_module_info($module_id) {
+		if (array_key_exists($module_id, self::$module_info_cache)) {
+			return self::$module_info_cache[$module_id];
+		}
 
-    public static function has_module_style($module_id) {
-        if ( file_exists(BDTEP_MODULES_PATH . $module_id . '/module.info.php') ) {
-            $module_data = require BDTEP_MODULES_PATH . $module_id . '/module.info.php';
+		$info = null;
+		$file = BDTEP_MODULES_PATH . $module_id . '/module.info.php';
 
-            if ( isset($module_data['has_style']) ) {
-                return $module_data['has_style'];
-            }
-        }
-    }
+		if (file_exists($file)) {
+			$info = require $file;
+		}
 
-    public static function has_module_script($module_id) {
-        if ( file_exists(BDTEP_MODULES_PATH . $module_id . '/module.info.php') ) {
-            $module_data = require BDTEP_MODULES_PATH . $module_id . '/module.info.php';
+		return self::$module_info_cache[$module_id] = $info;
+	}
 
-            if ( isset($module_data['has_script']) ) {
-                return $module_data['has_script'];
-            }
-        }
-    }
+	/**
+	 * Per-request cache of the module enable/disable option arrays.
+	 *
+	 * The enabled-state helpers (element_pack_is_widget_enabled() etc.) run dozens
+	 * of times per page (≈74 in the asset-registration pass alone), each fetching
+	 * the same option. WordPress already caches options in memory, but this also
+	 * skips the repeated default-array handling. The cache is flushed via
+	 * flush_modules_option_cache() whenever one of these options is updated, so a
+	 * settings save in the same request is never served a stale value.
+	 *
+	 * @var array<string, array>
+	 */
+	private static $modules_option_cache = [];
+
+	/**
+	 * Get one of the module option arrays with a per-request cache.
+	 *
+	 * @param string $key Option name.
+	 * @return array
+	 */
+	public static function get_modules_option($key) {
+		if (!array_key_exists($key, self::$modules_option_cache)) {
+			self::$modules_option_cache[$key] = get_option($key, []);
+		}
+		return self::$modules_option_cache[$key];
+	}
+
+	/**
+	 * Invalidate the cached option(s). Pass null to clear everything.
+	 *
+	 * @param string|null $key
+	 * @return void
+	 */
+	public static function flush_modules_option_cache($key = null) {
+		if ($key === null) {
+			self::$modules_option_cache = [];
+			self::$runtime_lists_cache = null;
+		} else {
+			unset(self::$modules_option_cache[$key]);
+		}
+	}
+
+	/**
+	 * Per-request memo of the reduced runtime module lists.
+	 *
+	 * @var array<string, array>|null
+	 */
+	private static $runtime_lists_cache = null;
+
+	/**
+	 * The lean module lists the front-end loader (Manager) actually needs: the
+	 * candidate module names per tier, plus plugin_path for third-party entries.
+	 *
+	 * The full get_widget_settings() array is ~4,200 lines and rebuilding it on
+	 * every request runs hundreds of esc_html__() calls and a get_plugins()
+	 * directory scan — none of which the loader reads. The candidate list is fixed
+	 * by the plugin code; the only request-varying part is third-party plugin_path
+	 * selection, which depends on which plugins are active. So the result is cached
+	 * in a transient keyed by plugin version + the active-plugin fingerprint:
+	 * activating/deactivating any plugin changes the key and rebuilds, keeping
+	 * plugin_path correct, while normal requests skip the full build entirely.
+	 *
+	 * Widget enable/disable toggles do NOT affect this list — those are read live
+	 * from options by element_pack_is_*_enabled(), so no flush is needed on save.
+	 *
+	 * @return array{element_pack_active_modules: array, element_pack_elementor_extend: array, element_pack_third_party_widget: array}
+	 */
+	public static function get_runtime_module_lists() {
+		if (is_array(self::$runtime_lists_cache)) {
+			return self::$runtime_lists_cache;
+		}
+
+		$fingerprint = md5(
+			BDTEP_VER . '|'
+			. wp_json_encode(get_option('active_plugins', [])) . '|'
+			. wp_json_encode(get_site_option('active_sitewide_plugins', []))
+		);
+		$cache_key = 'ep_runtime_modules_' . $fingerprint;
+
+		$cached = get_transient($cache_key);
+		if (self::is_valid_runtime_lists($cached)) {
+			return self::$runtime_lists_cache = $cached;
+		}
+
+		$lists = self::get_widget_settings(function ($settings) {
+			$fields = isset($settings['settings_fields']) && is_array($settings['settings_fields'])
+				? $settings['settings_fields']
+				: [];
+
+			return [
+				'element_pack_active_modules'     => self::reduce_runtime_list($fields['element_pack_active_modules'] ?? []),
+				'element_pack_elementor_extend'   => self::reduce_runtime_list($fields['element_pack_elementor_extend'] ?? []),
+				'element_pack_third_party_widget' => self::reduce_runtime_list($fields['element_pack_third_party_widget'] ?? []),
+			];
+		});
+
+		set_transient($cache_key, $lists, defined('WEEK_IN_SECONDS') ? WEEK_IN_SECONDS : 604800);
+
+		return self::$runtime_lists_cache = $lists;
+	}
+
+	/**
+	 * Reduce a full settings tier to the fields the loader reads.
+	 *
+	 * @param array $items
+	 * @return array
+	 */
+	private static function reduce_runtime_list($items) {
+		$out = [];
+		if (!is_array($items)) {
+			return $out;
+		}
+		foreach ($items as $item) {
+			if (!isset($item['name'])) {
+				continue;
+			}
+			$entry = ['name' => $item['name']];
+			if (isset($item['plugin_path'])) {
+				$entry['plugin_path'] = $item['plugin_path'];
+			}
+			$out[] = $entry;
+		}
+		return $out;
+	}
+
+	/**
+	 * @param mixed $lists
+	 * @return bool
+	 */
+	private static function is_valid_runtime_lists($lists) {
+		return is_array($lists)
+			&& isset(
+				$lists['element_pack_active_modules'],
+				$lists['element_pack_elementor_extend'],
+				$lists['element_pack_third_party_widget']
+			);
+	}
+
+	public static function is_module_active($module_id, $options) {
+		if (!isset($options[$module_id])) {
+			$module_data = self::get_module_info($module_id);
+			if (is_array($module_data) && isset($module_data['default_activation'])) {
+				return $module_data['default_activation'];
+			}
+			return null;
+		}
+
+		return $options[$module_id] == 'on';
+	}
+
+	public static function is_plugin_active($plugin_path) {
+		if ($plugin_path) {
+			return is_plugin_active($plugin_path);
+		}
+	}
+
+	public static function has_module_style($module_id) {
+		$module_data = self::get_module_info($module_id);
+		if (is_array($module_data) && isset($module_data['has_style'])) {
+			return $module_data['has_style'];
+		}
+	}
+
+	public static function has_module_script($module_id) {
+		$module_data = self::get_module_info($module_id);
+		if (is_array($module_data) && isset($module_data['has_script'])) {
+			return $module_data['has_script'];
+		}
+	}
+
+	/**
+	 * Get Google OAuth Connection HTML
+	 *
+	 * @return string
+	 */
+	public static function get_google_oauth_connection_html() {
+		$ep_api_settings = get_option('element_pack_api_settings');
+		$oauth_data = get_option('element_pack_google_oauth_data', array());
+		
+		$client_id = !empty($ep_api_settings['google_sheets_client_id']) ? $ep_api_settings['google_sheets_client_id'] : '';
+		$is_connected = !empty($oauth_data['access_token']);
+		
+		ob_start();
+		?>
+		<div id="ep-google-oauth-manager">
+			<?php if (!$client_id): ?>
+				<div class="oauth-setup-required">
+					<h4>⚠️ <?php echo esc_html__('Setup Required', 'bdthemes-element-pack'); ?></h4>
+					<p><?php echo esc_html__('Please configure your Google OAuth Client ID above before connecting your Google account.', 'bdthemes-element-pack'); ?></p>
+					<ol>
+						<li><?php echo esc_html__('Add your Google OAuth Client ID and Client Secret in the field above', 'bdthemes-element-pack'); ?></li>
+						<li><?php echo esc_html__('Save the settings', 'bdthemes-element-pack'); ?></li>
+						<li><?php echo esc_html__('Refresh this page to see the connection button', 'bdthemes-element-pack'); ?></li>
+					</ol>
+				</div>
+			<?php elseif ($is_connected): ?>
+				<div class="oauth-connected">
+					<h4>✅ <?php echo esc_html__('Google Sheets Connected', 'bdthemes-element-pack'); ?></h4>
+					<div>
+						<div>
+							<button type="button" id="ep-disconnect-google" class="bdt-button bdt-button-secondary">
+								<?php echo esc_html__('Disconnect', 'bdthemes-element-pack'); ?>
+								<i class="dashicons dashicons-plugins-checked"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			<?php else: ?>
+				<div class="oauth-disconnected">
+					<p><?php echo esc_html__('Connect your Google account to access to your Google Sheets from webhook forms.', 'bdthemes-element-pack'); ?></p>
+
+					<p><strong><?php echo esc_html__('This is your Redirect URI: ', 'bdthemes-element-pack'); ?> <code><?php echo esc_html__( admin_url() . 'admin.php?page=element_pack_options', 'bdthemes-element-pack'); ?></code></strong></p>
+					
+					<div>
+						<button type="button" id="ep-connect-google" class="bdt-button bdt-button-primary">
+							<?php echo esc_html__('Connect', 'bdthemes-element-pack'); ?>
+							<i class="dashicons dashicons-admin-plugins"></i>
+						</button>
+					</div>
+				</div>
+			<?php endif; ?>
+			
+			<div id="ep-oauth-status"></div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
 }
