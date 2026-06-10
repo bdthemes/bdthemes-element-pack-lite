@@ -15,42 +15,43 @@ final class Manager
     public function register_module_and_assets()
     {
 
-        ModuleService::get_widget_settings(function ($settings) {
-            $core_widgets = $settings['settings_fields']['element_pack_active_modules'];
-            $extensions = $settings['settings_fields']['element_pack_elementor_extend'];
-            $third_party_widgets = $settings['settings_fields']['element_pack_third_party_widget'];
+        // The loader only needs each module's name (+ plugin_path for third-party
+        // integrations). Pull the lean, transient-cached runtime lists instead of
+        // rebuilding the full ~4,200-line settings array (hundreds of esc_html__()
+        // calls + a get_plugins() directory scan) on every front-end request.
+        $lists = ModuleService::get_runtime_module_lists();
 
-            /**
-             * Our Widget
-             */
-            foreach ($core_widgets as $widget) {
-                if (element_pack_is_widget_enabled($widget['name'])) {
+        /**
+         * Our Widget
+         */
+        foreach ($lists['element_pack_active_modules'] as $widget) {
+            if (element_pack_is_widget_enabled($widget['name'])) {
+                $this->load_module_instance($widget);
+            }
+        }
+
+        /**
+         * Extension
+         */
+        foreach ($lists['element_pack_elementor_extend'] as $extension) {
+            if (element_pack_is_extend_enabled($extension['name'])) {
+                $this->load_module_instance($extension);
+            }
+        }
+
+        /**
+         * Third Party Widget
+         */
+        foreach ($lists['element_pack_third_party_widget'] as $widget) {
+            if (element_pack_is_third_party_enabled($widget['name'])) {
+                if (isset($widget['plugin_path']) && ModuleService::is_plugin_active($widget['plugin_path'])) {
                     $this->load_module_instance($widget);
                 }
             }
+        }
 
-            /**
-             * Extension
-             */
-            foreach ($extensions as $extension) {
-                if (element_pack_is_extend_enabled($extension['name'])) {
-                    $this->load_module_instance($extension);
-                }
-            }
-
-            /**
-             * Third Party Widget
-             */
-            foreach ($third_party_widgets as $widget) {
-                if (element_pack_is_third_party_enabled($widget['name'])) {
-                    if (isset($widget['plugin_path']) && ModuleService::is_plugin_active($widget['plugin_path'])) {
-                        $this->load_module_instance($widget);
-                    }
-                }
-            }
-            // Static module if need
-            $this->load_module_instance(['name' => 'elementor']);
-        });
+        // Static module if need
+        $this->load_module_instance(['name' => 'elementor']);
     }
 
     public function load_module_instance($module)

@@ -1063,6 +1063,71 @@ function element_pack_mask_shapes_options() {
 }
 
 /**
+ * Shape keys that have a matching color overlay SVG in assets/images/mask/.
+ *
+ * @return string[]
+ */
+function element_pack_mask_color_shapes() {
+	static $shapes = null;
+
+	if ( null !== $shapes ) {
+		return $shapes;
+	}
+
+	$shapes   = [];
+	$mask_dir = BDTEP_PATH . 'assets/images/mask/';
+
+	if ( ! is_dir( $mask_dir ) ) {
+		return $shapes;
+	}
+
+	foreach ( glob( $mask_dir . 'color-shape-*.svg' ) as $file ) {
+		$basename = basename( $file, '.svg' );
+
+		if ( preg_match( '/^color-(shape-\d+)$/', $basename, $matches ) ) {
+			$shapes[] = $matches[1];
+		}
+	}
+
+	sort( $shapes );
+
+	return $shapes;
+}
+
+/**
+ * Resolve color overlay URL for a default mask shape when the asset exists.
+ *
+ * @param string $shape_key Mask shape key, e.g. shape-21.
+ * @return string Color overlay URL or empty string.
+ */
+function element_pack_mask_color_overlay_url( $shape_key ) {
+	$shape_key = sanitize_file_name( (string) $shape_key );
+
+	if ( '' === $shape_key || ! in_array( $shape_key, element_pack_mask_color_shapes(), true ) ) {
+		return '';
+	}
+
+	return BDTEP_ASSETS_URL . 'images/mask/color-' . $shape_key . '.svg';
+}
+
+/**
+ * Selectors dictionary for legacy image masking :before color overlays.
+ *
+ * @return array<string, string>
+ */
+function element_pack_mask_color_overlay_selectors_dictionary() {
+	$dictionary = [];
+
+	foreach ( element_pack_mask_shapes() as $shape_key => $shape_name ) {
+		$url = element_pack_mask_color_overlay_url( $shape_key );
+
+		$dictionary[ $shape_key ] = $url ? 'url(' . $url . ')' : 'none';
+	}
+
+	return $dictionary;
+}
+
+/**
  * This is a svg file converter function which return a svg content
  *
  * @param string $icon Icon name (alphanumeric, hyphen, underscore only). No path components.
