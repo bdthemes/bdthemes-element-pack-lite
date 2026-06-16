@@ -1111,7 +1111,10 @@ function element_pack_mask_color_overlay_url( $shape_key ) {
 }
 
 /**
- * Selectors dictionary for legacy image masking :before color overlays.
+ * Selectors dictionary for native Elementor image masking wrapper styles.
+ *
+ * Sets mask and optional color overlay URLs as CSS variables so the mask URL
+ * is not replaced by overlay "none" values in img selectors.
  *
  * @return array<string, string>
  */
@@ -1119,9 +1122,15 @@ function element_pack_mask_color_overlay_selectors_dictionary() {
 	$dictionary = [];
 
 	foreach ( element_pack_mask_shapes() as $shape_key => $shape_name ) {
-		$url = element_pack_mask_color_overlay_url( $shape_key );
+		if ( 0 === $shape_key ) {
+			continue;
+		}
 
-		$dictionary[ $shape_key ] = $url ? 'url(' . $url . ')' : 'none';
+		$mask_url     = BDTEP_ASSETS_URL . 'images/mask/' . $shape_key . '.svg';
+		$overlay_url  = element_pack_mask_color_overlay_url( $shape_key );
+		$overlay_value = $overlay_url ? 'url(' . $overlay_url . ')' : 'none';
+
+		$dictionary[ $shape_key ] = '--bdt-mask-shape-url: url(' . $mask_url . '); --bdt-mask-overlay: ' . $overlay_value . ';';
 	}
 
 	return $dictionary;
