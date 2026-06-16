@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.3
+Stable tag: 8.7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.1.1
+Elementor tested up to: 4.1.3
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -413,6 +413,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.4 [16th June 2026] =
+
+* Fixed: Image Masking default shape issue fixed (resolved none.svg 404 request causing masked images to disappear)
 
 = 8.7.3 [11th June 2026] =
 
