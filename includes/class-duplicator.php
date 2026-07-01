@@ -17,48 +17,78 @@ class BdThemes_Duplicator {
 
 	public function __construct() {
 		add_action( 'admin_action_bdt_duplicate_as_draft', [ $this, 'bdt_duplicate_as_draft' ] );
-		add_filter( 'post_row_actions', [ $this, 'bdt_duplicate_post_link' ], 10, 2 );
-		add_filter( 'page_row_actions', [ $this, 'bdt_duplicate_post_link' ], 10, 2 );
+		add_action( 'admin_init', [ $this, 'register_row_action_hooks' ] );
+	}
+
+	/**
+	 * Register duplicate links for all supported post types.
+	 */
+	public function register_row_action_hooks() {
+		foreach ( $this->get_duplicatable_post_types() as $post_type ) {
+			add_filter( "{$post_type}_row_actions", [ $this, 'bdt_duplicate_post_link' ], 10, 2 );
+		}
+	}
+
+	/**
+	 * Post types that should show the duplicate row action.
+	 *
+	 * @return string[]
+	 */
+	protected function get_duplicatable_post_types() {
+		$post_types = get_post_types(
+			[
+				'show_ui' => true,
+			],
+			'names'
+		);
+
+		unset( $post_types['attachment'] );
+
+		/**
+		 * Filter duplicatable post types.
+		 *
+		 * @param string[] $post_types Post type slugs.
+		 */
+		return apply_filters( 'element_pack/duplicator/post_types', array_values( $post_types ) );
+	}
+
+	/**
+	 * Whether the current user can duplicate a post.
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @return bool
+	 */
+	protected function user_can_duplicate_post( $post ) {
+		if ( ! $post instanceof \WP_Post ) {
+			return false;
+		}
+
+		return current_user_can( 'edit_post', $post->ID );
 	}
 
 	public function bdt_duplicate_as_draft() {
 
-		if ( ! current_user_can( 'edit_posts' ) ) {
-			wp_die( 'You don\'t have permission to duplicate it; please go back!' );
-		}
-
-		if ( ! ( isset( $_GET['post'] ) || isset( $_POST['post'] ) || ( isset( $_REQUEST['action'] ) && 'bdt_duplicate_as_draft' == $_REQUEST['action'] ) ) ) {
-			wp_die( 'No post to duplicate has been supplied!' );
+		if ( ! ( isset( $_GET['post'] ) || isset( $_POST['post'] ) || ( isset( $_REQUEST['action'] ) && 'bdt_duplicate_as_draft' === $_REQUEST['action'] ) ) ) {
+			wp_die( esc_html__( 'No post to duplicate has been supplied!', 'bdthemes-element-pack' ) );
 		}
 
 		/**
 		 * Nonce verification
 		 */
-		if ( ! isset( $_GET['duplicate_nonce'] ) || ! wp_verify_nonce( $_GET['duplicate_nonce'], basename( __FILE__ ) ) ) {
-			return;
+		if ( ! isset( $_GET['duplicate_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['duplicate_nonce'] ) ), basename( __FILE__ ) ) ) {
+			wp_die( esc_html__( 'Security check failed. Please try again.', 'bdthemes-element-pack' ) );
 		}
 
 		/**
 		 * get the original post id
 		 */
-		$post_id = ( isset( $_GET['post'] ) ? absint( $_GET['post'] ) : absint( $_POST['post'] ) );
-		/**
-		 * and all the original post data then
-		 */
-		$post = get_post( $post_id );
+		$post_id = isset( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : absint( wp_unslash( $_POST['post'] ) );
 
-		/**
-		 * if you don't want current user to be the new post author,
-		 */
-		$current_user_id = get_current_user_id();
-
-		if ( current_user_can( 'manage_options' ) || current_user_can( 'edit_others_posts' ) ) {
-			$this->duplicate_edit_post( $post_id );
-		} else if ( current_user_can( 'edit_posts' ) && $post->post_author == $current_user_id ) {
-			$this->duplicate_edit_post( $post_id );
-		} else {
-			wp_die( 'You don\'t have permission to duplicate it; please go back!' );
+		if ( ! $this->user_can_duplicate_post( get_post( $post_id ) ) ) {
+			wp_die( esc_html__( 'You don\'t have permission to duplicate it; please go back!', 'bdthemes-element-pack' ) );
 		}
+
+		$this->duplicate_edit_post( $post_id );
 	}
 
 	/**
@@ -155,25 +185,15 @@ class BdThemes_Duplicator {
 				update_post_meta( $bdt_new_post_id, '_elementor_template_type', $source_type );
 			}
 
-			$css = Post_CSS::create( $bdt_new_post_id );
-			$css->update();
+			if ( class_exists( Post_CSS::class ) ) {
+				$css = Post_CSS::create( $bdt_new_post_id );
+				$css->update();
+			}
 
 			/**
-			 * finally, redirect to the edit post screen for the new draft
+			 * Redirect back to the post type list after duplication.
 			 */
-
-			$bdt_all_post_types = get_post_types( [], 'names' );
-
-			foreach ( $bdt_all_post_types as $bdt_key => $bdt_value ) {
-				$bdt_names[] = $bdt_key;
-			}
-
-			$current_post_type = get_post_type( $post_id );
-
-			if ( is_array( $bdt_names ) && in_array( $current_post_type, $bdt_names ) ) {
-				wp_safe_redirect( admin_url( 'edit.php?post_type=' . $current_post_type ) );
-			}
-
+			wp_safe_redirect( admin_url( 'edit.php?post_type=' . $bdt_post->post_type ) );
 			exit;
 		} else {
 			wp_die( 'Failed. Not Found Post: ' . esc_html( $post_id ) );
@@ -183,15 +203,31 @@ class BdThemes_Duplicator {
 
 	public function bdt_duplicate_post_link( $actions, $post ) {
 
-		if ( current_user_can( 'manage_options' ) || current_user_can( 'edit_others_posts' ) ) {
-			if ( $post->post_type == 'post' ) {
-				$actions['duplicate'] = '<a href="' . wp_nonce_url( 'admin.php?action=bdt_duplicate_as_draft&post=' . $post->ID, basename( __FILE__ ), 'duplicate_nonce' ) . '" title="Duplicate this post" rel="permalink">' . esc_html_x( "Duplicate Post", "Admin String", "bdthemes-element-pack" ) . '</a>';
-			} elseif ( $post->post_type == 'page' ) {
-				$actions['duplicate'] = '<a href="' . wp_nonce_url( 'admin.php?action=bdt_duplicate_as_draft&post=' . $post->ID, basename( __FILE__ ), 'duplicate_nonce' ) . '" title="Duplicate this page" rel="permalink">' . esc_html_x( "Duplicate Page", "Admin String", "bdthemes-element-pack" ) . '</a>';
-			} elseif ( $post->post_type == 'elementor_library' ) {
-				$actions['duplicate'] = '<a href="' . wp_nonce_url( 'admin.php?action=bdt_duplicate_as_draft&post=' . $post->ID, basename( __FILE__ ), 'duplicate_nonce' ) . '" title="Duplicate this template" rel="permalink">' . esc_html_x( "Duplicate Template", "Admin String", "bdthemes-element-pack" ) . '</a>';
-			}
+		if ( ! $this->user_can_duplicate_post( $post ) ) {
+			return $actions;
 		}
+
+		if ( ! in_array( $post->post_type, $this->get_duplicatable_post_types(), true ) ) {
+			return $actions;
+		}
+
+		$post_type_object = get_post_type_object( $post->post_type );
+		$label            = esc_html_x( 'Duplicate', 'Admin String', 'bdthemes-element-pack' );
+
+		if ( $post_type_object && ! empty( $post_type_object->labels->singular_name ) ) {
+			$label = sprintf(
+				/* translators: %s: post type singular name */
+				esc_html_x( 'Duplicate %s', 'Admin String', 'bdthemes-element-pack' ),
+				$post_type_object->labels->singular_name
+			);
+		}
+
+		$actions['duplicate'] = '<a href="' . wp_nonce_url(
+			'admin.php?action=bdt_duplicate_as_draft&post=' . absint( $post->ID ),
+			basename( __FILE__ ),
+			'duplicate_nonce'
+		) . '" title="' . esc_attr( $label ) . '" rel="permalink">' . esc_html( $label ) . '</a>';
+
 		return $actions;
 	}
 }

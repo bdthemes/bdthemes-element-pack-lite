@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.4
+Stable tag: 8.7.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.1.3
+Elementor tested up to: 4.1.4
 
 Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
 
@@ -413,6 +413,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.5 [1st July 2026] =
+
+* Added: Duplicate post feature added for custom post types
+* Fixed: Cursor Effects extension: image size control not applying on frontend fixed (Image source)
+* Fixed: Item height issue fixed in event calendar grid widget
+* Updated: System improved
+* Updated: Assets loading improved
 
 = 8.7.4 [16th June 2026] =
 

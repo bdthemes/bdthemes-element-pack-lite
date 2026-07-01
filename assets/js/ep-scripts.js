@@ -1,41 +1,26 @@
 /**
  * Start accordion widget script
- * Optimized version - No jQuery dependency
  */
 
 (() => {
   "use strict";
 
-  /**
-   * Check if device is mobile
-   * @returns {boolean}
-   */
   const isMobileDevice = () => window.matchMedia("(max-width: 767px)").matches;
 
-  /**
-   * Smooth scroll to element
-   * @param {HTMLElement} element - Target element
-   * @param {number} offset - Top offset in pixels
-   * @param {number} duration - Animation duration in milliseconds
-   * @returns {Promise}
-   */
-  const smoothScrollTo = (element, offset = 0, duration = 1000) => {
-    return new Promise((resolve) => {
-      const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
+  const smoothScrollTo = (element, offset = 0, duration = 1000) =>
+    new Promise((resolve) => {
+      const startPosition = window.scrollY;
+      const distance = element.getBoundingClientRect().top - offset;
       let startTime = null;
 
       const animation = (currentTime) => {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
         const progress = Math.min(timeElapsed / duration, 1);
-        
-        // Easing function (ease-in-out)
-        const ease = progress < 0.5 
-          ? 2 * progress * progress 
+        const ease = progress < 0.5
+          ? 2 * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-        
+
         window.scrollTo(0, startPosition + distance * ease);
 
         if (timeElapsed < duration) {
@@ -47,133 +32,75 @@
 
       requestAnimationFrame(animation);
     });
-  };
 
-  /**
-   * Get element by data-title attribute
-   * @param {HTMLElement} accordion - Accordion container
-   * @param {string} title - Data title value
-   * @returns {HTMLElement|null}
-   */
-  const getElementByDataTitle = (accordion, title) => {
-    return accordion.querySelector(`[data-title="${title}"]`);
-  };
-
-  /**
-   * Handle hash navigation and accordion toggle
-   * @param {HTMLElement} accordion - Accordion element
-   * @param {Object} settings - Accordion settings
-   * @param {number} scrollTime - Scroll animation time
-   */
-  const handleHash = async (accordion, settings, scrollTime) => {
+  const handleHash = async (accordion, settings, scrollTime, animate = true) => {
     const hash = window.location.hash;
     if (!hash) return;
 
-    const hashValue = hash.substring(1);
-    const targetElement = getElementByDataTitle(accordion, hashValue);
-    
+    const targetElement = accordion.querySelector(`[data-title="${hash.substring(1)}"]`);
     if (!targetElement) return;
 
     const accordionIndex = targetElement.dataset.accordionIndex;
-    const accordionContainer = targetElement.closest('.bdt-ep-accordion');
-    const accordionId = accordionContainer?.id;
-
+    const accordionContainer = targetElement.closest(".bdt-ep-accordion");
     if (!accordionIndex || !accordionContainer) return;
 
+    const accordionId = accordionContainer.id;
     const bdtAccordion = window.bdtUIkit?.accordion(accordion);
     if (!bdtAccordion) return;
 
-    // Scroll if scrollspy is enabled
+    const index = parseInt(accordionIndex, 10);
+
     if (settings.activeScrollspy === "yes" && accordionId) {
       const targetContainer = document.getElementById(accordionId);
       if (targetContainer) {
         await smoothScrollTo(targetContainer, settings.hashTopOffset, scrollTime);
       }
-      bdtAccordion.toggle(parseInt(accordionIndex), false);
+      bdtAccordion.toggle(index, false);
     } else {
-      bdtAccordion.toggle(parseInt(accordionIndex), true);
+      bdtAccordion.toggle(index, animate);
     }
   };
 
-  /**
-   * Initialize accordion widget
-   * @param {HTMLElement|jQuery} scope - Widget scope element (can be jQuery object or DOM element)
-   */
   const widgetAccordion = (scope) => {
-    // Handle both jQuery objects and native DOM elements
-    const scopeElement = scope instanceof jQuery ? scope[0] : scope;
-    
+    const scopeElement = scope?.jquery ? scope[0] : scope;
+
     const accrContainer = scopeElement.querySelector(".bdt-ep-accordion-container");
     if (!accrContainer) return;
 
     const accordion = accrContainer.querySelector(".bdt-ep-accordion");
     if (!accordion) return;
 
-    const activeItems = accrContainer.querySelectorAll(".bdt-ep-accordion-item.bdt-open");
-    
-    // Get settings from data attribute
     const settingsData = accordion.dataset.settings;
     if (!settingsData) return;
 
     let settings;
     try {
-      settings = typeof settingsData === 'string' ? JSON.parse(settingsData) : settingsData;
+      settings = typeof settingsData === "string" ? JSON.parse(settingsData) : settingsData;
     } catch (e) {
-      console.error('Failed to parse accordion settings:', e);
+      console.error("Failed to parse accordion settings:", e);
       return;
     }
 
-    // Destructure settings with defaults
     const {
       activeHash = "no",
-      hashTopOffset = 0,
       hashScrollspyTime = 1000,
-      activeScrollspy = "no",
       closeAllItemsOnMobile = false
     } = settings;
 
-    // Update settings object with defaults
-    settings.activeScrollspy = activeScrollspy;
-
-    // Close all items on mobile if enabled
     if (closeAllItemsOnMobile && isMobileDevice()) {
-      activeItems.forEach(item => {
+      accrContainer.querySelectorAll(".bdt-ep-accordion-item.bdt-open").forEach((item) => {
         item.classList.remove("bdt-open");
         const content = item.querySelector(".bdt-ep-accordion-content");
-        if (content) {
-          content.hidden = true;
-        }
+        if (content) content.hidden = true;
       });
     }
 
-    // Hash navigation functionality
     if (activeHash === "yes") {
       const abortController = new AbortController();
       const signal = abortController.signal;
 
-      // Handle initial hash on page load
-      const handleLoad = () => {
-        const hash = window.location.hash;
-        if (!hash) return;
+      const handleLoad = () => handleHash(accordion, settings, hashScrollspyTime, false);
 
-        const hashValue = hash.substring(1);
-        const targetElement = getElementByDataTitle(accordion, hashValue);
-        
-        if (targetElement && targetElement.dataset.accordionIndex) {
-          const accordionIndex = parseInt(targetElement.dataset.accordionIndex);
-          const bdtAccordion = window.bdtUIkit?.accordion(accordion);
-          
-          if (bdtAccordion) {
-            if (activeScrollspy === "yes") {
-              handleHash(accordion, settings, hashScrollspyTime);
-            } else {
-              bdtAccordion.toggle(accordionIndex, false);
-            }
-          }
-        }
-      };
-
-      // Handle accordion title clicks
       const handleTitleClick = (event) => {
         const title = event.currentTarget.dataset.title;
         if (title) {
@@ -182,36 +109,24 @@
         }
       };
 
-      // Handle hash changes
-      const handleHashChange = () => {
-        handleHash(accordion, settings, 1000);
-      };
+      const handleHashChange = () => handleHash(accordion, settings, 1000);
 
-      // Check if page has already loaded
-      if (document.readyState === 'complete') {
-        // Page already loaded, handle hash immediately
+      if (document.readyState === "complete") {
         handleLoad();
       } else {
-        // Page still loading, wait for load event
         window.addEventListener("load", handleLoad, { signal, once: true });
       }
-      
-      // Always listen for hash changes
+
       window.addEventListener("hashchange", handleHashChange, { signal });
 
-      const accordionTitles = accordion.querySelectorAll(".bdt-ep-accordion-title");
-      accordionTitles.forEach(title => {
+      accordion.querySelectorAll(".bdt-ep-accordion-title").forEach((title) => {
         title.addEventListener("click", handleTitleClick, { signal });
       });
 
-      // Store cleanup function for potential future use
-      accordion._cleanupAccordion = () => {
-        abortController.abort();
-      };
+      accordion._cleanupAccordion = () => abortController.abort();
     }
   };
 
-  // Initialize on Elementor frontend ready
   window.addEventListener("elementor/frontend/init", () => {
     if (window.elementorFrontend?.hooks) {
       elementorFrontend.hooks.addAction(
@@ -238,7 +153,7 @@
     'use strict';
 
     const widgetDualButton = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
 
         const buttons = scopeEl.querySelectorAll('.bdt-dual-button .bdt-ep-button[data-onclick]');
         if (!buttons.length) return;
@@ -279,12 +194,7 @@
 (() => {
   "use strict";
 
-  /**
-   * Initialize business hours widget
-   * @param {HTMLElement|jQuery} scope - Widget scope element
-   */
   const widgetBusinessHours = (scope) => {
-    // Handle both jQuery objects and native DOM elements
     const scopeElement = scope instanceof jQuery ? scope[0] : scope;
 
     const businessHoursContainer = scopeElement.querySelector(".bdt-ep-business-hours");
@@ -295,7 +205,6 @@
     );
     if (!currentTimeElement) return;
 
-    // Get settings from data attribute
     const settingsData = businessHoursContainer.dataset.settings;
     if (!settingsData) return;
 
@@ -309,16 +218,13 @@
 
     const { business_hour_style, timeNotation, dynamic_timezone, dynamic_timezone_default } = settings;
 
-    // Only proceed if style is dynamic
     if (business_hour_style !== "dynamic") return;
 
-    // Validate jclock library (requires jQuery)
     if (typeof jQuery === "undefined" || !jQuery.fn.jclock) {
       console.error("jclock library is not loaded");
       return;
     }
 
-    // Determine timezone offset
     const offsetVal =
       business_hour_style === "static" ? dynamic_timezone_default : dynamic_timezone;
 
@@ -327,10 +233,8 @@
       return;
     }
 
-    // Determine time format based on notation
     const timeFormat = timeNotation === "12h" ? "%I:%M:%S %p" : "%H:%M:%S";
 
-    // Configure jclock options
     const options = {
       format: timeFormat,
       timeNotation: timeNotation,
@@ -339,11 +243,9 @@
       utc_offset: offsetVal,
     };
 
-    // Initialize jclock (requires jQuery)
     jQuery(currentTimeElement).jclock(options);
   };
 
-  // Initialize on Elementor frontend ready
   window.addEventListener("elementor/frontend/init", () => {
     if (window.elementorFrontend?.hooks) {
       elementorFrontend.hooks.addAction(
@@ -365,22 +267,12 @@
 (() => {
     'use strict';
 
-    /**
-     * Read optional notification z-index from the widget wrapper (set in Elementor).
-     * @param {HTMLFormElement|null|undefined} formEl
-     * @returns {string|null}
-     */
     const getNotificationZIndex = (formEl) => {
         const holder = formEl && formEl.closest('[data-bdt-notification-z-index]');
         const raw    = holder && holder.dataset ? holder.dataset.bdtNotificationZIndex : '';
         return raw !== undefined && raw !== '' ? raw : null;
     };
 
-    /**
-     * Apply z-index to the UIkit notification container (parent of the message node).
-     * @param {*} notificationInstance
-     * @param {string|null} zIndexRaw
-     */
     const applyNotificationZIndex = (notificationInstance, zIndexRaw) => {
         if (notificationInstance == null || zIndexRaw === null) {
             return;
@@ -395,11 +287,6 @@
         }
     };
 
-    /**
-     * Submit form data via fetch and handle response notifications
-     * @param {HTMLFormElement} formEl
-     * @param {string|false}    widgetID
-     */
     const sendContactForm = async (formEl, widgetID = false) => {
         const langStr = window.ElementPackConfig.contact_form;
         const zIndex  = getNotificationZIndex(formEl);
@@ -453,10 +340,6 @@
         }
     };
 
-    /**
-     * Google invisible reCAPTCHA callback
-     * @returns {Promise}
-     */
     const elementPackGIC = () => {
         const langStr = window.ElementPackConfig.contact_form;
 
@@ -497,15 +380,10 @@
         });
     };
 
-    // Expose reCAPTCHA callback globally
     window.elementPackGICCB = elementPackGIC;
 
-    /**
-     * Initialize contact form widget
-     * @param {jQuery} scope - Widget scope element
-     */
     const widgetSimpleContactForm = (scope) => {
-        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+        const scopeElement = scope?.jquery ? scope[0] : scope;
 
         const widgetID = scopeElement.dataset.id;
 
@@ -545,12 +423,8 @@
 (() => {
     'use strict';
 
-    /**
-     * Initialize cookie consent widget
-     * @param {jQuery} scope - Widget scope element
-     */
     const widgetCookieConsent = (scope) => {
-        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+        const scopeElement = scope?.jquery ? scope[0] : scope;
 
         const cookieConsentEl = scopeElement.querySelector('.bdt-cookie-consent');
         if (!cookieConsentEl) return;
@@ -574,7 +448,6 @@
 
         window.cookieconsent.initialise(settings);
 
-        // Append deny/close button to the compliance bar
         const compliance = document.querySelector('.cc-compliance');
         const denyBtn    = document.createElement('button');
         denyBtn.className = 'btn-denyCookie bdt-cc-close-btn cc-btn cc-dismiss';
@@ -635,12 +508,6 @@
 (() => {
     'use strict';
 
-    /**
-     * Set a cookie with an optional expiry in hours
-     * @param {string} name
-     * @param {string} value
-     * @param {number} hours
-     */
     const setCookie = (name, value, hours) => {
         let expires = '';
         if (hours) {
@@ -651,11 +518,6 @@
         document.cookie = `${name}=${value ?? ''}${expires}; path=/`;
     };
 
-    /**
-     * Read a cookie value by name, returns null if not found
-     * @param {string} name
-     * @returns {string|null}
-     */
     const getCookie = (name) => {
         const match = document.cookie
             .split(';')
@@ -663,19 +525,8 @@
         return match ? match.trimStart().slice(name.length + 1) : null;
     };
 
-    /**
-     * Random integer between min and max (inclusive)
-     * @param {number} min
-     * @param {number} max
-     * @returns {number}
-     */
     const randomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-    /**
-     * Get remaining time components from a target date
-     * @param {Date} date
-     * @returns {{ total: number, seconds: number }}
-     */
     const getTimeSpan = (date) => {
         const total = date - Date.now();
         return {
@@ -684,11 +535,6 @@
         };
     };
 
-    /**
-     * POST to the admin AJAX endpoint and handle all countdown-end actions
-     * @param {object} settings
-     * @param {string|number} endTime
-     */
     const handleCountdownEnd = async (settings, endTime) => {
         try {
             const body = new URLSearchParams({
@@ -722,12 +568,8 @@
         }
     };
 
-    /**
-     * Initialize countdown widget
-     * @param {jQuery} scope - Widget scope element
-     */
     const widgetCountdown = (scope) => {
-        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+        const scopeElement = scope?.jquery ? scope[0] : scope;
 
         const countdownWrapper = scopeElement.querySelector('.bdt-countdown-wrapper');
         if (!countdownWrapper) return;
@@ -745,8 +587,6 @@
 
         const { endTime, loopHours, isLogged } = settings;
         const isEditMode = document.body.classList.contains('elementor-editor-active');
-
-        // ── Fixed countdown ──────────────────────────────────────────────────
 
         if (!loopHours) {
             const timerEl  = document.querySelector(`${settings.id}-timer`);
@@ -768,8 +608,6 @@
                 }
             }, 1000);
         }
-
-        // ── Loop countdown ───────────────────────────────────────────────────
 
         if (loopHours) {
             const randMinute        = randomInRange(6, 14);
@@ -822,7 +660,7 @@
     'use strict';
 
     const widgetCustomGallery = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
 
         const customGalleryEl = scopeEl.querySelector('.bdt-custom-gallery');
         if (!customGalleryEl) return;
@@ -1020,7 +858,7 @@
     'use strict';
 
     const widgetFlipBox = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
 
         const flipBoxes = scopeEl.querySelectorAll('.bdt-flip-box');
         if (!flipBoxes.length) return;
@@ -1072,7 +910,7 @@
     };
 
     const widgetImageAccordion = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
         const imageAccordion = scopeEl.querySelector('.bdt-ep-image-accordion');
         if (!imageAccordion) return;
 
@@ -1094,15 +932,14 @@
         }
 
         const mouseEvent = settings.mouse_event || 'click';
-        const siblings = (el) => getSiblings(el);
 
         accordionItems.forEach((item) => {
             item.addEventListener(mouseEvent, function () {
-                setActive(this, siblings(this));
+                setActive(this, getSiblings(this));
             });
 
             item.addEventListener('focus', function () {
-                setActive(this, siblings(this));
+                setActive(this, getSiblings(this));
             });
 
             item.addEventListener('keydown', function (e) {
@@ -1152,9 +989,9 @@
                     e.stopPropagation();
                     if (this.classList.contains('active')) {
                         this.classList.remove('bdt-inactive');
-                        siblings(this).forEach((s) => s.classList.add('bdt-inactive'));
+                        getSiblings(this).forEach((s) => s.classList.add('bdt-inactive'));
                     } else {
-                        siblings(this).forEach((s) => s.classList.remove('bdt-inactive'));
+                        getSiblings(this).forEach((s) => s.classList.remove('bdt-inactive'));
                     }
                 });
             });
@@ -1193,7 +1030,7 @@
     };
 
     const widgetImageCompare = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
         const imageCompareEls = scopeEl.querySelectorAll('.image-compare');
         if (!imageCompareEls.length) return;
 
@@ -1281,7 +1118,7 @@
     'use strict';
 
     const widgetImageStack = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
         const imageStack = scopeEl.querySelector('.bdt-image-stack');
         if (!imageStack) return;
 
@@ -1314,7 +1151,7 @@
     'use strict';
 
     const widgetIconMobileMenu = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
         const marker = scopeEl.querySelector('.bdt-icon-mobile-menu-wrap');
         if (!marker) return;
 
@@ -1347,7 +1184,7 @@
     'use strict';
 
     const widgetLogoGrid = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
         const logoGrid = scopeEl.querySelector('.bdt-logo-grid-wrapper');
         if (!logoGrid) return;
 
@@ -1380,18 +1217,37 @@
 
 	'use strict';
 
+	// Build popup markup while stripping scripts and inline event handlers to prevent XSS.
+	function createSafePopup( html ) {
+		var popupContent = document.createElement('div');
+		popupContent.innerHTML = html;
+
+		popupContent.querySelectorAll('script').forEach(function (script) {
+			script.remove();
+		});
+
+		popupContent.querySelectorAll('[onclick], [onload], [onerror], [onmouseover], [onmouseout]').forEach(function (el) {
+			el.removeAttribute('onclick');
+			el.removeAttribute('onload');
+			el.removeAttribute('onerror');
+			el.removeAttribute('onmouseover');
+			el.removeAttribute('onmouseout');
+		});
+
+		return popupContent;
+	}
+
 	var widgetOpenStreetMap = function( $scope, $ ) {
 
-		var $openStreetMap = $scope.find( '.bdt-open-street-map' ),
+		const $openStreetMap = $scope.find( '.bdt-open-street-map' ),
             settings       = $openStreetMap.data('settings'),
-            markers        = $openStreetMap.data('map_markers'),
-            tileSource = '';
+            markers        = $openStreetMap.data('map_markers');
 
         if ( ! $openStreetMap.length ) {
             return;
         }
 
-        var avdOSMap = L.map($openStreetMap[0], {
+        const avdOSMap = L.map($openStreetMap[0], {
                 zoomControl: settings.zoomControl,
                 scrollWheelZoom: false
             }).setView([
@@ -1402,7 +1258,7 @@
             );
 
         if (settings.mapboxToken !== '' && settings.mapboxToken !== false) {
-          tileSource = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + settings.mapboxToken;
+          const tileSource = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + settings.mapboxToken;
             L.tileLayer( tileSource, {
                 maxZoom: 18,
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -1420,52 +1276,18 @@
 
         for (var i in markers) { 
             if( (markers[i]['iconUrl']) != '' && typeof (markers[i]['iconUrl']) !== 'undefined'){ 
-                var LeafIcon = L.Icon.extend({
+                const LeafIcon = L.Icon.extend({
                     options: {
                         iconSize   : [25, 41],
                         iconAnchor : [12, 41],
                         popupAnchor: [2, -41]
                     }
                 });
-                var greenIcon = new LeafIcon({iconUrl: markers[i]['iconUrl'] });
-                // Create a safe popup content that allows HTML formatting but prevents XSS
-                var popupContent = document.createElement('div');
-                popupContent.innerHTML = markers[i]['infoWindow'];
-                // Remove any script tags and event handlers for security
-                var scripts = popupContent.querySelectorAll('script');
-                for (var j = 0; j < scripts.length; j++) {
-                    scripts[j].remove();
-                }
-                // Remove any elements with event handlers
-                var elementsWithEvents = popupContent.querySelectorAll('[onclick], [onload], [onerror], [onmouseover], [onmouseout]');
-                for (var k = 0; k < elementsWithEvents.length; k++) {
-                    elementsWithEvents[k].removeAttribute('onclick');
-                    elementsWithEvents[k].removeAttribute('onload');
-                    elementsWithEvents[k].removeAttribute('onerror');
-                    elementsWithEvents[k].removeAttribute('onmouseover');
-                    elementsWithEvents[k].removeAttribute('onmouseout');
-                }
-                L.marker( [markers[i]['lat'], markers[i]['lng']], {icon: greenIcon} ).bindPopup(popupContent).addTo(avdOSMap);
+                const greenIcon = new LeafIcon({iconUrl: markers[i]['iconUrl'] });
+                L.marker( [markers[i]['lat'], markers[i]['lng']], {icon: greenIcon} ).bindPopup(createSafePopup(markers[i]['infoWindow'])).addTo(avdOSMap);
             } else {
                 if( (markers[i]['lat']) != '' && typeof (markers[i]['lat']) !== 'undefined'){ 
-                    // Create a safe popup content that allows HTML formatting but prevents XSS
-                    var popupContent = document.createElement('div');
-                    popupContent.innerHTML = markers[i]['infoWindow'];
-                    // Remove any script tags and event handlers for security
-                    var scripts = popupContent.querySelectorAll('script');
-                    for (var j = 0; j < scripts.length; j++) {
-                        scripts[j].remove();
-                    }
-                    // Remove any elements with event handlers
-                    var elementsWithEvents = popupContent.querySelectorAll('[onclick], [onload], [onerror], [onmouseover], [onmouseout]');
-                    for (var k = 0; k < elementsWithEvents.length; k++) {
-                        elementsWithEvents[k].removeAttribute('onclick');
-                        elementsWithEvents[k].removeAttribute('onload');
-                        elementsWithEvents[k].removeAttribute('onerror');
-                        elementsWithEvents[k].removeAttribute('onmouseover');
-                        elementsWithEvents[k].removeAttribute('onmouseout');
-                    }
-                    L.marker( [markers[i]['lat'], markers[i]['lng']] ).bindPopup(popupContent).addTo(avdOSMap);
+                    L.marker( [markers[i]['lat'], markers[i]['lng']] ).bindPopup(createSafePopup(markers[i]['infoWindow'])).addTo(avdOSMap);
                 }
             }
         }
@@ -1494,20 +1316,20 @@
 
 	var widgetPanelSlider = function ($scope, $) {
 
-		var $slider = $scope.find('.bdt-panel-slider');
+		const $slider = $scope.find('.bdt-panel-slider');
 
 		if (!$slider.length) {
 			return;
 		}
 
-		var $sliderContainer = $slider.find('.swiper-carousel'),
+		const $sliderContainer = $slider.find('.swiper-carousel'),
 			$settings = $slider.data('settings'),
 			$widgetSettings = $slider.data('widget-settings');
 
 		const Swiper = elementorFrontend.utils.swiper;
 		initSwiper();
 		async function initSwiper() {
-			var swiper = await new Swiper($sliderContainer, $settings);
+			const swiper = await new Swiper($sliderContainer, $settings);
 
 			if ($settings.pauseOnHover) {
 				$($sliderContainer).hover(function () {
@@ -1520,10 +1342,10 @@
 
 		if ($widgetSettings.mouseInteractivity == true) {
 			setTimeout(() => {
-				var data = $($widgetSettings.id).find('.bdt-panel-slide-item');
+				const data = $($widgetSettings.id).find('.bdt-panel-slide-item');
 				$(data).each((index, element) => {
-					var scene = $(element).get(0);
-					var parallaxInstance = new Parallax(scene, {
+					const scene = $(element).get(0);
+					new Parallax(scene, {
 						selector: '.bdt-panel-slide-thumb',
 						hoverOnly: true,
 						pointerEvents: true
@@ -1556,16 +1378,14 @@
 
     var widgetProgressPie = function ($scope, $) {
 
-        var $progressPie = $scope.find('.bdt-progress-pie');
+        const $progressPie = $scope.find('.bdt-progress-pie');
 
         if (!$progressPie.length) {
             return;
         }
 
         epObserveTarget($scope[0], function () {
-            var $this = $($progressPie);
-
-            $this.asPieProgress({
+            $progressPie.asPieProgress({
                 namespace: 'pieProgress',
                 classes: {
                     svg: 'bdt-progress-pie-svg',
@@ -1574,12 +1394,12 @@
                 }
             });
 
-            $this.asPieProgress('start');
+            $progressPie.asPieProgress('start');
 
         }, {
-            root: null, // Use the viewport as the root
-            rootMargin: '0px', // No margin around the root
-            threshold: 1 // 80% visibility (1 - 0.8)
+            root: null,
+            rootMargin: '0px',
+            threshold: 1
         });
 
     };
@@ -1622,10 +1442,9 @@
                 darkBorderColor: '#39B4CC'
             };
 
-            var colorBg = $settings.progress_bg;  //'red'
-            var progressColor = $settings.scroll_bg; //'green';
+            var colorBg = $settings.progress_bg;
+            var progressColor = $settings.scroll_bg;
             var innerHeight, offsetHeight, netHeight,
-            self = this,
             container = $($readingProgress),
             borderContainer = 'bdt-reading-progress-border',
             circleContainer = 'bdt-reading-progress-circle',
@@ -1672,7 +1491,7 @@
                     getHeight();
                     prepare();
                     $(window).on('scroll', function () {
-                        var getOffset = window.pageYOffset || document.documentElement.scrollTop;
+                        var getOffset = window.scrollY || document.documentElement.scrollTop;
                         var percnt = (typeof netHeight === 'number' && isFinite(netHeight) && netHeight > 0)
                             ? Math.max(0, Math.min(1, getOffset / netHeight))
                             : 0;
@@ -1692,7 +1511,7 @@
             });
 
     };
-    //	start progress with cursor
+
     var readingProgressCursorSkin = function($scope, $) {
 
         var $readingProgress = $scope.find('.bdt-progress-with-cursor');
@@ -1731,7 +1550,6 @@
         }
 
         $(document).ready(function() {
-            //Scroll indicator
             var progressPath = document.querySelector('.bdt-progress-wrap path');
             var pathLength = progressPath.getTotalLength();
             progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
@@ -1752,10 +1570,6 @@
         });
 
     };
-    //	end  progress with cursor
-
-    // start progress horizontal 
-
 
     var readingProgressHorizontalSkin = function($scope, $) {
 
@@ -1768,11 +1582,6 @@
         $('#bdt-progress').progress({ size: '3px', wapperBg: '#eee', innerBg: '#DA4453' });
 
     };
-
-    // end progress horizontal 
-
-    // start  progress back to top 
-
 
     var readingProgressBackToTopSkin = function($scope, $) {
 
@@ -1813,8 +1622,6 @@
         });
 
     };
-
-    // end progress back to top
 
     jQuery(window).on('elementor/frontend/init', function() {
         elementorFrontend.hooks.addAction('frontend/element_ready/bdt-reading-progress.default', readingProgressWidget);
@@ -1882,14 +1689,14 @@
           ? this.settings("minute_text")
           : "min read";
 
-        var editMode = Boolean(elementorFrontend.isEditMode());
+        const editMode = Boolean(elementorFrontend.isEditMode());
         if (editMode) {
           $(widgetContainer).append("2 " + minText + "");
           return;
         }
         if (contentSelector) {
           ReadingContent = $(document).find(`#${contentSelector}`).text();
-          var readTime = this.calculateReadingTime(ReadingContent);
+          const readTime = this.calculateReadingTime(ReadingContent);
           $(widgetContainer).append(readTime);
         } else return;
       },
@@ -1928,7 +1735,7 @@
 		const Swiper = elementorFrontend.utils.swiper;
 		initSwiper();
 		async function initSwiper() {
-			var swiper = await new Swiper($reviewCardCarouselContainer, $settings); // this is an example
+			var swiper = await new Swiper($reviewCardCarouselContainer, $settings);
 
 			if ($settings.pauseOnHover) {
 				$($reviewCardCarouselContainer).hover(function () {
@@ -1963,18 +1770,17 @@
 
 	'use strict';
 
-	var widgetScrollButton = function( $scope, $ ) {
-	    
-			var $scrollButton = $scope.find('.bdt-scroll-button'),
-			$selector         = $scrollButton.data('selector'),
-			$settings         =  $scrollButton.data('settings');
+	const widgetScrollButton = function( $scope, $ ) {
+
+			const $scrollButton = $scope.find('.bdt-scroll-button');
 
 	    if ( ! $scrollButton.length ) {
 	    	return;
 	    }
 
-	    //$($scrollButton).find('.bdt-scroll-button').unbind();
-	    
+			const $selector = $scrollButton.data('selector'),
+			$settings = $scrollButton.data('settings');
+
 	    if ($settings.HideOnBeforeScrolling == true) {
 
 			$(window).scroll(function() {
@@ -2003,7 +1809,6 @@
 /**
  * End scroll button widget script
  */
-
 
 /**
  * Start search widget script
@@ -2137,8 +1942,6 @@
     elementorFrontend.hooks.addAction('frontend/element_ready/bdt-search.default', widgetAjaxSearch);
   });
 
-  //window.elementPackAjaxSearch = widgetAjaxSearch;
-
 })(jQuery, window.elementorFrontend);
 
 /**
@@ -2152,24 +1955,23 @@
 
 	'use strict';
 
-	var widgetSlider = function( $scope, $ ) {
+	const widgetSlider = function( $scope, $ ) {
 
-		var $slider = $scope.find( '.bdt-slider' );
-				
+		const $slider = $scope.find( '.bdt-slider' );
+
         if ( ! $slider.length ) {
             return;
         }
 
-        var $sliderContainer = $slider.find('.swiper-carousel'),
-			$settings 		 = $slider.data('settings');
+        const $sliderContainer = $slider.find('.swiper-carousel'),
+			$settings = $slider.data('settings');
 
-		// Access swiper class
         const Swiper = elementorFrontend.utils.swiper;
         initSwiper();
-        
+
         async function initSwiper() {
 
-			var swiper = await new Swiper($sliderContainer, $settings);
+			await new Swiper($sliderContainer, $settings);
 
 			if ($settings.pauseOnHover) {
 				 $($sliderContainer).hover(function() {
@@ -2194,7 +1996,6 @@
  * End slider widget script
  */
 
-
 /**
  * Start twitter carousel widget script
  */
@@ -2203,24 +2004,23 @@
 
 	'use strict';
 
-	var widgetStaticCarousel = function( $scope, $ ) {
+	const widgetStaticCarousel = function( $scope, $ ) {
 
-		var $StaticCarousel = $scope.find( '.bdt-static-carousel' );
-				
+		const $StaticCarousel = $scope.find( '.bdt-static-carousel' );
+
         if ( ! $StaticCarousel.length ) {
             return;
         }
 
-		var $StaticCarouselContainer = $StaticCarousel.find('.swiper-carousel'),
-			$settings 		 = $StaticCarousel.data('settings');
+		const $StaticCarouselContainer = $StaticCarousel.find('.swiper-carousel'),
+			$settings = $StaticCarousel.data('settings');
 
-		// Access swiper class
         const Swiper = elementorFrontend.utils.swiper;
         initSwiper();
-        
+
         async function initSwiper() {
 
-			var swiper = await new Swiper($StaticCarouselContainer, $settings);
+			await new Swiper($StaticCarouselContainer, $settings);
 
 			if ($settings.pauseOnHover) {
 				 $($StaticCarouselContainer).hover(function() {
@@ -2244,7 +2044,6 @@
  * End twitter carousel widget script
  */
 
-
 /**
  * Start post grid tab widget script
  */
@@ -2254,16 +2053,16 @@
 
 	'use strict';
 
-	var widgetStaticPostTab = function ($scope, $) {
+	const widgetStaticPostTab = function ($scope, $) {
 
-		var $postGridTab = $scope.find('.bdt-static-grid-tab'),
-			gridTab = $postGridTab.find('.gridtab');
-
-		var $settings = $postGridTab.data('settings');
+		const $postGridTab = $scope.find('.bdt-static-grid-tab');
 
 		if (!$postGridTab.length) {
 			return;
 		}
+
+		const gridTab = $postGridTab.find('.gridtab');
+		const $settings = $postGridTab.data('settings');
 
 		$(gridTab).gridtab($settings);
 
@@ -2279,6 +2078,7 @@
 /**
  * End post grid tab widget script
  */
+
 /**
  * Start step flow widget script
  */
@@ -2290,7 +2090,7 @@
     var widgetStepFlow = function ($scope, $) {
 
         var $avdDivider = $scope.find('.bdt-step-flow'),
-            divider = $($avdDivider).find('.bdt-title-separator-wrapper > img');
+            divider = $avdDivider.find('.bdt-title-separator-wrapper > img');
 
         if (!$avdDivider.length) {
             return;
@@ -2301,9 +2101,9 @@
                 strokeAnimation: true
             });
         }, {
-            root: null, // Use the viewport as the root
-            rootMargin: '0px', // No margin around the root
-            threshold: 0.8 // 80% visibility (1 - 0.8)
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.8
         });
 
     };
@@ -2437,7 +2237,6 @@
             }
         });
 
-        /* Function to animate height: auto */
         function autoHeightAnimate(element, time){
     var curHeight = element.height(), // Get Default Height
         autoHeight = element.css('height', 'auto').height(); // Get Auto Height
@@ -2453,9 +2252,6 @@
                     //#code
                 }).promise().then(function () {
                     if ( $(source_selector).hasClass('bdt-fold-close') ) {
-                        // $(source_selector).css({
-                        //     'max-height': '100%'
-                        // }).removeClass('bdt-fold-close toggle_initially_open').addClass('bdt-fold-open');
                         $(source_selector).removeClass('bdt-fold-close toggle_initially_open').addClass('bdt-fold-open');
                         autoHeightAnimate($(source_selector), 500);
                     } else {
@@ -2466,9 +2262,6 @@
                 });
             } else {
                 if ( $(source_selector).hasClass('bdt-fold-close') ) {
-                    // $(source_selector).css({
-                    //     'max-height': '100%'
-                    // }).removeClass('bdt-fold-close toggle_initially_open').addClass('bdt-fold-open');
                     $(source_selector).removeClass('bdt-fold-close toggle_initially_open').addClass('bdt-fold-open');
                     autoHeightAnimate($(source_selector), 500);
 
@@ -2506,9 +2299,6 @@
                     'height': widget_visibility_filtered + 'px'
                 });
             } else {
-                // $(source_selector).css({
-                //     'max-height': '100%'
-                // });
                 autoHeightAnimate($(source_selector), 500);
             }
         }
@@ -2535,12 +2325,13 @@
 
 	var widgetTutorLMSGrid = function ($scope, $) {
 
-		var $tutorLMS = $scope.find('.bdt-tutor-lms-course-grid'),
-			$settings = $tutorLMS.data('settings');
+		var $tutorLMS = $scope.find('.bdt-tutor-lms-course-grid');
 
 		if (!$tutorLMS.length) {
 			return;
 		}
+
+		var $settings = $tutorLMS.data('settings');
 
 		if ($settings.tiltShow == true) {
 			var elements = document.querySelectorAll($settings.id + " .bdt-tutor-course-item");
@@ -2578,13 +2369,12 @@
 		var $tutorCarouselContainer = $tutorCarousel.find('.swiper-carousel'),
 			$settings = $tutorCarousel.data('settings');
 
-		// Access swiper class
 		const Swiper = elementorFrontend.utils.swiper;
 		initSwiper();
 
 		async function initSwiper() {
 
-			var swiper = await new Swiper($tutorCarouselContainer, $settings);
+			await new Swiper($tutorCarouselContainer, $settings);
 
 			if ($settings.pauseOnHover) {
 				$($tutorCarouselContainer).hover(function () {
@@ -2679,7 +2469,6 @@
                 reCaptchaFields.each(function () {
                     var self = $(this),
                         attrWidget = self.attr('data-widgetid');
-                    // alert(self.data('sitekey'))
                     // Avoid re-rendering as it's throwing API error
                     if ((typeof attrWidget !== typeof undefined && attrWidget !== false)) {
                         return;
@@ -3095,28 +2884,27 @@ jQuery(document).ready(function () {
 
 	var widgetProductCarousel = function( $scope, $ ) {
 
-		var $ProductCarousel = $scope.find( '.bdt-ep-product-carousel' );
+		const $ProductCarousel = $scope.find( '.bdt-ep-product-carousel' );
 				
         if ( ! $ProductCarousel.length ) {
             return;
         }
 
-		var $ProductCarouselContainer = $ProductCarousel.find('.swiper-carousel'),
+		const $ProductCarouselContainer = $ProductCarousel.find('.swiper-carousel'),
 			$settings 		 = $ProductCarousel.data('settings');
 
-		// Access swiper class
         const Swiper = elementorFrontend.utils.swiper;
         initSwiper();
         
         async function initSwiper() {
 
-			var swiper = await new Swiper($ProductCarouselContainer, $settings);
+			await new Swiper($ProductCarouselContainer, $settings);
 
 			if ($settings.pauseOnHover) {
 				 $($ProductCarouselContainer).hover(function() {
-					(this).swiper.autoplay.stop();
+					this.swiper.autoplay.stop();
 				}, function() {
-					(this).swiper.autoplay.start();
+					this.swiper.autoplay.start();
 				});
 			}
 		};
@@ -3137,15 +2925,11 @@ jQuery(document).ready(function () {
 
 /**
  * Start age-gate script
- * Optimized version - No jQuery dependency
  */
 
 (() => {
   "use strict";
 
-  /**
-   * Age Gate Modal Handler Class
-   */
   class AgeGateModal {
     constructor(element, settings, isEditMode) {
       this.element = element;
@@ -3156,9 +2940,6 @@ jQuery(document).ready(function () {
       this.signal = this.abortController.signal;
     }
 
-    /**
-     * Set localStorage with expiration
-     */
     setLocalize() {
       if (this.isEditMode) {
         this.clearLocalize();
@@ -3178,18 +2959,15 @@ jQuery(document).ready(function () {
       }
 
       if (localStorage.getItem(this.widgetId) !== null) {
-        let count = parseInt(localStorage.getItem(this.widgetId)) || 0;
+        let count = parseInt(localStorage.getItem(this.widgetId), 10) || 0;
         count++;
         localStorage.setItem(this.widgetId, count.toString());
       }
     }
 
-    /**
-     * Clear expired localStorage
-     */
     clearLocalize() {
       const localizeExpiry = parseInt(
-        localStorage.getItem(`${this.widgetId}_expiresIn`)
+        localStorage.getItem(`${this.widgetId}_expiresIn`), 10
       );
       const now = Date.now();
 
@@ -3199,12 +2977,9 @@ jQuery(document).ready(function () {
       }
     }
 
-    /**
-     * Show modal based on display times
-     */
     modalFire() {
       const displayTimes = this.settings.displayTimes || 1;
-      const firedNotify = parseInt(localStorage.getItem(this.widgetId)) || 0;
+      const firedNotify = parseInt(localStorage.getItem(this.widgetId), 10) || 0;
 
       if (displayTimes !== false && firedNotify >= displayTimes) {
         return;
@@ -3218,11 +2993,8 @@ jQuery(document).ready(function () {
       }
     }
 
-    /**
-     * Handle age verification
-     */
     setupAgeVerify() {
-      let firedNotify = parseInt(localStorage.getItem(this.widgetId)) || 0;
+      let firedNotify = parseInt(localStorage.getItem(this.widgetId), 10) || 0;
       const modal = this.element;
       const buttons = modal.querySelectorAll(".bdt-button");
       const redirectLink = this.isEditMode ? false : this.settings.redirect_link;
@@ -3233,9 +3005,8 @@ jQuery(document).ready(function () {
           "click",
           () => {
             const ageInput = modal.querySelector(".bdt-age-input");
-            let inputAge = parseInt(ageInput?.value) || 0;
+            let inputAge = parseInt(ageInput?.value, 10) || 0;
 
-            // Handle yes/no buttons
             if (button.classList.contains("data-val-yes")) {
               inputAge = 18;
             }
@@ -3244,7 +3015,6 @@ jQuery(document).ready(function () {
               inputAge = 1;
             }
 
-            // Verify age
             if (inputAge >= requiredAge) {
               this.setLocalize();
               firedNotify += 1;
@@ -3252,13 +3022,11 @@ jQuery(document).ready(function () {
                 window.bdtUIkit.modal(this.element).hide();
               }
             } else {
-              // Show error message
               const msgText = document.querySelector(".modal-msg-text");
               if (msgText) {
                 msgText.classList.remove("bdt-hidden");
               }
 
-              // Redirect if link is provided
               if (redirectLink !== false) {
                 window.location.replace(redirectLink);
               }
@@ -3268,7 +3036,6 @@ jQuery(document).ready(function () {
         );
       });
 
-      // Handle modal hidden event
       if (window.bdtUIkit?.util) {
         window.bdtUIkit.util.on(this.element, "hidden", () => {
           if (this.isEditMode) {
@@ -3289,9 +3056,6 @@ jQuery(document).ready(function () {
       }
     }
 
-    /**
-     * Handle close button delay
-     */
     setupCloseBtnDelay() {
       const { widgetId, delayTime } = this.settings;
       const modalElement = document.getElementById(widgetId);
@@ -3302,10 +3066,8 @@ jQuery(document).ready(function () {
       const closeButton = modalElement.querySelector("#bdt-modal-close-button");
       if (!closeButton) return;
 
-      // Hide initially so it doesn't show before the delay
       closeButton.style.display = "none";
 
-      // Show on modal shown, after configured delay
       if (window.bdtUIkit?.util) {
         window.bdtUIkit.util.on(modalElement, "shown", () => {
           closeButton.style.display = "none";
@@ -3327,9 +3089,6 @@ jQuery(document).ready(function () {
       }
     }
 
-    /**
-     * Initialize modal
-     */
     init() {
       this.modalFire();
       this.setupAgeVerify();
@@ -3339,21 +3098,13 @@ jQuery(document).ready(function () {
       }
     }
 
-    /**
-     * Cleanup
-     */
     destroy() {
       this.abortController.abort();
     }
   }
 
-  /**
-   * Initialize age gate widget
-   * @param {HTMLElement|jQuery} scope - Widget scope element
-   */
   const widgetAgeGate = (scope) => {
-    // Handle both jQuery objects and native DOM elements
-    const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+    const scopeElement = scope?.jquery ? scope[0] : scope;
 
     const modals = scopeElement.querySelectorAll(".bdt-age-gate");
     if (modals.length === 0) return;
@@ -3361,7 +3112,6 @@ jQuery(document).ready(function () {
     const isEditMode = Boolean(window.elementorFrontend?.isEditMode());
 
     modals.forEach((modal) => {
-      // Get settings from data attribute
       const settingsData = modal.dataset.settings;
       if (!settingsData) return;
 
@@ -3373,16 +3123,13 @@ jQuery(document).ready(function () {
         return;
       }
 
-      // Create and initialize modal instance
       const ageGateModal = new AgeGateModal(modal, settings, isEditMode);
       ageGateModal.init();
 
-      // Store instance for cleanup
       modal._ageGateInstance = ageGateModal;
     });
   };
 
-  // Initialize on Elementor frontend ready
   window.addEventListener("elementor/frontend/init", () => {
     if (window.elementorFrontend?.hooks) {
       elementorFrontend.hooks.addAction(
@@ -3472,7 +3219,6 @@ jQuery(document).ready(function () {
                     options.buttonColorLight = darkToggleBg;
                 }
 
-                // Remove any previously applied dark-mode position classes
                 const toRemove = [...document.body.classList].filter(c => /^bdt-dark-mode-\S+/.test(c));
                 document.body.classList.remove(...toRemove);
                 document.body.classList.add('bdt-dark-mode-position-' + this.settings('toggle_position'));
@@ -3545,7 +3291,6 @@ jQuery(document).ready(function () {
 
 /**
  * Start animated gradient background widget script
- * Optimized version - No jQuery dependency
  */
 
 (() => {
@@ -3553,9 +3298,8 @@ jQuery(document).ready(function () {
 
   window.addEventListener("elementor/frontend/init", () => {
     const ModuleHandler = elementorModules.frontend.handlers.Base;
-    let AnimatedGradientBackground;
 
-    AnimatedGradientBackground = ModuleHandler.extend({
+    const AnimatedGradientBackground = ModuleHandler.extend({
       bindEvents: function () {
         this.run();
       },
@@ -3576,11 +3320,6 @@ jQuery(document).ready(function () {
         return this.getElementSettings(`element_pack_agbg_${key}`);
       },
 
-      /**
-       * Parse and standardize colors to desired formats
-       * @param {string} color - Color string to parse
-       * @returns {string} Standardized color
-       */
       parseColor: function (color) {
         // Convert RGBA to 6-digit HEX if alpha is 1
         if (/^rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*([\d.]*)\)$/.test(color)) {
@@ -3591,7 +3330,7 @@ jQuery(document).ready(function () {
 
           if (alpha === 1) {
             // Convert to 6-digit HEX format
-            return `#${((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b))
+            return `#${((1 << 24) + (parseInt(r, 10) << 16) + (parseInt(g, 10) << 8) + parseInt(b, 10))
               .toString(16)
               .slice(1)}`;
           }
@@ -3648,11 +3387,9 @@ jQuery(document).ready(function () {
 
         if (!widgetContainer) return;
 
-        // Check if canvas already exists
         let canvasElement = widgetContainer.querySelector(".bdt-animated-gradient-background");
 
         if (!canvasElement) {
-          // Create canvas element
           canvasElement = document.createElement("canvas");
           canvasElement.id = `canvas-basic-${sectionID}`;
           canvasElement.className = "bdt-animated-gradient-background";
@@ -3661,24 +3398,20 @@ jQuery(document).ready(function () {
 
         const gradientID = canvasElement.id;
 
-        // Parse colors
         const colorList = this.settings("color_list");
         const colors = colorList.map((color) => [
           this.parseColor(color.start_color),
           this.parseColor(color.end_color),
         ]);
 
-        // Get settings with defaults
         const direction = this.settings("direction") || "diagonal";
         const transitionSpeed = this.settings("transitionSpeed.size") || 5500;
 
-        // Validate Granim library
         if (typeof Granim === "undefined") {
           console.error("Granim library is not loaded");
           return;
         }
 
-        // Initialize Granim
         const granimInstance = new Granim({
           element: `#${gradientID}`,
           direction: direction,
@@ -3693,7 +3426,6 @@ jQuery(document).ready(function () {
       },
     });
 
-    // Register handlers for sections
     elementorFrontend.hooks.addAction(
       "frontend/element_ready/section",
       (scope) => {
@@ -3703,7 +3435,6 @@ jQuery(document).ready(function () {
       }
     );
 
-    // Register handlers for containers
     elementorFrontend.hooks.addAction(
       "frontend/element_ready/container",
       (scope) => {
@@ -4753,9 +4484,6 @@ jQuery(document).ready(function () {
                         options.trigger = this.settings('tooltip_trigger');
                     }
                 }
-                // if (this.settings('tooltip_animation_duration')) {
-                //     options.duration = this.settings('tooltip_animation_duration.sizes.from');
-                // }
                 if (this.settings('tooltip_animation')) {
                     if (this.settings('tooltip_animation') === 'fill') {
                         options.animateFill = true;
@@ -4805,6 +4533,72 @@ jQuery(document).ready(function () {
                 return this.getElementSettings('element_pack_cursor_effects_' + key);
             },
 
+            copyCursorVarsToWrapper: function (wrapper, source) {
+                var elementEl = this.$element[0];
+                var computed = window.getComputedStyle(elementEl);
+                var cursorVars = [
+                    "cursor-ball-color",
+                    "cursor-ball-size",
+                    "cursor-circle-color",
+                    "cursor-circle-size",
+                    "cursor-text-label",
+                    "cursor-image-size"
+                ];
+
+                cursorVars.forEach(function (name) {
+                    var val = computed.getPropertyValue("--" + name).trim();
+
+                    if (val) {
+                        wrapper.style.setProperty("--" + name, val);
+                    }
+                });
+
+                if (source === "image") {
+                    var sizeAttr = this.$element.attr("data-bdt-cursor-image-size");
+                    var sizeSetting = this.settings("image_size");
+                    var imageSize = sizeAttr;
+
+                    if (!imageSize && sizeSetting && sizeSetting.size) {
+                        imageSize = sizeSetting.size + (sizeSetting.unit || "px");
+                    }
+
+                    if (!imageSize) {
+                        imageSize = computed.getPropertyValue("--cursor-image-size").trim();
+                    }
+
+                    if (imageSize) {
+                        wrapper.style.setProperty("--cursor-image-size", imageSize);
+                    }
+                }
+            },
+
+            applyImageSize: function (wrapper) {
+                var imageSize = wrapper.style.getPropertyValue("--cursor-image-size").trim();
+
+                if (!imageSize) {
+                    imageSize = this.$element.attr("data-bdt-cursor-image-size");
+                }
+
+                if (!imageSize) {
+                    var sizeSetting = this.settings("image_size");
+
+                    if (sizeSetting && sizeSetting.size) {
+                        imageSize = sizeSetting.size + (sizeSetting.unit || "px");
+                    }
+                }
+
+                if (!imageSize) {
+                    return;
+                }
+
+                wrapper.style.setProperty("--cursor-image-size", imageSize);
+                wrapper.querySelectorAll(".bdt-cursor-image").forEach(function (img) {
+                    img.style.width = imageSize;
+                    img.style.height = imageSize;
+                    img.style.maxWidth = "none";
+                });
+            },
+
             run: function () {
                 var elementID = this.$element.data("id");
                 var cursorWrapId = "bdt-cursor-effects-wrap-" + elementID;
@@ -4814,7 +4608,6 @@ jQuery(document).ready(function () {
                     return;
                 }
 
-                // Disable on mobile
                 const disableOnMobile = this.settings("disable_on_mobile") === "yes";
                 const isMobile = window.innerWidth <= 767;
                 if (disableOnMobile && isMobile) {
@@ -4834,7 +4627,6 @@ jQuery(document).ready(function () {
                     && this.settings("image_gsap_animation") === "yes"
                     && $element.hasClass("cursor-effects-smooth-animation-yes");
 
-                // ── GSAP cleanup: runs whenever GSAP mode is toggled off ──────────
                 if (!isGsap) {
                     var staleGsap = document.getElementById(gsapId);
                     if (staleGsap) staleGsap.remove();
@@ -4851,7 +4643,6 @@ jQuery(document).ready(function () {
                     }
                 }
 
-                // ── GSAP Image Animation Mode ────────────────────────────────────
                 if (isGsap) {
                     var staleWrap = document.getElementById(cursorWrapId);
                     if (staleWrap) staleWrap.remove();
@@ -4877,13 +4668,11 @@ jQuery(document).ready(function () {
 
                     gsap.set(galleryEl, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
 
-                    // Remove any stale listeners before re-attaching
                     if (elementEl._bdtGsapHandlers) {
                         elementEl.removeEventListener("mousemove", elementEl._bdtGsapHandlers.move);
                         elementEl.removeEventListener("mouseleave", elementEl._bdtGsapHandlers.leave);
                     }
 
-                    // transform x/y + quickTo: GPU-accelerated, instant response, smooth deceleration
                     var xTo = gsap.quickTo(galleryEl, "x", { duration: 0.5, ease: "power3.out" });
                     var yTo = gsap.quickTo(galleryEl, "y", { duration: 0.5, ease: "power3.out" });
 
@@ -4910,7 +4699,6 @@ jQuery(document).ready(function () {
 
                     return; // Skip Cotton.js initialisation
                 }
-                // ── End GSAP Mode ────────────────────────────────────────────────
 
                 var cursorInnerHtml = "";
                     if (source === "image") {
@@ -4918,7 +4706,7 @@ jQuery(document).ready(function () {
                         cursorInnerHtml =
                             '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
                             elementID +
-                            '" class="ep-cursor-ball"><img class="bdt-cursor-image"src="' +
+                            '" class="ep-cursor-ball"><img class="bdt-cursor-image" src="' +
                             image +
                             '"></div></div>';
                     } else if (source === "icons") {
@@ -4962,15 +4750,14 @@ jQuery(document).ready(function () {
                         document.getElementById(cursorWrapId) && document.getElementById(cursorWrapId).remove();
                         var wrapper = document.createElement("div");
                         wrapper.id = cursorWrapId;
-                        wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap" + (source === "icons" ? " bdt-cursor-effects--icons" : "");
+                        wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap" + (source === "icons" ? " bdt-cursor-effects--icons" : "") + (source === "image" ? " bdt-cursor-effects--image" : "");
                         wrapper.innerHTML = cursorInnerHtml;
-                        var computed = window.getComputedStyle(elementEl);
-                        var cursorVars = ["cursor-ball-color", "cursor-ball-size", "cursor-circle-color", "cursor-circle-size", "cursor-text-label", "cursor-image-size"];
-                        cursorVars.forEach(function (name) {
-                            var val = computed.getPropertyValue("--" + name).trim();
-                            if (val) wrapper.style.setProperty("--" + name, val);
-                        });
+                        this.copyCursorVarsToWrapper(wrapper, source);
                         document.body.appendChild(wrapper);
+
+                        if (source === "image") {
+                            this.applyImageSize(wrapper);
+                        }
                     }
                 var cursorBallID =
                     "#bdt-ep-cursor-ball-effects-" + this.$element.data("id");
@@ -4998,21 +4785,18 @@ jQuery(document).ready(function () {
             }
         });
 
-        // Handle widgets
         elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
             elementorFrontend.elementsHandler.addHandler(CursorEffect, {
                 $element: $scope
             });
         });
 
-        // Handle sections
         elementorFrontend.hooks.addAction('frontend/element_ready/section', function ($scope) {
             elementorFrontend.elementsHandler.addHandler(CursorEffect, {
                 $element: $scope
             });
         });
 
-        // Handle containers
         elementorFrontend.hooks.addAction('frontend/element_ready/container', function ($scope) {
             elementorFrontend.elementsHandler.addHandler(CursorEffect, {
                 $element: $scope
@@ -5028,12 +4812,8 @@ jQuery(document).ready(function () {
 (() => {
     'use strict';
 
-    /**
-     * Initialize content switcher widget
-     * @param {jQuery} scope - Widget scope element
-     */
     const widgetContentSwitcher = (scope) => {
-        const scopeElement = scope instanceof jQuery ? scope[0] : scope;
+        const scopeElement = scope?.jquery ? scope[0] : scope;
 
         const contentSwitcher = scopeElement.querySelector('.bdt-content-switcher');
         if (!contentSwitcher) return;
@@ -5054,8 +4834,6 @@ jQuery(document).ready(function () {
         const linkedWidgets  = parseData('linkedWidgets');
         const editMode       = Boolean(elementorFrontend.isEditMode());
 
-        // ── Shared helpers ──────────────────────────────────────────────────
-
         const sectionContainerId = linkedSections ? `bdt-content-switcher-section-${linkedSections.id}` : null;
 
         const updateLinkedSectionActive = (index) => {
@@ -5075,8 +4853,6 @@ jQuery(document).ready(function () {
                 widget.style.display = isActive ? 'block' : 'none';
             });
         };
-
-        // ── Handle linked sections ───────────────────────────────────────────
 
         if (linkedSections !== undefined && !editMode) {
             Object.entries(linkedSections.sections).forEach(([index, sectionId]) => {
@@ -5115,8 +4891,6 @@ jQuery(document).ready(function () {
             });
         }
 
-        // ── Handle linked widgets initial state ──────────────────────────────
-
         if (linkedWidgets !== undefined && !editMode) {
             Object.entries(linkedWidgets.widgets).forEach(([index, widgetId]) => {
                 const widget = document.getElementById(widgetId);
@@ -5147,8 +4921,6 @@ jQuery(document).ready(function () {
             });
         }
 
-        // ── Toggle switcher (checkbox style) ────────────────────────────────
-
         if (settings?.switcherStyle !== 'button') {
             const checkbox        = contentSwitcher.querySelector('input[type="checkbox"]');
             const primarySwitcher = contentSwitcher.querySelector('.bdt-primary-switcher');
@@ -5174,8 +4946,6 @@ jQuery(document).ready(function () {
             checkbox?.addEventListener('change', (e) => toggleCheckboxState(e.target.checked));
 
         } else {
-
-        // ── Button / tab switcher ────────────────────────────────────────────
 
             const tabs = contentSwitcher.querySelectorAll('.bdt-content-switcher-tab');
 
@@ -5218,7 +4988,7 @@ jQuery(document).ready(function () {
     'use strict';
 
     const widgetInteractiveCard = (scope) => {
-        const scopeEl = scope instanceof jQuery ? scope[0] : scope;
+        const scopeEl = scope?.jquery ? scope[0] : scope;
         const iCardMain = scopeEl.querySelector('.bdt-interactive-card');
         if (!iCardMain) return;
 
@@ -5263,22 +5033,22 @@ jQuery(document).ready(function () {
 
 	'use strict';
 
-	var widgetScrollNav = function( $scope, $ ) {
+	const widgetScrollNav = function( $scope, $ ) {
 
-		var $scrollnav = $scope.find( '.bdt-dotnav > li' );
+		const $scrollnav = $scope.find( '.bdt-dotnav > li' );
 
         if ( ! $scrollnav.length ) {
             return;
         }
 
-		var $tooltip = $scrollnav.find('> .bdt-tippy-tooltip'),
+		const $tooltip = $scrollnav.find('> .bdt-tippy-tooltip'),
 			widgetID = $scope.data('id');
-		
-		$tooltip.each( function( index ) {
+
+		$tooltip.each( function() {
 			tippy( this, {
 				allowHTML: true,
 				theme: 'bdt-tippy-' + widgetID
-			});				
+			});
 		});
 
 	};
@@ -5293,7 +5063,6 @@ jQuery(document).ready(function () {
 /**
  * End scrollnav widget script
  */
-
 
 // Common js for review card, review card carousel, review card grid, testimonial carousel, testimonial grid
 (function ($, elementor) {
