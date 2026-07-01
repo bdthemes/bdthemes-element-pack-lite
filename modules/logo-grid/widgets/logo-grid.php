@@ -13,6 +13,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Utils;
 
+use ElementPack\Traits\Global_Controls_Functions;
 use ElementPack\Traits\Global_Mask_Controls;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Logo_Grid extends Module_Base {
 
+	use Global_Controls_Functions;
 	use Global_Mask_Controls;
 
 	public function get_name() {
@@ -64,110 +66,12 @@ class Logo_Grid extends Module_Base {
 
 	protected function register_controls() {
 
-		$this->start_controls_section(
-			'ep_section_logo',
-			[ 
-				'label' => __( 'Logo Grid Items', 'bdthemes-element-pack' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
+		$this->register_logo_items_controls(
+			[
+				'section_label'    => __( 'Logo Grid Items', 'bdthemes-element-pack' ),
+				'tooltip_frontend' => true,
 			]
 		);
-
-		$repeater = new Repeater();
-
-		$repeater->add_control(
-			'image',
-			[ 
-				'label'   => __( 'Logo Image', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::MEDIA,
-				'dynamic' => ['active' => true],
-				'default' => [ 
-					'url' => Utils::get_placeholder_image_src(),
-				],
-			]
-		);
-
-		$repeater->add_control(
-			'link',
-			[ 
-				'label'   => __( 'Website Url', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::URL,
-				'dynamic' => ['active' => true],
-			]
-		);
-
-		$repeater->add_control(
-			'name',
-			[ 
-				'label'   => __( 'Brand Name', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Brand Name', 'bdthemes-element-pack' ),
-				'dynamic' => [ 'active' => true ],
-			]
-		);
-
-		$repeater->add_control(
-			'description',
-			[ 
-				'label'   => __( 'Description', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::TEXTAREA,
-				'dynamic' => ['active' => true],
-				'default' => __( 'Brand Short Description Type Here.', 'bdthemes-element-pack' ),
-			]
-		);
-
-		$repeater->add_control(
-			'logo_tooltip',
-			[ 
-				'label'              => __( 'Tooltip', 'bdthemes-element-pack' ),
-				'type'               => Controls_Manager::SWITCHER,
-				'render_type'        => 'template',
-				'frontend_available' => true,
-			]
-		);
-
-		$repeater->add_control(
-			'logo_tooltip_placement',
-			[ 
-				'label'     => esc_html__( 'Placement', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'top',
-				'options'   => [ 
-					'top-start'    => esc_html__( 'Top Left', 'bdthemes-element-pack' ),
-					'top'          => esc_html__( 'Top', 'bdthemes-element-pack' ),
-					'top-end'      => esc_html__( 'Top Right', 'bdthemes-element-pack' ),
-					'bottom-start' => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
-					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
-					'bottom-end'   => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
-					'left'         => esc_html__( 'Left', 'bdthemes-element-pack' ),
-					'right'        => esc_html__( 'Right', 'bdthemes-element-pack' ),
-				],
-				'condition' => [ 
-					'logo_tooltip' => 'yes',
-				],
-			]
-		);
-
-		$this->add_control(
-			'logo_list',
-			[ 
-				'show_label'  => false,
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ name }}}',
-				'default'     => [ 
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
-				]
-			]
-		);
-
-		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'ep_section_layout',
@@ -325,69 +229,7 @@ class Logo_Grid extends Module_Base {
 
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_tooltip_settings',
-			[ 
-				'label' => __( 'Tooltip Settings', 'bdthemes-element-pack' ),
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_animation',
-			[ 
-				'label'   => esc_html__( 'Animation', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'shift-toward',
-				'options' => [ 
-					'shift-away'   => esc_html__( 'Shift-Away', 'bdthemes-element-pack' ),
-					'shift-toward' => esc_html__( 'Shift-Toward', 'bdthemes-element-pack' ),
-					'fade'         => esc_html__( 'Fade', 'bdthemes-element-pack' ),
-					'scale'        => esc_html__( 'Scale', 'bdthemes-element-pack' ),
-					'perspective'  => esc_html__( 'Perspective', 'bdthemes-element-pack' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_x_offset',
-			[ 
-				'label'   => esc_html__( 'X Offset', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::SLIDER,
-				'default' => [ 
-					'size' => 0,
-				],
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_y_offset',
-			[ 
-				'label'   => esc_html__( 'Y Offset', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::SLIDER,
-				'default' => [ 
-					'size' => 0,
-				],
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_arrow',
-			[ 
-				'label' => esc_html__( 'Arrow', 'bdthemes-element-pack' ),
-				'type'  => Controls_Manager::SWITCHER,
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_trigger',
-			[ 
-				'label'       => __( 'Trigger on Click', 'bdthemes-element-pack' ),
-				'description' => __( 'Don\'t set yes when you set lightbox image with marker.', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::SWITCHER,
-			]
-		);
-
-		$this->end_controls_section();
+		$this->register_logo_tooltip_settings_controls();
 
 		//Style
 		$this->start_controls_section(
@@ -770,156 +612,7 @@ class Logo_Grid extends Module_Base {
 
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_style_tooltip',
-			[ 
-				'label' => esc_html__( 'Tooltip', 'bdthemes-element-pack' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_responsive_control(
-			'logo_tooltip_width',
-			[ 
-				'label'       => esc_html__( 'Width', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::SLIDER,
-				'size_units'  => [ 
-					'px',
-					'em',
-				],
-				'range'       => [ 
-					'px' => [ 
-						'min' => 50,
-						'max' => 500,
-					],
-				],
-				'selectors'   => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'max-width: calc({{SIZE}}{{UNIT}} - 10px) !important;',
-				],
-				'render_type' => 'template',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[ 
-				'name'     => 'logo_tooltip_typography',
-				'selector' => '.tippy-box[data-theme="bdt-tippy-{{ID}}"]',
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_title_color',
-			[ 
-				'label'     => esc_html__( 'Title Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .bdt-title' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_color',
-			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_text_align',
-			[ 
-				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'default'   => 'center',
-				'options'   => [ 
-					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-text-align-center',
-					],
-					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
-						'icon'  => 'eicon-text-align-right',
-					],
-				],
-				'selectors' => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[ 
-				'name'     => 'logo_tooltip_background',
-				'selector' => '.tippy-box[data-theme="bdt-tippy-{{ID}}"], .tippy-box[data-theme="bdt-tippy-{{ID}}"] .tippy-backdrop',
-			]
-		);
-
-		$this->add_control(
-			'logo_tooltip_arrow_color',
-			[ 
-				'label'     => esc_html__( 'Arrow Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .tippy-arrow' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'logo_tooltip_padding',
-			[ 
-				'label'       => __( 'Padding', 'bdthemes-element-pack' ),
-				'type'        => Controls_Manager::DIMENSIONS,
-				'size_units'  => [ 'px', '%' ],
-				'selectors'   => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .tippy-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'render_type' => 'template',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[ 
-				'name'        => 'logo_tooltip_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
-				'placeholder' => '1px',
-				'default'     => '1px',
-				'selector'    => '.tippy-box[data-theme="bdt-tippy-{{ID}}"]',
-			]
-		);
-
-		$this->add_responsive_control(
-			'logo_tooltip_border_radius',
-			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [ 
-					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[ 
-				'name'     => 'logo_tooltip_box_shadow',
-				'selector' => '.tippy-box[data-theme="bdt-tippy-{{ID}}"]',
-			]
-		);
-
-		$this->end_controls_section();
+		$this->register_logo_tooltip_style_controls( [ 'widget_type' => 'grid' ] );
 
 	}
 
@@ -946,61 +639,24 @@ class Logo_Grid extends Module_Base {
 		$image_mask_popover = ! empty( $settings['image_mask_popover'] ) && $settings['image_mask_popover'] === 'yes';
 		$image_mask_class = $image_mask_popover ? ' bdt-image-mask' : '';
 
-		$logo_tooltip_animation = isset( $settings['logo_tooltip_animation'] ) ? sanitize_key( $settings['logo_tooltip_animation'] ) : '';
-		$logo_tooltip_x_offset = isset( $settings['logo_tooltip_x_offset']['size'] ) ? (int) $settings['logo_tooltip_x_offset']['size'] : 0;
-		$logo_tooltip_y_offset = isset( $settings['logo_tooltip_y_offset']['size'] ) ? (int) $settings['logo_tooltip_y_offset']['size'] : 0;
-		$logo_tooltip_arrow = ! empty( $settings['logo_tooltip_arrow'] ) && $settings['logo_tooltip_arrow'] === 'yes';
-		$logo_tooltip_trigger = ! empty( $settings['logo_tooltip_trigger'] ) && $settings['logo_tooltip_trigger'] === 'yes';
-
 		?>
 		<div <?php $this->print_render_attribute_string( 'logo-grid' ); ?>>
 			<?php
 			foreach ( $logo_list as $index => $item ) :
-				$item_image_id   = isset( $item['image']['id'] ) ? $item['image']['id'] : 0;
-				$item_name       = isset( $item['name'] ) ? $item['name'] : '';
-				$item_description = isset( $item['description'] ) ? $item['description'] : '';
-				$item_link_url   = isset( $item['link']['url'] ) ? $item['link']['url'] : '';
-				$item_logo_tooltip = ! empty( $item['logo_tooltip'] ) && $item['logo_tooltip'] === 'yes';
-				$item_tooltip_placement = isset( $item['logo_tooltip_placement'] ) ? $item['logo_tooltip_placement'] : '';
+				$item_image_id = isset( $item['image']['id'] ) ? $item['image']['id'] : 0;
+				$item_link_url = isset( $item['link']['url'] ) ? $item['link']['url'] : '';
 
 				$image = $item_image_id ? wp_get_attachment_image_url( $item_image_id, $thumbnail_size ) : false;
 				$repeater_key = 'grid_item' . $index;
 				$item_tag = ! empty( $item_link_url ) ? 'a' : 'div';
-				$image_alt = $item_name . ' : ' . $item_description;
+				$image_alt = $this->get_logo_image_alt( $item );
 
 				$this->add_render_attribute( $repeater_key, 'class', 'bdt-item' );
-
-				$tooltip_content = '<span class="bdt-title">' . esc_html( $item_name ) . '</span>' . esc_html( $item_description );
-				$allowed_tags = '<p><b><strong><em><u><span><br><i>';
-				$tooltip_content = strip_tags( $tooltip_content, $allowed_tags );
-				$this->add_render_attribute( $repeater_key, 'data-tippy-content', wp_kses_post( $tooltip_content ), true );
+				$this->add_logo_tooltip_attributes( $repeater_key, $item, $settings, [ 'format' => 'grid' ] );
 
 				if ( ! empty( $item_link_url ) ) {
 					$this->add_render_attribute( $repeater_key, 'class', 'bdt-logo-grid-link' );
 					$this->add_link_attributes( $repeater_key, $item['link'] );
-				}
-
-				if ( ! empty( $item_name ) && ! empty( $item_description ) && $item_logo_tooltip ) {
-					$this->add_render_attribute( $repeater_key, 'class', 'bdt-tippy-tooltip' );
-					$this->add_render_attribute( $repeater_key, 'data-tippy', '', true );
-
-					if ( ! empty( $item_tooltip_placement ) ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-placement', esc_attr( $item_tooltip_placement ), true );
-					}
-
-					if ( ! empty( $logo_tooltip_animation ) ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-animation', esc_attr( $logo_tooltip_animation ), true );
-					}
-
-					if ( $logo_tooltip_x_offset !== 0 || $logo_tooltip_y_offset !== 0 ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-offset', '[' . esc_js( (string) $logo_tooltip_x_offset ) . ',' . esc_js( (string) $logo_tooltip_y_offset ) . ']', true );
-					}
-
-					$this->add_render_attribute( $repeater_key, 'data-tippy-arrow', $logo_tooltip_arrow ? 'true' : 'false', true );
-
-					if ( $logo_tooltip_trigger ) {
-						$this->add_render_attribute( $repeater_key, 'data-tippy-trigger', 'click', true );
-					}
 				}
 
 				$this->add_render_attribute( 'image-wrap', 'class', 'bdt-logo-grid-figure' . $image_mask_class );

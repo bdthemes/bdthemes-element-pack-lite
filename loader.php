@@ -133,6 +133,7 @@ class Element_Pack_Loader {
         require_once BDTEP_PATH . 'traits/global-widget-controls.php';
         require_once BDTEP_PATH . 'traits/global-swiper-controls.php';
         require_once BDTEP_PATH . 'traits/global-mask-controls.php';
+        require_once BDTEP_PATH . 'traits/global-controls-functions.php';
 
         // json upload support for wordpress
         require_once BDTEP_INC_PATH . 'class-json-file-upload-control.php';
