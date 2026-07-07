@@ -181,7 +181,7 @@ trait Global_Terms_Query_Controls {
 		
 		if ($category_slug !== '') {
 			// Specific category selected
-			$query_args['tax_query'] = [
+			$query_args['tax_query'] = [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- User-configurable Elementor query control.
 				[
 					'taxonomy' => $taxonomy,
 					'field' => 'slug',
@@ -224,7 +224,7 @@ trait Global_Terms_Query_Controls {
 				if (count($tax_query) > 1) {
 					$tax_query['relation'] = 'AND';
 				}
-				$query_args['tax_query'] = $tax_query;
+				$query_args['tax_query'] = $tax_query; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- User-configurable Elementor query control.
 			}
 		}
 		

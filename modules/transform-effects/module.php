@@ -658,7 +658,8 @@ class Module extends Element_Pack_Module_Base {
 			'element_pack_widget_effect_transition_easing',
 			[
 				'label'   => esc_html__('Easing', 'bdthemes-element-pack'),
-				'description' => sprintf(__('If you want use Cubic Bezier easing, Go %1s HERE %2s', 'bdthemes-element-pack'), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>'),
+/* translators: 1: Opening anchor tag, 2: Closing anchor tag */
+				'description' => sprintf(__('If you want use Cubic Bezier easing, Go %1$s HERE %2$s', 'bdthemes-element-pack'), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>'),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 				'default' => 'ease-out',

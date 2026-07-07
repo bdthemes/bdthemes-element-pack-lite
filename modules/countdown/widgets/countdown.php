@@ -82,7 +82,7 @@ class Countdown extends Module_Base {
 			[ 
 				'label'       => esc_html__( 'Due Date', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::DATE_TIME,
-				'default'     => date( 'Y-m-d H:i', strtotime( '+1 month' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ),
+				'default'     => gmdate( 'Y-m-d H:i', strtotime( '+1 month' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ),
 				// translators: %s is the current timezone string like 'UTC', 'Europe/London', etc.
 				'description' => sprintf( __( 'Date set according to your timezone: %s.', 'bdthemes-element-pack' ), Utils::get_timezone_string() ),
 				// 'condition'   => [
@@ -691,7 +691,7 @@ class Countdown extends Module_Base {
 				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SWITCHER,
 				// translators: %1s: Opening anchor tag with link to MDN backdrop-filter documentation, %2s: Closing anchor tag
-				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
+				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
 
 			]
 		);
@@ -2416,7 +2416,7 @@ class Countdown extends Module_Base {
 
 	public function wp_current_time() {
 
-		$wp_current_time = date( 'Y-m-d H:i', current_time( 'timestamp' ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
+		$wp_current_time = gmdate( 'Y-m-d H:i', current_time( 'timestamp' ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
 		$wp_current_time = new DateTime( $wp_current_time );
 		$wp_current_time = $wp_current_time->format( 'c' );
 		return strtotime( $wp_current_time );
@@ -2427,7 +2427,7 @@ class Countdown extends Module_Base {
 		$settings = $this->get_settings_for_display();
 		$due_date = $settings['due_date'];
 
-		$with_gmt_time = date( 'Y-m-d H:i', strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
+		$with_gmt_time = gmdate( 'Y-m-d H:i', strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
 		$datetime      = new DateTime( $with_gmt_time );
 
 		return $datetime->format( 'c' );
@@ -2438,7 +2438,7 @@ class Countdown extends Module_Base {
 		$due_date = isset( $settings['due_date'] ) ? $settings['due_date'] : '';
 		$string   = $this->get_strftime( $settings );
 
-		$with_gmt_time = date( 'Y-m-d H:i', strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
+		$with_gmt_time = gmdate( 'Y-m-d H:i', strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
 		$datetime      = new DateTime( $with_gmt_time );
 
 		$final_time = $datetime->format( 'c' );

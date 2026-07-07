@@ -1180,7 +1180,7 @@ class Business_Hours extends Module_Base
         $absmin = abs($min);
         // $tz     = sprintf("UTC%s%02d:%02d", $sign, $absmin/60, $absmin%60);
         $tz     = sprintf("%s%02d", $sign, $absmin / 60, $absmin % 60);
-        $data = gmdate("g:i:s A", time() + 3600 * ($tz + date("I")));
+        $data = gmdate("g:i:s A", time() + 3600 * ($tz + gmdate("I")));
         return $data;
     }
 
@@ -1515,12 +1515,12 @@ class Business_Hours extends Module_Base
                                         }
                                         $thisDay = substr(ucwords($item['dynamic_enter_day']), 0, 3);
                                         // echo $thisDay;
-                                        // echo date('D');
+                                        // echo gmdate('D');
                                         if ($settings['dynamic_timezone'] == 'default') {
-                                            $cur_Date   =   date('D');
+                                            $cur_Date   =   gmdate('D');
                                         } else {
                                             $cur_Date   =   strtotime($this->set_time_zone($settings));
-                                            $cur_Date   =    date('D', $cur_Date);
+                                            $cur_Date   =    gmdate('D', $cur_Date);
                                         }
                                         if ($cur_Date == $thisDay) {
 
@@ -1559,7 +1559,7 @@ class Business_Hours extends Module_Base
 
 
                 if (isset($closeDay)) {
-                    if ($closeDay == date('D')) {
+                    if ($closeDay == gmdate('D')) {
                         $officeStatus = $settings['dynamic_close_day'];
                         $officeStatusLogic = 'close';
                     }
@@ -1572,7 +1572,7 @@ class Business_Hours extends Module_Base
                         $cur_time   =   strtotime($this->set_time_zone($settings));;
                     } else {
                         $cur_time   =   strtotime($this->set_time_zone($settings));
-                        $cur_time   =   strtotime(date('g:i:s A', $cur_time));
+                        $cur_time   =   strtotime(gmdate('g:i:s A', $cur_time));
                     }
                     if ($cur_time >= $st_time && $cur_time <= $end_time) {
                         $officeStatus = $settings['dynamic_open_day'];

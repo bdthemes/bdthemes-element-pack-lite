@@ -25,6 +25,7 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme/WP-provided widget wrapper markup.
 		echo $args['before_widget'];
 
 		if ( ! empty( $instance['title'] ) ) {
@@ -45,6 +46,7 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 			unset( $this->sidebar_id );
 		}
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme/WP-provided widget wrapper markup.
 		echo $args['after_widget'];
 	}
 
@@ -131,7 +133,7 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance                = [];
-		$instance['title']       = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['title']       = ( ! empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
 		$instance['template_id'] = $new_instance['template_id'];
 
 		return $instance;

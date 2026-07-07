@@ -231,7 +231,7 @@ class Module extends Element_Pack_Module_Base {
 			}
 
 			if ( ! empty( $terms_query ) ) {
-				$query_args['tax_query']             = $terms_query;
+				$query_args['tax_query']             = $terms_query; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- User-configurable Elementor query control.
 				$query_args['tax_query']['relation'] = 'AND';
 			}
 
@@ -252,7 +252,7 @@ class Module extends Element_Pack_Module_Base {
 				$query_posts = array_slice( $query_posts, 0, $response_limit );
 
 				foreach ( $query_posts as $post ) {
-					$content = ! empty( $post->post_excerpt ) ? strip_tags( strip_shortcodes( $post->post_excerpt ) ) : strip_tags( strip_shortcodes( $post->post_content ) );
+					$content = ! empty( $post->post_excerpt ) ? wp_strip_all_tags( strip_shortcodes( $post->post_excerpt ) ) : wp_strip_all_tags( strip_shortcodes( $post->post_content ) );
 					if ( strlen( $content ) > 180 ) {
 						$content = substr( $content, 0, 179 ) . '...';
 					}

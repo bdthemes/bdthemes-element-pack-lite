@@ -84,7 +84,7 @@ class ElementPack_FB_Access_Token_Generator_Control extends Base_Data_Control {
 			</script>
 			<?php
 		endif;
-		wp_register_script( 'ep-facebook-page-access-token-generator-control', BDTEP_ASSETS_URL . 'js/controls/ep-facebook-page-access-token-generator-control.min.js' );
+		wp_register_script( 'ep-facebook-page-access-token-generator-control', BDTEP_ASSETS_URL . 'js/controls/ep-facebook-page-access-token-generator-control.min.js', [], BDTEP_VER, true );
 		wp_enqueue_script( 'ep-facebook-page-access-token-generator-control' );
 	}
 

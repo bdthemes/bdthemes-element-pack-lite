@@ -9,6 +9,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Setup wizard view template with local presentation variables.
+
 // Include the required classes
 require_once __DIR__ . '/../class-plugin-integration-helper.php';
 require_once __DIR__ . '/../class-remote-data-handler.php';
@@ -31,18 +33,23 @@ if (!function_exists('format_last_updated_ep')) {
             return __('Just now', 'bdthemes-element-pack');
         } elseif ($diff < 3600) {
             $minutes = floor($diff / 60);
+            /* translators: %d: Number of minutes */
             return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'bdthemes-element-pack'), $minutes);
         } elseif ($diff < 86400) {
             $hours = floor($diff / 3600);
+            /* translators: %d: Number of hours */
             return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'bdthemes-element-pack'), $hours);
         } elseif ($diff < 2592000) { // 30 days
             $days = floor($diff / 86400);
+            /* translators: %d: Number of days */
             return sprintf(_n('%d day ago', '%d days ago', $days, 'bdthemes-element-pack'), $days);
         } elseif ($diff < 31536000) { // 1 year
             $months = floor($diff / 2592000);
+            /* translators: %d: Number of months */
             return sprintf(_n('%d month ago', '%d months ago', $months, 'bdthemes-element-pack'), $months);
         } else {
             $years = floor($diff / 31536000);
+            /* translators: %d: Number of years */
             return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack'), $years);
         }
     }
@@ -330,6 +337,7 @@ if (!$has_cached_data) {
 }
 </style>
 
+<?php // phpcs:ignore PluginCheck.CodeAnalysis.Offloading.OffloadedContent -- Setup wizard loads plugin icons from the WordPress.org plugin directory. ?>
 <script>
 jQuery(document).ready(function($) {
     const epI18n = <?php echo wp_json_encode( [
@@ -364,7 +372,7 @@ jQuery(document).ready(function($) {
             type: 'POST',
             data: {
                 action: 'ep_get_plugins',
-                nonce: '<?php echo wp_create_nonce('ep_get_plugins_nonce'); ?>'
+                nonce: '<?php echo esc_js( wp_create_nonce('ep_get_plugins_nonce') ); ?>'
             },
             success: function(response) {
                 if (response.success && response.data.plugins) {
@@ -446,8 +454,7 @@ jQuery(document).ready(function($) {
                     <div class="default-plugin-icon" style="display:none;">📦</div>`;
         } else {
             const slug = plugin.slug.includes('/') ? plugin.slug.split('/')[0] : plugin.slug;
-            return `<img src="https://ps.w.org/${slug}/assets/icon-256x256.png" alt="${plugin.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="default-plugin-icon" style="display:none;">📦</div>`;
+            return `<div class="default-plugin-icon" aria-label="${plugin.name}">📦</div>`;
         }
     }
     

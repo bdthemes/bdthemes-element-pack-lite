@@ -106,7 +106,7 @@ class Dynamic_Select extends Base_Data_Control {
      * @since 5.8.0
      */
     public function enqueue() {
-        wp_enqueue_script('ep-dynamic-select', BDTEP_URL . 'includes/controls/assets/js/ep-dynamic-select.min.js', array('jquery'), BDTEP_VER);
+        wp_enqueue_script( 'ep-dynamic-select', BDTEP_URL . 'includes/controls/assets/js/ep-dynamic-select.min.js', array( 'jquery' ), BDTEP_VER, true );
 
         wp_localize_script(
             'ep-dynamic-select',

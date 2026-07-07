@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.5
+Stable tag: 8.7.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -413,6 +413,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.6 [7th July 2026] =
+
+* Fixed: Sync issue fixed in template library
+* Updated: Security improved
 
 = 8.7.5 [1st July 2026] =
 

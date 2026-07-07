@@ -166,12 +166,13 @@ class BdThemes_Duplicator {
 
 			if ( isset( $bdt_post_meta_infos ) && is_array( $bdt_post_meta_infos ) ) {
 				foreach ( $bdt_post_meta_infos as $bdt_meta_info ) {
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Copying post meta on duplicate action; uses $wpdb->insert() with format specifiers.
 					$wpdb->insert(
 						$wpdb->postmeta,
 						array(
 							'post_id'    => $bdt_new_post_id,
-							'meta_key'   => $bdt_meta_info->meta_key,
-							'meta_value' => $bdt_meta_info->meta_value,
+							'meta_key'   => $bdt_meta_info->meta_key, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Duplicating post meta row on copy.
+							'meta_value' => $bdt_meta_info->meta_value, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Duplicating post meta row on copy.
 						),
 						array( '%d', '%s', '%s' )
 					);

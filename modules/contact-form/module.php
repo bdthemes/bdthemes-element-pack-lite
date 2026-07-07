@@ -112,7 +112,7 @@ class Module extends Element_Pack_Module_Base {
                     $value = sanitize_textarea_field($value);
                 }
 
-                $form_data[$field] = strip_tags($value);
+                $form_data[$field] = wp_strip_all_tags($value);
             }
 
             // Get widget settings to check if contact number is required
@@ -144,6 +144,7 @@ class Module extends Element_Pack_Module_Base {
                     : esc_html__('Invalid length of custom success message.', 'bdthemes-element-pack');
             } else {
                 $success = sprintf(
+                    /* translators: %s: The name submitted in the contact form */
                     esc_html__('Hi, %s. We got your e-mail. We\'ll reply to you very soon. Thanks for being with us...', 'bdthemes-element-pack'),
                     esc_html($form_data['name'])
                 );

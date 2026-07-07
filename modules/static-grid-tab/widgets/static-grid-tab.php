@@ -93,7 +93,7 @@ class Static_Grid_Tab extends Module_Base {
 				'render_type'  => 'template',
 				'dynamic'      => [ 'active' => true ],
 				'default'      => [
-					'url' => BDTEP_ASSETS_URL . 'images/gallery/item-' . rand( 1, 8 ) . '.svg',
+					'url' => BDTEP_ASSETS_URL . 'images/gallery/item-' . wp_rand( 1, 8 ) . '.svg',
 				],
 			]
 		);
@@ -468,7 +468,7 @@ class Static_Grid_Tab extends Module_Base {
 			[
 				'name'     => 'item_tab_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-static-grid-tab .gridtab > dt',
 			]
 		);
@@ -531,7 +531,7 @@ class Static_Grid_Tab extends Module_Base {
 			[
 				'name'     => 'item_tab_active_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-static-grid-tab .gridtab > dt.is-active',
 			]
 		);
@@ -553,7 +553,7 @@ class Static_Grid_Tab extends Module_Base {
 			[
 				'name'     => 'content_background_color',
 				'types'    => [ 'classic', 'gradient' ],
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-static-grid-tab .gridtab > dd',
 			]
 		);
@@ -847,7 +847,7 @@ class Static_Grid_Tab extends Module_Base {
 			[
 				'name'     => 'close_button_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-static-grid-tab .gridtab__close',
 			]
 		);
@@ -905,7 +905,7 @@ class Static_Grid_Tab extends Module_Base {
 			[
 				'name'     => 'close_button_hover_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-static-grid-tab .gridtab__close:hover',
 			]
 		);

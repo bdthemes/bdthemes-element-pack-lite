@@ -528,7 +528,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 			$due_date      = $event_date;
 			$string        = $this->parent->get_strftime( $settings );
 
-			$with_gmt_time = date( 'Y-m-d H:i', strtotime( $due_date ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
+			$with_gmt_time = gmdate( 'Y-m-d H:i', strtotime( $due_date ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
 			$datetime      = new \DateTime($with_gmt_time);
 			$final_time    = $datetime->format('c');
 

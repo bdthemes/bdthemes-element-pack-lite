@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Template partial; variables are provided by the including template.
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 

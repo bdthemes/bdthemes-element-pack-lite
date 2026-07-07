@@ -146,7 +146,7 @@ class Logo_Grid extends Module_Base {
 				'name'      => 'thumbnail',
 				'default'   => 'large',
 				'separator' => 'before',
-				'exclude'   => [ 
+				'exclude'   => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'custom'
 				]
 			]
@@ -465,7 +465,7 @@ class Logo_Grid extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'grid_box_shadow',
-				'exclude'  => [ 
+				'exclude'  => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'box_shadow_position',
 				],
 				'selector' => '{{WRAPPER}}.bdt-logo-grid--tictactoe .bdt-logo-grid-wrapper, {{WRAPPER}}.bdt-logo-grid--border .bdt-logo-grid-wrapper, {{WRAPPER}}.bdt-logo-grid--box .bdt-item'

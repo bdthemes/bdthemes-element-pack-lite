@@ -30,10 +30,10 @@ class Skin_Tiny_Countdown extends Elementor_Skin_Base {
     
     public function render() {
 		$settings      = $this->parent->get_settings_for_display();
-		$due_date      = ! empty( $settings['due_date'] ) ? $settings['due_date'] : date( 'Y-m-d H:i:s', strtotime( '+1 week' ) );
+		$due_date      = ! empty( $settings['due_date'] ) ? $settings['due_date'] : gmdate( 'Y-m-d H:i:s', strtotime( '+1 week' ) );
 		$string        = $this->parent->get_strftime( $settings );
 		
-		$with_gmt_time = date( 'Y-m-d H:i', strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );		
+		$with_gmt_time = gmdate( 'Y-m-d H:i', strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );		
 		$datetime      = new DateTime($with_gmt_time);
 
 		$final_time    = $datetime->format('c');

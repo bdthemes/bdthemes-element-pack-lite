@@ -117,7 +117,7 @@ trait Global_Controls_Functions {
 				'name'      => 'thumbnail',
 				'default'   => 'medium',
 				'separator' => 'before',
-				'exclude'   => [ 'custom' ],
+				'exclude'   => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 
@@ -2951,7 +2951,7 @@ trait Global_Controls_Functions {
 		$image_mask    = ! empty( $settings['image_mask_popover'] ) && 'yes' === $settings['image_mask_popover'] ? ' bdt-image-mask' : '';
 		$attachment_id = ! empty( $item['image']['id'] ) ? (int) $item['image']['id'] : 0;
 		$thumb_url     = $attachment_id ? Group_Control_Image_Size::get_attachment_image_src( $attachment_id, 'thumbnail_size', $settings ) : '';
-		$alt           = ! empty( $item['reviewer_name'] ) ? esc_attr( $item['reviewer_name'] ) : '';
+		$alt           = ! empty( $item['reviewer_name'] ) ? $item['reviewer_name'] : '';
 
 		$this->add_render_attribute( 'image-wrap', 'class', 'bdt-ep-' . $widget_prefix . '-image' . $image_mask, $overwrite );
 
@@ -2959,7 +2959,7 @@ trait Global_Controls_Functions {
 		<div <?php $this->print_render_attribute_string( 'image-wrap' ); ?>>
 			<?php
 			if ( empty( $thumb_url ) ) {
-				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), $alt );
+				printf( '<img src="%1$s" alt="%2$s">', esc_url( $item['image']['url'] ), esc_attr( $alt ) );
 			} else {
 				print wp_get_attachment_image(
 					$attachment_id,
@@ -5439,7 +5439,7 @@ trait Global_Controls_Functions {
 			[
 				'name'         => 'thumbnail_size',
 				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
-				'exclude'      => [ 'custom' ],
+				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'medium',
 				'prefix_class' => 'bdt-portfolio--thumbnail-size-',
 			]
@@ -6810,7 +6810,8 @@ trait Global_Controls_Functions {
 			'border_radius_advanced',
 			[
 				'label'       => esc_html__( 'Radius', 'bdthemes-element-pack' ),
-				'description' => sprintf( __( 'For example: <b>%1s</b> or Go <a href="%2s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack' ), '30% 70% 82% 18% / 46% 62% 38% 54%', 'https://9elements.github.io/fancy-border-radius/' ),
+				/* translators: 1: Example radius value, 2: URL to the fancy-border-radius tool */
+				'description' => sprintf( __( 'For example: <b>%1$s</b> or Go <a href="%2$s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack' ), '30% 70% 82% 18% / 46% 62% 38% 54%', 'https://9elements.github.io/fancy-border-radius/' ),
 				'type'        => Controls_Manager::TEXT,
 				'size_units'  => [ 'px', '%' ],
 				'default'     => '30% 70% 82% 18% / 46% 62% 38% 54%',
@@ -7128,7 +7129,7 @@ trait Global_Controls_Functions {
 				'taxonomy'   => $taxonomy,
 				'hide_empty' => true,
 				'include'    => $include_Categories,
-				'exclude'    => $exclude_Categories,
+				'exclude'    => $exclude_Categories, // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			];
 			$post_categories = get_terms( $params );
 			if ( is_wp_error( $post_categories ) ) {
@@ -7196,9 +7197,9 @@ trait Global_Controls_Functions {
 		$tag = Utils::get_valid_html_tag( $settings['title_tag'] ?? 'h4' );
 
 		if ( 'portfolio-carousel' === $widget_prefix ) {
-			$target = ! empty( $settings['external_link'] ) ? ' target="_blank"' : '';
+			$is_external = ! empty( $settings['external_link'] );
 			?>
-			<a href="<?php echo esc_url( get_the_permalink() ); ?>"<?php echo $target; ?>>
+			<a href="<?php echo esc_url( get_the_permalink() ); ?>"<?php echo $is_external ? ' target="_blank"' : ''; ?>>
 				<<?php echo esc_attr( $tag ); ?> class="bdt-gallery-item-title bdt-margin-remove">
 					<?php echo esc_html( get_the_title() ); ?>
 				</<?php echo esc_attr( $tag ); ?>>
@@ -7524,7 +7525,7 @@ trait Global_Controls_Functions {
 			[
 				'name'      => 'image',
 				'label'     => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
-				'exclude'   => [ 'custom' ],
+				'exclude'   => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'   => 'medium',
 			]
 		);
@@ -8995,7 +8996,7 @@ trait Global_Controls_Functions {
 					[
 						'name'         => 'thumbnail_size',
 						'label'        => esc_html__('Image Size', 'bdthemes-element-pack'),
-						'exclude'      => ['custom'],
+						'exclude'      => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 						'default'      => 'medium',
 						'prefix_class' => 'grid' === $type ? 'bdt-portfolio--thumbnail-size-' : 'bdt-tutor--thumbnail-size-',
 					]
@@ -11487,7 +11488,10 @@ trait Global_Controls_Functions {
 					echo $enroll_btn;
 					echo ' </div>';
 				} else {
-					echo '<div class="price"> <span class="bdt-tutor-price-free">' . esc_html( $free_label ) . '</span>' . $enroll_btn . ' </div>';
+					echo '<div class="price"> <span class="bdt-tutor-price-free">' . esc_html( $free_label ) . '</span>';
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Tutor/WooCommerce enroll button markup (must keep data-* for WC scripts).
+					echo $enroll_btn;
+					echo ' </div>';
 				}
 				?>
 			</div>
@@ -11784,7 +11788,7 @@ trait Global_Controls_Functions {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name'    => 'category_thumbnail',
-				'exclude' => ['custom'],
+				'exclude' => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default' => 'medium',
 				'condition' => ['is_use_image' => 'yes']
 			]
@@ -11855,7 +11859,8 @@ trait Global_Controls_Functions {
 						[
 								'label'       => esc_html__('Glassmorphism', 'bdthemes-element-pack'),
 								'type'        => Controls_Manager::SWITCHER,
-								'description' => sprintf(__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
+								/* translators: 1: Opening anchor tag, 2: Closing anchor tag */
+								'description' => sprintf(__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
 								'default'     => 'yes',
 								'condition' => [
 										'skin_layout' => [
@@ -12188,7 +12193,7 @@ trait Global_Controls_Functions {
 						[
 								'name'     => 'category_typography',
 								'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
-								'exclude' => ['line_height'],
+								'exclude' => ['line_height'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 								'selector' => $w . ' .edd-item .edd-content .title',
 						]
 				);
@@ -12395,7 +12400,7 @@ trait Global_Controls_Functions {
 										$args['include'] = $settings['cats_include_by_id'];
 								}
 								if (isset($settings['cats_exclude_by_id']) && !empty($settings['cats_exclude_by_id'])) {
-										$args['exclude'] = $settings['cats_exclude_by_id'];
+										$args['exclude'] = $settings['cats_exclude_by_id']; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Term exclusion for category display control.
 								}
 								break;
 						case 'child':
@@ -12407,7 +12412,12 @@ trait Global_Controls_Functions {
 								$args['parent'] = 0;
 								break;
 				}
-				$categories = get_terms('download_category', $args);
+				$categories = get_terms(
+					array_merge(
+						[ 'taxonomy' => 'download_category' ],
+						$args
+					)
+				);
 				return $categories;
 	}
 
@@ -12455,8 +12465,7 @@ trait Global_Controls_Functions {
 					<div class="edd-content">
 						<?php printf( '<h3 class="title">%s</h3>', esc_html( $category->name ) ); ?>
 						<?php if ( $settings['show_count'] ) :
-							$count = $is_carousel ? esc_html( $category->count ) : esc_attr( $category->count );
-							printf( '<p class="edd-category-count"><span class="edd-count-number">%s</span><span class="edd-count-text">products</span></p>', $count );
+							printf( '<p class="edd-category-count"><span class="edd-count-number">%s</span><span class="edd-count-text">products</span></p>', esc_html( $category->count ) );
 						endif; ?>
 					</div>
 					<div class="edd-item-overlay"></div>
@@ -12595,7 +12604,7 @@ trait Global_Controls_Functions {
             [
                 'name'      => 'image',
                 'label'     => esc_html__('Image Size', 'bdthemes-element-pack'),
-                'exclude'   => ['custom'],
+                'exclude'   => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
                 'default'   => 'medium',
             ]
         );
@@ -12656,7 +12665,7 @@ trait Global_Controls_Functions {
             [
                 'name'    => 'image',
                 'label'   => esc_html__('Image Size', 'bdthemes-element-pack'),
-                'exclude' => ['custom'],
+                'exclude' => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
                 'default' => 'medium',
             ]
         );
@@ -14967,7 +14976,7 @@ trait Global_Controls_Functions {
 				[
 					'name'    => 'image',
 					'label'   => esc_html__('Image Size', 'bdthemes-element-pack'),
-					'exclude' => ['custom'],
+					'exclude' => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'default' => 'medium',
 				]
 			);
@@ -15041,7 +15050,7 @@ trait Global_Controls_Functions {
 		[
 		'name' => 'image',
 		'label' => esc_html__('Image Size', 'bdthemes-element-pack'),
-		'exclude' => ['custom'],
+		'exclude' => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 		'default' => 'medium',
 		]
 		);
@@ -15115,7 +15124,7 @@ trait Global_Controls_Functions {
 				[
 					'name'    => 'image',
 					'label'   => esc_html__('Image Size', 'bdthemes-element-pack'),
-					'exclude' => ['custom'],
+					'exclude' => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'default' => 'thumbnail',
 				]
 			);
@@ -15277,9 +15286,6 @@ trait Global_Controls_Functions {
 
 
 			$this->end_controls_section();
-
-			// Style Section
-			$this->end_controls_section();
 		}
 		if ( 'carousel' === $type ) {
 		$this->start_controls_section(
@@ -15410,9 +15416,6 @@ trait Global_Controls_Functions {
 		);
 
 		$this->end_controls_section();
-
-		//Navigation Controls
-			$this->end_controls_section();
 		}
 		if ( 'list' === $type ) {
 		$this->start_controls_section(
@@ -15545,9 +15548,6 @@ trait Global_Controls_Functions {
 
 
 
-			$this->end_controls_section();
-
-			// Style Section
 			$this->end_controls_section();
 		}
 	}
@@ -16686,9 +16686,6 @@ trait Global_Controls_Functions {
 		);
 
 		$this->end_controls_section();
-
-		// Time Style controller
-			$this->end_controls_section();
 		}
 		if ( 'list' === $type ) {
 		$this->start_controls_section(
@@ -17632,7 +17629,6 @@ trait Global_Controls_Functions {
 			);
 
 			$this->end_controls_section();
-			$this->end_controls_section();
 		}
 		if ( 'carousel' === $type ) {
 		$this->start_controls_section(
@@ -17724,9 +17720,6 @@ trait Global_Controls_Functions {
 		);
 
 		$this->end_controls_section();
-
-		//Navigation Style
-			$this->end_controls_section();
 		}
 		if ( 'list' === $type ) {
 		$this->start_controls_section(
@@ -17795,7 +17788,6 @@ trait Global_Controls_Functions {
 			);
 
 			$this->end_controls_section();
-			$this->end_controls_section();
 		}
 	}
 
@@ -17835,17 +17827,23 @@ trait Global_Controls_Functions {
 		$image_html        = Group_Control_Image_Size::get_attachment_image_html($settings, 'image');
 		$placeholder_image_src = Utils::get_placeholder_image_src();
 
-		if (!$image_html) {
-			$image_html = '<img src="' . esc_url($placeholder_image_src) . '" alt="' . get_the_title() . '">';
+		if ( ! $image_html ) {
+			$image_html = '<img src="' . esc_url( $placeholder_image_src ) . '" alt="' . esc_attr( get_the_title() ) . '">';
+		}
+
+		$permalink = ( 'yes' === $settings['anchor_link'] ) ? get_permalink() : 'javascript:void(0);';
+		$thumb_url = wp_get_attachment_image_url( get_post_thumbnail_id(), $settings['image_size'] );
+		if ( ! $thumb_url ) {
+			$thumb_url = $placeholder_image_src;
 		}
 
 		?>
 
 		<div class="bdt-event-image bdt-background-cover">
-			<a href="<?php echo ($settings['anchor_link'] == 'yes') ? esc_url(the_permalink()) : 'javascript:void(0);'; ?>" 
-			title="<?php echo esc_html(get_the_title()); ?>">
-				<img src="<?php echo esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])); ?>" 
-				alt="<?php echo esc_html(get_the_title()); ?>">
+			<a href="<?php echo esc_url( $permalink ); ?>"
+			title="<?php echo esc_attr( get_the_title() ); ?>">
+				<img src="<?php echo esc_url( $thumb_url ); ?>"
+				alt="<?php echo esc_attr( get_the_title() ); ?>">
 			</a>
 		</div>
 	<?php
@@ -20326,7 +20324,7 @@ trait Global_Controls_Functions {
 		                                        $timeDisplay = ( 'slider' === $type ) ? element_pack_time_diff( $t['time'], current_time( 'timestamp' ) ) : $this->twitter_time_diff( $t['time'], current_time( 'timestamp' ) );
 		                                    }
 		                                    $displayAgo = _x('ago', 'leading space is required', 'bdthemes-element-pack');
-		                                    // Use to make il8n compliant
+		                                    /* translators: 1: Human-readable time difference, 2: The word "ago" */
 		                                    printf(esc_html__('%1$s %2$s', 'bdthemes-element-pack'), wp_kses_post($timeDisplay), wp_kses_post($displayAgo));
 		                                    ?>
 		                                </a>
@@ -20392,6 +20390,7 @@ trait Global_Controls_Functions {
 		        <?php 
 				$ep_setting_url = admin_url( 'admin.php?page=element_pack_options#element_pack_api_settings' );
 		        echo '<p>';
+		        /* translators: 1: Opening anchor tag, 2: Closing anchor tag */
 		        echo sprintf(esc_html__('Please add your twitter API key in Element Pack settings. %1$sClick here%2$s to add your twitter API key.', 'bdthemes-element-pack'), '<a href="' . esc_url($ep_setting_url) . '">', '</a>');
 		        echo '</p>';
 		        ?>
@@ -24815,7 +24814,7 @@ trait Global_Controls_Functions {
             'taxonomy'   => $taxonomy,
             'hide_empty' => true,
             'include'    => $settings['posts_include_term_ids'] ?? [],
-            'exclude'    => $settings['posts_exclude_term_ids'] ?? [],
+            'exclude'    => $settings['posts_exclude_term_ids'] ?? [], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
         ];
         $terms = get_terms( $params );
         if ( is_wp_error( $terms ) || ! is_array( $terms ) ) {
@@ -27815,7 +27814,7 @@ trait Global_Controls_Functions {
 		}
 		printf(
 			'<div class="bdt-date-muted">%1$s</div>',
-			esc_html( date( "M d Y", strtotime( $data['created_time'] ) ) )
+			esc_html( gmdate( "M d Y", strtotime( $data['created_time'] ) ) )
 		);
 	}
 
@@ -28269,7 +28268,7 @@ trait Global_Controls_Functions {
 			if ( is_file( $file ) ) {
 				$file_age = $now - filemtime( $file );
 				if ( $file_age > $max_age ) {
-					@unlink( $file );
+					@wp_delete_file( $file );
 				}
 			}
 		}
@@ -28297,7 +28296,7 @@ trait Global_Controls_Functions {
 			foreach ( $old_images as $image_file ) {
 				$file_path = $cache_dir . $image_file;
 				if ( file_exists( $file_path ) ) {
-					@unlink( $file_path );
+					@wp_delete_file( $file_path );
 				}
 			}
 		}
@@ -28500,7 +28499,8 @@ trait Global_Controls_Functions {
 			'lottie_json_path',
 			[ 
 				'label'         => __( 'Lottie JSON URL', 'bdthemes-element-pack' ),
-				'description'   => sprintf( __( 'Enter your lottie josn file, if you don\'t understand lottie json file so please %1s look here %2s', 'bdthemes-element-pack' ), '<a href="https://lottiefiles.com/featured" target="_blank">', '</a>' ),
+				/* translators: 1: Opening anchor tag, 2: Closing anchor tag */
+				'description'   => sprintf( __( 'Enter your lottie josn file, if you don\'t understand lottie json file so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://lottiefiles.com/featured" target="_blank">', '</a>' ),
 				'type'          => Controls_Manager::TEXT,
 				'autocomplete'  => false,
 				'show_external' => false,
@@ -28538,7 +28538,8 @@ trait Global_Controls_Functions {
 			'lottie_json_code',
 			[ 
 				'label'       => __( 'Paste JSON Code', 'bdthemes-element-pack' ),
-				'description' => sprintf( __( 'Enter your lottie josn text, if you don\'t understand lottie json file so please %1s look here %2s', 'bdthemes-element-pack' ), '<a href="https://lottiefiles.com/featured" target="_blank">', '</a>' ),
+				/* translators: 1: Opening anchor tag, 2: Closing anchor tag */
+				'description' => sprintf( __( 'Enter your lottie josn text, if you don\'t understand lottie json file so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://lottiefiles.com/featured" target="_blank">', '</a>' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'label_block' => true,
 				'show_label'  => true,
@@ -29724,7 +29725,8 @@ trait Global_Controls_Functions {
 			'icon_radius_advanced',
 			[ 
 				'label'       => esc_html__('Radius', 'bdthemes-element-pack'),
-				'description' => sprintf( esc_html__('For example: <b>%1s</b> or Go <a href="%2s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack'), '75% 25% 43% 57% / 46% 29% 71% 54%', 'https://9elements.github.io/fancy-border-radius/'),
+				/* translators: 1: Example radius value, 2: URL to the fancy-border-radius tool */
+				'description' => sprintf( esc_html__('For example: <b>%1$s</b> or Go <a href="%2$s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack'), '75% 25% 43% 57% / 46% 29% 71% 54%', 'https://9elements.github.io/fancy-border-radius/'),
 				'type'        => Controls_Manager::TEXT,
 				'size_units'  => [ 'px', '%' ],
 				'separator'   => 'after',
@@ -31169,7 +31171,7 @@ trait Global_Controls_Functions {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'image_box_shadow',
-				'exclude'  => [ 
+				'exclude'  => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'box_shadow_position',
 				],
 				'selector' => '{{WRAPPER}} .bdt-lottie-image svg',

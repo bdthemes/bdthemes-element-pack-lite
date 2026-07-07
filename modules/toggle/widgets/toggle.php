@@ -413,7 +413,7 @@ class Toggle extends Module_Base {
 			[ 
 				'name'     => 'title_background',
 				'types'    => [ 'classic', 'gradient' ],
-                'exclude'  => [ 'image' ],
+                'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
                 'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn',
 			]
 		);
@@ -517,7 +517,7 @@ class Toggle extends Module_Base {
             [ 
                 'name'     => 'active_title_background',
                 'types'    => [ 'classic', 'gradient' ],
-                'exclude'  => [ 'image' ],
+                'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
                 'selector' => '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-btn',
             ]
         );

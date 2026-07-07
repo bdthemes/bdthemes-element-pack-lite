@@ -150,7 +150,7 @@ class Remote_Data_Handler {
     public static function ajax_get_plugins() {
         // Verify nonce for security
         if (!check_ajax_referer('ep_get_plugins_nonce', 'nonce', false)) {
-            wp_die(__('Security check failed.', 'bdthemes-element-pack'));
+            wp_die(esc_html__('Security check failed.', 'bdthemes-element-pack'));
         }
 
         // Get cached data
@@ -312,18 +312,23 @@ class Remote_Data_Handler {
             return __('Just now', 'bdthemes-element-pack');
         } elseif ($diff < 3600) {
             $minutes = floor($diff / 60);
+            /* translators: %d: Number of minutes */
             return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'bdthemes-element-pack'), $minutes);
         } elseif ($diff < 86400) {
             $hours = floor($diff / 3600);
+            /* translators: %d: Number of hours */
             return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'bdthemes-element-pack'), $hours);
         } elseif ($diff < 2592000) { // 30 days
             $days = floor($diff / 86400);
+            /* translators: %d: Number of days */
             return sprintf(_n('%d day ago', '%d days ago', $days, 'bdthemes-element-pack'), $days);
         } elseif ($diff < 31536000) { // 1 year
             $months = floor($diff / 2592000);
+            /* translators: %d: Number of months */
             return sprintf(_n('%d month ago', '%d months ago', $months, 'bdthemes-element-pack'), $months);
         } else {
             $years = floor($diff / 31536000);
+            /* translators: %d: Number of years */
             return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack'), $years);
         }
     }
@@ -484,7 +489,7 @@ class Remote_Data_Handler {
         }
         
         // Get file extension
-        $path_info = pathinfo(parse_url($url, PHP_URL_PATH));
+        $path_info = pathinfo(wp_parse_url($url, PHP_URL_PATH));
         $extension = strtolower($path_info['extension'] ?? '');
         
         return in_array($extension, $valid_extensions);

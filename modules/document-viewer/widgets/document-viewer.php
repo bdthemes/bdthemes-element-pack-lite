@@ -150,7 +150,7 @@ class Document_Viewer extends Module_Base {
 			
 			// Check if URL is local
 			$is_local_url = false;
-			$parsed_url = parse_url($source_url);
+			$parsed_url = wp_parse_url($source_url);
 			if (isset($parsed_url['host'])) {
 				$host = $parsed_url['host'];
 				// Check for localhost, IP addresses, or local domains

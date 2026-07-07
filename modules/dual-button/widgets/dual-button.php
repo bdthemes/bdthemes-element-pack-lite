@@ -250,6 +250,7 @@ class DualButton extends Module_Base {
 				'type'        => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 				'placeholder' => 'myFunction()',
+/* translators: %s: URL to the onclick event documentation */
 				'description' => sprintf( __( 'For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
 				'condition' => [
 					'button_a_onclick' => 'yes'
@@ -415,6 +416,7 @@ class DualButton extends Module_Base {
 				'type'        => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 				'placeholder' => 'myFunction()',
+/* translators: %s: URL to the onclick event documentation */
 				'description' => sprintf( __('For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
 				'condition' => [
 					'button_b_onclick' => 'yes'

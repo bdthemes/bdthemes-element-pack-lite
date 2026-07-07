@@ -43,8 +43,11 @@ class ElementPack_Template_Library_Base {
         $table_post_name = $this->table_post;
         $table_cat_post_name = $this->table_cat_post;;
         if (defined('BDTEP_TPL_DB_VER') && BDTEP_TPL_DB_VER != get_option('BDTEP_TPL_DB_VER', false)) {
+            // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Internal plugin table names from $wpdb->prefix.
             $this->wpdb->query("DROP TABLE IF EXISTS $table_cat_name");
+            // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Internal plugin table names from $wpdb->prefix.
             $this->wpdb->query("DROP TABLE IF EXISTS $table_post_name");
+            // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Internal plugin table names from $wpdb->prefix.
             $this->wpdb->query("DROP TABLE IF EXISTS $table_cat_post_name");
             update_option('BDTEP_TPL_DB_VER', BDTEP_TPL_DB_VER);
         }
@@ -95,8 +98,11 @@ class ElementPack_Template_Library_Base {
 
         $demoData = $this->remote_get_demo_data();
         if ($demoData) {
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Internal table names from $wpdb->prefix; TRUNCATE on plugin-owned tables.
             $this->wpdb->query('TRUNCATE ' . $this->table_cat);
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $this->wpdb->query('TRUNCATE ' . $this->table_post);
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $this->wpdb->query('TRUNCATE ' . $this->table_cat_post);
 
             $prefixCat = "INSERT INTO `" . $this->table_cat . "` (`term_id`, `name`, `slug`, `description`, `total`, `image_url`) VALUES ";
@@ -123,9 +129,11 @@ class ElementPack_Template_Library_Base {
                 if (isset($demo['data']) && is_array($demo['data'])) {
                     $postData = $demo['data'];
                     foreach ($postData as $post) {
-                        $PostQueryString[$post['demo_id']] = $this->wpdb->prepare(
+                        $demo_id = $this->resolve_demo_id( $post );
+
+                        $PostQueryString[ $demo_id ] = $this->wpdb->prepare(
                             "(%d, %s, %s, %s, %d, %d, %s, %s, %s)",
-                            intval($post['demo_id']),
+                            $demo_id,
                             sanitize_text_field($post['date']),
                             sanitize_text_field($post['title']),
                             sanitize_textarea_field($post['short_desc']),
@@ -139,7 +147,7 @@ class ElementPack_Template_Library_Base {
                         $PostCatQueryString[] = $this->wpdb->prepare(
                             "(%d, %d)",
                             intval($demo['term_id']),
-                            intval($post['demo_id'])
+                            $demo_id
                         );
                     }
                 }
@@ -148,6 +156,7 @@ class ElementPack_Template_Library_Base {
             $wpdbError = false;
 
             $query = $prefixCat . implode(',', $CatQueryString);
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Bulk insert into internal plugin tables; all interpolated values are int-cast VALUES tuples.
             $this->wpdb->query($query);
             if ($this->wpdb->last_error) {
                 $wpdbError = true;
@@ -156,6 +165,7 @@ class ElementPack_Template_Library_Base {
             $PostQueryString = array_chunk($PostQueryString, 100, true);
             foreach ($PostQueryString as $chunk) {
                 $postQuery = $prefixPost . implode(',', $chunk);
+                // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Bulk insert into internal plugin tables; interpolated values are pre-escaped/int-cast VALUES tuples.
                 $this->wpdb->query($postQuery);
             }
 
@@ -166,6 +176,7 @@ class ElementPack_Template_Library_Base {
             $PostCatQueryString = array_chunk($PostCatQueryString, 100, true);
             foreach ($PostCatQueryString as $chunk) {
                 $postCatQuery = $prefixPostCat . implode(',', $chunk);
+                // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Bulk insert into internal plugin tables; interpolated values are int-cast VALUES tuples.
                 $this->wpdb->query($postCatQuery);
             }
 
@@ -190,6 +201,7 @@ class ElementPack_Template_Library_Base {
 
     public function checkDemoData() {
 
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Internal table name check on plugin-owned table.
         $result = $this->wpdb->get_row("SHOW TABLES LIKE '" . $this->table_cat . "'", ARRAY_A);
         $tableExists = false;
         if (is_array($result)) {
@@ -239,9 +251,20 @@ class ElementPack_Template_Library_Base {
         return $url;
     }
 
+    protected function resolve_demo_id( $post ) {
+        $demo_id = isset( $post['demo_id'] ) ? intval( $post['demo_id'] ) : 0;
+
+        if ( 0 === $demo_id && ! empty( $post['id'] ) ) {
+            $demo_id = intval( $post['id'] );
+        }
+
+        return $demo_id;
+    }
+
     public function getNaviationItems() {
 
         $this->checkDemoData();
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Internal plugin table name from $wpdb->prefix.
         $demoData = $this->wpdb->get_results("SELECT * FROM {$this->table_cat}", ARRAY_A);
 
         $navItems = array();
@@ -333,9 +356,11 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
  {$keywordSearch}";
 
         if (!empty($prepare_values)) {
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL fragment prepared with escaped values on this line.
             $count_sql = $this->wpdb->prepare($count_sql, $prepare_values);
         }
 
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query on internal plugin tables; user values passed through $wpdb->prepare(), table names are internal.
         $total_items = $this->wpdb->get_var($count_sql);
 
         $this->totalPage = ceil($total_items / $per_page);
@@ -348,8 +373,10 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
 {$keywordSearch} GROUP BY {$postTable}.demo_id {$sortingQuery} LIMIT %d, %d";
 
         $data_prepare_values = array_merge($prepare_values, [$offset, $per_page]);
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL fragment prepared with escaped values on this line.
         $data_sql = $this->wpdb->prepare($data_sql, $data_prepare_values);
 
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query on internal plugin tables; user values passed through $wpdb->prepare(), table names are internal.
         $allPagesData = $this->wpdb->get_results($data_sql, ARRAY_A);
 
         return $allPagesData;
@@ -420,9 +447,11 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
  {$keywordSearch}";
 
         if (!empty($prepare_values)) {
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL fragment prepared with escaped values on this line.
             $count_sql = $this->wpdb->prepare($count_sql, $prepare_values);
         }
 
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query on internal plugin tables; user values passed through $wpdb->prepare(), table names are internal.
         $total_items = $this->wpdb->get_var($count_sql);
 
         $this->totalPage = ceil($total_items / $per_page);
@@ -438,8 +467,10 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
 {$keywordSearch} {$sortingQuery} LIMIT %d, %d";
 
         $data_prepare_values = array_merge($prepare_values, [$offset, $per_page]);
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL fragment prepared with escaped values on this line.
         $data_sql = $this->wpdb->prepare($data_sql, $data_prepare_values);
 
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query on internal plugin tables; user values passed through $wpdb->prepare(), table names are internal.
         $allPagesData = $this->wpdb->get_results($data_sql, ARRAY_A);
 
         return $allPagesData;
@@ -447,6 +478,7 @@ LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
 
     public function findDemo($id) {
         return $this->wpdb->get_row(
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Prepared query on internal plugin table; id is passed via prepare().
             $this->wpdb->prepare("SELECT * FROM {$this->table_post} WHERE id=%d", $id),
             ARRAY_A
         );

@@ -272,7 +272,7 @@ class Panel_Slider extends Module_Base {
 			[ 
 				'name'      => 'thumbnail_size',
 				'label'     => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
-				'exclude'   => [ 'custom' ],
+				'exclude'   => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'   => 'full',
 				'separator' => 'before'
 			]

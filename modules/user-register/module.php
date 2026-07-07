@@ -139,6 +139,7 @@
 						echo wp_json_encode( [ 'registered' => false, 'message' => $errors ] );
 					} else {
 						// Success
+						/* translators: %s: Site name */
 						$message = sprintf( __( 'You have successfully registered to <strong>%s</strong>.', 'bdthemes-element-pack' ), get_bloginfo( 'name' ) );
 						
 						

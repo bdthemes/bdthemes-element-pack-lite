@@ -25,7 +25,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
             add_action( 'admin_menu', [ $this, 'admin_menu' ], 201 );
         }
 
-        $this->new_demo_rang_date = date('Y-m-d', strtotime('-31 days'));
+        $this->new_demo_rang_date = gmdate('Y-m-d', strtotime('-31 days'));
 
         parent::__construct();
         add_action( 'wp_ajax_ep_elementor_demo_importer_data_import', array( $this, 'ajax_import_data' ) );
@@ -393,6 +393,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
             $postTable      = $this->table_post;
             $resultData = $this->wpdb->get_row(
+                // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Prepared query on internal plugin table; demo_id is cast via prepare().
                 $this->wpdb->prepare("SELECT * FROM {$postTable} WHERE demo_id = %d", $demo_id)
             );
 
