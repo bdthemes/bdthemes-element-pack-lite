@@ -1182,7 +1182,7 @@ class Fluent_Forms extends Module_Base {
                         'condition' => [
                             'show_progressbar'  => 'yes'
                         ],
-                        'exclude'    => [
+                        'exclude'    => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
                             'image'
                         ]
                     ]
@@ -1207,7 +1207,7 @@ class Fluent_Forms extends Module_Base {
                         'condition' => [
                             'show_progressbar'  => 'yes'
                         ],
-                        'exclude'    => [
+                        'exclude'    => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
                             'image'
                         ]
                     ]

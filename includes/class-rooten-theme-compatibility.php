@@ -139,10 +139,8 @@ class Element_Pack_Rooten_Theme_Compatibility {
         foreach ( $templates as $index => $page ) {
             $_page   = ucwords($page);
             $checked = ($index == $saved_page) ? "checked='checked'" : '';
-            $content .= <<<BDT
-			<input type="radio" name="rooten_template_type" id="rooten_template_type" value="{$index}" {$checked}  />
-			<label for="rooten_template_type">{$_page}</label><br>
-BDT;
+            $content .= '<input type="radio" name="rooten_template_type" id="rooten_template_type" value="' . esc_attr( $index ) . '" ' . $checked . '  />'
+                . '<label for="rooten_template_type">' . esc_html( $_page ) . '</label><br>';
         }
         echo wp_kses_post($content);
     }
@@ -203,7 +201,7 @@ BDT;
      */
     public function block_template_frontend() {
         if ( is_singular('bdt-custom-template') && !current_user_can('edit_posts') ) {
-            wp_redirect(site_url(), 301);
+            wp_safe_redirect(site_url(), 301);
             die;
         }
     }

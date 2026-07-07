@@ -1333,12 +1333,12 @@ class Contact_Form extends Module_Base {
 								if ( 'yes' == $settings['custom_text'] ) {
 									echo '<label ' . wp_kses_post( $this->get_render_attribute_string( 'contact_label' ) ) . '>' . wp_kses_post( $settings['contact_label'] ) . '</label>';
 								} else {
-									$contact_label = $contact_required ? esc_html__( 'Contact Number*', 'bdthemes-element-pack' ) : esc_html__( 'Contact Number', 'bdthemes-element-pack' );
-									echo '<label ' . wp_kses_post( $this->get_render_attribute_string( 'contact_label' ) ) . '>' . $contact_label . '</label>';
+									$contact_label = $contact_required ? __( 'Contact Number*', 'bdthemes-element-pack' ) : __( 'Contact Number', 'bdthemes-element-pack' );
+									echo '<label ' . wp_kses_post( $this->get_render_attribute_string( 'contact_label' ) ) . '>' . esc_html( $contact_label ) . '</label>';
 								}
 							}
 							echo '<div class="bdt-form-controls">';
-							echo '<input ' . wp_kses_post( $this->get_render_attribute_string( 'contact_input' ) ) . $contact_required_attr . '>';
+							echo '<input ' . wp_kses_post( $this->get_render_attribute_string( 'contact_input' ) ) . ( $contact_required ? ' required="required"' : '' ) . '>';
 							echo '</div>';
 
 							?>

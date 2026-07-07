@@ -508,7 +508,8 @@ class Module extends Element_Pack_Module_Base {
 	}
 
 	public function enqueue_scripts() {
-		wp_register_script( 'cotton-js', BDTEP_ASSETS_URL . 'vendor/js/cotton.min.js', [], '5.3.5' );
+		wp_register_script( 'cotton-js', BDTEP_ASSETS_URL . 'vendor/js/cotton.min.js', [], '5.3.5', true );
+		// phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent -- GSAP CDN is required for cursor effects animation library.
 		wp_register_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', [], '3.12.5', true );
 
 		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {

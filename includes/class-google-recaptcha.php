@@ -38,7 +38,8 @@ class ElementPack_Google_Recaptcha {
         $secretkey       = isset($ep_api_settings['recaptcha_secret_key']) ? $ep_api_settings['recaptcha_secret_key'] : '';
 
         if ( !empty($recaptchaResponse) && !empty($secretkey) ) {
-            $request  = wp_remote_get('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretkey . '&response=' . esc_textarea($recaptchaResponse) . '&remoteip=' . $_SERVER["REMOTE_ADDR"]);
+            $remote_ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+            $request  = wp_remote_get('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretkey . '&response=' . esc_textarea($recaptchaResponse) . '&remoteip=' . $remote_ip);
             $response = wp_remote_retrieve_body($request);
 
             $result = json_decode($response, TRUE);

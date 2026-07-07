@@ -79,9 +79,14 @@ class Social_Share extends Module_Base {
 			'image' => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
 			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
 			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
+			/* translators: 1: First promoted feature, 2: Second promoted feature */
 			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'View -> Icon, Text', 'Count -> Show'),
 			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
-			'upgrade_text' => sprintf( __( '<span class="bdt-widget-promotion-btn">%s</span>', 'bdthemes-element-pack' ), esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' ) ),
+			/* translators: %s: Upgrade button label */
+			'upgrade_text' => sprintf(
+				'<span class="bdt-widget-promotion-btn">%s</span>',
+				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' )
+			),
 		];
 	}
 	
@@ -520,7 +525,7 @@ class Social_Share extends Module_Base {
 				'name'     => 'typography',
 				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-social-share-title, {{WRAPPER}} .bdt-ss-counter',
-				'exclude'  => [ 'line_height' ],
+				'exclude'  => [ 'line_height' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 

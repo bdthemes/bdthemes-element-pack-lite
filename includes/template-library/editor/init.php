@@ -104,7 +104,7 @@ class ElementPack_Template_Library_Editor_Init {
 					},
 				},
 				"defaultTab": "bdt_elementpack_page",
-				"new_demo_rang_date": "<?php echo esc_html( date( 'Ymd', strtotime( '-31 days' ) ) ); ?>"
+				"new_demo_rang_date": "<?php echo esc_html( gmdate( 'Ymd', strtotime( '-31 days' ) ) ); ?>"
 			};
 		</script>
 		<?php
@@ -114,6 +114,7 @@ class ElementPack_Template_Library_Editor_Init {
 			$name = basename( $file, '.php' );
 			ob_start();
 			include $file;
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Buffered output from trusted local view template (JS/HTML underscore template).
 			printf( '<script type="text/html" id="view-bdt-elementpack-%1$s">%2$s</script>', esc_html( $name ), ob_get_clean() );
 		}
 	}

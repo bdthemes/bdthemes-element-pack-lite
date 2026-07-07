@@ -418,7 +418,8 @@ class Lightbox extends Module_Base {
 			[ 
 				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack' ) . BDTEP_NC,
 				'type'        => Controls_Manager::SWITCHER,
-				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
+/* translators: 1: Opening anchor tag, 2: Closing anchor tag */
+				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
 
 			]
 		);

@@ -193,7 +193,7 @@ class Fancy_List extends Module_Base {
 						if ( ! empty( $item['link']['url'] ) ) {
 							$link_key = 'link_' . $index;
 							$this->add_link_attributes( $link_key, $item['link'] );
-							echo '<a class="bdt-fancy-list-wrap" ' . $this->get_render_attribute_string( $link_key ) . '>';
+							echo '<a class="bdt-fancy-list-wrap" ' . wp_kses_post( $this->get_render_attribute_string( $link_key ) ) . '>';
 						} else {
 							echo '<div class="bdt-fancy-list-wrap">';
 						}

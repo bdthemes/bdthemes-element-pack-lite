@@ -764,7 +764,7 @@ class Search extends Module_Base {
 				'name' => 'icon_background',
 				'label' => esc_html__('Background', 'bdthemes-element-pack'),
 				'types' => ['classic', 'gradient'],
-				'exclude' => ['image'],
+				'exclude' => ['image'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search .bdt-search-icon',
 				'fields_options' => [
 					'background' => [
@@ -1071,7 +1071,7 @@ class Search extends Module_Base {
 			[
 				'name'     => 'modal_close_button_background',
 				'types'    => ['classic', 'gradient'],
-				'exclude'  => ['image'],
+				'exclude'  => ['image'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full',
 			]
 		);
@@ -1171,7 +1171,7 @@ class Search extends Module_Base {
 			[
 				'name'     => 'modal_close_button_background_hover',
 				'types'    => ['classic', 'gradient'],
-				'exclude'  => ['image'],
+				'exclude'  => ['image'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '#modal-search-{{ID}} .bdt-modal-close-full:hover',
 			]
 		);

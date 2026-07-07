@@ -134,7 +134,8 @@ class Calendly extends Module_Base {
 			[ 
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => sprintf(
-					esc_html__( 'Style option only works with %s. Basic plan user can\'t change the color style. For more details please %s.', 'bdthemes-element-pack' ),
+					/* translators: 1: Calendly Pro plan link, 2: Documentation link */
+					esc_html__( 'Style option only works with %1$s. Basic plan user can\'t change the color style. For more details please %2$s.', 'bdthemes-element-pack' ),
 					'<a href="https://calendly.com/pages/pricing" target="_blank">Calendly Pro plan</a>',
 					'<a href="https://calendly.com/pages/pricing" target="_blank">check here</a>'
 				),
@@ -200,8 +201,6 @@ class Calendly extends Module_Base {
 		<?php if ( ! empty( $settings['calendly_username'] ) ) : ?>
 
 			<div class="calendly-inline-widget" data-url="<?php echo esc_url( $final_url ); ?>" style="min-width:320px;"></div>
-
-			<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
 			<?php if ( Plugin::$instance->editor->is_edit_mode() ) : ?>
 				<div class="calendly-wrapper" style="width:100%; position:absolute; top:0; left:0; z-index:100;"></div>
 			<?php endif; ?>

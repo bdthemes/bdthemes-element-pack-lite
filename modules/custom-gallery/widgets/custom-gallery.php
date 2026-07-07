@@ -101,7 +101,7 @@ class Custom_Gallery extends Module_Base {
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [ 'active' => true ],
 				'default' => [ 
-					'url' => BDTEP_ASSETS_URL . 'images/gallery/item-' . rand( 1, 8 ) . '.svg',
+					'url' => BDTEP_ASSETS_URL . 'images/gallery/item-' . wp_rand( 1, 8 ) . '.svg',
 				],
 			]
 		);
@@ -300,7 +300,7 @@ class Custom_Gallery extends Module_Base {
 			[ 
 				'name'         => 'thumbnail_size',
 				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
-				'exclude'      => [ 'custom' ],
+				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'medium',
 				'prefix_class' => 'bdt-custom-gallery--thumbnail-size-',
 			]
@@ -713,7 +713,7 @@ class Custom_Gallery extends Module_Base {
 				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SWITCHER,
 				// translators: %1s: Opening anchor tag with link to MDN backdrop-filter documentation, %2s: Closing anchor tag
-				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1s look here %2s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
+				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
 				'separator'   => 'before',
 			]
 		);
@@ -1178,7 +1178,7 @@ class Custom_Gallery extends Module_Base {
 
 		?>
 		<div class="bdt-gallery-item-text bdt-transition-slide-bottom-small">
-		<?php echo wp_kses_post( strip_tags( $text['image_text'] ) ); ?>
+		<?php echo wp_kses_post( wp_strip_all_tags( $text['image_text'] ) ); ?>
 		</div>
 		<?php
 	}

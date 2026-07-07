@@ -65,7 +65,7 @@ class ElementPack_JSON_File_Upload_Control extends Base_Data_Control {
 
 	public function enqueue_editor_scripts() {
 
-		wp_register_script( 'element-pack-json-file-import-control', BDTEP_ASSETS_URL . 'js/controls/element-pack-json-file-upload-control.min.js' );
+		wp_register_script( 'element-pack-json-file-import-control', BDTEP_ASSETS_URL . 'js/controls/element-pack-json-file-upload-control.min.js', [], BDTEP_VER, true );
 		wp_enqueue_script( 'element-pack-json-file-import-control' );
 	}
 

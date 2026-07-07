@@ -548,7 +548,7 @@ class Member extends Module_Base {
 			[ 
 				'name'         => 'thumbnail_size',
 				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
-				'exclude'      => [ 'custom' ],
+				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'full',
 				'prefix_class' => 'bdt-member--thumbnail-size-',
 			]
@@ -1258,7 +1258,7 @@ class Member extends Module_Base {
 				$tooltip = '';
 				if ( isset( $settings['social_icon_tooltip'] ) && $settings['social_icon_tooltip'] === 'yes' ) {
 					$title_raw   = isset( $link['social_link_title'] ) ? $link['social_link_title'] : '';
-					$tooltip_raw = wp_kses_post( strip_tags( (string) $title_raw ) );
+					$tooltip_raw = wp_kses_post( wp_strip_all_tags( (string) $title_raw ) );
 					$tooltip     = 'title: ' . esc_attr( $tooltip_raw ) . ';';
 				}
 

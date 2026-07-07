@@ -393,6 +393,7 @@ class Module extends Element_Pack_Module_Base {
     public function should_script_enqueue( $element ) {
         $settings = $element->get_settings_for_display();
         if ( ! empty( $settings['element_pack_backdrop_filter_type'] ) && 'liquid_glass' === $settings['element_pack_backdrop_filter_type'] ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static, plugin-defined SVG filter markup.
             echo $this->bdt_liquid_glass_effects_svg();
         }
     }

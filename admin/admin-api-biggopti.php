@@ -2,6 +2,10 @@
 
 namespace ElementPack;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Admin Api Biggopties class
  */

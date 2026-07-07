@@ -74,7 +74,7 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
     public function getCategoriesItems() {
 
         $this->checkDemoData();
-        $demoDataType = $this->demoType;
+        $demoDataType = absint( $this->demoType );
         global $wpdb;
         $table_prefix = $wpdb->prefix;
         // Table Info
@@ -82,6 +82,7 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         $postCatTable   = $this->table_cat_post;
         $catTable       = $this->table_cat;
 
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are internal ($wpdb->prefix based) and $demoDataType is cast via absint().
         $demoData = $this->wpdb->get_results("SELECT COUNT(*) as ttotal, {$catTable}.* FROM {$postTable}
  LEFT JOIN {$postCatTable} ON {$postTable}.demo_id = {$postCatTable}.demo_id
  LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
@@ -128,7 +129,7 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
 
         $this->perPage = 500000;
 
-        echo wp_send_json([
+        wp_send_json([
             'data'=>[
                 'categories'    => $this->getCategoriesItems(),
                 'templates'     => $this->getElementorLibraryData()

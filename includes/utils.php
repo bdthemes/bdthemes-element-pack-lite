@@ -39,8 +39,8 @@ class Utils {
 		];
 
 		foreach ( $server_ip_keys as $key ) {
-			if ( isset( $_SERVER[ $key ] ) && filter_var( $_SERVER[ $key ], FILTER_VALIDATE_IP ) ) {
-				return $_SERVER[ $key ];
+			if ( isset( $_SERVER[ $key ] ) && filter_var( wp_unslash( $_SERVER[ $key ] ), FILTER_VALIDATE_IP ) ) {
+				return sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) );
 			}
 		}
 
@@ -49,7 +49,7 @@ class Utils {
 	}
 
 	public static function get_site_domain() {
-		return str_ireplace( 'www.', '', parse_url( home_url(), PHP_URL_HOST ) );
+		return str_ireplace( 'www.', '', wp_parse_url( home_url(), PHP_URL_HOST ) );
 	}
 
 	public static function readable_num( $size ) {
@@ -130,7 +130,7 @@ class Utils {
 			'wp_cron'                   => ! ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ),
 			'language'                  => get_locale(),
 			'external_object_cache'     => wp_using_ext_object_cache(),
-			'server_info'               => isset( $_SERVER['SERVER_SOFTWARE'] ) ? wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) : '',
+			'server_info'               => isset( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '',
 			'php_version'               => phpversion(),
 			'php_post_max_size'         => self::readable_num( ini_get( 'post_max_size' ) ),
 			'php_max_execution_time'    => ini_get( 'max_execution_time' ),

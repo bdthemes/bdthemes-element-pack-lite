@@ -820,7 +820,7 @@ class Svg_Image extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'image_box_shadow',
-				'exclude'  => [ 
+				'exclude'  => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'box_shadow_position',
 				],
 				'selector' => '{{WRAPPER}} .bdt-svg-image svg',
@@ -1081,6 +1081,7 @@ class Svg_Image extends Module_Base {
 
 		if ( ! empty( $svg_content ) ) {
 			$svg_content = preg_replace( '/<svg(\s|>)/', '<svg class="bdt-svg-image-inner" data-bdt-svg="stroke-animation: true" ', $svg_content, 1 );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup already sanitized via sanitize_svg().
 			echo $svg_content;
 		} else {
 			// fallback to <img> if SVG can't be loaded

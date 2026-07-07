@@ -175,7 +175,7 @@ class Price_List extends Module_Base {
 			[ 
 				'name'        => 'thumbnail_size',
 				'label'       => esc_html__( 'Image Size', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'exclude'     => [ 'custom' ],
+				'exclude'     => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'     => 'thumbnail',
 				'render_type' => 'template'
 			]
@@ -1378,7 +1378,7 @@ class Price_List extends Module_Base {
 				'name'     => 'counter_typography',
 				'label'    => __( 'Typography', 'bdthemes-element-pack' ),
 				'selector' => '{{WRAPPER}} .bdt-price-list-counter::before',
-				'exclude'  => [ 
+				'exclude'  => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'letter_spacing',
 					'text_transform',
 				],

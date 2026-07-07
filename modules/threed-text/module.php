@@ -263,7 +263,7 @@ class Module extends Element_Pack_Module_Base {
 	}
 
 	public function enqueue_scripts() {
-		wp_register_script('ztext-js', BDTEP_ASSETS_URL . 'vendor/js/ztext.min.js', ['jquery'], '0.0.2');
+		wp_register_script( 'ztext-js', BDTEP_ASSETS_URL . 'vendor/js/ztext.min.js', [ 'jquery' ], '0.0.2', true );
 		wp_register_script( 'ep-threed-text', BDTEP_ASSETS_URL . 'js/modules/ep-threed-text.min.js', [ 'jquery', 'ztext-js' ], BDTEP_VER, true );
 		$this->ensure_frontend_script_deps();
 

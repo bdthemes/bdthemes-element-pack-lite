@@ -1,5 +1,9 @@
 <?php
 //TODO: namespace need.  Note: We don't use namespace because use them easily
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 use Elementor\Plugin;
 use ElementPack\Element_Pack_Loader;
 use ElementPack\Base\Element_Pack_Base;
@@ -137,7 +141,7 @@ function bdt_get_widget_badge( $widget_name ) {
 	$allowed_widgets = new \ElementPack\Admin\ElementPack_Permission_Manager();
 
 	if ( ! element_pack_pro_activated() ) {
-		return ' <span class="bdt-ep-pro-badge elementor-element--promotion eicon-lock">' . esc_html__( '', 'bdthemes-element-pack' ) . '</span>';
+		return ' <span class="bdt-ep-pro-badge elementor-element--promotion eicon-lock"></span>';
 	}
 
 	if ( ! $allowed_widgets->bdt_get_allowed_widgets_for_user( $widget_name ) ) {
@@ -709,8 +713,12 @@ function element_pack_get_terms( $taxonomy = 'category', $hide_empty = false ) {
 function element_pack_get_only_parent_cats( $taxonomy = 'category' ) {
 
 	$parent_categories = [ 'none' => __( 'None', 'bdthemes-element-pack' ) ];
-	$args              = [ 'parent' => 0 ];
-	$parent_cats       = get_terms( $taxonomy, $args );
+	$parent_cats       = get_terms(
+		[
+			'taxonomy' => $taxonomy,
+			'parent'   => 0,
+		]
+	);
 
 	foreach ( $parent_cats as $parent_cat ) {
 		$parent_categories[ $parent_cat->term_id ] = ucfirst( $parent_cat->name );
@@ -2565,6 +2573,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 
 			<div class="bdt-mini-cart-product-remove">
 				<?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WooCommerce core filter output (remove-link anchor with inline SVG); URL/attributes escaped in sprintf().
 				echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf(
 					'<a href="%s" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></a>',
 					esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
@@ -2596,7 +2605,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 		];
 
 		if ( isset( $postSettings['posts_orderby'] ) && $postSettings['posts_orderby'] === 'rand' ) {
-			$args['post__not_in'] = $loadedPostIds;
+			$args['post__not_in'] = $loadedPostIds; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Intentional post exclusion for widget query.
 		} else {
 			$args['orderby'] = $postSettings['posts_orderby'];
 			$args['offset']  = isset( $_POST['offset'] ) ? $_POST['offset'] : 0;
@@ -2625,7 +2634,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 		 *
 		 */
 		if ( isset( $postSettings['posts_only_with_featured_image'] ) && $postSettings['posts_only_with_featured_image'] === 'yes' ) {
-			$args['meta_query'] = [ 
+			$args['meta_query'] = [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- User-configurable Elementor query control.
 				[ 
 					'key'     => '_thumbnail_id',
 					'compare' => 'EXISTS'
@@ -2692,7 +2701,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 		if ( ! empty( $exclude_by ) && $postSettings['posts_source'] === 'post' && $postSettings['posts_ignore_sticky_posts'] === 'yes' ) {
 			$args['ignore_sticky_posts'] = true;
 			if ( in_array( 'current_post', $exclude_by ) ) {
-				$args['post__not_in'] = [ get_the_ID() ];
+				$args['post__not_in'] = [ get_the_ID() ]; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Intentional post exclusion for widget query.
 			}
 		}
 
@@ -2740,7 +2749,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 			}
 
 			if ( in_array( 'current_post', $exclude_by ) ) {
-				$args['post__not_in'] = [ get_the_ID() ];
+				$args['post__not_in'] = [ get_the_ID() ]; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Intentional post exclusion for widget query.
 			}
 
 			$args['ignore_sticky_posts'] = 1;
@@ -2770,7 +2779,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 				}
 				if ( in_array( 'manual_selection', $exclude_by ) ) {
 					$exclude_ids          = $postSettings['posts_exclude_ids'];
-					$args['post__not_in'] = array_merge( $current_post, wp_parse_id_list( $exclude_ids ) );
+					$args['post__not_in'] = array_merge( $current_post, wp_parse_id_list( $exclude_ids ) ); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Intentional post exclusion for widget query.
 				}
 				if ( in_array( 'terms', $exclude_by ) ) {
 					$exclude_terms = wp_parse_id_list( $postSettings['posts_exclude_term_ids'] );
@@ -2811,7 +2820,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 				}
 			}
 			if ( ! empty( $terms_query ) ) {
-				$args['tax_query']             = $terms_query;
+				$args['tax_query']             = $terms_query; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- User-configurable Elementor query control.
 				$args['tax_query']['relation'] = 'AND';
 			}
 		}
@@ -2924,6 +2933,7 @@ if ( ! function_exists( 'ep_setup_quantity_buttons' ) ) {
 		if ( ! empty( $custom_css ) ) {
 			echo "\n<!-- Element Pack Custom Header CSS -->\n";
 			echo '<style type="text/css">' . "\n";
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Raw custom CSS intentionally set by an admin via plugin settings.
 			echo $custom_css . "\n";
 			echo '</style>' . "\n";
 		}
@@ -2931,6 +2941,7 @@ if ( ! function_exists( 'ep_setup_quantity_buttons' ) ) {
 		if ( ! empty( $custom_js ) ) {
 			echo "\n<!-- Element Pack Custom Header JS -->\n";
 			echo '<script type="text/javascript">' . "\n";
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Raw custom JS intentionally set by an admin via plugin settings.
 			echo $custom_js . "\n";
 			echo '</script>' . "\n";
 		}
@@ -2949,6 +2960,7 @@ if ( ! function_exists( 'ep_inject_footer_custom_code' ) ) {
 		if ( ! empty( $custom_css_2 ) ) {
 			echo "\n<!-- Element Pack Custom Footer CSS -->\n";
 			echo '<style type="text/css">' . "\n";
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Raw custom CSS intentionally set by an admin via plugin settings.
 			echo $custom_css_2 . "\n";
 			echo '</style>' . "\n";
 		}
@@ -2956,6 +2968,7 @@ if ( ! function_exists( 'ep_inject_footer_custom_code' ) ) {
 		if ( ! empty( $custom_js_2 ) ) {
 			echo "\n<!-- Element Pack Custom Footer JS -->\n";
 			echo '<script type="text/javascript">' . "\n";
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Raw custom JS intentionally set by an admin via plugin settings.
 			echo $custom_js_2 . "\n";
 			echo '</script>' . "\n";
 		}

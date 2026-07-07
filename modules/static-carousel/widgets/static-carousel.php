@@ -269,7 +269,7 @@ class Static_Carousel extends Module_Base {
 			[
 				'name'      => 'thumbnail_size',
 				'default'   => 'medium',
-				'exclude'   => [ 'custom' ],
+				'exclude'   => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'condition' => [ 'show_image' => 'yes' ],
 			]
 		);

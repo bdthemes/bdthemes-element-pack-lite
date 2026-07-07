@@ -208,7 +208,7 @@ class Image_Stack extends Module_Base {
 			[ 
 				'name'      => 'icon_background',
 				'types'     => [ 'classic', 'gradient' ],
-				'exclude'   => [ 'image' ],
+				'exclude'   => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector'  => '{{WRAPPER}} .bdt-image-stack .bdt-ep-image-stack-item{{CURRENT_ITEM}} span, {{WRAPPER}} .bdt-image-stack .bdt-ep-image-stack-item{{CURRENT_ITEM}} a',
 				'condition' => [ 
 					'media_type' => 'icon'
@@ -325,7 +325,7 @@ class Image_Stack extends Module_Base {
 			[ 
 				'name'     => 'icon_background_color',
 				'types'    => [ 'classic', 'gradient' ],
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-ep-image-stack-item span, {{WRAPPER}} .bdt-ep-image-stack-item a'
 			]
 		);
@@ -455,7 +455,7 @@ class Image_Stack extends Module_Base {
 			[ 
 				'name'     => 'icon_background_color_hover',
 				'types'    => [ 'classic', 'gradient' ],
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-ep-image-stack-item:hover span, {{WRAPPER}} .bdt-ep-image-stack-item:hover a'
 			]
 		);
@@ -796,7 +796,8 @@ class Image_Stack extends Module_Base {
 			'item_effect_transition_easing',
 			[ 
 				'label'       => esc_html__( 'Easing', 'bdthemes-element-pack' ),
-				'description' => sprintf( __( 'If you want use Cubic Bezier easing, Go %1s HERE %2s', 'bdthemes-element-pack' ), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>' ),
+/* translators: 1: Opening anchor tag, 2: Closing anchor tag */
+				'description' => sprintf( __( 'If you want use Cubic Bezier easing, Go %1$s HERE %2$s', 'bdthemes-element-pack' ), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'default'     => 'ease-out',
@@ -1152,8 +1153,8 @@ class Image_Stack extends Module_Base {
 					$tooltip_placement = isset( $item['tooltip_placement'] ) ? $item['tooltip_placement'] : 'top';
 					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', esc_attr( $tooltip_placement ), true );
 
-					$tooltip_text = wp_kses_post( strip_tags( $tooltip_text ) );
-					$tooltip = esc_attr( $tooltip_text );
+					$tooltip_text = wp_kses_post( wp_strip_all_tags( $tooltip_text ) );
+					$tooltip = $tooltip_text;
 				}
 
 				$link_url = isset( $item['link_url']['url'] ) ? $item['link_url']['url'] : '';
@@ -1161,7 +1162,7 @@ class Image_Stack extends Module_Base {
 					$this->add_link_attributes( 'link-wrap' . $index, isset( $item['link_url'] ) ? $item['link_url'] : [] );
 				}
 				?>
-				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?> data-tippy-content="<?php echo $tooltip; ?>">
+				<div <?php $this->print_render_attribute_string( 'stack-item' ); ?> data-tippy-content="<?php echo esc_attr( $tooltip ); ?>">
 					<?php if ( $link_url !== '' ) : ?>
 						<a <?php $this->print_render_attribute_string( 'link-wrap' . $index ); ?>>
 							<?php $this->render_media( $item, $settings ); ?>

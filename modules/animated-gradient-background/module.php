@@ -181,7 +181,7 @@ class Module extends Element_Pack_Module_Base {
 	}
 
 	public function enqueue_scripts() {
-		wp_register_script( 'granim', BDTEP_ASSETS_URL . 'vendor/js/granim.min.js', [], 'v2.0.0' );
+		wp_register_script( 'granim', BDTEP_ASSETS_URL . 'vendor/js/granim.min.js', [], 'v2.0.0', true );
 
 		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
 			wp_enqueue_script( 'granim' );

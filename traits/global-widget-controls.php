@@ -4698,7 +4698,7 @@ trait Global_Widget_Controls {
 				'name' => 'overlay_color',
 				'label' => esc_html__('Background', 'bdthemes-element-pack'),
 				'types' => ['classic', 'gradient'],
-				'exclude' => ['image'],
+				'exclude' => ['image'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}} .bdt-slider .bdt-slide-item .bdt-slider-image-wrapper:before',
 				'fields_options' => [
 					'background' => [
@@ -7378,7 +7378,7 @@ trait Global_Widget_Controls {
 			[
 				'name'      => 'icon_background',
 				'selector'  => '{{WRAPPER}} .bdt-tab .bdt-tabs-item-title .bdt-tab-title-icon',
-				'exclude'   => [ 'image' ],
+				'exclude'   => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 		$this->add_group_control(
@@ -7456,7 +7456,7 @@ trait Global_Widget_Controls {
 			[
 				'name'      => 'icon_hover_background',
 				'selector'  => '{{WRAPPER}} .bdt-tabs .bdt-tabs-item:hover .bdt-tabs-item-title .bdt-tab-title-icon',
-				'exclude'   => [ 'image' ],
+				'exclude'   => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 		$this->add_control(
@@ -7498,7 +7498,7 @@ trait Global_Widget_Controls {
 			[
 				'name'      => 'icon_active_background',
 				'selector'  => '{{WRAPPER}} .bdt-tabs .bdt-tabs-item.bdt-active .bdt-tabs-item-title .bdt-tab-title-icon',
-				'exclude'   => [ 'image' ],
+				'exclude'   => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 		$this->add_control(

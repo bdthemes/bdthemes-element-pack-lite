@@ -1,6 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) )
 	exit; // Exit if accessed directly
+// phpcs:disable WordPress.WP.AlternativeFunctions.parse_url_parse_url,WordPress.WP.AlternativeFunctions.rand_mt_rand,WordPress.Security.ValidatedSanitizedInput -- Third-party OAuth library; kept as-is for compatibility.
 // vim: foldmethod=marker
 
 /* Generic exception class
@@ -233,7 +234,7 @@ class OAuthRequest {
 
 	function __construct( $http_method, $http_url, $parameters = NULL ) {
 		@$parameters or $parameters = array();
-		$parameters        = array_merge( OAuthUtil::parse_parameters( parse_url( $http_url, PHP_URL_QUERY ) ), $parameters );
+		$parameters        = array_merge( OAuthUtil::parse_parameters( wp_parse_url( $http_url, PHP_URL_QUERY ) ), $parameters );
 		$this->parameters  = $parameters;
 		$this->http_method = $http_method;
 		$this->http_url    = $http_url;
@@ -383,7 +384,7 @@ class OAuthRequest {
 	 * scheme://host/path
 	 */
 	public function get_normalized_http_url() {
-		$parts  = parse_url( $this->http_url );
+		$parts  = wp_parse_url( $this->http_url );
 		$port   = ""; // just define it
 		$port   = @$parts['port'];
 		$scheme = $parts['scheme'];
@@ -478,7 +479,7 @@ class OAuthRequest {
 	 */
 	private static function generate_nonce() {
 		$mt   = microtime();
-		$rand = mt_rand();
+		$rand = wp_rand();
 
 		return md5( $mt . $rand ); // md5s look nicer than numbers
 	}

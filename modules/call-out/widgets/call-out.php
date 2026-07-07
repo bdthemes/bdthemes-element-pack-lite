@@ -717,7 +717,7 @@ class Call_Out extends Module_Base {
 				<?php endif; ?>
 				<?php if ( $settings['description'] ) : ?>
 					<div class="bdt-ep-callout-description">
-						<?php echo wp_kses_post( strip_tags( $settings['description'] ) ); ?>
+						<?php echo wp_kses_post( wp_strip_all_tags( $settings['description'] ) ); ?>
 					</div>
 				<?php endif; ?>
 			</div>

@@ -1237,7 +1237,7 @@ class User_Register extends Module_Base {
 			[ 
 				'name'     => 'modal_header_background',
 				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-header',
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 
@@ -1303,7 +1303,7 @@ class User_Register extends Module_Base {
 			[ 
 				'name'     => 'modal_close_button_background',
 				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default',
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 		$this->add_group_control(
@@ -1389,7 +1389,7 @@ class User_Register extends Module_Base {
 			[ 
 				'name'     => 'modal_close_button_hover_background',
 				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default:hover',
-				'exclude'  => [ 'image' ],
+				'exclude'  => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 			]
 		);
 		$this->add_control(
@@ -2064,7 +2064,7 @@ class User_Register extends Module_Base {
 				'name'           => 'progress_background',
 				'label'          => esc_html__( 'Background', 'bdthemes-element-pack' ),
 				'types'          => [ 'classic', 'gradient' ],
-				'exclude'        => [ 'image' ],
+				'exclude'        => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'fields_options' => [ 
 					'background' => [ 
 						'label' => esc_html__( 'Progress Background', 'bdthemes-element-pack' ),

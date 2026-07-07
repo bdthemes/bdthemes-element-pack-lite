@@ -72,6 +72,7 @@ class We_Forms extends Module_Base {
 					'active' => true,
 				],
 				'placeholder' => __( 'key|value', 'bdthemes-element-pack' ),
+				/* translators: %s: The separator character wrapped in a code tag */
 				'description' => sprintf( __( 'Set custom attributes for the weForm. Each attribute in a separate line. Separate attribute key from the value using %s character. for example: field_values|param_name1=value1', 'bdthemes-element-pack' ), '<code>|</code>' ),
 				'classes'     => 'elementor-control-direction-ltr',
 			]
@@ -243,7 +244,7 @@ class We_Forms extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'field_focus_box_shadow',
-				'exclude'  => [
+				'exclude'  => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'box_shadow_position',
 				],
 				'selector' => '{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields input:focus:not(.weforms_submit_btn), {{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields textarea:focus',

@@ -99,7 +99,7 @@ class Image_Compare extends Module_Base {
 			[
 				'name'         => 'thumbnail_size',
 				'label'        => __( 'Image Size', 'bdthemes-element-pack' ),
-				'exclude'      => [ 'custom' ],
+				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'full',
 			]
 		);
