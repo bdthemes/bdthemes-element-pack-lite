@@ -1355,6 +1355,64 @@ class ElementPack_Admin_Settings {
 	}
 
 	/**
+	 * Agentic AI Angie integration coming soon notice (above dashboard).
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function render_angie_integration_coming_soon_notice() {
+		$display_id = 'angie-integration';
+		$dismissals = get_option( 'bdt_biggopti_dismissals', [] );
+
+		if ( isset( $dismissals[ $display_id ] ) ) {
+			return;
+		}
+
+		$notice_id = 'bdt-admin-biggopti-api-biggopti-' . $display_id;
+		?>
+		<div id="<?php echo esc_attr( $notice_id ); ?>" class="element-pack-biggopti biggopti biggopti-info is-dismissible ep-angie-coming-soon" data-display-id="<?php echo esc_attr( $display_id ); ?>" data-dismissible-meta="transient" data-dismissible-time="604800">
+			<div class="ep-angie-notice">
+				<div class="ep-angie-notice__glow" aria-hidden="true"></div>
+				<div class="ep-angie-notice__grid" aria-hidden="true"></div>
+
+				<div class="ep-angie-notice__body">
+					<div class="ep-angie-notice__brand">
+						<div class="ep-angie-notice__orb" aria-hidden="true">
+							<span class="ep-angie-notice__orb-core"></span>
+							<span class="ep-angie-notice__orb-ring ep-angie-notice__orb-ring--1"></span>
+							<span class="ep-angie-notice__orb-ring ep-angie-notice__orb-ring--2"></span>
+						</div>
+						<div class="ep-angie-notice__identity">
+							<span class="ep-angie-notice__eyebrow"><?php esc_html_e( 'Agentic AI', 'bdthemes-element-pack' ); ?></span>
+							<h2 class="ep-angie-notice__title"><?php esc_html_e( 'Angie Integration', 'bdthemes-element-pack' ); ?></h2>
+						</div>
+					</div>
+
+					<div class="ep-angie-notice__copy">
+						<p class="ep-angie-notice__description">
+							<?php esc_html_e( 'Your creative AI partner is joining Element Pack — understand your site, take real actions, and build smarter Elementor workflows from natural language.', 'bdthemes-element-pack' ); ?>
+						</p>
+						<div class="ep-angie-notice__features">
+							<span class="ep-angie-notice__feature"><?php esc_html_e( 'AI Workflows', 'bdthemes-element-pack' ); ?></span>
+							<span class="ep-angie-notice__feature"><?php esc_html_e( 'Smart Actions', 'bdthemes-element-pack' ); ?></span>
+							<span class="ep-angie-notice__feature"><?php esc_html_e( 'Native Elementor', 'bdthemes-element-pack' ); ?></span>
+						</div>
+					</div>
+
+					<div class="ep-angie-notice__status">
+						<span class="ep-angie-notice__badge ep-angie-notice__badge--beta"><?php esc_html_e( 'Beta', 'bdthemes-element-pack' ); ?></span>
+						<span class="ep-angie-notice__badge ep-angie-notice__badge--soon"><?php esc_html_e( 'Coming Soon', 'bdthemes-element-pack' ); ?></span>
+					</div>
+				</div>
+			</div>
+			<button type="button" class="bdt-admin-api-biggopti-dismiss dashicons dashicons-dismiss">
+				<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'bdthemes-element-pack' ); ?></span>
+			</button>
+		</div>
+		<?php
+	}
+
+	/**
 	 * Display Plugin Page
 	 *
 	 * @access public
@@ -1368,6 +1426,8 @@ class ElementPack_Admin_Settings {
 		<div class="wrap element-pack-dashboard">
 			<h1></h1> <!-- don't remove this div, it's used for the notice container -->
 		
+			<?php $this->render_angie_integration_coming_soon_notice(); ?>
+			
 			<div class="ep-dashboard-wrapper bdt-margin-top">
 				<div class="ep-dashboard-header bdt-flex bdt-flex-wrap bdt-flex-between bdt-flex-middle"
 					bdt-sticky="offset: 32; animation: bdt-animation-slide-top-small; duration: 300">
