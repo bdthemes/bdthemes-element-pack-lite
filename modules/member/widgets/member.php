@@ -14,11 +14,14 @@ use Elementor\Icons_Manager;
 use ElementPack\Modules\Member\Skins;
 use ElementPack\Traits\Global_Mask_Controls;
 
+use ElementPack\Traits\Global_Widget_Controls;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 class Member extends Module_Base {
+
+	use Global_Widget_Controls;
 
 	use Global_Mask_Controls;
 
@@ -67,6 +70,8 @@ class Member extends Module_Base {
 	}
 
 	protected function register_controls() {
+
+		$this->register_deprecated_widget_controls();
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 

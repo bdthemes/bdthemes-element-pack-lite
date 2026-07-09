@@ -9,9 +9,12 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Background;
 
+use ElementPack\Traits\Global_Widget_Controls;
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class Give_Login extends Module_Base {
+
+	use Global_Widget_Controls;
 
 	public function get_name() {
 		return 'bdt-give-login';
@@ -52,6 +55,8 @@ class Give_Login extends Module_Base {
 	
 	protected function register_controls() {
 
+
+		$this->register_deprecated_widget_controls();
 		$this->start_controls_section(
 			'give_login_section',
 			[

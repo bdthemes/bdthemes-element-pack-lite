@@ -116,42 +116,120 @@ class Admin_Feeds {
 	 * @return string
 	 */
 	private function get_rss_posts_data() {
-		$transient_key = $this->settings['transient_key'] . '_rss';
+		$transient_key = $this->get_rss_transient_key();
 		$cached_data   = get_transient( $transient_key );
 
 		if ( ! empty( $cached_data ) ) {
-			/**
-			 * Decode as associative array
-			 */
 			$rss_items = json_decode( $cached_data, true );
-		} else {
-			include_once ABSPATH . WPINC . '/feed.php';
 
-			$rss = fetch_feed( $this->settings['feed_link'] );
-
-			if ( is_wp_error( $rss ) ) {
-				return '<li>' . esc_html__( 'Items Not Found', 'bdthemes-element-pack' ) . '.</li>';
+			if ( ! empty( $rss_items ) ) {
+				return $this->render_rss_posts_list( $rss_items );
 			}
 
-			$maxitems  = $rss->get_item_quantity( 5 );
-			$rss_items = $rss->get_items( 0, $maxitems );
-
-			/**
-			 * Convert RSS items to a simpler array to avoid serialization issues
-			 */
-			$simplified_rss_items = array_map( function ($item) {
-				return [ 
-					'title'   => $item->get_title(),
-					'link'    => $item->get_permalink(),
-					'date'    => $item->get_date( 'U' ),
-					'content' => $item->get_content(),
-				];
-			}, $rss_items );
-
-			set_transient( $transient_key, json_encode( $simplified_rss_items ), 6 * HOUR_IN_SECONDS );
-			$rss_items = $simplified_rss_items;
+			delete_transient( $transient_key );
 		}
 
+		$rss_items = $this->fetch_rss_feed_items( $this->settings['feed_link'], 5 );
+
+		if ( ! empty( $rss_items ) ) {
+			set_transient( $transient_key, wp_json_encode( $rss_items ), 6 * HOUR_IN_SECONDS );
+		}
+
+		return $this->render_rss_posts_list( $rss_items );
+	}
+
+	/**
+	 * Build a transient key that changes when the feed URL changes.
+	 *
+	 * @return string
+	 */
+	private function get_rss_transient_key() {
+		return $this->settings['transient_key'] . '_rss_' . md5( $this->settings['feed_link'] );
+	}
+
+	/**
+	 * Allow fetching RSS from private/local hosts configured in feed_link.
+	 *
+	 * WordPress blocks LAN IPs via reject_unsafe_urls; the browser can still open them.
+	 *
+	 * @param array  $args Request arguments.
+	 * @param string $url  Request URL.
+	 * @return array
+	 */
+	public function maybe_allow_feed_request( $args, $url ) {
+		$feed_host = wp_parse_url( $this->settings['feed_link'], PHP_URL_HOST );
+		$req_host  = wp_parse_url( $url, PHP_URL_HOST );
+
+		if ( empty( $feed_host ) || empty( $req_host ) ) {
+			return $args;
+		}
+
+		if ( strtolower( $feed_host ) === strtolower( $req_host ) ) {
+			$args['reject_unsafe_urls'] = false;
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Fetch and normalize RSS feed items.
+	 *
+	 * @param string $feed_url Feed URL.
+	 * @param int    $limit    Maximum number of items.
+	 * @return array
+	 */
+	private function fetch_rss_feed_items( $feed_url, $limit = 5 ) {
+		include_once ABSPATH . WPINC . '/feed.php';
+
+		add_filter( 'http_request_args', array( $this, 'maybe_allow_feed_request' ), 10, 2 );
+
+		$rss = fetch_feed( $feed_url );
+
+		remove_filter( 'http_request_args', array( $this, 'maybe_allow_feed_request' ), 10 );
+
+		if ( is_wp_error( $rss ) ) {
+			return array();
+		}
+
+		$maxitems  = $rss->get_item_quantity( $limit );
+		$rss_items = $rss->get_items( 0, $maxitems );
+
+		if ( empty( $rss_items ) ) {
+			return array();
+		}
+
+		return array_map(
+			function ( $item ) {
+				$timestamp = $item->get_date( 'U' );
+
+				if ( empty( $timestamp ) ) {
+					$timestamp = strtotime( (string) $item->get_date( 'Y-m-d H:i:s' ) );
+				}
+
+				$content = $item->get_content();
+
+				if ( empty( $content ) ) {
+					$content = $item->get_description();
+				}
+
+				return array(
+					'title'   => $item->get_title(),
+					'link'    => $item->get_permalink(),
+					'date'    => $timestamp ? (int) $timestamp : 0,
+					'content' => $content,
+				);
+			},
+			$rss_items
+		);
+	}
+
+	/**
+	 * Render RSS posts list markup.
+	 *
+	 * @param array $rss_items Feed items.
+	 * @return string
+	 */
+	private function render_rss_posts_list( $rss_items ) {
 		ob_start();
 		?>
 		<div class="bdt-widget">
@@ -162,17 +240,17 @@ class Admin_Feeds {
 					<?php foreach ( $rss_items as $item ) : ?>
 						<li>
 							<a target="_blank" href="<?php echo esc_url( $item['link'] ); ?>"
-								title="<?php echo esc_html( $item['date'] ); ?>">
+								title="<?php echo esc_attr( wp_date( get_option( 'date_format' ), $item['date'] ) ); ?>">
 								<?php if ( $this->is_feed_item_new( $item['date'] ) ) : ?>
 									<span class="bdt-feed-badge bdt-feed-badge--new"><?php esc_html_e( 'New', 'bdthemes-element-pack' ); ?></span>
 								<?php endif; ?>
 								<?php echo esc_html( $item['title'] ); ?>
 							</a>
 							<span class="bdt-date" style="display: block; margin: 0;">
-								<?php echo esc_html( human_time_diff( $item['date'], current_time( 'timestamp' ) ) . ' ' . __( 'ago', 'bdthemes-element-pack' ) ); ?>
+								<?php echo esc_html( human_time_diff( $item['date'], time() ) . ' ' . __( 'ago', 'bdthemes-element-pack' ) ); ?>
 							</span>
 							<div class="bdt-summary">
-								<?php echo esc_html( wp_html_excerpt( $item['content'], 120 ) . ' [...]' ); ?>
+								<?php echo esc_html( wp_html_excerpt( wp_strip_all_tags( $item['content'] ), 120 ) . ' [...]' ); ?>
 							</div>
 						</li>
 					<?php endforeach; ?>
@@ -181,14 +259,17 @@ class Admin_Feeds {
 		</div>
 		<p class="community-events-footer" style="margin: 12px -12px 6px -12px; padding: 12px 12px 0px;">
 			<?php
-			foreach ( $this->settings['footer_links'] as $link ) {
+			$footer_links = $this->settings['footer_links'];
+			$last_link    = end( $footer_links );
+
+			foreach ( $footer_links as $link ) {
 				printf(
 					'<a href="%s" target="_blank">%s <span class="screen-reader-text"> (opens in a new tab)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>',
 					esc_url( $link['url'] ),
 					esc_html( $link['title'] )
 				);
 
-				if ( next( $this->settings['footer_links'] ) ) {
+				if ( $link !== $last_link ) {
 					echo ' | ';
 				}
 			}

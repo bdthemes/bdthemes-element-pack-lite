@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.6
+Stable tag: 8.7.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -413,6 +413,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.7 [9th July 2026] =
+
+* Added: Agentic AI Angie integration coming soon notice added above the admin dashboard
+* Fixed: Dashboard "BdThemes News & Updates" RSS widget showing "Items Not Found" for valid feeds fixed
+* Fixed: Template Library (in Editor) not loading on fresh install while the admin switch showed enabled fixed
+* Deprecated: Editor deprecation notice added for Age Gate, Call Out, Dark Mode, Dropbar, Everest Forms, Image Accordion, Member, Give Donation History, Give Donor Wall, Give Form, Give Form Grid, Give Goal, Give Login, Give Profile Editor, Give Receipt, Give Register, and Give Totals widgets (will be removed in a future version)
 
 = 8.7.6 [7th July 2026] =
 

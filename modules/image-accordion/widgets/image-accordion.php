@@ -12,11 +12,14 @@ use Elementor\Group_Control_Text_Stroke;
 use Elementor\Repeater;
 use ElementPack\Utils;
 
+use ElementPack\Traits\Global_Widget_Controls;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 class Image_Accordion extends Module_Base {
+
+	use Global_Widget_Controls;
 
 	public function get_name() {
 		return 'bdt-image-accordion';
@@ -63,6 +66,8 @@ class Image_Accordion extends Module_Base {
 
 	protected function register_controls() {
 
+
+		$this->register_deprecated_widget_controls();
 		$this->start_controls_section(
 			'section_accordion_item',
 			[

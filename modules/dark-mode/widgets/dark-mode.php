@@ -7,10 +7,13 @@ use Elementor\Icons_Manager;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 
+use ElementPack\Traits\Global_Widget_Controls;
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
 class Dark_Mode extends Module_Base {
+
+	use Global_Widget_Controls;
 
     public function get_name() {
         return 'bdt-dark-mode';
@@ -58,6 +61,8 @@ class Dark_Mode extends Module_Base {
 
     protected function register_controls() {
 
+
+		$this->register_deprecated_widget_controls();
         $this->start_controls_section(
             'section_layout',
             [

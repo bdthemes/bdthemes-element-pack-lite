@@ -9,9 +9,12 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Text_Shadow;
 
+use ElementPack\Traits\Global_Widget_Controls;
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class Give_Donation_History extends Module_Base {
+
+	use Global_Widget_Controls;
 
 	public function get_name() {
 		return 'bdt-give-donation-history';
@@ -51,6 +54,8 @@ class Give_Donation_History extends Module_Base {
 	
 	public function register_controls() {
 
+
+		$this->register_deprecated_widget_controls();
 		$this->start_controls_section(
 			'donation_history_settings',
 			[
