@@ -12,10 +12,13 @@ use Elementor\Group_Control_Text_Stroke;
 use Elementor\Icons_Manager;
 use ElementPack\Utils;
 
+use ElementPack\Traits\Global_Widget_Controls;
 if ( ! defined( 'ABSPATH' ) )
 	exit; // Exit if accessed directly
 
 class Call_Out extends Module_Base {
+
+	use Global_Widget_Controls;
 
 	public function get_name() {
 		return 'bdt-call-out';
@@ -57,6 +60,8 @@ class Call_Out extends Module_Base {
 	}
 
 	protected function register_controls() {
+
+		$this->register_deprecated_widget_controls();
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
