@@ -1252,10 +1252,10 @@ class ElementPack_Admin_Settings {
 					<?php
 					if ($max_execution_time < '90') {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2" title="Min: 90 Recommended" bdt-tooltip>Currently: ' . esc_html($max_execution_time) . '</span>';
+						echo '<span class="label2" title="' . esc_attr__('Min: 90 Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($max_execution_time) . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">Currently: ' . esc_html($max_execution_time) . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($max_execution_time) . '</span>';
 					}
 					?>
 				</div>
@@ -1267,10 +1267,10 @@ class ElementPack_Admin_Settings {
 					<?php
 					if (intval($memory_limit) < '512') {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2" title="Min: 512M Recommended" bdt-tooltip>Currently: ' . esc_html($memory_limit) . '</span>';
+						echo '<span class="label2" title="' . esc_attr__('Min: 512M Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($memory_limit) . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">Currently: ' . esc_html($memory_limit) . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($memory_limit) . '</span>';
 					}
 					?>
 				</div>
@@ -1283,10 +1283,10 @@ class ElementPack_Admin_Settings {
 					<?php
 					if (intval($post_limit) < '32') {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2" title="Min: 32M Recommended" bdt-tooltip>Currently: ' . wp_kses_post($post_limit) . '</span>';
+						echo '<span class="label2" title="' . esc_attr__('Min: 32M Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . wp_kses_post($post_limit) . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">Currently: ' . wp_kses_post($post_limit) . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . wp_kses_post($post_limit) . '</span>';
 					}
 					?>
 				</div>
