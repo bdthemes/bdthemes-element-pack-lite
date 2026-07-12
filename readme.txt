@@ -3,9 +3,9 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets
 Requires at least: 5.0.0
-Tested up to: 7.0
+Tested up to: 7.0.1
 Requires PHP: 7.4.0
-Stable tag: 8.7.7
+Stable tag: 8.7.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -413,6 +413,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.8 [12th July 2026] =
+
+* Updated: Made compatible with WordPress version 7.0.1
 
 = 8.7.7 [9th July 2026] =
 
