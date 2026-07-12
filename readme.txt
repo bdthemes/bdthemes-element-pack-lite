@@ -1,24 +1,24 @@
 === Element Pack – Widgets, Templates & Addons for Elementor ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik,  syedfarhanreza, shmusuf, arafatakashakku, shaikatazim, shamim496
 Donate link: http://bdthemes.com/
-Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets
+Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets, elementor extensions, elementor addon, elementor widget, woocommerce elementor, addons
 Requires at least: 5.0.0
 Tested up to: 7.0.1
 Requires PHP: 7.4.0
-Stable tag: 8.7.8
+Stable tag: 8.7.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
 Elementor tested up to: 4.1.4
 
-Elementor addons with 300+ widgets, templates, WooCommerce widgets, mega menu, header footer builder, and powerful design extensions.
+Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, templates, mega menu, header footer builder and extensions.
 
 
 == Description ==
 
-Element Pack is a powerful Elementor addon that extends the Elementor page builder with advanced Elementor widgets, templates, and design extensions.
+Element Pack is a powerful Elementor addon and Elementor widget library that extends the Elementor page builder with templates and Elementor extensions.
 
-With Element Pack you can build professional WordPress websites using powerful widgets for Elementor, WooCommerce widgets, Elementor templates, and advanced design elements.
+With Element Pack you can build professional WordPress websites using powerful widgets for Elementor, WooCommerce Elementor elements, Elementor templates and advanced design elements.
 
 Element Pack includes 300+ widgets and extensions and thousands of ready-made Elementor templates.
 
@@ -51,9 +51,9 @@ Popular widgets for Elementor included in Element Pack:
 
 With these advanced Elementor widgets, you can design fully customized pages using the Elementor editor.
 
-## WooCommerce Widgets for Elementor
+## WooCommerce Elementor Widgets
 
-Element Pack also provides powerful WooCommerce widgets for Elementor that help you design fully customized online stores.
+Element Pack also provides powerful WooCommerce Elementor widgets that help you design fully customized online stores.
 
 Using these widgets, you can create beautiful product layouts, showcase featured products, and design modern shop pages directly in the Elementor page builder.
 
@@ -172,6 +172,16 @@ This powerful combination makes Element Pack one of the most comprehensive Eleme
 
 Whether you are building landing pages, ecommerce websites, portfolios, or business websites, Element Pack provides everything you need to extend the Elementor page builder.
 
+## Deep Integrations with Your Favorite WordPress Plugins
+
+Element Pack plays incredibly well with the plugins you already use. Instead of wrestling with custom code, use our dedicated Elementor widgets to style and display content from popular third-party plugins instantly:
+
+- **Form Builders:** Style your layouts effortlessly with dedicated widgets for Forminator Forms, Contact Form 7, and Ninja Forms. 
+
+- **LMS & Education:** Create beautiful e-learning platforms using our custom Tutor LMS Course Grid and Tutor LMS Course Carousel widgets. 
+
+- **Donations & Fundraising:** Build powerful fundraising pages with unlocked free widgets for GiveWP, including Give Donation History, Donor Wall, Goal, and Form grids. 
+
 ## Explore Element Pack Features in Action
 
 Element Pack includes powerful visual tools that integrate seamlessly with the Elementor editor. The screenshots below highlight some of the key features of the plugin.
@@ -179,8 +189,8 @@ Element Pack includes powerful visual tools that integrate seamlessly with the E
 - ### Advanced Elementor Widgets Panel:
 Explore a large collection of Elementor widgets that help you build modern layouts directly inside the Elementor editor. 👉 [Check All the Widgets](https://www.elementpack.pro/widgets/)
 
-- ### WooCommerce Widgets for Elementor:
-Design beautiful ecommerce pages with product grids, product sliders, and advanced WooCommerce widgets. 👉 [Check all WooCommerce Elementor Elements](https://www.elementpack.pro/widgets/)
+- ### WooCommerce Elementor Widgets:
+Design beautiful ecommerce pages with product grids, product sliders and advanced WooCommerce widgets. 👉 [Check all WooCommerce Elementor Elements](https://www.elementpack.pro/widgets/)
 
 - ### Elementor Template Library:
 Import ready-made premium Elementor templates and sections to build websites faster. 👉 [Check all the templates with Live Demo](https://www.elementpack.pro/ready-templates/ready-blocks/#ready-block)
@@ -196,7 +206,7 @@ Enhance your website with animations, motion effects, and interactive design ele
 
 
 
-## 🚀 Why Elementor Users Choose Element Pack
+## Why Elementor Users Choose Element Pack
 Thousands of website creators rely on Element Pack to extend the power of Elementor.
 
 With its large collection of widgets for Elementor, ready-to-use Elementor templates, and advanced design tools, Element Pack helps users build professional websites without coding.
@@ -216,6 +226,22 @@ Why users choose Element Pack:
 - Regular updates and feature improvements
 
 Whether you are a beginner or an experienced developer, Element Pack makes it easier to build modern websites with Elementor.
+
+## Optimized for Speed and Performance
+
+Worried about site bloat? Element Pack is engineered with a completely modular architecture. You have total control over your asset loading, ensuring your WordPress site stays lightning-fast.
+
+- **Asset Manager Dashboard:** Deactivate any Elementor widget or extension you aren't using with a single click. Unused assets are never loaded on your frontend.
+
+- **Clean Code Architecture:** Built following strict WordPress and Elementor development standards to keep page loading times crisp and server requests minimal.
+
+- **Asynchronous Loading:** Scripts and styles are only loaded on pages where the specific widgets are actually deployed.
+
+## Get Started with Element Pack in 3 Simple Steps
+
+1. **Activate the Plugin:** Install and activate Element Pack Lite via your WordPress dashboard.
+2. **Run the Setup Wizard:** Follow our automated onboarding wizard to easily configure your initial settings, dashboard, and baseline preferences.  
+3. **Drag and Drop in Elementor:** Open any page inside the Elementor editor, scroll to the Element Pack sections, and start building with 300+ new options!
 
 Start building faster with Element Pack and unlock new design possibilities for your Elementor websites.
 
@@ -413,6 +439,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.9 [12th July 2026] =
+
+* Fixed: Hard coded issue fixed
 
 = 8.7.8 [12th July 2026] =
 
@@ -798,6 +828,14 @@ Details [changelog here](https://feedback.bdthemes.com/announcements?category=ca
 ### Does it interact with other Elementor Addons?
 
 - Of course, our plugin is made with green codes that will not conflict with any other addons for Elementor.
+
+### Is Element Pack an Elementor addon or an Elementor extension?
+
+- Both. Element Pack is an Elementor addon built with 300+ Elementor widgets and Elementor extensions, plus a template library, mega menu builder and header and footer builder.
+
+### Does Element Pack include WooCommerce Elementor widgets?
+
+- Yes. Element Pack ships with a set of WooCommerce Elementor widgets including Product Grid, Product Carousel, Product Category, Add to Cart, Product Gallery and Product Slider, so you can design complete shop pages inside the Elementor editor.
 
 ### Does it work with Elementor Pro?
 
