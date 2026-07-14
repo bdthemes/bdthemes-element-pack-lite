@@ -496,8 +496,8 @@ class Content_Switcher extends Module_Base {
 			[
 				'label' => __('Badge Text', 'bdthemes-element-pack'),
 				'type' => Controls_Manager::TEXT,
-				'default' => 'Hot',
-				'placeholder' => 'Type Step Here',
+				'default' => esc_html__( 'Hot', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Type Step Here', 'bdthemes-element-pack' ),
 				'dynamic' => [
 					'active' => true,
 				],

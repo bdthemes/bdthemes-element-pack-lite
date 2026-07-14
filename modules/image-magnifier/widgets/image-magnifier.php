@@ -144,7 +144,7 @@ class Image_Magnifier extends Module_Base {
 			[
 				'label'       => esc_html__( 'Zoom Ratio', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::IMAGE_DIMENSIONS,
-				'description' => 'Zoom ratio widht and height, such as 480:300',
+				'description' => esc_html__( 'Zoom ratio widht and height, such as 480:300', 'bdthemes-element-pack' ),
 				'condition'	  => [
 					'type'		=> ['standard', 'follow']
 				]

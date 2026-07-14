@@ -203,7 +203,7 @@ class Price_List extends Module_Base {
 			[ 
 				'label'       => esc_html__( 'Vertical Align', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SELECT,
-				'description' => 'When you will take image then you understand its function',
+				'description' => esc_html__( 'When you will take image then you understand its function', 'bdthemes-element-pack' ),
 				'options'     => [ 
 					'middle' => esc_html__( 'Middle', 'bdthemes-element-pack' ),
 					'top'    => esc_html__( 'Top', 'bdthemes-element-pack' ),

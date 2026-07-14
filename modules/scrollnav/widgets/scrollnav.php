@@ -106,7 +106,7 @@ class Scrollnav extends Module_Base {
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
 				'default'     => [ 'url' => '#' ],
-				'description' => 'Add your section id WITH the # key. e.g: #my-id also you can add internal/external URL',
+				'description' => esc_html__( 'Add your section id WITH the # key. e.g: #my-id also you can add internal/external URL', 'bdthemes-element-pack' ),
 			]
 		);
 

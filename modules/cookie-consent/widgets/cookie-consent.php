@@ -145,7 +145,7 @@ class Cookie_Consent extends Module_Base {
 			'expiry_days',
 			[ 
 				'label'       => esc_html__( 'Expiry Days', 'bdthemes-element-pack' ),
-				'description' => 'Specify -1 for no expiry',
+				'description' => esc_html__( 'Specify -1 for no expiry', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [ 
 					'size' => 7,

@@ -1,11 +1,11 @@
-=== Element Pack – Widgets, Templates & Addons for Elementor ===
-Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik,  syedfarhanreza, shmusuf, arafatakashakku, shaikatazim, shamim496
+=== Element Pack Addons for Elementor - Widgets, Templates and Addons ===
+Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik, syedfarhanreza, shmusuf, arafatakashakku, shaikatazim, shamim496
 Donate link: http://bdthemes.com/
 Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets, elementor extensions, elementor addon, elementor widget, woocommerce elementor, addons
 Requires at least: 5.0.0
 Tested up to: 7.0.1
 Requires PHP: 7.4.0
-Stable tag: 8.7.9
+Stable tag: 8.7.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -53,7 +53,7 @@ With these advanced Elementor widgets, you can design fully customized pages usi
 
 ## WooCommerce Elementor Widgets
 
-Element Pack also provides powerful WooCommerce Elementor widgets that help you design fully customized online stores.
+Being the best addons for Elementor, Element Pack also provides powerful WooCommerce Elementor widgets that help you design fully customized online stores.
 
 Using these widgets, you can create beautiful product layouts, showcase featured products, and design modern shop pages directly in the Elementor page builder.
 
@@ -71,7 +71,7 @@ Popular WooCommerce Elementor widgets include:
 
 - Product Slider widget
 
-These WooCommerce widgets for Elementor allow you to build highly engaging ecommerce pages without additional plugins.
+These WooCommerce widgets for Elementor allow you to build highly engaging e-commerce pages without additional plugins.
 
 ## Elementor Template Library
 
@@ -97,7 +97,7 @@ With this Elementor template library, you can launch websites faster by importin
 
 Element Pack includes an advanced Mega Menu builder for Elementor that allows you to create powerful navigation menus.
 
-Using the Elementor Mega Menu builder, you can design fully customizable menus with images, icons, widgets, and dynamic content.
+Using the Elementor Mega Menu builder, you can design fully customizable menus with images, icons, widgets and dynamic content.
 
 Features include:
 
@@ -152,7 +152,7 @@ These Elementor extensions help designers create modern websites with interactiv
 
 ## Widgets, Extensions & Templates for Elementor
 
-Element Pack is designed to be a complete toolkit for Elementor users, offering a large collection of widgets, templates, and extensions that help you build professional websites faster.
+This addons for Elementor is designed to be a complete toolkit for Elementor users, offering a large collection of widgets, templates, and extensions that help you build professional websites faster.
 
 With Element Pack you get access to:
 
@@ -170,13 +170,13 @@ With Element Pack you get access to:
 
 This powerful combination makes Element Pack one of the most comprehensive Elementor addon solutions for designers, developers, and agencies.
 
-Whether you are building landing pages, ecommerce websites, portfolios, or business websites, Element Pack provides everything you need to extend the Elementor page builder.
+Whether you are building landing pages, e-commerce websites, portfolios, or business websites, Element Pack provides everything you need to extend the Elementor page builder.
 
 ## Deep Integrations with Your Favorite WordPress Plugins
 
 Element Pack plays incredibly well with the plugins you already use. Instead of wrestling with custom code, use our dedicated Elementor widgets to style and display content from popular third-party plugins instantly:
 
-- **Form Builders:** Style your layouts effortlessly with dedicated widgets for Forminator Forms, Contact Form 7, and Ninja Forms. 
+- **Form Builders:** Style your layouts effortlessly with dedicated widgets for Forminator Forms, Contact Form 7 and Ninja Forms. 
 
 - **LMS & Education:** Create beautiful e-learning platforms using our custom Tutor LMS Course Grid and Tutor LMS Course Carousel widgets. 
 
@@ -439,6 +439,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 
 == Changelog ==
+
+= 8.7.10 [12th July 2026] =
+
+* Fixed: Hard-coded untranslatable control strings wrapped with `esc_html__()` for WordPress.org i18n compliance
 
 = 8.7.9 [12th July 2026] =
 

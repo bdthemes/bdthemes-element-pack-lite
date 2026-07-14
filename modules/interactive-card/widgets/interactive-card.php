@@ -466,8 +466,8 @@ class Interactive_Card extends Module_Base {
             [
                 'label'       => __('Badge Text', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => 'POPULAR',
-                'placeholder' => 'Type Badge Title',
+                'default'     => esc_html__( 'POPULAR', 'bdthemes-element-pack' ),
+                'placeholder' => esc_html__( 'Type Badge Title', 'bdthemes-element-pack' ),
                 'dynamic'     => [
                     'active' => true,
                 ],

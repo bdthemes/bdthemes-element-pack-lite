@@ -4287,7 +4287,7 @@ trait Global_Widget_Controls {
 					],
 				],
 				'prefix_class' => 'elementor%s-align-',
-				'description'  => 'Use align to match position',
+				'description'  => esc_html__( 'Use align to match position', 'bdthemes-element-pack' ),
 				'default'      => 'center',
 			]
 		);
