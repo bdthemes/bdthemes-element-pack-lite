@@ -14779,7 +14779,7 @@ trait Global_Controls_Functions {
 					'label'       => esc_html__('Column', 'bdthemes-element-pack'),
 					'type'        => Controls_Manager::SELECT,
 					'default'     => '2',
-					'description' => 'For good looking set it 1 for default skin and 2 for another skin',
+					'description' => esc_html__( 'For good looking set it 1 for default skin and 2 for another skin', 'bdthemes-element-pack' ),
 					'options'     => [
 						'2' => esc_html__('Two', 'bdthemes-element-pack'),
 						'3' => esc_html__('Three', 'bdthemes-element-pack'),
@@ -29521,8 +29521,8 @@ trait Global_Controls_Functions {
 			[ 
 				'label'       => esc_html__('Badge Text', 'bdthemes-element-pack'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => 'POPULAR',
-				'placeholder' => 'Type Badge Title',
+				'default'     => esc_html__( 'POPULAR', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Type Badge Title', 'bdthemes-element-pack' ),
 				'dynamic'     => [ 
 					'active' => true,
 				],

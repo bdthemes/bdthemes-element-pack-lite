@@ -306,7 +306,7 @@ class Panel_Slider extends Module_Base {
 				'label'       => esc_html__( 'Show Read More', 'bdthemes-element-pack' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
-				'description' => 'It will work when link field no null.',
+				'description' => esc_html__( 'It will work when link field no null.', 'bdthemes-element-pack' ),
 				// 'condition'   => [ 
 				// 	'_skin!' => 'bdt-middle',
 				// ],
