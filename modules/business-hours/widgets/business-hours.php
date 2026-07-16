@@ -388,7 +388,7 @@ class Business_Hours extends Module_Base
             [
                 'label'   => esc_html__('Select Day', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SELECT,
-                'default' => 'Monday',
+                'default' => esc_html__('Monday', 'bdthemes-element-pack'),
                 'options' => [
                     'Monday'    => esc_html__('Monday', 'bdthemes-element-pack'),
                     'Tuesday'   => esc_html__('Tuesday', 'bdthemes-element-pack'),

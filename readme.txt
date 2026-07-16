@@ -440,6 +440,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.7.X [XXth July 2026] =
+
+* Fixed: Security issue fixed
+
 = 8.7.10 [12th July 2026] =
 
 * Fixed: Hard-coded untranslatable control strings wrapped with `esc_html__()` for WordPress.org i18n compliance
