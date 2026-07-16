@@ -174,24 +174,134 @@ class Library_Source extends Source_Base {
 	 * @return array|\WP_Error Remote Template data.
 	 */
 	public function get_data( array $args, $context = 'display' ) {
-		$data = $this->request_template_data( $args['demo_json'] );
+		$progress = new Import_Progress( isset( $args['import_id'] ) ? $args['import_id'] : '' );
 
-		$data = json_decode( $data, true );
+		try {
+			$progress->update( 'fetching', 2 );
 
-		if ( empty( $data ) || empty( $data['content'] ) ) {
-			throw new \Exception( esc_html__( 'Template does not have any content', 'bdthemes-element-pack' ) );
+			$data = $this->request_template_data( $args['demo_json'] );
+
+			$data = json_decode( $data, true );
+
+			if ( empty( $data ) || empty( $data['content'] ) ) {
+				throw new \Exception( esc_html__( 'Template does not have any content', 'bdthemes-element-pack' ) );
+			}
+
+			$progress->update( 'preparing', 8 );
+
+			$data['content'] = $this->replace_elements_ids( $data['content'] );
+			$data['content'] = $this->import_content_with_progress( $data['content'], $progress );
+
+			$progress->update( 'finalizing', 96 );
+
+			$post_id = $args['editor_post_id'];
+			$document = \Elementor\Plugin::instance()->documents->get( $post_id );
+
+			if ( $document ) {
+				$data['content'] = $document->get_elements_raw_data( $data['content'], true );
+			}
+
+			$progress->update( 'complete', 100 );
+
+			return $data;
+		} catch ( \Exception $e ) {
+			// The editor stops polling as soon as the import request itself
+			// fails, so the state is of no further use to anyone.
+			$progress->clear();
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Element-for-element equivalent of Source_Base::process_export_import_content()
+	 * for the `on_import` method, reporting progress as it walks the tree.
+	 *
+	 * Element count is the only dependable progress signal available here. The
+	 * obvious alternative — counting downloaded images via the
+	 * `elementor/template_library/import_images/new_attachment` filter — stalls
+	 * badly, because that filter is skipped for any image already present in the
+	 * media library and for any image whose download fails. Image downloads
+	 * happen inside this loop anyway, so element progress still tracks the part
+	 * that actually takes the time.
+	 *
+	 * @param array            $content  A set of elements.
+	 * @param Import_Progress  $progress Progress reporter.
+	 *
+	 * @return mixed Processed content data.
+	 */
+	private function import_content_with_progress( $content, Import_Progress $progress ) {
+		$total  = max( 1, $this->count_elements( $content ) );
+		$done   = 0;
+		$images = 0;
+
+		$count_image = function( $post_id ) use ( &$images ) {
+			$images++;
+
+			return $post_id;
+		};
+
+		add_filter( 'elementor/template_library/import_images/new_attachment', $count_image );
+
+		try {
+			$content = \Elementor\Plugin::$instance->db->iterate_data(
+				$content, function( $element_data ) use ( &$done, &$images, $total, $progress ) {
+					$element = \Elementor\Plugin::$instance->elements_manager->create_element_instance( $element_data );
+
+					$done++;
+
+					// A null element is one whose widget isn't registered, e.g. a
+					// disabled module. Matches Source_Base: drop it and move on.
+					$processed = $element ? $this->process_element_export_import_content( $element, 'on_import' ) : null;
+
+					$progress->update(
+						'importing',
+						10 + (int) floor( 85 * $done / $total ),
+						[
+							'done'   => $done,
+							'total'  => $total,
+							'images' => $images,
+						]
+					);
+
+					return $processed;
+				}
+			);
+		} finally {
+			remove_filter( 'elementor/template_library/import_images/new_attachment', $count_image );
 		}
 
-		$data['content'] = $this->replace_elements_ids( $data['content'] );
-		$data['content'] = $this->process_export_import_content( $data['content'], 'on_import' );
+		return $content;
+	}
 
-		$post_id = $args['editor_post_id'];
-		$document = \Elementor\Plugin::instance()->documents->get( $post_id );
-
-		if ( $document ) {
-			$data['content'] = $document->get_elements_raw_data( $data['content'], true );
+	/**
+	 * Count the elements in a content tree, so progress has a denominator.
+	 *
+	 * @param mixed $content
+	 *
+	 * @return int
+	 */
+	private function count_elements( $content ) {
+		if ( ! is_array( $content ) ) {
+			return 0;
 		}
 
-		return $data;
+		$count = 0;
+
+		if ( isset( $content['elType'] ) ) {
+			$count++;
+
+			if ( ! empty( $content['elements'] ) ) {
+				$count += $this->count_elements( $content['elements'] );
+			}
+
+			return $count;
+		}
+
+		foreach ( $content as $child ) {
+			$count += $this->count_elements( $child );
+		}
+
+		return $count;
 	}
 }
