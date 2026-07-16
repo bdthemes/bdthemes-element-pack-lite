@@ -654,6 +654,67 @@ div#bdt-elementpack-template-library-header-logo-area {
 }
 
 
+// import progress
+#bdt-elementpack-template-library-import-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.bdt-ep-import-progress {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+
+    &__title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #444;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    &__track {
+        height: 8px;
+        border-radius: 4px;
+        background-color: #e6e8ea;
+        overflow: hidden;
+    }
+
+    &__fill {
+        width: 0;
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(to right, #49e0af, #3fb8e1);
+        transition: width .3s ease;
+    }
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #6d7882;
+    }
+
+    &__percent {
+        font-weight: 600;
+        color: #444;
+        flex-shrink: 0;
+    }
+
+    &__hint {
+        margin-top: 12px;
+        font-size: 11px;
+        line-height: 1.5;
+        color: #9aa5ae;
+        text-align: center;
+    }
+}
+
 // fallback
 .ep-template-library-preview-fallback {
     position: absolute;

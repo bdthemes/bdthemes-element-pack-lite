@@ -4,6 +4,7 @@
     EpControler = {
         EpTemplateHeaderView            : null,
         EpTemplateLoadingView           : null,
+        EpTemplateImportProgressView    : null,
         EpTemplateLayoutView            : null,
         EpTemplateErrorView             : null,
         EpTemplateBodyView              : null,
@@ -58,7 +59,10 @@
                 e.EpTemplateLoadingView = Marionette.ItemView.extend({
                     id      : 'bdt-elementpack-template-library-loading',
                     template: '#view-bdt-elementpack-template-library-loading'
-                }), e.EpTemplateErrorView = Marionette.ItemView.extend({
+                }), e.EpTemplateImportProgressView = Marionette.ItemView.extend({
+                id      : 'bdt-elementpack-template-library-import-progress',
+                template: '#view-bdt-elementpack-template-library-import-progress'
+            }), e.EpTemplateErrorView = Marionette.ItemView.extend({
                 id      : 'bdt-elementpack-template-library-error',
                 template: '#view-bdt-elementpack-template-library-error'
             }), e.EpTemplateHeaderView = Marionette.LayoutView.extend({
@@ -166,13 +170,14 @@
                 ui                 : {insertButton: '.bdt-elementpack-template-library-template-insert'},
                 events             : {'click @ui.insertButton': 'onInsertButtonClick'},
                 onInsertButtonClick: function () {
-                    var viewModel = this.view.model, template_id, requestFn, params;
-                    EpModel.layout.showLoadingView();
+                    var viewModel = this.view.model, template_id, requestFn, params,
+                        importId = EpModel.startImportProgress();
                     template_id = viewModel.get('template_id'), params = {
                         unique_id: template_id,
-                        data     : {edit_mode: !0, display: !0, template_id: template_id}
+                        data     : {edit_mode: !0, display: !0, template_id: template_id, import_id: importId}
                     }, (requestFn = {
                         success: function (data) {
+                            EpModel.stopImportProgress(), EpModel.renderProgress({stage: 'complete', percent: 100});
                             var importArgs = {
                                 model  : window.elementor.elementsModel,
                                 data   : data,
@@ -187,6 +192,7 @@
                             $e.run('document/elements/import', importArgs), EpModel.dismissInlineAddStripAfterInsert(), EpModel.clearImportPlacement(), EpModel.closeModal();
                         },
                         error  : function error(data) {
+                            EpModel.stopImportProgress();
                             if (data == 'required_activated_license') {
                                 EpModel.layout.showLicenseError();
                             } else {
@@ -338,6 +344,8 @@
                     return this.getRegion("modalContent").currentView
                 }, showLoadingView  : function () {
                     this.modalContent.show(new e.EpTemplateLoadingView)
+                }, showImportProgressView: function () {
+                    this.modalContent.show(new e.EpTemplateImportProgressView)
                 }, showLicenseError : function () {
                     this.modalContent.show(new e.EpTemplateErrorView)
                 }, showPreviewError : function (errorMessage) {
@@ -366,6 +374,9 @@
         importContainer   : null,
         importAt          : null,
         stripReferenceElementId: null,
+        progressPoll      : null,
+        progressPercent   : 0,
+        progressActive    : !1,
         init              : function () {
             window.elementor.on("preview:loaded", window._.bind(EpModel.onPreviewLoaded, EpModel)), EpControler.init();
         },
@@ -486,6 +497,77 @@
             this.importAt = null;
             this.stripReferenceElementId = null;
         },
+        // The import runs in one blocking request, so progress has to be read
+        // out-of-band: the server stores it against this id, we poll for it.
+        startImportProgress: function () {
+            var _this = this, cfg = EpConfig.progress || {},
+                importId = 'ep' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+
+            this.stopImportProgress();
+            this.progressActive = !0;
+            this.progressPercent = 0;
+            this.layout.showImportProgressView();
+            this.renderProgress({stage: 'pending', percent: 0});
+
+            if (!cfg.action || !cfg.nonce) {
+                return importId;
+            }
+
+            this.progressPoll = setInterval(function () {
+                e.ajax({
+                    url     : ajaxurl,
+                    type    : 'post',
+                    dataType: 'json',
+                    data    : {action: cfg.action, nonce: cfg.nonce, import_id: importId},
+                    success : function (res) {
+                        // A poll can land after the import already finished or failed.
+                        if (!_this.progressActive || !res || !res.success || !res.data) {
+                            return;
+                        }
+                        _this.renderProgress(res.data);
+                    }
+                });
+            }, cfg.interval || 700);
+
+            return importId;
+        },
+        stopImportProgress: function () {
+            this.progressActive = !1;
+            if (this.progressPoll) {
+                clearInterval(this.progressPoll), this.progressPoll = null;
+            }
+        },
+        renderProgress    : function (state) {
+            var labels = (EpConfig.progress && EpConfig.progress.labels) || {},
+                $root = e('#bdt-elementpack-template-library-import-progress'),
+                percent, label, detail = [];
+
+            if (!$root.length) {
+                return;
+            }
+
+            // Element processing is post-order, so the server's percentage only
+            // ever climbs; clamp anyway so a late poll can't drag the bar back.
+            percent = Math.min(100, parseInt(state.percent, 10) || 0);
+            percent = this.progressPercent = Math.max(this.progressPercent, percent);
+
+            label = labels[state.stage] || labels.pending || '';
+
+            if (state.total && labels.detail_elements) {
+                detail.push(labels.detail_elements.replace('%1$s', state.done).replace('%2$s', state.total));
+            }
+            if (state.images && labels.detail_images) {
+                detail.push(labels.detail_images.replace('%s', state.images));
+            }
+            if (detail.length) {
+                label += ' — ' + detail.join(', ');
+            }
+
+            $root.find('.bdt-ep-import-progress__fill').css('width', percent + '%');
+            $root.find('.bdt-ep-import-progress__track').attr('aria-valuenow', percent);
+            $root.find('.bdt-ep-import-progress__percent').text(percent + '%');
+            $root.find('.bdt-ep-import-progress__label').text(label);
+        },
         showTemplatesModal: function () {
             this.getModal().show(), this.layout || (this.layout = new EpControler.EpTemplateLayoutView, this.layout.showLoadingView()), this.setTab(this.defaultTab, !0), this.getTemplatedata(this.defaultTab), this.setPreview("initial")
         },
@@ -557,7 +639,7 @@
             e('#bdt-elementpack-template-library-content .search-result-counter span').html(0);
         },
         closeModal        : function () {
-            this.clearImportPlacement(), this.getModal().hide(), this.showHeaderLogo();
+            this.stopImportProgress(), this.clearImportPlacement(), this.getModal().hide(), this.showHeaderLogo();
         },
         getModal          : function () {
             return this.modal || (this.modal = elementor.dialogsManager.createWidget("lightbox", {
