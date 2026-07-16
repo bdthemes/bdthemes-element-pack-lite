@@ -134,7 +134,7 @@ class Lightbox extends Module_Base {
 			[ 
 				'label'     => __( 'Button Text', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => 'Open Lightbox',
+				'default'   => esc_html__('Open Lightbox', 'bdthemes-element-pack'),
 				'condition' => [ 
 					'lightbox_toggler' => 'button',
 				],
@@ -396,7 +396,7 @@ class Lightbox extends Module_Base {
 				'label'   => __( 'Content Caption', 'bdthemes-element-pack' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => 'This is a image',
+				'default' => esc_html__('This is a image', 'bdthemes-element-pack'),
 			]
 		);
 

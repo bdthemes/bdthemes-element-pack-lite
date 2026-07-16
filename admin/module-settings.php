@@ -2130,7 +2130,7 @@ class ModuleService {
                 [
                     'name'              => 'twitter_name',
                     'label'             => esc_html__('User Name', 'bdthemes-element-pack'),
-                    'placeholder'       => 'for example: bdthemescom',
+                    'placeholder'       => esc_attr__('for example: bdthemescom', 'bdthemes-element-pack'),
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
