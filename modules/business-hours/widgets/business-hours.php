@@ -145,7 +145,7 @@ class Business_Hours extends Module_Base
                 'label'       => esc_html__('Custom Timezone', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
-                'default'     => '+6',
+                'defaut'      => '+6',
                 'placeholder' => '+6',
                 'condition'   => [
                     'dynamic_timezone'    => 'custom',
@@ -591,7 +591,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_dynamic_additional',
             [
-                'label' => __('Additional Options', 'bdthemes-element-pack'),
+                'label' => __('Additional', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'business_hour_style' => 'dynamic',
