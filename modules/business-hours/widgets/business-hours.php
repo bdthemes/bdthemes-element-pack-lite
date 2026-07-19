@@ -103,7 +103,7 @@ class Business_Hours extends Module_Base
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'default',
                 'options' => [
-                    'default' => 'Website Time',
+                    'default' => esc_html__('Website Time', 'bdthemes-element-pack'),
                     '-0'      => 'UT or UTC - GMT -0',
                     '+1'      => 'CET - GMT+1',
                     '+2'      => 'EET - GMT+2',
@@ -131,7 +131,7 @@ class Business_Hours extends Module_Base
                     '-10'     => 'HST  - GMT-10',
                     '-11'     => 'NT  - GMT-11',
                     '-12'     => 'IDLW  - GMT-12',
-                    'custom'  => "Custom",
+                    'custom'  => esc_html__('Custom', 'bdthemes-element-pack'),
                 ],
                 'condition'        => [
                     'business_hour_style' => 'dynamic',
@@ -145,7 +145,7 @@ class Business_Hours extends Module_Base
                 'label'       => esc_html__('Custom Timezone', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
-                'defaut'      => '+6',
+                'default'     => '+6',
                 'placeholder' => '+6',
                 'condition'   => [
                     'dynamic_timezone'    => 'custom',
@@ -591,7 +591,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_dynamic_additional',
             [
-                'label' => __('Additional', 'bdthemes-element-pack'),
+                'label' => __('Additional Options', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'business_hour_style' => 'dynamic',
