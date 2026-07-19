@@ -380,7 +380,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 = 8.7.12 [19th July 2026] =
 
-* Updated: Security improved
+* Fixed: Security issue fixed
 
 = 8.7.11 [17th July 2026] =
 
