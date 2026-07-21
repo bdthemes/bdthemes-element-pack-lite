@@ -181,9 +181,7 @@ class Module extends Element_Pack_Module_Base {
             }
 
             /** Recaptcha*/
-            $result_recaptcha = $this->get_widget_settings($post_id, $widget_id);
-
-            if (isset($result_recaptcha['show_recaptcha']) && $result_recaptcha['show_recaptcha'] == 'yes') {
+            if ($this->is_recaptcha_required($post_id, $widget_id, 'show_recaptcha')) {
                 if (!empty($ep_api_settings['recaptcha_site_key']) and !empty($ep_api_settings['recaptcha_secret_key'])) {
                     if (!$this->is_valid_captcha()) {
                         $error  = true;

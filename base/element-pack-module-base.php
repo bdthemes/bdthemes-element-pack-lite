@@ -82,4 +82,46 @@ abstract class Element_Pack_Module_Base extends Module {
 
         return $settings;
     }
+
+    /**
+     * Whether reCAPTCHA credentials are configured site wide.
+     *
+     * @return bool
+     */
+    protected function has_recaptcha_keys() {
+        $api_settings = get_option('element_pack_api_settings');
+
+        return !empty($api_settings['recaptcha_site_key']) && !empty($api_settings['recaptcha_secret_key']);
+    }
+
+    /**
+     * Whether the reCAPTCHA gate must run for the current form submission.
+     *
+     * get_widget_settings() yields an error string or an empty array whenever the
+     * widget cannot be located. That happens in two very different situations:
+     * an unauthenticated caller posting a bogus widget_id, and the legitimate case
+     * of a form rendered inside a template, popup or theme-builder location, where
+     * the posted page_id is the viewed post rather than the document that owns the
+     * widget.
+     *
+     * Reading the flag straight off that unresolved result made both cases
+     * indistinguishable from "reCAPTCHA disabled", so the check was skipped
+     * entirely. An unresolved lookup now falls back to whether the site has
+     * reCAPTCHA set up at all: sites with keys get the check, sites without keys
+     * behave exactly as before.
+     *
+     * @param int    $post_id     Posted page id.
+     * @param string $widget_id   Posted widget id.
+     * @param string $setting_key Widget control holding the on/off flag.
+     * @return bool
+     */
+    protected function is_recaptcha_required($post_id, $widget_id, $setting_key) {
+        $settings = $this->get_widget_settings($post_id, $widget_id);
+
+        if (is_array($settings) && !empty($settings)) {
+            return isset($settings[$setting_key]) && 'yes' === $settings[$setting_key];
+        }
+
+        return $this->has_recaptcha_keys();
+    }
 }

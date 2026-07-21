@@ -378,6 +378,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.7.XX [XXth July 2026] =
+
+* Updated: Security improved
+
 = 8.7.13 [19th July 2026] =
 
 * Fixed: Security issue fixed
