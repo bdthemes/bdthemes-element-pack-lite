@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets, elementor extensions, elementor addon, elementor widget, woocommerce elementor, addons
 Requires at least: 5.0.0
-Tested up to: 7.0.1
+Tested up to: 7.0.2
 Requires PHP: 7.4.0
-Stable tag: 8.7.13
+Stable tag: 8.7.14
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.1.5
+Elementor tested up to: 4.2.0
 
 
 Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
@@ -378,7 +378,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.7.XX [XXth July 2026] =
+= 8.7.14 [21st July 2026] =
 
 * Updated: Security improved
 
