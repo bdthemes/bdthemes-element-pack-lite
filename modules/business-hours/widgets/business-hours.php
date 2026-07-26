@@ -103,7 +103,7 @@ class Business_Hours extends Module_Base
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'default',
                 'options' => [
-                    'default' => 'Website Time',
+                    'default' => esc_html__('Website Time', 'bdthemes-element-pack'),
                     '-0'      => 'UT or UTC - GMT -0',
                     '+1'      => 'CET - GMT+1',
                     '+2'      => 'EET - GMT+2',
@@ -131,7 +131,7 @@ class Business_Hours extends Module_Base
                     '-10'     => 'HST  - GMT-10',
                     '-11'     => 'NT  - GMT-11',
                     '-12'     => 'IDLW  - GMT-12',
-                    'custom'  => "Custom",
+                    'custom'  => esc_html__('Custom', 'bdthemes-element-pack'),
                 ],
                 'condition'        => [
                     'business_hour_style' => 'dynamic',
@@ -145,7 +145,7 @@ class Business_Hours extends Module_Base
                 'label'       => esc_html__('Custom Timezone', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
-                'defaut'      => '+6',
+                'default'     => '+6',
                 'placeholder' => '+6',
                 'condition'   => [
                     'dynamic_timezone'    => 'custom',
@@ -182,7 +182,7 @@ class Business_Hours extends Module_Base
                 'label'       => esc_html__('Enter Day', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => 'Monday',
+                'default'     => esc_html__('Monday', 'bdthemes-element-pack'),
                 'dynamic'     => ['active' => true],
             ]
         );
@@ -193,7 +193,7 @@ class Business_Hours extends Module_Base
                 'label'       => esc_html__('Enter Time', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => '10:00 AM - 6:00 PM',
+                'default'     => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
                 'dynamic'     => ['active' => true],
             ]
         );
@@ -273,27 +273,27 @@ class Business_Hours extends Module_Base
                 'default'     => [
                     [
                         'enter_day'  => esc_html__('Monday', 'bdthemes-element-pack'),
-                        'enter_time' => '10:00 AM - 6:00 PM',
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
                     ],
                     [
                         'enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack'),
-                        'enter_time' => '10:00 AM - 6:00 PM',
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
                     ],
                     [
                         'enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack'),
-                        'enter_time' => '10:00 AM - 6:00 PM',
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
                     ],
                     [
                         'enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack'),
-                        'enter_time' => '10:00 AM - 6:00 PM',
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
                     ],
                     [
                         'enter_day'  => esc_html__('Friday', 'bdthemes-element-pack'),
-                        'enter_time' => '10:00 AM - 6:00 PM',
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
                     ],
                     [
                         'enter_day'      => esc_html__('Saturday', 'bdthemes-element-pack'),
-                        'enter_time'     => '10:00 AM - 6:00 PM',
+                        'enter_time'     => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
                     ],
                     [
                         'enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack'),
@@ -388,7 +388,7 @@ class Business_Hours extends Module_Base
             [
                 'label'   => esc_html__('Select Day', 'bdthemes-element-pack'),
                 'type'    => Controls_Manager::SELECT,
-                'default' => 'Monday',
+                'default' => esc_html__('Monday', 'bdthemes-element-pack'),
                 'options' => [
                     'Monday'    => esc_html__('Monday', 'bdthemes-element-pack'),
                     'Tuesday'   => esc_html__('Tuesday', 'bdthemes-element-pack'),
@@ -415,8 +415,8 @@ class Business_Hours extends Module_Base
             [
                 'label'       => esc_html__('Start Time', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => '09:00 AM',
-                'placeholder' => '09:00 AM',
+                'default'     => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                'placeholder' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'dynamic_close_this!' => 'yes',
@@ -429,8 +429,8 @@ class Business_Hours extends Module_Base
             [
                 'label'       => esc_html__('End Time', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => '05:00 PM',
-                'placeholder' => '05:00 PM',
+                'default'     => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                'placeholder' => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'dynamic_close_this!' => 'yes',
@@ -539,46 +539,46 @@ class Business_Hours extends Module_Base
 
                     [
                         'dynamic_enter_day'  => esc_html__('Monday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => '09:00 AM',
-                        'dynamic_end_time'   => '05:00 PM',
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                     ],
 
                     [
                         'dynamic_enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => '09:00 AM',
-                        'dynamic_end_time'   => '05:00 PM',
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                     ],
 
                     [
                         'dynamic_enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => '09:00 AM',
-                        'dynamic_end_time'   => '05:00 PM',
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                     ],
 
                     [
                         'dynamic_enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => '09:00 AM',
-                        'dynamic_end_time'   => '05:00 PM',
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                     ],
 
                     [
                         'dynamic_enter_day'  => esc_html__('Friday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => '09:00 AM',
-                        'dynamic_end_time'   => '05:00 PM',
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                     ],
 
                     [
                         'dynamic_enter_day'  => esc_html__('Saturday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => '09:00 AM',
-                        'dynamic_end_time'   => '05:00 PM',
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                     ],
 
                     [
                         'dynamic_enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack'),
-                        'dynamic_start_time'     => '09:00 AM',
-                        'dynamic_end_time'       => '05:00 PM',
+                        'dynamic_start_time'     => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                        'dynamic_end_time'       => esc_html__('05:00 PM', 'bdthemes-element-pack'),
                         'dynamic_close_this'     => 'yes',
-                        'dynamic_close_text'     => 'Closed',
+                        'dynamic_close_text'     => esc_html__('Closed', 'bdthemes-element-pack'),
                         'dynamic_highlight_this' => 'yes',
                     ],
                 ],
@@ -591,7 +591,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_dynamic_additional',
             [
-                'label' => __('Additional', 'bdthemes-element-pack'),
+                'label' => __('Additional Options', 'bdthemes-element-pack'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'business_hour_style' => 'dynamic',
@@ -631,7 +631,7 @@ class Business_Hours extends Module_Base
             [
                 'label'       => esc_html__('Separator', 'bdthemes-element-pack'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => '-',
+                'default'     => esc_html__('-', 'bdthemes-element-pack'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'business_hour_style' => 'dynamic',

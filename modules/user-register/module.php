@@ -59,8 +59,7 @@
 			$post_id   = isset($_REQUEST['page_id']) ? (int) $_REQUEST['page_id'] : 0;
 			$widget_id = isset($_REQUEST['widget_id']) ? $_REQUEST['widget_id'] : 0;
 			
-			$result = $this->get_widget_settings( $post_id, $widget_id );
-			if ( isset( $result['show_recaptcha_checker'] ) && $result['show_recaptcha_checker'] == 'yes' ) {
+			if ( $this->is_recaptcha_required( $post_id, $widget_id, 'show_recaptcha_checker' ) ) {
 				$gRecaptcha = isset($_REQUEST['g-recaptcha-response']) ? sanitize_text_field( wp_unslash($_REQUEST['g-recaptcha-response']) ) : '';
 				if ( ! apply_filters( 'element_pack_google_recaptcha_validation', $gRecaptcha ) ) {
 					$errors->add( 'recaptcha_invalid', __( 'reCAPTCHA is invalid!.', 'bdthemes-element-pack' ) );

@@ -70,7 +70,7 @@ class Module extends Element_Pack_Module_Base {
 			[ 
 				'label'              => esc_html__( 'Description', 'bdthemes-element-pack' ),
 				'type'               => Controls_Manager::TEXTAREA,
-				'default'            => 'This is Tooltip',
+				'default'            => esc_html__('This is Tooltip', 'bdthemes-element-pack'),
 				'dynamic'            => [ 'active' => true ],
 				'condition'          => [ 
 					'element_pack_widget_tooltip' => 'yes',
