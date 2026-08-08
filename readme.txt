@@ -1,15 +1,15 @@
 === Element Pack Addons for Elementor - Elementor Widgets, Elementor Templates, Elementor Addons ===
-Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik, syedfarhanreza, shmusuf, arafatakashakku, shaikatazim, shamim496
+Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik, shmusuf, arafatakashakku, shaikatazim, shamim496
 Donate link: http://bdthemes.com/
 Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets, elementor extensions, elementor addon, elementor widget, woocommerce elementor, addons
 Requires at least: 5.0.0
-Tested up to: 7.0.2
+Tested up to: 7.0.3
 Requires PHP: 7.4.0
-Stable tag: 8.7.14
+Stable tag: 8.7.15
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.2.0
+Elementor tested up to: 4.2.2
 
 
 Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
@@ -377,6 +377,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Widgets List
 
 == Changelog ==
+
+= 8.7.15 [8th August 2026] =
+
+* Fixed: Security issue where data returned by the promotions API could be injected as script into the WordPress admin area
+* Fixed: Promotion links and images are now restricted to http(s) and mailto addresses
+* Updated: Security improved
 
 = 8.7.14 [21st July 2026] =
 
