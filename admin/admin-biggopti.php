@@ -46,7 +46,7 @@ class Biggopties {
 		// }
 
 		// API endpoint for biggopties - you can change this to your actual endpoint
-		$api_url = 'https://api.sigmative.io/prod/store/api/biggopti/api-data-records';
+		$api_url = '';
 
 		$response = wp_remote_get($api_url, [
 			'timeout' => 30,
