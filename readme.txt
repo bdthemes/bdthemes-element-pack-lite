@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 7.0.3
 Requires PHP: 7.4.0
-Stable tag: 8.7.15
+Stable tag: 8.7.16
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -377,6 +377,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Widgets List
 
 == Changelog ==
+
+= 8.7.16 [10th August 2026] =
+
+* Removed: Admin API promotion notice system
 
 = 8.7.15 [8th August 2026] =
 
