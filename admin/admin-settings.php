@@ -41,6 +41,10 @@ class ElementPack_Admin_Settings {
 
 		// Add AJAX handler for plugin installation
 		add_action('wp_ajax_ep_install_plugin', [$this, 'install_plugin_ajax']);
+
+		// Angie integration notice: assets and dismiss handler
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_angie_notice_script' ] );
+		add_action( 'wp_ajax_ep_angie_notice_dismiss', [ $this, 'angie_notice_dismiss' ] );
 	}
 
 	/**
@@ -1355,6 +1359,53 @@ class ElementPack_Admin_Settings {
 	}
 
 	/**
+	 * Enqueue the dismiss script for the Angie integration notice.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function enqueue_angie_notice_script() {
+		if ( ! isset( $_GET['page'] ) || self::PAGE_ID !== $_GET['page'] ) {
+			return;
+		}
+
+		wp_enqueue_script( 'ep-angie-notice', BDTEP_ADMIN_URL . 'assets/js/ep-angie-notice.min.js', [ 'jquery' ], BDTEP_VER, true );
+		wp_localize_script( 'ep-angie-notice', 'ElementPackAngieConfig', [
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'element-pack' ),
+		] );
+	}
+
+	/**
+	 * Dismiss the Angie integration notice.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function angie_notice_dismiss() {
+		$nonce      = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
+		$display_id = isset( $_POST['display_id'] ) ? sanitize_text_field( wp_unslash( $_POST['display_id'] ) ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'element-pack' ) ) {
+			wp_send_json_error();
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error();
+		}
+
+		if ( empty( $display_id ) ) {
+			wp_send_json_error();
+		}
+
+		$dismissals                  = get_option( 'bdt_biggopti_dismissals', [] );
+		$dismissals[ $display_id ]   = [ 'dismissed_at' => time() ];
+		update_option( 'bdt_biggopti_dismissals', $dismissals, false );
+
+		wp_send_json_success();
+	}
+
+	/**
 	 * Agentic AI Angie integration coming soon notice (above dashboard).
 	 *
 	 * @access public
@@ -1368,9 +1419,8 @@ class ElementPack_Admin_Settings {
 			return;
 		}
 
-		$notice_id = 'bdt-admin-biggopti-api-biggopti-' . $display_id;
 		?>
-		<div id="<?php echo esc_attr( $notice_id ); ?>" class="element-pack-biggopti biggopti biggopti-info is-dismissible ep-angie-coming-soon" data-display-id="<?php echo esc_attr( $display_id ); ?>" data-dismissible-meta="transient" data-dismissible-time="604800">
+		<div id="ep-angie-notice" class="element-pack-biggopti biggopti biggopti-info ep-angie-coming-soon" data-display-id="<?php echo esc_attr( $display_id ); ?>">
 			<div class="ep-angie-notice">
 				<div class="ep-angie-notice__glow" aria-hidden="true"></div>
 				<div class="ep-angie-notice__grid" aria-hidden="true"></div>
@@ -1405,7 +1455,7 @@ class ElementPack_Admin_Settings {
 					</div>
 				</div>
 			</div>
-			<button type="button" class="bdt-admin-api-biggopti-dismiss dashicons dashicons-dismiss">
+			<button type="button" class="ep-angie-notice__dismiss dashicons dashicons-dismiss">
 				<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'bdthemes-element-pack' ); ?></span>
 			</button>
 		</div>

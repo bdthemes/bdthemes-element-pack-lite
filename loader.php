@@ -674,7 +674,6 @@ class Element_Pack_Loader {
 			new Admin();
 
             require_once( BDTEP_ADMIN_PATH . 'admin-biggopti.php' );
-            require_once( BDTEP_ADMIN_PATH . 'admin-api-biggopti.php' );
 		}
 	}
 

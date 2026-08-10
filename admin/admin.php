@@ -24,7 +24,7 @@ class Admin {
 			add_action('admin_init', [$this, 'admin_script']);
 		}
 
-		add_action('admin_init', [$this, 'admin_api_biggopti_script']);
+		add_action('admin_init', [$this, 'admin_biggopti_script']);
 
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
 		
@@ -118,41 +118,17 @@ class Admin {
 		}
 	}
 
-	public function admin_api_biggopti_script() {
+	public function admin_biggopti_script() {
 		wp_enqueue_style( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-biggopti.css', [], BDTEP_VER, 'all' );
 		wp_enqueue_script( 'ep-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
 
 		wp_enqueue_style( 'bdt-product-feed', BDTEP_ADMIN_URL . 'assets/css/ep-product-feed.css', [], BDTEP_VER, 'all' );
 
-		wp_enqueue_style( 'bdt-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/css/ep-admin-api-biggopti.css', [], BDTEP_VER, 'all' );
-		wp_enqueue_script( 'ep-admin-api-biggopti', BDTEP_ADMIN_URL . 'assets/js/ep-admin-api-biggopti.min.js', [ 'jquery' ], BDTEP_VER, true );
-
-		$dismissals = get_option('bdt_biggopti_dismissals', []);
-		$dismissed_display_ids = [];
-		$prefix = 'bdt-admin-biggopti-api-biggopti-';
-		foreach (array_keys($dismissals) as $key) {
-			if (strpos($key, $prefix) === 0) {
-				$dismissed_display_ids[] = substr($key, strlen($prefix));
-			} else {
-				$dismissed_display_ids[] = $key;
-			}
-		}
-
-		$current_sector = '';
-		if ( isset( $_GET['page'] ) && $_GET['page'] === 'element_pack_options' ) {
-			$current_sector = 'plugin_dashboard';
-		}
-		
-		$script_config = [ 
+		$script_config = [
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'nonce'   => wp_create_nonce( 'element-pack' ),
-			'isPro'             	=> function_exists('element_pack_pro_activated') && element_pack_pro_activated(),
-			'assetsUrl'         	=> defined('BDTEP_ASSETS_URL') ? BDTEP_ASSETS_URL : '',
-			'dismissedDisplayIds'	=> $dismissed_display_ids,
-			'currentSector'      	=> $current_sector,
 		];
 		wp_localize_script( 'ep-biggopti', 'ElementPackBiggoptiConfig', $script_config );
-		wp_localize_script( 'ep-admin-api-biggopti', 'ElementPackAdminApiBiggoptiConfig', $script_config);
 	}
 
 	/**
