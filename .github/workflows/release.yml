@@ -1,41 +1,44 @@
 name: Publish Release
 
 on:
-    push:
-        tags:
-            - '*'
-    release:
-        types: [published]            
+  push:
+    tags:
+      - '*'
+  release:
+    types: [published]
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    release-pro:
-        runs-on: ubuntu-latest
+  release-pro:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: Create bdthemes-element-pack-lite directory and move files
-              run: |
-                  mkdir -p bdthemes-element-pack-lite &&
-                  find . -maxdepth 1 -not -name 'bdthemes-element-pack-lite' -exec mv {} bdthemes-element-pack-lite \;
+      - name: Create bdthemes-element-pack-lite directory and move files
+        run: |
+          mkdir -p bdthemes-element-pack-lite &&
+          find . -maxdepth 1 -not -name 'bdthemes-element-pack-lite' -exec mv {} bdthemes-element-pack-lite \;
 
-            - name: Archive release
-              uses: thedoctor0/zip-release@0.7.6
-              with:
-                  filename: 'bdthemes-element-pack-lite.zip'
-                  exclusions: "/*node_modules/* /*less/* /*tests/* /*gruntfile.js /*package.json /*package-lock.json /*sync.ffs_db /*.idea/* /*.DS_Store /*.gitignore /*.github/* /*.git/* /*LICENSE /*.eslintrc /*.gitattributes /*.prettierrc"
-            - name: Display release
-              run: ls -a
+      - name: Archive release
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          filename: 'bdthemes-element-pack-lite.zip'
+          exclusions: "/*node_modules/* /*less/* /*tests/* /*gruntfile.js /*package.json /*package-lock.json /*sync.ffs_db /*.idea/* /*.DS_Store /*.gitignore /*.github/* /*.git/* /*LICENSE /*.eslintrc /*.gitattributes /*.prettierrc"
 
-            - name: Create Release
-              uses: ncipollo/release-action@v1.14.0
-              with:
-                  artifacts: './bdthemes-element-pack-lite.zip'
-                  token: ${{ secrets.TOKEN }}
-                  removeArtifacts: true
-                  allowUpdates: true
-                  makeLatest: true
-                  tag: ${{ github.ref_name }}
+      - name: Display release
+        run: |
+          ls -lah
+          test -s bdthemes-element-pack-lite.zip
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          artifacts: './bdthemes-element-pack-lite.zip'
+          token: ${{ secrets.TOKEN }}
+          removeArtifacts: true
+          allowUpdates: true
+          makeLatest: true
+          tag: ${{ github.ref_name }}
