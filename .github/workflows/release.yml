@@ -28,10 +28,24 @@ jobs:
           filename: 'bdthemes-element-pack-lite.zip'
           exclusions: "/*node_modules/* /*less/* /*tests/* /*gruntfile.js /*package.json /*package-lock.json /*sync.ffs_db /*.idea/* /*.DS_Store /*.gitignore /*.github/* /*.git/* /*LICENSE /*.eslintrc /*.gitattributes /*.prettierrc"
 
-      - name: Display release
+      - name: Verify release archive
         run: |
+          echo "PWD:"
+          pwd
+
+          echo "Files:"
           ls -lah
-          test -s bdthemes-element-pack-lite.zip
+
+          echo "ZIP:"
+          ls -lah ./bdthemes-element-pack-lite.zip
+
+          echo "ZIP size:"
+          du -h ./bdthemes-element-pack-lite.zip
+
+          echo "ZIP integrity:"
+          unzip -t ./bdthemes-element-pack-lite.zip
+
+          test -s ./bdthemes-element-pack-lite.zip
 
       - name: Create Release
         uses: ncipollo/release-action@v1.14.0
@@ -40,5 +54,6 @@ jobs:
           token: ${{ secrets.TOKEN }}
           removeArtifacts: true
           allowUpdates: true
+          artifactErrorsFailBuild: true
           makeLatest: true
           tag: ${{ github.ref_name }}
