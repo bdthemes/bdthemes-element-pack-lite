@@ -38,5 +38,4 @@ jobs:
                   removeArtifacts: true
                   allowUpdates: true
                   makeLatest: true
-                  immutableCreate: true
                   tag: ${{ github.ref_name }}
