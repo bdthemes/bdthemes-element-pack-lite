@@ -58,10 +58,23 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
     }
 
+    /**
+     * Gate every AJAX handler in this class behind a capability + nonce check.
+     * Without it these actions (remote fetch, template import, page creation,
+     * e-mail) were reachable by any logged-in user with no nonce.
+     */
+    private function verify_ajax_access() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to do this.', 'bdthemes-element-pack' ) ), 403 );
+        }
+        check_ajax_referer( 'ep_elementor_demo_importer', 'nonce' );
+    }
+
     ## Import Template
     function templates_get_content_remote_request( $url ) {
 
-        $response = wp_remote_get( $url, array(
+        // wp_safe_remote_get blocks requests to internal/loopback hosts (SSRF).
+        $response = wp_safe_remote_get( $url, array(
             'timeout'   => 60,
             'sslverify' => true
         ) );
@@ -75,6 +88,8 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
      * Ajax request.
      */
     public function ajax_import_data() {
+
+        $this->verify_ajax_access();
 
         if ( isset( $_REQUEST ) ) {
             $demo_url         = isset($_REQUEST['demo_url']) ? esc_url_raw($_REQUEST['demo_url']) : '';
@@ -121,7 +136,9 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
                         $new_post_id = wp_insert_post( $args );
                         update_post_meta( $new_post_id, '_elementor_data', $_elementor_data );
                         if(isset($metaData['_elementor_page_settings']) && isset($metaData['_elementor_page_settings'][0])){
-                            $_elementor_page_settings = maybe_unserialize( $metaData['_elementor_page_settings'][0] );
+                            $_elementor_page_settings = is_serialized( $metaData['_elementor_page_settings'][0] )
+                                ? unserialize( $metaData['_elementor_page_settings'][0], array( 'allowed_classes' => false ) )
+                                : $metaData['_elementor_page_settings'][0];
                             update_post_meta( $new_post_id, '_elementor_page_settings', $_elementor_page_settings );
                         }
                         update_post_meta( $new_post_id, '_elementor_template_type', $response_data['type'] );
@@ -344,6 +361,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
     /** Load data when click on Demo Tab **/
     function demo_tab_ajax_loading_demo() {
+        $this->verify_ajax_access();
         $this->searchVal      = isset($_REQUEST['s']) ? sanitize_text_field($_REQUEST['s']) : '';
         $this->termSlug       = isset($_REQUEST['term_slug']) ? sanitize_text_field($_REQUEST['term_slug']) : '';
         $this->demoType       = isset($_REQUEST['demo_type']) ? sanitize_text_field($_REQUEST['demo_type']) : '';
@@ -371,6 +389,8 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
     public function sync_demo_with_server(){
 
+        $this->verify_ajax_access();
+
         $this->createTemplateTables();
 
         echo json_encode(
@@ -384,6 +404,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
     }
 
     public function send_report(){
+        $this->verify_ajax_access();
         if(isset($_REQUEST['demo_id']) && $_REQUEST['demo_id'] > 0 && isset($_REQUEST['demo_json_url'])){
             $demo_id        = absint($_REQUEST['demo_id']);
             $demo_json_url  = esc_url_raw($_REQUEST['demo_json_url']);

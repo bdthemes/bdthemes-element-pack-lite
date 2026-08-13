@@ -248,6 +248,20 @@ class ElementPack_Others_Plugin_Manager {
                 });
             }
             
+            // Escape remote-sourced strings before they are concatenated into
+            // markup. The plugin catalog comes from a remote endpoint; treat it
+            // as untrusted so a poisoned/compromised feed cannot inject HTML/JS
+            // into the admin dashboard (the 2026 notification-feed incident).
+            function epEsc(s) {
+                return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+                });
+            }
+            function epSafeUrl(u) {
+                u = String(u == null ? '' : u);
+                return /^https?:\/\//i.test(u) ? u : '';
+            }
+
             // Function to render plugins
             function renderPlugins(plugins) {
                 var html = '';
@@ -273,18 +287,18 @@ class ElementPack_Others_Plugin_Manager {
                             '<div class="bdt-others-plugin-content">' +
                                 '<div class="bdt-plugin-logo-wrap bdt-flex bdt-flex-middle">' +
                                     '<div class="bdt-plugin-logo-container">' +
-                                        '<img src="' + logoUrl + '" alt="' + pluginName + '" class="bdt-plugin-logo" ' +
+                                        '<img src="' + epEsc(epSafeUrl(logoUrl)) + '" alt="' + epEsc(pluginName) + '" class="bdt-plugin-logo" ' +
                                             'onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">' +
                                         '<div class="default-plugin-icon" style="display:none;">📦</div>' +
                                     '</div>' +
                                     '<div class="bdt-others-plugin-user-wrap bdt-flex bdt-flex-middle">' +
-                                        '<h1 class="ep-feature-title">' + pluginName + '</h1>' +
+                                        '<h1 class="ep-feature-title">' + epEsc(pluginName) + '</h1>' +
                                     '</div>' +
                                 '</div>' +
                                 '<div class="bdt-others-plugin-content-text bdt-margin-top">';
                         
                         if (plugin.description) {
-                            html += '<p>' + plugin.description + '</p>';
+                            html += '<p>' + epEsc(plugin.description) + '</p>';
                         }
                         
                         // Active installs
@@ -355,13 +369,13 @@ class ElementPack_Others_Plugin_Manager {
                                 '<?php esc_html_e("Activate", "bdthemes-element-pack"); ?>' +
                                 '</a>';
                         } else {
-                            html += '<button class="bdt-button bdt-welcome-button ep-install-plugin" data-plugin-slug="' + pluginSlug + '" data-nonce="<?php echo esc_attr( wp_create_nonce('ep_install_plugin_nonce') ); ?>">' +
+                            html += '<button class="bdt-button bdt-welcome-button ep-install-plugin" data-plugin-slug="' + epEsc(pluginSlug) + '" data-nonce="<?php echo esc_attr( wp_create_nonce('ep_install_plugin_nonce') ); ?>">' +
                                 '<?php esc_html_e("Install", "bdthemes-element-pack"); ?>' +
                                 '</button>';
                         }
                         
-                        if (plugin.homepage) {
-                            html += '<a class="bdt-button bdt-dashboard-sec-btn" target="_blank" href="' + plugin.homepage + '">' +
+                        if (plugin.homepage && epSafeUrl(plugin.homepage)) {
+                            html += '<a class="bdt-button bdt-dashboard-sec-btn" target="_blank" rel="noopener noreferrer" href="' + epEsc(epSafeUrl(plugin.homepage)) + '">' +
                                 '<?php esc_html_e("Learn More", "bdthemes-element-pack"); ?>' +
                                 '</a>';
                         }
@@ -494,6 +508,12 @@ class ElementPack_Others_Plugin_Manager {
         // Verify nonce
         if (!check_ajax_referer('ep_get_plugins_nonce', 'nonce', false)) {
             wp_die(esc_html__('Security check failed.', 'bdthemes-element-pack'));
+        }
+
+        // This data is only ever used on the plugin-install screen; gate it to
+        // users who could act on it rather than exposing it to any logged-in user.
+        if (!current_user_can('install_plugins')) {
+            wp_send_json_error(['message' => __('You do not have permission to do this.', 'bdthemes-element-pack')], 403);
         }
 
         // Get cached data

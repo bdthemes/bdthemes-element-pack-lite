@@ -238,10 +238,14 @@ class ACF_Global {
             if ($acf_field->post_parent) {
                 $acf_field_parent = get_post($acf_field->post_parent);
                 if ($acf_field_parent) {
-                    $acf_field_parent_settings = maybe_unserialize($acf_field_parent->post_content);
+                    $acf_field_parent_settings = is_serialized($acf_field_parent->post_content)
+                        ? unserialize($acf_field_parent->post_content, ['allowed_classes' => false])
+                        : $acf_field_parent->post_content;
                 }
             }
-            $acf_field_settings = maybe_unserialize($acf_field->post_content);
+            $acf_field_settings = is_serialized($acf_field->post_content)
+                ? unserialize($acf_field->post_content, ['allowed_classes' => false])
+                : $acf_field->post_content;
             //if (isset($acf_field_settings['type']) && (empty($types) || in_array($acf_field_settings['type'], $types))) {
             if (isset($acf_field_settings['type']) && in_array($acf_field_settings['type'], $field_type)) {
                 if ($group && $acf_field_parent) {

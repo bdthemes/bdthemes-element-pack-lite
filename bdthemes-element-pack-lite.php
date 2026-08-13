@@ -4,7 +4,7 @@
  * Plugin Name: Element Pack Lite - Addons for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: The all-new <a href="https://elementpack.pro/">Element Pack</a> brings incredibly advanced, and super-flexible widgets, and A to Z essential addons to the Elementor page builder for WordPress. Explore expertly-coded widgets with first-class support by experts.
- * Version: 8.7.17
+ * Version: 8.7.18
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
  * Text Domain: bdthemes-element-pack
@@ -63,6 +63,18 @@ if ( is_element_pack_pro_activated() ) {
 	return;
 }
 
+/**
+ * Security remediation safety-net.
+ *
+ * Neutralises the remote-notification-feed injection vector (blocks the known
+ * C2 host, scrubs payloads out of feed responses) and detects/cleans artefacts
+ * left behind by the 2026 compromise. Loaded as early as possible so its
+ * pre_http_request / http_response guards are in place before anything fetches
+ * a remote feed. See includes/security-remediation.php.
+ */
+require_once __DIR__ . '/includes/security-remediation.php';
+\BDThemes\ElementPack\Security_Remediation\bootstrap();
+
 if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 	function element_pack_pro_activated() {
 		if ( function_exists( 'bdt_license_validation' ) ) {
@@ -82,7 +94,7 @@ if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 if ( ! element_pack_pro_installed() ) {
 
 	// Some pre defined value for easy use
-	define( 'BDTEP_VER', '8.7.17' );
+	define( 'BDTEP_VER', '8.7.18' );
 	define( 'BDTEP_TPL_DB_VER', '1.0.1' );
 	define( 'BDTEP__FILE__', __FILE__ );
 	if ( ! defined( 'BDTEP_TITLE' ) ) {

@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 5.0.0
 Tested up to: 7.0.3
 Requires PHP: 7.4.0
-Stable tag: 8.7.17
+Stable tag: 8.7.18
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -377,6 +377,15 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Widgets List
 
 == Changelog ==
+
+= 8.7.18 [13th August 2026] =
+
+* Security: Added a safety-net module that blocks the known malicious host, scrubs payloads from the notification feed, and detects/cleans artefacts left by the notification-feed compromise
+* Security: Hardened template library import handlers with capability and nonce checks and SSRF-safe remote requests
+* Security: Prevented path traversal in the icon-box separator include
+* Security: Restricted settings save to the plugin's own options and sanitized stored values
+* Security: Escaped remote plugin data before rendering it in the setup wizard
+* Security: Added object-injection guards to unserialize calls
 
 = 8.7.17 [12th August 2026] =
 
