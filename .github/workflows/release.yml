@@ -56,4 +56,6 @@ jobs:
           allowUpdates: true
           artifactErrorsFailBuild: true
           makeLatest: true
+          omitBodyDuringUpdate: true
+          omitNameDuringUpdate: true
           tag: ${{ github.ref_name }}
