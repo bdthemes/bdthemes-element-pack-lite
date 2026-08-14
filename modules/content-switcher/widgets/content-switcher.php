@@ -25,7 +25,7 @@ class Content_Switcher extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__('Content Switcher', 'bdthemes-element-pack');
+		return BDTEP . esc_html__('Content Switcher', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -69,15 +69,15 @@ class Content_Switcher extends Module_Base {
 		return [
 			'condition' => ! is_ep_pro(),
 			'image' => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
-			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack-lite' ),
+			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack-lite' ),
 			/* translators: 1: First promoted feature, 2: Second promoted feature */
-			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Style -> Show Multiple Switches', 'Content Type -> Elementor Template, Link Section, Link Widget'),
+			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack-lite' ), 'Style -> Show Multiple Switches', 'Content Type -> Elementor Template, Link Section, Link Widget'),
 			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
 			/* translators: %s: Upgrade button label */
 			'upgrade_text' => sprintf(
 				'<span class="bdt-widget-promotion-btn">%s</span>',
-				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' )
+				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack-lite' )
 			),
 		];
 	}
@@ -86,29 +86,28 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_switcher_layout',
 			[
-				'label' => esc_html__('Switcher', 'bdthemes-element-pack'),
+				'label' => esc_html__('Switcher', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'switcher_style',
 			[
-				'label'   => esc_html__('Style', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Style', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '1',
 				'options' => [
-					'1'      => esc_html__('Classic Toggle', 'bdthemes-element-pack'),
-					'2'      => esc_html__('Rectangle Switch', 'bdthemes-element-pack'),
-					'3'      => esc_html__('Round Slide', 'bdthemes-element-pack'),
-					'4'      => esc_html__('Flat Modern', 'bdthemes-element-pack'),
-					'5'      => esc_html__('Sleek Slider', 'bdthemes-element-pack'),
-					'6'      => esc_html__('Diamond Toggle', 'bdthemes-element-pack'),
-					'7'      => esc_html__('Clean Circle', 'bdthemes-element-pack'),
-					'8'      => esc_html__('Soft Curve', 'bdthemes-element-pack'),
-					'9'      => esc_html__('Square Rotate', 'bdthemes-element-pack'),
-					'button' => esc_html__('Show all switches', 'bdthemes-element-pack') . BDTEP_LOCK,
+					'1'      => esc_html__('Classic Toggle', 'bdthemes-element-pack-lite'),
+					'2'      => esc_html__('Rectangle Switch', 'bdthemes-element-pack-lite'),
+					'3'      => esc_html__('Round Slide', 'bdthemes-element-pack-lite'),
+					'4'      => esc_html__('Flat Modern', 'bdthemes-element-pack-lite'),
+					'5'      => esc_html__('Sleek Slider', 'bdthemes-element-pack-lite'),
+					'6'      => esc_html__('Diamond Toggle', 'bdthemes-element-pack-lite'),
+					'7'      => esc_html__('Clean Circle', 'bdthemes-element-pack-lite'),
+					'8'      => esc_html__('Soft Curve', 'bdthemes-element-pack-lite'),
+					'9'      => esc_html__('Square Rotate', 'bdthemes-element-pack-lite'),
+					'button' => esc_html__('Show all switches', 'bdthemes-element-pack-lite'),
 				],
-				'classes' => BDTEP_LOCK_CLASS,
 			]
 		);
 
@@ -117,9 +116,9 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'title',
 			[
-				'label'       => esc_html__('Title', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Title', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__('Switcher Title', 'bdthemes-element-pack'),
+				'default'     => esc_html__('Switcher Title', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 			]
 		);
@@ -127,7 +126,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'switcher_icon',
 			[
-				'label'       => esc_html__('Icon', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Icon', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::ICONS,
 				'label_block' => false,
 				'skin'        => 'inline',
@@ -137,10 +136,10 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'switcher_active',
 			[
-				'label'        => esc_html__('Active', 'bdthemes-element-pack'),
+				'label'        => esc_html__('Active', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__('Yes', 'bdthemes-element-pack'),
-				'label_off'    => esc_html__('No', 'bdthemes-element-pack'),
+				'label_on'     => esc_html__('Yes', 'bdthemes-element-pack-lite'),
+				'label_off'    => esc_html__('No', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -148,26 +147,25 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'content_type',
 			[
-				'label'   => esc_html__('Content Type', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Content Type', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'content',
 				'options' => [
-					'content' => esc_html__('Content', 'bdthemes-element-pack'),
-					'template' => esc_html__('Elementor Template', 'bdthemes-element-pack') . BDTEP_LOCK,
-					'link_section'  => esc_html__('Link Section', 'bdthemes-element-pack') . BDTEP_LOCK,
-					'link_widget'  => esc_html__('Link Widget', 'bdthemes-element-pack') . BDTEP_LOCK,
-					'price_card'  => esc_html__('Price Card', 'bdthemes-element-pack') . BDTEP_LOCK,
+					'content' => esc_html__('Content', 'bdthemes-element-pack-lite'),
+					'template' => esc_html__('Elementor Template', 'bdthemes-element-pack-lite'),
+					'link_section'  => esc_html__('Link Section', 'bdthemes-element-pack-lite'),
+					'link_widget'  => esc_html__('Link Widget', 'bdthemes-element-pack-lite'),
+					'price_card'  => esc_html__('Price Card', 'bdthemes-element-pack-lite'),
 				],
-				'classes' => BDTEP_LOCK_CLASS,
 			]
 		);
 
 		$repeater->add_control(
 			'price_card_content',
 			[
-				'label'       => esc_html__('Price Title', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Price Title', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__('Starting From', 'bdthemes-element-pack'),
+				'default'     => esc_html__('Starting From', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 				'condition'   => [
 					'content_type' => 'price_card',
@@ -177,29 +175,29 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'currency_symbol',
 			[ 
-				'label'   => __( 'Currency Symbol', 'bdthemes-element-pack' ),
+				'label'   => __( 'Currency Symbol', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [ 
-					''             => __( 'None', 'bdthemes-element-pack' ),
-					'dollar'       => '&#36; ' . _x( 'Dollar', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'euro'         => '&#128; ' . _x( 'Euro', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'baht'         => '&#3647; ' . _x( 'Baht', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'franc'        => '&#8355; ' . _x( 'Franc', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'guilder'      => '&fnof; ' . _x( 'Guilder', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'krona'        => 'kr ' . _x( 'Krona', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'lira'         => '&#8356; ' . _x( 'Lira', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'peseta'       => '&#8359 ' . _x( 'Peseta', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'peso'         => '&#8369; ' . _x( 'Peso', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'pound'        => '&#163; ' . _x( 'Pound Sterling', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'real'         => 'R$ ' . _x( 'Real', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'ruble'        => '&#8381; ' . _x( 'Ruble', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'rupee'        => '&#8360; ' . _x( 'Rupee', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'indian_rupee' => '&#8377; ' . _x( 'Rupee (Indian)', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'shekel'       => '&#8362; ' . _x( 'Shekel', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'yen'          => '&#165; ' . _x( 'Yen/Yuan', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'bdt'          => '&#2547; ' . _x( 'Taka', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'won'          => '&#8361; ' . _x( 'Won', 'Currency Symbol', 'bdthemes-element-pack' ),
-					'custom'       => __( 'Custom', 'bdthemes-element-pack' ),
+					''             => __( 'None', 'bdthemes-element-pack-lite' ),
+					'dollar'       => '&#36; ' . _x( 'Dollar', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'euro'         => '&#128; ' . _x( 'Euro', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'baht'         => '&#3647; ' . _x( 'Baht', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'franc'        => '&#8355; ' . _x( 'Franc', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'guilder'      => '&fnof; ' . _x( 'Guilder', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'krona'        => 'kr ' . _x( 'Krona', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'lira'         => '&#8356; ' . _x( 'Lira', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'peseta'       => '&#8359 ' . _x( 'Peseta', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'peso'         => '&#8369; ' . _x( 'Peso', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'pound'        => '&#163; ' . _x( 'Pound Sterling', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'real'         => 'R$ ' . _x( 'Real', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'ruble'        => '&#8381; ' . _x( 'Ruble', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'rupee'        => '&#8360; ' . _x( 'Rupee', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'indian_rupee' => '&#8377; ' . _x( 'Rupee (Indian)', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'shekel'       => '&#8362; ' . _x( 'Shekel', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'yen'          => '&#165; ' . _x( 'Yen/Yuan', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'bdt'          => '&#2547; ' . _x( 'Taka', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'won'          => '&#8361; ' . _x( 'Won', 'Currency Symbol', 'bdthemes-element-pack-lite' ),
+					'custom'       => __( 'Custom', 'bdthemes-element-pack-lite' ),
 				],
 				'default' => 'dollar',
 				'condition'   => [
@@ -211,7 +209,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'currency_symbol_custom',
 			[ 
-				'label'     => __( 'Custom Symbol', 'bdthemes-element-pack' ),
+				'label'     => __( 'Custom Symbol', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'condition' => [ 
 					'currency_symbol' => 'custom',
@@ -223,7 +221,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'price',
 			[ 
-				'label'   => __( 'Price', 'bdthemes-element-pack' ),
+				'label'   => __( 'Price', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => '49.99',
 				'condition'   => [
@@ -236,7 +234,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'currency_format',
 			[ 
-				'label'   => __( 'Currency Format', 'bdthemes-element-pack' ),
+				'label'   => __( 'Currency Format', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [ 
 					''  => '1,234.56 (Default)',
@@ -251,7 +249,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'sale',
 			[ 
-				'label'     => __( 'Sale', 'bdthemes-element-pack' ),
+				'label'     => __( 'Sale', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 				'condition'   => [
@@ -263,7 +261,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'original_price',
 			[ 
-				'label'     => __( 'Original Price', 'bdthemes-element-pack' ),
+				'label'     => __( 'Original Price', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::NUMBER,
 				'default'   => '79',
 				'condition' => [ 
@@ -276,9 +274,9 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'period',
 			[ 
-				'label'   => __( 'Period', 'bdthemes-element-pack' ),
+				'label'   => __( 'Period', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Monthly', 'bdthemes-element-pack' ),
+				'default' => __( 'Monthly', 'bdthemes-element-pack-lite' ),
 				'condition'   => [
 					'content_type' => 'price_card',
 				],
@@ -288,9 +286,9 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'price_card_additional_text',
 			[
-				'label'       => esc_html__('Additional Text', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Additional Text', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => esc_html__('Enjoy our special offer!', 'bdthemes-element-pack'),
+				'default'     => esc_html__('Enjoy our special offer!', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 				'condition'   => [
 					'content_type' => 'price_card',
@@ -301,9 +299,9 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'button_text',
 			[ 
-				'label'   => __( 'Button Text', 'bdthemes-element-pack' ),
+				'label'   => __( 'Button Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Select Plan', 'bdthemes-element-pack' ),
+				'default' => __( 'Select Plan', 'bdthemes-element-pack-lite' ),
 				'condition'   => [
 					'content_type' => 'price_card',
 				],
@@ -313,7 +311,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'link',
 			[ 
-				'label'       => __( 'Link', 'bdthemes-element-pack' ),
+				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'placeholder' => 'http://your-link.com',
 				'default'     => [ 
@@ -328,14 +326,14 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'button_css_id',
 			[ 
-				'label'       => __( 'Button ID', 'bdthemes-element-pack' ),
+				'label'       => __( 'Button ID', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 
 					'active' => true,
 				],
 				'default'     => '',
-				'title'       => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
-				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'title'       => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite' ),
 				'separator'   => 'before',
 				'condition'   => [
 					'content_type' => 'price_card',
@@ -346,9 +344,9 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'content',
 			[
-				'label'       => esc_html__('Content', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Content', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => esc_html__('Switcher Content', 'bdthemes-element-pack'),
+				'default'     => esc_html__('Switcher Content', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 				'condition'   => [
 					'content_type' => 'content',
@@ -359,10 +357,10 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'saved_templates',
 			[
-				'label'       => esc_html__('Choose Template', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Choose Template', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'label_block' => true,
-				'placeholder' => __('Type and select template', 'bdthemes-element-pack'),
+				'placeholder' => __('Type and select template', 'bdthemes-element-pack-lite'),
 				'query_args'  => [
 					'query'        => 'elementor_template',
 				],
@@ -375,8 +373,8 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'link_section_id',
 			[
-				'label'       => __('Section ID', 'bdthemes-element-pack'),
-				'description' => __('Paste your section ID here. Don\'t need to add # before ID', 'bdthemes-element-pack'),
+				'label'       => __('Section ID', 'bdthemes-element-pack-lite'),
+				'description' => __('Paste your section ID here. Don\'t need to add # before ID', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'section-id',
 				'dynamic'     => ['active' => true],
@@ -389,7 +387,7 @@ class Content_Switcher extends Module_Base {
 		$repeater->add_control(
 			'link_widget_id',
 			[
-				'label'   => __('Link Widget ID', 'bdthemes-element-pack'),
+				'label'   => __('Link Widget ID', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => ['active' => true],
 				'condition'   => [
@@ -402,7 +400,7 @@ class Content_Switcher extends Module_Base {
 			'link_widget_note',
 			[
 				'type' => Controls_Manager::RAW_HTML,
-				'raw' => __('Note: Add widget ID here without # prefix. This widget will be shown when this item is active. Make sure to add Link Widget option for other items too.', 'bdthemes-element-pack'),
+				'raw' => __('Note: Add widget ID here without # prefix. This widget will be shown when this item is active. Make sure to add Link Widget option for other items too.', 'bdthemes-element-pack-lite'),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 				'condition'   => [
 					'content_type' => 'link_widget',
@@ -413,24 +411,24 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switcher_items',
 			[
-				'label'   => esc_html__('Switcher Items', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Switcher Items', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::REPEATER,
 				'default' => [
 					[
 						'content_type'    => 'content',
-						'title'           => esc_html__('Primary', 'bdthemes-element-pack'),
-						'content'         => esc_html__('Switcher Content Primary', 'bdthemes-element-pack'),
+						'title'           => esc_html__('Primary', 'bdthemes-element-pack-lite'),
+						'content'         => esc_html__('Switcher Content Primary', 'bdthemes-element-pack-lite'),
 						'switcher_active' => 'yes',
 					],
 					[
 						'content_type' => 'content',
-						'title'        => esc_html__('Secondary', 'bdthemes-element-pack'),
-						'content'      => esc_html__('Switcher Content Secondary', 'bdthemes-element-pack'),
+						'title'        => esc_html__('Secondary', 'bdthemes-element-pack-lite'),
+						'content'      => esc_html__('Switcher Content Secondary', 'bdthemes-element-pack-lite'),
 					],
 					[
 						'content_type' => 'content',
-						'title'        => esc_html__('Others', 'bdthemes-element-pack'),
-						'content'      => esc_html__('Switcher Content Others', 'bdthemes-element-pack'),
+						'title'        => esc_html__('Others', 'bdthemes-element-pack-lite'),
+						'content'      => esc_html__('Switcher Content Others', 'bdthemes-element-pack-lite'),
 					],
 				],
 				'fields'      => $repeater->get_controls(),
@@ -443,16 +441,16 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_switcher_additional_options',
 			[
-				'label' => esc_html__('Additional Options', 'bdthemes-element-pack'),
+				'label' => esc_html__('Additional Options', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'content_position_unchanged',
 			[
-				'label'        => __('Content Position Unchanged', 'bdthemes-element-pack'),
+				'label'        => __('Content Position Unchanged', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
-				'description'  => __('Keep content in its original position in the page.', 'bdthemes-element-pack'),
+				'description'  => __('Keep content in its original position in the page.', 'bdthemes-element-pack-lite'),
 			]
 		);
 
@@ -460,19 +458,19 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'content_switcher_align',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left'   => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fa fa-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fa fa-align-right',
 					],
 				],
@@ -485,7 +483,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'badge',
 			[
-				'label' => __('Badge', 'bdthemes-element-pack'),
+				'label' => __('Badge', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -494,10 +492,10 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'badge_text',
 			[
-				'label' => __('Badge Text', 'bdthemes-element-pack'),
+				'label' => __('Badge Text', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Hot', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Type Step Here', 'bdthemes-element-pack' ),
+				'default' => esc_html__( 'Hot', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Type Step Here', 'bdthemes-element-pack-lite' ),
 				'dynamic' => [
 					'active' => true,
 				],
@@ -511,15 +509,15 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'badge_align',
 			[
-				'label'   => esc_html__('Badge Align', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Badge Align', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left'   => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'right'  => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -543,7 +541,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'arrows_style',
 			[
-				'label'   => esc_html__('Arrow Style', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Arrow Style', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '1',
 				'options' => [
@@ -561,10 +559,10 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'badge_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 				'condition' => [
 					'badge' => 'yes',
@@ -579,14 +577,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_offset_badge_controls',
 			[
-				'label' => __('Badge', 'bdthemes-element-pack'),
+				'label' => __('Badge', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_responsive_control(
 			'badge_horizontal_offset',
 			[
-				'label' => __('Badge Horizontal Offset', 'bdthemes-element-pack'),
+				'label' => __('Badge Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -618,7 +616,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'badge_vertical_offset',
 			[
-				'label' => __('Badge Vertical Offset', 'bdthemes-element-pack'),
+				'label' => __('Badge Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => -40,
@@ -650,7 +648,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'badge_rotate',
 			[
-				'label' => esc_html__('Badge Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Badge Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -684,14 +682,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_offset_arrows_controls',
 			[
-				'label' => __('Arrow', 'bdthemes-element-pack'),
+				'label' => __('Arrow', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_responsive_control(
 			'arrows_horizontal_offset_left',
 			[
-				'label' => __('Arrow Horizontal Offset', 'bdthemes-element-pack'),
+				'label' => __('Arrow Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => -35,
@@ -724,7 +722,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'arrows_horizontal_offset_right',
 			[
-				'label' => __('Arrow Horizontal Offset', 'bdthemes-element-pack'),
+				'label' => __('Arrow Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 40,
@@ -757,7 +755,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'arrows_vertical_offset',
 			[
-				'label' => __('Arrow Vertical Offset', 'bdthemes-element-pack'),
+				'label' => __('Arrow Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => -26,
@@ -789,7 +787,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'arrows_rotate',
 			[
-				'label' => esc_html__('Arrow Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Arrow Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -831,7 +829,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_style_switch',
 			[
-				'label' => esc_html__('Switch', 'bdthemes-element-pack'),
+				'label' => esc_html__('Switch', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -840,7 +838,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switch_spacing',
 			[
-				'label' => esc_html__('Space Between', 'bdthemes-element-pack'),
+				'label' => esc_html__('Space Between', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -858,7 +856,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switch_icon_spacing',
 			[
-				'label' => esc_html__('Icon Spacing', 'bdthemes-element-pack'),
+				'label' => esc_html__('Icon Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -887,7 +885,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_switch_style_normal',
 			[
-				'label' => __('Normal', 'bdthemes-element-pack'),
+				'label' => __('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
@@ -895,7 +893,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switch_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-switch-container-wrap .bdt-package-text, {{WRAPPER}} .bdt-content-switcher-icon i, {{WRAPPER}} .bdt-content-switcher-tab' => 'color: {{VALUE}};',
@@ -930,7 +928,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_button_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -945,7 +943,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_button_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -991,14 +989,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_switch_style_active',
 			[
-				'label' => __('Active', 'bdthemes-element-pack'),
+				'label' => __('Active', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'switch_active_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-switch-container-wrap .bdt-package-text.bdt-active, {{WRAPPER}} .bdt-content-switcher-icon.bdt-active i, {{WRAPPER}} .bdt-content-switcher-tab.bdt-active .bdt-content-switcher-icon i, {{WRAPPER}} .bdt-content-switcher-tab.bdt-active' => 'color: {{VALUE}};',
@@ -1021,7 +1019,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switcher_button_active_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'switcher_style' => 'button',
@@ -1068,7 +1066,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_style_switcher',
 			[
-				'label' => esc_html__('Switcher', 'bdthemes-element-pack'),
+				'label' => esc_html__('Switcher', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'switcher_style!' => 'button',
@@ -1079,7 +1077,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_width',
 			[
-				'label' => esc_html__('Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Width', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'size_units' => ['px', '%'],
 				'range' => [
@@ -1104,7 +1102,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_height',
 			[
-				'label' => esc_html__('Height', 'bdthemes-element-pack'),
+				'label' => esc_html__('Height', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'size_units' => ['px', '%'],
 				'range' => [
@@ -1130,7 +1128,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_knob_size',
 			[
-				'label' => esc_html__('Knob Size', 'bdthemes-element-pack'),
+				'label' => esc_html__('Knob Size', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -1152,7 +1150,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_border_radius',
 			[
-				'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label' => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -1165,7 +1163,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_margin',
 			[
-				'label' => esc_html__('Margin', 'bdthemes-element-pack'),
+				'label' => esc_html__('Margin', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -1178,23 +1176,23 @@ class Content_Switcher extends Module_Base {
 		// $this->add_responsive_control(
 		// 	'switcher_alignment',
 		// 	[
-		// 		'label' => esc_html__('Alignment', 'bdthemes-element-pack'),
+		// 		'label' => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 		// 		'type' => Controls_Manager::CHOOSE,
 		// 		'options' => [
 		// 			'flex-start'    => [
-		// 				'title' => esc_html__('Left', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 		// 				'icon' => 'eicon-h-align-left',
 		// 			],
 		// 			'center' => [
-		// 				'title' => esc_html__('Center', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 		// 				'icon' => 'eicon-h-align-center',
 		// 			],
 		// 			'flex-end' => [
-		// 				'title' => esc_html__('Right', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 		// 				'icon' => 'eicon-h-align-right',
 		// 			],
 		// 			'space-between' => [
-		// 				'title' => esc_html__('Justified', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Justified', 'bdthemes-element-pack-lite'),
 		// 				'icon' => 'eicon-h-align-stretch',
 		// 			],
 		// 		],
@@ -1209,14 +1207,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_switcher_style_normal',
 			[
-				'label' => __('Normal', 'bdthemes-element-pack'),
+				'label' => __('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'switcher_knob_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-toggle-button-1 .bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-2 .bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-2 .bdt-knobs:after, {{WRAPPER}} .bdt-toggle-button-3 .bdt-knobs::before, {{WRAPPER}} .bdt-toggle-button-4 .bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-4 .bdt-knobs:after, {{WRAPPER}} .bdt-toggle-button-5 .bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-6 .bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-7 .bdt-knobs span, {{WRAPPER}} .bdt-toggle-button-8 .bdt-knobs span, {{WRAPPER}} .bdt-toggle-button-9 .bdt-knobs span' => 'background-color: {{VALUE}};',
@@ -1227,7 +1225,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switcher_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-content-switcher .bdt-layer' => 'background-color: {{VALUE}};',
@@ -1240,14 +1238,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_switcher_style_active',
 			[
-				'label' => __('Active', 'bdthemes-element-pack'),
+				'label' => __('Active', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'switcher_knob_checked_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-toggle-button-1 .checkbox:checked+.bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-2 .checkbox:checked+.bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-2 .checkbox:checked+.bdt-knobs:after, {{WRAPPER}} .bdt-toggle-button-3 .checkbox:checked+.bdt-knobs::before, {{WRAPPER}} .bdt-toggle-button-4 .checkbox:checked+.bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-4 .checkbox:checked+.bdt-knobs:after, {{WRAPPER}} .bdt-toggle-button-5 .checkbox:checked+.bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-6 .checkbox:checked+.bdt-knobs:after, {{WRAPPER}} .bdt-toggle-button-7 .bdt-knobs:after, {{WRAPPER}} .bdt-toggle-button-8 .bdt-knobs:after, {{WRAPPER}} .bdt-toggle-button-9 .checkbox:checked+.bdt-knobs span' => 'background-color: {{VALUE}};',
@@ -1258,7 +1256,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switcher_checked_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-toggle-button-1 .checkbox:checked~.bdt-layer, {{WRAPPER}} .bdt-toggle-button-2 .checkbox:checked~.bdt-layer, {{WRAPPER}} .bdt-toggle-button-3 .checkbox:checked~.bdt-layer, {{WRAPPER}} .bdt-toggle-button-4 .checkbox:checked~.bdt-layer, {{WRAPPER}} .bdt-toggle-button-5 .checkbox:checked~.bdt-layer, {{WRAPPER}} .bdt-toggle-button-6 .checkbox:checked~.bdt-layer, {{WRAPPER}} .bdt-toggle-button-7 .checkbox:checked~.bdt-layer, {{WRAPPER}} .bdt-toggle-button-7 .bdt-knobs:before, {{WRAPPER}} .bdt-toggle-button-8 .checkbox:checked+.bdt-knobs span, {{WRAPPER}} .bdt-toggle-button-9 .checkbox:checked~.bdt-layer' => 'background-color: {{VALUE}};',
@@ -1269,7 +1267,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switcher_checked_knob_color',
 			[
-				'label' => esc_html__('Knob Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Knob Color', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-toggle-button-7 .checkbox:checked+.bdt-knobs span' => 'background-color: {{VALUE}};',
@@ -1288,7 +1286,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_style_switcher_bar',
 			[
-				'label' => esc_html__('Switcher Bar', 'bdthemes-element-pack'),
+				'label' => esc_html__('Switcher Bar', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1312,7 +1310,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_bar_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1324,7 +1322,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_bar_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1336,7 +1334,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_bar_margin',
 			[
-				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1360,7 +1358,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_switcher_content_style',
 			[
-				'label' => esc_html__('Content', 'bdthemes-element-pack'),
+				'label' => esc_html__('Content', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1369,7 +1367,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'switcher_content_text_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-switcher-content' => 'color: {{VALUE}};',
@@ -1392,7 +1390,7 @@ class Content_Switcher extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'switcher_content_border',
-				'label'     => esc_html__('Border', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .bdt-switcher-content',
 				'separator' => 'before',
 			]
@@ -1402,7 +1400,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_content_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-switcher-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1413,7 +1411,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_content_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors'  => [
@@ -1425,7 +1423,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'switcher_content_margin',
 			[
-				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors'  => [
@@ -1446,23 +1444,23 @@ class Content_Switcher extends Module_Base {
 		// $this->add_responsive_control(
 		// 	'switcher_content_align',
 		// 	[
-		// 		'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+		// 		'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 		// 		'type'    => Controls_Manager::CHOOSE,
 		// 		'options' => [
 		// 			'left'    => [
-		// 				'title' => esc_html__('Left', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 		// 				'icon'  => 'fa fa-align-left',
 		// 			],
 		// 			'center' => [
-		// 				'title' => esc_html__('Center', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 		// 				'icon'  => 'fa fa-align-center',
 		// 			],
 		// 			'right' => [
-		// 				'title' => esc_html__('Right', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 		// 				'icon'  => 'fa fa-align-right',
 		// 			],
 		// 			'justify' => [
-		// 				'title' => esc_html__('Justified', 'bdthemes-element-pack'),
+		// 				'title' => esc_html__('Justified', 'bdthemes-element-pack-lite'),
 		// 				'icon'  => 'fa fa-align-justify',
 		// 			],
 		// 		],
@@ -1480,7 +1478,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_style_badge',
 			[
-				'label' => __('Badge', 'bdthemes-element-pack'),
+				'label' => __('Badge', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'badge' => 'yes',
@@ -1491,7 +1489,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'badge_text_color',
 			[
-				'label' => __('Text Color', 'bdthemes-element-pack'),
+				'label' => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-content-switcher-badge' => 'color: {{VALUE}};',
@@ -1502,7 +1500,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'badge_arrows_color',
 			[
-				'label' => __('Arrow Color', 'bdthemes-element-pack'),
+				'label' => __('Arrow Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-switcher-arrows svg' => 'fill: {{VALUE}};',
@@ -1513,7 +1511,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'badge_background_color',
 			[
-				'label' => __('Background Color', 'bdthemes-element-pack'),
+				'label' => __('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-content-switcher-badge' => 'background: {{VALUE}};',
@@ -1536,7 +1534,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'badge_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors' => [
@@ -1548,7 +1546,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'badge_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors' => [
@@ -1577,7 +1575,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'badge_arrows_size',
 			[
-				'label' => __('Arrow Size', 'bdthemes-element-pack'),
+				'label' => __('Arrow Size', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-switcher-arrows' => 'font-size: {{SIZE}}{{UNIT}};',
@@ -1591,7 +1589,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_style_pricing',
 			[ 
-				'label' => __( 'Pricing', 'bdthemes-element-pack' ),
+				'label' => __( 'Pricing', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1599,19 +1597,19 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'pricing_align',
 			[ 
-				'label'                => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'                => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'options'              => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -1631,14 +1629,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tabs_pricing_normal',
 			[ 
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'price_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-card-currency, {{WRAPPER}} .bdt-price-card-integer-part, {{WRAPPER}} .bdt-price-card-fractional-part' => 'color: {{VALUE}}',
@@ -1665,7 +1663,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'readmore_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1677,7 +1675,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'pricing_element_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1689,7 +1687,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'pricing_element_margin',
 			[ 
-				'label'      => __( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => __( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1702,7 +1700,7 @@ class Content_Switcher extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'price_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-price-card-currency, {{WRAPPER}} .bdt-price-card-integer-part, {{WRAPPER}} .bdt-price-card-fractional-part',
 			]
 		);
@@ -1718,7 +1716,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'heading_currency_style',
 			[ 
-				'label'     => __( 'Currency Symbol', 'bdthemes-element-pack' ),
+				'label'     => __( 'Currency Symbol', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1727,7 +1725,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'currency_size',
 			[ 
-				'label'     => __( 'Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1744,16 +1742,16 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'currency_horizontal_position',
 			[ 
-				'label'     => __( 'Position', 'bdthemes-element-pack' ),
+				'label'     => __( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'left',
 				'options'   => [ 
 					'left'  => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'right' => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -1763,19 +1761,19 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'currency_vertical_position',
 			[ 
-				'label'                => __( 'Vertical Position', 'bdthemes-element-pack' ),
+				'label'                => __( 'Vertical Position', 'bdthemes-element-pack-lite' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'options'              => [ 
 					'top'    => [ 
-						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'title' => __( 'Top', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'middle' => [ 
-						'title' => __( 'Middle', 'bdthemes-element-pack' ),
+						'title' => __( 'Middle', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'bottom' => [ 
-						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -1794,7 +1792,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'fractional_part_style',
 			[ 
-				'label'     => __( 'Fractional Part', 'bdthemes-element-pack' ),
+				'label'     => __( 'Fractional Part', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1803,7 +1801,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'fractional-part_size',
 			[ 
-				'label'     => __( 'Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1820,19 +1818,19 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'fractional_part_vertical_position',
 			[ 
-				'label'                => __( 'Vertical Position', 'bdthemes-element-pack' ),
+				'label'                => __( 'Vertical Position', 'bdthemes-element-pack-lite' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'options'              => [ 
 					'top'    => [ 
-						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'title' => __( 'Top', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'middle' => [ 
-						'title' => __( 'Middle', 'bdthemes-element-pack' ),
+						'title' => __( 'Middle', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'bottom' => [ 
-						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -1851,7 +1849,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'heading_original_price_style',
 			[ 
-				'label'     => __( 'Original Price', 'bdthemes-element-pack' ),
+				'label'     => __( 'Original Price', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1860,7 +1858,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'original_price_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-card-original-price' => 'color: {{VALUE}}',
@@ -1879,19 +1877,19 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'original_price_vertical_position',
 			[ 
-				'label'                => __( 'Vertical Position', 'bdthemes-element-pack' ),
+				'label'                => __( 'Vertical Position', 'bdthemes-element-pack-lite' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'options'              => [ 
 					'top'    => [ 
-						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'title' => __( 'Top', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'middle' => [ 
-						'title' => __( 'Middle', 'bdthemes-element-pack' ),
+						'title' => __( 'Middle', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'bottom' => [ 
-						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -1910,10 +1908,10 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'original_price_offset_toggle',
 			[ 
-				'label'        => __( 'Offset', 'bdthemes-element-pack' ),
+				'label'        => __( 'Offset', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => __( 'None', 'bdthemes-element-pack' ),
-				'label_on'     => __( 'Custom', 'bdthemes-element-pack' ),
+				'label_off'    => __( 'None', 'bdthemes-element-pack-lite' ),
+				'label_on'     => __( 'Custom', 'bdthemes-element-pack-lite' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -1923,7 +1921,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'original_price_horizontal_offset',
 			[ 
-				'label'          => __( 'Horizontal Offset', 'bdthemes-element-pack' ),
+				'label'          => __( 'Horizontal Offset', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 0,
@@ -1951,7 +1949,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'original_price_vertical_offset',
 			[ 
-				'label'          => __( 'Vertical Offset', 'bdthemes-element-pack' ),
+				'label'          => __( 'Vertical Offset', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 0,
@@ -1979,7 +1977,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'original_price_rotate',
 			[ 
-				'label'          => esc_html__( 'Rotate', 'bdthemes-element-pack' ),
+				'label'          => esc_html__( 'Rotate', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 0,
@@ -2009,7 +2007,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'heading_period_style',
 			[ 
-				'label'     => __( 'Period', 'bdthemes-element-pack' ),
+				'label'     => __( 'Period', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -2018,7 +2016,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'period_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-card-period' => 'color: {{VALUE}}',
@@ -2037,7 +2035,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'period_position',
 			[ 
-				'label'     => __( 'Position', 'bdthemes-element-pack' ),
+				'label'     => __( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [ 
 					'below'  => 'Below',
@@ -2050,7 +2048,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'heading_price_title_style',
 			[ 
-				'label'     => __( 'Price Title', 'bdthemes-element-pack' ),
+				'label'     => __( 'Price Title', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -2059,7 +2057,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'price_title_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-title' => 'color: {{VALUE}}',
@@ -2078,7 +2076,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'heading_price_additional_text_style',
 			[ 
-				'label'     => __( 'Additional Text', 'bdthemes-element-pack' ),
+				'label'     => __( 'Additional Text', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -2087,7 +2085,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'price_additional_text_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-additional-text' => 'color: {{VALUE}}',
@@ -2108,14 +2106,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tabs_pricing_hover',
 			[ 
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'price_hover_color',
 			[ 
-				'label'     => __( 'Price Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Price Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-currency, {{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-integer-part, {{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-fractional-part' => 'color: {{VALUE}}',
@@ -2134,7 +2132,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'pricing_table_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'pricing_border_border!' => '',
@@ -2148,7 +2146,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'period_hover_color',
 			[ 
-				'label'     => __( 'Period Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Period Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-content-switcher:hover .bdt-price-card-period' => 'color: {{VALUE}}',
@@ -2164,7 +2162,7 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_section(
 			'section_style_price_button',
 			[ 
-				'label' => __( 'Button', 'bdthemes-element-pack' ),
+				'label' => __( 'Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -2173,14 +2171,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[ 
-				'label'     => __( 'Normal', 'bdthemes-element-pack' ),
+				'label'     => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[ 
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-card-button' => 'color: {{VALUE}};',
@@ -2200,7 +2198,7 @@ class Content_Switcher extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'button_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-price-card-button',
@@ -2210,7 +2208,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -2222,7 +2220,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'button_margin',
 			[ 
-				'label'      => __( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => __( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -2234,7 +2232,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'button_text_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -2245,7 +2243,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'button_width',
 			[ 
-				'label'     => __( 'Width', 'bdthemes-element-pack' ),
+				'label'     => __( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'vw', '%' ],
 				'range'     => [ 
@@ -2270,7 +2268,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_responsive_control(
 			'button_vertical_offset',
 			[ 
-				'label'          => __( 'Vertical offset', 'bdthemes-element-pack' ),
+				'label'          => __( 'Vertical offset', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 0,
@@ -2314,14 +2312,14 @@ class Content_Switcher extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[ 
-				'label'     => __( 'Hover', 'bdthemes-element-pack' ),
+				'label'     => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[ 
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-card-button:hover' => 'color: {{VALUE}};',
@@ -2340,7 +2338,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-card-button:hover' => 'border-color: {{VALUE}};',
@@ -2351,7 +2349,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_control(
 			'button_hover_animation',
 			[ 
-				'label'     => __( 'Animation', 'bdthemes-element-pack' ),
+				'label'     => __( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HOVER_ANIMATION,
 			]
 		);

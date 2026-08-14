@@ -32,7 +32,7 @@ class Module extends Element_Pack_Module_Base {
 			'section_element_pack_threed_text_controls',
 			[
 				'tab'   => Controls_Manager::TAB_CONTENT,
-				'label' => BDTEP_CP . esc_html__('3D Text', 'bdthemes-element-pack'),
+				'label' => BDTEP_CP . esc_html__('3D Text', 'bdthemes-element-pack-lite'),
 			]
 		);
 		$element->end_controls_section();
@@ -44,7 +44,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_active',
 			[
-				'label'              => esc_html__('3D Text', 'bdthemes-element-pack'),
+				'label'              => esc_html__('3D Text', 'bdthemes-element-pack-lite'),
 				'type'               => Controls_Manager::SWITCHER,
 				'render_type'        => 'template',
 				'frontend_available' => true,
@@ -54,7 +54,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_depth',
 			[
-				'label'     => __('Depth', 'bdthemes-element-pack'),
+				'label'     => __('Depth', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'frontend_available' => true,
 				'size_units' => ['px', 'em', 'rem', '%'],
@@ -90,7 +90,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_layers',
 			[
-				'label' => esc_html__('Layers', 'bdthemes-element-pack'),
+				'label' => esc_html__('Layers', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::NUMBER,
 				'min' => 0,
 				'max' => 100,
@@ -106,7 +106,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_depth_color',
 			[
-				'label'     => esc_html__('Depth Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Depth Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'frontend_available' => true,
 				'condition' => [
@@ -118,7 +118,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_perspective',
 			[
-				'label'     => __('Perspective', 'bdthemes-element-pack'),
+				'label'     => __('Perspective', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'frontend_available' => true,
 				'size_units' => ['px'],
@@ -140,7 +140,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_fade',
 			[
-				'label'       => esc_html__('Fade', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Fade', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
 				'condition'   => [
@@ -153,12 +153,12 @@ class Module extends Element_Pack_Module_Base {
 		// $widget->add_control(
 		// 	'ep_threed_text_direction',
 		// 	[
-		// 		'label'   => esc_html__('Direction', 'bdthemes-element-pack'),
+		// 		'label'   => esc_html__('Direction', 'bdthemes-element-pack-lite'),
 		// 		'type'    => Controls_Manager::SELECT,
 		// 		'options' => [
-		// 			'both'      => esc_html__('Both', 'bdthemes-element-pack'),
-		// 			'backwards' => esc_html__('Backwards', 'bdthemes-element-pack'),
-		// 			'forwards'  => esc_html__('Forwards', 'bdthemes-element-pack'),
+		// 			'both'      => esc_html__('Both', 'bdthemes-element-pack-lite'),
+		// 			'backwards' => esc_html__('Backwards', 'bdthemes-element-pack-lite'),
+		// 			'forwards'  => esc_html__('Forwards', 'bdthemes-element-pack-lite'),
 		// 		],
 		// 		'default' => 'both',
 		// 		'frontend_available' => true,
@@ -171,7 +171,7 @@ class Module extends Element_Pack_Module_Base {
 		// $widget->add_control(
 		// 	'ep_threed_text_bg_color',
 		// 	[
-		// 		'label'     => esc_html__( 'Direction Background', 'bdthemes-element-pack' ),
+		// 		'label'     => esc_html__( 'Direction Background', 'bdthemes-element-pack-lite' ),
 		// 		'type'      => Controls_Manager::COLOR,
 		// 		'frontend_available' => true,
 		// 		'condition' => [
@@ -183,14 +183,14 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_event',
 			[
-				'label'   => esc_html__('Event', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Event', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'none'    => esc_html__('None', 'bdthemes-element-pack'),
-					'pointer' => esc_html__('Pointer', 'bdthemes-element-pack'),
-					'scroll'  => esc_html__('Scroll', 'bdthemes-element-pack'),
-					'scrollX' => esc_html__('ScrollX', 'bdthemes-element-pack'),
-					'scrollY' => esc_html__('ScrollY', 'bdthemes-element-pack'),
+					'none'    => esc_html__('None', 'bdthemes-element-pack-lite'),
+					'pointer' => esc_html__('Pointer', 'bdthemes-element-pack-lite'),
+					'scroll'  => esc_html__('Scroll', 'bdthemes-element-pack-lite'),
+					'scrollX' => esc_html__('ScrollX', 'bdthemes-element-pack-lite'),
+					'scrollY' => esc_html__('ScrollY', 'bdthemes-element-pack-lite'),
 				],
 				'default' => 'none',
 				'frontend_available' => true,
@@ -203,7 +203,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_event_rotation',
 			[
-				'label'     => __('Event Rotation', 'bdthemes-element-pack'),
+				'label'     => __('Event Rotation', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 35,
@@ -225,11 +225,11 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_threed_text_event_direction',
 			[
-				'label'   => esc_html__('Event Direction', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Event Direction', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'default'  => esc_html__('Default', 'bdthemes-element-pack'),
-					'reverse'  => esc_html__('Reverse', 'bdthemes-element-pack'),
+					'default'  => esc_html__('Default', 'bdthemes-element-pack-lite'),
+					'reverse'  => esc_html__('Reverse', 'bdthemes-element-pack-lite'),
 				],
 				'default' => 'default',
 				'frontend_available' => true,

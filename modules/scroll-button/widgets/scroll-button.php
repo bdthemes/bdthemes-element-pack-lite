@@ -23,7 +23,7 @@ class Scroll_Button extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Scroll Button', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Scroll Button', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -68,14 +68,14 @@ class Scroll_Button extends Module_Base {
 		$this->start_controls_section(
 			'section_content_scroll_button',
 			[
-				'label' => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'duration',
 			[
-				'label'      => esc_html__( 'Duration', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Duration', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [
@@ -91,7 +91,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'offset',
 			[
-				'label' => esc_html__( 'Offset', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Offset', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -106,21 +106,21 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'scroll_button_text',
 			[
-				'label'       => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'Scroll Up', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Scroll Up', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Scroll Up', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Scroll Up', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'section_id',
 			[
-				'label'       => esc_html__( 'Section ID', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Section ID', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => 'my-header',
-				'description' => esc_html__( "By clicking this scroll button, to which section in your page you want to go? Just write that's section ID here such 'my-header'. N.B: No need to add '#'.", 'bdthemes-element-pack' ),
+				'description' => esc_html__( "By clicking this scroll button, to which section in your page you want to go? Just write that's section ID here such 'my-header'. N.B: No need to add '#'.", 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 'active' => true ],
 			]
 		);
@@ -128,7 +128,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'scroll_button_position',
 			[
-				'label'   => __( 'Scroll Button Position', 'bdthemes-element-pack' ),
+				'label'   => __( 'Scroll Button Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => element_pack_position(),
@@ -138,7 +138,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_responsive_control(
 			'scroll_button_offset',
 			[
-				'label'     => __( 'Button Offset', 'bdthemes-element-pack' ),
+				'label'     => __( 'Button Offset', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-scroll-button-wrapper' => 'margin: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
@@ -152,25 +152,25 @@ class Scroll_Button extends Module_Base {
 		$this->add_responsive_control(
 			'scroll_button_align',
 			[
-				'label'        => esc_html__( 'Button Alignment', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Button Alignment', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'prefix_class' => 'elementor%s-align-',
 				'default'      => 'center',
 				'options'      => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -183,7 +183,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'button_icon',
 			[
-				'label'       => esc_html__( 'Button Icon', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Button Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'scroll_button_icon',
 				'default' => [
@@ -198,12 +198,12 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'icon_align',
 			[
-				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'  => esc_html__( 'Before', 'bdthemes-element-pack' ),
-					'right' => esc_html__( 'After', 'bdthemes-element-pack' ),
+					'left'  => esc_html__( 'Before', 'bdthemes-element-pack-lite' ),
+					'right' => esc_html__( 'After', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					'button_icon[value]!' => '',
@@ -214,7 +214,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_responsive_control(
 			'icon_indent',
 			[
-				'label'   => esc_html__( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 8,
@@ -237,7 +237,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'hide_on_before_scrolling',
 			[
-				'label'   => esc_html__( 'Hide On Before Scrolling', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Hide On Before Scrolling', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'scroll_button_position[value]!' => '',
@@ -252,7 +252,7 @@ class Scroll_Button extends Module_Base {
 		$this->start_controls_section(
 			'section_style_scroll_button',
 			[
-				'label' => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -262,14 +262,14 @@ class Scroll_Button extends Module_Base {
 		$this->start_controls_tab(
 			'tab_scroll_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'scroll_button_text_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-scroll-button' => 'color: {{VALUE}};',
@@ -281,7 +281,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'scroll_button_background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-scroll-button' => 'background-color: {{VALUE}};',
@@ -293,7 +293,7 @@ class Scroll_Button extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'scroll_button_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-scroll-button',
@@ -304,7 +304,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_responsive_control(
 			'border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -316,7 +316,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_responsive_control(
 			'scroll_button_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -329,7 +329,7 @@ class Scroll_Button extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'scroll_button_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-scroll-button',
 			]
 		);
@@ -347,14 +347,14 @@ class Scroll_Button extends Module_Base {
 		$this->start_controls_tab(
 			'tab_scroll_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'scroll_button_hover_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-scroll-button:hover' => 'color: {{VALUE}};',
@@ -366,7 +366,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'scroll_button_background_hover_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-scroll-button:hover' => 'background-color: {{VALUE}};',
@@ -377,7 +377,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'scroll_button_hover_border_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'scroll_button_border_border!' => '',
@@ -391,7 +391,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'scroll_button_hover_animation',
 			[
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 				'condition' => [
 					'show_fancy_animation' => '',
@@ -403,7 +403,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'show_fancy_animation',
 			[
-				'label' => __( 'Show Fancy Animation', 'bdthemes-element-pack' ),
+				'label' => __( 'Show Fancy Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 				'render_type' => 'template',
 			]
@@ -412,13 +412,13 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'fancy_animation',
 			[
-				'label'       => esc_html__( 'Fancy Animation', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Fancy Animation', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'shadow-pulse',
 				'options'     => [
-					'shadow-pulse' => esc_html__( 'Shadow Pulse', 'bdthemes-element-pack' ),
-					'multi-shadow' => esc_html__( 'Multi Shadow', 'bdthemes-element-pack' ),
-					'line-bounce' => esc_html__( 'Line Bounce', 'bdthemes-element-pack' ),
+					'shadow-pulse' => esc_html__( 'Shadow Pulse', 'bdthemes-element-pack-lite' ),
+					'multi-shadow' => esc_html__( 'Multi Shadow', 'bdthemes-element-pack-lite' ),
+					'line-bounce' => esc_html__( 'Line Bounce', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					'show_fancy_animation' => 'yes',
@@ -430,7 +430,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'fancy_border_color',
 			[
-				'label'     => esc_html__( 'Animated Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Animated Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-scroll-button-wrapper .bdt-scroll-button:before, {{WRAPPER}} .bdt-scroll-button-wrapper .bdt-scroll-button:after' => 'border-color: {{VALUE}};',
@@ -445,7 +445,7 @@ class Scroll_Button extends Module_Base {
 		$this->add_control(
 			'button_shadow_color',
 			[
-				'label'     => esc_html__( 'Animated Shadow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Animated Shadow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-scroll-button-wrapper .bdt-scroll-button' => '--box-shadow-color: {{VALUE}};',

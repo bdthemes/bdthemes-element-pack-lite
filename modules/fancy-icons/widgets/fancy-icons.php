@@ -22,7 +22,7 @@ class Fancy_Icons extends Module_Base {
     }
 
     public function get_title() {
-        return BDTEP . esc_html__('Fancy Icons', 'bdthemes-element-pack');
+        return BDTEP . esc_html__('Fancy Icons', 'bdthemes-element-pack-lite');
     }
 
     public function get_icon() {
@@ -61,7 +61,7 @@ class Fancy_Icons extends Module_Base {
         $this->start_controls_section(
             'section_layout_fancy_icons',
             [
-                'label' => esc_html__('Fancy Icons', 'bdthemes-element-pack'),
+                'label' => esc_html__('Fancy Icons', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -71,18 +71,18 @@ class Fancy_Icons extends Module_Base {
         $repeater->add_control(
             'social_type',
             [
-                'label'        => esc_html__('Social Type', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Social Type', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::CHOOSE,
                 'toggle'       => false,
                 'default'      => 'icon',
                 'prefix_class' => 'bdt-social-type-',
                 'options'      => [
                     'icon' => [
-                        'title' => esc_html__('Icon', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Icon', 'bdthemes-element-pack-lite'),
                         'icon'  => 'fas fa-star'
                     ],
                     'text' => [
-                        'title' => esc_html__('Text', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Text', 'bdthemes-element-pack-lite'),
                         'icon'  => 'fas fa-text-width',
                     ],
                 ],
@@ -93,7 +93,7 @@ class Fancy_Icons extends Module_Base {
         $repeater->add_control(
             'social_icon',
             [
-                'label'     => esc_html__('Icon', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Icon', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::ICONS,
                 'fa4compatibility' => 'icon',
                 'condition' => [
@@ -111,10 +111,10 @@ class Fancy_Icons extends Module_Base {
         $repeater->add_control(
             'social_name',
             [
-                'label'       => esc_html__('Custom Label', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Custom Label', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
-                'default'     => esc_html__('Facebook', 'bdthemes-element-pack'),
+                'default'     => esc_html__('Facebook', 'bdthemes-element-pack-lite'),
                 'label_block' => true,
                 'condition'   => [
                     'social_type' => 'text',
@@ -126,7 +126,7 @@ class Fancy_Icons extends Module_Base {
         $repeater->add_control(
             'social_link',
             [
-                'label'         => esc_html__('Custom Link', 'bdthemes-element-pack'),
+                'label'         => esc_html__('Custom Link', 'bdthemes-element-pack-lite'),
                 'type'          => Controls_Manager::URL,
                 'default'       => ['url' => '#'],
                 'show_external' => false,
@@ -140,7 +140,7 @@ class Fancy_Icons extends Module_Base {
         $repeater->add_control(
             'icon_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} {{CURRENT_ITEM}}.bdt-fancy-icons-item a'          => 'color: {{VALUE}};',
@@ -152,7 +152,7 @@ class Fancy_Icons extends Module_Base {
         $repeater->add_control(
             'icon_hover_color',
             [
-                'label'     => esc_html__('Hover Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hover Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} {{CURRENT_ITEM}}.bdt-fancy-icons-item:hover a'          => 'color: {{VALUE}};',
@@ -164,7 +164,7 @@ class Fancy_Icons extends Module_Base {
         $repeater->add_control(
             'icon_background_color',
             [
-                'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} {{CURRENT_ITEM}}.bdt-fancy-icons-item' => 'background: {{VALUE}};',
@@ -175,24 +175,24 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'share_items',
             [
-                'label'       => esc_html__('Social Items', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Social Items', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default'     => [
                     [
-                        'social_name' => esc_html__('Facebook', 'bdthemes-element-pack'),
+                        'social_name' => esc_html__('Facebook', 'bdthemes-element-pack-lite'),
                         'social_icon' => ['value' => 'fab fa-facebook-f', 'library' => 'fa-brands'],
                     ],
                     [
-                        'social_name' => esc_html__('X', 'bdthemes-element-pack'),
+                        'social_name' => esc_html__('X', 'bdthemes-element-pack-lite'),
                         'social_icon' => ['value' => 'fab fa-x-twitter', 'library' => 'fa-brands'],
                     ],
                     [
-                        'social_name' => esc_html__('Linkedin', 'bdthemes-element-pack'),
+                        'social_name' => esc_html__('Linkedin', 'bdthemes-element-pack-lite'),
                         'social_icon' => ['value' => 'fab fa-linkedin-in', 'library' => 'fa-brands'],
                     ],
                     [
-                        'social_name' => esc_html__('Instagram', 'bdthemes-element-pack'),
+                        'social_name' => esc_html__('Instagram', 'bdthemes-element-pack-lite'),
                         'social_icon' => ['value' => 'fab fa-instagram', 'library' => 'fa-brands'],
                     ],
                 ],
@@ -203,7 +203,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_responsive_control(
             'columns',
             [
-                'label'          => esc_html__('Columns', 'bdthemes-element-pack'),
+                'label'          => esc_html__('Columns', 'bdthemes-element-pack-lite'),
                 'type'           => Controls_Manager::SELECT,
                 'default'        => '2',
                 'tablet_default' => '2',
@@ -223,20 +223,20 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'background_type',
             [
-                'label'   => esc_html__('Background Type', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Background Type', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::CHOOSE,
                 'default' => 'image',
                 'options' => [
                     'image'   => [
-                        'title' => esc_html__('Image', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Image', 'bdthemes-element-pack-lite'),
                         'icon'  => 'fas fa-image',
                     ],
                     'video'   => [
-                        'title' => esc_html__('Video', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Video', 'bdthemes-element-pack-lite'),
                         'icon'  => 'fas fa-play-circle',
                     ],
                     'youtube' => [
-                        'title' => esc_html__('Youtube', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Youtube', 'bdthemes-element-pack-lite'),
                         'icon'  => 'fab fa-youtube',
                     ],
                 ],
@@ -247,7 +247,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'background_image',
             [
-                'label'     => esc_html__('Background Image', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Background Image', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::MEDIA,
                 'dynamic'   => ['active' => true],
                 'default'   => [
@@ -262,13 +262,13 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'background_attachment',
             [
-                'label'     => esc_html__('Background Attachment', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Background Attachment', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'inherit',
                 'options'   => [
-                    'inherit' => esc_html__('Default', 'bdthemes-element-pack'),
-                    'scroll'  => esc_html__('Scroll', 'bdthemes-element-pack'),
-                    'fixed'   => esc_html__('Fixed', 'bdthemes-element-pack'),
+                    'inherit' => esc_html__('Default', 'bdthemes-element-pack-lite'),
+                    'scroll'  => esc_html__('Scroll', 'bdthemes-element-pack-lite'),
+                    'fixed'   => esc_html__('Fixed', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'background_type' => 'image'
@@ -280,7 +280,7 @@ class Fancy_Icons extends Module_Base {
             Group_Control_Image_Size::get_type(),
             [
                 'name'         => 'thumbnail_size',
-                'label'        => esc_html__('Image Size', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Image Size', 'bdthemes-element-pack-lite'),
                 'exclude'      => ['custom'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
                 'default'      => 'full',
                 'prefix_class' => 'bdt-fancy-icons--thumbnail-size-',
@@ -293,7 +293,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'video_link',
             [
-                'label'     => esc_html__('Video Link', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Video Link', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [
                     'background_type' => 'video'
@@ -306,7 +306,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'youtube_link',
             [
-                'label'     => esc_html__('Youtube Link', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Youtube Link', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::TEXT,
                 'condition' => [
                     'background_type' => 'youtube'
@@ -322,14 +322,14 @@ class Fancy_Icons extends Module_Base {
         $this->start_controls_section(
             'section_style_fancy_icons',
             [
-                'label' => esc_html__('Fancy Icons', 'bdthemes-element-pack'),
+                'label' => esc_html__('Fancy Icons', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
         $this->add_control(
 			'blend_type',
 			[
-				'label'     => esc_html__('Blend Type', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Blend Type', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'multiply',
 				'options'   => element_pack_blend_options(),
@@ -342,7 +342,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'item_background_color',
             [
-                'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-icons-item' => 'background: {{VALUE}};',
@@ -353,7 +353,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'item_hover_background_color',
             [
-                'label'     => esc_html__('Hover Background', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hover Background', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-icons-item:hover' => 'background: {{VALUE}};',
@@ -372,7 +372,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_responsive_control(
             'fancy_ixons_item_radius',
             [
-                'label'      => esc_html__('Radius', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -384,7 +384,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_responsive_control(
             'item_icon_text_rotate',
             [
-                'label'     => esc_html__('Hover Rotate', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hover Rotate', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SLIDER,
                 'range'     => [
                     'px' => [
@@ -402,7 +402,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_responsive_control(
             'item_padding',
             [
-                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -414,7 +414,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'share_items_icon',
             [
-                'label'     => esc_html__('Icon', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Icon', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -423,7 +423,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'item_icon_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-icons-item a.icon'     => 'color: {{VALUE}};',
@@ -435,7 +435,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'item_icon_hover_color',
             [
-                'label'     => esc_html__('Hover Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hover Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-icons-item:hover a.icon' => 'color: {{VALUE}};',
@@ -447,7 +447,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_responsive_control(
             'icon_size',
             [
-                'label'      => esc_html__('Size', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Size', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['vw'],
                 'range'      => [
@@ -468,7 +468,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'share_items_text',
             [
-                'label'     => esc_html__('Text', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Text', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -478,7 +478,7 @@ class Fancy_Icons extends Module_Base {
             Group_Control_Text_Stroke::get_type(),
             [
                 'name' => 'item_text_stroke',
-                'label' => esc_html__('Text Stroke', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => esc_html__('Text Stroke', 'bdthemes-element-pack-lite') . BDTEP_NC,
                 'selector' => '{{WRAPPER}} .bdt-fancy-icons-item a.text',
             ]
         );
@@ -486,7 +486,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'item_text_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-icons-item a.text' => 'color: {{VALUE}};',
@@ -497,7 +497,7 @@ class Fancy_Icons extends Module_Base {
         $this->add_control(
             'item_text_hover_color',
             [
-                'label'     => esc_html__('Hover Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hover Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fancy-icons-item:hover a.text' => 'color: {{VALUE}}; -webkit-text-stroke-color: {{VALUE}};',
@@ -509,7 +509,7 @@ class Fancy_Icons extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'text_size',
-                'label' => esc_html__('Typography', 'bdthemes-element-pack'),
+                'label' => esc_html__('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .bdt-fancy-icons-item a.text',
             ]
         );

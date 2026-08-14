@@ -30,10 +30,10 @@ class WPML_ElementPack_Logo_Grid extends WPML_Module_With_Items {
 		switch( $field ) {
 
 			case 'name':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'description':
-				return esc_html__( 'Content', 'bdthemes-element-pack' );
+				return esc_html__( 'Content', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

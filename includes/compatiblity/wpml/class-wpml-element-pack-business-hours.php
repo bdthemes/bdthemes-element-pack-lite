@@ -31,16 +31,16 @@ class WPML_ElementPack_Business_Hours extends WPML_Module_With_Items {
 	protected function get_title( $field ) {
 		switch( $field ) {
 			case 'enter_day':
-				return esc_html__( 'Enter Day', 'bdthemes-element-pack' );
+				return esc_html__( 'Enter Day', 'bdthemes-element-pack-lite' );
 
 			case 'enter_time':
-				return esc_html__( 'Enter Time', 'bdthemes-element-pack' );
+				return esc_html__( 'Enter Time', 'bdthemes-element-pack-lite' );
 
 			case 'dynamic_enter_day_level':
-				return esc_html__( 'Day Level', 'bdthemes-element-pack' );
+				return esc_html__( 'Day Level', 'bdthemes-element-pack-lite' );
 
 			case 'dynamic_close_text':
-				return esc_html__( 'Close Level', 'bdthemes-element-pack' );
+				return esc_html__( 'Close Level', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

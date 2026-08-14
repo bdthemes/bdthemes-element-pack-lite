@@ -31,7 +31,7 @@ class WPML_ElementPack_Fancy_Icons extends WPML_Module_With_Items {
 		switch( $field ) {
 
 			case 'social_name':
-				return esc_html__( 'Social Name', 'bdthemes-element-pack' );
+				return esc_html__( 'Social Name', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

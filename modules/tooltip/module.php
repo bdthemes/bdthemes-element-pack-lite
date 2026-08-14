@@ -32,7 +32,7 @@ class Module extends Element_Pack_Module_Base {
 			'section_element_pack_tooltip_controls',
 			[ 
 				'tab'   => Controls_Manager::TAB_ADVANCED,
-				'label' => BDTEP_CP . esc_html__( 'Tooltip', 'bdthemes-element-pack' ),
+				'label' => BDTEP_CP . esc_html__( 'Tooltip', 'bdthemes-element-pack-lite' ),
 			]
 		);
 		$element->end_controls_section();
@@ -44,10 +44,10 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip',
 			[ 
-				'label'              => esc_html__( 'Use Tooltip?', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Use Tooltip?', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SWITCHER,
-				'label_on'           => esc_html__( 'Yes', 'bdthemes-element-pack' ),
-				'label_off'          => esc_html__( 'No', 'bdthemes-element-pack' ),
+				'label_on'           => esc_html__( 'Yes', 'bdthemes-element-pack-lite' ),
+				'label_off'          => esc_html__( 'No', 'bdthemes-element-pack-lite' ),
 				'render_type'        => 'template',
 				'frontend_available' => true,
 			]
@@ -58,7 +58,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->start_controls_tab(
 			'element_pack_widget_tooltip_settings_tab',
 			[ 
-				'label'     => esc_html__( 'Settings', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Settings', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'element_pack_widget_tooltip' => 'yes',
 				],
@@ -68,9 +68,9 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_text',
 			[ 
-				'label'              => esc_html__( 'Description', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Description', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::TEXTAREA,
-				'default'            => esc_html__('This is Tooltip', 'bdthemes-element-pack'),
+				'default'            => esc_html__('This is Tooltip', 'bdthemes-element-pack-lite'),
 				'dynamic'            => [ 'active' => true ],
 				'condition'          => [ 
 					'element_pack_widget_tooltip' => 'yes',
@@ -83,30 +83,30 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_placement',
 			[ 
-				'label'              => esc_html__( 'Placement', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Placement', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'default'            => '',
 				'options'            => [ 
-					''             => esc_html__( 'Top (Default)', 'bdthemes-element-pack' ),
+					''             => esc_html__( 'Top (Default)', 'bdthemes-element-pack-lite' ),
 
-					'top-start'    => esc_html__( 'Top Start', 'bdthemes-element-pack' ),
-					'top-end'      => esc_html__( 'Top End', 'bdthemes-element-pack' ),
+					'top-start'    => esc_html__( 'Top Start', 'bdthemes-element-pack-lite' ),
+					'top-end'      => esc_html__( 'Top End', 'bdthemes-element-pack-lite' ),
 
-					'right'        => esc_html__( 'Right', 'bdthemes-element-pack' ),
-					'right-start'  => esc_html__( 'Right Start', 'bdthemes-element-pack' ),
-					'right-end'    => esc_html__( 'Right End', 'bdthemes-element-pack' ),
+					'right'        => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
+					'right-start'  => esc_html__( 'Right Start', 'bdthemes-element-pack-lite' ),
+					'right-end'    => esc_html__( 'Right End', 'bdthemes-element-pack-lite' ),
 
-					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
-					'bottom-start' => esc_html__( 'Bottom Start', 'bdthemes-element-pack' ),
-					'bottom-end'   => esc_html__( 'Bottom End', 'bdthemes-element-pack' ),
+					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack-lite' ),
+					'bottom-start' => esc_html__( 'Bottom Start', 'bdthemes-element-pack-lite' ),
+					'bottom-end'   => esc_html__( 'Bottom End', 'bdthemes-element-pack-lite' ),
 
-					'left'         => esc_html__( 'Left', 'bdthemes-element-pack' ),
-					'left-start'   => esc_html__( 'Left Start', 'bdthemes-element-pack' ),
-					'left-end'     => esc_html__( 'Left End', 'bdthemes-element-pack' ),
+					'left'         => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
+					'left-start'   => esc_html__( 'Left Start', 'bdthemes-element-pack-lite' ),
+					'left-end'     => esc_html__( 'Left End', 'bdthemes-element-pack-lite' ),
 
-					'auto'         => esc_html__( 'Auto', 'bdthemes-element-pack' ),
-					'auto-start'   => esc_html__( 'Auto Start', 'bdthemes-element-pack' ),
-					'auto-end'     => esc_html__( 'Auto End', 'bdthemes-element-pack' ),
+					'auto'         => esc_html__( 'Auto', 'bdthemes-element-pack-lite' ),
+					'auto-start'   => esc_html__( 'Auto Start', 'bdthemes-element-pack-lite' ),
+					'auto-end'     => esc_html__( 'Auto End', 'bdthemes-element-pack-lite' ),
 				],
 				'render_type'        => 'none',
 				'frontend_available' => true,
@@ -120,7 +120,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_follow_cursor',
 			[ 
-				'label'              => esc_html__( 'Follow Cursor', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'              => esc_html__( 'Follow Cursor', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'               => Controls_Manager::SWITCHER,
 				'render_type'        => 'none',
 				'frontend_available' => true,
@@ -133,17 +133,17 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_animation',
 			[ 
-				'label'              => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'default'            => '',
 				'options'            => [ 
-					'none'         => esc_html__( 'None', 'bdthemes-element-pack' ),
-					''             => esc_html__( 'Fade', 'bdthemes-element-pack' ),
-					'shift-away'   => esc_html__( 'Shift-Away', 'bdthemes-element-pack' ),
-					'shift-toward' => esc_html__( 'Shift-Toward', 'bdthemes-element-pack' ),
-					'scale'        => esc_html__( 'Scale', 'bdthemes-element-pack' ),
-					'perspective'  => esc_html__( 'Perspective', 'bdthemes-element-pack' ),
-					'fill'         => esc_html__( 'Fill Effect', 'bdthemes-element-pack' ),
+					'none'         => esc_html__( 'None', 'bdthemes-element-pack-lite' ),
+					''             => esc_html__( 'Fade', 'bdthemes-element-pack-lite' ),
+					'shift-away'   => esc_html__( 'Shift-Away', 'bdthemes-element-pack-lite' ),
+					'shift-toward' => esc_html__( 'Shift-Toward', 'bdthemes-element-pack-lite' ),
+					'scale'        => esc_html__( 'Scale', 'bdthemes-element-pack-lite' ),
+					'perspective'  => esc_html__( 'Perspective', 'bdthemes-element-pack-lite' ),
+					'fill'         => esc_html__( 'Fill Effect', 'bdthemes-element-pack-lite' ),
 				],
 				'render_type'        => 'none',
 				'frontend_available' => true,
@@ -156,12 +156,12 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_trigger',
 			[ 
-				'label'              => esc_html__( 'Trigger', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'              => esc_html__( 'Trigger', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'               => Controls_Manager::SELECT,
 				'options'            => [ 
-					''       => esc_html__( 'Hover', 'bdthemes-element-pack' ),
-					'click'  => esc_html__( 'Click', 'bdthemes-element-pack' ),
-					'manual' => esc_html__( 'Custom Trigger', 'bdthemes-element-pack' ),
+					''       => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
+					'click'  => esc_html__( 'Click', 'bdthemes-element-pack-lite' ),
+					'manual' => esc_html__( 'Custom Trigger', 'bdthemes-element-pack-lite' ),
 
 				],
 				'render_type'        => 'none',
@@ -175,7 +175,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_custom_trigger',
 			[ 
-				'label'              => esc_html__( 'Custom Trigger', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Custom Trigger', 'bdthemes-element-pack-lite' ),
 				'placeholder'        => '.class-name',
 				'type'               => Controls_Manager::TEXT,
 				'dynamic'            => [ 'active' => true ],
@@ -191,7 +191,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_x_offset',
 			[ 
-				'label'              => esc_html__( 'X Offset', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'X Offset', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'size_units'         => [ 'px' ],
 				'range'              => [ 
@@ -212,7 +212,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_y_offset',
 			[ 
-				'label'              => esc_html__( 'Y Offset', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Y Offset', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'size_units'         => [ 'px' ],
 				'range'              => [ 
@@ -233,7 +233,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_arrow',
 			[ 
-				'label'              => esc_html__( 'Arrow', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Arrow', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SWITCHER,
 				'render_type'        => 'none',
 				'frontend_available' => true,
@@ -249,7 +249,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->start_controls_tab(
 			'element_pack_widget_tooltip_styles_tab',
 			[ 
-				'label'     => esc_html__( 'Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Style', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'element_pack_widget_tooltip' => 'yes',
 				],
@@ -259,7 +259,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_tooltip_width',
 			[ 
-				'label'      => esc_html__( 'Max Width', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Max Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 
 					'px',
@@ -286,7 +286,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'color: {{VALUE}}',
@@ -311,7 +311,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_arrow_color',
 			[ 
-				'label'     => esc_html__( 'Arrow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Arrow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .tippy-arrow' => 'color: {{VALUE}}',
@@ -326,7 +326,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_tooltip_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -342,7 +342,7 @@ class Module extends Element_Pack_Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'element_pack_widget_tooltip_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.tippy-box[data-theme="bdt-tippy-{{ID}}"]',
@@ -355,7 +355,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_tooltip_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -370,20 +370,20 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_tooltip_text_align',
 			[ 
-				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'center',
 				'options'   => [ 
 					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],

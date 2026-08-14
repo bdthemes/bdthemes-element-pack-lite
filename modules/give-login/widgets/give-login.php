@@ -21,7 +21,7 @@ class Give_Login extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Give Login', 'bdthemes-element-pack');
+		return BDTEP . __('Give Login', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -60,7 +60,7 @@ class Give_Login extends Module_Base {
 		$this->start_controls_section(
 			'give_login_section',
 			[
-				'label' => __('Give Login', 'bdthemes-element-pack'),
+				'label' => __('Give Login', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -68,7 +68,7 @@ class Give_Login extends Module_Base {
 		$this->add_control(
 			'login_url',
 			[
-				'label' => __('Redirect URL', 'bdthemes-element-pack'),
+				'label' => __('Redirect URL', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::URL,
 				'show_external' => false,
 			]
@@ -80,7 +80,7 @@ class Give_Login extends Module_Base {
 		$this->start_controls_section(
 			'give_login_style',
 			[
-				'label' => __('Give Login', 'bdthemes-element-pack'),
+				'label' => __('Give Login', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -88,7 +88,7 @@ class Give_Login extends Module_Base {
 		$this->add_control(
 			'give_login_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-form > fieldset' => 'background-color: {{VALUE}};',
@@ -107,7 +107,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'give_login_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -119,7 +119,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'give_login_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-form > fieldset' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -132,7 +132,7 @@ class Give_Login extends Module_Base {
 		$this->start_controls_section(
 			'title_style',
 			[
-				'label' => esc_html__('Title', 'bdthemes-element-pack'),
+				'label' => esc_html__('Title', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -140,19 +140,19 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'give_login_legend_align',
 			[
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -166,7 +166,7 @@ class Give_Login extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-form legend' => 'color: {{VALUE}};',
@@ -185,7 +185,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'title_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -197,7 +197,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'title_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-form legend' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -208,7 +208,7 @@ class Give_Login extends Module_Base {
 		// $this->add_responsive_control(
 		// 	'title_margin',
 		// 	[
-		// 		'label' => __('Margin', 'bdthemes-element-pack'),
+		// 		'label' => __('Margin', 'bdthemes-element-pack-lite'),
 		// 		'type' => Controls_Manager::DIMENSIONS,
 		// 		'selectors' => [
 		// 			'{{WRAPPER}} .bdt-give-login .give-form legend' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -219,7 +219,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'give_login_legend_width_offset',
 			[
-				'label'      => esc_html__( 'Box width', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Box width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-give-login .give-form legend' => 'width: calc(100% - {{SIZE}}{{UNIT}}); margin: 0 auto;',
@@ -240,7 +240,7 @@ class Give_Login extends Module_Base {
 		$this->start_controls_section(
 			'label_style',
 			[
-				'label' => esc_html__('Label', 'bdthemes-element-pack'),
+				'label' => esc_html__('Label', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -248,7 +248,7 @@ class Give_Login extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-login label' => 'color: {{VALUE}};',
@@ -259,7 +259,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'label_margin',
 			[
-				'label' => __('Margin', 'bdthemes-element-pack'),
+				'label' => __('Margin', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-form label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -280,7 +280,7 @@ class Give_Login extends Module_Base {
 		$this->start_controls_section(
 			'section_style_input',
 			[
-				'label' => esc_html__('Input Fields', 'bdthemes-element-pack'),
+				'label' => esc_html__('Input Fields', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -288,7 +288,7 @@ class Give_Login extends Module_Base {
 		$this->add_control(
 			'input_field_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-login input[type="text"],
@@ -309,7 +309,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'input_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -322,7 +322,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'input_inner_padding',
 			[
-				'label' => esc_html__('Inner Padding', 'bdthemes-element-pack'),
+				'label' => esc_html__('Inner Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors' => [
@@ -346,7 +346,7 @@ class Give_Login extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[
-				'label'     => esc_html__('Submit Button', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Submit Button', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -356,14 +356,14 @@ class Give_Login extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-login .give_submit' => 'color: {{VALUE}};',
@@ -390,7 +390,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -402,7 +402,7 @@ class Give_Login extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -423,7 +423,7 @@ class Give_Login extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'button_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .bdt-give-login .give-login .give_submit',
 			]
 		);
@@ -433,14 +433,14 @@ class Give_Login extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-login .give_submit:hover'  => 'color: {{VALUE}};',
@@ -459,7 +459,7 @@ class Give_Login extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'button_border_border!' => '',
@@ -479,7 +479,7 @@ class Give_Login extends Module_Base {
 		$this->start_controls_section(
 			'section_password_text_style',
 			[
-				'label' => esc_html__('Reset Password', 'bdthemes-element-pack'),
+				'label' => esc_html__('Reset Password', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -487,7 +487,7 @@ class Give_Login extends Module_Base {
 		$this->add_control(
 			'password_text_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-login .give-lost-password a' => 'color: {{VALUE}};',
@@ -510,17 +510,17 @@ class Give_Login extends Module_Base {
 ?>
 		<form id="give-login-form" class="give-form">
 			<fieldset>
-				<legend><?php echo esc_html__('Log into Your Account', 'bdthemes-element-pack'); ?></legend>
+				<legend><?php echo esc_html__('Log into Your Account', 'bdthemes-element-pack-lite'); ?></legend>
 				<div class="give-login-username give-login">
 					<label for="give_user_login">
-						<?php echo esc_html__('Username or Email Address', 'bdthemes-element-pack'); ?>
+						<?php echo esc_html__('Username or Email Address', 'bdthemes-element-pack-lite'); ?>
 					</label>
 					<input name="give_user_login" id="give_user_login" class="give-required give-input" type="text" required="" aria-required="true">
 				</div>
 
 				<div class="give-login-password give-login">
 					<label for="give_user_pass">
-						<?php echo esc_html__('Password', 'bdthemes-element-pack'); ?>
+						<?php echo esc_html__('Password', 'bdthemes-element-pack-lite'); ?>
 					</label>
 					<input name="give_user_pass" id="give_user_pass" class="give-password give-required give-input" type="password" required="" aria-required="true">
 				</div>
@@ -531,7 +531,7 @@ class Give_Login extends Module_Base {
 
 				<div class="give-lost-password give-login">
 					<a href="<?php echo esc_url(get_site_url()); ?>/wp-login.php?action=lostpassword">
-						<?php echo esc_html__('Reset Password', 'bdthemes-element-pack'); ?></a>
+						<?php echo esc_html__('Reset Password', 'bdthemes-element-pack-lite'); ?></a>
 				</div>
 			</fieldset>
 		</form>

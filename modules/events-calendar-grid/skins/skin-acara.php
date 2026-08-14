@@ -16,7 +16,7 @@ class Skin_Acara extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __('Acara', 'bdthemes-element-pack');
+		return __('Acara', 'bdthemes-element-pack-lite');
 	}
 
 
@@ -79,8 +79,8 @@ class Skin_Acara extends Elementor_Skin_Base {
 
 ?>
 		<span class="bdt-event-date">
-			<a href="javascript:void(0);" title="<?php esc_html_e('Start Date:', 'bdthemes-element-pack');
-								echo esc_html($start_datetime); ?>  - <?php esc_html_e('End Date:', 'bdthemes-element-pack');
+			<a href="javascript:void(0);" title="<?php esc_html_e('Start Date:', 'bdthemes-element-pack-lite');
+								echo esc_html($start_datetime); ?>  - <?php esc_html_e('End Date:', 'bdthemes-element-pack-lite');
 																		echo esc_html($end_datetime); ?>">
 				<span class="bdt-event-day">
 					<?php echo esc_html(str_pad($event_day, 2, '0', STR_PAD_LEFT)); ?>

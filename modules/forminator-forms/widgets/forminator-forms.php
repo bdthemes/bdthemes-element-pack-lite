@@ -17,7 +17,7 @@ class Forminator_Forms extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Forminator Forms', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Forminator Forms', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -52,14 +52,14 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'forminator_form',
 			[
-				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_forminator_forms_options(),
 			]
@@ -68,7 +68,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'hide_label',
 			[
-				'label'        => __( 'Hide Label', 'bdthemes-element-pack' ),
+				'label'        => __( 'Hide Label', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-forminator-forms-label-hide--',
 			]
@@ -80,7 +80,7 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_label_style',
 			[
-				'label' => __( 'Labels', 'bdthemes-element-pack' ),
+				'label' => __( 'Labels', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'hide_label' => ''
@@ -91,7 +91,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'text_color_label',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-label' => 'color: {{VALUE}}',
@@ -110,7 +110,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'label_spacing',
 			[
-				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-label' => 'margin-bottom: {{SIZE}}px;',
@@ -123,7 +123,7 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_fields_style',
 			[
-				'label' => __( 'Input & Textarea', 'bdthemes-element-pack' ),
+				'label' => __( 'Input & Textarea', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -131,19 +131,19 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'input_alignment',
 			[
-				'label'     => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'     => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -158,14 +158,14 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_fields_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'field_bg_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -177,7 +177,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'field_text_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -190,7 +190,7 @@ class Forminator_Forms extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'field_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-input, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-textarea, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-select-list',
@@ -200,7 +200,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'field_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -212,7 +212,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'text_indent',
 			[
-				'label'      => __( 'Text Indent', 'bdthemes-element-pack' ),
+				'label'      => __( 'Text Indent', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -237,7 +237,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'input_width',
 			[
-				'label'      => __( 'Input Width', 'bdthemes-element-pack' ),
+				'label'      => __( 'Input Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -256,7 +256,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'input_height',
 			[
-				'label'      => __( 'Input Height', 'bdthemes-element-pack' ),
+				'label'      => __( 'Input Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -275,7 +275,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'textarea_width',
 			[
-				'label'      => __( 'Textarea Width', 'bdthemes-element-pack' ),
+				'label'      => __( 'Textarea Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -294,7 +294,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'textarea_height',
 			[
-				'label'      => __( 'Textarea Height', 'bdthemes-element-pack' ),
+				'label'      => __( 'Textarea Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -313,7 +313,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'field_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -326,7 +326,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'field_spacing',
 			[
-				'label'      => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'      => __( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -361,7 +361,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'text_color_placeholder',
 			[
-				'label'     => __( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-field input::-webkit-input-placeholder, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-field textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
@@ -374,14 +374,14 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_fields_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'field_bg__hover_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -393,7 +393,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'hover_field_text_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -405,7 +405,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'hover_field_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-input:hover, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-textarea:hover, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-select-list:hover' => 'border-color: {{VALUE}};',
@@ -427,7 +427,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'text_color_placeholder_hover',
 			[
-				'label'     => __( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-field input:hover::-webkit-input-placeholder, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-field textarea:hover::-webkit-input-placeholder' => 'color: {{VALUE}}',
@@ -440,14 +440,14 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_fields_focus',
 			[
-				'label' => __( 'Focus', 'bdthemes-element-pack' ),
+				'label' => __( 'Focus', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'focus_field_bg_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -459,7 +459,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'focus_field_text_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -471,7 +471,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'focus_field_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-input:focus, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-textarea:focus, {{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-select-list:focus' => 'border-color: {{VALUE}};',
@@ -499,7 +499,7 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_section(
             'section_radio_checkbox_style',
             [
-                'label' => __('Radio & Checkbox', 'bdthemes-element-pack'),
+                'label' => __('Radio & Checkbox', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -507,7 +507,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_control(
             'custom_radio_checkbox',
             [
-                'label' => __('Custom Styles', 'bdthemes-element-pack'),
+                'label' => __('Custom Styles', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
             ]
@@ -516,7 +516,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_responsive_control(
             'radio_checkbox_size',
             [
-                'label' => __('Size', 'bdthemes-element-pack'),
+                'label' => __('Size', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => '15',
@@ -544,7 +544,7 @@ class Forminator_Forms extends Module_Base {
         $this->start_controls_tab(
             'radio_checkbox_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -554,7 +554,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_control(
             'radio_checkbox_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -569,7 +569,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_responsive_control(
             'checkbox_border_width',
             [
-                'label' => __('Border Width', 'bdthemes-element-pack'),
+                'label' => __('Border Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -591,7 +591,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_control(
             'checkbox_border_color',
             [
-                'label' => __('Border Color', 'bdthemes-element-pack'),
+                'label' => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -606,7 +606,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_control(
             'checkbox_heading',
             [
-                'label' => __('Checkbox', 'bdthemes-element-pack'),
+                'label' => __('Checkbox', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -617,7 +617,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_responsive_control(
             'checkbox_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -632,7 +632,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_control(
             'radio_heading',
             [
-                'label' => __('Radio Buttons', 'bdthemes-element-pack'),
+                'label' => __('Radio Buttons', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -643,7 +643,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_responsive_control(
             'radio_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -660,7 +660,7 @@ class Forminator_Forms extends Module_Base {
         $this->start_controls_tab(
             'radio_checkbox_checked',
             [
-                'label' => __('Checked', 'bdthemes-element-pack'),
+                'label' => __('Checked', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -670,7 +670,7 @@ class Forminator_Forms extends Module_Base {
         $this->add_control(
             'radio_checkbox_color_checked',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -691,7 +691,7 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_submit_button_style',
 			[
-				'label' => __( 'Submit Button', 'bdthemes-element-pack' ),
+				'label' => __( 'Submit Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -699,19 +699,19 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_align',
 			[
-				'label'     => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'     => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -727,12 +727,12 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'button_width_type',
 			[
-				'label'        => __( 'Width', 'bdthemes-element-pack' ),
+				'label'        => __( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'custom',
 				'options'      => [
-					'full-width' => __( 'Full Width', 'bdthemes-element-pack' ),
-					'custom'     => __( 'Custom', 'bdthemes-element-pack' ),
+					'full-width' => __( 'Full Width', 'bdthemes-element-pack-lite' ),
+					'custom'     => __( 'Custom', 'bdthemes-element-pack-lite' ),
 				],
 				'prefix_class' => 'bdt-forminator-forms-button-',
 			]
@@ -741,7 +741,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_width',
 			[
-				'label'      => __( 'Width', 'bdthemes-element-pack' ),
+				'label'      => __( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -765,14 +765,14 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color_normal',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -784,7 +784,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'button_bg_color_normal',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -797,7 +797,7 @@ class Forminator_Forms extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'button_border_normal',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-button',
@@ -807,7 +807,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -819,7 +819,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -831,7 +831,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_margin',
 			[
-				'label'      => __( 'Margin Top', 'bdthemes-element-pack' ),
+				'label'      => __( 'Margin Top', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -851,7 +851,7 @@ class Forminator_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'button_typography',
-				'label'     => __( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => __( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-button',
 			]
 		);
@@ -869,14 +869,14 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_bg_color_hover',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -888,7 +888,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'button_text_color_hover',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -900,7 +900,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'button_border_color_hover',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -926,7 +926,7 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_error_style',
 			[
-				'label'     => __( 'Errors', 'bdthemes-element-pack' ),
+				'label'     => __( 'Errors', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -934,7 +934,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'error_message_text_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -946,7 +946,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'error_message_background_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -959,7 +959,7 @@ class Forminator_Forms extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'error_message_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-error-message',
@@ -969,7 +969,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'error_message_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -982,7 +982,7 @@ class Forminator_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'error_message_typography',
-				'label'     => __( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => __( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-error-message',
 			]
 		);
@@ -992,7 +992,7 @@ class Forminator_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_confirmation_style',
 			[
-				'label' => __( 'Confirmation Message', 'bdthemes-element-pack' ),
+				'label' => __( 'Confirmation Message', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1000,19 +1000,19 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'confirmation_alignment',
 			[
-				'label'     => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'     => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -1026,7 +1026,7 @@ class Forminator_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'confirmation_typography',
-				'label'    => __( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => __( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-success',
 			]
 		);
@@ -1034,7 +1034,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'confirmation_text_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -1046,7 +1046,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_control(
 			'confirmation_bg_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -1059,7 +1059,7 @@ class Forminator_Forms extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'confirmation_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} #bdt-forminator-forms-{{ID}} .forminator-success',
@@ -1069,7 +1069,7 @@ class Forminator_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'confirmation_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1086,7 +1086,7 @@ class Forminator_Forms extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['forminator_form']) {
-			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Forminator Forms From Setting!', 'bdthemes-element-pack').'</div>';
+			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Forminator Forms From Setting!', 'bdthemes-element-pack-lite').'</div>';
 		}
 
 		$attributes = [

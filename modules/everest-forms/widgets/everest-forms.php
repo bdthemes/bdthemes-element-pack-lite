@@ -20,7 +20,7 @@ class Everest_Forms extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Everest Forms', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Everest Forms', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -57,14 +57,14 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'everest_form',
 			[
-				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_everest_forms_options(),
 			]
@@ -75,7 +75,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_s_label',
 			[
-				'label' => esc_html__( 'Label', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,				
 			]
         );
@@ -83,7 +83,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'label_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -96,7 +96,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'label_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -117,7 +117,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[
-				'label' => esc_html__( 'Label', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,				
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-label .evf-label' => 'color: {{VALUE}}',
@@ -129,7 +129,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'inline_help_label_color',
 			[
-				'label' => esc_html__( 'Inline/Description Text', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inline/Description Text', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,				
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .form-row .everest-forms-field-label-inline,{{WRAPPER}} .bdt-everest-forms .form-row .evf-field-description' => 'color: {{VALUE}}',
@@ -141,7 +141,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'req_symbol_color',
 			[
-				'label' => esc_html__( 'Required Symbol', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Required Symbol', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,				
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row label .required' => 'color: {{VALUE}} !important',
@@ -154,7 +154,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_style_input',
 			[
-				'label' => esc_html__( 'Input Fields', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Input Fields', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
         );
@@ -174,7 +174,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'input_placeholder_color',
 			[
-				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms input::-webkit-input-placeholder,
@@ -189,7 +189,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'input_inner_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -205,7 +205,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'input_inner_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -222,7 +222,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'input_border_options',
 			[
-				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -231,10 +231,10 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'box_border',
 			[
-				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack-lite' ),
 				'default' => 'no',
 			]
 		);
@@ -242,14 +242,14 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'border_style',
 			[
-				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'solid',
 				'options' => [
-					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
-					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
-					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack' ),
+					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack-lite' ),
+					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms input[type="text"],
@@ -267,7 +267,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'box_border_width',
 			[
-				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'default' => [
@@ -293,14 +293,14 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_input_field_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
         );
         
 		$this->add_control(
 			'input_field_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms input[type="text"],
@@ -328,7 +328,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'box_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#252525',
 				'selectors'  => [
@@ -347,7 +347,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -380,14 +380,14 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_input_field_focus',
 			[
-				'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Focus', 'bdthemes-element-pack-lite' ),
 			]
         );
         
 		$this->add_control(
 			'input_field_focus_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms input[type="text"]:focus,
@@ -415,7 +415,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'box_border_hover_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors'  => [
@@ -434,7 +434,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'border_hover_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -471,7 +471,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_style_textarea',
 			[
-				'label' => esc_html__( 'Textarea Fields', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Textarea Fields', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
         );
@@ -479,7 +479,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'textarea_inner_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -491,7 +491,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'textarea_inner_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -511,7 +511,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'textarea_placeholder_color',
 			[
-				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms textarea::-webkit-input-placeholder' => 'color: {{VALUE}};',
@@ -522,7 +522,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'textarea_border_options',
 			[
-				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -531,10 +531,10 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'ta_box_border',
 			[
-				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack-lite' ),
 				'default' => 'no',
 			]
         );
@@ -542,14 +542,14 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'ta_border_style',
 			[
-				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'solid',
 				'options' => [
-					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
-					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
-					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack' ),
+					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack-lite' ),
+					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea' => 'border-style: {{VALUE}};',
@@ -563,7 +563,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'ta_box_border_width',
 			[
-				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'default' => [
@@ -586,14 +586,14 @@ class Everest_Forms extends Module_Base {
         $this->start_controls_tab(
             'tab_textarea_field_normal',
             [
-                'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
             ]
         );
 
         $this->add_control(
             'textarea_field_color',
             [
-                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea' => 'color: {{VALUE}};',
@@ -613,7 +613,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
             'ta_box_border_color',
             [
-                'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
                 'type' => Controls_Manager::COLOR,				
                 'selectors'  => [
                     '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea' => 'border-color: {{VALUE}};',
@@ -627,7 +627,7 @@ class Everest_Forms extends Module_Base {
         $this->add_responsive_control(
             'ta_border_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors'  => [
@@ -652,14 +652,14 @@ class Everest_Forms extends Module_Base {
         $this->start_controls_tab(
             'tab_textarea_field_focus',
             [
-                'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Focus', 'bdthemes-element-pack-lite' ),
             ]
         );
 
         $this->add_control(
             'textarea_field_focus_color',
             [
-                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+                'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field-container .evf-frontend-row textarea:focus' => 'color: {{VALUE}};',
@@ -679,7 +679,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
             'ta_box_border_hover_color',
             [
-                'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors'  => [
@@ -694,7 +694,7 @@ class Everest_Forms extends Module_Base {
         $this->add_responsive_control(
             'ta_border_hover_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors'  => [
@@ -723,7 +723,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
             'section_checked_styling',
             [
-                'label' => esc_html__('CheckBox/Radio Field', 'bdthemes-element-pack'),
+                'label' => esc_html__('CheckBox/Radio Field', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -732,7 +732,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_unchecked_field_bg',
 			[
-				'label' => esc_html__( 'Check Box', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Check Box', 'bdthemes-element-pack-lite' ),
 			]
         );
         
@@ -747,7 +747,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'checked_field_text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-checkbox label.everest-forms-field-label-inline' => 'color: {{VALUE}};',
@@ -759,7 +759,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
   			'checkbox_typography',
   			[
-  				'label' => esc_html__( 'Icon Size', 'bdthemes-element-pack' ),
+  				'label' => esc_html__( 'Icon Size', 'bdthemes-element-pack-lite' ),
   				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px'],
 				'range' => [
@@ -777,7 +777,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'checked_uncheck_color',
 			[
-				'label'     => esc_html__( 'UnChecked Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'UnChecked Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-checkbox .everest-forms-field-label-inline:before' => 'color: {{VALUE}};',
@@ -788,7 +788,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'checked_field_color',
 			[
-				'label'     => esc_html__( 'Checked Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Checked Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-form .evf-field-checkbox input[type=checkbox]:checked + .everest-forms-field-label-inline:before' => 'color: {{VALUE}};',
@@ -799,7 +799,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'unchecked_field_bgcolor',
 			[
-				'label'     => esc_html__( 'UnChecked Bg Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'UnChecked Bg Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-checkbox .everest-forms-field-label-inline:before' => 'background: {{VALUE}};',
@@ -811,7 +811,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'checked_field_bgcolor',
 			[
-				'label'     => esc_html__( 'Checked Bg Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Checked Bg Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-form .evf-field-checkbox input[type=checkbox]:checked + .everest-forms-field-label-inline:before' => 'background: {{VALUE}};',
@@ -822,7 +822,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'check_box_border_options',
 			[
-				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -831,10 +831,10 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'check_box_border',
 			[
-				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack-lite' ),
 				'default' => 'no',
 			]
 		);
@@ -842,14 +842,14 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'check_box_border_style',
 			[
-				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'solid',
 				'options' => [
-					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
-					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
-					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack' ),
+					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack-lite' ),
+					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-checkbox .everest-forms-field-label-inline:before' => 'border-style: {{VALUE}};',
@@ -863,7 +863,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'check_box_border_width',
 			[
-				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'default' => [
@@ -884,7 +884,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'unchecked_box_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-checkbox .everest-forms-field-label-inline:before' => 'border-color: {{VALUE}};',
@@ -898,7 +898,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'unchecked_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -915,7 +915,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_radio_field',
 			[
-				'label' => esc_html__( 'Radio Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Radio Button', 'bdthemes-element-pack-lite' ),
 			]
         );
         
@@ -930,7 +930,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_field_text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-radio label.everest-forms-field-label-inline' => 'color: {{VALUE}};',
@@ -942,7 +942,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
   			'radio_typography',
   			[
-  				'label' => esc_html__( 'Icon Size', 'bdthemes-element-pack' ),
+  				'label' => esc_html__( 'Icon Size', 'bdthemes-element-pack-lite' ),
   				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px'],
 				'range' => [
@@ -960,7 +960,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_uncheck_color',
 			[
-				'label'     => esc_html__( 'UnChecked Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'UnChecked Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [					
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-radio .everest-forms-field-label-inline:before' => 'color: {{VALUE}};',
@@ -971,7 +971,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_field_color',
 			[
-				'label'     => esc_html__( 'Checked Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Checked Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [					
 					'{{WRAPPER}} .bdt-everest-forms .everest-form .evf-field-radio input[type=radio]:checked + .everest-forms-field-label-inline:before' => 'color: {{VALUE}};',
@@ -982,7 +982,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_unchecked_field_bgcolor',
 			[
-				'label'     => esc_html__( 'UnChecked Bg Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'UnChecked Bg Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-radio .everest-forms-field-label-inline:before' => 'background: {{VALUE}};',
@@ -994,7 +994,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_checked_field_bgcolor',
 			[
-				'label'     => esc_html__( 'Checked Bg Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Checked Bg Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-form .evf-field-radio input[type=radio]:checked + .everest-forms-field-label-inline:before' => 'background: {{VALUE}};',
@@ -1005,7 +1005,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_border_options',
 			[
-				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1014,10 +1014,10 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_border',
 			[
-				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack-lite' ),
 				'default' => 'no',
 			]
 		);
@@ -1025,14 +1025,14 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_border_style',
 			[
-				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'solid',
 				'options' => [
-					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
-					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
-					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack' ),
+					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack-lite' ),
+					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-radio .everest-forms-field-label-inline:before' => 'border-style: {{VALUE}};',
@@ -1046,7 +1046,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'radio_border_width',
 			[
-				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'default' => [
@@ -1067,7 +1067,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'radio_unchecked_box_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms .evf-field-radio .everest-forms-field-label-inline:before' => 'border-color: {{VALUE}};',
@@ -1081,7 +1081,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'radio_unchecked_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1102,7 +1102,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
             'section_button_styling',
             [
-                'label' => esc_html__('Submit/Send Button', 'bdthemes-element-pack'),
+                'label' => esc_html__('Submit/Send Button', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1111,7 +1111,7 @@ class Everest_Forms extends Module_Base {
             'button_max_width',
             [
                 'type' => Controls_Manager::SLIDER,
-				'label' => esc_html__('Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Width', 'bdthemes-element-pack-lite'),
 				'size_units' => [ 'px', '%' ],
 				'range' => [
 					'px' => [
@@ -1144,7 +1144,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_inner_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1157,7 +1157,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1170,7 +1170,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'button_border_options',
 			[
-				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Options', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1179,10 +1179,10 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'button_box_border',
 			[
-				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Box Border', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Hide', 'bdthemes-element-pack-lite' ),
 				'default' => 'no',
 			]
 		);
@@ -1190,14 +1190,14 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'button_border_style',
 			[
-				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'solid',
 				'options' => [
-					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
-					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
-					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack' ),
+					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack-lite' ),
+					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'groove' => esc_html__( 'Groove', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]' => 'border-style: {{VALUE}};',
@@ -1211,7 +1211,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_box_border_width',
 			[
-				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'default' => [
@@ -1234,14 +1234,14 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
         );
         
 		$this->add_control(
 			'button_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]' => 'color: {{VALUE}};',
@@ -1261,7 +1261,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'button_box_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit],{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]' => 'border-color: {{VALUE}};',
@@ -1275,7 +1275,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1300,14 +1300,14 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
         );
         
 		$this->add_control(
 			'button_hover_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-part-button:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms button[type=submit]:hover,{{WRAPPER}} .bdt-everest-forms .everest-forms input[type=submit]:hover' => 'color: {{VALUE}};',
@@ -1327,7 +1327,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'button_box_border_hover_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors'  => [
@@ -1342,7 +1342,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_hover_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1371,7 +1371,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
             'section_oute_r_styling',
             [
-                'label' => esc_html__('Outer Field', 'bdthemes-element-pack'),
+                'label' => esc_html__('Outer Field', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1379,7 +1379,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'oute_r_inner_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1391,7 +1391,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'oute_r_inner_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1406,7 +1406,7 @@ class Everest_Forms extends Module_Base {
         $this->start_controls_tab(
             'oute_r_normal',
             [
-                'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
             ]
         );
 
@@ -1423,7 +1423,7 @@ class Everest_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'oute_r__border',
-                'label' => esc_html__( 'Border', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
                 'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field',				
             ]
         );
@@ -1431,7 +1431,7 @@ class Everest_Forms extends Module_Base {
         $this->add_responsive_control(
             'oute_r_border_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors'  => [
@@ -1453,7 +1453,7 @@ class Everest_Forms extends Module_Base {
         $this->start_controls_tab(
             'oute_r_hover',
             [
-                'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
             ]
         );
 
@@ -1470,7 +1470,7 @@ class Everest_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'oute_r__border_hover',
-                'label' => esc_html__( 'Border', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
                 'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .evf-field:hover',
             ]
         );
@@ -1478,7 +1478,7 @@ class Everest_Forms extends Module_Base {
         $this->add_responsive_control(
             'oute_r_border_radius_hover',
             [
-                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors'  => [
@@ -1504,7 +1504,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
             'section_form_container',
             [
-                'label' => esc_html__('Form Container', 'bdthemes-element-pack'),
+                'label' => esc_html__('Form Container', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1512,7 +1512,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'form_cont_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1524,7 +1524,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'form_cont_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1538,7 +1538,7 @@ class Everest_Forms extends Module_Base {
         $this->start_controls_tab(
             'form_normal',
             [
-                'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
             ]
         );
         $this->add_group_control(
@@ -1553,7 +1553,7 @@ class Everest_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'form_border',
-                'label' => esc_html__( 'Border', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
                 'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms',				
             ]
         );
@@ -1561,7 +1561,7 @@ class Everest_Forms extends Module_Base {
         $this->add_responsive_control(
             'form_border_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors'  => [
@@ -1583,7 +1583,7 @@ class Everest_Forms extends Module_Base {
         $this->start_controls_tab(
             'form_hover',
             [
-                'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
             ]
         );
 
@@ -1600,7 +1600,7 @@ class Everest_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'form_border_hover',
-                'label' => esc_html__( 'Border', 'bdthemes-element-pack' ),
+                'label' => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
                 'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms:hover',
             ]
         );
@@ -1608,7 +1608,7 @@ class Everest_Forms extends Module_Base {
         $this->add_responsive_control(
             'form_border_radius_hover',
             [
-                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors'  => [
@@ -1634,7 +1634,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
             'section_response_message',
             [
-                'label' => esc_html__('Response Message', 'bdthemes-element-pack'),
+                'label' => esc_html__('Response Message', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1643,14 +1643,14 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_response_success',
 			[
-				'label' => esc_html__( 'Success', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Success', 'bdthemes-element-pack-lite' ),
 			]
         );		
         
 		$this->add_responsive_control(
 			'response_success_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1662,7 +1662,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'response_success_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1683,7 +1683,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'response_success_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-notice--success' => 'color: {{VALUE}};',
@@ -1704,7 +1704,7 @@ class Everest_Forms extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'response_success_border',
-				'label' => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms .everest-forms-notice--success',
 			]
         );
@@ -1712,7 +1712,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'response_success_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1726,14 +1726,14 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_response_validation',
 			[
-				'label' => esc_html__( 'Validation/Error', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Validation/Error', 'bdthemes-element-pack-lite' ),
 			]
         );
         
 		$this->add_responsive_control(
 			'response_validation_padding',
 			[
-				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Inner Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1746,7 +1746,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'response_validation_margin',
 			[
-				'label' => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%'],
 				'selectors' => [
@@ -1767,7 +1767,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'response_validation_color',
 			[
-				'label'     => esc_html__( 'Text Color/Field Border', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color/Field Border', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms label.evf-error' => 'color: {{VALUE}};',
@@ -1782,7 +1782,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_control(
 			'response_validation_bg',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-everest-forms .everest-forms label.evf-error' => 'background: {{VALUE}};',
@@ -1794,7 +1794,7 @@ class Everest_Forms extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'response_validation_border',
-				'label' => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-everest-forms .everest-forms label.evf-error',
 			]
         );
@@ -1802,7 +1802,7 @@ class Everest_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'response_validation_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1820,7 +1820,7 @@ class Everest_Forms extends Module_Base {
 		$this->start_controls_section(
             'section_extra_option_styling',
             [
-                'label' => esc_html__('Extra Option', 'bdthemes-element-pack'),
+                'label' => esc_html__('Extra Option', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1829,7 +1829,7 @@ class Everest_Forms extends Module_Base {
             'content_max_width',
             [
                 'type' => Controls_Manager::SLIDER,
-				'label' => esc_html__('Maximum Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Maximum Width', 'bdthemes-element-pack-lite'),
 				'size_units' => [ 'px', '%' ],
 				'range' => [
 					'px' => [
@@ -1858,7 +1858,7 @@ class Everest_Forms extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['everest_form']) {
-			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Everest Forms From Setting!', 'bdthemes-element-pack').'</div>';
+			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Everest Forms From Setting!', 'bdthemes-element-pack-lite').'</div>';
 		}
 
 		$attributes = [

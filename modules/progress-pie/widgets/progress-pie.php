@@ -17,7 +17,7 @@ class Progress_Pie extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Progress Pie', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Progress Pie', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -63,14 +63,14 @@ class Progress_Pie extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'percent',
 			[
-				'label'   => esc_html__( 'Progress Value', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Progress Value', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 75,
 				'dynamic' => [ 'active' => true ],
@@ -80,7 +80,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'duration',
 			[
-				'label'   => esc_html__( 'Duration(s)', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Duration(s)', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 1,
 			]
@@ -89,7 +89,7 @@ class Progress_Pie extends Module_Base {
 		/*$this->add_control(
 			'delay',
 			[
-				'label'   => esc_html__( 'Delay', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Delay', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 1,
 			]
@@ -98,7 +98,7 @@ class Progress_Pie extends Module_Base {
 		/*$this->add_control(
 			'step',
 			[
-				'label'   => esc_html__( 'Steps', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Steps', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 1,
 			]
@@ -107,10 +107,10 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'title',
 			[
-				'label'       => esc_html__( 'Progress Pie Title', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Progress Pie Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => esc_html__( 'Your title text here', 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'Progress Pie Title', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Your title text here', 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'Progress Pie Title', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -119,7 +119,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'hide_title_divider',
 			[
-				'label'        => esc_html__( 'Hide Title Divider', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Hide Title Divider', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => ' bdt-no-divider',
 				'condition'    => [
@@ -131,9 +131,9 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'before',
 			[
-				'label'       => esc_html__( 'Before Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Before Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => esc_html__( 'Your before text here', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Your before text here', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -142,9 +142,9 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'text',
 			[
-				'label'       => esc_html__( 'Middle Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Middle Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => esc_html__( 'Your middle text here', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Your middle text here', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -153,9 +153,9 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'after',
 			[
-				'label'       => esc_html__( 'After Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'After Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => esc_html__( 'Your after text here', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Your after text here', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -166,7 +166,7 @@ class Progress_Pie extends Module_Base {
 		$this->start_controls_section(
 			'section_style_layout',
 			[
-				'label' => esc_html__( 'Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Style', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -174,7 +174,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'progress_pie',
 			[
-				'label'     => esc_html__( 'Progress Pie', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Progress Pie', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -183,7 +183,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'progress_background',
 			[
-				'label'     => esc_html__( 'Pie Fill Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Pie Fill Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-wrapper .bdt-progress-pie svg ellipse' => 'stroke: {{VALUE}};',
@@ -194,7 +194,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'progress_color',
 			[
-				'label'     => esc_html__( 'Pie Bar Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Pie Bar Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-wrapper .bdt-progress-pie svg path' => 'stroke: {{VALUE}};',
@@ -205,7 +205,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'before_text_color',
 			[
-				'label'     => esc_html__( 'Before Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Before Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-before' => 'color: {{VALUE}};',
@@ -219,7 +219,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'label'     => esc_html__( 'Before Text Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Before Text Typography', 'bdthemes-element-pack-lite' ),
 				'name'      => 'before_text_typography',
 				'selector'  => '{{WRAPPER}} .bdt-progress-pie-before',
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_1,
@@ -232,7 +232,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'middle_text_color',
 			[
-				'label'     => esc_html__( 'Middle Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Middle Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-text' => 'color: {{VALUE}};',
@@ -247,7 +247,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'label'     => esc_html__( 'Middle Text Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Middle Text Typography', 'bdthemes-element-pack-lite' ),
 				'name'      => 'middle_text_typography',
 				'selector'  => '{{WRAPPER}} .bdt-progress-pie-text',
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_1,
@@ -260,7 +260,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'number_color',
 			[
-				'label'     => esc_html__( 'Percentage Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Percentage Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-number' => 'color: {{VALUE}};',
@@ -275,7 +275,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'label'     => esc_html__( 'Percentage Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Percentage Typography', 'bdthemes-element-pack-lite' ),
 				'name'      => 'percentage_typography',
 				'selector'  => '{{WRAPPER}} .bdt-progress-pie-number',
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_1,
@@ -288,7 +288,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'after_text_color',
 			[
-				'label'     => esc_html__( 'After Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'After Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-after' => 'color: {{VALUE}};',
@@ -302,7 +302,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'label'     => esc_html__( 'After Text Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'After Text Typography', 'bdthemes-element-pack-lite' ),
 				'name'      => 'after_text_typography',
 				'selector'  => '{{WRAPPER}} .bdt-progress-pie-after',
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_1,
@@ -315,7 +315,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_responsive_control(
 			'progress_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -327,7 +327,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'line_width',
 			[
-				'label'   => esc_html__( 'Line Width', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Line Width', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 8,
 			]
@@ -337,13 +337,13 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'line_cap',
 			[
-				'label'     => esc_html__( 'Line Cap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Line Cap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'round',
 				'options'   => [
-					'round' => esc_html__( 'Rounded', 'bdthemes-element-pack' ),
-					'square'  => esc_html__( 'Square', 'bdthemes-element-pack' ),
-					'butt'    => esc_html__( 'Butt', 'bdthemes-element-pack' ),
+					'round' => esc_html__( 'Rounded', 'bdthemes-element-pack-lite' ),
+					'square'  => esc_html__( 'Square', 'bdthemes-element-pack-lite' ),
+					'butt'    => esc_html__( 'Butt', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -351,7 +351,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'progress_title',
 			[
-				'label'     => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [
@@ -363,7 +363,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'title_background',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-wrapper .bdt-progress-pie-title' => 'background-color: {{VALUE}};  border-top: none;',
@@ -377,7 +377,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-progress-pie-wrapper .bdt-progress-pie-title' => 'color: {{VALUE}};',
@@ -391,7 +391,7 @@ class Progress_Pie extends Module_Base {
 		$this->add_responsive_control(
 			'title_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [

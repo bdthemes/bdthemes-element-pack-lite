@@ -23,7 +23,7 @@ class Image_Stack extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Image Stack', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Image Stack', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -61,7 +61,7 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_section(
 			'section_content_image_stack',
 			[ 
-				'label' => __( 'Image Stack', 'bdthemes-element-pack' ),
+				'label' => __( 'Image Stack', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -72,25 +72,25 @@ class Image_Stack extends Module_Base {
 		$repeater->start_controls_tab(
 			'tab_item_content',
 			[ 
-				'label' => __( 'Content', 'bdthemes-element-pack' )
+				'label' => __( 'Content', 'bdthemes-element-pack-lite' )
 			]
 		);
 
 		$repeater->add_control(
 			'media_type',
 			[ 
-				'label'       => esc_html__( 'Media Type', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Media Type', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'toggle'      => false,
 				'default'     => 'image',
 				'render_type' => 'template',
 				'options'     => [ 
 					'image' => [ 
-						'title' => esc_html__( 'Image', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'far fa-image'
 					],
 					'icon'  => [ 
-						'title' => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'fas fa-star'
 					]
 				]
@@ -100,7 +100,7 @@ class Image_Stack extends Module_Base {
 		$repeater->add_control(
 			'selected_icon',
 			[ 
-				'label'       => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'       => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'default'     => [ 
 					'value'   => 'fas fa-star',
@@ -118,7 +118,7 @@ class Image_Stack extends Module_Base {
 		$repeater->add_control(
 			'image',
 			[ 
-				'label'       => __( 'Image', 'bdthemes-element-pack' ),
+				'label'       => __( 'Image', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::MEDIA,
 				'dynamic'     => ['active' => true],
 				'render_type' => 'template',
@@ -134,7 +134,7 @@ class Image_Stack extends Module_Base {
 		$repeater->add_control(
 			'link_url',
 			[ 
-				'label'       => __( 'Link', 'bdthemes-element-pack' ),
+				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
 				'placeholder' => 'http://your-link.com',
@@ -146,14 +146,14 @@ class Image_Stack extends Module_Base {
 		$repeater->start_controls_tab(
 			'tab_tooltip_text',
 			[ 
-				'label' => __( 'Tooltip', 'bdthemes-element-pack' )
+				'label' => __( 'Tooltip', 'bdthemes-element-pack-lite' )
 			]
 		);
 
 		$repeater->add_control(
 			'tooltip_text',
 			[ 
-				'label'   => __( 'Text', 'bdthemes-element-pack' ),
+				'label'   => __( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 
 					'active' => true,
@@ -164,14 +164,14 @@ class Image_Stack extends Module_Base {
 		$repeater->add_control(
 			'tooltip_placement',
 			[ 
-				'label'     => __( 'Placement', 'bdthemes-element-pack' ),
+				'label'     => __( 'Placement', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'top',
 				'options'   => [ 
-					'top'    => __( 'Top', 'bdthemes-element-pack' ),
-					'bottom' => __( 'Bottom', 'bdthemes-element-pack' ),
-					'left'   => __( 'Left', 'bdthemes-element-pack' ),
-					'right'  => __( 'Right', 'bdthemes-element-pack' ),
+					'top'    => __( 'Top', 'bdthemes-element-pack-lite' ),
+					'bottom' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
+					'left'   => __( 'Left', 'bdthemes-element-pack-lite' ),
+					'right'  => __( 'Right', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'tooltip_text!' => '',
@@ -184,14 +184,14 @@ class Image_Stack extends Module_Base {
 		$repeater->start_controls_tab(
 			'tab_item_style',
 			[ 
-				'label' => __( 'Style', 'bdthemes-element-pack' )
+				'label' => __( 'Style', 'bdthemes-element-pack-lite' )
 			]
 		);
 
 		$repeater->add_control(
 			'icon_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-image-stack .bdt-ep-image-stack-item{{CURRENT_ITEM}}'     => 'color: {{VALUE}};',
@@ -219,7 +219,7 @@ class Image_Stack extends Module_Base {
 		$repeater->add_control(
 			'border_color_item',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-image-stack .bdt-ep-image-stack-item{{CURRENT_ITEM}} span, {{WRAPPER}} .bdt-ep-image-stack-item{{CURRENT_ITEM}} a' => 'border-color: {{VALUE}}',
@@ -265,19 +265,19 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'alignment',
 			[ 
-				'label'     => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'     => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					]
 				],
@@ -294,7 +294,7 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_section(
 			'section_style_items',
 			[ 
-				'label' => __( 'Items', 'bdthemes-element-pack' ),
+				'label' => __( 'Items', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -304,14 +304,14 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_normal',
 			[ 
-				'label' => __( 'Normal', 'bdthemes-element-pack' )
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' )
 			]
 		);
 
 		$this->add_control(
 			'icon_color',
 			[ 
-				'label'     => __( 'Icon Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-image-stack-item'     => 'color: {{VALUE}}',
@@ -334,7 +334,7 @@ class Image_Stack extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'           => 'item_border',
-				'label'          => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'          => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'fields_options' => [ 
 					'border' => [ 
 						'default' => 'solid',
@@ -360,7 +360,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -372,7 +372,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_size',
 			[ 
-				'label'      => __( 'Item Size', 'bdthemes-element-pack' ),
+				'label'      => __( 'Item Size', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -390,7 +390,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'icon_size',
 			[ 
-				'label'     => __( 'Icon Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-image-stack-item span, {{WRAPPER}} .bdt-ep-image-stack-item a' => 'font-size: {{SIZE}}{{UNIT}};',
@@ -401,7 +401,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_spacing',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-image-stack-item:not(:last-child) span, {{WRAPPER}} .bdt-ep-image-stack-item:not(:last-child) a' => 'margin-right: {{SIZE}}{{UNIT}};',
@@ -412,7 +412,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_stack_spacing',
 			[ 
-				'label'     => __( 'Stack Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Stack Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-image-stack-item:not(:first-child) a, {{WRAPPER}} .bdt-ep-image-stack-item:not(:first-child) span' => 'margin-left: -{{SIZE}}{{UNIT}};',
@@ -424,7 +424,7 @@ class Image_Stack extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'item_box_shadow',
-				'label'    => __( 'Box Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Box Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-image-stack-item span, {{WRAPPER}} .bdt-ep-image-stack-item a',
 			]
 		);
@@ -434,14 +434,14 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_hover',
 			[ 
-				'label' => __( 'Hover', 'bdthemes-element-pack' )
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' )
 			]
 		);
 
 		$this->add_control(
 			'icon_color_hover',
 			[ 
-				'label'     => __( 'Icon Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-image-stack-item:hover'     => 'color: {{VALUE}}',
@@ -463,7 +463,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'item_border_border!' => '',
@@ -478,7 +478,7 @@ class Image_Stack extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'item_box_shadow_hover',
-				'label'    => __( 'Box Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Box Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-image-stack-item:hover span, {{WRAPPER}} .bdt-ep-image-stack-item:hover a',
 			]
 		);
@@ -492,7 +492,7 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_section(
 			'section_style_stack_animations',
 			[ 
-				'label' => __( 'Stack Animations', 'bdthemes-element-pack' ),
+				'label' => __( 'Stack Animations', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -502,14 +502,14 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_tab(
 			'tab_stack_item_hover',
 			[ 
-				'label' => __( 'Item Hover', 'bdthemes-element-pack' )
+				'label' => __( 'Item Hover', 'bdthemes-element-pack-lite' )
 			]
 		);
 
 		$this->add_control(
 			'item_translate_toggle_hover',
 			[ 
-				'label'        => __( 'Translate', 'bdthemes-element-pack' ),
+				'label'        => __( 'Translate', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'return_value' => 'yes',
 			]
@@ -521,7 +521,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_transx_hover',
 			[ 
-				'label'      => esc_html__( 'Translate X', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Translate X', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -542,7 +542,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_transy_hover',
 			[ 
-				'label'      => esc_html__( 'Translate Y', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Translate Y', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -565,7 +565,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_rotate_toggle_hover',
 			[ 
-				'label'        => __( 'Rotate', 'bdthemes-element-pack' ),
+				'label'        => __( 'Rotate', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'return_value' => 'yes',
 			]
@@ -576,7 +576,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_rotatex_hover',
 			[ 
-				'label'      => esc_html__( 'Rotate X', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Rotate X', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -597,7 +597,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_rotatey_hover',
 			[ 
-				'label'      => esc_html__( 'Rotate Y', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Rotate Y', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -618,7 +618,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_rotatez_hover',
 			[ 
-				'label'      => __( 'Rotate Z', 'bdthemes-element-pack' ),
+				'label'      => __( 'Rotate Z', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -641,7 +641,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_scale_hover',
 			[ 
-				'label'        => __( 'Scale', 'bdthemes-element-pack' ),
+				'label'        => __( 'Scale', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'return_value' => 'yes',
 			]
@@ -652,7 +652,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_scalex_hover',
 			[ 
-				'label'      => esc_html__( 'Scale X', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Scale X', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -674,7 +674,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_scaley_hover',
 			[ 
-				'label'      => esc_html__( 'Scale Y', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Scale Y', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -698,7 +698,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_skew_hover',
 			[ 
-				'label'        => __( 'Skew', 'bdthemes-element-pack' ),
+				'label'        => __( 'Skew', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'return_value' => 'yes',
 			]
@@ -709,7 +709,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_skewx_hover',
 			[ 
-				'label'      => esc_html__( 'Skew X', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Skew X', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -730,7 +730,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'item_effect_skewy_hover',
 			[ 
-				'label'      => esc_html__( 'Skew Y', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Skew Y', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -753,7 +753,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_effect_transition',
 			[ 
-				'label'       => __( 'Transition', 'bdthemes-element-pack' ),
+				'label'       => __( 'Transition', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::POPOVER_TOGGLE,
 				'render_type' => 'none',
 			]
@@ -764,7 +764,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_effect_transition_duration',
 			[ 
-				'label'     => esc_html__( 'Duration (ms)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Duration (ms)', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => [ 'active' => true ],
 				'default'   => '300',
@@ -780,7 +780,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_effect_transition_delay',
 			[ 
-				'label'     => esc_html__( 'Delay (ms)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Delay (ms)', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => [ 'active' => true ],
 				'condition' => [ 
@@ -795,9 +795,9 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'item_effect_transition_easing',
 			[ 
-				'label'       => esc_html__( 'Easing', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Easing', 'bdthemes-element-pack-lite' ),
 /* translators: 1: Opening anchor tag, 2: Closing anchor tag */
-				'description' => sprintf( __( 'If you want use Cubic Bezier easing, Go %1$s HERE %2$s', 'bdthemes-element-pack' ), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>' ),
+				'description' => sprintf( __( 'If you want use Cubic Bezier easing, Go %1$s HERE %2$s', 'bdthemes-element-pack-lite' ), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'default'     => 'ease-out',
@@ -817,14 +817,14 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_tab(
 			'tab_stack_hover',
 			[ 
-				'label' => __( 'Stack Hover', 'bdthemes-element-pack' )
+				'label' => __( 'Stack Hover', 'bdthemes-element-pack-lite' )
 			]
 		);
 
 		$this->add_control(
 			'stack_translate_toggle_normal',
 			[ 
-				'label'        => __( 'Translate', 'bdthemes-element-pack' ),
+				'label'        => __( 'Translate', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'return_value' => 'yes',
 			]
@@ -835,7 +835,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'stack_effect_transx_normal',
 			[ 
-				'label'      => esc_html__( 'Translate X', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Translate X', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -856,7 +856,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'stack_effect_transy_normal',
 			[ 
-				'label'      => esc_html__( 'Translate Y', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Translate Y', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -879,7 +879,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'stack_rotate_toggle_normal',
 			[ 
-				'label'        => __( 'Rotate', 'bdthemes-element-pack' ),
+				'label'        => __( 'Rotate', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'return_value' => 'yes',
 			]
@@ -890,7 +890,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'stack_effect_rotatex_normal',
 			[ 
-				'label'      => esc_html__( 'Rotate X', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Rotate X', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -911,7 +911,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'stack_effect_rotatey_normal',
 			[ 
-				'label'      => esc_html__( 'Rotate Y', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Rotate Y', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -933,7 +933,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'stack_effect_rotatez_normal',
 			[ 
-				'label'      => __( 'Rotate Z', 'bdthemes-element-pack' ),
+				'label'      => __( 'Rotate Z', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -962,7 +962,7 @@ class Image_Stack extends Module_Base {
 		$this->start_controls_section(
 			'section_style_tooltip',
 			[ 
-				'label' => __( 'Tooltip', 'bdthemes-element-pack' ),
+				'label' => __( 'Tooltip', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -970,7 +970,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'tooltip_width',
 			[ 
-				'label'       => esc_html__( 'Width', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SLIDER,
 				'size_units'  => [ 
 					'px', 'em',
@@ -991,20 +991,20 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'tooltip_text_align',
 			[ 
-				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'center',
 				'options'   => [ 
 					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -1017,7 +1017,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'tooltip_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'color: {{VALUE}}',
@@ -1029,7 +1029,7 @@ class Image_Stack extends Module_Base {
 		$this->add_control(
 			'tooltip_arrow_color',
 			[ 
-				'label'     => esc_html__( 'Arrow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Arrow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .tippy-arrow' => 'color: {{VALUE}}',
@@ -1049,7 +1049,7 @@ class Image_Stack extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'tooltip_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.tippy-box[data-theme="bdt-tippy-{{ID}}"]',
@@ -1059,7 +1059,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'tooltip_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1071,7 +1071,7 @@ class Image_Stack extends Module_Base {
 		$this->add_responsive_control(
 			'tooltip_padding',
 			[ 
-				'label'       => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'       => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::DIMENSIONS,
 				'size_units'  => [ 'px', '%' ],
 				'selectors'   => [ 

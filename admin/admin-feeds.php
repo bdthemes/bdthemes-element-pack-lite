@@ -68,7 +68,7 @@ class Admin_Feeds {
 					<p>
 						<?php echo wp_kses_post( wp_trim_words( wp_strip_all_tags( $feed->content ), 50 ) ); ?>
 						<a href="<?php echo esc_url( $feed->demo_link ); ?>" target="_blank">
-							<?php esc_html_e( 'Learn more...', 'bdthemes-element-pack' ); ?>
+							<?php esc_html_e( 'Learn more...', 'bdthemes-element-pack-lite' ); ?>
 						</a>
 					</p>
 				</div>
@@ -235,19 +235,19 @@ class Admin_Feeds {
 		<div class="bdt-widget">
 			<ul>
 				<?php if ( empty( $rss_items ) ) : ?>
-					<li><?php esc_html_e( 'Items Not Found', 'bdthemes-element-pack' ); ?>.</li>
+					<li><?php esc_html_e( 'Items Not Found', 'bdthemes-element-pack-lite' ); ?>.</li>
 				<?php else : ?>
 					<?php foreach ( $rss_items as $item ) : ?>
 						<li>
 							<a target="_blank" href="<?php echo esc_url( $item['link'] ); ?>"
 								title="<?php echo esc_attr( wp_date( get_option( 'date_format' ), $item['date'] ) ); ?>">
 								<?php if ( $this->is_feed_item_new( $item['date'] ) ) : ?>
-									<span class="bdt-feed-badge bdt-feed-badge--new"><?php esc_html_e( 'New', 'bdthemes-element-pack' ); ?></span>
+									<span class="bdt-feed-badge bdt-feed-badge--new"><?php esc_html_e( 'New', 'bdthemes-element-pack-lite' ); ?></span>
 								<?php endif; ?>
 								<?php echo esc_html( $item['title'] ); ?>
 							</a>
 							<span class="bdt-date" style="display: block; margin: 0;">
-								<?php echo esc_html( human_time_diff( $item['date'], time() ) . ' ' . __( 'ago', 'bdthemes-element-pack' ) ); ?>
+								<?php echo esc_html( human_time_diff( $item['date'], time() ) . ' ' . __( 'ago', 'bdthemes-element-pack-lite' ) ); ?>
 							</span>
 							<div class="bdt-summary">
 								<?php echo esc_html( wp_html_excerpt( wp_strip_all_tags( $item['content'] ), 120 ) . ' [...]' ); ?>

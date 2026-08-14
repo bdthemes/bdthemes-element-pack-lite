@@ -24,7 +24,7 @@ class Slider extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__('Slider', 'bdthemes-element-pack');
+		return BDTEP . esc_html__('Slider', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -76,7 +76,7 @@ class Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_content_sliders',
 			[
-				'label' => esc_html__('Sliders', 'bdthemes-element-pack'),
+				'label' => esc_html__('Sliders', 'bdthemes-element-pack-lite'),
 			]
 		);
 
@@ -85,22 +85,22 @@ class Slider extends Module_Base {
 		$repeater->add_control(
 			'source',
 			[
-				'label'   => esc_html__('Select Source', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Select Source', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'custom',
 				'options' => [
-					'custom'        => esc_html__('Custom Content', 'bdthemes-element-pack'),
-					"elementor"     => esc_html__('Elementor Template', 'bdthemes-element-pack'),
+					'custom'        => esc_html__('Custom Content', 'bdthemes-element-pack-lite'),
+					"elementor"     => esc_html__('Elementor Template', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
 		$repeater->add_control(
 			'template_id',
 			[
-				'label'       => __('Select Template', 'bdthemes-element-pack'),
+				'label'       => __('Select Template', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'label_block' => true,
-				'placeholder' => __('Type and select template', 'bdthemes-element-pack'),
+				'placeholder' => __('Type and select template', 'bdthemes-element-pack-lite'),
 				'query_args'  => [
 					'query'        => 'elementor_template',
 				],
@@ -111,10 +111,10 @@ class Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_title',
 			[
-				'label'       => esc_html__('Title', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Title', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => ['active' => true],
-				'default'     => esc_html__('Slide Title', 'bdthemes-element-pack'),
+				'default'     => esc_html__('Slide Title', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 				'condition' => ['source' => 'custom'],
 			]
@@ -123,7 +123,7 @@ class Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_image',
 			[
-				'label'   => esc_html__('Image', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Image', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => ['active' => true],
 				'condition' => ['source' => 'custom'],
@@ -133,10 +133,10 @@ class Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_content',
 			[
-				'label'      => esc_html__('Content', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Content', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::WYSIWYG,
 				'dynamic'    => ['active' => true],
-				'default'    => esc_html__('Slide Content', 'bdthemes-element-pack'),
+				'default'    => esc_html__('Slide Content', 'bdthemes-element-pack-lite'),
 				'show_label' => false,
 				'condition' => ['source' => 'custom'],
 			]
@@ -145,7 +145,7 @@ class Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_link',
 			[
-				'label'       => esc_html__('Link', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Link', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => ['active' => true],
 				'placeholder' => 'http://your-link.com',
@@ -159,25 +159,25 @@ class Slider extends Module_Base {
 		$this->add_control(
 			'tabs',
 			[
-				'label' => esc_html__('Slider Items', 'bdthemes-element-pack'),
+				'label' => esc_html__('Slider Items', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'tab_title'   => esc_html__('Slide #1', 'bdthemes-element-pack'),
-						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack'),
+						'tab_title'   => esc_html__('Slide #1', 'bdthemes-element-pack-lite'),
+						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite'),
 					],
 					[
-						'tab_title'   => esc_html__('Slide #2', 'bdthemes-element-pack'),
-						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack'),
+						'tab_title'   => esc_html__('Slide #2', 'bdthemes-element-pack-lite'),
+						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite'),
 					],
 					[
-						'tab_title'   => esc_html__('Slide #3', 'bdthemes-element-pack'),
-						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack'),
+						'tab_title'   => esc_html__('Slide #3', 'bdthemes-element-pack-lite'),
+						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite'),
 					],
 					[
-						'tab_title'   => esc_html__('Slide #4', 'bdthemes-element-pack'),
-						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack'),
+						'tab_title'   => esc_html__('Slide #4', 'bdthemes-element-pack-lite'),
+						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite'),
 					],
 				],
 				'title_field' => '{{{ tab_title }}}',

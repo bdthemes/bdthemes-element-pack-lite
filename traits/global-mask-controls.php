@@ -14,17 +14,17 @@
 		    $this->add_control(
 		        'image_mask_shape',
 		        [
-		            'label'     => esc_html__('Masking Shape', 'bdthemes-element-pack'),
-		            'title'     => esc_html__('Masking Shape', 'bdthemes-element-pack'),
+		            'label'     => esc_html__('Masking Shape', 'bdthemes-element-pack-lite'),
+		            'title'     => esc_html__('Masking Shape', 'bdthemes-element-pack-lite'),
 		            'type'      => Controls_Manager::CHOOSE,
 		            'default'   => 'default',
 		            'options'   => [
 		                'default' => [
-		                    'title' => esc_html__('Default Shapes', 'bdthemes-element-pack'),
+		                    'title' => esc_html__('Default Shapes', 'bdthemes-element-pack-lite'),
 		                    'icon'  => 'eicon-star',
 		                ],
 		                'custom'  => [
-		                    'title' => esc_html__('Custom Shape', 'bdthemes-element-pack'),
+		                    'title' => esc_html__('Custom Shape', 'bdthemes-element-pack-lite'),
 		                    'icon'  => 'eicon-image-bold',
 		                ],
 		            ],
@@ -38,7 +38,7 @@
 		    $this->add_control(
 		        'image_mask_shape_default',
 		        [
-		            'label'          => _x('Default', 'Mask Image', 'bdthemes-element-pack'),
+		            'label'          => _x('Default', 'Mask Image', 'bdthemes-element-pack-lite'),
 		            'label_block'    => true,
 		            'show_label'     => false,
 		            'type'           => Controls_Manager::VISUAL_CHOICE,
@@ -60,7 +60,7 @@
 		    $this->add_control(
 		        'image_mask_shape_custom',
 		        [
-		            'label'      => _x('Custom Shape', 'Mask Image', 'bdthemes-element-pack'),
+		            'label'      => _x('Custom Shape', 'Mask Image', 'bdthemes-element-pack-lite'),
 		            'type'       => Controls_Manager::MEDIA,
 		            'show_label' => false,
 		            'selectors'  => [
@@ -76,19 +76,19 @@
 		    $this->add_control(
 		        'image_mask_shape_position',
 		        [
-		            'label'                => esc_html__('Position', 'bdthemes-element-pack'),
+		            'label'                => esc_html__('Position', 'bdthemes-element-pack-lite'),
 		            'type'                 => Controls_Manager::SELECT,
 		            'default'              => 'center-center',
 		            'options'              => [
-		                'center-center' => esc_html__('Center Center', 'bdthemes-element-pack'),
-		                'center-left'   => esc_html__('Center Left', 'bdthemes-element-pack'),
-		                'center-right'  => esc_html__('Center Right', 'bdthemes-element-pack'),
-		                'top-center'    => esc_html__('Top Center', 'bdthemes-element-pack'),
-		                'top-left'      => esc_html__('Top Left', 'bdthemes-element-pack'),
-		                'top-right'     => esc_html__('Top Right', 'bdthemes-element-pack'),
-		                'bottom-center' => esc_html__('Bottom Center', 'bdthemes-element-pack'),
-		                'bottom-left'   => esc_html__('Bottom Left', 'bdthemes-element-pack'),
-		                'bottom-right'  => esc_html__('Bottom Right', 'bdthemes-element-pack'),
+		                'center-center' => esc_html__('Center Center', 'bdthemes-element-pack-lite'),
+		                'center-left'   => esc_html__('Center Left', 'bdthemes-element-pack-lite'),
+		                'center-right'  => esc_html__('Center Right', 'bdthemes-element-pack-lite'),
+		                'top-center'    => esc_html__('Top Center', 'bdthemes-element-pack-lite'),
+		                'top-left'      => esc_html__('Top Left', 'bdthemes-element-pack-lite'),
+		                'top-right'     => esc_html__('Top Right', 'bdthemes-element-pack-lite'),
+		                'bottom-center' => esc_html__('Bottom Center', 'bdthemes-element-pack-lite'),
+		                'bottom-left'   => esc_html__('Bottom Left', 'bdthemes-element-pack-lite'),
+		                'bottom-right'  => esc_html__('Bottom Right', 'bdthemes-element-pack-lite'),
 		            ],
 		            'selectors_dictionary' => [
 		                'center-center' => 'center center',
@@ -113,14 +113,14 @@
 		    $this->add_control(
 		        'image_mask_shape_size',
 		        [
-		            'label'     => esc_html__('Size', 'bdthemes-element-pack'),
+		            'label'     => esc_html__('Size', 'bdthemes-element-pack-lite'),
 		            'type'      => Controls_Manager::SELECT,
 		            'default'   => 'contain',
 		            'options'   => [
-		                'auto'    => esc_html__('Auto', 'bdthemes-element-pack'),
-		                'cover'   => esc_html__('Cover', 'bdthemes-element-pack'),
-		                'contain' => esc_html__('Contain', 'bdthemes-element-pack'),
-		                'initial' => esc_html__('Custom', 'bdthemes-element-pack'),
+		                'auto'    => esc_html__('Auto', 'bdthemes-element-pack-lite'),
+		                'cover'   => esc_html__('Cover', 'bdthemes-element-pack-lite'),
+		                'contain' => esc_html__('Contain', 'bdthemes-element-pack-lite'),
+		                'initial' => esc_html__('Custom', 'bdthemes-element-pack-lite'),
 		            ],
 		            'selectors' => [
 		                '{{WRAPPER}} .bdt-image-mask>*' => '-webkit-mask-size: {{VALUE}}; mask-size: {{VALUE}};',
@@ -134,7 +134,7 @@
 		    $this->add_responsive_control(
 		        'image_mask_shape_custom_size',
 		        [
-		            'label'      => _x('Custom Size', 'Mask Image', 'bdthemes-element-pack'),
+		            'label'      => _x('Custom Size', 'Mask Image', 'bdthemes-element-pack-lite'),
 		            'type'       => Controls_Manager::SLIDER,
 		            'size_units' => ['px', 'em', '%', 'vw'],
 		            'range'      => [
@@ -173,19 +173,19 @@
 		    $this->add_control(
 		        'image_mask_shape_repeat',
 		        [
-		            'label'                => esc_html__('Repeat', 'bdthemes-element-pack'),
+		            'label'                => esc_html__('Repeat', 'bdthemes-element-pack-lite'),
 		            'type'                 => Controls_Manager::SELECT,
 		            'default'              => 'no-repeat',
 		            'options'              => [
-		                'repeat'          => esc_html__('Repeat', 'bdthemes-element-pack'),
-		                'repeat-x'        => esc_html__('Repeat-x', 'bdthemes-element-pack'),
-		                'repeat-y'        => esc_html__('Repeat-y', 'bdthemes-element-pack'),
-		                'space'           => esc_html__('Space', 'bdthemes-element-pack'),
-		                'round'           => esc_html__('Round', 'bdthemes-element-pack'),
-		                'no-repeat'       => esc_html__('No-repeat', 'bdthemes-element-pack'),
-		                'repeat-space'    => esc_html__('Repeat Space', 'bdthemes-element-pack'),
-		                'round-space'     => esc_html__('Round Space', 'bdthemes-element-pack'),
-		                'no-repeat-round' => esc_html__('No-repeat Round', 'bdthemes-element-pack'),
+		                'repeat'          => esc_html__('Repeat', 'bdthemes-element-pack-lite'),
+		                'repeat-x'        => esc_html__('Repeat-x', 'bdthemes-element-pack-lite'),
+		                'repeat-y'        => esc_html__('Repeat-y', 'bdthemes-element-pack-lite'),
+		                'space'           => esc_html__('Space', 'bdthemes-element-pack-lite'),
+		                'round'           => esc_html__('Round', 'bdthemes-element-pack-lite'),
+		                'no-repeat'       => esc_html__('No-repeat', 'bdthemes-element-pack-lite'),
+		                'repeat-space'    => esc_html__('Repeat Space', 'bdthemes-element-pack-lite'),
+		                'round-space'     => esc_html__('Round Space', 'bdthemes-element-pack-lite'),
+		                'no-repeat-round' => esc_html__('No-repeat Round', 'bdthemes-element-pack-lite'),
 		            ],
 		            'selectors_dictionary' => [
 		                'repeat'          => 'repeat',

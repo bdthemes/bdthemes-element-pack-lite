@@ -24,14 +24,14 @@ class Module extends Element_Pack_Module_Base {
 			'element_pack_grid_line_section',
 			[
 				'tab'   => Controls_Manager::TAB_SETTINGS,
-				'label' => BDTEP_CP . esc_html__('Grid Line', 'bdthemes-element-pack'),
+				'label' => BDTEP_CP . esc_html__('Grid Line', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$section->add_control(
 			'ep_grid_line_enable',
 			[
-				'label'       => esc_html__('Grid Line?', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Grid Line?', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SWITCHER,
 				'render_type' => 'template',
 			]
@@ -40,7 +40,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'ep_grid_line_line_color',
 			[
-				'label'     => esc_html__('Line Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Line Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'ep_grid_line_enable' => 'yes'
@@ -54,7 +54,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'ep_grid_line_column_color',
 			[
-				'label'     => esc_html__('Column Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Column Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'ep_grid_line_enable' => 'yes'
@@ -69,7 +69,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'ep_grid_line_columns',
 			[
-				'label'           => esc_html__('Columns', 'bdthemes-element-pack'),
+				'label'           => esc_html__('Columns', 'bdthemes-element-pack-lite'),
 				'type'            => Controls_Manager::NUMBER,
 				'min'             => 1,
 				'max'             => 12,
@@ -90,7 +90,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'ep_grid_line_outline',
 			[
-				'label'       => esc_html__('Outline', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Outline', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SWITCHER,
 				'render_type' => 'none',
 				'condition'   => [
@@ -103,7 +103,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'ep_grid_line_max_width',
 			[
-				'label'      => esc_html__('Max Width', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Max Width', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px', 'em', '%'],
 				'range'      => [
@@ -128,7 +128,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'ep_grid_line_line_width',
 			[
-				'label'      => esc_html__('Line Width', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Line Width', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px', 'em', '%'],
 				'range'      => [
@@ -157,7 +157,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'ep_grid_line_direction',
 			[
-				'label' => esc_html__('Line Direction (deg)', 'bdthemes-element-pack'),
+				'label' => esc_html__('Line Direction (deg)', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -179,7 +179,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'ep_grid_line_z_index',
 			[
-				'label'       => esc_html__('Z-index', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Z-index', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::NUMBER,
 				'min'         => 0,
 				'max'         => 9999,
@@ -196,7 +196,7 @@ class Module extends Element_Pack_Module_Base {
 		// $section->add_control(
 		// 	'ep_grid_line_animation',
 		// 	[
-		// 		'label'              => esc_html__('Entrance Animation', 'bdthemes-element-pack'),
+		// 		'label'              => esc_html__('Entrance Animation', 'bdthemes-element-pack-lite'),
 		// 		'type'               => Controls_Manager::SWITCHER,
 		// 		'condition' => [
 		// 			'ep_grid_line_enable' => 'yes'
@@ -242,13 +242,12 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'ep_grid_line_horizontal',
 			[
-				'label'       => esc_html__('Horizontal Line?', 'bdthemes-element-pack') . BDTEP_PC,
+				'label'       => esc_html__('Horizontal Line?', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SWITCHER,
 				'render_type' => 'template',
 				'condition'   => [
 					'ep_grid_line_enable' => 'yes'
 				],
-				'classes' => BDTEP_IS_PC,
 			]
 		);
 

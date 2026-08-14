@@ -28,7 +28,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->start_controls_section(
 			'ep_section_background_overlay',
 			[ 
-				'label'     => BDTEP_CP . esc_html__( 'Background Over/Underlay', 'bdthemes-element-pack' ),
+				'label'     => BDTEP_CP . esc_html__( 'Background Over/Underlay', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_ADVANCED,
 			]
 		);
@@ -36,7 +36,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
             'element_pack_background_overlay',
             [
-                'label'         => BDTEP_CP . esc_html__('Enable', 'bdthemes-element-pack'),
+                'label'         => BDTEP_CP . esc_html__('Enable', 'bdthemes-element-pack-lite'),
                 'type'          => Controls_Manager::SWITCHER,
 				'prefix_class'  => 'bdt-background-overlay-',
             ]
@@ -54,7 +54,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->start_controls_tab(
 			'ep_tab_background_overlay_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -69,7 +69,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_background_overlay_opacity',
 			[ 
-				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => .5,
@@ -100,10 +100,10 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_overlay_blend_mode',
 			[ 
-				'label'     => esc_html__( 'Blend Mode', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Blend Mode', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [ 
-					''            => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+					''            => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 					'multiply'    => 'Multiply',
 					'screen'      => 'Screen',
 					'overlay'     => 'Overlay',
@@ -123,7 +123,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'ep_background_overlay_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'separator'  => 'before',
@@ -136,7 +136,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'ep_background_overlay_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'separator'  => 'before',
@@ -149,7 +149,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_background_overlay_zindex',
 			[ 
-				'label'     => esc_html__( 'Z-Index', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Z-Index', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::NUMBER,
 				'dynamic'   => [ 
 					'active' => true,
@@ -164,7 +164,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->start_controls_tab(
 			'ep_tab_background_overlay_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -179,7 +179,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_background_overlay_hover_opacity',
 			[ 
-				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => .5,
@@ -210,7 +210,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_background_overlay_hover_transition_duration',
 			[ 
-				'label'     => esc_html__( 'Transition Duration', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Transition Duration', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 0.3,
@@ -231,7 +231,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'ep_background_overlay_hover_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'separator'  => 'before',

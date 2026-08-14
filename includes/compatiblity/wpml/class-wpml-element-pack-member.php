@@ -29,7 +29,7 @@ class WPML_ElementPack_Team_Member extends WPML_Module_With_Items {
 	protected function get_title($field) {
 		switch ($field) {
 			case 'social_link_title':
-				return esc_html__('Social Label', 'bdthemes-element-pack');
+				return esc_html__('Social Label', 'bdthemes-element-pack-lite');
 
 			default:
 				return '';

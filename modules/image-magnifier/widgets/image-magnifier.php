@@ -16,7 +16,7 @@ class Image_Magnifier extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Image Magnifier', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Image Magnifier', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -62,7 +62,7 @@ class Image_Magnifier extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -71,17 +71,17 @@ class Image_Magnifier extends Module_Base {
 		$this->start_controls_tab(
 			'image_choose_thumb_image',
 			[
-				'label' => __('Thumb Image', 'bdthemes-element-pack')
+				'label' => __('Thumb Image', 'bdthemes-element-pack-lite')
 			]
 		);
 
 		$this->add_control(
 			'image',
 			[
-				'label'   => esc_html__( 'Thumb Image', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Thumb Image', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [ 'active' => true ],
-				'description' => esc_html__( 'If you want to load magnifying image as large so open right tab', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'If you want to load magnifying image as large so open right tab', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -90,14 +90,14 @@ class Image_Magnifier extends Module_Base {
 		$this->start_controls_tab(
 			'image_choose_magnify_image',
 			[
-				'label' => __('Magnify Image', 'bdthemes-element-pack')
+				'label' => __('Magnify Image', 'bdthemes-element-pack-lite')
 			]
 		);
 
 		$this->add_control(
 			'magnify_img',
 			[
-				'label'   => esc_html__( 'Magnify Image', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Magnify Image', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [ 'active' => true ],
 			]
@@ -110,13 +110,13 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'type',
 			[
-				'label'   => esc_html__( 'Type', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Type', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'inner',
 				'options' => [
-					'inner'    => esc_html__( 'Inner', 'bdthemes-element-pack' ),
-					'standard' => esc_html__( 'Standard', 'bdthemes-element-pack' ),
-					'follow'   => esc_html__( 'Follow', 'bdthemes-element-pack' ),
+					'inner'    => esc_html__( 'Inner', 'bdthemes-element-pack-lite' ),
+					'standard' => esc_html__( 'Standard', 'bdthemes-element-pack-lite' ),
+					'follow'   => esc_html__( 'Follow', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -124,7 +124,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'smooth_move',
 			[
-				'label'   => esc_html__( 'Smooth Move', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Smooth Move', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -133,7 +133,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'preload',
 			[
-				'label'   => esc_html__( 'Preload', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Preload', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -142,9 +142,9 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'zoom_ratio',
 			[
-				'label'       => esc_html__( 'Zoom Ratio', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Zoom Ratio', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::IMAGE_DIMENSIONS,
-				'description' => esc_html__( 'Zoom ratio widht and height, such as 480:300', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'Zoom ratio widht and height, such as 480:300', 'bdthemes-element-pack-lite' ),
 				'condition'	  => [
 					'type'		=> ['standard', 'follow']
 				]
@@ -154,7 +154,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'horizontal_offset',
 			[
-				'label'   => esc_html__( 'Horizontal Offset', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Horizontal Offset', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => '10',
@@ -168,7 +168,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'vertical_offset',
 			[
-				'label'   => esc_html__( 'Vertical Offset', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Vertical Offset', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => '0',
@@ -182,12 +182,12 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'position',
 			[
-				'label'   => esc_html__( 'Position', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'left',
 				'options' => [
-					'right' => esc_html__( 'Right', 'bdthemes-element-pack' ),
-					'left'  => esc_html__( 'Left', 'bdthemes-element-pack' ),
+					'right' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
+					'left'  => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					'type' => 'standard',
@@ -200,7 +200,7 @@ class Image_Magnifier extends Module_Base {
 		$this->start_controls_section(
 			'section_style_image',
 			[
-				'label' => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -208,7 +208,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'image_background',
 			[
-				'label'     => __( 'Background', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-image-magnifier' => 'background-color: {{VALUE}};',
@@ -219,7 +219,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_responsive_control(
 			'image_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-image-magnifier' => 'padding: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
@@ -231,7 +231,7 @@ class Image_Magnifier extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'image_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-image-magnifier',
@@ -242,7 +242,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'image_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -254,7 +254,7 @@ class Image_Magnifier extends Module_Base {
 		$this->add_control(
 			'image_opacity',
 			[
-				'label'   => __( 'Opacity (%)', 'bdthemes-element-pack' ),
+				'label'   => __( 'Opacity (%)', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 1,
@@ -351,7 +351,7 @@ class Image_Magnifier extends Module_Base {
             <?php
         } else {
         	?>
-        	<div class="bdt-alert-warning bdt-text-center"><?php esc_html_e('Opps!! You didn\'t choose any image for magnifying action', 'bdthemes-element-pack'); ?></div>
+        	<div class="bdt-alert-warning bdt-text-center"><?php esc_html_e('Opps!! You didn\'t choose any image for magnifying action', 'bdthemes-element-pack-lite'); ?></div>
         	<?php
         }
 	}

@@ -60,6 +60,7 @@ class ElementPack_Template_Library_Editor_Init {
 	public function admin_inline_js() { ?>
 		<script type="text/javascript">
 			var ElementPackLibreryData = {
+				"nonce": "<?php echo esc_js( wp_create_nonce( 'ep-template-library' ) ); ?>",
 				"libraryButton": "Elements Button",
 				"modalRegions": {
 					"modalHeader": ".dialog-header",
@@ -74,19 +75,19 @@ class ElementPack_Template_Library_Editor_Init {
 					"nonce": "<?php echo esc_js( wp_create_nonce( 'ep-template-library-progress' ) ); ?>",
 					"interval": 700,
 					"labels": {
-						"pending": "<?php echo esc_js( __( 'Preparing…', 'bdthemes-element-pack' ) ); ?>",
-						"fetching": "<?php echo esc_js( __( 'Fetching template…', 'bdthemes-element-pack' ) ); ?>",
-						"preparing": "<?php echo esc_js( __( 'Preparing elements…', 'bdthemes-element-pack' ) ); ?>",
-						"importing": "<?php echo esc_js( __( 'Importing content…', 'bdthemes-element-pack' ) ); ?>",
-						"finalizing": "<?php echo esc_js( __( 'Finalizing…', 'bdthemes-element-pack' ) ); ?>",
-						"complete": "<?php echo esc_js( __( 'Done', 'bdthemes-element-pack' ) ); ?>",
+						"pending": "<?php echo esc_js( __( 'Preparing…', 'bdthemes-element-pack-lite' ) ); ?>",
+						"fetching": "<?php echo esc_js( __( 'Fetching template…', 'bdthemes-element-pack-lite' ) ); ?>",
+						"preparing": "<?php echo esc_js( __( 'Preparing elements…', 'bdthemes-element-pack-lite' ) ); ?>",
+						"importing": "<?php echo esc_js( __( 'Importing content…', 'bdthemes-element-pack-lite' ) ); ?>",
+						"finalizing": "<?php echo esc_js( __( 'Finalizing…', 'bdthemes-element-pack-lite' ) ); ?>",
+						"complete": "<?php echo esc_js( __( 'Done', 'bdthemes-element-pack-lite' ) ); ?>",
 						"detail_elements": "<?php
 							/* translators: 1: number of elements imported so far, 2: total number of elements. */
-							echo esc_js( __( '%1$s of %2$s elements', 'bdthemes-element-pack' ) );
+							echo esc_js( __( '%1$s of %2$s elements', 'bdthemes-element-pack-lite' ) );
 						?>",
 						"detail_images": "<?php
 							/* translators: %s: number of images downloaded so far. */
-							echo esc_js( __( '%s images', 'bdthemes-element-pack' ) );
+							echo esc_js( __( '%s images', 'bdthemes-element-pack-lite' ) );
 						?>"
 					}
 				},

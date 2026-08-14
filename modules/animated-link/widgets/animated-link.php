@@ -19,7 +19,7 @@ class AnimatedLink extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Animated Link', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Animated Link', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -54,32 +54,32 @@ class AnimatedLink extends Module_Base {
 		$this->start_controls_section(
 			'section_content_animated_link',
 			[
-				'label' => esc_html__('Animated Link', 'bdthemes-element-pack'),
+				'label' => esc_html__('Animated Link', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'link_style',
 			[
-				'label'   => esc_html__('Style', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Style', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'metis',
 				'options' => [
-					'carpo'   => esc_html__('Carpo', 'bdthemes-element-pack'),
-					'carme'   => esc_html__('Carme', 'bdthemes-element-pack'),
-					'dia'     => esc_html__('Dia', 'bdthemes-element-pack'),
-					'eirene'  => esc_html__('Eirene', 'bdthemes-element-pack'),
-					'elara'   => esc_html__('Elara', 'bdthemes-element-pack'),
-					'ersa'    => esc_html__('Ersa', 'bdthemes-element-pack'),
-					'helike'  => esc_html__('Helike', 'bdthemes-element-pack'),
-					'herse'   => esc_html__('Herse', 'bdthemes-element-pack'),
-					'io'      => esc_html__('Io', 'bdthemes-element-pack'),
-					'iocaste' => esc_html__('Iocaste', 'bdthemes-element-pack'),
-					'kale'    => esc_html__('Kale', 'bdthemes-element-pack'),
-					'leda'    => esc_html__('Leda', 'bdthemes-element-pack'),
-					'metis'   => esc_html__('Metis', 'bdthemes-element-pack'),
-					'mneme'   => esc_html__('Mneme', 'bdthemes-element-pack'),
-					'thebe'   => esc_html__('Thebe', 'bdthemes-element-pack'),
+					'carpo'   => esc_html__('Carpo', 'bdthemes-element-pack-lite'),
+					'carme'   => esc_html__('Carme', 'bdthemes-element-pack-lite'),
+					'dia'     => esc_html__('Dia', 'bdthemes-element-pack-lite'),
+					'eirene'  => esc_html__('Eirene', 'bdthemes-element-pack-lite'),
+					'elara'   => esc_html__('Elara', 'bdthemes-element-pack-lite'),
+					'ersa'    => esc_html__('Ersa', 'bdthemes-element-pack-lite'),
+					'helike'  => esc_html__('Helike', 'bdthemes-element-pack-lite'),
+					'herse'   => esc_html__('Herse', 'bdthemes-element-pack-lite'),
+					'io'      => esc_html__('Io', 'bdthemes-element-pack-lite'),
+					'iocaste' => esc_html__('Iocaste', 'bdthemes-element-pack-lite'),
+					'kale'    => esc_html__('Kale', 'bdthemes-element-pack-lite'),
+					'leda'    => esc_html__('Leda', 'bdthemes-element-pack-lite'),
+					'metis'   => esc_html__('Metis', 'bdthemes-element-pack-lite'),
+					'mneme'   => esc_html__('Mneme', 'bdthemes-element-pack-lite'),
+					'thebe'   => esc_html__('Thebe', 'bdthemes-element-pack-lite'),
 				]
 			]
 		);
@@ -87,10 +87,10 @@ class AnimatedLink extends Module_Base {
 		$this->add_control(
 			'link_text',
 			[
-				'label'       => esc_html__('Text', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Text', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => ['active' => true],
-				'default'     => esc_html__('Animated Link', 'bdthemes-element-pack'),
+				'default'     => esc_html__('Animated Link', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 			]
 		);
@@ -98,7 +98,7 @@ class AnimatedLink extends Module_Base {
 		$this->add_control(
 			'link_url',
 			[
-				'label'         => esc_html__('Link', 'bdthemes-element-pack'),
+				'label'         => esc_html__('Link', 'bdthemes-element-pack-lite'),
 				'type'          => Controls_Manager::URL,
 				'default'       => ['url' => ''],
 				'show_external' => false,
@@ -109,19 +109,19 @@ class AnimatedLink extends Module_Base {
 		$this->add_responsive_control(
 			'link_alignment',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-right',
 					]
 				],
@@ -137,7 +137,7 @@ class AnimatedLink extends Module_Base {
 		$this->start_controls_section(
 			'section_style_link',
 			[
-				'label'     => esc_html__('Animated Link', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Animated Link', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -145,7 +145,7 @@ class AnimatedLink extends Module_Base {
 		$this->add_control(
 			'link_text_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-animated-link' => 'color: {{VALUE}};',
@@ -156,7 +156,7 @@ class AnimatedLink extends Module_Base {
 		$this->add_control(
 			'link_hover_text_color',
 			[
-				'label'     => esc_html__('Hover Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Hover Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-animated-link:hover' => 'color: {{VALUE}};',
@@ -167,7 +167,7 @@ class AnimatedLink extends Module_Base {
 		$this->add_control(
 			'link_style_color',
 			[
-				'label'     => esc_html__('Style Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Style Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-animated-link:before, {{WRAPPER}} .bdt-ep-animated-link:after' => 'background: {{VALUE}};',
@@ -178,7 +178,7 @@ class AnimatedLink extends Module_Base {
 		$this->add_responsive_control(
 			'link_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [

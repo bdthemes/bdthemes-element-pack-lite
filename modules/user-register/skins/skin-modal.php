@@ -21,7 +21,7 @@ class Skin_Modal extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Modal', 'bdthemes-element-pack' );
+		return __( 'Modal', 'bdthemes-element-pack-lite' );
 	}
 
 	public function render() {
@@ -140,7 +140,7 @@ class Skin_Modal extends Elementor_Skin_Base {
 					<?php endif; ?>
 					<?php if ($settings['modal_header']) : ?>
 					<div class="bdt-modal-header">
-			            <h2 class="bdt-modal-title"><span class="ep-icon-user-circle-o"></span> <?php esc_html_e('User Registration', 'bdthemes-element-pack'); ?></h2>
+			            <h2 class="bdt-modal-title"><span class="ep-icon-user-circle-o"></span> <?php esc_html_e('User Registration', 'bdthemes-element-pack-lite'); ?></h2>
 			        </div>
 					<?php endif; ?>
 					<div class="elementor-form-fields-wrapper bdt-modal-body">
@@ -167,7 +167,7 @@ class Skin_Modal extends Elementor_Skin_Base {
 		$this->parent->add_render_attribute('button-icon', 'class', ['bdt-modal-button-icon', 'bdt-flex-align-' . esc_attr($settings['modal_button_icon_align'])]);
 
 		if ( is_user_logged_in() && ! Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
-			$button_text = esc_html__( 'Logout', 'bdthemes-element-pack' );
+			$button_text = esc_html__( 'Logout', 'bdthemes-element-pack-lite' );
 		} else {
 			$button_text = $settings['modal_button_text'];
 		}

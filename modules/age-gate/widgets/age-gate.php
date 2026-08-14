@@ -20,7 +20,7 @@ class Age_Gate extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Age Gate', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Age Gate', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -54,19 +54,19 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_form',
 			[ 
-				'label' => esc_html__( 'Modal Form', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Modal Form', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'layout',
 			[ 
-				'label'   => esc_html__( 'Layout Type', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Layout Type', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'input',
 				'options' => [ 
-					'input'  => esc_html__( 'Input Age', 'bdthemes-element-pack' ),
-					'button' => esc_html__( 'Yes/No Buttons', 'bdthemes-element-pack' ),
+					'input'  => esc_html__( 'Input Age', 'bdthemes-element-pack-lite' ),
+					'button' => esc_html__( 'Yes/No Buttons', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -74,11 +74,11 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'required_age',
 			[ 
-				'label'       => esc_html__( 'Required Minimum Age', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Required Minimum Age', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::NUMBER,
 				'dynamic'     => [ 'active' => true ],
 				'default'     => 18,
-				'placeholder' => esc_html__( 'Minimum Age', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Minimum Age', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'layout' => 'input',
 				],
@@ -89,7 +89,7 @@ class Age_Gate extends Module_Base {
 			'age_input_note',
 			[ 
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'Note: example - 18. That means the user can view this webpage only if he is at least 18 years old.', 'bdthemes-element-pack' ),
+				'raw'             => esc_html__( 'Note: example - 18. That means the user can view this webpage only if he is at least 18 years old.', 'bdthemes-element-pack-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			]
 		);
@@ -97,22 +97,22 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'form_align',
 			[ 
-				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'toggle'      => false,
 				'default'     => 'center',
 				'options'     => [ 
 					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -122,10 +122,10 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'form_placeholder',
 			[ 
-				'label'     => esc_html__( 'Form Placeholder', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Form Placeholder', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => ['active' => true],
-				'default'   => esc_html__( 'Your Age', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'Your Age', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'layout' => 'input',
 				],
@@ -135,10 +135,10 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_text',
 			[ 
-				'label'     => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => ['active' => true],
-				'default'   => esc_html__( 'Submit', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'Submit', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'layout' => 'input',
 				],
@@ -148,10 +148,10 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_text_yes',
 			[ 
-				'label'     => esc_html__( 'Button Text (Yes)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button Text (Yes)', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => ['active' => true],
-				'default'   => esc_html__( 'Yes, I\'m 18+ older', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'Yes, I\'m 18+ older', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'layout' => 'button',
 				],
@@ -161,10 +161,10 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_text_no',
 			[ 
-				'label'       => esc_html__( 'Button Text (No)', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Button Text (No)', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'   => ['active' => true],
-				'placeholder' => esc_html__( 'No', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'No', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'layout' => 'button',
 				],
@@ -174,7 +174,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'redirect_link',
 			[ 
-				'label' => esc_html__( 'Redirect URL', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Redirect URL', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::URL,
 				// 'default'	=> get_home_url()
 			]
@@ -184,7 +184,7 @@ class Age_Gate extends Module_Base {
 			'redirect_link_note',
 			[ 
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'Note: If the condition not match with user age, then it will redirect them to this link.', 'bdthemes-element-pack' ),
+				'raw'             => esc_html__( 'Note: If the condition not match with user age, then it will redirect them to this link.', 'bdthemes-element-pack-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 			]
 		);
@@ -192,10 +192,10 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'age_invalid_msg',
 			[ 
-				'label'       => esc_html__( 'Age Invalid Message', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Age Invalid Message', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXTAREA,
-				'default'     => esc_html__( 'Sorry, your entered age is not suitable for our condition.', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Enter your message', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Sorry, your entered age is not suitable for our condition.', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Enter your message', 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 'active' => true ],
 			]
 		);
@@ -205,14 +205,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_layout',
 			[ 
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'modal_width',
 			[ 
-				'label'     => esc_html__( 'Modal Width', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Width', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -229,9 +229,9 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'display_times_expire',
 			[ 
-				'label'       => esc_html__( 'Times Expiry (Hour)', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Times Expiry (Hour)', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::NUMBER,
-				'description' => esc_html__( 'Default 72 hours.', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'Default 72 hours.', 'bdthemes-element-pack-lite' ),
 				'default'     => 72,
 			]
 		);
@@ -246,7 +246,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'show_modal_header',
 			[ 
-				'label'   => esc_html__( 'Show Modal Header', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Modal Header', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -255,7 +255,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'show_modal_footer',
 			[ 
-				'label'   => esc_html__( 'Show Modal Footer', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Modal Footer', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -267,7 +267,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_header',
 			[ 
-				'label'     => esc_html__( 'Modal Header', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Header', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_modal_header' => 'yes'
 				]
@@ -277,11 +277,11 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'header',
 			[ 
-				'label'       => esc_html__( 'Header Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Header Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'This is your modal header title', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Modal header title', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'This is your modal header title', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Modal header title', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -289,20 +289,20 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'header_align',
 			[ 
-				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options'     => [ 
 					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -315,41 +315,41 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_content_modal',
 			[ 
-				'label' => esc_html__( 'Modal Content', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Modal Content', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'content',
 			[ 
-				'label'       => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::WYSIWYG,
 				'dynamic'     => [ 'active' => true ],
 				'show_label'  => false,
-				'default'     => esc_html__( 'You can view this webpage only if you are at least 18 years old.', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Modal content goes here', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'You can view this webpage only if you are at least 18 years old.', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Modal content goes here', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'content_align',
 			[ 
-				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'toggle'      => false,
 				'default'     => 'center',
 				'options'     => [ 
 					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -361,7 +361,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_footer',
 			[ 
-				'label'     => esc_html__( 'Modal Footer', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Footer', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_modal_footer' => 'yes'
 				]
@@ -371,11 +371,11 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'footer',
 			[ 
-				'label'       => esc_html__( 'Footer Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Footer Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'Modal footer goes here', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Modal footer goes here', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Modal footer goes here', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Modal footer goes here', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -383,20 +383,20 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'footer_align',
 			[ 
-				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options'     => [ 
 					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -409,21 +409,21 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_additional',
 			[ 
-				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'close_button',
 			[ 
-				'label'       => esc_html__( 'Modal Close Button', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'When you set modal full screen make sure you don\'t set colse button outside', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Modal Close Button', 'bdthemes-element-pack-lite' ),
+				'description' => esc_html__( 'When you set modal full screen make sure you don\'t set colse button outside', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'default',
 				'options'     => [ 
-					'default' => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'outside' => esc_html__( 'Outside', 'bdthemes-element-pack' ),
-					'none'    => esc_html__( 'No Close Button', 'bdthemes-element-pack' ),
+					'default' => esc_html__( 'Default', 'bdthemes-element-pack-lite' ),
+					'outside' => esc_html__( 'Outside', 'bdthemes-element-pack-lite' ),
+					'none'    => esc_html__( 'No Close Button', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -431,7 +431,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'close_btn_delay_show',
 			[ 
-				'label' => esc_html__( 'Close Button Delay Show', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Close Button Delay Show', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'close_button!' => 'none',
@@ -442,7 +442,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'close_btn_delay_time',
 			[ 
-				'label'     => esc_html__( 'Close Button Delay Time(sec)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Close Button Delay Time(sec)', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 2,
@@ -463,7 +463,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'modal_center',
 			[ 
-				'label'        => esc_html__( 'Center Position', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Center Position', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 			]
@@ -475,7 +475,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'tab_content_close_button',
 			[ 
-				'label'     => esc_html__( 'Modal Close Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Close Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'close_button!' => 'none',
@@ -488,14 +488,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_close_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'close_button_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-dialog button.bdt-close' => 'color: {{VALUE}};',
@@ -506,7 +506,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'close_button_backgroun_color',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-dialog button.bdt-close' => 'background: {{VALUE}};',
@@ -518,7 +518,7 @@ class Age_Gate extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'close_button_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-dialog button.bdt-close',
@@ -528,7 +528,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'close_button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -540,7 +540,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'close_button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -552,7 +552,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'close_button_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -566,14 +566,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_close_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'close_button_color_hover',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-dialog button.bdt-close:hover' => 'color: {{VALUE}};',
@@ -584,7 +584,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'close_button_backgroun_hover',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-dialog button.bdt-close:hover' => 'background: {{VALUE}};',
@@ -595,7 +595,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'close_button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'close_button_border_border!' => '',
@@ -609,7 +609,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'close_button_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -623,7 +623,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'tab_content_header',
 			[ 
-				'label'     => esc_html__( 'Modal Header', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Header', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'header!'           => '',
@@ -635,7 +635,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-title' => 'color: {{VALUE}};',
@@ -646,7 +646,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'header_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-header' => 'background-color: {{VALUE}};',
@@ -658,7 +658,7 @@ class Age_Gate extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'header_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-header',
@@ -668,7 +668,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'header_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -698,7 +698,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_style_modal',
 			[ 
-				'label' => esc_html__( 'Modal Content', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Modal Content', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -706,7 +706,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'content_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-body .modal-body-info-text' => 'color: {{VALUE}};',
@@ -717,7 +717,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'content_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-body, .bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-dialog' => 'background-color: {{VALUE}};',
@@ -728,7 +728,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'content_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -742,7 +742,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'content_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -755,7 +755,7 @@ class Age_Gate extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'content_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-body .modal-body-info-text',
 			]
 		);
@@ -765,7 +765,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_field_style',
 			[ 
-				'label' => esc_html__( 'Fields', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fields', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -773,7 +773,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'field_width',
 			[ 
-				'label'      => esc_html__( 'Width', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', '%' ],
 				'range'      => [ 
@@ -795,7 +795,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'field_spacing',
 			[ 
-				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', '%' ],
 				'range'      => [ 
@@ -815,14 +815,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_field_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'field_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-input' => 'color: {{VALUE}};',
@@ -833,7 +833,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'field_placeholder_color',
 			[ 
-				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-input::placeholder' => 'color: {{VALUE}};',
@@ -844,7 +844,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'field_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-input' => 'background-color: {{VALUE}};',
@@ -856,7 +856,7 @@ class Age_Gate extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'field_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-input',
@@ -867,7 +867,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'field_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -887,7 +887,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'field_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -901,7 +901,7 @@ class Age_Gate extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'      => 'field_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-input',
 				'separator' => 'before',
 			]
@@ -912,14 +912,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_field_focus',
 			[ 
-				'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Focus', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'field_focus_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-input:focus' => 'background-color: {{VALUE}};',
@@ -930,7 +930,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'field_focus_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-input:focus' => 'border-color: {{VALUE}};',
@@ -950,7 +950,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_submit_button_style',
 			[ 
-				'label'     => esc_html__( 'Submit Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Submit Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'layout' => 'input'
@@ -963,14 +963,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button' => 'color: {{VALUE}};',
@@ -1009,7 +1009,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1021,7 +1021,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'button_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1035,14 +1035,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button:hover' => 'color: {{VALUE}};',
@@ -1062,7 +1062,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'separator' => 'before',
 				'selectors' => [ 
@@ -1077,7 +1077,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -1092,7 +1092,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_button_yes_style',
 			[ 
-				'label'     => esc_html__( 'Button (Yes)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button (Yes)', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'layout' => 'button'
@@ -1105,14 +1105,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_yes_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_yes_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes' => 'color: {{VALUE}};',
@@ -1142,7 +1142,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'button_yes_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1154,7 +1154,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'button_yes_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1183,14 +1183,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_yes_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_yes_hover_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-yes:hover' => 'color: {{VALUE}};',
@@ -1209,7 +1209,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_yes_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'separator' => 'before',
 				'selectors' => [ 
@@ -1224,7 +1224,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_yes_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -1236,7 +1236,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_button_no_style',
 			[ 
-				'label'     => esc_html__( 'Button (No)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button (No)', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'layout' => 'button'
@@ -1248,14 +1248,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_no_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_no_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no' => 'color: {{VALUE}};',
@@ -1285,7 +1285,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'button_no_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1297,7 +1297,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'button_no_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1308,7 +1308,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'button_no_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1335,14 +1335,14 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_no_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_no_hover_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-button.data-val-no:hover' => 'color: {{VALUE}};',
@@ -1361,7 +1361,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_no_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'separator' => 'before',
 				'selectors' => [ 
@@ -1376,7 +1376,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'button_no_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -1389,7 +1389,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'invalid_msg_style',
 			[ 
-				'label'     => esc_html__( 'Invalid Message', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Invalid Message', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'age_invalid_msg!' => '',
@@ -1400,7 +1400,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'invalid_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .modal-msg-text' => 'color: {{VALUE}};',
@@ -1411,7 +1411,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'invalid_text_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1433,7 +1433,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'tab_content_footer',
 			[ 
-				'label'     => esc_html__( 'Modal Footer', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Footer', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'footer!'           => '',
@@ -1445,7 +1445,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-footer' => 'color: {{VALUE}};',
@@ -1456,7 +1456,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'footer_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-footer' => 'background-color: {{VALUE}};',
@@ -1468,7 +1468,7 @@ class Age_Gate extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'footer_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.bdt-age-gate-{{ID}}.bdt-modal .bdt-modal-footer',
@@ -1478,7 +1478,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'footer_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1491,7 +1491,7 @@ class Age_Gate extends Module_Base {
 		$this->add_responsive_control(
 			'footer_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1521,7 +1521,7 @@ class Age_Gate extends Module_Base {
 		$this->start_controls_section(
 			'section_style_additional',
 			[ 
-				'label' => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1529,7 +1529,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'overlay_background',
 			[ 
-				'label'     => esc_html__( 'Overlay Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Overlay Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.bdt-age-gate-{{ID}}.bdt-modal' => 'background-color: {{VALUE}};',
@@ -1540,7 +1540,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'opacity',
 			[ 
-				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1558,7 +1558,7 @@ class Age_Gate extends Module_Base {
 		$this->add_control(
 			'bg_blur',
 			[ 
-				'label'     => esc_html__( 'Background Blur', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Blur', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 

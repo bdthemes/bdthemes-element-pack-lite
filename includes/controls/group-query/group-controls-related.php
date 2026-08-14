@@ -28,7 +28,7 @@ class Group_Control_Related extends Group_Control_Query {
         $tabs_wrapper = $name . '_query_args';
         $include_wrapper = $name . '_query_include';
 
-        $fields['post_type']['options']['related'] = esc_html__('Related', 'bdthemes-element-pack');
+        $fields['post_type']['options']['related'] = esc_html__('Related', 'bdthemes-element-pack-lite');
         $fields['include_term_ids']['condition']['post_type!'][] = 'related';
         $fields['related_taxonomies']['condition']['post_type'][] = 'related';
         $fields['include_authors']['condition']['post_type!'][] = 'related';
@@ -37,7 +37,7 @@ class Group_Control_Related extends Group_Control_Query {
         $fields['offset']['condition']['post_type!'][] = 'related';
 
         $related_taxonomies = [
-            'label' => esc_html__('Term', 'bdthemes-element-pack'),
+            'label' => esc_html__('Term', 'bdthemes-element-pack-lite'),
             'type' => Controls_Manager::SELECT2,
             'options' => $this->get_supported_taxonomies(),
             'label_block' => true,
@@ -53,15 +53,15 @@ class Group_Control_Related extends Group_Control_Query {
         ];
 
         $related_fallback = [
-            'label' => esc_html__('Fallback', 'bdthemes-element-pack'),
+            'label' => esc_html__('Fallback', 'bdthemes-element-pack-lite'),
             'type' => Controls_Manager::SELECT,
             'options' => [
-                'fallback_none' => esc_html__('None', 'bdthemes-element-pack'),
-                'fallback_by_id' => esc_html__('Manual Selection', 'bdthemes-element-pack'),
-                'fallback_recent' => esc_html__('Recent Posts', 'bdthemes-element-pack'),
+                'fallback_none' => esc_html__('None', 'bdthemes-element-pack-lite'),
+                'fallback_by_id' => esc_html__('Manual Selection', 'bdthemes-element-pack-lite'),
+                'fallback_recent' => esc_html__('Recent Posts', 'bdthemes-element-pack-lite'),
             ],
             'default' => 'fallback_none',
-            'description' => esc_html__('Displayed if no relevant results are found. Manual selection display order is random', 'bdthemes-element-pack'),
+            'description' => esc_html__('Displayed if no relevant results are found. Manual selection display order is random', 'bdthemes-element-pack-lite'),
             'condition' => [
                 'post_type' => 'related',
             ],
@@ -69,7 +69,7 @@ class Group_Control_Related extends Group_Control_Query {
         ];
 
         $fallback_ids = [
-            'label' => esc_html__('Search & Select', 'bdthemes-element-pack'),
+            'label' => esc_html__('Search & Select', 'bdthemes-element-pack-lite'),
             'type' => Query_Module::QUERY_CONTROL_ID,
             'options' => [],
             'label_block' => true,

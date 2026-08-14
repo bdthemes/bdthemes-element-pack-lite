@@ -29,7 +29,7 @@ class Interactive_Card extends Module_Base {
     }
 
     public function get_title() {
-        return BDTEP . esc_html__('Interactive Card', 'bdthemes-element-pack');
+        return BDTEP . esc_html__('Interactive Card', 'bdthemes-element-pack-lite');
     }
 
     public function get_icon() {
@@ -67,7 +67,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_interactive-card_layout',
             [
-                'label' => __('Layout', 'bdthemes-element-pack'),
+                'label' => __('Layout', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -75,7 +75,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'image',
             [
-                'label'       => __('Image', 'bdthemes-element-pack'),
+                'label'       => __('Image', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::MEDIA,
                 'render_type' => 'template',
                 'dynamic'     => [
@@ -98,11 +98,10 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'image_mask_popover',
             [
-                'label'        => esc_html__('Image Mask', 'bdthemes-element-pack') . BDTEP_PC,
+                'label'        => esc_html__('Image Mask', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::POPOVER_TOGGLE,
                 'render_type'  => 'template',
                 'return_value' => 'yes',
-                'classes' => BDTEP_IS_PC,
             ]
         );
 
@@ -112,13 +111,13 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'title_text',
             [
-                'label'       => __('Title', 'bdthemes-element-pack'),
+                'label'       => __('Title', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => [
                     'active' => true,
                 ],
-                'default'     => __('Interactive Card Title', 'bdthemes-element-pack'),
-                'placeholder' => __('Enter your title', 'bdthemes-element-pack'),
+                'default'     => __('Interactive Card Title', 'bdthemes-element-pack-lite'),
+                'placeholder' => __('Enter your title', 'bdthemes-element-pack-lite'),
                 'label_block' => true,
             ]
         );
@@ -126,7 +125,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'title_link',
             [
-                'label'        => __('Title Link', 'bdthemes-element-pack'),
+                'label'        => __('Title Link', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-title-link-'
             ]
@@ -136,7 +135,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'title_link_url',
             [
-                'label'       => __('Title Link URL', 'bdthemes-element-pack'),
+                'label'       => __('Title Link URL', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::URL,
                 'dynamic'     => ['active' => true],
                 'placeholder' => 'http://your-link.com',
@@ -149,7 +148,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'show_sub_title',
             [
-                'label'   => __('Show Sub Title', 'bdthemes-element-pack'),
+                'label'   => __('Show Sub Title', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes'
             ]
@@ -158,13 +157,13 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'sub_title_text',
             [
-                'label'       => __('Sub Title', 'bdthemes-element-pack'),
+                'label'       => __('Sub Title', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => [
                     'active' => true,
                 ],
-                'default'     => __('This is a Label', 'bdthemes-element-pack'),
-                'placeholder' => __('Enter your sub title', 'bdthemes-element-pack'),
+                'default'     => __('This is a Label', 'bdthemes-element-pack-lite'),
+                'placeholder' => __('Enter your sub title', 'bdthemes-element-pack-lite'),
                 'label_block' => true,
                 'condition'   => [
                     'show_sub_title' => 'yes',
@@ -175,13 +174,13 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'description_text',
             [
-                'label'       => __('Text', 'bdthemes-element-pack'),
+                'label'       => __('Text', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'dynamic'     => [
                     'active' => true,
                 ],
-                'default'     => __('Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack'),
-                'placeholder' => __('Enter your description', 'bdthemes-element-pack'),
+                'default'     => __('Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack-lite'),
+                'placeholder' => __('Enter your description', 'bdthemes-element-pack-lite'),
                 'rows'        => 10,
             ]
         );
@@ -189,7 +188,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'readmore',
             [
-                'label'   => __('Read More Button', 'bdthemes-element-pack'),
+                'label'   => __('Read More Button', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -198,7 +197,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'badge',
             [
-                'label' => __('Badge', 'bdthemes-element-pack'),
+                'label' => __('Badge', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SWITCHER,
             ]
         );
@@ -206,7 +205,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'title_size',
             [
-                'label'   => __('Title HTML Tag', 'bdthemes-element-pack'),
+                'label'   => __('Title HTML Tag', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'h3',
                 'options' => element_pack_title_tags(),
@@ -223,23 +222,23 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'text_align',
             [
-                'label'     => __('Alignment', 'bdthemes-element-pack'),
+                'label'     => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'    => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center'  => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'   => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                        'title' => __('Justified', 'bdthemes-element-pack'),
+                        'title' => __('Justified', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-justify',
                     ],
                 ],
@@ -252,14 +251,14 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'content_position',
             [
-                'label'   => esc_html__('Position', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Position', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'top',
                 'options' => [
-                    'top'    => __('Top', 'bdthemes-element-pack'),
-                    'bottom' => __('Bottom', 'bdthemes-element-pack'),
-                    'left'   => __('Left', 'bdthemes-element-pack'),
-                    'right'  => __('Right', 'bdthemes-element-pack'),
+                    'top'    => __('Top', 'bdthemes-element-pack-lite'),
+                    'bottom' => __('Bottom', 'bdthemes-element-pack-lite'),
+                    'left'   => __('Left', 'bdthemes-element-pack-lite'),
+                    'right'  => __('Right', 'bdthemes-element-pack-lite'),
                 ],
             ]
         );
@@ -277,19 +276,18 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'show_wavify_effect',
             [
-                'label'   => __('Show Wavify Effect', 'bdthemes-element-pack') . BDTEP_PC,
+                'label'   => __('Show Wavify Effect', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SWITCHER,
                 'condition' => [
                     'content_position' => ['top', 'bottom']
                 ],
-                'classes' => BDTEP_IS_PC,
             ]
         );
 
         $this->add_control(
             'wavify_toggle',
             [
-                'label'        => __('Wavify', 'bdthemes-element-pack'),
+                'label'        => __('Wavify', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::POPOVER_TOGGLE,
                 'return_value' => 'yes',
                 'condition'    => [
@@ -304,7 +302,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'wave_bones',
             [
-                'label'       => __('Bones', 'bdthemes-element-pack'),
+                'label'       => __('Bones', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::SLIDER,
                 'default'     => [
                     'size' => 3,
@@ -325,7 +323,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'wave_amplitude',
             [
-                'label'       => __('Amplitude', 'bdthemes-element-pack'),
+                'label'       => __('Amplitude', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::SLIDER,
                 'default'     => [
                     'size' => 40,
@@ -346,7 +344,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'wave_speed',
             [
-                'label'       => __('Speed', 'bdthemes-element-pack'),
+                'label'       => __('Speed', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::SLIDER,
                 'default'     => [
                     'size' => .25,
@@ -370,10 +368,10 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
 			'global_link',
 			[
-				'label'        => __( 'Global Link', 'bdthemes-element-pack' ),
+				'label'        => __( 'Global Link', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-global-link-',
-				'description'  => __( 'Be aware! When Global Link activated then title link and read more link will not work', 'bdthemes-element-pack' ),
+				'description'  => __( 'Be aware! When Global Link activated then title link and read more link will not work', 'bdthemes-element-pack-lite' ),
                 'separator' => 'before'
 			]
 		);
@@ -381,7 +379,7 @@ class Interactive_Card extends Module_Base {
 		$this->add_control(
 			'global_link_url',
 			[
-				'label'       => __( 'Global Link URL', 'bdthemes-element-pack' ),
+				'label'       => __( 'Global Link URL', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
 				'placeholder' => 'http://your-link.com',
@@ -396,7 +394,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_content_readmore',
             [
-                'label'     => __('Read More', 'bdthemes-element-pack'),
+                'label'     => __('Read More', 'bdthemes-element-pack-lite'),
                 'tab'       => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'readmore' => 'yes',
@@ -407,24 +405,24 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'readmore_text',
             [
-                'label'       => __('Text', 'bdthemes-element-pack'),
+                'label'       => __('Text', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
-                'default'     => __('Read More', 'bdthemes-element-pack'),
-                'placeholder' => __('Read More', 'bdthemes-element-pack'),
+                'default'     => __('Read More', 'bdthemes-element-pack-lite'),
+                'placeholder' => __('Read More', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'readmore_link',
             [
-                'label'       => __('Link to', 'bdthemes-element-pack'),
+                'label'       => __('Link to', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::URL,
                 'separator'   => 'before',
                 'dynamic'     => [
                     'active' => true,
                 ],
-                'placeholder' => __('https://your-link.com', 'bdthemes-element-pack'),
+                'placeholder' => __('https://your-link.com', 'bdthemes-element-pack-lite'),
                 'default'     => [
                     'url' => '#',
                 ],
@@ -437,14 +435,14 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
 			'button_css_id',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
+				'label' => __( 'Button ID', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
 				],
 				'default' => '',
-				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
-				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 			]
 		);
@@ -454,7 +452,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_content_badge',
             [
-                'label'     => __('Badge', 'bdthemes-element-pack'),
+                'label'     => __('Badge', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'badge' => 'yes',
                 ],
@@ -464,10 +462,10 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'badge_text',
             [
-                'label'       => __('Badge Text', 'bdthemes-element-pack'),
+                'label'       => __('Badge Text', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => esc_html__( 'POPULAR', 'bdthemes-element-pack' ),
-                'placeholder' => esc_html__( 'Type Badge Title', 'bdthemes-element-pack' ),
+                'default'     => esc_html__( 'POPULAR', 'bdthemes-element-pack-lite' ),
+                'placeholder' => esc_html__( 'Type Badge Title', 'bdthemes-element-pack-lite' ),
                 'dynamic'     => [
                     'active' => true,
                 ],
@@ -477,7 +475,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'badge_position',
             [
-                'label'   => esc_html__('Position', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Position', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'top-right',
                 'options' => element_pack_position(),
@@ -487,10 +485,10 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'badge_offset_toggle',
             [
-                'label' => __('Offset', 'bdthemes-element-pack'),
+                'label' => __('Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => __('None', 'bdthemes-element-pack'),
-                'label_on' => __('Custom', 'bdthemes-element-pack'),
+                'label_off' => __('None', 'bdthemes-element-pack-lite'),
+                'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -500,7 +498,7 @@ class Interactive_Card extends Module_Base {
 		$this->add_responsive_control(
 			'badge_horizontal_offset',
 			[
-				'label' => __('Horizontal Offset', 'bdthemes-element-pack'),
+				'label' => __('Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -531,7 +529,7 @@ class Interactive_Card extends Module_Base {
 		$this->add_responsive_control(
 			'badge_vertical_offset',
 			[
-				'label' => __('Vertical Offset', 'bdthemes-element-pack'),
+				'label' => __('Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -562,7 +560,7 @@ class Interactive_Card extends Module_Base {
 		$this->add_responsive_control(
 			'badge_rotate',
 			[
-				'label'   => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -600,7 +598,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_card',
             [
-                'label' => __('Card Wrapper', 'bdthemes-element-pack'),
+                'label' => __('Card Wrapper', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -608,7 +606,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_card_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
         $this->add_group_control(
@@ -628,7 +626,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'card_border_radius',
             [
-                'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -639,7 +637,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'card_padding',
             [
-                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -658,7 +656,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_card_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
         $this->add_group_control(
@@ -671,7 +669,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'card_hover_border_color',
             [
-                'label'     => __('Border Color', 'bdthemes-element-pack'),
+                'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card:hover' => 'border-color: {{VALUE}};',
@@ -695,7 +693,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_feature',
             [
-                'label' => __('Image', 'bdthemes-element-pack'),
+                'label' => __('Image', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -705,7 +703,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_image_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
@@ -736,7 +734,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'iamge_radius',
             [
-                'label'      => esc_html__('Radius', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -748,7 +746,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'card_iamge_padding',
             [
-                'label'      => __('Padding', 'bdthemes-element-pack'),
+                'label'      => __('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -760,7 +758,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'card_iamge_margin',
             [
-                'label'      => __('Margin', 'bdthemes-element-pack'),
+                'label'      => __('Margin', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -772,7 +770,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'image_opacity',
             [
-                'label'     => __('Opacity', 'bdthemes-element-pack'),
+                'label'     => __('Opacity', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SLIDER,
                 'range'     => [
                     'px' => [
@@ -790,7 +788,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'image_hover_effect',
             [
-                'label'   => __('Image Hover Effect', 'bdthemes-element-pack'),
+                'label'   => __('Image Hover Effect', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -801,7 +799,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_image_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
@@ -824,7 +822,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'image_hover_border_color',
             [
-                'label'     => __('Border Color', 'bdthemes-element-pack'),
+                'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card:hover .bdt-interactive-card-image' => 'border-color: {{VALUE}};',
@@ -838,7 +836,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'icon_hover_radius',
             [
-                'label'      => esc_html__('Radius', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -850,7 +848,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'image_opacity_hover',
             [
-                'label'     => __('Opacity', 'bdthemes-element-pack'),
+                'label'     => __('Opacity', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SLIDER,
                 'range'     => [
                     'px' => [
@@ -874,7 +872,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_content',
             [
-                'label' => __('Content', 'bdthemes-element-pack'),
+                'label' => __('Content', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -884,14 +882,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_default_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'default_background',
             [
-                'label'     => __('Background', 'bdthemes-element-pack'),
+                'label'     => __('Background', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-content' => 'background: {{VALUE}};',
@@ -903,7 +901,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'content_padding',
             [
-                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -917,14 +915,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_default_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'default_hover_background',
             [
-                'label'     => __('Background', 'bdthemes-element-pack'),
+                'label'     => __('Background', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card:hover .bdt-interactive-card-content' => 'background: {{VALUE}};',
@@ -942,7 +940,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_title',
             [
-                'label' => __('Title', 'bdthemes-element-pack'),
+                'label' => __('Title', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -952,14 +950,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_title_style_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'title_color',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-title' => 'color: {{VALUE}};',
@@ -970,7 +968,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'title_bottom_space',
             [
-                'label'      => __('Margin', 'bdthemes-element-pack'),
+                'label'      => __('Margin', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -991,7 +989,7 @@ class Interactive_Card extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name' => 'title_text_stroke',
-                'label' => __('Text Stroke', 'bdthemes-element-pack'),
+                'label' => __('Text Stroke', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-interactive-card-title',
 			]
 		);
@@ -1000,7 +998,7 @@ class Interactive_Card extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'title_text_shadow',
-				'label' => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label' => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-interactive-card-title',
 			]
 		);
@@ -1010,14 +1008,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_title_style_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'title_color_hover',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card:hover .bdt-interactive-card-title' => 'color: {{VALUE}};',
@@ -1029,7 +1027,7 @@ class Interactive_Card extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'title_text_shadow_hover',
-				'label' => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label' => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-interactive-card:hover .bdt-interactive-card-title',
 			]
 		);
@@ -1043,7 +1041,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_sub_title',
             [
-                'label'     => __('Sub Title', 'bdthemes-element-pack'),
+                'label'     => __('Sub Title', 'bdthemes-element-pack-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_sub_title' => 'yes',
@@ -1056,14 +1054,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_sub_title_style_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'sub_title_color',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-sub-title' => 'color: {{VALUE}};',
@@ -1074,7 +1072,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'sub_title_bottom_space',
             [
-                'label'      => __('Margin', 'bdthemes-element-pack'),
+                'label'      => __('Margin', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -1096,14 +1094,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_sub_title_style_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'sub_title_color_hover',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card:hover .bdt-interactive-card-sub-title' => 'color: {{VALUE}};',
@@ -1128,7 +1126,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_description',
             [
-                'label' => __('Text', 'bdthemes-element-pack'),
+                'label' => __('Text', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1138,14 +1136,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_description_style_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'description_color',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-text' => 'color: {{VALUE}};',
@@ -1166,14 +1164,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_description_style_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'description_color_hover',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card:hover .bdt-interactive-card-text' => 'color: {{VALUE}};',
@@ -1190,7 +1188,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_readmore',
             [
-                'label'     => __('Read More', 'bdthemes-element-pack'),
+                'label'     => __('Read More', 'bdthemes-element-pack-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'readmore' => 'yes',
@@ -1201,7 +1199,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'readmore_attention',
             [
-                'label' => __('Attention', 'bdthemes-element-pack'),
+                'label' => __('Attention', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SWITCHER,
             ]
         );
@@ -1209,7 +1207,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'button_top_space',
             [
-                'label'      => __('Margin', 'bdthemes-element-pack'),
+                'label'      => __('Margin', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -1230,14 +1228,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_readmore_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'readmore_text_color',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-readmore' => 'color: {{VALUE}};',
@@ -1248,7 +1246,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'readmore_icon_color',
             [
-                'label'     => __('Icon Color', 'bdthemes-element-pack'),
+                'label'     => __('Icon Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-readmore span.ep-icon-long-arrow-right' => 'color: {{VALUE}};',
@@ -1277,7 +1275,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'readmore_radius',
             [
-                'label'      => __('Border Radius', 'bdthemes-element-pack'),
+                'label'      => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -1297,7 +1295,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'readmore_button_size',
             [
-                'label'      => __('Button Size', 'bdthemes-element-pack'),
+                'label'      => __('Button Size', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -1309,7 +1307,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'readmore_padding_right',
             [
-                'label'      => __('Padding Right', 'bdthemes-element-pack'),
+                'label'      => __('Padding Right', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -1321,7 +1319,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'readmore_icon_spacing',
             [
-                'label'      => __('Space Between', 'bdthemes-element-pack'),
+                'label'      => __('Space Between', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -1343,14 +1341,14 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_tab(
             'tab_readmore_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'readmore_hover_text_color',
             [
-                'label'     => __('Text Color', 'bdthemes-element-pack'),
+                'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-readmore:hover' => 'color: {{VALUE}};',
@@ -1361,7 +1359,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'readmore_hover_icon_color',
             [
-                'label'     => __('Icon Color', 'bdthemes-element-pack'),
+                'label'     => __('Icon Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-readmore:hover span.ep-icon-long-arrow-right' => 'color: {{VALUE}};',
@@ -1380,7 +1378,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'readmore_hover_border_color',
             [
-                'label'     => __('Border Color', 'bdthemes-element-pack'),
+                'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-readmore:hover:before' => 'border-color: {{VALUE}};',
@@ -1402,7 +1400,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'readmore_hover_animation',
             [
-                'label' => __('Hover Animation', 'bdthemes-element-pack'),
+                'label' => __('Hover Animation', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::HOVER_ANIMATION,
             ]
         );
@@ -1416,7 +1414,7 @@ class Interactive_Card extends Module_Base {
         $this->start_controls_section(
             'section_style_badge',
             [
-                'label'     => __('Badge', 'bdthemes-element-pack'),
+                'label'     => __('Badge', 'bdthemes-element-pack-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'badge' => 'yes',
@@ -1427,7 +1425,7 @@ class Interactive_Card extends Module_Base {
         $this->add_control(
             'badge_text_color',
             [
-                'label'     => __('Text Color', 'bdthemes-element-pack'),
+                'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-interactive-card-badge span' => 'color: {{VALUE}};',
@@ -1456,7 +1454,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'badge_radius',
             [
-                'label'      => __('Border Radius', 'bdthemes-element-pack'),
+                'label'      => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -1476,7 +1474,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'badge_padding',
             [
-                'label'      => __('Padding', 'bdthemes-element-pack'),
+                'label'      => __('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -1488,7 +1486,7 @@ class Interactive_Card extends Module_Base {
         $this->add_responsive_control(
             'badge_margin',
             [
-                'label'      => __('Margin', 'bdthemes-element-pack'),
+                'label'      => __('Margin', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -1631,7 +1629,7 @@ class Interactive_Card extends Module_Base {
 				<a <?php $this->print_render_attribute_string( 'readmore' ); ?>>
 					<span class="ep-icon-long-arrow-right"></span>
 					<span class="bdt-ic-readme-text bdt-position-relative">
-						<?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : __( 'Read More', 'bdthemes-element-pack' ) ); ?>
+						<?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : __( 'Read More', 'bdthemes-element-pack-lite' ) ); ?>
 					</span>
 				</a>
 			</div>

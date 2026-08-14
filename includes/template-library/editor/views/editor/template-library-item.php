@@ -31,7 +31,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
         <# } else { #>
             <a class="elementor-template-library-template-action elementor-button bdt-elementpack-template-library-template-go-pro" href="{{ proLink }}" target="_blank">
                 <i class="eicon-heart"></i><span class="elementor-button-title"><?php
-                    esc_html_e( 'Get Pro', 'bdthemes-element-pack' );
+                    esc_html_e( 'Get Pro', 'bdthemes-element-pack-lite' );
                 ?></span>
             </a>
 	    <# } #>

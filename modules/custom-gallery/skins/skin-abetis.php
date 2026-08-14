@@ -15,7 +15,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Abetis', 'bdthemes-element-pack' );
+		return __( 'Abetis', 'bdthemes-element-pack-lite' );
 	}
 
 	public function _register_controls_actions() {
@@ -31,7 +31,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 		$this->start_controls_section(
 			'section_style_abetis',
 			[
-				'label' => __( 'Abetis Style', 'bdthemes-element-pack' ),
+				'label' => __( 'Abetis Style', 'bdthemes-element-pack-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -39,7 +39,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 		$this->add_control(
 			'desc_background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-skin-abetis-desc' => 'background-color: {{VALUE}};',
@@ -50,7 +50,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 		$this->add_control(
 			'desc_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-skin-abetis-desc *' => 'color: {{VALUE}};',
@@ -61,7 +61,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 		$this->add_responsive_control(
 			'desc_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -73,7 +73,7 @@ class Skin_Abetis extends Elementor_Skin_Base {
 		$this->add_responsive_control(
 			'abetis_item_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -85,20 +85,20 @@ class Skin_Abetis extends Elementor_Skin_Base {
 		$this->add_responsive_control(
 			'desc_alignment',
 			[
-				'label'       => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options' => [
 					'left' => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],

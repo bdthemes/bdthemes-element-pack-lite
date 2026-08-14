@@ -20,7 +20,7 @@ class Lightbox extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Lightbox', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Lightbox', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -59,21 +59,21 @@ class Lightbox extends Module_Base {
 		$this->start_controls_section(
 			'section_content_toggler',
 			[ 
-				'label' => __( 'Toggler', 'bdthemes-element-pack' ),
+				'label' => __( 'Toggler', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'lightbox_toggler',
 			[ 
-				'label'       => esc_html__( 'Select Lightbox Toggler', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Select Lightbox Toggler', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'poster',
 				// 'label_block' => true,
 				'options'     => [ 
-					'poster' => esc_html__( 'Poster', 'bdthemes-element-pack' ),
-					'button' => esc_html__( 'Button', 'bdthemes-element-pack' ),
-					'icon'   => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+					'poster' => esc_html__( 'Poster', 'bdthemes-element-pack-lite' ),
+					'button' => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
+					'icon'   => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -81,7 +81,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'poster_image',
 			[ 
-				'label'     => __( 'Poster Image', 'bdthemes-element-pack' ),
+				'label'     => __( 'Poster Image', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::MEDIA,
 				'default'   => [ 
 					'url' => Utils::get_placeholder_image_src(),
@@ -108,7 +108,7 @@ class Lightbox extends Module_Base {
 		$this->add_responsive_control(
 			'poster_height',
 			[ 
-				'label'     => __( 'Poster Height', 'bdthemes-element-pack' ),
+				'label'     => __( 'Poster Height', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 400,
@@ -132,9 +132,9 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'button_text',
 			[ 
-				'label'     => __( 'Button Text', 'bdthemes-element-pack' ),
+				'label'     => __( 'Button Text', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__('Open Lightbox', 'bdthemes-element-pack'),
+				'default'   => esc_html__('Open Lightbox', 'bdthemes-element-pack-lite'),
 				'condition' => [ 
 					'lightbox_toggler' => 'button',
 				],
@@ -145,9 +145,9 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'icon_text',
 			[ 
-				'label'       => __( 'Icon Text', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => __( 'Icon Text', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => __( 'Enter your Text', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'Enter your Text', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'lightbox_toggler' => 'icon',
 				],
@@ -158,7 +158,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'lightbox_toggler_icon',
 			[ 
-				'label'            => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'            => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'toggler_icon',
 				'default'          => [ 
@@ -176,23 +176,23 @@ class Lightbox extends Module_Base {
 		$this->add_responsive_control(
 			'align',
 			[ 
-				'label'        => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'        => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'options'      => [ 
 					'left'    => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [ 
-						'title' => __( 'Justified', 'bdthemes-element-pack' ),
+						'title' => __( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -207,7 +207,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'button_icon',
 			[ 
-				'label'            => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'            => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'condition'        => [ 
@@ -221,12 +221,12 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'icon_align',
 			[ 
-				'label'      => __( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'      => __( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SELECT,
 				'default'    => 'left',
 				'options'    => [ 
-					'left'  => __( 'Before', 'bdthemes-element-pack' ),
-					'right' => __( 'After', 'bdthemes-element-pack' ),
+					'left'  => __( 'Before', 'bdthemes-element-pack-lite' ),
+					'right' => __( 'After', 'bdthemes-element-pack-lite' ),
 				],
 				'conditions' => [ 
 					'terms' => [ 
@@ -247,7 +247,7 @@ class Lightbox extends Module_Base {
 		$this->add_responsive_control(
 			'icon_indent',
 			[ 
-				'label'      => __( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label'      => __( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [ 
 					'px' => [ 
@@ -282,23 +282,23 @@ class Lightbox extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
-				'label' => __( 'Lightbox Content', 'bdthemes-element-pack' ),
+				'label' => __( 'Lightbox Content', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'lightbox_content',
 			[ 
-				'label'       => esc_html__( 'Select Lightbox Content', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Select Lightbox Content', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'image',
 				// 'label_block' => true,
 				'options'     => [ 
-					'image'      => esc_html__( 'Image', 'bdthemes-element-pack' ),
-					'video'      => esc_html__( 'Video', 'bdthemes-element-pack' ),
-					'youtube'    => esc_html__( 'Youtube', 'bdthemes-element-pack' ),
-					'vimeo'      => esc_html__( 'Vimeo', 'bdthemes-element-pack' ),
-					'google-map' => esc_html__( 'Google Map', 'bdthemes-element-pack' ),
+					'image'      => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
+					'video'      => esc_html__( 'Video', 'bdthemes-element-pack-lite' ),
+					'youtube'    => esc_html__( 'Youtube', 'bdthemes-element-pack-lite' ),
+					'vimeo'      => esc_html__( 'Vimeo', 'bdthemes-element-pack-lite' ),
+					'google-map' => esc_html__( 'Google Map', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -306,7 +306,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'content_image',
 			[ 
-				'label'     => __( 'Image Source', 'bdthemes-element-pack' ),
+				'label'     => __( 'Image Source', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::MEDIA,
 				'default'   => [ 
 					'url' => Utils::get_placeholder_image_src(),
@@ -321,7 +321,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'content_video',
 			[ 
-				'label'         => __( 'Video Source', 'bdthemes-element-pack' ),
+				'label'         => __( 'Video Source', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -339,7 +339,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'content_youtube',
 			[ 
-				'label'         => __( 'YouTube Source', 'bdthemes-element-pack' ),
+				'label'         => __( 'YouTube Source', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -357,7 +357,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'content_vimeo',
 			[ 
-				'label'         => __( 'Vimeo Source', 'bdthemes-element-pack' ),
+				'label'         => __( 'Vimeo Source', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -375,7 +375,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'content_google_map',
 			[ 
-				'label'         => __( 'Goggle Map Embed URL', 'bdthemes-element-pack' ),
+				'label'         => __( 'Goggle Map Embed URL', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -393,10 +393,10 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'content_caption',
 			[ 
-				'label'   => __( 'Content Caption', 'bdthemes-element-pack' ),
+				'label'   => __( 'Content Caption', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => esc_html__('This is a image', 'bdthemes-element-pack'),
+				'default' => esc_html__('This is a image', 'bdthemes-element-pack-lite'),
 			]
 		);
 
@@ -405,7 +405,7 @@ class Lightbox extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[ 
-				'label'     => esc_html__( 'Toggle Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Toggle Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'lightbox_toggler!' => 'poster',
@@ -416,10 +416,10 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'glassmorphism_effect',
 			[ 
-				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'        => Controls_Manager::SWITCHER,
 /* translators: 1: Opening anchor tag, 2: Closing anchor tag */
-				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
+				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack-lite' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
 
 			]
 		);
@@ -427,7 +427,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'glassmorphism_blur_level',
 			[ 
-				'label'     => __( 'Blur Level', 'bdthemes-element-pack' ),
+				'label'     => __( 'Blur Level', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -453,14 +453,14 @@ class Lightbox extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .elementor-button'     => 'color: {{VALUE}};',
@@ -472,7 +472,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'button_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .elementor-button' => 'background-color: {{VALUE}};',
@@ -483,7 +483,7 @@ class Lightbox extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(), [ 
 				'name'        => 'button_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .elementor-button',
@@ -493,7 +493,7 @@ class Lightbox extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -505,7 +505,7 @@ class Lightbox extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -526,7 +526,7 @@ class Lightbox extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'button_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .elementor-button',
 			]
 		);
@@ -534,7 +534,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'icon_text_heading',
 			[ 
-				'label'     => esc_html__( 'ICON TEXT', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'ICON TEXT', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [ 
@@ -546,7 +546,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'icon_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-lightbox-wrapper .bdt-icon-text' => 'color: {{VALUE}};',
@@ -560,7 +560,7 @@ class Lightbox extends Module_Base {
 		$this->add_responsive_control(
 			'icon_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -576,7 +576,7 @@ class Lightbox extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'      => 'icon_text_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-lightbox-wrapper .bdt-icon-text',
 				'condition' => [ 
 					'icon_text[value]!' => '',
@@ -589,14 +589,14 @@ class Lightbox extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .elementor-button:hover'     => 'color: {{VALUE}};',
@@ -608,7 +608,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .elementor-button:hover' => 'background-color: {{VALUE}};',
@@ -619,7 +619,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .elementor-button:hover' => 'border-color: {{VALUE}};',
@@ -630,7 +630,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'hover_animation',
 			[ 
-				'label'     => __( 'Hover Animation', 'bdthemes-element-pack' ),
+				'label'     => __( 'Hover Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HOVER_ANIMATION,
 				'condition' => [ 
 					'show_fancy_animation' => '',
@@ -641,7 +641,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'show_fancy_animation',
 			[ 
-				'label'     => __( 'Show Fancy Animation', 'bdthemes-element-pack' ),
+				'label'     => __( 'Show Fancy Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'lightbox_toggler' => 'icon',
@@ -652,13 +652,13 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'fancy_animation',
 			[ 
-				'label'     => esc_html__( 'Fancy Animation', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Fancy Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'shadow-pulse',
 				'options'   => [ 
-					'shadow-pulse' => esc_html__( 'Shadow Pulse', 'bdthemes-element-pack' ),
-					'multi-shadow' => esc_html__( 'Multi Shadow', 'bdthemes-element-pack' ),
-					'line-bounce'  => esc_html__( 'Line Bounce', 'bdthemes-element-pack' ),
+					'shadow-pulse' => esc_html__( 'Shadow Pulse', 'bdthemes-element-pack-lite' ),
+					'multi-shadow' => esc_html__( 'Multi Shadow', 'bdthemes-element-pack-lite' ),
+					'line-bounce'  => esc_html__( 'Line Bounce', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'lightbox_toggler'     => 'icon',
@@ -670,7 +670,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'fancy_border_color',
 			[ 
-				'label'     => esc_html__( 'Animated Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Animated Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-lightbox-wrapper .elementor-button:before, {{WRAPPER}} .bdt-lightbox-wrapper .elementor-button:after' => 'border-color: {{VALUE}};',
@@ -686,7 +686,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'button_shadow_color',
 			[ 
-				'label'     => esc_html__( 'Animated Shadow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Animated Shadow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-lightbox-wrapper .elementor-button' => '--box-shadow-color: {{VALUE}};',
@@ -702,7 +702,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'icon_text_hover_heading',
 			[ 
-				'label'     => esc_html__( 'ICON TEXT', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'ICON TEXT', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [ 
@@ -714,7 +714,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'icon_text_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-lightbox-wrapper .bdt-icon-text:hover' => 'color: {{VALUE}};',
@@ -734,7 +734,7 @@ class Lightbox extends Module_Base {
 		$this->start_controls_section(
 			'section_style_lightbox',
 			[ 
-				'label' => esc_html__( 'Lightbox', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Lightbox', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -742,13 +742,13 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'lightbox_animation',
 			[ 
-				'label'   => esc_html__( 'Lightbox Animation', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Lightbox Animation', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'slide',
 				'options' => [ 
-					'slide' => esc_html__( 'Slide', 'bdthemes-element-pack' ),
-					'fade'  => esc_html__( 'Fade', 'bdthemes-element-pack' ),
-					'scale' => esc_html__( 'Scale', 'bdthemes-element-pack' ),
+					'slide' => esc_html__( 'Slide', 'bdthemes-element-pack-lite' ),
+					'fade'  => esc_html__( 'Fade', 'bdthemes-element-pack-lite' ),
+					'scale' => esc_html__( 'Scale', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -758,7 +758,7 @@ class Lightbox extends Module_Base {
 		$this->add_control(
 			'video_autoplay',
 			[ 
-				'label'   => esc_html__( 'Video Autoplay', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Video Autoplay', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]

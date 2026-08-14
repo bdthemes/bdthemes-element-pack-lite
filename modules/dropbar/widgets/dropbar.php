@@ -25,7 +25,7 @@ class Dropbar extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__('Dropbar', 'bdthemes-element-pack');
+		return BDTEP . esc_html__('Dropbar', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -55,20 +55,20 @@ class Dropbar extends Module_Base {
 		$this->start_controls_section(
 			'section_content_dropbar',
 			[
-				'label' => esc_html__('Dropbar Content', 'bdthemes-element-pack'),
+				'label' => esc_html__('Dropbar Content', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'source',
 			[
-				'label'   => esc_html__('Select Source', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Select Source', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'custom',
 				'options' => [
-					'custom'    => esc_html__('Custom Content', 'bdthemes-element-pack'),
-					"elementor" => esc_html__('Elementor Template', 'bdthemes-element-pack'),
-					'anywhere'  => esc_html__('AE Template', 'bdthemes-element-pack'),
+					'custom'    => esc_html__('Custom Content', 'bdthemes-element-pack-lite'),
+					"elementor" => esc_html__('Elementor Template', 'bdthemes-element-pack-lite'),
+					'anywhere'  => esc_html__('AE Template', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -76,22 +76,22 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'content',
 			[
-				'label'       => esc_html__('Content', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Content', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::WYSIWYG,
 				'dynamic'     => ['active' => true],
-				'placeholder' => esc_html__('Dropbar content goes here', 'bdthemes-element-pack'),
+				'placeholder' => esc_html__('Dropbar content goes here', 'bdthemes-element-pack-lite'),
 				'show_label'  => false,
-				'default'     => esc_html__('A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.', 'bdthemes-element-pack'),
+				'default'     => esc_html__('A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.', 'bdthemes-element-pack-lite'),
 				'condition'   => ['source' => 'custom'],
 			]
 		);
 		$this->add_control(
 			'template_id',
 			[
-				'label'       => __('Select Template', 'bdthemes-element-pack'),
+				'label'       => __('Select Template', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'label_block' => true,
-				'placeholder' => __('Type and select template', 'bdthemes-element-pack'),
+				'placeholder' => __('Type and select template', 'bdthemes-element-pack-lite'),
 				'query_args'  => [
 					'query'        => 'elementor_template',
 				],
@@ -101,10 +101,10 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'anywhere_id',
 			[
-				'label'       => __('Select Template', 'bdthemes-element-pack'),
+				'label'       => __('Select Template', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'label_block' => true,
-				'placeholder' => __('Type and select template', 'bdthemes-element-pack'),
+				'placeholder' => __('Type and select template', 'bdthemes-element-pack-lite'),
 				'query_args'  => [
 					'query'        => 'anywhere_template',
 				],
@@ -116,41 +116,41 @@ class Dropbar extends Module_Base {
 		$this->start_controls_section(
 			'section_content_button',
 			[
-				'label' => esc_html__('Button', 'bdthemes-element-pack'),
+				'label' => esc_html__('Button', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_text',
 			[
-				'label'   => esc_html__('Text', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Text', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => ['active' => true],
-				'default' => esc_html__('Open Dropbar', 'bdthemes-element-pack'),
+				'default' => esc_html__('Open Dropbar', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_responsive_control(
 			'button_align',
 			[
-				'label'   => __('Alignment', 'bdthemes-element-pack'),
+				'label'   => __('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => '',
 				'options' => [
 					'left'    => [
-						'title' => __('Left', 'bdthemes-element-pack'),
+						'title' => __('Left', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __('Center', 'bdthemes-element-pack'),
+						'title' => __('Center', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => __('Right', 'bdthemes-element-pack'),
+						'title' => __('Right', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => __('Justified', 'bdthemes-element-pack'),
+						'title' => __('Justified', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-justify',
 					],
 				],
@@ -164,7 +164,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'size',
 			[
-				'label'   => __('Size', 'bdthemes-element-pack'),
+				'label'   => __('Size', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'sm',
 				'options' => element_pack_button_sizes(),
@@ -174,7 +174,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'button_icon',
 			[
-				'label'       => esc_html__('Icon', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Icon', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'skin'        => 'inline',
@@ -185,12 +185,12 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'button_icon_align',
 			[
-				'label'   => esc_html__('Icon Position', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Icon Position', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'  => esc_html__('Before', 'bdthemes-element-pack'),
-					'right' => esc_html__('After', 'bdthemes-element-pack'),
+					'left'  => esc_html__('Before', 'bdthemes-element-pack-lite'),
+					'right' => esc_html__('After', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'button_icon[value]!' => '',
@@ -201,7 +201,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'button_icon_indent',
 			[
-				'label'   => esc_html__('Icon Spacing', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Icon Spacing', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 8,
@@ -225,7 +225,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'button_position',
 			[
-				'label'   => esc_html__('Fixed Position', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Fixed Position', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => element_pack_position(),
@@ -235,7 +235,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'btn_horizontal_offset',
 			[
-				'label' => __('Horizontal Offset', 'bdthemes-element-pack'),
+				'label' => __('Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -260,7 +260,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'btn_vertical_offset',
 			[
-				'label' => __('Vertical Offset', 'bdthemes-element-pack'),
+				'label' => __('Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -285,7 +285,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'button_rotate',
 			[
-				'label'   => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -312,14 +312,14 @@ class Dropbar extends Module_Base {
 		$this->start_controls_section(
 			'section_additional_option',
 			[
-				'label'     => esc_html__('Dropbar Options', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Dropbar Options', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'drop_position',
 			[
-				'label'   => esc_html__('Position', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Position', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'bottom-left',
 				'options' => element_pack_drop_position(),
@@ -329,12 +329,12 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'drop_mode',
 			[
-				'label'   => esc_html__('Mode', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Mode', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'hover',
 				'options' => [
-					'click'    => esc_html__('Click', 'bdthemes-element-pack'),
-					'hover'  => esc_html__('Hover', 'bdthemes-element-pack'),
+					'click'    => esc_html__('Click', 'bdthemes-element-pack-lite'),
+					'hover'  => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -342,7 +342,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'drop_width',
 			[
-				'label' => esc_html__('Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Width', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -359,14 +359,14 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'stretch',
 			[
-				'label'     => esc_html__('Stretch', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Stretch', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'null',
 				'options' => [
-					'null' => esc_html__('None', 'bdthemes-element-pack'),
-					'true' => esc_html__('Full', 'bdthemes-element-pack'),
-					'x'    => esc_html__('X - Horizontal', 'bdthemes-element-pack'),
-					'y'    => esc_html__('Y - Vertical', 'bdthemes-element-pack'),
+					'null' => esc_html__('None', 'bdthemes-element-pack-lite'),
+					'true' => esc_html__('Full', 'bdthemes-element-pack-lite'),
+					'x'    => esc_html__('X - Horizontal', 'bdthemes-element-pack-lite'),
+					'y'    => esc_html__('Y - Vertical', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -374,7 +374,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'drop_flip',
 			[
-				'label' => esc_html__('Flip Dropbar', 'bdthemes-element-pack'),
+				'label' => esc_html__('Flip Dropbar', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -382,7 +382,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'drop_offset',
 			[
-				'label'   => esc_html__('Dropbar Offset', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Dropbar Offset', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 10,
@@ -399,12 +399,12 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'target',
 			[
-				'label' => esc_html__( 'Target', 'bdthemes-element-pack'),
+				'label' => esc_html__( 'Target', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
 				],
-				'title' => esc_html__( 'Add your custom class WITHOUT the dot. e.g: my-class', 'bdthemes-element-pack' ),
+				'title' => esc_html__( 'Add your custom class WITHOUT the dot. e.g: my-class', 'bdthemes-element-pack-lite' ),
 				'classes' => 'elementor-control-direction-ltr',
 			]
 		);
@@ -412,12 +412,12 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'boundary',
 			[
-				'label' => esc_html__( 'Boundary', 'bdthemes-element-pack'),
+				'label' => esc_html__( 'Boundary', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
 				],
-				'title' => esc_html__( 'Add your custom class WITHOUT the dot. e.g: my-class', 'bdthemes-element-pack' ),
+				'title' => esc_html__( 'Add your custom class WITHOUT the dot. e.g: my-class', 'bdthemes-element-pack-lite' ),
 				'classes' => 'elementor-control-direction-ltr',
 			]
 		);
@@ -425,20 +425,20 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'drop_animation',
 			[
-				'label'     => esc_html__('Animation', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Animation', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'bdt-animation-fade',
 				'options' => [
-					''             => esc_html__('None', 'bdthemes-element-pack'),
-					'bdt-animation-fade' => esc_html__('Fade', 'bdthemes-element-pack'),
-					'slide-top'    => esc_html__('Slide Top', 'bdthemes-element-pack'),
-					'slide-bottom' => esc_html__('Slide Bottom', 'bdthemes-element-pack'),
-					'slide-left'   => esc_html__('Slide Left', 'bdthemes-element-pack'),
-					'slide-right'  => esc_html__('Slide Right', 'bdthemes-element-pack'),
-					'reveal-top'    => esc_html__('Reveal Top', 'bdthemes-element-pack'),
-					'reveal-bottom' => esc_html__('Reveal Bottom', 'bdthemes-element-pack'),
-					'reveal-left'   => esc_html__('Reveal Left', 'bdthemes-element-pack'),
-					'reveal-right'  => esc_html__('Reveal Right', 'bdthemes-element-pack'),
+					''             => esc_html__('None', 'bdthemes-element-pack-lite'),
+					'bdt-animation-fade' => esc_html__('Fade', 'bdthemes-element-pack-lite'),
+					'slide-top'    => esc_html__('Slide Top', 'bdthemes-element-pack-lite'),
+					'slide-bottom' => esc_html__('Slide Bottom', 'bdthemes-element-pack-lite'),
+					'slide-left'   => esc_html__('Slide Left', 'bdthemes-element-pack-lite'),
+					'slide-right'  => esc_html__('Slide Right', 'bdthemes-element-pack-lite'),
+					'reveal-top'    => esc_html__('Reveal Top', 'bdthemes-element-pack-lite'),
+					'reveal-bottom' => esc_html__('Reveal Bottom', 'bdthemes-element-pack-lite'),
+					'reveal-left'   => esc_html__('Reveal Left', 'bdthemes-element-pack-lite'),
+					'reveal-right'  => esc_html__('Reveal Right', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -446,7 +446,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'animate_out',
 			[
-				'label' => esc_html__('Animate Out', 'bdthemes-element-pack'),
+				'label' => esc_html__('Animate Out', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -454,7 +454,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'drop_duration',
 			[
-				'label'   => esc_html__('Animation Duration', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Animation Duration', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 200,
@@ -474,7 +474,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'drop_show_delay',
 			[
-				'label'   => esc_html__('Show Delay', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Show Delay', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -491,7 +491,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'drop_hide_delay',
 			[
-				'label'   => esc_html__('Hide Delay', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Hide Delay', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 800,
@@ -511,7 +511,7 @@ class Dropbar extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[
-				'label'     => esc_html__('Button', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Button', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'button_text!' => '',
@@ -524,14 +524,14 @@ class Dropbar extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dropbar-button' => 'color: {{VALUE}};',
@@ -542,7 +542,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'button_background_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dropbar-button' => 'background-color: {{VALUE}};',
@@ -554,7 +554,7 @@ class Dropbar extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'button_border',
-				'label'       => esc_html__('Border', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-dropbar-button',
@@ -564,7 +564,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -576,7 +576,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'button_text_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -597,7 +597,7 @@ class Dropbar extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'button_typography',
-				'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'    => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .bdt-dropbar-button',
 			]
@@ -606,7 +606,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'dropbar_button_icon_color',
 			[
-				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dropbar-button .bdt-dropbar-button-icon' => 'color: {{VALUE}};',
@@ -624,14 +624,14 @@ class Dropbar extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dropbar-button:hover' => 'color: {{VALUE}};',
@@ -642,7 +642,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dropbar-button:hover' => 'background-color: {{VALUE}};',
@@ -653,7 +653,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dropbar-button:hover' => 'border-color: {{VALUE}};',
@@ -667,7 +667,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'hover_animation',
 			[
-				'label' => __('Hover Animation', 'bdthemes-element-pack'),
+				'label' => __('Hover Animation', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -675,7 +675,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'dropbar_button_hover_icon_color',
 			[
-				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dropbar-button:hover .bdt-dropbar-button-icon' => 'color: {{VALUE}};',
@@ -697,7 +697,7 @@ class Dropbar extends Module_Base {
 		$this->start_controls_section(
 			'section_style_content',
 			[
-				'label'     => esc_html__('Dropbar Content', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Dropbar Content', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -705,24 +705,24 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'content_alignment',
 			[
-				'label'   => __('Alignment', 'bdthemes-element-pack'),
+				'label'   => __('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => 'left',
 				'options' => [
 					'left' => [
-						'title' => __('Left', 'bdthemes-element-pack'),
+						'title' => __('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __('Center', 'bdthemes-element-pack'),
+						'title' => __('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => __('Right', 'bdthemes-element-pack'),
+						'title' => __('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => __('Justify', 'bdthemes-element-pack'),
+						'title' => __('Justify', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -735,7 +735,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'content_text_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#bdt-drop-{{ID}}.bdt-drop.bdt-card-body' => 'color: {{VALUE}};',
@@ -747,7 +747,7 @@ class Dropbar extends Module_Base {
 		$this->add_control(
 			'content_background',
 			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#bdt-drop-{{ID}}.bdt-drop.bdt-card-body' => 'background-color: {{VALUE}};',
@@ -758,7 +758,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'content_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -771,7 +771,7 @@ class Dropbar extends Module_Base {
 		$this->add_responsive_control(
 			'content_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -790,7 +790,7 @@ class Dropbar extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'content_typography',
-				'label'    => esc_html__('Typography', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'    => esc_html__('Typography', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'selector' => '#bdt-drop-{{ID}}.bdt-drop.bdt-card-body',
 				'condition' => [
 					'source' => 'custom',

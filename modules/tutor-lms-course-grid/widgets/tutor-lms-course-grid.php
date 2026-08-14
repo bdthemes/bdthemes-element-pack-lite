@@ -24,7 +24,7 @@ class TutorLms_Course_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Tutor LMS Course Grid', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Tutor LMS Course Grid', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -80,7 +80,7 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -88,7 +88,7 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[
-				'label'              => esc_html__( 'Columns', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Columns', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'default'            => '3',
 				'tablet_default'     => '2',
@@ -108,7 +108,7 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_control(
 			'show_pagination',
 			[
-				'label' => esc_html__( 'Pagination', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Pagination', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -118,7 +118,7 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_control(
 			'tilt_show',
 			[
-				'label' => esc_html__( 'Tilt Effect', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Tilt Effect', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -126,7 +126,7 @@ class TutorLms_Course_Grid extends Module_Base {
 		$this->add_control(
 			'tilt_scale',
 			[
-				'label'     => esc_html__( 'Zoom on Hover', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Zoom on Hover', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [
 					'tilt_show' => 'yes',

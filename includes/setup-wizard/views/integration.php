@@ -19,38 +19,38 @@ require_once __DIR__ . '/../class-remote-data-handler.php';
 if (!function_exists('format_last_updated_ep')) {
     function format_last_updated_ep($date_string) {
         if (empty($date_string)) {
-            return __('Unknown', 'bdthemes-element-pack');
+            return __('Unknown', 'bdthemes-element-pack-lite');
         }
         
         $date = strtotime($date_string);
         if (!$date) {
-            return __('Unknown', 'bdthemes-element-pack');
+            return __('Unknown', 'bdthemes-element-pack-lite');
         }
         
         $diff = current_time('timestamp') - $date;
         
         if ($diff < 60) {
-            return __('Just now', 'bdthemes-element-pack');
+            return __('Just now', 'bdthemes-element-pack-lite');
         } elseif ($diff < 3600) {
             $minutes = floor($diff / 60);
             /* translators: %d: Number of minutes */
-            return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'bdthemes-element-pack'), $minutes);
+            return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'bdthemes-element-pack-lite'), $minutes);
         } elseif ($diff < 86400) {
             $hours = floor($diff / 3600);
             /* translators: %d: Number of hours */
-            return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'bdthemes-element-pack'), $hours);
+            return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'bdthemes-element-pack-lite'), $hours);
         } elseif ($diff < 2592000) { // 30 days
             $days = floor($diff / 86400);
             /* translators: %d: Number of days */
-            return sprintf(_n('%d day ago', '%d days ago', $days, 'bdthemes-element-pack'), $days);
+            return sprintf(_n('%d day ago', '%d days ago', $days, 'bdthemes-element-pack-lite'), $days);
         } elseif ($diff < 31536000) { // 1 year
             $months = floor($diff / 2592000);
             /* translators: %d: Number of months */
-            return sprintf(_n('%d month ago', '%d months ago', $months, 'bdthemes-element-pack'), $months);
+            return sprintf(_n('%d month ago', '%d months ago', $months, 'bdthemes-element-pack-lite'), $months);
         } else {
             $years = floor($diff / 31536000);
             /* translators: %d: Number of years */
-            return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack'), $years);
+            return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack-lite'), $years);
         }
     }
 }
@@ -117,8 +117,8 @@ if (!$has_cached_data) {
 ?>
 
 <div class="bdt-wizard-step bdt-setup-wizard-integration" data-step="integration">
-    <h2><?php esc_html_e('Add More Firepower', 'bdthemes-element-pack'); ?></h2>
-    <p><?php esc_html_e('You can onboard additional powerful plugins to extend your web design capabilities.', 'bdthemes-element-pack'); ?></p>
+    <h2><?php esc_html_e('Add More Firepower', 'bdthemes-element-pack-lite'); ?></h2>
+    <p><?php esc_html_e('You can onboard additional powerful plugins to extend your web design capabilities.', 'bdthemes-element-pack-lite'); ?></p>
 
     <div class="progress-bar-container">
         <div id="plugin-install-progress" class="progress-bar"></div>
@@ -132,7 +132,7 @@ if (!$has_cached_data) {
                 <div class="ep-loading-dot"></div>
                 <div class="ep-loading-dot"></div>
             </div>
-            <p style="margin-top: 20px;" id="ep-loading-message"><?php esc_html_e('Installing plugins...', 'bdthemes-element-pack'); ?></p>
+            <p style="margin-top: 20px;" id="ep-loading-message"><?php esc_html_e('Installing plugins...', 'bdthemes-element-pack-lite'); ?></p>
         </div>
 
         <!-- Initial loading state - shown while fetching plugin data -->
@@ -143,7 +143,7 @@ if (!$has_cached_data) {
                 <div class="ep-loading-dot"></div>
                 <div class="ep-loading-dot"></div>
             </div>
-            <p style="margin-top: 20px;"><?php esc_html_e('Loading plugin data...', 'bdthemes-element-pack'); ?></p>
+            <p style="margin-top: 20px;"><?php esc_html_e('Loading plugin data...', 'bdthemes-element-pack-lite'); ?></p>
         </div>
         <?php endif; ?>
 
@@ -197,16 +197,16 @@ if (!$has_cached_data) {
                             <div class="bdt-plugin-badge-switch-wrap">
 
                             <?php if ($is_recommended) : ?>
-                                <span class="recommended-badge"><?php esc_html_e('Recommended', 'bdthemes-element-pack'); ?></span>
+                                <span class="recommended-badge"><?php esc_html_e('Recommended', 'bdthemes-element-pack-lite'); ?></span>
                             <?php endif; ?>
                             
                             <?php if ($is_active) : ?>
-                                <span class="active-badge"><?php esc_html_e('ACTIVE', 'bdthemes-element-pack'); ?></span>
+                                <span class="active-badge"><?php esc_html_e('ACTIVE', 'bdthemes-element-pack-lite'); ?></span>
                             <?php endif; ?>
                              <?php
                              if (!$is_active) : ?>
                                  <label class="switch">
-                                     <input type="checkbox" class="plugin-slider-checkbox" <?php echo $plugin_recommended ? 'checked' : ''; ?>
+                                     <input type="checkbox" class="plugin-slider-checkbox" <?php echo esc_attr( $plugin_recommended ? 'checked' : '' ); ?>
                                             name="plugins[]<?php echo isset($plugin['slug']) ? wp_kses_post($plugin['slug']) : ''; ?>">
                                      <span class="slider round"></span>
                                  </label>
@@ -222,7 +222,7 @@ if (!$has_cached_data) {
                             </div>
                             
                         <span class="active-installs">
-                            <?php esc_html_e('Active Installs: ', 'bdthemes-element-pack'); 
+                            <?php esc_html_e('Active Installs: ', 'bdthemes-element-pack-lite'); 
                             if (isset($plugin['active_installs_count']) && $plugin['active_installs_count'] > 0) {
                                 echo ' <span class="installs-count">' . number_format($plugin['active_installs_count']) . '+' . '</span>';
                             } else {
@@ -232,7 +232,7 @@ if (!$has_cached_data) {
                         </span>
 
                         <?php if (isset($plugin['downloaded_formatted']) && !empty($plugin['downloaded_formatted'])): ?>
-                        <span class="downloads"><?php esc_html_e('Downloads: ', 'bdthemes-element-pack'); echo wp_kses_post($plugin['downloaded_formatted']); ?></span>
+                        <span class="downloads"><?php esc_html_e('Downloads: ', 'bdthemes-element-pack-lite'); echo wp_kses_post($plugin['downloaded_formatted']); ?></span>
                         <?php endif; ?>
                         
                         <div class="rating-section">
@@ -270,9 +270,9 @@ if (!$has_cached_data) {
                         <?php 
                         // Use the enhanced last_updated_formatted if available, otherwise fall back to formatting
                         if (isset($plugin['last_updated_formatted']) && !empty($plugin['last_updated_formatted'])): ?>
-                        <span class="last-updated"><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack'); echo esc_html($plugin['last_updated_formatted']); ?></span>
+                        <span class="last-updated"><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack-lite'); echo esc_html($plugin['last_updated_formatted']); ?></span>
                         <?php elseif (isset($plugin['last_updated']) && !empty($plugin['last_updated'])): ?>
-                        <span class="last-updated"><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack'); echo esc_html(format_last_updated_ep($plugin['last_updated'])); ?></span>
+                        <span class="last-updated"><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack-lite'); echo esc_html(format_last_updated_ep($plugin['last_updated'])); ?></span>
                         <?php endif; ?>
 
                     </label>
@@ -283,16 +283,16 @@ if (!$has_cached_data) {
         
         <div class="wizard-navigation bdt-margin-top">
             <button class="bdt-button bdt-button-primary d-none" type="submit" id="ep-install-plugins-btn">
-                <?php esc_html_e('Install and Continue', 'bdthemes-element-pack'); ?>
+                <?php esc_html_e('Install and Continue', 'bdthemes-element-pack-lite'); ?>
             </button>
-            <div class="bdt-close-button bdt-margin-left bdt-wizard-next" data-step="finish"><?php esc_html_e('Skip', 'bdthemes-element-pack'); ?></div>
+            <div class="bdt-close-button bdt-margin-left bdt-wizard-next" data-step="finish"><?php esc_html_e('Skip', 'bdthemes-element-pack-lite'); ?></div>
         </div>
     </form>
 
     <div class="bdt-wizard-navigation">
         <button class="bdt-button bdt-button-secondary bdt-wizard-prev" data-step="features">
             <span><i class="dashicons dashicons-arrow-left-alt"></i></span>
-            <?php esc_html_e('Previous Step', 'bdthemes-element-pack'); ?>
+            <?php esc_html_e('Previous Step', 'bdthemes-element-pack-lite'); ?>
         </button>
     </div>
 </div>
@@ -341,18 +341,18 @@ if (!$has_cached_data) {
 <script>
 jQuery(document).ready(function($) {
     const epI18n = <?php echo wp_json_encode( [
-        'unable_to_load'      => __( 'Unable to load plugin data.', 'bdthemes-element-pack' ),
-        'network_error'       => __( 'Network error occurred while loading plugin data.', 'bdthemes-element-pack' ),
-        'no_plugins_found'    => __( 'No plugins found.', 'bdthemes-element-pack' ),
-        'recommended'         => __( 'Recommended', 'bdthemes-element-pack' ),
-        'active'              => __( 'ACTIVE', 'bdthemes-element-pack' ),
-        'active_installs'     => __( 'Active Installs:', 'bdthemes-element-pack' ),
-        'downloads'           => __( 'Downloads:', 'bdthemes-element-pack' ),
-        'last_updated'        => __( 'Last Updated:', 'bdthemes-element-pack' ),
-        'out_of_5_stars'      => __( 'out of 5 stars', 'bdthemes-element-pack' ),
-        'ratings'             => __( 'ratings', 'bdthemes-element-pack' ),
-        'fewer_than_10'       => __( 'Fewer than 10', 'bdthemes-element-pack' ),
-        'retry'               => __( 'Retry', 'bdthemes-element-pack' ),
+        'unable_to_load'      => __( 'Unable to load plugin data.', 'bdthemes-element-pack-lite' ),
+        'network_error'       => __( 'Network error occurred while loading plugin data.', 'bdthemes-element-pack-lite' ),
+        'no_plugins_found'    => __( 'No plugins found.', 'bdthemes-element-pack-lite' ),
+        'recommended'         => __( 'Recommended', 'bdthemes-element-pack-lite' ),
+        'active'              => __( 'ACTIVE', 'bdthemes-element-pack-lite' ),
+        'active_installs'     => __( 'Active Installs:', 'bdthemes-element-pack-lite' ),
+        'downloads'           => __( 'Downloads:', 'bdthemes-element-pack-lite' ),
+        'last_updated'        => __( 'Last Updated:', 'bdthemes-element-pack-lite' ),
+        'out_of_5_stars'      => __( 'out of 5 stars', 'bdthemes-element-pack-lite' ),
+        'ratings'             => __( 'ratings', 'bdthemes-element-pack-lite' ),
+        'fewer_than_10'       => __( 'Fewer than 10', 'bdthemes-element-pack-lite' ),
+        'retry'               => __( 'Retry', 'bdthemes-element-pack-lite' ),
     ] ); ?>;
     let integrationDataLoaded = false;
     

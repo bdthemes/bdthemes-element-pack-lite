@@ -28,7 +28,7 @@ class WPML_ElementPack_Image_Stack extends WPML_Module_With_Items {
 	protected function get_title( $field ) {
 		switch( $field ) {
 			case 'tooltip_text':
-				return esc_html__( 'Image Stack: Tooltip Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Image Stack: Tooltip Text', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

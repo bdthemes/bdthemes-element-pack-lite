@@ -19,7 +19,7 @@ class Twitter_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __( 'Twitter Grid', 'bdthemes-element-pack' );
+		return BDTEP . __( 'Twitter Grid', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {

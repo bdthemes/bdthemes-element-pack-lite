@@ -23,7 +23,7 @@ class Accordion extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Accordion', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Accordion', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -66,7 +66,7 @@ class Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_title',
 			[ 
-				'label' => __( 'Accordion', 'bdthemes-element-pack' ),
+				'label' => __( 'Accordion', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -75,10 +75,10 @@ class Accordion extends Module_Base {
 		$repeater->add_control(
 			'tab_title',
 			[ 
-				'label'       => __( 'Title & Content', 'bdthemes-element-pack' ),
+				'label'       => __( 'Title & Content', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => __( 'Accordion Title', 'bdthemes-element-pack' ),
+				'default'     => __( 'Accordion Title', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -86,13 +86,13 @@ class Accordion extends Module_Base {
 		$repeater->add_control(
 			'source',
 			[ 
-				'label'   => esc_html__( 'Select Source', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Source', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'custom',
 				'options' => [ 
-					'custom'    => esc_html__( 'Custom Content', 'bdthemes-element-pack' ),
-					"elementor" => esc_html__( 'Elementor Template', 'bdthemes-element-pack' ),
-					'anywhere'  => esc_html__( 'AE Template', 'bdthemes-element-pack' ),
+					'custom'    => esc_html__( 'Custom Content', 'bdthemes-element-pack-lite' ),
+					"elementor" => esc_html__( 'Elementor Template', 'bdthemes-element-pack-lite' ),
+					'anywhere'  => esc_html__( 'AE Template', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -100,10 +100,10 @@ class Accordion extends Module_Base {
 		$repeater->add_control(
 			'tab_content',
 			[ 
-				'label'      => __( 'Content', 'bdthemes-element-pack' ),
+				'label'      => __( 'Content', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::WYSIWYG,
 				'dynamic'    => [ 'active' => true ],
-				'default'    => __( 'Accordion Content', 'bdthemes-element-pack' ),
+				'default'    => __( 'Accordion Content', 'bdthemes-element-pack-lite' ),
 				'show_label' => false,
 				'condition'  => [ 'source' => 'custom' ],
 			]
@@ -112,10 +112,10 @@ class Accordion extends Module_Base {
 		$repeater->add_control(
 			'template_id',
 			[ 
-				'label'       => __( 'Select Template', 'bdthemes-element-pack' ),
+				'label'       => __( 'Select Template', 'bdthemes-element-pack-lite' ),
 				'type'        => Dynamic_Select::TYPE,
 				'label_block' => true,
-				'placeholder' => __( 'Type and select template', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'Type and select template', 'bdthemes-element-pack-lite' ),
 				'query_args'  => [ 
 					'query' => 'elementor_template',
 				],
@@ -125,10 +125,10 @@ class Accordion extends Module_Base {
 		$repeater->add_control(
 			'anywhere_id',
 			[ 
-				'label'       => __( 'Select Template', 'bdthemes-element-pack' ),
+				'label'       => __( 'Select Template', 'bdthemes-element-pack-lite' ),
 				'type'        => Dynamic_Select::TYPE,
 				'label_block' => true,
-				'placeholder' => __( 'Type and select template', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'Type and select template', 'bdthemes-element-pack-lite' ),
 				'query_args'  => [ 
 					'query' => 'anywhere_template',
 				],
@@ -139,7 +139,7 @@ class Accordion extends Module_Base {
 		$repeater->add_control(
 			'repeater_icon',
 			[ 
-				'label'       => __( 'Title Icon', 'bdthemes-element-pack' ),
+				'label'       => __( 'Title Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'skin'        => 'inline',
 				'label_block' => false,
@@ -149,21 +149,21 @@ class Accordion extends Module_Base {
 		$this->add_control(
 			'tabs',
 			[ 
-				'label'       => __( 'Items', 'bdthemes-element-pack' ),
+				'label'       => __( 'Items', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'tab_title'   => __( 'Accordion #1', 'bdthemes-element-pack' ),
-						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack' ),
+						'tab_title'   => __( 'Accordion #1', 'bdthemes-element-pack-lite' ),
+						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
-						'tab_title'   => __( 'Accordion #2', 'bdthemes-element-pack' ),
-						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack' ),
+						'tab_title'   => __( 'Accordion #2', 'bdthemes-element-pack-lite' ),
+						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
-						'tab_title'   => __( 'Accordion #3', 'bdthemes-element-pack' ),
-						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack' ),
+						'tab_title'   => __( 'Accordion #3', 'bdthemes-element-pack-lite' ),
+						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack-lite' ),
 					],
 				],
 				'title_field' => '{{{ tab_title }}}',
@@ -173,7 +173,7 @@ class Accordion extends Module_Base {
 		$this->add_control(
 			'view',
 			[ 
-				'label'   => __( 'View', 'bdthemes-element-pack' ),
+				'label'   => __( 'View', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'traditional',
 			]
@@ -182,7 +182,7 @@ class Accordion extends Module_Base {
 		$this->add_control(
 			'title_html_tag',
 			[ 
-				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack' ),
+				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_title_tags(),
 				'default' => 'div',
@@ -192,7 +192,7 @@ class Accordion extends Module_Base {
 		$this->add_control(
 			'accordion_icon',
 			[ 
-				'label'            => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'            => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'default'          => [ 
@@ -219,7 +219,7 @@ class Accordion extends Module_Base {
 		$this->add_control(
 			'accordion_active_icon',
 			[ 
-				'label'            => __( 'Active Icon', 'bdthemes-element-pack' ),
+				'label'            => __( 'Active Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon_active',
 				'default'          => [ 
@@ -249,7 +249,7 @@ class Accordion extends Module_Base {
 		$this->add_control(
 			'show_custom_icon',
 			[ 
-				'label'     => esc_html__( 'Show Title Icon', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Show Title Icon', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -389,7 +389,7 @@ class Accordion extends Module_Base {
 								</span>
 							<?php endif; ?>
 
-							<span role="heading" class="bdt-ep-title-text bdt-flex-inline bdt-flex-middle" <?php echo $output_schema ? 'itemprop="name"' : ''; ?>>
+							<span role="heading" class="bdt-ep-title-text bdt-flex-inline bdt-flex-middle" <?php if ( $output_schema ) { echo 'itemprop="name"'; } ?>>
 
 								<?php if ( ! empty( $item['repeater_icon']['value'] ) and $settings['show_custom_icon'] == 'yes' ) : ?>
 									<span class="bdt-ep-accordion-custom-icon">
@@ -496,7 +496,7 @@ class Accordion extends Module_Base {
 								<# } else { #>
 									<div style="padding:20px;text-align:center;color:#888;border:1px dashed #ccc;">
 										<i class="eicon-column" style="font-size:24px;display:block;margin-bottom:8px;"></i>
-										<?php esc_html_e( 'Template content is visible in preview mode.', 'bdthemes-element-pack' ); ?>
+										<?php esc_html_e( 'Template content is visible in preview mode.', 'bdthemes-element-pack-lite' ); ?>
 									</div>
 								<# } #>
 							</div>

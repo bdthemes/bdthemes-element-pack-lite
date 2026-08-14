@@ -23,7 +23,7 @@ class User_Register extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'User Register', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'User Register', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -76,14 +76,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_forms_layout',
 			[ 
-				'label' => esc_html__( 'Forms Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Forms Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'labels_title',
 			[ 
-				'label'     => esc_html__( 'Labels', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Labels', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -92,7 +92,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'show_labels',
 			[ 
-				'label'   => esc_html__( 'Label', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -101,7 +101,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'fields_title',
 			[ 
-				'label' => esc_html__( 'Fields', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fields', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -109,12 +109,12 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'input_size',
 			[ 
-				'label'   => esc_html__( 'Input Size', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Input Size', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [ 
-					'small'   => esc_html__( 'Small', 'bdthemes-element-pack' ),
-					'default' => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'large'   => esc_html__( 'Large', 'bdthemes-element-pack' ),
+					'small'   => esc_html__( 'Small', 'bdthemes-element-pack-lite' ),
+					'default' => esc_html__( 'Default', 'bdthemes-element-pack-lite' ),
+					'large'   => esc_html__( 'Large', 'bdthemes-element-pack-lite' ),
 				],
 				'default' => 'default',
 			]
@@ -123,7 +123,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'button_title',
 			[ 
-				'label'     => esc_html__( 'Submit Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Submit Button', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -132,22 +132,22 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'button_text',
 			[ 
-				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => esc_html__( 'Register', 'bdthemes-element-pack' ),
+				'default' => esc_html__( 'Register', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_size',
 			[ 
-				'label'   => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [ 
-					'small' => esc_html__( 'Small', 'bdthemes-element-pack' ),
-					''      => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'large' => esc_html__( 'Large', 'bdthemes-element-pack' ),
+					'small' => esc_html__( 'Small', 'bdthemes-element-pack-lite' ),
+					''      => esc_html__( 'Default', 'bdthemes-element-pack-lite' ),
+					'large' => esc_html__( 'Large', 'bdthemes-element-pack-lite' ),
 				],
 				'default' => '',
 			]
@@ -156,23 +156,23 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'align',
 			[ 
-				'label'        => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'options'      => [ 
 					'start'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'end'     => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'stretch' => [ 
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -198,7 +198,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'show_terms',
 			[ 
-				'label'       => esc_html__( 'Terms Field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Terms Field', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'        => Controls_Manager::SWITCHER,
 				'separator'   => 'before',
 			]
@@ -207,7 +207,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'terms_link',
 			[ 
-				'label'     => esc_html__( 'Terms Link', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Terms Link', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::URL,
 				'default'   => [ 
 					'url' => '#',
@@ -223,7 +223,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_button',
 			[
-				'label' => esc_html__( 'Modal Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Modal Button', 'bdthemes-element-pack-lite' ),
 				'condition' => [
 					'_skin' => 'bdt-modal'
 				]
@@ -233,17 +233,17 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_text',
 			[
-				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => esc_html__( 'Register', 'bdthemes-element-pack' ),
+				'default' => esc_html__( 'Register', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'modal_button_size',
 			[
-				'label'   => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'sm',
 				'options' => element_pack_button_sizes(),
@@ -253,23 +253,23 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_button_align',
 			[
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left'    => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -281,7 +281,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'user_register_modal_icon',
 			[
-				'label'       => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'modal_button_icon',
 			]
@@ -290,12 +290,12 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_icon_align',
 			[
-				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'  => esc_html__( 'Before', 'bdthemes-element-pack' ),
-					'right' => esc_html__( 'After', 'bdthemes-element-pack' ),
+					'left'  => esc_html__( 'Before', 'bdthemes-element-pack-lite' ),
+					'right' => esc_html__( 'After', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					'user_register_modal_icon[value]!' => '',
@@ -306,7 +306,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_button_icon_indent',
 			[
-				'label'   => esc_html__( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 8,
@@ -332,14 +332,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_forms_additional_options',
 			[ 
-				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'redirect_after_register',
 			[ 
-				'label' => esc_html__( 'Redirect After Register', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Redirect After Register', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -352,7 +352,7 @@ class User_Register extends Module_Base {
 				'show_external' => false,
 				'separator'     => false,
 				'placeholder'   => 'http://your-link.com/',
-				'description'   => esc_html__( 'Note: Because of security reasons, you can ONLY use your current domain here.', 'bdthemes-element-pack' ),
+				'description'   => esc_html__( 'Note: Because of security reasons, you can ONLY use your current domain here.', 'bdthemes-element-pack-lite' ),
 				'condition'     => [ 
 					'redirect_after_register' => 'yes',
 				],
@@ -362,7 +362,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'auto_login_after_register',
 			[ 
-				'label' => esc_html__( 'Auto Login After Register', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Auto Login After Register', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -370,7 +370,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'show_lost_password',
 			[ 
-				'label'   => esc_html__( 'Lost your password?', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Lost your password?', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 			]
 		);
@@ -379,7 +379,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'show_login',
 			[ 
-				'label' => esc_html__( 'Login', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Login', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -388,7 +388,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'show_logged_in_message',
 			[ 
-				'label'   => esc_html__( 'Logged in Message', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Logged in Message', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -397,7 +397,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'is_needed_password_input',
 			[ 
-				'label' => esc_html__( 'Add password field', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Add password field', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -405,7 +405,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'is_confirm_password_input',
 			[ 
-				'label'     => esc_html__( 'Confirm password field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Confirm password field', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'is_needed_password_input' => 'yes'
@@ -416,7 +416,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'password_strength',
 			[ 
-				'label'   => esc_html__( 'Show Password Strength', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Show Password Strength', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 				'condition' => [ 
@@ -428,7 +428,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'force_strong_password',
 			[ 
-				'label'     => esc_html__( 'Must Strong Password', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Must Strong Password', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => [ 
@@ -441,7 +441,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'remove_first_name',
 			[ 
-				'label'     => esc_html__( 'Remove First Name', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Remove First Name', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -450,7 +450,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'remove_last_name',
 			[ 
-				'label' => esc_html__( 'Remove Last Name', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Remove Last Name', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -458,7 +458,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'custom_labels',
 			[ 
-				'label'     => esc_html__( 'Custom Label', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Custom Label', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 				'condition' => [ 
@@ -471,10 +471,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'first_name_label',
 			[ 
-				'label'     => esc_html__( 'First Name Label', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'First Name Label', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'   => esc_html__( 'First Name', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'First Name', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels'        => 'yes',
 					'custom_labels'      => 'yes',
@@ -487,10 +487,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'first_name_placeholder',
 			[ 
-				'label'     => esc_html__( 'First Name Placeholder', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'First Name Placeholder', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'   => esc_html__( 'John', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'John', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels'        => 'yes',
 					'custom_labels'      => 'yes',
@@ -502,10 +502,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'last_name_label',
 			[ 
-				'label'     => esc_html__( 'Last Name Label', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Last Name Label', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'   => esc_html__( 'Last Name', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'Last Name', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels'       => 'yes',
 					'custom_labels'     => 'yes',
@@ -517,10 +517,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'last_name_placeholder',
 			[ 
-				'label'     => esc_html__( 'Last Name Placeholder', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Last Name Placeholder', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'   => esc_html__( 'Doe', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'Doe', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels'       => 'yes',
 					'custom_labels'     => 'yes',
@@ -532,10 +532,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'email_label',
 			[ 
-				'label'     => esc_html__( 'Email Label', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Email Label', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'   => esc_html__( 'Email', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'Email', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels'   => 'yes',
 					'custom_labels' => 'yes',
@@ -546,10 +546,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'email_placeholder',
 			[ 
-				'label'     => esc_html__( 'Email Placeholder', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Email Placeholder', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'   => esc_html__( 'example@email.com', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'example@email.com', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels'   => 'yes',
 					'custom_labels' => 'yes',
@@ -560,10 +560,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'password_label',
 			[ 
-				'label'      => esc_html__( 'Password Label', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Password Label', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'    => esc_html__( 'Password', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'Password', 'bdthemes-element-pack-lite' ),
 				'conditions' => [ 
 					'terms' => [ 
 						[ 
@@ -586,10 +586,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'password_placeholder',
 			[ 
-				'label'      => esc_html__( 'Password Placeholder', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Password Placeholder', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'    => esc_html__( 'Enter password', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'Enter password', 'bdthemes-element-pack-lite' ),
 				'conditions' => [ 
 					'terms' => [ 
 						[ 
@@ -612,10 +612,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'confirm_password_label',
 			[ 
-				'label'      => esc_html__( 'Confirm Password Label', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Confirm Password Label', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'    => esc_html__( 'Confirm Password', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'Confirm Password', 'bdthemes-element-pack-lite' ),
 				'conditions' => [ 
 					'terms' => [ 
 						[ 
@@ -638,10 +638,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'confirm_password_msg',
 			[ 
-				'label'      => esc_html__( 'Confirm Password Message', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Confirm Password Message', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'    => esc_html__( 'Passwords must be same', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'Passwords must be same', 'bdthemes-element-pack-lite' ),
 				'conditions' => [ 
 					'terms' => [ 
 						[ 
@@ -664,10 +664,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'confirm_password_placeholder',
 			[ 
-				'label'      => esc_html__( 'Confirm Password Placeholder', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Confirm Password Placeholder', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'    => esc_html__( 'Confirm your password', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'Confirm your password', 'bdthemes-element-pack-lite' ),
 				'conditions' => [ 
 					'terms' => [ 
 						[ 
@@ -690,10 +690,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'terms_label',
 			[ 
-				'label'      => esc_html__( 'Terms Label', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Terms Label', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'    => esc_html__( 'I agree to the', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'I agree to the', 'bdthemes-element-pack-lite' ),
 				'conditions' => [ 
 					'terms' => [ 
 						[ 
@@ -716,10 +716,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'terms_link_text',
 			[ 
-				'label'      => esc_html__( 'Terms Link Text', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Terms Link Text', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'    => esc_html__( 'Terms and Conditions', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'Terms and Conditions', 'bdthemes-element-pack-lite' ),
 				'conditions' => [ 
 					'terms' => [ 
 						[ 
@@ -742,7 +742,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'show_additional_message',
 			[ 
-				'label' => esc_html__( 'Additional Bottom Message', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Bottom Message', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -750,10 +750,10 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'additional_message',
 			[ 
-				'label'     => esc_html__( 'Additional Message', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Additional Message', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default'   => esc_html__( 'Note: Your password will be generated automatically and sent to your email address.', 'bdthemes-element-pack' ),
+				'default'   => esc_html__( 'Note: Your password will be generated automatically and sent to your email address.', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_additional_message' => 'yes',
 				],
@@ -763,7 +763,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'show_recaptcha_checker',
 			[ 
-				'label'        => esc_html__( 'Show reCAPTCHA Checker', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Show reCAPTCHA Checker', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-show-recaptcha-badge-',
 				'separator'    => 'before',
@@ -773,7 +773,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'toggle_password',
 			[ 
-				'label'     => esc_html__( 'Toggle Password', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Toggle Password', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'separator' => 'before',
@@ -786,7 +786,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_style_dropdown_button',
 			[ 
-				'label'     => esc_html__( 'Dropdown Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Dropdown Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'_skin' => 'bdt-dropdown'
@@ -799,14 +799,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dropdown_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dropdown_button_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-dropdown' => 'color: {{VALUE}};',
@@ -825,7 +825,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'dropdown_button_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-dropdown' => 'background-color: {{VALUE}};',
@@ -846,7 +846,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'dropdown_button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -858,7 +858,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'dropdown_button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -872,14 +872,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dropdown_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dropdown_button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-dropdown:hover' => 'color: {{VALUE}};',
@@ -890,7 +890,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'dropdown_button_hover_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-dropdown:hover' => 'background-color: {{VALUE}};',
@@ -901,7 +901,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'dropdown_button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-dropdown:hover' => 'border-color: {{VALUE}};',
@@ -915,7 +915,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'dropdown_button_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -930,7 +930,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_style_modal_button',
 			[ 
-				'label'     => esc_html__( 'Modal Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'_skin' => 'bdt-modal'
@@ -943,14 +943,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_modal_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'modal_button_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-modal' => 'color: {{VALUE}};',
@@ -969,7 +969,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-modal' => 'background-color: {{VALUE}};',
@@ -990,7 +990,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1002,7 +1002,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1016,14 +1016,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_modal_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'modal_button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-modal:hover' => 'color: {{VALUE}};',
@@ -1034,7 +1034,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_hover_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-modal:hover' => 'background-color: {{VALUE}};',
@@ -1045,7 +1045,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-button-modal:hover' => 'border-color: {{VALUE}};',
@@ -1059,7 +1059,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_button_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -1071,7 +1071,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_style',
 			[
-				'label' => esc_html__( 'Modal Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Modal Style', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'_skin' => 'bdt-modal'
@@ -1081,7 +1081,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal{{ID}} .bdt-modal-dialog' => 'background-color: {{VALUE}};',
@@ -1102,7 +1102,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1114,7 +1114,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_text_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1126,13 +1126,13 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_custom_width',
 			[
-				'label'   => esc_html__( 'Modal Width', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Modal Width', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'default' 	=> esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'full' 		=> esc_html__( 'Full', 'bdthemes-element-pack' ),
-					'container' => esc_html__( 'Container', 'bdthemes-element-pack' ),
-					'custom'    => esc_html__( 'Custom', 'bdthemes-element-pack' ),
+					'default' 	=> esc_html__( 'Default', 'bdthemes-element-pack-lite' ),
+					'full' 		=> esc_html__( 'Full', 'bdthemes-element-pack-lite' ),
+					'container' => esc_html__( 'Container', 'bdthemes-element-pack-lite' ),
+					'custom'    => esc_html__( 'Custom', 'bdthemes-element-pack-lite' ),
 				],
 				'default' 	=> 'default',
 			]
@@ -1141,7 +1141,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_custom_width_custom',
 			[
-				'label' => esc_html__( 'Custom Width(px)', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Custom Width(px)', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1161,7 +1161,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_close_button',
 			[
-				'label'   => esc_html__( 'Close Button Style', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Close Button Style', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 				'separator' => 'before',
@@ -1173,7 +1173,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_header',
 			[
-				'label'   => esc_html__( 'Modal Header Style', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Modal Header Style', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 				'separator' => 'before',
@@ -1183,7 +1183,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_recaptcha',
 			[
-				'label'   => esc_html__( 'Recaptcha Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Recaptcha Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1192,7 +1192,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_recaptcha_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal{{ID}} .bdt-modal-dialog .bdt-recaptcha-text' => 'color: {{VALUE}};',
@@ -1204,7 +1204,7 @@ class User_Register extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'modal_recaptcha_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-recaptcha-text',
 			]
 		);
@@ -1214,7 +1214,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_header_style',
 			[
-				'label'     => esc_html__( 'Modal Header', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Modal Header', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'_skin' => 'bdt-modal',
@@ -1225,7 +1225,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_header_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-header .bdt-modal-title' => 'color: {{VALUE}};',
@@ -1252,7 +1252,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_header_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1264,7 +1264,7 @@ class User_Register extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'modal_header_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector' => '#modal{{ID}} .bdt-modal-dialog .bdt-modal-header .bdt-modal-title',
 			]
 		);
@@ -1273,7 +1273,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_close_button_style',
 			[
-				'label' => esc_html__( 'Modal Close Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Modal Close Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'modal_close_button' => 'yes',
@@ -1284,14 +1284,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_modal_close_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'modal_close_button_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default' => 'color: {{VALUE}};',
@@ -1317,7 +1317,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1328,7 +1328,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1339,7 +1339,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_margin',
 			[
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1357,7 +1357,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_size',
 			[
-				'label'      => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
@@ -1370,14 +1370,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_modal_close_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'modal_close_button_hover_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default:hover' => 'color: {{VALUE}};',
@@ -1395,7 +1395,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'modal_close_button_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal{{ID}} .bdt-modal-dialog .bdt-modal-close-default:hover' => 'color: {{VALUE}};',
@@ -1413,7 +1413,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_style',
 			[ 
-				'label' => esc_html__( 'Form Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Form Style', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1421,7 +1421,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'row_gap',
 			[ 
-				'label'     => esc_html__( 'Rows Gap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Rows Gap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => '15',
@@ -1441,7 +1441,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'links_heading',
 			[ 
-				'label'     => esc_html__( 'L I N K S', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'L I N K S', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -1450,7 +1450,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'links_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group > a'                                 => 'color: {{VALUE}};',
@@ -1462,7 +1462,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'links_hover_color',
 			[ 
-				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group > a:hover' => 'color: {{VALUE}};',
@@ -1474,7 +1474,7 @@ class User_Register extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'links_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'selector' => '#bdt-user-register{{ID}} .bdt-field-group > a',
 			]
 		);
@@ -1484,7 +1484,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_style_labels',
 			[ 
-				'label'     => esc_html__( 'Label', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_labels!' => '',
@@ -1495,7 +1495,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'label_spacing',
 			[ 
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1512,7 +1512,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-form-label' => 'color: {{VALUE}};',
@@ -1534,7 +1534,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_field_style',
 			[ 
-				'label' => esc_html__( 'Fields', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fields', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1544,14 +1544,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_field_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'field_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group .bdt-input' => 'color: {{VALUE}};',
@@ -1562,7 +1562,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'field_placeholder_color',
 			[ 
-				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group .bdt-input::placeholder'      => 'color: {{VALUE}};',
@@ -1574,7 +1574,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'field_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group .bdt-input,
@@ -1587,7 +1587,7 @@ class User_Register extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'field_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '#bdt-user-register{{ID}} .bdt-field-group .bdt-input',
@@ -1598,7 +1598,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'field_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1610,7 +1610,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'field_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1623,7 +1623,7 @@ class User_Register extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'      => 'field_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '#bdt-user-register{{ID}} .bdt-field-group .bdt-input',
 				'separator' => 'before',
 			]
@@ -1642,14 +1642,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_field_hover',
 			[ 
-				'label' => esc_html__( 'Focus', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Focus', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'field_text_color_focus',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group .bdt-input:focus' => 'color: {{VALUE}};',
@@ -1660,7 +1660,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'field_placeholder_color_focus',
 			[ 
-				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group .bdt-input:focus::placeholder'      => 'color: {{VALUE}};',
@@ -1672,7 +1672,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'field_background_color_focus',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-field-group .bdt-input:focus,
@@ -1684,7 +1684,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'field_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'field_border_border!' => '',
@@ -1702,7 +1702,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_terms_style',
 			[ 
-				'label'     => esc_html__( 'Terms Field', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Terms Field', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_terms' => 'yes',
@@ -1714,14 +1714,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_terms_text_field',
 			[ 
-				'label' => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'terms_text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-terms-label' => 'color: {{VALUE}};',
@@ -1731,7 +1731,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'terms_link_color',
 			[ 
-				'label'     => esc_html__( 'Link Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Link Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-terms-label a' => 'color: {{VALUE}};',
@@ -1741,7 +1741,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'terms_link_hover_color',
 			[ 
-				'label'     => esc_html__( 'Link Hover Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Link Hover Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-terms-label a:hover' => 'color: {{VALUE}};',
@@ -1761,14 +1761,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_terms_checkbox_field',
 			[ 
-				'label' => esc_html__( 'Checkbox', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Checkbox', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'terms_checkbox_color',
 			[ 
-				'label'     => esc_html__( 'Checkbox Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Checkbox Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-term-input-wrapper .bdt-checkbox' => 'background-color: {{VALUE}};',
@@ -1778,7 +1778,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'terms_checkbox_checked_color',
 			[ 
-				'label'     => esc_html__( 'Checkbox Checked Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Checkbox Checked Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-term-input-wrapper .bdt-checkbox:checked' => 'background-color: {{VALUE}};',
@@ -1795,7 +1795,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'terms_checkbox_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1806,7 +1806,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'terms_checkbox_size',
 			[
-				'label' => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1826,7 +1826,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_submit_button_style',
 			[ 
-				'label' => esc_html__( 'Submit Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Submit Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1836,14 +1836,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-button' => 'color: {{VALUE}};',
@@ -1854,7 +1854,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'button_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-button' => 'background-color: {{VALUE}};',
@@ -1876,7 +1876,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1888,7 +1888,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'button_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1900,7 +1900,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'button_text_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1921,7 +1921,7 @@ class User_Register extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'button_box_shadow',
-				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'selector' => '#bdt-user-register{{ID}} .bdt-button',
 			]
 		);
@@ -1931,14 +1931,14 @@ class User_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-button:hover' => 'color: {{VALUE}};',
@@ -1949,7 +1949,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-button:hover' => 'background-color: {{VALUE}};',
@@ -1960,7 +1960,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-button:hover' => 'border-color: {{VALUE}};',
@@ -1975,7 +1975,7 @@ class User_Register extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'button_hover_box_shadow',
-				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'selector' => '#bdt-user-register{{ID}} .bdt-button:hover',
 			]
 		);
@@ -1983,7 +1983,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'button_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -1997,7 +1997,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_additional_style',
 			[ 
-				'label'     => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Additional', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_additional_message!' => '',
@@ -2008,7 +2008,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'additional_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'#bdt-user-register{{ID}} .bdt-register-additional-message' => 'color: {{VALUE}};',
@@ -2020,7 +2020,7 @@ class User_Register extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'      => 'additional_text_typography',
-				'label'     => esc_html__( 'Additional Message Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Additional Message Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
 				'selector'  => '#bdt-user-register{{ID}} .bdt-register-additional-message',
 				'separator' => 'before',
@@ -2032,7 +2032,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_pass_progress_style',
 			[ 
-				'label'     => esc_html__( 'Password Progress Bar', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Password Progress Bar', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'password_strength' => 'yes',
@@ -2043,7 +2043,7 @@ class User_Register extends Module_Base {
 		$this->add_responsive_control(
 			'progress_bar_height',
 			[ 
-				'label'     => esc_html__( 'Height', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Height', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -2062,12 +2062,12 @@ class User_Register extends Module_Base {
 			Group_Control_Background::get_type(),
 			[ 
 				'name'           => 'progress_background',
-				'label'          => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'          => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'types'          => [ 'classic', 'gradient' ],
 				'exclude'        => [ 'image' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'fields_options' => [ 
 					'background' => [ 
-						'label' => esc_html__( 'Progress Background', 'bdthemes-element-pack' ),
+						'label' => esc_html__( 'Progress Background', 'bdthemes-element-pack-lite' ),
 					],
 				],
 				'selector'       => '{{WRAPPER}} .bdt-progress',
@@ -2079,7 +2079,7 @@ class User_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_style_toggle_pass',
 			[ 
-				'label'     => esc_html__( 'Toggle Password', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Toggle Password', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'toggle_password' => 'yes'
@@ -2090,7 +2090,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'toggle_pass_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-toggle-pass-wrapper'                    => 'color: {{VALUE}};',
@@ -2102,7 +2102,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'toggle_pass_size',
 			[ 
-				'label'      => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', 'rem' ],
 				'range'      => [ 
@@ -2192,7 +2192,7 @@ class User_Register extends Module_Base {
 					'type'        => 'text',
 					'name'        => 'first_name',
 					'id'          => 'first_name' . esc_attr( $id ),
-					'placeholder' => ( $settings['first_name_placeholder'] ) ? $settings['first_name_placeholder'] : esc_html__( 'Jhon', 'bdthemes-element-pack' ),
+					'placeholder' => ( $settings['first_name_placeholder'] ) ? $settings['first_name_placeholder'] : esc_html__( 'Jhon', 'bdthemes-element-pack-lite' ),
 					'class'       => [ 
 						'first_name',
 						'bdt-input',
@@ -2203,7 +2203,7 @@ class User_Register extends Module_Base {
 					'type'        => 'text',
 					'name'        => 'last_name',
 					'id'          => 'last_name' . esc_attr( $id ),
-					'placeholder' => ( $settings['last_name_placeholder'] ) ? $settings['last_name_placeholder'] : esc_html__( 'Doe', 'bdthemes-element-pack' ),
+					'placeholder' => ( $settings['last_name_placeholder'] ) ? $settings['last_name_placeholder'] : esc_html__( 'Doe', 'bdthemes-element-pack-lite' ),
 					'class'       => [ 
 						'last_name',
 						'bdt-input',
@@ -2214,7 +2214,7 @@ class User_Register extends Module_Base {
 					'type'        => 'email',
 					'name'        => 'user_email',
 					'id'          => 'user_email' . esc_attr( $id ),
-					'placeholder' => ( $settings['email_placeholder'] ) ? $settings['email_placeholder'] : esc_html__( 'example@email.com', 'bdthemes-element-pack' ),
+					'placeholder' => ( $settings['email_placeholder'] ) ? $settings['email_placeholder'] : esc_html__( 'example@email.com', 'bdthemes-element-pack-lite' ),
 					'class'       => [ 
 						'user_email',
 						'bdt-input',
@@ -2231,7 +2231,7 @@ class User_Register extends Module_Base {
 						'type'        => 'password',
 						'name'        => 'user_password',
 						'id'          => 'user_password' . esc_attr( $id ),
-						'placeholder' => ( $settings['password_placeholder'] ) ? $settings['password_placeholder'] : esc_html__( 'Enter password', 'bdthemes-element-pack' ),
+						'placeholder' => ( $settings['password_placeholder'] ) ? $settings['password_placeholder'] : esc_html__( 'Enter password', 'bdthemes-element-pack-lite' ),
 						'class'       => [ 
 							'user_password',
 							'bdt-input',
@@ -2249,7 +2249,7 @@ class User_Register extends Module_Base {
 						'type'        => 'password',
 						'name'        => 'confirm_password',
 						'id'          => 'confirm_password' . esc_attr( $id ),
-						'placeholder' => ( $settings['confirm_password_placeholder'] ) ? $settings['confirm_password_placeholder'] : esc_html__( 'Enter password', 'bdthemes-element-pack' ),
+						'placeholder' => ( $settings['confirm_password_placeholder'] ) ? $settings['confirm_password_placeholder'] : esc_html__( 'Enter password', 'bdthemes-element-pack-lite' ),
 						'class'       => [ 
 							'confirm_password',
 							'bdt-input',
@@ -2292,11 +2292,11 @@ class User_Register extends Module_Base {
 				?>
 				<div class="bdt-user-register">
 					<?php
-					esc_html_e( 'You are Logged in as', 'bdthemes-element-pack' );
+					esc_html_e( 'You are Logged in as', 'bdthemes-element-pack-lite' );
 					echo esc_html( ' ' . $current_user->display_name );
 					?>
 					<a href="<?php echo esc_url( wp_logout_url( $current_url ) ); ?>">
-						<?php esc_html_e( 'Logout', 'bdthemes-element-pack' ); ?>
+						<?php esc_html_e( 'Logout', 'bdthemes-element-pack-lite' ); ?>
 					</a>
 				</div>
 				<?php
@@ -2308,7 +2308,7 @@ class User_Register extends Module_Base {
 			<div class="bdt-alert bdt-alert-warning" bdt-alert>
 				<a class="bdt-alert-close"><i class="ep-icon-close" aria-hidden="true"></i></a>
 				<p>
-					<?php esc_html_e( 'Registration option not enabled in your general settings.', 'bdthemes-element-pack' ); ?>
+					<?php esc_html_e( 'Registration option not enabled in your general settings.', 'bdthemes-element-pack-lite' ); ?>
 				</p>
 			</div>
 			<?php
@@ -2386,7 +2386,7 @@ class User_Register extends Module_Base {
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
 								echo wp_kses_post( $settings['first_name_label'] );
 							} else {
-								echo esc_html__( 'First Name', 'bdthemes-element-pack' );
+								echo esc_html__( 'First Name', 'bdthemes-element-pack-lite' );
 							} ?>
 						</label>
 						<?php
@@ -2409,7 +2409,7 @@ class User_Register extends Module_Base {
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
 								echo wp_kses_post( $settings['last_name_label'] );
 							} else {
-								echo esc_html__( 'Last Name', 'bdthemes-element-pack' );
+								echo esc_html__( 'Last Name', 'bdthemes-element-pack-lite' );
 							} ?>
 						</label>
 						<?php
@@ -2431,7 +2431,7 @@ class User_Register extends Module_Base {
 						<?php if ( 'yes' == $settings['custom_labels'] ) {
 							echo wp_kses_post( $settings['email_label'] );
 						} else {
-							echo esc_html__( 'Email', 'bdthemes-element-pack' );
+							echo esc_html__( 'Email', 'bdthemes-element-pack-lite' );
 						} ?>
 					</label>
 					<?php
@@ -2453,7 +2453,7 @@ class User_Register extends Module_Base {
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
 								echo wp_kses_post( $settings['password_label'] );
 							} else {
-								echo esc_html__( 'Password', 'bdthemes-element-pack' );
+								echo esc_html__( 'Password', 'bdthemes-element-pack-lite' );
 							} ?>
 						</label>
 						<?php
@@ -2481,7 +2481,7 @@ class User_Register extends Module_Base {
 							<?php if ( 'yes' == $settings['custom_labels'] ) {
 								echo wp_kses_post( $settings['confirm_password_label'] );
 							} else {
-								echo esc_html__( 'Confirm Password', 'bdthemes-element-pack' );
+								echo esc_html__( 'Confirm Password', 'bdthemes-element-pack-lite' );
 							} ?>
 						</label>
 						<?php
@@ -2530,8 +2530,8 @@ class User_Register extends Module_Base {
 									<?php echo esc_html($settings['terms_label']); ?>
 									<a <?php $this->print_render_attribute_string('terms-link'); ?>><?php echo esc_html($settings['terms_label']); ?></a>
 								<?php else : ?>
-									<?php echo esc_html__( 'I agree to the ', 'bdthemes-element-pack' ); ?>
-									<a <?php $this->print_render_attribute_string('terms-link'); ?>><?php echo esc_html__( 'Terms and Conditions', 'bdthemes-element-pack' ); ?></a>
+									<?php echo esc_html__( 'I agree to the ', 'bdthemes-element-pack-lite' ); ?>
+									<a <?php $this->print_render_attribute_string('terms-link'); ?>><?php echo esc_html__( 'Terms and Conditions', 'bdthemes-element-pack-lite' ); ?></a>
 								<?php endif; ?>
 							</label>
 							<?php
@@ -2549,7 +2549,7 @@ class User_Register extends Module_Base {
 			<input type="hidden" name="redirect_after_register" class="redirect_after_register"
 				value="<?php echo esc_url( $redirect_after_register ) ?>" />
 			<input type="hidden" name="bdt_spinner_message" class="bdt_spinner_message"
-				value="<?php esc_html_e( "We are registering you, please wait...", "bdthemes-element-pack" ); ?>" />
+				value="<?php esc_html_e( "We are registering you, please wait...", "bdthemes-element-pack-lite" ); ?>" />
 			<div <?php $this->print_render_attribute_string( 'submit-group' ); ?>>
 				<button type="submit" <?php $this->print_render_attribute_string( 'button' ); ?>>
 					<?php if ( ! empty( $settings['button_text'] ) ) : ?>
@@ -2569,13 +2569,13 @@ class User_Register extends Module_Base {
 
 					<?php if ( $show_lost_password ) : ?>
 						<a class="bdt-lost-password" href="<?php echo esc_url( wp_lostpassword_url( $redirect_url ) ); ?>">
-							<?php esc_html_e( 'Lost your password?', 'bdthemes-element-pack' ); ?>
+							<?php esc_html_e( 'Lost your password?', 'bdthemes-element-pack-lite' ); ?>
 						</a>
 					<?php endif; ?>
 
 					<?php if ( $show_login ) : ?>
 						<a class="bdt-login" href="<?php echo esc_url( wp_login_url() ); ?>">
-							<?php esc_html_e( 'Login', 'bdthemes-element-pack' ); ?>
+							<?php esc_html_e( 'Login', 'bdthemes-element-pack-lite' ); ?>
 						</a>
 					<?php endif; ?>
 

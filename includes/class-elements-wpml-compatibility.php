@@ -78,42 +78,42 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'form_placeholder',
-					'type'        => esc_html__( 'Form Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Form Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_text_yes',
-					'type'        => esc_html__( 'Button Text (Yes)', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text (Yes)', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_text_no',
-					'type'        => esc_html__( 'Button Text (No)', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text (No)', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'age_invalid_msg',
-					'type'        => esc_html__( 'Age Invalid Message', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Age Invalid Message', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'header',
-					'type'        => esc_html__( 'Header Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Header Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'content',
-					'type'        => esc_html__( 'ModalContent', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'ModalContent', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'footer',
-					'type'        => esc_html__( 'Footer Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Footer Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 			],
@@ -124,12 +124,12 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'dynamic_open_day',
-					'type'        => esc_html__( 'Open Status', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Open Status', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'dynamic_close_day',
-					'type'        => esc_html__( 'Close Status', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Close Status', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 			],
@@ -141,17 +141,17 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'title',
-					'type'        => esc_html__( 'Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'description',
-					'type'        => esc_html__( 'Description', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Description', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -162,62 +162,62 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'user_name_label',
-					'type'        => esc_html__( 'Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'user_name_placeholder',
-					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'contact_label',
-					'type'        => esc_html__( 'Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'contact_placeholder',
-					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'subject_label',
-					'type'        => esc_html__( 'Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'subject_placeholder',
-					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'email_address_label',
-					'type'        => esc_html__( 'Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'email_placeholder',
-					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'message_label',
-					'type'        => esc_html__( 'Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'message_placeholder',
-					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'additional_message',
-					'type'        => esc_html__( 'Message', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Message', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -228,17 +228,17 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'message',
-					'type'        => __( 'Message', 'bdthemes-element-pack' ),
+					'type'        => __( 'Message', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA'
 				],
 				[
 					'field'       => 'learn_more_text',
-					'type'        => __( 'Learn More Text', 'bdthemes-element-pack' ),
+					'type'        => __( 'Learn More Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE'
 				],
 				[
 					'field'       => 'button_text',
-					'type'        => __( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => __( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE'
 				],
 			],
@@ -255,7 +255,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -266,27 +266,27 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'middle_text',
-					'type'        => esc_html__( 'Middle Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Middle Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_a_text',
-					'type'        => esc_html__( 'Button A Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button A Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_a_onclick_event',
-					'type'        => esc_html__( 'Button A OnClick Event', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button A OnClick Event', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_b_text',
-					'type'        => esc_html__( 'Button B Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button B Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_b_onclick_event',
-					'type'        => esc_html__( 'OnClick Event', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'OnClick Event', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -297,27 +297,27 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'title_text',
-					'type'        => esc_html__( 'Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'sub_title_text',
-					'type'        => esc_html__( 'Sub Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Sub Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'description_text',
-					'type'        => esc_html__( 'Content', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'readmore_text',
-					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'badge_text',
-					'type'        => esc_html__( 'Badge Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Badge Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -328,22 +328,22 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'title_text',
-					'type'        => esc_html__( 'Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'description_text',
-					'type'        => esc_html__( 'Content', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'readmore_text',
-					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'badge_text',
-					'type'        => esc_html__( 'Badge Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Badge Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -354,7 +354,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'caption',
-					'type'        => esc_html__( 'Custom Caption', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Custom Caption', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -389,27 +389,27 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'front_title_text',
-					'type'        => esc_html__( 'Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'front_description_text',
-					'type'        => esc_html__( 'Description', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Description', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'back_title_text',
-					'type'        => esc_html__( 'Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'back_description_text',
-					'type'        => esc_html__( 'Description', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Description', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -420,12 +420,12 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'before_label',
-					'type'        => esc_html__( 'Before Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Before Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'after_label',
-					'type'        => esc_html__( 'After Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'After Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -436,12 +436,12 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'content_caption',
-					'type'        => esc_html__( 'Content Caption', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Content Caption', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -452,17 +452,17 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'name',
-					'type'        => esc_html__( 'Member Name', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Member Name', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'description_text',
-					'type'        => esc_html__( 'Member Description', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Member Description', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'role',
-					'type'        => esc_html__( 'Member Role', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Member Role', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 
@@ -487,12 +487,12 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'filter_custom_text_all',
-					'type'        => esc_html__( 'Custom Text (All)', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Custom Text (All)', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'filter_custom_text_filter',
-					'type'        => esc_html__( 'Custom Text (Filter)', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Custom Text (Filter)', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -509,27 +509,27 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'percent',
-					'type'        => esc_html__( 'Percent', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Percent', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'title',
-					'type'        => esc_html__( 'Progress Pie Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Progress Pie Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'before',
-					'type'        => esc_html__( 'Before Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Before Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'text',
-					'type'        => esc_html__( 'Middle Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Middle Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'after',
-					'type'        => esc_html__( 'After Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'After Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -540,12 +540,12 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'scroll_button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'section_id',
-					'type'        => esc_html__( 'Section ID', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Section ID', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -556,12 +556,12 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'placeholder',
-					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Search Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Search Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -572,7 +572,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -584,17 +584,17 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'toggle_title',
-					'type'        => esc_html__( 'Normal Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Normal Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'toggle_open_title',
-					'type'        => esc_html__( 'Opened Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Opened Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'toggle_content',
-					'type'        => esc_html__( 'Content', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 			],
@@ -605,22 +605,22 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'pre_title',
-					'type'        => esc_html__( 'Pre Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Pre Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'title',
-					'type'        => esc_html__( 'Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'content',
-					'type'        => esc_html__( 'Content', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -631,42 +631,42 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'button_text',
-					'type'        => esc_html__( 'Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'first_name_label',
-					'type'        => esc_html__( 'First Name Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'First Name Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'first_name_placeholder',
-					'type'        => esc_html__( 'First Name Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'First Name Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'last_name_label',
-					'type'        => esc_html__( 'Last Name Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Last Name Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'last_name_placeholder',
-					'type'        => esc_html__( 'Last Name Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Last Name Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'email_label',
-					'type'        => esc_html__( 'Email Label', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Email Label', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'email_placeholder',
-					'type'        => esc_html__( 'Email Placeholder', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Email Placeholder', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'additional_message',
-					'type'        => esc_html__( 'Additional Message', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Additional Message', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -677,7 +677,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'readmore_text',
-					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -689,7 +689,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'ignore_element',
-					'type'        => __( 'Ignore Elements', 'bdthemes-element-pack' ),
+					'type'        => __( 'Ignore Elements', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA'
 				],
 			],
@@ -706,7 +706,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'readmore_text',
-					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -718,7 +718,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'readmore_text',
-					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -736,17 +736,17 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'reviewer_name',
-					'type'        => esc_html__( 'Reviewer Name', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Reviewer Name', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'reviewer_job_title',
-					'type'        => esc_html__( 'Reviewer Job Title', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Reviewer Job Title', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'review_text',
-					'type'        => esc_html__( 'Review Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Review Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 			],
@@ -757,17 +757,17 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'title',
-					'type'        => esc_html__('Title', 'bdthemes-element-pack'),
+					'type'        => esc_html__('Title', 'bdthemes-element-pack-lite'),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'text',
-					'type'        => esc_html__('Text', 'bdthemes-element-pack'),
+					'type'        => esc_html__('Text', 'bdthemes-element-pack-lite'),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'readmore_text',
-					'type'        => esc_html__('Read More Text', 'bdthemes-element-pack'),
+					'type'        => esc_html__('Read More Text', 'bdthemes-element-pack-lite'),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -779,12 +779,12 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'reading_timer_minute_text',
-					'type'        => esc_html__('Minute Text', 'bdthemes-element-pack'),
+					'type'        => esc_html__('Minute Text', 'bdthemes-element-pack-lite'),
 					'editor_type' => 'LINE',
 				],
 				[
 					'field'       => 'reading_timer_seconds_text',
-					'type'        => esc_html__('Seconds Text', 'bdthemes-element-pack'),
+					'type'        => esc_html__('Seconds Text', 'bdthemes-element-pack-lite'),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -801,7 +801,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'read_more_text',
-					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Read More Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -812,7 +812,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -823,7 +823,7 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'calendly_username',
-					'type'        => esc_html__( 'Calendly Username', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Calendly Username', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'LINE',
 				],
 			],
@@ -840,17 +840,17 @@ class Element_Pack_WPML {
 			'fields'     => [
 				[
 					'field'       => 'pre_heading',
-					'type'        => esc_html__( 'Prefix Heading', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Prefix Heading', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'animated_heading',
-					'type'        => esc_html__( 'Animated Heading', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Animated Heading', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 				[
 					'field'       => 'post_heading',
-					'type'        => esc_html__( 'Post Heading', 'bdthemes-element-pack' ),
+					'type'        => esc_html__( 'Post Heading', 'bdthemes-element-pack-lite' ),
 					'editor_type' => 'AREA',
 				],
 			],

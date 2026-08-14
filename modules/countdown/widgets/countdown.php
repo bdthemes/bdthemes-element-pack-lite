@@ -23,7 +23,7 @@ class Countdown extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Countdown', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Countdown', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -73,18 +73,18 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'due_date',
 			[ 
-				'label'       => esc_html__( 'Due Date', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Due Date', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::DATE_TIME,
 				'default'     => gmdate( 'Y-m-d H:i', strtotime( '+1 month' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ),
 				// translators: %s is the current timezone string like 'UTC', 'Europe/London', etc.
-				'description' => sprintf( __( 'Date set according to your timezone: %s.', 'bdthemes-element-pack' ), Utils::get_timezone_string() ),
+				'description' => sprintf( __( 'Date set according to your timezone: %s.', 'bdthemes-element-pack-lite' ), Utils::get_timezone_string() ),
 				// 'condition'   => [
 				// 	'_skin!' => 'bdt-event-countdown',
 				// 	// 'loop_time!' => 'yes',
@@ -113,7 +113,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'loop_time',
 			[ 
-				'label'     => esc_html__( 'Loop Time', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Loop Time', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'_skin!' => 'bdt-event-countdown',
@@ -124,7 +124,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'loop_hours',
 			[ 
-				'label'      => esc_html__( 'Input Loop Time (Hours)', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Input Loop Time (Hours)', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::NUMBER,
 				'default'    => '3',
 				'conditions' => [ 
@@ -149,7 +149,7 @@ class Countdown extends Module_Base {
 			'loop_show_note',
 			[ 
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => __( 'This Loop time option will only work on client side. If you logged in, this will not work. You can test it on incognito mode of your browser. The Last 15 minutes will work randomly.', 'bdthemes-element-pack' ),
+				'raw'             => __( 'This Loop time option will only work on client side. If you logged in, this will not work. You can test it on incognito mode of your browser. The Last 15 minutes will work randomly.', 'bdthemes-element-pack-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 				'condition'       => [ 
 					'loop_time' => 'yes',
@@ -164,14 +164,14 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_content_count',
 			[ 
-				'label' => esc_html__( 'Count Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Count Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'columns',
 			[
-				'label' => __('Columns', 'bdthemes-element-pack'),
+				'label' => __('Columns', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default'        => '4',
 				'tablet_default' => '2',
@@ -194,7 +194,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'gap',
 			[
-				'label' => esc_html__('Gap', 'bdthemes-element-pack'),
+				'label' => esc_html__('Gap', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 20,
@@ -211,7 +211,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'number_label_gap',
 			[ 
-				'label'      => esc_html__( 'Number & Label Gap', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Number & Label Gap', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 
 					'unit' => 'px',
@@ -239,7 +239,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'tiny_item_spacing',
 			[ 
-				'label'      => esc_html__( 'Item Gap', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Item Gap', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 
 					'unit' => 'px',
@@ -264,7 +264,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'tiny_number_label_gap',
 			[ 
-				'label'      => esc_html__( 'Number & Label Gap', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Number & Label Gap', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 
 					'unit' => 'px',
@@ -290,19 +290,19 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'alignment',
 			[ 
-				'label'        => __( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'        => __( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'options'      => [ 
 					'left'   => [ 
-						'title' => __( 'Start', 'bdthemes-element-pack' ),
+						'title' => __( 'Start', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'End', 'bdthemes-element-pack' ),
+						'title' => __( 'End', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -318,19 +318,19 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'tiny_alignment',
 			[ 
-				'label'       => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -348,7 +348,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'container_width',
 			[ 
-				'label'          => esc_html__( 'Container Width', 'bdthemes-element-pack' ),
+				'label'          => esc_html__( 'Container Width', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'unit' => '%',
@@ -383,15 +383,15 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'content_align',
 			[ 
-				'label'     => __( 'Content Align', 'bdthemes-element-pack' ),
+				'label'     => __( 'Content Align', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'  => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'right' => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -409,18 +409,18 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_content_additional',
 			[ 
-				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'label_display',
 			[ 
-				'label'        => esc_html__( 'View', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'View', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SELECT,
 				'options'      => [ 
-					'block'  => esc_html__( 'Block', 'bdthemes-element-pack' ),
-					'inline' => esc_html__( 'Inline', 'bdthemes-element-pack' ),
+					'block'  => esc_html__( 'Block', 'bdthemes-element-pack-lite' ),
+					'inline' => esc_html__( 'Inline', 'bdthemes-element-pack-lite' ),
 				],
 				'default'      => 'block',
 				'prefix_class' => 'bdt-countdown--label-',
@@ -433,7 +433,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'show_days',
 			[ 
-				'label'   => esc_html__( 'Days', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Days', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -442,7 +442,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'show_hours',
 			[ 
-				'label'   => esc_html__( 'Hours', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Hours', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -451,7 +451,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'show_minutes',
 			[ 
-				'label'   => esc_html__( 'Minutes', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Minutes', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -460,7 +460,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'show_seconds',
 			[ 
-				'label'   => esc_html__( 'Seconds', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Seconds', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -469,7 +469,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'show_labels',
 			[ 
-				'label'   => esc_html__( 'Show Label', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Label', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -478,7 +478,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'custom_labels',
 			[ 
-				'label'        => esc_html__( 'Custom Label', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Custom Label', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'condition'    => [ 
@@ -490,10 +490,10 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'label_days',
 			[ 
-				'label'       => esc_html__( 'Days', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Days', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Days', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Days', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Days', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Days', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'show_labels!'   => '',
 					'custom_labels!' => '',
@@ -505,10 +505,10 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'label_hours',
 			[ 
-				'label'       => esc_html__( 'Hours', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Hours', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Hours', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Hours', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Hours', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Hours', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'show_labels!'   => '',
 					'custom_labels!' => '',
@@ -520,10 +520,10 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'label_minutes',
 			[ 
-				'label'       => esc_html__( 'Minutes', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Minutes', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Minutes', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Minutes', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Minutes', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Minutes', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'show_labels!'   => '',
 					'custom_labels!' => '',
@@ -535,10 +535,10 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'label_seconds',
 			[ 
-				'label'       => esc_html__( 'Seconds', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Seconds', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Seconds', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Seconds', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Seconds', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Seconds', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'show_labels!'   => '',
 					'custom_labels!' => '',
@@ -550,7 +550,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'show_separator',
 			[ 
-				'label'     => esc_html__( 'Show Separator', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Show Separator', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -559,7 +559,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'separator',
 			[ 
-				'label'     => __( 'Symbol', 'bdthemes-element-pack' ),
+				'label'     => __( 'Symbol', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'default'   => ':',
 				'condition' => [ 
@@ -573,7 +573,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_end_action',
 			[ 
-				'label'     => __( 'End Action', 'bdthemes-element-pack' ),
+				'label'     => __( 'End Action', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => [ 
 					'loop_time!' => 'yes',
@@ -585,7 +585,7 @@ class Countdown extends Module_Base {
 			'end_action_note',
 			[ 
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => __( 'Choose which action you want to at the end of countdown.', 'bdthemes-element-pack' ),
+				'raw'             => __( 'Choose which action you want to at the end of countdown.', 'bdthemes-element-pack-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 			]
 		);
@@ -593,14 +593,14 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'end_action_type',
 			[ 
-				'label'   => esc_html__( 'Type', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Type', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [ 
-					'none'        => esc_html__( 'None', 'bdthemes-element-pack' ),
-					'message'     => esc_html__( 'Message', 'bdthemes-element-pack' ),
-					'url'         => esc_html__( 'Redirection Link', 'bdthemes-element-pack' ),
-					'coupon-code' => esc_html__( 'Coupon Code', 'bdthemes-element-pack' ),
-					'trigger'     => esc_html__( 'On trigger', 'bdthemes-element-pack' ),
+					'none'        => esc_html__( 'None', 'bdthemes-element-pack-lite' ),
+					'message'     => esc_html__( 'Message', 'bdthemes-element-pack-lite' ),
+					'url'         => esc_html__( 'Redirection Link', 'bdthemes-element-pack-lite' ),
+					'coupon-code' => esc_html__( 'Coupon Code', 'bdthemes-element-pack-lite' ),
+					'trigger'     => esc_html__( 'On trigger', 'bdthemes-element-pack-lite' ),
 				],
 				'default' => 'none'
 			]
@@ -609,7 +609,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'id_for_coupon_code',
 			[ 
-				'label'       => __( 'ID for Coupon Code', 'bdthemes-element-pack' ),
+				'label'       => __( 'ID for Coupon Code', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'label_block' => true,
@@ -622,7 +622,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'selector_for_trigger',
 			[ 
-				'label'       => __( 'Trigger ID', 'bdthemes-element-pack' ),
+				'label'       => __( 'Trigger ID', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'label_block' => true,
@@ -635,10 +635,10 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'end_message',
 			[ 
-				'label'       => __( 'End Message', 'bdthemes-element-pack' ),
+				'label'       => __( 'End Message', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => __( 'Countdown End!', 'bdthemes-element-pack' ),
-				'placeholder' => __( 'Type your message here', 'bdthemes-element-pack' ),
+				'default'     => __( 'Countdown End!', 'bdthemes-element-pack-lite' ),
+				'placeholder' => __( 'Type your message here', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'end_action_type' => 'message'
 				],
@@ -648,9 +648,9 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'end_redirect_link',
 			[ 
-				'label'       => __( 'Redirection Link', 'bdthemes-element-pack' ),
+				'label'       => __( 'Redirection Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => __( 'https://elementpack.pro/', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'https://elementpack.pro/', 'bdthemes-element-pack-lite' ),
 				'condition'   => [ 
 					'end_action_type' => 'url'
 				],
@@ -660,7 +660,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'link_redirect_delay',
 			[ 
-				'label'     => __( 'Redirection Delay (s)', 'bdthemes-element-pack' ),
+				'label'     => __( 'Redirection Delay (s)', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -680,7 +680,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_count_style',
 			[ 
-				'label' => esc_html__( 'Items Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Items Style', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -688,10 +688,10 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'glassmorphism_effect',
 			[ 
-				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				// translators: %1s: Opening anchor tag with link to MDN backdrop-filter documentation, %2s: Closing anchor tag
-				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
+				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack-lite' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
 
 			]
 		);
@@ -699,7 +699,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'glassmorphism_blur_level',
 			[ 
-				'label'     => __( 'Blur Level', 'bdthemes-element-pack' ),
+				'label'     => __( 'Blur Level', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -735,7 +735,7 @@ class Countdown extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'      => 'count_border',
-				'label'     => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-countdown-item',
 				'separator' => 'before',
 				'condition' => [ 
@@ -747,7 +747,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'count_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -762,7 +762,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'count_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -788,7 +788,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'individual_style',
 			[ 
-				'label'     => esc_html__( 'Individual Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Individual Style', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -799,7 +799,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_number_style',
 			[ 
-				'label'     => esc_html__( 'Number', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Number', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'individual_style' => ''
@@ -810,7 +810,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'number_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-countdown-number' => 'color: {{VALUE}};',
@@ -840,7 +840,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'number_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -852,7 +852,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'number_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -865,7 +865,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'text_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-countdown-number',
 			]
 		);
@@ -891,7 +891,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_label_style',
 			[ 
-				'label'     => esc_html__( 'Label', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_labels'      => 'yes',
@@ -903,7 +903,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-countdown-label' => 'color: {{VALUE}};',
@@ -933,7 +933,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'label_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -945,7 +945,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'label_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -957,7 +957,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'label_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -970,7 +970,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'label_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-countdown-label',
 			]
 		);
@@ -996,7 +996,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_days_style',
 			[ 
-				'label'     => esc_html__( 'Days Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Days Style', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_days'        => 'yes',
@@ -1025,7 +1025,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'days_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1037,7 +1037,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'days_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1059,14 +1059,14 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_days_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack' ),
+				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'days_number_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-days-wrapper .bdt-countdown-number' => 'color: {{VALUE}};',
@@ -1096,7 +1096,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'days_number_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1108,7 +1108,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'days_number_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1121,7 +1121,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'days_number_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-days-wrapper .bdt-countdown-number',
 			]
 		);
@@ -1147,7 +1147,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_days_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack' ),
+				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],
@@ -1157,7 +1157,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'days_label_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-days-wrapper .bdt-countdown-label' => 'color: {{VALUE}};',
@@ -1196,7 +1196,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'days_label_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1211,7 +1211,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'days_label_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1226,7 +1226,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'days_label_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1242,7 +1242,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'      => 'days_label_shadow',
-				'label'     => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-days-wrapper .bdt-countdown-label',
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -1281,7 +1281,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_hours_style',
 			[ 
-				'label'     => esc_html__( 'Hours Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Hours Style', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_hours'       => 'yes',
@@ -1310,7 +1310,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'hours_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1322,7 +1322,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'hours_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1344,14 +1344,14 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_hours_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack' ),
+				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'hours_number_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-hours-wrapper .bdt-countdown-number' => 'color: {{VALUE}};',
@@ -1381,7 +1381,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'hours_number_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1393,7 +1393,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'hours_number_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1406,7 +1406,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'hours_number_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-hours-wrapper .bdt-countdown-number',
 			]
 		);
@@ -1432,7 +1432,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_hours_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack' ),
+				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],
@@ -1442,7 +1442,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'hours_label_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-hours-wrapper .bdt-countdown-label' => 'color: {{VALUE}};',
@@ -1481,7 +1481,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'hours_label_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1496,7 +1496,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'hours_label_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1511,7 +1511,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'hours_label_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1527,7 +1527,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'      => 'hours_label_shadow',
-				'label'     => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-hours-wrapper .bdt-countdown-label',
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -1566,7 +1566,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_minutes_style',
 			[ 
-				'label'     => esc_html__( 'Minutes Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Minutes Style', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_minutes'     => 'yes',
@@ -1595,7 +1595,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'minutes_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1607,7 +1607,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'minutes_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1629,14 +1629,14 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_minutes_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack' ),
+				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'minutes_number_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-minutes-wrapper .bdt-countdown-number' => 'color: {{VALUE}};',
@@ -1666,7 +1666,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'minutes_number_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1678,7 +1678,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'minutes_number_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1691,7 +1691,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'minutes_number_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-minutes-wrapper .bdt-countdown-number',
 			]
 		);
@@ -1717,7 +1717,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_minutes_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack' ),
+				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],
@@ -1727,7 +1727,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'minutes_label_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-minutes-wrapper .bdt-countdown-label' => 'color: {{VALUE}};',
@@ -1766,7 +1766,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'minutes_label_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1781,7 +1781,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'minutes_label_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1796,7 +1796,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'minutes_label_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1812,7 +1812,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'      => 'minutes_label_shadow',
-				'label'     => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-minutes-wrapper .bdt-countdown-label',
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -1851,7 +1851,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_seconds_style',
 			[ 
-				'label'     => esc_html__( 'Seconds Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Seconds Style', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_seconds'     => 'yes',
@@ -1880,7 +1880,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'seconds_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1892,7 +1892,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'seconds_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1914,14 +1914,14 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_seconds_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack' ),
+				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'seconds_number_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-seconds-wrapper .bdt-countdown-number' => 'color: {{VALUE}};',
@@ -1951,7 +1951,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'seconds_number_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1963,7 +1963,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'seconds_number_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -1976,7 +1976,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'seconds_number_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-seconds-wrapper .bdt-countdown-number',
 			]
 		);
@@ -2002,7 +2002,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_seconds_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack' ),
+				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],
@@ -2012,7 +2012,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'seconds_label_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-seconds-wrapper .bdt-countdown-label' => 'color: {{VALUE}};',
@@ -2051,7 +2051,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'seconds_label_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -2066,7 +2066,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'seconds_label_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -2081,7 +2081,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'seconds_label_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -2097,7 +2097,7 @@ class Countdown extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'      => 'seconds_label_shadow',
-				'label'     => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-seconds-wrapper .bdt-countdown-label',
 				'condition' => [ 
 					'show_labels' => 'yes',
@@ -2137,7 +2137,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_separator_style',
 			[ 
-				'label'     => esc_html__( 'Separator', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Separator', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_separator' => 'yes',
@@ -2148,7 +2148,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'separator_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-countdown-wrapper .bdt-countdown-divider' => 'color: {{VALUE}}',
@@ -2159,7 +2159,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'separator_size',
 			[ 
-				'label'      => __( 'Size', 'bdthemes-element-pack' ),
+				'label'      => __( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'selectors'  => [ 
@@ -2171,7 +2171,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'divider_offset_popover',
 			[ 
-				'label'        => esc_html__( 'Offset', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Offset', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'render_type'  => 'ui',
 				'return_value' => 'yes',
@@ -2183,7 +2183,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'divider_horizontal_offset',
 			[ 
-				'label'     => __( 'Horizontal', 'bdthemes-element-pack' ),
+				'label'     => __( 'Horizontal', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -2203,7 +2203,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'divider_vertical_offset',
 			[ 
-				'label'     => __( 'Vertical', 'bdthemes-element-pack' ),
+				'label'     => __( 'Vertical', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -2223,7 +2223,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'divider_rotate',
 			[ 
-				'label'     => esc_html__( 'Rotate', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Rotate', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -2247,7 +2247,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_section(
 			'section_end_message_style',
 			[ 
-				'label'     => esc_html__( 'End Message', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'End Message', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'end_action_type' => 'message',
@@ -2259,7 +2259,7 @@ class Countdown extends Module_Base {
 		$this->add_control(
 			'end_message_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-countdown-end-message' => 'color: {{VALUE}};',
@@ -2287,7 +2287,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'end_message_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -2299,7 +2299,7 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'end_message_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -2327,19 +2327,19 @@ class Countdown extends Module_Base {
 		$this->add_responsive_control(
 			'end_message_alignment',
 			[ 
-				'label'       => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -2376,12 +2376,12 @@ class Countdown extends Module_Base {
 
 	private function _init_default_countdown_labels() {
 		$this->_default_countdown_labels = [ 
-			'label_months'  => esc_html__( 'Months', 'bdthemes-element-pack' ),
-			'label_weeks'   => esc_html__( 'Weeks', 'bdthemes-element-pack' ),
-			'label_days'    => esc_html__( 'Days', 'bdthemes-element-pack' ),
-			'label_hours'   => esc_html__( 'Hours', 'bdthemes-element-pack' ),
-			'label_minutes' => esc_html__( 'Minutes', 'bdthemes-element-pack' ),
-			'label_seconds' => esc_html__( 'Seconds', 'bdthemes-element-pack' ),
+			'label_months'  => esc_html__( 'Months', 'bdthemes-element-pack-lite' ),
+			'label_weeks'   => esc_html__( 'Weeks', 'bdthemes-element-pack-lite' ),
+			'label_days'    => esc_html__( 'Days', 'bdthemes-element-pack-lite' ),
+			'label_hours'   => esc_html__( 'Hours', 'bdthemes-element-pack-lite' ),
+			'label_minutes' => esc_html__( 'Minutes', 'bdthemes-element-pack-lite' ),
+			'label_seconds' => esc_html__( 'Seconds', 'bdthemes-element-pack-lite' ),
 		];
 	}
 

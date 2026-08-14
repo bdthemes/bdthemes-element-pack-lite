@@ -18,7 +18,7 @@ class Back_To_Top_With_Progress extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Back To Top With Progress', 'bdthemes-element-pack' );
+		return __( 'Back To Top With Progress', 'bdthemes-element-pack-lite' );
 	}
 
 	public function render() {

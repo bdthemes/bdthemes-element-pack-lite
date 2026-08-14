@@ -3,6 +3,10 @@ namespace ElementPack\Includes\WPML;
 
 use WPML_Elementor_Module_With_Items;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Product Grid widget integration
  */
@@ -36,22 +40,22 @@ class WPML_ElementPack_Product_Grid extends WPML_Elementor_Module_With_Items {
 	protected function get_title( $field ) {
 		switch ( $field ) {
 			case 'title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'price':
-				return esc_html__( 'Price', 'bdthemes-element-pack' );
+				return esc_html__( 'Price', 'bdthemes-element-pack-lite' );
 
 			case 'text':
-				return esc_html__( 'Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Text', 'bdthemes-element-pack-lite' );
 
 			case 'time':
-				return esc_html__( 'Time', 'bdthemes-element-pack' );
+				return esc_html__( 'Time', 'bdthemes-element-pack-lite' );
 
 			case 'rating_count':
-				return esc_html__( 'Rating Count', 'bdthemes-element-pack' );
+				return esc_html__( 'Rating Count', 'bdthemes-element-pack-lite' );
 
 			case 'badge_text':
-				return esc_html__( 'Badge Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Badge Text', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

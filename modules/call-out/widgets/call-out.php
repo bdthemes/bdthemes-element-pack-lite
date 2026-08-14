@@ -25,7 +25,7 @@ class Call_Out extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Call Out', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Call Out', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -65,18 +65,18 @@ class Call_Out extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'title',
 			[ 
-				'label'       => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'This is your call to action title', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Call to action title', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'This is your call to action title', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Call to action title', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -84,11 +84,11 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'description',
 			[ 
-				'label'       => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Call to action description', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Call to action description', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -96,7 +96,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'title_size',
 			[ 
-				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack' ),
+				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h3',
 				'options' => element_pack_title_tags(),
@@ -106,23 +106,23 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'text_alignment',
 			[ 
-				'label'   => __( 'Text Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => __( 'Text Alignment', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left'   => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => __( 'Justify', 'bdthemes-element-pack' ),
+						'title' => __( 'Justify', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -137,24 +137,24 @@ class Call_Out extends Module_Base {
 		$this->start_controls_section(
 			'section_content_button',
 			[ 
-				'label' => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text',
 			[ 
-				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => esc_html__( 'Click Here', 'bdthemes-element-pack' ),
+				'default' => esc_html__( 'Click Here', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'link',
 			[ 
-				'label'       => esc_html__( 'Link', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
 				'placeholder' => 'http://your-link.com',
@@ -167,13 +167,13 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_align',
 			[ 
-				'label'   => esc_html__( 'Position', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [ 
-					'left'   => esc_html__( 'Left', 'bdthemes-element-pack' ),
-					'right'  => esc_html__( 'Right', 'bdthemes-element-pack' ),
-					'center' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+					'left'   => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
+					'right'  => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
+					'center' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -181,7 +181,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'callout_icon',
 			[ 
-				'label'            => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label'            => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'label_block'      => false,
@@ -192,12 +192,12 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'icon_align',
 			[ 
-				'label'     => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'right',
 				'options'   => [ 
-					'left'  => esc_html__( 'Left', 'bdthemes-element-pack' ),
-					'right' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+					'left'  => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
+					'right' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'callout_icon[value]!' => '',
@@ -208,7 +208,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'icon_indent',
 			[ 
-				'label'     => esc_html__( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 8,
@@ -231,14 +231,14 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_css_id',
 			[ 
-				'label'       => __( 'Button ID', 'bdthemes-element-pack' ),
+				'label'       => __( 'Button ID', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 
 					'active' => true,
 				],
 				'default'     => '',
-				'title'       => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
-				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'title'       => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite' ),
 				'separator'   => 'before',
 			]
 		);
@@ -249,7 +249,7 @@ class Call_Out extends Module_Base {
 		$this->start_controls_section(
 			'section_style_title',
 			[ 
-				'label'     => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'title!' => '',
@@ -260,7 +260,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-title' => 'color: {{VALUE}};',
@@ -280,7 +280,7 @@ class Call_Out extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'text_shadow',
-				'label'    => __( 'Text Shadow', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-callout-title',
 			]
 		);
@@ -289,7 +289,7 @@ class Call_Out extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[ 
 				'name'     => 'title_text_stroke',
-				'label'    => __( 'Text Stroke', 'bdthemes-element-pack' ),
+				'label'    => __( 'Text Stroke', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-callout-title',
 			]
 		);
@@ -299,7 +299,7 @@ class Call_Out extends Module_Base {
 		$this->start_controls_section(
 			'section_style_text',
 			[ 
-				'label'     => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'description!' => '',
@@ -310,7 +310,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'description_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-description' => 'color: {{VALUE}};',
@@ -329,7 +329,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'description_spacing',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-description' => 'margin-top: {{SIZE}}{{UNIT}};',
@@ -342,7 +342,7 @@ class Call_Out extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[ 
-				'label'     => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'button_text!' => '',
@@ -353,7 +353,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'attention_button',
 			[ 
-				'label' => __( 'Attention', 'bdthemes-element-pack' ),
+				'label' => __( 'Attention', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -363,14 +363,14 @@ class Call_Out extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-button' => 'color: {{VALUE}};',
@@ -381,7 +381,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_background_color',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-button' => 'background-color: {{VALUE}};',
@@ -400,7 +400,7 @@ class Call_Out extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(), [ 
 				'name'        => 'button_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-ep-callout-button',
@@ -411,7 +411,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -423,7 +423,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'button_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -434,7 +434,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'button_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -455,7 +455,7 @@ class Call_Out extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'button_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-callout-button',
 			]
 		);
@@ -465,14 +465,14 @@ class Call_Out extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-button:hover' => 'color: {{VALUE}};',
@@ -483,7 +483,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-button:hover' => 'background-color: {{VALUE}};',
@@ -502,7 +502,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'button_border_border!' => ''
@@ -524,7 +524,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'button_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -536,7 +536,7 @@ class Call_Out extends Module_Base {
 		$this->start_controls_section(
 			'section_style_icon',
 			[ 
-				'label'     => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'callout_icon[value]!' => '',
@@ -548,14 +548,14 @@ class Call_Out extends Module_Base {
 		$this->start_controls_tab(
 			'tab_callout_icon_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'callout_button_icon_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-button-icon'     => 'color: {{VALUE}};',
@@ -585,7 +585,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'callout_icon_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -597,7 +597,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'callout_icon_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -609,7 +609,7 @@ class Call_Out extends Module_Base {
 		$this->add_responsive_control(
 			'callout_icon_size',
 			[ 
-				'label'     => __( 'Icon Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -627,14 +627,14 @@ class Call_Out extends Module_Base {
 		$this->start_controls_tab(
 			'tab_callout_icon_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'callout_button_hover_icon_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-ep-callout-button:hover .bdt-ep-callout-button-icon'     => 'color: {{VALUE}};',
@@ -654,7 +654,7 @@ class Call_Out extends Module_Base {
 		$this->add_control(
 			'icon_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'icon_border_border!' => '',

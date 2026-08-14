@@ -21,7 +21,7 @@ class Trailer_Box extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Trailer Box', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Trailer Box', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -59,17 +59,17 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'pre_title',
 			[
-				'label'       => esc_html__( 'Pre Title', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Pre Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => esc_html__( 'Trailer box pre title', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Trailer box pre title', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -77,11 +77,11 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title',
 			[
-				'label'       => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => esc_html__( 'Trailer box title', 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'Trailer Box Title', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Trailer box title', 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'Trailer Box Title', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -89,11 +89,11 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'content',
 			[
-				'label'       => esc_html__( 'Content', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::WYSIWYG,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => esc_html__( 'Trailer box text' , 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'I am Trailer Box Description Text. You can change me anytime from settings.' , 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Trailer box text' , 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'I am Trailer Box Description Text. You can change me anytime from settings.' , 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -101,7 +101,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'content_width',
 			[
-				'label' => esc_html__( 'Content Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Content Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -118,7 +118,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'origin',
 			[
-				'label'   => esc_html__( 'Origin', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Origin', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'bottom-left',
 				'options' => element_pack_position(),
@@ -128,23 +128,23 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'align',
 			[
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left'    => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -157,7 +157,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'width',
 			[
-				'label' => esc_html__( 'Maximum Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Maximum Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -175,7 +175,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'height',
 			[
-				'label'   => esc_html__( 'Minimum Height', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Minimum Height', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 400,
@@ -195,13 +195,13 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'link_type',
 			[
-				'label'   => __( 'Link', 'bdthemes-element-pack' ),
+				'label'   => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [
-					''       => __( 'None', 'bdthemes-element-pack' ),
-					'button' => __( 'Button', 'bdthemes-element-pack' ),
-					'item'   => __( 'Item', 'bdthemes-element-pack' ),
+					''       => __( 'None', 'bdthemes-element-pack-lite' ),
+					'button' => __( 'Button', 'bdthemes-element-pack-lite' ),
+					'item'   => __( 'Item', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -209,7 +209,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button',
 			[
-				'label'       => esc_html__( 'link', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
 				'placeholder' => 'http://your-link.com',
@@ -225,7 +225,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_tags',
 			[
-				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack' ),
+				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h3',
 				'options' => element_pack_title_tags(),
@@ -237,7 +237,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_content_button',
 			[
-				'label'     => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 				'condition' => [
 					'link_type' => 'button',
 				],
@@ -247,11 +247,11 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_text',
 			[
-				'label'       => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => esc_html__( 'View Details', 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'View Details', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'View Details', 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'View Details', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -259,7 +259,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_icon',
 			[
-				'label' => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 			]
@@ -268,12 +268,12 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'icon_align',
 			[
-				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'  => esc_html__( 'Before', 'bdthemes-element-pack' ),
-					'right' => esc_html__( 'After', 'bdthemes-element-pack' ),
+					'left'  => esc_html__( 'Before', 'bdthemes-element-pack-lite' ),
+					'right' => esc_html__( 'After', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					'button_icon[value]!' => '',
@@ -284,7 +284,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'icon_indent',
 			[
-				'label'   => esc_html__( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 8,
@@ -306,7 +306,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_position',
 			[
-				'label'   => esc_html__( 'Button Position', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Button Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => element_pack_position(),
@@ -316,14 +316,14 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_css_id',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
+				'label' => __( 'Button ID', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
 				],
 				'default' => '',
-				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
-				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 			]
 		);
@@ -335,7 +335,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_trailer_box_style',
 			[
-				'label' => esc_html__( 'Trailer Box', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Trailer Box', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -343,16 +343,16 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'item_animation',
 			[
-				'label'        => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'content',
 				'prefix_class' => 'bdt-item-transition-',				
 				'render_type'  => 'ui',
 				'options'      => [
-					'content'    => esc_html__( 'Content', 'bdthemes-element-pack' ),
-					'scale-up'   => esc_html__( 'Image Scale Up', 'bdthemes-element-pack' ),
-					'scale-down' => esc_html__( 'Image Scale Down', 'bdthemes-element-pack' ),
-					'none'       => esc_html__( 'None', 'bdthemes-element-pack' ),
+					'content'    => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
+					'scale-up'   => esc_html__( 'Image Scale Up', 'bdthemes-element-pack-lite' ),
+					'scale-down' => esc_html__( 'Image Scale Down', 'bdthemes-element-pack-lite' ),
+					'none'       => esc_html__( 'None', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -360,7 +360,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'trailer_box_content_padding',
 			[
-				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -374,7 +374,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_style_pre_title',
 			[
-				'label'     => esc_html__( 'Pre Tilte', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Pre Tilte', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'pre_title!' => '',
@@ -387,14 +387,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_pre_title_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'pre_title_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title' => 'color: {{VALUE}};',
@@ -405,7 +405,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_bg_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title' => 'background: {{VALUE}};',
@@ -417,7 +417,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'pre_title_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector'    => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title',
 			]
 		);
@@ -425,7 +425,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -437,7 +437,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'pre_title_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -457,7 +457,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'tb_pre_title_spacing',
 			[
-				'label' => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label' => __( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'margin-bottom: {{SIZE}}px;',
@@ -468,7 +468,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'tb_pre_title_opacity',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -487,7 +487,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'pre_title_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title',
 			]
 		);
@@ -495,10 +495,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -508,7 +508,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'pre_title_x_position',
 			[
-				'label'   => __( 'X Offset', 'bdthemes-element-pack' ),
+				'label'   => __( 'X Offset', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -538,7 +538,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'pre_title_y_position',
 			[
-				'label'   => __( 'Y Offset', 'bdthemes-element-pack' ),
+				'label'   => __( 'Y Offset', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -568,7 +568,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'pre_title_rotate',
 			[
-				'label'   => __( 'Rotate', 'bdthemes-element-pack' ),
+				'label'   => __( 'Rotate', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -599,7 +599,7 @@ class Trailer_Box extends Module_Base {
 		// $this->add_responsive_control(
 		// 	'pre_title_scale',
 		// 	[
-		// 		'label'   => __( 'Scale', 'bdthemes-element-pack' ),
+		// 		'label'   => __( 'Scale', 'bdthemes-element-pack-lite' ),
 		// 		'type'    => Controls_Manager::SLIDER,
 		// 		'range' => [
 		// 			'px' => [
@@ -623,14 +623,14 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_hide',
 			[
-				'label'       => __( 'Hide at', 'bdthemes-element-pack' ),
-				'description' => __( 'Some cases you need to hide it because when you set heading at outer position mobile device can show wrong width in that case you can hide it at mobile or tablet device. if you set overflow hidden on section or body so you don\'t need it.', 'bdthemes-element-pack' ),
+				'label'       => __( 'Hide at', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Some cases you need to hide it because when you set heading at outer position mobile device can show wrong width in that case you can hide it at mobile or tablet device. if you set overflow hidden on section or body so you don\'t need it.', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'm',
 				'options'     => [
-					''  => esc_html__('Nothing', 'bdthemes-element-pack'),
-					'm' => esc_html__('Tablet and Mobile ', 'bdthemes-element-pack'),
-					's' => esc_html__('Mobile', 'bdthemes-element-pack'),
+					''  => esc_html__('Nothing', 'bdthemes-element-pack-lite'),
+					'm' => esc_html__('Tablet and Mobile ', 'bdthemes-element-pack-lite'),
+					's' => esc_html__('Mobile', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -640,14 +640,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_pre_title_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'pre_title_color_hover',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'color: {{VALUE}};',
@@ -658,7 +658,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_bg__hover_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'background: {{VALUE}};',
@@ -669,7 +669,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_border_color_hover',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'pre_title_border_border!' => '',
@@ -691,7 +691,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'tb_pre_title_opacity_hover',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -709,10 +709,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_hover_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -722,7 +722,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'pre_title_hover_x_position',
 			[
-				'label'   => __( 'X Offset', 'bdthemes-element-pack' ),
+				'label'   => __( 'X Offset', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -743,7 +743,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'pre_title_hover_y_position',
 			[
-				'label'   => __( 'Y Offset', 'bdthemes-element-pack' ),
+				'label'   => __( 'Y Offset', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -764,7 +764,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'pre_title_hover_rotate',
 			[
-				'label'   => __( 'Rotate', 'bdthemes-element-pack' ),
+				'label'   => __( 'Rotate', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -786,7 +786,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'pre_title_transition_delay',
 			[
-				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -812,7 +812,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_style_title',
 			[
-				'label'     => esc_html__( 'Tilte', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Tilte', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'title!' => '',
@@ -825,14 +825,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_title_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title' => 'color: {{VALUE}};',
@@ -844,7 +844,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'title_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title',
 			]
 		);
@@ -852,7 +852,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_opacity',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -870,10 +870,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -883,7 +883,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_horizontal_offset',
 			[
-				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'label' => __('Horizontal', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -905,7 +905,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_vertical_offset',
 			[
-				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'label' => __('Vertical', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -927,7 +927,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_rotate',
 			[
-				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -951,7 +951,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_advanced_style',
 			[
-				'label' => esc_html__('Advanced Style', 'bdthemes-element-pack'),
+				'label' => esc_html__('Advanced Style', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -971,7 +971,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name' => 'title_text_shadow',
-				'label' => __( 'Text Shadow', 'bdthemes-element-pack'),
+				'label' => __( 'Text Shadow', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title',
 				'condition' => [
 					'title_advanced_style' => 'yes'
@@ -993,7 +993,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_border_radius',
 			[
-				'label'		 => __('Border Radius', 'bdthemes-element-pack'),
+				'label'		 => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' 		 => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1019,7 +1019,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_text_padding',
 			[
-				'label' 	 => __('Padding', 'bdthemes-element-pack'),
+				'label' 	 => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' 		 => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1036,14 +1036,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_title_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'title_color_hover',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-title' => 'color: {{VALUE}};',
@@ -1065,7 +1065,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_border_color_hover',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'title_border_border!' => '',
@@ -1079,7 +1079,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_hover_opacity',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1097,10 +1097,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_hover_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -1110,7 +1110,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_hover_horizontal_offset',
 			[
-				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'label' => __('Horizontal', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1132,7 +1132,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_hover_vertical_offset',
 			[
-				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'label' => __('Vertical', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1154,7 +1154,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'title_hover_rotate',
 			[
-				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1176,7 +1176,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'title_transition_delay',
 			[
-				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1202,7 +1202,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_style_text',
 			[
-				'label'     => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'content!' => '',
@@ -1215,14 +1215,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_text_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'text_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text' => 'color: {{VALUE}};',
@@ -1233,7 +1233,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text' => 'background: {{VALUE}};',
@@ -1244,7 +1244,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'text_border_radius',
 			[
-				'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label' => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1256,7 +1256,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_padding',
 			[
-				'label' => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label' => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1268,7 +1268,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_spacing',
 			[
-				'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
+				'label' => esc_html__('Spacing', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text' => 'margin-top: {{SIZE}}px;',
@@ -1280,7 +1280,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'text_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text',
 			]
 		);
@@ -1288,7 +1288,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_opacity',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1306,10 +1306,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -1319,7 +1319,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'text_horizontal_offset',
 			[
-				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'label' => __('Horizontal', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1341,7 +1341,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'text_vertical_offset',
 			[
-				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'label' => __('Vertical', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1363,7 +1363,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'text_rotate',
 			[
-				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1389,14 +1389,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_text_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'text_color_hover',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-text' => 'color: {{VALUE}};',
@@ -1407,7 +1407,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_bg_color_hover',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-text' => 'background: {{VALUE}};',
@@ -1418,7 +1418,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_hover_opacity',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1436,10 +1436,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_hover_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -1449,7 +1449,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'text_hover_horizontal_offset',
 			[
-				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'label' => __('Horizontal', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1471,7 +1471,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'text_hover_vertical_offset',
 			[
-				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'label' => __('Vertical', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1493,7 +1493,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'text_hover_rotate',
 			[
-				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1515,7 +1515,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_transition_delay',
 			[
-				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1541,7 +1541,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[
-				'label'     => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'link_type' => 'button',
@@ -1554,14 +1554,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box a.bdt-trailer-box-button' => 'color: {{VALUE}};',
@@ -1573,7 +1573,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} a.bdt-trailer-box-button' => 'background-color: {{VALUE}};',
@@ -1585,7 +1585,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} a.bdt-trailer-box-button',
@@ -1595,7 +1595,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1607,7 +1607,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1619,7 +1619,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_spacing',
 			[
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1640,7 +1640,7 @@ class Trailer_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} a.bdt-trailer-box-button',
 			]
 		);
@@ -1648,7 +1648,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_opacity',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1666,10 +1666,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -1679,7 +1679,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_horizontal_offset',
 			[
-				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'label' => __('Horizontal', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1701,7 +1701,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_vertical_offset',
 			[
-				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'label' => __('Vertical', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1723,7 +1723,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_rotate',
 			[
-				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1749,14 +1749,14 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'hover_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-trailer-box:hover a.bdt-trailer-box-button' => 'color: {{VALUE}};',
@@ -1768,7 +1768,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-trailer-box:hover a.bdt-trailer-box-button' => 'background-color: {{VALUE}};',
@@ -1779,7 +1779,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'border_border!' => '',
@@ -1793,7 +1793,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_hover_animation',
 			[
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -1801,7 +1801,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_hover_opacity',
 			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label' => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1819,10 +1819,10 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_hover_offset_toggle',
 			[
-				'label' => __('Offset', 'bdthemes-element-pack'),
+				'label' => __('Offset', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __('None', 'bdthemes-element-pack'),
-				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'label_off' => __('None', 'bdthemes-element-pack-lite'),
+				'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -1832,7 +1832,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_hover_horizontal_offset',
 			[
-				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'label' => __('Horizontal', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1854,7 +1854,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_hover_vertical_offset',
 			[
-				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'label' => __('Vertical', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1876,7 +1876,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_hover_rotate',
 			[
-				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1898,7 +1898,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'button_transition_delay',
 			[
-				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1927,7 +1927,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_advanced_background_overlay',
 			[
-				'label'     => esc_html__( 'Background Overlay', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Overlay', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_ADVANCED,
 				'condition' => [
 					'_background_background' => [ 'classic', 'gradient' ],
@@ -1939,7 +1939,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_background_overlay_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -1954,7 +1954,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'background_overlay_opacity',
 			[
-				'label'   => esc_html__( 'Opacity (%)', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Opacity (%)', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => .5,
@@ -1978,7 +1978,7 @@ class Trailer_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_background_overlay_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -1993,7 +1993,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'background_overlay_hover_opacity',
 			[
-				'label'   => esc_html__( 'Opacity (%)', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Opacity (%)', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => .5,

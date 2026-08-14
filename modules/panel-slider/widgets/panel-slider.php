@@ -32,7 +32,7 @@ class Panel_Slider extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Panel Slider', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Panel Slider', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -78,7 +78,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_content_sliders',
 			[ 
-				'label' => esc_html__( 'Slider Item', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Slider Item', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -87,10 +87,10 @@ class Panel_Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_title',
 			[ 
-				'label'       => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'Slide Title', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Slide Title', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -98,10 +98,10 @@ class Panel_Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_image',
 			[ 
-				'label'       => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::MEDIA,
 				'dynamic'     => [ 'active' => true ],
-				'description' => __( 'Use same size ratio image', 'bdthemes-element-pack' ),
+				'description' => __( 'Use same size ratio image', 'bdthemes-element-pack-lite' ),
 				'default'	   => [ 
 					'url' => BDTEP_ASSETS_URL . '/images/panel-slider.svg',
 				],
@@ -111,10 +111,10 @@ class Panel_Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_content',
 			[ 
-				'label'      => esc_html__( 'Content', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::WYSIWYG,
 				'dynamic'    => [ 'active' => true ],
-				'default'    => esc_html__( 'Slide Content', 'bdthemes-element-pack' ),
+				'default'    => esc_html__( 'Slide Content', 'bdthemes-element-pack-lite' ),
 				'show_label' => false,
 			]
 		);
@@ -122,7 +122,7 @@ class Panel_Slider extends Module_Base {
 		$repeater->add_control(
 			'tab_link',
 			[ 
-				'label'       => esc_html__( 'Link', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
 				'placeholder' => 'http://your-link.com',
@@ -135,25 +135,25 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'tabs',
 			[ 
-				'label'       => esc_html__( 'Items', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Items', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'tab_title'   => esc_html__( 'Slide #1', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'tab_title'   => esc_html__( 'Slide #1', 'bdthemes-element-pack-lite' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
-						'tab_title'   => esc_html__( 'Slide #2', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'tab_title'   => esc_html__( 'Slide #2', 'bdthemes-element-pack-lite' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
-						'tab_title'   => esc_html__( 'Slide #3', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'tab_title'   => esc_html__( 'Slide #3', 'bdthemes-element-pack-lite' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
-						'tab_title'   => esc_html__( 'Slide #4', 'bdthemes-element-pack' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'tab_title'   => esc_html__( 'Slide #4', 'bdthemes-element-pack-lite' ),
+						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 					],
 				],
 				'title_field' => '{{{ tab_title }}}',
@@ -165,20 +165,20 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
-				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'_skin',
 			[ 
-				'label'   => esc_html__( 'Style', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Style', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [ 
-					''               => esc_html__( 'On Hover', 'bdthemes-element-pack' ),
-					'bdt-middle'     => esc_html__( 'On Active', 'bdthemes-element-pack' ),
-					'always-visible' => esc_html__( 'Always Visible', 'bdthemes-element-pack' ),
+					''               => esc_html__( 'On Hover', 'bdthemes-element-pack-lite' ),
+					'bdt-middle'     => esc_html__( 'On Active', 'bdthemes-element-pack-lite' ),
+					'always-visible' => esc_html__( 'Always Visible', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -186,7 +186,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[ 
-				'label'              => esc_html__( 'Columns', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Columns', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'default'            => '3',
 				'tablet_default'     => '2',
@@ -209,7 +209,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'skin_columns',
 			[ 
-				'label'          => esc_html__( 'Columns', 'bdthemes-element-pack' ),
+				'label'          => esc_html__( 'Columns', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SELECT,
 				'default'        => '4',
 				'tablet_default' => '2',
@@ -235,7 +235,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'column_space',
 			[ 
-				'label' => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Column Gap', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 			]
 		);
@@ -243,7 +243,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'slider_height',
 			[ 
-				'label'      => esc_html__( 'Slider Height', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Slider Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'vh' ],
 				'range'      => [ 
@@ -271,7 +271,7 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Image_Size::get_type(),
 			[ 
 				'name'      => 'thumbnail_size',
-				'label'     => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Image Size', 'bdthemes-element-pack-lite' ),
 				'exclude'   => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'   => 'full',
 				'separator' => 'before'
@@ -281,7 +281,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'show_title',
 			[ 
-				'label'   => esc_html__( 'Show Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -290,7 +290,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'title_tags',
 			[ 
-				'label'     => __( 'Title HTML Tag', 'bdthemes-element-pack' ),
+				'label'     => __( 'Title HTML Tag', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'h3',
 				'options'   => element_pack_title_tags(),
@@ -303,10 +303,10 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'button',
 			[ 
-				'label'       => esc_html__( 'Show Read More', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Show Read More', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
-				'description' => esc_html__( 'It will work when link field no null.', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'It will work when link field no null.', 'bdthemes-element-pack-lite' ),
 				// 'condition'   => [ 
 				// 	'_skin!' => 'bdt-middle',
 				// ],
@@ -316,23 +316,23 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'align',
 			[ 
-				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'    => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [ 
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -345,19 +345,19 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'vertical_align_content',
 			[ 
-				'label'     => esc_html__( 'Align Content', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Align Content', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'flex-start'    => [ 
-						'title' => esc_html__( 'Top', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Top', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Middle', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Middle', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'flex-end' => [ 
-						'title' => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Bottom', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -370,7 +370,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'slide_skew',
 			[ 
-				'label'     => esc_html__( 'Slide Skew', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Slide Skew', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -394,7 +394,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'mouse_interactivity',
 			[ 
-				'label'        => __( 'Item Mouse Interaction', 'bdthemes-element-pack' ),
+				'label'        => __( 'Item Mouse Interaction', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'separator'    => 'before',
 				'prefix_class' => 'ep-mouse-interaction-',
@@ -405,10 +405,10 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'global_link',
 			[ 
-				'label'        => __( 'Item Wrapper Link', 'bdthemes-element-pack' ),
+				'label'        => __( 'Item Wrapper Link', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-global-link-',
-				'description'  => __( 'Be aware! When Item Wrapper Link activated then read more link will not work', 'bdthemes-element-pack' ),
+				'description'  => __( 'Be aware! When Item Wrapper Link activated then read more link will not work', 'bdthemes-element-pack-lite' ),
 				'separator'    => 'before'
 			]
 		);
@@ -418,7 +418,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_content_button',
 			[ 
-				'label'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Read More', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'button' => 'yes',
 					// '_skin!' => 'bdt-middle',
@@ -429,18 +429,18 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'button_text',
 			[ 
-				'label'       => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => ['active' => true],
-				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Read More', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'panel_slider_icon',
 			[ 
-				'label'            => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label'            => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'label_block'      => false,
@@ -451,12 +451,12 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'icon_align',
 			[ 
-				'label'     => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'right',
 				'options'   => [ 
-					'left'  => esc_html__( 'Left', 'bdthemes-element-pack' ),
-					'right' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+					'left'  => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
+					'right' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'panel_slider_icon[value]!' => '',
@@ -467,7 +467,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'icon_indent',
 			[ 
-				'label'     => esc_html__( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 8,
@@ -492,7 +492,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_content_navigation',
 			[ 
-				'label' => __( 'Navigation', 'bdthemes-element-pack' ),
+				'label' => __( 'Navigation', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -508,7 +508,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_style_slider',
 			[ 
-				'label' => esc_html__( 'Slider', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Slider', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -516,7 +516,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'slider_overlay_background_color',
 			[ 
-				'label'     => esc_html__( 'Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Overlay Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-item:before' => 'background-color: {{VALUE}}; transition: all .3s ease;',
@@ -527,7 +527,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'slider_active_overlay_color',
 			[ 
-				'label'     => esc_html__( 'Active Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Active Overlay Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-item.swiper-slide-active:before' => 'background-color: {{VALUE}};',
@@ -538,7 +538,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'slider_background_color',
 			[ 
-				'label'     => esc_html__( 'Overlay Hover Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Overlay Hover Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-overlay-gradient' => 'background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, {{VALUE}} 100%);',
@@ -549,7 +549,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'slider_opacity',
 			[ 
-				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				// 'default'   => [ 
 				// 	'size' => 0.4,
@@ -571,7 +571,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'desc_padding',
 			[ 
-				'label'     => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Content Padding', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::DIMENSIONS,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-desc' => 'padding: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
@@ -582,7 +582,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'slider_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -594,7 +594,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'shadow_mode',
 			[ 
-				'label'        => esc_html__( 'Shadow Mode', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Shadow Mode', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-ep-shadow-mode-',
 				'render_type'  => 'template',
@@ -604,7 +604,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'shadow_color',
 			[ 
-				'label'     => esc_html__( 'Shadow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Shadow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'shadow_mode' => 'yes',
@@ -619,8 +619,8 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
             'item_shadow_padding',
             [
-                'label'       => esc_html__('Match Padding', 'bdthemes-element-pack'),
-                'description' => esc_html__('You have to add padding for matching overlaping normal/hover box shadow when you used Box Shadow option.', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Match Padding', 'bdthemes-element-pack-lite'),
+                'description' => esc_html__('You have to add padding for matching overlaping normal/hover box shadow when you used Box Shadow option.', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::SLIDER,
                 'range'       => [
                     'px' => [
@@ -643,7 +643,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_style_title',
 			[ 
-				'label'     => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_title' => 'yes',
@@ -654,7 +654,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-title' => 'color: {{VALUE}};',
@@ -666,7 +666,7 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-panel-slide-title',
 			]
 		);
@@ -675,7 +675,7 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[ 
 				'name'     => 'title_text_stroke',
-				'label'    => esc_html__( 'Text Stroke', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Text Stroke', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-panel-slide-title',
 			]
 		);
@@ -684,7 +684,7 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[ 
 				'name'     => 'title_shadow',
-				'label'    => esc_html__( 'Text Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Text Shadow', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'selector' => '{{WRAPPER}} .bdt-panel-slide-title',
 			]
 		);
@@ -694,7 +694,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_style_text',
 			[ 
-				'label' => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -702,7 +702,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-text' => 'color: {{VALUE}};',
@@ -714,7 +714,7 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'text_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-panel-slide-text',
 			]
 		);
@@ -722,7 +722,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'text_top_spacing',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-text' => 'margin-top: {{SIZE}}{{UNIT}};',
@@ -735,7 +735,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[ 
-				'label'      => esc_html__( 'Read More', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Read More', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'condition'  => [ 
 					'button' => 'yes',
@@ -748,14 +748,14 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-link'     => 'color: {{VALUE}};',
@@ -767,7 +767,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-link' => 'background-color: {{VALUE}};',
@@ -779,7 +779,7 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-panel-slide-link',
@@ -789,7 +789,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'btn_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -801,7 +801,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -813,7 +813,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_responsive_control(
 			'btn_spacing',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-link' => 'margin-top: {{SIZE}}{{UNIT}};',
@@ -833,7 +833,7 @@ class Panel_Slider extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-panel-slide-link',
 			]
 		);
@@ -843,14 +843,14 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-link:hover'     => 'color: {{VALUE}};',
@@ -862,7 +862,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-panel-slide-link:hover' => 'background-color: {{VALUE}};',
@@ -873,7 +873,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'border_border!' => '',
@@ -887,7 +887,7 @@ class Panel_Slider extends Module_Base {
 		$this->add_control(
 			'button_hover_animation',
 			[ 
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -902,7 +902,7 @@ class Panel_Slider extends Module_Base {
 		$this->start_controls_section(
 			'section_style_navigation',
 			[ 
-				'label'      => __( 'Navigation', 'bdthemes-element-pack' ),
+				'label'      => __( 'Navigation', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'conditions' => [ 
 					'relation' => 'or',

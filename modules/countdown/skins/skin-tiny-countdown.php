@@ -25,7 +25,7 @@ class Skin_Tiny_Countdown extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Tiny Countdown', 'bdthemes-element-pack' );
+		return __( 'Tiny Countdown', 'bdthemes-element-pack-lite' );
     }
     
     public function render() {

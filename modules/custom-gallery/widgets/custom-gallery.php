@@ -26,7 +26,7 @@ class Custom_Gallery extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Custom Gallery', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Custom Gallery', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -77,7 +77,7 @@ class Custom_Gallery extends Module_Base {
 		$this->start_controls_section(
 			'section_custom_gallery_content',
 			[ 
-				'label' => esc_html__( 'Custom Gallery', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Custom Gallery', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -86,10 +86,10 @@ class Custom_Gallery extends Module_Base {
 		$repeater->add_control(
 			'image_title',
 			[ 
-				'label'   => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => esc_html__( 'Slide Title', 'bdthemes-element-pack' ),
+				'default' => esc_html__( 'Slide Title', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -97,7 +97,7 @@ class Custom_Gallery extends Module_Base {
 			'gallery_image',
 			[ 
 				'name'    => 'gallery_image',
-				'label'   => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [ 'active' => true ],
 				'default' => [ 
@@ -109,27 +109,27 @@ class Custom_Gallery extends Module_Base {
 		$repeater->add_control(
 			'image_text',
 			[ 
-				'label'   => esc_html__( 'Content', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXTAREA,
 				'dynamic' => [ 'active' => true ],
-				'default' => esc_html__( 'Slide Content', 'bdthemes-element-pack' ),
+				'default' => esc_html__( 'Slide Content', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$repeater->add_control(
 			'image_link_type',
 			[ 
-				'label'       => esc_html__( 'Lightbox/Link', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Lightbox/Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '',
 				'label_block' => true,
 				'options'     => [ 
-					''           => esc_html__( 'Selected Image', 'bdthemes-element-pack' ),
-					'website'    => esc_html__( 'Website', 'bdthemes-element-pack' ),
-					'video'      => esc_html__( 'Video', 'bdthemes-element-pack' ),
-					'youtube'    => esc_html__( 'YouTube', 'bdthemes-element-pack' ),
-					'vimeo'      => esc_html__( 'Vimeo', 'bdthemes-element-pack' ),
-					'google-map' => esc_html__( 'Google Map', 'bdthemes-element-pack' ),
+					''           => esc_html__( 'Selected Image', 'bdthemes-element-pack-lite' ),
+					'website'    => esc_html__( 'Website', 'bdthemes-element-pack-lite' ),
+					'video'      => esc_html__( 'Video', 'bdthemes-element-pack-lite' ),
+					'youtube'    => esc_html__( 'YouTube', 'bdthemes-element-pack-lite' ),
+					'vimeo'      => esc_html__( 'Vimeo', 'bdthemes-element-pack-lite' ),
+					'google-map' => esc_html__( 'Google Map', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -137,7 +137,7 @@ class Custom_Gallery extends Module_Base {
 		$repeater->add_control(
 			'image_link_video',
 			[ 
-				'label'         => __( 'Video Source', 'bdthemes-element-pack' ),
+				'label'         => __( 'Video Source', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -155,7 +155,7 @@ class Custom_Gallery extends Module_Base {
 		$repeater->add_control(
 			'image_link_youtube',
 			[ 
-				'label'         => __( 'YouTube Source', 'bdthemes-element-pack' ),
+				'label'         => __( 'YouTube Source', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -173,7 +173,7 @@ class Custom_Gallery extends Module_Base {
 		$repeater->add_control(
 			'image_link_vimeo',
 			[ 
-				'label'         => __( 'Vimeo Source', 'bdthemes-element-pack' ),
+				'label'         => __( 'Vimeo Source', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -191,7 +191,7 @@ class Custom_Gallery extends Module_Base {
 		$repeater->add_control(
 			'image_link_google_map',
 			[ 
-				'label'         => __( 'Goggle Map Embed URL', 'bdthemes-element-pack' ),
+				'label'         => __( 'Goggle Map Embed URL', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [ 
@@ -210,7 +210,7 @@ class Custom_Gallery extends Module_Base {
 			'image_link_website',
 			[ 
 				'name'          => 'image_link_website',
-				'label'         => esc_html__( 'Custom Link', 'bdthemes-element-pack' ),
+				'label'         => esc_html__( 'Custom Link', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'condition'     => [ 
@@ -226,38 +226,38 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'gallery',
 			[ 
-				'label'       => esc_html__( 'Gallery Items', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Gallery Items', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'image_title'   => esc_html__( 'Image #1', 'bdthemes-element-pack' ),
-						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'image_title'   => esc_html__( 'Image #1', 'bdthemes-element-pack-lite' ),
+						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 						'gallery_image' => [ 'url' => BDTEP_ASSETS_URL . 'images/gallery/item-1.svg' ],
 					],
 					[ 
-						'image_title'   => esc_html__( 'Image #2', 'bdthemes-element-pack' ),
-						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'image_title'   => esc_html__( 'Image #2', 'bdthemes-element-pack-lite' ),
+						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 						'gallery_image' => [ 'url' => BDTEP_ASSETS_URL . 'images/gallery/item-2.svg' ],
 					],
 					[ 
-						'image_title'   => esc_html__( 'Image #3', 'bdthemes-element-pack' ),
-						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'image_title'   => esc_html__( 'Image #3', 'bdthemes-element-pack-lite' ),
+						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 						'gallery_image' => [ 'url' => BDTEP_ASSETS_URL . 'images/gallery/item-3.svg' ],
 					],
 					[ 
-						'image_title'   => esc_html__( 'Image #4', 'bdthemes-element-pack' ),
-						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'image_title'   => esc_html__( 'Image #4', 'bdthemes-element-pack-lite' ),
+						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 						'gallery_image' => [ 'url' => BDTEP_ASSETS_URL . 'images/gallery/item-4.svg' ],
 					],
 					[ 
-						'image_title'   => esc_html__( 'Image #5', 'bdthemes-element-pack' ),
-						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'image_title'   => esc_html__( 'Image #5', 'bdthemes-element-pack-lite' ),
+						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 						'gallery_image' => [ 'url' => BDTEP_ASSETS_URL . 'images/gallery/item-5.svg' ],
 					],
 					[ 
-						'image_title'   => esc_html__( 'Image #6', 'bdthemes-element-pack' ),
-						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack' ),
+						'image_title'   => esc_html__( 'Image #6', 'bdthemes-element-pack-lite' ),
+						'image_text'    => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 						'gallery_image' => [ 'url' => BDTEP_ASSETS_URL . 'images/gallery/item-6.svg' ],
 					],
 				],
@@ -270,7 +270,7 @@ class Custom_Gallery extends Module_Base {
 		$this->start_controls_section(
 			'section_custom_gallery_layout',
 			[ 
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -278,7 +278,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[ 
-				'label'              => esc_html__( 'Columns', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Columns', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'default'            => '3',
 				'tablet_default'     => '2',
@@ -299,7 +299,7 @@ class Custom_Gallery extends Module_Base {
 			Group_Control_Image_Size::get_type(),
 			[ 
 				'name'         => 'thumbnail_size',
-				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack-lite' ),
 				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'medium',
 				'prefix_class' => 'bdt-custom-gallery--thumbnail-size-',
@@ -309,7 +309,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'image_mask_popover',
 			[ 
-				'label'        => esc_html__( 'Image Mask', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Image Mask', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'render_type'  => 'template',
 				'return_value' => 'yes',
@@ -322,7 +322,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'masonry',
 			[ 
-				'label' => esc_html__( 'Masonry', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Masonry', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -330,7 +330,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'item_ratio',
 			[ 
-				'label'     => esc_html__( 'Item Height', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Item Height', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 265,
@@ -356,7 +356,7 @@ class Custom_Gallery extends Module_Base {
 		$this->start_controls_section(
 			'section_layout_additional',
 			[ 
-				'label' => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -364,7 +364,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_animation',
 			[ 
-				'label'      => esc_html__( 'Overlay Animation', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Overlay Animation', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SELECT,
 				'default'    => 'fade',
 				'options'    => element_pack_transition_options(),
@@ -391,7 +391,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'show_title',
 			[ 
-				'label'   => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -400,7 +400,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'title_tag',
 			[ 
-				'label'     => esc_html__( 'Title HTML Tag', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Title HTML Tag', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => element_pack_title_tags(),
 				'default'   => 'h3',
@@ -413,7 +413,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'show_text',
 			[ 
-				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -422,7 +422,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'show_lightbox',
 			[ 
-				'label'   => esc_html__( 'Lightbox', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Lightbox', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -431,7 +431,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'direct_link',
 			[ 
-				'label'     => esc_html__( 'Lightbox Link as Image Link', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Lightbox Link as Image Link', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'show_lightbox' => '',
@@ -442,7 +442,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'external_link',
 			[ 
-				'label'     => esc_html__( 'Show in new Tab', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Show in new Tab', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'show_lightbox' => '',
@@ -454,12 +454,12 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'link_type',
 			[ 
-				'label'     => esc_html__( 'Link Type', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Link Type', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'icon',
 				'options'   => [ 
-					'icon' => esc_html__( 'Icon', 'bdthemes-element-pack' ),
-					'text' => esc_html__( 'Text', 'bdthemes-element-pack' ),
+					'icon' => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
+					'text' => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'show_lightbox' => 'yes',
@@ -470,7 +470,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'icon',
 			[ 
-				'label'      => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::CHOOSE,
 				'default'    => 'plus',
 				'options'    => [ 
@@ -511,10 +511,10 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'link_text',
 			[
-				'label'       => esc_html__('Link Text', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'       => esc_html__('Link Text', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => ['active' => true],
-				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack'),
+				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'show_lightbox' => 'yes',
 					'link_type'		=> 'text',
@@ -526,7 +526,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'tilt_show',
 			[ 
-				'label'       => esc_html__( 'Tilt Effect', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Tilt Effect', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'render_type' => 'template',
 			]
@@ -535,7 +535,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'tilt_scale',
 			[ 
-				'label'     => esc_html__( 'Tilt Scale', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Tilt Scale', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -553,13 +553,13 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'lightbox_animation',
 			[ 
-				'label'     => esc_html__( 'Lightbox Animation', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Lightbox Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'slide',
 				'options'   => [ 
-					'slide' => esc_html__( 'Slide', 'bdthemes-element-pack' ),
-					'fade'  => esc_html__( 'Fade', 'bdthemes-element-pack' ),
-					'scale' => esc_html__( 'Scale', 'bdthemes-element-pack' ),
+					'slide' => esc_html__( 'Slide', 'bdthemes-element-pack-lite' ),
+					'fade'  => esc_html__( 'Fade', 'bdthemes-element-pack-lite' ),
+					'scale' => esc_html__( 'Scale', 'bdthemes-element-pack-lite' ),
 				],
 				'separator' => 'before',
 				'condition' => [ 
@@ -571,7 +571,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'lightbox_autoplay',
 			[ 
-				'label'     => __( 'Lightbox Autoplay', 'bdthemes-element-pack' ),
+				'label'     => __( 'Lightbox Autoplay', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'show_lightbox' => 'yes',
@@ -582,7 +582,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'lightbox_pause',
 			[ 
-				'label'     => __( 'Lightbox Pause on Hover', 'bdthemes-element-pack' ),
+				'label'     => __( 'Lightbox Pause on Hover', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'show_lightbox'     => 'yes',
@@ -595,7 +595,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'grid_animation_type',
 			[ 
-				'label'     => esc_html__( 'Grid Entrance Animation', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Grid Entrance Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => '',
 				'options'   => element_pack_transition_options(),
@@ -606,7 +606,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'grid_anim_delay',
 			[ 
-				'label'      => esc_html__( 'Animation delay', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Animation delay', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'ms', '' ],
 				'range'      => [ 
@@ -634,7 +634,7 @@ class Custom_Gallery extends Module_Base {
 		$this->start_controls_section(
 			'section_design_layout',
 			[ 
-				'label' => esc_html__( 'Items', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Items', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -642,7 +642,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'item_gap',
 			[ 
-				'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 10,
@@ -664,7 +664,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'row_gap',
 			[ 
-				'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 10,
@@ -687,7 +687,7 @@ class Custom_Gallery extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[ 
 				'name'     => 'item_box_shadow',
-				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Box Shadow', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-custom-gallery .bdt-custom-gallery-inner',
 			]
 		);
@@ -702,7 +702,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_heading',
 			[ 
-				'label' => esc_html__( 'Overlay', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Overlay', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -710,10 +710,10 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_blur_effect',
 			[ 
-				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Glassmorphism', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				// translators: %1s: Opening anchor tag with link to MDN backdrop-filter documentation, %2s: Closing anchor tag
-				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
+				'description' => sprintf( __( 'This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack-lite' ), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>' ),
 				'separator'   => 'before',
 			]
 		);
@@ -721,7 +721,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_blur_level',
 			[ 
-				'label'     => __( 'Blur Level', 'bdthemes-element-pack' ),
+				'label'     => __( 'Blur Level', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -745,7 +745,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_background',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item .bdt-overlay' => 'background-color: {{VALUE}};',
@@ -756,7 +756,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'overlay_gap',
 			[ 
-				'label'     => esc_html__( 'Gap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Gap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -773,7 +773,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'item_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -788,7 +788,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'item_skin_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -805,7 +805,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'content_padding',
 			[ 
-				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -820,19 +820,19 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_content_alignment',
 			[ 
-				'label'        => __( 'Content Alignment', 'bdthemes-element-pack' ),
+				'label'        => __( 'Content Alignment', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'options'      => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -847,19 +847,19 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'overlay_content_position',
 			[ 
-				'label'                => __( 'Content Vertical Position', 'bdthemes-element-pack' ),
+				'label'                => __( 'Content Vertical Position', 'bdthemes-element-pack-lite' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'options'              => [ 
 					'top'    => [ 
-						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'title' => __( 'Top', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'middle' => [ 
-						'title' => __( 'Middle', 'bdthemes-element-pack' ),
+						'title' => __( 'Middle', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'bottom' => [ 
-						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -888,7 +888,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'title_heading',
 			[ 
-				'label'     => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [ 
 					'show_title' => 'yes',
@@ -899,7 +899,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item .bdt-gallery-item-title' => 'color: {{VALUE}};',
@@ -936,7 +936,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'text_heading',
 			[ 
-				'label'     => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [ 
 					'show_text' => 'yes',
@@ -947,7 +947,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item .bdt-gallery-item-text' => 'color: {{VALUE}};',
@@ -974,7 +974,7 @@ class Custom_Gallery extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[ 
-				'label'     => esc_html__( 'Link Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Link Style', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_lightbox' => 'yes',
@@ -987,14 +987,14 @@ class Custom_Gallery extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item-link i, {{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item-link span' => 'color: {{VALUE}};',
@@ -1005,7 +1005,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item-link' => 'background-color: {{VALUE}};',
@@ -1017,7 +1017,7 @@ class Custom_Gallery extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item-link',
@@ -1027,7 +1027,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1039,7 +1039,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1051,7 +1051,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_responsive_control(
 			'button_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1084,14 +1084,14 @@ class Custom_Gallery extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item-link:hover span, {{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item-link:hover i' => 'color: {{VALUE}};',
@@ -1102,7 +1102,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-custom-gallery .bdt-gallery-item-link:hover' => 'background-color: {{VALUE}};',
@@ -1113,7 +1113,7 @@ class Custom_Gallery extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'border_border!' => '',

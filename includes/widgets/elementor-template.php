@@ -15,7 +15,7 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'elementortemplate_widget',
-			esc_html__( 'Elementor Template', 'bdthemes-element-pack' )
+			esc_html__( 'Elementor Template', 'bdthemes-element-pack-lite' )
 		);
 	}
 
@@ -85,14 +85,14 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 		$template_list = Element_Pack_Loader::elementor()->templates_manager->get_source( 'local' )->get_items();
 
 		if ( empty( $template_list ) ) {
-			echo esc_html__( 'Template Not Found!', 'bdthemes-element-pack' );
+			echo esc_html__( 'Template Not Found!', 'bdthemes-element-pack-lite' );
 			return;
 		}
 
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<?php esc_attr_e( 'Title', 'bdthemes-element-pack' ); ?>
+				<?php esc_attr_e( 'Title', 'bdthemes-element-pack-lite' ); ?>
 				:
 			</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
@@ -102,13 +102,13 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'template_id' ) ); ?>">
-				<?php esc_attr_e( 'Select Template', 'bdthemes-element-pack' ); ?>
+				<?php esc_attr_e( 'Select Template', 'bdthemes-element-pack-lite' ); ?>
 				:
 			</label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'template_id' ) ); ?>"
 				name="<?php echo esc_attr( $this->get_field_name( 'template_id' ) ); ?>">
 				<option value="">—
-					<?php esc_html_e( 'Select', 'bdthemes-element-pack' ); ?> —
+					<?php esc_html_e( 'Select', 'bdthemes-element-pack-lite' ); ?> —
 				</option>
 				<?php
 				foreach ( $template_list as $template ) :

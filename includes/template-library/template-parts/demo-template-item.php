@@ -31,7 +31,7 @@ if (!$demo_thumb) {
      data-pro="<?php echo esc_attr($is_pro); ?>">
     <div class="bdt-hidden plugin-content-item">
         <?php
-            $install_txt = esc_html__('This template need this plugin install and active', 'bdthemes-element-pack');
+            $install_txt = esc_html__('This template need this plugin install and active', 'bdthemes-element-pack-lite');
         ?>
         <li title="<?php echo esc_html($install_txt); ?>" data-slug="bdthemes-element-pack" ><span class="bdt-plugin installed"></span> <span class="bdt-plugin-name">Element Pack</span></li>
         <?php foreach($plugins as $key=>$val): ?>

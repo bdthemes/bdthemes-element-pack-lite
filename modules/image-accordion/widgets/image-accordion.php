@@ -26,7 +26,7 @@ class Image_Accordion extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Image Accordion', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Image Accordion', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -71,19 +71,19 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_accordion_item',
 			[
-				'label' => __( 'Image Accordion', 'bdthemes-element-pack' ),
+				'label' => __( 'Image Accordion', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'skin_type',
 			[
-				'label'	   => __( 'Style', 'bdthemes-element-pack' ),
+				'label'	   => __( 'Style', 'bdthemes-element-pack-lite' ),
 				'type' 	   => Controls_Manager::SELECT,
 				'options'  => [
-					'default' 	=> __( 'Horizontal', 'bdthemes-element-pack' ),
-					'vertical' 	=> __( 'Vertical', 'bdthemes-element-pack' ),
-					'sliding-box' 	=> __( 'Sliding Box', 'bdthemes-element-pack' ),
+					'default' 	=> __( 'Horizontal', 'bdthemes-element-pack-lite' ),
+					'vertical' 	=> __( 'Vertical', 'bdthemes-element-pack-lite' ),
+					'sliding-box' 	=> __( 'Sliding Box', 'bdthemes-element-pack-lite' ),
 				],
 				'default'  => 'default',
 				'tablet_default'  => 'default',
@@ -116,17 +116,17 @@ class Image_Accordion extends Module_Base {
 		$repeater->start_controls_tab(
 			'tab_item_content',
 			[
-				'label' => __( 'Content', 'bdthemes-element-pack' ),
+				'label' => __( 'Content', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$repeater->add_control(
 			'image_accordion_title', 
 			[
-				'label'       => __( 'Title', 'bdthemes-element-pack' ),
+				'label'       => __( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => __( 'Tab Title' , 'bdthemes-element-pack' ),
+				'default'     => __( 'Tab Title' , 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 			]
 		);
@@ -134,7 +134,7 @@ class Image_Accordion extends Module_Base {
 		$repeater->add_control(
 			'image_accordion_sub_title', 
 			[
-				'label'       => __( 'Sub Title', 'bdthemes-element-pack' ),
+				'label'       => __( 'Sub Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'label_block' => true,
@@ -144,9 +144,9 @@ class Image_Accordion extends Module_Base {
 		$repeater->add_control(
 			'image_accordion_button', 
 			[
-				'label'       => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Read More' , 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Read More' , 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -155,7 +155,7 @@ class Image_Accordion extends Module_Base {
 		$repeater->add_control(
 			'button_link', 
 			[
-				'label'         => esc_html__( 'Button Link', 'bdthemes-element-pack' ),
+				'label'         => esc_html__( 'Button Link', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'default'       => ['url' => '#'],
 				'show_external' => false,
@@ -169,7 +169,7 @@ class Image_Accordion extends Module_Base {
 		$repeater->add_control(
 			'slide_image', 
 			[
-				'label'   => esc_html__( 'Background Image', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Background Image', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [ 'active' => true ],
 				'default' => [
@@ -183,14 +183,14 @@ class Image_Accordion extends Module_Base {
 		$repeater->start_controls_tab(
 			'tab_item_content_optional',
 			[
-				'label' => __( 'Optional', 'bdthemes-element-pack' ),
+				'label' => __( 'Optional', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$repeater->add_control(
 			'title_link', 
 			[
-				'label'         => esc_html__( 'Title Link', 'bdthemes-element-pack' ),
+				'label'         => esc_html__( 'Title Link', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'default'       => ['url' => ''],
 				'show_external' => false,
@@ -206,7 +206,7 @@ class Image_Accordion extends Module_Base {
 			[
 				'type'       => Controls_Manager::WYSIWYG,
 				'dynamic'    => [ 'active' => true ],
-				'default'    => __( 'Box Content', 'bdthemes-element-pack' ),
+				'default'    => __( 'Box Content', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -217,32 +217,32 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'image_accordion_items',
 			[
-				'label'   => esc_html__( 'Items', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Items', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack' ),
-						'image_accordion_title'   	  => __( 'Image Accordion One', 'bdthemes-element-pack' ),
-						'image_accordion_text' 	  => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack' ),
+						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack-lite' ),
+						'image_accordion_title'   	  => __( 'Image Accordion One', 'bdthemes-element-pack-lite' ),
+						'image_accordion_text' 	  => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack-lite' ),
 						'slide_image' => ['url' => BDTEP_ASSETS_URL . 'images/gallery/item-1.svg']
 					],
 					[
-						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack' ),
-						'image_accordion_title'   => __( 'Image Accordion Two', 'bdthemes-element-pack' ),
-						'image_accordion_text' => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack' ),
+						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack-lite' ),
+						'image_accordion_title'   => __( 'Image Accordion Two', 'bdthemes-element-pack-lite' ),
+						'image_accordion_text' => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack-lite' ),
 						'slide_image' => ['url' => BDTEP_ASSETS_URL . 'images/gallery/item-2.svg']
 					],
 					[
-						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack' ),
-						'image_accordion_title'   => __( 'Image Accordion Three', 'bdthemes-element-pack' ),
-						'image_accordion_text' => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack' ),
+						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack-lite' ),
+						'image_accordion_title'   => __( 'Image Accordion Three', 'bdthemes-element-pack-lite' ),
+						'image_accordion_text' => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack-lite' ),
 						'slide_image' => ['url' => BDTEP_ASSETS_URL . 'images/gallery/item-3.svg']
 					],
 					[
-						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack' ),
-						'image_accordion_title'   => __( 'Image Accordion Four', 'bdthemes-element-pack' ),
-						'image_accordion_text' => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack' ),
+						'image_accordion_sub_title'   => __( 'This is a label', 'bdthemes-element-pack-lite' ),
+						'image_accordion_title'   => __( 'Image Accordion Four', 'bdthemes-element-pack-lite' ),
+						'image_accordion_text' => __( 'Lorem ipsum dolor sit amet consect voluptate repell endus kilo gram magni illo ea animi.', 'bdthemes-element-pack-lite' ),
 						'slide_image' => ['url' => BDTEP_ASSETS_URL . 'images/gallery/item-4.svg']
 					],
 				],
@@ -255,7 +255,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_layout_hover_box',
 			[
-				'label' => esc_html__( 'Additional Settings', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Settings', 'bdthemes-element-pack-lite' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -263,7 +263,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'image_accordion_min_height',
 			[
-				'label' => esc_html__('Height', 'bdthemes-element-pack'),
+				'label' => esc_html__('Height', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'size_units' => ['px', 'em', 'vh'],
 				'range' => [
@@ -289,7 +289,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'image_accordion_width',
 			[
-				'label' => esc_html__('Content Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Content Width', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -307,7 +307,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name'         => 'thumbnail_size',
-				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack-lite' ),
 				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'full',
 				'separator' => 'before'
@@ -317,12 +317,12 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
             'image_accordion_event',
             [
-                'label'   => __('Select Event', 'bdthemes-element-pack'),
+                'label'   => __('Select Event', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'mouseover',
                 'options' => [
-                    'click'     => __('Click', 'bdthemes-element-pack'),
-                    'mouseover' => __('Hover', 'bdthemes-element-pack'),
+                    'click'     => __('Click', 'bdthemes-element-pack-lite'),
+                    'mouseover' => __('Hover', 'bdthemes-element-pack-lite'),
                 ],
             ]
 		);
@@ -330,7 +330,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'swiping',
 			[
-				'label'   => esc_html__('Touch Screen Swiping', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Touch Screen Swiping', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				//'separator' => 'before'
 			]
@@ -346,17 +346,17 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'items_content_position',
 			[
-				'label'   => __( 'Content Position', 'bdthemes-element-pack' ),
+				'label'   => __( 'Content Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'toggle' => false,
 				'default' => 'row',
 				'options' => [
 					'row-reverse' => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'row' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -375,23 +375,23 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'items_content_align',
 			[
-				'label'   => __( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'   => __( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-center',
 					],
 					'right' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 					'justify' => [
-						'title' => __( 'Justified', 'bdthemes-element-pack' ),
+						'title' => __( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-stretch',
 					],
 				],
@@ -404,19 +404,19 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'items_content_vertical_align',
 			[
-				'label'   => __( 'Vertical Alignment', 'bdthemes-element-pack' ),
+				'label'   => __( 'Vertical Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
-						'title' => __( 'Top', 'bdthemes-element-pack' ),
+						'title' => __( 'Top', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'flex-end' => [
-						'title' => __( 'Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -429,7 +429,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'active_item',
 			[
-				'label'   => esc_html__( 'Active Item', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Active Item', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -438,8 +438,8 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'active_item_number',
 			[
-				'label'       => __( 'Item Number', 'bdthemes-element-pack' ),
-				'description' => __( 'Type your item number', 'bdthemes-element-pack' ),
+				'label'       => __( 'Item Number', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Type your item number', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::NUMBER,
 				'default'	  => 1,
 				'condition' => [
@@ -451,7 +451,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'active_item_expand',
 			[
-				'label' => esc_html__('Active Item Column Expand', 'bdthemes-element-pack'),
+				'label' => esc_html__('Active Item Column Expand', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -477,7 +477,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'inactive_item_overlay',
 			[
-				'label'   => esc_html__( 'In-active Item Overlay', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'In-active Item Overlay', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-ep-inactive-item-overlay-',
 				'render_type'  => 'template',
@@ -490,7 +490,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'show_title',
 			[
-				'label'   => esc_html__( 'Show Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 				'separator' => 'before'
@@ -500,7 +500,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'title_tags',
 			[
-				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack' ),
+				'label'   => __( 'Title HTML Tag', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h2',
 				'options' => element_pack_title_tags(),
@@ -513,7 +513,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'show_sub_title',
 			[
-				'label'   => esc_html__( 'Show Sub Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Sub Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -522,7 +522,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'show_text',
 			[
-				'label'   => esc_html__( 'Show Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -531,7 +531,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'show_button',
 			[
-				'label'   => esc_html__( 'Show Button', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Button', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -541,7 +541,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'show_lightbox',
 			[
-				'label'   => esc_html__('Show Lightbox', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Show Lightbox', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -557,7 +557,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'hide_on_mobile_title',
 			[
-				'label'   => esc_html__( 'Title Hide on Mobile', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Title Hide on Mobile', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'show_title' => 'yes'
@@ -568,7 +568,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'hide_on_mobile_sub_title',
 			[
-				'label'   => esc_html__( 'Sub Title Hide on Mobile', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Sub Title Hide on Mobile', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'show_sub_title' => 'yes'
@@ -579,7 +579,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'hide_on_mobile_text',
 			[
-				'label'   => esc_html__( 'Text Hide on Mobile', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Text Hide on Mobile', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'show_text' => 'yes'
@@ -590,7 +590,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'hide_on_mobile_button',
 			[
-				'label'   => esc_html__( 'Button Hide on Mobile', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Button Hide on Mobile', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'show_button' => 'yes'
@@ -604,7 +604,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_accordion_lightbox',
 			[
-				'label' => __( 'Lightbox', 'bdthemes-element-pack' ),
+				'label' => __( 'Lightbox', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 				'condition' => [
 					'show_lightbox' => 'yes',
@@ -615,12 +615,12 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'link_type',
 			[
-				'label'   => esc_html__('Link Type', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Link Type', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'icon',
 				'options' => [
-					'icon' => esc_html__('Icon', 'bdthemes-element-pack'),
-					'text' => esc_html__('Text', 'bdthemes-element-pack'),
+					'icon' => esc_html__('Icon', 'bdthemes-element-pack-lite'),
+					'text' => esc_html__('Text', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -628,7 +628,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'icon',
 			[
-				'label'   => esc_html__('Icon', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Icon', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => 'plus',
 				'options' => [
@@ -665,9 +665,9 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'link_text',
 			[
-				'label'       => esc_html__('Link Text', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Link Text', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack'),
+				'default'     => esc_html__('ZOOM', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'link_type'		=> 'text',
 				],
@@ -678,13 +678,13 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'lightbox_animation',
 			[
-				'label'   => esc_html__('Lightbox Animation', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Lightbox Animation', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'slide',
 				'options' => [
-					'slide' => esc_html__('Slide', 'bdthemes-element-pack'),
-					'fade'  => esc_html__('Fade', 'bdthemes-element-pack'),
-					'scale' => esc_html__('Scale', 'bdthemes-element-pack'),
+					'slide' => esc_html__('Slide', 'bdthemes-element-pack-lite'),
+					'fade'  => esc_html__('Fade', 'bdthemes-element-pack-lite'),
+					'scale' => esc_html__('Scale', 'bdthemes-element-pack-lite'),
 				],
 				'separator' => 'before',
 			]
@@ -693,7 +693,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'lightbox_autoplay',
 			[
-				'label'   => __('Lightbox Autoplay', 'bdthemes-element-pack'),
+				'label'   => __('Lightbox Autoplay', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				
 			]
@@ -702,7 +702,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'lightbox_pause',
 			[
-				'label'   => __('Lightbox Pause on Hover', 'bdthemes-element-pack'),
+				'label'   => __('Lightbox Pause on Hover', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'lightbox_autoplay' => 'yes'
@@ -714,14 +714,14 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'lightbox_placement',
 			[
-				'label'     => esc_html__( 'Position', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'top-right',
 				'options'   => [
-					'top-left'    => esc_html__( 'Top Left', 'bdthemes-element-pack' ),
-					'top-right'          => esc_html__( 'Top Right', 'bdthemes-element-pack' ),
-					'bottom-left' => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
-					'bottom-right'   => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
+					'top-left'    => esc_html__( 'Top Left', 'bdthemes-element-pack-lite' ),
+					'top-right'          => esc_html__( 'Top Right', 'bdthemes-element-pack-lite' ),
+					'bottom-left' => esc_html__( 'Bottom Left', 'bdthemes-element-pack-lite' ),
+					'bottom-right'   => esc_html__( 'Bottom Right', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors_dictionary' => [
 					'top-left' => 'left: 0;',
@@ -745,7 +745,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_image_accordion_style',
 			[
-				'label' => __( 'Image Accordion', 'bdthemes-element-pack' ),
+				'label' => __( 'Image Accordion', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -753,7 +753,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'image_accordion_overlay_color',
 			[
-				'label'     => __( 'Active Item Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Active Item Overlay Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-item:before'  => 'background: {{VALUE}};',
@@ -768,13 +768,13 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'sliding_overlay_background',
-				'label' => esc_html__('Background', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'types' => ['classic', 'gradient'],
 				'exclude' => ['image'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}}.skin--sliding-box .bdt-ep-image-accordion-img:before',
 				'fields_options' => [
 					'background' => [
-						'label' => esc_html__('Active Item Overlay Color', 'bdthemes-element-pack'),
+						'label' => esc_html__('Active Item Overlay Color', 'bdthemes-element-pack-lite'),
 					],
 				],
 				'condition' => [
@@ -786,7 +786,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'image_accordion_inactive_item_overlay_color',
 			[
-				'label'     => __( 'In-active Item Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'In-active Item Overlay Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-item.bdt-inactive:before'  => 'background: {{VALUE}};',
@@ -812,7 +812,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'tabs_content_padding',
 			[
-				'label'      => __( 'Content Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Content Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -824,7 +824,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'image_accordion_divider_heading',
 			[
-				'label'     => __( 'Divider', 'bdthemes-element-pack' ),
+				'label'     => __( 'Divider', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [
@@ -837,7 +837,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'image_accordion_divider_color',
 			[
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-item:after'  => 'background: {{VALUE}};',
@@ -852,7 +852,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'image_accordion_divider_width',
 			[
-				'label' => esc_html__('Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Width', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -873,7 +873,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'image_accordion_divider_width_skin',
 			[
-				'label' => esc_html__('Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Width', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -895,7 +895,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'enable_item_style',
 			[
-				'label' => esc_html__('Enable Item Style', 'bdthemes-element-pack'),
+				'label' => esc_html__('Enable Item Style', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -904,7 +904,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'item_column_gap',
 			[
-				'label' => esc_html__('Item Gap', 'bdthemes-element-pack'),
+				'label' => esc_html__('Item Gap', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion' => 'grid-gap: {{SIZE}}{{UNIT}};',
@@ -932,7 +932,7 @@ class Image_Accordion extends Module_Base {
         $this->add_responsive_control(
             'item_radius',
             [
-                'label'      => __('Border Radius', 'bdthemes-element-pack'),
+                'label'      => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -949,7 +949,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_style_title',
 			[
-				'label'     => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_title' => [ 'yes' ],
@@ -960,7 +960,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-title' => 'color: {{VALUE}};',
@@ -971,7 +971,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'title_spacing',
 			[
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-title' => 'padding-bottom: {{SIZE}}{{UNIT}}',
@@ -983,7 +983,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-title',
 			]
 		);
@@ -992,7 +992,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name' => 'title_text_stroke',
-                'label' => __('Text Stroke', 'bdthemes-element-pack'),
+                'label' => __('Text Stroke', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-title',
 			]
 		);
@@ -1002,7 +1002,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_style_sub_title',
 			[
-				'label'     => esc_html__( 'Sub Title', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Sub Title', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_sub_title' => [ 'yes' ],
@@ -1013,7 +1013,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'sub_title_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-sub-title' => 'color: {{VALUE}};',
@@ -1024,7 +1024,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'sub_title_spacing',
 			[
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-sub-title' => 'margin-bottom: {{SIZE}}{{UNIT}}',
@@ -1036,7 +1036,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'sub_title_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-sub-title',
 			]
 		);
@@ -1046,7 +1046,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_style_description',
 			[
-				'label'     => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_text' => [ 'yes' ],
@@ -1057,7 +1057,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'description_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-text, {{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-text *' => 'color: {{VALUE}};',
@@ -1068,7 +1068,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'description_spacing',
 			[
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-text' => 'padding-bottom: {{SIZE}}{{UNIT}}',
@@ -1080,7 +1080,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'description_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-ep-image-accordion-text',
 			]
 		);
@@ -1090,7 +1090,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[
-				'label'     => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_button' => 'yes',
@@ -1103,14 +1103,14 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-button a' => 'color: {{VALUE}};',
@@ -1130,7 +1130,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'button_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector'    => '{{WRAPPER}} .bdt-ep-image-accordion-button a',
 				'separator'   => 'before',
 			]
@@ -1139,7 +1139,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1154,7 +1154,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'border_radius_advanced_show',
 			[
-				'label' => __( 'Advanced Radius', 'bdthemes-element-pack' ),
+				'label' => __( 'Advanced Radius', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -1162,9 +1162,9 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'border_radius_advanced',
 			[
-				'label'       => esc_html__('Radius', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Radius', 'bdthemes-element-pack-lite'),
 				/* translators: %1$s is example value, %2$s is link */
-				'description' => sprintf(esc_html__('For example: <b>%1$s</b> or Go <a href="%2$s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack'), '30% 70% 82% 18% / 46% 62% 38% 54%', 'https://9elements.github.io/fancy-border-radius/'),
+				'description' => sprintf(esc_html__('For example: <b>%1$s</b> or Go <a href="%2$s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack-lite'), '30% 70% 82% 18% / 46% 62% 38% 54%', 'https://9elements.github.io/fancy-border-radius/'),
 				'type'        => Controls_Manager::TEXT,
 				'size_units'  => [ 'px', '%' ],
 				'separator'   => 'after',
@@ -1181,7 +1181,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1195,7 +1195,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'button_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-ep-image-accordion-button a',
 			]
 		);
@@ -1213,14 +1213,14 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion .bdt-ep-image-accordion-button a:hover'  => 'color: {{VALUE}};',
@@ -1239,7 +1239,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'button_border_border!' => '',
@@ -1259,7 +1259,7 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_section(
 			'section_style_lightbox',
 			[
-				'label'     => esc_html__('Lightbox', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Lightbox', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_lightbox' => 'yes',
@@ -1272,14 +1272,14 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_tab(
 			'tab_lightbox_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'lightbox_text_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox i, {{WRAPPER}} .bdt-ep-image-accordion-lightbox span' => 'color: {{VALUE}};',
@@ -1299,7 +1299,7 @@ class Image_Accordion extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'lightbox_border',
-				'label'       => esc_html__('Border', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-ep-image-accordion-lightbox',
@@ -1310,7 +1310,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'lightbox_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1322,7 +1322,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'lightbox_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1334,7 +1334,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_responsive_control(
 			'lightbox_margin',
 			[
-				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1364,14 +1364,14 @@ class Image_Accordion extends Module_Base {
 		$this->start_controls_tab(
 			'tab_lightbox_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'lightbox_hover_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-image-accordion-lightbox:hover span, {{WRAPPER}} .bdt-ep-image-accordion-lightbox:hover i'    => 'color: {{VALUE}};',
@@ -1390,7 +1390,7 @@ class Image_Accordion extends Module_Base {
 		$this->add_control(
 			'lightbox_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'lightbox_border_border!' => 'none',

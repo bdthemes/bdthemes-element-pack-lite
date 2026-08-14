@@ -22,7 +22,7 @@ class Give_Donor_Wall extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Give Donor Wall', 'bdthemes-element-pack');
+		return BDTEP . __('Give Donor Wall', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -60,7 +60,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'give_donor_wall_settings',
 			[
-				'label' => __('Donor Wall', 'bdthemes-element-pack'),
+				'label' => __('Donor Wall', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -68,7 +68,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'show_avatar',
 			[
-				'label' => __('Show Avatar', 'bdthemes-element-pack'),
+				'label' => __('Show Avatar', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -78,7 +78,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'show_name',
 			[
-				'label' => __('Show Name', 'bdthemes-element-pack'),
+				'label' => __('Show Name', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -88,7 +88,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'show_total',
 			[
-				'label' => __('Show Donation Amount', 'bdthemes-element-pack'),
+				'label' => __('Show Donation Amount', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -98,7 +98,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'show_time',
 			[
-				'label' => __('Show Date', 'bdthemes-element-pack'),
+				'label' => __('Show Date', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -108,7 +108,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'anonymous',
 			[
-				'label' => __('Show Anonymous Donations', 'bdthemes-element-pack'),
+				'label' => __('Show Anonymous Donations', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -118,16 +118,16 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'only_comments',
 			[
-				'label' => __('Only Comments Donors', 'bdthemes-element-pack'),
+				'label' => __('Only Comments Donors', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
-				'description' => esc_html__('Choose whether to display all donors or just donors who left comments.', 'bdthemes-element-pack'),
+				'description' => esc_html__('Choose whether to display all donors or just donors who left comments.', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'show_comments',
 			[
-				'label' => __('Show Comments', 'bdthemes-element-pack'),
+				'label' => __('Show Comments', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 			]
 		);
@@ -135,7 +135,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'comment_length',
 			[
-				'label' => __('Comment Length', 'bdthemes-element-pack'),
+				'label' => __('Comment Length', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::NUMBER,
 				'default' => '30',
 				'condition' => [
@@ -147,7 +147,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'donors_per_page',
 			[
-				'label' => __('Donors per Page', 'bdthemes-element-pack'),
+				'label' => __('Donors per Page', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::NUMBER,
 				'default' => '6'
 			]
@@ -156,15 +156,15 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'all_forms',
 			[
-				'label' => __('Show All Donors?', 'bdthemes-element-pack'),
+				'label' => __('Show All Donors?', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'yes' => [
-						'title' => __('Yes', 'bdthemes-element-pack'),
+						'title' => __('Yes', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-check',
 					],
 					'no' => [
-						'title' => __('No', 'bdthemes-element-pack'),
+						'title' => __('No', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-close-circle',
 					],
 				],
@@ -176,7 +176,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'form_id',
 			[
-				'label' => __('Form ID', 'bdthemes-element-pack'),
+				'label' => __('Form ID', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_give_forms_options(),
 				'condition' => [
@@ -188,7 +188,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[
-				'label' => __('Columns', 'bdthemes-element-pack'),
+				'label' => __('Columns', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default'        => '3',
 				'tablet_default' => '2',
@@ -211,7 +211,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'items_gap',
 			[
-				'label' => esc_html__('Items Gap', 'bdthemes-element-pack'),
+				'label' => esc_html__('Items Gap', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 20,
@@ -225,11 +225,11 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'orderby',
 			[
-				'label'            => __('Order By', 'bdthemes-element-pack'),
+				'label'            => __('Order By', 'bdthemes-element-pack-lite'),
 				'type'             => Controls_Manager::SELECT,
 				'options'          => [
-					'post_date'       => __('Donation Date', 'bdthemes-element-pack'),
-					'donation_amount' => __('Donation Amount', 'bdthemes-element-pack')
+					'post_date'       => __('Donation Date', 'bdthemes-element-pack-lite'),
+					'donation_amount' => __('Donation Amount', 'bdthemes-element-pack-lite')
 				],
 				'default'          => 'post_date'
 			]
@@ -238,11 +238,11 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'order',
 			[
-				'label'       => __('Order', 'bdthemes-element-pack'),
+				'label'       => __('Order', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
-					'desc'       => __('Descending', 'bdthemes-element-pack'),
-					'asc'        => __('Ascending', 'bdthemes-element-pack')
+					'desc'       => __('Descending', 'bdthemes-element-pack-lite'),
+					'asc'        => __('Ascending', 'bdthemes-element-pack-lite')
 				],
 				'default'     => 'desc'
 			]
@@ -251,10 +251,10 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'loadmore_text',
 			[
-				'label' => __('Load More Text', 'bdthemes-element-pack'),
+				'label' => __('Load More Text', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => ['active' => true],
-				'default' => __('Load More', 'bdthemes-element-pack'),
+				'default' => __('Load More', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 			]
 		);
@@ -262,10 +262,10 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'readmore_text',
 			[
-				'label' => __('Read More Text', 'bdthemes-element-pack'),
+				'label' => __('Read More Text', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => ['active' => true],
-				'default' => __('Read More', 'bdthemes-element-pack'),
+				'default' => __('Read More', 'bdthemes-element-pack-lite'),
 				'label_block' => true,
 				'condition' => [
 					'show_comments' => 'yes'
@@ -279,7 +279,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'section_items_style',
 			[
-				'label' => esc_html__('Items', 'bdthemes-element-pack'),
+				'label' => esc_html__('Items', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -289,14 +289,14 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'tab_item_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card' => 'background-color: {{VALUE}};',
@@ -315,7 +315,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'tab_item_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -327,7 +327,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'tab_item_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -348,14 +348,14 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'tab_item_bg_hover_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card:hover' => 'background-color: {{VALUE}};',
@@ -366,7 +366,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'tab_item_hover_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card:hover'  => 'border-color: {{VALUE}};',
@@ -395,7 +395,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'image_item_hover_color',
 			[
-				'label' => esc_html__('Avatar Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Avatar Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card:hover .give-donor__image' => 'color: {{VALUE}};',
@@ -409,7 +409,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'title_item_hover_color',
 			[
-				'label' => esc_html__('Title Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Title Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card:hover .give-donor__name' => 'color: {{VALUE}} !important;',
@@ -423,7 +423,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'amount_item_hover_color',
 			[
-				'label' => esc_html__('Amount Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Amount Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card:hover span.give-donor__total' => 'color: {{VALUE}};',
@@ -437,7 +437,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'comment_item_hover_color',
 			[
-				'label' => esc_html__('Comment Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Comment Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card:hover .give-donor__content .give-donor__excerpt' => 'color: {{VALUE}};',
@@ -451,7 +451,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'date_item_hover_color',
 			[
-				'label' => esc_html__('Date Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Date Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-wrap .give-card:hover span.give-donor__timestamp' => 'color: {{VALUE}} !important;',
@@ -471,7 +471,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'section_avatar_style',
 			[
-				'label' => esc_html__('Avatar', 'bdthemes-element-pack'),
+				'label' => esc_html__('Avatar', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_avatar' => 'yes'
@@ -482,7 +482,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'image_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__image' => 'color: {{VALUE}};',
@@ -493,7 +493,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'image_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__image' => 'background-color: {{VALUE}};',
@@ -505,7 +505,7 @@ class Give_Donor_Wall extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'image_border',
-				'label' => esc_html__('Border', 'bdthemes-element-pack'),
+				'label' => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-give-donor-wall .give-donor__image',
 			]
 		);
@@ -513,7 +513,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'image_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -533,7 +533,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'avatar_size',
 			[
-				'label' => __('Avatar Size', 'bdthemes-element-pack'),
+				'label' => __('Avatar Size', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'separator' => 'before',
 				'selectors' => [
@@ -545,7 +545,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'avatar_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__image' => 'margin-right: {{SIZE}}{{UNIT}};',
@@ -558,7 +558,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'section_title_style',
 			[
-				'label' => esc_html__('Title', 'bdthemes-element-pack'),
+				'label' => esc_html__('Title', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_name' => 'yes'
@@ -569,7 +569,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__name' => 'color: {{VALUE}} !important;',
@@ -580,7 +580,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'title_size',
 			[
-				'label' => __('Size', 'bdthemes-element-pack'),
+				'label' => __('Size', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__name' => 'font-size: {{SIZE}}{{UNIT}} !important;',
@@ -591,7 +591,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'title_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__name' => 'padding-bottom: {{SIZE}}{{UNIT}} !important;',
@@ -604,7 +604,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'section_amount_style',
 			[
-				'label' => esc_html__('Amount', 'bdthemes-element-pack'),
+				'label' => esc_html__('Amount', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_total' => 'yes'
@@ -615,7 +615,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'amount_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall span.give-donor__total' => 'color: {{VALUE}};',
@@ -636,7 +636,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'section_comment_style',
 			[
-				'label' => esc_html__('Comment', 'bdthemes-element-pack'),
+				'label' => esc_html__('Comment', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_comments' => 'yes'
@@ -647,7 +647,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'comment_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__content .give-donor__excerpt' => 'color: {{VALUE}};',
@@ -658,7 +658,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'comment_link_color',
 			[
-				'label' => esc_html__('Link Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Link Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__content .give-donor__excerpt .give-donor__read-more' => 'color: {{VALUE}};',
@@ -669,7 +669,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'comment_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__content .give-donor__excerpt' => 'padding-top: {{SIZE}}{{UNIT}} !important;',
@@ -680,7 +680,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'comment_size',
 			[
-				'label' => __('Size', 'bdthemes-element-pack'),
+				'label' => __('Size', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__content .give-donor__excerpt' => 'font-size: {{SIZE}}{{UNIT}} !important;',
@@ -693,7 +693,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'section_date_style',
 			[
-				'label' => esc_html__('Date', 'bdthemes-element-pack'),
+				'label' => esc_html__('Date', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_time' => 'yes'
@@ -704,7 +704,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'date_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall span.give-donor__timestamp' => 'color: {{VALUE}} !important;',
@@ -715,7 +715,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'date_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall span.give-donor__timestamp' => 'padding-top: {{SIZE}}{{UNIT}} !important;',
@@ -726,7 +726,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'date_size',
 			[
-				'label' => __('Size', 'bdthemes-element-pack'),
+				'label' => __('Size', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall span.give-donor__timestamp' => 'font-size: {{SIZE}}{{UNIT}} !important;',
@@ -739,7 +739,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[
-				'label'     => esc_html__('Load More Button', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Load More Button', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -747,20 +747,20 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'loadmore_alignment',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => 'center',
 				'options' => [
 					'left' => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'inherit' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -775,14 +775,14 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__load_more' => 'color: {{VALUE}};',
@@ -809,7 +809,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -821,7 +821,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -842,7 +842,7 @@ class Give_Donor_Wall extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'button_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .bdt-give-donor-wall .give-donor__load_more',
 			]
 		);
@@ -852,14 +852,14 @@ class Give_Donor_Wall extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donor-wall .give-donor__load_more:hover'  => 'color: {{VALUE}};',
@@ -878,7 +878,7 @@ class Give_Donor_Wall extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'button_border_border!' => '',
@@ -900,7 +900,7 @@ class Give_Donor_Wall extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['form_id'] and 'yes' !== $settings['all_forms']) {
-			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack') . '</div>';
+			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack-lite') . '</div>';
 		}
 
 		$attributes = [

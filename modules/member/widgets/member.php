@@ -30,7 +30,7 @@ class Member extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Member', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Member', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -75,14 +75,14 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'photo',
 			[ 
-				'label'   => esc_html__( 'Choose Photo', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Choose Photo', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [ 'active' => true ],
 				'default' => [ 
@@ -94,7 +94,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'member_alternative_photo',
 			[ 
-				'label' => esc_html__( 'Alternative Photo', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Alternative Photo', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -102,7 +102,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'alternative_photo',
 			[ 
-				'label'     => esc_html__( 'Choose Photo', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Choose Photo', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::MEDIA,
 				'dynamic'   => [ 'active' => true ],
 				'default'   => [ 
@@ -117,7 +117,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'image_mask_popover',
 			[ 
-				'label'        => esc_html__( 'Image Mask', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Image Mask', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'render_type'  => 'template',
 				'return_value' => 'yes',
@@ -130,10 +130,10 @@ class Member extends Module_Base {
 		$this->add_control(
 			'name',
 			[ 
-				'label'       => esc_html__( 'Name', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Name', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'John Doe', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Member Name', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'John Doe', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Member Name', 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 'active' => true ],
 			]
 		);
@@ -141,10 +141,10 @@ class Member extends Module_Base {
 		$this->add_control(
 			'role',
 			[ 
-				'label'       => esc_html__( 'Role', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Role', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Managing Director', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Member Role', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Managing Director', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Member Role', 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 'active' => true ],
 			]
 		);
@@ -152,10 +152,10 @@ class Member extends Module_Base {
 		$this->add_control(
 			'description_text',
 			[ 
-				'label'       => esc_html__( 'Description', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Description', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXTAREA,
-				'default'     => esc_html__( 'Type here some info about this team member, the man very important person of our company.', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Member Description', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Type here some info about this team member, the man very important person of our company.', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Member Description', 'bdthemes-element-pack-lite' ),
 				'rows'        => 10,
 				'condition'   => [ '_skin' => [ '', 'bdt-partait', 'bdt-band', 'bdt-flip' ] ],
 				'dynamic'     => [ 'active' => true ],
@@ -165,7 +165,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'member_social_icon',
 			[ 
-				'label'   => esc_html__( 'Social Icon', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Social Icon', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -174,23 +174,23 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'skin_partait_align',
 			[ 
-				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'    => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [ 
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -208,7 +208,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_content_social_link',
 			[ 
-				'label'     => esc_html__( 'Social Icon', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Social Icon', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 'member_social_icon' => 'yes' ],
 			]
 		);
@@ -218,7 +218,7 @@ class Member extends Module_Base {
 		$repeater->add_control(
 			'social_link_title',
 			[ 
-				'label'   => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => ['active' => true],
 				'default' => 'Facebook',
@@ -231,14 +231,14 @@ class Member extends Module_Base {
         $repeater->add_control(
             'social_link',
             [ 
-                'label'   => __( 'Link', 'bdthemes-element-pack' ),
+                'label'   => __( 'Link', 'bdthemes-element-pack-lite' ),
                 'type'    => Controls_Manager::HIDDEN,
             ]
         );
         $repeater->add_control(
             'social_icon_link',
             [ 
-                'label'   => __( 'Link', 'bdthemes-element-pack' ),
+                'label'   => __( 'Link', 'bdthemes-element-pack-lite' ),
                 'type'    => Controls_Manager::URL,
             ]
         );
@@ -246,7 +246,7 @@ class Member extends Module_Base {
 		$repeater->add_control(
 			'social_share_icon',
 			[ 
-				'label'            => esc_html__( 'Choose Icon', 'bdthemes-element-pack' ),
+				'label'            => esc_html__( 'Choose Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'social_icon',
 			]
@@ -255,7 +255,7 @@ class Member extends Module_Base {
 		$repeater->add_control(
 			'icon_background',
 			[ 
-				'label'     => esc_html__( 'Icon Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icons {{CURRENT_ITEM}}' => 'background-color: {{VALUE}}',
@@ -269,7 +269,7 @@ class Member extends Module_Base {
 		$repeater->add_control(
 			'icon_color',
 			[ 
-				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icons {{CURRENT_ITEM}}'     => 'color: {{VALUE}}',
@@ -293,7 +293,7 @@ class Member extends Module_Base {
 							'value'   => 'fab fa-facebook-f',
 							'library' => 'fa-brands',
 						],
-						'social_link_title' => __( 'Facebook', 'bdthemes-element-pack' ),
+						'social_link_title' => __( 'Facebook', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
 						'social_icon_link'       => [ 'url' => 'http://www.x.com/bdthemescom/' ],
@@ -301,7 +301,7 @@ class Member extends Module_Base {
 							'value'   => 'fab fa-x-twitter',
 							'library' => 'fa-brands',
 						],
-						'social_link_title' => __( 'X', 'bdthemes-element-pack' ),
+						'social_link_title' => __( 'X', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
 						'social_icon_link'       => [ 'url' => 'http://www.instagram.com/sigmative/' ],
@@ -309,7 +309,7 @@ class Member extends Module_Base {
 							'value'   => 'fab fa-instagram',
 							'library' => 'fa-brands',
 						],
-						'social_link_title' => __( 'Instagram', 'bdthemes-element-pack' ),
+						'social_link_title' => __( 'Instagram', 'bdthemes-element-pack-lite' ),
 					],
 				],
 				'title_field' => '{{{ social_link_title }}}',
@@ -322,7 +322,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_style',
 			[ 
-				'label'     => esc_html__( 'Member', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Member', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'_skin' => [ '', 'bdt-band', 'bdt-partait' ],
@@ -333,7 +333,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'band_overlay_color',
 			[ 
-				'label'     => __( 'Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Overlay Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .skin-band .bdt-member-photo:before' => 'background: {{VALUE}};',
@@ -346,7 +346,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'band_item_background_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .skin-band .bdt-member-item-wrapper' => 'background: {{VALUE}};',
@@ -378,7 +378,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'member_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -389,7 +389,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'member_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -401,7 +401,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'desc_padding',
 			[ 
-				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -413,23 +413,23 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'text_align',
 			[ 
-				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'    => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [ 
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -445,7 +445,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_flip_style',
 			[ 
-				'label'     => __( 'Flip Style', 'bdthemes-element-pack' ),
+				'label'     => __( 'Flip Style', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'_skin' => 'bdt-flip',
@@ -456,7 +456,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'back_background_color',
 			[ 
-				'label'     => __( 'Back Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Back Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-skin-flip-back' => 'background-color: {{VALUE}};',
@@ -470,7 +470,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'skin_flip_height',
 			[ 
-				'label'      => __( 'Height', 'bdthemes-element-pack' ),
+				'label'      => __( 'Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [ 
 					'px' => [ 
@@ -492,7 +492,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'flip_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [ 
@@ -510,7 +510,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'flip_desc_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -522,23 +522,23 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'flip_text_align',
 			[ 
-				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'    => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [ 
-						'title' => esc_html__( 'Justified', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justified', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -552,7 +552,7 @@ class Member extends Module_Base {
 			Group_Control_Image_Size::get_type(),
 			[ 
 				'name'         => 'thumbnail_size',
-				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Image Size', 'bdthemes-element-pack-lite' ),
 				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'full',
 				'prefix_class' => 'bdt-member--thumbnail-size-',
@@ -562,13 +562,13 @@ class Member extends Module_Base {
 		$this->add_control(
 			'flip_effect',
 			[ 
-				'label'        => __( 'Flip Effect', 'bdthemes-element-pack' ),
+				'label'        => __( 'Flip Effect', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'flip',
 				'options'      => [ 
-					'flip'  => __( 'Flip', 'bdthemes-element-pack' ),
-					'slide' => __( 'Slide', 'bdthemes-element-pack' ),
-					'push'  => __( 'Push', 'bdthemes-element-pack' ),
+					'flip'  => __( 'Flip', 'bdthemes-element-pack-lite' ),
+					'slide' => __( 'Slide', 'bdthemes-element-pack-lite' ),
+					'push'  => __( 'Push', 'bdthemes-element-pack-lite' ),
 				],
 				'prefix_class' => 'bdt-skin-flip-effect-',
 			]
@@ -577,14 +577,14 @@ class Member extends Module_Base {
 		$this->add_control(
 			'flip_direction',
 			[ 
-				'label'        => __( 'Flip Direction', 'bdthemes-element-pack' ),
+				'label'        => __( 'Flip Direction', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'left',
 				'options'      => [ 
-					'left'  => __( 'Left', 'bdthemes-element-pack' ),
-					'right' => __( 'Right', 'bdthemes-element-pack' ),
-					'up'    => __( 'Up', 'bdthemes-element-pack' ),
-					'down'  => __( 'Down', 'bdthemes-element-pack' ),
+					'left'  => __( 'Left', 'bdthemes-element-pack-lite' ),
+					'right' => __( 'Right', 'bdthemes-element-pack-lite' ),
+					'up'    => __( 'Up', 'bdthemes-element-pack-lite' ),
+					'down'  => __( 'Down', 'bdthemes-element-pack-lite' ),
 				],
 				'prefix_class' => 'bdt-skin-flip-direction-',
 			]
@@ -593,7 +593,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'flip_3d',
 			[ 
-				'label'        => __( '3D Depth', 'bdthemes-element-pack' ),
+				'label'        => __( '3D Depth', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'prefix_class' => 'bdt-skin-flip-3d-',
@@ -608,7 +608,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_style_photo',
 			[ 
-				'label'     => esc_html__( 'Photo', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Photo', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'_skin!' => ['bdt-calm', 'bdt-ekip', 'bdt-phaedra', 'bdt-flip'],
@@ -621,14 +621,14 @@ class Member extends Module_Base {
 		$this->start_controls_tab(
 			'tab_photo_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'photo_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-photo' => 'background-color: {{VALUE}};',
@@ -640,7 +640,7 @@ class Member extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'photo_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-member .bdt-member-photo',
@@ -651,7 +651,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'photo_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -663,7 +663,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'photo_opacity',
 			[ 
-				'label'     => esc_html__( 'Opacity (%)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Opacity (%)', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 1,
@@ -684,7 +684,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'photo_spacing',
 			[ 
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -705,14 +705,14 @@ class Member extends Module_Base {
 		$this->start_controls_tab(
 			'tab_photo_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'photo_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'border_border!' => '',
@@ -726,7 +726,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'photo_hover_opacity',
 			[ 
-				'label'     => esc_html__( 'Opacity (%)', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Opacity (%)', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 1,
@@ -747,7 +747,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'photo_hover_animation',
 			[ 
-				'label'   => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [ 
@@ -767,7 +767,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_style_name',
 			[ 
-				'label' => esc_html__( 'Name', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Name', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -775,7 +775,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'name_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-name' => 'color: {{VALUE}};',
@@ -794,7 +794,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'name_bottom_space',
 			[ 
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -814,7 +814,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'ekip_name_bottom_space',
 			[ 
-				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 
 					'unit' => '%',
@@ -840,7 +840,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_style_role',
 			[ 
-				'label' => esc_html__( 'Role', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Role', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -848,7 +848,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'role_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-role' => 'color: {{VALUE}};',
@@ -859,7 +859,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'role_bottom_space',
 			[ 
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -879,7 +879,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'ekip_role_bottom_space',
 			[ 
-				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 
 					'unit' => '%',
@@ -913,7 +913,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_style_text',
 			[ 
-				'label'     => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'_skin' => [ '', 'bdt-band', 'bdt-flip', 'bdt-partait' ],
@@ -924,7 +924,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-text' => 'color: {{VALUE}};',
@@ -945,7 +945,7 @@ class Member extends Module_Base {
 		$this->start_controls_section(
 			'section_style_social_icon',
 			[ 
-				'label'     => esc_html__( 'Social Icon', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Social Icon', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 'member_social_icon' => 'yes' ],
 			]
@@ -954,7 +954,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'icon_content_background',
 			[ 
-				'label'     => esc_html__( 'Icons Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icons Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icons' => 'background-color: {{VALUE}}',
@@ -968,7 +968,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'social_icon_content_padding',
 			[ 
-				'label'      => esc_html__( 'Icons Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Icons Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -985,14 +985,14 @@ class Member extends Module_Base {
 		$this->start_controls_tab(
 			'tab_social_icon_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'icon_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icon' => 'background-color: {{VALUE}}',
@@ -1006,7 +1006,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'band_icon_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .skin-band .bdt-member-icons .bdt-member-icon:before' => 'background: {{VALUE}}',
@@ -1020,7 +1020,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'icon_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icon i'   => 'color: {{VALUE}};',
@@ -1032,7 +1032,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'social_icons_top_border_color',
 			[ 
-				'label'     => esc_html__( 'Top Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Top Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icons' => 'border-top-color: {{VALUE}}',
@@ -1047,7 +1047,7 @@ class Member extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'social_icon_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-member .bdt-member-icon',
@@ -1060,7 +1060,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'social_icon_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1075,7 +1075,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'social_icon_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1090,7 +1090,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'social_icon_size',
 			[ 
-				'label'     => esc_html__( 'Icon Size', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icon i'        => 'min-width: {{SIZE}}{{UNIT}};',
@@ -1106,7 +1106,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'social_icon_box_size',
 			[ 
-				'label'     => esc_html__( 'Icon Background Size', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Icon Background Size', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .skin-band .bdt-member-icon:before, {{WRAPPER}} .skin-band .bdt-member-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
@@ -1120,7 +1120,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'social_icon_indent',
 			[ 
-				'label'     => esc_html__( 'Icon Space Between', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Space Between', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icon + .bdt-member-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
@@ -1132,7 +1132,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'social_icon_vertical_space',
 			[ 
-				'label'     => esc_html__( 'Vertical Spacing', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Vertical Spacing', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .skin-band .bdt-member-icons' => 'bottom: {{SIZE}}{{UNIT}};',
@@ -1146,7 +1146,7 @@ class Member extends Module_Base {
 		$this->add_responsive_control(
 			'ekip_icon_vertical_space',
 			[ 
-				'label'      => esc_html__( 'Vertical Spacing', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Vertical Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 
 					'unit' => '%',
@@ -1170,7 +1170,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'social_icon_tooltip',
 			[ 
-				'label'   => esc_html__( 'Tooltip', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Tooltip', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -1181,14 +1181,14 @@ class Member extends Module_Base {
 		$this->start_controls_tab(
 			'tab_social_icon_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'icon_hover_background',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icon:hover' => 'background-color: {{VALUE}}',
@@ -1202,7 +1202,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'icon_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-icon:hover i'   => 'color: {{VALUE}};',
@@ -1214,7 +1214,7 @@ class Member extends Module_Base {
 		$this->add_control(
 			'icon_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'social_icon_border_border!' => '',

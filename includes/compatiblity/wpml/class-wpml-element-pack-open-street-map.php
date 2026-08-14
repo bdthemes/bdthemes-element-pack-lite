@@ -29,16 +29,16 @@ class WPML_ElementPack_Open_Street_Map extends WPML_Module_With_Items {
 	protected function get_title($field) {
 		switch ($field) {
 			case 'marker_title':
-				return esc_html__('Title', 'bdthemes-element-pack');
+				return esc_html__('Title', 'bdthemes-element-pack-lite');
 
 			case 'marker_lat':
-				return esc_html__('Latitude', 'bdthemes-element-pack');
+				return esc_html__('Latitude', 'bdthemes-element-pack-lite');
 
 			case 'marker_lng':
-				return esc_html__('Longitude', 'bdthemes-element-pack');
+				return esc_html__('Longitude', 'bdthemes-element-pack-lite');
 
 			case 'marker_content':
-				return esc_html__('Content', 'bdthemes-element-pack');
+				return esc_html__('Content', 'bdthemes-element-pack-lite');
 
 			default:
 				return '';

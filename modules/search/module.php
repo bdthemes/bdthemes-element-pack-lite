@@ -126,8 +126,8 @@ class Module extends Element_Pack_Module_Base {
 	public function element_pack_ajax_search() {
 		global $post;
 
-		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_REQUEST['nonce'] ), 'element-pack-site' ) ) {
-			die( json_encode( array( 'results' => array() ) ) );
+		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'element-pack-site' ) ) {
+			die( wp_json_encode( array( 'results' => array() ) ) );
 		}
 
 		$result       = array( 'results' => array() );
@@ -265,7 +265,7 @@ class Module extends Element_Pack_Module_Base {
 			}
 		}
 
-		die( json_encode( $result ) );
+		die( wp_json_encode( $result ) );
 	}
 
 

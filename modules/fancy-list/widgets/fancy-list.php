@@ -21,7 +21,7 @@ class Fancy_List extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Fancy List', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Fancy List', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -56,14 +56,14 @@ class Fancy_List extends Module_Base {
 		$this->start_controls_section(
 			'section_layout',
 			[ 
-				'label' => esc_html__( 'Fancy List', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fancy List', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'layout_style',
 			[ 
-				'label'   => esc_html__( 'Layout Style', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Layout Style', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => [ 
@@ -79,11 +79,11 @@ class Fancy_List extends Module_Base {
 		$repeater->add_control(
 			'text',
 			[ 
-				'label'       => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
-				'placeholder' => esc_html__( 'List Item', 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'List Item', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'List Item', 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'List Item', 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 
 					'active' => true,
 				],
@@ -93,10 +93,10 @@ class Fancy_List extends Module_Base {
 		$repeater->add_control(
 			'text_details',
 			[ 
-				'label'       => esc_html__( 'Sub Title', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Sub Title', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
-				'placeholder' => esc_html__( 'Sub Title', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Sub Title', 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 
 					'active' => true,
 				],
@@ -106,7 +106,7 @@ class Fancy_List extends Module_Base {
 		$repeater->add_control(
 			'list_icon',
 			[ 
-				'label'       => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'label_block' => false,
 				'skin'        => 'inline',
@@ -117,7 +117,7 @@ class Fancy_List extends Module_Base {
 		$repeater->add_control(
 			'img',
 			[ 
-				'label'   => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'dynamic' => [ 
 					'active' => true,
@@ -128,13 +128,13 @@ class Fancy_List extends Module_Base {
 		$repeater->add_control(
 			'link',
 			[ 
-				'label'       => esc_html__( 'Link', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 
 					'active' => true,
 				],
 				'label_block' => true,
-				'placeholder' => esc_html__( 'https://your-link.com', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -146,13 +146,13 @@ class Fancy_List extends Module_Base {
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'text' => esc_html__( 'List Item #1', 'bdthemes-element-pack' ),
+						'text' => esc_html__( 'List Item #1', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
-						'text' => esc_html__( 'List Item #2', 'bdthemes-element-pack' ),
+						'text' => esc_html__( 'List Item #2', 'bdthemes-element-pack-lite' ),
 					],
 					[ 
-						'text' => esc_html__( 'List Item #3', 'bdthemes-element-pack' ),
+						'text' => esc_html__( 'List Item #3', 'bdthemes-element-pack-lite' ),
 					],
 				],
 				'title_field' => '{{{ elementor.helpers.renderIcon( this, list_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ text }}}',

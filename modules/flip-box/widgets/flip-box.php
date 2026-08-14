@@ -24,7 +24,7 @@ class Flip_Box extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Flip Box', 'bdthemes-element-pack');
+		return BDTEP . __('Flip Box', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -63,30 +63,30 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_side_a_content',
 			[
-				'label' => __('Front', 'bdthemes-element-pack'),
+				'label' => __('Front', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->start_controls_tabs('front_content_tabs');
 
-		$this->start_controls_tab('front_content_tab', ['label' => __('Content', 'bdthemes-element-pack')]);
+		$this->start_controls_tab('front_content_tab', ['label' => __('Content', 'bdthemes-element-pack-lite')]);
 
 		$this->add_control(
 			'graphic_element',
 			[
-				'label'   => __('Icon Type', 'bdthemes-element-pack'),
+				'label'   => __('Icon Type', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'none' => [
-						'title' => __('None', 'bdthemes-element-pack'),
+						'title' => __('None', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fas fa-ban',
 					],
 					'image' => [
-						'title' => __('Image', 'bdthemes-element-pack'),
+						'title' => __('Image', 'bdthemes-element-pack-lite'),
 						'icon'  => 'far fa-image',
 					],
 					'icon' => [
-						'title' => __('Icon', 'bdthemes-element-pack'),
+						'title' => __('Icon', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fas fa-star',
 					],
 				],
@@ -97,7 +97,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'image',
 			[
-				'label'   => __('Choose Image', 'bdthemes-element-pack'),
+				'label'   => __('Choose Image', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -113,7 +113,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name'      => 'image',
-				'label'     => __('Image Size', 'bdthemes-element-pack'),
+				'label'     => __('Image Size', 'bdthemes-element-pack-lite'),
 				'default'   => 'thumbnail',
 				'condition' => [
 					'graphic_element' => 'image',
@@ -124,7 +124,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_box_icon',
 			[
-				'label'       => __('Icon', 'bdthemes-element-pack'),
+				'label'       => __('Icon', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'default' => [
@@ -140,13 +140,13 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'icon_view',
 			[
-				'label'   => __('View', 'bdthemes-element-pack'),
+				'label'   => __('View', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'default',
 				'options' => [
-					'default' => __('Default', 'bdthemes-element-pack'),
-					'stacked' => __('Stacked', 'bdthemes-element-pack'),
-					'framed'  => __('Framed', 'bdthemes-element-pack'),
+					'default' => __('Default', 'bdthemes-element-pack-lite'),
+					'stacked' => __('Stacked', 'bdthemes-element-pack-lite'),
+					'framed'  => __('Framed', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'graphic_element' => 'icon',
@@ -157,12 +157,12 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'icon_shape',
 			[
-				'label'   => __('Shape', 'bdthemes-element-pack'),
+				'label'   => __('Shape', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'circle',
 				'options' => [
-					'circle' => __('Circle', 'bdthemes-element-pack'),
-					'square' => __('Square', 'bdthemes-element-pack'),
+					'circle' => __('Circle', 'bdthemes-element-pack-lite'),
+					'square' => __('Square', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'icon_view!'      => 'default',
@@ -174,11 +174,11 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'front_title_text',
 			[
-				'label'       => __('Title', 'bdthemes-element-pack'),
+				'label'       => __('Title', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => ['active' => true],
-				'default'     => __('This is the heading', 'bdthemes-element-pack'),
-				'placeholder' => __('Your Title', 'bdthemes-element-pack'),
+				'default'     => __('This is the heading', 'bdthemes-element-pack-lite'),
+				'placeholder' => __('Your Title', 'bdthemes-element-pack-lite'),
 				'separator'   => 'before',
 			]
 		);
@@ -186,19 +186,19 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'front_description_text',
 			[
-				'label'       => __('Description', 'bdthemes-element-pack'),
+				'label'       => __('Description', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXTAREA,
 				'dynamic'     => ['active' => true],
-				'default'     => __('Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'bdthemes-element-pack'),
-				'placeholder' => __('Your Description', 'bdthemes-element-pack'),
-				'title'       => __('Input image text here', 'bdthemes-element-pack'),
+				'default'     => __('Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'bdthemes-element-pack-lite'),
+				'placeholder' => __('Your Description', 'bdthemes-element-pack-lite'),
+				'title'       => __('Input image text here', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'front_title_tags',
 			[
-				'label'   => __('Title HTML Tag', 'bdthemes-element-pack'),
+				'label'   => __('Title HTML Tag', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h3',
 				'options' => element_pack_title_tags(),
@@ -207,7 +207,7 @@ class Flip_Box extends Module_Base {
 
 		$this->end_controls_tab();
 
-		$this->start_controls_tab('front_background_tab', ['label' => __('Background', 'bdthemes-element-pack')]);
+		$this->start_controls_tab('front_background_tab', ['label' => __('Background', 'bdthemes-element-pack-lite')]);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
@@ -221,7 +221,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'front_background_overlay',
 			[
-				'label'     => __('Background Overlay', 'bdthemes-element-pack'),
+				'label'     => __('Background Overlay', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-front .bdt-flip-box-layer-overlay' => 'background-color: {{VALUE}};',
@@ -242,44 +242,44 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_back_content',
 			[
-				'label' => __('Back', 'bdthemes-element-pack'),
+				'label' => __('Back', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->start_controls_tabs('back_content_tabs');
 
-		$this->start_controls_tab('back_content_tab', ['label' => __('Content', 'bdthemes-element-pack')]);
+		$this->start_controls_tab('back_content_tab', ['label' => __('Content', 'bdthemes-element-pack-lite')]);
 
 		$this->add_control(
 			'back_title_text',
 			[
-				'label'       => __('Title', 'bdthemes-element-pack'),
+				'label'       => __('Title', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => ['active' => true],
-				'default'     => __('This is the heading', 'bdthemes-element-pack'),
-				'placeholder' => __('Your Title', 'bdthemes-element-pack'),
+				'default'     => __('This is the heading', 'bdthemes-element-pack-lite'),
+				'placeholder' => __('Your Title', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'back_description_text',
 			[
-				'label'       => __('Description', 'bdthemes-element-pack'),
+				'label'       => __('Description', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXTAREA,
 				'dynamic'     => ['active' => true],
-				'default'     => __('Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'bdthemes-element-pack'),
-				'placeholder' => __('Your Description', 'bdthemes-element-pack'),
-				'title'       => __('Input image text here', 'bdthemes-element-pack'),
+				'default'     => __('Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'bdthemes-element-pack-lite'),
+				'placeholder' => __('Your Description', 'bdthemes-element-pack-lite'),
+				'title'       => __('Input image text here', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_text',
 			[
-				'label'     => __('Button Text', 'bdthemes-element-pack'),
+				'label'     => __('Button Text', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => ['active' => true],
-				'default'   => __('Click Here', 'bdthemes-element-pack'),
+				'default'   => __('Click Here', 'bdthemes-element-pack-lite'),
 				'separator' => 'before',
 			]
 		);
@@ -287,21 +287,21 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'link',
 			[
-				'label'       => __('Link', 'bdthemes-element-pack'),
+				'label'       => __('Link', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => ['active' => true],
-				'placeholder' => __('http://your-link.com', 'bdthemes-element-pack'),
+				'placeholder' => __('http://your-link.com', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'link_click',
 			[
-				'label'   => __('Apply Link On', 'bdthemes-element-pack'),
+				'label'   => __('Apply Link On', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'box'    => __('Whole Box', 'bdthemes-element-pack'),
-					'button' => __('Button Only', 'bdthemes-element-pack'),
+					'box'    => __('Whole Box', 'bdthemes-element-pack-lite'),
+					'button' => __('Button Only', 'bdthemes-element-pack-lite'),
 				],
 				'default'   => 'button',
 				'condition' => [
@@ -313,15 +313,15 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'button_size',
 			[
-				'label' => __('Size', 'bdthemes-element-pack'),
+				'label' => __('Size', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'sm',
 				'options' => [
-					'xs' => __('Extra Small', 'bdthemes-element-pack'),
-					'sm' => __('Small', 'bdthemes-element-pack'),
-					'md' => __('Medium', 'bdthemes-element-pack'),
-					'lg' => __('Large', 'bdthemes-element-pack'),
-					'xl' => __('Extra Large', 'bdthemes-element-pack'),
+					'xs' => __('Extra Small', 'bdthemes-element-pack-lite'),
+					'sm' => __('Small', 'bdthemes-element-pack-lite'),
+					'md' => __('Medium', 'bdthemes-element-pack-lite'),
+					'lg' => __('Large', 'bdthemes-element-pack-lite'),
+					'xl' => __('Extra Large', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'button_text!' => '',
@@ -332,7 +332,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'back_title_tags',
 			[
-				'label'   => __('Title HTML Tag', 'bdthemes-element-pack'),
+				'label'   => __('Title HTML Tag', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h3',
 				'options' => element_pack_title_tags(),
@@ -341,7 +341,7 @@ class Flip_Box extends Module_Base {
 
 		$this->end_controls_tab();
 
-		$this->start_controls_tab('back_background_tab', ['label' => __('Background', 'bdthemes-element-pack')]);
+		$this->start_controls_tab('back_background_tab', ['label' => __('Background', 'bdthemes-element-pack-lite')]);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
@@ -355,7 +355,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'back_background_overlay',
 			[
-				'label' => __('Background Overlay', 'bdthemes-element-pack'),
+				'label' => __('Background Overlay', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -377,14 +377,14 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_box_settings',
 			[
-				'label' => __('Settings', 'bdthemes-element-pack'),
+				'label' => __('Settings', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_responsive_control(
 			'height',
 			[
-				'label' => __('Height', 'bdthemes-element-pack'),
+				'label' => __('Height', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -406,7 +406,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'border_radius',
 			[
-				'label'      => __('Border Radius', 'bdthemes-element-pack'),
+				'label'      => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px', '%'],
 				'range'      => [
@@ -425,17 +425,17 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_effect',
 			[
-				'label'   => __('Flip Effect', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => __('Flip Effect', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'flip',
 				'options' => [
-					'flip'     => __('Flip', 'bdthemes-element-pack'),
-					'slide'    => __('Slide', 'bdthemes-element-pack'),
-					'push'     => __('Push', 'bdthemes-element-pack'),
-					'zoom-in'  => __('Zoom In', 'bdthemes-element-pack'),
-					'zoom-out' => __('Zoom Out', 'bdthemes-element-pack'),
-					'fade'     => __('Fade', 'bdthemes-element-pack'),
-					'slide-overflow'  => __('Slide Overflow', 'bdthemes-element-pack'),
+					'flip'     => __('Flip', 'bdthemes-element-pack-lite'),
+					'slide'    => __('Slide', 'bdthemes-element-pack-lite'),
+					'push'     => __('Push', 'bdthemes-element-pack-lite'),
+					'zoom-in'  => __('Zoom In', 'bdthemes-element-pack-lite'),
+					'zoom-out' => __('Zoom Out', 'bdthemes-element-pack-lite'),
+					'fade'     => __('Fade', 'bdthemes-element-pack-lite'),
+					'slide-overflow'  => __('Slide Overflow', 'bdthemes-element-pack-lite'),
 				],
 				'prefix_class' => 'bdt-flip-box-effect-',
 			]
@@ -444,14 +444,14 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_direction',
 			[
-				'label'   => __('Flip Direction', 'bdthemes-element-pack'),
+				'label'   => __('Flip Direction', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'left',
 				'options' => [
-					'left'  => __('Left', 'bdthemes-element-pack'),
-					'right' => __('Right', 'bdthemes-element-pack'),
-					'up'    => __('Up', 'bdthemes-element-pack'),
-					'down'  => __('Down', 'bdthemes-element-pack'),
+					'left'  => __('Left', 'bdthemes-element-pack-lite'),
+					'right' => __('Right', 'bdthemes-element-pack-lite'),
+					'up'    => __('Up', 'bdthemes-element-pack-lite'),
+					'down'  => __('Down', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'flip_effect!' => [
@@ -468,12 +468,12 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_direction_content',
 			[
-				'label'   => __('Flip Direction', 'bdthemes-element-pack'),
+				'label'   => __('Flip Direction', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'up',
 				'options' => [
-					'up'    => __('Up', 'bdthemes-element-pack'),
-					'down'  => __('Down', 'bdthemes-element-pack'),
+					'up'    => __('Up', 'bdthemes-element-pack-lite'),
+					'down'  => __('Down', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'flip_effect' => [
@@ -487,7 +487,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_3d',
 			[
-				'label'        => __('3D Depth', 'bdthemes-element-pack'),
+				'label'        => __('3D Depth', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'prefix_class' => 'bdt-flip-box-3d-',
@@ -499,7 +499,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_transition',
 			[
-				'label'     => esc_html__('Transition', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'     => esc_html__('Transition', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -508,17 +508,17 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_transition_easing',
 			[
-				'label'      			=> esc_html__('Easing type', 'bdthemes-element-pack'),
+				'label'      			=> esc_html__('Easing type', 'bdthemes-element-pack-lite'),
 				'type'       			=> Controls_Manager::SELECT,
 				'default'    			=> 'ease-out',
 				'options'    			=> [
-					'ease-out'     => esc_html__('Default', 'bdthemes-element-pack'),
-					'circ' 		  => esc_html__('Circ', 'bdthemes-element-pack'),
-					'cubic' 	  => esc_html__('Cubic', 'bdthemes-element-pack'),
-					'expo'   	  => esc_html__('Expo', 'bdthemes-element-pack'),
-					'quad'  	  => esc_html__('Quad', 'bdthemes-element-pack'),
-					'quart' 	  => esc_html__('Quart', 'bdthemes-element-pack'),
-					'quint' 	  => esc_html__('Quint', 'bdthemes-element-pack'),
+					'ease-out'     => esc_html__('Default', 'bdthemes-element-pack-lite'),
+					'circ' 		  => esc_html__('Circ', 'bdthemes-element-pack-lite'),
+					'cubic' 	  => esc_html__('Cubic', 'bdthemes-element-pack-lite'),
+					'expo'   	  => esc_html__('Expo', 'bdthemes-element-pack-lite'),
+					'quad'  	  => esc_html__('Quad', 'bdthemes-element-pack-lite'),
+					'quart' 	  => esc_html__('Quart', 'bdthemes-element-pack-lite'),
+					'quint' 	  => esc_html__('Quint', 'bdthemes-element-pack-lite'),
 				],
 				'prefix_class' => 'bdt-flip-box-easing-',
 			]
@@ -527,7 +527,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_transiton_duration',
 			[
-				'label'         => esc_html__('Duration', 'bdthemes-element-pack'),
+				'label'         => esc_html__('Duration', 'bdthemes-element-pack-lite'),
 				'type'          => Controls_Manager::SLIDER,
 				'range'         => [
 					'px'        => [
@@ -545,12 +545,12 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'flip_trigger',
 			[
-				'label'   => esc_html__('Trigger Type', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'   => esc_html__('Trigger Type', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'hover',
 				'options' => [
-					'hover' => esc_html__('Hover', 'bdthemes-element-pack'),
-					'click' => esc_html__('Click', 'bdthemes-element-pack'),
+					'hover' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
+					'click' => esc_html__('Click', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -561,7 +561,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_style_front',
 			[
-				'label' => __('Front', 'bdthemes-element-pack'),
+				'label' => __('Front', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -577,7 +577,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'front_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors' => [
@@ -589,24 +589,24 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'front_alignment',
 			[
-				'label' => __('Alignment', 'bdthemes-element-pack'),
+				'label' => __('Alignment', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options' => [
 					'left' => [
-						'title' => __('Left', 'bdthemes-element-pack'),
+						'title' => __('Left', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __('Center', 'bdthemes-element-pack'),
+						'title' => __('Center', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => __('Right', 'bdthemes-element-pack'),
+						'title' => __('Right', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => __('Justify', 'bdthemes-element-pack'),
+						'title' => __('Justify', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-justify',
 					],
 				],
@@ -620,20 +620,20 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'front_vertical_position',
 			[
-				'label' => __('Vertical Position', 'bdthemes-element-pack'),
+				'label' => __('Vertical Position', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options' => [
 					'top' => [
-						'title' => __('Top', 'bdthemes-element-pack'),
+						'title' => __('Top', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-v-align-top',
 					],
 					'middle' => [
-						'title' => __('Middle', 'bdthemes-element-pack'),
+						'title' => __('Middle', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-v-align-middle',
 					],
 					'bottom' => [
-						'title' => __('Bottom', 'bdthemes-element-pack'),
+						'title' => __('Bottom', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-v-align-bottom',
 					],
 				],
@@ -652,7 +652,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_tab(
 			'front_icon_style_tab',
 			[
-				'label' => __('Icon', 'bdthemes-element-pack'),
+				'label' => __('Icon', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'graphic_element' => 'icon',
 				],
@@ -662,7 +662,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'icon_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -682,7 +682,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'icon_primary_color',
 			[
-				'label' => __('Icon Color', 'bdthemes-element-pack'),
+				'label' => __('Icon Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -699,7 +699,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'icon_secondary_color',
 			[
-				'label' => __('Secondary Color', 'bdthemes-element-pack'),
+				'label' => __('Secondary Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'condition' => [
@@ -716,7 +716,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'icon_size',
 			[
-				'label' => __('Icon Size', 'bdthemes-element-pack'),
+				'label' => __('Icon Size', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -736,7 +736,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'icon_padding',
 			[
-				'label' => __('Icon Padding', 'bdthemes-element-pack'),
+				'label' => __('Icon Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .elementor-icon' => 'padding: {{SIZE}}{{UNIT}};',
@@ -757,7 +757,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'icon_rotate',
 			[
-				'label' => __('Icon Rotate', 'bdthemes-element-pack'),
+				'label' => __('Icon Rotate', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -776,7 +776,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'icon_border_width',
 			[
-				'label' => __('Border Width', 'bdthemes-element-pack'),
+				'label' => __('Border Width', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .elementor-icon' => 'border-width: {{SIZE}}{{UNIT}}',
@@ -791,7 +791,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'icon_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors' => [
@@ -810,7 +810,7 @@ class Flip_Box extends Module_Base {
 			'front_image_style_tab',
 			[
 
-				'label'     => __('Image', 'bdthemes-element-pack'),
+				'label'     => __('Image', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'graphic_element' => 'image',
 				],
@@ -820,7 +820,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'image_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -840,7 +840,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'image_width',
 			[
-				'label'      => __('Size (%)', 'bdthemes-element-pack'),
+				'label'      => __('Size (%)', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['%'],
 				'default'    => [
@@ -865,7 +865,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'image_opacity',
 			[
-				'label'   => __('Opacity (%)', 'bdthemes-element-pack'),
+				'label'   => __('Opacity (%)', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 1,
@@ -890,7 +890,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'image_border',
-				'label'     => __('Image Border', 'bdthemes-element-pack'),
+				'label'     => __('Image Border', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .bdt-flip-box-image img',
 				'condition' => [
 					'graphic_element' => 'image',
@@ -902,7 +902,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'image_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -922,7 +922,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'front_image_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Padding', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors' => [
@@ -936,7 +936,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_tab(
 			'front_title_style_tab',
 			[
-				'label' => __('Title', 'bdthemes-element-pack'),
+				'label' => __('Title', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'front_title_text!' => '',
 				],
@@ -946,7 +946,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'front_title_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -966,7 +966,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'front_title_color',
 			[
-				'label' => __('Text Color', 'bdthemes-element-pack'),
+				'label' => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-front .bdt-flip-box-layer-title' => 'color: {{VALUE}}',
@@ -979,7 +979,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'front_title_typography',
-				'label'    => __('Typography', 'bdthemes-element-pack'),
+				'label'    => __('Typography', 'bdthemes-element-pack-lite'),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bdt-flip-box-front .bdt-flip-box-layer-title',
 			]
@@ -990,7 +990,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_tab(
 			'front_description_style_tab',
 			[
-				'label' => __('Description', 'bdthemes-element-pack'),
+				'label' => __('Description', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'front_description_text!' => '',
 				],
@@ -1000,7 +1000,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'front_description_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#f5f5f5',
 				'selectors' => [
@@ -1014,7 +1014,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'front_description_typography',
-				'label'    => __('Typography', 'bdthemes-element-pack'),
+				'label'    => __('Typography', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-flip-box-front .bdt-flip-box-layer-desc',
 			]
 		);
@@ -1028,7 +1028,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_style_back',
 			[
-				'label' => __('Back', 'bdthemes-element-pack'),
+				'label' => __('Back', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1044,7 +1044,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'back_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors' => [
@@ -1056,20 +1056,20 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'back_alignment',
 			[
-				'label' => __('Alignment', 'bdthemes-element-pack'),
+				'label' => __('Alignment', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options' => [
 					'left' => [
-						'title' => __('Left', 'bdthemes-element-pack'),
+						'title' => __('Left', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __('Center', 'bdthemes-element-pack'),
+						'title' => __('Center', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => __('Right', 'bdthemes-element-pack'),
+						'title' => __('Right', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-right',
 					],
 				],
@@ -1084,20 +1084,20 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'back_vertical_position',
 			[
-				'label'       => __('Vertical Position', 'bdthemes-element-pack'),
+				'label'       => __('Vertical Position', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options'     => [
 					'top' => [
-						'title' => __('Top', 'bdthemes-element-pack'),
+						'title' => __('Top', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'middle' => [
-						'title' => __('Middle', 'bdthemes-element-pack'),
+						'title' => __('Middle', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'bottom' => [
-						'title' => __('Bottom', 'bdthemes-element-pack'),
+						'title' => __('Bottom', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -1119,7 +1119,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_tab(
 			'back_title_style_tab',
 			[
-				'label' => __('Title', 'bdthemes-element-pack'),
+				'label' => __('Title', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'back_title_text!' => '',
 				],
@@ -1129,7 +1129,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'back_title_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1149,7 +1149,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'back_title_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-back .bdt-flip-box-layer-title' => 'color: {{VALUE}}',
@@ -1165,7 +1165,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'back_title_typography',
-				'label'     => __('Typography', 'bdthemes-element-pack'),
+				'label'     => __('Typography', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .bdt-flip-box-back .bdt-flip-box-layer-title',
 				'condition' => [
 					'back_title_text!' => '',
@@ -1178,7 +1178,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_tab(
 			'back_description_style_tab',
 			[
-				'label' => __('Description', 'bdthemes-element-pack'),
+				'label' => __('Description', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'back_description_text!' => '',
 				],
@@ -1188,7 +1188,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'back_description_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1208,7 +1208,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'back_description_color',
 			[
-				'label' => __('Text Color', 'bdthemes-element-pack'),
+				'label' => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-back .bdt-flip-box-layer-desc' => 'color: {{VALUE}}',
@@ -1221,7 +1221,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'description_typography_b',
-				'label'     => __('Typography', 'bdthemes-element-pack'),
+				'label'     => __('Typography', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .bdt-flip-box-back .bdt-flip-box-layer-desc',
 			]
 		);
@@ -1235,7 +1235,7 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[
-				'label' => __('Button', 'bdthemes-element-pack'),
+				'label' => __('Button', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'button_text!' => '',
@@ -1249,14 +1249,14 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-button' => 'color: {{VALUE}};',
@@ -1267,7 +1267,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'button_background_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-button' => 'background-color: {{VALUE}};',
@@ -1287,7 +1287,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'button_border',
-				'label'       => esc_html__('Border', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-flip-box-button',
@@ -1297,7 +1297,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1309,7 +1309,7 @@ class Flip_Box extends Module_Base {
 		$this->add_responsive_control(
 			'button_text_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1322,7 +1322,7 @@ class Flip_Box extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'button_typography',
-				'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'    => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-flip-box-button',
 			]
 		);
@@ -1332,14 +1332,14 @@ class Flip_Box extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-button:hover' => 'color: {{VALUE}};',
@@ -1350,7 +1350,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-button:hover' => 'background-color: {{VALUE}};',
@@ -1369,7 +1369,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-flip-box-button:hover' => 'border-color: {{VALUE}};',
@@ -1380,7 +1380,7 @@ class Flip_Box extends Module_Base {
 		$this->add_control(
 			'button_hover_animation',
 			[
-				'label' => esc_html__('Animation', 'bdthemes-element-pack'),
+				'label' => esc_html__('Animation', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);

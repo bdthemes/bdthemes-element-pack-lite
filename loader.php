@@ -15,15 +15,6 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 
-if (!defined('BDTEP_PC')) {
-    define('BDTEP_PC', '<span class="bdt-ep-pro-control"></span>');
-} // pro control badge
-define('BDTEP_IS_PC', 'bdt-ep-disabled-control');
-define('BDTEP_LOCK_CLASS', 'bdt-ep-lock-control');
-
-if (!defined('BDTEP_LOCK')) {
-    define('BDTEP_LOCK', ' - Pro ✨');
-} // lock control badge
 /**
  * Main class for element pack
  */
@@ -76,7 +67,7 @@ class Element_Pack_Loader {
      */
     public function __clone() {
         // Cloning instances of the class is forbidden
-        _doing_it_wrong(__FUNCTION__, esc_html__('Cheatin&#8217; huh?', 'bdthemes-element-pack'), '1.6.0');
+        _doing_it_wrong(__FUNCTION__, esc_html__('Cheatin&#8217; huh?', 'bdthemes-element-pack-lite'), '1.6.0');
     }
 
     /**
@@ -87,7 +78,7 @@ class Element_Pack_Loader {
      */
     public function __wakeup() {
         // Unserializing instances of the class is forbidden
-        _doing_it_wrong(__FUNCTION__, esc_html__('Cheatin&#8217; huh?', 'bdthemes-element-pack'), '1.6.0');
+        _doing_it_wrong(__FUNCTION__, esc_html__('Cheatin&#8217; huh?', 'bdthemes-element-pack-lite'), '1.6.0');
     }
 
     /**
@@ -329,32 +320,32 @@ class Element_Pack_Loader {
             'nonce'         => wp_create_nonce('element-pack-site'),
             'data_table'    => [
                 'language' => [
-                    'lengthMenu' => sprintf(esc_html_x('Show %1s Entries', 'DataTable String', 'bdthemes-element-pack'), '_MENU_'),
-                    'info'       => sprintf(esc_html_x('Showing %1s to %2s of %3s entries', 'DataTable String', 'bdthemes-element-pack'), '_START_', '_END_', '_TOTAL_'),
-                    'search'     => esc_html_x('Search :', 'DataTable String', 'bdthemes-element-pack'),
+                    'lengthMenu' => sprintf(esc_html_x('Show %1s Entries', 'DataTable String', 'bdthemes-element-pack-lite'), '_MENU_'),
+                    'info'       => sprintf(esc_html_x('Showing %1s to %2s of %3s entries', 'DataTable String', 'bdthemes-element-pack-lite'), '_START_', '_END_', '_TOTAL_'),
+                    'search'     => esc_html_x('Search :', 'DataTable String', 'bdthemes-element-pack-lite'),
                     'paginate'   => [
-                        'previous' => esc_html_x('Previous', 'DataTable String', 'bdthemes-element-pack'),
-                        'next'     => esc_html_x('Next', 'DataTable String', 'bdthemes-element-pack'),
+                        'previous' => esc_html_x('Previous', 'DataTable String', 'bdthemes-element-pack-lite'),
+                        'next'     => esc_html_x('Next', 'DataTable String', 'bdthemes-element-pack-lite'),
                     ],
                 ],
             ],
             'contact_form'  => [
-                'sending_msg' => esc_html_x('Sending message please wait...', 'Contact Form String', 'bdthemes-element-pack'),
-                'captcha_nd'  => esc_html_x('Invisible captcha not defined!', 'Contact Form String', 'bdthemes-element-pack'),
-                'captcha_nr'  => esc_html_x('Could not get invisible captcha response!', 'Contact Form String', 'bdthemes-element-pack'),
+                'sending_msg' => esc_html_x('Sending message please wait...', 'Contact Form String', 'bdthemes-element-pack-lite'),
+                'captcha_nd'  => esc_html_x('Invisible captcha not defined!', 'Contact Form String', 'bdthemes-element-pack-lite'),
+                'captcha_nr'  => esc_html_x('Could not get invisible captcha response!', 'Contact Form String', 'bdthemes-element-pack-lite'),
 
             ],
             'mailchimp'     => [
-                'subscribing' => esc_html_x('Subscribing you please wait...', 'Mailchimp String', 'bdthemes-element-pack'),
+                'subscribing' => esc_html_x('Subscribing you please wait...', 'Mailchimp String', 'bdthemes-element-pack-lite'),
             ],
             'search'        => [ 
-                'more_result'   => esc_html_x( 'More Results', 'Search Widget String', 'bdthemes-element-pack' ),
-                'search_result' => esc_html_x( 'SEARCH RESULT', 'Search Widget String', 'bdthemes-element-pack' ),
-                'not_found'     => esc_html_x( 'not found', 'Search Widget String', 'bdthemes-element-pack' ),
+                'more_result'   => esc_html_x( 'More Results', 'Search Widget String', 'bdthemes-element-pack-lite' ),
+                'search_result' => esc_html_x( 'SEARCH RESULT', 'Search Widget String', 'bdthemes-element-pack-lite' ),
+                'not_found'     => esc_html_x( 'not found', 'Search Widget String', 'bdthemes-element-pack-lite' ),
             ],
             'words_limit'     => [ 
-				'read_more' => esc_html_x( '[read more]', 'Read More String', 'bdthemes-element-pack' ),
-				'read_less' => esc_html_x( '[read less]', 'Read Less String', 'bdthemes-element-pack' ),
+				'read_more' => esc_html_x( '[read more]', 'Read More String', 'bdthemes-element-pack-lite' ),
+				'read_less' => esc_html_x( '[read less]', 'Read Less String', 'bdthemes-element-pack-lite' ),
 			],
             'elements_data' => $this->elements_data,
         ];
@@ -374,8 +365,8 @@ class Element_Pack_Loader {
             array(
                 'ajaxurl'        => admin_url('admin-ajax.php'),
                 'language'       => substr(get_locale(), 0, 2),
-                'loadingmessage' => esc_html_x('Sending user info, please wait...', 'User Login and Register', 'bdthemes-element-pack'),
-                'unknownerror'   => esc_html_x('Unknown error, make sure access is correct!', 'User Login and Register', 'bdthemes-element-pack'),
+                'loadingmessage' => esc_html_x('Sending user info, please wait...', 'User Login and Register', 'bdthemes-element-pack-lite'),
+                'unknownerror'   => esc_html_x('Unknown error, make sure access is correct!', 'User Login and Register', 'bdthemes-element-pack-lite'),
             )
         );
 
@@ -411,9 +402,9 @@ class Element_Pack_Loader {
                 'isProActive' => element_pack_pro_installed(),
                 'upgradeUrl' => 'https://elementpack.pro/pricing/',
                 'proFeatures' => [
-                    'title' => esc_html__('Element Pack Pro', 'bdthemes-element-pack'),
-                    'content' => esc_html__('Unlock advanced dynamic content features with Element Pack Pro. Access dozens of dynamic tags to create more personalized and dynamic sites.', 'bdthemes-element-pack'),
-                    'upgradeText' => esc_html__('Upgrade to Pro', 'bdthemes-element-pack')
+                    'title' => esc_html__('Element Pack Pro', 'bdthemes-element-pack-lite'),
+                    'content' => esc_html__('Unlock advanced dynamic content features with Element Pack Pro. Access dozens of dynamic tags to create more personalized and dynamic sites.', 'bdthemes-element-pack-lite'),
+                    'upgradeText' => esc_html__('Upgrade to Pro', 'bdthemes-element-pack-lite')
                 ]
             ]
         ];
@@ -536,6 +527,7 @@ class Element_Pack_Loader {
             return '';
         }
 
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor renders and escapes this document markup itself; escaping again would corrupt the output.
         return self::elementor()->frontend->get_builder_content_for_display($id);
     }
 
@@ -568,14 +560,14 @@ class Element_Pack_Loader {
             echo wp_json_encode(
                 [
                     'loggedin' => true,
-                    'message'  => esc_html_x('Login successful, Redirecting...', 'User Login and Register', 'bdthemes-element-pack')
+                    'message'  => esc_html_x('Login successful, Redirecting...', 'User Login and Register', 'bdthemes-element-pack-lite')
                 ]
             );
         } else {
             echo wp_json_encode(
                 [
                     'loggedin' => false,
-                    'message'  => esc_html_x('Oops! Wrong username or password!', 'User Login and Register', 'bdthemes-element-pack')
+                    'message'  => esc_html_x('Oops! Wrong username or password!', 'User Login and Register', 'bdthemes-element-pack-lite')
                 ]
             );
         }

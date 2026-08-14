@@ -40,7 +40,7 @@ class Module extends Element_Pack_Module_Base {
 			self::WRAPPER_SECTION_KEY,
 			[ 
 				'tab' => $tabs,
-				'label' => BDTEP_CP . esc_html__( 'Wrapper Link', 'bdthemes-element-pack' ),
+				'label' => BDTEP_CP . esc_html__( 'Wrapper Link', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -56,9 +56,9 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			self::LEGACY_LINK_CONTROL_KEY,
 			[ 
-				'label' => esc_html__( 'Link', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => esc_html__( 'https://example.com', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'https://example.com', 'bdthemes-element-pack-lite' ),
 				'show_external' => true,
 				'default' => [ 'url' => '' ],
 				'dynamic' => [ 'active' => true ],
@@ -92,16 +92,16 @@ class Module extends Element_Pack_Module_Base {
 
 		$section = \Elementor\Modules\AtomicWidgets\Controls\Section::make()
 			->set_id( 'ep_section_wrapper_link' )
-			->set_label( esc_html__( 'Wrapper Link', 'bdthemes-element-pack' ) )
+			->set_label( esc_html__( 'Wrapper Link', 'bdthemes-element-pack-lite' ) )
 			->set_items( [] );
 
 		$controls[] = $section;
 
 		$section->add_item(
 			Link_Control::bind_to( self::ATOMIC_LINK_PROP_KEY )
-				->set_placeholder( esc_html__( 'Type or paste a URL', 'bdthemes-element-pack' ) )
-				->set_label( esc_html__( 'Wrapper Link', 'bdthemes-element-pack' ) )
-				->set_description( esc_html__( 'If the URL is not a link, the link will be opened in a new tab.', 'bdthemes-element-pack' ) )
+				->set_placeholder( esc_html__( 'Type or paste a URL', 'bdthemes-element-pack-lite' ) )
+				->set_label( esc_html__( 'Wrapper Link', 'bdthemes-element-pack-lite' ) )
+				->set_description( esc_html__( 'If the URL is not a link, the link will be opened in a new tab.', 'bdthemes-element-pack-lite' ) )
 		);
 
 		return $controls;

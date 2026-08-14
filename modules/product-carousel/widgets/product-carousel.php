@@ -23,7 +23,7 @@ class Product_Carousel extends Module_Base {
 	}
 	
 	public function get_title() {
-		return BDTEP . esc_html__( 'Product Carousel', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Product Carousel', 'bdthemes-element-pack-lite' );
 	}
 	
 	public function get_icon() {
@@ -65,7 +65,7 @@ protected function is_dynamic_content(): bool {
 	$this->start_controls_section(
 		'section_additional_settings',
 		[
-			'label' => __( 'Additional Settings', 'bdthemes-element-pack' ),
+			'label' => __( 'Additional Settings', 'bdthemes-element-pack-lite' ),
 			'tab'   => Controls_Manager::TAB_CONTENT,
 		]
 	);
@@ -75,7 +75,7 @@ protected function is_dynamic_content(): bool {
 	$this->add_control(
 		'item_match_height',
 		[
-			'label'        => __( 'Item Match Height', 'bdthemes-element-pack' ),
+			'label'        => __( 'Item Match Height', 'bdthemes-element-pack-lite' ),
 			'type'         => Controls_Manager::SWITCHER,
 			'default'      => 'yes',
 			'prefix_class' => 'bdt-item-match-height--',
@@ -87,7 +87,7 @@ protected function is_dynamic_content(): bool {
 		$widget_prefix,
 		[
 			'readmore_wrapper_option' => 'item',
-			'section_label'           => __( 'Additional Settings', 'bdthemes-element-pack' ),
+			'section_label'           => __( 'Additional Settings', 'bdthemes-element-pack-lite' ),
 			'section_wrapper'         => false,
 		]
 	);
@@ -100,7 +100,7 @@ protected function is_dynamic_content(): bool {
 	$this->start_controls_section(
 		'section_content_navigation',
 		[
-			'label' => __( 'Navigation', 'bdthemes-element-pack' ),
+			'label' => __( 'Navigation', 'bdthemes-element-pack-lite' ),
 		]
 	);
 
@@ -128,7 +128,7 @@ protected function is_dynamic_content(): bool {
 	$this->start_controls_section(
 		'section_style_navigation',
 		[
-			'label'      => __( 'Navigation', 'bdthemes-element-pack' ),
+			'label'      => __( 'Navigation', 'bdthemes-element-pack-lite' ),
 			'tab'        => Controls_Manager::TAB_STYLE,
 			'conditions' => [
 				'relation' => 'or',
@@ -279,7 +279,7 @@ protected function is_dynamic_content(): bool {
 		var hideArrowMobile = settings.hide_arrow_on_mobile ? ' bdt-visible@m' : '';
 		var rmIconHTML = elementor.helpers.renderIcon( view, settings.readmore_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
 		var iconAlign  = settings.icon_align || 'right';
-		var readmoreLabel = settings.readmore_text || '<?php echo esc_js( __( 'Read More', 'bdthemes-element-pack' ) ); ?>';
+		var readmoreLabel = settings.readmore_text || '<?php echo esc_js( __( 'Read More', 'bdthemes-element-pack-lite' ) ); ?>';
 		#>
 		<div id="<# print( carouselId ); #>" class="<# print( carouselClass ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
 			<div class="swiper-carousel swiper" role="region" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $this->get_title() ); ?>" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">

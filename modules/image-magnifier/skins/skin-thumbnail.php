@@ -15,7 +15,7 @@ class Skin_Thumbnail extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Thumbnail', 'bdthemes-element-pack' );
+		return __( 'Thumbnail', 'bdthemes-element-pack-lite' );
 	}
 
 	public function render_navigation($settings) {

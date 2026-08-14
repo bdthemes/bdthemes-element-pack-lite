@@ -20,7 +20,7 @@ class Dark_Mode extends Module_Base {
     }
 
     public function get_title() {
-        return BDTEP . esc_html__('Dark Mode', 'bdthemes-element-pack');
+        return BDTEP . esc_html__('Dark Mode', 'bdthemes-element-pack-lite');
     }
 
     public function get_icon() {
@@ -66,19 +66,19 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_section(
             'section_layout',
             [
-                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack'),
+                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'default_mode',
             [
-                'label'   => esc_html__('Default Mode', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Default Mode', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'light',
                 'options' => [
-                    'light' => esc_html__('Light', 'bdthemes-element-pack'),
-                    'dark'  => esc_html__('Dark', 'bdthemes-element-pack'),
+                    'light' => esc_html__('Light', 'bdthemes-element-pack-lite'),
+                    'dark'  => esc_html__('Dark', 'bdthemes-element-pack-lite'),
                 ],
                 'frontend_available' => true,
                 'render_type'        => 'none'
@@ -88,14 +88,14 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'toggle_position',
             [
-                'label'   => esc_html__('Toggle Position', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Toggle Position', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'bottom-right',
                 'options' => [
-                    'top-left'     => esc_html__('Top Start', 'bdthemes-element-pack'),
-                    'top-right'    => esc_html__('Top End', 'bdthemes-element-pack'),
-                    'bottom-left'  => esc_html__('Bottom Start', 'bdthemes-element-pack'),
-                    'bottom-right' => esc_html__('Bottom End', 'bdthemes-element-pack'),
+                    'top-left'     => esc_html__('Top Start', 'bdthemes-element-pack-lite'),
+                    'top-right'    => esc_html__('Top End', 'bdthemes-element-pack-lite'),
+                    'bottom-left'  => esc_html__('Bottom Start', 'bdthemes-element-pack-lite'),
+                    'bottom-right' => esc_html__('Bottom End', 'bdthemes-element-pack-lite'),
                 ],
                 'frontend_available' => true,
                 'render_type'        => 'none'
@@ -105,7 +105,7 @@ class Dark_Mode extends Module_Base {
         $this->add_responsive_control(
             'icon_horizontal_offset',
             [
-                'label' => esc_html__('Horizontal Offset', 'bdthemes-element-pack'),
+                'label' => esc_html__('Horizontal Offset', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -123,7 +123,7 @@ class Dark_Mode extends Module_Base {
         $this->add_responsive_control(
             'icon_vertical_offset',
             [
-                'label' => esc_html__('Vertical Offset', 'bdthemes-element-pack'),
+                'label' => esc_html__('Vertical Offset', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -141,7 +141,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'time',
             [
-                'label' => esc_html__('Animation Time (ms)', 'bdthemes-element-pack'),
+                'label' => esc_html__('Animation Time (ms)', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 //'size_units' => 's',
                 'range' => [
@@ -162,7 +162,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'ignore_element',
             [
-                'label'       => esc_html__('Ignore Elements', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Ignore Elements', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXTAREA,
                 'placeholder' => '.my-image, .my-widget',
                 'dynamic'     => [
@@ -177,7 +177,7 @@ class Dark_Mode extends Module_Base {
             'ignore_element_notes',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__('Note: add Class ID of elements to exempt them from dark mode effect, i.e. images, special background, etc.', 'bdthemes-element-pack'),
+                'raw'             => esc_html__('Note: add Class ID of elements to exempt them from dark mode effect, i.e. images, special background, etc.', 'bdthemes-element-pack-lite'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 
             ]
@@ -186,7 +186,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'saveInCookies',
             [
-                'label'              => esc_html__('Save User Action', 'bdthemes-element-pack'),
+                'label'              => esc_html__('Save User Action', 'bdthemes-element-pack-lite'),
                 'type'               => Controls_Manager::SWITCHER,
                 'return_value'       => 'yes',
                 'frontend_available' => true,
@@ -197,7 +197,7 @@ class Dark_Mode extends Module_Base {
             'save_cookies_notes',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__('Note: saves the last user action on the browser, i.e. loads the last browser condition whether dark mode was on/off. Cookie is exempted on Elementor Editor.', 'bdthemes-element-pack'),
+                'raw'             => esc_html__('Note: saves the last user action on the browser, i.e. loads the last browser condition whether dark mode was on/off. Cookie is exempted on Elementor Editor.', 'bdthemes-element-pack-lite'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 
             ]
@@ -206,7 +206,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'autoMatchOsTheme',
             [
-                'label'              => esc_html__('Auto Match On Theme', 'bdthemes-element-pack'),
+                'label'              => esc_html__('Auto Match On Theme', 'bdthemes-element-pack-lite'),
                 'type'               => Controls_Manager::SWITCHER,
                 'return_value'       => 'yes',
                 'frontend_available' => true,
@@ -218,7 +218,7 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_section(
             'section_style',
             [
-                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack'),
+                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -228,14 +228,14 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_tab(
             'tab_day_mode_normal',
             [
-                'label' => esc_html__('Day Mode', 'bdthemes-element-pack'),
+                'label' => esc_html__('Day Mode', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'default_background',
             [
-                'label'              => esc_html__('Background', 'bdthemes-element-pack'),
+                'label'              => esc_html__('Background', 'bdthemes-element-pack-lite'),
                 'type'               => Controls_Manager::COLOR,
                 'default'            => '#fff',
                 'frontend_available' => true,
@@ -245,7 +245,7 @@ class Dark_Mode extends Module_Base {
         // $this->add_control(
         //     'icon_color_day',
         //     [
-        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack'),
+        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
         //         'type' => Controls_Manager::COLOR,
         //         'default' => '#fff',
         //         'selectors' => [
@@ -259,14 +259,14 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_tab(
             'tab_dark_mode_normal',
             [
-                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack'),
+                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'mix_color',
             [
-                'label'              => esc_html__('Content Mix Color', 'bdthemes-element-pack'),
+                'label'              => esc_html__('Content Mix Color', 'bdthemes-element-pack-lite'),
                 'type'               => Controls_Manager::COLOR,
                 'default'            => '#fff',
                 'frontend_available' => true,
@@ -276,7 +276,7 @@ class Dark_Mode extends Module_Base {
         // $this->add_control(
         //     'icon_color_dark',
         //     [
-        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack'),
+        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
         //         'type' => Controls_Manager::COLOR,
         //         'default' => '#000',
         //         'selectors' => [
@@ -296,7 +296,7 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_section(
             'toggle_button_style',
             [
-                'label' => esc_html__('Toggle Button', 'bdthemes-element-pack'),
+                'label' => esc_html__('Toggle Button', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -304,7 +304,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'icon_size',
             [
-                'label' => esc_html__('Icon Size', 'bdthemes-element-pack'),
+                'label' => esc_html__('Icon Size', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -326,7 +326,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'icon_button_width',
             [
-                'label' => esc_html__('Toggle Size', 'bdthemes-element-pack'),
+                'label' => esc_html__('Toggle Size', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -348,7 +348,7 @@ class Dark_Mode extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'icon_border',
-                'label'    => esc_html__('Border', 'bdthemes-element-pack'),
+                'label'    => esc_html__('Border', 'bdthemes-element-pack-lite'),
                 'selector' => '.darkmode-toggle',
             ]
         );
@@ -356,7 +356,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'icon_border_radius',
             [
-                'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -370,7 +370,7 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_tab(
             'toggle_button_day_mode',
             [
-                'label' => esc_html__('Day Mode', 'bdthemes-element-pack'),
+                'label' => esc_html__('Day Mode', 'bdthemes-element-pack-lite'),
             ]
         );
 
@@ -379,7 +379,7 @@ class Dark_Mode extends Module_Base {
         // $this->add_control(
         //     'icon_color_day',
         //     [
-        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack'),
+        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
         //         'type' => Controls_Manager::COLOR,
         //         'default' => '#fff',
         //         'selectors' => [
@@ -391,7 +391,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'day_mode_icon_background',
             [
-                'label'     => esc_html__('Icon Background', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Icon Background', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#100f2c',
                 'selectors' => [
@@ -405,7 +405,7 @@ class Dark_Mode extends Module_Base {
         $this->start_controls_tab(
             'toggle_button_dark_mode',
             [
-                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack'),
+                'label' => esc_html__('Dark Mode', 'bdthemes-element-pack-lite'),
             ]
         );
 
@@ -413,7 +413,7 @@ class Dark_Mode extends Module_Base {
         // $this->add_control(
         //     'icon_color_dark',
         //     [
-        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack'),
+        //         'label' => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
         //         'type' => Controls_Manager::COLOR,
         //         'default' => '#000',
         //         'selectors' => [
@@ -425,7 +425,7 @@ class Dark_Mode extends Module_Base {
         $this->add_control(
             'dark_mode_icon_background',
             [
-                'label'     => esc_html__('Icon Background', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Icon Background', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [

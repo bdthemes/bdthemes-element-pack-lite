@@ -30,7 +30,7 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
 
         // Mirrors the capability the import itself requires.
         if ( ! current_user_can( 'edit_posts' ) ) {
-            wp_send_json_error( [ 'message' => esc_html__( 'Access Denied', 'bdthemes-element-pack' ) ], 403 );
+            wp_send_json_error( [ 'message' => esc_html__( 'Access Denied', 'bdthemes-element-pack-lite' ) ], 403 );
         }
 
         $import_id = isset( $_REQUEST['import_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['import_id'] ) ) : '';
@@ -55,14 +55,14 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
                 $editor_post_id = absint( $data['editor_post_id'] );
 
                 if ( ! get_post( $editor_post_id ) ) {
-                    throw new \Exception( esc_html__( 'Post not found', 'bdthemes-element-pack' ) );
+                    throw new \Exception( esc_html__( 'Post not found', 'bdthemes-element-pack-lite' ) );
                 }
 
                 \Elementor\Plugin::instance()->db->switch_to_post( $editor_post_id );
             }
 
             if ( empty( $data['template_id'] ) ) {
-                throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack' ) );
+                throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack-lite' ) );
             }
 
             return $this->get_template_data( $data );
@@ -74,11 +74,11 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         $result = $this->findDemo($args['template_id']);
 
         if(!is_array($result) || !isset($result['json_url'])){
-            throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack' ) );
+            throw new \Exception( esc_html__( 'Template id missing', 'bdthemes-element-pack-lite' ) );
         }
 
         if($result['is_pro'] == 1 && !$this->packLicenseActivated){
-            throw new \Exception( esc_html__( 'required_activated_license', 'bdthemes-element-pack' ) );
+            throw new \Exception( esc_html__( 'required_activated_license', 'bdthemes-element-pack-lite' ) );
         }
 
         $args['demo_json'] = $result['json_url'];
@@ -127,13 +127,15 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
     public function get_layouts()
     {
 
-        if ( !current_user_can('manage_options') ) {
-            return;
+        check_ajax_referer( 'ep-template-library', 'nonce' );
+
+        if ( ! current_user_can( 'edit_posts' ) ) {
+            wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'bdthemes-element-pack-lite' ) ), 403 );
         }
 
         isset($_REQUEST['tab']) || exit();
 
-        $tab = (empty($_REQUEST['tab']) ? 'bdt_elementpack_page' : $_REQUEST['tab']);
+        $tab = empty($_REQUEST['tab']) ? 'bdt_elementpack_page' : sanitize_key( wp_unslash( $_REQUEST['tab'] ) );
 
         if($tab == 'bdt_elementpack_block'){
             $this->demoType = 2;
@@ -162,9 +164,15 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
     }
 
     public function sync_now(){
+        check_ajax_referer( 'ep-template-library', 'nonce' );
+
+        if ( ! current_user_can( 'edit_posts' ) ) {
+            wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'bdthemes-element-pack-lite' ) ), 403 );
+        }
+
         $this->createTemplateTables();
 
-        echo json_encode(
+        echo wp_json_encode(
             array(
                 'success' => true,
                 'data'    => array(),

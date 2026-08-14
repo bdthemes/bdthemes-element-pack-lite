@@ -42,7 +42,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
             add_submenu_page(
                 self::PAGE_ID,
                 BDTEP_TITLE,
-                esc_html__( 'Template Library', 'bdthemes-element-pack' ),
+                esc_html__( 'Template Library', 'bdthemes-element-pack-lite' ),
                 'manage_options',
                 'element-pack-template-library',
                 [ $this, 'plugin_page' ]
@@ -65,7 +65,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
      */
     private function verify_ajax_access() {
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to do this.', 'bdthemes-element-pack' ) ), 403 );
+            wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to do this.', 'bdthemes-element-pack-lite' ) ), 403 );
         }
         check_ajax_referer( 'ep_elementor_demo_importer', 'nonce' );
     }
@@ -106,11 +106,11 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
             }
 
             if ( ! is_array( $response_data ) || ! is_array( $sourceData ) ) {
-                echo json_encode(
+                echo wp_json_encode(
                     array(
                         'success' => false,
                         'id'      => '',
-                        'edittxt' => esc_html__( 'Fail to upload. Try again.', 'bdthemes-element-pack' )
+                        'edittxt' => esc_html__( 'Fail to upload. Try again.', 'bdthemes-element-pack-lite' )
                     )
                 );
                 wp_die();
@@ -148,22 +148,22 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
                             update_post_meta( $new_post_id, '_wp_page_template', ! empty( $response_data['page_template'] ) ? $response_data['page_template'] : 'elementor_header_footer' );
                         }
 
-                        echo json_encode(
+                        echo wp_json_encode(
                             array(
                                 'success' => true,
                                 'id'      => $new_post_id,
-                                'edittxt' => ( $importType == 'page' ) ? esc_html__( 'Edit Page', 'bdthemes-element-pack' ) : esc_html__( 'Edit Template', 'bdthemes-element-pack' )
+                                'edittxt' => ( $importType == 'page' ) ? esc_html__( 'Edit Page', 'bdthemes-element-pack-lite' ) : esc_html__( 'Edit Template', 'bdthemes-element-pack-lite' )
                             )
                         );
                         wp_die();
                     }
                 } else {
 
-                    echo json_encode(
+                    echo wp_json_encode(
                         array(
                             'success' => true,
                             'id'      => $template_id,
-                            'edittxt' => esc_html__( 'Edit Template', 'bdthemes-element-pack' )
+                            'edittxt' => esc_html__( 'Edit Template', 'bdthemes-element-pack-lite' )
                         )
                     );
                     wp_die();
@@ -171,11 +171,11 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
             }
         }
 
-        echo json_encode(
+        echo wp_json_encode(
             array(
                 'success' => false,
                 'id'      => '',
-                'edittxt' => esc_html__( 'Fail to upload. Try again', 'bdthemes-element-pack' )
+                'edittxt' => esc_html__( 'Fail to upload. Try again', 'bdthemes-element-pack-lite' )
             )
         );
         wp_die();
@@ -376,7 +376,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
         $html = ob_get_contents();
         ob_end_clean();
-        echo json_encode(
+        echo wp_json_encode(
             array(
                 'success'   => true,
                 'data'      => $html,
@@ -393,7 +393,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
         $this->createTemplateTables();
 
-        echo json_encode(
+        echo wp_json_encode(
             array(
                 'success' => true,
                 'data'    => array(),
@@ -433,7 +433,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
             $data['site_url'] = site_url();
 
             if($this->sendMail($data)){
-                echo json_encode(
+                echo wp_json_encode(
                     array(
                         'success' => true,
                         'data'    => array(),
@@ -443,7 +443,7 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
             };
         }
 
-        echo json_encode(
+        echo wp_json_encode(
             array(
                 'success' => false,
                 'data'    => array(),

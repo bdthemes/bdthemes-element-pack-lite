@@ -74,20 +74,20 @@ class Element_Pack_Rooten_Theme_Compatibility {
     public function rooten_custom_template_posttype() {
 
         $labels = array(
-            'name'               => __('Rooten Custom Template', 'bdthemes-element-pack'),
-            'singular_name'      => __('Rooten Custom Template', 'bdthemes-element-pack'),
-            'menu_name'          => __('Rooten Custom Template', 'bdthemes-element-pack'),
-            'name_admin_bar'     => __('Rooten Custom Template', 'bdthemes-element-pack'),
-            'add_new'            => __('Add New', 'bdthemes-element-pack'),
-            'add_new_item'       => __('Add New Custom Template', 'bdthemes-element-pack'),
-            'new_item'           => __('New Custom Template', 'bdthemes-element-pack'),
-            'edit_item'          => __('Edit Custom Template', 'bdthemes-element-pack'),
-            'view_item'          => __('View Custom Template', 'bdthemes-element-pack'),
-            'all_items'          => __('All Rooten Custom Templates', 'bdthemes-element-pack'),
-            'search_items'       => __('Search Custom Templates', 'bdthemes-element-pack'),
-            'parent_item_colon'  => __('Parent Custom Templates:', 'bdthemes-element-pack'),
-            'not_found'          => __('No Custom Templates found.', 'bdthemes-element-pack'),
-            'not_found_in_trash' => __('No Custom Templates found in Trash.', 'bdthemes-element-pack'),
+            'name'               => __('Rooten Custom Template', 'bdthemes-element-pack-lite'),
+            'singular_name'      => __('Rooten Custom Template', 'bdthemes-element-pack-lite'),
+            'menu_name'          => __('Rooten Custom Template', 'bdthemes-element-pack-lite'),
+            'name_admin_bar'     => __('Rooten Custom Template', 'bdthemes-element-pack-lite'),
+            'add_new'            => __('Add New', 'bdthemes-element-pack-lite'),
+            'add_new_item'       => __('Add New Custom Template', 'bdthemes-element-pack-lite'),
+            'new_item'           => __('New Custom Template', 'bdthemes-element-pack-lite'),
+            'edit_item'          => __('Edit Custom Template', 'bdthemes-element-pack-lite'),
+            'view_item'          => __('View Custom Template', 'bdthemes-element-pack-lite'),
+            'all_items'          => __('All Rooten Custom Templates', 'bdthemes-element-pack-lite'),
+            'search_items'       => __('Search Custom Templates', 'bdthemes-element-pack-lite'),
+            'parent_item_colon'  => __('Parent Custom Templates:', 'bdthemes-element-pack-lite'),
+            'not_found'          => __('No Custom Templates found.', 'bdthemes-element-pack-lite'),
+            'not_found_in_trash' => __('No Custom Templates found in Trash.', 'bdthemes-element-pack-lite'),
         );
 
         $args = array(
@@ -115,24 +115,24 @@ class Element_Pack_Rooten_Theme_Compatibility {
     public function register_admin_menu() {
         add_submenu_page(
             'themes.php',
-            __('Rooten Custom Template', 'bdthemes-element-pack'),
-            __('Rooten Custom Template', 'bdthemes-element-pack'),
+            __('Rooten Custom Template', 'bdthemes-element-pack-lite'),
+            __('Rooten Custom Template', 'bdthemes-element-pack-lite'),
             'edit_pages',
             'edit.php?post_type=bdt-custom-template'
         );
     }
 
     public function rooten_custom_template_metabox() {
-        add_meta_box('_rooten_custom_template', esc_html__('Template Settings', 'bdthemes-element-pack'), [$this, 'rooten_custom_template_metabox_callback'], 'bdt-custom-template', 'side');
+        add_meta_box('_rooten_custom_template', esc_html__('Template Settings', 'bdthemes-element-pack-lite'), [$this, 'rooten_custom_template_metabox_callback'], 'bdt-custom-template', 'side');
     }
 
     public function rooten_custom_template_metabox_callback($post) {
         wp_nonce_field('rooten_custom_template_nonce_action', 'rooten_custom_template_nonce_field');
         $templates  = [
-            'header' => esc_html__('Header', 'bdthemes-element-pack'),
-            'footer' => esc_html__('Footer', 'bdthemes-element-pack'),
-            '404'    => esc_html__('404 Page', 'bdthemes-element-pack'),
-            'others' => esc_html__('Other', 'bdthemes-element-pack'),
+            'header' => esc_html__('Header', 'bdthemes-element-pack-lite'),
+            'footer' => esc_html__('Footer', 'bdthemes-element-pack-lite'),
+            '404'    => esc_html__('404 Page', 'bdthemes-element-pack-lite'),
+            'others' => esc_html__('Other', 'bdthemes-element-pack-lite'),
         ];
         $saved_page = get_post_meta($post->ID, 'rooten_template_type', true);
         $content    = '';
@@ -155,7 +155,7 @@ class Element_Pack_Rooten_Theme_Compatibility {
     }
 
     private function is_secured($nonce_field, $action, $post_id) {
-        $nonce = isset($_POST[$nonce_field]) ? $_POST[$nonce_field] : '';
+        $nonce = isset($_POST[$nonce_field]) ? sanitize_text_field(wp_unslash($_POST[$nonce_field])) : '';
 
         if ( $nonce == '' ) {
             return false;
@@ -234,7 +234,7 @@ class Element_Pack_Rooten_Theme_Compatibility {
 
         unset($columns['date']);
 
-        $columns['shortcode'] = __('Shortcode', 'bdthemes-element-pack');
+        $columns['shortcode'] = __('Shortcode', 'bdthemes-element-pack-lite');
         $columns['date']      = $date_column;
 
         return $columns;
@@ -250,17 +250,10 @@ class Element_Pack_Rooten_Theme_Compatibility {
 
         switch ($column) {
             case 'shortcode':
-                ob_start();
-                ?>
-                <span class="bdt-shortcode-col-wrap">
-                    <input type="text" onfocus="this.select();" readonly="readonly"
-                           value="[rooten_custom_template id='<?php echo esc_attr($post_id); ?>']"
-                           class="regular-text code">
-                </span>
-
-                <?php
-
-                ob_get_contents();
+                printf(
+                    '<span class="bdt-shortcode-col-wrap"><input type="text" onfocus="this.select();" readonly="readonly" value="%s" class="regular-text code"></span>',
+                    esc_attr( "[rooten_custom_template id='" . $post_id . "']" )
+                );
                 break;
         }
     }
@@ -295,6 +288,7 @@ class Element_Pack_Rooten_Theme_Compatibility {
 
         // return self::$elementor_instance->frontend->get_builder_content_for_display($id);
         // Using the correct Elementor method to get builder content
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor renders and escapes this document markup itself; escaping again would corrupt the output.
         return Plugin::instance()->frontend->get_builder_content_for_display($id, true);
     }
 }

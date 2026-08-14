@@ -17,7 +17,7 @@ class Fluent_Forms extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Fluent Forms', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Fluent Forms', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -52,14 +52,14 @@ class Fluent_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'fluent_form',
 			[
-				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_fluent_forms_options(),
 			]
@@ -71,7 +71,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_label_style',
             [
-                'label' => __('Labels', 'bdthemes-element-pack'),
+                'label' => __('Labels', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -79,7 +79,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'text_color_label',
             [
-                'label' => __('Text Color', 'bdthemes-element-pack'),
+                'label' => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fluent-forms .ff-el-group label' => 'color: {{VALUE}}',
@@ -91,7 +91,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'typography_label',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms .ff-el-group label',
             ]
         );
@@ -101,7 +101,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_fields_style',
             [
-                'label' => __('Input & Textarea', 'bdthemes-element-pack'),
+                'label' => __('Input & Textarea', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -109,19 +109,19 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'input_alignment',
             [
-                'label' => __('Alignment', 'bdthemes-element-pack'),
+                'label' => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -137,14 +137,14 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_tab(
             'tab_fields_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'field_bg_color',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => __('Background Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -156,7 +156,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'field_text_color',
             [
-                'label' => __('Text Color', 'bdthemes-element-pack'),
+                'label' => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -169,7 +169,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'field_border',
-                'label' => __('Border', 'bdthemes-element-pack'),
+                'label' => __('Border', 'bdthemes-element-pack-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .bdt-fluent-forms .ff-el-group textarea, {{WRAPPER}} .bdt-fluent-forms .ff-el-group select',
@@ -180,7 +180,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'field_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -192,7 +192,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'field_text_indent',
             [
-                'label' => __('Text Indent', 'bdthemes-element-pack'),
+                'label' => __('Text Indent', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -217,7 +217,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'input_width',
             [
-                'label' => __('Input Width', 'bdthemes-element-pack'),
+                'label' => __('Input Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -236,7 +236,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'input_height',
             [
-                'label' => __('Input Height', 'bdthemes-element-pack'),
+                'label' => __('Input Height', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -255,7 +255,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'textarea_width',
             [
-                'label' => __('Textarea Width', 'bdthemes-element-pack'),
+                'label' => __('Textarea Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -274,7 +274,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'textarea_height',
             [
-                'label' => __('Textarea Height', 'bdthemes-element-pack'),
+                'label' => __('Textarea Height', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -293,7 +293,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'field_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => __('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -305,7 +305,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'field_spacing',
             [
-                'label' => __('Spacing', 'bdthemes-element-pack'),
+                'label' => __('Spacing', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -325,7 +325,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'field_typography',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .bdt-fluent-forms .ff-el-group textarea, {{WRAPPER}} .bdt-fluent-forms .ff-el-group select',
                 'separator' => 'before',
             ]
@@ -345,14 +345,14 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_tab(
             'tab_fields_focus',
             [
-                'label' => __('Focus', 'bdthemes-element-pack'),
+                'label' => __('Focus', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'field_bg_color_focus',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => __('Background Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -365,7 +365,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'focus_input_border',
-                'label' => __('Border', 'bdthemes-element-pack'),
+                'label' => __('Border', 'bdthemes-element-pack-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .bdt-fluent-forms .ff-el-group textarea:focus',
@@ -390,7 +390,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_placeholder_style',
             [
-                'label' => __('Placeholder', 'bdthemes-element-pack'),
+                'label' => __('Placeholder', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -398,7 +398,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'text_color_placeholder',
             [
-                'label' => __('Text Color', 'bdthemes-element-pack'),
+                'label' => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fluent-forms .ff-el-group input::-webkit-input-placeholder, {{WRAPPER}} .bdt-fluent-forms .ff-el-group textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
@@ -411,7 +411,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_radio_checkbox_style',
             [
-                'label' => __('Radio & Checkbox', 'bdthemes-element-pack'),
+                'label' => __('Radio & Checkbox', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -419,10 +419,10 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'custom_radio_checkbox',
             [
-                'label' => __('Custom Styles', 'bdthemes-element-pack'),
+                'label' => __('Custom Styles', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'bdthemes-element-pack'),
-                'label_off' => __('No', 'bdthemes-element-pack'),
+                'label_on' => __('Yes', 'bdthemes-element-pack-lite'),
+                'label_off' => __('No', 'bdthemes-element-pack-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -430,7 +430,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'radio_checkbox_size',
             [
-                'label' => __('Size', 'bdthemes-element-pack'),
+                'label' => __('Size', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => '15',
@@ -458,7 +458,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_tab(
             'radio_checkbox_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -468,7 +468,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'radio_checkbox_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -483,7 +483,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'checkbox_border_width',
             [
-                'label' => __('Border Width', 'bdthemes-element-pack'),
+                'label' => __('Border Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -505,7 +505,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'checkbox_border_color',
             [
-                'label' => __('Border Color', 'bdthemes-element-pack'),
+                'label' => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -520,7 +520,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'checkbox_heading',
             [
-                'label' => __('Checkbox', 'bdthemes-element-pack'),
+                'label' => __('Checkbox', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -531,7 +531,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'checkbox_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -546,7 +546,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'radio_heading',
             [
-                'label' => __('Radio Buttons', 'bdthemes-element-pack'),
+                'label' => __('Radio Buttons', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -557,7 +557,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'radio_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -574,7 +574,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_tab(
             'radio_checkbox_checked',
             [
-                'label' => __('Checked', 'bdthemes-element-pack'),
+                'label' => __('Checked', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -584,7 +584,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'radio_checkbox_color_checked',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -605,7 +605,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_break_style',
             [
-                'label' => __('Section Break Style', 'bdthemes-element-pack'),
+                'label' => __('Section Break Style', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -613,7 +613,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'section_break_label',
             [
-                'label' => __('Label', 'bdthemes-element-pack'),
+                'label' => __('Label', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING
             ]
         );
@@ -621,7 +621,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'section_break_label_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -634,7 +634,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'section_break_label_typography',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '.bdt-fluent-forms .ff-el-section-break .ff-el-section-title',
                 'separator' => 'before',
             ]
@@ -643,7 +643,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'section_break_label_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => __('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -655,7 +655,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'section_break_label_margin',
             [
-                'label' => __('Margin', 'bdthemes-element-pack'),
+                'label' => __('Margin', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -667,7 +667,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'section_break_description',
             [
-                'label' => __('Description', 'bdthemes-element-pack'),
+                'label' => __('Description', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before'
             ]
@@ -676,7 +676,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'section_break_description_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -689,7 +689,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'section_break_description_typography',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms .ff-el-section-break div',
                 'separator' => 'before',
             ]
@@ -698,7 +698,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'section_break_description_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => __('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -710,7 +710,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'section_break_description_margin',
             [
-                'label' => __('Margin', 'bdthemes-element-pack'),
+                'label' => __('Margin', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -722,19 +722,19 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'section_break_alignment',
             [
-                'label' => __('Alignment', 'bdthemes-element-pack'),
+                'label' => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-h-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -747,7 +747,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_address_line_style',
             [
-                'label' => __('Address Line Style', 'bdthemes-element-pack'),
+                'label' => __('Address Line Style', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -755,7 +755,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'address_line_label_color',
             [
-                'label' => __('Label Color', 'bdthemes-element-pack'),
+                'label' => __('Label Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -768,7 +768,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'address_line_label_typography',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .fluent-address label',
             ]
         );
@@ -778,7 +778,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_submit_button_style',
             [
-                'label' => __('Submit Button', 'bdthemes-element-pack'),
+                'label' => __('Submit Button', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -786,19 +786,19 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'button_align',
             [
-                'label' => __('Alignment', 'bdthemes-element-pack'),
+                'label' => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-h-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -813,12 +813,12 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'button_width_type',
             [
-                'label' => __('Width', 'bdthemes-element-pack'),
+                'label' => __('Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'custom',
                 'options' => [
-                    'full-width' => __('Full Width', 'bdthemes-element-pack'),
-                    'custom' => __('Custom', 'bdthemes-element-pack'),
+                    'full-width' => __('Full Width', 'bdthemes-element-pack-lite'),
+                    'custom' => __('Custom', 'bdthemes-element-pack-lite'),
                 ],
                 'prefix_class' => 'bdt-fluentform-form-button-',
             ]
@@ -827,7 +827,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'button_width',
             [
-                'label' => __('Width', 'bdthemes-element-pack'),
+                'label' => __('Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -851,14 +851,14 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_tab(
             'tab_button_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'button_bg_color_normal',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => __('Background Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#409EFF',
                 'selectors' => [
@@ -870,7 +870,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'button_text_color_normal',
             [
-                'label' => __('Text Color', 'bdthemes-element-pack'),
+                'label' => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -883,7 +883,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'button_border_normal',
-                'label' => __('Border', 'bdthemes-element-pack'),
+                'label' => __('Border', 'bdthemes-element-pack-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms .ff-el-group .ff-btn-submit',
@@ -893,7 +893,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'button_border_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -905,7 +905,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'button_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => __('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -917,7 +917,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'button_margin',
             [
-                'label' => __('Margin Top', 'bdthemes-element-pack'),
+                'label' => __('Margin Top', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -937,7 +937,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'button_typography',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms .ff-el-group .ff-btn-submit',
                 'separator' => 'before',
             ]
@@ -957,14 +957,14 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_tab(
             'tab_button_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'button_bg_color_hover',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => __('Background Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -976,7 +976,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'button_text_color_hover',
             [
-                'label' => __('Text Color', 'bdthemes-element-pack'),
+                'label' => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -988,7 +988,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'button_border_color_hover',
             [
-                'label' => __('Border Color', 'bdthemes-element-pack'),
+                'label' => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1011,7 +1011,7 @@ class Fluent_Forms extends Module_Base {
             $this->start_controls_section(
                 'section_pagination_style',
                 [
-                    'label' => __('Pagination', 'bdthemes-element-pack'),
+                    'label' => __('Pagination', 'bdthemes-element-pack-lite'),
                     'tab' => Controls_Manager::TAB_STYLE,
                 ]
             );
@@ -1021,14 +1021,14 @@ class Fluent_Forms extends Module_Base {
                 $this->start_controls_tab(
                     'form_progressbar_normal',
                     [
-                        'label' => __('Normal', 'bdthemes-element-pack'),
+                        'label' => __('Normal', 'bdthemes-element-pack-lite'),
                     ]
                 );
     
                 $this->add_control(
                     'pagination_progressbar_label',
                     [
-                        'label' => __('Label', 'bdthemes-element-pack'),
+                        'label' => __('Label', 'bdthemes-element-pack-lite'),
                         'type' => Controls_Manager::HEADING
                     ]
                 );
@@ -1036,10 +1036,10 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'show_label',
                     [
-                        'label'     => __( 'Show Label', 'bdthemes-element-pack' ),
+                        'label'     => __( 'Show Label', 'bdthemes-element-pack-lite' ),
                         'type'      => Controls_Manager::SWITCHER,
-                        'label_on'  => __( 'Show', 'bdthemes-element-pack' ),
-                        'label_off' => __( 'Hide', 'bdthemes-element-pack' ),
+                        'label_on'  => __( 'Show', 'bdthemes-element-pack-lite' ),
+                        'label_off' => __( 'Hide', 'bdthemes-element-pack-lite' ),
                         'return_value' => 'yes',
                         'default'   => 'yes',
                         'prefix_class'  => 'bdt-ff-step-header-'
@@ -1049,7 +1049,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'label_color',
                     [
-                        'label'     => __( 'Label Color', 'bdthemes-element-pack' ),
+                        'label'     => __( 'Label Color', 'bdthemes-element-pack-lite' ),
                         'type'      => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .ff-el-progress-status' => 'color: {{VALUE}}',
@@ -1064,7 +1064,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Typography::get_type(),
                     [
                         'name' => 'label_typography',
-                        'label' => __( 'Typography', 'bdthemes-element-pack' ),
+                        'label' => __( 'Typography', 'bdthemes-element-pack-lite' ),
                         'selector' => '{{WRAPPER}} .ff-el-progress-status',
                         'condition' => [
                             'show_label'    => 'yes'
@@ -1075,7 +1075,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'label_space',
                     [
-                        'label' => __( 'Spacing', 'bdthemes-element-pack' ),
+                        'label' => __( 'Spacing', 'bdthemes-element-pack-lite' ),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => [ 'px', '%', 'em' ],
                         'selectors' => [
@@ -1091,7 +1091,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'pagination_progressbar',
                     [
-                        'label' => __('Progressbar', 'bdthemes-element-pack'),
+                        'label' => __('Progressbar', 'bdthemes-element-pack-lite'),
                         'type' => Controls_Manager::HEADING,
                     ]
                 );
@@ -1099,10 +1099,10 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'show_progressbar',
                     [
-                        'label'     => __( 'Show Progressbar', 'bdthemes-element-pack' ),
+                        'label'     => __( 'Show Progressbar', 'bdthemes-element-pack-lite' ),
                         'type'      => Controls_Manager::SWITCHER,
-                        'label_on'  => __( 'Show', 'bdthemes-element-pack' ),
-                        'label_off' => __( 'Hide', 'bdthemes-element-pack' ),
+                        'label_on'  => __( 'Show', 'bdthemes-element-pack-lite' ),
+                        'label_off' => __( 'Hide', 'bdthemes-element-pack-lite' ),
                         'return_value' => 'yes',
                         'default'   => 'yes',
                         'prefix_class'  => 'bdt-ff-step-progressbar-'
@@ -1112,7 +1112,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'progressbar_height',
                     [
-                        'label' => __( 'Height', 'bdthemes-element-pack' ),
+                        'label' => __( 'Height', 'bdthemes-element-pack-lite' ),
                         'type' => Controls_Manager::SLIDER,
                         'size_units' => [ 'px' ],
                         'range' => [
@@ -1134,7 +1134,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'progressbar_color',
                     [
-                        'label' => __( 'Title Color', 'bdthemes-element-pack' ),
+                        'label' => __( 'Title Color', 'bdthemes-element-pack-lite' ),
                         'type'  =>   Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .ff-el-progress-bar span' => 'color: {{VALUE}};',
@@ -1149,7 +1149,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'progressbar_border',
-                        'label' => __( 'Border', 'bdthemes-element-pack' ),
+                        'label' => __( 'Border', 'bdthemes-element-pack-lite' ),
                         'selector' => '{{WRAPPER}} .ff-el-progress',
                         'condition' => [
                             'show_progressbar'  => 'yes'
@@ -1160,7 +1160,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'progressbar_border_radius',
                     [
-                        'label' => __( 'Border Radius', 'bdthemes-element-pack' ),
+                        'label' => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => [ 'px', '%', 'em' ],
                         'selectors' => [
@@ -1176,7 +1176,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Background::get_type(),
                     [
                         'name' => 'progressbar_bg',
-                        'label' => __( 'Background', 'bdthemes-element-pack' ),
+                        'label' => __( 'Background', 'bdthemes-element-pack-lite' ),
                         'types' => [ 'classic', 'gradient' ],
                         'selector' => '{{WRAPPER}} .ff-el-progress',
                         'condition' => [
@@ -1193,7 +1193,7 @@ class Fluent_Forms extends Module_Base {
                 $this->start_controls_tab(
                     'form_progressbar_filled',
                     [
-                        'label' => __('Filled', 'bdthemes-element-pack'),
+                        'label' => __('Filled', 'bdthemes-element-pack-lite'),
                     ]
                 );
     
@@ -1201,7 +1201,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Background::get_type(),
                     [
                         'name' => 'progressbar_bg_filled',
-                        'label' => __( 'Background', 'bdthemes-element-pack' ),
+                        'label' => __( 'Background', 'bdthemes-element-pack-lite' ),
                         'types' => [ 'classic', 'gradient' ],
                         'selector' => '{{WRAPPER}} .ff-el-progress-bar',
                         'condition' => [
@@ -1229,14 +1229,14 @@ class Fluent_Forms extends Module_Base {
                 $this->start_controls_tab(
                     'form_pagination_button',
                     [
-                        'label' => __('Normal', 'bdthemes-element-pack'),
+                        'label' => __('Normal', 'bdthemes-element-pack-lite'),
                     ]
                 );
     
                 $this->add_control(
                     'pagination_button_style',
                     [
-                        'label' => __('Button', 'bdthemes-element-pack'),
+                        'label' => __('Button', 'bdthemes-element-pack-lite'),
                         'type' => Controls_Manager::HEADING
                     ]
                 );
@@ -1244,7 +1244,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'pagination_button_color',
                     [
-                        'label' => __( 'Color', 'bdthemes-element-pack' ),
+                        'label' => __( 'Color', 'bdthemes-element-pack-lite' ),
                         'type'  =>   Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .step-nav button' => 'color: {{VALUE}};',
@@ -1256,7 +1256,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Typography::get_type(),
                     [
                         'name' => 'pagination_button_typography',
-                        'label' => __( 'Typography', 'bdthemes-element-pack' ),
+                        'label' => __( 'Typography', 'bdthemes-element-pack-lite' ),
                         'selector' => '{{WRAPPER}} .step-nav button',
                     ]
                 );
@@ -1265,7 +1265,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Background::get_type(),
                     [
                         'name' => 'pagination_button_bg',
-                        'label' => __( 'Background', 'bdthemes-element-pack' ),
+                        'label' => __( 'Background', 'bdthemes-element-pack-lite' ),
                         'types' => [ 'classic', 'gradient' ],
                         'selector' => '{{WRAPPER}} .step-nav button',
                     ]
@@ -1275,7 +1275,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'pagination_button_border',
-                        'label' => __( 'Border', 'bdthemes-element-pack' ),
+                        'label' => __( 'Border', 'bdthemes-element-pack-lite' ),
                         'selector' => '{{WRAPPER}} .step-nav button',
                     ]
                 );
@@ -1283,7 +1283,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'pagination_button_border_radius',
                     [
-                        'label' => __( 'Border Radius', 'bdthemes-element-pack' ),
+                        'label' => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => [ 'px', '%', 'em' ],
                         'selectors' => [
@@ -1295,7 +1295,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'pagination_button_padding',
                     [
-                        'label' => __( 'Padding', 'bdthemes-element-pack' ),
+                        'label' => __( 'Padding', 'bdthemes-element-pack-lite' ),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => [ 'px', '%', 'em' ],
                         'selectors' => [
@@ -1309,14 +1309,14 @@ class Fluent_Forms extends Module_Base {
                 $this->start_controls_tab(
                     'form_pagination_button_hover',
                     [
-                        'label' => __('Hover', 'bdthemes-element-pack'),
+                        'label' => __('Hover', 'bdthemes-element-pack-lite'),
                     ]
                 );
     
                 $this->add_control(
                     'pagination_button_hover_color',
                     [
-                        'label' => __( 'Color', 'bdthemes-element-pack' ),
+                        'label' => __( 'Color', 'bdthemes-element-pack-lite' ),
                         'type'  =>   Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .step-nav button:hover' => 'color: {{VALUE}};',
@@ -1328,7 +1328,7 @@ class Fluent_Forms extends Module_Base {
                     Group_Control_Background::get_type(),
                     [
                         'name' => 'pagination_button_hover_bg',
-                        'label' => __( 'Background', 'bdthemes-element-pack' ),
+                        'label' => __( 'Background', 'bdthemes-element-pack-lite' ),
                         'types' => [ 'classic', 'gradient' ],
                         'selector' => '{{WRAPPER}} .step-nav button:hover',
                     ]
@@ -1337,7 +1337,7 @@ class Fluent_Forms extends Module_Base {
                 $this->add_control(
                     'pagination_button_border_hover_radius',
                     [
-                        'label' => __( 'Border Radius', 'bdthemes-element-pack' ),
+                        'label' => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => [ 'px', '%', 'em' ],
                         'selectors' => [
@@ -1357,7 +1357,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_success_message_style',
             [
-                'label' => __('Success Message', 'bdthemes-element-pack'),
+                'label' => __('Success Message', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1365,7 +1365,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'success_message_bg_color',
             [
-                'label' => __('Background Color', 'bdthemes-element-pack'),
+                'label' => __('Background Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fluent-forms .ff-message-success' => 'background-color: {{VALUE}}',
@@ -1376,7 +1376,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'success_message_text_color',
             [
-                'label' => __('Text Color', 'bdthemes-element-pack'),
+                'label' => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-fluent-forms .ff-message-success' => 'color: {{VALUE}}',
@@ -1388,7 +1388,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'success_message_border',
-                'label' => __('Border', 'bdthemes-element-pack'),
+                'label' => __('Border', 'bdthemes-element-pack-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms .ff-message-success',
@@ -1399,7 +1399,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'success_message_typography',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms .ff-message-success',
             ]
         );
@@ -1409,7 +1409,7 @@ class Fluent_Forms extends Module_Base {
         $this->start_controls_section(
             'section_error_style',
             [
-                'label' => __('Error', 'bdthemes-element-pack'),
+                'label' => __('Error', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1417,7 +1417,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'error_messages_heading',
             [
-                'label' => __('Error Messages', 'bdthemes-element-pack'),
+                'label' => __('Error Messages', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'error_messages' => 'show',
@@ -1428,7 +1428,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_control(
             'error_message_text_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1444,7 +1444,7 @@ class Fluent_Forms extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'error_message_typography',
-                'label' => __('Typography', 'bdthemes-element-pack'),
+                'label' => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector' => '{{WRAPPER}} .bdt-fluent-forms .error.text-danger',
             ]
         );
@@ -1452,7 +1452,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'error_message_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => __('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -1464,7 +1464,7 @@ class Fluent_Forms extends Module_Base {
         $this->add_responsive_control(
             'error_message_margin',
             [
-                'label' => __('Margin', 'bdthemes-element-pack'),
+                'label' => __('Margin', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -1481,7 +1481,7 @@ class Fluent_Forms extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['fluent_form']) {
-			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Fluent Forms From Setting!', 'bdthemes-element-pack').'</div>';
+			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Fluent Forms From Setting!', 'bdthemes-element-pack-lite').'</div>';
 		}
 
 		$attributes = [

@@ -29,13 +29,13 @@ class WPML_ElementPack_Price_List extends WPML_Module_With_Items {
 	protected function get_title( $field ) {
 		switch( $field ) {
 			case 'price':
-				return esc_html__( 'Price', 'bdthemes-element-pack' );
+				return esc_html__( 'Price', 'bdthemes-element-pack-lite' );
 
 			case 'title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'item_description':
-				return esc_html__( 'Description', 'bdthemes-element-pack' );
+				return esc_html__( 'Description', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

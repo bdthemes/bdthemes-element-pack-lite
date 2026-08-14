@@ -358,7 +358,7 @@ class ACF_Global {
 				return '<a href="mailto:' . esc_attr( $field_value ) . '">' . esc_html( $field_value ) . '</a>';
 
 			case 'true_false':
-				return $field_value ? __( 'Yes', 'bdthemes-element-pack' ) : __( 'No', 'bdthemes-element-pack' );
+				return $field_value ? __( 'Yes', 'bdthemes-element-pack-lite' ) : __( 'No', 'bdthemes-element-pack-lite' );
 
 			case 'date_picker':
 			case 'date_time_picker':
@@ -434,11 +434,11 @@ class ACF_Global {
 	private function format_file_field( $field_value ) {
 		if ( is_array( $field_value ) ) {
 			$file_url = $field_value['url'] ?? '';
-			$file_title = $field_value['title'] ?? __( 'Download', 'bdthemes-element-pack' );
+			$file_title = $field_value['title'] ?? __( 'Download', 'bdthemes-element-pack-lite' );
 			return '<a href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( $file_title ) . '</a>';
 		} elseif ( is_numeric( $field_value ) ) {
 			$file_url = wp_get_attachment_url( $field_value );
-			return '<a href="' . esc_url( $file_url ) . '" target="_blank">' . __( 'Download', 'bdthemes-element-pack' ) . '</a>';
+			return '<a href="' . esc_url( $file_url ) . '" target="_blank">' . __( 'Download', 'bdthemes-element-pack-lite' ) . '</a>';
 		}
 		return '';
 	}
