@@ -24,8 +24,8 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_transform',
 			[
-				'label'        => BDTEP_CP . esc_html__('Transform Effects', 'bdthemes-element-pack'),
-				'description'  => esc_html__('Don\'t use with others addon effect so it will work abnormal.', 'bdthemes-element-pack'),
+				'label'        => BDTEP_CP . esc_html__('Transform Effects', 'bdthemes-element-pack-lite'),
+				'description'  => esc_html__('Don\'t use with others addon effect so it will work abnormal.', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-motion-effect-',
 				'separator'    => 'before',
@@ -37,7 +37,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->start_controls_tab(
 			'element_pack_widget_motion_effect_tab_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'element_pack_widget_transform' => 'yes',
 				],
@@ -47,7 +47,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_translate_toggle_normal',
 			[
-				'label' 		=> __('Translate', 'bdthemes-element-pack'),
+				'label' 		=> __('Translate', 'bdthemes-element-pack-lite'),
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -61,7 +61,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_transx_normal',
 			[
-				'label'      => esc_html__('Translate X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Translate X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -83,7 +83,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_transy_normal',
 			[
-				'label'      => esc_html__('Translate Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Translate Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -110,7 +110,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_rotate_toggle_normal',
 			[
-				'label' 		=> __('Rotate', 'bdthemes-element-pack'),
+				'label' 		=> __('Rotate', 'bdthemes-element-pack-lite'),
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -125,7 +125,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_rotatex_normal',
 			[
-				'label'      => esc_html__('Rotate X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Rotate X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -147,7 +147,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_rotatey_normal',
 			[
-				'label'      => esc_html__('Rotate Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Rotate Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -170,7 +170,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_rotatez_normal',
 			[
-				'label'   => __('Rotate Z', 'bdthemes-element-pack'),
+				'label'   => __('Rotate Z', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -195,7 +195,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_scale_normal',
 			[
-				'label' 		=> __('Scale', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' 		=> __('Scale', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -209,7 +209,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_scalex_normal',
 			[
-				'label'      => esc_html__('Scale X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Scale X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -232,7 +232,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_scaley_normal',
 			[
-				'label'      => esc_html__('Scale Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Scale Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -257,7 +257,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_skew_normal',
 			[
-				'label' 		=> __('Skew', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' 		=> __('Skew', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -271,7 +271,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_skewx_normal',
 			[
-				'label'      => esc_html__('Skew X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Skew X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -293,7 +293,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_skewy_normal',
 			[
-				'label'      => esc_html__('Skew Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Skew Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -319,7 +319,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->start_controls_tab(
 			'element_pack_widget_motion_effect_tab_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'element_pack_widget_transform' => 'yes',
 				],
@@ -330,7 +330,7 @@ class Module extends Element_Pack_Module_Base {
 			'element_pack_widget_motion_effect_notice',
 			[
 				'type' => Controls_Manager::RAW_HTML,
-				'raw' => __('If you want to hover your transform effect hover by column/section, so you need to go column/section > Motion Effect > Hover Transform and set the option YES.', 'bdthemes-element-pack'),
+				'raw' => __('If you want to hover your transform effect hover by column/section, so you need to go column/section > Motion Effect > Hover Transform and set the option YES.', 'bdthemes-element-pack-lite'),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			]
 		);
@@ -338,7 +338,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_translate_toggle_hover',
 			[
-				'label' 		=> __('Translate', 'bdthemes-element-pack'),
+				'label' 		=> __('Translate', 'bdthemes-element-pack-lite'),
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -353,7 +353,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_transx_hover',
 			[
-				'label'      => esc_html__('Translate X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Translate X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -375,7 +375,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_transy_hover',
 			[
-				'label'      => esc_html__('Translate Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Translate Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -402,7 +402,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_rotate_toggle_hover',
 			[
-				'label' 		=> __('Rotate', 'bdthemes-element-pack'),
+				'label' 		=> __('Rotate', 'bdthemes-element-pack-lite'),
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -417,7 +417,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_rotatex_hover',
 			[
-				'label'      => esc_html__('Rotate X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Rotate X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -439,7 +439,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_rotatey_hover',
 			[
-				'label'      => esc_html__('Rotate Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Rotate Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -462,7 +462,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_rotatez_hover',
 			[
-				'label'   => __('Rotate Z', 'bdthemes-element-pack'),
+				'label'   => __('Rotate Z', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -488,7 +488,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_scale_hover',
 			[
-				'label' 		=> __('Scale', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' 		=> __('Scale', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -502,7 +502,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_scalex_hover',
 			[
-				'label'      => esc_html__('Scale X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Scale X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -525,7 +525,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_scaley_hover',
 			[
-				'label'      => esc_html__('Scale Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Scale Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -550,7 +550,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_skew_hover',
 			[
-				'label' 		=> __('Skew', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' 		=> __('Skew', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' 			=> Controls_Manager::POPOVER_TOGGLE,
 				'return_value' 	=> 'yes',
 				'condition' 	=> [
@@ -564,7 +564,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_skewx_hover',
 			[
-				'label'      => esc_html__('Skew X', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Skew X', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -586,7 +586,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_responsive_control(
 			'element_pack_widget_effect_skewy_hover',
 			[
-				'label'      => esc_html__('Skew Y', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Skew Y', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -610,7 +610,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_effect_transition',
 			[
-				'label' => __('Transition', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Transition', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' => Controls_Manager::POPOVER_TOGGLE,
 				'condition' => [
 					'element_pack_widget_transform' => 'yes',
@@ -624,7 +624,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_effect_transition_duration',
 			[
-				'label'       => esc_html__('Duration (ms)', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Duration (ms)', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'   => [ 'active' => true ],
 				'default'     => '300',
@@ -641,7 +641,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_effect_transition_delay',
 			[
-				'label'       => esc_html__('Delay (ms)', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Delay (ms)', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'   => [ 'active' => true ],
 				'condition' => [
@@ -657,9 +657,9 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_widget_effect_transition_easing',
 			[
-				'label'   => esc_html__('Easing', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Easing', 'bdthemes-element-pack-lite'),
 /* translators: 1: Opening anchor tag, 2: Closing anchor tag */
-				'description' => sprintf(__('If you want use Cubic Bezier easing, Go %1$s HERE %2$s', 'bdthemes-element-pack'), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>'),
+				'description' => sprintf(__('If you want use Cubic Bezier easing, Go %1$s HERE %2$s', 'bdthemes-element-pack-lite'), '<a href="https://cubic-bezier.com/" target="_blank">', '</a>'),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 				'default' => 'ease-out',
@@ -684,8 +684,8 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_section_transform',
 			[
-				'label'        => BDTEP_CP . esc_html__('Hover Transform', 'bdthemes-element-pack') . BDTEP_NC,
-				'description'  => esc_html__('This feature works with our Transform Effect which you enabled from widget.', 'bdthemes-element-pack'),
+				'label'        => BDTEP_CP . esc_html__('Hover Transform', 'bdthemes-element-pack-lite') . BDTEP_NC,
+				'description'  => esc_html__('This feature works with our Transform Effect which you enabled from widget.', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-motion-effect-',
 				'separator'    => 'before',
@@ -696,12 +696,12 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_section_overflow',
 			[
-				'label'   => esc_html__('Content Overflow', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Content Overflow', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'visible',
 				'options' => [
-					'visible' => __('Visible', 'bdthemes-element-pack'),
-					'hidden'  => __('Hidden', 'bdthemes-element-pack'),
+					'visible' => __('Visible', 'bdthemes-element-pack-lite'),
+					'hidden'  => __('Hidden', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'element_pack_section_transform' => 'wrapper'
@@ -717,8 +717,8 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_column_transform',
 			[
-				'label'        => BDTEP_CP . esc_html__('Hover Transform', 'bdthemes-element-pack') . BDTEP_NC,
-				'description'  => esc_html__('This feature works with our Transform Effect which you enabled from widget.', 'bdthemes-element-pack'),
+				'label'        => BDTEP_CP . esc_html__('Hover Transform', 'bdthemes-element-pack-lite') . BDTEP_NC,
+				'description'  => esc_html__('This feature works with our Transform Effect which you enabled from widget.', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-motion-effect-',
 				'separator'    => 'before',
@@ -729,12 +729,12 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'element_pack_column_overflow',
 			[
-				'label'   => esc_html__('Content Overflow', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Content Overflow', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'visible',
 				'options' => [
-					'visible' => __('Visible', 'bdthemes-element-pack'),
-					'hidden'  => __('Hidden', 'bdthemes-element-pack'),
+					'visible' => __('Visible', 'bdthemes-element-pack-lite'),
+					'hidden'  => __('Hidden', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'element_pack_column_transform' => 'wrapper'

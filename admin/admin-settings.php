@@ -7,6 +7,10 @@ use ElementPack\Base\Element_Pack_Base;
 use Elementor\Modules\Usage\Module;
 use Elementor\Tracker;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Element Pack Admin Settings Class
  */
@@ -36,73 +40,9 @@ class ElementPack_Admin_Settings {
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 201 );
 
-		// Add custom CSS/JS functionality
-		$this->init_custom_code_functionality();
-
 		// Add AJAX handler for plugin installation
 		add_action('wp_ajax_ep_install_plugin', [$this, 'install_plugin_ajax']);
 
-		// Angie integration notice: assets and dismiss handler
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_angie_notice_script' ] );
-		add_action( 'wp_ajax_ep_angie_notice_dismiss', [ $this, 'angie_notice_dismiss' ] );
-	}
-
-	/**
-	 * Initialize Custom Code Functionality
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function init_custom_code_functionality() {
-		
-		// Admin scripts (admin only)
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_custom_code_scripts' ] );
-		
-	}
-
-	/**
-	 * Enqueue scripts for custom code editor
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function enqueue_custom_code_scripts( $hook ) {
-		if ( $hook !== 'toplevel_page_element_pack_options' ) {
-			return;
-		}
-
-		// Enqueue WordPress built-in CodeMirror 
-		wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
-		wp_enqueue_code_editor( array( 'type' => 'application/javascript' ) );
-		
-		// Enqueue WordPress media library scripts
-		wp_enqueue_media();
-		
-		// Enqueue the admin script if it exists
-		$admin_script_path = BDTEP_ASSETS_PATH . 'js/ep-admin.js';
-		if ( file_exists( $admin_script_path ) ) {
-			wp_enqueue_script( 
-				'ep-admin-script', 
-				BDTEP_ASSETS_URL . 'js/ep-admin.js', 
-				[ 'jquery', 'media-upload', 'media-views', 'code-editor' ], 
-				BDTEP_VER, 
-				true 
-			);
-			
-			// Localize script with AJAX data
-			wp_localize_script( 'ep-admin-script', 'ep_admin_ajax', [
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'ep_custom_code_nonce' ),
-				'white_label_nonce' => wp_create_nonce( 'ep_white_label_nonce' )
-			] );
-		} else {
-			// Fallback: localize to jquery if the admin script doesn't exist
-			wp_localize_script( 'jquery', 'ep_admin_ajax', [
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'ep_custom_code_nonce' ),
-				'white_label_nonce' => wp_create_nonce( 'ep_white_label_nonce' )
-			] );
-		}
 	}
 
 	/**
@@ -420,7 +360,7 @@ class ElementPack_Admin_Settings {
 
 	public function admin_menu() {
 		add_menu_page(
-			BDTEP_TITLE . ' ' . esc_html__( 'Dashboard', 'bdthemes-element-pack' ),
+			BDTEP_TITLE . ' ' . esc_html__( 'Dashboard', 'bdthemes-element-pack-lite' ),
 			BDTEP_TITLE,
 			'manage_options',
 			self::PAGE_ID,
@@ -431,8 +371,8 @@ class ElementPack_Admin_Settings {
 
 		add_submenu_page(
 			self::PAGE_ID,
-			esc_html__('Dashboard', 'bdthemes-element-pack'),
-			esc_html__('Dashboard', 'bdthemes-element-pack'),
+			esc_html__('Dashboard', 'bdthemes-element-pack-lite'),
+			esc_html__('Dashboard', 'bdthemes-element-pack-lite'),
 			'manage_options',
 			self::PAGE_ID,
 			[$this, 'plugin_page'],
@@ -441,7 +381,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__( 'Core Widgets', 'bdthemes-element-pack' ),
+			esc_html__( 'Core Widgets', 'bdthemes-element-pack-lite' ),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_active_modules',
 			[ $this, 'display_page' ]
@@ -450,7 +390,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__( '3rd Party Widgets', 'bdthemes-element-pack' ),
+			esc_html__( '3rd Party Widgets', 'bdthemes-element-pack-lite' ),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_third_party_widget',
 			[ $this, 'display_page' ]
@@ -459,7 +399,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__( 'Extensions', 'bdthemes-element-pack' ),
+			esc_html__( 'Extensions', 'bdthemes-element-pack-lite' ),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_elementor_extend',
 			[ $this, 'display_page' ]
@@ -468,7 +408,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__( 'Special Features', 'bdthemes-element-pack' ),
+			esc_html__( 'Special Features', 'bdthemes-element-pack-lite' ),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_other_settings',
 			[ $this, 'display_page' ]
@@ -477,7 +417,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__( 'API Settings', 'bdthemes-element-pack' ),
+			esc_html__( 'API Settings', 'bdthemes-element-pack-lite' ),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_api_settings',
 			[ $this, 'display_page' ]
@@ -486,16 +426,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__('Extra Options', 'bdthemes-element-pack'),
-			'manage_options',
-			self::PAGE_ID . '#element_pack_extra_options',
-			[$this, 'display_page']
-		);
-		
-		add_submenu_page(
-			self::PAGE_ID,
-			BDTEP_TITLE,
-			esc_html__('System Status', 'bdthemes-element-pack'),
+			esc_html__('System Status', 'bdthemes-element-pack-lite'),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_analytics_system_req',
 			[$this, 'display_page']
@@ -504,7 +435,7 @@ class ElementPack_Admin_Settings {
 		add_submenu_page(
 			self::PAGE_ID,
 			BDTEP_TITLE,
-			esc_html__('Other Plugins', 'bdthemes-element-pack'),
+			esc_html__('Other Plugins', 'bdthemes-element-pack-lite'),
 			'manage_options',
 			self::PAGE_ID . '#element_pack_other_plugins',
 			[$this, 'display_page']
@@ -533,27 +464,27 @@ class ElementPack_Admin_Settings {
 		$sections = [
 			[
 				'id' => 'element_pack_active_modules',
-				'title' => esc_html__('Core Widgets', 'bdthemes-element-pack'),
+				'title' => esc_html__('Core Widgets', 'bdthemes-element-pack-lite'),
 				'icon' => 'dashicons dashicons-screenoptions',
 			],
 			[
 				'id' => 'element_pack_third_party_widget',
-				'title' => esc_html__('3rd Party Widgets', 'bdthemes-element-pack'),
+				'title' => esc_html__('3rd Party Widgets', 'bdthemes-element-pack-lite'),
 				'icon' => 'dashicons dashicons-screenoptions',
 			],
 			[
 				'id' => 'element_pack_elementor_extend',
-				'title' => esc_html__('Extensions', 'bdthemes-element-pack'),
+				'title' => esc_html__('Extensions', 'bdthemes-element-pack-lite'),
 				'icon' => 'dashicons dashicons-screenoptions',
 			],
 			[
 				'id' => 'element_pack_other_settings',
-				'title' => esc_html__('Special Features', 'bdthemes-element-pack'),
+				'title' => esc_html__('Special Features', 'bdthemes-element-pack-lite'),
 				'icon' => 'dashicons dashicons-screenoptions',
 			],
 			[
 				'id' => 'element_pack_api_settings',
-				'title' => esc_html__('API Settings', 'bdthemes-element-pack'),
+				'title' => esc_html__('API Settings', 'bdthemes-element-pack-lite'),
 				'icon' => 'dashicons dashicons-admin-settings',
 			],
 		];
@@ -599,39 +530,39 @@ class ElementPack_Admin_Settings {
 
 				<div class="ep-dashboard-item ep-dashboard-welcome bdt-card bdt-card-body">
 					<h1 class="ep-feature-title ep-dashboard-welcome-title">
-						<?php esc_html_e('Welcome to Element Pack!', 'bdthemes-element-pack'); ?>
+						<?php esc_html_e('Welcome to Element Pack!', 'bdthemes-element-pack-lite'); ?>
 					</h1>
 					<p class="ep-dashboard-welcome-desc">
-						<?php esc_html_e('Empower your web creation with powerful widgets, advanced extensions, and 2700+ ready templates and more.', 'bdthemes-element-pack'); ?>
+						<?php esc_html_e('Empower your web creation with powerful widgets, advanced extensions, and 2700+ ready templates and more.', 'bdthemes-element-pack-lite'); ?>
 					</p>
 					<a href="<?php echo admin_url('?ep_setup_wizard=show'); ?>"
 						class="bdt-button bdt-welcome-button bdt-margin-small-top"
-						target="_blank"><?php esc_html_e('Setup Element Pack', 'bdthemes-element-pack'); ?></a>
+						target="_blank"><?php esc_html_e('Setup Element Pack', 'bdthemes-element-pack-lite'); ?></a>
 
 					<div class="ep-dashboard-compare-section">
 						<h4 class="ep-feature-sub-title">
-							<?php printf(esc_html__('Unlock %sPremium Features%s', 'bdthemes-element-pack'), '<strong class="ep-highlight-text">', '</strong>'); ?>
+							<?php printf(esc_html__('Unlock %sPremium Features%s', 'bdthemes-element-pack-lite'), '<strong class="ep-highlight-text">', '</strong>'); ?>
 						</h4>
 						<h1 class="ep-feature-title ep-dashboard-compare-title">
-							<?php esc_html_e('Create Your Sleek Website with Element Pack Pro!', 'bdthemes-element-pack'); ?>
+							<?php esc_html_e('Create Your Sleek Website with Element Pack Pro!', 'bdthemes-element-pack-lite'); ?>
 						</h1>
-						<p><?php esc_html_e('Don\'t need more plugins. This pro addon helps you build complex or professional websites—visually stunning, functional and customizable.', 'bdthemes-element-pack'); ?>
+						<p><?php esc_html_e('Don\'t need more plugins. This pro addon helps you build complex or professional websites—visually stunning, functional and customizable.', 'bdthemes-element-pack-lite'); ?>
 						</p>
 						<ul>
-							<li><?php esc_html_e('Dynamic Content and Integrations', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Enhanced Template Library', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Theme Builder', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Mega Menu Builder', 'bdthemes-element-pack'); ?></li>
-							<li><?php esc_html_e('Powerful Widgets and Advanced Extensions', 'bdthemes-element-pack'); ?>
+							<li><?php esc_html_e('Dynamic Content and Integrations', 'bdthemes-element-pack-lite'); ?></li>
+							<li><?php esc_html_e('Enhanced Template Library', 'bdthemes-element-pack-lite'); ?></li>
+							<li><?php esc_html_e('Theme Builder', 'bdthemes-element-pack-lite'); ?></li>
+							<li><?php esc_html_e('Mega Menu Builder', 'bdthemes-element-pack-lite'); ?></li>
+							<li><?php esc_html_e('Powerful Widgets and Advanced Extensions', 'bdthemes-element-pack-lite'); ?>
 							</li>
 						</ul>
 						<div class="ep-dashboard-compare-section-buttons">
 							<a href="https://www.elementpack.pro/pricing/#a2a0062"
 								class="bdt-button bdt-welcome-button bdt-margin-small-right"
-								target="_blank"><?php esc_html_e('Compare Free Vs Pro', 'bdthemes-element-pack'); ?></a>
+								target="_blank"><?php esc_html_e('Compare Free Vs Pro', 'bdthemes-element-pack-lite'); ?></a>
 							<a href="https://www.elementpack.pro/pricing?utm_source=ElementPackLite&utm_medium=PluginPage&utm_campaign=ElementPackLite&coupon=FREETOPRO"
 								class="bdt-button bdt-dashboard-sec-btn"
-								target="_blank"><?php esc_html_e('Get Premium at Up to 83% OFF', 'bdthemes-element-pack'); ?></a>
+								target="_blank"><?php esc_html_e('Get Premium at Up to 83% OFF', 'bdthemes-element-pack-lite'); ?></a>
 						</div>
 					</div>
 				</div>
@@ -641,52 +572,52 @@ class ElementPack_Admin_Settings {
 						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/template.jpg'; ?>"
 							alt="Element Pack Dashboard Template">
 						<h1 class="ep-feature-title ">
-							<?php esc_html_e('Faster Web Creation with Sleek and Ready-to-Use Templates!', 'bdthemes-element-pack'); ?>
+							<?php esc_html_e('Faster Web Creation with Sleek and Ready-to-Use Templates!', 'bdthemes-element-pack-lite'); ?>
 						</h1>
-						<p><?php esc_html_e('Build your wordpress websites of any niche—not from scratch and in a single click.', 'bdthemes-element-pack'); ?>
+						<p><?php esc_html_e('Build your wordpress websites of any niche—not from scratch and in a single click.', 'bdthemes-element-pack-lite'); ?>
 						</p>
 						<a href="https://www.elementpack.pro/ready-templates/"
 							class="bdt-button bdt-dashboard-sec-btn bdt-margin-small-top"
-							target="_blank"><?php esc_html_e('View Templates', 'bdthemes-element-pack'); ?></a>
+							target="_blank"><?php esc_html_e('View Templates', 'bdthemes-element-pack-lite'); ?></a>
 					</div>
 
 					<div class="ep-dashboard-quick-access bdt-margin-medium-top">
 						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/support.svg'; ?>"
 							alt="Element Pack Dashboard Template">
 						<h1 class="ep-feature-title">
-							<?php esc_html_e('Getting Started with Quick Access', 'bdthemes-element-pack'); ?>
+							<?php esc_html_e('Getting Started with Quick Access', 'bdthemes-element-pack-lite'); ?>
 						</h1>
 						<ul>
 							<li><a href="https://www.elementpack.pro/contact/"
-									target="_blank"><?php esc_html_e('Contact Us', 'bdthemes-element-pack'); ?></a></li>
+									target="_blank"><?php esc_html_e('Contact Us', 'bdthemes-element-pack-lite'); ?></a></li>
 							<li><a href="https://bdthemes.com/support/"
-									target="_blank"><?php esc_html_e('Help Centre', 'bdthemes-element-pack'); ?></a></li>
+									target="_blank"><?php esc_html_e('Help Centre', 'bdthemes-element-pack-lite'); ?></a></li>
 							<li><a href="https://feedback.bdthemes.com/b/6vr2250l/feature-requests/idea/new"
-									target="_blank"><?php esc_html_e('Request a Feature', 'bdthemes-element-pack'); ?></a>
+									target="_blank"><?php esc_html_e('Request a Feature', 'bdthemes-element-pack-lite'); ?></a>
 							</li>
 						</ul>
 						<div class="ep-dashboard-support-section">
 							<h1 class="ep-feature-title">
 								<i class="dashicons dashicons-phone"></i>
-								<?php esc_html_e('24/7 Support', 'bdthemes-element-pack'); ?>
+								<?php esc_html_e('24/7 Support', 'bdthemes-element-pack-lite'); ?>
 							</h1>
-							<p><?php esc_html_e('Helping you get real-time solutions related to web creation with WordPress, Elementor, and Element Pack.', 'bdthemes-element-pack'); ?>
+							<p><?php esc_html_e('Helping you get real-time solutions related to web creation with WordPress, Elementor, and Element Pack.', 'bdthemes-element-pack-lite'); ?>
 							</p>
 							<a href="https://bdthemes.com/support/" class="bdt-margin-small-top"
-								target="_blank"><?php esc_html_e('Get Your Support', 'bdthemes-element-pack'); ?></a>
+								target="_blank"><?php esc_html_e('Get Your Support', 'bdthemes-element-pack-lite'); ?></a>
 						</div>
 					</div>
 				</div>
 
 				<div class="ep-dashboard-item ep-dashboard-request-feature bdt-card bdt-card-body">
 					<h1 class="ep-feature-title ep-dashboard-template-quick-title">
-						<?php esc_html_e('What\'s Stacking You?', 'bdthemes-element-pack'); ?>
+						<?php esc_html_e('What\'s Stacking You?', 'bdthemes-element-pack-lite'); ?>
 					</h1>
-					<p><?php esc_html_e('We are always here to help you. If you have any feature request, please let us know.', 'bdthemes-element-pack'); ?>
+					<p><?php esc_html_e('We are always here to help you. If you have any feature request, please let us know.', 'bdthemes-element-pack-lite'); ?>
 					</p>
 					<a href="https://feedback.elementpack.pro/b/3v2gg80n/feature-requests/idea/new"
 						class="bdt-button bdt-dashboard-sec-btn bdt-margin-small-top"
-						target="_blank"><?php esc_html_e('Request Your Features', 'bdthemes-element-pack'); ?></a>
+						target="_blank"><?php esc_html_e('Request Your Features', 'bdthemes-element-pack-lite'); ?></a>
 				</div>
 
 				<a href="https://www.youtube.com/watch?v=-e-kr4Vkh4E&list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA" target="_blank"
@@ -694,8 +625,8 @@ class ElementPack_Admin_Settings {
 					<span class="ep-dashboard-footer-item-icon">
 						<i class="dashicons dashicons-video-alt3"></i>
 					</span>
-					<h1 class="ep-feature-title"><?php esc_html_e('Watch Video Tutorials', 'bdthemes-element-pack'); ?></h1>
-					<p><?php esc_html_e('An invaluable resource for mastering WordPress, Elementor, and Web Creation', 'bdthemes-element-pack'); ?>
+					<h1 class="ep-feature-title"><?php esc_html_e('Watch Video Tutorials', 'bdthemes-element-pack-lite'); ?></h1>
+					<p><?php esc_html_e('An invaluable resource for mastering WordPress, Elementor, and Web Creation', 'bdthemes-element-pack-lite'); ?>
 					</p>
 				</a>
 				<a href="https://bdthemes.com/all-knowledge-base-of-element-pack/" target="_blank"
@@ -704,16 +635,16 @@ class ElementPack_Admin_Settings {
 						<i class="dashicons dashicons-admin-tools"></i>
 					</span>
 					</span>
-					<h1 class="ep-feature-title"><?php esc_html_e('Read Easy Documentation', 'bdthemes-element-pack'); ?></h1>
-					<p><?php esc_html_e('A way to eliminate the challenges you might face', 'bdthemes-element-pack'); ?></p>
+					<h1 class="ep-feature-title"><?php esc_html_e('Read Easy Documentation', 'bdthemes-element-pack-lite'); ?></h1>
+					<p><?php esc_html_e('A way to eliminate the challenges you might face', 'bdthemes-element-pack-lite'); ?></p>
 				</a>
 				<a href="https://www.facebook.com/bdthemes" target="_blank"
 					class="ep-dashboard-item ep-dashboard-footer-item ep-dashboard-community bdt-card bdt-card-body bdt-card-small">
 					<span class="ep-dashboard-footer-item-icon">
 						<i class="dashicons dashicons-admin-users"></i>
 					</span>
-					<h1 class="ep-feature-title"><?php esc_html_e('Join Our Community', 'bdthemes-element-pack'); ?></h1>
-					<p><?php esc_html_e('A platform for the opportunity to network, collaboration and innovation', 'bdthemes-element-pack'); ?>
+					<h1 class="ep-feature-title"><?php esc_html_e('Join Our Community', 'bdthemes-element-pack-lite'); ?></h1>
+					<p><?php esc_html_e('A platform for the opportunity to network, collaboration and innovation', 'bdthemes-element-pack-lite'); ?>
 					</p>
 				</a>
 				<a href="https://wordpress.org/plugins/bdthemes-element-pack-lite/#reviews" target="_blank"
@@ -721,8 +652,8 @@ class ElementPack_Admin_Settings {
 					<span class="ep-dashboard-footer-item-icon">
 						<i class="dashicons dashicons-star-filled"></i>
 					</span>
-					<h1 class="ep-feature-title"><?php esc_html_e('Show Your Love', 'bdthemes-element-pack'); ?></h1>
-					<p><?php esc_html_e('A way of the assessment of code', 'bdthemes-element-pack'); ?></p>
+					<h1 class="ep-feature-title"><?php esc_html_e('Show Your Love', 'bdthemes-element-pack-lite'); ?></h1>
+					<p><?php esc_html_e('A way of the assessment of code', 'bdthemes-element-pack-lite'); ?></p>
 				</a>
 			</div>
 
@@ -749,7 +680,7 @@ class ElementPack_Admin_Settings {
 	public function element_pack_widgets_status() {
 		$track_nw_msg = '';
 		if (!Tracker::is_allow_track()) {
-			$track_nw = esc_html__('This feature is not working because the Elementor Usage Data Sharing feature is Not Enabled.', 'bdthemes-element-pack');
+			$track_nw = esc_html__('This feature is not working because the Elementor Usage Data Sharing feature is Not Enabled.', 'bdthemes-element-pack-lite');
 			$track_nw_msg = 'bdt-tooltip="' . $track_nw . '"';
 		}
 		?>
@@ -764,17 +695,17 @@ class ElementPack_Admin_Settings {
 						?>
 
 						<div class="ep-count-canvas-wrap">
-							<h1 class="ep-feature-title"><?php esc_html_e('All Widgets', 'bdthemes-element-pack'); ?></h1>
+							<h1 class="ep-feature-title"><?php esc_html_e('All Widgets', 'bdthemes-element-pack-lite'); ?></h1>
 							<div class="bdt-flex bdt-flex-between bdt-flex-middle">
 								<div class="ep-count-wrap">
-									<div class="ep-widget-count"><?php esc_html_e('Used:', 'bdthemes-element-pack'); ?> <b>
+									<div class="ep-widget-count"><?php esc_html_e('Used:', 'bdthemes-element-pack-lite'); ?> <b>
 											<?php echo esc_html($used_widgets); ?>
 										</b></div>
-									<div class="ep-widget-count"><?php esc_html_e('Unused:', 'bdthemes-element-pack'); ?> <b>
+									<div class="ep-widget-count"><?php esc_html_e('Unused:', 'bdthemes-element-pack-lite'); ?> <b>
 											<?php echo esc_html($un_used_widgets); ?>
 										</b>
 									</div>
-									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack'); ?>
+									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack-lite'); ?>
 										<b>
 											<?php echo esc_html($used_widgets + $un_used_widgets); ?>
 										</b>
@@ -803,16 +734,16 @@ class ElementPack_Admin_Settings {
 
 
 						<div class="ep-count-canvas-wrap">
-							<h1 class="ep-feature-title"><?php esc_html_e('Core', 'bdthemes-element-pack'); ?></h1>
+							<h1 class="ep-feature-title"><?php esc_html_e('Core', 'bdthemes-element-pack-lite'); ?></h1>
 							<div class="bdt-flex bdt-flex-between bdt-flex-middle">
 								<div class="ep-count-wrap">
-									<div class="ep-widget-count"><?php esc_html_e('Used:', 'bdthemes-element-pack'); ?> <b>
+									<div class="ep-widget-count"><?php esc_html_e('Used:', 'bdthemes-element-pack-lite'); ?> <b>
 											<?php echo esc_html($used_only_widgets); ?>
 										</b></div>
-									<div class="ep-widget-count"><?php esc_html_e('Unused:', 'bdthemes-element-pack'); ?> <b>
+									<div class="ep-widget-count"><?php esc_html_e('Unused:', 'bdthemes-element-pack-lite'); ?> <b>
 											<?php echo esc_html($unused_only_widgets); ?>
 										</b></div>
-									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack'); ?>
+									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack-lite'); ?>
 										<b>
 											<?php echo esc_html($used_only_widgets + $unused_only_widgets); ?>
 										</b>
@@ -841,16 +772,16 @@ class ElementPack_Admin_Settings {
 
 
 						<div class="ep-count-canvas-wrap">
-							<h1 class="ep-feature-title"><?php esc_html_e('3rd Party', 'bdthemes-element-pack'); ?></h1>
+							<h1 class="ep-feature-title"><?php esc_html_e('3rd Party', 'bdthemes-element-pack-lite'); ?></h1>
 							<div class="bdt-flex bdt-flex-between bdt-flex-middle">
 								<div class="ep-count-wrap">
-									<div class="ep-widget-count"><?php esc_html_e('Used:', 'bdthemes-element-pack'); ?> <b>
+									<div class="ep-widget-count"><?php esc_html_e('Used:', 'bdthemes-element-pack-lite'); ?> <b>
 											<?php echo esc_html($used_only_3rdparty); ?>
 										</b></div>
-									<div class="ep-widget-count"><?php esc_html_e('Unused:', 'bdthemes-element-pack'); ?> <b>
+									<div class="ep-widget-count"><?php esc_html_e('Unused:', 'bdthemes-element-pack-lite'); ?> <b>
 											<?php echo esc_html($unused_only_3rdparty); ?>
 										</b></div>
-									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack'); ?>
+									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack-lite'); ?>
 										<b>
 											<?php echo esc_html($used_only_3rdparty + $unused_only_3rdparty); ?>
 										</b>
@@ -874,18 +805,18 @@ class ElementPack_Admin_Settings {
 					<div class="ep-widget-status bdt-card bdt-card-body" <?php echo wp_kses_post($track_nw_msg); ?>>
 
 						<div class="ep-count-canvas-wrap">
-							<h1 class="ep-feature-title"><?php esc_html_e('Active', 'bdthemes-element-pack'); ?></h1>
+							<h1 class="ep-feature-title"><?php esc_html_e('Active', 'bdthemes-element-pack-lite'); ?></h1>
 							<div class="bdt-flex bdt-flex-between bdt-flex-middle">
 								<div class="ep-count-wrap">
-									<div class="ep-widget-count"><?php esc_html_e('Core:', 'bdthemes-element-pack'); ?> <b
+									<div class="ep-widget-count"><?php esc_html_e('Core:', 'bdthemes-element-pack-lite'); ?> <b
 											id="bdt-total-widgets-status-core">0</b></div>
-									<div class="ep-widget-count"><?php esc_html_e('3rd Party:', 'bdthemes-element-pack'); ?>
+									<div class="ep-widget-count"><?php esc_html_e('3rd Party:', 'bdthemes-element-pack-lite'); ?>
 										<b id="bdt-total-widgets-status-3rd">0</b>
 									</div>
-									<div class="ep-widget-count"><?php esc_html_e('Extensions:', 'bdthemes-element-pack'); ?>
+									<div class="ep-widget-count"><?php esc_html_e('Extensions:', 'bdthemes-element-pack-lite'); ?>
 										<b id="bdt-total-widgets-status-extensions">0</b>
 									</div>
-									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack'); ?> <b
+									<div class="ep-widget-count"><?php esc_html_e('Total:', 'bdthemes-element-pack-lite'); ?> <b
 											id="bdt-total-widgets-status-heading">0</b></div>
 								</div>
 
@@ -911,11 +842,11 @@ class ElementPack_Admin_Settings {
 				<div class="bdt-text-default">
 				<?php
 					printf(
-						esc_html__('To view widgets analytics, Elementor %1$sUsage Data Sharing%2$s feature by Elementor needs to be activated. Please activate the feature to get widget analytics instantly ', 'bdthemes-element-pack'),
+						esc_html__('To view widgets analytics, Elementor %1$sUsage Data Sharing%2$s feature by Elementor needs to be activated. Please activate the feature to get widget analytics instantly ', 'bdthemes-element-pack-lite'),
 						'<b>', '</b>'
 					);
 
-					echo ' <a href="' . esc_url(admin_url('admin.php?page=elementor-settings')) . '">' . esc_html__('from here.', 'bdthemes-element-pack') . '</a>';
+					echo ' <a href="' . esc_url(admin_url('admin.php?page=elementor-settings')) . '">' . esc_html__('from here.', 'bdthemes-element-pack-lite') . '</a>';
 				?>
 				</div>
 			</div>
@@ -941,11 +872,11 @@ class ElementPack_Admin_Settings {
 				<div class="bdt-width-1-1@m ep-comparision bdt-text-center">
 					<div class="bdt-flex bdt-flex-between bdt-flex-middle">
 						<div class="bdt-text-left">
-							<h1 class="bdt-text-bold"><?php echo esc_html__( 'WHY GO WITH PRO?', 'bdthemes-element-pack' ); ?></h1>
-							<h2><?php echo esc_html__( 'Just Compare With Element Pack Lite Vs Pro', 'bdthemes-element-pack' ); ?></h2>
+							<h1 class="bdt-text-bold"><?php echo esc_html__( 'WHY GO WITH PRO?', 'bdthemes-element-pack-lite' ); ?></h1>
+							<h2><?php echo esc_html__( 'Just Compare With Element Pack Lite Vs Pro', 'bdthemes-element-pack-lite' ); ?></h2>
 						</div>
 						<div class="ep-purchase-button">
-							<a href="https://elementpack.pro/pricing/" target="_blank"><?php echo esc_html__( 'Purchase Now', 'bdthemes-element-pack' ); ?></a>
+							<a href="https://elementpack.pro/pricing/" target="_blank"><?php echo esc_html__( 'Purchase Now', 'bdthemes-element-pack-lite' ); ?></a>
 						</div>
 					</div>
 
@@ -957,16 +888,16 @@ class ElementPack_Admin_Settings {
 							<li class="bdt-text-bold">
 								<div class="bdt-grid">
 									<?php
-									echo '<div class="bdt-width-expand@m">' . esc_html__( 'Features', 'bdthemes-element-pack' ) . '</div>';
-									echo '<div class="bdt-width-auto@m">' . esc_html__( 'Free', 'bdthemes-element-pack' ) . '</div>';
-									echo '<div class="bdt-width-auto@m">' . esc_html__( 'Pro', 'bdthemes-element-pack' ) . '</div>';
+									echo '<div class="bdt-width-expand@m">' . esc_html__( 'Features', 'bdthemes-element-pack-lite' ) . '</div>';
+									echo '<div class="bdt-width-auto@m">' . esc_html__( 'Free', 'bdthemes-element-pack-lite' ) . '</div>';
+									echo '<div class="bdt-width-auto@m">' . esc_html__( 'Pro', 'bdthemes-element-pack-lite' ) . '</div>';
 									?>
 								</div>
 							</li>
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m"><span
-											bdt-tooltip="pos: top-left; title: <?php echo esc_html__( 'Lite have 35+ Widgets but Pro have 100+ core widgets', 'bdthemes-element-pack' ); ?>"><?php echo esc_html__( 'Core Widgets', 'bdthemes-element-pack' ); ?></span>
+											bdt-tooltip="pos: top-left; title: <?php echo esc_html__( 'Lite have 35+ Widgets but Pro have 100+ core widgets', 'bdthemes-element-pack-lite' ); ?>"><?php echo esc_html__( 'Core Widgets', 'bdthemes-element-pack-lite' ); ?></span>
 									</div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
@@ -974,36 +905,28 @@ class ElementPack_Admin_Settings {
 							</li>
 							<li class="">
 								<div class="bdt-grid">
-									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Theme Compatibility', 'bdthemes-element-pack' ) . '</div>'; ?>
+									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Theme Compatibility', 'bdthemes-element-pack-lite' ) . '</div>'; ?>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
 							</li>
 							<li class="">
 								<div class="bdt-grid">
-									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Dynamic Content & Custom Fields Capabilities', 'bdthemes-element-pack' ) . '</div>'; ?>
+									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Dynamic Content & Custom Fields Capabilities', 'bdthemes-element-pack-lite' ) . '</div>'; ?>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
 							</li>
 							<li class="">
 								<div class="bdt-grid">
-									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Proper Documentation', 'bdthemes-element-pack' ) . '</div>'; ?>
+									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Proper Documentation', 'bdthemes-element-pack-lite' ) . '</div>'; ?>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
 							</li>
 							<li class="">
 								<div class="bdt-grid">
-									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Updates & Support', 'bdthemes-element-pack' ) . '</div>'; ?>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
-								</div>
-							</li>
-							<li class="">
-								<div class="bdt-grid">
-									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Ready Made Pages', 'bdthemes-element-pack' ); ?></div>
+									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Updates & Support', 'bdthemes-element-pack-lite' ) . '</div>'; ?>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1011,7 +934,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Ready Made Blocks', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Ready Made Pages', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1019,7 +942,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Elementor Extended Widgets', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Ready Made Blocks', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1027,7 +950,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Asset Manager', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Elementor Extended Widgets', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1035,7 +958,15 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Live Copy or Paste', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Asset Manager', 'bdthemes-element-pack-lite' ); ?></div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
+								</div>
+							</li>
+							<li class="">
+								<div class="bdt-grid">
+									<div class="bdt-width-expand@m">
+										<?php echo esc_html__( 'Live Copy or Paste', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1044,7 +975,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Template Library (in Editor)', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Template Library (in Editor)', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1052,7 +983,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'SVG Support', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'SVG Support', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1061,7 +992,7 @@ class ElementPack_Admin_Settings {
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
 										<a href="https://www.elementpack.pro/demo/element/dynamic-content/" target="_blank">
-											<?php echo esc_html__( 'Dynamic Content', 'bdthemes-element-pack' ); ?>
+											<?php echo esc_html__( 'Dynamic Content', 'bdthemes-element-pack-lite' ); ?>
 										</a>
 									</div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
@@ -1071,7 +1002,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Smooth Scroller', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Smooth Scroller', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1079,7 +1010,7 @@ class ElementPack_Admin_Settings {
 							
 							<li class="">
 								<div class="bdt-grid">
-									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Header & Footer Builder', 'bdthemes-element-pack' ) . '</div>'; ?>
+									<?php echo '<div class="bdt-width-expand@m">' . esc_html__( 'Header & Footer Builder', 'bdthemes-element-pack-lite' ) . '</div>'; ?>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1087,7 +1018,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Rooten Theme Pro Features', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Rooten Theme Pro Features', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1095,7 +1026,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Priority Support', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Priority Support', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1103,7 +1034,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'WooCommerce Widgets', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'WooCommerce Widgets', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1111,7 +1042,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Ready Made Header & Footer', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Ready Made Header & Footer', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1119,7 +1050,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Essential Shortcodes', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Essential Shortcodes', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1127,7 +1058,7 @@ class ElementPack_Admin_Settings {
 							<li class="">
 								<div class="bdt-grid">
 									<div class="bdt-width-expand@m">
-										<?php echo esc_html__( 'Context Menu', 'bdthemes-element-pack' ); ?></div>
+										<?php echo esc_html__( 'Context Menu', 'bdthemes-element-pack-lite' ); ?></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-no"></span></div>
 									<div class="bdt-width-auto@m"><span class="dashicons dashicons-yes"></span></div>
 								</div>
@@ -1139,9 +1070,9 @@ class ElementPack_Admin_Settings {
 								<li>
 									<div class="bdt-grid bdt-grid-small">
 										<?php
-										echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__( ' Incredibly Advanced', 'bdthemes-element-pack' ) . '</div>';
-										echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__( ' Refund or Cancel Anytime', 'bdthemes-element-pack' ) . '</div>';
-										echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__( ' Dynamic Content', 'bdthemes-element-pack' ) . '</div>';
+										echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__( ' Incredibly Advanced', 'bdthemes-element-pack-lite' ) . '</div>';
+										echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__( ' Refund or Cancel Anytime', 'bdthemes-element-pack-lite' ) . '</div>';
+										echo '<div class="bdt-width-1-3@m"><span class="dashicons dashicons-heart"></span> ' . esc_html__( ' Dynamic Content', 'bdthemes-element-pack-lite' ) . '</div>';
 										?>
 									</div>
 								</li>
@@ -1150,32 +1081,15 @@ class ElementPack_Admin_Settings {
 									<div class="bdt-grid bdt-grid-small">
 										<div class="bdt-width-1-3@m">
 											<span class="dashicons dashicons-heart"></span>
-											<?php echo esc_html__( 'Super-Flexible Widgets', 'bdthemes-element-pack' ); ?>
+											<?php echo esc_html__( 'Super-Flexible Widgets', 'bdthemes-element-pack-lite' ); ?>
 										</div>
 										<div class="bdt-width-1-3@m">
 											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' 24/7 Premium Support', 'bdthemes-element-pack' ); ?>
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' 24/7 Premium Support', 'bdthemes-element-pack-lite' ); ?>
 										</div>
 										<div class="bdt-width-1-3@m">
 											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Third Party Plugins', 'bdthemes-element-pack' ); ?>
-										</div>
-									</div>
-								</li>
-
-								<li>
-									<div class="bdt-grid bdt-grid-small">
-										<div class="bdt-width-1-3@m">
-											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Special Discount!', 'bdthemes-element-pack' ); ?>
-										</div>
-										<div class="bdt-width-1-3@m">
-											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Custom Field Integration', 'bdthemes-element-pack' ); ?>
-										</div>
-										<div class="bdt-width-1-3@m">
-											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' With Live Chat Support', 'bdthemes-element-pack' ); ?>
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Third Party Plugins', 'bdthemes-element-pack-lite' ); ?>
 										</div>
 									</div>
 								</li>
@@ -1184,22 +1098,39 @@ class ElementPack_Admin_Settings {
 									<div class="bdt-grid bdt-grid-small">
 										<div class="bdt-width-1-3@m">
 											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Trusted Payment Methods', 'bdthemes-element-pack' ); ?>
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Special Discount!', 'bdthemes-element-pack-lite' ); ?>
 										</div>
 										<div class="bdt-width-1-3@m">
 											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Interactive Effects', 'bdthemes-element-pack' ); ?>
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Custom Field Integration', 'bdthemes-element-pack-lite' ); ?>
 										</div>
 										<div class="bdt-width-1-3@m">
 											<span
-												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Video Tutorial', 'bdthemes-element-pack' ); ?>
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' With Live Chat Support', 'bdthemes-element-pack-lite' ); ?>
+										</div>
+									</div>
+								</li>
+
+								<li>
+									<div class="bdt-grid bdt-grid-small">
+										<div class="bdt-width-1-3@m">
+											<span
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Trusted Payment Methods', 'bdthemes-element-pack-lite' ); ?>
+										</div>
+										<div class="bdt-width-1-3@m">
+											<span
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Interactive Effects', 'bdthemes-element-pack-lite' ); ?>
+										</div>
+										<div class="bdt-width-1-3@m">
+											<span
+												class="dashicons dashicons-heart"></span><?php echo esc_html__( ' Video Tutorial', 'bdthemes-element-pack-lite' ); ?>
 										</div>
 									</div>
 								</li>
 							</ul>
 
 							<div class="ep-purchase-button bdt-margin-medium-top">
-								<a href="https://elementpack.pro/pricing/" target="_blank"><?php echo esc_html__( 'Purchase Now', 'bdthemes-element-pack' ); ?></a>
+								<a href="https://elementpack.pro/pricing/" target="_blank"><?php echo esc_html__( 'Purchase Now', 'bdthemes-element-pack-lite' ); ?></a>
 							</div>
 
 						</div>
@@ -1235,15 +1166,15 @@ class ElementPack_Admin_Settings {
 		<ul class="check-system-status bdt-grid bdt-child-width-1-2@m  bdt-grid-small ">
 			<li>
 				<div>
-					<span class="label1"><?php esc_html_e('PHP Version:', 'bdthemes-element-pack'); ?></span>
+					<span class="label1"><?php esc_html_e('PHP Version:', 'bdthemes-element-pack-lite'); ?></span>
 
 					<?php
 					if (version_compare($php_version, '7.4.0', '<')) {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2" title="' . esc_attr__('Min: 7.4 Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($php_version) . '</span>';
+						echo '<span class="label2" title="' . esc_attr__('Min: 7.4 Recommended', 'bdthemes-element-pack-lite') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . esc_html($php_version) . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($php_version) . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . esc_html($php_version) . '</span>';
 					}
 					?>
 				</div>
@@ -1252,29 +1183,29 @@ class ElementPack_Admin_Settings {
 
 			<li>
 				<div>
-					<span class="label1"><?php esc_html_e('Max execution time:', 'bdthemes-element-pack'); ?> </span>
+					<span class="label1"><?php esc_html_e('Max execution time:', 'bdthemes-element-pack-lite'); ?> </span>
 					<?php
 					if ($max_execution_time < '90') {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2" title="' . esc_attr__('Min: 90 Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($max_execution_time) . '</span>';
+						echo '<span class="label2" title="' . esc_attr__('Min: 90 Recommended', 'bdthemes-element-pack-lite') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . esc_html($max_execution_time) . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($max_execution_time) . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . esc_html($max_execution_time) . '</span>';
 					}
 					?>
 				</div>
 			</li>
 			<li>
 				<div>
-					<span class="label1"><?php esc_html_e('Memory Limit:', 'bdthemes-element-pack'); ?> </span>
+					<span class="label1"><?php esc_html_e('Memory Limit:', 'bdthemes-element-pack-lite'); ?> </span>
 
 					<?php
 					if (intval($memory_limit) < '512') {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2" title="' . esc_attr__('Min: 512M Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($memory_limit) . '</span>';
+						echo '<span class="label2" title="' . esc_attr__('Min: 512M Recommended', 'bdthemes-element-pack-lite') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . esc_html($memory_limit) . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . esc_html($memory_limit) . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . esc_html($memory_limit) . '</span>';
 					}
 					?>
 				</div>
@@ -1282,15 +1213,15 @@ class ElementPack_Admin_Settings {
 
 			<li>
 				<div>
-					<span class="label1"><?php esc_html_e('Max Post Limit:', 'bdthemes-element-pack'); ?> </span>
+					<span class="label1"><?php esc_html_e('Max Post Limit:', 'bdthemes-element-pack-lite'); ?> </span>
 
 					<?php
 					if (intval($post_limit) < '32') {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2" title="' . esc_attr__('Min: 32M Recommended', 'bdthemes-element-pack') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . wp_kses_post($post_limit) . '</span>';
+						echo '<span class="label2" title="' . esc_attr__('Min: 32M Recommended', 'bdthemes-element-pack-lite') . '" bdt-tooltip>' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . wp_kses_post($post_limit) . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack') . ' ' . wp_kses_post($post_limit) . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently:', 'bdthemes-element-pack-lite') . ' ' . wp_kses_post($post_limit) . '</span>';
 					}
 					?>
 				</div>
@@ -1298,7 +1229,7 @@ class ElementPack_Admin_Settings {
 
 			<li>
 				<div>
-					<span class="label1"><?php esc_html_e('Uploads folder writable:', 'bdthemes-element-pack'); ?></span>
+					<span class="label1"><?php esc_html_e('Uploads folder writable:', 'bdthemes-element-pack-lite'); ?></span>
 
 					<?php
 					if (!is_writable($upload_path)) {
@@ -1313,7 +1244,7 @@ class ElementPack_Admin_Settings {
 
 			<li>
 				<div>
-					<span class="label1"><?php esc_html_e('GZip Enabled:', 'bdthemes-element-pack'); ?></span>
+					<span class="label1"><?php esc_html_e('GZip Enabled:', 'bdthemes-element-pack-lite'); ?></span>
 
 					<?php
 					if ($environment['gzip_enabled']) {
@@ -1328,14 +1259,14 @@ class ElementPack_Admin_Settings {
 
 			<li>
 				<div>
-					<span class="label1"><?php esc_html_e('Debug Mode:', 'bdthemes-element-pack'); ?></span>
+					<span class="label1"><?php esc_html_e('Debug Mode:', 'bdthemes-element-pack-lite'); ?></span>
 					<?php
 					if ($environment['wp_debug_mode']) {
 						echo wp_kses_post($no_icon);
-						echo '<span class="label2">' . esc_html__('Currently Turned On', 'bdthemes-element-pack') . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently Turned On', 'bdthemes-element-pack-lite') . '</span>';
 					} else {
 						echo wp_kses_post($yes_icon);
-						echo '<span class="label2">' . esc_html__('Currently Turned Off', 'bdthemes-element-pack') . '</span>';
+						echo '<span class="label2">' . esc_html__('Currently Turned Off', 'bdthemes-element-pack-lite') . '</span>';
 					}
 					?>
 				</div>
@@ -1345,120 +1276,16 @@ class ElementPack_Admin_Settings {
 		</ul>
 
 		<div class="bdt-admin-alert">
-			<strong><?php esc_html_e('Note:', 'bdthemes-element-pack'); ?></strong>
+			<strong><?php esc_html_e('Note:', 'bdthemes-element-pack-lite'); ?></strong>
 			<?php
 			/* translators: %s: Plugin name 'Element Pack' */
 			printf(
-				esc_html__('If you have multiple addons like %s so you may need to allocate additional memory for other addons as well.', 'bdthemes-element-pack'),
+				esc_html__('If you have multiple addons like %s so you may need to allocate additional memory for other addons as well.', 'bdthemes-element-pack-lite'),
 				'<b>Element Pack</b>'
 			);
 			?>
 		</div>
 
-		<?php
-	}
-
-	/**
-	 * Enqueue the dismiss script for the Angie integration notice.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function enqueue_angie_notice_script() {
-		if ( ! isset( $_GET['page'] ) || self::PAGE_ID !== $_GET['page'] ) {
-			return;
-		}
-
-		wp_enqueue_script( 'ep-angie-notice', BDTEP_ADMIN_URL . 'assets/js/ep-angie-notice.min.js', [ 'jquery' ], BDTEP_VER, true );
-		wp_localize_script( 'ep-angie-notice', 'ElementPackAngieConfig', [
-			'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			'nonce'   => wp_create_nonce( 'element-pack' ),
-		] );
-	}
-
-	/**
-	 * Dismiss the Angie integration notice.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function angie_notice_dismiss() {
-		$nonce      = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
-		$display_id = isset( $_POST['display_id'] ) ? sanitize_text_field( wp_unslash( $_POST['display_id'] ) ) : '';
-
-		if ( ! wp_verify_nonce( $nonce, 'element-pack' ) ) {
-			wp_send_json_error();
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error();
-		}
-
-		if ( empty( $display_id ) ) {
-			wp_send_json_error();
-		}
-
-		$dismissals                  = get_option( 'bdt_biggopti_dismissals', [] );
-		$dismissals[ $display_id ]   = [ 'dismissed_at' => time() ];
-		update_option( 'bdt_biggopti_dismissals', $dismissals, false );
-
-		wp_send_json_success();
-	}
-
-	/**
-	 * Agentic AI Angie integration coming soon notice (above dashboard).
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function render_angie_integration_coming_soon_notice() {
-		$display_id = 'angie-integration';
-		$dismissals = get_option( 'bdt_biggopti_dismissals', [] );
-
-		if ( isset( $dismissals[ $display_id ] ) ) {
-			return;
-		}
-
-		?>
-		<div id="ep-angie-notice" class="element-pack-biggopti biggopti biggopti-info ep-angie-coming-soon" data-display-id="<?php echo esc_attr( $display_id ); ?>">
-			<div class="ep-angie-notice">
-				<div class="ep-angie-notice__glow" aria-hidden="true"></div>
-				<div class="ep-angie-notice__grid" aria-hidden="true"></div>
-
-				<div class="ep-angie-notice__body">
-					<div class="ep-angie-notice__brand">
-						<div class="ep-angie-notice__orb" aria-hidden="true">
-							<span class="ep-angie-notice__orb-core"></span>
-							<span class="ep-angie-notice__orb-ring ep-angie-notice__orb-ring--1"></span>
-							<span class="ep-angie-notice__orb-ring ep-angie-notice__orb-ring--2"></span>
-						</div>
-						<div class="ep-angie-notice__identity">
-							<span class="ep-angie-notice__eyebrow"><?php esc_html_e( 'Agentic AI', 'bdthemes-element-pack' ); ?></span>
-							<h2 class="ep-angie-notice__title"><?php esc_html_e( 'Angie Integration', 'bdthemes-element-pack' ); ?></h2>
-						</div>
-					</div>
-
-					<div class="ep-angie-notice__copy">
-						<p class="ep-angie-notice__description">
-							<?php esc_html_e( 'Your creative AI partner is joining Element Pack — understand your site, take real actions, and build smarter Elementor workflows from natural language.', 'bdthemes-element-pack' ); ?>
-						</p>
-						<div class="ep-angie-notice__features">
-							<span class="ep-angie-notice__feature"><?php esc_html_e( 'AI Workflows', 'bdthemes-element-pack' ); ?></span>
-							<span class="ep-angie-notice__feature"><?php esc_html_e( 'Smart Actions', 'bdthemes-element-pack' ); ?></span>
-							<span class="ep-angie-notice__feature"><?php esc_html_e( 'Native Elementor', 'bdthemes-element-pack' ); ?></span>
-						</div>
-					</div>
-
-					<div class="ep-angie-notice__status">
-						<span class="ep-angie-notice__badge ep-angie-notice__badge--beta"><?php esc_html_e( 'Beta', 'bdthemes-element-pack' ); ?></span>
-						<span class="ep-angie-notice__badge ep-angie-notice__badge--soon"><?php esc_html_e( 'Coming Soon', 'bdthemes-element-pack' ); ?></span>
-					</div>
-				</div>
-			</div>
-			<button type="button" class="ep-angie-notice__dismiss dashicons dashicons-dismiss">
-				<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'bdthemes-element-pack' ); ?></span>
-			</button>
-		</div>
 		<?php
 	}
 
@@ -1476,8 +1303,6 @@ class ElementPack_Admin_Settings {
 		<div class="wrap element-pack-dashboard">
 			<h1></h1> <!-- don't remove this div, it's used for the notice container -->
 		
-			<?php $this->render_angie_integration_coming_soon_notice(); ?>
-			
 			<div class="ep-dashboard-wrapper bdt-margin-top">
 				<div class="ep-dashboard-header bdt-flex bdt-flex-wrap bdt-flex-between bdt-flex-middle"
 					bdt-sticky="offset: 32; animation: bdt-animation-slide-top-small; duration: 300">
@@ -1503,13 +1328,13 @@ class ElementPack_Admin_Settings {
 						<!-- Always render save button, JavaScript will control visibility -->
 						<div class="ep-dashboard-save-btn" style="display: none;">
 							<button class="bdt-button bdt-button-primary element-pack-settings-save-btn" type="submit">
-								<?php esc_html_e('Save Settings', 'bdthemes-element-pack'); ?>
+								<?php esc_html_e('Save Settings', 'bdthemes-element-pack-lite'); ?>
 							</button>
 						</div>
 
 						<div class="ep-dashboard-new-page">
 							<a class="bdt-flex bdt-flex-middle" href="<?php echo esc_url(admin_url('post-new.php?post_type=page')); ?>" class=""><i class="dashicons dashicons-admin-page"></i>
-								<?php echo esc_html__('Create New Page', 'bdthemes-element-pack') ?>
+								<?php echo esc_html__('Create New Page', 'bdthemes-element-pack-lite') ?>
 							</a>
 						</div>
 						
@@ -1546,10 +1371,6 @@ class ElementPack_Admin_Settings {
 						$this->settings_api->show_forms();
 						?>
 
-						<div id="element_pack_extra_options_page" class="ep-option-page group">
-							<?php $this->element_pack_extra_options(); ?>
-						</div>
-
 						<div id="element_pack_analytics_system_req_page" class="ep-option-page group">
 							<?php $this->element_pack_analytics_system_req_content(); ?>
 						</div>
@@ -1565,9 +1386,7 @@ class ElementPack_Admin_Settings {
 					</div>
 				</div>
 
-				<?php if (!defined('BDTEP_WL') ) {
-					$this->footer_info();
-				} ?>
+				<?php $this->footer_info(); ?>
 			</div>
 
 		</div>
@@ -2057,7 +1876,7 @@ class ElementPack_Admin_Settings {
 					if (targetForm && targetForm.length > 0) {
 						// Show loading notification
 						// bdtUIkit.notification({
-						// 	message: '<div bdt-spinner></div> <?php //esc_html_e('Please wait, Saving settings...', 'bdthemes-element-pack') ?>',
+						// 	message: '<div bdt-spinner></div> <?php //esc_html_e('Please wait, Saving settings...', 'bdthemes-element-pack-lite') ?>',
 						// 	timeout: false
 						// });
 
@@ -2066,7 +1885,7 @@ class ElementPack_Admin_Settings {
 							success: function () {
 								bdtUIkit.notification.closeAll();
 								bdtUIkit.notification({
-									message: '<span class="dashicons dashicons-yes"></span> <?php esc_html_e('Settings Saved Successfully.', 'bdthemes-element-pack') ?>',
+									message: '<span class="dashicons dashicons-yes"></span> <?php esc_html_e('Settings Saved Successfully.', 'bdthemes-element-pack-lite') ?>',
 									status: 'primary',
 									pos: 'top-center'
 								});
@@ -2074,7 +1893,7 @@ class ElementPack_Admin_Settings {
 							error: function (data) {
 								bdtUIkit.notification.closeAll();
 								bdtUIkit.notification({
-									message: '<span bdt-icon=\'icon: warning\'></span> <?php esc_html_e('Unknown error, make sure access is correct!', 'bdthemes-element-pack') ?>',
+									message: '<span bdt-icon=\'icon: warning\'></span> <?php esc_html_e('Unknown error, make sure access is correct!', 'bdthemes-element-pack-lite') ?>',
 									status: 'warning'
 								});
 							}
@@ -2082,575 +1901,12 @@ class ElementPack_Admin_Settings {
 					} else {
 						// Show error if no form found
 						bdtUIkit.notification({
-							message: '<span bdt-icon="icon: warning"></span> <?php esc_html_e('No settings form found to save.', 'bdthemes-element-pack') ?>',
+							message: '<span bdt-icon="icon: warning"></span> <?php esc_html_e('No settings form found to save.', 'bdthemes-element-pack-lite') ?>',
 							status: 'warning'
 						});
 					}
 				});
 
-				// White Label Settings Functionality
-				// Check if ep_admin_ajax is available
-				if (typeof ep_admin_ajax === 'undefined') {
-					window.ep_admin_ajax = {
-						ajax_url: '<?php echo admin_url('admin-ajax.php'); ?>',
-						white_label_nonce: '<?php echo wp_create_nonce('ep_white_label_nonce'); ?>'
-					};
-				}				
-				
-				// Initialize CodeMirror editors for custom code
-				var codeMirrorEditors = {};
-				
-				function initializeCodeMirrorEditors() {
-					// CSS Editor 1
-					if (document.getElementById('ep-custom-css')) {
-						codeMirrorEditors['ep-custom-css'] = wp.codeEditor.initialize('ep-custom-css', {
-							type: 'text/css',
-							codemirror: {
-								lineNumbers: true,
-								mode: 'css',
-								theme: 'default',
-								lineWrapping: true,
-								autoCloseBrackets: true,
-								matchBrackets: true,
-								lint: false
-							}
-						});
-					}
-					
-					// JavaScript Editor 1
-					if (document.getElementById('ep-custom-js')) {
-						codeMirrorEditors['ep-custom-js'] = wp.codeEditor.initialize('ep-custom-js', {
-							type: 'application/javascript',
-							codemirror: {
-								lineNumbers: true,
-								mode: 'javascript',
-								theme: 'default',
-								lineWrapping: true,
-								autoCloseBrackets: true,
-								matchBrackets: true,
-								lint: false
-							}
-						});
-					}
-					
-					// CSS Editor 2
-					if (document.getElementById('ep-custom-css-2')) {
-						codeMirrorEditors['ep-custom-css-2'] = wp.codeEditor.initialize('ep-custom-css-2', {
-							type: 'text/css',
-							codemirror: {
-								lineNumbers: true,
-								mode: 'css',
-								theme: 'default',
-								lineWrapping: true,
-								autoCloseBrackets: true,
-								matchBrackets: true,
-								lint: false
-							}
-						});
-					}
-					
-					// JavaScript Editor 2
-					if (document.getElementById('ep-custom-js-2')) {
-						codeMirrorEditors['ep-custom-js-2'] = wp.codeEditor.initialize('ep-custom-js-2', {
-							type: 'application/javascript',
-							codemirror: {
-								lineNumbers: true,
-								mode: 'javascript',
-								theme: 'default',
-								lineWrapping: true,
-								autoCloseBrackets: true,
-								matchBrackets: true,
-								lint: false
-							}
-						});
-					}
-					
-					// Refresh all editors after a short delay to ensure proper rendering
-					setTimeout(function() {
-						refreshAllCodeMirrorEditors();
-					}, 100);
-				}
-				
-				// Function to refresh all CodeMirror editors
-				function refreshAllCodeMirrorEditors() {
-					Object.keys(codeMirrorEditors).forEach(function(editorKey) {
-						if (codeMirrorEditors[editorKey] && codeMirrorEditors[editorKey].codemirror) {
-							codeMirrorEditors[editorKey].codemirror.refresh();
-						}
-					});
-				}
-				
-				// Function to refresh editors when tab becomes visible
-				function refreshEditorsOnTabShow() {
-					// Listen for tab changes (UIkit tab switching)
-					if (typeof bdtUIkit !== 'undefined' && bdtUIkit.tab) {
-						// When tab becomes active, refresh editors
-						bdtUIkit.util.on(document, 'shown', '.bdt-tab', function() {
-							setTimeout(function() {
-								refreshAllCodeMirrorEditors();
-							}, 50);
-						});
-					}
-					
-					// Also listen for direct tab clicks
-					$('.bdt-tab a').on('click', function() {
-						setTimeout(function() {
-							refreshAllCodeMirrorEditors();
-						}, 100);
-					});
-					
-					// Listen for switcher changes (UIkit switcher)
-					if (typeof bdtUIkit !== 'undefined' && bdtUIkit.switcher) {
-						bdtUIkit.util.on(document, 'shown', '.bdt-switcher', function() {
-							setTimeout(function() {
-								refreshAllCodeMirrorEditors();
-							}, 50);
-						});
-					}
-				}
-				
-				// Initialize editors when page loads - with delay for better rendering
-				setTimeout(function() {
-					initializeCodeMirrorEditors();
-				}, 100);
-				
-				// Setup tab switching handlers
-				setTimeout(function() {
-					refreshEditorsOnTabShow();
-				}, 100);
-				
-				// Handle window resize events
-				$(window).on('resize', function() {
-					setTimeout(function() {
-						refreshAllCodeMirrorEditors();
-					}, 100);
-				});
-				
-				// Handle page visibility changes (when switching browser tabs)
-				document.addEventListener('visibilitychange', function() {
-					if (!document.hidden) {
-						setTimeout(function() {
-							refreshAllCodeMirrorEditors();
-						}, 200);
-					}
-				});
-				
-				// Force refresh when clicking on the Custom CSS & JS tab specifically
-				$('a[href="#"]').on('click', function() {
-					var tabText = $(this).text().trim();
-					if (tabText === 'Custom CSS & JS') {
-						setTimeout(function() {
-							refreshAllCodeMirrorEditors();
-						}, 150);
-					}
-				});
-
-				// Toggle white label fields visibility
-				$('#ep-white-label-enabled').on('change', function() {
-					if ($(this).is(':checked')) {
-						$('.ep-white-label-fields').slideDown(300);
-					} else {
-						$('.ep-white-label-fields').slideUp(300);
-					}
-				});
-
-				// WordPress Media Library Integration for Icon Upload
-				var mediaUploader;
-				
-				$('#ep-upload-icon').on('click', function(e) {
-					e.preventDefault();
-					
-					// If the uploader object has already been created, reopen the dialog
-					if (mediaUploader) {
-						mediaUploader.open();
-						return;
-					}
-					
-					// Create the media frame
-					mediaUploader = wp.media.frames.file_frame = wp.media({
-						title: 'Select Icon',
-						button: {
-							text: 'Use This Icon'
-						},
-						library: {
-							type: ['image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml']
-						},
-						multiple: false
-					});
-					
-					// When an image is selected, run a callback
-					mediaUploader.on('select', function() {
-						var attachment = mediaUploader.state().get('selection').first().toJSON();
-						
-						// Set the hidden inputs
-						$('#ep-white-label-icon').val(attachment.url);
-						$('#ep-white-label-icon-id').val(attachment.id);
-						
-						// Update preview
-						$('#ep-icon-preview-img').attr('src', attachment.url);
-						$('.ep-icon-preview-container').show();
-					});
-					
-					// Open the uploader dialog
-					mediaUploader.open();
-				});
-				
-				// Remove icon functionality
-				$('#ep-remove-icon').on('click', function(e) {
-					e.preventDefault();
-					
-					// Clear the hidden inputs
-					$('#ep-white-label-icon').val('');
-					$('#ep-white-label-icon-id').val('');
-					
-					// Hide preview
-					$('.ep-icon-preview-container').hide();
-					$('#ep-icon-preview-img').attr('src', '');
-				});
-
-				// BDTEP_HIDE Warning when checkbox is enabled
-				$('#ep-white-label-bdtep-hide').on('change', function() {
-					if ($(this).is(':checked')) {
-						// Show warning modal/alert
-						var warningMessage = '⚠️ WARNING: ADVANCED FEATURE\n\n' +
-							'Enabling BDTEP_HIDE will activate advanced white label mode that:\n\n' +
-							'• Hides ALL Element Pack branding and menus\n' +
-							'• Makes these settings difficult to access later\n' +
-							'• Requires the special access link to return\n' +
-							'• Is intended for client/agency use only\n\n' +
-							'An email with access instructions will be sent if you proceed.\n\n' +
-							'Are you sure you want to enable this advanced mode?';
-						
-						if (!confirm(warningMessage)) {
-							// User cancelled, uncheck the box
-							$(this).prop('checked', false);
-							return false;
-						}
-						
-						// Show additional info message
-						if ($('#ep-bdtep-hide-info').length === 0) {
-							$(this).closest('.ep-option-item').after(
-								'<div id="ep-bdtep-hide-info" class="bdt-alert bdt-alert-warning bdt-margin-small-top">' +
-								'<p><strong>BDTEP_HIDE Mode Enabled</strong></p>' +
-								'<p>When you save these settings, an email will be sent with instructions to access white label settings in the future.</p>' +
-								'</div>'
-							);
-						}
-					} else {
-						// Remove info message when unchecked
-						$('#ep-bdtep-hide-info').remove();
-					}
-				});
-
-				// Save white label settings with confirmation
-				$('#ep-save-white-label').on('click', function(e) {
-					e.preventDefault();
-					
-					// Check if button is disabled (no license or no white label eligible license)
-					if ($(this).prop('disabled')) {
-						var buttonText = $(this).text().trim();
-						var alertMessage = '';
-						
-						if (buttonText.includes('License Not Activated')) {
-							alertMessage = '<div class="bdt-alert bdt-alert-danger" bdt-alert>' +
-								'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-								'<p><strong>License Not Activated</strong><br>You need to activate your Element Pack license to access White Label functionality. Please activate your license first.</p>' +
-								'</div>';
-						} else {
-							alertMessage = '<div class="bdt-alert bdt-alert-warning" bdt-alert>' +
-								'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-								'<p><strong>Eligible License Required</strong><br>White Label functionality is available for Agency, Extended, Developer, AppSumo Lifetime, and other eligible license holders. Please upgrade your license to access these features.</p>' +
-								'</div>';
-						}
-						
-						$('#ep-white-label-message').html(alertMessage).show();
-						return false;
-					}
-					
-					// Check if white label mode is being enabled
-					var whiteLabelEnabled = $('#ep-white-label-enabled').is(':checked');
-					var bdtepHideEnabled = $('#ep-white-label-bdtep-hide').is(':checked');
-					
-					// Only show confirmation dialog if white label is enabled AND BDTEP_HIDE is enabled
-					if (whiteLabelEnabled && bdtepHideEnabled) {
-						var confirmMessage = '🔒 FINAL CONFIRMATION\n\n' +
-							'You are about to save settings with BDTEP_HIDE enabled.\n\n' +
-							'This will:\n' +
-							'• Hide Element Pack from WordPress admin immediately\n' +
-							'• Send access instructions to your email addresses\n' +
-							'• Require the special link to modify these settings\n\n' +
-							'Email will be sent to:\n' +
-							'• License email: <?php echo esc_js('farid@bdthemes.com'); ?>\n' +
-							'• Admin email: <?php echo esc_js(get_bloginfo('admin_email')); ?>\n\n' +
-							'Are you absolutely sure you want to proceed?';
-						
-						if (!confirm(confirmMessage)) {
-							return false;
-						}
-					}
-					
-					var $button = $(this);
-					var originalText = $button.html();
-					
-					// Show loading state
-					$button.html('<span class="dashicons dashicons-update-alt"></span> Saving...');
-					$button.prop('disabled', true);
-					
-					// Collect form data
-					var formData = {
-						action: 'ep_save_white_label',
-						nonce: ep_admin_ajax.white_label_nonce,
-						white_label_enabled: $('#ep-white-label-enabled').is(':checked') ? 1 : 0,
-						white_label_title: $('#ep-white-label-title').val(),
-						white_label_icon: $('#ep-white-label-icon').val(),
-						white_label_icon_id: $('#ep-white-label-icon-id').val(),
-						hide_license: $('#ep-white-label-hide-license').is(':checked') ? 1 : 0,
-						bdtep_hide: $('#ep-white-label-bdtep-hide').is(':checked') ? 1 : 0
-					};
-					
-					// Send AJAX request
-					$.post(ep_admin_ajax.ajax_url, formData)
-						.done(function(response) {
-							if (response.success) {
-								// Show success message with countdown
-								var countdown = 2;
-								var successMessage = response.data.message;
-								
-								// Add email notification info if BDTEP_HIDE was enabled
-								if (response.data.bdtep_hide && response.data.email_sent) {
-									successMessage += '<br><br><strong>📧 Access Email Sent!</strong><br>Check your email for the access link to modify these settings in the future.';
-								} else if (response.data.bdtep_hide && !response.data.email_sent && response.data.access_url) {
-									// Localhost scenario - show the access URL directly
-									successMessage += '<br><br><strong>📧 Localhost Email Notice:</strong><br>Email functionality is not available on localhost.<br><strong>Your Access URL:</strong><br><a href="' + response.data.access_url + '" target="_blank">Click here to access white label settings</a><br><small>Save this URL - you\'ll need it to modify settings when BDTEP_HIDE is active.</small>';
-								} else if (response.data.bdtep_hide && !response.data.email_sent) {
-									successMessage += '<br><br><strong>⚠️ Email Notice:</strong><br>There was an issue sending the access email. Please check your email settings or contact support.';
-								}
-								
-								$('#ep-white-label-message').html(
-									'<div class="bdt-alert bdt-alert-success" bdt-alert>' +
-									'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-									'<p>' + successMessage + ' <span id="ep-reload-countdown">Reloading in ' + countdown + ' seconds...</span></p>' +
-									'</div>'
-								).show();
-								
-								// Update button text
-								$button.html('<span class="dashicons dashicons-update-alt"></span> Reloading...');
-								
-								// Countdown timer
-								var countdownInterval = setInterval(function() {
-									countdown--;
-									if (countdown > 0) {
-										$('#ep-reload-countdown').text('Reloading in ' + countdown + ' seconds...');
-									} else {
-										$('#ep-reload-countdown').text('Reloading now...');
-										clearInterval(countdownInterval);
-									}
-								}, 1000);
-								
-								// Check if BDTEP_HIDE is enabled and redirect accordingly
-								setTimeout(function() {
-									if (response.data.bdtep_hide) {
-										// Redirect to admin dashboard if BDTEP_HIDE is enabled
-										window.location.href = '<?php echo admin_url('index.php'); ?>';
-									} else {
-										// Reload current page if BDTEP_HIDE is not enabled
-										window.location.reload();
-									}
-								}, 1500);
-							} else {
-								// Show error message
-								$('#ep-white-label-message').html(
-									'<div class="bdt-alert bdt-alert-danger" bdt-alert>' +
-									'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-									'<p>Error: ' + (response.data.message || 'Unknown error occurred') + '</p>' +
-									'</div>'
-								).show();
-								
-								// Restore button state for error case
-								$button.html(originalText);
-								$button.prop('disabled', false);
-							}
-						})
-						.fail(function(xhr, status, error) {
-							// Show error message
-							$('#ep-white-label-message').html(
-								'<div class="bdt-alert bdt-alert-danger" bdt-alert>' +
-								'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-								'<p>Error: Failed to save settings. Please try again. (' + status + ')</p>' +
-								'</div>'
-							).show();
-							
-							// Restore button state for failure case
-							$button.html(originalText);
-							$button.prop('disabled', false);
-						});
-				});
-
-				// Save custom code functionality (updated for CodeMirror)
-				$('#ep-save-custom-code').on('click', function(e) {
-					e.preventDefault();
-					
-					var $button = $(this);
-					var originalText = $button.html();
-					
-					// Prevent multiple simultaneous saves
-					if ($button.prop('disabled') || $button.hasClass('ep-saving')) {
-						return;
-					}
-					
-					// Mark as saving
-					$button.addClass('ep-saving');
-					
-					// Get content from CodeMirror editors
-					function getCodeMirrorContent(elementId) {
-						if (codeMirrorEditors[elementId] && codeMirrorEditors[elementId].codemirror) {
-							return codeMirrorEditors[elementId].codemirror.getValue();
-						} else {
-							// Fallback to textarea value
-							return $('#' + elementId).val() || '';
-						}
-					}
-					
-					var cssContent = getCodeMirrorContent('ep-custom-css');
-					var jsContent = getCodeMirrorContent('ep-custom-js');
-					var css2Content = getCodeMirrorContent('ep-custom-css-2');
-					var js2Content = getCodeMirrorContent('ep-custom-js-2');
-					
-					// Show loading state
-					$button.html('<span class="dashicons dashicons-update-alt"></span> Saving...');
-					$button.prop('disabled', true);
-					
-					// Timeout safeguard - if AJAX doesn't complete in 30 seconds, restore button
-					var timeoutId = setTimeout(function() {
-						$button.removeClass('ep-saving');
-						$button.html(originalText);
-						$button.prop('disabled', false);
-						$('#ep-custom-code-message').html(
-							'<div class="bdt-alert bdt-alert-warning" bdt-alert>' +
-							'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-							'<p>Save operation timed out. Please try again.</p>' +
-							'</div>'
-						).show();
-					}, 30000);
-					
-					// Collect form data
-					var formData = {
-						action: 'ep_save_custom_code',
-						nonce: ep_admin_ajax.nonce,
-						custom_css: cssContent,
-						custom_js: jsContent,
-						custom_css_2: css2Content,
-						custom_js_2: js2Content,
-						excluded_pages: $('#ep-excluded-pages').val() || []
-					};
-					
-					
-					// Verify we have some content before sending (optional check)
-					var totalContentLength = cssContent.length + jsContent.length + css2Content.length + js2Content.length;
-					if (totalContentLength === 0) {
-						var confirmEmpty = confirm('No content detected in any editor. Do you want to save empty content (this will clear all custom code)?');
-						if (!confirmEmpty) {
-							// Restore button state
-							$button.html(originalText);
-							$button.prop('disabled', false);
-							return;
-						}
-					}
-					
-					// Send AJAX request
-					$.post(ep_admin_ajax.ajax_url, formData)
-						.done(function(response) {
-							if (response.success) {
-								// Show success message
-								var successMessage = response.data.message;
-								if (response.data.excluded_count) {
-									successMessage += ' (' + response.data.excluded_count + ' pages excluded)';
-								}
-								
-								$('#ep-custom-code-message').html(
-									'<div class="bdt-alert bdt-alert-success" bdt-alert>' +
-									'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-									'<p>' + successMessage + '</p>' +
-									'</div>'
-								).show();
-								
-								// Auto-hide message after 5 seconds
-								setTimeout(function() {
-									$('#ep-custom-code-message').fadeOut();
-								}, 5000);
-								
-							} else {
-								// Show error message
-								$('#ep-custom-code-message').html(
-									'<div class="bdt-alert bdt-alert-danger" bdt-alert>' +
-									'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-									'<p>Error: ' + (response.data.message || 'Unknown error occurred') + '</p>' +
-									'</div>'
-								).show();
-							}
-						})
-						.fail(function(xhr, status, error) {
-							// Show error message
-							$('#ep-custom-code-message').html(
-								'<div class="bdt-alert bdt-alert-danger" bdt-alert>' +
-								'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-								'<p>Error: Failed to save custom code. Please try again. (' + status + ')</p>' +
-								'</div>'
-							).show();
-						})
-						.always(function() {
-							
-							// Clear the timeout since AJAX completed
-							clearTimeout(timeoutId);
-							
-							try {
-								$button.removeClass('ep-saving');
-								$button.html(originalText);
-								$button.prop('disabled', false);
-							} catch (e) {
-								// Fallback: force button restoration
-								$('#ep-save-custom-code').removeClass('ep-saving').html('<span class="dashicons dashicons-yes"></span> Save Custom Code').prop('disabled', false);
-							}
-						});
-				});
-
-				// Reset custom code functionality (updated for CodeMirror)
-				$('#ep-reset-custom-code').on('click', function(e) {
-					e.preventDefault();
-					
-					if (confirm('Are you sure you want to reset all custom code? This action cannot be undone.')) {
-						// Clear CodeMirror editors
-						function clearCodeMirrorEditor(elementId) {
-							if (codeMirrorEditors[elementId] && codeMirrorEditors[elementId].codemirror) {
-								codeMirrorEditors[elementId].codemirror.setValue('');
-							} else {
-								// Fallback to clearing textarea
-								$('#' + elementId).val('');
-							}
-						}
-						
-						// Clear all editors
-						clearCodeMirrorEditor('ep-custom-css');
-						clearCodeMirrorEditor('ep-custom-js');
-						clearCodeMirrorEditor('ep-custom-css-2');
-						clearCodeMirrorEditor('ep-custom-js-2');
-						
-						// Clear exclusions
-						$('#ep-excluded-pages').val([]).trigger('change');
-						
-						$('#ep-custom-code-message').html(
-							'<div class="bdt-alert bdt-alert-warning" bdt-alert>' +
-							'<a href="#" class="bdt-alert-close" onclick="$(this).parent().parent().hide(); return false;">&times;</a>' +
-							'<p>All custom code has been cleared. Don\'t forget to save changes!</p>' +
-							'</div>'
-						).show();
-						
-						// Auto-hide message after 3 seconds
-						setTimeout(function() {
-							$('#ep-custom-code-message').fadeOut();
-						}, 3000);
-					}
-				});				
 			});
 
 			// Chart.js initialization for system status canvas charts
@@ -2809,7 +2065,7 @@ class ElementPack_Admin_Settings {
 				
 				// Disable button and show loading state
 				$button.prop('disabled', true)
-					   .text('<?php echo esc_js(__('Installing...', 'bdthemes-element-pack')); ?>')
+					   .text('<?php echo esc_js(__('Installing...', 'bdthemes-element-pack-lite')); ?>')
 					   .addClass('bdt-installing');
 				
 				// Perform AJAX request
@@ -2824,7 +2080,7 @@ class ElementPack_Admin_Settings {
 					success: function(response) {
 						if (response.success) {
 							// Show success message
-							$button.text('<?php echo esc_js(__('Installed!', 'bdthemes-element-pack')); ?>')
+							$button.text('<?php echo esc_js(__('Installed!', 'bdthemes-element-pack-lite')); ?>')
 								   .removeClass('bdt-installing')
 								   .addClass('bdt-installed');
 							
@@ -2865,7 +2121,7 @@ class ElementPack_Admin_Settings {
 						// Show error notification
 						if (typeof bdtUIkit !== 'undefined' && bdtUIkit.notification) {
 							bdtUIkit.notification({
-								message: '<span class="dashicons dashicons-warning"></span> <?php echo esc_js(__('Installation failed. Please try again.', 'bdthemes-element-pack')); ?>',
+								message: '<span class="dashicons dashicons-warning"></span> <?php echo esc_js(__('Installation failed. Please try again.', 'bdthemes-element-pack-lite')); ?>',
 								status: 'danger'
 							});
 						}
@@ -2900,9 +2156,16 @@ class ElementPack_Admin_Settings {
 					<p class="">
 						<?php
 						/* translators: %1$s: URL link to BdThemes website */
-						echo sprintf(
-							__('Element Pack plugin made with love by <a target="_blank" href="%1$s">BdThemes</a> Team.<br>All rights reserved by <a target="_blank" href="%1$s">BdThemes.com</a>.', 'bdthemes-element-pack'),
-							esc_url('https://bdthemes.com')
+						echo wp_kses(
+							sprintf(
+								/* translators: %1$s: URL link to BdThemes website */
+								__('Element Pack plugin made with love by <a target="_blank" href="%1$s">BdThemes</a> Team.<br>All rights reserved by <a target="_blank" href="%1$s">BdThemes.com</a>.', 'bdthemes-element-pack-lite'),
+								esc_url('https://bdthemes.com')
+							),
+							array(
+								'a'  => array( 'href' => array(), 'target' => array() ),
+								'br' => array(),
+							)
 						);
 						?>
 					</p>
@@ -2949,7 +2212,7 @@ class ElementPack_Admin_Settings {
 					<div class="bdt-width-1-1">
 						<div class="bdt-card bdt-card-body ep-system-requirement">
 							<h1 class="ep-feature-title bdt-margin-small-bottom">
-								<?php esc_html_e('System Requirement', 'bdthemes-element-pack'); ?>
+								<?php esc_html_e('System Requirement', 'bdthemes-element-pack-lite'); ?>
 							</h1>
 							<?php $this->element_pack_system_requirement(); ?>
 						</div>
@@ -2962,326 +2225,6 @@ class ElementPack_Admin_Settings {
 	}
 
 	/**
-	 * Extra Options Start Here
-	 */
-
-	public function element_pack_extra_options() {
-		?>
-		<div class="ep-dashboard-panel"
-			bdt-scrollspy="target: > div > div > .bdt-card; cls: bdt-animation-slide-bottom-small; delay: 300">
-			<div class="ep-dashboard-extra-options">
-				<div class="bdt-card bdt-card-body">
-					<h1 class="ep-feature-title"><?php esc_html_e('Extra Options', 'bdthemes-element-pack'); ?></h1>
-
-					<div class="ep-extra-options-tabs">
-						<ul class="bdt-tab" bdt-tab="connect: #ep-extra-options-tab-content; animation: bdt-animation-fade">
-							<li class="bdt-active"><a
-									href="#"><?php esc_html_e('Custom CSS & JS', 'bdthemes-element-pack'); ?></a></li>
-							<li><a href="#"><?php esc_html_e('White Label', 'bdthemes-element-pack'); ?></a></li>
-						</ul>
-
-						<div id="ep-extra-options-tab-content" class="bdt-switcher">
-							<!-- Custom CSS & JS Tab -->
-							<div>
-								<?php $this->render_custom_css_js_section(); ?>
-							</div>
-							
-							<!-- White Label Tab -->
-							<div>
-								<?php $this->render_white_label_section(); ?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Extra Options Start Here
-	 */
-
-	/**
-	 * Render Custom CSS & JS Section
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function render_custom_css_js_section() {
-		?>
-		<div class="ep-custom-code-section">
-			<!-- Header Section -->
-			<div class="ep-code-section-header">
-				<h2 class="ep-section-title"><?php esc_html_e('Header Code Injection', 'bdthemes-element-pack'); ?></h2>
-				<p class="ep-section-description"><?php esc_html_e('Code added here will be injected into the &lt;head&gt; section of your website.', 'bdthemes-element-pack'); ?></p>
-			</div>
-			<div class="ep-code-row bdt-grid bdt-grid-small" bdt-grid>
-				<div class="bdt-width-1-2@m">
-					<div class="ep-code-editor-wrapper">
-						<h3 class="ep-code-editor-title"><?php esc_html_e('CSS', 'bdthemes-element-pack'); ?></h3>
-						<p class="ep-code-editor-description"><?php esc_html_e('Enter raw CSS code without &lt;style&gt; tags.', 'bdthemes-element-pack'); ?></p>
-						<div class="ep-codemirror-editor-container">
-							<textarea id="ep-custom-css" name="ep_custom_css" class="ep-code-editor" data-mode="css" placeholder=".example {&#10;    background: red;&#10;    border-radius: 5px;&#10;    padding: 15px;&#10;}&#10;&#10;"><?php echo esc_textarea(get_option('ep_custom_css', '')); ?></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="bdt-width-1-2@m">
-					<div class="ep-code-editor-wrapper">
-						<h3 class="ep-code-editor-title"><?php esc_html_e('JS', 'bdthemes-element-pack'); ?></h3>
-						<p class="ep-code-editor-description"><?php esc_html_e('Enter raw JavaScript code without &lt;script&gt; tags.', 'bdthemes-element-pack'); ?></p>
-						<div class="ep-codemirror-editor-container">
-							<textarea id="ep-custom-js" name="ep_custom_js" class="ep-code-editor" data-mode="javascript" placeholder="alert('Hello, Element Pack!');"><?php echo esc_textarea(get_option('ep_custom_js', '')); ?></textarea>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Footer Section -->
-			<div class="ep-code-section-header bdt-margin-medium-top">
-				<h2 class="ep-section-title"><?php esc_html_e('Footer Code Injection', 'bdthemes-element-pack'); ?></h2>
-				<p class="ep-section-description"><?php esc_html_e('Code added here will be injected before the closing &lt;/body&gt; tag of your website.', 'bdthemes-element-pack'); ?></p>
-			</div>
-			<div class="ep-code-row bdt-grid bdt-grid-small bdt-margin-small-top" bdt-grid>
-				<div class="bdt-width-1-2@m">
-					<div class="ep-code-editor-wrapper">
-						<h3 class="ep-code-editor-title"><?php esc_html_e('CSS', 'bdthemes-element-pack'); ?></h3>
-						<p class="ep-code-editor-description"><?php esc_html_e('Enter raw CSS code without &lt;style&gt; tags.', 'bdthemes-element-pack'); ?></p>
-						<div class="ep-codemirror-editor-container">
-							<textarea id="ep-custom-css-2" name="ep_custom_css_2" class="ep-code-editor" data-mode="css" placeholder=".example {&#10;    background: green;&#10;}&#10;&#10;"><?php echo esc_textarea(get_option('ep_custom_css_2', '')); ?></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="bdt-width-1-2@m">
-					<div class="ep-code-editor-wrapper">
-						<h3 class="ep-code-editor-title"><?php esc_html_e('JS', 'bdthemes-element-pack'); ?></h3>
-						<p class="ep-code-editor-description"><?php esc_html_e('Enter raw JavaScript code without &lt;script&gt; tags.', 'bdthemes-element-pack'); ?></p>
-						<div class="ep-codemirror-editor-container">
-							<textarea id="ep-custom-js-2" name="ep_custom_js_2" class="ep-code-editor" data-mode="javascript" placeholder="console.log('Hello, Element Pack!');"><?php echo esc_textarea(get_option('ep_custom_js_2', '')); ?></textarea>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Page Exclusion Section -->
-			<div class="ep-code-section-header bdt-margin-medium-top">
-				<h2 class="ep-section-title"><?php esc_html_e('Page & Post Exclusion Settings', 'bdthemes-element-pack'); ?></h2>
-				<p class="ep-section-description"><?php esc_html_e('Select pages and posts where you don\'t want any custom code to be injected. This applies to all sections above.', 'bdthemes-element-pack'); ?></p>
-			</div>
-			<div class="ep-page-exclusion-wrapper">
-				<label for="ep-excluded-pages" class="ep-exclusion-label">
-					<?php esc_html_e('Exclude Pages & Posts:', 'bdthemes-element-pack'); ?>
-				</label>
-				<select id="ep-excluded-pages" name="ep_excluded_pages[]" multiple class="ep-page-select">
-					<option value=""><?php esc_html_e('-- Select pages/posts to exclude --', 'bdthemes-element-pack'); ?></option>
-					<?php
-					$excluded_pages = get_option('ep_excluded_pages', array());
-					if (!is_array($excluded_pages)) {
-						$excluded_pages = array();
-					}
-					
-					// Get all published pages
-					$pages = get_pages(array(
-						'sort_order' => 'ASC',
-						'sort_column' => 'post_title',
-						'post_status' => 'publish'
-					));
-					
-					// Get recent posts (last 50)
-					$posts = get_posts(array(
-						'numberposts' => 50,
-						'post_status' => 'publish',
-						'post_type' => 'post',
-						'orderby' => 'date',
-						'order' => 'DESC'
-					));
-					
-					// Display pages first
-					if (!empty($pages)) {
-						echo '<optgroup label="' . esc_attr__('Pages', 'bdthemes-element-pack') . '">';
-						foreach ($pages as $page) {
-							$selected = in_array($page->ID, $excluded_pages) ? 'selected' : '';
-							echo '<option value="' . esc_attr($page->ID) . '" ' . $selected . '>' . esc_html($page->post_title) . '</option>';
-						}
-						echo '</optgroup>';
-					}
-					
-					// Then display posts
-					if (!empty($posts)) {
-						echo '<optgroup label="' . esc_attr__('Recent Posts', 'bdthemes-element-pack') . '">';
-						foreach ($posts as $post) {
-							$selected = in_array($post->ID, $excluded_pages) ? 'selected' : '';
-							$post_date = date('M j, Y', strtotime($post->post_date));
-							echo '<option value="' . esc_attr($post->ID) . '" ' . $selected . '>' . esc_html($post->post_title) . ' (' . $post_date . ')</option>';
-						}
-						echo '</optgroup>';
-					}
-					?>
-				</select>
-				<p class="ep-exclusion-help">
-					<?php esc_html_e('Hold Ctrl (or Cmd on Mac) to select multiple items. Selected pages and posts will not load any custom CSS or JavaScript code. The list shows all pages and the 50 most recent posts.', 'bdthemes-element-pack'); ?>
-				</p>
-			</div>
-
-			<!-- Save Button Section -->
-			<div class="ep-code-save-section bdt-margin-medium-top bdt-text-center">
-				<button type="button" id="ep-save-custom-code" class="bdt-button bdt-btn-blue bdt-margin-small-right" bdt-tooltip="Upgrade to Element Pack Pro to use this feature." disabled>
-					<span class="dashicons dashicons-yes"></span>
-					<?php esc_html_e('Save Custom Code', 'bdthemes-element-pack'); ?>
-				</button>
-				<button type="button" id="ep-reset-custom-code" class="bdt-button bdt-btn-grey">
-					<span class="dashicons dashicons-update"></span>
-					<?php esc_html_e('Reset Code', 'bdthemes-element-pack'); ?>
-				</button>
-			</div>
-
-			<!-- Success/Error Messages -->
-			<div id="ep-custom-code-message" class="ep-code-message bdt-margin-small-top" style="display: none;">
-				<div class="bdt-alert bdt-alert-success" bdt-alert>
-					<a href class="bdt-alert-close" bdt-close></a>
-					<p><?php esc_html_e('Custom code saved successfully!', 'bdthemes-element-pack'); ?></p>
-				</div>
-			</div>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Render White Label Section
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function render_white_label_section() {
-		?>
-		<div class="ep-white-label-section">
-			<h1 class="ep-feature-title"><?php esc_html_e('White Label Settings', 'bdthemes-element-pack'); ?></h1>
-			<p><?php esc_html_e('Enable white label mode to hide Element Pack branding from the admin interface and widgets.', 'bdthemes-element-pack'); ?></p>
-
-			<div class="bdt-alert bdt-alert-danger bdt-margin-medium-top" bdt-alert>
-				<p><strong><?php esc_html_e('License Not Activated', 'bdthemes-element-pack'); ?></strong></p>
-				<p><?php esc_html_e('You need to activate your Element Pack license to access White Label functionality. Please activate your license first.', 'bdthemes-element-pack'); ?></p>
-				<div class="bdt-margin-small-top">
-					<a href="https://elementpack.pro/pricing/" target="_blank" class="bdt-button bdt-btn-blue">
-						<?php esc_html_e('Get License', 'bdthemes-element-pack'); ?>
-					</a>
-				</div>
-			</div>
-
-			<!-- White Label Options -->
-			<div class="ep-white-label-options ep-white-label-locked">
-				<div class="ep-option-item ">
-					<div class="ep-option-item-inner bdt-card">
-						<div class="bdt-flex bdt-flex-between bdt-flex-middle">
-							<div>
-								<h3 class="ep-option-title"><?php esc_html_e('Enable White Label Mode', 'bdthemes-element-pack'); ?></h3>
-								<p class="ep-option-description">
-									<?php esc_html_e('This feature requires an eligible license (Agency, Extended, Developer, AppSumo Lifetime, etc.). Upgrade your license to access white label functionality.', 'bdthemes-element-pack'); ?>
-								</p>
-							</div>
-							<div class="ep-option-switch">
-								<?php
-								$white_label_enabled = false;
-								// Convert to boolean to ensure proper comparison
-								$white_label_enabled = (bool) $white_label_enabled;
-								?>
-								<label class="switch">
-									<input type="checkbox" 
-										   id="ep-white-label-enabled" 
-										   name="ep_white_label_enabled" 
-										   <?php checked($white_label_enabled, true); ?>
-										   <?php disabled(true); ?>>
-									<span class="slider"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Save Button Section -->
-				<div class="ep-white-label-save-section bdt-margin-small-top bdt-text-center">
-					<button type="button" 
-							id="ep-save-white-label" 
-							class="bdt-button bdt-btn-blue"
-							<?php disabled(true); ?>>
-						<span class="dashicons dashicons-yes"></span>
-						<?php esc_html_e('Eligible License Required', 'bdthemes-element-pack'); ?>
-					</button>
-				</div>
-
-				<!-- Success/Error Messages -->
-				<div id="ep-white-label-message" class="ep-white-label-message bdt-margin-small-top" style="display: none;">
-					<div class="bdt-alert bdt-alert-success" bdt-alert>
-						<a href class="bdt-alert-close" bdt-close></a>
-						<p><?php esc_html_e('White label settings saved successfully!', 'bdthemes-element-pack'); ?></p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Check plugin status (installed, active, or not installed)
-	 * 
-	 * @param string $plugin_path Plugin file path
-	 * @return string 'active', 'installed', or 'not_installed'
-	 */
-	private function get_plugin_status($plugin_path) {
-		// Check if plugin is active
-		if (is_plugin_active($plugin_path)) {
-			return 'active';
-		}
-		
-		// Check if plugin is installed but not active
-		$installed_plugins = get_plugins();
-		if (isset($installed_plugins[$plugin_path])) {
-			return 'installed';
-		}
-		
-		// Plugin is not installed
-		return 'not_installed';
-	}
-
-	/**
-	 * Get plugin action button HTML based on plugin status
-	 * 
-	 * @param string $plugin_path Plugin file path
-	 * @param string $install_url Plugin installation URL
-	 * @param string $plugin_slug Plugin slug for activation
-	 * @return string Button HTML
-	 */
-	private function get_plugin_action_button($plugin_path, $install_url, $plugin_slug = '') {
-		$status = $this->get_plugin_status($plugin_path);
-		
-		switch ($status) {
-			case 'active':
-				return '';
-				
-			case 'installed':
-				$activate_url = wp_nonce_url(
-					add_query_arg([
-						'action' => 'activate',
-						'plugin' => $plugin_path
-					], admin_url('plugins.php')),
-					'activate-plugin_' . $plugin_path
-				);
-				return '<a class="bdt-button bdt-welcome-button" href="' . esc_url($activate_url) . '">' . 
-				       __('Activate', 'bdthemes-element-pack') . '</a>';
-				
-			case 'not_installed':
-			default:
-				$plugin_slug = $this->extract_plugin_slug_from_path($plugin_path);
-				$nonce = wp_create_nonce('ep_install_plugin_nonce');
-				return '<a class="bdt-button bdt-welcome-button ep-install-plugin" 
-				          data-plugin-slug="' . esc_attr($plugin_slug) . '" 
-				          data-nonce="' . esc_attr($nonce) . '" 
-				          href="#">' . 
-				       __('Install', 'bdthemes-element-pack') . '</a>';
-		}
-	}
-
-	/**
 	 * Handle AJAX plugin installation
 	 * 
 	 * @access public
@@ -3289,19 +2232,19 @@ class ElementPack_Admin_Settings {
 	 */
 	public function install_plugin_ajax() {
 		// Check nonce
-		if (!wp_verify_nonce($_POST['nonce'], 'ep_install_plugin_nonce')) {
-			wp_send_json_error(['message' => __('Security check failed', 'bdthemes-element-pack')]);
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ep_install_plugin_nonce' ) ) {
+			wp_send_json_error(['message' => __('Security check failed', 'bdthemes-element-pack-lite')]);
 		}
 
 		// Check user capability
 		if (!current_user_can('install_plugins')) {
-			wp_send_json_error(['message' => __('You do not have permission to install plugins', 'bdthemes-element-pack')]);
+			wp_send_json_error(['message' => __('You do not have permission to install plugins', 'bdthemes-element-pack-lite')]);
 		}
 
-		$plugin_slug = sanitize_text_field($_POST['plugin_slug']);
+		$plugin_slug = isset($_POST['plugin_slug']) ? sanitize_key(wp_unslash($_POST['plugin_slug'])) : '';
 
 		if (empty($plugin_slug)) {
-			wp_send_json_error(['message' => __('Plugin slug is required', 'bdthemes-element-pack')]);
+			wp_send_json_error(['message' => __('Plugin slug is required', 'bdthemes-element-pack-lite')]);
 		}
 
 		// Include necessary WordPress files
@@ -3318,7 +2261,7 @@ class ElementPack_Admin_Settings {
 		]);
 
 		if (is_wp_error($api)) {
-			wp_send_json_error(['message' => __('Plugin not found: ', 'bdthemes-element-pack') . $api->get_error_message()]);
+			wp_send_json_error(['message' => __('Plugin not found: ', 'bdthemes-element-pack-lite') . $api->get_error_message()]);
 		}
 
 		// Install the plugin
@@ -3327,18 +2270,18 @@ class ElementPack_Admin_Settings {
 		$result = $upgrader->install($api->download_link);
 
 		if (is_wp_error($result)) {
-			wp_send_json_error(['message' => __('Installation failed: ', 'bdthemes-element-pack') . $result->get_error_message()]);
+			wp_send_json_error(['message' => __('Installation failed: ', 'bdthemes-element-pack-lite') . $result->get_error_message()]);
 		} elseif ($skin->get_errors()->has_errors()) {
-			wp_send_json_error(['message' => __('Installation failed: ', 'bdthemes-element-pack') . $skin->get_error_messages()]);
+			wp_send_json_error(['message' => __('Installation failed: ', 'bdthemes-element-pack-lite') . $skin->get_error_messages()]);
 		} elseif (is_null($result)) {
-			wp_send_json_error(['message' => __('Installation failed: Unable to connect to filesystem', 'bdthemes-element-pack')]);
+			wp_send_json_error(['message' => __('Installation failed: Unable to connect to filesystem', 'bdthemes-element-pack-lite')]);
 		}
 
 		// Get installation status
 		$install_status = install_plugin_install_status($api);
 		
 		wp_send_json_success([
-			'message' => __('Plugin installed successfully!', 'bdthemes-element-pack'),
+			'message' => __('Plugin installed successfully!', 'bdthemes-element-pack-lite'),
 			'plugin_file' => $install_status['file'],
 			'plugin_name' => $api->name
 		]);

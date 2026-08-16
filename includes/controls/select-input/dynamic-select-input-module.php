@@ -133,10 +133,11 @@ class Dynamic_Select_Input_Module {
     protected function getselecedIds() {
         $results = [];
         if (!empty($_POST['ids']) ){
-            if (is_array($_POST['ids'])) {
-                $results = $_POST['ids'];
+            $raw_ids = wp_unslash($_POST['ids']);
+            if (is_array($raw_ids)) {
+                $results = array_map('sanitize_text_field', $raw_ids);
             } else {
-                $results = explode(',', $_POST['ids']);
+                $results = explode(',', sanitize_text_field($raw_ids));
             }
         }
         $results = array_map('absint', array_filter($results, 'is_numeric'));
@@ -553,7 +554,7 @@ class Dynamic_Select_Input_Module {
         $results   = [];
 
         if (empty($templates)) {
-            $results = ['0' => __('Template Not Found!', 'bdthemes-element-pack')];
+            $results = ['0' => __('Template Not Found!', 'bdthemes-element-pack-lite')];
         } else {
             foreach ($templates as $template) {
                 $results[] = [
@@ -585,7 +586,7 @@ class Dynamic_Select_Input_Module {
                 ];
             }
         } else {
-            $results = ['0' => esc_html__('AE Plugin Not Installed', 'bdthemes-element-pack')];
+            $results = ['0' => esc_html__('AE Plugin Not Installed', 'bdthemes-element-pack-lite')];
         }
 
         return $results;

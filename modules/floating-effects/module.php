@@ -31,7 +31,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_show',
 			[ 
-				'label'              => BDTEP_CP . esc_html__( 'Floating Effects', 'bdthemes-element-pack' ),
+				'label'              => BDTEP_CP . esc_html__( 'Floating Effects', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SWITCHER,
 				'default'            => '',
 				'return_value'       => 'yes',
@@ -42,7 +42,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_translate_toggle',
 			[ 
-				'label'              => esc_html__( 'Translate', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Translate', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [ 
 					'ep_floating_effects_show' => 'yes',
@@ -58,7 +58,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_translate_x',
 			[ 
-				'label'              => esc_html__( 'Translate X', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Translate X', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -74,8 +74,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -93,7 +93,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_translate_y',
 			[ 
-				'label'              => esc_html__( 'Translate Y', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Translate Y', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -109,8 +109,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -126,7 +126,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_translate_duration',
 			[ 
-				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -151,7 +151,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_translate_delay',
 			[ 
-				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -175,7 +175,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_toggle',
 			[ 
-				'label'              => esc_html__( 'Rotate', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Rotate', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [ 
 					'ep_floating_effects_show' => 'yes',
@@ -191,7 +191,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_x',
 			[ 
-				'label'              => esc_html__( 'Rotate X', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Rotate X', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -207,8 +207,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -225,7 +225,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_y',
 			[ 
-				'label'              => esc_html__( 'Rotate Y', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Rotate Y', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -241,8 +241,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -259,7 +259,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_z',
 			[ 
-				'label'              => esc_html__( 'Rotate Z', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Rotate Z', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -275,8 +275,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -293,7 +293,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_infinite',
 			[ 
-				'label'              => esc_html__( 'Rotate Infinite', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Rotate Infinite', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SWITCHER,
 				'condition'          => [ 
 					'ep_floating_effects_show'          => 'yes',
@@ -309,7 +309,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_duration',
 			[ 
-				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -337,7 +337,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_rotate_delay',
 			[ 
-				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -364,7 +364,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_scale_toggle',
 			[ 
-				'label'              => esc_html__( 'Scale', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Scale', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [ 
 					'ep_floating_effects_show' => 'yes',
@@ -380,7 +380,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_scale_x',
 			[ 
-				'label'              => esc_html__( 'Scale X', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Scale X', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -397,8 +397,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -414,7 +414,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_scale_y',
 			[ 
-				'label'              => esc_html__( 'Scale Y', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Scale Y', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -431,8 +431,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -448,7 +448,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_scale_duration',
 			[ 
-				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -473,7 +473,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_scale_delay',
 			[ 
-				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -497,7 +497,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_skew_toggle',
 			[ 
-				'label'              => esc_html__( 'Skew', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Skew', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [ 
 					'ep_floating_effects_show' => 'yes',
@@ -513,7 +513,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_skew_x',
 			[ 
-				'label'              => esc_html__( 'Skew X', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Skew X', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -529,8 +529,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -546,7 +546,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_skew_y',
 			[ 
-				'label'              => esc_html__( 'Skew Y', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Skew Y', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -562,8 +562,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				'scales'             => 1,
 				'handles'            => 'range',
@@ -579,7 +579,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_skew_duration',
 			[ 
-				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -604,7 +604,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_skew_delay',
 			[ 
-				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -628,7 +628,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_border_radius_toggle',
 			[ 
-				'label'              => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [ 
 					'ep_floating_effects_show' => 'yes',
@@ -644,7 +644,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_border_radius',
 			[ 
-				'label'              => esc_html__( 'Start and End', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Start and End', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => [ 
 					'sizes' => [ 
@@ -661,8 +661,8 @@ class Module extends Element_Pack_Module_Base {
 					]
 				],
 				'labels'             => [ 
-					esc_html__( 'From', 'bdthemes-element-pack' ),
-					esc_html__( 'To', 'bdthemes-element-pack' ),
+					esc_html__( 'From', 'bdthemes-element-pack-lite' ),
+					esc_html__( 'To', 'bdthemes-element-pack-lite' ),
 				],
 				//'scales'             => 1,
 				'handles'            => 'range',
@@ -678,7 +678,7 @@ class Module extends Element_Pack_Module_Base {
 		//			$widget->add_control(
 		//				'ep_floating_effects_border_radius_reverse',
 		//				[
-		//					'label'              => esc_html__( 'Reverse', 'bdthemes-element-pack' ),
+		//					'label'              => esc_html__( 'Reverse', 'bdthemes-element-pack-lite' ),
 		//					'type'               => Controls_Manager::SWITCHER,
 		//					'return_value'       => 'yes',
 		//					'frontend_available' => true,
@@ -689,7 +689,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_border_radius_duration',
 			[ 
-				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -714,7 +714,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_border_radius_delay',
 			[ 
-				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Delay', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -738,7 +738,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_opacity_toggle',
 			[ 
-				'label'              => esc_html__( 'Opacity', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::POPOVER_TOGGLE,
 				'condition'          => [ 
 					'ep_floating_effects_show' => 'yes',
@@ -754,7 +754,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_opacity_start',
 			[ 
-				'label'              => esc_html__( 'Start', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Start', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -779,7 +779,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_opacity_end',
 			[ 
-				'label'              => esc_html__( 'End', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'End', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -805,7 +805,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_opacity_duration',
 			[ 
-				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Duration', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'range'              => [ 
 					'px' => [ 
@@ -833,18 +833,18 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_floating_effects_easing',
 			[ 
-				'label'              => esc_html__( 'Easing', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Easing', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'options'            => [ 
-					'easeInOutQuad'   => esc_html__( 'Ease In Out Quad', 'bdthemes-element-pack' ),
-					'easeInOutCubic'  => esc_html__( 'Ease In Out Cubic', 'bdthemes-element-pack' ),
-					'easeInOutQuart'  => esc_html__( 'Ease In Out Quart', 'bdthemes-element-pack' ),
-					'easeInOutQuint'  => esc_html__( 'Ease In Out Quint', 'bdthemes-element-pack' ),
-					'easeInOutSine'   => esc_html__( 'Ease In Out Sine', 'bdthemes-element-pack' ),
-					'easeInOutExpo'   => esc_html__( 'Ease In Out Expo', 'bdthemes-element-pack' ),
-					'easeInOutCirc'   => esc_html__( 'Ease In Out Circ', 'bdthemes-element-pack' ),
-					'easeInOutBack'   => esc_html__( 'Ease In Out Back', 'bdthemes-element-pack' ),
-					'easeInOutBounce' => esc_html__( 'Ease In Out Bounce', 'bdthemes-element-pack' ),
+					'easeInOutQuad'   => esc_html__( 'Ease In Out Quad', 'bdthemes-element-pack-lite' ),
+					'easeInOutCubic'  => esc_html__( 'Ease In Out Cubic', 'bdthemes-element-pack-lite' ),
+					'easeInOutQuart'  => esc_html__( 'Ease In Out Quart', 'bdthemes-element-pack-lite' ),
+					'easeInOutQuint'  => esc_html__( 'Ease In Out Quint', 'bdthemes-element-pack-lite' ),
+					'easeInOutSine'   => esc_html__( 'Ease In Out Sine', 'bdthemes-element-pack-lite' ),
+					'easeInOutExpo'   => esc_html__( 'Ease In Out Expo', 'bdthemes-element-pack-lite' ),
+					'easeInOutCirc'   => esc_html__( 'Ease In Out Circ', 'bdthemes-element-pack-lite' ),
+					'easeInOutBack'   => esc_html__( 'Ease In Out Back', 'bdthemes-element-pack-lite' ),
+					'easeInOutBounce' => esc_html__( 'Ease In Out Bounce', 'bdthemes-element-pack-lite' ),
 				],
 				'default'            => 'easeInOutQuad',
 				'condition'          => [ 

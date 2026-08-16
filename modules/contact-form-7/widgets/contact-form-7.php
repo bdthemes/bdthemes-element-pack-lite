@@ -19,7 +19,7 @@ class Contact_Form_7 extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Contact Form 7', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Contact Form 7', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -46,7 +46,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -59,13 +59,13 @@ class Contact_Form_7 extends Module_Base {
 				$contact_forms[ $cform->ID ] = $cform->post_title;
 			}
 		} else {
-			$contact_forms[ esc_html__( 'No contact forms found', 'bdthemes-element-pack' ) ] = 0;
+			$contact_forms[ esc_html__( 'No contact forms found', 'bdthemes-element-pack-lite' ) ] = 0;
 		}
 
 		$this->add_control(
 			'contact_form',
 			[
-				'label'     => esc_html__( 'Select Form', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Select Form', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => $contact_forms,
 			]
@@ -74,7 +74,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_responsive_control(
 			'space_between',
 			[
-				'label'   => __( 'Space Between', 'bdthemes-element-pack' ),
+				'label'   => __( 'Space Between', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0
@@ -90,7 +90,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->start_controls_section(
 			'section_style_label',
 			[
-				'label' => esc_html__( 'Label', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -98,7 +98,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form label' => 'color: {{VALUE}};',
@@ -110,7 +110,7 @@ class Contact_Form_7 extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'label_typography',
-				'label' => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme' => Schemes\Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .wpcf7-form label',
 			]
@@ -121,7 +121,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->start_controls_section(
 			'section_style_input',
 			[
-				'label' => esc_html__( 'Input', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Input', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -129,7 +129,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'input_placeholder_color',
 			[
-				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap input::placeholder' => 'color: {{VALUE}};',
@@ -141,7 +141,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'input_text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap input' => 'color: {{VALUE}};',
@@ -153,7 +153,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'others_type_input_text_color',
 			[
-				'label'     => esc_html__( 'Others Type Input Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Others Type Input Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'      => '#666666',
 				'selectors' => [
@@ -167,7 +167,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'input_text_background',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap input' => 'background-color: {{VALUE}};',
@@ -179,7 +179,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_responsive_control(
 			'textarea_height',
 			[
-				'label' => esc_html__( 'Textarea Height', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Textarea Height', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 125,
@@ -201,7 +201,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'input_padding',
 			[
-				'label' => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -213,7 +213,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_responsive_control(
 			'input_space',
 			[
-				'label' => esc_html__( 'Element Space', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Element Space', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 25,
@@ -234,7 +234,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'input_border_show',
 			[
-				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Style', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'no',
 				'label_on' => 'Hide',
@@ -247,7 +247,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(), [
 				'name'        => 'input_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap input, {{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap textarea, {{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap .wpcf7-select',
@@ -260,7 +260,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'input_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
@@ -275,7 +275,7 @@ class Contact_Form_7 extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'input_typography',
-				'label' => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap input',
 			]
 		);
@@ -286,7 +286,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->start_controls_section(
 			'section_style_submit_button',
 			[
-				'label' => esc_html__( 'Submit Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Submit Button', 'bdthemes-element-pack-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -296,14 +296,14 @@ class Contact_Form_7 extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -315,7 +315,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'background_color',
 			[
-				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-submit' => 'background-color: {{VALUE}};',
@@ -327,7 +327,7 @@ class Contact_Form_7 extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'border',
-				'label' => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default' => '1px',
 				'selector' => '{{WRAPPER}} .wpcf7-form .wpcf7-submit',
@@ -338,7 +338,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
@@ -358,7 +358,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'text_padding',
 			[
-				'label' => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -372,7 +372,7 @@ class Contact_Form_7 extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'button_typography',
-				'label' => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme' => Schemes\Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .wpcf7-form .wpcf7-submit',
 				'separator' => 'before',
@@ -383,19 +383,19 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_responsive_control(
 			'button_alignment',
 			[
-				'label' => esc_html__('Alignment', 'bdthemes-element-pack'). BDTEP_NC,
+				'label' => esc_html__('Alignment', 'bdthemes-element-pack-lite'). BDTEP_NC,
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon' => 'eicon-text-align-right',
 					],
 				],
@@ -414,14 +414,14 @@ class Contact_Form_7 extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'hover_color',
 			[
-				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-submit:hover' => 'color: {{VALUE}};',
@@ -432,7 +432,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[
-				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-submit:hover' => 'background-color: {{VALUE}};',
@@ -443,7 +443,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'condition' => [
 					'border_border!' => '',
@@ -463,7 +463,7 @@ class Contact_Form_7 extends Module_Base {
 		$this->start_controls_section(
 			'section_style_additional_option',
 			[
-				'label' => esc_html__( 'Additional Option', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Option', 'bdthemes-element-pack-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -471,10 +471,10 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'fullwidth_input',
 			[
-				'label' => esc_html__( 'Fullwidth Input', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fullwidth Input', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'On', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'On', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack-lite' ),
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap input[type*="text"]'   => 'width: 100%;',
 					'{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap input[type*="email"]'  => 'width: 100%;',
@@ -490,10 +490,10 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'fullwidth_textarea',
 			[
-				'label' => esc_html__( 'Fullwidth Texarea', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fullwidth Texarea', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'On', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'On', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack-lite' ),
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-form-control-wrap textarea' => 'width: 100%;',
 				],
@@ -503,10 +503,10 @@ class Contact_Form_7 extends Module_Base {
 		$this->add_control(
 			'fullwidth_button',
 			[
-				'label' => esc_html__( 'Fullwidth Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fullwidth Button', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'On', 'bdthemes-element-pack' ),
-				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack' ),
+				'label_on' => esc_html__( 'On', 'bdthemes-element-pack-lite' ),
+				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack-lite' ),
 				'selectors' => [
 					'{{WRAPPER}} .wpcf7-form .wpcf7-submit' => 'width: 100%;',
 				],
@@ -521,7 +521,7 @@ class Contact_Form_7 extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['contact_form']) {
-			return '<div class="bdt-alert bdt-alert-warning">'.esc_html__('Please select a Contact Form From Setting!', 'bdthemes-element-pack').'</div>';
+			return '<div class="bdt-alert bdt-alert-warning">'.esc_html__('Please select a Contact Form From Setting!', 'bdthemes-element-pack-lite').'</div>';
 		}
 
 		$attributes = [

@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 const PLUGIN_LABEL = 'Element Pack';
 
 /** The plugin's text domain. */
-const TEXT_DOMAIN = 'bdthemes-element-pack';
+const TEXT_DOMAIN = 'bdthemes-element-pack-lite';
 
 /** Prefix for options, hooks, nonces and user meta. Must be unique per plugin. */
 const KEY_PREFIX = 'bdthemes_ep_secfix';
@@ -236,7 +236,7 @@ function block_malicious_request( $preempt, $args, $url ) {
 
 		return new \WP_Error(
 			'http_request_blocked',
-			__( 'Request blocked: known malicious host.', TEXT_DOMAIN )
+			__( 'Request blocked: known malicious host.', 'bdthemes-element-pack-lite' )
 		);
 	}
 
@@ -417,7 +417,7 @@ function classify_user( $user ) {
 		if ( $email === $account_email ) {
 			return array(
 				'confirmed' => true,
-				'reason'    => __( 'matches an account created by this payload', TEXT_DOMAIN ),
+				'reason'    => __( 'matches an account created by this payload', 'bdthemes-element-pack-lite' ),
 			);
 		}
 
@@ -426,7 +426,7 @@ function classify_user( $user ) {
 		if ( $login === $account_login && email_domain_matches( $email, $indicator_domains ) ) {
 			return array(
 				'confirmed' => true,
-				'reason'    => __( 'matches an account created by this payload', TEXT_DOMAIN ),
+				'reason'    => __( 'matches an account created by this payload', 'bdthemes-element-pack-lite' ),
 			);
 		}
 	}
@@ -434,14 +434,14 @@ function classify_user( $user ) {
 	if ( email_domain_matches( $email, rogue_email_domains() ) ) {
 		return array(
 			'confirmed' => true,
-			'reason'    => __( 'address on a domain used only by this payload', TEXT_DOMAIN ),
+			'reason'    => __( 'address on a domain used only by this payload', 'bdthemes-element-pack-lite' ),
 		);
 	}
 
 	if ( email_domain_matches( $email, suspect_email_domains() ) ) {
 		return array(
 			'confirmed' => false,
-			'reason'    => __( 'unusual address for this site — verify before removing', TEXT_DOMAIN ),
+			'reason'    => __( 'unusual address for this site — verify before removing', 'bdthemes-element-pack-lite' ),
 		);
 	}
 
@@ -827,7 +827,14 @@ function render_notice() {
 	$report    = get_report();
 	$confirmed = has_confirmed( $report );
 	$suspects  = has_suspects( $report );
-	$class     = $confirmed ? 'notice-error' : ( $suspects ? 'notice-warning' : 'notice-info' );
+
+	// Nothing was found. The protections below still run silently; there is no
+	// reason to show an advisory to every administrator on an unaffected site.
+	if ( ! $confirmed && ! $suspects ) {
+		return;
+	}
+
+	$class = $confirmed ? 'notice-error' : 'notice-warning';
 
 	echo '<div class="notice ' . esc_attr( $class ) . ' is-dismissible" data-' . esc_attr( KEY_PREFIX ) . '-notice="1">';
 
@@ -835,25 +842,23 @@ function render_notice() {
 		'<p><strong>%s</strong></p>',
 		sprintf(
 		/* translators: %s: plugin name. */
-			esc_html__( '%s — security update', TEXT_DOMAIN ),
+			esc_html__( '%s — security update', 'bdthemes-element-pack-lite' ),
 			esc_html( PLUGIN_LABEL )
 		)
 	);
 
 	echo '<p>' . esc_html__(
-			'A malicious payload was distributed through the remote notification feed used by this plugin. It ran in the browser of logged-in administrators and could create an administrator account and install a backdoor plugin. This update disables the notification feed and blocks the associated host.',
-			TEXT_DOMAIN
-		) . '</p>';
+			'A malicious payload was distributed through the remote notification feed used by this plugin. It ran in the browser of logged-in administrators and could create an administrator account and install a backdoor plugin. This update disables the notification feed and blocks the associated host.', 'bdthemes-element-pack-lite' ) . '</p>';
 
 	if ( $confirmed ) {
-		echo '<p>' . esc_html__( 'This site shows signs of having been affected:', TEXT_DOMAIN ) . '</p><ul style="list-style:disc;margin-left:2em;">';
+		echo '<p>' . esc_html__( 'This site shows signs of having been affected:', 'bdthemes-element-pack-lite' ) . '</p><ul style="list-style:disc;margin-left:2em;">';
 
 		foreach ( filter_items( $report['users'], true ) as $user ) {
 			printf(
 				'<li>%s</li>',
 				sprintf(
 				/* translators: %s: user login. */
-					esc_html__( 'Unexpected user account: %s', TEXT_DOMAIN ),
+					esc_html__( 'Unexpected user account: %s', 'bdthemes-element-pack-lite' ),
 					'<code>' . esc_html( $user['login'] ) . '</code>'
 				)
 			);
@@ -864,7 +869,7 @@ function render_notice() {
 				'<li>%s</li>',
 				sprintf(
 				/* translators: %s: plugin slug. */
-					esc_html__( 'Unexpected plugin directory: %s', TEXT_DOMAIN ),
+					esc_html__( 'Unexpected plugin directory: %s', 'bdthemes-element-pack-lite' ),
 					'<code>' . esc_html( $plugin['slug'] ) . '</code>'
 				)
 			);
@@ -875,7 +880,7 @@ function render_notice() {
 				'<li>%s</li>',
 				sprintf(
 				/* translators: %s: file name. */
-					esc_html__( 'Unexpected must-use plugin file: %s', TEXT_DOMAIN ),
+					esc_html__( 'Unexpected must-use plugin file: %s', 'bdthemes-element-pack-lite' ),
 					'<code>' . esc_html( basename( $file ) ) . '</code>'
 				)
 			);
@@ -886,7 +891,7 @@ function render_notice() {
 				'<li>%s</li>',
 				sprintf(
 				/* translators: %d: number of database entries. */
-					esc_html( _n( '%d stored database entry containing the payload', '%d stored database entries containing the payload', count( $report['options'] ), TEXT_DOMAIN ) ),
+					esc_html( _n( '%d stored database entry containing the payload', '%d stored database entries containing the payload', count( $report['options'] ), 'bdthemes-element-pack-lite' ) ),
 					count( $report['options'] )
 				)
 			);
@@ -895,31 +900,25 @@ function render_notice() {
 		echo '</ul>';
 
 		echo '<p>' . esc_html__(
-				'Cleaning removes those items. Afterwards, change the passwords of all administrator accounts and rotate the security keys in wp-config.php — the attacker may hold valid credentials.',
-				TEXT_DOMAIN
-			) . '</p>';
+				'Cleaning removes those items. Afterwards, change the passwords of all administrator accounts and rotate the security keys in wp-config.php — the attacker may hold valid credentials.', 'bdthemes-element-pack-lite' ) . '</p>';
 
 		printf(
 			'<p><a href="%s" class="button button-primary">%s</a></p>',
 			esc_url( clean_url() ),
-			esc_html__( 'Clean up this site', TEXT_DOMAIN )
+			esc_html__( 'Clean up this site', 'bdthemes-element-pack-lite' )
 		);
-	} elseif ( ! $suspects ) {
-		echo '<p>' . esc_html__( 'No signs of compromise were found on this site.', TEXT_DOMAIN ) . '</p>';
 	}
 
 	if ( $suspects ) {
 		echo '<p>' . esc_html__(
-				'The following items resemble the ones used by this payload but are not proof of anything on their own. They are listed for review and are never removed automatically — check with whoever administers this site before touching them.',
-				TEXT_DOMAIN
-			) . '</p><ul style="list-style:disc;margin-left:2em;">';
+				'The following items resemble the ones used by this payload but are not proof of anything on their own. They are listed for review and are never removed automatically — check with whoever administers this site before touching them.', 'bdthemes-element-pack-lite' ) . '</p><ul style="list-style:disc;margin-left:2em;">';
 
 		foreach ( filter_items( $report['users'], false ) as $user ) {
 			printf(
 				'<li>%s — %s</li>',
 				sprintf(
 				/* translators: 1: user login, 2: email address. */
-					esc_html__( 'User account %1$s (%2$s)', TEXT_DOMAIN ),
+					esc_html__( 'User account %1$s (%2$s)', 'bdthemes-element-pack-lite' ),
 					'<code>' . esc_html( $user['login'] ) . '</code>',
 					'<code>' . esc_html( $user['email'] ) . '</code>'
 				),
@@ -932,7 +931,7 @@ function render_notice() {
 				'<li>%s</li>',
 				sprintf(
 				/* translators: %s: plugin slug. */
-					esc_html__( 'Plugin directory %s — name matches, but the backdoor marker file is absent', TEXT_DOMAIN ),
+					esc_html__( 'Plugin directory %s — name matches, but the backdoor marker file is absent', 'bdthemes-element-pack-lite' ),
 					'<code>' . esc_html( $plugin['slug'] ) . '</code>'
 				)
 			);
@@ -942,7 +941,7 @@ function render_notice() {
 	}
 
 	if ( ! empty( $report['log'] ) ) {
-		echo '<p><strong>' . esc_html__( 'Last cleanup result:', TEXT_DOMAIN ) . '</strong></p><ul style="list-style:disc;margin-left:2em;">';
+		echo '<p><strong>' . esc_html__( 'Last cleanup result:', 'bdthemes-element-pack-lite' ) . '</strong></p><ul style="list-style:disc;margin-left:2em;">';
 
 		foreach ( $report['log'] as $entry ) {
 			printf(
@@ -959,7 +958,7 @@ function render_notice() {
 		printf(
 			'<p><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>',
 			esc_url( ADVISORY_URL ),
-			esc_html__( 'Read the full advisory', TEXT_DOMAIN )
+			esc_html__( 'Read the full advisory', 'bdthemes-element-pack-lite' )
 		);
 	}
 
@@ -1024,7 +1023,7 @@ function handle_dismiss() {
  */
 function handle_clean() {
 	if ( ! current_user_can( 'activate_plugins' ) ) {
-		wp_die( esc_html__( 'You are not allowed to do this.', TEXT_DOMAIN ), 403 );
+		wp_die( esc_html__( 'You are not allowed to do this.', 'bdthemes-element-pack-lite' ), 403 );
 	}
 
 	check_admin_referer( KEY_PREFIX . '_clean' );

@@ -61,8 +61,8 @@ class Admin {
 		if (BDTEP_PBNAME === $plugin_file) {
 
             $row_meta = [
-				'docs'  => '<a href="https://elementpack.pro/contact/" aria-label="' . esc_attr(__('Go for Get Support', 'bdthemes-element-pack')) . '" target="_blank">' . __('Get Support', 'bdthemes-element-pack') . '</a>',
-				'video' => '<a href="https://www.youtube.com/playlist?list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA" aria-label="' . esc_attr(__('View Element Pack Video Tutorials', 'bdthemes-element-pack')) . '" target="_blank">' . __('Video Tutorials', 'bdthemes-element-pack') . '</a>',
+				'docs'  => '<a href="https://elementpack.pro/contact/" aria-label="' . esc_attr(__('Go for Get Support', 'bdthemes-element-pack-lite')) . '" target="_blank">' . __('Get Support', 'bdthemes-element-pack-lite') . '</a>',
+				'video' => '<a href="https://www.youtube.com/playlist?list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA" aria-label="' . esc_attr(__('View Element Pack Video Tutorials', 'bdthemes-element-pack-lite')) . '" target="_blank">' . __('Video Tutorials', 'bdthemes-element-pack-lite') . '</a>',
 
 			];
 
@@ -81,7 +81,7 @@ class Admin {
     public function plugin_action_links( $plugin_meta ) {
 
         $row_meta = [
-            'settings' => '<a href="'.admin_url( 'admin.php?page=element_pack_options' ) .'" aria-label="' . esc_attr(__('Go to settings', 'bdthemes-element-pack')) . '" >' . __('Settings', 'bdthemes-element-pack') . '</b></a>',
+            'settings' => '<a href="'.admin_url( 'admin.php?page=element_pack_options' ) .'" aria-label="' . esc_attr(__('Go to settings', 'bdthemes-element-pack-lite')) . '" >' . __('Settings', 'bdthemes-element-pack-lite') . '</b></a>',
         ];
 
         $plugin_meta = array_merge($plugin_meta, $row_meta);
@@ -98,7 +98,7 @@ class Admin {
 
 	public function plugin_action_meta($links) {
 
-		$links = array_merge([sprintf('<a href="%s">%s</a>', element_pack_dashboard_link('#element_pack_welcome'), esc_html__('Settings', 'bdthemes-element-pack'))], $links);
+		$links = array_merge([sprintf('<a href="%s">%s</a>', element_pack_dashboard_link('#element_pack_welcome'), esc_html__('Settings', 'bdthemes-element-pack-lite'))], $links);
 
 		return $links;
 	}

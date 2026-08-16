@@ -29,10 +29,10 @@ class WPML_ElementPack_Custom_Gallery extends WPML_Module_With_Items {
 	protected function get_title( $field ) {
 		switch( $field ) {
 			case 'image_title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'image_text':
-				return esc_html__( 'Content', 'bdthemes-element-pack' );
+				return esc_html__( 'Content', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

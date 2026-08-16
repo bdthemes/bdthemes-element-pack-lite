@@ -25,7 +25,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Tutor LMS Course Carousel', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Tutor LMS Course Carousel', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -81,7 +81,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -96,7 +96,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 		$this->start_controls_section(
 			'section_content_navigation',
 			[
-				'label' => __( 'Navigation', 'bdthemes-element-pack' ),
+				'label' => __( 'Navigation', 'bdthemes-element-pack-lite' ),
 			]
 		);
 		$this->register_navigation_controls();
@@ -113,7 +113,7 @@ class TutorLms_Course_Carousel extends Module_Base {
 		$this->start_controls_section(
 			'section_style_navigation',
 			[
-				'label'      => __( 'Navigation', 'bdthemes-element-pack' ),
+				'label'      => __( 'Navigation', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'conditions' => [
 					'relation' => 'or',

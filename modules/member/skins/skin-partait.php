@@ -17,7 +17,7 @@ class Skin_Partait extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Partait', 'bdthemes-element-pack' );
+		return esc_html__( 'Partait', 'bdthemes-element-pack-lite' );
 	}
 
 	public function render() {

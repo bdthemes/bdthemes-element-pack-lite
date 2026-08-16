@@ -23,7 +23,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_backdrop_filter',
             [
-                'label'         => BDTEP_CP . esc_html__('Backdrop Filter/Liquid Glass Effects', 'bdthemes-element-pack'),
+                'label'         => BDTEP_CP . esc_html__('Backdrop Filter/Liquid Glass Effects', 'bdthemes-element-pack-lite'),
                 'type'          => Controls_Manager::POPOVER_TOGGLE,
                 'return_value'  => 'yes',
                 'separator'    => 'before',
@@ -36,18 +36,17 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_backdrop_filter_type',
             [
-                'label'     => esc_html__('Effect Type', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Effect Type', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'backdrop',
                 'options'   => [
-                    'backdrop' => esc_html__('Backdrop Filter', 'bdthemes-element-pack'),
-                    'liquid_glass'    => esc_html__('Liquid Glass Effects', 'bdthemes-element-pack') . BDTEP_LOCK,
+                    'backdrop' => esc_html__('Backdrop Filter', 'bdthemes-element-pack-lite'),
+                    'liquid_glass'    => esc_html__('Liquid Glass Effects', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'element_pack_backdrop_filter' => 'yes'
                 ],
                 'prefix_class' => 'bdt-filter-',
-                'classes' => BDTEP_LOCK_CLASS,
             ]
         );
 
@@ -55,7 +54,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_blur',
             [
-                'label' => esc_html__('Blur', 'bdthemes-element-pack'),
+                'label' => esc_html__('Blur', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -77,7 +76,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_brightness',
             [
-                'label'       => esc_html__('Brightness', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Brightness', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::SLIDER,
                 'render_type' => 'ui',
 
@@ -101,7 +100,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_contrast',
             [
-                'label' => esc_html__('Contrast', 'bdthemes-element-pack'),
+                'label' => esc_html__('Contrast', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
 
                 'range' => [
@@ -124,7 +123,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_grayscale',
             [
-                'label' => esc_html__('Grayscale', 'bdthemes-element-pack'),
+                'label' => esc_html__('Grayscale', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
 
                 'range' => [
@@ -147,7 +146,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_invert',
             [
-                'label' => esc_html__('Invert', 'bdthemes-element-pack'),
+                'label' => esc_html__('Invert', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
 
                 'range' => [
@@ -170,7 +169,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_opacity',
             [
-                'label' => esc_html__('Opacity', 'bdthemes-element-pack'),
+                'label' => esc_html__('Opacity', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
 
                 'range' => [
@@ -193,7 +192,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_sepia',
             [
-                'label' => esc_html__('Sepia', 'bdthemes-element-pack'),
+                'label' => esc_html__('Sepia', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
 
                 'range' => [
@@ -216,7 +215,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_saturate',
             [
-                'label' => esc_html__('Saturate', 'bdthemes-element-pack'),
+                'label' => esc_html__('Saturate', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
 
                 'range' => [
@@ -239,7 +238,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_bf_hue_rotate',
             [
-                'label' => esc_html__('Hue Rotate', 'bdthemes-element-pack'),
+                'label' => esc_html__('Hue Rotate', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
 
                 'range' => [
@@ -264,7 +263,7 @@ class Module extends Element_Pack_Module_Base {
         $widget->add_control(
             'element_pack_liquid_glass_effects_blur',
             [
-                'label' => esc_html__('Blur', 'bdthemes-element-pack'),
+                'label' => esc_html__('Blur', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0.5,
@@ -290,7 +289,7 @@ class Module extends Element_Pack_Module_Base {
             'ep_liquid_glass_effects_notice',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__('Liquid glass effect works best with transparent backgrounds. For optimal results, ensure the parent section has a background image.', 'bdthemes-element-pack'),
+                'raw'             => esc_html__('Liquid glass effect works best with transparent backgrounds. For optimal results, ensure the parent section has a background image.', 'bdthemes-element-pack-lite'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
                 'condition' => [
                     'element_pack_backdrop_filter' => 'yes',
@@ -306,7 +305,7 @@ class Module extends Element_Pack_Module_Base {
             [
                 'type'            => Controls_Manager::RAW_HTML,
                 /* translators: %1$s and %2$s are HTML tags for a link */
-                'raw'             => sprintf(esc_html__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
+                'raw'             => sprintf(esc_html__('This feature will not work in the Firefox browser untill you enable browser compatibility so please %1$s look here %2$s', 'bdthemes-element-pack-lite'), '<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility" target="_blank">', '</a>'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
             ]
         );

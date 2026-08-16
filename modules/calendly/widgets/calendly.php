@@ -16,7 +16,7 @@ class Calendly extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Calendly', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Calendly', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -51,7 +51,7 @@ class Calendly extends Module_Base {
 		$this->start_controls_section(
 			'section_calendly',
 			[ 
-				'label' => esc_html__( 'Calendly', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Calendly', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -59,10 +59,10 @@ class Calendly extends Module_Base {
 		$this->add_control(
 			'calendly_username',
 			[ 
-				'label'       => esc_html__( 'Username', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Username', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
-				'placeholder' => esc_html__( 'Type calendly username here', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Type calendly username here', 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 'active' => true ],
 				'render_type' => 'template'
 			]
@@ -71,13 +71,13 @@ class Calendly extends Module_Base {
 		$this->add_control(
 			'calendly_time',
 			[ 
-				'label'   => esc_html__( 'Select Time', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Time', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [ 
-					'15min' => esc_html__( '15 Minutes', 'bdthemes-element-pack' ),
-					'30min' => esc_html__( '30 Minutes', 'bdthemes-element-pack' ),
-					'60min' => esc_html__( '60 Minutes', 'bdthemes-element-pack' ),
-					''      => esc_html__( 'All', 'bdthemes-element-pack' ),
+					'15min' => esc_html__( '15 Minutes', 'bdthemes-element-pack-lite' ),
+					'30min' => esc_html__( '30 Minutes', 'bdthemes-element-pack-lite' ),
+					'60min' => esc_html__( '60 Minutes', 'bdthemes-element-pack-lite' ),
+					''      => esc_html__( 'All', 'bdthemes-element-pack-lite' ),
 				],
 				'default' => '15min'
 			]
@@ -86,7 +86,7 @@ class Calendly extends Module_Base {
 		$this->add_control(
 			'event_type_details',
 			[ 
-				'label' => esc_html__( 'Hide Event Type Details', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hide Event Type Details', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -94,7 +94,7 @@ class Calendly extends Module_Base {
 		$this->add_responsive_control(
 			'height',
 			[ 
-				'label'      => esc_html__( 'Height', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [ 
@@ -124,7 +124,7 @@ class Calendly extends Module_Base {
 		$this->start_controls_section(
 			'section_style_calendly',
 			[ 
-				'label' => esc_html__( 'Calendly', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Calendly', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -135,7 +135,7 @@ class Calendly extends Module_Base {
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => sprintf(
 					/* translators: 1: Calendly Pro plan link, 2: Documentation link */
-					esc_html__( 'Style option only works with %1$s. Basic plan user can\'t change the color style. For more details please %2$s.', 'bdthemes-element-pack' ),
+					esc_html__( 'Style option only works with %1$s. Basic plan user can\'t change the color style. For more details please %2$s.', 'bdthemes-element-pack-lite' ),
 					'<a href="https://calendly.com/pages/pricing" target="_blank">Calendly Pro plan</a>',
 					'<a href="https://calendly.com/pages/pricing" target="_blank">check here</a>'
 				),
@@ -146,7 +146,7 @@ class Calendly extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[ 
-				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::COLOR,
 				'alpha' => false,
 			]
@@ -155,7 +155,7 @@ class Calendly extends Module_Base {
 		$this->add_control(
 			'button_link_color',
 			[ 
-				'label' => esc_html__( 'Button & Link Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Button & Link Color', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::COLOR,
 				'alpha' => false,
 			]
@@ -164,7 +164,7 @@ class Calendly extends Module_Base {
 		$this->add_control(
 			'background_color',
 			[ 
-				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::COLOR,
 				'alpha' => false,
 			]

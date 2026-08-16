@@ -21,7 +21,7 @@ class Give_Register extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Give Register', 'bdthemes-element-pack');
+		return BDTEP . __('Give Register', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -60,7 +60,7 @@ class Give_Register extends Module_Base {
 		$this->start_controls_section(
 			'give_register_section',
 			[
-				'label' => __('Give Register', 'bdthemes-element-pack'),
+				'label' => __('Give Register', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -68,7 +68,7 @@ class Give_Register extends Module_Base {
 		$this->add_control(
 			'link',
 			[
-				'label' => __('Redirect Link', 'bdthemes-element-pack'),
+				'label' => __('Redirect Link', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::URL,
 				'show_external' => false,
 			]
@@ -80,7 +80,7 @@ class Give_Register extends Module_Base {
 		$this->start_controls_section(
 			'give_register_style',
 			[
-				'label' => __('Give Register', 'bdthemes-element-pack'),
+				'label' => __('Give Register', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -88,7 +88,7 @@ class Give_Register extends Module_Base {
 		$this->add_control(
 			'give_register_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form > fieldset' => 'background-color: {{VALUE}};',
@@ -107,7 +107,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'give_register_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -119,7 +119,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'give_register_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form > fieldset' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -132,7 +132,7 @@ class Give_Register extends Module_Base {
 		$this->start_controls_section(
 			'title_style',
 			[
-				'label' => esc_html__('Title', 'bdthemes-element-pack'),
+				'label' => esc_html__('Title', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -140,7 +140,7 @@ class Give_Register extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form legend' => 'color: {{VALUE}};',
@@ -159,7 +159,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'title_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -171,7 +171,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'title_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form legend' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -182,7 +182,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'title_margin',
 			[
-				'label' => __('Margin', 'bdthemes-element-pack'),
+				'label' => __('Margin', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form legend' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -203,7 +203,7 @@ class Give_Register extends Module_Base {
 		$this->start_controls_section(
 			'label_style',
 			[
-				'label' => esc_html__('Label', 'bdthemes-element-pack'),
+				'label' => esc_html__('Label', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -211,7 +211,7 @@ class Give_Register extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form label' => 'color: {{VALUE}};',
@@ -222,7 +222,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'label_margin',
 			[
-				'label' => __('Margin', 'bdthemes-element-pack'),
+				'label' => __('Margin', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -243,7 +243,7 @@ class Give_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_style_input',
 			[
-				'label' => esc_html__('Input Fields', 'bdthemes-element-pack'),
+				'label' => esc_html__('Input Fields', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -251,7 +251,7 @@ class Give_Register extends Module_Base {
 		$this->add_control(
 			'input_field_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form input[type="text"], {{WRAPPER}} .bdt-give-register .give-form input[type="email"], {{WRAPPER}} .bdt-give-register .give-form input[type="password"]' => 'color: {{VALUE}};',
@@ -262,7 +262,7 @@ class Give_Register extends Module_Base {
 		$this->add_control(
 			'input_field_background_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .give-form input[type="text"], {{WRAPPER}} .bdt-give-register .give-form input[type="email"], {{WRAPPER}} .bdt-give-register .give-form input[type="password"]' => 'background-color: {{VALUE}};',
@@ -281,7 +281,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'input_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -293,7 +293,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'input_inner_padding',
 			[
-				'label' => esc_html__('Inner Padding', 'bdthemes-element-pack'),
+				'label' => esc_html__('Inner Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors' => [
@@ -315,7 +315,7 @@ class Give_Register extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button',
 			[
-				'label'     => esc_html__('Submit Button', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Submit Button', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -325,14 +325,14 @@ class Give_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .form-row input.button' => 'color: {{VALUE}};',
@@ -359,7 +359,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -371,7 +371,7 @@ class Give_Register extends Module_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -392,7 +392,7 @@ class Give_Register extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'button_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .bdt-give-register .form-row input.button',
 			]
 		);
@@ -402,14 +402,14 @@ class Give_Register extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'button_hover_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-register .form-row input.button:hover'  => 'color: {{VALUE}};',
@@ -428,7 +428,7 @@ class Give_Register extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'button_border_border!' => '',

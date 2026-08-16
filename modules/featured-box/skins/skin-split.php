@@ -16,7 +16,7 @@ class Skin_Split extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Split', 'bdthemes-element-pack' );
+		return __( 'Split', 'bdthemes-element-pack-lite' );
 	}
 
 

@@ -27,7 +27,7 @@ class Reading_Progress extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Reading Progress', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Reading Progress', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -77,21 +77,21 @@ class Reading_Progress extends Module_Base {
 		$this->start_controls_section(
 			'reading_progress_layout',
 			[ 
-				'label' => esc_html__( 'Reading Progress', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Reading Progress', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'progress_position',
 			[ 
-				'label'     => __( 'Position', 'bdthemes-element-pack' ),
+				'label'     => __( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'bottom-right',
 				'options'   => [ 
-					'bottom-right' => __( 'Bottom End', 'bdthemes-element-pack' ),
-					'bottom-left'  => __( 'Bottom Start', 'bdthemes-element-pack' ),
-					'top-right'    => __( 'Top End', 'bdthemes-element-pack' ),
-					'top-left'     => __( 'Top Start', 'bdthemes-element-pack' ),
+					'bottom-right' => __( 'Bottom End', 'bdthemes-element-pack-lite' ),
+					'bottom-left'  => __( 'Bottom Start', 'bdthemes-element-pack-lite' ),
+					'top-right'    => __( 'Top End', 'bdthemes-element-pack-lite' ),
+					'top-left'     => __( 'Top Start', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'_skin' => [ '', 'bdt-back-to-top-with-progress' ],
@@ -103,7 +103,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_responsive_control(
 			'reading_progress_font_area_size',
 			[ 
-				'label'     => __( 'Primary Circle Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Primary Circle Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 80,
@@ -126,7 +126,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_responsive_control(
 			'reading_progress_size',
 			[ 
-				'label'     => __( 'Secondary Circle Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Secondary Circle Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 90,
@@ -153,7 +153,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_responsive_control(
 			'reading_progress_horizontal_offset',
 			[ 
-				'label'     => __( 'Horizontal Offset', 'bdthemes-element-pack' ),
+				'label'     => __( 'Horizontal Offset', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -174,7 +174,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_responsive_control(
 			'reading_progress_vertical_offset',
 			[ 
-				'label'     => __( 'Vertical Offset', 'bdthemes-element-pack' ),
+				'label'     => __( 'Vertical Offset', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -195,12 +195,12 @@ class Reading_Progress extends Module_Base {
 		$this->add_control(
 			'horizontal_reading_progress_position',
 			[ 
-				'label'     => __( 'Position', 'bdthemes-element-pack' ),
+				'label'     => __( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'top',
 				'options'   => [ 
-					'top'    => __( 'Top ', 'bdthemes-element-pack' ),
-					'bottom' => __( 'Bottom', 'bdthemes-element-pack' ),
+					'top'    => __( 'Top ', 'bdthemes-element-pack-lite' ),
+					'bottom' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'_skin' => 'bdt-horizontal-progress',
@@ -211,7 +211,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_responsive_control(
 			'horizontal_reading_progress_size',
 			[ 
-				'label'      => __( 'Height', 'bdthemes-element-pack' ),
+				'label'      => __( 'Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [ 
@@ -236,7 +236,7 @@ class Reading_Progress extends Module_Base {
 		$this->start_controls_section(
 			'reading_progress_style_default',
 			[ 
-				'label' => __( 'Additional', 'bdthemes-element-pack' ),
+				'label' => __( 'Additional', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -244,7 +244,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_control(
 			'reading_progress_value_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}}  .bdt-reading-progress .bdt-reading-progress-border .bdt-reading-progress-circle .bdt-reading-progress-text' => 'color: {{VALUE}}',
@@ -261,7 +261,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_control(
 			'reading_progress_bg',
 			[ 
-				'label'     => __( 'Background', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#08AEEC',
 				'selectors' => [ 
@@ -276,7 +276,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_control(
 			'reading_progress_font_area_bg',
 			[ 
-				'label'     => __( 'Secondary Background', 'bdthemes-element-pack' ),
+				'label'     => __( 'Secondary Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#54595F',
 				'selectors' => [ 
@@ -291,7 +291,7 @@ class Reading_Progress extends Module_Base {
 		$this->add_control(
 			'reading_progress_bg_scroll',
 			[ 
-				'label'     => __( 'Active Background', 'bdthemes-element-pack' ),
+				'label'     => __( 'Active Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#FF0000',
 				'selectors' => [ 
@@ -306,7 +306,7 @@ class Reading_Progress extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'      => 'reading_progress_border',
-				'label'     => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-reading-progress .bdt-reading-progress-circle',
 				'condition' => [ 
 					'_skin' => '',

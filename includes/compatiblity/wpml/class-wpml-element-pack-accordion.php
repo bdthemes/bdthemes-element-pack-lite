@@ -29,10 +29,10 @@ class WPML_ElementPack_Accordion extends WPML_Module_With_Items {
 		switch( $field ) {
 
 			case 'tab_title':
-				return esc_html__( 'Accordion: Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Accordion: Title', 'bdthemes-element-pack-lite' );
 
 			case 'tab_content':
-				return esc_html__( 'Accordion: Content', 'bdthemes-element-pack' );
+				return esc_html__( 'Accordion: Content', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

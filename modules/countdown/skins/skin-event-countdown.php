@@ -32,7 +32,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Event Countdown', 'bdthemes-element-pack' );
+		return __( 'Event Countdown', 'bdthemes-element-pack-lite' );
 	}
 
 	public function register_event_additional_controls( Module_Base $widget ) {
@@ -41,7 +41,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'show_event_title',
 			[
-				'label'   => esc_html__( 'Show Event Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Event Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -50,7 +50,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'show_event_button',
 			[
-				'label'   => esc_html__( 'Show Event Button', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Show Event Button', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -66,7 +66,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 				'post_type'      => \Tribe__Events__Main::POSTTYPE,
 			));
 
-			$event_items = ['0' => esc_html__( 'Select Event', 'bdthemes-element-pack' ) ];
+			$event_items = ['0' => esc_html__( 'Select Event', 'bdthemes-element-pack-lite' ) ];
 
 			foreach ($event_item as $key => $value) {
 				$event_items[$value] = get_the_title($value);
@@ -74,7 +74,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 
 			wp_reset_postdata();
 		} else {
-			$event_items = ['0' => esc_html__( 'Event Calendar Not Installed', 'bdthemes-element-pack' ) ];
+			$event_items = ['0' => esc_html__( 'Event Calendar Not Installed', 'bdthemes-element-pack-lite' ) ];
 		}
 		return $event_items;
 	}
@@ -85,9 +85,9 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_id',
 			[
-				'label'       => esc_html__( 'Event List', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Event List', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
-				'description' => esc_html__( 'Select your event from this list', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'Select your event from this list', 'bdthemes-element-pack-lite' ),
 				'options'     => self::get_event_list(),
 				'default'     => '0',
 			]
@@ -98,23 +98,23 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->start_controls_section(
 			'section_event_button',
 			[
-				'label' => esc_html__( 'Event Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Event Button', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'event_button_text',
 			[
-				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__( 'VIEW DETAILS', 'bdthemes-element-pack' ),
+				'default' => esc_html__( 'VIEW DETAILS', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'event_button_size',
 			[
-				'label'   => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'lg',
 				'options' => element_pack_button_sizes(),
@@ -124,7 +124,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_icon',
 			[
-				'label'       => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 			]
@@ -133,12 +133,12 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_icon_align',
 			[
-				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'  => esc_html__( 'Before', 'bdthemes-element-pack' ),
-					'right' => esc_html__( 'After', 'bdthemes-element-pack' ),
+					'left'  => esc_html__( 'Before', 'bdthemes-element-pack-lite' ),
+					'right' => esc_html__( 'After', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					$this->get_control_id( 'event_button_icon[value]!' ) => '',
@@ -149,7 +149,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_icon_indent',
 			[
-				'label' => esc_html__( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 8,
@@ -176,7 +176,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->start_controls_section(
 			'section_style_event_button',
 			[
-				'label'     => esc_html__( 'Event Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Event Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					$this->get_control_id( 'show_event_button' ) => 'yes',
@@ -189,14 +189,14 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->start_controls_tab(
 			'tab_event_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'event_button_text_color',
 			[
-				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -217,7 +217,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_background_color',
 			[
-				'label'  => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'  => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'   => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-event-button' => 'background-color: {{VALUE}};',
@@ -237,7 +237,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
@@ -249,7 +249,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_padding',
 			[
-				'label' => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -261,7 +261,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_icon_color',
 			[
-				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-event-button .bdt-event-button-icon i' => 'color: {{VALUE}};',
@@ -279,14 +279,14 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->start_controls_tab(
 			'tab_event_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'event_button_hover_color',
 			[
-				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-event-button:hover' => 'color: {{VALUE}};',
@@ -297,7 +297,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_hover_background_color',
 			[
-				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-event-button:hover' => 'background-color: {{VALUE}};',
@@ -308,7 +308,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_hover_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-event-button:hover' => 'border-color: {{VALUE}};',
@@ -322,7 +322,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_hover_animation',
 			[
-				'label' => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -330,7 +330,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_button_hover_icon_color',
 			[
-				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-event-button:hover .bdt-event-button-icon i' => 'color: {{VALUE}};',
@@ -356,7 +356,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->start_controls_section(
 			'section_style_title',
 			[
-				'label' => esc_html__( 'Event Title', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Event Title', 'bdthemes-element-pack-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					$this->get_control_id( 'show_event_title' ) => 'yes',
@@ -367,7 +367,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_title_background_color',
 			[
-				'label'  => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'  => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'   => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-countdown-event-title' => 'background-color: {{VALUE}};',
@@ -378,7 +378,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_control(
 			'event_title_color',
 			[
-				'label'  => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'  => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'   => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-countdown-event-title' => 'color: {{VALUE}};',
@@ -398,7 +398,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_responsive_control(
 			'event_title_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
@@ -410,7 +410,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_responsive_control(
 			'event_title_padding',
 			[
-				'label' => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -422,7 +422,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 		$this->add_responsive_control(
 			'event_title_space',
 			[
-				'label' => esc_html__( 'Space', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Space', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'unit' => 'px',
@@ -575,7 +575,7 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 				</div>
 			</div>
 			<?php 
-		} else echo '<div class="bdt-alert-warning" data-bdt-alert><p>'. esc_html__('You couldn\'t select any event, please select a event from event list.', 'bdthemes-element-pack') .'</p></div>';
+		} else echo '<div class="bdt-alert-warning" data-bdt-alert><p>'. esc_html__('You couldn\'t select any event, please select a event from event list.', 'bdthemes-element-pack-lite') .'</p></div>';
 	}
 }
 

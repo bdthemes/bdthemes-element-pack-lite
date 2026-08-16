@@ -150,7 +150,13 @@ class Remote_Data_Handler {
     public static function ajax_get_plugins() {
         // Verify nonce for security
         if (!check_ajax_referer('ep_get_plugins_nonce', 'nonce', false)) {
-            wp_die(esc_html__('Security check failed.', 'bdthemes-element-pack'));
+            wp_die(esc_html__('Security check failed.', 'bdthemes-element-pack-lite'));
+        }
+
+        // A nonce proves intent, not authority: this listing drives the plugin
+        // installer, so require the capability that action would need.
+        if (!current_user_can('install_plugins')) {
+            wp_send_json_error(['message' => esc_html__('Unauthorized', 'bdthemes-element-pack-lite')], 403);
         }
 
         // Get cached data
@@ -169,7 +175,7 @@ class Remote_Data_Handler {
                 wp_send_json_success([
                     'plugins' => [],
                     'loading' => true,
-                    'message' => __('Loading plugin data...', 'bdthemes-element-pack')
+                    'message' => __('Loading plugin data...', 'bdthemes-element-pack-lite')
                 ]);
             }
         }
@@ -226,7 +232,7 @@ class Remote_Data_Handler {
         wp_send_json_success([
             'plugins' => $formatted_plugins,
             'loading' => false,
-            'message' => __('Plugin data loaded successfully.', 'bdthemes-element-pack')
+            'message' => __('Plugin data loaded successfully.', 'bdthemes-element-pack-lite')
         ]);
     }
 
@@ -298,38 +304,38 @@ class Remote_Data_Handler {
      */
     private static function format_last_updated($date_string) {
         if (empty($date_string)) {
-            return __('Unknown', 'bdthemes-element-pack');
+            return __('Unknown', 'bdthemes-element-pack-lite');
         }
         
         $date = strtotime($date_string);
         if (!$date) {
-            return __('Unknown', 'bdthemes-element-pack');
+            return __('Unknown', 'bdthemes-element-pack-lite');
         }
         
         $diff = current_time('timestamp') - $date;
         
         if ($diff < 60) {
-            return __('Just now', 'bdthemes-element-pack');
+            return __('Just now', 'bdthemes-element-pack-lite');
         } elseif ($diff < 3600) {
             $minutes = floor($diff / 60);
             /* translators: %d: Number of minutes */
-            return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'bdthemes-element-pack'), $minutes);
+            return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'bdthemes-element-pack-lite'), $minutes);
         } elseif ($diff < 86400) {
             $hours = floor($diff / 3600);
             /* translators: %d: Number of hours */
-            return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'bdthemes-element-pack'), $hours);
+            return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'bdthemes-element-pack-lite'), $hours);
         } elseif ($diff < 2592000) { // 30 days
             $days = floor($diff / 86400);
             /* translators: %d: Number of days */
-            return sprintf(_n('%d day ago', '%d days ago', $days, 'bdthemes-element-pack'), $days);
+            return sprintf(_n('%d day ago', '%d days ago', $days, 'bdthemes-element-pack-lite'), $days);
         } elseif ($diff < 31536000) { // 1 year
             $months = floor($diff / 2592000);
             /* translators: %d: Number of months */
-            return sprintf(_n('%d month ago', '%d months ago', $months, 'bdthemes-element-pack'), $months);
+            return sprintf(_n('%d month ago', '%d months ago', $months, 'bdthemes-element-pack-lite'), $months);
         } else {
             $years = floor($diff / 31536000);
             /* translators: %d: Number of years */
-            return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack'), $years);
+            return sprintf(_n('%d year ago', '%d years ago', $years, 'bdthemes-element-pack-lite'), $years);
         }
     }
 

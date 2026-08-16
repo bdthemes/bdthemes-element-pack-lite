@@ -23,7 +23,7 @@ class Testimonial_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Testimonial Grid', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Testimonial Grid', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {

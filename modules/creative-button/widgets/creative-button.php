@@ -19,7 +19,7 @@ class Creative_Button extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Creative Button', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Creative Button', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -57,15 +57,15 @@ class Creative_Button extends Module_Base {
 		return [
 			'condition' => ! is_ep_pro(),
 			'image' => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
-			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack-lite' ),
+			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack-lite' ),
 			/* translators: %1$s: Promoted feature name */
-			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Button Style -> Aura (New)'),
+			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack-lite' ), 'Button Style -> Aura (New)'),
 			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
 			/* translators: %s: Upgrade button label */
 			'upgrade_text' => sprintf(
 				'<span class="bdt-widget-promotion-btn">%s</span>',
-				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' )
+				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack-lite' )
 			),
 		];
 	}
@@ -74,67 +74,66 @@ class Creative_Button extends Module_Base {
 		$this->start_controls_section(
 			'section_creative_button',
 			[
-				'label' => esc_html__( 'Creative Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Creative Button', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_style',
 			[
-				'label'   => esc_html__( 'Style', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Style', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'anthe',
 				'options' => [
-					'aura'     => esc_html__( 'Aura (New)', 'bdthemes-element-pack' ) . BDTEP_LOCK,
-					'anthe'    => esc_html__( 'Anthe', 'bdthemes-element-pack' ),
-					'atlas'    => esc_html__( 'Atlas', 'bdthemes-element-pack' ),
-					'bestia'   => esc_html__( 'Bestia', 'bdthemes-element-pack' ),
-					'calypso'  => esc_html__( 'Calypso', 'bdthemes-element-pack' ),
-					'dione'    => esc_html__( 'Dione', 'bdthemes-element-pack' ),
-					'fenrir'   => esc_html__( 'Fenrir', 'bdthemes-element-pack' ),
-					'greip'    => esc_html__( 'Greip', 'bdthemes-element-pack' ),
-					'hati'     => esc_html__( 'Hati', 'bdthemes-element-pack' ),
-					'hyperion' => esc_html__( 'Hyperion', 'bdthemes-element-pack' ),
-					'helene'   => esc_html__( 'Helene', 'bdthemes-element-pack' ),
-					'janus'    => esc_html__( 'Janus', 'bdthemes-element-pack' ),
-					'kari'     => esc_html__( 'Kari', 'bdthemes-element-pack' ),
-					'mimas'    => esc_html__( 'Mimas', 'bdthemes-element-pack' ),
-					'narvi'    => esc_html__( 'Narvi', 'bdthemes-element-pack' ),
-					'pan'      => esc_html__( 'Pan', 'bdthemes-element-pack' ),
-					'pandora'  => esc_html__( 'Pandora', 'bdthemes-element-pack' ),
-					'pallene'  => esc_html__( 'Pallene', 'bdthemes-element-pack' ),
-					'rhea'     => esc_html__( 'Rhea', 'bdthemes-element-pack' ),
-					'skoll'    => esc_html__( 'Skoll', 'bdthemes-element-pack' ),
-					'surtur'   => esc_html__( 'Surtur', 'bdthemes-element-pack' ),
-					'telesto'  => esc_html__( 'Telesto', 'bdthemes-element-pack' ),
-					'reklo'    => esc_html__( 'Reklo', 'bdthemes-element-pack' ),
-					'elon'     => esc_html__( 'Elon', 'bdthemes-element-pack' ),
-					'reveal'     => esc_html__( 'Reveal', 'bdthemes-element-pack' ),
-					'glitch'   => esc_html__( 'Glitch', 'bdthemes-element-pack' ),
-					'gooey'    => esc_html__( 'Gooey', 'bdthemes-element-pack' ),
+					'aura'     => esc_html__( 'Aura (New)', 'bdthemes-element-pack-lite' ),
+					'anthe'    => esc_html__( 'Anthe', 'bdthemes-element-pack-lite' ),
+					'atlas'    => esc_html__( 'Atlas', 'bdthemes-element-pack-lite' ),
+					'bestia'   => esc_html__( 'Bestia', 'bdthemes-element-pack-lite' ),
+					'calypso'  => esc_html__( 'Calypso', 'bdthemes-element-pack-lite' ),
+					'dione'    => esc_html__( 'Dione', 'bdthemes-element-pack-lite' ),
+					'fenrir'   => esc_html__( 'Fenrir', 'bdthemes-element-pack-lite' ),
+					'greip'    => esc_html__( 'Greip', 'bdthemes-element-pack-lite' ),
+					'hati'     => esc_html__( 'Hati', 'bdthemes-element-pack-lite' ),
+					'hyperion' => esc_html__( 'Hyperion', 'bdthemes-element-pack-lite' ),
+					'helene'   => esc_html__( 'Helene', 'bdthemes-element-pack-lite' ),
+					'janus'    => esc_html__( 'Janus', 'bdthemes-element-pack-lite' ),
+					'kari'     => esc_html__( 'Kari', 'bdthemes-element-pack-lite' ),
+					'mimas'    => esc_html__( 'Mimas', 'bdthemes-element-pack-lite' ),
+					'narvi'    => esc_html__( 'Narvi', 'bdthemes-element-pack-lite' ),
+					'pan'      => esc_html__( 'Pan', 'bdthemes-element-pack-lite' ),
+					'pandora'  => esc_html__( 'Pandora', 'bdthemes-element-pack-lite' ),
+					'pallene'  => esc_html__( 'Pallene', 'bdthemes-element-pack-lite' ),
+					'rhea'     => esc_html__( 'Rhea', 'bdthemes-element-pack-lite' ),
+					'skoll'    => esc_html__( 'Skoll', 'bdthemes-element-pack-lite' ),
+					'surtur'   => esc_html__( 'Surtur', 'bdthemes-element-pack-lite' ),
+					'telesto'  => esc_html__( 'Telesto', 'bdthemes-element-pack-lite' ),
+					'reklo'    => esc_html__( 'Reklo', 'bdthemes-element-pack-lite' ),
+					'elon'     => esc_html__( 'Elon', 'bdthemes-element-pack-lite' ),
+					'reveal'     => esc_html__( 'Reveal', 'bdthemes-element-pack-lite' ),
+					'glitch'   => esc_html__( 'Glitch', 'bdthemes-element-pack-lite' ),
+					'gooey'    => esc_html__( 'Gooey', 'bdthemes-element-pack-lite' ),
 				],
-				'classes' => BDTEP_LOCK_CLASS
 			]
 		);
 
 		$this->add_control(
 			'text',
 			[
-				'label'       => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack' ),
-				'placeholder' => esc_html__( 'Type Button Text', 'bdthemes-element-pack' ),
+				'default'     => esc_html__( 'Read More', 'bdthemes-element-pack-lite' ),
+				'placeholder' => esc_html__( 'Type Button Text', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'link',
 			[
-				'label'       => esc_html__( 'Link', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => esc_html__( 'https://your-link.com', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
 				'default'     => [
 					'url' => '#',
 				],
@@ -144,21 +143,21 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'alignment',
 			[
-				'label'        => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'prefix_class' => 'elementor%s-align-',
 				'default'      => '',
 				'options' => [
 					'left'    => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-right',
 					],
 				],
@@ -171,14 +170,14 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'button_css_id',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
+				'label' => __( 'Button ID', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
 				],
 				'default' => '',
-				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
-				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 			]
 		);
@@ -188,7 +187,7 @@ class Creative_Button extends Module_Base {
 		$this->start_controls_section(
 			'section_content_style',
 			[
-				'label'     => esc_html__( 'Creative Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Creative Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -196,20 +195,20 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'shape_alignment',
 			[
-				'label'        => esc_html__( 'Shape Align', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Shape Align', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'default'      => 'left',
 				'options' => [
 					'left'    => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-right',
 					],
 				],
@@ -229,16 +228,16 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'gooey_direction',
 			[
-				'label' => esc_html__( 'Fill Direction', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Fill Direction', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::CHOOSE,
 				'default' => 'top',
 				'options' => [
 					'top'    => [
-						'title' => __( 'To Top', 'bdthemes-element-pack' ),
+						'title' => __( 'To Top', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-v-align-top',
 					],
 					'bottom' => [
-						'title' => __( 'To Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'To Bottom', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-v-align-bottom',
 					],
 				],
@@ -257,25 +256,25 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'reveal_direction',
 			[
-				'label' => esc_html__( 'Reveal Direction', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Reveal Direction', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::CHOOSE,
 				'default' => 'left',
 				'toggle' => false,
 				'options' => [
 					'left'    => [
-						'title' => __( 'To Left', 'bdthemes-element-pack' ),
+						'title' => __( 'To Left', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-h-align-left',
 					],
 					'right' => [
-						'title' => __( 'To Right', 'bdthemes-element-pack' ),
+						'title' => __( 'To Right', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-h-align-right',
 					],
 					'top' => [
-						'title' => __( 'To Top', 'bdthemes-element-pack' ),
+						'title' => __( 'To Top', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-v-align-top',
 					],
 					'bottom' => [
-						'title' => __( 'To Bottom', 'bdthemes-element-pack' ),
+						'title' => __( 'To Bottom', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-v-align-bottom',
 					],
 				],
@@ -291,14 +290,14 @@ class Creative_Button extends Module_Base {
 		$this->start_controls_tab(
 			'tab_creative_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'creative_button_text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button, {{WRAPPER}} .bdt-ep-creative-button--dione span' => 'color: {{VALUE}};',
@@ -313,7 +312,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_line_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--fenrir .progress__circle, {{WRAPPER}} .bdt-ep-creative-button--fenrir .progress__path' => 'stroke: {{VALUE}};',
@@ -328,7 +327,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_stroke_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--surtur svg *' => 'stroke: {{VALUE}};',
@@ -342,7 +341,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button, {{WRAPPER}} .bdt-ep-creative-button--anthe::before, {{WRAPPER}} .bdt-ep-creative-button--bestia .bdt-ep-creative-button__bg, {{WRAPPER}} .bdt-ep-creative-button--dione::before, {{WRAPPER}} .bdt-ep-creative-button--greip::before, {{WRAPPER}} .bdt-ep-creative-button--hyperion::before, {{WRAPPER}} .bdt-ep-creative-button--janus::before, {{WRAPPER}} .bdt-ep-creative-button--mimas::before, {{WRAPPER}} .bdt-ep-creative-button--narvi::before, {{WRAPPER}} .bdt-ep-creative-button--pan::before, {{WRAPPER}} .bdt-ep-creative-button--pandora span, {{WRAPPER}} .bdt-ep-creative-button--rhea::before, {{WRAPPER}} .bdt-ep-creative-button--skoll::before' => 'background: {{VALUE}};',
@@ -362,7 +361,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'secondary_creative_button_background_color',
 			[
-				'label'     => esc_html__( 'Secondary Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Secondary Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button.bdt-ep-creative-button--pandora' => 'background: {{VALUE}};'
@@ -376,7 +375,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_helene_shadow_color',
 			[
-				'label'     => esc_html__( 'Shadow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Shadow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--helene::before' => 'background: {{VALUE}};',
@@ -402,7 +401,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -417,7 +416,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -432,7 +431,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_pandora_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -469,7 +468,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_size',
 			[
-				'label' => __( 'Size', 'bdthemes-element-pack' ),
+				'label' => __( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -491,10 +490,10 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_aura_line_toggle',
 			[
-				'label'     => esc_html__( 'Line & Clip Path Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Line & Clip Path Style', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack' ),
-				'label_on'  => esc_html__( 'On', 'bdthemes-element-pack' ),
+				'label_off' => esc_html__( 'Off', 'bdthemes-element-pack-lite' ),
+				'label_on'  => esc_html__( 'On', 'bdthemes-element-pack-lite' ),
 				'return_value' => 'yes',
 				'default' => 'no',
 				'condition' => [
@@ -509,7 +508,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_aura_line_color',
 			[
-				'label'     => esc_html__( 'Line Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Line Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(1):before, {{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(1):after, {{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(2):before, {{WRAPPER}} .bdt-ep-creative-button--aura>span:nth-child(2):after' => 'background: {{VALUE}};',
@@ -525,7 +524,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_aura_line_width',
 			[
-				'label'     => esc_html__( 'Line Width', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Line Width', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -547,7 +546,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_aura_line_height',
 			[
-				'label'     => esc_html__( 'Line Height', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Line Height', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -570,7 +569,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_aura_line_offset',
 			[
-				'label'     => esc_html__( 'Offset', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Offset', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -595,7 +594,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'creative_button_aura_clip_path',
 			[
-				'label'     => esc_html__( 'Clip Path', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Clip Path', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -622,14 +621,14 @@ class Creative_Button extends Module_Base {
 		$this->start_controls_tab(
 			'tab_creative_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'creative_button_hover_text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button:hover, {{WRAPPER}} .bdt-ep-creative-button--dione:hover span' => 'color: {{VALUE}};',
@@ -644,7 +643,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_aura_line_hover_color',
 			[
-				'label'     => esc_html__( 'Line Hover Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Line Hover Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(1):before, {{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(1):after, {{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(2):before, {{WRAPPER}} .bdt-ep-creative-button--aura:hover>span:nth-child(2):after' => 'background: {{VALUE}};',
@@ -658,7 +657,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_hover_stroke_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--surtur:hover svg *' => 'stroke: {{VALUE}};',
@@ -672,7 +671,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_hover_line_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--fenrir .progress__path' => 'stroke: {{VALUE}};',
@@ -687,7 +686,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_hover_background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button:hover, {{WRAPPER}} .bdt-ep-creative-button--anthe:hover::before, {{WRAPPER}} .bdt-ep-creative-button--bestia .bdt-ep-creative-button__bg::before, {{WRAPPER}} .bdt-ep-creative-button--bestia .bdt-ep-creative-button__bg::after, {{WRAPPER}} .bdt-ep-creative-button--calypso::before, {{WRAPPER}} .bdt-ep-creative-button--calypso::after, {{WRAPPER}} .bdt-ep-creative-button--dione:hover::before, {{WRAPPER}} .bdt-ep-creative-button--greip, {{WRAPPER}} .bdt-ep-creative-button--hyperion, {{WRAPPER}} .bdt-ep-creative-button--janus:hover::before, {{WRAPPER}} .bdt-ep-creative-button--mimas, {{WRAPPER}} .bdt-ep-creative-button--narvi:hover::before, {{WRAPPER}} .bdt-ep-creative-button--pan, {{WRAPPER}} .bdt-ep-creative-button--pandora:hover span, {{WRAPPER}} .bdt-ep-creative-button--rhea:hover::before, {{WRAPPER}} .bdt-ep-creative-button--skoll, {{WRAPPER}} .bdt-ep-creative-button--telesto::before, {{WRAPPER}} .bdt-ep-creative-button--telesto::after' => 'background: {{VALUE}};',
@@ -707,7 +706,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_glitch_hover_shadow_color',
 			[
-				'label'     => esc_html__( 'Shadow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Shadow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-creative-button .bdt-ep-creative-button--glitch:hover, {{WRAPPER}}.elementor-widget-bdt-creative-button .bdt-ep-creative-button--glitch:hover::after' => 'box-shadow: 6px 0 0 {{VALUE}};',
@@ -721,7 +720,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'secondary_creative_button_background_hover',
 			[
-				'label'     => esc_html__( 'Secondary Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Secondary Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button.bdt-ep-creative-button--pandora:hover' => 'background: {{VALUE}};'
@@ -735,7 +734,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button:hover, {{WRAPPER}} .bdt-ep-creative-button--bestia:hover .bdt-ep-creative-button__bg' => 'border-color: {{VALUE}};',
@@ -762,7 +761,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'hover_animation',
 			[
-				'label' => esc_html__( 'Hover Animation', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover Animation', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -771,7 +770,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_hover_icon_heading',
 			[
-				'label'     => esc_html__( 'Icon Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Style', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'button_style' => ['reklo']
@@ -782,7 +781,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_hover_icon_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--reklo:hover i' => 'color: {{VALUE}};',
@@ -795,7 +794,7 @@ class Creative_Button extends Module_Base {
 		$this->add_control(
 			'creative_button_hover_icon_bg_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-ep-creative-button--reklo i' => 'background-color: {{VALUE}};',
@@ -820,7 +819,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'icon_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -834,7 +833,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'icon_size',
 			[
-				'label' => esc_html__('Size', 'bdthemes-element-pack'),
+				'label' => esc_html__('Size', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -853,7 +852,7 @@ class Creative_Button extends Module_Base {
 		$this->add_responsive_control(
 			'icon_gap',
 			[
-				'label' => esc_html__('Space Between', 'bdthemes-element-pack'),
+				'label' => esc_html__('Space Between', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [

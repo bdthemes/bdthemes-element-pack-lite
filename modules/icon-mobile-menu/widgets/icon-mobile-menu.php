@@ -26,7 +26,7 @@ class Icon_Mobile_Menu extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Icon Mobile Menu', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Icon Mobile Menu', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -65,7 +65,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_section(
 			'ep_section_menu',
 			[ 
-				'label' => __( 'Menu Items', 'bdthemes-element-pack' ),
+				'label' => __( 'Menu Items', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -73,14 +73,14 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_style',
 			[ 
-				'label'   => __( 'Menu Style', 'bdthemes-element-pack' ),
+				'label'   => __( 'Menu Style', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => [ 
-					'style-1' => __( 'Default', 'bdthemes-element-pack' ),
-					'style-2' => __( 'Border', 'bdthemes-element-pack' ),
-					'style-3' => __( 'Tooltip', 'bdthemes-element-pack' ),
-					'style-4' => __( 'Circle with Tooltip', 'bdthemes-element-pack' ),
+					'style-1' => __( 'Default', 'bdthemes-element-pack-lite' ),
+					'style-2' => __( 'Border', 'bdthemes-element-pack-lite' ),
+					'style-3' => __( 'Tooltip', 'bdthemes-element-pack-lite' ),
+					'style-4' => __( 'Circle with Tooltip', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -90,7 +90,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$repeater->add_control(
 			'menu_icon',
 			[ 
-				'label'       => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'       => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'label_block' => false,
 				'skin'        => 'inline',
@@ -101,7 +101,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$repeater->add_control(
 			'menu_text',
 			[ 
-				'label' => __( 'Menu Text', 'bdthemes-element-pack' ),
+				'label' => __( 'Menu Text', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 			]
@@ -110,15 +110,15 @@ class Icon_Mobile_Menu extends Module_Base {
 		$repeater->add_control(
 			'link',
 			[ 
-				'label'       => __( 'Link', 'bdthemes-element-pack' ),
+				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 
 					'active' => true,
 				],
 				'default'     => [ 'url' => '#' ],
-				'description' => __( 'Add your section id WITH the # key. e.g: #my-id also you can add internal/external URL', 'bdthemes-element-pack' ),
+				'description' => __( 'Add your section id WITH the # key. e.g: #my-id also you can add internal/external URL', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
-				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -130,15 +130,15 @@ class Icon_Mobile_Menu extends Module_Base {
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'menu_text' => __( 'Home', 'bdthemes-element-pack' ),
+						'menu_text' => __( 'Home', 'bdthemes-element-pack-lite' ),
 						'menu_icon' => [ 'value' => 'fas fa-home', 'library' => 'fa-solid' ],
 					],
 					[ 
-						'menu_text' => __( 'Cart', 'bdthemes-element-pack' ),
+						'menu_text' => __( 'Cart', 'bdthemes-element-pack-lite' ),
 						'menu_icon' => [ 'value' => 'fas fa-shopping-cart', 'library' => 'fa-solid' ],
 					],
 					[ 
-						'menu_text' => __( 'Account', 'bdthemes-element-pack' ),
+						'menu_text' => __( 'Account', 'bdthemes-element-pack-lite' ),
 						'menu_icon' => [ 'value' => 'fas fa-user', 'library' => 'fa-solid' ],
 					],
 				],
@@ -151,7 +151,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_section(
 			'section_tooltip_settings',
 			[ 
-				'label'     => __( 'Tooltip Settings', 'bdthemes-element-pack' ),
+				'label'     => __( 'Tooltip Settings', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'menu_style' => [ 'style-3', 'style-4' ],
 				],
@@ -161,7 +161,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip',
 			[ 
-				'label'              => __( 'Tooltip', 'bdthemes-element-pack' ),
+				'label'              => __( 'Tooltip', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SWITCHER,
 				'default'            => 'yes',
 				'render_type'        => 'template',
@@ -172,18 +172,18 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_placement',
 			[ 
-				'label'     => esc_html__( 'Placement', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Placement', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'top',
 				'options'   => [ 
-					'top-start'    => esc_html__( 'Top Left', 'bdthemes-element-pack' ),
-					'top'          => esc_html__( 'Top', 'bdthemes-element-pack' ),
-					'top-end'      => esc_html__( 'Top Right', 'bdthemes-element-pack' ),
-					'bottom-start' => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
-					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
-					'bottom-end'   => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
-					'left'         => esc_html__( 'Left', 'bdthemes-element-pack' ),
-					'right'        => esc_html__( 'Right', 'bdthemes-element-pack' ),
+					'top-start'    => esc_html__( 'Top Left', 'bdthemes-element-pack-lite' ),
+					'top'          => esc_html__( 'Top', 'bdthemes-element-pack-lite' ),
+					'top-end'      => esc_html__( 'Top Right', 'bdthemes-element-pack-lite' ),
+					'bottom-start' => esc_html__( 'Bottom Left', 'bdthemes-element-pack-lite' ),
+					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack-lite' ),
+					'bottom-end'   => esc_html__( 'Bottom Right', 'bdthemes-element-pack-lite' ),
+					'left'         => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
+					'right'        => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'menu_tooltip' => 'yes',
@@ -195,15 +195,15 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_animation',
 			[ 
-				'label'     => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'shift-toward',
 				'options'   => [ 
-					'shift-away'   => esc_html__( 'Shift-Away', 'bdthemes-element-pack' ),
-					'shift-toward' => esc_html__( 'Shift-Toward', 'bdthemes-element-pack' ),
-					'fade'         => esc_html__( 'Fade', 'bdthemes-element-pack' ),
-					'scale'        => esc_html__( 'Scale', 'bdthemes-element-pack' ),
-					'perspective'  => esc_html__( 'Perspective', 'bdthemes-element-pack' ),
+					'shift-away'   => esc_html__( 'Shift-Away', 'bdthemes-element-pack-lite' ),
+					'shift-toward' => esc_html__( 'Shift-Toward', 'bdthemes-element-pack-lite' ),
+					'fade'         => esc_html__( 'Fade', 'bdthemes-element-pack-lite' ),
+					'scale'        => esc_html__( 'Scale', 'bdthemes-element-pack-lite' ),
+					'perspective'  => esc_html__( 'Perspective', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'menu_tooltip' => 'yes',
@@ -214,7 +214,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_x_offset',
 			[ 
-				'label'     => esc_html__( 'X Offset', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'X Offset', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 0,
@@ -228,7 +228,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_y_offset',
 			[ 
-				'label'     => esc_html__( 'Y Offset', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Y Offset', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 0,
@@ -242,7 +242,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_arrow',
 			[ 
-				'label'     => esc_html__( 'Arrow', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Arrow', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'menu_tooltip' => 'yes',
@@ -253,8 +253,8 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_trigger',
 			[ 
-				'label'       => __( 'Trigger on Click', 'bdthemes-element-pack' ),
-				'description' => __( 'Don\'t set yes when you set lightbox image with marker.', 'bdthemes-element-pack' ),
+				'label'       => __( 'Trigger on Click', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Don\'t set yes when you set lightbox image with marker.', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'condition'   => [ 
 					'menu_tooltip' => 'yes',
@@ -268,7 +268,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_section(
 			'ep_section_style_menu',
 			[ 
-				'label' => __( 'Menu Items', 'bdthemes-element-pack' ),
+				'label' => __( 'Menu Items', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -278,7 +278,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -293,16 +293,16 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'item_border_type',
 			[ 
-				'label'     => esc_html_x( 'Border Type', 'Border Control', 'bdthemes-element-pack' ),
+				'label'     => esc_html_x( 'Border Type', 'Border Control', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [ 
-					''       => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'none'   => esc_html__( 'None', 'bdthemes-element-pack' ),
-					'solid'  => esc_html_x( 'Solid', 'Border Control', 'bdthemes-element-pack' ),
-					'double' => esc_html_x( 'Double', 'Border Control', 'bdthemes-element-pack' ),
-					'dotted' => esc_html_x( 'Dotted', 'Border Control', 'bdthemes-element-pack' ),
-					'dashed' => esc_html_x( 'Dashed', 'Border Control', 'bdthemes-element-pack' ),
-					'groove' => esc_html_x( 'Groove', 'Border Control', 'bdthemes-element-pack' ),
+					''       => esc_html__( 'Default', 'bdthemes-element-pack-lite' ),
+					'none'   => esc_html__( 'None', 'bdthemes-element-pack-lite' ),
+					'solid'  => esc_html_x( 'Solid', 'Border Control', 'bdthemes-element-pack-lite' ),
+					'double' => esc_html_x( 'Double', 'Border Control', 'bdthemes-element-pack-lite' ),
+					'dotted' => esc_html_x( 'Dotted', 'Border Control', 'bdthemes-element-pack-lite' ),
+					'dashed' => esc_html_x( 'Dashed', 'Border Control', 'bdthemes-element-pack-lite' ),
+					'groove' => esc_html_x( 'Groove', 'Border Control', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors' => [ 
 					'{{SELECTOR}} .bdt-icon-mobile-menu-wrap .bdt-icon-mobile-menu-link' => 'border-style: {{VALUE}};',
@@ -317,7 +317,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_border_width',
 			[ 
-				'label'     => __( 'Border Width', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}}' => '--ep-border-width: {{SIZE}}{{UNIT}};'
@@ -332,7 +332,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'item_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-icon-mobile-menu-wrap .bdt-icon-mobile-menu-link' => 'border-color: {{SIZE}}{{UNIT}};'
@@ -347,7 +347,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -359,7 +359,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -371,7 +371,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -394,7 +394,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -409,7 +409,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'item_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'item_border_type!' => [ 'none' ],
@@ -437,7 +437,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_section(
 			'ep_section_style_menu_icon',
 			[ 
-				'label' => __( 'Menu Icon', 'bdthemes-element-pack' ),
+				'label' => __( 'Menu Icon', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -447,14 +447,14 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_icon_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'item_icon_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-icon-mobile-menu-wrap span.bdt-icon-mobile-menu'     => 'color: {{VALUE}};',
@@ -483,7 +483,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_icon_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -495,7 +495,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_icon_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -515,7 +515,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_icon_size',
 			[ 
-				'label'     => __( 'Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-icon-mobile-menu-wrap span.bdt-icon-mobile-menu' => 'font-size: {{SIZE}}{{UNIT}};',
@@ -528,14 +528,14 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_icon_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'item_icon_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-icon-mobile-menu-wrap .bdt-icon-mobile-menu-link:hover span.bdt-icon-mobile-menu'     => 'color: {{VALUE}};',
@@ -555,7 +555,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'item_icon_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'item_icon_border_border!' => [ 'none' ],
@@ -583,7 +583,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_section(
 			'ep_section_style_menu_text',
 			[ 
-				'label' => __( 'Menu Text', 'bdthemes-element-pack' ),
+				'label' => __( 'Menu Text', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'menu_style' => [ 'style-1', 'style-2' ],
@@ -596,14 +596,14 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_text_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'item_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-icon-mobile-menu-wrap span.bdt-text-mobile-menu' => 'color: {{VALUE}};',
@@ -631,7 +631,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_text_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -643,7 +643,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -655,7 +655,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'item_text_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -686,14 +686,14 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_text_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'item_text_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-icon-mobile-menu-wrap .bdt-icon-mobile-menu-link:hover span.bdt-text-mobile-menu' => 'color: {{VALUE}};',
@@ -712,7 +712,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'item_text_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'item_text_border_border!' => [ 'none' ],
@@ -741,7 +741,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->start_controls_section(
 			'section_style_tooltip',
 			[ 
-				'label'     => esc_html__( 'Tooltip', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Tooltip', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'menu_style'   => [ 'style-3', 'style-4' ],
@@ -753,7 +753,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'menu_tooltip_width',
 			[ 
-				'label'       => esc_html__( 'Max Width', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Max Width', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SLIDER,
 				'size_units'  => [ 
 					'px',
@@ -783,7 +783,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_title_color',
 			[ 
-				'label'     => esc_html__( 'Title Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Title Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .bdt-title' => 'color: {{VALUE}}',
@@ -794,20 +794,20 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_text_align',
 			[ 
-				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'center',
 				'options'   => [ 
 					'left'   => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -828,7 +828,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_control(
 			'menu_tooltip_arrow_color',
 			[ 
-				'label'     => esc_html__( 'Arrow Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Arrow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .tippy-arrow' => 'color: {{VALUE}}',
@@ -839,7 +839,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'menu_tooltip_padding',
 			[ 
-				'label'       => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'       => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::DIMENSIONS,
 				'size_units'  => [ 'px', '%' ],
 				'selectors'   => [ 
@@ -853,7 +853,7 @@ class Icon_Mobile_Menu extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'menu_tooltip_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.tippy-box[data-theme="bdt-tippy-{{ID}}"]',
@@ -863,7 +863,7 @@ class Icon_Mobile_Menu extends Module_Base {
 		$this->add_responsive_control(
 			'menu_tooltip_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 

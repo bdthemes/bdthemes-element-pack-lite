@@ -15,7 +15,7 @@ class Skin_Flip extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Flip', 'bdthemes-element-pack' );
+		return __( 'Flip', 'bdthemes-element-pack-lite' );
 	}
 
 	public function render() {

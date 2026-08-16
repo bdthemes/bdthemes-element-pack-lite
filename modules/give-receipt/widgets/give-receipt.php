@@ -19,7 +19,7 @@ class Give_Receipt extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__('Give Receipt', 'bdthemes-element-pack');
+		return BDTEP . esc_html__('Give Receipt', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -58,7 +58,7 @@ class Give_Receipt extends Module_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__('Donation Receipt', 'bdthemes-element-pack'),
+				'label' => esc_html__('Donation Receipt', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -66,10 +66,10 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'error',
 			[
-				'label' => esc_html__('Error Message', 'bdthemes-element-pack'),
+				'label' => esc_html__('Error Message', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXTAREA,
-				'default' => esc_html__('You are missing the donation id to view this donation receipt.', 'bdthemes-element-pack'),
-				'placeholder' => esc_html__('You are missing the donation id to view this donation receipt.', 'bdthemes-element-pack'),
+				'default' => esc_html__('You are missing the donation id to view this donation receipt.', 'bdthemes-element-pack-lite'),
+				'placeholder' => esc_html__('You are missing the donation id to view this donation receipt.', 'bdthemes-element-pack-lite'),
 				'dynamic' => [ 'active' => true ],
 			]
 		);
@@ -77,10 +77,10 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'success',
 			[
-				'label' => esc_html__('Success Message', 'bdthemes-element-pack'),
+				'label' => esc_html__('Success Message', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXTAREA,
-				'default' => esc_html__('Thank you for your donation.', 'bdthemes-element-pack'),
-				'placeholder' => esc_html__('Thank you for your donation.', 'bdthemes-element-pack'),
+				'default' => esc_html__('Thank you for your donation.', 'bdthemes-element-pack-lite'),
+				'placeholder' => esc_html__('Thank you for your donation.', 'bdthemes-element-pack-lite'),
 				'dynamic' => [ 'active' => true ],
 			]
 		);
@@ -88,7 +88,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'price',
 			[
-				'label' => esc_html__('Donation Total', 'bdthemes-element-pack'),
+				'label' => esc_html__('Donation Total', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -97,7 +97,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'donor',
 			[
-				'label' => esc_html__('Donor', 'bdthemes-element-pack'),
+				'label' => esc_html__('Donor', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -106,7 +106,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'date',
 			[
-				'label' => esc_html__('Date', 'bdthemes-element-pack'),
+				'label' => esc_html__('Date', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -115,7 +115,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'method',
 			[
-				'label' => esc_html__('Payment Method', 'bdthemes-element-pack'),
+				'label' => esc_html__('Payment Method', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -124,7 +124,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'payment_id',
 			[
-				'label' => esc_html__('Payment ID', 'bdthemes-element-pack'),
+				'label' => esc_html__('Payment ID', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -133,7 +133,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'status',
 			[
-				'label' => esc_html__('Status', 'bdthemes-element-pack'),
+				'label' => esc_html__('Status', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -142,7 +142,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'company',
 			[
-				'label' => esc_html__('Company Name', 'bdthemes-element-pack'),
+				'label' => esc_html__('Company Name', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -151,7 +151,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'status_notice',
 			[
-				'label' => esc_html__('Payment Status Notice', 'bdthemes-element-pack'),
+				'label' => esc_html__('Payment Status Notice', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -164,7 +164,7 @@ class Give_Receipt extends Module_Base {
 		$this->start_controls_section(
 			'section_style_header',
 			[
-				'label' => esc_html__('Header', 'bdthemes-element-pack'),
+				'label' => esc_html__('Header', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -172,7 +172,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'header_background',
 			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#e7ebef',
 				'selectors' => [
@@ -184,7 +184,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'header_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#333',
 				'selectors' => [
@@ -196,16 +196,16 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'header_border_style',
 			[
-				'label'     => esc_html__('Border Style', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Style', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'solid',
 				'options'   => [
-					'none'   => esc_html__('None', 'bdthemes-element-pack'),
-					'solid'  => esc_html__('Solid', 'bdthemes-element-pack'),
-					'double' => esc_html__('Double', 'bdthemes-element-pack'),
-					'dotted' => esc_html__('Dotted', 'bdthemes-element-pack'),
-					'dashed' => esc_html__('Dashed', 'bdthemes-element-pack'),
-					'groove' => esc_html__('Groove', 'bdthemes-element-pack'),
+					'none'   => esc_html__('None', 'bdthemes-element-pack-lite'),
+					'solid'  => esc_html__('Solid', 'bdthemes-element-pack-lite'),
+					'double' => esc_html__('Double', 'bdthemes-element-pack-lite'),
+					'dotted' => esc_html__('Dotted', 'bdthemes-element-pack-lite'),
+					'dashed' => esc_html__('Dashed', 'bdthemes-element-pack-lite'),
+					'groove' => esc_html__('Groove', 'bdthemes-element-pack-lite'),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-receipt .give-table th' => 'border-style: {{VALUE}};',
@@ -216,7 +216,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'header_border_width',
 			[
-				'label'     => esc_html__('Border Width', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Width', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 1,
@@ -236,7 +236,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'header_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ccc',
 				'selectors' => [
@@ -248,7 +248,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_responsive_control(
 			'header_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'default'    => [
@@ -277,7 +277,7 @@ class Give_Receipt extends Module_Base {
 		$this->start_controls_section(
 			'section_style_body',
 			[
-				'label' => esc_html__('Body', 'bdthemes-element-pack'),
+				'label' => esc_html__('Body', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -285,16 +285,16 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'cell_border_style',
 			[
-				'label'     => esc_html__('Border Style', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Style', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'solid',
 				'options'   => [
-					'none'   => esc_html__('None', 'bdthemes-element-pack'),
-					'solid'  => esc_html__('Solid', 'bdthemes-element-pack'),
-					'double' => esc_html__('Double', 'bdthemes-element-pack'),
-					'dotted' => esc_html__('Dotted', 'bdthemes-element-pack'),
-					'dashed' => esc_html__('Dashed', 'bdthemes-element-pack'),
-					'groove' => esc_html__('Groove', 'bdthemes-element-pack'),
+					'none'   => esc_html__('None', 'bdthemes-element-pack-lite'),
+					'solid'  => esc_html__('Solid', 'bdthemes-element-pack-lite'),
+					'double' => esc_html__('Double', 'bdthemes-element-pack-lite'),
+					'dotted' => esc_html__('Dotted', 'bdthemes-element-pack-lite'),
+					'dashed' => esc_html__('Dashed', 'bdthemes-element-pack-lite'),
+					'groove' => esc_html__('Groove', 'bdthemes-element-pack-lite'),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-receipt .give-table td' => 'border-style: {{VALUE}};',
@@ -305,7 +305,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'cell_border_width',
 			[
-				'label'     => esc_html__('Border Width', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Width', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 1,
@@ -325,7 +325,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_responsive_control(
 			'cell_padding',
 			[
-				'label'      => esc_html__('Cell Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Cell Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'default'    => [
@@ -354,14 +354,14 @@ class Give_Receipt extends Module_Base {
 		$this->start_controls_tab(
 			'tab_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'normal_background',
 			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#fff',
 				'selectors' => [
@@ -373,7 +373,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'normal_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-receipt .give-table td' => 'color: {{VALUE}};',
@@ -384,7 +384,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'normal_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ccc',
 				'selectors' => [
@@ -398,14 +398,14 @@ class Give_Receipt extends Module_Base {
 		$this->start_controls_tab(
 			'tab_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'row_hover_background',
 			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-receipt .give-table tr:hover td' => 'background-color: {{VALUE}} !important;',
@@ -416,7 +416,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'row_hover_text_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-receipt .give-table tr:hover td' => 'color: {{VALUE}};',
@@ -429,14 +429,14 @@ class Give_Receipt extends Module_Base {
 		$this->start_controls_tab(
 			'tab_stripe',
 			[
-				'label'     => esc_html__('Stripe', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Stripe', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'stripe_background',
 			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#f5f5f5',
 				'selectors' => [
@@ -448,7 +448,7 @@ class Give_Receipt extends Module_Base {
 		$this->add_control(
 			'stripe_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-receipt .give-table tr:nth-child(even) td' => 'color: {{VALUE}};',
@@ -477,13 +477,13 @@ class Give_Receipt extends Module_Base {
 		<div id="give-receipt">
 			<div class="give_notices give_errors" id="give_error_fail">
 				<p class="give_notice give_error">
-					<?php echo (!empty($error) ? wp_kses_post($error ): esc_html__('You are missing the donation ID to view this donation receipt.', 'bdthemes-element-pack')); ?>
+					<?php echo (!empty($error) ? wp_kses_post($error ): esc_html__('You are missing the donation ID to view this donation receipt.', 'bdthemes-element-pack-lite')); ?>
 				</p>
 			</div>
 			<?php if ('yes' == $settings['status_notice']) : ?>
 				<div class="give_notices give_errors" id="give_error_success">
 					<p class="give_notice give_success">
-						<?php echo (!empty($success) ? wp_kses_post($success) : esc_html__('Thank you for your donation.', 'bdthemes-element-pack')); ?>
+						<?php echo (!empty($success) ? wp_kses_post($success) : esc_html__('Thank you for your donation.', 'bdthemes-element-pack-lite')); ?>
 					</p>
 				</div>
 			<?php endif; ?>
@@ -491,7 +491,7 @@ class Give_Receipt extends Module_Base {
 				<thead>
 					<tr>
 						<th scope="colgroup" colspan="2">
-							<span class="give-receipt-thead-text"><?php esc_html_e('Donation Receipt', 'bdthemes-element-pack'); ?></span>
+							<span class="give-receipt-thead-text"><?php esc_html_e('Donation Receipt', 'bdthemes-element-pack-lite'); ?></span>
 						</th>
 					</tr>
 				</thead>
@@ -500,13 +500,13 @@ class Give_Receipt extends Module_Base {
 					<?php
 					if ('yes' == $settings['donor']) : ?>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Donor', 'bdthemes-element-pack'); ?></strong></td>
-							<td><?php esc_html_e('Test Donor', 'bdthemes-element-pack'); ?></td>
+							<td scope="row"><strong><?php esc_html_e('Donor', 'bdthemes-element-pack-lite'); ?></strong></td>
+							<td><?php esc_html_e('Test Donor', 'bdthemes-element-pack-lite'); ?></td>
 						</tr>
 					<?php endif;
 					if ('yes' == $settings['company']) : ?>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Company Name', 'bdthemes-element-pack'); ?></strong></td>
+							<td scope="row"><strong><?php esc_html_e('Company Name', 'bdthemes-element-pack-lite'); ?></strong></td>
 							<td>Impress.org</td>
 						</tr>
 					<?php endif;
@@ -518,37 +518,37 @@ class Give_Receipt extends Module_Base {
 					<?php endif;
 					if ('yes' == $settings['price']) : ?>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Total Donation', 'bdthemes-element-pack'); ?></strong></td>
+							<td scope="row"><strong><?php esc_html_e('Total Donation', 'bdthemes-element-pack-lite'); ?></strong></td>
 							<td>$25.00</td>
 						</tr>
 					<?php endif; ?>
 					<tr>
-						<td scope="row"><strong><?php esc_html_e('Donation', 'bdthemes-element-pack'); ?></strong></td>
-						<td><?php esc_html_e('First Form', 'bdthemes-element-pack'); ?><span class="donation-level-text-wrap"></span></td>
+						<td scope="row"><strong><?php esc_html_e('Donation', 'bdthemes-element-pack-lite'); ?></strong></td>
+						<td><?php esc_html_e('First Form', 'bdthemes-element-pack-lite'); ?><span class="donation-level-text-wrap"></span></td>
 					</tr>
 					<?php
 					if ('yes' == $settings['status']) : ?>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Donation Status', 'bdthemes-element-pack'); ?></strong></td>
-							<td><?php esc_html_e('Complete', 'bdthemes-element-pack'); ?></td>
+							<td scope="row"><strong><?php esc_html_e('Donation Status', 'bdthemes-element-pack-lite'); ?></strong></td>
+							<td><?php esc_html_e('Complete', 'bdthemes-element-pack-lite'); ?></td>
 						</tr>
 					<?php endif;
 					if ('yes' == $settings['payment_id']) : ?>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Donation ID', 'bdthemes-element-pack'); ?></strong></td>
+							<td scope="row"><strong><?php esc_html_e('Donation ID', 'bdthemes-element-pack-lite'); ?></strong></td>
 							<td>3</td>
 						</tr>
 					<?php endif;
 					if ('yes' == $settings['method']) : ?>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Payment Method', 'bdthemes-element-pack'); ?></strong></td>
-							<td><?php esc_html_e('Test Donation', 'bdthemes-element-pack'); ?></td>
+							<td scope="row"><strong><?php esc_html_e('Payment Method', 'bdthemes-element-pack-lite'); ?></strong></td>
+							<td><?php esc_html_e('Test Donation', 'bdthemes-element-pack-lite'); ?></td>
 						</tr>
 					<?php endif;
 					if ('true' == $pdfreceipts) : ?>
 						<tr>
-							<td><strong><?php esc_html_e('Receipt', 'bdthemes-element-pack'); ?>:</strong></td>
-							<td><a class="give_receipt_link" title="Download Receipt" href="#"><?php esc_html_e('Download Receipt', 'bdthemes-element-pack'); ?> »</a></td>
+							<td><strong><?php esc_html_e('Receipt', 'bdthemes-element-pack-lite'); ?>:</strong></td>
+							<td><a class="give_receipt_link" title="Download Receipt" href="#"><?php esc_html_e('Download Receipt', 'bdthemes-element-pack-lite'); ?> »</a></td>
 						</tr>
 					<?php endif; ?>
 				</tbody>
@@ -560,7 +560,7 @@ class Give_Receipt extends Module_Base {
 					<thead>
 						<tr>
 							<th scope="colgroup" colspan="2">
-								<span class="give-receipt-thead-text"><?php esc_html_e('Subscription Details', 'bdthemes-element-pack'); ?></span>
+								<span class="give-receipt-thead-text"><?php esc_html_e('Subscription Details', 'bdthemes-element-pack-lite'); ?></span>
 							</th>
 						</tr>
 					</thead>
@@ -568,30 +568,30 @@ class Give_Receipt extends Module_Base {
 					<tbody>
 
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Subscription:', 'bdthemes-element-pack'); ?></strong></td>
+							<td scope="row"><strong><?php esc_html_e('Subscription:', 'bdthemes-element-pack-lite'); ?></strong></td>
 							<td>
-								<span class="give-subscription-billing-cycle">$25.00 / <?php esc_html_e('Monthly', 'bdthemes-element-pack'); ?></span>
+								<span class="give-subscription-billing-cycle">$25.00 / <?php esc_html_e('Monthly', 'bdthemes-element-pack-lite'); ?></span>
 							</td>
 						</tr>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Status:', 'bdthemes-element-pack'); ?></strong></td>
+							<td scope="row"><strong><?php esc_html_e('Status:', 'bdthemes-element-pack-lite'); ?></strong></td>
 							<td>
-								<span class="give-subscription-status"><span class="give-donation-status status-active"><span class="give-donation-status-icon"></span> <?php esc_html_e('Active', 'bdthemes-element-pack'); ?></span></span>
+								<span class="give-subscription-status"><span class="give-donation-status status-active"><span class="give-donation-status-icon"></span> <?php esc_html_e('Active', 'bdthemes-element-pack-lite'); ?></span></span>
 							</td>
 						</tr>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Renewal Date:', 'bdthemes-element-pack'); ?></strong></td>
-							<td><span class="give-subscription-renewal-date"><?php esc_html_e('June 4, 2020', 'bdthemes-element-pack'); ?></span></td>
+							<td scope="row"><strong><?php esc_html_e('Renewal Date:', 'bdthemes-element-pack-lite'); ?></strong></td>
+							<td><span class="give-subscription-renewal-date"><?php esc_html_e('June 4, 2020', 'bdthemes-element-pack-lite'); ?></span></td>
 						</tr>
 						<tr>
-							<td scope="row"><strong><?php esc_html_e('Progress:', 'bdthemes-element-pack'); ?></strong></td>
-							<td><span class="give-subscription-times-billed">1 / <?php esc_html_e('Ongoing', 'bdthemes-element-pack'); ?></span>
+							<td scope="row"><strong><?php esc_html_e('Progress:', 'bdthemes-element-pack-lite'); ?></strong></td>
+							<td><span class="give-subscription-times-billed">1 / <?php esc_html_e('Ongoing', 'bdthemes-element-pack-lite'); ?></span>
 							</td>
 						</tr>
 
 					</tbody>
 				</table>
-				<a href="#" class="give-recurring-manage-subscriptions-receipt-link"><?php esc_html_e('Manage Subscriptions', 'bdthemes-element-pack'); ?> »</a>
+				<a href="#" class="give-recurring-manage-subscriptions-receipt-link"><?php esc_html_e('Manage Subscriptions', 'bdthemes-element-pack-lite'); ?> »</a>
 			<?php endif; ?>
 		</div>
 	<?php

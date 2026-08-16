@@ -18,7 +18,7 @@ class Give_Totals extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Give Totals', 'bdthemes-element-pack');
+		return BDTEP . __('Give Totals', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -49,7 +49,7 @@ class Give_Totals extends Module_Base {
 		$this->start_controls_section(
 			'give_totals_settings',
 			[
-				'label' => __('Give Totals', 'bdthemes-element-pack'),
+				'label' => __('Give Totals', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -57,7 +57,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'forms',
 			[
-				'label' => __('Forms', 'bdthemes-element-pack'),
+				'label' => __('Forms', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SELECT2,
 				'options' => element_pack_give_forms_options(),
 				'multiple' => true,
@@ -68,7 +68,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'total_goal',
 			[
-				'label' => __('Goal Amount', 'bdthemes-element-pack'),
+				'label' => __('Goal Amount', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => ['active' => true],
 				'default' => '1000'
@@ -78,16 +78,16 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'message',
 			[
-				'label' => __('Message:', 'bdthemes-element-pack'),
+				'label' => __('Message:', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXTAREA,
-				'default' => __('Hey! We\'ve raised {total} of the {total_goal} we are trying to raise for this campaign!', 'bdthemes-element-pack'),
+				'default' => __('Hey! We\'ve raised {total} of the {total_goal} we are trying to raise for this campaign!', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'link',
 			[
-				'label' => __('Link', 'bdthemes-element-pack'),
+				'label' => __('Link', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::URL,
 				'show_external' => false,
 				'default' => [
@@ -101,17 +101,17 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'link_text',
 			[
-				'label' => __('Link Text', 'bdthemes-element-pack'),
+				'label' => __('Link Text', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => ['active' => true],
-				'default' => __('Donate Now', 'bdthemes-element-pack'),
+				'default' => __('Donate Now', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'show_progress',
 			[
-				'label' => __('Show Progress', 'bdthemes-element-pack'),
+				'label' => __('Show Progress', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -123,7 +123,7 @@ class Give_Totals extends Module_Base {
 		$this->start_controls_section(
 			'section_title_style',
 			[
-				'label' => esc_html__('Raised Title', 'bdthemes-element-pack'),
+				'label' => esc_html__('Raised Title', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_progress' => 'yes'
@@ -134,7 +134,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-totals .raised' => 'color: {{VALUE}};',
@@ -145,7 +145,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'title_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -167,7 +167,7 @@ class Give_Totals extends Module_Base {
 		$this->start_controls_section(
 			'progress_bar_style',
 			[
-				'label' => esc_html__('Progress Bar', 'bdthemes-element-pack'),
+				'label' => esc_html__('Progress Bar', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_progress' => 'yes'
@@ -178,7 +178,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'progress_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-totals .give-progress-bar>span' => 'background-color: {{VALUE}} !important;',
@@ -189,7 +189,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'progress_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-totals .give-progress-bar' => 'background-color: {{VALUE}};',
@@ -200,7 +200,7 @@ class Give_Totals extends Module_Base {
 		$this->add_responsive_control(
 			'progress_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -212,7 +212,7 @@ class Give_Totals extends Module_Base {
 		$this->add_responsive_control(
 			'progress_height',
 			[
-				'label' => __('Height', 'bdthemes-element-pack'),
+				'label' => __('Height', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-totals .give-progress-bar' => 'height: {{SIZE}}{{UNIT}};',
@@ -223,7 +223,7 @@ class Give_Totals extends Module_Base {
 		$this->add_responsive_control(
 			'progress_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-totals .give-progress-bar' => 'margin-top: {{SIZE}}{{UNIT}} !important;',
@@ -236,7 +236,7 @@ class Give_Totals extends Module_Base {
 		$this->start_controls_section(
 			'section_message_style',
 			[
-				'label' => esc_html__('Message', 'bdthemes-element-pack'),
+				'label' => esc_html__('Message', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'message!' => ''
@@ -247,7 +247,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'message_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-totals .give-totals-shortcode-wrap' => 'color: {{VALUE}} !important;',
@@ -268,7 +268,7 @@ class Give_Totals extends Module_Base {
 		$this->start_controls_section(
 			'section_link_style',
 			[
-				'label' => esc_html__('Link', 'bdthemes-element-pack'),
+				'label' => esc_html__('Link', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -276,7 +276,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'link_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} a.give-totals-text-link' => 'color: {{VALUE}} !important;',
@@ -287,7 +287,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'link_hover_color',
 			[
-				'label' => esc_html__('Hover Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} a.give-totals-text-link:hover' => 'color: {{VALUE}} !important;',
@@ -298,7 +298,7 @@ class Give_Totals extends Module_Base {
 		$this->add_control(
 			'link_margin',
 			[
-				'label' => __('Margin', 'bdthemes-element-pack'),
+				'label' => __('Margin', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -322,7 +322,7 @@ class Give_Totals extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['forms']) {
-			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack') . '</div>';
+			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack-lite') . '</div>';
 		}
 
 		$attributes = [

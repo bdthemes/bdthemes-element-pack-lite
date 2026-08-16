@@ -31,7 +31,7 @@ class WPML_ElementPack_Icon_Mobile_Menu extends WPML_Module_With_Items {
 	protected function get_title( $field ) {
 		switch ( $field ) {
 			case 'menu_text':
-				return esc_html__( 'Icon Mobile Menu: Menu Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Icon Mobile Menu: Menu Text', 'bdthemes-element-pack-lite' );
 			default:
 				return '';
 		}

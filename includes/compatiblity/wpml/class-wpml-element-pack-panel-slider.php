@@ -29,13 +29,13 @@ class WPML_ElementPack_Panel_Slider extends WPML_Module_With_Items {
 	protected function get_title( $field ) {
 		switch( $field ) {
 			case 'tab_title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'tab_content':
-				return esc_html__( 'Content', 'bdthemes-element-pack' );
+				return esc_html__( 'Content', 'bdthemes-element-pack-lite' );
 
 			case 'button_text':
-				return esc_html__( 'Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Text', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

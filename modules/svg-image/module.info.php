@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 return [
-	'title'              => esc_html__('SVG Image', 'bdthemes-element-pack'),
+	'title'              => esc_html__('SVG Image', 'bdthemes-element-pack-lite'),
 	'required'           => true,
 	'default_activation' => false,
 	'has_script' 		 => true,

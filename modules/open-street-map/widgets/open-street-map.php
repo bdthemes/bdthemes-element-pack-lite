@@ -20,7 +20,7 @@ class Open_Street_Map extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( ' Open Street Map', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( ' Open Street Map', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -63,14 +63,14 @@ class Open_Street_Map extends Module_Base {
 		$this->start_controls_section(
 			'section_content_osmap',
 			[
-				'label' => esc_html__( 'Open Street Map', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Open Street Map', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'zoom_control',
 			[
-				'label'   => esc_html__( 'Zoom Control', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Zoom Control', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -79,7 +79,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_control(
 			'zoom',
 			[
-				'label' => esc_html__( 'Zoom', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Zoom', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 15,
@@ -96,7 +96,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_responsive_control(
 			'open_street_map_height',
 			[
-				'label' => esc_html__( 'Map Height', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Map Height', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -112,19 +112,19 @@ class Open_Street_Map extends Module_Base {
 		$this->add_responsive_control(
 			'search_align',
 			[
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -140,7 +140,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_responsive_control(
 			'search_spacing',
 			[
-				'label' => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -161,7 +161,7 @@ class Open_Street_Map extends Module_Base {
 		$this->start_controls_tab(
 			'tab_css_filter_normal',
 			[
-				'label' => __('Normal', 'bdthemes-element-pack') . BDTEP_NC
+				'label' => __('Normal', 'bdthemes-element-pack-lite') . BDTEP_NC
 			]
 		);
 
@@ -177,7 +177,7 @@ class Open_Street_Map extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'map_border',
-				'label'    => esc_html__('Border', 'bdthemes-element-pack'),
+				'label'    => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-open-street-map',
 				'separator' => 'before'
 			]
@@ -186,7 +186,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_responsive_control(
 			'map_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -200,7 +200,7 @@ class Open_Street_Map extends Module_Base {
 		$this->start_controls_tab(
 			'tab_css_filter_hover',
 			[
-				'label' => __('Hover', 'bdthemes-element-pack') . BDTEP_NC
+				'label' => __('Hover', 'bdthemes-element-pack-lite') . BDTEP_NC
 			]
 		);
 
@@ -221,7 +221,7 @@ class Open_Street_Map extends Module_Base {
 		$this->start_controls_section(
 			'section_content_marker',
 			[
-				'label' => esc_html__( 'Marker', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Marker', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -230,7 +230,7 @@ class Open_Street_Map extends Module_Base {
 		$repeater->add_control(
 			'marker_title',
 			[
-				'label'   => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => 'Marker #1',
 				'dynamic'     => [ 'active' => true, ],
@@ -240,7 +240,7 @@ class Open_Street_Map extends Module_Base {
 		$repeater->add_control(
 			'marker_lat',
 			[
-				'label' => esc_html__( 'Latitude', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Latitude', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::TEXT,
 				'default' => '24.82391',
 				'dynamic'     => [ 'active' => true, ],
@@ -250,7 +250,7 @@ class Open_Street_Map extends Module_Base {
 		$repeater->add_control(
 			'marker_lng',
 			[
-				'label'   => esc_html__( 'Longitude', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Longitude', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => '89.38414',
 				'dynamic'     => [ 'active' => true, ],
@@ -260,9 +260,9 @@ class Open_Street_Map extends Module_Base {
 		$repeater->add_control(
 			'marker_content',
 			[
-				'label'   => esc_html__( 'Content', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Content', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXTAREA,
-				'default' => esc_html__( 'Your Business Address Here', 'bdthemes-element-pack'),
+				'default' => esc_html__( 'Your Business Address Here', 'bdthemes-element-pack-lite'),
 				'dynamic'     => [ 'active' => true, ],
 			]
 		);
@@ -270,8 +270,8 @@ class Open_Street_Map extends Module_Base {
 		$repeater->add_control(
 			'custom_marker',
 			[
-				'label'       => esc_html__( 'Custom marker', 'bdthemes-element-pack' ),
-				'description' => esc_html__('Use 25x41 px size png icon for exact point.', 'bdthemes-element-pack'),
+				'label'       => esc_html__( 'Custom marker', 'bdthemes-element-pack-lite' ),
+				'description' => esc_html__('Use 25x41 px size png icon for exact point.', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::MEDIA,
 				'dynamic'     => [ 'active' => true, ],
 			]
@@ -286,7 +286,7 @@ class Open_Street_Map extends Module_Base {
 					[
 						'marker_lat'     => '24.82391',
 						'marker_lng'     => '89.38414',
-						'marker_title'   => esc_html__( 'Marker #1', 'bdthemes-element-pack' ),
+						'marker_title'   => esc_html__( 'Marker #1', 'bdthemes-element-pack-lite' ),
 						'marker_content' => '<strong>BdThemes Limited</strong>,<br>Latifpur, Bogra - 5800,<br>Bangladesh',
 					],
 				],
@@ -299,7 +299,7 @@ class Open_Street_Map extends Module_Base {
 		$this->start_controls_section(
 			'section_style_tooltip',
 			[
-				'label' => esc_html__( 'Tooltip', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Tooltip', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -307,7 +307,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_control(
 			'marker_tooltip_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .leaflet-popup-content-wrapper' => 'color: {{VALUE}}',
@@ -318,7 +318,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_control(
 			'marker_tooltip_button_color',
 			[
-				'label'     => esc_html__( 'Close Button Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Close Button Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .leaflet-popup-close-button' => 'color: {{VALUE}}',
@@ -329,7 +329,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_control(
 			'marker_tooltip_button_hover_color',
 			[
-				'label'     => esc_html__( 'Close Button Hover Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Close Button Hover Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .leaflet-popup-close-button:hover' => 'color: {{VALUE}}',
@@ -348,7 +348,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_responsive_control(
 			'marker_tooltip_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -361,7 +361,7 @@ class Open_Street_Map extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'marker_tooltip_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .leaflet-popup-content-wrapper',
@@ -371,7 +371,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_responsive_control(
 			'marker_tooltip_border_radius',
 			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -401,7 +401,7 @@ class Open_Street_Map extends Module_Base {
 		$this->start_controls_section(
 			'section_style_zoom_control',
 			[
-				'label'     => esc_html__( 'Zoom Control', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Zoom Control', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'zoom_control' => 'yes'
@@ -412,7 +412,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_control(
 			'zoom_control_color',
 			[
-				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-open-street-map .leaflet-bar a' => 'color: {{VALUE}}',
@@ -432,7 +432,7 @@ class Open_Street_Map extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'zoom_control_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-open-street-map .leaflet-bar a',
@@ -442,7 +442,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_responsive_control(
 			'zoom_control_border_radius',
 			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -454,7 +454,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_control(
 			'zoom_control_bar_color',
 			[
-				'label'     => esc_html__( 'Bar Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Bar Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'separator' => 'before',
 				'selectors' => [
@@ -466,7 +466,7 @@ class Open_Street_Map extends Module_Base {
 		$this->add_control(
 			'zoom_control_bar_width',
 			[
-				'label'     => __('Bar Width', 'bdthemes-element-pack'),
+				'label'     => __('Bar Width', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-open-street-map .leaflet-bar' => 'border-width: {{SIZE}}{{UNIT}}',

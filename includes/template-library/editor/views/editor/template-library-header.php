@@ -19,6 +19,6 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 	<i class="eicon-sync" aria-hidden="true" title="Sync Library"></i>
 	<span class="elementor-screen-only">Sync Library</span>
 </div>
-<div id="bdt-elementpack-template-library-header-close-modal" class="elementor-template-library-header-item" title="<?php esc_html_e('Close', 'bdthemes-element-pack'); ?>">
+<div id="bdt-elementpack-template-library-header-close-modal" class="elementor-template-library-header-item" title="<?php esc_html_e('Close', 'bdthemes-element-pack-lite'); ?>">
 	<i class="eicon-close" title="Close"></i>
 </div>

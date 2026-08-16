@@ -19,7 +19,7 @@ class Scrollnav extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __( 'Scroll Navigation', 'bdthemes-element-pack' );
+		return BDTEP . __( 'Scroll Navigation', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -65,15 +65,15 @@ class Scrollnav extends Module_Base {
 		return [
 			'condition' => ! is_ep_pro(),
 			'image' => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
-			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack-lite' ),
+			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack-lite' ),
 			/* translators: 1: First promoted feature, 2: Second promoted feature, 3: Third promoted feature */
-			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li><li>%3$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Nav View -> Dots', 'Vertical Nav -> Show', 'Fixed Nav -> Show'),
+			'description' => sprintf(__( '<ul class="bdt-widget-promotion-list"><li>%1$s</li><li>%2$s</li><li>%3$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack-lite' ), 'Nav View -> Dots', 'Vertical Nav -> Show', 'Fixed Nav -> Show'),
 			'upgrade_url' => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
 			/* translators: %s: Upgrade button label */
 			'upgrade_text' => sprintf(
 				'<span class="bdt-widget-promotion-btn">%s</span>',
-				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' )
+				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack-lite' )
 			),
 		];
 	}
@@ -83,7 +83,7 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_section(
 			'section_content_scrollnav',
 			[ 
-				'label' => __( 'Scrollnav', 'bdthemes-element-pack' ),
+				'label' => __( 'Scrollnav', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -92,28 +92,28 @@ class Scrollnav extends Module_Base {
 		$repeater->add_control(
 			'nav_title',
 			[ 
-				'label'   => __( 'Nav Title', 'bdthemes-element-pack' ),
+				'label'   => __( 'Nav Title', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => __( 'Nav Title', 'bdthemes-element-pack' ),
+				'default' => __( 'Nav Title', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$repeater->add_control(
 			'nav_link',
 			[ 
-				'label'       => __( 'Link', 'bdthemes-element-pack' ),
+				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
 				'default'     => [ 'url' => '#' ],
-				'description' => esc_html__( 'Add your section id WITH the # key. e.g: #my-id also you can add internal/external URL', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'Add your section id WITH the # key. e.g: #my-id also you can add internal/external URL', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$repeater->add_control(
 			'scroll_nav_icon',
 			[ 
-				'label'            => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'            => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'nav_icon',
 				'skin'             => 'inline',
@@ -123,36 +123,36 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'navs',
 			[ 
-				'label'       => __( 'Nav Items', 'bdthemes-element-pack' ),
+				'label'       => __( 'Nav Items', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'nav_title' => __( 'Nav #1', 'bdthemes-element-pack' ),
+						'nav_title' => __( 'Nav #1', 'bdthemes-element-pack-lite' ),
 						'nav_link'  => [ 
 							'url' => '#section-1',
 						]
 					],
 					[ 
-						'nav_title' => __( 'Nav #2', 'bdthemes-element-pack' ),
+						'nav_title' => __( 'Nav #2', 'bdthemes-element-pack-lite' ),
 						'nav_link'  => [ 
 							'url' => '#section-2',
 						]
 					],
 					[ 
-						'nav_title' => __( 'Nav #3', 'bdthemes-element-pack' ),
+						'nav_title' => __( 'Nav #3', 'bdthemes-element-pack-lite' ),
 						'nav_link'  => [ 
 							'url' => '#section-3',
 						]
 					],
 					[ 
-						'nav_title' => __( 'Nav #4', 'bdthemes-element-pack' ),
+						'nav_title' => __( 'Nav #4', 'bdthemes-element-pack-lite' ),
 						'nav_link'  => [ 
 							'url' => '#section-4',
 						]
 					],
 					[ 
-						'nav_title' => __( 'Nav #5', 'bdthemes-element-pack' ),
+						'nav_title' => __( 'Nav #5', 'bdthemes-element-pack-lite' ),
 						'nav_link'  => [ 
 							'url' => '#section-5',
 						]
@@ -165,35 +165,32 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_style',
 			[ 
-				'label'     => __( 'Nav View', 'bdthemes-element-pack' ),
+				'label'     => __( 'Nav View', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'separator' => 'before',
 				'default'   => 'default',
 				'options'   => [ 
-					'default' => __( 'Text', 'bdthemes-element-pack' ),
-					'dot'     => __( 'Dots', 'bdthemes-element-pack' ) . BDTEP_LOCK,
+					'default' => __( 'Text', 'bdthemes-element-pack-lite' ),
+					'dot'     => __( 'Dots', 'bdthemes-element-pack-lite' ),
 				],
-				'classes' => BDTEP_LOCK_CLASS,
 			]
 		);
 
 		$this->add_control(
 			'vertical_nav',
 			[ 
-				'label' => __( 'Vertical Nav', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'label' => __( 'Vertical Nav', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
-				'classes' => BDTEP_IS_PC,
 			]
 		);
 
 		$this->add_control(
 			'fixed_nav',
 			[ 
-				'label'        => __( 'Fixed Nav', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'label'        => __( 'Fixed Nav', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-scrollnav-fixed-',
 				'render_type'  => 'template',
-				'classes' => BDTEP_IS_PC,
 			]
 		);
 
@@ -202,27 +199,27 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_section(
 			'section_content_additional',
 			[ 
-				'label' => __( 'Additional Options', 'bdthemes-element-pack' ),
+				'label' => __( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'alignment',
 			[ 
-				'label'       => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label'       => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options'     => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -240,7 +237,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_position',
 			[ 
-				'label'     => __( 'Nav Position', 'bdthemes-element-pack' ),
+				'label'     => __( 'Nav Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'center-left',
 				'options'   => element_pack_position(),
@@ -253,7 +250,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'nav_offset',
 			[ 
-				'label'     => __( 'Nav Offset', 'bdthemes-element-pack' ),
+				'label'     => __( 'Nav Offset', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -274,7 +271,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'nav_spacing',
 			[ 
-				'label'      => __( 'Nav Spacing', 'bdthemes-element-pack' ),
+				'label'      => __( 'Nav Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -286,7 +283,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'menu_height',
 			[ 
-				'label'      => __( 'Menu Height', 'bdthemes-element-pack' ),
+				'label'      => __( 'Menu Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [ 
 					'px' => [ 
@@ -307,13 +304,13 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'icon_align',
 			[ 
-				'label'     => __( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'separator' => 'before',
 				'default'   => 'right',
 				'options'   => [ 
-					'left'  => __( 'Before', 'bdthemes-element-pack' ),
-					'right' => __( 'After', 'bdthemes-element-pack' ),
+					'left'  => __( 'Before', 'bdthemes-element-pack-lite' ),
+					'right' => __( 'After', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [ 
 					'nav_style' => 'default',
@@ -324,7 +321,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'icon_indent',
 			[ 
-				'label'     => __( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 8,
@@ -346,8 +343,8 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'content_offset',
 			[ 
-				'label'       => __( 'Target Offset', 'bdthemes-element-pack' ),
-				'description' => __( 'This offset work when you click and go to targeted location', 'bdthemes-element-pack' ),
+				'label'       => __( 'Target Offset', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'This offset work when you click and go to targeted location', 'bdthemes-element-pack-lite' ),
 				'separator'   => 'before',
 				'type'        => Controls_Manager::SLIDER,
 				'range'       => [ 
@@ -368,7 +365,7 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_section(
 			'section_content_tooltip',
 			[ 
-				'label'     => __( 'Tooltip', 'bdthemes-element-pack' ),
+				'label'     => __( 'Tooltip', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'nav_style' => 'dot',
 				]
@@ -380,15 +377,15 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_animation',
 			[ 
-				'label'       => __( 'Animation', 'bdthemes-element-pack' ),
+				'label'       => __( 'Animation', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'shift-toward',
 				'options'     => [ 
-					'shift-away'   => __( 'Shift-Away', 'bdthemes-element-pack' ),
-					'shift-toward' => __( 'Shift-Toward', 'bdthemes-element-pack' ),
-					'fade'         => __( 'Fade', 'bdthemes-element-pack' ),
-					'scale'        => __( 'Scale', 'bdthemes-element-pack' ),
-					'perspective'  => __( 'Perspective', 'bdthemes-element-pack' ),
+					'shift-away'   => __( 'Shift-Away', 'bdthemes-element-pack-lite' ),
+					'shift-toward' => __( 'Shift-Toward', 'bdthemes-element-pack-lite' ),
+					'fade'         => __( 'Fade', 'bdthemes-element-pack-lite' ),
+					'scale'        => __( 'Scale', 'bdthemes-element-pack-lite' ),
+					'perspective'  => __( 'Perspective', 'bdthemes-element-pack-lite' ),
 				],
 				'render_type' => 'template',
 			]
@@ -400,14 +397,14 @@ class Scrollnav extends Module_Base {
 			'dotnav_tooltip_placement',
 			[ 
 				'name'    => 'marker_tooltip_placement',
-				'label'   => __( 'Placement', 'bdthemes-element-pack' ),
+				'label'   => __( 'Placement', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [ 
-					'top'    => __( 'Top', 'bdthemes-element-pack' ),
-					'bottom' => __( 'Bottom', 'bdthemes-element-pack' ),
-					'left'   => __( 'Left', 'bdthemes-element-pack' ),
-					'right'  => __( 'Right', 'bdthemes-element-pack' ),
+					'top'    => __( 'Top', 'bdthemes-element-pack-lite' ),
+					'bottom' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
+					'left'   => __( 'Left', 'bdthemes-element-pack-lite' ),
+					'right'  => __( 'Right', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -415,7 +412,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_x_offset',
 			[ 
-				'label'   => __( 'Offset', 'bdthemes-element-pack' ),
+				'label'   => __( 'Offset', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [ 
 					'size' => 0,
@@ -426,7 +423,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_y_offset',
 			[ 
-				'label'   => __( 'Distance', 'bdthemes-element-pack' ),
+				'label'   => __( 'Distance', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [ 
 					'size' => 0,
@@ -437,7 +434,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_arrow',
 			[ 
-				'label' => __( 'Arrow', 'bdthemes-element-pack' ),
+				'label' => __( 'Arrow', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -445,8 +442,8 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_trigger',
 			[ 
-				'label'       => __( 'Trigger on Click', 'bdthemes-element-pack' ),
-				'description' => __( 'Don\'t set yes when you set lightbox image with marker.', 'bdthemes-element-pack' ),
+				'label'       => __( 'Trigger on Click', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Don\'t set yes when you set lightbox image with marker.', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 			]
 		);
@@ -456,7 +453,7 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_section(
 			'section_style_nav',
 			[ 
-				'label'     => __( 'Default Nav', 'bdthemes-element-pack' ),
+				'label'     => __( 'Default Nav', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'nav_style' => 'default',
@@ -467,15 +464,15 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'navbar_style',
 			[ 
-				'label'        => __( 'Navbar Style', 'bdthemes-element-pack' ) . BDTEP_UC,
+				'label'        => __( 'Navbar Style', 'bdthemes-element-pack-lite' ) . BDTEP_UC,
 				'type'         => Controls_Manager::SELECT,
 				'default'      => '',
 				'options'      => [ 
-					''  => __( 'Default', 'bdthemes-element-pack' ),
-					'1' => __( 'Style 1', 'bdthemes-element-pack' ),
-					'2' => __( 'Style 2', 'bdthemes-element-pack' ),
-					'3' => __( 'Style 3', 'bdthemes-element-pack' ),
-					'4' => __( 'Style 4', 'bdthemes-element-pack' ),
+					''  => __( 'Default', 'bdthemes-element-pack-lite' ),
+					'1' => __( 'Style 1', 'bdthemes-element-pack-lite' ),
+					'2' => __( 'Style 2', 'bdthemes-element-pack-lite' ),
+					'3' => __( 'Style 3', 'bdthemes-element-pack-lite' ),
+					'4' => __( 'Style 4', 'bdthemes-element-pack-lite' ),
 				],
 				'prefix_class' => 'bdt-navbar-style-',
 			]
@@ -486,14 +483,14 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_tab(
 			'tab_nav_normal',
 			[ 
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'nav_color',
 			[ 
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li > a' => 'color: {{VALUE}};',
@@ -504,7 +501,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_background_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li > a' => 'background-color: {{VALUE}};',
@@ -516,7 +513,7 @@ class Scrollnav extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'nav_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-scrollnav ul li > a',
@@ -526,7 +523,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'nav_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -546,7 +543,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'nav_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -558,7 +555,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'nav_margin',
 			[ 
-				'label'      => __( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => __( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -571,7 +568,7 @@ class Scrollnav extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'nav_typography',
-				'label'    => __( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => __( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-scrollnav ul li > a',
 			]
 		);
@@ -579,7 +576,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_icon_heading',
 			[ 
-				'label'     => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -588,7 +585,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_icon_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li > a span' => 'color: {{VALUE}} !important;',
@@ -600,7 +597,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'nav_icon_size',
 			[ 
-				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Size', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li > a span' => 'font-size: {{SIZE}}px;',
@@ -613,14 +610,14 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_tab(
 			'tab_nav_hover',
 			[ 
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'navbar_hover_style_color',
 			[ 
-				'label'     => __( 'Style Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Style Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-navbar-nav > li:hover > a:before' => 'background-color: {{VALUE}};',
@@ -635,7 +632,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_hover_color',
 			[ 
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li > a:hover' => 'color: {{VALUE}};',
@@ -646,7 +643,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_hover_background_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li > a:hover' => 'background-color: {{VALUE}};',
@@ -657,7 +654,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_hover_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'nav_border_border!' => '',
@@ -671,7 +668,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_icon_hover_heading',
 			[ 
-				'label'     => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -680,7 +677,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_icon_hover_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li > a:hover span' => 'color: {{VALUE}} !important;',
@@ -694,14 +691,14 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_tab(
 			'tab_nav_active',
 			[ 
-				'label' => __( 'Active', 'bdthemes-element-pack' ),
+				'label' => __( 'Active', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'navbar_active_style_color',
 			[ 
-				'label'     => __( 'Style Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Style Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-navbar-nav > li.bdt-active > a:before' => 'background-color: {{VALUE}};',
@@ -716,7 +713,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_active_color',
 			[ 
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li.bdt-active > a' => 'color: {{VALUE}};',
@@ -727,7 +724,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_active_background_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li.bdt-active > a' => 'background-color: {{VALUE}};',
@@ -738,7 +735,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_active_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'nav_border_border!' => '',
@@ -752,7 +749,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_icon_active_heading',
 			[ 
-				'label'     => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -761,7 +758,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'nav_icon_active_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav ul li.bdt-active > a span' => 'color: {{VALUE}} !important;',
@@ -779,7 +776,7 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_section(
 			'section_style_dot_nav',
 			[ 
-				'label'     => __( 'Dot Nav', 'bdthemes-element-pack' ),
+				'label'     => __( 'Dot Nav', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'nav_style' => 'dot',
@@ -792,14 +789,14 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dot_nav_normal',
 			[ 
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dot_nav_size',
 			[ 
-				'label'     => __( 'Dots Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Dots Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -816,7 +813,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dot_nav_background_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav .bdt-dotnav > li > a' => 'background-color: {{VALUE}};',
@@ -828,7 +825,7 @@ class Scrollnav extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'dot_nav_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-scrollnav .bdt-dotnav > li > a',
@@ -838,7 +835,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'dot_nav_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -858,7 +855,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'dot_nav_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -872,14 +869,14 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dot_nav_hover',
 			[ 
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dot_nav_hover_background_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav .bdt-dotnav > li > a:hover' => 'background-color: {{VALUE}};',
@@ -890,7 +887,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dot_nav_hover_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'dot_nav_border_border!' => '',
@@ -906,14 +903,14 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dot_nav_active',
 			[ 
-				'label' => __( 'Active', 'bdthemes-element-pack' ),
+				'label' => __( 'Active', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dot_nav_active_background_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-scrollnav .bdt-dotnav > li.bdt-active > a' => 'background-color: {{VALUE}};',
@@ -924,7 +921,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dot_nav_active_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'dot_nav_border_border!' => '',
@@ -944,7 +941,7 @@ class Scrollnav extends Module_Base {
 		$this->start_controls_section(
 			'dotnav_tooltip_styles_tab',
 			[ 
-				'label'     => __( 'Tooltip', 'bdthemes-element-pack' ),
+				'label'     => __( 'Tooltip', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'nav_style' => 'dot',
@@ -955,7 +952,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'dotnav_tooltip_width',
 			[ 
-				'label'      => __( 'Width', 'bdthemes-element-pack' ),
+				'label'      => __( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 
 					'px', 'em',
@@ -983,7 +980,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_color',
 			[ 
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"]' => 'color: {{VALUE}}',
@@ -994,20 +991,20 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_text_align',
 			[ 
-				'label'     => __( 'Text Alignment', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'center',
 				'options'   => [ 
 					'left'   => [ 
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [ 
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [ 
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -1028,7 +1025,7 @@ class Scrollnav extends Module_Base {
 		$this->add_control(
 			'dotnav_tooltip_arrow_color',
 			[ 
-				'label'     => __( 'Arrow Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Arrow Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'.tippy-box[data-theme="bdt-tippy-{{ID}}"] .tippy-arrow' => 'border-left-color: {{VALUE}}',
@@ -1047,7 +1044,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'dotnav_tooltip_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1060,7 +1057,7 @@ class Scrollnav extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'dotnav_tooltip_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '.tippy-box[data-theme="bdt-tippy-{{ID}}"]',
@@ -1070,7 +1067,7 @@ class Scrollnav extends Module_Base {
 		$this->add_responsive_control(
 			'dotnav_tooltip_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 

@@ -30,16 +30,16 @@ class WPML_ElementPack_Image_Accordion extends WPML_Module_With_Items {
 		switch( $field ) {
 
 			case 'image_accordion_title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'image_accordion_sub_title':
-				return esc_html__( 'Sub Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Sub Title', 'bdthemes-element-pack-lite' );
 
 			case 'image_accordion_text':
-				return esc_html__( 'Content', 'bdthemes-element-pack' );
+				return esc_html__( 'Content', 'bdthemes-element-pack-lite' );
 
 			case 'image_accordion_button':
-				return esc_html__( 'Button Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Button Text', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

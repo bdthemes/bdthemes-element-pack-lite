@@ -21,7 +21,7 @@ class Brand_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Brand Grid', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Brand Grid', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -105,7 +105,7 @@ class Brand_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_additional_settings',
 			[
-				'label' => esc_html__( 'Additional Settings', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Settings', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -113,7 +113,7 @@ class Brand_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[
-				'label'           => esc_html__( 'Columns', 'bdthemes-element-pack' ),
+				'label'           => esc_html__( 'Columns', 'bdthemes-element-pack-lite' ),
 				'type'            => Controls_Manager::SELECT,
 				'desktop_default' => 3,
 				'tablet_default'  => 2,
@@ -135,7 +135,7 @@ class Brand_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'column_gap',
 			[
-				'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 20,
@@ -149,7 +149,7 @@ class Brand_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'row_gap',
 			[
-				'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 20,

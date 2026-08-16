@@ -1,324 +1,76 @@
-=== Element Pack Addons for Elementor - Elementor Widgets, Elementor Templates, Elementor Addons ===
+=== Element Pack Lite - Addons for Elementor ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik, shmusuf, arafatakashakku, shaikatazim, shamim496
 Donate link: http://bdthemes.com/
-Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets, elementor extensions, elementor addon, elementor widget, woocommerce elementor, addons
-Requires at least: 5.0.0
-Tested up to: 7.0.3
+Tags: elementor addons, elementor widgets, elementor templates, elementor extensions, woocommerce
+Requires at least: 6.8
+Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.18
+Stable tag: 8.7.19
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
 Elementor tested up to: 4.2.2
 
 
-Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
+Elementor addons with 300+ widgets, WooCommerce elements, ready templates, mega menu and header footer builder.
 
 == Description ==
 
-Element Pack is a powerful Elementor addon and Elementor widget library that extends the Elementor page builder with templates and Elementor extensions.
+Element Pack Lite is a powerful Elementor addon that extends the Elementor page builder with advanced widgets, ready-made templates and design extensions.
 
-With Element Pack, you can build professional WordPress websites using powerful widgets for Elementor, WooCommerce Elementor elements, Elementor templates and advanced design elements.
+Build professional WordPress websites without writing code, using widgets that work directly inside the Elementor editor.
 
-Element Pack includes 300+ widgets and extensions and thousands of ready-made Elementor templates.
+**[Get Element Pack](https://elementpack.pro)**
 
-**[Get Element Pack Now for Free](https://elementpack.pro)**.
+= Advanced Elementor widgets =
 
-## Advanced Widgets for Elementor
+A large collection of widgets for landing pages, business sites, portfolios and blogs:
 
-Element Pack, one of the best essential addons for Elementor, includes a powerful collection of advanced widgets for Elementor that help you design professional websites without writing code.
+* Pricing Table, Testimonial and Review Card
+* Image Gallery, Image Accordion and Image Compare
+* Team Member, Logo Grid and Brand Grid
+* Countdown Timer, Business Hours and Progress Pie
+* Social Feed, Twitter Grid and Facebook Feed
+* Post Grid, Slider and Carousel widgets
 
-These Elementor widgets extend the Elementor page builder with modern design elements and dynamic content options. Whether you are building landing pages, business websites, portfolios, or blogs, these widgets make it easy to create beautiful layouts inside Elementor.
+= WooCommerce widgets =
 
-Popular widgets for Elementor included in Element Pack:
+Design fully customised shops inside Elementor:
 
-- Pricing Table widget
-- Testimonial widget
-- Image Gallery widget
-- Team Member widget
-- Logo Grid widget
-- Countdown Timer widget
-- Social Feed widget
-- Blog Post widget
+* Product Grid and Product Carousel
+* Product Category and Product Gallery
+* Add to Cart and Product Slider
 
-With these advanced Elementor widgets, you can design fully customized pages using the Elementor editor.
+= Form integrations =
 
-## WooCommerce Elementor Widgets
+Style and display forms from the plugins you already use:
 
-Being the best addons for Elementor, Element Pack also provides powerful WooCommerce Elementor widgets that help you design fully customized online stores.
+* Contact Form 7, WPForms and Ninja Forms
+* Fluent Forms, Formidable Forms and Forminator
+* Everest Forms and weForms
 
-Using these widgets, you can create beautiful product layouts, showcase featured products and design modern shop pages directly in the Elementor page builder.
+= Elementor extensions =
 
-Popular WooCommerce Elementor widgets include:
+Extensions that add capability to any Elementor element:
 
-- Product Grid widget
-- Product Carousel widget
-- Product Category widget
-- Add to Cart widget
-- Product Gallery widget
-- Product Slider widget
+* Wrapper Link, Tooltip and Floating Effects
+* Cursor Effects, Grid Line and Backdrop Filter
+* Equal Height, Transform Effects and Reading Progress
+* Dark Mode, Cookie Consent and Scroll Button
 
-These WooCommerce widgets for Elementor allow you to build highly engaging e-commerce pages without additional plugins.
+= Ready-made templates =
 
-## Elementor Template Library
+Import complete page and section templates from the built-in template library and customise everything in Elementor.
 
-Element Pack includes a large Elementor template library that allows you to quickly create professional websites.
+= Third-party integrations =
 
-The template library provides ready-made Elementor templates that can be imported directly into your page builder.
+Widgets for Tutor LMS, GiveWP, Events Calendar and more, so your existing plugins fit your design.
 
-400+ Available templates include:
+= Documentation and support =
 
-- Landing page templates
-- Business website templates
-- Portfolio templates
-- Blog page templates
-- WooCommerce store templates
+Full documentation is available at [elementpack.pro](https://elementpack.pro). For help, visit our [support centre](https://bdthemes.com/support/).
 
-With this Elementor template library, you can launch websites faster by importing and customizing professionally designed layouts.
-
-## Mega Menu Builder for Elementor
-
-Element Pack includes an advanced Mega Menu builder for Elementor that allows you to create powerful navigation menus.
-
-Using the Elementor Mega Menu builder, you can design fully customizable menus with images, icons, widgets and dynamic content.
-
-Features include:
-
-- Custom multi-column navigation menus
-- Visual menu builder inside Elementor
-- Dropdown mega menus
-- Responsive navigation layouts
-
-This Mega Menu for Elementor helps you build modern navigation systems that improve website usability and design.
-
-## 250+ Header & Footer Builder for Elementor
-
-Element Pack includes a flexible Header and Footer builder for Elementor that allows you to design fully customized website headers and footers.
-
-With the Elementor header builder you can create:
-
-- Custom website headers
-- Navigation menus
-- Sticky headers
-- Responsive header layouts
-
-Using the Elementor footer builder, you can design advanced footer sections including widgets, menus and dynamic content.
-
-This Header & Footer builder for Elementor gives you complete control over your website layout without editing theme files.
-
-## Elementor Extensions & Modules
-
-Element Pack also includes powerful Elementor extensions and modules that enhance the capabilities of the Elementor page builder.
-
-These extensions add advanced design features, animations and interactive effects to your Elementor websites.
-
-Popular extensions include:
-
-- Sticky content modules
-- Parallax effects
-- Advanced animations
-- Background effects
-- Motion design tools
-
-These Elementor extensions help designers create modern websites with interactive layouts and advanced visual effects.
-
-## Widgets, Extensions & Templates for Elementor
-
-This addons for Elementor is designed to be a complete toolkit for Elementor users, offering a large collection of widgets, templates and extensions that help you build professional websites faster.
-
-With Element Pack you get access to:
-
-- 300+ Elementor widgets and extensions
-- 2,700+ ready-made Elementor templates and blocks
-- Advanced WooCommerce widgets for Elementor
-- Powerful navigation and mega menu builder
-- Flexible header and footer builder
-- Modern animations, effects and interactive elements
-
-This powerful combination makes Element Pack one of the most comprehensive Elementor addon solutions for designers, developers and agencies.
-
-Whether you are building landing pages, e-commerce websites, portfolios, or business websites, Element Pack provides everything you need to extend the Elementor page builder.
-
-## Deep Integrations with Your Favorite WordPress Plugins
-
-Element Pack plays incredibly well with the plugins you already use. Instead of wrestling with custom code, use our dedicated Elementor widgets to style and display content from popular third-party plugins instantly:
-
-- **Form Builders:** Style your layouts effortlessly with dedicated widgets for Forminator Forms, Contact Form 7 and Ninja Forms.
-- **LMS & Education:** Create beautiful e-learning platforms using our custom Tutor LMS Course Grid and Tutor LMS Course Carousel widgets.
-- **Donations & Fundraising:** Build powerful fundraising pages with unlocked free widgets for GiveWP, including Give Donation History, Donor Wall, Goal and Form grids.
-
-## Explore Element Pack Features in Action
-
-Element Pack includes powerful visual tools that integrate seamlessly with the Elementor editor. The screenshots below highlight some of the key features of the plugin.
-
-- ### Advanced Elementor Widgets Panel:
-
-Explore a large collection of Elementor widgets that help you build modern layouts directly inside the Elementor editor.  [Check All the Widgets](https://www.elementpack.pro/widgets/)
-
-- ### WooCommerce Elementor Widgets:
-
-Design beautiful ecommerce pages with product grids, product sliders and advanced WooCommerce widgets.  [Check all WooCommerce Elementor Elements](https://www.elementpack.pro/widgets/)
-
-- ### Elementor Template Library:
-
-Import ready-made premium Elementor templates and sections to build websites faster.  [Check all the templates with Live Demo](https://www.elementpack.pro/ready-templates/ready-blocks/#ready-block)
-
-- ### Mega Menu Builder for Elementor:
-
-Create powerful navigation menus with multi-column layouts, icons and dynamic content.
-
-- ### Header & Footer Builder for Elementor:
-
-Design custom headers and footers using the Elementor visual builder.  [Check all the templates with Live Demo](https://www.elementpack.pro/ready-templates/ready-blocks/#ready-block)
-
-- ### Advanced Design Widgets and Effects:
-
-Enhance your website with animations, motion effects and interactive design elements.
-
-## Why Elementor Users Choose Element Pack
-
-Thousands of website creators rely on Element Pack to extend the power of Elementor.
-
-With its large collection of widgets for Elementor, ready-to-use Elementor templates and advanced design tools, Element Pack helps users build professional websites without coding.
-
-Why users choose Element Pack:
-
-- Large collection of advanced Elementor widgets
-- Powerful WooCommerce widgets for Elementor
-- Huge Elementor template library
-- Flexible navigation and layout builders
-- Lightweight and optimized performance
-- Regular updates and feature improvements
-
-Whether you are a beginner or an experienced developer, Element Pack makes it easier to build modern websites with Elementor.
-
-## Optimized for Speed and Performance
-
-Worried about site bloat? Element Pack is engineered with a completely modular architecture. You have total control over your asset loading, ensuring your WordPress site stays lightning-fast.
-
-- **Asset Manager Dashboard:** Deactivate any Elementor widget or extension you aren't using with a single click. Unused assets are never loaded on your frontend.
-- **Clean Code Architecture:** Built following strict WordPress and Elementor development standards to keep page loading times crisp and server requests minimal.
-- **Asynchronous Loading:** Scripts and styles are only loaded on pages where the specific widgets are actually deployed.
-
-## Get Started with Element Pack in 3 Simple Steps
-
-1. **Activate the Plugin:** Install and activate Element Pack Lite via your WordPress dashboard.
-2. **Run the Setup Wizard:** Follow our automated onboarding wizard to easily configure your initial settings, dashboard and baseline preferences.
-3. **Drag and Drop in Elementor:** Open any page inside the Elementor editor, scroll to the Element Pack sections and start building with 300+ new options!
-
-Start building faster with Element Pack and unlock new design possibilities for your Elementor websites.
-
-**[Element Pack Demo](https://www.elementpack.pro/widgets/)** | **[Official Websites](https://elementpack.pro)** | **[Knowledge base](https://bdthemes.com/all-knowledge-base-of-element-pack/)** | **[VideoTutorial](https://youtube.com/playlist?list=PLP0S85GEw7DOJf_cbgUIL20qqwqb5x8KA&si=bR91QQYCjeAtG9vC)**
-
-***â€œI found Element Pack Pro to be brimming with cutting-edge design tools and widgets to please both designers and end users. Plus, a user-friendly dashboard makes the whole process of putting together a robust and modern site with WordPress and Elementor a breezeâ€*** - [WP Mayor](https://wpmayor.com/element-pack-pro-review/).
-
-***"An excellent pack of tools to customize your website easily"*** - G2
-
-https://youtu.be/Shxejp20pW0?si=Md3CwBSHS6HRR_Lt
-
-## Supercharge your Elementor experience with Element Pack the most comprehensive Elementor addon.
-
-### 300+ Free & Premium Elementor Widgets to Simplify and Improve Your Design
-
-Enhance your Elementor site with Element Pack's powerful Elementor widgets. Get creative, improve user experience and effortlessly build stunning websites.
-
-**[Image Hover Effects](https://www.elementpack.pro/demo/element/image-hover-effects/)** Enhance images with animations on hover to boost user engagement.[New] [Free]
-
-**[Cursors Effects](https://www.elementpack.pro/demo/element/cursor-effects/)** Transform cursor appearance for a visually appealing and interactive experience.[New] [Free]
-
-**[Content Switcher](https://www.elementpack.pro/demo/element/content-switcher/)** Toggle between content sections to simplify navigation and display information.[New] [Free]
-
-**[Document Viewer](https://www.elementpack.pro/demo/element/document-viewer/)** Display documents directly on websites for convenient, in-browser access.[New] [Free]
-
-**[Interactive Card](https://www.elementpack.pro/demo/element/interactive-card/)** Present information with clickable cards to organize and engage users.[New] [Free]
-
-**[Social Share](https://www.elementpack.pro/demo/element/social-share/)** Add sharing buttons to expand your content's reach instantly.[New] [Free]
-
-**[Forminator Forms](https://www.elementpack.pro/demo/element/forminator-form/)** Create customizable forms to efficiently collect user data.[New] [Free]
-
-**[Scroll Navigation](https://www.elementpack.pro/demo/element/scrollnav/)** Guide users through content with scrolling menus for better navigation.[New] [Free]
-
-**[Dynamic Content](https://www.elementpack.pro/demo/element/dynamic-content/)** Display automatically updating content to personalize user experiences.[New] [Pro]
-
-**[Background Image Parallax](https://www.elementpack.pro/demo/element/background-image-parallax/)** Create depth with moving backgrounds for a visually modern design.[New] [Pro]
-
-**[Testimonial Grid](https://www.elementpack.pro/demo/element/testimonial-grid/)** Display client reviews in a structured and engaging layout. [Free]
-
-**[Navbar](https://www.elementpack.pro/demo/element/navbar/)** Create a responsive and user-friendly navigation bar. [Free]
-
-**[Search](https://www.elementpack.pro/demo/element/search/)** Add a search bar to help visitors find content easily. [Free]
-
-**[Product Carousel](https://www.elementpack.pro/demo/element/product-carousel/)** Showcase your WooCommerce products in a stylish slider. [Free]
-
-**[Floating Effects](https://www.elementpack.pro/demo/element/floating-effects/)** Add animations to make elements stand out. [Free]
-
-**[Creative Button](https://www.elementpack.pro/demo/element/creative-button)** Design eye-catching buttons with unique effects. [Free]
-
-**[Static Carousel](https://www.elementpack.pro/demo/element/static-carousel/)** Display images, text, or content in a static slider. [Free]
-
-**[Featured Box](https://www.elementpack.pro/demo/element/featured-box/)** Highlight key features or services attractively. [Free]
-
-**[Call Out](https://www.elementpack.pro/demo/element/call-out/)** Grab attention with standout messages or promotions. [Free]
-
-**[Mega Menu](https://www.elementpack.pro/demo/element/mega-menu/)** Build advanced and multi-level menus for better navigation. [Pro]
-
-**[Image Hover Effects](https://www.elementpack.pro/demo/element/image-hover-effects/)** Add stunning hover animations to your images. [Pro]
-
-**[Chart](https://www.elementpack.pro/demo/element/charts/)** Visualize data with interactive charts and graphs. [Pro]
-
-**[Widget Tooltip](https://www.elementpack.pro/demo/element/widget-tooltip/)** Show helpful tips when users hover over elements. [Pro]
-
-**[Vertical Menu](https://www.elementpack.pro/demo/element/vertical-menu/)** Create side menus for easy browsing. [Pro]
-
-**[Portfolio Gallery](https://www.elementpack.pro/demo/element/portfolio-gallery/)** Display projects in a beautiful grid layout. [Pro]
-
- [Check All the Widgets](https://www.elementpack.pro/widgets/)
-
-## What's More
-
-**1. Seamless Easy Digital Downloads Integration for Your Store:**
-
-Get all the features of Easy Digital Downloads (EDD) with Element Pack's essential widgets. Whether you're selling digital products, managing customer accounts, or showcasing reviews, these widgets make everything easier and more engaging.
-
-**2. Live Copy-Paste Save Time with Instant Design Replication:**
-
-You can copy any Elementor section or widget from one website to another with just one click. No need to recreate designs just copy, paste and go!
-
-**3. Dynamic Grid & Carousel Showcase Your Content Beautifully**
-
-Easily display posts, products, or custom content in a stylish grid or carousel. Keep your visitors engaged with interactive layouts.
-
-**4. Comparison List Help Your Visitors Make Better Choices**
-
-You can let users compare multiple products, services, or features side by side. Perfect for eCommerce and pricing tables.
-
-**5.Visibility Controls Display What Matters, When It Matters**
-
-Take full control of your content by choosing who sees what based on device type, user roles, or conditions. Customize your site for the right audience.
-
-**6. Notation Make Your Content More User-Friendly**
-
-Highlight important sections with notes, labels, or tooltips. Guide your users and make your site easier to navigate.
-
-**7. iFrame Embed External Content Seamlessly**
-
-You can display external websites, videos, or custom content inside your pages without affecting design or performance.
-
-**8. Scroll Box Keep Long Content Organized**
-
-Wrap large text sections inside a scrollable box to keep your pages clean and easy to read. Ideal for FAQs, policies, or detailed information.
-
-**9. Sub Menu Improve Your Site Navigation**
-
-Create multi-level submenus to help visitors navigate your site effortlessly. Keep your menus structured and user-friendly.
-
-With Element Pack, you have everything you need to build a dynamic, engaging and user-friendly website!
-
-**[Download Element Pack Free](https://www.elementpack.pro/)**
-
-**[PURCHASE ELEMENT PACK PRO FROM OUR WEBSITE](https://www.elementpack.pro/pricing/ )**
-
-== Common Issues and Solutions: ðŸ£ ==
+== Common Issues and Solutions: 🐣 ==
 
 * **Editor fails to load**
   Ans. It is due to your server PHP setting. You can increase PHP memory limit from wp-config.php file or php.ini file
@@ -327,9 +79,9 @@ With Element Pack, you have everything you need to build a dynamic, engaging and
 == Need Help? ==
 
 Have a feature suggestion? Share it with us on our [Feature Suggestion Page](https://feedback.bdthemes.com/b/6vr2250l/feature-requests/idea/new).
-For assistance, [Contact us](https://bdthemes.com/support/) ðŸ’Œ or check out our Tutorials.
+For assistance, [Contact us](https://bdthemes.com/support/) 💌 or check out our Tutorials.
 
-== Checkout our other Plugins ðŸ‘‘ ==
+== Checkout our other Plugins 👑 ==
 
 Explore the best free addons for Elementor and Gutenberg to boost your site with advanced blocks, sliders and eCommerce tools.
 
@@ -350,6 +102,158 @@ Explore the best free addons for Elementor and Gutenberg to boost your site with
 * **[Swift Checkout for WooCommerce](https://wordpress.org/plugins/swift-checkout/)** - Simplify the WooCommerce checkout process to improve user experience and boost conversion rates.
 
 Visit [BdThemes](https://bdthemes.com/) to learn about our services, Elementor page builder-based products, informative blogs and documentation.
+
+== External services ==
+
+This plugin relies on the third-party services listed below. Each entry states what the
+service is used for, what data is sent and when it is sent.
+
+= Element Pack template library (BdThemes) =
+Used to list and import the ready-made Elementor templates offered inside the editor.
+Data sent: when a logged-in administrator opens the template library or imports a template,
+the plugin requests the template index and the selected template's JSON from
+elementpack.pro. The setup wizard's starter kits are downloaded the same way, from
+templates.elementpack.pro, when an administrator chooses to import one. No site content,
+user data or credentials are transmitted.
+Service provided by BdThemes.
+Terms: https://elementpack.pro/terms-and-conditions/
+Privacy Policy: https://elementpack.pro/privacy-policy/
+
+= BdThemes product feed =
+Used to display BdThemes product news on the plugin's own admin dashboard page.
+Data sent: a plain read request to dashboard.bdthemes.io when an administrator loads the
+Element Pack settings screen. No personal data is transmitted.
+Service provided by BdThemes.
+Terms: https://elementpack.pro/terms-and-conditions/
+Privacy Policy: https://bdthemes.com/privacy-policy/
+
+= Google reCAPTCHA =
+Used to verify form submissions in the Contact Form and User Register widgets, and only
+when you have entered reCAPTCHA keys and enabled the option on the widget.
+Data sent: the visitor's reCAPTCHA response token, your reCAPTCHA secret key and the
+visitor's IP address are sent to google.com when a protected form is submitted.
+Service provided by Google.
+Terms: https://policies.google.com/terms
+Privacy Policy: https://policies.google.com/privacy
+
+= Google Docs Viewer =
+Used by the Document Viewer widget to render documents that cannot be displayed natively.
+Data sent: the URL of the document you configure is embedded in an iframe pointing at
+docs.google.com, so the document URL is disclosed to Google and the visitor's browser
+contacts Google directly when the page is viewed.
+Service provided by Google.
+Terms: https://policies.google.com/terms
+Privacy Policy: https://policies.google.com/privacy
+
+= X (Twitter) API =
+Used by the Twitter Grid widget to fetch tweets for a configured account.
+Data sent: your Twitter API credentials and the configured screen name are sent to
+api.twitter.com when the widget renders and its cache has expired. Used only when you
+have entered Twitter API credentials.
+Service provided by X Corp.
+Terms: https://x.com/en/tos
+Privacy Policy: https://x.com/en/privacy
+
+= Facebook Graph API =
+Used by the Facebook Feed widget to fetch posts and avatars for a configured page.
+Data sent: your Facebook access token and the configured page ID are sent to
+graph.facebook.com when the widget renders and its cache has expired. Used only when you
+have entered a Facebook access token.
+Service provided by Meta Platforms.
+Terms: https://www.facebook.com/terms.php
+Privacy Policy: https://www.facebook.com/privacy/policy/
+
+= Mapbox =
+Used by the Open Street Map widget to load map tiles, and only when you have entered a
+Mapbox access token.
+Data sent: the visitor's browser requests map tiles from api.mapbox.com using your access
+token when a page containing the map is viewed.
+Service provided by Mapbox.
+Terms: https://www.mapbox.com/legal/tos
+Privacy Policy: https://www.mapbox.com/legal/privacy
+
+= CoinGecko =
+Used to retrieve cryptocurrency market data for the crypto currency feature.
+Data sent: the requested currency, coin identifiers and paging options are sent to
+api.coingecko.com when the data is refreshed. No personal data is transmitted.
+Service provided by CoinGecko.
+Terms: https://www.coingecko.com/en/terms
+Privacy Policy: https://www.coingecko.com/en/privacy
+
+= Calendly =
+Used by the Calendly widget to embed a scheduling page.
+Data sent: the Calendly script is loaded from calendly.com and the visitor's browser
+contacts Calendly directly when a page containing the widget is viewed.
+Service provided by Calendly.
+Terms: https://calendly.com/legal
+Privacy Policy: https://calendly.com/privacy
+
+= OpenStreetMap =
+Used by the Open Street Map widget to load map tiles when no Mapbox token is configured.
+Data sent: the visitor's browser requests map tiles directly from openstreetmap.org when a
+page containing the map is viewed.
+Service provided by the OpenStreetMap Foundation.
+Terms: https://osmfoundation.org/wiki/Terms_of_Use
+Privacy Policy: https://osmfoundation.org/wiki/Privacy_Policy
+
+= Facebook JavaScript SDK =
+Used by the Facebook access-token generator in the plugin's admin settings, so an
+administrator can obtain a token for the Facebook Feed widget.
+Data sent: the Facebook SDK is loaded from connect.facebook.net and the administrator's
+browser communicates with Facebook only while that admin screen is open.
+Service provided by Meta Platforms.
+Terms: https://www.facebook.com/terms.php
+Privacy Policy: https://www.facebook.com/privacy/policy/
+
+= Google Chart API (QR codes) =
+Used by the Social Share widget to render a QR code for the current page when the QR
+share option is enabled.
+Data sent: the URL being shared is sent to chart.apis.google.com to generate the QR image.
+Service provided by Google.
+Terms: https://policies.google.com/terms
+Privacy Policy: https://policies.google.com/privacy
+
+= Social share counters =
+Used by the Social Share widget, and only when the share-counter option is enabled for a
+network. The counter is not shown by default.
+Data sent: the URL of the page being viewed is sent to that network's public share-count
+endpoint from the visitor's browser when the page loads. No personal data is transmitted.
+Networks with share counters, and their legal pages:
+* Facebook - https://www.facebook.com/terms.php | https://www.facebook.com/privacy/policy/
+* LinkedIn - https://www.linkedin.com/legal/user-agreement | https://www.linkedin.com/legal/privacy-policy
+* Pinterest - https://policy.pinterest.com/terms-of-service | https://policy.pinterest.com/privacy-policy
+* Tumblr - https://www.tumblr.com/policy/terms-of-service | https://www.tumblr.com/privacy_policy
+* Buffer - https://buffer.com/legal | https://buffer.com/privacy
+* Pocket - https://getpocket.com/tos | https://www.mozilla.org/privacy/
+* VK - https://vk.com/terms | https://vk.com/privacy
+* OK - https://ok.ru/regulations
+* Mail.Ru - https://help.mail.ru/legal/terms/common/ua | https://help.mail.ru/legal/terms/common/privacy
+
+== Source code ==
+
+The human-readable source for this plugin, together with the build tooling used to
+generate the minified assets in assets/js and assets/css, is publicly available at:
+https://github.com/bdthemes/bdthemes-element-pack-lite
+
+This plugin bundles the following third-party libraries, unmodified, under their own
+licences. Each is the upstream distribution of the named project:
+
+* bdt-uikit 3.21.7 (UIkit) - https://getuikit.com/
+* Leaflet - https://leafletjs.com/
+* goodshare.js 4.1.2 - https://github.com/artemsemkin/goodshare.js
+* Popper - https://popper.js.org/
+* Tippy.js - https://atomiks.github.io/tippyjs/
+* anime.js 3.2.1 - https://animejs.com/
+* Chart.js - https://www.chartjs.org/
+* cookieconsent 3.1.0 - https://github.com/osano/cookieconsent
+* vanilla-tilt.js - https://micku7zu.github.io/vanilla-tilt.js/
+* image-compare-viewer - https://github.com/kylewetton/image-compare-viewer
+* parallax.js - https://matthew.wagerfield.com/parallax/
+* Granim.js - https://sarcadass.github.io/granim.js/
+* ztext.js - https://bennettfeely.com/ztext/
+* Minify (matthiasmullie/minify) - https://github.com/matthiasmullie/minify
+* TwitterOAuth - https://github.com/abraham/twitteroauth
+* Parsedown - https://parsedown.org/
 
 == Installation ==
 
@@ -377,6 +281,26 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Widgets List
 
 == Changelog ==
+
+= 8.7.19 [14th August 2026] =
+
+* Removed: Custom CSS / JS module and the site-wide custom code editors
+* Removed: White Label settings and the now-empty Extra Options screen
+* Removed: Agentic AI Angie integration notice
+* Removed: Editor control-lock system; every previously locked control and option is now fully available
+* Removed: GSAP smooth cursor animation option, along with its external CDN dependency
+* Removed: Bundled starter-kit archives; the setup wizard now downloads them on demand
+* Removed: Unused editor template-library request handlers
+* Security: Added nonce and capability checks to the editor template-library AJAX endpoints
+* Security: Sanitized remaining request and server input, including the CoinGecko and OAuth paths
+* Security: Escaped settings-screen output and switched JSON responses to wp_json_encode()
+* Security: Restricted the feedback collector to writing its own options
+* Fixed: Text domain now matches the plugin slug
+* Fixed: Removed deprecated openssl_free_key() calls
+* Fixed: Balanced the output buffer in the Rooten shortcode column
+* Fixed: Security advisory notice no longer shows on sites with no findings
+* Updated: readme documents every external service, bundled library and where the source lives
+* Updated: Requires at least raised to WordPress 6.8, matching the Elementor dependency
 
 = 8.7.18 [13th August 2026] =
 

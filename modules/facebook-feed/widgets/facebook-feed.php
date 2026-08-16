@@ -17,7 +17,7 @@ class Facebook_Feed extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Facebook Feed', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Facebook Feed', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {

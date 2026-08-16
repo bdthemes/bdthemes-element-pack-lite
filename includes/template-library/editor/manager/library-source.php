@@ -16,7 +16,7 @@ class Library_Source extends Source_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Element Pack Library', 'bdthemes-element-pack' );
+		return esc_html__( 'Element Pack Library', 'bdthemes-element-pack-lite' );
 	}
 
 	public function register_data() {}
@@ -184,7 +184,7 @@ class Library_Source extends Source_Base {
 			$data = json_decode( $data, true );
 
 			if ( empty( $data ) || empty( $data['content'] ) ) {
-				throw new \Exception( esc_html__( 'Template does not have any content', 'bdthemes-element-pack' ) );
+				throw new \Exception( esc_html__( 'Template does not have any content', 'bdthemes-element-pack-lite' ) );
 			}
 
 			$progress->update( 'preparing', 8 );

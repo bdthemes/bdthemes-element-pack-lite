@@ -23,7 +23,7 @@ class Business_Hours extends Module_Base
 
     public function get_title()
     {
-        return BDTEP . esc_html__('Business Hours', 'bdthemes-element-pack');
+        return BDTEP . esc_html__('Business Hours', 'bdthemes-element-pack-lite');
     }
 
     public function get_icon()
@@ -79,18 +79,18 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_business_houes_layout',
             [
-                'label' => esc_html__('Layout', 'bdthemes-element-pack'),
+                'label' => esc_html__('Layout', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'business_hour_style',
             [
-                'label'     => esc_html__('Style', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Style', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'options'   => [
-                    'default' => esc_html__('Static', 'bdthemes-element-pack'),
-                    'dynamic' => esc_html__('Dynamic', 'bdthemes-element-pack'),
+                    'default' => esc_html__('Static', 'bdthemes-element-pack-lite'),
+                    'dynamic' => esc_html__('Dynamic', 'bdthemes-element-pack-lite'),
                 ],
                 'default'   => 'default',
             ]
@@ -99,11 +99,11 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'dynamic_timezone',
             [
-                'label'   => esc_html__('Timezone', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Timezone', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'default',
                 'options' => [
-                    'default' => esc_html__('Website Time', 'bdthemes-element-pack'),
+                    'default' => esc_html__('Website Time', 'bdthemes-element-pack-lite'),
                     '-0'      => 'UT or UTC - GMT -0',
                     '+1'      => 'CET - GMT+1',
                     '+2'      => 'EET - GMT+2',
@@ -131,7 +131,7 @@ class Business_Hours extends Module_Base
                     '-10'     => 'HST  - GMT-10',
                     '-11'     => 'NT  - GMT-11',
                     '-12'     => 'IDLW  - GMT-12',
-                    'custom'  => esc_html__('Custom', 'bdthemes-element-pack'),
+                    'custom'  => esc_html__('Custom', 'bdthemes-element-pack-lite'),
                 ],
                 'condition'        => [
                     'business_hour_style' => 'dynamic',
@@ -142,7 +142,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'custom_timezone_input',
             [
-                'label'       => esc_html__('Custom Timezone', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Custom Timezone', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
                 'default'     => '+6',
@@ -157,7 +157,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'show_header',
             [
-                'label' => esc_html__('Show Header', 'bdthemes-element-pack'),
+                'label' => esc_html__('Show Header', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SWITCHER,
             ]
         );
@@ -167,7 +167,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_business_days_layout',
             [
-                'label'     => esc_html__('Business Days & Times', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Business Days & Times', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'business_hour_style' => 'default',
                 ]
@@ -179,10 +179,10 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'enter_day',
             [
-                'label'       => esc_html__('Enter Day', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Enter Day', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => esc_html__('Monday', 'bdthemes-element-pack'),
+                'default'     => esc_html__('Monday', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true],
             ]
         );
@@ -190,10 +190,10 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'enter_time',
             [
-                'label'       => esc_html__('Enter Time', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Enter Time', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
+                'default'     => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true],
             ]
         );
@@ -201,7 +201,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'current_styling_heading',
             [
-                'label'     => esc_html__('Styling', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Styling', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -210,7 +210,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'highlight_this',
             [
-                'label'        => esc_html__('Style This Day', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Style This Day', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -221,7 +221,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'single_business_day_color',
             [
-                'label'     => esc_html__('Day Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Day Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -237,7 +237,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'single_business_timing_color',
             [
-                'label'     => esc_html__('Time Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Time Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -253,7 +253,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'single_business_background_color',
             [
-                'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-inner {{CURRENT_ITEM}}.border-divider' => 'background-color: {{VALUE}}',
@@ -272,32 +272,32 @@ class Business_Hours extends Module_Base
                 'fields'      => $repeater->get_controls(),
                 'default'     => [
                     [
-                        'enter_day'  => esc_html__('Monday', 'bdthemes-element-pack'),
-                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
+                        'enter_day'  => esc_html__('Monday', 'bdthemes-element-pack-lite'),
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack-lite'),
                     ],
                     [
-                        'enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack'),
-                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
+                        'enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack-lite'),
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack-lite'),
                     ],
                     [
-                        'enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack'),
-                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
+                        'enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack-lite'),
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack-lite'),
                     ],
                     [
-                        'enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack'),
-                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
+                        'enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack-lite'),
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack-lite'),
                     ],
                     [
-                        'enter_day'  => esc_html__('Friday', 'bdthemes-element-pack'),
-                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
+                        'enter_day'  => esc_html__('Friday', 'bdthemes-element-pack-lite'),
+                        'enter_time' => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack-lite'),
                     ],
                     [
-                        'enter_day'      => esc_html__('Saturday', 'bdthemes-element-pack'),
-                        'enter_time'     => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack'),
+                        'enter_day'      => esc_html__('Saturday', 'bdthemes-element-pack-lite'),
+                        'enter_time'     => esc_html__('10:00 AM - 6:00 PM', 'bdthemes-element-pack-lite'),
                     ],
                     [
-                        'enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack'),
-                        'enter_time'     => esc_html__('Closed', 'bdthemes-element-pack'),
+                        'enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack-lite'),
+                        'enter_time'     => esc_html__('Closed', 'bdthemes-element-pack-lite'),
                         'highlight_this' => 'yes',
                     ],
                 ],
@@ -310,7 +310,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_header',
             [
-                'label'     => esc_html__('Header', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Header', 'bdthemes-element-pack-lite'),
                 'tab'       => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'show_header' => 'yes'
@@ -321,7 +321,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'show_current_time',
             [
-                'label'   => esc_html__('Show Current Time', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Show Current Time', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes'
             ]
@@ -330,7 +330,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'show_current_date',
             [
-                'label'   => esc_html__('Show Current Date', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Show Current Date', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes'
             ]
@@ -339,23 +339,23 @@ class Business_Hours extends Module_Base
         $this->add_responsive_control(
             'bs_header_text_align',
             [
-                'label'   => __('Alignment', 'bdthemes-element-pack'),
+                'label'   => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                        'title' => __('Justified', 'bdthemes-element-pack'),
+                        'title' => __('Justified', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-justify',
                     ],
                 ],
@@ -373,7 +373,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_dynamic_repeater',
             [
-                'label' => __('Dynamic Days & Times', 'bdthemes-element-pack'),
+                'label' => __('Dynamic Days & Times', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'business_hour_style' => 'dynamic',
@@ -386,17 +386,17 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_enter_day',
             [
-                'label'   => esc_html__('Select Day', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Select Day', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
-                'default' => esc_html__('Monday', 'bdthemes-element-pack'),
+                'default' => esc_html__('Monday', 'bdthemes-element-pack-lite'),
                 'options' => [
-                    'Monday'    => esc_html__('Monday', 'bdthemes-element-pack'),
-                    'Tuesday'   => esc_html__('Tuesday', 'bdthemes-element-pack'),
-                    'Wednesday' => esc_html__('Wednesday', 'bdthemes-element-pack'),
-                    'Thursday'  => esc_html__('Thursday', 'bdthemes-element-pack'),
-                    'Friday'    => esc_html__('Friday', 'bdthemes-element-pack'),
-                    'Saturday'  => esc_html__('Saturday', 'bdthemes-element-pack'),
-                    'Sunday'    => esc_html__('Sunday', 'bdthemes-element-pack'),
+                    'Monday'    => esc_html__('Monday', 'bdthemes-element-pack-lite'),
+                    'Tuesday'   => esc_html__('Tuesday', 'bdthemes-element-pack-lite'),
+                    'Wednesday' => esc_html__('Wednesday', 'bdthemes-element-pack-lite'),
+                    'Thursday'  => esc_html__('Thursday', 'bdthemes-element-pack-lite'),
+                    'Friday'    => esc_html__('Friday', 'bdthemes-element-pack-lite'),
+                    'Saturday'  => esc_html__('Saturday', 'bdthemes-element-pack-lite'),
+                    'Sunday'    => esc_html__('Sunday', 'bdthemes-element-pack-lite'),
                 ],
             ]
         );
@@ -404,7 +404,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_enter_day_level',
             [
-                'label'       => esc_html__('Day Level', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Day Level', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true,],
             ]
@@ -413,10 +413,10 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_start_time',
             [
-                'label'       => esc_html__('Start Time', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Start Time', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                'placeholder' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
+                'default'     => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                'placeholder' => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'dynamic_close_this!' => 'yes',
@@ -427,10 +427,10 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_end_time',
             [
-                'label'       => esc_html__('End Time', 'bdthemes-element-pack'),
+                'label'       => esc_html__('End Time', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => esc_html__('05:00 PM', 'bdthemes-element-pack'),
-                'placeholder' => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                'default'     => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
+                'placeholder' => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'dynamic_close_this!' => 'yes',
@@ -441,7 +441,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_close_this',
             [
-                'label'        => esc_html__('Close This Day', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Close This Day', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -452,9 +452,9 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_close_text',
             [
-                'label'       => esc_html__('Close Level', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Close Level', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => __('Closed', 'bdthemes-element-pack'),
+                'default'     => __('Closed', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'dynamic_close_this' => 'yes',
@@ -465,7 +465,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_current_styling_heading',
             [
-                'label'     => esc_html__('Styling', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Styling', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -474,7 +474,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_highlight_this',
             [
-                'label'        => esc_html__('Style This Day', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Style This Day', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -485,7 +485,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_single_business_day_color',
             [
-                'label'     => esc_html__('Day Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Day Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -501,7 +501,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_single_business_timing_color',
             [
-                'label'     => esc_html__('Time Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Time Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#db6159',
                 'selectors' => [
@@ -517,7 +517,7 @@ class Business_Hours extends Module_Base
         $repeater->add_control(
             'dynamic_single_business_background_color',
             [
-                'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-inner {{CURRENT_ITEM}}.border-divider' => 'background-color: {{VALUE}}',
@@ -538,47 +538,47 @@ class Business_Hours extends Module_Base
                 'default'     => [
 
                     [
-                        'dynamic_enter_day'  => esc_html__('Monday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                        'dynamic_enter_day'  => esc_html__('Monday', 'bdthemes-element-pack-lite'),
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                        'dynamic_enter_day'  => esc_html__('Tuesday', 'bdthemes-element-pack-lite'),
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                        'dynamic_enter_day'  => esc_html__('Wednesday', 'bdthemes-element-pack-lite'),
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                        'dynamic_enter_day'  => esc_html__('Thursday', 'bdthemes-element-pack-lite'),
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__('Friday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                        'dynamic_enter_day'  => esc_html__('Friday', 'bdthemes-element-pack-lite'),
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                     ],
 
                     [
-                        'dynamic_enter_day'  => esc_html__('Saturday', 'bdthemes-element-pack'),
-                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                        'dynamic_enter_day'  => esc_html__('Saturday', 'bdthemes-element-pack-lite'),
+                        'dynamic_start_time' => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                        'dynamic_end_time'   => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                     ],
 
                     [
-                        'dynamic_enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack'),
-                        'dynamic_start_time'     => esc_html__('09:00 AM', 'bdthemes-element-pack'),
-                        'dynamic_end_time'       => esc_html__('05:00 PM', 'bdthemes-element-pack'),
+                        'dynamic_enter_day'      => esc_html__('Sunday', 'bdthemes-element-pack-lite'),
+                        'dynamic_start_time'     => esc_html__('09:00 AM', 'bdthemes-element-pack-lite'),
+                        'dynamic_end_time'       => esc_html__('05:00 PM', 'bdthemes-element-pack-lite'),
                         'dynamic_close_this'     => 'yes',
-                        'dynamic_close_text'     => esc_html__('Closed', 'bdthemes-element-pack'),
+                        'dynamic_close_text'     => esc_html__('Closed', 'bdthemes-element-pack-lite'),
                         'dynamic_highlight_this' => 'yes',
                     ],
                 ],
@@ -591,7 +591,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_dynamic_additional',
             [
-                'label' => __('Additional Options', 'bdthemes-element-pack'),
+                'label' => __('Additional Options', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'business_hour_style' => 'dynamic',
@@ -603,9 +603,9 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'dynamic_open_day',
             [
-                'label'       => esc_html__('Open Status', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Open Status', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
-                'default'     => __('Office Open. Right now we are available for service.', 'bdthemes-element-pack'),
+                'default'     => __('Office Open. Right now we are available for service.', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'business_hour_style' => 'dynamic',
@@ -616,9 +616,9 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'dynamic_close_day',
             [
-                'label'       => esc_html__('Close Status', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Close Status', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
-                'default'     => esc_html__('Office Closed. Right now we are not available.', 'bdthemes-element-pack'),
+                'default'     => esc_html__('Office Closed. Right now we are not available.', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'business_hour_style' => 'dynamic',
@@ -629,9 +629,9 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'dynamic_time_separator',
             [
-                'label'       => esc_html__('Separator', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Separator', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => esc_html__('-', 'bdthemes-element-pack'),
+                'default'     => esc_html__('-', 'bdthemes-element-pack-lite'),
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'business_hour_style' => 'dynamic',
@@ -649,7 +649,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'style_bs_header',
             [
-                'label' => esc_html__('Header', 'bdthemes-element-pack'),
+                'label' => esc_html__('Header', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_header' => 'yes'
@@ -669,7 +669,7 @@ class Business_Hours extends Module_Base
         $this->add_responsive_control(
             'bs_header_padding',
             [
-                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -681,7 +681,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'bs_header_current_time_heading',
             [
-                'label'     => esc_html__('Current Time', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Current Time', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -693,7 +693,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'current_time_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-current-time' => 'color: {{VALUE}};',
@@ -708,7 +708,7 @@ class Business_Hours extends Module_Base
             Group_Control_Text_Shadow::get_type(),
             [
                 'name'      => 'current_time_text_shadow',
-                'label'     => __('Text Shadow', 'bdthemes-element-pack'),
+                'label'     => __('Text Shadow', 'bdthemes-element-pack-lite'),
                 'selector'  => '{{WRAPPER}} .bdt-ep-business-hours-current-time',
                 'condition' => [
                     'show_current_time' => 'yes',
@@ -730,7 +730,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'bs_current_time_sapcing',
             [
-                'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
+                'label' => esc_html__('Spacing', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -749,7 +749,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'bs_header_current_date_heading',
             [
-                'label'     => esc_html__('Current Date', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Current Date', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -761,7 +761,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'current_date_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours-current-date' => 'color: {{VALUE}};',
@@ -776,7 +776,7 @@ class Business_Hours extends Module_Base
             Group_Control_Text_Shadow::get_type(),
             [
                 'name'      => 'current_date_text_shadow',
-                'label'     => __('Text Shadow', 'bdthemes-element-pack'),
+                'label'     => __('Text Shadow', 'bdthemes-element-pack-lite'),
                 'selector'  => '{{WRAPPER}} .bdt-ep-business-hours-current-date',
                 'condition' => [
                     'show_current_date' => 'yes',
@@ -798,7 +798,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'bs_current_date_sapcing',
             [
-                'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
+                'label' => esc_html__('Spacing', 'bdthemes-element-pack-lite'),
                 'type'  => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -819,7 +819,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_bs_general',
             [
-                'label' => esc_html__('General', 'bdthemes-element-pack'),
+                'label' => esc_html__('General', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -827,7 +827,7 @@ class Business_Hours extends Module_Base
         $this->add_responsive_control(
             'section_bs_list_padding',
             [
-                'label'      => esc_html__('Row Spacing', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Row Spacing', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'default'    => ['top' => 5, 'right' => 5, 'bottom' => 5, 'left' => 5],
@@ -840,7 +840,7 @@ class Business_Hours extends Module_Base
         $this->add_responsive_control(
             'bs_genarel_padding',
             [
-                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -854,7 +854,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_bs_divider',
             [
-                'label' => esc_html__('Divider', 'bdthemes-element-pack'),
+                'label' => esc_html__('Divider', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -862,7 +862,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'day_divider',
             [
-                'label'        => esc_html__('Divider', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Divider', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -872,12 +872,12 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'day_divider_style',
             [
-                'label'     => esc_html__('Style', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Style', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'options'   => [
-                    'solid'  => esc_html__('Solid', 'bdthemes-element-pack'),
-                    'dotted' => esc_html__('Dotted', 'bdthemes-element-pack'),
-                    'dashed' => esc_html__('Dashed', 'bdthemes-element-pack'),
+                    'solid'  => esc_html__('Solid', 'bdthemes-element-pack-lite'),
+                    'dotted' => esc_html__('Dotted', 'bdthemes-element-pack-lite'),
+                    'dashed' => esc_html__('Dashed', 'bdthemes-element-pack-lite'),
                 ],
                 'default'   => 'solid',
                 'selectors' => [
@@ -892,7 +892,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'day_divider_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#e8e8e8',
                 'selectors' => [
@@ -907,7 +907,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'day_divider_weight',
             [
-                'label'     => esc_html__('Weight', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Weight', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SLIDER,
                 'default'   => [
                     'size' => 1,
@@ -933,7 +933,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'section_business_day_style',
             [
-                'label' => esc_html__('Day and Time', 'bdthemes-element-pack'),
+                'label' => esc_html__('Day and Time', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -942,14 +942,14 @@ class Business_Hours extends Module_Base
             'bs_note_heading',
             [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw'  => sprintf('<p style="font-size: 12px;font-style: italic;line-height: 1.4;color: #a4afb7;">%s</p>', esc_html__('Note: By default, the color & typography options will inherit from parent styling. If you wish you can override that styling from here.', 'bdthemes-element-pack')),
+                'raw'  => sprintf('<p style="font-size: 12px;font-style: italic;line-height: 1.4;color: #a4afb7;">%s</p>', esc_html__('Note: By default, the color & typography options will inherit from parent styling. If you wish you can override that styling from here.', 'bdthemes-element-pack-lite')),
             ]
         );
 
         $this->add_responsive_control(
             'bs_day_cutom_width',
             [
-                'label' => esc_html__('Days Area Width(%)', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => esc_html__('Days Area Width(%)', 'bdthemes-element-pack-lite') . BDTEP_NC,
                 'type'  => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-ep-business-hours .heading-date.bdt-width-1-2' => 'width: {{SIZE}}%;',
@@ -960,19 +960,19 @@ class Business_Hours extends Module_Base
         $this->add_responsive_control(
             'business_hours_day_align',
             [
-                'label'     => esc_html__('Day Alignment', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Day Alignment', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -985,19 +985,19 @@ class Business_Hours extends Module_Base
         $this->add_responsive_control(
             'business_hours_time_align',
             [
-                'label'     => esc_html__('Time Alignment', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Time Alignment', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -1010,7 +1010,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'business_day_color',
             [
-                'label'     => esc_html__('Day Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Day Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-business-day' => 'color: {{VALUE}};',
@@ -1021,7 +1021,7 @@ class Business_Hours extends Module_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'label'    => esc_html__('Day Typography', 'bdthemes-element-pack'),
+                'label'    => esc_html__('Day Typography', 'bdthemes-element-pack-lite'),
                 'name'     => 'business_day_typography',
                 'selector' => '{{WRAPPER}} .heading-date',
             ]
@@ -1030,7 +1030,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'business_timing_color',
             [
-                'label'     => esc_html__('Time Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Time Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-business-time' => 'color: {{VALUE}};',
@@ -1041,7 +1041,7 @@ class Business_Hours extends Module_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'label'    => esc_html__('Time Typography', 'bdthemes-element-pack'),
+                'label'    => esc_html__('Time Typography', 'bdthemes-element-pack-lite'),
                 'name'     => 'business_timings_typography',
                 'selector' => '{{WRAPPER}} .heading-time',
             ]
@@ -1050,7 +1050,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'business_hours_striped',
             [
-                'label'        => esc_html__('Striped Effect', 'bdthemes-element-pack'),
+                'label'        => esc_html__('Striped Effect', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
@@ -1060,7 +1060,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'business_hours_striped_odd_color',
             [
-                'label'     => esc_html__('Striped Odd Rows Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Striped Odd Rows Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#eaeaea',
                 'selectors' => [
@@ -1075,7 +1075,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'striped_effect_even',
             [
-                'label'     => esc_html__('Striped Even Rows Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Striped Even Rows Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#FFFFFF',
                 'selectors' => [
@@ -1092,7 +1092,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'dynamic_business_day_separator',
             [
-                'label' => esc_html__('Separator', 'bdthemes-element-pack'),
+                'label' => esc_html__('Separator', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'dynamic_time_separator!' => '',
@@ -1103,7 +1103,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'dynamic_separator_color',
             [
-                'label'     => esc_html__('Separator Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Separator Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .dynamic-separator' => 'color: {{VALUE}};',
@@ -1117,7 +1117,7 @@ class Business_Hours extends Module_Base
         $this->start_controls_section(
             'dynamic_business_msg',
             [
-                'label' => esc_html__('Message', 'bdthemes-element-pack'),
+                'label' => esc_html__('Message', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'business_hour_style' => 'dynamic',
@@ -1128,7 +1128,7 @@ class Business_Hours extends Module_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'label'    => esc_html__('Typography', 'bdthemes-element-pack'),
+                'label'    => esc_html__('Typography', 'bdthemes-element-pack-lite'),
                 'name'     => 'business_dynamic_msg_typography',
                 'selector' => '{{WRAPPER}} .bdt-ep-business-hours .bdt-live-status',
             ]
@@ -1137,7 +1137,7 @@ class Business_Hours extends Module_Base
         $this->add_control(
             'dynamic_business_msg_sapcing',
             [
-                'label' => esc_html__('Top Spacing', 'bdthemes-element-pack'),
+                'label' => esc_html__('Top Spacing', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [

@@ -17,7 +17,7 @@ class Skin_Band extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Band', 'bdthemes-element-pack' );
+		return __( 'Band', 'bdthemes-element-pack-lite' );
 	}
 
 	public function render() {

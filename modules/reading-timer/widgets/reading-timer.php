@@ -18,7 +18,7 @@ class Reading_Timer extends Module_Base {
     }
 
     public function get_title() {
-        return BDTEP . esc_html__('Reading Timer', 'bdthemes-element-pack');
+        return BDTEP . esc_html__('Reading Timer', 'bdthemes-element-pack-lite');
     }
 
     public function get_icon() {
@@ -58,7 +58,7 @@ class Reading_Timer extends Module_Base {
         $this->start_controls_section(
             'section_title',
             [
-                'label' => __('Reading Timer', 'bdthemes-element-pack'),
+                'label' => __('Reading Timer', 'bdthemes-element-pack-lite'),
             ]
         );
 
@@ -66,7 +66,7 @@ class Reading_Timer extends Module_Base {
             'ignore_element_notes',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => esc_html__('Note: This widget\'s functionality may not be available in editor mode (dummy text, 2 min read), but rest assured, it works seamlessly when you switch to the perview mode/frontend perspective.', 'bdthemes-element-pack'),
+                'raw'             => esc_html__('Note: This widget\'s functionality may not be available in editor mode (dummy text, 2 min read), but rest assured, it works seamlessly when you switch to the perview mode/frontend perspective.', 'bdthemes-element-pack-lite'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
             ]
         );
@@ -75,10 +75,10 @@ class Reading_Timer extends Module_Base {
         $this->add_control(
             'reading_timer_content_id',
             [
-                'label'       => esc_html__('Selector ID', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Selector ID', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
-                'description' => esc_html__("Just write the content selector ID here such 'my-id'. N.B: No need to add '#'.", 'bdthemes-element-pack'),
+                'description' => esc_html__("Just write the content selector ID here such 'my-id'. N.B: No need to add '#'.", 'bdthemes-element-pack-lite'),
                 'frontend_available' => true,
                 'render_type' => 'none',
                 'separator'       => 'before',
@@ -88,7 +88,7 @@ class Reading_Timer extends Module_Base {
         $this->add_control(
             'reading_timer_avg_words_per_minute',
             [
-                'label'         => __('Average Words Per Minute', 'bdthemes-element-pack'),
+                'label'         => __('Average Words Per Minute', 'bdthemes-element-pack-lite'),
                 'type'          => Controls_Manager::SLIDER,
                 'frontend_available' => true,
                 'render_type'   => 'none',
@@ -110,10 +110,10 @@ class Reading_Timer extends Module_Base {
         $this->add_control(
             'reading_timer_minute_text',
             [
-                'label'       => __('Minute Text', 'bdthemes-element-pack'),
+                'label'       => __('Minute Text', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
-                'placeholder' => __('min read', 'bdthemes-element-pack'),
+                'placeholder' => __('min read', 'bdthemes-element-pack-lite'),
                 'frontend_available' => true,
                 'render_type' => 'none',
             ]
@@ -122,10 +122,10 @@ class Reading_Timer extends Module_Base {
         $this->add_control(
             'reading_timer_seconds_text',
             [
-                'label'       => __('Seconds Text', 'bdthemes-element-pack'),
+                'label'       => __('Seconds Text', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
-                'placeholder' => __('sec read', 'bdthemes-element-pack'),
+                'placeholder' => __('sec read', 'bdthemes-element-pack-lite'),
                 'frontend_available' => true,
                 'render_type' => 'none',
             ]
@@ -134,7 +134,7 @@ class Reading_Timer extends Module_Base {
         $this->add_control(
             'show_icon',
             [
-                'label' => __('Show Icon', 'bdthemes-element-pack') . BDTEP_NC,
+                'label' => __('Show Icon', 'bdthemes-element-pack-lite') . BDTEP_NC,
                 'type'  => Controls_Manager::SWITCHER,
             ]
         );
@@ -142,14 +142,14 @@ class Reading_Timer extends Module_Base {
         $this->start_controls_section(
             'section_style',
             [
-                'label' => __('Reading Time', 'bdthemes-element-pack'),
+                'label' => __('Reading Time', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
         $this->add_control(
             'reading_color',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-reading-timer' => 'color: {{VALUE}}',
@@ -160,7 +160,7 @@ class Reading_Timer extends Module_Base {
             Group_Control_Background::get_type(),
             [
                 'name'      => 'reading_background',
-                'label'     => __('Background', 'bdthemes-element-pack'),
+                'label'     => __('Background', 'bdthemes-element-pack-lite'),
                 'types'     => ['classic', 'gradient'],
                 'selector'  => '{{WRAPPER}} .bdt-reading-timer',
             ]
@@ -170,7 +170,7 @@ class Reading_Timer extends Module_Base {
             Group_Control_Border::get_type(),
             [
                 'name'      => 'reading_border',
-                'label'     => __('Border', 'bdthemes-element-pack'),
+                'label'     => __('Border', 'bdthemes-element-pack-lite'),
                 'selector'  => '{{WRAPPER}} .bdt-reading-timer',
                 'separator' => 'before',
             ]
@@ -178,7 +178,7 @@ class Reading_Timer extends Module_Base {
         $this->add_responsive_control(
             'reading_border_radius',
             [
-                'label'      => __('Border Radius', 'bdthemes-element-pack'),
+                'label'      => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -189,7 +189,7 @@ class Reading_Timer extends Module_Base {
         $this->add_responsive_control(
             'reading_padding',
             [
-                'label'      => __('Padding', 'bdthemes-element-pack'),
+                'label'      => __('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -200,7 +200,7 @@ class Reading_Timer extends Module_Base {
         $this->add_responsive_control(
             'reading_margin',
             [
-                'label'      => __('Margin', 'bdthemes-element-pack'),
+                'label'      => __('Margin', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -212,7 +212,7 @@ class Reading_Timer extends Module_Base {
         $this->add_responsive_control(
             'reading_space_between',
             [
-                'label'      => __('Space Between', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'      => __('Space Between', 'bdthemes-element-pack-lite') . BDTEP_NC,
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range'      => [
@@ -238,7 +238,7 @@ class Reading_Timer extends Module_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'      => 'reading_box_shadow',
-                'label'     => __('Box Shadow', 'bdthemes-element-pack'),
+                'label'     => __('Box Shadow', 'bdthemes-element-pack-lite'),
                 'selector'  => '{{WRAPPER}} .bdt-reading-timer',
             ]
         );
@@ -247,7 +247,7 @@ class Reading_Timer extends Module_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'reading_typography',
-                'label'     => __('Typography', 'bdthemes-element-pack'),
+                'label'     => __('Typography', 'bdthemes-element-pack-lite'),
                 'selector'  => '{{WRAPPER}} .bdt-reading-timer',
             ]
         );
@@ -255,19 +255,19 @@ class Reading_Timer extends Module_Base {
         $this->add_responsive_control(
             'reading_timer_alignment',
             [
-                'label'         => __('Alignment', 'bdthemes-element-pack'),
+                'label'         => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type'          => Controls_Manager::CHOOSE,
                 'options'       => [
                     'left'      => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center'    => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'     => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],

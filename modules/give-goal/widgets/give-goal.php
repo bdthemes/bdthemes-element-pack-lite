@@ -18,7 +18,7 @@ class Give_Goal extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Give Goal', 'bdthemes-element-pack');
+		return BDTEP . __('Give Goal', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -57,7 +57,7 @@ class Give_Goal extends Module_Base {
 		$this->start_controls_section(
 			'give_login_settings',
 			[
-				'label' => __('Give Goal', 'bdthemes-element-pack'),
+				'label' => __('Give Goal', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -65,7 +65,7 @@ class Give_Goal extends Module_Base {
 		$this->add_control(
 			'form_id',
 			[
-				'label' => __('Form ID', 'bdthemes-element-pack'),
+				'label' => __('Form ID', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_give_forms_options(),
 				'default' => 0
@@ -75,7 +75,7 @@ class Give_Goal extends Module_Base {
 		$this->add_control(
 			'show_text',
 			[
-				'label' => __('Show Amount', 'bdthemes-element-pack'),
+				'label' => __('Show Amount', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -84,7 +84,7 @@ class Give_Goal extends Module_Base {
 		$this->add_control(
 			'show_bar',
 			[
-				'label' => __('Show Progress Bar', 'bdthemes-element-pack'),
+				'label' => __('Show Progress Bar', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -96,7 +96,7 @@ class Give_Goal extends Module_Base {
 		$this->start_controls_section(
 			'section_income_style',
 			[
-				'label' => esc_html__('Income Amount', 'bdthemes-element-pack'),
+				'label' => esc_html__('Income Amount', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_text' => 'yes'
@@ -107,7 +107,7 @@ class Give_Goal extends Module_Base {
 		$this->add_control(
 			'income_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-goal span.income' => 'color: {{VALUE}};',
@@ -118,7 +118,7 @@ class Give_Goal extends Module_Base {
 		$this->add_responsive_control(
 			'income_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-goal span.income' => 'margin-right: {{SIZE}}{{UNIT}} !important;',
@@ -139,7 +139,7 @@ class Give_Goal extends Module_Base {
 		$this->start_controls_section(
 			'section_goal_amount_style',
 			[
-				'label' => esc_html__('Goal Amount', 'bdthemes-element-pack'),
+				'label' => esc_html__('Goal Amount', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_text' => 'yes'
@@ -150,7 +150,7 @@ class Give_Goal extends Module_Base {
 		$this->add_control(
 			'goal_amount_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-goal .raised' => 'color: {{VALUE}};',
@@ -171,7 +171,7 @@ class Give_Goal extends Module_Base {
 		$this->start_controls_section(
 			'sectn_style',
 			[
-				'label' => esc_html__('Progress Bar', 'bdthemes-element-pack'),
+				'label' => esc_html__('Progress Bar', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_bar' => 'yes'
@@ -182,7 +182,7 @@ class Give_Goal extends Module_Base {
 		$this->add_control(
 			'progress_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-goal .give-progress-bar>span' => 'background-color: {{VALUE}} !important;',
@@ -193,7 +193,7 @@ class Give_Goal extends Module_Base {
 		$this->add_control(
 			'progress_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-goal .give-progress-bar' => 'background-color: {{VALUE}};',
@@ -205,7 +205,7 @@ class Give_Goal extends Module_Base {
 		$this->add_responsive_control(
 			'progress_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -217,7 +217,7 @@ class Give_Goal extends Module_Base {
 		$this->add_responsive_control(
 			'progress_height',
 			[
-				'label' => __('Height', 'bdthemes-element-pack'),
+				'label' => __('Height', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-goal .give-progress-bar' => 'height: {{SIZE}}{{UNIT}};',
@@ -228,7 +228,7 @@ class Give_Goal extends Module_Base {
 		$this->add_responsive_control(
 			'progress_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-goal .give-progress-bar' => 'margin-top: {{SIZE}}{{UNIT}} !important;',
@@ -244,7 +244,7 @@ class Give_Goal extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['form_id']) {
-			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack') . '</div>';
+			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack-lite') . '</div>';
 		}
 
 		$attributes = [

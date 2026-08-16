@@ -4,15 +4,19 @@
  * Plugin Name: Element Pack Lite - Addons for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: The all-new <a href="https://elementpack.pro/">Element Pack</a> brings incredibly advanced, and super-flexible widgets, and A to Z essential addons to the Elementor page builder for WordPress. Explore expertly-coded widgets with first-class support by experts.
- * Version: 8.7.18
+ * Version: 8.7.19
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
- * Text Domain: bdthemes-element-pack
+ * Text Domain: bdthemes-element-pack-lite
  * Domain Path: /languages
  * License: GPL3
  * Elementor requires at least: 4.0.0
  * Elementor tested up to: 4.2.2
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 
 if ( ! function_exists( 'element_pack_pro_installed' ) ) {
@@ -94,7 +98,7 @@ if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 if ( ! element_pack_pro_installed() ) {
 
 	// Some pre defined value for easy use
-	define( 'BDTEP_VER', '8.7.18' );
+	define( 'BDTEP_VER', '8.7.19' );
 	define( 'BDTEP_TPL_DB_VER', '1.0.1' );
 	define( 'BDTEP__FILE__', __FILE__ );
 	if ( ! defined( 'BDTEP_TITLE' ) ) {
@@ -115,7 +119,7 @@ if ( ! element_pack_pro_installed() ) {
 
 	if ( ! function_exists( 'ep_load_textdomain' ) ) {
 		function ep_load_textdomain() {
-			load_plugin_textdomain( 'bdthemes-element-pack', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain( 'bdthemes-element-pack-lite', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		}
 		add_action( 'init', 'ep_load_textdomain' );
 	}
@@ -162,15 +166,15 @@ if ( ! element_pack_pro_installed() ) {
 				return;
 			}
 			$activation_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $plugin . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $plugin );
-			$admin_message  = '<p>' . esc_html__( 'Ops! Element Pack not working because you need to activate the Elementor plugin first.', 'bdthemes-element-pack' ) . '</p>';
-			$admin_message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $activation_url, esc_html__( 'Activate Elementor Now', 'bdthemes-element-pack' ) ) . '</p>';
+			$admin_message  = '<p>' . esc_html__( 'Ops! Element Pack not working because you need to activate the Elementor plugin first.', 'bdthemes-element-pack-lite' ) . '</p>';
+			$admin_message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $activation_url, esc_html__( 'Activate Elementor Now', 'bdthemes-element-pack-lite' ) ) . '</p>';
 		} else {
 			if ( ! current_user_can( 'install_plugins' ) ) {
 				return;
 			}
 			$install_url   = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
-			$admin_message = '<p>' . esc_html__( 'Ops! Element Pack not working because you need to install the Elementor plugin', 'bdthemes-element-pack' ) . '</p>';
-			$admin_message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $install_url, esc_html__( 'Install Elementor Now', 'bdthemes-element-pack' ) ) . '</p>';
+			$admin_message = '<p>' . esc_html__( 'Ops! Element Pack not working because you need to install the Elementor plugin', 'bdthemes-element-pack-lite' ) . '</p>';
+			$admin_message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $install_url, esc_html__( 'Install Elementor Now', 'bdthemes-element-pack-lite' ) ) . '</p>';
 		}
 
 		echo '<div class="error">' . $admin_message . '</div>';

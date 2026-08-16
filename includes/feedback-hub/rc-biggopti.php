@@ -163,8 +163,18 @@ if ( ! class_exists( 'RC_Reviews_Collector' ) ) {
 		public function rc_sdk_insights() {
 			$sanitized_status = isset( $_POST['button_val'] ) ? sanitize_text_field( $_POST['button_val'] ) : '';
 			$nonce            = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
-			$allow_name       = isset( $_POST['allow_name'] ) ? sanitize_text_field( $_POST['allow_name'] ) : '';
-			$date_name        = isset( $_POST['date_name'] ) ? sanitize_text_field( $_POST['date_name'] ) : '';
+			$allow_name       = isset( $_POST['allow_name'] ) ? sanitize_key( wp_unslash( $_POST['allow_name'] ) ) : '';
+			$date_name        = isset( $_POST['date_name'] ) ? sanitize_key( wp_unslash( $_POST['date_name'] ) ) : '';
+
+			// Only this collector's own options may be written, never an arbitrary one.
+			if ( ! preg_match( '/^rc_allow_[a-z0-9_]+$/', $allow_name ) || ! preg_match( '/^rc_date_[a-z0-9_]+$/', $date_name ) ) {
+				wp_send_json( array(
+					'status'  => 'error',
+					'title'   => 'Error',
+					'message' => 'Invalid option name',
+				) );
+				wp_die();
+			}
 
 			if ( ! wp_verify_nonce( $nonce, 'rc_sdk' ) ) {
 				wp_send_json( array(

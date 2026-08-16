@@ -20,7 +20,7 @@ class Search extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__('Search', 'bdthemes-element-pack');
+		return BDTEP . esc_html__('Search', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -64,21 +64,21 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_search_layout',
 			[
-				'label' => esc_html__('Search Layout', 'bdthemes-element-pack'),
+				'label' => esc_html__('Search Layout', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'skin',
 			[
-				'label'   => esc_html__('Skin', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Skin', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'default',
 				'options' => [
-					'default'  => esc_html__('Default', 'bdthemes-element-pack'),
-					'dropbar'  => esc_html__('Dropbar', 'bdthemes-element-pack'),
-					'dropdown' => esc_html__('Dropdown', 'bdthemes-element-pack'),
-					'modal'    => esc_html__('Modal', 'bdthemes-element-pack'),
+					'default'  => esc_html__('Default', 'bdthemes-element-pack-lite'),
+					'dropbar'  => esc_html__('Dropbar', 'bdthemes-element-pack-lite'),
+					'dropdown' => esc_html__('Dropdown', 'bdthemes-element-pack-lite'),
+					'modal'    => esc_html__('Modal', 'bdthemes-element-pack-lite'),
 				],
 				'prefix_class' => 'elementor-search-form-skin-',
 				'render_type'  => 'template',
@@ -88,8 +88,8 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_query',
 			[
-				'label'       => esc_html__('Specific Post Type', 'bdthemes-element-pack'),
-				'description' => esc_html__('Select post type if you need to search only this post type content.', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Specific Post Type', 'bdthemes-element-pack-lite'),
+				'description' => esc_html__('Select post type if you need to search only this post type content.', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => $this->getGroupControlQueryPostTypes(),
 				'default' => 'post',
@@ -100,18 +100,18 @@ class Search extends Module_Base {
 		$this->add_control(
 			'placeholder',
 			[
-				'label'     => esc_html__('Placeholder', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Placeholder', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => ['active' => true],
 				'separator' => 'before',
-				'default'   => esc_html__('Search', 'bdthemes-element-pack') . '...',
+				'default'   => esc_html__('Search', 'bdthemes-element-pack-lite') . '...',
 			]
 		);
 
 		$this->add_control(
 			'search_icon',
 			[
-				'label'   => esc_html__('Search Icon', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Search Icon', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -120,7 +120,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_icon_flip',
 			[
-				'label'     => esc_html__('Icon Flip', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Flip', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [
 					'search_icon' => 'yes',
@@ -132,7 +132,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_toggle_icon',
 			[
-				'label'       => esc_html__('Choose Toggle Icon', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Choose Toggle Icon', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'toggle_icon',
 				'default' => [
@@ -146,19 +146,19 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_align',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fas fa-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fas fa-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'fas fa-align-right',
 					],
 				],
@@ -172,24 +172,24 @@ class Search extends Module_Base {
 		$this->add_control(
 			'dropbar_position',
 			[
-				'label'   => esc_html__('Dropbar Position', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Dropbar Position', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'bottom-left',
 				'options' => [
-					'bottom-left'    => esc_html__('Bottom Left', 'bdthemes-element-pack'),
-					'bottom-center'  => esc_html__('Bottom Center', 'bdthemes-element-pack'),
-					'bottom-right'   => esc_html__('Bottom Right', 'bdthemes-element-pack'),
-					'bottom-justify' => esc_html__('Bottom Justify', 'bdthemes-element-pack'),
-					'top-left'       => esc_html__('Top Left', 'bdthemes-element-pack'),
-					'top-center'     => esc_html__('Top Center', 'bdthemes-element-pack'),
-					'top-right'      => esc_html__('Top Right', 'bdthemes-element-pack'),
-					'top-justify'    => esc_html__('Top Justify', 'bdthemes-element-pack'),
-					'left-top'       => esc_html__('Left Top', 'bdthemes-element-pack'),
-					'left-center'    => esc_html__('Left Center', 'bdthemes-element-pack'),
-					'left-bottom'    => esc_html__('Left Bottom', 'bdthemes-element-pack'),
-					'right-top'      => esc_html__('Right Top', 'bdthemes-element-pack'),
-					'right-center'   => esc_html__('Right Center', 'bdthemes-element-pack'),
-					'right-bottom'   => esc_html__('Right Bottom', 'bdthemes-element-pack'),
+					'bottom-left'    => esc_html__('Bottom Left', 'bdthemes-element-pack-lite'),
+					'bottom-center'  => esc_html__('Bottom Center', 'bdthemes-element-pack-lite'),
+					'bottom-right'   => esc_html__('Bottom Right', 'bdthemes-element-pack-lite'),
+					'bottom-justify' => esc_html__('Bottom Justify', 'bdthemes-element-pack-lite'),
+					'top-left'       => esc_html__('Top Left', 'bdthemes-element-pack-lite'),
+					'top-center'     => esc_html__('Top Center', 'bdthemes-element-pack-lite'),
+					'top-right'      => esc_html__('Top Right', 'bdthemes-element-pack-lite'),
+					'top-justify'    => esc_html__('Top Justify', 'bdthemes-element-pack-lite'),
+					'left-top'       => esc_html__('Left Top', 'bdthemes-element-pack-lite'),
+					'left-center'    => esc_html__('Left Center', 'bdthemes-element-pack-lite'),
+					'left-bottom'    => esc_html__('Left Bottom', 'bdthemes-element-pack-lite'),
+					'right-top'      => esc_html__('Right Top', 'bdthemes-element-pack-lite'),
+					'right-center'   => esc_html__('Right Center', 'bdthemes-element-pack-lite'),
+					'right-bottom'   => esc_html__('Right Bottom', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'skin' => ['dropbar', 'dropdown']
@@ -200,7 +200,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'dropbar_offset',
 			[
-				'label' => esc_html__('Dropbar Offset', 'bdthemes-element-pack'),
+				'label' => esc_html__('Dropbar Offset', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -220,7 +220,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_width',
 			[
-				'label' => esc_html__('Search Width', 'bdthemes-element-pack'),
+				'label' => esc_html__('Search Width', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -241,7 +241,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'show_ajax_search',
 			[
-				'label'   => esc_html__('Ajax Search', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Ajax Search', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'skin' => ['default']
@@ -254,8 +254,8 @@ class Search extends Module_Base {
 		$this->add_control(
 			'element_connect',
 			[
-				'label'       => esc_html__('Connect Section / Widget', 'bdthemes-element-pack') . BDTEP_NC,
-				'description' => esc_html__('Turn on to show specified section (by ID/Class) when no search result found. Specify the section which will be display when search result not found', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Connect Section / Widget', 'bdthemes-element-pack-lite') . BDTEP_NC,
+				'description' => esc_html__('Turn on to show specified section (by ID/Class) when no search result found. Specify the section which will be display when search result not found', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SWITCHER,
 				'condition'   => [
 					'skin'             => ['default'],
@@ -268,8 +268,8 @@ class Search extends Module_Base {
 		$this->add_control(
 			'element_selector',
 			[
-				'label'       => esc_html__('Section / Widget Selector', 'bdthemes-element-pack'),
-				'description' => esc_html__('Example - .selector / #selector', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Section / Widget Selector', 'bdthemes-element-pack-lite'),
+				'description' => esc_html__('Example - .selector / #selector', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
 				'condition'   => [
@@ -283,7 +283,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'anchor_target',
 			[
-				'label'        => esc_html__('Link open in new window', 'bdthemes-element-pack'),
+				'label'        => esc_html__('Link open in new window', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'condition' => [
@@ -295,7 +295,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_button',
 			[
-				'label'   => esc_html__('Search Button', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Search Button', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				'condition' => [
 					'skin' => 'default',
@@ -307,10 +307,10 @@ class Search extends Module_Base {
 		$this->add_control(
 			'button_text',
 			[
-				'label'     => esc_html__('Button Text', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Button Text', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::TEXT,
 				'dynamic'   => ['active' => true],
-				'default'   => esc_html__('Submit', 'bdthemes-element-pack'),
+				'default'   => esc_html__('Submit', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'search_button' => 'yes',
 					'show_ajax_search' => '',
@@ -321,7 +321,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'button_icon',
 			[
-				'label'            => esc_html__('Icon', 'bdthemes-element-pack'),
+				'label'            => esc_html__('Icon', 'bdthemes-element-pack-lite'),
 				'type'             => Controls_Manager::ICONS,
 				'render_type'      => 'template',
 				'condition'        => [
@@ -334,7 +334,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'button_position',
 			[
-				'label' => esc_html__('Button Position', 'bdthemes-element-pack'),
+				'label' => esc_html__('Button Position', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -355,7 +355,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'icon_spacing',
 			[
-				'label' => esc_html__('Icon Spacing', 'bdthemes-element-pack'),
+				'label' => esc_html__('Icon Spacing', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -378,7 +378,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'ajax_search_query',
 			[
-				'label'     => esc_html__('Ajax Query', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Ajax Query', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => [
 					'skin'             => 'default',
@@ -390,7 +390,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'ajax_item_limit',
 			[
-				'label'     => esc_html__('Item Limit', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Item Limit', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::NUMBER,
 				'min'       => 1,
 				'max'       => 20,
@@ -412,7 +412,7 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_posts_include',
 			[
-				'label'     => esc_html__('Include', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Include', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'show_ajax_search' => 'yes'
 				]
@@ -422,13 +422,13 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_include_by',
 			[
-				'label'       => esc_html__('Include By', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Include By', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SELECT2,
 				'multiple'    => true,
 				'label_block' => true,
 				'options'     => [
-					'authors' => esc_html__('Authors', 'bdthemes-element-pack'),
-					'terms'   => esc_html__('Terms', 'bdthemes-element-pack'),
+					'authors' => esc_html__('Authors', 'bdthemes-element-pack-lite'),
+					'terms'   => esc_html__('Terms', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'show_ajax_search' => 'yes'
@@ -439,7 +439,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_include_author_ids',
 			[
-				'label'       => esc_html__('Authors', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Authors', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
@@ -456,12 +456,12 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_include_term_ids',
 			[
-				'label'       => __('Terms', 'bdthemes-element-pack'),
-				'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack'),
+				'label'       => __('Terms', 'bdthemes-element-pack-lite'),
+				'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
-				'placeholder' => __('Type and select terms', 'bdthemes-element-pack'),
+				'placeholder' => __('Type and select terms', 'bdthemes-element-pack-lite'),
 				'query_args'  => [
 					'query'        => 'terms',
 					'widget_props' => [
@@ -479,7 +479,7 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_posts_exclude',
 			[
-				'label'     => esc_html__('Exclude', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Exclude', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'show_ajax_search' => 'yes'
 				]
@@ -489,15 +489,15 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_by',
 			[
-				'label'       => esc_html__('Exclude By', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Exclude By', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SELECT2,
 				'multiple'    => true,
 				'label_block' => true,
 				'options'     => [
-					'authors'          => esc_html__('Authors', 'bdthemes-element-pack'),
-					'current_post'     => esc_html__('Current Post', 'bdthemes-element-pack'),
-					'manual_selection' => esc_html__('Manual Selection', 'bdthemes-element-pack'),
-					'terms'            => esc_html__('Terms', 'bdthemes-element-pack'),
+					'authors'          => esc_html__('Authors', 'bdthemes-element-pack-lite'),
+					'current_post'     => esc_html__('Current Post', 'bdthemes-element-pack-lite'),
+					'manual_selection' => esc_html__('Manual Selection', 'bdthemes-element-pack-lite'),
+					'terms'            => esc_html__('Terms', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'show_ajax_search' => 'yes'
@@ -508,7 +508,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_ids',
 			[
-				'label'       => esc_html__('Search & Select', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Search & Select', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
@@ -528,7 +528,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_author_ids',
 			[
-				'label'       => esc_html__('Authors', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Authors', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
@@ -545,12 +545,12 @@ class Search extends Module_Base {
 		$this->add_control(
 			'posts_exclude_term_ids',
 			[
-				'label'       => esc_html__('Terms', 'bdthemes-element-pack'),
-				'description' => esc_html__('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Terms', 'bdthemes-element-pack-lite'),
+				'description' => esc_html__('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack-lite'),
 				'type'        => Dynamic_Select::TYPE,
 				'multiple'    => true,
 				'label_block' => true,
-				'placeholder' => esc_html__('Type and select terms', 'bdthemes-element-pack'),
+				'placeholder' => esc_html__('Type and select terms', 'bdthemes-element-pack-lite'),
 				'query_args'  => [
 					'query'        => 'terms',
 					'widget_props' => [
@@ -570,7 +570,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_style_toggle_icon',
 			[
-				'label'     => esc_html__('Toggle Icon', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Toggle Icon', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'skin!' => 'default'
@@ -581,7 +581,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'toggle_icon_size',
 			[
-				'label'     => esc_html__('Size', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-toggle' => 'font-size: {{SIZE}}{{UNIT}};',
@@ -592,7 +592,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'toggle_icon_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-toggle'       => 'color: {{VALUE}};',
@@ -604,7 +604,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'toggle_icon_background',
 			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-toggle' => 'background-color: {{VALUE}};'
@@ -615,7 +615,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'toggle_icon_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -637,7 +637,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'toggle_icon_radius',
 			[
-				'label'      => esc_html__('Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -659,7 +659,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_search_layout_style',
 			[
-				'label' => esc_html__('Search Container', 'bdthemes-element-pack'),
+				'label' => esc_html__('Search Container', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'skin!' => 'modal'
@@ -670,7 +670,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_icon_color',
 			[
-				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-dropdown-close.bdt-icon.bdt-close '      => 'color: {{VALUE}};',
@@ -685,7 +685,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_container_background',
 			[
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-container .bdt-search:not(.bdt-search-navbar),
@@ -698,7 +698,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_container_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -710,7 +710,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_container_radius',
 			[
-				'label'      => esc_html__('Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -736,7 +736,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_search_icon_style',
 			[
-				'label' => esc_html__('Search Icon', 'bdthemes-element-pack'),
+				'label' => esc_html__('Search Icon', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'search_icon' => 'yes',
@@ -747,7 +747,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'icon_color',
 			[
-				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-icon svg' => 'color: {{VALUE}};',
@@ -762,13 +762,13 @@ class Search extends Module_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'icon_background',
-				'label' => esc_html__('Background', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'types' => ['classic', 'gradient'],
 				'exclude' => ['image'], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'selector' => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search .bdt-search-icon',
 				'fields_options' => [
 					'background' => [
-						'label' => esc_html__('Icon Background', 'bdthemes-element-pack') . BDTEP_NC,
+						'label' => esc_html__('Icon Background', 'bdthemes-element-pack-lite') . BDTEP_NC,
 					],
 				],
 				'condition' => [
@@ -780,7 +780,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'modal_search_icon_size',
 			[
-				'label'     => esc_html__('Icon Size', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'#modal-search-{{ID}} .bdt-search-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: auto;',
@@ -794,7 +794,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_icon_size',
 			[
-				'label'     => esc_html__('Icon Size', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-icon svg' => 'width: {{SIZE}}{{UNIT}};',
@@ -808,7 +808,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_icon_width',
 			[
-				'label'     => esc_html__('Icon Width', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Icon Width', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-icon' => 'width: {{SIZE}}{{UNIT}};',
@@ -824,7 +824,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_search_style',
 			[
-				'label' => esc_html__('Input', 'bdthemes-element-pack'),
+				'label' => esc_html__('Input', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -844,14 +844,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_input_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'input_text_color',
 			[
-				'label'  => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'  => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'   => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-input,
@@ -863,7 +863,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'input_background_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-container .bdt-search .bdt-search-input' => 'background-color: {{VALUE}}',
@@ -878,7 +878,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'input_placeholder_color',
 			[
-				'label'     => esc_html__('Placeholder Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Placeholder Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-input::placeholder' => 'color: {{VALUE}}',
@@ -890,7 +890,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'input_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-input' => 'border-color: {{VALUE}}',
@@ -902,7 +902,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_width',
 			[
-				'label'     => esc_html__('Border Size', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-input' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -914,7 +914,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'border_radius',
 			[
-				'label' => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label' => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -937,7 +937,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'input_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -968,14 +968,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_input_focus',
 			[
-				'label' => esc_html__('Focus', 'bdthemes-element-pack'),
+				'label' => esc_html__('Focus', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'input_text_color_focus',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-input:focus' => 'color: {{VALUE}}',
@@ -987,7 +987,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'input_background_color_focus',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-container .bdt-search .bdt-search-input:focus' => 'background-color: {{VALUE}}',
@@ -1001,7 +1001,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'input_border_color_focus',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search-input:focus' => 'border-color: {{VALUE}}',
@@ -1038,7 +1038,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_modal_close_button_style',
 			[
-				'label'     => esc_html__('Modal Close Button', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'     => esc_html__('Modal Close Button', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'skin' => 'modal'
@@ -1051,14 +1051,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_modal_close_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 		
 		$this->add_control(
 			'modal_close_button_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal-search-{{ID}} .bdt-modal-close-full' => 'color: {{VALUE}};',
@@ -1088,7 +1088,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1100,7 +1100,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1112,7 +1112,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_margin',
 			[
-				'label'      => esc_html__('Margin', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Margin', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1132,7 +1132,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'modal_close_button_size',
 			[
-				'label' => esc_html__('Size', 'bdthemes-element-pack'),
+				'label' => esc_html__('Size', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1151,14 +1151,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_modal_close_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 		
 		$this->add_control(
 			'modal_close_button_color_hover',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal-search-{{ID}} .bdt-modal-close-full:hover' => 'color: {{VALUE}};',
@@ -1179,7 +1179,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'modal_close_button_border_color_hover',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#modal-search-{{ID}} .bdt-modal-close-full:hover' => 'border-color: {{VALUE}};',
@@ -1208,7 +1208,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_search_ajax_style',
 			[
-				'label' => esc_html__('Ajax Dropdown', 'bdthemes-element-pack'),
+				'label' => esc_html__('Ajax Dropdown', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'conditions' => [
 					'relation' => 'and',
@@ -1230,14 +1230,14 @@ class Search extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'ajax_search_border',
-				'label'     => esc_html__('Border', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result',
 			]
 		);
 		$this->add_responsive_control(
 			'ajax_search_dropdown_radius',
 			[
-				'label'                 => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'                 => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => ['px', '%', 'em'],
 				'selectors'             => [
@@ -1249,7 +1249,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_ajax_background_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result' => 'background: {{VALUE}};',
@@ -1259,7 +1259,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'ajax_search_dropdown_padding',
 			[
-				'label'                 => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'                 => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => ['px', '%', 'em'],
 				'selectors'             => [
@@ -1271,7 +1271,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'ajax_search_dropdown_margin',
 			[
-				'label'                 => esc_html__('Margin', 'bdthemes-element-pack'),
+				'label'                 => esc_html__('Margin', 'bdthemes-element-pack-lite'),
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => ['px', '%', 'em'],
 				'selectors'             => [
@@ -1291,7 +1291,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'ajax_loading_spacing',
 			[
-				'label'      => esc_html__('Loading Spacing', 'bdthemes-element-pack') . BDTEP_NC,
+				'label'      => esc_html__('Loading Spacing', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px', 'em'],
 				'selectors'  => [
@@ -1306,13 +1306,13 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_ajax_heading',
 			[
-				'label' => esc_html__('Heading', 'bdthemes-element-pack'),
+				'label' => esc_html__('Heading', 'bdthemes-element-pack-lite'),
 			]
 		);
 		$this->add_control(
 			'search_ajax_heading_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result-header' => 'color: {{VALUE}};',
@@ -1331,13 +1331,13 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_ajax_title',
 			[
-				'label' => esc_html__('Title', 'bdthemes-element-pack'),
+				'label' => esc_html__('Title', 'bdthemes-element-pack-lite'),
 			]
 		);
 		$this->add_control(
 			'search_ajax_title_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title' => 'color: {{VALUE}};',
@@ -1348,7 +1348,7 @@ class Search extends Module_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'      => 'search_ajax_title_background',
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'types'     => ['classic', 'gradient'],
 				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title',
 			]
@@ -1363,7 +1363,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'heading_search_ajax_title',
 			[
-				'label'     => esc_html__('HOVER', 'bdthemes-element-pack'),
+				'label'     => esc_html__('HOVER', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1371,7 +1371,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_ajax_title_h_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title:hover' => 'color: {{VALUE}};',
@@ -1382,7 +1382,7 @@ class Search extends Module_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'      => 'search_ajax_title_h_background',
-				'label'     => esc_html__('Background', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background', 'bdthemes-element-pack-lite'),
 				'types'     => ['classic', 'gradient'],
 				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-title:hover',
 			]
@@ -1392,13 +1392,13 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_ajax_desc',
 			[
-				'label' => esc_html__('Description', 'bdthemes-element-pack'),
+				'label' => esc_html__('Description', 'bdthemes-element-pack-lite'),
 			]
 		);
 		$this->add_control(
 			'search_ajax_desc_color',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-text' => 'color: {{VALUE}};',
@@ -1408,7 +1408,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_ajax_desc_h_color',
 			[
-				'label'     => esc_html__('Hover Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Hover Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-list .bdt-search-item a .bdt-search-text:hover' => 'color: {{VALUE}};',
@@ -1427,14 +1427,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_ajax_no_posts',
 			[
-				'label' => esc_html__('Others', 'bdthemes-element-pack'),
+				'label' => esc_html__('Others', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'ajax_search_close_button_heading',
 			[
-				'label'     => __('CLOSE BUTTON', 'bdthemes-element-pack'),
+				'label'     => __('CLOSE BUTTON', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1443,7 +1443,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'close_btn_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn' => 'color: {{VALUE}}',
@@ -1453,7 +1453,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'close_btn_hover_color',
 			[
-				'label'     => __('Hover Color', 'bdthemes-element-pack'),
+				'label'     => __('Hover Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn:hover' => 'color: {{VALUE}}',
@@ -1463,7 +1463,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'close_btn_bg_color',
 			[
-				'label'     => __('Background Color', 'bdthemes-element-pack'),
+				'label'     => __('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn' => 'background-color: {{VALUE}}',
@@ -1473,7 +1473,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'close_btn_hover_bg_color',
 			[
-				'label'     => __('Hover Background Color', 'bdthemes-element-pack'),
+				'label'     => __('Hover Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header .bdt-search-result-close-btn:hover' => 'background-color: {{VALUE}}',
@@ -1483,7 +1483,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'close_btn_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1495,7 +1495,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'ajx_search_dropdown_divider_heading',
 			[
-				'label'     => __('DIVIDER', 'bdthemes-element-pack'),
+				'label'     => __('DIVIDER', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1503,7 +1503,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'ajax_search_dropdown_divider_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-result-header' => 'border-bottom-color: {{VALUE}}',
@@ -1516,7 +1516,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'ajax_search_empty_heading',
 			[
-				'label'     => __('NO POST', 'bdthemes-element-pack'),
+				'label'     => __('NO POST', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1524,7 +1524,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'ajax_empty_content',
 			[
-				'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-text' => 'color: {{VALUE}}',
@@ -1535,7 +1535,7 @@ class Search extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'ajax_no_posts_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}}.elementor-widget-bdt-search .bdt-search-result .bdt-search-text',
 			]
 		);
@@ -1546,7 +1546,7 @@ class Search extends Module_Base {
 		$this->start_controls_section(
 			'section_style_search_button',
 			[
-				'label'     => esc_html__('Search Button', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Search Button', 'bdthemes-element-pack-lite'),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'search_button'       => 'yes',
@@ -1560,14 +1560,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_search_button_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'search_button_text_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-button' => 'color: {{VALUE}};',
@@ -1595,7 +1595,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_button_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1615,7 +1615,7 @@ class Search extends Module_Base {
 		$this->add_responsive_control(
 			'search_button_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -1637,14 +1637,14 @@ class Search extends Module_Base {
 		$this->start_controls_tab(
 			'tab_search_button_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'search_button_hover_text_color',
 			[
-				'label'     => esc_html__('Text Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-button:hover' => 'color: {{VALUE}};',
@@ -1664,7 +1664,7 @@ class Search extends Module_Base {
 		$this->add_control(
 			'search_button_hover_border_color',
 			[
-				'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-search .bdt-search-button:hover' => 'border-color: {{VALUE}};',
@@ -1703,9 +1703,9 @@ class Search extends Module_Base {
 		$post_types = array_diff_key($post_types, $ignorePostTypes);
 
 		$extra_types = [
-			'manual_selection'   => __('Manual Selection', 'bdthemes-element-pack'),
-			'current_query'      => __('Current Query', 'bdthemes-element-pack'),
-			'_related_post_type' => __('Related', 'bdthemes-element-pack'),
+			'manual_selection'   => __('Manual Selection', 'bdthemes-element-pack-lite'),
+			'current_query'      => __('Current Query', 'bdthemes-element-pack-lite'),
+			'_related_post_type' => __('Related', 'bdthemes-element-pack-lite'),
 		];
 
 		$post_types = array_merge($post_types, $extra_types);
@@ -1753,7 +1753,7 @@ class Search extends Module_Base {
 				'class'       => 'bdt-search-input',
 				'type'        => 'search',
 				'name'        => 's',
-				'title'       => esc_html__('Search', 'bdthemes-element-pack'),
+				'title'       => esc_html__('Search', 'bdthemes-element-pack-lite'),
 				'value'       => get_search_query(),
 			]
 		);

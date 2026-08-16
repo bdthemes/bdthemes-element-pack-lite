@@ -577,7 +577,7 @@
                 url     : ajaxurl,
                 type    : "post",
                 dataType: "json",
-                data    : {action: "bdt_element_pack_template_library_get_layouts", tab: currentTab},
+                data    : {action: "bdt_element_pack_template_library_get_layouts", tab: currentTab, nonce: EpConfig.nonce},
                 success : function (e) {
                     var templates  = new EpControler.EpTemplateCollection(e.data.templates),
                         categories = new EpControler.EpCategoriesCollection(e.data.categories);
@@ -603,7 +603,7 @@
                 url     : ajaxurl,
                 type    : "post",
                 dataType: "json",
-                data    : {action: "bdt_element_pack_template_library_making_syncing"},
+                data    : {action: "bdt_element_pack_template_library_making_syncing", nonce: EpConfig.nonce},
                 success : function (e) {
                     var currentTab = _this.getTab(), tabData = _this.tabs[currentTab];
                     tabData.data.templates = '';

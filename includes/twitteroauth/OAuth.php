@@ -196,8 +196,8 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {
 		// Sign using the key
 		$ok = openssl_sign( $base_string, $signature, $privatekeyid );
 
-		// Release the key resource
-		openssl_free_key( $privatekeyid );
+		// PHP 8.0+ releases the key resource automatically; the old explicit free
+		// call was removed because it is deprecated.
 
 		return base64_encode( $signature );
 	}
@@ -216,8 +216,8 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {
 		// Check the computed signature against the one passed in the query
 		$ok = openssl_verify( $base_string, $decoded_sig, $publickeyid );
 
-		// Release the key resource
-		openssl_free_key( $publickeyid );
+		// PHP 8.0+ releases the key resource automatically; the old explicit free
+		// call was removed because it is deprecated.
 
 		return $ok == 1;
 	}
@@ -245,15 +245,15 @@ class OAuthRequest {
 	 * attempt to build up a request from what was passed to the server
 	 */
 	public static function from_request( $http_method = NULL, $http_url = NULL, $parameters = NULL ) {
-		$scheme = ( ! isset ( $_SERVER['HTTPS'] ) || $_SERVER['HTTPS'] != "on" )
-			? 'http'
-			: 'https';
-		@$http_url or $http_url = $scheme .
-			'://' . $_SERVER['HTTP_HOST'] .
-			':' .
-			$_SERVER['SERVER_PORT'] .
-			$_SERVER['REQUEST_URI'];
-		@$http_method or $http_method = $_SERVER['REQUEST_METHOD'];
+		$https_on = isset( $_SERVER['HTTPS'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) : '';
+		$scheme   = ( 'on' !== $https_on ) ? 'http' : 'https';
+
+		$host        = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+		$port        = isset( $_SERVER['SERVER_PORT'] ) ? absint( $_SERVER['SERVER_PORT'] ) : 0;
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+
+		@$http_url or $http_url = $scheme . '://' . $host . ':' . $port . $request_uri;
+		@$http_method or $http_method = isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) : 'GET';
 
 		// We weren't handed any parameters, so let's find the ones relevant to
 		// this request.
@@ -264,7 +264,7 @@ class OAuthRequest {
 			$request_headers = OAuthUtil::get_headers();
 
 			// Parse the query-string to find GET parameters
-			$parameters = OAuthUtil::parse_parameters( $_SERVER['QUERY_STRING'] );
+			$parameters = OAuthUtil::parse_parameters( isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '' );
 
 			// It's a POST request of the proper content-type, so parse POST
 			// parameters and add those overriding any duplicates from GET
@@ -794,9 +794,9 @@ class OAuthUtil {
 			// that $_SERVER actually contains what we need
 			$out = array();
 			if ( isset ( $_SERVER['CONTENT_TYPE'] ) )
-				$out['Content-Type'] = $_SERVER['CONTENT_TYPE'];
+				$out['Content-Type'] = sanitize_text_field( wp_unslash( $_SERVER['CONTENT_TYPE'] ) );
 			if ( isset ( $_ENV['CONTENT_TYPE'] ) )
-				$out['Content-Type'] = $_ENV['CONTENT_TYPE'];
+				$out['Content-Type'] = sanitize_text_field( $_ENV['CONTENT_TYPE'] );
 
 			foreach ( $_SERVER as $key => $value ) {
 				if ( substr( $key, 0, 5 ) == "HTTP_" ) {

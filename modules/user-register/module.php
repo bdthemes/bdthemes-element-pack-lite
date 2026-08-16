@@ -38,19 +38,19 @@
 			// Email address is used as both username and email. It is also the only
 			// parameter we need to validate
 			if ( ! is_email( $email ) ) {
-				$errors->add( 'email', __( 'The email address you entered is not valid.', 'bdthemes-element-pack' ) );
+				$errors->add( 'email', __( 'The email address you entered is not valid.', 'bdthemes-element-pack-lite' ) );
 				
 				return $errors;
 			}
 			
 			if ( username_exists( $email ) || email_exists( $email ) ) {
-				$errors->add( 'email_exists', __( 'An account exists with this email address.', 'bdthemes-element-pack' ) );
+				$errors->add( 'email_exists', __( 'An account exists with this email address.', 'bdthemes-element-pack-lite' ) );
 				
 				return $errors;
 			}
 			
 			if ( ! empty( $is_password_required ) && empty( $password ) ) {
-				$errors->add( 'empty_password', __( 'Please enter password.', 'bdthemes-element-pack' ) );
+				$errors->add( 'empty_password', __( 'Please enter password.', 'bdthemes-element-pack-lite' ) );
 				
 				return $errors;
 			}
@@ -62,7 +62,7 @@
 			if ( $this->is_recaptcha_required( $post_id, $widget_id, 'show_recaptcha_checker' ) ) {
 				$gRecaptcha = isset($_REQUEST['g-recaptcha-response']) ? sanitize_text_field( wp_unslash($_REQUEST['g-recaptcha-response']) ) : '';
 				if ( ! apply_filters( 'element_pack_google_recaptcha_validation', $gRecaptcha ) ) {
-					$errors->add( 'recaptcha_invalid', __( 'reCAPTCHA is invalid!.', 'bdthemes-element-pack' ) );
+					$errors->add( 'recaptcha_invalid', __( 'reCAPTCHA is invalid!.', 'bdthemes-element-pack-lite' ) );
 					
 					return $errors;
 				}
@@ -113,7 +113,7 @@
 					echo wp_json_encode(
 						[
 							'registered' => false,
-							'message'    => __( 'Registering new users is currently not allowed.', 'bdthemes-element-pack' )
+							'message'    => __( 'Registering new users is currently not allowed.', 'bdthemes-element-pack-lite' )
 						] );
 				} else {
 					
@@ -139,7 +139,7 @@
 					} else {
 						// Success
 						/* translators: %s: Site name */
-						$message = sprintf( __( 'You have successfully registered to <strong>%s</strong>.', 'bdthemes-element-pack' ), get_bloginfo( 'name' ) );
+						$message = sprintf( __( 'You have successfully registered to <strong>%s</strong>.', 'bdthemes-element-pack-lite' ), get_bloginfo( 'name' ) );
 						
 						
 						if ( isset( $settings['auto_login_after_register'] ) && $settings['auto_login_after_register'] == 'yes' ) {

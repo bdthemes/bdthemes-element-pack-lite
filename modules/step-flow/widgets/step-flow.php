@@ -25,7 +25,7 @@ class Step_Flow extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Step Flow', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Step Flow', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -63,14 +63,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_content_step_flow',
             [
-                'label' => __('Step Flow', 'bdthemes-element-pack'),
+                'label' => __('Step Flow', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'icon_type',
             [
-                'label' => esc_html__('Icon Type', 'bdthemes-element-pack'),
+                'label' => esc_html__('Icon Type', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'icon',
@@ -78,11 +78,11 @@ class Step_Flow extends Module_Base {
                 'render_type' => 'template',
                 'options' => [
                     'icon' => [
-                        'title' => esc_html__('Icon', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Icon', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-star'
                     ],
                     'image' => [
-                        'title' => esc_html__('Image', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Image', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-image'
                     ]
                 ]
@@ -92,7 +92,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'selected_icon',
             [
-                'label' => __('Icon', 'bdthemes-element-pack'),
+                'label' => __('Icon', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-directions',
@@ -108,7 +108,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'image',
             [
-                'label' => __('Image Icon', 'bdthemes-element-pack'),
+                'label' => __('Image Icon', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => ['active' => true],
                 'render_type' => 'template',
@@ -133,13 +133,13 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_text',
             [
-                'label' => __('Title', 'bdthemes-element-pack'),
+                'label' => __('Title', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => [
                     'active' => true,
                 ],
-                'default' => __('Step Flow Heading', 'bdthemes-element-pack'),
-                'placeholder' => __('Enter your title', 'bdthemes-element-pack'),
+                'default' => __('Step Flow Heading', 'bdthemes-element-pack-lite'),
+                'placeholder' => __('Enter your title', 'bdthemes-element-pack-lite'),
                 'label_block' => true,
             ]
         );
@@ -147,7 +147,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_link',
             [
-                'label' => __('Title Link', 'bdthemes-element-pack'),
+                'label' => __('Title Link', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-title-link-'
             ]
@@ -157,7 +157,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_link_url',
             [
-                'label' => __('Title Link URL', 'bdthemes-element-pack'),
+                'label' => __('Title Link URL', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::URL,
                 'dynamic' => ['active' => true],
                 'placeholder' => 'http://your-link.com',
@@ -170,13 +170,13 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'description_text',
             [
-                'label' => __('Description', 'bdthemes-element-pack'),
+                'label' => __('Description', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::TEXTAREA,
                 'dynamic' => [
                     'active' => true,
                 ],
-                'default' => __('Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack'),
-                'placeholder' => __('Enter your description', 'bdthemes-element-pack'),
+                'default' => __('Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack-lite'),
+                'placeholder' => __('Enter your description', 'bdthemes-element-pack-lite'),
                 'rows' => 10,
                 'separator' => 'before',
             ]
@@ -185,7 +185,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_size',
             [
-                'label' => __('Title HTML Tag', 'bdthemes-element-pack'),
+                'label' => __('Title HTML Tag', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'h3',
                 'options' => element_pack_title_tags(),
@@ -195,23 +195,23 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'text_align',
             [
-                'label' => __('Alignment', 'bdthemes-element-pack'),
+                'label' => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                        'title' => __('Justified', 'bdthemes-element-pack'),
+                        'title' => __('Justified', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-justify',
                     ],
                 ],
@@ -224,7 +224,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'show_separator',
             [
-                'label' => __('Title Separator', 'bdthemes-element-pack'),
+                'label' => __('Title Separator', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
             ]
         );
@@ -232,7 +232,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'readmore',
             [
-                'label' => __('Read More', 'bdthemes-element-pack'),
+                'label' => __('Read More', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
             ]
         );
@@ -240,7 +240,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'badge',
             [
-                'label' => __('Badge (Step)', 'bdthemes-element-pack'),
+                'label' => __('Badge (Step)', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes'
             ]
@@ -249,7 +249,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'show_indicator',
             [
-                'label' => __('Show Direction', 'bdthemes-element-pack'),
+                'label' => __('Show Direction', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -259,14 +259,14 @@ class Step_Flow extends Module_Base {
         $this->add_control(
 			'direction_hide_on',
 			[ 
-				'label'              => __( 'Direction Hide On', 'bdthemes-element-pack' ),
+				'label'              => __( 'Direction Hide On', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT2,
 				'multiple'           => true,
 				'label_block'        => true,
 				'options'            => [ 
-					'desktop' => __( 'Desktop', 'bdthemes-element-pack' ),
-					'tablet'  => __( 'Tablet', 'bdthemes-element-pack' ),
-					'mobile'  => __( 'Mobile', 'bdthemes-element-pack' ),
+					'desktop' => __( 'Desktop', 'bdthemes-element-pack-lite' ),
+					'tablet'  => __( 'Tablet', 'bdthemes-element-pack-lite' ),
+					'mobile'  => __( 'Mobile', 'bdthemes-element-pack-lite' ),
 				],
 				'frontend_available' => true,
                 'condition'          => [
@@ -278,17 +278,17 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'global_link',
             [
-                'label' => __('Global Link', 'bdthemes-element-pack'),
+                'label' => __('Global Link', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-global-link-',
-                'description' => __('Be aware! When Global Link activated then title link and read more link will not work', 'bdthemes-element-pack'),
+                'description' => __('Be aware! When Global Link activated then title link and read more link will not work', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'global_link_url',
             [
-                'label' => __('Global Link URL', 'bdthemes-element-pack'),
+                'label' => __('Global Link URL', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::URL,
                 'dynamic' => ['active' => true],
                 'placeholder' => 'http://your-link.com',
@@ -303,7 +303,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_content_readmore',
             [
-                'label' => __('Read More', 'bdthemes-element-pack'),
+                'label' => __('Read More', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'readmore' => 'yes',
                 ],
@@ -313,24 +313,24 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'readmore_text',
             [
-                'label' => __('Text', 'bdthemes-element-pack'),
+                'label' => __('Text', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
-                'default' => __('Read More', 'bdthemes-element-pack'),
-                'placeholder' => __('Read More', 'bdthemes-element-pack'),
+                'default' => __('Read More', 'bdthemes-element-pack-lite'),
+                'placeholder' => __('Read More', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'readmore_link',
             [
-                'label' => __('Link to', 'bdthemes-element-pack'),
+                'label' => __('Link to', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::URL,
                 'separator' => 'before',
                 'dynamic' => [
                     'active' => true,
                 ],
-                'placeholder' => __('https://your-link.com', 'bdthemes-element-pack'),
+                'placeholder' => __('https://your-link.com', 'bdthemes-element-pack-lite'),
                 'default' => [
                     'url' => '#',
                 ],
@@ -344,7 +344,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'advanced_readmore_icon',
             [
-                'label' => __('Icon', 'bdthemes-element-pack'),
+                'label' => __('Icon', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::ICONS,
                 'separator' => 'before',
                 'label_block' => false,
@@ -358,12 +358,12 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'readmore_icon_align',
             [
-                'label' => __('Icon Position', 'bdthemes-element-pack'),
+                'label' => __('Icon Position', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'right',
                 'options' => [
-                    'left' => __('Left', 'bdthemes-element-pack'),
-                    'right' => __('Right', 'bdthemes-element-pack'),
+                    'left' => __('Left', 'bdthemes-element-pack-lite'),
+                    'right' => __('Right', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'advanced_readmore_icon[value]!' => '',
@@ -374,7 +374,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'readmore_icon_indent',
             [
-                'label' => __('Icon Spacing', 'bdthemes-element-pack'),
+                'label' => __('Icon Spacing', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -397,7 +397,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'readmore_on_hover',
             [
-                'label' => __('Show on Hover', 'bdthemes-element-pack'),
+                'label' => __('Show on Hover', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-readmore-on-hover-',
             ]
@@ -406,7 +406,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'readmore_horizontal_offset',
             [
-                'label' => __('Horizontal Offset', 'bdthemes-element-pack'),
+                'label' => __('Horizontal Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => -50,
@@ -435,7 +435,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'readmore_vertical_offset',
             [
-                'label' => __('Vertical Offset', 'bdthemes-element-pack'),
+                'label' => __('Vertical Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -464,14 +464,14 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'button_css_id',
             [
-                'label' => __('Button ID', 'bdthemes-element-pack'),
+                'label' => __('Button ID', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => [
                     'active' => true,
                 ],
                 'default' => '',
-                'title' => __('Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack'),
-                'description' => __('Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack'),
+                'title' => __('Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite'),
+                'description' => __('Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite'),
                 'separator' => 'before',
             ]
         );
@@ -481,7 +481,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_content_badge',
             [
-                'label' => __('Badge (Step)', 'bdthemes-element-pack'),
+                'label' => __('Badge (Step)', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'badge' => 'yes',
                 ],
@@ -491,10 +491,10 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'badge_text',
             [
-                'label' => __('Badge Text', 'bdthemes-element-pack'),
+                'label' => __('Badge Text', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__( 'Step 01', 'bdthemes-element-pack' ),
-                'placeholder' => esc_html__( 'Type Step Here', 'bdthemes-element-pack' ),
+                'default' => esc_html__( 'Step 01', 'bdthemes-element-pack-lite' ),
+                'placeholder' => esc_html__( 'Type Step Here', 'bdthemes-element-pack-lite' ),
                 'dynamic' => [
                     'active' => true,
                 ],
@@ -504,7 +504,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'badge_position',
             [
-                'label' => esc_html__('Position', 'bdthemes-element-pack'),
+                'label' => esc_html__('Position', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'top-center',
                 'options' => element_pack_position(),
@@ -514,10 +514,10 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'badge_offset_toggle',
             [
-                'label' => __('Offset', 'bdthemes-element-pack'),
+                'label' => __('Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => __('None', 'bdthemes-element-pack'),
-                'label_on' => __('Custom', 'bdthemes-element-pack'),
+                'label_off' => __('None', 'bdthemes-element-pack-lite'),
+                'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -527,7 +527,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'badge_horizontal_offset',
             [
-                'label' => __('Horizontal Offset', 'bdthemes-element-pack'),
+                'label' => __('Horizontal Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -558,7 +558,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'badge_vertical_offset',
             [
-                'label' => __('Vertical Offset', 'bdthemes-element-pack'),
+                'label' => __('Vertical Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -589,7 +589,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'badge_rotate',
             [
-                'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+                'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -625,7 +625,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_style_step_flow',
             [
-                'label' => __('Icon/Image', 'bdthemes-element-pack'),
+                'label' => __('Icon/Image', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'conditions' => [
                     'relation' => 'or',
@@ -650,14 +650,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'icon_colors_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'icon_color',
             [
-                'label' => __('Icon Color', 'bdthemes-element-pack'),
+                'label' => __('Icon Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow .bdt-icon-wrapper' => 'color: {{VALUE}};',
@@ -681,7 +681,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'icon_padding',
             [
-                'label' => esc_html__('Padding', 'bdthemes-element-pack'),
+                'label' => esc_html__('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'separator' => 'before',
@@ -706,7 +706,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'icon_radius',
             [
-                'label' => esc_html__('Radius', 'bdthemes-element-pack'),
+                'label' => esc_html__('Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'separator' => 'after',
@@ -722,7 +722,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_radius_advanced_show',
             [
-                'label' => __('Advanced Radius', 'bdthemes-element-pack'),
+                'label' => __('Advanced Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
             ]
         );
@@ -730,9 +730,9 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'icon_radius_advanced',
             [
-                'label' => esc_html__('Radius', 'bdthemes-element-pack'),
+                'label' => esc_html__('Radius', 'bdthemes-element-pack-lite'),
                 // translators: %1s is an example radius value in bold, %2s is an anchor tag with a link to the border-radius generator.
-                'description' => sprintf(__('For example: <b>%1$s</b> or Go <a href="%2$s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack'), '75% 25% 43% 57% / 46% 29% 71% 54%', 'https://9elements.github.io/fancy-border-radius/'),
+                'description' => sprintf(__('For example: <b>%1$s</b> or Go <a href="%2$s" target="_blank">this link</a> and copy and paste the radius value.', 'bdthemes-element-pack-lite'), '75% 25% 43% 57% / 46% 29% 71% 54%', 'https://9elements.github.io/fancy-border-radius/'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => [ 'active' => true ],
                 'size_units' => ['px', '%'],
@@ -770,7 +770,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'icon_space',
             [
-                'label' => __('Spacing', 'bdthemes-element-pack'),
+                'label' => __('Spacing', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'separator' => 'before',
                 'default' => [
@@ -791,7 +791,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'image_fullwidth',
             [
-                'label' => __('Image Fullwidth', 'bdthemes-element-pack'),
+                'label' => __('Image Fullwidth', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow .bdt-icon-wrapper' => 'width: 100%;box-sizing: border-box;',
@@ -805,7 +805,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __('Size', 'bdthemes-element-pack'),
+                'label' => __('Size', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'vh', 'vw'],
                 'range' => [
@@ -839,7 +839,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'rotate',
             [
-                'label' => __('Rotate', 'bdthemes-element-pack'),
+                'label' => __('Rotate', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -862,7 +862,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_background_rotate',
             [
-                'label' => __('Background Rotate', 'bdthemes-element-pack'),
+                'label' => __('Background Rotate', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -883,7 +883,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'image_icon_heading',
             [
-                'label' => __('Image Effect', 'bdthemes-element-pack'),
+                'label' => __('Image Effect', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -906,7 +906,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'image_opacity',
             [
-                'label' => __('Opacity', 'bdthemes-element-pack'),
+                'label' => __('Opacity', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -927,7 +927,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'background_hover_transition',
             [
-                'label' => __('Transition Duration', 'bdthemes-element-pack'),
+                'label' => __('Transition Duration', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0.3,
@@ -952,14 +952,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'icon_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'icon_hover_color',
             [
-                'label' => __('Icon Color', 'bdthemes-element-pack'),
+                'label' => __('Icon Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow:hover .bdt-icon-wrapper' => 'color: {{VALUE}};',
@@ -983,17 +983,17 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_effect',
             [
-                'label' => __('Effect', 'bdthemes-element-pack'),
+                'label' => __('Effect', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'prefix_class' => 'bdt-icon-effect-',
                 'default' => 'none',
                 'options' => [
-                    'none' => __('None', 'bdthemes-element-pack'),
-                    'a' => __('Effect A', 'bdthemes-element-pack'),
-                    'b' => __('Effect B', 'bdthemes-element-pack'),
-                    'c' => __('Effect C', 'bdthemes-element-pack'),
-                    'd' => __('Effect D', 'bdthemes-element-pack'),
-                    'e' => __('Effect E', 'bdthemes-element-pack'),
+                    'none' => __('None', 'bdthemes-element-pack-lite'),
+                    'a' => __('Effect A', 'bdthemes-element-pack-lite'),
+                    'b' => __('Effect B', 'bdthemes-element-pack-lite'),
+                    'c' => __('Effect C', 'bdthemes-element-pack-lite'),
+                    'd' => __('Effect D', 'bdthemes-element-pack-lite'),
+                    'e' => __('Effect E', 'bdthemes-element-pack-lite'),
                 ],
             ]
         );
@@ -1001,7 +1001,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_hover_border_color',
             [
-                'label' => __('Border Color', 'bdthemes-element-pack'),
+                'label' => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'separator' => 'before',
                 'selectors' => [
@@ -1016,7 +1016,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_hover_radius',
             [
-                'label' => esc_html__('Radius', 'bdthemes-element-pack'),
+                'label' => esc_html__('Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'separator' => 'after',
@@ -1038,7 +1038,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_hover_rotate',
             [
-                'label' => __('Rotate', 'bdthemes-element-pack'),
+                'label' => __('Rotate', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'unit' => 'deg',
@@ -1059,7 +1059,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_hover_background_rotate',
             [
-                'label' => __('Background Rotate', 'bdthemes-element-pack'),
+                'label' => __('Background Rotate', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'unit' => 'deg',
@@ -1079,7 +1079,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'image_icon_hover_heading',
             [
-                'label' => __('Image Effect', 'bdthemes-element-pack'),
+                'label' => __('Image Effect', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -1102,7 +1102,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'image_opacity_hover',
             [
-                'label' => __('Opacity', 'bdthemes-element-pack'),
+                'label' => __('Opacity', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1127,10 +1127,10 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'icon_offset_toggle',
             [
-                'label' => __('Offset', 'bdthemes-element-pack'),
+                'label' => __('Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => __('None', 'bdthemes-element-pack'),
-                'label_on' => __('Custom', 'bdthemes-element-pack'),
+                'label_off' => __('None', 'bdthemes-element-pack-lite'),
+                'label_on' => __('Custom', 'bdthemes-element-pack-lite'),
                 'return_value' => 'yes',
                 'separator' => 'before'
             ]
@@ -1141,7 +1141,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'icon_horizontal_offset',
             [
-                'label' => __('Horizontal Offset', 'bdthemes-element-pack'),
+                'label' => __('Horizontal Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -1171,7 +1171,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'icon_vertical_offset',
             [
-                'label' => __('Vertical Offset', 'bdthemes-element-pack'),
+                'label' => __('Vertical Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
@@ -1205,7 +1205,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_style_title',
             [
-                'label' => __('Title', 'bdthemes-element-pack'),
+                'label' => __('Title', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1215,14 +1215,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'tab_title_style_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_responsive_control(
             'title_bottom_space',
             [
-                'label' => __('Spacing', 'bdthemes-element-pack'),
+                'label' => __('Spacing', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1239,7 +1239,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow-content .bdt-step-flow-title' => 'color: {{VALUE}};',
@@ -1260,14 +1260,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'tab_title_style_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'title_color_hover',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow:hover .bdt-step-flow-content .bdt-step-flow-title' => 'color: {{VALUE}};',
@@ -1292,7 +1292,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_style_description',
             [
-                'label' => __('Description', 'bdthemes-element-pack'),
+                'label' => __('Description', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1302,14 +1302,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'tab_description_style_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_responsive_control(
             'description_bottom_space',
             [
-                'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
+                'label' => esc_html__('Spacing', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow-content .bdt-step-flow-description' => 'margin-bottom: {{SIZE}}{{UNIT}};',
@@ -1320,7 +1320,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'description_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow-content .bdt-step-flow-description' => 'color: {{VALUE}};',
@@ -1341,14 +1341,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'tab_description_style_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'description_color_hover',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow:hover .bdt-step-flow-content .bdt-step-flow-description' => 'color: {{VALUE}};',
@@ -1373,7 +1373,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_content_title_separator',
             [
-                'label' => __('Title Separator', 'bdthemes-element-pack'),
+                'label' => __('Title Separator', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_separator' => 'yes',
@@ -1384,38 +1384,38 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_separator_type',
             [
-                'label' => esc_html__('Select Separator Type', 'bdthemes-element-pack'),
+                'label' => esc_html__('Select Separator Type', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'line',
                 'options' => [
-                    'line' => esc_html__('Line', 'bdthemes-element-pack'),
-                    'line-circle' => esc_html__('Line Circle', 'bdthemes-element-pack'),
-                    'line-cross' => esc_html__('Line Cross', 'bdthemes-element-pack'),
-                    'line-star' => esc_html__('Line Star', 'bdthemes-element-pack'),
-                    'line-dashed' => esc_html__('Line Dashed', 'bdthemes-element-pack'),
-                    'heart' => esc_html__('Heart', 'bdthemes-element-pack'),
-                    'dashed' => esc_html__('Dashed', 'bdthemes-element-pack'),
-                    'floret' => esc_html__('Floret', 'bdthemes-element-pack'),
-                    'rectangle' => esc_html__('Rectangle', 'bdthemes-element-pack'),
-                    'leaf' => esc_html__('Leaf', 'bdthemes-element-pack'),
-                    'slash' => esc_html__('Slash', 'bdthemes-element-pack'),
-                    'triangle' => esc_html__('Triangle', 'bdthemes-element-pack'),
-                    'wave' => esc_html__('Wave', 'bdthemes-element-pack'),
-                    'kiss-curl' => esc_html__('Kiss-curl', 'bdthemes-element-pack'),
-                    'zemik' => esc_html__('Zemik', 'bdthemes-element-pack'),
-                    'finest' => esc_html__('Finest', 'bdthemes-element-pack'),
-                    'furrow' => esc_html__('Furrow', 'bdthemes-element-pack'),
-                    'peak' => esc_html__('Peak', 'bdthemes-element-pack'),
-                    'melody' => esc_html__('Melody', 'bdthemes-element-pack'),
-                    'bloomstar' => esc_html__('Bloomstar', 'bdthemes-element-pack'),
-                    'bobbleaf' => esc_html__('Bobbleaf', 'bdthemes-element-pack'),
-                    'demaxa' => esc_html__('Demaxa', 'bdthemes-element-pack'),
-                    'fill-circle' => esc_html__('Fill Circle', 'bdthemes-element-pack'),
-                    'finalio' => esc_html__('Finalio', 'bdthemes-element-pack'),
-                    'jemik' => esc_html__('Jemik', 'bdthemes-element-pack'),
-                    'separk' => esc_html__('Separk', 'bdthemes-element-pack'),
-                    'zigzag-dot' => esc_html__('Zigzag Dot', 'bdthemes-element-pack'),
-                    'zozobe' => esc_html__('Zozobe', 'bdthemes-element-pack'),
+                    'line' => esc_html__('Line', 'bdthemes-element-pack-lite'),
+                    'line-circle' => esc_html__('Line Circle', 'bdthemes-element-pack-lite'),
+                    'line-cross' => esc_html__('Line Cross', 'bdthemes-element-pack-lite'),
+                    'line-star' => esc_html__('Line Star', 'bdthemes-element-pack-lite'),
+                    'line-dashed' => esc_html__('Line Dashed', 'bdthemes-element-pack-lite'),
+                    'heart' => esc_html__('Heart', 'bdthemes-element-pack-lite'),
+                    'dashed' => esc_html__('Dashed', 'bdthemes-element-pack-lite'),
+                    'floret' => esc_html__('Floret', 'bdthemes-element-pack-lite'),
+                    'rectangle' => esc_html__('Rectangle', 'bdthemes-element-pack-lite'),
+                    'leaf' => esc_html__('Leaf', 'bdthemes-element-pack-lite'),
+                    'slash' => esc_html__('Slash', 'bdthemes-element-pack-lite'),
+                    'triangle' => esc_html__('Triangle', 'bdthemes-element-pack-lite'),
+                    'wave' => esc_html__('Wave', 'bdthemes-element-pack-lite'),
+                    'kiss-curl' => esc_html__('Kiss-curl', 'bdthemes-element-pack-lite'),
+                    'zemik' => esc_html__('Zemik', 'bdthemes-element-pack-lite'),
+                    'finest' => esc_html__('Finest', 'bdthemes-element-pack-lite'),
+                    'furrow' => esc_html__('Furrow', 'bdthemes-element-pack-lite'),
+                    'peak' => esc_html__('Peak', 'bdthemes-element-pack-lite'),
+                    'melody' => esc_html__('Melody', 'bdthemes-element-pack-lite'),
+                    'bloomstar' => esc_html__('Bloomstar', 'bdthemes-element-pack-lite'),
+                    'bobbleaf' => esc_html__('Bobbleaf', 'bdthemes-element-pack-lite'),
+                    'demaxa' => esc_html__('Demaxa', 'bdthemes-element-pack-lite'),
+                    'fill-circle' => esc_html__('Fill Circle', 'bdthemes-element-pack-lite'),
+                    'finalio' => esc_html__('Finalio', 'bdthemes-element-pack-lite'),
+                    'jemik' => esc_html__('Jemik', 'bdthemes-element-pack-lite'),
+                    'separk' => esc_html__('Separk', 'bdthemes-element-pack-lite'),
+                    'zigzag-dot' => esc_html__('Zigzag Dot', 'bdthemes-element-pack-lite'),
+                    'zozobe' => esc_html__('Zozobe', 'bdthemes-element-pack-lite'),
                 ],
                 'render_type' => 'template',
             ]
@@ -1424,21 +1424,21 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'divider_align',
             [
-                'label' => __('Alignment', 'bdthemes-element-pack'),
+                'label' => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'center',
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -1455,21 +1455,21 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'divider_line_align',
             [
-                'label' => __('Alignment', 'bdthemes-element-pack'),
+                'label' => __('Alignment', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'center',
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'bdthemes-element-pack'),
+                        'title' => __('Left', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'bdthemes-element-pack'),
+                        'title' => __('Center', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'bdthemes-element-pack'),
+                        'title' => __('Right', 'bdthemes-element-pack-lite'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -1486,14 +1486,14 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_separator_border_style',
             [
-                'label' => esc_html__('Separator Style', 'bdthemes-element-pack'),
+                'label' => esc_html__('Separator Style', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'solid',
                 'options' => [
-                    'solid' => esc_html__('Solid', 'bdthemes-element-pack'),
-                    'dotted' => esc_html__('Dotted', 'bdthemes-element-pack'),
-                    'dashed' => esc_html__('Dashed', 'bdthemes-element-pack'),
-                    'groove' => esc_html__('Groove', 'bdthemes-element-pack'),
+                    'solid' => esc_html__('Solid', 'bdthemes-element-pack-lite'),
+                    'dotted' => esc_html__('Dotted', 'bdthemes-element-pack-lite'),
+                    'dashed' => esc_html__('Dashed', 'bdthemes-element-pack-lite'),
+                    'groove' => esc_html__('Groove', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'title_separator_type' => 'line'
@@ -1507,7 +1507,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_separator_line_color',
             [
-                'label' => esc_html__('Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'condition' => [
                     'title_separator_type' => 'line'
@@ -1521,7 +1521,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'title_separator_height',
             [
-                'label' => __('Height', 'bdthemes-element-pack'),
+                'label' => __('Height', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1542,7 +1542,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'title_separator_width',
             [
-                'label' => __('Width', 'bdthemes-element-pack'),
+                'label' => __('Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
@@ -1568,7 +1568,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_separator_svg_fill_color',
             [
-                'label' => esc_html__('Fill Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Fill Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'condition' => [
                     'title_separator_type!' => 'line'
@@ -1582,7 +1582,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_separator_svg_stroke_color',
             [
-                'label' => esc_html__('Stroke Color', 'bdthemes-element-pack'),
+                'label' => esc_html__('Stroke Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'condition' => [
                     'title_separator_type!' => 'line'
@@ -1596,7 +1596,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'max_width',
             [
-                'label' => __('Width', 'bdthemes-element-pack'),
+                'label' => __('Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1616,13 +1616,13 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'line_cap',
             [
-                'label' => esc_html__('Line Cap', 'bdthemes-element-pack'),
+                'label' => esc_html__('Line Cap', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'ep_square',
                 'options' => [
-                    'ep_square' => esc_html__('Square', 'bdthemes-element-pack'),
-                    'ep_round' => esc_html__('Rounded', 'bdthemes-element-pack'),
-                    'ep_butt' => esc_html__('Butt', 'bdthemes-element-pack'),
+                    'ep_square' => esc_html__('Square', 'bdthemes-element-pack-lite'),
+                    'ep_round' => esc_html__('Rounded', 'bdthemes-element-pack-lite'),
+                    'ep_butt' => esc_html__('Butt', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'title_separator_type!' => 'line'
@@ -1633,7 +1633,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'divider_svg_stroke_width',
             [
-                'label' => __('Stroke Width', 'bdthemes-element-pack'),
+                'label' => __('Stroke Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1653,7 +1653,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'divider_crop',
             [
-                'label' => __('Divider Crop', 'bdthemes-element-pack'),
+                'label' => __('Divider Crop', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1673,7 +1673,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'max_height',
             [
-                'label' => __('Match Height', 'bdthemes-element-pack'),
+                'label' => __('Match Height', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1692,7 +1692,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'title_separator_spacing',
             [
-                'label' => __('Separator Spacing', 'bdthemes-element-pack'),
+                'label' => __('Separator Spacing', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1710,7 +1710,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_style_readmore',
             [
-                'label' => __('Read More', 'bdthemes-element-pack'),
+                'label' => __('Read More', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'readmore' => 'yes',
@@ -1721,7 +1721,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'readmore_attention',
             [
-                'label' => __('Attention', 'bdthemes-element-pack'),
+                'label' => __('Attention', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SWITCHER,
             ]
         );
@@ -1731,14 +1731,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'tab_readmore_normal',
             [
-                'label' => __('Normal', 'bdthemes-element-pack'),
+                'label' => __('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'readmore_text_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow-readmore' => 'color: {{VALUE}};',
@@ -1770,7 +1770,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'readmore_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'separator' => 'after',
@@ -1791,7 +1791,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'readmore_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => __('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -1813,14 +1813,14 @@ class Step_Flow extends Module_Base {
         $this->start_controls_tab(
             'tab_readmore_hover',
             [
-                'label' => __('Hover', 'bdthemes-element-pack'),
+                'label' => __('Hover', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'readmore_hover_text_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow-readmore:hover' => 'color: {{VALUE}};',
@@ -1841,7 +1841,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'readmore_hover_border_color',
             [
-                'label' => __('Border Color', 'bdthemes-element-pack'),
+                'label' => __('Border Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-step-flow-readmore:hover' => 'border-color: {{VALUE}};',
@@ -1863,7 +1863,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'readmore_hover_animation',
             [
-                'label' => __('Hover Animation', 'bdthemes-element-pack'),
+                'label' => __('Hover Animation', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::HOVER_ANIMATION,
             ]
         );
@@ -1877,7 +1877,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             '_section_direction_style',
             [
-                'label' => __('Direction', 'bdthemes-element-pack'),
+                'label' => __('Direction', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_indicator' => 'yes'
@@ -1888,7 +1888,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'direction_animation',
             [
-                'label'     => __('Hover Animation', 'bdthemes-element-pack'),
+                'label'     => __('Hover Animation', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-direction-animation--',
                 'condition' => [
@@ -1901,7 +1901,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'infinite_animation',
             [
-                'label'     => __('Infinite Animation', 'bdthemes-element-pack'),
+                'label'     => __('Infinite Animation', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SWITCHER,
                 'prefix_class' => 'bdt-infinite-animation--',
             ]
@@ -1917,18 +1917,18 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'direction_style',
             [
-                'label' => __('Style', 'bdthemes-element-pack'),
+                'label' => __('Style', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '1',
                 'options' => [
-                    '1' => __('Style 1', 'bdthemes-element-pack'),
-                    '2' => __('Style 2', 'bdthemes-element-pack'),
-                    '3' => __('Style 3', 'bdthemes-element-pack'),
-                    '4' => __('Style 4', 'bdthemes-element-pack'),
-                    '5' => __('Style 5', 'bdthemes-element-pack'),
-                    '6' => __('Style 6', 'bdthemes-element-pack'),
-                    '7' => __('Style 7', 'bdthemes-element-pack'),
-                    '8' => __('Style 8', 'bdthemes-element-pack'),
+                    '1' => __('Style 1', 'bdthemes-element-pack-lite'),
+                    '2' => __('Style 2', 'bdthemes-element-pack-lite'),
+                    '3' => __('Style 3', 'bdthemes-element-pack-lite'),
+                    '4' => __('Style 4', 'bdthemes-element-pack-lite'),
+                    '5' => __('Style 5', 'bdthemes-element-pack-lite'),
+                    '6' => __('Style 6', 'bdthemes-element-pack-lite'),
+                    '7' => __('Style 7', 'bdthemes-element-pack-lite'),
+                    '8' => __('Style 8', 'bdthemes-element-pack-lite'),
                 ],
                 'render_type' => 'template',
             ]
@@ -1937,7 +1937,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'direction_width',
             [
-                'label' => __('Width', 'bdthemes-element-pack'),
+                'label' => __('Width', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
@@ -1955,7 +1955,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'direction_offset_toggle',
             [
-                'label' => __('Offset', 'bdthemes-element-pack'),
+                'label' => __('Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::POPOVER_TOGGLE,
                 'return_value' => 'yes',
             ]
@@ -1966,7 +1966,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'direction_offset_y',
             [
-                'label' => __('Vertical Offset', 'bdthemes-element-pack'),
+                'label' => __('Vertical Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'condition' => [
@@ -1982,7 +1982,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'direction_offset_x',
             [
-                'label' => __('Horizontal Offset', 'bdthemes-element-pack'),
+                'label' => __('Horizontal Offset', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -2004,7 +2004,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'direction_rotate',
             [
-                'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+                'label' => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'devices' => ['desktop', 'tablet', 'mobile'],
                 'default' => [
@@ -2038,7 +2038,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'direction_color',
             [
-                'label' => __('Color', 'bdthemes-element-pack'),
+                'label' => __('Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-direction-svg svg *' => 'stroke: {{VALUE}};',
@@ -2051,7 +2051,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_style_badge',
             [
-                'label' => __('Badge (Step)', 'bdthemes-element-pack'),
+                'label' => __('Badge (Step)', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'badge' => 'yes',
@@ -2062,7 +2062,7 @@ class Step_Flow extends Module_Base {
         $this->add_control(
             'badge_text_color',
             [
-                'label' => __('Text Color', 'bdthemes-element-pack'),
+                'label' => __('Text Color', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}}.elementor-widget-bdt-step-flow .bdt-step-flow-badge span' => 'color: {{VALUE}} !important;',
@@ -2094,7 +2094,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'badge_radius',
             [
-                'label' => __('Border Radius', 'bdthemes-element-pack'),
+                'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'separator' => 'after',
@@ -2107,7 +2107,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'badge_padding',
             [
-                'label' => __('Padding', 'bdthemes-element-pack'),
+                'label' => __('Padding', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -2137,7 +2137,7 @@ class Step_Flow extends Module_Base {
         $this->start_controls_section(
             'section_style_additional',
             [
-                'label' => __('Additional', 'bdthemes-element-pack'),
+                'label' => __('Additional', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -2145,7 +2145,7 @@ class Step_Flow extends Module_Base {
         $this->add_responsive_control(
             'content_padding',
             [
-                'label'      => esc_html__('Content Inner Padding', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Content Inner Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -2327,7 +2327,7 @@ class Step_Flow extends Module_Base {
                     <?php endif; ?>
 
                     <span class="bdt-step-flow-readmore-text">
-                        <?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : esc_html__( 'Read More', 'bdthemes-element-pack' ) ); ?>
+                        <?php echo esc_html( isset( $settings['readmore_text'] ) ? $settings['readmore_text'] : esc_html__( 'Read More', 'bdthemes-element-pack-lite' ) ); ?>
                     </span>
 
                     <?php if ( $settings['readmore_icon_align'] === 'right' ) : ?>

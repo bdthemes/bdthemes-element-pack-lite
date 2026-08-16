@@ -11,7 +11,7 @@ trait Global_Terms_Query_Controls {
         $this->start_controls_section(
             'section_term_query',
             [
-                'label' => __('Query', 'bdthemes-element-pack'),
+                'label' => __('Query', 'bdthemes-element-pack-lite'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -19,13 +19,13 @@ trait Global_Terms_Query_Controls {
         $this->add_control(
             'display_category',
             [
-                'label' => __('Type', 'bdthemes-element-pack'),
+                'label' => __('Type', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'all',
                 'options' => [
-                    'all' => __('All', 'bdthemes-element-pack'),
-                    'parents' => __('Only Parents', 'bdthemes-element-pack'),
-                    'child' => __('Only Child', 'bdthemes-element-pack')
+                    'all' => __('All', 'bdthemes-element-pack-lite'),
+                    'parents' => __('Only Parents', 'bdthemes-element-pack-lite'),
+                    'child' => __('Only Child', 'bdthemes-element-pack-lite')
                 ],
             ]
         );
@@ -33,7 +33,7 @@ trait Global_Terms_Query_Controls {
         // $this->add_control(
         // 	'item_limit',
         // 	[
-        // 		'label' => esc_html__('Item Limit', 'bdthemes-element-pack'),
+        // 		'label' => esc_html__('Item Limit', 'bdthemes-element-pack-lite'),
         // 		'type'  => Controls_Manager::SLIDER,
         // 		'range' => [
         // 			'px' => [
@@ -56,7 +56,7 @@ trait Global_Terms_Query_Controls {
         $this->start_controls_tab(
             'tab_term_include',
             [
-                'label' => __('Include', 'bdthemes-element-pack'),
+                'label' => __('Include', 'bdthemes-element-pack-lite'),
                 'condition' => ['display_category' => 'all']
             ]
         );
@@ -64,7 +64,7 @@ trait Global_Terms_Query_Controls {
         $this->add_control(
             'cats_include_by_id',
             [
-                'label' => __('Categories', 'bdthemes-element-pack'),
+                'label' => __('Categories', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
                 'label_block' => true,
@@ -80,7 +80,7 @@ trait Global_Terms_Query_Controls {
         $this->start_controls_tab(
             'tab_term_exclude',
             [
-                'label' => __('Exclude', 'bdthemes-element-pack'),
+                'label' => __('Exclude', 'bdthemes-element-pack-lite'),
                 'condition' => ['display_category' => 'all']
             ]
         );
@@ -88,7 +88,7 @@ trait Global_Terms_Query_Controls {
         $this->add_control(
             'cats_exclude_by_id',
             [
-                'label' => __('Categories', 'bdthemes-element-pack'),
+                'label' => __('Categories', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
                 'label_block' => true,
@@ -105,7 +105,7 @@ trait Global_Terms_Query_Controls {
             'child_cats_notice',
             [
                 'type'              => Controls_Manager::RAW_HTML,
-                'raw'               => __('WARNING!, Must Select Parent Category from Child Categories of.', 'bdthemes-element-pack'),
+                'raw'               => __('WARNING!, Must Select Parent Category from Child Categories of.', 'bdthemes-element-pack-lite'),
                 'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
                 'condition' => [
                     'display_category' => 'child',
@@ -116,7 +116,7 @@ trait Global_Terms_Query_Controls {
         $this->add_control(
             'parent_cats',
             [
-                'label' => __('Child Categories of', 'bdthemes-element-pack'),
+                'label' => __('Child Categories of', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'none',
                 'options' => element_pack_get_only_parent_cats($taxonomy),
@@ -130,15 +130,15 @@ trait Global_Terms_Query_Controls {
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'bdthemes-element-pack'),
+                'label' => __('Order By', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'name',
                 'options' => [
-                    'name'       => esc_html__('Name', 'bdthemes-element-pack'),
-                    'count'  => esc_html__('Count', 'bdthemes-element-pack'),
-                    'slug' => esc_html__('Slug', 'bdthemes-element-pack'),
-                    // 'menu_order' => esc_html__('Menu Order', 'bdthemes-element-pack'),
-                    // 'rand'       => esc_html__('Random', 'bdthemes-element-pack'),
+                    'name'       => esc_html__('Name', 'bdthemes-element-pack-lite'),
+                    'count'  => esc_html__('Count', 'bdthemes-element-pack-lite'),
+                    'slug' => esc_html__('Slug', 'bdthemes-element-pack-lite'),
+                    // 'menu_order' => esc_html__('Menu Order', 'bdthemes-element-pack-lite'),
+                    // 'rand'       => esc_html__('Random', 'bdthemes-element-pack-lite'),
                 ],
             ]
         );
@@ -146,19 +146,19 @@ trait Global_Terms_Query_Controls {
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'bdthemes-element-pack'),
+                'label' => __('Order', 'bdthemes-element-pack-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'desc',
                 'options' => [
-                    'desc' => __('Descending', 'bdthemes-element-pack'),
-                    'asc' => __('Ascending', 'bdthemes-element-pack'),
+                    'desc' => __('Descending', 'bdthemes-element-pack-lite'),
+                    'asc' => __('Ascending', 'bdthemes-element-pack-lite'),
                 ],
             ]
         );
         $this->add_control(
             'hide_empty',
             [
-                'label'         => __('Hide Empty', 'bdthemes-element-pack'),
+                'label'         => __('Hide Empty', 'bdthemes-element-pack-lite'),
                 'type'          => Controls_Manager::SWITCHER,
             ]
         );

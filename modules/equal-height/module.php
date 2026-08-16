@@ -27,7 +27,7 @@ class Module extends Element_Pack_Module_Base {
 		$element->start_controls_section(
 			'section_equal_height_controls',
 			[
-				'label' => BDTEP_CP . esc_html__('Equal Height', 'bdthemes-element-pack'),
+				'label' => BDTEP_CP . esc_html__('Equal Height', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_ADVANCED,
 			]
 		);
@@ -40,17 +40,17 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'section_equal_height_on',
 			[
-				'label'        => esc_html__('Enable Equal Height', 'bdthemes-element-pack'),
+				'label'        => esc_html__('Enable Equal Height', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
-				'description'  => esc_html__('You can make your columns or widgets have equal height by enabling this option.', 'bdthemes-element-pack'),
+				'description'  => esc_html__('You can make your columns or widgets have equal height by enabling this option.', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$section->add_control(
 			'section_equal_height_selector',
 			[
-				'label'     => esc_html__('Equal Height For', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Equal Height For', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [
 					'column'     => 'Columns',
@@ -70,7 +70,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'section_equal_height_custom_selector',
 			[
-				'label'       => esc_html__('Custom Selector', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Custom Selector', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
 				'placeholder' => '.class-name',
@@ -85,7 +85,7 @@ class Module extends Element_Pack_Module_Base {
 			'equal_height_important_note',
 			[
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'If the Equal Height feature is not visible in the editor, please visit the preview page to see the changes.', 'bdthemes-element-pack' ),
+				'raw'             => esc_html__( 'If the Equal Height feature is not visible in the editor, please visit the preview page to see the changes.', 'bdthemes-element-pack-lite' ),
 				'separator'       => 'before',
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 				'condition'       => [

@@ -2,6 +2,10 @@
 
 use ElementPack\Admin\AssetMinifier\Asset_Minifier;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if (!class_exists('ElementPack_Settings_API')) :
 
     class ElementPack_Settings_API {
@@ -112,7 +116,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 				}
 				echo '<div class="ep-options" role="presentation" ' . esc_attr($data_settings) . '>';
 
-				echo '<p class="ep-no-result bdt-text-center bdt-width-1-1 bdt-margin-small-top bdt-padding bdt-h4">' . esc_html__('Ops! Your Searched widget not found! Do you have any idea? If yes, ', 'bdthemes-element-pack') . '<a href="https://feedback.elementpack.pro/b/3v2gg80n/feature-requests/idea/new" target="_blank">' . esc_html__('Submit here', 'bdthemes-element-pack') . '</a></p>';
+				echo '<p class="ep-no-result bdt-text-center bdt-width-1-1 bdt-margin-small-top bdt-padding bdt-h4">' . esc_html__('Ops! Your Searched widget not found! Do you have any idea? If yes, ', 'bdthemes-element-pack-lite') . '<a href="https://feedback.elementpack.pro/b/3v2gg80n/feature-requests/idea/new" target="_blank">' . esc_html__('Submit here', 'bdthemes-element-pack-lite') . '</a></p>';
 
 				$this->do_settings_fields($page, $section['id']);
 
@@ -166,7 +170,7 @@ if (!class_exists('ElementPack_Settings_API')) :
                 $data_type = ' data-widget-type="' . esc_attr($field['args']['widget_type']) . '" data-content-type="' . esc_attr($field['args']['content_type']) . esc_attr($widget_used_status) . '" data-widget-name="' . strtolower($field['args']['name']) . '"';
 
                 if (!empty($field['args']['widget_type']) && 'pro' == $field['args']['widget_type'] && true !== element_pack_pro_activated()) {
-                    $data_type .= ' bdt-tooltip="' . esc_attr__( 'Pro widget only works with Pro version.', 'bdthemes-element-pack' ) . '"';
+                    $data_type .= ' bdt-tooltip="' . esc_attr__( 'Pro widget only works with Pro version.', 'bdthemes-element-pack-lite' ) . '"';
                 }
 
                 echo "<div class='ep-option-item {$class} {$widget_used_status}' {$data_type}>";
@@ -251,8 +255,40 @@ if (!class_exists('ElementPack_Settings_API')) :
 
             // creates our settings in the options table
             foreach ($this->settings_sections as $section) {
-                register_setting($section['id'], $section['id'], array($this, 'sanitize_options'));
+                register_setting(
+                    $section['id'],
+                    $section['id'],
+                    array(
+                        'type'              => 'array',
+                        'sanitize_callback' => array($this, 'sanitize_options'),
+                    )
+                );
             }
+        }
+
+        /**
+         * Allowed HTML for settings-field markup, used by wp_kses() on output.
+         *
+         * @return array
+         */
+        protected function get_allowed_field_html() {
+            $attr = array(
+                'class' => array(), 'id' => array(), 'name' => array(), 'value' => array(),
+                'type' => array(), 'for' => array(), 'href' => array(), 'target' => array(),
+                'title' => array(), 'placeholder' => array(), 'min' => array(), 'max' => array(),
+                'step' => array(), 'rows' => array(), 'cols' => array(), 'scope' => array(),
+                'checked' => array(), 'selected' => array(), 'disabled' => array(),
+                'readonly' => array(), 'multiple' => array(), 'style' => array(),
+                'aria-hidden' => array(), 'bdt-tooltip' => array(), 'data-default-color' => array(),
+            );
+
+            return array(
+                'fieldset' => $attr, 'div' => $attr, 'span' => $attr, 'label'  => $attr,
+                'input'    => $attr, 'select' => $attr, 'option' => $attr, 'textarea' => $attr,
+                'a'        => $attr, 'i'      => $attr, 'p'      => $attr, 'br'    => $attr,
+                'hr'       => $attr, 'h3'     => $attr, 'h4'     => $attr, 'strong' => $attr,
+                'em'       => $attr, 'code'   => $attr, 'small'  => $attr,
+            );
         }
 
         /**
@@ -286,20 +322,20 @@ if (!class_exists('ElementPack_Settings_API')) :
 
             $html .= '<div class="ep-option-item-inner">';
             if ($args['video_url']) {
-                $html .= '<a href="' . $args['video_url'] . '" target="_blank" class="ep-option-video" bdt-tooltip="View ' . $args['name'] . ' Video Tutorial"><i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
+                $html .= '<a href="' . esc_url($args['video_url']) . '" target="_blank" class="ep-option-video" bdt-tooltip="View ' . esc_attr($args['name']) . ' Video Tutorial"><i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
             }
-            $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', $args['section'], $args['id']);
+            $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', esc_attr($args['section']), esc_attr($args['id']));
             $html .= '<span scope="row" class="ep-option-label">' . $args['name'] . '</span>';
             $html  .= '</label>';
 
 
-            $html .= sprintf('<input type="%1$s" class="%2$s" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $class, $args['section'], $args['id'], $value, $placeholder);
+            $html .= sprintf('<input type="%1$s" class="%2$s" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $class, esc_attr($args['section']), esc_attr($args['id']), $value, $placeholder);
 
             $html  .= $this->get_field_description($args);
 
             $html .= '</div>';
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -325,10 +361,10 @@ if (!class_exists('ElementPack_Settings_API')) :
             $max         = ($args['max'] == '') ? '' : ' max="' . $args['max'] . '"';
             $step        = ($args['step'] == '') ? '' : ' step="' . $args['step'] . '"';
 
-            $html        = sprintf('<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder, $min, $max, $step);
+            $html        = sprintf('<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, esc_attr($args['section']), esc_attr($args['id']), $value, $placeholder, $min, $max, $step);
             $html       .= $this->get_field_description($args);
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -394,16 +430,16 @@ if (!class_exists('ElementPack_Settings_API')) :
 
 			$html .= '<i class="bdt-wi-' . esc_attr($args['id']) . '" aria-hidden="true"></i>';
 			$html .= '<div class="ep-option-label-wrap">';
-			$html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', $args['section'], $args['id']);
+			$html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', esc_attr($args['section']), esc_attr($args['id']));
 			$html .= '<span scope="row" class="ep-option-label">' . $args['name'] . '</span>';
 			$html .= '</label>';
 
 			$html .= '<div class="ep-option-links">';
 			if ($args['demo_url']) {
-				$html .= '<a href="' . esc_url( $args['demo_url'] ) . '" target="_blank" class="ep-option-demo" title="' . esc_attr( sprintf( __( 'View %s Widget Demo', 'bdthemes-element-pack' ), $args['name'] ) ) . '">' . esc_html__( 'Demo', 'bdthemes-element-pack' ) . '<i class="bdt-wi-preview" aria-hidden="true"></i></a>';
+				$html .= '<a href="' . esc_url( $args['demo_url'] ) . '" target="_blank" class="ep-option-demo" title="' . esc_attr( sprintf( __( 'View %s Widget Demo', 'bdthemes-element-pack-lite' ), $args['name'] ) ) . '">' . esc_html__( 'Demo', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-preview" aria-hidden="true"></i></a>';
 			}
 			if ($args['video_url']) {
-				$html .= '<a href="' . esc_url( $args['video_url'] ) . '" target="_blank" class="ep-option-video" title="' . esc_attr( sprintf( __( 'View %s Video Tutorial', 'bdthemes-element-pack' ), $args['name'] ) ) . '">' . esc_html__( 'Video', 'bdthemes-element-pack' ) . '<i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
+				$html .= '<a href="' . esc_url( $args['video_url'] ) . '" target="_blank" class="ep-option-video" title="' . esc_attr( sprintf( __( 'View %s Video Tutorial', 'bdthemes-element-pack-lite' ), $args['name'] ) ) . '">' . esc_html__( 'Video', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
 			}
 			$html .= '</div>';
 			$html .= '</div>';
@@ -422,22 +458,22 @@ if (!class_exists('ElementPack_Settings_API')) :
 					}
 					if (!is_plugin_active($plugin_path)) {
 						$active_link = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $plugin_path . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $plugin_path);
-						$html .= '<a href="' . $active_link . '" class="element-pack-3pp-active" bdt-tooltip="' . esc_html__('Activate the plugin first then you can activate this widget.', 'bdthemes-element-pack') . '"><span class="dashicons dashicons-admin-plugins"></span></a>';
+						$html .= '<a href="' . esc_url($active_link) . '" class="element-pack-3pp-active" bdt-tooltip="' . esc_html__('Activate the plugin first then you can activate this widget.', 'bdthemes-element-pack-lite') . '"><span class="dashicons dashicons-admin-plugins"></span></a>';
 					}
 				} else {
 					if ($paid) {
-						$html .= '<a href="' . $paid . '" class="element-pack-3pp-download" bdt-tooltip="' . esc_html__('Download and install plugin first then you can activate this widget.', 'bdthemes-element-pack') . '"><span class="dashicons dashicons-download"></span></a>';
+						$html .= '<a href="' . esc_url($paid) . '" class="element-pack-3pp-download" bdt-tooltip="' . esc_html__('Download and install plugin first then you can activate this widget.', 'bdthemes-element-pack-lite') . '"><span class="dashicons dashicons-download"></span></a>';
 					} else {
 						$install_link = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $plugin_name), 'install-plugin_' . $plugin_name);
-						$html .= '<a href="' . $install_link . '" class="element-pack-3pp-install" bdt-tooltip="' . esc_html__('Install the plugin first then you can activate this widget.', 'bdthemes-element-pack') . '"><span class="dashicons dashicons-download"></span></a>';
+						$html .= '<a href="' . esc_url($install_link) . '" class="element-pack-3pp-install" bdt-tooltip="' . esc_html__('Install the plugin first then you can activate this widget.', 'bdthemes-element-pack-lite') . '"><span class="dashicons dashicons-download"></span></a>';
 					}
 				}
 				if ($this->_is_plugin_installed($plugin_name, $plugin_path) and is_plugin_active($plugin_path)) {
 
 					$html .= '<fieldset>';
-					$html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', $args['section'], $args['id']);
-					$html .= sprintf('<input type="hidden" name="%1$s[%2$s]" value="off" />', $args['section'], $args['id']);
-					$html .= sprintf('<input type="checkbox" class="checkbox' . $parent_class . '" id="bdt_ep_%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', $args['section'], $args['id'], checked($value, 'on', false));
+					$html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', esc_attr($args['section']), esc_attr($args['id']));
+					$html .= sprintf('<input type="hidden" name="%1$s[%2$s]" value="off" />', esc_attr($args['section']), esc_attr($args['id']));
+					$html .= sprintf('<input type="checkbox" class="checkbox' . $parent_class . '" id="bdt_ep_%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', esc_attr($args['section']), esc_attr($args['id']), checked($value, 'on', false));
 					$html .= '<span class="switch"></span>';
 					$html .= '</label>';
 					$html .= '</fieldset>';
@@ -445,9 +481,9 @@ if (!class_exists('ElementPack_Settings_API')) :
 			} else { // core widgets
 
 				$html .= '<fieldset>';
-				$html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', $args['section'], $args['id']);
-				$html .= sprintf('<input type="hidden" name="%1$s[%2$s]" value="off" />', $args['section'], $args['id']);
-				$html .= sprintf('<input type="checkbox" class="checkbox" id="bdt_ep_%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', $args['section'], $args['id'], checked($value, 'on', false));
+				$html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', esc_attr($args['section']), esc_attr($args['id']));
+				$html .= sprintf('<input type="hidden" name="%1$s[%2$s]" value="off" />', esc_attr($args['section']), esc_attr($args['id']));
+				$html .= sprintf('<input type="checkbox" class="checkbox" id="bdt_ep_%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', esc_attr($args['section']), esc_attr($args['id']), checked($value, 'on', false));
 				$html .= '<span class="switch"></span>';
 				$html .= '</label>';
 				$html .= '</fieldset>';
@@ -504,19 +540,19 @@ if (!class_exists('ElementPack_Settings_API')) :
 
             $value = $this->get_option($args['id'], $args['section'], $args['std']);
             $html  = '<fieldset>';
-            $html .= sprintf('<input type="hidden" name="%1$s[%2$s]" value="" />', $args['section'], $args['id']);
+            $html .= sprintf('<input type="hidden" name="%1$s[%2$s]" value="" />', esc_attr($args['section']), esc_attr($args['id']));
             foreach ($args['options'] as $key => $label) {
                 $checked = isset($value[$key]) ? $value[$key] : '0';
-                $html    .= sprintf('<label for="bdt_ep_%1$s[%2$s][%3$s]">', $args['section'], $args['id'], $key);
-                $html    .= sprintf('<input type="checkbox" class="checkbox" id="bdt_ep_%1$s[%2$s][%3$s]" name="%1$s[%2$s][%3$s]" value="%3$s" %4$s />', $args['section'], $args['id'], $key, checked($checked, $key, false));
+                $html    .= sprintf('<label for="bdt_ep_%1$s[%2$s][%3$s]">', esc_attr($args['section']), esc_attr($args['id']), esc_attr($key));
+                $html    .= sprintf('<input type="checkbox" class="checkbox" id="bdt_ep_%1$s[%2$s][%3$s]" name="%1$s[%2$s][%3$s]" value="%3$s" %4$s />', esc_attr($args['section']), esc_attr($args['id']), esc_attr($key), checked($checked, esc_attr($key), false));
                 $html    .= '<span class="switch"></span>';
-                $html    .= sprintf('%1$s</label><br>',  $label);
+                $html    .= sprintf('%1$s</label><br>', wp_kses_post($label));
             }
 
             $html .= $this->get_field_description($args);
             $html .= '</fieldset>';
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -530,15 +566,15 @@ if (!class_exists('ElementPack_Settings_API')) :
             $html  = '<fieldset>';
 
             foreach ($args['options'] as $key => $label) {
-                $html .= sprintf('<label for="bdt_ep_%1$s[%2$s][%3$s]">',  $args['section'], $args['id'], $key);
-                $html .= sprintf('<input type="radio" class="radio" id="bdt_ep_%1$s[%2$s][%3$s]" name="%1$s[%2$s]" value="%3$s" %4$s />', $args['section'], $args['id'], $key, checked($value, $key, false));
-                $html .= sprintf('%1$s</label><br>', $label);
+                $html .= sprintf('<label for="bdt_ep_%1$s[%2$s][%3$s]">', esc_attr($args['section']), esc_attr($args['id']), esc_attr($key));
+                $html .= sprintf('<input type="radio" class="radio" id="bdt_ep_%1$s[%2$s][%3$s]" name="%1$s[%2$s]" value="%3$s" %4$s />', esc_attr($args['section']), esc_attr($args['id']), esc_attr($key), checked($value, esc_attr($key), false));
+                $html .= sprintf('%1$s</label><br>', wp_kses_post($label));
             }
 
             $html .= $this->get_field_description($args);
             $html .= '</fieldset>';
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -550,16 +586,16 @@ if (!class_exists('ElementPack_Settings_API')) :
 
             $value = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
             $size  = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
-            $html  = sprintf('<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id']);
+            $html  = sprintf('<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, esc_attr($args['section']), esc_attr($args['id']));
 
             foreach ($args['options'] as $key => $label) {
-                $html .= sprintf('<option value="%s"%s>%s</option>', $key, selected($value, $key, false), $label);
+                $html .= sprintf('<option value="%s"%s>%s</option>', esc_attr($key), selected($value, esc_attr($key), false), wp_kses_post($label));
             }
 
             $html .= sprintf('</select>');
             $html .= $this->get_field_description($args);
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -574,14 +610,14 @@ if (!class_exists('ElementPack_Settings_API')) :
             $placeholder = empty($args['placeholder']) ? '' : ' placeholder="' . $args['placeholder'] . '"';
 
             $html  = '';
-            $html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', $args['section'], $args['id']);
+            $html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', esc_attr($args['section']), esc_attr($args['id']));
             $html .= '<span scope="row" class="ep-option-label">' . $args['name'] . '</span>';
             $html .= '</label>';
 
-            $html .= sprintf('<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" %4$s >%5$s</textarea>', $size, $args['section'], $args['id'], $placeholder, $value);
+            $html .= sprintf('<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" %4$s >%5$s</textarea>', $size, esc_attr($args['section']), esc_attr($args['id']), $placeholder, $value);
             $html .= $this->get_field_description($args);
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -591,7 +627,7 @@ if (!class_exists('ElementPack_Settings_API')) :
          * @return string
          */
         function callback_html($args) {
-            echo $args['desc'];
+            echo wp_kses_post($args['desc']);
         }
 
         /**
@@ -604,13 +640,13 @@ if (!class_exists('ElementPack_Settings_API')) :
             $value = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
             $size  = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
             $id    = $args['section']  . '[' . $args['id'] . ']';
-            $label = isset($args['options']['button_label']) ? $args['options']['button_label'] : __('Choose File', 'bdthemes-element-pack');
+            $label = isset($args['options']['button_label']) ? $args['options']['button_label'] : __('Choose File', 'bdthemes-element-pack-lite');
 
-            $html  = sprintf('<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value);
+            $html  = sprintf('<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, esc_attr($args['section']), esc_attr($args['id']), $value);
             $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
             $html  .= $this->get_field_description($args);
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -623,10 +659,10 @@ if (!class_exists('ElementPack_Settings_API')) :
             $value = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
             $size  = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
 
-            $html  = sprintf('<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value);
+            $html  = sprintf('<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, esc_attr($args['section']), esc_attr($args['id']), $value);
             $html  .= $this->get_field_description($args);
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -639,10 +675,10 @@ if (!class_exists('ElementPack_Settings_API')) :
             $value = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
             $size  = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
 
-            $html  = sprintf('<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std']);
+            $html  = sprintf('<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, esc_attr($args['section']), esc_attr($args['id']), $value, $args['std']);
             $html  .= $this->get_field_description($args);
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -656,26 +692,26 @@ if (!class_exists('ElementPack_Settings_API')) :
             $html .= $this->get_field_description($args);
             $html .= '<hr class="setting_separator">';
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         function callback_start_group($args) {
 
             $html  = '<div class="ep-option-item-inner ep-option-group">';
 
-            $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', $args['section'], $args['id']);
+            $html  .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', esc_attr($args['section']), esc_attr($args['id']));
             $html .= '<span scope="row" class="ep-option-label">' . $args['name'] . '</span>';
             $html  .= '</label>';
 
             if ($args['video_url']) {
-                $html .= '<a href="' . $args['video_url'] . '" target="_blank" class="ep-option-video" bdt-tooltip="View ' . $args['name'] . ' Video Tutorial"><i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
+                $html .= '<a href="' . esc_url($args['video_url']) . '" target="_blank" class="ep-option-video" bdt-tooltip="View ' . esc_attr($args['name']) . ' Video Tutorial"><i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
             }
 
             $html .= $this->get_field_description($args);
 
             $html .= '<div class="bdt-grid" bdt-grid>';
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         function callback_end_group($args) {
@@ -683,7 +719,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             $html  = '</div>';
             $html  .= '</div>';
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -697,7 +733,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             $html .= $this->get_field_description($args);
 
 
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
 
@@ -715,7 +751,7 @@ if (!class_exists('ElementPack_Settings_API')) :
                 'echo'     => 0
             );
             $html = wp_dropdown_pages($dropdown_args);
-            echo $html;
+            echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
         /**
@@ -723,6 +759,26 @@ if (!class_exists('ElementPack_Settings_API')) :
          *
          * @return mixed
          */
+        /**
+         * Default recursive sanitizer for settings values without their own callback.
+         *
+         * @param mixed $value raw option value.
+         * @return mixed
+         */
+        protected function sanitize_value($value) {
+            if (is_array($value)) {
+                return array_map(array($this, 'sanitize_value'), $value);
+            }
+
+            if (is_bool($value) || is_int($value) || is_float($value) || is_null($value)) {
+                return $value;
+            }
+
+            // sanitize_textarea_field() keeps newlines intact for multi-line fields
+            // while still stripping tags and invalid UTF-8.
+            return sanitize_textarea_field($value);
+        }
+
         function sanitize_options($options) {
 
             if (!$options) {
@@ -737,6 +793,10 @@ if (!class_exists('ElementPack_Settings_API')) :
                     $options[$option_slug] = call_user_func($sanitize_callback, $option_value);
                     continue;
                 }
+
+                // No field-specific callback: fall back to a type-appropriate default so
+                // nothing reaches the options table unsanitized.
+                $options[$option_slug] = $this->sanitize_value($option_value);
             }
 
             return $options;
@@ -798,7 +858,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             $html = '<div class="bdt-dashboard-navigation">';
             $html .= '<ul class="bdt-tab bdt-flex-column" bdt-tab="animation: bdt-animation-slide-bottom-small;connect: .bdt-tab-container;">';
 
-            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="0"><i class="dashicons dashicons-admin-home"></i>%2$s</a></li>', 'element_pack_welcome', esc_html__('Dashboard', 'bdthemes-element-pack'));
+            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="0"><i class="dashicons dashicons-admin-home"></i>%2$s</a></li>', 'element_pack_welcome', esc_html__('Dashboard', 'bdthemes-element-pack-lite'));
 
             $count = 1;
 
@@ -808,7 +868,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             foreach ($all_sections as $tab) {
                 $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="%2$s"><i class="%4$s"></i>%3$s</a></li>', $tab['id'], $count++, $tab['title'], $tab['icon']);
             }
-            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="%2$s">👑 %3$s</a></li>', 'element_pack_get_pro', $count++, esc_html__('Get Pro', 'bdthemes-element-pack'));
+            $html .= sprintf('<li><a href="#%1$s" class="bdt-tab-item" id="bdt-%1$s" data-tab-index="%2$s">👑 %3$s</a></li>', 'element_pack_get_pro', $count++, esc_html__('Get Pro', 'bdthemes-element-pack-lite'));
 
             $html .= '</ul>';
             $html .= '</div>';            echo wp_kses($html, array(
@@ -847,18 +907,13 @@ if (!class_exists('ElementPack_Settings_API')) :
 			// Add manually created content sections that don't have settings forms
 			$content_only_sections = [
 				[
-					'id' => 'element_pack_extra_options',
-					'title' => esc_html__('Extra Options', 'bdthemes-element-pack'),
-					'icon' => 'dashicons dashicons-smiley',
-				],
-				[
 					'id' => 'element_pack_analytics_system_req',
-					'title' => esc_html__('System Status', 'bdthemes-element-pack'),
+					'title' => esc_html__('System Status', 'bdthemes-element-pack-lite'),
 					'icon' => 'dashicons dashicons-chart-bar',
 				],
 				[
 					'id' => 'element_pack_other_plugins',
-					'title' => esc_html__('Other Plugins', 'bdthemes-element-pack'),
+					'title' => esc_html__('Other Plugins', 'bdthemes-element-pack-lite'),
 					'icon' => 'dashicons dashicons-admin-plugins',
 				],
 			];
@@ -966,14 +1021,14 @@ if (!class_exists('ElementPack_Settings_API')) :
 													<ul
 														class="bdt-subnav bdt-subnav-pill ep-widget-filter bdt-widget-type-content bdt-flex-inline">
 														<li class="ep-widget-all bdt-active" bdt-filter-control="*"><a
-																href="#"><?php esc_html_e('All', 'bdthemes-element-pack'); ?></a></li>
+																href="#"><?php esc_html_e('All', 'bdthemes-element-pack-lite'); ?></a></li>
 														<li class="ep-widget-free"
 															bdt-filter-control="filter: [data-widget-type='free']; group: data-content-type">
-															<a href="#"><?php esc_html_e('Free', 'bdthemes-element-pack'); ?></a>
+															<a href="#"><?php esc_html_e('Free', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
 														<li class="ep-widget-pro"
 															bdt-filter-control="filter: [data-widget-type='pro']; group: data-content-type">
-															<a href="#"><?php esc_html_e('Pro', 'bdthemes-element-pack'); ?></a>
+															<a href="#"><?php esc_html_e('Pro', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
 
 													</ul>
@@ -989,14 +1044,14 @@ if (!class_exists('ElementPack_Settings_API')) :
 																class="bdt-subnav bdt-subnav-pill ep-widget-filter ep-used-unused-widgets bdt-flex-inline">
 																<li class="ep-widget--"
 																	bdt-filter-control="filter: [data-content-type*='ep-used']; group: data-content-type">
-																	<a href="#"><?php esc_html_e('Used', 'bdthemes-element-pack'); ?>
+																	<a href="#"><?php esc_html_e('Used', 'bdthemes-element-pack-lite'); ?>
 																		<span class="bdt-badge ep-used-widget"></span>
 																	</a>
 																</li>
 																<li class="ep-widget--"
 																	bdt-filter-control="filter: [data-content-type*='ep-unused']; group: data-content-type">
 																	<a href="#"
-																		bdt-tooltip="<?php esc_html_e('Don\'t need unused widget? Click on the Deactivate All button.', 'bdthemes-element-pack'); ?>"><?php esc_html_e('Unused', 'bdthemes-element-pack'); ?>
+																		bdt-tooltip="<?php esc_html_e('Don\'t need unused widget? Click on the Deactivate All button.', 'bdthemes-element-pack-lite'); ?>"><?php esc_html_e('Unused', 'bdthemes-element-pack-lite'); ?>
 																		<span class="bdt-badge ep-unused-widget bdt-danger"></span>
 																	</a>
 																</li>
@@ -1014,7 +1069,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 											<div class="bdt-widget-search">
 												<input data-id="ep-options-parent-<?php echo esc_attr($i); ?>" onkeyup="filterSearch(this);"
 													bdt-filter-control="" class="bdt-search-input bdt-flex-middle" type="search"
-													placeholder="<?php esc_html_e('Search widget...', 'bdthemes-element-pack'); ?>"
+													placeholder="<?php esc_html_e('Search widget...', 'bdthemes-element-pack-lite'); ?>"
 													autofocus>
 											</div>
 
@@ -1024,12 +1079,12 @@ if (!class_exists('ElementPack_Settings_API')) :
 												<ul class="bdt-subnav bdt-subnav-pill ep-widget-onoff">
 													<li>
 														<a href="#" class="ep-active-all-widget">
-															<?php esc_html_e('Activate All', 'bdthemes-element-pack'); ?>
+															<?php esc_html_e('Activate All', 'bdthemes-element-pack-lite'); ?>
 														</a>
 													</li>
 													<li>
 														<a href="#" class="ep-deactive-all-widget">
-															<?php esc_html_e('Deactivate All', 'bdthemes-element-pack'); ?>
+															<?php esc_html_e('Deactivate All', 'bdthemes-element-pack-lite'); ?>
 														</a>
 													</li>
 												</ul>
@@ -1041,57 +1096,57 @@ if (!class_exists('ElementPack_Settings_API')) :
 										<div class="ep-content-type-filter bdt-margin-top">
 											<div class="bdt-flex bdt-flex-wrap bdt-flex-middle bdt-visible@l">
 												<div class="ep-filter-by-text bdt-visible@xl">
-													<?php esc_html_e('Filter By: ', 'bdthemes-element-pack'); ?>
+													<?php esc_html_e('Filter By: ', 'bdthemes-element-pack-lite'); ?>
 												</div>
 												<ul
 													class="bdt-nav xbdt-subnav-pill xbdt-dropdown-nav ep-widget-filter ep-widget-content-type bdt-flex bdt-flex-wrap ">
 													<li class="ep-widget-new"
 														bdt-filter-control="filter: [data-content-type*='new']; group: data-widget-type"><a
-															href="#"><?php esc_html_e('New', 'bdthemes-element-pack'); ?></a></li>
+															href="#"><?php esc_html_e('New', 'bdthemes-element-pack-lite'); ?></a></li>
 													<li class="ep-widget-post"
 														bdt-filter-control="filter: [data-content-type*='post']; group: data-widget-type"><a
-															href="#"><?php esc_html_e('Post', 'bdthemes-element-pack'); ?></a></li>
+															href="#"><?php esc_html_e('Post', 'bdthemes-element-pack-lite'); ?></a></li>
 													<?php if ($form['id'] == 'element_pack_active_modules'): ?>
 														<li class="ep-widget-custom"
 															bdt-filter-control="filter: [data-content-type*='custom']; group: data-widget-type">
-															<a href="#"><?php esc_html_e('Custom', 'bdthemes-element-pack'); ?></a>
+															<a href="#"><?php esc_html_e('Custom', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
 													<?php endif; ?>
 													<li class="ep-widget-gallery"
 														bdt-filter-control="filter: [data-content-type*='gallery']; group: data-widget-type">
-														<a href="#"><?php esc_html_e('Gallery', 'bdthemes-element-pack'); ?></a>
+														<a href="#"><?php esc_html_e('Gallery', 'bdthemes-element-pack-lite'); ?></a>
 													</li>
 													<li class="ep-widget-slider"
 														bdt-filter-control="filter: [data-content-type*='slider']; group: data-widget-type">
-														<a href="#"><?php esc_html_e('Slider', 'bdthemes-element-pack'); ?></a>
+														<a href="#"><?php esc_html_e('Slider', 'bdthemes-element-pack-lite'); ?></a>
 													</li>
 													<li class="ep-widget-carousel"
 														bdt-filter-control="filter: [data-content-type*='carousel']; group: data-widget-type">
-														<a href="#"><?php esc_html_e('Carousel', 'bdthemes-element-pack'); ?></a>
+														<a href="#"><?php esc_html_e('Carousel', 'bdthemes-element-pack-lite'); ?></a>
 													</li>
 													<?php if ($form['id'] == 'element_pack_third_party_widget'): ?>
 														<li class="ep-widget-acf"
 															bdt-filter-control="filter: [data-content-type*='acf']; group: data-widget-type">
-															<a href="#"><?php esc_html_e('ACF', 'bdthemes-element-pack'); ?></a>
+															<a href="#"><?php esc_html_e('ACF', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
 														<li class="ep-widget-forms"
 															bdt-filter-control="filter: [data-content-type*='forms']; group: data-widget-type">
-															<a href="#"><?php esc_html_e('Forms', 'bdthemes-element-pack'); ?></a>
+															<a href="#"><?php esc_html_e('Forms', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
 														<li class="ep-widget-ecommerce"
 															bdt-filter-control="filter: [data-content-type*='ecommerce']; group: data-widget-type">
-															<a href="#"><?php esc_html_e('eCommerce', 'bdthemes-element-pack'); ?></a>
+															<a href="#"><?php esc_html_e('eCommerce', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
 													<?php endif; ?>
 													<?php if ($form['id'] == 'element_pack_active_modules'): ?>
 														<li class="ep-widget-template-builder"
 															bdt-filter-control="filter: [data-content-type*='template-builder']; group: data-widget-type">
-															<a href="#"><?php esc_html_e('Template Builder', 'bdthemes-element-pack'); ?></a>
+															<a href="#"><?php esc_html_e('Template Builder', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
 													<?php endif; ?>
 													<li class="ep-widget-others"
 														bdt-filter-control="filter: [data-content-type*='others']; group: data-widget-type">
-														<a href="#"><?php esc_html_e('Others', 'bdthemes-element-pack'); ?></a>
+														<a href="#"><?php esc_html_e('Others', 'bdthemes-element-pack-lite'); ?></a>
 													</li>
 												</ul>
 											</div>

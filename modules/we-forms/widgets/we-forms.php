@@ -21,7 +21,7 @@ class We_Forms extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'weForms', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'weForms', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -49,14 +49,14 @@ class We_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'we_form',
 			[
-				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 0,
 				'options' => element_pack_we_forms_options(),
@@ -66,14 +66,14 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'custom_attributes',
 			[
-				'label'       => __( 'Custom Attributes', 'bdthemes-element-pack' ),
+				'label'       => __( 'Custom Attributes', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'dynamic'     => [
 					'active' => true,
 				],
-				'placeholder' => __( 'key|value', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'key|value', 'bdthemes-element-pack-lite' ),
 				/* translators: %s: The separator character wrapped in a code tag */
-				'description' => sprintf( __( 'Set custom attributes for the weForm. Each attribute in a separate line. Separate attribute key from the value using %s character. for example: field_values|param_name1=value1', 'bdthemes-element-pack' ), '<code>|</code>' ),
+				'description' => sprintf( __( 'Set custom attributes for the weForm. Each attribute in a separate line. Separate attribute key from the value using %s character. for example: field_values|param_name1=value1', 'bdthemes-element-pack-lite' ), '<code>|</code>' ),
 				'classes'     => 'elementor-control-direction-ltr',
 			]
 		);
@@ -83,7 +83,7 @@ class We_Forms extends Module_Base {
 		$this->start_controls_section(
 			'weforms_section_fields_style',
 			[
-				'label' => __( 'Form Fields', 'bdthemes-element-pack' ),
+				'label' => __( 'Form Fields', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -91,7 +91,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'large_field_width',
 			[
-				'label'      => __( 'Large Field Width', 'bdthemes-element-pack' ),
+				'label'      => __( 'Large Field Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'default'    => [
@@ -119,7 +119,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'field_margin',
 			[
-				'label'      => __( 'Field Spacing', 'bdthemes-element-pack' ),
+				'label'      => __( 'Field Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -131,7 +131,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'field_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -144,7 +144,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'field_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -157,7 +157,7 @@ class We_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'field_typography',
-				'label'    => __( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => __( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields input:not(.weforms_submit_btn), .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields textarea',
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_3
 			]
@@ -166,7 +166,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'field_textcolor',
 			[
-				'label'     => __( 'Field Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Field Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields input:not(.weforms_submit_btn), {{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields textarea' => 'color: {{VALUE}};',
@@ -177,7 +177,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'field_placeholder_color',
 			[
-				'label'     => __( 'Field Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Field Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} ::-webkit-input-placeholder' => 'color: {{VALUE}};',
@@ -192,7 +192,7 @@ class We_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_field_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -215,7 +215,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'field_bg_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields input:not(.weforms_submit_btn), {{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields textarea' => 'background-color: {{VALUE}}',
@@ -228,7 +228,7 @@ class We_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_field_focus',
 			[
-				'label' => __( 'Focus', 'bdthemes-element-pack' ),
+				'label' => __( 'Focus', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -254,7 +254,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'field_focus_bg_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields input:focus:not(.weforms_submit_btn), {{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-fields textarea:focus' => 'background-color: {{VALUE}}',
@@ -271,7 +271,7 @@ class We_Forms extends Module_Base {
 		$this->start_controls_section(
 			'we-form-label',
 			[
-				'label' => __( 'Form Fields Label', 'bdthemes-element-pack' ),
+				'label' => __( 'Form Fields Label', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -279,7 +279,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'label_spacing',
 			[
-				'label'      => __( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => __( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -300,7 +300,7 @@ class We_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'label_typography',
-				'label'    => __( 'Label Typography', 'bdthemes-element-pack' ),
+				'label'    => __( 'Label Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .wpuf-label label, {{WRAPPER}} .wpuf-form-sub-label',
 			]
 		);
@@ -309,7 +309,7 @@ class We_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'desc_typography',
-				'label'    => __( 'Help Text Typography', 'bdthemes-element-pack' ),
+				'label'    => __( 'Help Text Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .wpuf-fields .wpuf-help',
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_3
 			]
@@ -318,7 +318,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[
-				'label'     => __( 'Label Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Label Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-label label, {{WRAPPER}} .wpuf-form-sub-label' => 'color: {{VALUE}}',
@@ -329,7 +329,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'requered_label',
 			[
-				'label'     => __( 'Required Label Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Required Label Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-label .required' => 'color: {{VALUE}} !important',
@@ -340,7 +340,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'desc_color',
 			[
-				'label'     => __( 'Help Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Help Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-fields .wpuf-help' => 'color: {{VALUE}}',
@@ -353,7 +353,7 @@ class We_Forms extends Module_Base {
 		$this->start_controls_section(
 			'submit',
 			[
-				'label' => __( 'Submit Button', 'bdthemes-element-pack' ),
+				'label' => __( 'Submit Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -361,7 +361,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'submit_btn_width',
 			[
-				'label' => __( 'Button Full Width', 'bdthemes-element-pack' ),
+				'label' => __( 'Button Full Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -369,7 +369,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'button_width',
 			[
-				'label'      => __( 'Button Width', 'bdthemes-element-pack' ),
+				'label'      => __( 'Button Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'condition'  => [
@@ -398,19 +398,19 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'submit_btn_position',
 			[
-				'label'           => __( 'Button Position', 'bdthemes-element-pack' ),
+				'label'           => __( 'Button Position', 'bdthemes-element-pack-lite' ),
 				'type'            => Controls_Manager::CHOOSE,
 				'options'         => [
 					'left'   => [
-						'title' => __( 'Left', 'bdthemes-element-pack' ),
+						'title' => __( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'bdthemes-element-pack' ),
+						'title' => __( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -429,7 +429,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'submit_margin',
 			[
-				'label'      => __( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => __( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -441,7 +441,7 @@ class We_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'submit_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -470,7 +470,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'submit_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -508,14 +508,14 @@ class We_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'submit_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -527,7 +527,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'submit_bg_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-submit input[type=submit]' => 'background-color: {{VALUE}};',
@@ -540,14 +540,14 @@ class We_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'submit_hover_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-submit input[type=submit]:hover, {{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-submit input[type=submit]:focus' => 'color: {{VALUE}};',
@@ -558,7 +558,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'submit_hover_bg_color',
 			[
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-submit input[type=submit]:hover, {{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-submit input[type=submit]:focus' => 'background-color: {{VALUE}};',
@@ -569,7 +569,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'submit_hover_border_color',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-submit input[type=submit]:hover, {{WRAPPER}} .wpuf-form-add.wpuf-style ul.wpuf-form .wpuf-submit input[type=submit]:focus' => 'border-color: {{VALUE}};',
@@ -586,7 +586,7 @@ class We_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_break',
 			[
-				'label' => __( 'Section Break', 'bdthemes-element-pack' ),
+				'label' => __( 'Section Break', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -594,7 +594,7 @@ class We_Forms extends Module_Base {
 		$this->add_control(
 			'break_separator_color',
 			[
-				'label'     => __( 'Separator Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Separator Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .section_break .wpuf-section-wrap' => 'border-color: {{VALUE}};',
@@ -607,14 +607,14 @@ class We_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_break_title',
 			[
-				'label' => __( 'Title', 'bdthemes-element-pack' ),
+				'label' => __( 'Title', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'break_title_color',
 			[
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .section_break .wpuf-section-title' => 'color: {{VALUE}};',
@@ -635,14 +635,14 @@ class We_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_break_description',
 			[
-				'label' => __( 'Description', 'bdthemes-element-pack' ),
+				'label' => __( 'Description', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'break_description_color',
 			[
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .section_break .wpuf-section-details' => 'color: {{VALUE}};',
@@ -670,7 +670,7 @@ class We_Forms extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if ( ! $settings['we_form'] ) {
-			return '<div class="bdt-alert bdt-alert-warning">' . __( 'Please select a we Forms From Setting!', 'bdthemes-element-pack' ) . '</div>';
+			return '<div class="bdt-alert bdt-alert-warning">' . __( 'Please select a we Forms From Setting!', 'bdthemes-element-pack-lite' ) . '</div>';
 		}
 
 		$attributes = [

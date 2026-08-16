@@ -31,7 +31,7 @@ class Module extends Element_Pack_Module_Base {
 			'element_pack_cursor_effects_section',
 			[ 
 				'tab'   => Controls_Manager::TAB_ADVANCED,
-				'label' => BDTEP_CP . esc_html__( 'Cursor Effects', 'bdthemes-element-pack' ),
+				'label' => BDTEP_CP . esc_html__( 'Cursor Effects', 'bdthemes-element-pack-lite' ),
 			]
 		);
 		$element->end_controls_section();
@@ -42,7 +42,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_show',
 			[ 
-				'label'              => __( 'Show Cursor Effects', 'bdthemes-element-pack' ),
+				'label'              => __( 'Show Cursor Effects', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SWITCHER,
 				'return_value'       => 'yes',
 				'prefix_class'       => 'bdt-cursor-effects-',
@@ -58,7 +58,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->start_controls_tab(
 			'element_pack_cursor_effects_tab_layout',
 			[ 
-				'label'     => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'element_pack_cursor_effects_show' => 'yes'
 				],
@@ -67,28 +67,27 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_source',
 			[ 
-				'label'              => esc_html__( 'Source', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'label'              => esc_html__( 'Source', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'default'            => 'default',
 				'frontend_available' => true,
 				'render_type'        => 'none',
 				'options'            => [ 
-					'default' => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'text'    => esc_html__( 'Text', 'bdthemes-element-pack' ),
-					'image'   => esc_html__( 'Image', 'bdthemes-element-pack' ),
-					'icons'   => esc_html__( 'Icons', 'bdthemes-element-pack' ),
+					'default' => esc_html__( 'Default', 'bdthemes-element-pack-lite' ),
+					'text'    => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
+					'image'   => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
+					'icons'   => esc_html__( 'Icons', 'bdthemes-element-pack-lite' ),
 				],
 				'condition'          => [ 
 					'element_pack_cursor_effects_show' => 'yes'
 				],
-				'classes' => BDTEP_IS_PC,
 				'render_type' => 'template',
 			]
 		);
 		$section->add_control(
 			'element_pack_cursor_effects_image_src',
 			[ 
-				'label'              => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::MEDIA,
 				'dynamic'            => ['active' => true],
 				'frontend_available' => true,
@@ -100,28 +99,9 @@ class Module extends Element_Pack_Module_Base {
 			]
 		);
 		$section->add_control(
-			'element_pack_cursor_effects_image_gsap_animation',
-			[ 
-				'label'              => esc_html__( 'Enable Smooth Animation', 'bdthemes-element-pack' ) . BDTEP_PC,
-				'description'        => esc_html__( 'Smooth image follows the cursor with GSAP-powered animation on hover.', 'bdthemes-element-pack' ),
-				'type'               => Controls_Manager::SWITCHER,
-				'return_value'       => 'yes',
-				'separator'          => 'before',
-				'frontend_available' => true,
-				'render_type'        => 'template',
-				'condition'          => [ 
-					'element_pack_cursor_effects_source' => 'image',
-					'element_pack_cursor_effects_show'   => 'yes',
-				],
-				'prefix_class' => 'cursor-effects-smooth-animation-',
-				'classes' => BDTEP_IS_PC,
-			]
-		);
-		
-		$section->add_control(
 			'element_pack_cursor_effects_icons',
 			[ 
-				'label'              => esc_html__( 'Icons', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Icons', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::ICONS,
 				'frontend_available' => true,
 				'render_type'        => 'template',
@@ -138,7 +118,7 @@ class Module extends Element_Pack_Module_Base {
 			'important_note',
 			[
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'If the cursor icon is not visible in the editor or preview, please navigate to Elementor Settings and enable Font Awesome support.', 'bdthemes-element-pack' ),
+				'raw'             => esc_html__( 'If the cursor icon is not visible in the editor or preview, please navigate to Elementor Settings and enable Font Awesome support.', 'bdthemes-element-pack-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 				'condition'       => [
 					'element_pack_cursor_effects_show'   => 'yes',
@@ -150,13 +130,13 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_style',
 			[ 
-				'label'              => __( 'Style', 'bdthemes-element-pack' ),
+				'label'              => __( 'Style', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SELECT,
 				'default'            => 'ep-cursor-style-1',
 				'options'            => [ 
-					'ep-cursor-style-1' => __( 'Style 1', 'bdthemes-element-pack' ),
-					'ep-cursor-style-2' => __( 'Style 2', 'bdthemes-element-pack' ),
-					'ep-cursor-style-3' => __( 'Style 3', 'bdthemes-element-pack' ),
+					'ep-cursor-style-1' => __( 'Style 1', 'bdthemes-element-pack-lite' ),
+					'ep-cursor-style-2' => __( 'Style 2', 'bdthemes-element-pack-lite' ),
+					'ep-cursor-style-3' => __( 'Style 3', 'bdthemes-element-pack-lite' ),
 				],
 				'frontend_available' => true,
 				'render_type'        => 'template',
@@ -169,9 +149,9 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_text_label',
 			[ 
-				'label'              => esc_html__( 'Text Label', 'bdthemes-element-pack' ),
+				'label'              => esc_html__( 'Text Label', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::TEXT,
-				// 'default'            => esc_html__('HELLO', 'bdthemes-element-pack'),
+				// 'default'            => esc_html__('HELLO', 'bdthemes-element-pack-lite'),
 				'frontend_available' => true,
 				'render_type'        => 'template',
 				'condition'          => [ 
@@ -183,7 +163,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_speed',
 			[ 
-				'label'              => __( 'Speed', 'bdthemes-element-pack' ),
+				'label'              => __( 'Speed', 'bdthemes-element-pack-lite' ),
 				'type'               => Controls_Manager::SLIDER,
 				'size_units'         => [ 'px' ],
 				'range'              => [ 
@@ -209,7 +189,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_disable_default_cursor',
 			[ 
-				'label'        => __( 'Disable Default Cursor', 'bdthemes-element-pack' ) . BDTEP_PC,
+				'label'        => __( 'Disable Default Cursor', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'separator'    => 'before',
@@ -220,13 +200,12 @@ class Module extends Element_Pack_Module_Base {
 				'selectors'    => [ 
 					'{{WRAPPER}}.bdt-cursor-effects-yes' => 'cursor: none !important;'
 				],
-				'classes' => BDTEP_IS_PC,
 			]
 		);
 		$section->add_control(
 			'element_pack_cursor_effects_disable_on_mobile',
 			[
-				'label' => __('Disable on Mobile', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => __('Disable on Mobile', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'frontend_available' => true,
@@ -241,7 +220,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->start_controls_tab(
 			'element_pack_cursor_effects_tab_style',
 			[ 
-				'label'     => esc_html__( 'Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Style', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'element_pack_cursor_effects_show' => 'yes'
 				],
@@ -250,7 +229,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_primary',
 			[ 
-				'label'     => esc_html__( 'Primary', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Primary', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [ 
@@ -261,7 +240,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_primary_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}}.bdt-cursor-effects-yes' => '--cursor-ball-color: {{VALUE}}',
@@ -274,7 +253,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_primary_size',
 			[ 
-				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}}.bdt-cursor-effects-yes' => '--cursor-ball-size:{{SIZE}}{{UNIT}};',
@@ -287,7 +266,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_secondary',
 			[ 
-				'label'     => esc_html__( 'Secondary', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Secondary', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [ 
@@ -298,7 +277,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_secondary_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}}.bdt-cursor-effects-yes' => '--cursor-circle-color: {{VALUE}}',
@@ -311,7 +290,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_secondary_size',
 			[ 
-				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}}.bdt-cursor-effects-yes' => '--cursor-circle-size:{{SIZE}}{{UNIT}};',
@@ -325,7 +304,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_control(
 			'element_pack_cursor_effects_text_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-text' => 'color: {{VALUE}}',
@@ -339,7 +318,7 @@ class Module extends Element_Pack_Module_Base {
 			Group_Control_Background::get_type(),
 			[ 
 				'name'      => 'element_pack_cursor_effects_text_background',
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'types'     => [ 'classic', 'gradient' ],
 				'selector'  => '{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-text',
 				'condition' => [ 
@@ -350,7 +329,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_text_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -365,7 +344,7 @@ class Module extends Element_Pack_Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'      => 'element_pack_cursor_effects_text_border',
-				'label'     => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-text',
 				'condition' => [ 
 					'element_pack_cursor_effects_source' => 'text'
@@ -375,7 +354,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_text_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -390,7 +369,7 @@ class Module extends Element_Pack_Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'      => 'element_pack_cursor_effects_text_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}}.bdt-cursor-effects-yes .bdt-cursor-text',
 				'condition' => [ 
 					'element_pack_cursor_effects_source' => 'text'
@@ -400,7 +379,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_image_size',
 			[ 
-				'label'      => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', 'rem', '%', 'vw', 'vh' ],
 				'range'      => [ 
@@ -419,45 +398,6 @@ class Module extends Element_Pack_Module_Base {
 				],
 				'condition' => [ 
 					'element_pack_cursor_effects_source' => 'image',
-					'element_pack_cursor_effects_image_gsap_animation' => '',
-				],
-			]
-		);
-		$section->add_control(
-			'element_pack_cursor_effects_gsap_width',
-			[ 
-				'label'              => esc_html__( 'Image Width', 'bdthemes-element-pack' ),
-				'type'               => Controls_Manager::SLIDER,
-				'size_units'         => [ 'px' ],
-				'range'              => [ 
-					'px' => [ 'min' => 50, 'max' => 800, 'step' => 10 ],
-				],
-				'default'            => [ 'unit' => 'px', 'size' => 385 ],
-				'frontend_available' => true,
-				'render_type'        => 'none',
-				'condition'          => [ 
-					'element_pack_cursor_effects_source'               => 'image',
-					'element_pack_cursor_effects_show'                 => 'yes',
-					'element_pack_cursor_effects_image_gsap_animation' => 'yes',
-				],
-			]
-		);
-		$section->add_control(
-			'element_pack_cursor_effects_gsap_height',
-			[ 
-				'label'              => esc_html__( 'Image Height', 'bdthemes-element-pack' ),
-				'type'               => Controls_Manager::SLIDER,
-				'size_units'         => [ 'px' ],
-				'range'              => [ 
-					'px' => [ 'min' => 50, 'max' => 600, 'step' => 10 ],
-				],
-				'default'            => [ 'unit' => 'px', 'size' => 280 ],
-				'frontend_available' => true,
-				'render_type'        => 'none',
-				'condition'          => [ 
-					'element_pack_cursor_effects_source'               => 'image',
-					'element_pack_cursor_effects_show'                 => 'yes',
-					'element_pack_cursor_effects_image_gsap_animation' => 'yes',
 				],
 			]
 		);
@@ -465,18 +405,17 @@ class Module extends Element_Pack_Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'      => 'element_pack_cursor_effects_image_border',
-				'label'     => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'selector'  => '#bdt-cursor-effects-wrap-{{ID}} .bdt-cursor-image',
 				'condition' => [ 
 					'element_pack_cursor_effects_source' => 'image',	
-					'element_pack_cursor_effects_image_gsap_animation' => '',
 				]
 			]
 		);
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_image_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -484,7 +423,6 @@ class Module extends Element_Pack_Module_Base {
 				],
 				'condition'  => [ 
 					'element_pack_cursor_effects_source' => 'image',
-					'element_pack_cursor_effects_image_gsap_animation' => '',
 				]
 			]
 		);
@@ -492,7 +430,7 @@ class Module extends Element_Pack_Module_Base {
 		$section->add_responsive_control(
 			'element_pack_cursor_effects_icons_size',
 			[ 
-				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}}.bdt-cursor-effects-yes' => '--cursor-ball-size:{{SIZE}}{{UNIT}};',
@@ -509,12 +447,9 @@ class Module extends Element_Pack_Module_Base {
 
 	public function enqueue_scripts() {
 		wp_register_script( 'cotton-js', BDTEP_ASSETS_URL . 'vendor/js/cotton.min.js', [], '5.3.5', true );
-		// phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent -- GSAP CDN is required for cursor effects animation library.
-		wp_register_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', [], '3.12.5', true );
 
 		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
 			wp_enqueue_script( 'cotton-js' );
-			wp_enqueue_script( 'gsap-js' );
 		}
 	}
 	public function should_script_enqueue( $section ) {
@@ -525,20 +460,14 @@ class Module extends Element_Pack_Module_Base {
 			wp_enqueue_script( 'ep-cursor-effects' );
 
 			if ( 'image' === $section->get_settings_for_display( 'element_pack_cursor_effects_source' ) ) {
-				if ( 'yes' !== $section->get_settings_for_display( 'element_pack_cursor_effects_image_gsap_animation' ) ) {
-					$image_size = $section->get_settings_for_display( 'element_pack_cursor_effects_image_size' );
+				$image_size = $section->get_settings_for_display( 'element_pack_cursor_effects_image_size' );
 
-					if ( ! empty( $image_size['size'] ) ) {
-						$section->add_render_attribute(
-							'_wrapper',
-							'data-bdt-cursor-image-size',
-							esc_attr( $image_size['size'] . ( $image_size['unit'] ?? 'px' ) )
-						);
-					}
-				}
-
-				if ( 'yes' === $section->get_settings_for_display( 'element_pack_cursor_effects_image_gsap_animation' ) ) {
-					wp_enqueue_script( 'gsap-js' );
+				if ( ! empty( $image_size['size'] ) ) {
+					$section->add_render_attribute(
+						'_wrapper',
+						'data-bdt-cursor-image-size',
+						esc_attr( $image_size['size'] . ( $image_size['unit'] ?? 'px' ) )
+					);
 				}
 			}
 		}

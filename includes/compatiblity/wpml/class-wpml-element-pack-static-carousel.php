@@ -30,13 +30,13 @@ class WPML_ElementPack_Static_Carousel extends WPML_Module_With_Items {
 		switch( $field ) {
 
 			case 'title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'sub_title':
-				return esc_html__( 'Sub Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Sub Title', 'bdthemes-element-pack-lite' );
 
 			case 'text':
-				return esc_html__( 'Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Text', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

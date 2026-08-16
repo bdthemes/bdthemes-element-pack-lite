@@ -22,7 +22,7 @@ class Product_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Product Grid', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Product Grid', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -57,15 +57,15 @@ class Product_Grid extends Module_Base {
 		return [
 			'condition'    => ! is_ep_pro(),
 			'image'        => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
-			'image_alt'    => esc_attr__( 'Upgrade', 'bdthemes-element-pack' ),
-			'title'        => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'bdthemes-element-pack-lite' ),
+			'title'        => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack-lite' ),
 			/* translators: %1$s: Promoted feature name */
-			'description'  => sprintf( __( '<ul class="bdt-widget-promotion-list"><li>%1$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack' ), 'Link to -> Wrapper Item' ),
+			'description'  => sprintf( __( '<ul class="bdt-widget-promotion-list"><li>%1$s</li></ul> These features are available only in Element Pack Pro.', 'bdthemes-element-pack-lite' ), 'Link to -> Wrapper Item' ),
 			'upgrade_url'  => esc_url( 'https://www.elementpack.pro/pricing/?utm_source=widget_panel&utm_medium=ep_widget_panel' ),
 			/* translators: %s: Upgrade button label */
 			'upgrade_text' => sprintf(
 				'<span class="bdt-widget-promotion-btn">%s</span>',
-				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack' )
+				esc_html__( 'Upgrade to Pro', 'bdthemes-element-pack-lite' )
 			),
 		];
 	}
@@ -84,7 +84,7 @@ class Product_Grid extends Module_Base {
 	$this->start_controls_section(
 		'section_additional_settings',
 		[
-			'label' => __( 'Additional Options', 'bdthemes-element-pack' ),
+			'label' => __( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			'tab'   => Controls_Manager::TAB_CONTENT,
 		]
 	);
@@ -92,7 +92,7 @@ class Product_Grid extends Module_Base {
 	$this->add_responsive_control(
 		'columns',
 		[
-			'label'           => __( 'Columns', 'bdthemes-element-pack' ),
+			'label'           => __( 'Columns', 'bdthemes-element-pack-lite' ),
 			'type'            => Controls_Manager::SELECT,
 			'desktop_default' => 3,
 			'tablet_default'  => 2,
@@ -114,7 +114,7 @@ class Product_Grid extends Module_Base {
 	$this->add_responsive_control(
 		'column_gap',
 		[
-			'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
+			'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack-lite' ),
 			'type'      => Controls_Manager::SLIDER,
 			'default'   => [
 				'size' => 20,
@@ -128,7 +128,7 @@ class Product_Grid extends Module_Base {
 	$this->add_responsive_control(
 		'row_gap',
 		[
-			'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack' ),
+			'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack-lite' ),
 			'type'      => Controls_Manager::SLIDER,
 			'default'   => [
 				'size' => 20,
@@ -143,7 +143,7 @@ class Product_Grid extends Module_Base {
 		$widget_prefix,
 		[
 			'readmore_wrapper_option' => 'wrapper',
-			'section_label'           => __( 'Additional Options', 'bdthemes-element-pack' ),
+			'section_label'           => __( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			'section_wrapper'         => false,
 		]
 	);

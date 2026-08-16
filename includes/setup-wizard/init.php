@@ -54,9 +54,6 @@ class Setup_Wizard {
 		add_action( 'admin_init', array( $this, 'maybe_display_setup_wizard' ) );
 		add_action( 'admin_init', array( $this, 'check_manual_wizard_request' ) );
 
-		if ( function_exists( 'add_filter' ) ) {
-			add_filter( 'auto_update_translation', '__return_false' );
-		}
 	}
 
 	// Check for manual wizard requests
@@ -192,8 +189,8 @@ class Setup_Wizard {
 	public function admin_menu() {
 		add_submenu_page(
 			'element_pack_options',
-			esc_html__( 'Setup Wizard', 'bdthemes-element-pack' ),
-			esc_html__( 'Setup Wizard', 'bdthemes-element-pack' ),
+			esc_html__( 'Setup Wizard', 'bdthemes-element-pack-lite' ),
+			esc_html__( 'Setup Wizard', 'bdthemes-element-pack-lite' ),
 			'manage_options',
 			'element-pack-setup-wizard',
 			array( $this, 'display_page' )
@@ -425,7 +422,7 @@ add_action('wp_ajax_import_elementor_template', function () {
 
 		// Capability check - only administrators can import templates
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized', 'bdthemes-element-pack' ) ] );
+			wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized', 'bdthemes-element-pack-lite' ) ] );
 			wp_die();
 		}
 
@@ -437,7 +434,7 @@ add_action('wp_ajax_import_elementor_template', function () {
         ));
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack')]);
+            wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
             wp_die();
         }
 
@@ -445,7 +442,7 @@ add_action('wp_ajax_import_elementor_template', function () {
         $sourceData2 = json_decode($sourceData, true);
 
         if (!$sourceData2 || !is_array($sourceData2)) {
-            wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack')]);
+            wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
             wp_die();
         }
 
@@ -455,7 +452,7 @@ add_action('wp_ajax_import_elementor_template', function () {
         // Initialize Elementor's Template Importer
         if (!class_exists('\Elementor\TemplateLibrary\Source_Local')) {
             wp_delete_file($temp_file);
-            wp_send_json_error(['message' => esc_html__('Elementor is not installed or activated!', 'bdthemes-element-pack')]);
+            wp_send_json_error(['message' => esc_html__('Elementor is not installed or activated!', 'bdthemes-element-pack-lite')]);
             wp_die();
         }
 
@@ -464,18 +461,18 @@ add_action('wp_ajax_import_elementor_template', function () {
         wp_delete_file($temp_file); // Delete temp file after import
 
         if (is_wp_error($templateData) || !is_array($templateData) || empty($templateData[0]['template_id'])) {
-            wp_send_json_error(['message' => esc_html__('Failed to import template!', 'bdthemes-element-pack')]);
+            wp_send_json_error(['message' => esc_html__('Failed to import template!', 'bdthemes-element-pack-lite')]);
             wp_die();
         }
 
         $template_id = $templateData[0]['template_id'];
         $metaData = get_post_meta($template_id);
 
-        $page_title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : esc_html__("No Title", 'bdthemes-element-pack');
+        $page_title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : esc_html__("No Title", 'bdthemes-element-pack-lite');
 
         // Validate Elementor Data
         if (!isset($metaData['_elementor_data'][0])) {
-            wp_send_json_error(['message' => esc_html__('Elementor data not found in template.', 'bdthemes-element-pack')]);
+            wp_send_json_error(['message' => esc_html__('Elementor data not found in template.', 'bdthemes-element-pack-lite')]);
             wp_die();
         }
 
@@ -490,7 +487,7 @@ add_action('wp_ajax_import_elementor_template', function () {
         ]);
 
         if (is_wp_error($new_post_id)) {
-            wp_send_json_error(['message' => esc_html__('Failed to create page!', 'bdthemes-element-pack')]);
+            wp_send_json_error(['message' => esc_html__('Failed to create page!', 'bdthemes-element-pack-lite')]);
             wp_die();
         }
 
@@ -510,7 +507,7 @@ add_action('wp_ajax_import_elementor_template', function () {
 //        update_post_meta($new_post_id, '_wp_page_template', !empty($pageTemplate) ? $pageTemplate : 'elementor_header_footer');
 
         wp_send_json_success([
-            'message'   => esc_html__('The template was imported successfully.', 'bdthemes-element-pack'),
+            'message'   => esc_html__('The template was imported successfully.', 'bdthemes-element-pack-lite'),
             'ids'       => $new_post_id,
             'edit_link' => admin_url('post.php?post=' . $new_post_id . '&action=elementor'),
         ]);
@@ -523,14 +520,14 @@ add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
 
     // Capability check - only administrators can import templates
     if ( ! current_user_can( 'manage_options' ) ) {
-        wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized', 'bdthemes-element-pack' ) ] );
+        wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized', 'bdthemes-element-pack-lite' ) ] );
         wp_die();
     }
 
     $file_url = isset($_POST['import_url']) ? esc_url_raw(wp_unslash($_POST['import_url'])) : '';
 
     if (!filter_var($file_url, FILTER_VALIDATE_URL) || 0 !== strpos($file_url, 'http')) {
-        wp_send_json_error(['message' => esc_html__('Invalid import URL', 'bdthemes-element-pack')]);
+        wp_send_json_error(['message' => esc_html__('Invalid import URL', 'bdthemes-element-pack-lite')]);
     }
 
     $remote_zip_request = wp_safe_remote_get($file_url, array(
@@ -539,19 +536,19 @@ add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
     ));
 
     if (is_wp_error($remote_zip_request)) {
-        wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack')]);
+        wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
     }
 
 
     if (200 !== $remote_zip_request['response']['code']) {
-        wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack')]);
+        wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
     }
 
     $kit_zip_path = Plugin::$instance->uploads_manager->create_temp_file($remote_zip_request['body'], 'kit.zip');
 
     $app = Plugin::$instance->app;
     if (!$app) {
-        wp_send_json_error(['message' => esc_html__('Elementor app not available', 'bdthemes-element-pack')]);
+        wp_send_json_error(['message' => esc_html__('Elementor app not available', 'bdthemes-element-pack-lite')]);
     }
 
     $import_export_module = $app->get_component('import-export');
@@ -572,7 +569,7 @@ add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
         if (count($missingPlugins)) {
             wp_send_json_error([
                 'plugins' => $missingPlugins,
-                'message' => esc_html__('Missing plugins', 'bdthemes-element-pack'),
+                'message' => esc_html__('Missing plugins', 'bdthemes-element-pack-lite'),
             ]);
         }
 
@@ -610,7 +607,7 @@ add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
 
         wp_send_json_success($import);
     } catch (\Throwable $e) {
-        wp_send_json_error(['message' => esc_html__('Import failed: ', 'bdthemes-element-pack') . esc_html($e->getMessage())]);
+        wp_send_json_error(['message' => esc_html__('Import failed: ', 'bdthemes-element-pack-lite') . esc_html($e->getMessage())]);
     }
 });
 
@@ -619,7 +616,7 @@ add_action('wp_ajax_import_ep_elementor_bundle_runner_template', function () {
 
     // Capability check - only administrators can import templates
     if ( ! current_user_can( 'manage_options' ) ) {
-        wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized', 'bdthemes-element-pack' ) ] );
+        wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized', 'bdthemes-element-pack-lite' ) ] );
         wp_die();
     }
 
@@ -627,12 +624,12 @@ add_action('wp_ajax_import_ep_elementor_bundle_runner_template', function () {
     $sessionId = isset($_POST['sessionId']) ? sanitize_text_field(wp_unslash($_POST['sessionId'])) : '';
 
     if (!$runner || !$sessionId) {
-        wp_send_json_error(['message' => esc_html__('Required Param Is Missing.', 'bdthemes-element-pack')]);
+        wp_send_json_error(['message' => esc_html__('Required Param Is Missing.', 'bdthemes-element-pack-lite')]);
     }
 
     $app = Plugin::$instance->app;
     if (!$app) {
-        wp_send_json_error(['message' => esc_html__('Elementor app not available.', 'bdthemes-element-pack')]);
+        wp_send_json_error(['message' => esc_html__('Elementor app not available.', 'bdthemes-element-pack-lite')]);
     }
 
     try {

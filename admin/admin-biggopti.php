@@ -406,9 +406,9 @@ class Biggopties {
 	 */
 	public function dismiss() {
 		$nonce = (isset($_POST['_wpnonce'])) ? sanitize_text_field($_POST['_wpnonce']) : '';
-		$id   = (isset($_POST['id'])) ? esc_attr($_POST['id']) : '';
-		$time = (isset($_POST['time'])) ? esc_attr($_POST['time']) : '';
-		$meta = (isset($_POST['meta'])) ? esc_attr($_POST['meta']) : '';
+		$id   = (isset($_POST['id'])) ? sanitize_text_field(wp_unslash($_POST['id'])) : '';
+		$time = (isset($_POST['time'])) ? sanitize_text_field( wp_unslash( $_POST['time'] ) ) : '';
+		$meta = (isset($_POST['meta'])) ? sanitize_text_field( wp_unslash( $_POST['meta'] ) ) : '';
 
 		if ( ! wp_verify_nonce($nonce, 'element-pack') ) {
 			wp_send_json_error();
@@ -467,11 +467,6 @@ class Biggopties {
 		foreach (self::$biggopties as $key => $biggopti) {
 
 			$biggopti = wp_parse_args($biggopti, $defaults);
-
-			// Check if biggopti is for White Label
-			if (defined('BDTEP_WL') && $biggopti['category'] === 'regular') {
-				continue;
-			}
 
 			$classes = ['biggopti'];
 

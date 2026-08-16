@@ -17,7 +17,7 @@ class Progress_With_Cursor extends Elementor_Skin_Base {
     }
 
     public function get_title() {
-        return __('Progress With Cursor', 'bdthemes-element-pack');
+        return __('Progress With Cursor', 'bdthemes-element-pack-lite');
     }
  
     public function render() {

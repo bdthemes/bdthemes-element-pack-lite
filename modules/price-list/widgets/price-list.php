@@ -23,7 +23,7 @@ class Price_List extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Price List', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Price List', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -61,7 +61,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_content_list',
 			[ 
-				'label' => esc_html__( 'List', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'List', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -70,7 +70,7 @@ class Price_List extends Module_Base {
 		$repeater->add_control(
 			'price',
 			[ 
-				'label'   => esc_html__( 'Price', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Price', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 			]
@@ -79,7 +79,7 @@ class Price_List extends Module_Base {
 		$repeater->add_control(
 			'old_price',
 			[ 
-				'label'   => esc_html__( 'Old Price', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Old Price', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 			]
@@ -88,8 +88,8 @@ class Price_List extends Module_Base {
 		$repeater->add_control(
 			'title',
 			[ 
-				'label'       => esc_html__( 'Title', 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'First item on the list', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'First item on the list', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => 'true',
 				'dynamic'     => [ 'active' => true ],
@@ -99,7 +99,7 @@ class Price_List extends Module_Base {
 		$repeater->add_control(
 			'item_description',
 			[ 
-				'label'   => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXTAREA,
 				'dynamic' => [ 'active' => true ],
 			]
@@ -108,7 +108,7 @@ class Price_List extends Module_Base {
 		$repeater->add_control(
 			'item_badge',
 			[ 
-				'label'   => esc_html__( 'Badge', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'   => esc_html__( 'Badge', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 			]
@@ -117,7 +117,7 @@ class Price_List extends Module_Base {
 		$repeater->add_control(
 			'image',
 			[ 
-				'label'   => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'default' => [],
 				'dynamic' => [ 'active' => true ],
@@ -127,7 +127,7 @@ class Price_List extends Module_Base {
 		$repeater->add_control(
 			'link',
 			[ 
-				'label'   => esc_html__( 'Link', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::URL,
 				'default' => [ 'url' => '#' ],
 				'dynamic' => [ 'active' => true ],
@@ -137,22 +137,22 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'price_list',
 			[ 
-				'label'       => esc_html__( 'List Items', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'List Items', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
 					[ 
-						'title' => esc_html__( 'First item on the list', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'First item on the list', 'bdthemes-element-pack-lite' ),
 						'price' => '$20',
 						'link'  => [ 'url' => '#' ],
 					],
 					[ 
-						'title' => esc_html__( 'Second item on the list', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Second item on the list', 'bdthemes-element-pack-lite' ),
 						'price' => '$9',
 						'link'  => [ 'url' => '#' ],
 					],
 					[ 
-						'title' => esc_html__( 'Third item on the list', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Third item on the list', 'bdthemes-element-pack-lite' ),
 						'price' => '$32',
 						'link'  => [ 'url' => '#' ],
 					],
@@ -166,7 +166,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_content_additional',
 			[ 
-				'label' => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -174,7 +174,7 @@ class Price_List extends Module_Base {
 			Group_Control_Image_Size::get_type(),
 			[ 
 				'name'        => 'thumbnail_size',
-				'label'       => esc_html__( 'Image Size', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Image Size', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'exclude'     => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'     => 'thumbnail',
 				'render_type' => 'template'
@@ -184,15 +184,15 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'image_hide_on',
 			[ 
-				'label'              => __( 'Image Hide On', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'              => __( 'Image Hide On', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'               => Controls_Manager::SELECT2,
 				'default'            => [ 'mobile' ],
 				'multiple'           => true,
 				'label_block'        => true,
 				'options'            => [ 
-					'desktop' => __( 'Desktop', 'bdthemes-element-pack' ),
-					'tablet'  => __( 'Tablet', 'bdthemes-element-pack' ),
-					'mobile'  => __( 'Mobile', 'bdthemes-element-pack' ),
+					'desktop' => __( 'Desktop', 'bdthemes-element-pack-lite' ),
+					'tablet'  => __( 'Tablet', 'bdthemes-element-pack-lite' ),
+					'mobile'  => __( 'Mobile', 'bdthemes-element-pack-lite' ),
 				],
 				'frontend_available' => true,
 			]
@@ -201,13 +201,13 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'vertical_align',
 			[ 
-				'label'       => esc_html__( 'Vertical Align', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Vertical Align', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SELECT,
-				'description' => esc_html__( 'When you will take image then you understand its function', 'bdthemes-element-pack' ),
+				'description' => esc_html__( 'When you will take image then you understand its function', 'bdthemes-element-pack-lite' ),
 				'options'     => [ 
-					'middle' => esc_html__( 'Middle', 'bdthemes-element-pack' ),
-					'top'    => esc_html__( 'Top', 'bdthemes-element-pack' ),
-					'bottom' => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
+					'middle' => esc_html__( 'Middle', 'bdthemes-element-pack-lite' ),
+					'top'    => esc_html__( 'Top', 'bdthemes-element-pack-lite' ),
+					'bottom' => esc_html__( 'Bottom', 'bdthemes-element-pack-lite' ),
 				],
 				'default'     => 'middle',
 				'separator'   => 'before',
@@ -217,7 +217,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[ 
-				'label'          => __( 'Columns', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'          => __( 'Columns', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'           => Controls_Manager::SELECT,
 				'default'        => '1',
 				'tablet_default' => '1',
@@ -237,7 +237,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'grid_column_gap',
 			[ 
-				'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Column Gap', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list' => 'grid-column-gap: {{SIZE}}{{UNIT}};',
@@ -251,7 +251,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'row_gap',
 			[ 
-				'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Row Gap', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list' => 'grid-row-gap: {{SIZE}}{{UNIT}};',
@@ -262,10 +262,10 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'item_counter',
 			[ 
-				'label'     => __( 'Item Counter', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => __( 'Item Counter', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => __( 'Hide', 'bdthemes-element-pack' ),
+				'label_on'  => __( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => __( 'Hide', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 			]
 		);
@@ -273,9 +273,9 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'show_cart',
 			[ 
-				'label'     => esc_html__( 'Add to Cart', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'label_on'  => __( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => __( 'Hide', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Add to Cart', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
+				'label_on'  => __( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => __( 'Hide', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::SWITCHER,
 			]
@@ -284,7 +284,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'cart_icon',
 			[ 
-				'label'       => __( 'Cart Icon', 'bdthemes-element-pack' ),
+				'label'       => __( 'Cart Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'render_type' => 'template',
 				'label_block' => false,
@@ -302,7 +302,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'cart_spacing',
 			[ 
-				'label'     => esc_html__( 'Cart Space', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Cart Space', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -324,10 +324,10 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'show_old_price',
 			[ 
-				'label'        => esc_html__( 'Old Price', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'        => esc_html__( 'Old Price', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Show', 'bdthemes-element-pack' ),
-				'label_off'    => __( 'Hide', 'bdthemes-element-pack' ),
+				'label_on'     => __( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off'    => __( 'Hide', 'bdthemes-element-pack-lite' ),
 				'separator'    => 'before',
 				'return_value' => 'yes',
 				'render_type'  => 'template',
@@ -337,7 +337,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'old_price_spacing',
 			[ 
-				'label'     => esc_html__( 'Old Price Space', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Old Price Space', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -359,10 +359,10 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'show_badge',
 			[ 
-				'label'     => esc_html__( 'Badge', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Badge', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Show', 'bdthemes-element-pack' ),
-				'label_off' => __( 'Hide', 'bdthemes-element-pack' ),
+				'label_on'  => __( 'Show', 'bdthemes-element-pack-lite' ),
+				'label_off' => __( 'Hide', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 			]
 		);
@@ -370,10 +370,10 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'badge_offset',
 			[ 
-				'label'        => esc_html__( 'Badge Offset', 'bdthemes-element-pack' ),
+				'label'        => esc_html__( 'Badge Offset', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => __( 'Default', 'bdthemes-element-pack' ),
-				'label_on'     => __( 'Custom', 'bdthemes-element-pack' ),
+				'label_off'    => __( 'Default', 'bdthemes-element-pack-lite' ),
+				'label_on'     => __( 'Custom', 'bdthemes-element-pack-lite' ),
 				'return_value' => 'yes',
 				'condition'    => [ 
 					'show_badge' => 'yes',
@@ -386,7 +386,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'badge_h_spacing',
 			[ 
-				'label'          => __( 'Horizontal Offset', 'bdthemes-element-pack' ),
+				'label'          => __( 'Horizontal Offset', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 0,
@@ -418,7 +418,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'badge_v_spacing',
 			[ 
-				'label'          => __( 'Vertical Offset', 'bdthemes-element-pack' ),
+				'label'          => __( 'Vertical Offset', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 0,
@@ -450,7 +450,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'badge_rotate',
 			[ 
-				'label'          => esc_html__( 'Rotate', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'          => esc_html__( 'Rotate', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 0,
@@ -487,7 +487,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_layout',
 			[ 
-				'label' => __( 'Items', 'bdthemes-element-pack' ),
+				'label' => __( 'Items', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -497,7 +497,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_normal',
 			[ 
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -513,7 +513,7 @@ class Price_List extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'item_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'label'       => __( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-price-list-item',
@@ -524,7 +524,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'item_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -536,7 +536,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'item_padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [ 
@@ -558,7 +558,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_hover',
 			[ 
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -573,7 +573,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'item_hover_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'item_border_border!' => '',
@@ -601,7 +601,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_title',
 			[ 
-				'label'      => esc_html__( 'Title', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 			]
@@ -610,7 +610,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'heading_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-title' => 'color: {{VALUE}};',
@@ -621,7 +621,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'heading_hover_color',
 			[ 
-				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-title' => 'color: {{VALUE}};',
@@ -633,7 +633,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'heading_margin',
 			[ 
-				'label'      => __( 'Margin', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => __( 'Margin', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -646,7 +646,7 @@ class Price_List extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'heading_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-price-list-header',
 			]
 		);
@@ -656,7 +656,7 @@ class Price_List extends Module_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[ 
 				'name'     => 'heading_text_stroke',
-				'label'    => esc_html__( 'Text Stroke', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'    => esc_html__( 'Text Stroke', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'selector' => '{{WRAPPER}} .bdt-price-list-title',
 			]
 		);
@@ -666,7 +666,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_price',
 			[ 
-				'label'      => esc_html__( 'Price', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Price', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 			]
@@ -677,14 +677,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_price_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'price_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => [ 
@@ -696,7 +696,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'price_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#4AB8F8',
 				'selectors' => [ 
@@ -716,7 +716,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'price_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'default'    => [ 
@@ -735,7 +735,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'price_width',
 			[ 
-				'label'     => esc_html__( 'Width', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 50,
@@ -755,7 +755,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'price_height',
 			[ 
-				'label'     => esc_html__( 'Height', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Height', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -791,14 +791,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_price_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'price_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-price' => 'color: {{VALUE}};',
@@ -809,7 +809,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'price_hover_bg',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-price' => 'background-color: {{VALUE}};',
@@ -821,7 +821,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'price_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'border_border!' => '',
@@ -851,7 +851,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_old_price',
 			[ 
-				'label'      => esc_html__( 'Old Price', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Old Price', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 				'condition'  => [ 
@@ -865,14 +865,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_old_price_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'old_price_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-old-price del' => 'color: {{VALUE}};',
@@ -883,7 +883,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'old_price_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-old-price del' => 'background-color: {{VALUE}};',
@@ -902,7 +902,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'old_price_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'default'    => [ 
@@ -921,7 +921,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'old_price_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -952,14 +952,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_old_price_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 			]
 		);
 
 		$this->add_control(
 			'old_price_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-old-price del' => 'color: {{VALUE}};',
@@ -971,7 +971,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'old_price_hover_background_color',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-old-price del' => 'background-color: {{VALUE}};',
@@ -983,7 +983,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'old_price_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'old_price_border_border!' => '',
@@ -1013,7 +1013,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_description',
 			[ 
-				'label'      => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 			]
@@ -1022,7 +1022,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'description_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-description' => 'color: {{VALUE}};',
@@ -1033,7 +1033,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'description_hover_color',
 			[ 
-				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-description' => 'color: {{VALUE}};',
@@ -1045,7 +1045,7 @@ class Price_List extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'description_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-price-list-description',
 			]
 		);
@@ -1055,7 +1055,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_separator',
 			[ 
-				'label'      => esc_html__( 'Separator', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Separator', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 			]
@@ -1064,14 +1064,14 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'separator_style',
 			[ 
-				'label'     => esc_html__( 'Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Style', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [ 
-					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack' ),
-					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack' ),
-					'double' => esc_html__( 'Double', 'bdthemes-element-pack' ),
-					'none'   => esc_html__( 'None', 'bdthemes-element-pack' ),
+					'solid'  => esc_html__( 'Solid', 'bdthemes-element-pack-lite' ),
+					'dotted' => esc_html__( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => esc_html__( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'double' => esc_html__( 'Double', 'bdthemes-element-pack-lite' ),
+					'none'   => esc_html__( 'None', 'bdthemes-element-pack-lite' ),
 				],
 				'default'   => 'dashed',
 				'selectors' => [ 
@@ -1083,7 +1083,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'separator_weight',
 			[ 
-				'label'     => esc_html__( 'Width', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Width', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1105,7 +1105,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'separator_spacing',
 			[ 
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1124,7 +1124,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'separator_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-separator' => 'border-bottom-color: {{VALUE}};',
@@ -1139,7 +1139,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'separator_hover_color',
 			[ 
-				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-separator' => 'border-bottom-color: {{VALUE}};',
@@ -1155,7 +1155,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_image_style',
 			[ 
-				'label'      => esc_html__( 'Image', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Image', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 			]
@@ -1167,7 +1167,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_image_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -1182,7 +1182,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'image_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1195,7 +1195,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'image_padding',
 			[ 
-				'label'     => esc_html__( 'Padding', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::DIMENSIONS,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-image' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1206,7 +1206,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'image_size',
 			[ 
-				'label'     => esc_html__( 'Size', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1225,7 +1225,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'image_spacing',
 			[ 
-				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1256,14 +1256,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_image_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 			]
 		);
 		// border color
 		$this->add_control(
 			'image_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'image_border_border!' => '',
@@ -1290,7 +1290,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_counter',
 			[ 
-				'label'      => esc_html__( 'Counter', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Counter', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 				'condition'  => [ 
@@ -1304,14 +1304,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_counter_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'counter_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-counter::before' => 'color: {{VALUE}}',
@@ -1340,7 +1340,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'counter_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1352,7 +1352,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'counter_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1364,7 +1364,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'counter_space',
 			[ 
-				'label'     => __( 'Spacing', 'bdthemes-element-pack' ),
+				'label'     => __( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-counter' => 'margin-right: {{SIZE}}{{UNIT}};',
@@ -1376,7 +1376,7 @@ class Price_List extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'counter_typography',
-				'label'    => __( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => __( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector' => '{{WRAPPER}} .bdt-price-list-counter::before',
 				'exclude'  => [ // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 					'letter_spacing',
@@ -1398,14 +1398,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_counter_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 			]
 		);
 
 		$this->add_control(
 			'counter_hover_color',
 			[ 
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-counter::before' => 'color: {{VALUE}}',
@@ -1424,7 +1424,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'counter_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'counter_border_border!' => ''
@@ -1452,7 +1452,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_icon',
 			[ 
-				'label'     => esc_html__( 'Cart Icon', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Cart Icon', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'show_cart'         => 'yes',
@@ -1466,14 +1466,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_cart_icon_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'cart_icon_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-cart-icon'     => 'color: {{VALUE}};',
@@ -1503,7 +1503,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'cart_icon_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -1515,7 +1515,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'cart_icon_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -1535,7 +1535,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'cart_icon_size',
 			[ 
-				'label'     => __( 'Icon Size', 'bdthemes-element-pack' ),
+				'label'     => __( 'Icon Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -1554,14 +1554,14 @@ class Price_List extends Module_Base {
 		$this->start_controls_tab(
 			'tab_cart_icon_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'cart_icon_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-cart-icon'     => 'color: {{VALUE}};',
@@ -1581,7 +1581,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'icon_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'cart_icon_border_border!' => ''
@@ -1601,7 +1601,7 @@ class Price_List extends Module_Base {
 		$this->start_controls_section(
 			'section_style_badge',
 			[ 
-				'label'      => esc_html__( 'Badge', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Badge', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 				'condition'  => [ 
@@ -1613,7 +1613,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'badge_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-badge' => 'color: {{VALUE}};',
@@ -1624,7 +1624,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'badge_hover_color',
 			[ 
-				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Hover Color', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-item:hover .bdt-price-list-badge' => 'color: {{VALUE}};',
@@ -1635,7 +1635,7 @@ class Price_List extends Module_Base {
 		$this->add_control(
 			'badge_background_color',
 			[ 
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-price-list-badge' => 'background-color: {{VALUE}};',
@@ -1647,7 +1647,7 @@ class Price_List extends Module_Base {
 			Group_Control_Border::get_type(),
 			[ 
 				'name'        => 'badge_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .bdt-price-list-badge',
@@ -1657,7 +1657,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'badge_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'default'    => [ 
@@ -1676,7 +1676,7 @@ class Price_List extends Module_Base {
 		$this->add_responsive_control(
 			'badge_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 

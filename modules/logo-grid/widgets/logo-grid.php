@@ -30,7 +30,7 @@ class Logo_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Logo Grid', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Logo Grid', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -68,7 +68,7 @@ class Logo_Grid extends Module_Base {
 
 		$this->register_logo_items_controls(
 			[
-				'section_label'    => __( 'Logo Grid Items', 'bdthemes-element-pack' ),
+				'section_label'    => __( 'Logo Grid Items', 'bdthemes-element-pack-lite' ),
 				'tooltip_frontend' => true,
 			]
 		);
@@ -76,7 +76,7 @@ class Logo_Grid extends Module_Base {
 		$this->start_controls_section(
 			'ep_section_layout',
 			[ 
-				'label' => __( 'Additional Settings', 'bdthemes-element-pack' ),
+				'label' => __( 'Additional Settings', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -84,12 +84,12 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'layout',
 			[ 
-				'label'          => __( 'Grid Layout', 'bdthemes-element-pack' ),
+				'label'          => __( 'Grid Layout', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SELECT,
 				'options'        => [ 
-					'box'       => __( 'Box', 'bdthemes-element-pack' ),
-					'border'    => __( 'Border', 'bdthemes-element-pack' ),
-					'tictactoe' => __( 'Plus', 'bdthemes-element-pack' ),
+					'box'       => __( 'Box', 'bdthemes-element-pack-lite' ),
+					'border'    => __( 'Border', 'bdthemes-element-pack-lite' ),
+					'tictactoe' => __( 'Plus', 'bdthemes-element-pack-lite' ),
 				],
 				'default'        => 'box',
 				'prefix_class'   => 'bdt-logo-grid--',
@@ -101,7 +101,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[ 
-				'label'           => __( 'Columns', 'bdthemes-element-pack' ),
+				'label'           => __( 'Columns', 'bdthemes-element-pack-lite' ),
 				'type'            => Controls_Manager::SELECT,
 				'options'         => [ 
 					1 => '1',
@@ -126,7 +126,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'column_gap',
 			[ 
-				'label'     => esc_html__( 'Grid Gap', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'     => esc_html__( 'Grid Gap', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [ 
 					'size' => 15,
@@ -155,7 +155,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'image_mask_popover',
 			[ 
-				'label'        => esc_html__( 'Image Mask', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'        => esc_html__( 'Image Mask', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'render_type'  => 'template',
 				'return_value' => 'yes',
@@ -168,7 +168,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'height',
 			[ 
-				'label'      => __( 'Item Height', 'bdthemes-element-pack' ),
+				'label'      => __( 'Item Height', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range'      => [ 
@@ -186,7 +186,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'grid_animation_type',
 			[ 
-				'label'     => esc_html__( 'Grid Entrance Animation', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Grid Entrance Animation', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => '',
 				'options'   => element_pack_transition_options(),
@@ -197,7 +197,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'grid_anim_delay',
 			[ 
-				'label'      => esc_html__( 'Animation delay', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Animation delay', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'ms', '' ],
 				'range'      => [ 
@@ -220,7 +220,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'logo_size_cover',
 			[ 
-				'label'        => esc_html__( 'Enable Logo Size Cover ', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'        => esc_html__( 'Enable Logo Size Cover ', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'ep-logo-grid-cover-',
 				'separator'    => 'before',
@@ -235,7 +235,7 @@ class Logo_Grid extends Module_Base {
 		$this->start_controls_section(
 			'ep_section_style_grid',
 			[ 
-				'label' => __( 'Logo Grid', 'bdthemes-element-pack' ),
+				'label' => __( 'Logo Grid', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -245,14 +245,14 @@ class Logo_Grid extends Module_Base {
 		$this->start_controls_tab(
 			'ep_tab_image_effects_normal',
 			[ 
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'grid_bg_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-logo-grid-figure' => 'background-color: {{VALUE}};',
@@ -263,15 +263,15 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'grid_border_type',
 			[ 
-				'label'     => __( 'Border Type', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Type', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [ 
-					'none'   => __( 'None', 'bdthemes-element-pack' ),
-					'solid'  => __( 'Solid', 'bdthemes-element-pack' ),
-					'double' => __( 'Double', 'bdthemes-element-pack' ),
-					'dotted' => __( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => __( 'Dashed', 'bdthemes-element-pack' ),
-					'groove' => __( 'Groove', 'bdthemes-element-pack' ),
+					'none'   => __( 'None', 'bdthemes-element-pack-lite' ),
+					'solid'  => __( 'Solid', 'bdthemes-element-pack-lite' ),
+					'double' => __( 'Double', 'bdthemes-element-pack-lite' ),
+					'dotted' => __( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => __( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'groove' => __( 'Groove', 'bdthemes-element-pack-lite' ),
 				],
 				'default'   => 'solid',
 				'selectors' => [ 
@@ -283,7 +283,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'grid_border_width',
 			[ 
-				'label'          => __( 'Border Width', 'bdthemes-element-pack' ),
+				'label'          => __( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [ 
 					'size' => 2,
@@ -352,7 +352,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'grid_border_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-item' => 'border-color: {{VALUE}};',
@@ -366,7 +366,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'grid_border_radius',
 			[ 
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -452,7 +452,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'padding',
 			[ 
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -475,7 +475,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'image_opacity',
 			[ 
-				'label'     => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label'     => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -501,7 +501,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'image_size',
 			[ 
-				'label'      => __( 'Image Size', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'      => __( 'Image Size', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range'      => [ 
@@ -525,14 +525,14 @@ class Logo_Grid extends Module_Base {
 		$this->start_controls_tab(
 			'hover',
 			[ 
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'grid_bg_hover_color',
 			[ 
-				'label'     => __( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-item:hover .bdt-logo-grid-figure' => 'background-color: {{VALUE}};',
@@ -543,7 +543,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'grid_border_hover_color',
 			[ 
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-item:hover' => 'border-color: {{VALUE}};',
@@ -558,7 +558,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'image_opacity_hover',
 			[ 
-				'label'     => __( 'Opacity', 'bdthemes-element-pack' ),
+				'label'     => __( 'Opacity', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -584,7 +584,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'image_bg_hover_transition',
 			[ 
-				'label'     => __( 'Transition Duration', 'bdthemes-element-pack' ),
+				'label'     => __( 'Transition Duration', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -601,7 +601,7 @@ class Logo_Grid extends Module_Base {
 		$this->add_control(
 			'hover_animation',
 			[ 
-				'label' => __( 'Hover Animation', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover Animation', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
 			]
 		);

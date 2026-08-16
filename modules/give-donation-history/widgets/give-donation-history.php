@@ -21,7 +21,7 @@ class Give_Donation_History extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Give Donation History', 'bdthemes-element-pack');
+		return BDTEP . __('Give Donation History', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -59,7 +59,7 @@ class Give_Donation_History extends Module_Base {
 		$this->start_controls_section(
 			'donation_history_settings',
 			[
-				'label' => __('Donation History', 'bdthemes-element-pack'),
+				'label' => __('Donation History', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -67,7 +67,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'form_id',
 			[
-				'label' => __('ID', 'bdthemes-element-pack'),
+				'label' => __('ID', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -76,7 +76,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'date',
 			[
-				'label' => __('Date', 'bdthemes-element-pack'),
+				'label' => __('Date', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -85,7 +85,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'donor',
 			[
-				'label' => __('Donor', 'bdthemes-element-pack'),
+				'label' => __('Donor', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 			]
 		);
@@ -93,7 +93,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'amount',
 			[
-				'label' => __('Amount', 'bdthemes-element-pack'),
+				'label' => __('Amount', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes'
 			]
@@ -102,7 +102,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'status',
 			[
-				'label' => __('Status', 'bdthemes-element-pack'),
+				'label' => __('Status', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 			]
 		);
@@ -110,7 +110,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'method',
 			[
-				'label' => __('Payment Method', 'bdthemes-element-pack'),
+				'label' => __('Payment Method', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 			]
 		);
@@ -122,7 +122,7 @@ class Give_Donation_History extends Module_Base {
 		$this->start_controls_section(
 			'section_style_header',
 			[
-				'label' => __('Header', 'bdthemes-element-pack'),
+				'label' => __('Header', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -130,7 +130,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'header_background',
 			[
-				'label'     => __('Background', 'bdthemes-element-pack'),
+				'label'     => __('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#e7ebef',
 				'selectors' => [
@@ -142,7 +142,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'header_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#333',
 				'selectors' => [
@@ -154,16 +154,16 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'header_border_style',
 			[
-				'label'     => __('Border Style', 'bdthemes-element-pack'),
+				'label'     => __('Border Style', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'solid',
 				'options'   => [
-					'none'   => __('None', 'bdthemes-element-pack'),
-					'solid'  => __('Solid', 'bdthemes-element-pack'),
-					'double' => __('Double', 'bdthemes-element-pack'),
-					'dotted' => __('Dotted', 'bdthemes-element-pack'),
-					'dashed' => __('Dashed', 'bdthemes-element-pack'),
-					'groove' => __('Groove', 'bdthemes-element-pack'),
+					'none'   => __('None', 'bdthemes-element-pack-lite'),
+					'solid'  => __('Solid', 'bdthemes-element-pack-lite'),
+					'double' => __('Double', 'bdthemes-element-pack-lite'),
+					'dotted' => __('Dotted', 'bdthemes-element-pack-lite'),
+					'dashed' => __('Dashed', 'bdthemes-element-pack-lite'),
+					'groove' => __('Groove', 'bdthemes-element-pack-lite'),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table th' => 'border-style: {{VALUE}};',
@@ -174,7 +174,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'header_border_width',
 			[
-				'label'     => __('Border Width', 'bdthemes-element-pack'),
+				'label'     => __('Border Width', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 1,
@@ -194,7 +194,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'header_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ccc',
 				'selectors' => [
@@ -206,7 +206,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_responsive_control(
 			'header_padding',
 			[
-				'label'      => __('Padding', 'bdthemes-element-pack'),
+				'label'      => __('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'default'    => [
@@ -233,20 +233,20 @@ class Give_Donation_History extends Module_Base {
 		$this->add_responsive_control(
 			'header_alignment',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => 'center',
 				'options' => [
 					'left' => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -261,7 +261,7 @@ class Give_Donation_History extends Module_Base {
 		$this->start_controls_section(
 			'section_style_body',
 			[
-				'label' => __('Body', 'bdthemes-element-pack'),
+				'label' => __('Body', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -269,16 +269,16 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'cell_border_style',
 			[
-				'label'     => __('Border Style', 'bdthemes-element-pack'),
+				'label'     => __('Border Style', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'solid',
 				'options'   => [
-					'none'   => __('None', 'bdthemes-element-pack'),
-					'solid'  => __('Solid', 'bdthemes-element-pack'),
-					'double' => __('Double', 'bdthemes-element-pack'),
-					'dotted' => __('Dotted', 'bdthemes-element-pack'),
-					'dashed' => __('Dashed', 'bdthemes-element-pack'),
-					'groove' => __('Groove', 'bdthemes-element-pack'),
+					'none'   => __('None', 'bdthemes-element-pack-lite'),
+					'solid'  => __('Solid', 'bdthemes-element-pack-lite'),
+					'double' => __('Double', 'bdthemes-element-pack-lite'),
+					'dotted' => __('Dotted', 'bdthemes-element-pack-lite'),
+					'dashed' => __('Dashed', 'bdthemes-element-pack-lite'),
+					'groove' => __('Groove', 'bdthemes-element-pack-lite'),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table td' => 'border-style: {{VALUE}};',
@@ -289,7 +289,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'cell_border_width',
 			[
-				'label'     => __('Border Width', 'bdthemes-element-pack'),
+				'label'     => __('Border Width', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 1,
@@ -309,7 +309,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_responsive_control(
 			'cell_padding',
 			[
-				'label'      => __('Cell Padding', 'bdthemes-element-pack'),
+				'label'      => __('Cell Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'default'    => [
@@ -336,20 +336,20 @@ class Give_Donation_History extends Module_Base {
 		$this->add_responsive_control(
 			'body_alignment',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => 'center',
 				'options' => [
 					'left' => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -364,14 +364,14 @@ class Give_Donation_History extends Module_Base {
 		$this->start_controls_tab(
 			'tab_normal',
 			[
-				'label' => __('Normal', 'bdthemes-element-pack'),
+				'label' => __('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'normal_background',
 			[
-				'label'     => __('Background', 'bdthemes-element-pack'),
+				'label'     => __('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#fff',
 				'selectors' => [
@@ -383,7 +383,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'normal_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table td' => 'color: {{VALUE}};',
@@ -394,7 +394,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'normal_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ccc',
 				'selectors' => [
@@ -408,14 +408,14 @@ class Give_Donation_History extends Module_Base {
 		$this->start_controls_tab(
 			'tab_hover',
 			[
-				'label' => __('Hover', 'bdthemes-element-pack'),
+				'label' => __('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'row_hover_background',
 			[
-				'label'     => __('Background', 'bdthemes-element-pack'),
+				'label'     => __('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table tr:hover td' => 'background-color: {{VALUE}} !important;',
@@ -426,7 +426,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'row_hover_text_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table tr:hover td' => 'color: {{VALUE}};',
@@ -439,14 +439,14 @@ class Give_Donation_History extends Module_Base {
 		$this->start_controls_tab(
 			'tab_stripe',
 			[
-				'label'     => __('Stripe', 'bdthemes-element-pack'),
+				'label'     => __('Stripe', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'stripe_background',
 			[
-				'label'     => __('Background', 'bdthemes-element-pack'),
+				'label'     => __('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#f5f5f5',
 				'selectors' => [
@@ -458,7 +458,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'stripe_color',
 			[
-				'label'     => __('Text Color', 'bdthemes-element-pack'),
+				'label'     => __('Text Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table tr:nth-child(even) td' => 'color: {{VALUE}};',
@@ -471,14 +471,14 @@ class Give_Donation_History extends Module_Base {
 		$this->start_controls_tab(
 			'tab_link_text',
 			[
-				'label'     => __('Link', 'bdthemes-element-pack'),
+				'label'     => __('Link', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'link_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table td a' => 'color: {{VALUE}};',
@@ -489,7 +489,7 @@ class Give_Donation_History extends Module_Base {
 		$this->add_control(
 			'link_hover_color',
 			[
-				'label'     => __('Hover Color', 'bdthemes-element-pack'),
+				'label'     => __('Hover Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-donation-history .give-table td a:hover' => 'color: {{VALUE}};',
@@ -508,7 +508,7 @@ class Give_Donation_History extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['form_id']) {
-			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack') . '</div>';
+			return '<div class="bdt-alert bdt-alert-warning">' . __('Please select a Give Forms From Setting!', 'bdthemes-element-pack-lite') . '</div>';
 		}
 
 		$attributes = [

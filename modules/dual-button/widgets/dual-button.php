@@ -20,7 +20,7 @@ class DualButton extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __( 'Dual Button', 'bdthemes-element-pack' );
+		return BDTEP . __( 'Dual Button', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -66,22 +66,22 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_content_button',
 			[
-				'label' => __( 'Button', 'bdthemes-element-pack' ),
+				'label' => __( 'Button', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dual_button_size',
 			[
-				'label'   => __( 'Button Size', 'bdthemes-element-pack' ),
+				'label'   => __( 'Button Size', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'md',
 				'options' => [
-					'xs' => __( 'Extra Small', 'bdthemes-element-pack' ),
-					'sm' => __( 'Small', 'bdthemes-element-pack' ),
-					'md' => __( 'Medium', 'bdthemes-element-pack' ),
-					'lg' => __( 'Large', 'bdthemes-element-pack' ),
-					'xl' => __( 'Extra Large', 'bdthemes-element-pack' ),
+					'xs' => __( 'Extra Small', 'bdthemes-element-pack-lite' ),
+					'sm' => __( 'Small', 'bdthemes-element-pack-lite' ),
+					'md' => __( 'Medium', 'bdthemes-element-pack-lite' ),
+					'lg' => __( 'Large', 'bdthemes-element-pack-lite' ),
+					'xl' => __( 'Extra Large', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -89,19 +89,19 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'align',
 			[
-				'label' => __( 'Alignment', 'bdthemes-element-pack' ),
+				'label' => __( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'start' => [
-						'title' => __( 'Start', 'bdthemes-element-pack' ),
+						'title' => __( 'Start', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'bdthemes-element-pack' ),
+						'title' => __( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'end' => [
-						'title' => __( 'End', 'bdthemes-element-pack' ),
+						'title' => __( 'End', 'bdthemes-element-pack-lite' ),
 						'icon' => 'eicon-text-align-right',
 					],
 				],
@@ -114,7 +114,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_width_auto',
 			[
-				'label' => __( 'Button Width Auto', 'bdthemes-element-pack' ),
+				'label' => __( 'Button Width Auto', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-dual-button-width-',
 			]
@@ -123,7 +123,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_width',
 			[
-				'label' => __( 'Button Width', 'bdthemes-element-pack' ),
+				'label' => __( 'Button Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'%' => [
@@ -160,7 +160,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'show_middle_text',
 			[
-				'label' => __( 'Middle Text', 'bdthemes-element-pack' ),
+				'label' => __( 'Middle Text', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -168,11 +168,11 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'middle_text',
 			[
-				'label'       => __( 'Text', 'bdthemes-element-pack' ),
+				'label'       => __( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => __( 'or', 'bdthemes-element-pack' ),
-				'placeholder' => __( 'or', 'bdthemes-element-pack' ),
+				'default'     => __( 'or', 'bdthemes-element-pack-lite' ),
+				'placeholder' => __( 'or', 'bdthemes-element-pack-lite' ),
 				'condition'   => [
 					'show_middle_text' => 'yes',
 				],
@@ -182,7 +182,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'dual_button_gap',
 			[
-				'label'   => __( 'Button Gap', 'bdthemes-element-pack' ),
+				'label'   => __( 'Button Gap', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 5,
@@ -207,28 +207,28 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_content_button_a',
 			[
-				'label' => __( 'Button A', 'bdthemes-element-pack' ),
+				'label' => __( 'Button A', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_a_text',
 			[
-				'label'       => __( 'Text', 'bdthemes-element-pack' ),
+				'label'       => __( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => __( 'Click Me', 'bdthemes-element-pack' ),
-				'placeholder' => __( 'Click Me', 'bdthemes-element-pack' ),
+				'default'     => __( 'Click Me', 'bdthemes-element-pack-lite' ),
+				'placeholder' => __( 'Click Me', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_a_link',
 			[
-				'label'       => __( 'Link', 'bdthemes-element-pack' ),
+				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
 				'default'     => [
 					'url' => '#',
 				],
@@ -238,7 +238,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_onclick',
 			[
-				'label' => esc_html__( 'OnClick', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'OnClick', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -246,12 +246,12 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_onclick_event',
 			[
-				'label'       => __( 'OnClick Event', 'bdthemes-element-pack' ),
+				'label'       => __( 'OnClick Event', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 				'placeholder' => 'myFunction()',
 /* translators: %s: URL to the onclick event documentation */
-				'description' => sprintf( __( 'For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
+				'description' => sprintf( __( 'For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack-lite' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
 				'condition' => [
 					'button_a_onclick' => 'yes'
 				]
@@ -261,19 +261,19 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_a_align',
 			[
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -286,7 +286,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_select_icon',
 			[
-				'label'       => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'       => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'button_a_icon',
 				'label_block' => false,
@@ -297,14 +297,14 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_icon_align',
 			[
-				'label'   => __( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'   => __( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'   => __( 'Left', 'bdthemes-element-pack' ),
-					'right'  => __( 'Right', 'bdthemes-element-pack' ),
-					'top'    => __( 'Top', 'bdthemes-element-pack' ),
-					'bottom' => __( 'Bottom', 'bdthemes-element-pack' ),
+					'left'   => __( 'Left', 'bdthemes-element-pack-lite' ),
+					'right'  => __( 'Right', 'bdthemes-element-pack-lite' ),
+					'top'    => __( 'Top', 'bdthemes-element-pack-lite' ),
+					'bottom' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					'button_a_select_icon[value]!' => '',
@@ -315,7 +315,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_icon_indent',
 			[
-				'label' => __( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label' => __( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -340,14 +340,14 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_css_id_a',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
+				'label' => __( 'Button ID', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
 				],
 				'default' => '',
-				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
-				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 			]
 		);
@@ -357,28 +357,28 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_content_button_b',
 			[
-				'label' => __( 'Button B', 'bdthemes-element-pack' ),
+				'label' => __( 'Button B', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_b_text',
 			[
-				'label'       => __( 'Text', 'bdthemes-element-pack' ),
+				'label'       => __( 'Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => [ 'active' => true ],
-				'default'     => __( 'Read More', 'bdthemes-element-pack' ),
-				'placeholder' => __( 'Read More', 'bdthemes-element-pack' ),
+				'default'     => __( 'Read More', 'bdthemes-element-pack-lite' ),
+				'placeholder' => __( 'Read More', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_b_link',
 			[
-				'label'       => __( 'Link', 'bdthemes-element-pack' ),
+				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack' ),
+				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
 				'default'     => [
 					'url' => '#',
 				],
@@ -388,15 +388,15 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_size',
 			[
-				'label'   => __( 'Button Size', 'bdthemes-element-pack' ),
+				'label'   => __( 'Button Size', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'md',
 				'options' => [
-					'xs' => __( 'Extra Small', 'bdthemes-element-pack' ),
-					'sm' => __( 'Small', 'bdthemes-element-pack' ),
-					'md' => __( 'Medium', 'bdthemes-element-pack' ),
-					'lg' => __( 'Large', 'bdthemes-element-pack' ),
-					'xl' => __( 'Extra Large', 'bdthemes-element-pack' ),
+					'xs' => __( 'Extra Small', 'bdthemes-element-pack-lite' ),
+					'sm' => __( 'Small', 'bdthemes-element-pack-lite' ),
+					'md' => __( 'Medium', 'bdthemes-element-pack-lite' ),
+					'lg' => __( 'Large', 'bdthemes-element-pack-lite' ),
+					'xl' => __( 'Extra Large', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -404,7 +404,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_onclick',
 			[
-				'label' => esc_html__( 'OnClick', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'OnClick', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -412,12 +412,12 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_onclick_event',
 			[
-				'label'       => __( 'OnClick Event', 'bdthemes-element-pack' ),
+				'label'       => __( 'OnClick Event', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
 				'placeholder' => 'myFunction()',
 /* translators: %s: URL to the onclick event documentation */
-				'description' => sprintf( __('For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
+				'description' => sprintf( __('For details please look <a href="%s" target="_blank">here</a>', 'bdthemes-element-pack-lite' ), 'https://www.w3schools.com/jsref/event_onclick.asp' ),
 				'condition' => [
 					'button_b_onclick' => 'yes'
 				]
@@ -427,19 +427,19 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_b_align',
 			[
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -452,7 +452,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_select_icon',
 			[
-				'label'       => __( 'Icon', 'bdthemes-element-pack' ),
+				'label'       => __( 'Icon', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'button_b_icon',
 				'label_block' => false,
@@ -463,14 +463,14 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_icon_align',
 			[
-				'label'   => __( 'Icon Position', 'bdthemes-element-pack' ),
+				'label'   => __( 'Icon Position', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'   => __( 'Left', 'bdthemes-element-pack' ),
-					'right'  => __( 'Right', 'bdthemes-element-pack' ),
-					'top'    => __( 'Top', 'bdthemes-element-pack' ),
-					'bottom' => __( 'Bottom', 'bdthemes-element-pack' ),
+					'left'   => __( 'Left', 'bdthemes-element-pack-lite' ),
+					'right'  => __( 'Right', 'bdthemes-element-pack-lite' ),
+					'top'    => __( 'Top', 'bdthemes-element-pack-lite' ),
+					'bottom' => __( 'Bottom', 'bdthemes-element-pack-lite' ),
 				],
 				'condition' => [
 					'button_b_select_icon[value]!' => '',
@@ -481,7 +481,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_icon_indent',
 			[
-				'label' => __( 'Icon Spacing', 'bdthemes-element-pack' ),
+				'label' => __( 'Icon Spacing', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -506,14 +506,14 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_css_id_b',
 			[
-				'label' => __( 'Button ID', 'bdthemes-element-pack' ),
+				'label' => __( 'Button ID', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
 				],
 				'default' => '',
-				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack' ),
-				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack' ),
+				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'bdthemes-element-pack-lite' ),
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'bdthemes-element-pack-lite' ),
 				'separator' => 'before',
 			]
 		);
@@ -524,7 +524,7 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_content_style',
 			[
-				'label' => __( 'Button', 'bdthemes-element-pack' ),
+				'label' => __( 'Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -534,22 +534,22 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dual_button_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_border_style',
 			[
-				'label'   => __( 'Border Style', 'bdthemes-element-pack' ),
+				'label'   => __( 'Border Style', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => [
-					'none'   => __( 'None', 'bdthemes-element-pack' ),
-					'solid'  => __( 'Solid', 'bdthemes-element-pack' ),
-					'dotted' => __( 'Dotted', 'bdthemes-element-pack' ),
-					'dashed' => __( 'Dashed', 'bdthemes-element-pack' ),
-					'groove' => __( 'Groove', 'bdthemes-element-pack' ),
+					'none'   => __( 'None', 'bdthemes-element-pack-lite' ),
+					'solid'  => __( 'Solid', 'bdthemes-element-pack-lite' ),
+					'dotted' => __( 'Dotted', 'bdthemes-element-pack-lite' ),
+					'dashed' => __( 'Dashed', 'bdthemes-element-pack-lite' ),
+					'groove' => __( 'Groove', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .bdt-dual-button a' => 'border-style: {{VALUE}};',
@@ -560,7 +560,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_border_width',
 			[
-				'label'      => __( 'Border Width', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'default'    => [
@@ -581,7 +581,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'dual_button_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -601,7 +601,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'dual_button_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -624,14 +624,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dual_button_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'dual_button_hover_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -657,7 +657,7 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_content_style_a',
 			[
-				'label' => __( 'Button A', 'bdthemes-element-pack' ),
+				'label' => __( 'Button A', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -665,19 +665,19 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_effect',
 			[
-				'label'   => __( 'Effect', 'bdthemes-element-pack' ),
+				'label'   => __( 'Effect', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'a',
 				'options' => [
-					'a' => __( 'Effect A', 'bdthemes-element-pack' ),
-					'b' => __( 'Effect B', 'bdthemes-element-pack' ),
-					'c' => __( 'Effect C', 'bdthemes-element-pack' ),
-					'd' => __( 'Effect D', 'bdthemes-element-pack' ),
-					'e' => __( 'Effect E', 'bdthemes-element-pack' ),
-					'f' => __( 'Effect F', 'bdthemes-element-pack' ),
-					'g' => __( 'Effect G', 'bdthemes-element-pack' ),
-					'h' => __( 'Effect H', 'bdthemes-element-pack' ),
-					'i' => __( 'Effect I', 'bdthemes-element-pack' ),
+					'a' => __( 'Effect A', 'bdthemes-element-pack-lite' ),
+					'b' => __( 'Effect B', 'bdthemes-element-pack-lite' ),
+					'c' => __( 'Effect C', 'bdthemes-element-pack-lite' ),
+					'd' => __( 'Effect D', 'bdthemes-element-pack-lite' ),
+					'e' => __( 'Effect E', 'bdthemes-element-pack-lite' ),
+					'f' => __( 'Effect F', 'bdthemes-element-pack-lite' ),
+					'g' => __( 'Effect G', 'bdthemes-element-pack-lite' ),
+					'h' => __( 'Effect H', 'bdthemes-element-pack-lite' ),
+					'i' => __( 'Effect I', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -687,14 +687,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_a_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_a_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-a' => 'color: {{VALUE}};',
@@ -716,7 +716,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_border_color',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#666',
 				'selectors' => [
@@ -731,7 +731,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_a_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -743,7 +743,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_a_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -765,14 +765,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_a_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_a_hover_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-a:hover' => 'color: {{VALUE}};',
@@ -795,7 +795,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_hover_border_color',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-a:hover' => 'border-color: {{VALUE}};',
@@ -809,7 +809,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_a_hover_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -835,7 +835,7 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_content_style_b',
 			[
-				'label' => __( 'Button B', 'bdthemes-element-pack' ),
+				'label' => __( 'Button B', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -843,19 +843,19 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_effect',
 			[
-				'label'   => __( 'Effect', 'bdthemes-element-pack' ),
+				'label'   => __( 'Effect', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'a',
 				'options' => [
-					'a' => __( 'Effect A', 'bdthemes-element-pack' ),
-					'b' => __( 'Effect B', 'bdthemes-element-pack' ),
-					'c' => __( 'Effect C', 'bdthemes-element-pack' ),
-					'd' => __( 'Effect D', 'bdthemes-element-pack' ),
-					'e' => __( 'Effect E', 'bdthemes-element-pack' ),
-					'f' => __( 'Effect F', 'bdthemes-element-pack' ),
-					'g' => __( 'Effect G', 'bdthemes-element-pack' ),
-					'h' => __( 'Effect H', 'bdthemes-element-pack' ),
-					'i' => __( 'Effect I', 'bdthemes-element-pack' ),
+					'a' => __( 'Effect A', 'bdthemes-element-pack-lite' ),
+					'b' => __( 'Effect B', 'bdthemes-element-pack-lite' ),
+					'c' => __( 'Effect C', 'bdthemes-element-pack-lite' ),
+					'd' => __( 'Effect D', 'bdthemes-element-pack-lite' ),
+					'e' => __( 'Effect E', 'bdthemes-element-pack-lite' ),
+					'f' => __( 'Effect F', 'bdthemes-element-pack-lite' ),
+					'g' => __( 'Effect G', 'bdthemes-element-pack-lite' ),
+					'h' => __( 'Effect H', 'bdthemes-element-pack-lite' ),
+					'i' => __( 'Effect I', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -865,14 +865,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_b_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_b_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-b' => 'color: {{VALUE}};',
@@ -894,7 +894,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_border_color',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#666',
 				'selectors' => [
@@ -909,7 +909,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_b_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -921,7 +921,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_b_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -943,14 +943,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_b_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_b_hover_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-b:hover' => 'color: {{VALUE}};',
@@ -974,7 +974,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_hover_border_color',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-b:hover' => 'border-color: {{VALUE}};',
@@ -988,7 +988,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_b__hover_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1014,7 +1014,7 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button_a_icon',
 			[
-				'label'     => __( 'Button A Icon', 'bdthemes-element-pack' ),
+				'label'     => __( 'Button A Icon', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'button_a_select_icon[value]!' => '',
@@ -1027,14 +1027,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_a_icon_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_a_icon_color',
 			[
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-a .bdt-a-icon' => 'color: {{VALUE}};',
@@ -1064,7 +1064,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_a_icon_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1076,7 +1076,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_a_icon_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1096,7 +1096,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_a_icon_size',
 			[
-				'label' => __( 'Icon Size', 'bdthemes-element-pack' ),
+				'label' => __( 'Icon Size', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1115,14 +1115,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_a_icon_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_a_icon_hover_color',
 			[
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-a:hover .bdt-a-icon' => 'color: {{VALUE}};',
@@ -1144,7 +1144,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_a_icon_hover_border_color',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'button_a_icon_border_border!' => '',
@@ -1162,7 +1162,7 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_style_button_b_icon',
 			[
-				'label'     => __( 'Button B Icon', 'bdthemes-element-pack' ),
+				'label'     => __( 'Button B Icon', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'button_b_select_icon[value]!' => '',
@@ -1175,14 +1175,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_b_icon_normal',
 			[
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_b_icon_color',
 			[
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-b .bdt-btn-b-icon' => 'color: {{VALUE}};',
@@ -1212,7 +1212,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_b_icon_radius',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1224,7 +1224,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_b_icon_padding',
 			[
-				'label'      => __( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => __( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -1244,7 +1244,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'button_b_icon_size',
 			[
-				'label' => __( 'Icon Size', 'bdthemes-element-pack' ),
+				'label' => __( 'Icon Size', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1263,14 +1263,14 @@ class DualButton extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_b_icon_hover',
 			[
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_b_icon_hover_color',
 			[
-				'label'     => __( 'Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-btn-b:hover .bdt-btn-b-icon' => 'color: {{VALUE}};',
@@ -1292,7 +1292,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'button_b_icon_hover_border_color',
 			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'button_b_icon_border_border!' => '',
@@ -1310,7 +1310,7 @@ class DualButton extends Module_Base {
 		$this->start_controls_section(
 			'section_style_middle_text',
 			[
-				'label'      => __( 'Middle Text', 'bdthemes-element-pack' ),
+				'label'      => __( 'Middle Text', 'bdthemes-element-pack-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'conditions' => [
 					'terms' => [
@@ -1332,7 +1332,7 @@ class DualButton extends Module_Base {
 		$this->add_control(
 			'middle_text_color',
 			[
-				'label'     => __( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dual-button span' => 'color: {{VALUE}};',
@@ -1353,7 +1353,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'middle_text_radius',
 			[
-				'label'      => __( 'Radius', 'bdthemes-element-pack' ),
+				'label'      => __( 'Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1381,7 +1381,7 @@ class DualButton extends Module_Base {
 		$this->add_responsive_control(
 			'middle_text_horizontal_offset',
 			[
-				'label' => __( 'Horizontal Offset', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => __( 'Horizontal Offset', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [

@@ -17,7 +17,7 @@ class Image_Compare extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Image Compare', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Image Compare', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -63,15 +63,15 @@ class Image_Compare extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'before_image',
 			[
-				'label'   => esc_html__( 'Before Image', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'Use same size image for before and after for better preview.', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Before Image', 'bdthemes-element-pack-lite' ),
+				'description' => esc_html__( 'Use same size image for before and after for better preview.', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => BDTEP_ASSETS_URL.'images/before.svg',
@@ -83,8 +83,8 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'after_image',
 			[
-				'label'   => esc_html__( 'After Image', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'Use same size image for before and after for better preview.', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'After Image', 'bdthemes-element-pack-lite' ),
+				'description' => esc_html__( 'Use same size image for before and after for better preview.', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => BDTEP_ASSETS_URL.'images/after.svg',
@@ -98,7 +98,7 @@ class Image_Compare extends Module_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name'         => 'thumbnail_size',
-				'label'        => __( 'Image Size', 'bdthemes-element-pack' ),
+				'label'        => __( 'Image Size', 'bdthemes-element-pack-lite' ),
 				'exclude'      => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not WP_Query.
 				'default'      => 'full',
 			]
@@ -107,10 +107,10 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'before_label',
 			[
-				'label'       => esc_html__( 'Before Label', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Before Label', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => esc_html__( 'Before Label', 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'Before', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Before Label', 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'Before', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -119,10 +119,10 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'after_label',
 			[
-				'label'       => esc_html__( 'After Label', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'After Label', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => esc_html__( 'After Label', 'bdthemes-element-pack' ),
-				'default'     => esc_html__( 'After', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'After Label', 'bdthemes-element-pack-lite' ),
+				'default'     => esc_html__( 'After', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
 				'dynamic'     => [ 'active' => true ],
 			]
@@ -133,7 +133,7 @@ class Image_Compare extends Module_Base {
 		$this->start_controls_section(
 			'section_content_additional_settings',
 			[
-				'label' => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -141,12 +141,12 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'orientation',
 			[
-				'label'   => esc_html__( 'Orientation', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Orientation', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'horizontal',
 				'options' => [
-					'horizontal' => esc_html__( 'Horizontal', 'bdthemes-element-pack' ),
-					'vertical'   => esc_html__( 'Vertical', 'bdthemes-element-pack' ),
+					'horizontal' => esc_html__( 'Horizontal', 'bdthemes-element-pack-lite' ),
+					'vertical'   => esc_html__( 'Vertical', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -154,7 +154,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'default_offset_pct',
 			[
-				'label'   => esc_html__( 'Before Image Visiblity', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Before Image Visiblity', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 70,
@@ -171,8 +171,8 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'no_overlay',
 			[
-				'label'       => esc_html__( 'Overlay', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'Do not show the overlay with before and after.', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Overlay', 'bdthemes-element-pack-lite' ),
+				'description' => esc_html__( 'Do not show the overlay with before and after.', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
 				'separator' => 'before'
@@ -182,7 +182,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'on_hover',
 			[
-				'label'       => esc_html__( 'On Hover?', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'On Hover?', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
 				'condition'   => [
@@ -194,8 +194,8 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'move_slider_on_hover',
 			[
-				'label'       => esc_html__( 'Slide on Hover', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'Move slider on mouse hover?', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Slide on Hover', 'bdthemes-element-pack-lite' ),
+				'description' => esc_html__( 'Move slider on mouse hover?', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -204,7 +204,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'add_circle',
 			[
-				'label'       => esc_html__( 'Add Circle In Bar?', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Add Circle In Bar?', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'separator' => 'before'
 			]
@@ -213,7 +213,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'add_circle_blur',
 			[
-				'label'       => esc_html__( 'add Circle Blur?', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'add Circle Blur?', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'condition'   => [
 					'add_circle' => 'yes'
@@ -224,7 +224,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'add_circle_shadow',
 			[
-				'label'       => esc_html__( 'Circle Shadow?', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Circle Shadow?', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'condition'   => [
 					'add_circle' => 'yes'
@@ -235,7 +235,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'smoothing',
 			[
-				'label'       => esc_html__( 'Smoothing?', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Smoothing?', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
 				'separator' => 'before'
@@ -245,7 +245,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'smoothing_amount',
 			[
-				'label'   => esc_html__( 'Smoothing Amount', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Smoothing Amount', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 400,
@@ -266,8 +266,8 @@ class Image_Compare extends Module_Base {
 		// $this->add_control(
 		// 	'move_with_handle_only',
 		// 	[
-		// 		'label'       => esc_html__( 'Handle Only', 'bdthemes-element-pack' ),
-		// 		'description' => esc_html__( 'Allow a user to swipe anywhere on the image to control slider movement.', 'bdthemes-element-pack' ),
+		// 		'label'       => esc_html__( 'Handle Only', 'bdthemes-element-pack-lite' ),
+		// 		'description' => esc_html__( 'Allow a user to swipe anywhere on the image to control slider movement.', 'bdthemes-element-pack-lite' ),
 		// 		'type'        => Controls_Manager::SWITCHER,
 		// 		'default'     => 'yes',
 		// 	]
@@ -276,8 +276,8 @@ class Image_Compare extends Module_Base {
 		// $this->add_control(
 		// 	'click_to_move',
 		// 	[
-		// 		'label'       => esc_html__( 'Click to Move', 'bdthemes-element-pack' ),
-		// 		'description' => esc_html__( 'Allow a user to click (or tap) anywhere on the image to move the slider to that location.', 'bdthemes-element-pack' ),
+		// 		'label'       => esc_html__( 'Click to Move', 'bdthemes-element-pack-lite' ),
+		// 		'description' => esc_html__( 'Allow a user to click (or tap) anywhere on the image to move the slider to that location.', 'bdthemes-element-pack-lite' ),
 		// 		'type'        => Controls_Manager::SWITCHER,
 		// 	]
 		// );
@@ -287,7 +287,7 @@ class Image_Compare extends Module_Base {
 		$this->start_controls_section(
 			'section_style_style',
 			[
-				'label' => esc_html__( 'Style', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Style', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -295,7 +295,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'overlay_color',
 			[
-				'label'     => esc_html__( 'Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Overlay Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-image-compare .bdt-image-compare-overlay:before' => 'background: {{VALUE}};',
@@ -311,14 +311,14 @@ class Image_Compare extends Module_Base {
 		$this->start_controls_tab(
 			'tab_image_compare_before_style',
 			[
-				'label' => esc_html__( 'Before', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Before', 'bdthemes-element-pack-lite' ),
 			]
 		);
 		
 		$this->add_control(
 			'before_background',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-before' => 'background-color: {{VALUE}};',
@@ -329,7 +329,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'before_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-before' => 'color: {{VALUE}};',
@@ -345,14 +345,14 @@ class Image_Compare extends Module_Base {
 		$this->start_controls_tab(
 			'tab_image_compare_after_style',
 			[
-				'label' => esc_html__( 'After', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'After', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'after_background',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-after' => 'background-color: {{VALUE}};',
@@ -363,7 +363,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'after_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-image-compare .icv__label.icv__label-after' => 'color: {{VALUE}};',
@@ -376,14 +376,14 @@ class Image_Compare extends Module_Base {
 		$this->start_controls_tab(
 			'tab_image_compare_bar_style',
 			[
-				'label' => esc_html__( 'Bar', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Bar', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'bar_color',
 			[
-				'label'     => esc_html__( 'Bar Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Bar Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#fff',
 			]
@@ -397,7 +397,7 @@ class Image_Compare extends Module_Base {
 		$this->add_responsive_control(
 			'after_before_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -410,7 +410,7 @@ class Image_Compare extends Module_Base {
 		$this->add_control(
 			'after_before_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -423,7 +423,7 @@ class Image_Compare extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'after_before_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				'selector'  => '{{WRAPPER}} .bdt-image-compare .icv__label',
 			]
 		);

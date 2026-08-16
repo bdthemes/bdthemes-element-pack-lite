@@ -69,14 +69,14 @@ class BdThemes_Duplicator {
 	public function bdt_duplicate_as_draft() {
 
 		if ( ! ( isset( $_GET['post'] ) || isset( $_POST['post'] ) || ( isset( $_REQUEST['action'] ) && 'bdt_duplicate_as_draft' === $_REQUEST['action'] ) ) ) {
-			wp_die( esc_html__( 'No post to duplicate has been supplied!', 'bdthemes-element-pack' ) );
+			wp_die( esc_html__( 'No post to duplicate has been supplied!', 'bdthemes-element-pack-lite' ) );
 		}
 
 		/**
 		 * Nonce verification
 		 */
 		if ( ! isset( $_GET['duplicate_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['duplicate_nonce'] ) ), basename( __FILE__ ) ) ) {
-			wp_die( esc_html__( 'Security check failed. Please try again.', 'bdthemes-element-pack' ) );
+			wp_die( esc_html__( 'Security check failed. Please try again.', 'bdthemes-element-pack-lite' ) );
 		}
 
 		/**
@@ -85,7 +85,7 @@ class BdThemes_Duplicator {
 		$post_id = isset( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : absint( wp_unslash( $_POST['post'] ) );
 
 		if ( ! $this->user_can_duplicate_post( get_post( $post_id ) ) ) {
-			wp_die( esc_html__( 'You don\'t have permission to duplicate it; please go back!', 'bdthemes-element-pack' ) );
+			wp_die( esc_html__( 'You don\'t have permission to duplicate it; please go back!', 'bdthemes-element-pack-lite' ) );
 		}
 
 		$this->duplicate_edit_post( $post_id );
@@ -117,7 +117,7 @@ class BdThemes_Duplicator {
 			$bdt_args = [ 
 				'post_status'    => 'draft',
 				/* translators: %1$s: Original post title */
-				'post_title'     => sprintf( __( '%1$s - [Duplicated]', 'bdthemes-element-pack' ), $bdt_post->post_title ),
+				'post_title'     => sprintf( __( '%1$s - [Duplicated]', 'bdthemes-element-pack-lite' ), $bdt_post->post_title ),
 				'post_type'      => $bdt_post->post_type,
 				'post_name'      => $bdt_post->post_name,
 				'post_content'   => $bdt_post->post_content,
@@ -213,12 +213,12 @@ class BdThemes_Duplicator {
 		}
 
 		$post_type_object = get_post_type_object( $post->post_type );
-		$label            = esc_html_x( 'Duplicate', 'Admin String', 'bdthemes-element-pack' );
+		$label            = esc_html_x( 'Duplicate', 'Admin String', 'bdthemes-element-pack-lite' );
 
 		if ( $post_type_object && ! empty( $post_type_object->labels->singular_name ) ) {
 			$label = sprintf(
 				/* translators: %s: post type singular name */
-				esc_html_x( 'Duplicate %s', 'Admin String', 'bdthemes-element-pack' ),
+				esc_html_x( 'Duplicate %s', 'Admin String', 'bdthemes-element-pack-lite' ),
 				$post_type_object->labels->singular_name
 			);
 		}

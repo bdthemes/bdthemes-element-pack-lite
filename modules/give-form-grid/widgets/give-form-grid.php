@@ -20,7 +20,7 @@ class Give_Form_Grid extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . __('Give Form Grid', 'bdthemes-element-pack');
+		return BDTEP . __('Give Form Grid', 'bdthemes-element-pack-lite');
 	}
 
 	public function get_icon() {
@@ -59,7 +59,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_section(
 			'give_form_grid_settings',
 			[
-				'label' => __('Form Grid', 'bdthemes-element-pack'),
+				'label' => __('Form Grid', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -67,7 +67,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'show_title',
 			[
-				'label' => __('Show Title', 'bdthemes-element-pack'),
+				'label' => __('Show Title', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -76,7 +76,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'show_excerpt',
 			[
-				'label' => __('Show Excerpt', 'bdthemes-element-pack'),
+				'label' => __('Show Excerpt', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -85,7 +85,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'excerpt_length',
 			[
-				'label' => __('Excerpt Length', 'bdthemes-element-pack'),
+				'label' => __('Excerpt Length', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::NUMBER,
 				'default' => 16,
 			]
@@ -94,7 +94,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'show_goal',
 			[
-				'label' => __('Show Goal', 'bdthemes-element-pack'),
+				'label' => __('Show Goal', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -103,7 +103,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'show_featured_image',
 			[
-				'label' => __('Show Featured Image', 'bdthemes-element-pack'),
+				'label' => __('Show Featured Image', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -112,7 +112,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'show_pagination',
 			[
-				'label' => __('Show Pagination', 'bdthemes-element-pack'),
+				'label' => __('Show Pagination', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 				'prefix_class' => 'bdt-pagination-show-',
@@ -122,7 +122,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'forms_per_page',
 			[
-				'label'   => __('Forms Per Page', 'bdthemes-element-pack'),
+				'label'   => __('Forms Per Page', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => '6'
 			]
@@ -131,7 +131,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'columns',
 			[
-				'label' => __('Columns', 'bdthemes-element-pack'),
+				'label' => __('Columns', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default'        => '3',
 				'tablet_default' => '2',
@@ -154,7 +154,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'items_gap',
 			[
-				'label' => esc_html__('Column Gap', 'bdthemes-element-pack'),
+				'label' => esc_html__('Column Gap', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 20,
@@ -168,7 +168,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'items_row_gap',
 			[
-				'label' => esc_html__('Row Gap', 'bdthemes-element-pack') . BDTEP_NC,
+				'label' => esc_html__('Row Gap', 'bdthemes-element-pack-lite') . BDTEP_NC,
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 20,
@@ -182,16 +182,16 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'orderby',
 			[
-				'label'   => __('Order By', 'bdthemes-element-pack'),
+				'label'   => __('Order By', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'date'             => __('Date Created', 'bdthemes-element-pack'),
-					'title'            => __('Form Title', 'bdthemes-element-pack'),
-					'amount_donated'   => __('Amount Donated', 'bdthemes-element-pack'),
-					'number_donations' => __('Number of Donations', 'bdthemes-element-pack'),
-					'menu_order'       => __('Menu Order', 'bdthemes-element-pack'),
-					'post__in'         => __('Form ID', 'bdthemes-element-pack'),
-					'closest_to_goal'  => __('Closest to Goal', 'bdthemes-element-pack'),
+					'date'             => __('Date Created', 'bdthemes-element-pack-lite'),
+					'title'            => __('Form Title', 'bdthemes-element-pack-lite'),
+					'amount_donated'   => __('Amount Donated', 'bdthemes-element-pack-lite'),
+					'number_donations' => __('Number of Donations', 'bdthemes-element-pack-lite'),
+					'menu_order'       => __('Menu Order', 'bdthemes-element-pack-lite'),
+					'post__in'         => __('Form ID', 'bdthemes-element-pack-lite'),
+					'closest_to_goal'  => __('Closest to Goal', 'bdthemes-element-pack-lite'),
 				],
 				'default' => 'date'
 			]
@@ -200,11 +200,11 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'order',
 			[
-				'label'       => __('Order', 'bdthemes-element-pack'),
+				'label'       => __('Order', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
-					'DESC' => __('Descending', 'bdthemes-element-pack'),
-					'ASC'  => __('Ascending', 'bdthemes-element-pack')
+					'DESC' => __('Descending', 'bdthemes-element-pack-lite'),
+					'ASC'  => __('Ascending', 'bdthemes-element-pack-lite')
 				],
 				'default' => 'DESC'
 			]
@@ -216,7 +216,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_form_grid_style',
 			[
-				'label' => esc_html__('Items', 'bdthemes-element-pack'),
+				'label' => esc_html__('Items', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -226,14 +226,14 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'tab_item_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card' => 'background-color: {{VALUE}};',
@@ -252,7 +252,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'tab_item_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -264,7 +264,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'tab_item_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -285,14 +285,14 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_tab(
 			'tab_item_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'tab_item_bg_hover_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card:hover' => 'background-color: {{VALUE}};',
@@ -303,7 +303,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'tab_item_hover_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card:hover'  => 'border-color: {{VALUE}};',
@@ -330,7 +330,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'section_content_padding',
 			[
-				'label' => __('Content Padding', 'bdthemes-element-pack'),
+				'label' => __('Content Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card__body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -344,7 +344,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_image_style',
 			[
-				'label' => esc_html__('Image', 'bdthemes-element-pack'),
+				'label' => esc_html__('Image', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_featured_image' => 'yes'
@@ -363,7 +363,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'iamge_radius',
 			[
-				'label'      => esc_html__('Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -375,7 +375,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'iamge_padding',
 			[
-				'label'      => __('Padding', 'bdthemes-element-pack'),
+				'label'      => __('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -397,7 +397,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_title_style',
 			[
-				'label' => esc_html__('Title', 'bdthemes-element-pack'),
+				'label' => esc_html__('Title', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_title' => 'yes'
@@ -408,7 +408,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card__title' => 'color: {{VALUE}};',
@@ -419,7 +419,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'title_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card__title' => 'margin-bottom: {{SIZE}}{{UNIT}} !important;',
@@ -440,7 +440,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_text_style',
 			[
-				'label' => esc_html__('Text', 'bdthemes-element-pack'),
+				'label' => esc_html__('Text', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_excerpt' => 'yes'
@@ -451,7 +451,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card__text' => 'color: {{VALUE}} !important;',
@@ -462,7 +462,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'text_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-wrap .give-card__text' => 'margin-bottom: {{SIZE}}{{UNIT}} !important;',
@@ -483,7 +483,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_goal_style',
 			[
-				'label' => esc_html__('Goal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Goal', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_goal' => 'yes'
@@ -494,7 +494,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'income_heading',
 			[
-				'label' => esc_html__('Income Amount', 'bdthemes-element-pack'),
+				'label' => esc_html__('Income Amount', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -502,7 +502,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'income_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid span.income' => 'color: {{VALUE}};',
@@ -513,7 +513,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'income_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid span.income' => 'margin-right: {{SIZE}}{{UNIT}} !important;',
@@ -532,7 +532,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'goal_amount_heading',
 			[
-				'label' => esc_html__('Goal Amount', 'bdthemes-element-pack'),
+				'label' => esc_html__('Goal Amount', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -541,7 +541,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'goal_amount_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .raised' => 'color: {{VALUE}};',
@@ -560,7 +560,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'progress_bar_heading',
 			[
-				'label' => esc_html__('Progress Bar', 'bdthemes-element-pack'),
+				'label' => esc_html__('Progress Bar', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -569,7 +569,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'progress_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-progress-bar>span' => 'background-color: {{VALUE}} !important;',
@@ -580,7 +580,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'progress_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-progress-bar' => 'background-color: {{VALUE}};',
@@ -591,7 +591,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'progress_height',
 			[
-				'label' => __('Height', 'bdthemes-element-pack'),
+				'label' => __('Height', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-progress-bar' => 'height: {{SIZE}}{{UNIT}};',
@@ -602,7 +602,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'progress_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-progress-bar' => 'margin-top: {{SIZE}}{{UNIT}} !important;',
@@ -616,7 +616,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_section(
 			'section_pagi_style',
 			[
-				'label' => esc_html__('Pagination', 'bdthemes-element-pack'),
+				'label' => esc_html__('Pagination', 'bdthemes-element-pack-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_pagination' => 'yes'
@@ -627,20 +627,20 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'pagi_alignment',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'default' => 'center',
 				'options' => [
 					'left' => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -655,14 +655,14 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_tab(
 			'pagi_normal',
 			[
-				'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+				'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'pagi_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers a' => 'color: {{VALUE}};',
@@ -673,7 +673,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'pagi_bg_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers a' => 'background-color: {{VALUE}};',
@@ -685,7 +685,7 @@ class Give_Form_Grid extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'pagi_border',
-				'label' => esc_html__('Border', 'bdthemes-element-pack'),
+				'label' => esc_html__('Border', 'bdthemes-element-pack-lite'),
 				'selector' => '{{WRAPPER}} .bdt-give-form-grid .give-page-numbers a, {{WRAPPER}} .bdt-give-form-grid .give-page-numbers span.current',
 			]
 		);
@@ -693,7 +693,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'pagi_border_radius',
 			[
-				'label' => __('Border Radius', 'bdthemes-element-pack'),
+				'label' => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
@@ -705,7 +705,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'pagi_padding',
 			[
-				'label' => __('Padding', 'bdthemes-element-pack'),
+				'label' => __('Padding', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers a, {{WRAPPER}} .bdt-give-form-grid .give-page-numbers span.current' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -716,7 +716,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_responsive_control(
 			'pagi_spacing',
 			[
-				'label' => __('Spacing', 'bdthemes-element-pack'),
+				'label' => __('Spacing', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers' => 'margin-top: {{SIZE}}{{UNIT}} !important;',
@@ -737,14 +737,14 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_tab(
 			'pagi_hover',
 			[
-				'label' => esc_html__('Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'pagi_hover_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers a:hover' => 'color: {{VALUE}};',
@@ -755,7 +755,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'pagi_bg_hover_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers a:hover' => 'background-color: {{VALUE}};',
@@ -766,7 +766,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'pagi_hover_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers a:hover'  => 'border-color: {{VALUE}};',
@@ -782,14 +782,14 @@ class Give_Form_Grid extends Module_Base {
 		$this->start_controls_tab(
 			'pagi_active',
 			[
-				'label' => esc_html__('Active', 'bdthemes-element-pack'),
+				'label' => esc_html__('Active', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'pagi_active_color',
 			[
-				'label' => esc_html__('Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers span.current' => 'color: {{VALUE}};',
@@ -800,7 +800,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'pagi_bg_active_color',
 			[
-				'label' => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label' => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers span.current' => 'background-color: {{VALUE}};',
@@ -811,7 +811,7 @@ class Give_Form_Grid extends Module_Base {
 		$this->add_control(
 			'pagi_active_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-give-form-grid .give-page-numbers span.current'  => 'border-color: {{VALUE}};',

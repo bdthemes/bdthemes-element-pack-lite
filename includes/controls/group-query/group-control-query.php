@@ -16,7 +16,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_source',
             [
-                'label'   => __('Source', 'bdthemes-element-pack'),
+                'label'   => __('Source', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'options' => $this->getGroupControlQueryPostTypes(),
                 'default' => 'post',
@@ -28,7 +28,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_per_page',
             [
-                'label'   => esc_html__('Limit', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Limit', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::NUMBER,
                 'default' => 6,
             ]
@@ -37,7 +37,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_selected_ids',
             [
-                'label'       => __('Search & Select', 'bdthemes-element-pack'),
+                'label'       => __('Search & Select', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'multiple'    => true,
                 'label_block' => true,
@@ -62,7 +62,7 @@ trait Group_Control_Query {
         $this->start_controls_tab(
             'tab_posts_include',
             [
-                'label'     => __('Include', 'bdthemes-element-pack'),
+                'label'     => __('Include', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'posts_source!' => ['manual_selection', 'current_query'],
                 ],
@@ -72,13 +72,13 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_include_by',
             [
-                'label'       => __('Include By', 'bdthemes-element-pack'),
+                'label'       => __('Include By', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::SELECT2,
                 'multiple'    => true,
                 'label_block' => true,
                 'options'     => [
-                    'authors' => __('Authors', 'bdthemes-element-pack'),
-                    'terms'   => __('Terms', 'bdthemes-element-pack'),
+                    'authors' => __('Authors', 'bdthemes-element-pack-lite'),
+                    'terms'   => __('Terms', 'bdthemes-element-pack-lite'),
                 ],
                 'condition'   => [
                     'posts_source!' => ['manual_selection', 'current_query'],
@@ -89,7 +89,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_include_author_ids',
             [
-                'label'       => __('Authors', 'bdthemes-element-pack'),
+                'label'       => __('Authors', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'multiple'    => true,
                 'label_block' => true,
@@ -106,12 +106,12 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_include_term_ids',
             [
-                'label'       => __('Terms', 'bdthemes-element-pack'),
-                'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack'),
+                'label'       => __('Terms', 'bdthemes-element-pack-lite'),
+                'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'multiple'    => true,
                 'label_block' => true,
-                'placeholder' => __('Type and select terms', 'bdthemes-element-pack'),
+                'placeholder' => __('Type and select terms', 'bdthemes-element-pack-lite'),
                 'query_args'  => [
                     'query'        => 'terms',
                     'widget_props' => [
@@ -130,7 +130,7 @@ trait Group_Control_Query {
         $this->start_controls_tab(
             'tab_posts_exclude',
             [
-                'label'     => __('Exclude', 'bdthemes-element-pack'),
+                'label'     => __('Exclude', 'bdthemes-element-pack-lite'),
                 'condition' => [
                     'posts_source!' => ['manual_selection', 'current_query'],
                 ],
@@ -140,15 +140,15 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_exclude_by',
             [
-                'label'       => __('Exclude By', 'bdthemes-element-pack'),
+                'label'       => __('Exclude By', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::SELECT2,
                 'multiple'    => true,
                 'label_block' => true,
                 'options'     => [
-                    'authors'          => __('Authors', 'bdthemes-element-pack'),
-                    'current_post'     => __('Current Post', 'bdthemes-element-pack'),
-                    'manual_selection' => __('Manual Selection', 'bdthemes-element-pack'),
-                    'terms'            => __('Terms', 'bdthemes-element-pack'),
+                    'authors'          => __('Authors', 'bdthemes-element-pack-lite'),
+                    'current_post'     => __('Current Post', 'bdthemes-element-pack-lite'),
+                    'manual_selection' => __('Manual Selection', 'bdthemes-element-pack-lite'),
+                    'terms'            => __('Terms', 'bdthemes-element-pack-lite'),
                 ],
                 'condition'   => [
                     'posts_source!' => ['manual_selection', 'current_query'],
@@ -159,7 +159,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_exclude_ids',
             [
-                'label'       => __('Search & Select', 'bdthemes-element-pack'),
+                'label'       => __('Search & Select', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'multiple'    => true,
                 'label_block' => true,
@@ -179,7 +179,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_exclude_author_ids',
             [
-                'label'       => __('Authors', 'bdthemes-element-pack'),
+                'label'       => __('Authors', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'multiple'    => true,
                 'label_block' => true,
@@ -196,12 +196,12 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_exclude_term_ids',
             [
-                'label'       => __('Terms', 'bdthemes-element-pack'),
-                'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack'),
+                'label'       => __('Terms', 'bdthemes-element-pack-lite'),
+                'description' => __('Terms are items in a taxonomy. The available taxonomies are: Categories, Tags, Formats and custom taxonomies.', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'multiple'    => true,
                 'label_block' => true,
-                'placeholder' => __('Type and select terms', 'bdthemes-element-pack'),
+                'placeholder' => __('Type and select terms', 'bdthemes-element-pack-lite'),
                 'query_args'  => [
                     'query'        => 'terms',
                     'widget_props' => [
@@ -230,7 +230,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_offset',
             [
-                'label'   => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'   => __('Offset', 'bdthemes-element-pack-lite') . BDTEP_NC,
                 'type'    => Controls_Manager::NUMBER,
                 'default' => 0,
                 'condition' => [
@@ -242,17 +242,17 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_select_date',
             [
-                'label'     => __('Date', 'bdthemes-element-pack'),
+                'label'     => __('Date', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'anytime',
                 'options'   => [
-                    'anytime' => __('All', 'bdthemes-element-pack'),
-                    'today'   => __('Past Day', 'bdthemes-element-pack'),
-                    'week'    => __('Past Week', 'bdthemes-element-pack'),
-                    'month'   => __('Past Month', 'bdthemes-element-pack'),
-                    'quarter' => __('Past Quarter', 'bdthemes-element-pack'),
-                    'year'    => __('Past Year', 'bdthemes-element-pack'),
-                    'exact'   => __('Custom', 'bdthemes-element-pack'),
+                    'anytime' => __('All', 'bdthemes-element-pack-lite'),
+                    'today'   => __('Past Day', 'bdthemes-element-pack-lite'),
+                    'week'    => __('Past Week', 'bdthemes-element-pack-lite'),
+                    'month'   => __('Past Month', 'bdthemes-element-pack-lite'),
+                    'quarter' => __('Past Quarter', 'bdthemes-element-pack-lite'),
+                    'year'    => __('Past Year', 'bdthemes-element-pack-lite'),
+                    'exact'   => __('Custom', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'posts_source!' => 'current_query',
@@ -263,9 +263,9 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_date_before',
             [
-                'label'       => __('Before', 'bdthemes-element-pack'),
+                'label'       => __('Before', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::DATE_TIME,
-                'description' => __('Setting a ‘Before’ date will show all the posts published until the chosen date (inclusive).', 'bdthemes-element-pack'),
+                'description' => __('Setting a ‘Before’ date will show all the posts published until the chosen date (inclusive).', 'bdthemes-element-pack-lite'),
                 'condition'   => [
                     'posts_select_date' => 'exact',
                     'posts_source!'     => 'current_query',
@@ -276,9 +276,9 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_date_after',
             [
-                'label'       => __('After', 'bdthemes-element-pack'),
+                'label'       => __('After', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::DATE_TIME,
-                'description' => __('Setting an ‘After’ date will show all the posts published since the chosen date (inclusive).', 'bdthemes-element-pack'),
+                'description' => __('Setting an ‘After’ date will show all the posts published since the chosen date (inclusive).', 'bdthemes-element-pack-lite'),
                 'condition'   => [
                     'posts_select_date' => 'exact',
                     'posts_source!'     => 'current_query',
@@ -289,17 +289,17 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_orderby',
             [
-                'label'     => __('Order By', 'bdthemes-element-pack'),
+                'label'     => __('Order By', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'date',
                 'options'   => [
-                    'title'         => __('Title', 'bdthemes-element-pack'),
-                    'ID'            => __('ID', 'bdthemes-element-pack'),
-                    'date'          => __('Date', 'bdthemes-element-pack'),
-                    'author'        => __('Author', 'bdthemes-element-pack'),
-                    'comment_count' => __('Comment Count', 'bdthemes-element-pack'),
-                    'menu_order'    => __('Menu Order', 'bdthemes-element-pack'),
-                    'rand'          => __('Random', 'bdthemes-element-pack'),
+                    'title'         => __('Title', 'bdthemes-element-pack-lite'),
+                    'ID'            => __('ID', 'bdthemes-element-pack-lite'),
+                    'date'          => __('Date', 'bdthemes-element-pack-lite'),
+                    'author'        => __('Author', 'bdthemes-element-pack-lite'),
+                    'comment_count' => __('Comment Count', 'bdthemes-element-pack-lite'),
+                    'menu_order'    => __('Menu Order', 'bdthemes-element-pack-lite'),
+                    'rand'          => __('Random', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'posts_source!' => ['current_query'],
@@ -309,12 +309,12 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_order',
             [
-                'label'     => __('Order', 'bdthemes-element-pack'),
+                'label'     => __('Order', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'desc',
                 'options'   => [
-                    'asc'  => __('ASC', 'bdthemes-element-pack'),
-                    'desc' => __('DESC', 'bdthemes-element-pack'),
+                    'asc'  => __('ASC', 'bdthemes-element-pack-lite'),
+                    'desc' => __('DESC', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'posts_source!' => 'current_query',
@@ -325,7 +325,7 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_ignore_sticky_posts',
             [
-                'label'        => __('Ignore Sticky Posts', 'bdthemes-element-pack'),
+                'label'        => __('Ignore Sticky Posts', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'yes',
@@ -338,8 +338,8 @@ trait Group_Control_Query {
         $this->add_control(
             'posts_only_with_featured_image',
             [
-                'label'        => __('Only Featured Image Post', 'bdthemes-element-pack'),
-                'description'  => __('Enable to display posts only when featured image is present.', 'bdthemes-element-pack'),
+                'label'        => __('Only Featured Image Post', 'bdthemes-element-pack-lite'),
+                'description'  => __('Enable to display posts only when featured image is present.', 'bdthemes-element-pack-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'condition'    => [
@@ -351,8 +351,8 @@ trait Group_Control_Query {
         $this->add_control(
             'query_id',
             [
-                'label'       => __('Query ID', 'bdthemes-element-pack'),
-                'description' => __('Give your Query a custom unique id to allow server side filtering', 'bdthemes-element-pack'),
+                'label'       => __('Query ID', 'bdthemes-element-pack-lite'),
+                'description' => __('Give your Query a custom unique id to allow server side filtering', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'separator'   => 'before',
             ]
@@ -367,9 +367,9 @@ trait Group_Control_Query {
                 'default' => 'product',
                 'options' => [
                     'product'            => "Product",
-                    'manual_selection'   => __('Manual Selection', 'bdthemes-element-pack'),
-                    'current_query'      => __('Current Query', 'bdthemes-element-pack'),
-                    '_related_post_type' => __('Related', 'bdthemes-element-pack'),
+                    'manual_selection'   => __('Manual Selection', 'bdthemes-element-pack-lite'),
+                    'current_query'      => __('Current Query', 'bdthemes-element-pack-lite'),
+                    '_related_post_type' => __('Related', 'bdthemes-element-pack-lite'),
                 ],
             ]
         );
@@ -383,19 +383,19 @@ trait Group_Control_Query {
         $this->update_control(
             'posts_orderby',
             [
-                'label'   => __('Order By', 'bdthemes-element-pack') . BDTEP_NC,
+                'label'   => __('Order By', 'bdthemes-element-pack-lite') . BDTEP_NC,
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'date',
                 'options' => [
-                    'title'         => __('Title', 'bdthemes-element-pack'),
-                    'ID'            => __('ID', 'bdthemes-element-pack'),
-                    'date'          => __('Date', 'bdthemes-element-pack'),
-                    'author'        => __('Author', 'bdthemes-element-pack'),
-                    'comment_count' => __('Comment Count', 'bdthemes-element-pack'),
-                    'menu_order'    => __('Menu Order', 'bdthemes-element-pack'),
-                    'rand'          => __('Random', 'bdthemes-element-pack'),
-                    'price'         => __('Price', 'bdthemes-element-pack'),
-                    'sales'         => __('Sales', 'bdthemes-element-pack'),
+                    'title'         => __('Title', 'bdthemes-element-pack-lite'),
+                    'ID'            => __('ID', 'bdthemes-element-pack-lite'),
+                    'date'          => __('Date', 'bdthemes-element-pack-lite'),
+                    'author'        => __('Author', 'bdthemes-element-pack-lite'),
+                    'comment_count' => __('Comment Count', 'bdthemes-element-pack-lite'),
+                    'menu_order'    => __('Menu Order', 'bdthemes-element-pack-lite'),
+                    'rand'          => __('Random', 'bdthemes-element-pack-lite'),
+                    'price'         => __('Price', 'bdthemes-element-pack-lite'),
+                    'sales'         => __('Sales', 'bdthemes-element-pack-lite'),
                 ],
 
             ]
@@ -403,13 +403,13 @@ trait Group_Control_Query {
         $this->add_control(
             'product_show_product_type',
             [
-                'label'     => esc_html__('Show Product', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Show Product', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'all',
                 'options'   => [
-                    'all'      => esc_html__('All Products', 'bdthemes-element-pack'),
-                    'onsale'   => esc_html__('On Sale', 'bdthemes-element-pack'),
-                    'featured' => esc_html__('Featured', 'bdthemes-element-pack'),
+                    'all'      => esc_html__('All Products', 'bdthemes-element-pack-lite'),
+                    'onsale'   => esc_html__('On Sale', 'bdthemes-element-pack-lite'),
+                    'featured' => esc_html__('Featured', 'bdthemes-element-pack-lite'),
                 ],
                 'condition' => [
                     'posts_source!' => 'current_query',
@@ -420,7 +420,7 @@ trait Group_Control_Query {
         $this->add_control(
             'product_hide_free',
             [
-                'label'     => esc_html__('Hide Free Product', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hide Free Product', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SWITCHER,
                 'condition' => [
                     'posts_source!' => 'current_query',
@@ -430,7 +430,7 @@ trait Group_Control_Query {
         $this->add_control(
             'product_hide_out_stock',
             [
-                'label'     => esc_html__('Hide Out of Stock', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hide Out of Stock', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SWITCHER,
                 'condition' => [
                     'posts_source!' => 'current_query',
@@ -768,9 +768,9 @@ trait Group_Control_Query {
         $post_types = array_diff_key($post_types, $ignorePostTypes);
 
         $extra_types = [
-            'manual_selection'   => __('Manual Selection', 'bdthemes-element-pack'),
-            'current_query'      => __('Current Query', 'bdthemes-element-pack'),
-            '_related_post_type' => __('Related', 'bdthemes-element-pack'),
+            'manual_selection'   => __('Manual Selection', 'bdthemes-element-pack-lite'),
+            'current_query'      => __('Current Query', 'bdthemes-element-pack-lite'),
+            '_related_post_type' => __('Related', 'bdthemes-element-pack-lite'),
         ];
 
         $post_types = array_merge($post_types, $extra_types);

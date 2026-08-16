@@ -28,24 +28,24 @@ $active_modules = get_option( 'element_pack_active_modules', array() );
 		<div class="bdt-features-list">
 			<div class="widget-filter bdt-flex bdt-flex-wrap bdt-flex-between bdt-flex-middle">
 				<div class="category-dropdown">
-					<label for="category-select"><?php esc_html_e('Filter by:', 'bdthemes-element-pack'); ?></label>
+					<label for="category-select"><?php esc_html_e('Filter by:', 'bdthemes-element-pack-lite'); ?></label>
 					<select id="category-select">
-						<option value="all"><?php esc_html_e('All', 'bdthemes-element-pack'); ?></option>
-						<option value="new"><?php esc_html_e('New', 'bdthemes-element-pack'); ?></option>
-						<option value="post"><?php esc_html_e('Post', 'bdthemes-element-pack'); ?></option>
-						<option value="custom"><?php esc_html_e('Custom', 'bdthemes-element-pack'); ?></option>
-						<option value="gallery"><?php esc_html_e('Gallery', 'bdthemes-element-pack'); ?></option>
-						<option value="slider"><?php esc_html_e('Slider', 'bdthemes-element-pack'); ?></option>
-						<option value="carousel"><?php esc_html_e('Carousel', 'bdthemes-element-pack'); ?></option>
-						<option value="template-builder"><?php esc_html_e('Template Builder', 'bdthemes-element-pack'); ?></option>
-						<option value="others"><?php esc_html_e('Others', 'bdthemes-element-pack'); ?></option>
+						<option value="all"><?php esc_html_e('All', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="new"><?php esc_html_e('New', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="post"><?php esc_html_e('Post', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="custom"><?php esc_html_e('Custom', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="gallery"><?php esc_html_e('Gallery', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="slider"><?php esc_html_e('Slider', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="carousel"><?php esc_html_e('Carousel', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="template-builder"><?php esc_html_e('Template Builder', 'bdthemes-element-pack-lite'); ?></option>
+						<option value="others"><?php esc_html_e('Others', 'bdthemes-element-pack-lite'); ?></option>
 					</select>
 				</div>
 				<div class="input-btn-wrap bdt-flex bdt-flex-wrap bdt-flex-between">
-					<input type="text" placeholder="<?php esc_attr_e('Search widgets...', 'bdthemes-element-pack'); ?>" class="widget-search" value="">
+					<input type="text" placeholder="<?php esc_attr_e('Search widgets...', 'bdthemes-element-pack-lite'); ?>" class="widget-search" value="">
 					<div class="bulk-action-buttons bdt-flex">
-						<button class="bulk-action activate"><?php esc_html_e('Activate All', 'bdthemes-element-pack'); ?></button>
-						<button class="bulk-action deactivate"><?php esc_html_e('Deactivate All', 'bdthemes-element-pack'); ?></button>
+						<button class="bulk-action activate"><?php esc_html_e('Activate All', 'bdthemes-element-pack-lite'); ?></button>
+						<button class="bulk-action deactivate"><?php esc_html_e('Deactivate All', 'bdthemes-element-pack-lite'); ?></button>
 					</div>
 				</div>
 			</div>
@@ -80,16 +80,16 @@ $active_modules = get_option( 'element_pack_active_modules', array() );
 		
 		<div class="wizard-navigation bdt-margin-top">
 			<button class="bdt-button bdt-button-primary" type="submit" id="save-and-continue">
-				<?php esc_html_e('Save and Continue', 'bdthemes-element-pack'); ?>
+				<?php esc_html_e('Save and Continue', 'bdthemes-element-pack-lite'); ?>
 			</button>
-			<div class="bdt-close-button bdt-margin-left bdt-wizard-next" data-step="integration"><?php esc_html_e('Skip', 'bdthemes-element-pack'); ?></div>
+			<div class="bdt-close-button bdt-margin-left bdt-wizard-next" data-step="integration"><?php esc_html_e('Skip', 'bdthemes-element-pack-lite'); ?></div>
 		</div>
 	</form>
 
 	<div class="bdt-wizard-navigation">
 		<button class="bdt-button bdt-button-secondary bdt-wizard-prev" data-step="welcome">
 			<span><i class="dashicons dashicons-arrow-left-alt"></i></span>
-			<?php esc_html_e( 'Previous Step', 'bdthemes-element-pack' ); ?>
+			<?php esc_html_e( 'Previous Step', 'bdthemes-element-pack-lite' ); ?>
 		</button>
 	</div>
 </div>

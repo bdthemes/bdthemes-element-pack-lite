@@ -27,7 +27,7 @@ class Navbar extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Navbar', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Navbar', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -64,14 +64,14 @@ class Navbar extends Module_Base {
 		$this->start_controls_section(
 			'section_navbar_content',
 			[
-				'label' => esc_html__( 'Navbar', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Navbar', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'navbar',
 			[
-				'label'   => esc_html__( 'Select Menu', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Menu', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_get_menu(),
 				'default' => 0,
@@ -81,19 +81,19 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'align',
 			[
-				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
-						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-center',
 					],
 					'flex-end'  => [
-						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'End', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -106,7 +106,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'menu_offset',
 			[
-				'label' => esc_html__( 'Offset', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Offset', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -124,7 +124,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'text_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -136,7 +136,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'menu_height',
 			[
-				'label' => esc_html__( 'Menu Height', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Menu Height', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -154,7 +154,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_parent_arrow',
 			[
-				'label'        => __( 'Parent Indicator', 'bdthemes-element-pack' ),
+				'label'        => __( 'Parent Indicator', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-navbar-parent-indicator-',
 			]
@@ -163,7 +163,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'auto_hiding_menu',
 			[
-				'label'        => __( 'Auto Hiding Menu', 'bdthemes-element-pack' ),
+				'label'        => __( 'Auto Hiding Menu', 'bdthemes-element-pack-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 			]
 		);
@@ -173,26 +173,26 @@ class Navbar extends Module_Base {
 		$this->start_controls_section(
 			'dropdown_content',
 			[
-				'label' => esc_html__( 'Dropdown', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Dropdown', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_responsive_control(
 			'dropdown_align',
 			[
-				'label'     => esc_html__( 'Dropdown Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Dropdown Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -202,19 +202,19 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'dropdown_link_align',
 			[
-				'label'   => esc_html__( 'Item Alignment', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Item Alignment', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -227,7 +227,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_padding',
 			[
-				'label'      => esc_html__( 'Dropdown Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Dropdown Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -239,7 +239,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'dropdown_width',
 			[
-				'label' => esc_html__( 'Dropdown Width', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Dropdown Width', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -259,14 +259,14 @@ class Navbar extends Module_Base {
 		$this->start_controls_section(
 			'dropdown_additional',
 			[
-				'label' => esc_html__( 'Additional', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dropdown_delay_show',
 			[
-				'label' => esc_html__( 'Delay Show', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Delay Show', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -280,7 +280,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_delay_hide',
 			[
-				'label' => esc_html__( 'Delay Hide', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Delay Hide', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -295,7 +295,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_duration',
 			[
-				'label' => esc_html__( 'Dropdown Duration', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Dropdown Duration', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -310,7 +310,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_offset',
 			[
-				'label' => esc_html__( 'Dropdown Offset', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Dropdown Offset', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -326,7 +326,7 @@ class Navbar extends Module_Base {
 		$this->start_controls_section(
 			'section_menu_style',
 			[
-				'label' => esc_html__( 'Navbar', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Navbar', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -334,15 +334,15 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'navbar_style',
 			[
-				'label'   => __( 'Navbar Style', 'bdthemes-element-pack' ) . BDTEP_UC,
+				'label'   => __( 'Navbar Style', 'bdthemes-element-pack-lite' ) . BDTEP_UC,
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [
-					''  => __( 'Default', 'bdthemes-element-pack' ),
-					'1' => __( 'Style 1', 'bdthemes-element-pack' ),
-					'2' => __( 'Style 2', 'bdthemes-element-pack' ),
-					'3' => __( 'Style 3', 'bdthemes-element-pack' ),
-					'4' => __( 'Style 4', 'bdthemes-element-pack' ),
+					''  => __( 'Default', 'bdthemes-element-pack-lite' ),
+					'1' => __( 'Style 1', 'bdthemes-element-pack-lite' ),
+					'2' => __( 'Style 2', 'bdthemes-element-pack-lite' ),
+					'3' => __( 'Style 3', 'bdthemes-element-pack-lite' ),
+					'4' => __( 'Style 4', 'bdthemes-element-pack-lite' ),
 				],
 				'prefix_class' => 'bdt-navbar-style-',
 			]
@@ -350,12 +350,12 @@ class Navbar extends Module_Base {
 
 		$this->start_controls_tabs( 'menu_link_styles' );
 
-		$this->start_controls_tab( 'menu_link_normal', [ 'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ) ] );
+		$this->start_controls_tab( 'menu_link_normal', [ 'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ) ] );
 
 		$this->add_control(
 			'menu_link_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li > a' => 'color: {{VALUE}};',
@@ -366,7 +366,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_link_background',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li > a' => 'background-color: {{VALUE}};',
@@ -377,7 +377,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'menu_spacing',
 			[
-				'label' => esc_html__( 'Column Gap', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Column Gap', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -396,7 +396,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'menu_bottom_spacing',
 			[
-				'label' => esc_html__( 'Row Gap', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Row Gap', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -416,7 +416,7 @@ class Navbar extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'menu_border',
-				'label'    => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'default'  => '1px',
 				'selector' => '{{WRAPPER}} .bdt-navbar-nav > li > a',
 			]
@@ -425,7 +425,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -438,7 +438,7 @@ class Navbar extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'menu_typography_normal',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bdt-navbar-nav > li > a',
 			]
@@ -447,7 +447,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_parent_arrow_color',
 			[
-				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.bdt-navbar-parent-indicator-yes .bdt-navbar-nav > li.bdt-parent a:after' => 'color: {{VALUE}};',
@@ -459,7 +459,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'auto_hiding_menu_both_side_color',
 			[
-				'label'     => esc_html__( 'Auto Hiding Menu Shadow', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Auto Hiding Menu Shadow', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-auto-hide-menu .bdt-cd-secondary-nav::before' => 'background: linear-gradient(to right, {{VALUE}}, rgba(37,40,61,0));',
@@ -472,12 +472,12 @@ class Navbar extends Module_Base {
 
 		$this->end_controls_tab();
 
-		$this->start_controls_tab( 'menu_link_hover', [ 'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ) ] );
+		$this->start_controls_tab( 'menu_link_hover', [ 'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ) ] );
 
 		$this->add_control(
 			'navbar_hover_style_color',
 			[
-				'label'     => esc_html__( 'Style Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Style Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li:hover > a:before' => 'background-color: {{VALUE}};',
@@ -492,7 +492,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_link_color_hover',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li > a:hover' => 'color: {{VALUE}};',
@@ -503,7 +503,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'link_background_hover',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li > a:hover' => 'background-color: {{VALUE}};',
@@ -514,7 +514,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_border_color_hover',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li > a:hover' => 'border-color: {{VALUE}};',
@@ -525,7 +525,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_border_radius_hover',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -538,7 +538,7 @@ class Navbar extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'menu_typography_hover',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bdt-navbar-nav > li > a:hover',
 			]
@@ -547,7 +547,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_parent_arrow_color_hover',
 			[
-				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.bdt-navbar-parent-indicator-yes .bdt-navbar-nav > li.bdt-parent a:hover::after' => 'color: {{VALUE}};',
@@ -559,12 +559,12 @@ class Navbar extends Module_Base {
 
 		$this->end_controls_tab();
 
-		$this->start_controls_tab( 'menu_link_active', [ 'label' => esc_html__( 'Active', 'bdthemes-element-pack' ) ] );
+		$this->start_controls_tab( 'menu_link_active', [ 'label' => esc_html__( 'Active', 'bdthemes-element-pack-lite' ) ] );
 
 		$this->add_control(
 			'navbar_active_style_color',
 			[
-				'label'     => esc_html__( 'Style Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Style Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li.bdt-active > a:before' => 'background-color: {{VALUE}};',
@@ -579,7 +579,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_hover_color_active',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li.bdt-active > a' => 'color: {{VALUE}};',
@@ -590,7 +590,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_hover_background_color_active',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-nav > li.bdt-active > a' => 'background-color: {{VALUE}};',
@@ -602,7 +602,7 @@ class Navbar extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'menu_border_active',
-				'label'    => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'default'  => '1px',
 				'selector' => '{{WRAPPER}} .bdt-navbar-nav > li.bdt-active > a',
 			]
@@ -611,7 +611,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_border_radius_active',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -623,7 +623,7 @@ class Navbar extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'menu_typography_active',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bdt-navbar-nav > li.bdt-active > a',
 			]
@@ -632,7 +632,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'menu_parent_arrow_color_active',
 			[
-				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.bdt-navbar-parent-indicator-yes .bdt-navbar-nav > li.bdt-parent.bdt-active a:after' => 'color: {{VALUE}};',
@@ -648,7 +648,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'individuL_menu_style',
 			[
-				'label'     => esc_html__( 'Individual Menu Style', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Individual Menu Style', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 			]
@@ -659,7 +659,7 @@ class Navbar extends Module_Base {
 		$this->start_controls_section(
 			'section_individual_menu_style',
 			[
-				'label' => esc_html__( 'Individual Menu Item', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Individual Menu Item', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => ['individuL_menu_style' => 'yes'],
 			]
@@ -669,20 +669,20 @@ class Navbar extends Module_Base {
 		$repeater->start_controls_tab(
 			'tab_normal',
 			[ 
-				'label' => __( 'Normal', 'bdthemes-element-pack' ),
+				'label' => __( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 		$repeater->add_control(
 			'selective_menu',
 			[
-				'label'   => esc_html__( 'Selective Menu', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Selective Menu', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SWITCHER,
 			]
 		);
 		$repeater->add_control(
 			'menu_number',
 			[ 
-				'label'       => esc_html__( 'Menu Number', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Menu Number', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::NUMBER,
 				'default'     => 3,
 				'min'         => 1,
@@ -693,21 +693,21 @@ class Navbar extends Module_Base {
 		$repeater->add_control(
 			'menu_color',
 			[ 
-				'label'       => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::COLOR,
 			]
 		);
 		$repeater->add_control(
 			'menu_background',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 			]
 		);
 		$repeater->add_control(
 			'menu_border_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 			]
 		);
@@ -715,27 +715,27 @@ class Navbar extends Module_Base {
 		$repeater->start_controls_tab(
 			'tab_hover',
 			[ 
-				'label' => __( 'Hover', 'bdthemes-element-pack' ),
+				'label' => __( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 		$repeater->add_control(
 			'menu_hover_color',
 			[ 
-				'label'       => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::COLOR,
 			]
 		);
 		$repeater->add_control(
 			'menu_hover_background',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 			]
 		);
 		$repeater->add_control(
 			'menu_hover_border_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 			]
 		);
@@ -744,7 +744,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'repeater_field',
 			[ 
-				'label'       => esc_html__( 'Menu Items', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Menu Items', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [ 
@@ -759,7 +759,7 @@ class Navbar extends Module_Base {
 		$this->start_controls_section(
 			'dropdown_color',
 			[
-				'label' => esc_html__( 'Dropdown', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Dropdown', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SECTION,
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
@@ -767,7 +767,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_background',
 			[
-				'label'     => esc_html__( 'Dropdown Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Dropdown Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-dropdown' => 'background-color: {{VALUE}};',
@@ -775,11 +775,11 @@ class Navbar extends Module_Base {
 			]
 		);
 		$this->start_controls_tabs( 'dropdown_link_styles' );
-		$this->start_controls_tab( 'dropdown_link_normal', [ 'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ) ] );
+		$this->start_controls_tab( 'dropdown_link_normal', [ 'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ) ] );
 		$this->add_control(
 			'dropdown_link_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a' => 'color: {{VALUE}};',
@@ -790,7 +790,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_link_background',
 			[
-				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a' => 'background-color: {{VALUE}};',
@@ -801,7 +801,7 @@ class Navbar extends Module_Base {
 		$this->add_responsive_control(
 			'dropdown_link_spacing',
 			[
-				'label' => esc_html__( 'Gap', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Gap', 'bdthemes-element-pack-lite' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -819,7 +819,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_link_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -832,7 +832,7 @@ class Navbar extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'dropdown_link_border',
-				'label'    => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'default'  => '1px',
 				'selector' => '{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a',
 			]
@@ -841,7 +841,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_link_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -854,7 +854,7 @@ class Navbar extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'dropdown_link_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a',
 			]
@@ -863,7 +863,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_parent_arrow_color',
 			[
-				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.bdt-navbar-parent-indicator-yes .bdt-navbar-dropdown-nav > li.bdt-parent a:after' => 'color: {{VALUE}};',
@@ -874,12 +874,12 @@ class Navbar extends Module_Base {
 
 		$this->end_controls_tab();
 
-		$this->start_controls_tab( 'dropdown_link_hover', [ 'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ) ] );
+		$this->start_controls_tab( 'dropdown_link_hover', [ 'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ) ] );
 
 		$this->add_control(
 			'dropdown_link_hover_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a:hover' => 'color: {{VALUE}};',
@@ -891,7 +891,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_link_hover_bg_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a:hover' => 'background-color: {{VALUE}};',
@@ -902,7 +902,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_border_hover_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a:hover' => 'border-color: {{VALUE}};',
@@ -913,7 +913,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_radius_hover',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -926,7 +926,7 @@ class Navbar extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'dropdown_typography_hover',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .bdt-navbar-dropdown-nav > li > a:hover',
 			]
@@ -935,7 +935,7 @@ class Navbar extends Module_Base {
 		$this->add_control(
 			'dropdown_parent_arrow_color_hover',
 			[
-				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.bdt-navbar-parent-indicator-yes .bdt-navbar-dropdown-nav > li.bdt-parent a:hover::after' => 'color: {{VALUE}};',
@@ -946,12 +946,12 @@ class Navbar extends Module_Base {
 
 		$this->end_controls_tab();
 
-		$this->start_controls_tab( 'dropdown_link_active', [ 'label' => esc_html__( 'Active', 'bdthemes-element-pack' ) ] );
+		$this->start_controls_tab( 'dropdown_link_active', [ 'label' => esc_html__( 'Active', 'bdthemes-element-pack-lite' ) ] );
 
 			$this->add_control(
 				'dropdown_active_color',
 				[
-					'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+					'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}} .bdt-navbar-dropdown-nav > li.bdt-active > a' => 'color: {{VALUE}};',
@@ -962,7 +962,7 @@ class Navbar extends Module_Base {
 			$this->add_control(
 				'dropdown_active_bg_color',
 				[
-					'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ),
+					'label'     => esc_html__( 'Background', 'bdthemes-element-pack-lite' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}} .bdt-navbar-dropdown-nav > li.bdt-active > a' => 'background-color: {{VALUE}};',
@@ -974,7 +974,7 @@ class Navbar extends Module_Base {
 				Group_Control_Border::get_type(),
 				[
 					'name'     => 'dropdown_active_border',
-					'label'    => esc_html__( 'Border', 'bdthemes-element-pack' ),
+					'label'    => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 					'default'  => '1px',
 					'selector' => '{{WRAPPER}} .bdt-navbar-dropdown-nav > li.bdt-active > a',
 				]
@@ -983,7 +983,7 @@ class Navbar extends Module_Base {
 			$this->add_control(
 				'dropdown_active_radius',
 				[
-					'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+					'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', '%' ],
 					'selectors'  => [
@@ -995,7 +995,7 @@ class Navbar extends Module_Base {
 				Group_Control_Typography::get_type(),
 				[
 					'name'     => 'dropdown_typography_active',
-					'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+					'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 					//'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
 					'selector' => '{{WRAPPER}} .bdt-navbar-dropdown-nav > li.bdt-active > a',
 				]
@@ -1004,7 +1004,7 @@ class Navbar extends Module_Base {
 			$this->add_control(
 				'dropdown_parent_arrow_color_active',
 				[
-					'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack' ),
+					'label'     => esc_html__( 'Parent Indicator Color', 'bdthemes-element-pack-lite' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}}.bdt-navbar-parent-indicator-yes .bdt-navbar-dropdown-nav > li.bdt-parent.bdt-active a:after' => 'color: {{VALUE}};',
@@ -1050,7 +1050,7 @@ class Navbar extends Module_Base {
 		}
 		
 		if (!$settings['navbar']) {
-			element_pack_alert(__('Please select a Menu From Setting!', 'bdthemes-element-pack'));
+			element_pack_alert(__('Please select a Menu From Setting!', 'bdthemes-element-pack-lite'));
 		}
 
 		$nav_menu = ! empty( $settings['navbar'] ) ? wp_get_nav_menu_object( $settings['navbar'] ) : false;

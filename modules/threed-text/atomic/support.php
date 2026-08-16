@@ -74,19 +74,19 @@ class Support
 	{
 		$item = Section::make()
 			->set_id('ep_section_threed_text')
-			->set_label(esc_html__('3D Text', 'bdthemes-element-pack'))
+			->set_label(esc_html__('3D Text', 'bdthemes-element-pack-lite'))
 			->set_items([]);
 
 		$controls[] = $item;
 
 			$item->add_item(
 				Switch_Control::bind_to(self::ACTIVE_KEY)
-					->set_label(esc_html__('3D Text', 'bdthemes-element-pack'))
+					->set_label(esc_html__('3D Text', 'bdthemes-element-pack-lite'))
 			);
 
 			$item->add_item(
 				Number_Control::bind_to(self::DEPTH_KEY)
-					->set_label(esc_html__('Depth', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Depth', 'bdthemes-element-pack-lite'))
 					->set_min(0)
 					->set_max(100)
 					->set_step(1)
@@ -94,7 +94,7 @@ class Support
 
 			$item->add_item(
 				Number_Control::bind_to(self::LAYERS_KEY)
-					->set_label(esc_html__('Layers', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Layers', 'bdthemes-element-pack-lite'))
 					->set_min(0)
 					->set_max(100)
 					->set_step(1)
@@ -102,12 +102,12 @@ class Support
 
 			$item->add_item(
 				Text_Control::bind_to(self::DEPTH_COLOR_KEY)
-					->set_label(esc_html__('Depth Color', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Depth Color', 'bdthemes-element-pack-lite'))
 			);
 
 			$item->add_item(
 				Number_Control::bind_to(self::PERSPECTIVE_KEY)
-					->set_label(esc_html__('Perspective', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Perspective', 'bdthemes-element-pack-lite'))
 					->set_min(0)
 					->set_max(1000)
 					->set_step(1)
@@ -115,26 +115,26 @@ class Support
 
 			$item->add_item(
 				Switch_Control::bind_to(self::FADE_KEY)
-					->set_label(esc_html__('Fade', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Fade', 'bdthemes-element-pack-lite'))
 			);
 
 			$item->add_item(
 				Select_Control::bind_to(self::EVENT_KEY)
-					->set_label(esc_html__('Event', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Event', 'bdthemes-element-pack-lite'))
 					->set_options(
 						[
-							['value' => 'none', 'label' => esc_html__('None', 'bdthemes-element-pack')],
-							['value' => 'pointer', 'label' => esc_html__('Pointer', 'bdthemes-element-pack')],
-							['value' => 'scroll', 'label' => esc_html__('Scroll', 'bdthemes-element-pack')],
-							['value' => 'scrollX', 'label' => esc_html__('ScrollX', 'bdthemes-element-pack')],
-							['value' => 'scrollY', 'label' => esc_html__('ScrollY', 'bdthemes-element-pack')],
+							['value' => 'none', 'label' => esc_html__('None', 'bdthemes-element-pack-lite')],
+							['value' => 'pointer', 'label' => esc_html__('Pointer', 'bdthemes-element-pack-lite')],
+							['value' => 'scroll', 'label' => esc_html__('Scroll', 'bdthemes-element-pack-lite')],
+							['value' => 'scrollX', 'label' => esc_html__('ScrollX', 'bdthemes-element-pack-lite')],
+							['value' => 'scrollY', 'label' => esc_html__('ScrollY', 'bdthemes-element-pack-lite')],
 						]
 					)
 			);
 
 			$item->add_item(
 				Number_Control::bind_to(self::EVENT_ROTATION_KEY)
-					->set_label(esc_html__('Event Rotation', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Event Rotation', 'bdthemes-element-pack-lite'))
 					->set_min(-360)
 					->set_max(360)
 					->set_step(1)
@@ -142,11 +142,11 @@ class Support
 
 			$item->add_item(
 				Select_Control::bind_to(self::EVENT_DIRECTION_KEY)
-					->set_label(esc_html__('Event Direction', 'bdthemes-element-pack'))
+					->set_label(esc_html__('Event Direction', 'bdthemes-element-pack-lite'))
 					->set_options(
 						[
-							['value' => 'default', 'label' => esc_html__('Default', 'bdthemes-element-pack')],
-							['value' => 'reverse', 'label' => esc_html__('Reverse', 'bdthemes-element-pack')],
+							['value' => 'default', 'label' => esc_html__('Default', 'bdthemes-element-pack-lite')],
+							['value' => 'reverse', 'label' => esc_html__('Reverse', 'bdthemes-element-pack-lite')],
 						]
 					)
 			);

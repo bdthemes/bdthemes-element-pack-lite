@@ -19,7 +19,7 @@ class ModuleService {
            'element_pack_active_modules'   => [
 				[
 					'name'         => 'accordion',
-					'label'        => esc_html__('Accordion', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Accordion', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -29,7 +29,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-button',
-					'label'        => esc_html__('Advanced Button', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Button', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -39,7 +39,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-calculator',
-					'label'        => esc_html__('Advanced Calculator', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Calculator', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -49,7 +49,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-counter',
-					'label'        => esc_html__('Advanced Counter', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Counter', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -59,7 +59,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-divider',
-					'label'        => esc_html__('Advanced Divider', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Divider', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -69,7 +69,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-gmap',
-					'label'        => esc_html__('Advanced Google Map', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Google Map', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -79,7 +79,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-heading',
-					'label'        => esc_html__('Advanced Heading', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Heading', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -89,7 +89,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-icon-box',
-					'label'        => esc_html__('Advanced Icon Box', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Icon Box', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -99,7 +99,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-image-gallery',
-					'label'        => esc_html__('Advanced Image Gallery', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Image Gallery', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -109,7 +109,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'advanced-progress-bar',
-					'label'        => esc_html__('Advanced Progress Bar', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Advanced Progress Bar', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -119,7 +119,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'age-gate',
-					'label'        => esc_html__('Age Gate', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Age Gate', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -129,7 +129,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'air-pollution',
-					'label'        => esc_html__('Air Pollution', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Air Pollution', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -139,7 +139,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'animated-card',
-					'label'        => esc_html__('Animated Card', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Animated Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -149,7 +149,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'animated-heading',
-					'label'        => esc_html__('Animated Heading', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Animated Heading', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -159,7 +159,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'animated-link',
-					'label'        => esc_html__('Animated Link', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Animated Link', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -169,7 +169,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'audio-player',
-					'label'        => esc_html__('Audio Player', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Audio Player', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -179,7 +179,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'barcode',
-					'label'        => esc_html__('Barcode', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Barcode', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -189,7 +189,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'brand-grid',
-					'label'        => esc_html__('Brand Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Brand Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -199,7 +199,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'brand-carousel',
-					'label'        => esc_html__('Brand Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Brand Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -209,7 +209,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'breadcrumbs',
-					'label'        => esc_html__('Breadcrumbs', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Breadcrumbs', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -219,7 +219,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'business-hours',
-					'label'        => esc_html__('Business Hours', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Business Hours', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -229,7 +229,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'dual-button',
-					'label'        => esc_html__('Dual Button', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Dual Button', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -239,7 +239,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'chart',
-					'label'        => esc_html__('Chart', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Chart', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -250,7 +250,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'calendly',
-					'label'        => esc_html__('Calendly', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Calendly', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -260,7 +260,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'call-out',
-					'label'        => esc_html__('Call Out', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Call Out', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -271,7 +271,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'carousel',
-					'label'        => esc_html__('Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -282,7 +282,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'changelog',
-					'label'        => esc_html__('Changelog', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Changelog', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -293,7 +293,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'circle-menu',
-					'label'        => esc_html__('Circle Menu', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Circle Menu', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -304,7 +304,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'comparison-list',
-					'label'        => esc_html__('Comparison List', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Comparison List', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -314,7 +314,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'circle-info',
-					'label'        => esc_html__('Circle Info', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Circle Info', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -325,7 +325,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'content-switcher',
-					'label'        => esc_html__('Content Switcher', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Content Switcher', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -335,7 +335,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'cookie-consent',
-					'label'        => esc_html__('Cookie Consent', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Cookie Consent', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -346,7 +346,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'countdown',
-					'label'        => esc_html__('Countdown', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Countdown', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -357,7 +357,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'contact-form',
-					'label'        => esc_html__('Simple Contact Form', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Simple Contact Form', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -368,7 +368,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'comment',
-					'label'        => esc_html__('Comment', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Comment', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -378,7 +378,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'custom-gallery',
-					'label'        => esc_html__('Custom Gallery', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Custom Gallery', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -389,7 +389,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'custom-carousel',
-					'label'        => esc_html__('Custom Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Custom Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -400,7 +400,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'creative-button',
-					'label'        => esc_html__('Creative Button', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Creative Button', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -410,7 +410,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-card',
-					'label'        => esc_html__('Crypto Currency Card', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -420,7 +420,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-table',
-					'label'        => esc_html__('Crypto Currency Table', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency Table', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -430,7 +430,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-grid',
-					'label'        => esc_html__('Crypto Currency Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -440,7 +440,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-carousel',
-					'label'        => esc_html__('Crypto Currency Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -450,7 +450,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-ticker',
-					'label'        => esc_html__('Crypto Currency Ticker', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency Ticker', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -460,7 +460,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-chart',
-					'label'        => esc_html__('Crypto Currency Chart', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency Chart', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -470,7 +470,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-chart-carousel',
-					'label'        => esc_html__('Crypto Currency Chart Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency Chart Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -480,7 +480,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'crypto-currency-list',
-					'label'        => esc_html__('Crypto Currency list', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Crypto Currency list', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -490,7 +490,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'coupon-code',
-					'label'        => esc_html__('Coupon Code', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Coupon Code', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -501,7 +501,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'dark-mode',
-					'label'        => esc_html__('Dark Mode', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Dark Mode', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -513,7 +513,7 @@ class ModuleService {
 
 				[
 					'name'         => 'document-viewer',
-					'label'        => esc_html__('Document Viewer', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Document Viewer', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -525,7 +525,7 @@ class ModuleService {
 
 				[
 					'name'         => 'device-slider',
-					'label'        => esc_html__('Device Slider', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Device Slider', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -536,7 +536,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'dropbar',
-					'label'        => esc_html__('Dropbar', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Dropbar', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -547,7 +547,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'dynamic-grid',
-					'label'        => esc_html__('Dynamic Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Dynamic Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -558,7 +558,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'dynamic-carousel',
-					'label'        => esc_html__('Dynamic Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Dynamic Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -569,7 +569,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'facebook-feed',
-					'label'        => esc_html__('Facebook Feed', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Facebook Feed', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -580,7 +580,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'facebook-feed-carousel',
-					'label'        => esc_html__('Facebook Feed Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Facebook Feed Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -591,7 +591,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'fancy-card',
-					'label'        => esc_html__('Fancy Card', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Fancy Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -602,7 +602,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'fancy-list',
-					'label'        => esc_html__('Fancy List', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Fancy List', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -613,7 +613,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'fancy-icons',
-					'label'        => esc_html__('Fancy Icons', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Fancy Icons', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -624,7 +624,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'fancy-slider',
-					'label'        => esc_html__('Fancy Slider', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Fancy Slider', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -635,7 +635,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'fancy-tabs',
-					'label'        => esc_html__('Fancy Tabs', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Fancy Tabs', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -646,7 +646,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'flip-box',
-					'label'        => esc_html__('Flip Box', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Flip Box', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -657,7 +657,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'floating-knowledgebase',
-					'label'        => esc_html__('Floating Knowledgebase', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Floating Knowledgebase', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -668,7 +668,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'global-badge',
-					'label'        => esc_html__( 'Global Badge', 'bdthemes-element-pack' ),
+					'label'        => esc_html__( 'Global Badge', 'bdthemes-element-pack-lite' ),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -678,7 +678,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'featured-box',
-					'label'        => esc_html__('Featured Box', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Featured Box', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -689,7 +689,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'google-reviews',
-					'label'        => esc_html__('Google Reviews', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Google Reviews', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -700,7 +700,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'helpdesk',
-					'label'        => esc_html__('Help Desk', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Help Desk', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -711,7 +711,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'hover-box',
-					'label'        => esc_html__('Hover Box', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Hover Box', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -722,7 +722,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'hover-video',
-					'label'        => esc_html__('Hover Video', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Hover Video', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -733,7 +733,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'honeycombs',
-					'label'        => esc_html__('Honeycombs', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Honeycombs', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -744,7 +744,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'horizontal-scroller',
-					'label'        => esc_html__('Horizontal Scroller', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Horizontal Scroller', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -755,7 +755,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'icon-mobile-menu',
-					'label'        => esc_html__('Icon Mobile Menu', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Icon Mobile Menu', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -765,7 +765,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'iconnav',
-					'label'        => esc_html__('Icon Nav', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Icon Nav', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -775,7 +775,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'iframe',
-					'label'        => esc_html__('Iframe', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Iframe', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -785,7 +785,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'instagram',
-					'label'        => esc_html__('Instagram', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Instagram', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -795,7 +795,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'image-accordion',
-					'label'        => esc_html__('Image Accordion', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Image Accordion', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -805,7 +805,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'image-compare',
-					'label'        => esc_html__('Image Compare', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Image Compare', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -815,7 +815,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'image-expand',
-					'label'        => esc_html__('Image Expand', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Image Expand', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -825,7 +825,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'image-stack',
-					'label'        => esc_html__('Image Stack', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Image Stack', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -835,7 +835,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'image-magnifier',
-					'label'        => esc_html__('Image Magnifier', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Image Magnifier', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -845,7 +845,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'interactive-card',
-					'label'        => esc_html__('Interactive Card', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Interactive Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -855,7 +855,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'interactive-tabs',
-					'label'        => esc_html__('Interactive Tabs', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Interactive Tabs', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -865,7 +865,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'lightbox',
-					'label'        => esc_html__('Lightbox', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Lightbox', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -875,7 +875,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'lottie-image',
-					'label'        => esc_html__('Lottie Image', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Lottie Image', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -885,7 +885,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'lottie-icon-box',
-					'label'        => esc_html__('Lottie Icon Box', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Lottie Icon Box', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -895,7 +895,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'logo-grid',
-					'label'        => esc_html__('Logo Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Logo Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -905,7 +905,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'logo-carousel',
-					'label'        => esc_html__('Logo Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Logo Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -915,7 +915,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'mega-menu',
-					'label'        => esc_html__('Mega Menu', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Mega Menu', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -925,7 +925,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'marquee',
-					'label'        => esc_html__('Marquee', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Marquee', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -935,7 +935,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'modal',
-					'label'        => esc_html__('Modal', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Modal', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -945,7 +945,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'mailchimp',
-					'label'        => esc_html__('Mailchimp', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Mailchimp', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -955,7 +955,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'marker',
-					'label'        => esc_html__('Marker', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Marker', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -965,7 +965,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'member',
-					'label'        => esc_html__('Member', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Member', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -975,7 +975,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'navbar',
-					'label'        => esc_html__('Navbar', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Navbar', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -985,7 +985,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'news-ticker',
-					'label'        => esc_html__('News Ticker', 'bdthemes-element-pack'),
+					'label'        => esc_html__('News Ticker', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -995,7 +995,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'notification',
-					'label'        => esc_html__('Notification', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Notification', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1005,7 +1005,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'offcanvas',
-					'label'        => esc_html__('Offcanvas', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Offcanvas', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1015,7 +1015,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'open-street-map',
-					'label'        => esc_html__('Open Street Map', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Open Street Map', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1025,7 +1025,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'price-list',
-					'label'        => esc_html__('Price List', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Price List', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1035,7 +1035,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'price-table',
-					'label'        => esc_html__('Price Table', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Price Table', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1045,7 +1045,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'product-grid',
-					'label'        => esc_html__('Product Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Product Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1055,7 +1055,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'product-carousel',
-					'label'        => esc_html__('Product Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Product Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1065,7 +1065,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'panel-slider',
-					'label'        => esc_html__('Panel Slider', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Panel Slider', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1075,7 +1075,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-slider',
-					'label'        => esc_html__('Post Slider', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Slider', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1085,7 +1085,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-card',
-					'label'        => esc_html__('Post Card', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1095,7 +1095,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-block',
-					'label'        => esc_html__('Post Block', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Block', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1105,7 +1105,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-block-modern',
-					'label'        => esc_html__('Post Block Modern', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Block Modern', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1115,7 +1115,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'progress-pie',
-					'label'        => esc_html__('Progress Pie', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Progress Pie', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1125,7 +1125,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-gallery',
-					'label'        => esc_html__('Post Gallery', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Gallery', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1135,7 +1135,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-grid',
-					'label'        => esc_html__('Post Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1145,7 +1145,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-grid-tab',
-					'label'        => esc_html__('Post Grid Tab', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Grid Tab', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1155,7 +1155,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-list',
-					'label'        => esc_html__('Post List', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post List', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1165,7 +1165,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-title',
-					'label'        => esc_html__('Post Title', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Title', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => "off",
 					'widget_type'  => 'pro',
@@ -1175,7 +1175,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-comments',
-					'label'        => esc_html__('Post Comments', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Comments', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => "off",
 					'widget_type'  => 'pro',
@@ -1185,7 +1185,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-content',
-					'label'        => esc_html__('Post Content', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Content', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => "off",
 					'widget_type'  => 'pro',
@@ -1195,7 +1195,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-featured-image',
-					'label'        => esc_html__('Post Featured Image', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Featured Image', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => "off",
 					'widget_type'  => 'pro',
@@ -1205,7 +1205,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'post-info',
-					'label'        => esc_html__('Post Info', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Post Info', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => "off",
 					'widget_type'  => 'pro',
@@ -1215,7 +1215,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'profile-card',
-					'label'        => esc_html__('Profile Card', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Profile Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1225,7 +1225,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'protected-content',
-					'label'        => esc_html__('Protected Content', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Protected Content', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1236,7 +1236,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'qrcode',
-					'label'        => esc_html__('QR Code', 'bdthemes-element-pack'),
+					'label'        => esc_html__('QR Code', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1246,7 +1246,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'reading-progress',
-					'label'        => esc_html__('Reading Progress', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Reading Progress', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1256,7 +1256,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'reading-timer',
-					'label'        => esc_html__('Reading Timer', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Reading Timer', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1266,7 +1266,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'remote-arrows',
-					'label'        => esc_html__('Remote Arrows', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Remote Arrows', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1276,7 +1276,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'remote-fraction',
-					'label'        => esc_html__('Remote Fraction', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Remote Fraction', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1286,7 +1286,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'remote-pagination',
-					'label'        => esc_html__('Remote Pagination', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Remote Pagination', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1296,7 +1296,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'remote-thumbs',
-					'label'        => esc_html__('Remote Thumbs', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Remote Thumbs', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1306,7 +1306,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'review-card',
-					'label'        => esc_html__('Review Card', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Review Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1316,7 +1316,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'review-card-grid',
-					'label'        => esc_html__('Review Card Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Review Card Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1326,7 +1326,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'review-card-carousel',
-					'label'        => esc_html__('Review Card Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Review Card Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1336,7 +1336,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'slider',
-					'label'        => esc_html__('Slider', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Slider', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1346,7 +1346,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'slideshow',
-					'label'        => esc_html__('Slideshow', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Slideshow', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1356,7 +1356,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'slinky-vertical-menu',
-					'label'        => esc_html__('Slinky Vertical Menu', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Slinky Vertical Menu', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1366,7 +1366,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'scrollnav',
-					'label'       => esc_html__('Scrollnav', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Scrollnav', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'on',
 					'widget_type' => 'free',
@@ -1376,7 +1376,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'search',
-					'label'        => esc_html__('Search', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Search', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1386,7 +1386,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'scroll-button',
-					'label'        => esc_html__('Scroll Button', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Scroll Button', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1396,7 +1396,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'scroll-image',
-					'label'        => esc_html__('Scroll Image', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Scroll Image', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1406,7 +1406,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'source-code',
-					'label'        => esc_html__('Source Code', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Source Code', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1416,7 +1416,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'stacker',
-					'label'        => esc_html__('Stacker', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Stacker', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1426,7 +1426,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'static-carousel',
-					'label'        => esc_html__('Static Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Static Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1436,7 +1436,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'static-grid-tab',
-					'label'        => esc_html__('Static Grid Tab', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Static Grid Tab', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1446,7 +1446,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'single-post',
-					'label'        => esc_html__('Single Post', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Single Post', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1456,7 +1456,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'social-share',
-					'label'        => esc_html__('Social Share', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Social Share', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1466,7 +1466,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'social-proof',
-					'label'        => esc_html__('Social Proof', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Social Proof', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1476,7 +1476,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'step-flow',
-					'label'        => esc_html__('Step Flow', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Step Flow', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1486,7 +1486,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'sub-menu',
-					'label'        => esc_html__('Sub Menu', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Sub Menu', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1496,7 +1496,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'switcher',
-					'label'        => esc_html__('Switcher', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Switcher', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1506,7 +1506,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'svg-blob',
-					'label'        => esc_html__('SVG Blob', 'bdthemes-element-pack'),
+					'label'        => esc_html__('SVG Blob', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1516,7 +1516,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'svg-image',
-					'label'        => esc_html__('SVG Image', 'bdthemes-element-pack'),
+					'label'        => esc_html__('SVG Image', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1527,7 +1527,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'svg-maps',
-					'label'        => esc_html__('SVG Maps', 'bdthemes-element-pack'),
+					'label'        => esc_html__('SVG Maps', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1537,7 +1537,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'tabs',
-					'label'        => esc_html__('Tabs', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Tabs', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1547,7 +1547,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'table',
-					'label'        => esc_html__('Table', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Table', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1557,7 +1557,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'table-of-content',
-					'label'        => esc_html__('Table Of Content', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Table Of Content', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1567,7 +1567,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'tags-cloud',
-					'label'        => esc_html__('Tags Cloud', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Tags Cloud', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1577,7 +1577,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'timeline',
-					'label'        => esc_html__('Timeline', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Timeline', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1587,7 +1587,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'time-zone',
-					'label'        => esc_html__('Time Zone', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Time Zone', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1597,7 +1597,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'total-count',
-					'label'        => esc_html__('Total Count', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Total Count', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1607,7 +1607,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'trailer-box',
-					'label'        => esc_html__('Trailer Box', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Trailer Box', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1617,7 +1617,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'thumb-gallery',
-					'label'        => esc_html__('Thumb Gallery', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Thumb Gallery', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1627,7 +1627,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'toggle',
-					'label'        => esc_html__('Read More Toggle', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Read More Toggle', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1637,7 +1637,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'twitter-carousel',
-					'label'        => esc_html__('Twitter Carousel', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Twitter Carousel', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1647,7 +1647,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'twitter-grid',
-					'label'        => esc_html__('Twitter Grid', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Twitter Grid', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1657,7 +1657,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'twitter-slider',
-					'label'        => esc_html__('Twitter Slider', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Twitter Slider', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1667,7 +1667,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'threesixty-product-viewer',
-					'label'        => esc_html__('360 Product Viewer', 'bdthemes-element-pack'),
+					'label'        => esc_html__('360 Product Viewer', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1677,7 +1677,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'user-login',
-					'label'        => esc_html__('User Login', 'bdthemes-element-pack'),
+					'label'        => esc_html__('User Login', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'pro',
@@ -1687,7 +1687,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'user-register',
-					'label'        => esc_html__('User Register', 'bdthemes-element-pack'),
+					'label'        => esc_html__('User Register', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'on',
 					'widget_type'  => 'free',
@@ -1697,7 +1697,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'vertical-menu',
-					'label'        => esc_html__('Vertical Menu', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Vertical Menu', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1707,7 +1707,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'video-gallery',
-					'label'        => esc_html__('Video Gallery', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Video Gallery', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1717,7 +1717,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'video-player',
-					'label'        => esc_html__('Video Player', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Video Player', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1727,7 +1727,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'weather',
-					'label'        => esc_html__('Weather', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Weather', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1737,7 +1737,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'webhook-form',
-					'label'        => esc_html__('Webhook Form', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Webhook Form', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1750,7 +1750,7 @@ class ModuleService {
             'element_pack_elementor_extend' => [
 				[
 					'name'        => 'adblock-detector',
-					'label'       => esc_html__('AdBlock Detector', 'bdthemes-element-pack'),
+					'label'       => esc_html__('AdBlock Detector', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1759,7 +1759,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'animated-gradient-background',
-					'label'       => esc_html__('Animated Gradient BG', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Animated Gradient BG', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -1768,7 +1768,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'backdrop-filter',
-					'label'       => esc_html__('Backdrop Filter', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Backdrop Filter', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -1777,7 +1777,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'background-expand',
-					'label'       => esc_html__('Background Expand', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Background Expand', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1786,7 +1786,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'background-overlay',
-					'label'       => esc_html__('Background Overlay', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Background Overlay', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -1795,7 +1795,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'background-parallax',
-					'label'       => esc_html__('BG Parallax Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('BG Parallax Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1804,7 +1804,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'confetti-effects',
-					'label'       => esc_html__('Confetti Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Confetti Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1813,7 +1813,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'cursor-effects',
-					'label'       => esc_html__('Cursor Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Cursor Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -1821,17 +1821,8 @@ class ModuleService {
 					'video_url'   => 'https://youtu.be/Pnev5lPByEc',
 				],
 				[
-					'name'        => 'custom-js',
-					'label'       => esc_html__('Custom CSS / JS', 'bdthemes-element-pack'),
-					'type'        => 'checkbox',
-					'default'     => 'off',
-					'widget_type' => 'free',
-					'demo_url'    => 'https://elementpack.pro/demo/element/custom-js/',
-					'video_url'   => 'https://youtu.be/e-_qQl6dBbE?t=312',
-				],
-				[
 					'name'        => 'equal-height',
-					'label'       => esc_html__('Widget Equal Height', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Widget Equal Height', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -1840,7 +1831,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'floating-effects',
-					'label'       => esc_html__('Floating Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Floating Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -1849,7 +1840,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'hash-link',
-					'label'       => esc_html__('Hash Link', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Hash Link', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1858,7 +1849,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'grid-line',
-					'label'       => esc_html__('Grid Line', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Grid Line', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -1867,7 +1858,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'content-protector',
-					'label'       => esc_html__('Content Protector', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Content Protector', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1876,7 +1867,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'image-hover-effects',
-					'label'        => esc_html__('Image Hover Effects', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Image Hover Effects', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'free',
@@ -1886,7 +1877,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'background-image-parallax',
-					'label'        => esc_html__('Background Image Parallax', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Background Image Parallax', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1896,7 +1887,7 @@ class ModuleService {
 				],
 				[
 					'name'         => 'image-masking',
-					'label'        => esc_html__('Image Masking', 'bdthemes-element-pack'),
+					'label'        => esc_html__('Image Masking', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
 					'default'      => 'off',
 					'widget_type'  => 'pro',
@@ -1906,7 +1897,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'image-parallax',
-					'label'       => esc_html__('Section Image Parallax', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Section Image Parallax', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1915,7 +1906,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'notation',
-					'label'       => esc_html__('Notation', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Notation', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1924,7 +1915,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'parallax-effects',
-					'label'       => esc_html__('Parallax/Scrolling Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Parallax/Scrolling Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1933,7 +1924,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'particles',
-					'label'       => esc_html__('Section Particles', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Section Particles', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1942,7 +1933,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'reveal-effects',
-					'label'       => esc_html__('Reveal Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Reveal Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1951,7 +1942,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'ripple-effects',
-					'label'       => esc_html__('Ripple Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Ripple Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1960,7 +1951,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'scroll-box',
-					'label'       => esc_html__('Scroll Box', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Scroll Box', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1969,7 +1960,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'scroll-fill-effect',
-					'label'       => esc_html__('Scroll Fill Effect', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Scroll Fill Effect', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1978,7 +1969,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'section-sticky',
-					'label'       => esc_html__('Sticky', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Sticky', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1988,7 +1979,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'sound-effects',
-					'label'       => esc_html__('Sound Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Sound Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -1997,7 +1988,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'shape-builder',
-					'label'       => esc_html__('Shape Builder', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Shape Builder', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2007,7 +1998,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'shape-divider',
-					'label'       => esc_html__('Shape Divider', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Shape Divider', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2017,7 +2008,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'threed-text',
-					'label'       => esc_html__('3D Text', 'bdthemes-element-pack'),
+					'label'       => esc_html__('3D Text', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2026,7 +2017,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'tile-scroll',
-					'label'       => esc_html__('Tile Scroll', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Tile Scroll', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2035,7 +2026,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'text-gradient-background',
-					'label'       => esc_html__('Text Gradient Background', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Text Gradient Background', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2045,7 +2036,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'realistic-image-shadow',
-					'label'       => esc_html__('Realistic Image Shadow', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Realistic Image Shadow', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2054,7 +2045,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'tooltip',
-					'label'       => esc_html__('Widget Tooltip', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Widget Tooltip', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2063,7 +2054,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'transform-effects',
-					'label'       => esc_html__('Transform Effects', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Transform Effects', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2072,7 +2063,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'visibility-controls',
-					'label'       => esc_html__('Visibility Controls', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Visibility Controls', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2082,7 +2073,7 @@ class ModuleService {
 				],
 				[
 					'name'        => 'wrapper-link',
-					'label'       => esc_html__('Wrapper Link', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Wrapper Link', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2094,21 +2085,21 @@ class ModuleService {
                 
                 [
                     'name'  => 'recaptcha_group_start',
-                    'label' => esc_html__('reCAPTCHA Access', 'bdthemes-element-pack'),
-                    'desc'  => __('Go to your Google <a href="https://www.google.com/recaptcha/" target="_blank">reCAPTCHA</a> > Account > Generate Keys (reCAPTCHA V2 > Invisible) and Copy and Paste here.', 'bdthemes-element-pack'),
+                    'label' => esc_html__('reCAPTCHA Access', 'bdthemes-element-pack-lite'),
+                    'desc'  => __('Go to your Google <a href="https://www.google.com/recaptcha/" target="_blank">reCAPTCHA</a> > Account > Generate Keys (reCAPTCHA V2 > Invisible) and Copy and Paste here.', 'bdthemes-element-pack-lite'),
                     'type'  => 'start_group',
                 ],
 
                 [
                     'name'              => 'recaptcha_site_key',
-                    'label'             => esc_html__('Site key', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Site key', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
                 [
                     'name'              => 'recaptcha_secret_key',
-                    'label'             => esc_html__('Secret key', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Secret key', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
@@ -2121,43 +2112,43 @@ class ModuleService {
 
                 [
                     'name'      => 'twitter_group_start',
-                    'label'     => esc_html__('Twitter Access', 'bdthemes-element-pack'),
-                    'desc'      => __('Go to <a href="https://developer.twitter.com/en" target="_blank">https://developer.twitter.com/en</a> for create your Consumer key and Access Token.', 'bdthemes-element-pack'),
+                    'label'     => esc_html__('Twitter Access', 'bdthemes-element-pack-lite'),
+                    'desc'      => __('Go to <a href="https://developer.twitter.com/en" target="_blank">https://developer.twitter.com/en</a> for create your Consumer key and Access Token.', 'bdthemes-element-pack-lite'),
                     'type'      => 'start_group',
                     'video_url' => 'https://youtu.be/IrQVteaaAow',
                 ],
 
                 [
                     'name'              => 'twitter_name',
-                    'label'             => esc_html__('User Name', 'bdthemes-element-pack'),
-                    'placeholder'       => esc_attr__('for example: bdthemescom', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('User Name', 'bdthemes-element-pack-lite'),
+                    'placeholder'       => esc_attr__('for example: bdthemescom', 'bdthemes-element-pack-lite'),
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
                 [
                     'name'              => 'twitter_consumer_key',
-                    'label'             => esc_html__('Consumer Key', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Consumer Key', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
                 [
                     'name'              => 'twitter_consumer_secret',
-                    'label'             => esc_html__('Consumer Secret', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Consumer Secret', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
                 [
                     'name'              => 'twitter_access_token',
-                    'label'             => esc_html__('Access Token', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Access Token', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
                 [
                     'name'              => 'twitter_access_token_secret',
-                    'label'             => esc_html__('Access Token Secret', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Access Token Secret', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
@@ -2169,24 +2160,24 @@ class ModuleService {
 
                 [
                     'name'  => 'contact_form_group_start',
-                    'label' => esc_html__('Simple Contact Form ', 'bdthemes-element-pack'),
-                    'desc'  => __('Set your simple contact form settings from here.', 'bdthemes-element-pack'),
+                    'label' => esc_html__('Simple Contact Form ', 'bdthemes-element-pack-lite'),
+                    'desc'  => __('Set your simple contact form settings from here.', 'bdthemes-element-pack-lite'),
                     'type'  => 'start_group',
                 ],
 
                 [
                     'name'              => 'contact_form_email',
-                    'label'             => esc_html__('Contact Form Email', 'bdthemes-element-pack'),
-                    'desc'              => __('You can set alternative email for simple contact form', 'bdthemes-element-pack'),
-                    'placeholder'       => esc_attr__( 'example@email.com', 'bdthemes-element-pack' ),
+                    'label'             => esc_html__('Contact Form Email', 'bdthemes-element-pack-lite'),
+                    'desc'              => __('You can set alternative email for simple contact form', 'bdthemes-element-pack-lite'),
+                    'placeholder'       => esc_attr__( 'example@email.com', 'bdthemes-element-pack-lite' ),
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
                 [
                     'name'              => 'contact_form_spam_email',
-                    'label'             => esc_html__('Spam Email List', 'bdthemes-element-pack'),
-                    'desc'              => __('add spam email here for block spamming from your contact form. multiple email separated by comma (,).', 'bdthemes-element-pack'),
-                    'placeholder'       => esc_attr__( 'example@email.com, example2@email.com', 'bdthemes-element-pack' ),
+                    'label'             => esc_html__('Spam Email List', 'bdthemes-element-pack-lite'),
+                    'desc'              => __('add spam email here for block spamming from your contact form. multiple email separated by comma (,).', 'bdthemes-element-pack-lite'),
+                    'placeholder'       => esc_attr__( 'example@email.com, example2@email.com', 'bdthemes-element-pack-lite' ),
                     'type'              => 'textarea',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
@@ -2198,29 +2189,29 @@ class ModuleService {
 
                 [
                     'name'              => 'open_street_map_access_token',
-                    'label'             => esc_html__('MapBox Access Token (for Open Street Map)', 'bdthemes-element-pack'),
-                    'desc'              => __('<a href="https://www.mapbox.com/account/access-tokens" target="_blank">Click Here</a> to get access token. This Access Token needs for show Open Street Map widget correctly.', 'bdthemes-element-pack'),
-                    'placeholder'       => esc_attr__( '------------- -------------------------', 'bdthemes-element-pack' ),
+                    'label'             => esc_html__('MapBox Access Token (for Open Street Map)', 'bdthemes-element-pack-lite'),
+                    'desc'              => __('<a href="https://www.mapbox.com/account/access-tokens" target="_blank">Click Here</a> to get access token. This Access Token needs for show Open Street Map widget correctly.', 'bdthemes-element-pack-lite'),
+                    'placeholder'       => esc_attr__( '------------- -------------------------', 'bdthemes-element-pack-lite' ),
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
 
                 [
                     'name'  => 'fb_social_group_start',
-                    'label' => esc_html__('Facebook Social Access', 'bdthemes-element-pack'),
-                    'desc'  => __('Go to your <a href="https://developers.facebook.com/apps/" target="_blank">Facebook Developer Account</a> to get access Page ID and Access Token. This credential need for Social Feeds widget.', 'bdthemes-element-pack'),
+                    'label' => esc_html__('Facebook Social Access', 'bdthemes-element-pack-lite'),
+                    'desc'  => __('Go to your <a href="https://developers.facebook.com/apps/" target="_blank">Facebook Developer Account</a> to get access Page ID and Access Token. This credential need for Social Feeds widget.', 'bdthemes-element-pack-lite'),
                     'type'  => 'start_group',
                 ],
                 [
                     'name'              => 'fb_page_id',
-                    'label'             => esc_html__('Facebook Page ID', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Facebook Page ID', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
                 [
                     'name'              => 'fb_access_token',
-                    'label'             => esc_html__('Facebook Access Token', 'bdthemes-element-pack'),
+                    'label'             => esc_html__('Facebook Access Token', 'bdthemes-element-pack-lite'),
                     'placeholder'       => '',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
@@ -2235,8 +2226,8 @@ class ModuleService {
 
 				[
 					'name'        => 'asset-manager',
-					'label'       => esc_html__('Asset Manager', 'bdthemes-element-pack'),
-					'tooltip'  => __('If you want to combine your JS and css and load in a single file so enable it. When you enable it all widgets css and JS will combine in a single file.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Asset Manager', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('If you want to combine your JS and css and load in a single file so enable it. When you enable it all widgets css and JS will combine in a single file.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2246,8 +2237,8 @@ class ModuleService {
 
 				[
 					'name'        => 'mega-menu',
-					'label'       => esc_html__('Mega Menu', 'bdthemes-element-pack'),
-					'tooltip'  => __('The Mega Menu by Element Pack Pro allows the users to create organized and oversized menus with full custom layouts having images, columns, sliders, icons, forms, buttons, and lots of links. This is one of the most demanding feature and now it is in your hands.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Mega Menu', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('The Mega Menu by Element Pack Pro allows the users to create organized and oversized menus with full custom layouts having images, columns, sliders, icons, forms, buttons, and lots of links. This is one of the most demanding feature and now it is in your hands.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2257,8 +2248,8 @@ class ModuleService {
 
 				[
 					'name'        => 'dynamic-content',
-					'label'       => esc_html__('Dynamic Content', 'bdthemes-element-pack'),
-					'tooltip'  => __('The Dynamic Content feature allows users to automatically populate Elementor widgets with real-time data from WordPress.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Dynamic Content', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('The Dynamic Content feature allows users to automatically populate Elementor widgets with real-time data from WordPress.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2270,8 +2261,8 @@ class ModuleService {
 
 				[
 					'name'        => 'smooth-scroller',
-					'label'       => esc_html__('Smooth Scroller', 'bdthemes-element-pack'),
-					'tooltip'  => __('Turn on this switcher to enable the Smooth Scroller Features, The Smooth Scroller feature enhances user experience by providing seamless, visually pleasing content navigation through animated transitions.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Smooth Scroller', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('Turn on this switcher to enable the Smooth Scroller Features, The Smooth Scroller feature enhances user experience by providing seamless, visually pleasing content navigation through animated transitions.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2282,8 +2273,8 @@ class ModuleService {
 				
 				[
 					'name'        => 'live-copy',
-					'label'       => esc_html__('Live Copy/Paste', 'bdthemes-element-pack'),
-					'tooltip'  => __('Live copy is a copy feature that allow you to copy and paste content from one domain to another. For example you can copy demo content directly from our demo website.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Live Copy/Paste', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('Live copy is a copy feature that allow you to copy and paste content from one domain to another. For example you can copy demo content directly from our demo website.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2293,8 +2284,8 @@ class ModuleService {
 				
 				[
 					'name'        => 'essential-shortcodes',
-					'label'       => esc_html__('Essential Shortcodes', 'bdthemes-element-pack'),
-					'tooltip'  => __('If you need element pack essential shortcodes feature so you can do that from here. it\'s included some basic content feature that not possible by element pack.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Essential Shortcodes', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('If you need element pack essential shortcodes feature so you can do that from here. it\'s included some basic content feature that not possible by element pack.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2304,8 +2295,8 @@ class ModuleService {
 				
 				[
 					'name'        => 'template-library',
-					'label'       => esc_html__('Template Library (in Editor)', 'bdthemes-element-pack'),
-					'tooltip'  => __('If you need to show element pack template library in your editor so please enable this option. It\'s amazing feature for elementor.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Template Library (in Editor)', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('If you need to show element pack template library in your editor so please enable this option. It\'s amazing feature for elementor.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2315,8 +2306,8 @@ class ModuleService {
 
 				[
 					'name'        => 'context-menu',
-					'label'       => esc_html__('Context Menu', 'bdthemes-element-pack'),
-					'tooltip'  => __('Turn on this switcher to enable the Context Menu inside "Site Settings" of Elementor Editor Page to use the right-click menu.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Context Menu', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('Turn on this switcher to enable the Context Menu inside "Site Settings" of Elementor Editor Page to use the right-click menu.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2326,8 +2317,8 @@ class ModuleService {
 
 				[
 					'name'        => 'duplicator',
-					'label'       => esc_html__('Duplicator', 'bdthemes-element-pack'),
-					'tooltip'  => __('Just hit the button below to enable the duplicator. It can duplicate anything like posts,pages and elementor templates. A masterclass duplication with just one click.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Duplicator', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('Just hit the button below to enable the duplicator. It can duplicate anything like posts,pages and elementor templates. A masterclass duplication with just one click.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -2337,8 +2328,8 @@ class ModuleService {
 
 				[
 					'name'        => 'svg-support',
-					'label'       => esc_html__('SVG Support', 'bdthemes-element-pack'),
-					'tooltip'  => __('Turn on this option to enable SVG support in your widgets & Upload Media Library.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('SVG Support', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('Turn on this option to enable SVG support in your widgets & Upload Media Library.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'on',
 					'widget_type' => 'free',
@@ -2349,8 +2340,8 @@ class ModuleService {
 
 				[
 					'name'        => 'variation-swatches',
-					'label'       => esc_html__('Variation Swatches', 'bdthemes-element-pack'),
-					'tooltip'  => __('Replace dropdowns with color swatches, image swatches or text/button swatches.', 'bdthemes-element-pack'),
+					'label'       => esc_html__('Variation Swatches', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('Replace dropdowns with color swatches, image swatches or text/button swatches.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'pro',
@@ -2364,7 +2355,7 @@ class ModuleService {
 
         $settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'acf-accordion',
-			'label'       => esc_html__('ACF Accordion', 'bdthemes-element-pack'),
+			'label'       => esc_html__('ACF Accordion', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'advanced-custom-fields-pro',
@@ -2378,7 +2369,7 @@ class ModuleService {
 		
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'acf-gallery',
-			'label'       => esc_html__('ACF Gallery', 'bdthemes-element-pack'),
+			'label'       => esc_html__('ACF Gallery', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'advanced-custom-fields-pro',
@@ -2392,7 +2383,7 @@ class ModuleService {
 		
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'acf-slider',
-			'label'       => esc_html__('ACF Slider', 'bdthemes-element-pack'),
+			'label'       => esc_html__('ACF Slider', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'advanced-custom-fields-pro',
@@ -2406,7 +2397,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'acf-tabs',
-			'label'       => esc_html__('ACF Tabs', 'bdthemes-element-pack'),
+			'label'       => esc_html__('ACF Tabs', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'advanced-custom-fields-pro',
@@ -2420,7 +2411,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'acf-list',
-			'label'       => esc_html__('ACF List', 'bdthemes-element-pack'),
+			'label'       => esc_html__('ACF List', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'advanced-custom-fields-pro',
@@ -2434,7 +2425,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-forum-form',
-			'label'       => esc_html__('bbPress Forum Form', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Forum Form', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2446,7 +2437,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-forum-index',
-			'label'       => esc_html__('bbPress Forum Index', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Forum Index', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2458,7 +2449,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-single-forum',
-			'label'       => esc_html__('bbPress Single Forum', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Single Forum', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2469,7 +2460,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-topic-index',
-			'label'       => esc_html__('bbPress Topic Index', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Topic Index', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2480,7 +2471,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-topic-form',
-			'label'       => esc_html__('bbPress Topic Form', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Topic Form', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2491,7 +2482,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-single-topic',
-			'label'       => esc_html__('bbPress Single Topic', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Single Topic', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2502,7 +2493,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-reply-form',
-			'label'       => esc_html__('bbPress Reply Form', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Reply Form', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2513,7 +2504,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-single-reply',
-			'label'       => esc_html__('bbPress Single Reply', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Single Reply', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2524,7 +2515,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-topic-tags',
-			'label'       => esc_html__('bbPress Topic Tags', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Topic Tags', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2535,7 +2526,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-single-tag',
-			'label'       => esc_html__('bbPress Single Tag', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Single Tag', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2546,7 +2537,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-single-view',
-			'label'       => esc_html__('bbPress Single View', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Single View', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2557,7 +2548,7 @@ class ModuleService {
 		];
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'bbpress-stats',
-			'label'       => esc_html__('bbPress Stats', 'bdthemes-element-pack'),
+			'label'       => esc_html__('bbPress Stats', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'bbpress',
@@ -2569,7 +2560,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'buddypress-friends',
-			'label'       => esc_html__('BuddyPress Friends', 'bdthemes-element-pack'),
+			'label'       => esc_html__('BuddyPress Friends', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'buddypress',
@@ -2582,7 +2573,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'buddypress-group',
-			'label'       => esc_html__('BuddyPress Group', 'bdthemes-element-pack'),
+			'label'       => esc_html__('BuddyPress Group', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'buddypress',
@@ -2595,7 +2586,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'buddypress-member',
-			'label'       => esc_html__('BuddyPress Member', 'bdthemes-element-pack'),
+			'label'       => esc_html__('BuddyPress Member', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'buddypress',
@@ -2608,7 +2599,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'contact-form-7',
-			'label'       => esc_html__('Contact Form 7', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Contact Form 7', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'on',
 			'plugin_name' => 'contact-form-7',
@@ -2621,7 +2612,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-campaigns',
-			'label'        => esc_html__('Charitable Campaigns', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Campaigns', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2635,7 +2626,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-donations',
-			'label'        => esc_html__('Charitable Donations', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Donations', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2649,7 +2640,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-donors',
-			'label'        => esc_html__('Charitable Donors', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Donors', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2663,7 +2654,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-donation-form',
-			'label'        => esc_html__('Charitable Donation Form', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Donation Form', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2677,7 +2668,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-stat',
-			'label'        => esc_html__('Charitable Stat', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Stat', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2691,7 +2682,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-login',
-			'label'        => esc_html__('Charitable Login', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Login', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2705,7 +2696,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-registration',
-			'label'        => esc_html__('Charitable Registration', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Registration', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2719,7 +2710,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'charitable-profile',
-			'label'        => esc_html__('Charitable Profile', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Charitable Profile', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'charitable',
@@ -2733,7 +2724,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'download-monitor',
-			'label'       => esc_html__('Download Monitor', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Download Monitor', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'download-monitor',
@@ -2747,7 +2738,7 @@ class ModuleService {
 		if (ModuleService::_is_plugin_installed('easy-digital-downloads', 'easy-digital-downloads/easy-digital-downloads.php') === true && is_plugin_active('easy-digital-downloads-pro/easy-digital-downloads.php') !== true) {
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-cart',
-				'label'       => esc_html__('EDD Cart', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Cart', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2759,7 +2750,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-category-grid',
-				'label'       => esc_html__('EDD Category Grid', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Category Grid', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2771,7 +2762,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-category-carousel',
-				'label'       => esc_html__('EDD Category Carousel', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Category Carousel', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2783,7 +2774,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-checkout',
-				'label'       => esc_html__('EDD Checkout', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Checkout', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2794,7 +2785,7 @@ class ModuleService {
 			];
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-login',
-				'label'       => esc_html__('EDD Login', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Login', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2805,7 +2796,7 @@ class ModuleService {
 			];
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-mini-cart',
-				'label'       => esc_html__('EDD Mini Cart', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Mini Cart', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2816,7 +2807,7 @@ class ModuleService {
 			];
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product',
-				'label'       => esc_html__('EDD Product', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2828,7 +2819,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product-carousel',
-				'label'       => esc_html__('EDD Product Carousel', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product Carousel', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2840,7 +2831,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product-reviews',
-				'label'       => esc_html__('EDD Product Reviews', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product Reviews', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2852,7 +2843,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product-review-carousel',
-				'label'       => esc_html__('EDD Product Review Carousel', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product Review Carousel', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2864,7 +2855,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-profile-editor',
-				'label'       => esc_html__('EDD Profile Editor', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Profile Editor', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2876,7 +2867,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-purchase-history',
-				'label'       => esc_html__('EDD Purchase History', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Purchase History', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2888,7 +2879,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-register',
-				'label'       => esc_html__('EDD Register', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Register', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2900,7 +2891,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-tabs',
-				'label'       => esc_html__('EDD Tabs', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Tabs', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2912,7 +2903,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'easy-digital-downloads',
-				'label'       => esc_html__('Easy Digital Download', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Easy Digital Download', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2924,7 +2915,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-download-history',
-				'label'       => esc_html__('EDD History', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD History', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2936,7 +2927,7 @@ class ModuleService {
 		} else {
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-cart',
-				'label'       => esc_html__('EDD Cart', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Cart', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2948,7 +2939,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-category-grid',
-				'label'       => esc_html__('EDD Category Grid', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Category Grid', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2960,7 +2951,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-category-carousel',
-				'label'       => esc_html__('EDD Category Carousel', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Category Carousel', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2972,7 +2963,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-checkout',
-				'label'       => esc_html__('EDD Checkout', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Checkout', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2983,7 +2974,7 @@ class ModuleService {
 			];
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-login',
-				'label'       => esc_html__('EDD Login', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Login', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -2994,7 +2985,7 @@ class ModuleService {
 			];
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-mini-cart',
-				'label'       => esc_html__('EDD Mini Cart', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Mini Cart', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3005,7 +2996,7 @@ class ModuleService {
 			];
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product',
-				'label'       => esc_html__('EDD Product', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3017,7 +3008,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product-carousel',
-				'label'       => esc_html__('EDD Product Carousel', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product Carousel', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3029,7 +3020,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product-reviews',
-				'label'       => esc_html__('EDD Product Reviews', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product Reviews', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3041,7 +3032,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-product-review-carousel',
-				'label'       => esc_html__('EDD Product Review Carousel', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Product Review Carousel', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3053,7 +3044,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-profile-editor',
-				'label'       => esc_html__('EDD Profile Editor', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Profile Editor', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3065,7 +3056,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-purchase-history',
-				'label'       => esc_html__('EDD Purchase History', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Purchase History', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3077,7 +3068,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-register',
-				'label'       => esc_html__('EDD Register', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Register', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3089,7 +3080,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-tabs',
-				'label'       => esc_html__('EDD Tabs', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD Tabs', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3101,7 +3092,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'easy-digital-downloads',
-				'label'       => esc_html__('Easy Digital Download', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Easy Digital Download', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3113,7 +3104,7 @@ class ModuleService {
 
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'        => 'edd-download-history',
-				'label'       => esc_html__('EDD History', 'bdthemes-element-pack'),
+				'label'       => esc_html__('EDD History', 'bdthemes-element-pack-lite'),
 				'type'        => 'checkbox',
 				'default'     => 'off',
 				'plugin_name' => 'easy-digital-downloads',
@@ -3125,7 +3116,7 @@ class ModuleService {
 		}
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'everest-forms',
-			'label'        => esc_html__('Everest Forms', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Everest Forms', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'everest-forms',
@@ -3138,7 +3129,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'events-calendar-grid',
-			'label'       => esc_html__('Events Calendar Grid', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Events Calendar Grid', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'the-events-calendar',
@@ -3150,7 +3141,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'events-calendar-carousel',
-			'label'       => esc_html__('Events Calendar Carousel', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Events Calendar Carousel', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'the-events-calendar',
@@ -3162,7 +3153,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'events-calendar-list',
-			'label'       => esc_html__('Events Calendar List', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Events Calendar List', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'the-events-calendar',
@@ -3174,7 +3165,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'fooevents-calendar',
-			'label'       => esc_html__('FooEvents Calendar', 'bdthemes-element-pack'),
+			'label'       => esc_html__('FooEvents Calendar', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'fooevents-calendar',
@@ -3187,7 +3178,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'fooevents-calendar-events',
-			'label'        => esc_html__( 'FooEvents Calendar Events', 'bdthemes-element-pack' ),
+			'label'        => esc_html__( 'FooEvents Calendar Events', 'bdthemes-element-pack-lite' ),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'fooevents-calendar',
@@ -3200,7 +3191,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'fooevents-calendar-carousel',
-			'label'        => esc_html__( 'FooEvents Calendar Carousel', 'bdthemes-element-pack' ),
+			'label'        => esc_html__( 'FooEvents Calendar Carousel', 'bdthemes-element-pack-lite' ),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'fooevents-calendar',
@@ -3213,7 +3204,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'faq',
-			'label'        => esc_html__('FAQ', 'bdthemes-element-pack'),
+			'label'        => esc_html__('FAQ', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'bdthemes-faq',
@@ -3227,7 +3218,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'fluent-forms',
-			'label'        => esc_html__('Fluent Forms', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Fluent Forms', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'fluentform',
@@ -3241,7 +3232,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'formidable-forms',
-			'label'        => esc_html__('Formidable Forms', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Formidable Forms', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'formidable',
@@ -3254,7 +3245,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'forminator-forms',
-			'label'        => esc_html__('Forminator Forms', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Forminator Forms', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'forminator',
@@ -3268,7 +3259,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-donation-history',
-			'label'        => esc_html__('Give Donation History', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Donation History', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3281,7 +3272,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-donor-wall',
-			'label'        => esc_html__('Give Donor Wall', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Donor Wall', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3295,7 +3286,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-form-grid',
-			'label'        => esc_html__('Give Form Grid', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Form Grid', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3309,7 +3300,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-form',
-			'label'        => esc_html__('Give Form', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Form', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3323,7 +3314,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-goal',
-			'label'        => esc_html__('Give Goal', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Goal', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3337,7 +3328,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-login',
-			'label'        => esc_html__('Give Login', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Login', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3351,7 +3342,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-profile-editor',
-			'label'        => esc_html__('Give Profile Editor', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Profile Editor', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3365,7 +3356,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-receipt',
-			'label'        => esc_html__('Give Receipt', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Receipt', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3379,7 +3370,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-register',
-			'label'        => esc_html__('Give Register', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Register', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3392,7 +3383,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'give-totals',
-			'label'        => esc_html__('Give Totals', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Give Totals', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'give',
@@ -3406,7 +3397,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'gravity-forms',
-			'label'        => esc_html__('Gravity Forms', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Gravity Forms', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'gravityforms',
@@ -3421,7 +3412,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'instagram-feed',
-			'label'       => esc_html__('Instagram Feed', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Instagram Feed', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'instagram-feed',
@@ -3434,7 +3425,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'layer-slider',
-			'label'        => esc_html__('Layer Slider', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Layer Slider', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'LayerSlider',
@@ -3449,7 +3440,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'learnpress-grid',
-			'label'       => esc_html__('LearnPress Grid', 'bdthemes-element-pack'),
+			'label'       => esc_html__('LearnPress Grid', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'learnpress',
@@ -3461,7 +3452,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'learnpress-carousel',
-			'label'        => esc_html__('LearnPress Carousel', 'bdthemes-element-pack'),
+			'label'        => esc_html__('LearnPress Carousel', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'learnpress',
@@ -3474,7 +3465,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'mailchimp-for-wp',
-			'label'       => esc_html__('Mailchimp For WP', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Mailchimp For WP', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'mailchimp-for-wp',
@@ -3487,7 +3478,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'ninja-forms',
-			'label'        => esc_html__('Ninja Forms', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Ninja Forms', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'on',
 			'plugin_name'  => 'ninja-forms',
@@ -3501,7 +3492,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'portfolio-gallery',
-			'label'        => esc_html__('Portfolio Gallery', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Portfolio Gallery', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'bdthemes-portfolio',
@@ -3516,7 +3507,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'portfolio-carousel',
-			'label'        => esc_html__('Portfolio Carousel', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Portfolio Carousel', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'bdthemes-portfolio',
@@ -3531,7 +3522,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'portfolio-list',
-			'label'        => esc_html__('Portfolio List', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Portfolio List', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'bdthemes-portfolio',
@@ -3546,7 +3537,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'quform',
-			'label'        => esc_html__('QuForm', 'bdthemes-element-pack'),
+			'label'        => esc_html__('QuForm', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'quform',
@@ -3561,7 +3552,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'revolution-slider',
-			'label'       => esc_html__('Revolution Slider', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Revolution Slider', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'revslider',
@@ -3575,7 +3566,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'tablepress',
-			'label'       => esc_html__('TablePress', 'bdthemes-element-pack'),
+			'label'       => esc_html__('TablePress', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'off',
 			'plugin_name' => 'tablepress',
@@ -3587,7 +3578,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'testimonial-carousel',
-			'label'        => esc_html__('Testimonial Carousel', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Testimonial Carousel', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'bdthemes-testimonials',
@@ -3601,7 +3592,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'testimonial-grid',
-			'label'        => esc_html__('Testimonial Grid', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Testimonial Grid', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'on',
 			'plugin_name'  => 'bdthemes-testimonials',
@@ -3615,7 +3606,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'testimonial-slider',
-			'label'        => esc_html__('Testimonial Slider', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Testimonial Slider', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'bdthemes-testimonials',
@@ -3629,7 +3620,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'the-newsletter',
-			'label'        => esc_html__('The Newsletter', 'bdthemes-element-pack'),
+			'label'        => esc_html__('The Newsletter', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'newsletter',
@@ -3642,7 +3633,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'tutor-lms-course-grid',
-			'label'       => esc_html__('Tutor LMS Grid', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Tutor LMS Grid', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'on',
 			'plugin_name' => 'tutor',
@@ -3654,7 +3645,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'tutor-lms-course-carousel',
-			'label'       => esc_html__('Tutor LMS Carousel', 'bdthemes-element-pack'),
+			'label'       => esc_html__('Tutor LMS Carousel', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
 			'default'     => 'on',
 			'plugin_name' => 'tutor',
@@ -3666,7 +3657,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'wc-products',
-			'label'        => esc_html__('Woocommerce Products', 'bdthemes-element-pack'),
+			'label'        => esc_html__('Woocommerce Products', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'woocommerce',
@@ -3679,7 +3670,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'wc-add-to-cart',
-			'label'        => esc_html__('WooCommerce Add To Cart', 'bdthemes-element-pack'),
+			'label'        => esc_html__('WooCommerce Add To Cart', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'woocommerce',
@@ -3692,7 +3683,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'wc-elements',
-			'label'        => esc_html__('WooCommerce Elements', 'bdthemes-element-pack'),
+			'label'        => esc_html__('WooCommerce Elements', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'woocommerce',
@@ -3705,7 +3696,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'wc-categories',
-			'label'        => esc_html__('WooCommerce Categories', 'bdthemes-element-pack'),
+			'label'        => esc_html__('WooCommerce Categories', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'woocommerce',
@@ -3718,7 +3709,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'wc-carousel',
-			'label'        => esc_html__('WooCommerce Carousel', 'bdthemes-element-pack'),
+			'label'        => esc_html__('WooCommerce Carousel', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'woocommerce',
@@ -3731,7 +3722,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'wc-slider',
-			'label'        => esc_html__('WooCommerce Slider', 'bdthemes-element-pack'),
+			'label'        => esc_html__('WooCommerce Slider', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'woocommerce',
@@ -3744,7 +3735,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'wc-mini-cart',
-			'label'        => esc_html__('WooCommerce Mini Cart', 'bdthemes-element-pack'),
+			'label'        => esc_html__('WooCommerce Mini Cart', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'woocommerce',
@@ -3757,7 +3748,7 @@ class ModuleService {
 
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'         => 'we-forms',
-			'label'        => esc_html__('weForms', 'bdthemes-element-pack'),
+			'label'        => esc_html__('weForms', 'bdthemes-element-pack-lite'),
 			'type'         => 'checkbox',
 			'default'      => 'off',
 			'plugin_name'  => 'weforms',
@@ -3771,7 +3762,7 @@ class ModuleService {
 		if (ModuleService::_is_plugin_installed('wpforms-lite', 'wpforms-lite/wpforms.php') === true && is_plugin_active('wpforms/wpforms.php') !== true) {
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'         => 'wp-forms',
-				'label'        => esc_html__('Wp Forms', 'bdthemes-element-pack'),
+				'label'        => esc_html__('Wp Forms', 'bdthemes-element-pack-lite'),
 				'type'         => 'checkbox',
 				'default'      => 'off',
 				'plugin_name'  => 'wpforms-lite',
@@ -3785,7 +3776,7 @@ class ModuleService {
 		} else {
 			$settings_fields['element_pack_third_party_widget'][] = [
 				'name'         => 'wp-forms',
-				'label'        => esc_html__('Wp Forms', 'bdthemes-element-pack'),
+				'label'        => esc_html__('Wp Forms', 'bdthemes-element-pack-lite'),
 				'type'         => 'checkbox',
 				'default'      => 'off',
 				'plugin_name'  => 'wpforms',
@@ -4031,21 +4022,21 @@ class ModuleService {
 		<div id="ep-google-oauth-manager">
 			<?php if (!$client_id): ?>
 				<div class="oauth-setup-required">
-					<h4>⚠️ <?php echo esc_html__('Setup Required', 'bdthemes-element-pack'); ?></h4>
-					<p><?php echo esc_html__('Please configure your Google OAuth Client ID above before connecting your Google account.', 'bdthemes-element-pack'); ?></p>
+					<h4>⚠️ <?php echo esc_html__('Setup Required', 'bdthemes-element-pack-lite'); ?></h4>
+					<p><?php echo esc_html__('Please configure your Google OAuth Client ID above before connecting your Google account.', 'bdthemes-element-pack-lite'); ?></p>
 					<ol>
-						<li><?php echo esc_html__('Add your Google OAuth Client ID and Client Secret in the field above', 'bdthemes-element-pack'); ?></li>
-						<li><?php echo esc_html__('Save the settings', 'bdthemes-element-pack'); ?></li>
-						<li><?php echo esc_html__('Refresh this page to see the connection button', 'bdthemes-element-pack'); ?></li>
+						<li><?php echo esc_html__('Add your Google OAuth Client ID and Client Secret in the field above', 'bdthemes-element-pack-lite'); ?></li>
+						<li><?php echo esc_html__('Save the settings', 'bdthemes-element-pack-lite'); ?></li>
+						<li><?php echo esc_html__('Refresh this page to see the connection button', 'bdthemes-element-pack-lite'); ?></li>
 					</ol>
 				</div>
 			<?php elseif ($is_connected): ?>
 				<div class="oauth-connected">
-					<h4>✅ <?php echo esc_html__('Google Sheets Connected', 'bdthemes-element-pack'); ?></h4>
+					<h4>✅ <?php echo esc_html__('Google Sheets Connected', 'bdthemes-element-pack-lite'); ?></h4>
 					<div>
 						<div>
 							<button type="button" id="ep-disconnect-google" class="bdt-button bdt-button-secondary">
-								<?php echo esc_html__('Disconnect', 'bdthemes-element-pack'); ?>
+								<?php echo esc_html__('Disconnect', 'bdthemes-element-pack-lite'); ?>
 								<i class="dashicons dashicons-plugins-checked"></i>
 							</button>
 						</div>
@@ -4053,13 +4044,13 @@ class ModuleService {
 				</div>
 			<?php else: ?>
 				<div class="oauth-disconnected">
-					<p><?php echo esc_html__('Connect your Google account to access to your Google Sheets from webhook forms.', 'bdthemes-element-pack'); ?></p>
+					<p><?php echo esc_html__('Connect your Google account to access to your Google Sheets from webhook forms.', 'bdthemes-element-pack-lite'); ?></p>
 
-					<p><strong><?php echo esc_html__('This is your Redirect URI: ', 'bdthemes-element-pack'); ?> <code><?php echo esc_html__( admin_url() . 'admin.php?page=element_pack_options', 'bdthemes-element-pack'); ?></code></strong></p>
+					<p><strong><?php echo esc_html__('This is your Redirect URI: ', 'bdthemes-element-pack-lite'); ?> <code><?php echo esc_html( admin_url() . 'admin.php?page=element_pack_options' ); ?></code></strong></p>
 					
 					<div>
 						<button type="button" id="ep-connect-google" class="bdt-button bdt-button-primary">
-							<?php echo esc_html__('Connect', 'bdthemes-element-pack'); ?>
+							<?php echo esc_html__('Connect', 'bdthemes-element-pack-lite'); ?>
 							<i class="dashicons dashicons-admin-plugins"></i>
 						</button>
 					</div>

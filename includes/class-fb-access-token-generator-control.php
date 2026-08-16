@@ -21,7 +21,7 @@ class ElementPack_FB_Access_Token_Generator_Control extends Base_Data_Control {
 			'description'  => '',
 			'label_block'  => true,
 			'show_label'   => true,
-			'button_label' => __( 'Generate Access Token', 'bdthemes-element-pack' ),
+			'button_label' => __( 'Generate Access Token', 'bdthemes-element-pack-lite' ),
 			'page_id'      => '',
 			'permission'   => 'manage_pages'
 		];

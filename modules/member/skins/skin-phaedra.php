@@ -25,7 +25,7 @@ class Skin_Phaedra extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Phaedra', 'bdthemes-element-pack' );
+		return esc_html__( 'Phaedra', 'bdthemes-element-pack-lite' );
 	}
 
 	public function register_phaedra_style_controls( Module_Base $widget ) {
@@ -34,7 +34,7 @@ class Skin_Phaedra extends Elementor_Skin_Base {
 		$this->start_controls_section(
 			'section_style_phaedra',
 			[ 
-				'label' => __( 'Phaedra', 'bdthemes-element-pack' ),
+				'label' => __( 'Phaedra', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -42,7 +42,7 @@ class Skin_Phaedra extends Elementor_Skin_Base {
 		$this->add_control(
 			'phaedra_overlay_color',
 			[ 
-				'label'     => __( 'Overlay Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Overlay Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member .bdt-member-overlay' => 'background-color: {{VALUE}};',
@@ -61,7 +61,7 @@ class Skin_Phaedra extends Elementor_Skin_Base {
 		$this->add_control(
 			'phaedra_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 

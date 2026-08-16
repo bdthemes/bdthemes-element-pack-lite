@@ -30,7 +30,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 
 	public function get_title()
 	{
-		return __('Dropdown', 'bdthemes-element-pack');
+		return __('Dropdown', 'bdthemes-element-pack-lite');
 	}
 
 	public function register_dropdown_button_controls(Module_Base $widget)
@@ -41,23 +41,23 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->start_controls_section(
 			'section_dropdown_button',
 			[
-				'label' => esc_html__('Dropdown Button', 'bdthemes-element-pack'),
+				'label' => esc_html__('Dropdown Button', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'dropdown_button_text',
 			[
-				'label'   => esc_html__('Text', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Text', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__('Register', 'bdthemes-element-pack'),
+				'default' => esc_html__('Register', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'dropdown_button_size',
 			[
-				'label'   => esc_html__('Size', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Size', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'sm',
 				'options' => element_pack_button_sizes(),
@@ -67,23 +67,23 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_responsive_control(
 			'dropdown_button_align',
 			[
-				'label'   => esc_html__('Alignment', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left'    => [
-						'title' => esc_html__('Left', 'bdthemes-element-pack'),
+						'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__('Center', 'bdthemes-element-pack'),
+						'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__('Right', 'bdthemes-element-pack'),
+						'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__('Justified', 'bdthemes-element-pack'),
+						'title' => esc_html__('Justified', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -95,7 +95,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_control(
 			'user_register_dropdown_icon',
 			[
-				'label'       => esc_html__('Icon', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Icon', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::ICONS,
 				'fa4compatibility' => 'dropdown_button_icon',
 			]
@@ -104,12 +104,12 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_control(
 			'dropdown_button_icon_align',
 			[
-				'label'   => esc_html__('Icon Position', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Icon Position', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'  => esc_html__('Before', 'bdthemes-element-pack'),
-					'right' => esc_html__('After', 'bdthemes-element-pack'),
+					'left'  => esc_html__('Before', 'bdthemes-element-pack-lite'),
+					'right' => esc_html__('After', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					$this->get_control_id('user_register_dropdown_icon[value]!') => '',
@@ -120,7 +120,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_responsive_control(
 			'dropdown_button_icon_indent',
 			[
-				'label'   => esc_html__('Icon Spacing', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Icon Spacing', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 8,
@@ -150,7 +150,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->start_controls_section(
 			'section_dropdown_style',
 			[
-				'label' => esc_html__('Dropdown Style', 'bdthemes-element-pack'),
+				'label' => esc_html__('Dropdown Style', 'bdthemes-element-pack-lite'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -158,7 +158,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_control(
 			'dropdown_background_color',
 			[
-				'label'     => esc_html__('Background Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Background Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'#dropdown{{ID}}.bdt-user-register .bdt-dropdown' => 'background-color: {{VALUE}};',
@@ -180,7 +180,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_responsive_control(
 			'dropdown_border_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -192,7 +192,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_responsive_control(
 			'dropdown_text_padding',
 			[
-				'label'      => esc_html__('Text Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Text Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -204,7 +204,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_control(
 			'dropdown_offset',
 			[
-				'label' => esc_html__('Offset', 'bdthemes-element-pack'),
+				'label' => esc_html__('Offset', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -218,7 +218,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_control(
 			'dropdown_position',
 			[
-				'label'   => esc_html__('Position', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Position', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'bottom-right',
 				'options' => element_pack_drop_position(),
@@ -228,12 +228,12 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$this->add_control(
 			'dropdown_mode',
 			[
-				'label'   => esc_html__('Mode', 'bdthemes-element-pack'),
+				'label'   => esc_html__('Mode', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'hover',
 				'options' => [
-					'hover' => esc_html__('Hover', 'bdthemes-element-pack'),
-					'click' => esc_html__('Clicked', 'bdthemes-element-pack'),
+					'hover' => esc_html__('Hover', 'bdthemes-element-pack-lite'),
+					'click' => esc_html__('Clicked', 'bdthemes-element-pack-lite'),
 				],
 			]
 		);
@@ -421,7 +421,7 @@ class Skin_Dropdown extends Elementor_Skin_Base
 		$dropdown_icon = $this->get_instance_value('user_register_dropdown_icon');
 
 		if (is_user_logged_in() && !Element_Pack_Loader::elementor()->editor->is_edit_mode()) {
-			$button_text = esc_html__('Logout', 'bdthemes-element-pack');
+			$button_text = esc_html__('Logout', 'bdthemes-element-pack-lite');
 		} else {
 			$button_text = $this->get_instance_value('dropdown_button_text');
 		}

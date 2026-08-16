@@ -26,7 +26,7 @@ class Skin_Ekip extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __( 'Ekip', 'bdthemes-element-pack' );
+		return __( 'Ekip', 'bdthemes-element-pack-lite' );
 	}
 
 	public function register_ekip_style_controls( Module_Base $widget ) {
@@ -35,7 +35,7 @@ class Skin_Ekip extends Elementor_Skin_Base {
 		$this->start_controls_section(
 			'section_style_phaedra',
 			[ 
-				'label' => __( 'Ekip', 'bdthemes-element-pack' ),
+				'label' => __( 'Ekip', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -44,7 +44,7 @@ class Skin_Ekip extends Elementor_Skin_Base {
 			Group_Control_Background::get_type(),
 			[ 
 				'name'     => 'ekip_overlay_background_color',
-				'label'    => __( 'Background', 'bdthemes-element-pack' ),
+				'label'    => __( 'Background', 'bdthemes-element-pack-lite' ),
 				'types'    => [ 'gradient' ],
 				'selector' => '{{WRAPPER}} .bdt-member.skin-ekip .ekip-overlay',
 			]
@@ -53,7 +53,7 @@ class Skin_Ekip extends Elementor_Skin_Base {
 		$this->add_control(
 			'ekip_overlay_line_color',
 			[ 
-				'label'     => __( 'Overlay Line Color', 'bdthemes-element-pack' ),
+				'label'     => __( 'Overlay Line Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'{{WRAPPER}} .bdt-member.skin-ekip .ekip-overlay' => 'border-color: {{VALUE}};',
@@ -72,7 +72,7 @@ class Skin_Ekip extends Elementor_Skin_Base {
 		$this->add_control(
 			'ekip_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 

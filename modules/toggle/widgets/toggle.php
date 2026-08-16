@@ -22,7 +22,7 @@ class Toggle extends Module_Base {
     }
 
     public function get_title() {
-        return BDTEP . esc_html__('Read More Toggle', 'bdthemes-element-pack');
+        return BDTEP . esc_html__('Read More Toggle', 'bdthemes-element-pack-lite');
     }
 
     public function get_icon() {
@@ -66,17 +66,17 @@ class Toggle extends Module_Base {
         $this->start_controls_section(
             'section_title',
             [
-                'label' => esc_html__('Toggle', 'bdthemes-element-pack'),
+                'label' => esc_html__('Toggle', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'toggle_title',
             [
-                'label'       => esc_html__('Normal Title', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Normal Title', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
-                'default'     => esc_html__('Show All', 'bdthemes-element-pack'),
+                'default'     => esc_html__('Show All', 'bdthemes-element-pack-lite'),
                 'label_block' => true,
             ]
         );
@@ -84,10 +84,10 @@ class Toggle extends Module_Base {
         $this->add_control(
             'toggle_open_title',
             [
-                'label'       => esc_html__('Opened Title', 'bdthemes-element-pack'),
+                'label'       => esc_html__('Opened Title', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' => true],
-                'default'     => esc_html__('Collapse', 'bdthemes-element-pack'),
+                'default'     => esc_html__('Collapse', 'bdthemes-element-pack-lite'),
                 'label_block' => true,
             ]
         );
@@ -95,14 +95,14 @@ class Toggle extends Module_Base {
         $this->add_control(
             'source',
             [
-                'label'   => esc_html__('Select Source', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Select Source', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'custom',
                 'options' => [
-                    'custom'    => esc_html__('Custom', 'bdthemes-element-pack'),
-                    "elementor" => esc_html__('Elementor Template', 'bdthemes-element-pack'),
-                    'anywhere'  => esc_html__('AE Template', 'bdthemes-element-pack'),
-                    'widget'    => esc_html__('Widget Selector', 'bdthemes-element-pack'),
+                    'custom'    => esc_html__('Custom', 'bdthemes-element-pack-lite'),
+                    "elementor" => esc_html__('Elementor Template', 'bdthemes-element-pack-lite'),
+                    'anywhere'  => esc_html__('AE Template', 'bdthemes-element-pack-lite'),
+                    'widget'    => esc_html__('Widget Selector', 'bdthemes-element-pack-lite'),
                 ],
             ]
         );
@@ -110,10 +110,10 @@ class Toggle extends Module_Base {
         $this->add_control(
             'template_id',
             [
-                'label'       => __('Select Template', 'bdthemes-element-pack'),
+                'label'       => __('Select Template', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'label_block' => true,
-                'placeholder' => __('Type and select template', 'bdthemes-element-pack'),
+                'placeholder' => __('Type and select template', 'bdthemes-element-pack-lite'),
                 'query_args'  => [
                     'query'        => 'elementor_template',
                 ],
@@ -123,10 +123,10 @@ class Toggle extends Module_Base {
         $this->add_control(
             'anywhere_id',
             [
-                'label'       => __('Select Template', 'bdthemes-element-pack'),
+                'label'       => __('Select Template', 'bdthemes-element-pack-lite'),
                 'type'        => Dynamic_Select::TYPE,
                 'label_block' => true,
-                'placeholder' => __('Type and select template', 'bdthemes-element-pack'),
+                'placeholder' => __('Type and select template', 'bdthemes-element-pack-lite'),
                 'query_args'  => [
                     'query'        => 'anywhere_template',
                 ],
@@ -137,10 +137,10 @@ class Toggle extends Module_Base {
         $this->add_control(
             'toggle_content',
             [
-                'label'      => esc_html__('Content', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Content', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::WYSIWYG,
                 'dynamic'    => ['active' => true],
-                'default'    => esc_html__('Toggle Content', 'bdthemes-element-pack'),
+                'default'    => esc_html__('Toggle Content', 'bdthemes-element-pack-lite'),
                 'show_label' => false,
                 'condition'  => ['source' => 'custom'],
             ]
@@ -150,8 +150,8 @@ class Toggle extends Module_Base {
         $this->add_control(
             'source_selector',
             [
-                'label'     => __('Widget Selector', 'bdthemes-element-pack'),
-                'description'     => __('Enter your widget ID or class (for example: #my-gallery) which widget you want to attached the toogle.', 'bdthemes-element-pack'),
+                'label'     => __('Widget Selector', 'bdthemes-element-pack-lite'),
+                'description'     => __('Enter your widget ID or class (for example: #my-gallery) which widget you want to attached the toogle.', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::TEXT,
                 'dynamic'   => [ 'active' => true ],
                 'condition' => ['source' => "widget"],
@@ -162,7 +162,7 @@ class Toggle extends Module_Base {
         $this->add_responsive_control(
             'widget_visibility',
             [
-                'label'      => esc_html__('Widget Visibility', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Widget Visibility', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', ''],
                 'range'      => [
@@ -185,14 +185,14 @@ class Toggle extends Module_Base {
         $this->start_controls_section(
             'section_content_additional',
             [
-                'label' => esc_html__('Additional Options', 'bdthemes-element-pack'),
+                'label' => esc_html__('Additional Options', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'toggle_icon_show',
             [
-                'label'   => esc_html__('Toggle Icon', 'bdthemes-element-pack'),
+                'label'   => esc_html__('Toggle Icon', 'bdthemes-element-pack-lite'),
                 'type'    => Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -201,7 +201,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'toggle_icon_normal',
             [
-                'label'            => esc_html__('Normal Icon', 'bdthemes-element-pack'),
+                'label'            => esc_html__('Normal Icon', 'bdthemes-element-pack-lite'),
                 'type'             => Controls_Manager::ICONS,
                 'fa4compatibility' => 'icon_normal',
                 'default'          => [
@@ -219,7 +219,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'toggle_icon_active',
             [
-                'label'            => esc_html__('Active Icon', 'bdthemes-element-pack'),
+                'label'            => esc_html__('Active Icon', 'bdthemes-element-pack-lite'),
                 'type'             => Controls_Manager::ICONS,
                 'fa4compatibility' => 'icon_active',
                 'default'          => [
@@ -237,12 +237,12 @@ class Toggle extends Module_Base {
         $this->add_control(
             'toggle_icon_position',
             [
-                'label'     => esc_html__('Icon Position', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Icon Position', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'right',
                 'options'   => [
-                    'left'    => esc_html__('Left', 'bdthemes-element-pack'),
-                    'right'   => esc_html__('Right', 'bdthemes-element-pack')
+                    'left'    => esc_html__('Left', 'bdthemes-element-pack-lite'),
+                    'right'   => esc_html__('Right', 'bdthemes-element-pack-lite')
                 ],
                 'condition' => [
                     'toggle_icon_show' => 'yes',
@@ -253,19 +253,19 @@ class Toggle extends Module_Base {
         $this->add_responsive_control(
             'align',
             [
-                'label'     => esc_html__('Alignment', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -278,7 +278,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'toggle_initially_open',
             [
-                'label'     => esc_html__('Initially Opened', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Initially Opened', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SWITCHER,
                 'separator' => 'before',
             ]
@@ -288,7 +288,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'active_scrollspy',
             [
-                'label'     => esc_html__('Active Scrollspy', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Active Scrollspy', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SWITCHER,
                 'default'   => 'no',
                 'separator' => 'before',
@@ -301,7 +301,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'hash_location',
             [
-                'label'     => esc_html__('Hash Location', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Hash Location', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SWITCHER,
                 'default'   => 'no',
                 'condition' => [
@@ -315,7 +315,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'scrollspy_top_offset',
             [
-                'label'      => esc_html__('Top Offset ', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Top Offset ', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range'      => [
@@ -348,7 +348,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'scrollspy_time',
             [
-                'label'      => esc_html__('Scrollspy Time', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Scrollspy Time', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['ms', ''],
                 'range'      => [
@@ -384,7 +384,7 @@ class Toggle extends Module_Base {
         $this->start_controls_section(
             'section_toggle_style_title',
             [
-                'label' => esc_html__('Toggle', 'bdthemes-element-pack'),
+                'label' => esc_html__('Toggle', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -394,14 +394,14 @@ class Toggle extends Module_Base {
         $this->start_controls_tab(
             'tab_title_normal',
             [
-                'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+                'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'title_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-btn'     => 'color: {{VALUE}};',
@@ -428,7 +428,7 @@ class Toggle extends Module_Base {
         $this->add_responsive_control(
             'title_border_radius',
             [
-                'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -439,7 +439,7 @@ class Toggle extends Module_Base {
         $this->add_responsive_control(
             'title_padding',
             [
-                'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+                'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -468,7 +468,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'shadow_color',
             [
-                'label'     => esc_html__('Shadow Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Shadow Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-show-hide-container .bdt-show-hide .bdt-show-hide-item .bdt-show-hide-title:before' => 'background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, {{VALUE}} 100%);',
@@ -480,7 +480,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'shadow_height',
             [
-                'label'     => esc_html__('Shadow Height', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Shadow Height', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SLIDER,
                 'range'     => [
                     'px' => [
@@ -498,14 +498,14 @@ class Toggle extends Module_Base {
         $this->start_controls_tab(
             'tab_title_active',
             [
-                'label' => esc_html__('Active', 'bdthemes-element-pack'),
+                'label' => esc_html__('Active', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'active_title_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-btn'     => 'color: {{VALUE}};',
@@ -524,7 +524,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'active_title_border_color',
             [
-                'label'     => esc_html__('Border Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Border Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-btn'     => 'border-color: {{VALUE}};',
@@ -542,7 +542,7 @@ class Toggle extends Module_Base {
         $this->start_controls_section(
             'section_toggle_content_style',
             [
-                'label' => esc_html__('Content', 'bdthemes-element-pack'),
+                'label' => esc_html__('Content', 'bdthemes-element-pack-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -550,19 +550,19 @@ class Toggle extends Module_Base {
         $this->add_responsive_control(
             'content_align',
             [
-                'label'     => esc_html__('Alignment', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Alignment', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => esc_html__('Left', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Left', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Center', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
-                        'title' => esc_html__('Right', 'bdthemes-element-pack'),
+                        'title' => esc_html__('Right', 'bdthemes-element-pack-lite'),
                         'icon'  => 'eicon-text-align-right',
                     ],
                 ],
@@ -575,7 +575,7 @@ class Toggle extends Module_Base {
         $this->add_control(
             'content_color',
             [
-                'label'     => __('Color', 'bdthemes-element-pack'),
+                'label'     => __('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-content' => 'color: {{VALUE}};',
@@ -597,7 +597,7 @@ class Toggle extends Module_Base {
         $this->start_controls_section(
             'section_toggle_style_icon',
             [
-                'label'     => esc_html__('Icon', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Icon', 'bdthemes-element-pack-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'toggle_icon_show' => 'yes',
@@ -610,14 +610,14 @@ class Toggle extends Module_Base {
         $this->start_controls_tab(
             'tab_icon_normal',
             [
-                'label' => esc_html__('Normal', 'bdthemes-element-pack'),
+                'label' => esc_html__('Normal', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'icon_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-title .bdt-show-hide-icon'   => 'color: {{VALUE}};',
@@ -629,7 +629,7 @@ class Toggle extends Module_Base {
         $this->add_responsive_control(
             'icon_space',
             [
-                'label'     => esc_html__('Spacing', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Spacing', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::SLIDER,
                 'range'     => [
                     'px' => [
@@ -649,14 +649,14 @@ class Toggle extends Module_Base {
         $this->start_controls_tab(
             'tab_icon_active',
             [
-                'label' => esc_html__('Active', 'bdthemes-element-pack'),
+                'label' => esc_html__('Active', 'bdthemes-element-pack-lite'),
             ]
         );
 
         $this->add_control(
             'icon_active_color',
             [
-                'label'     => esc_html__('Color', 'bdthemes-element-pack'),
+                'label'     => esc_html__('Color', 'bdthemes-element-pack-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bdt-show-hide .bdt-show-hide-item.bdt-open .bdt-show-hide-icon'   => 'color: {{VALUE}};',

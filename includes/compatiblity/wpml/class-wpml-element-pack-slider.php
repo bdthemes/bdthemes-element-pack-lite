@@ -30,10 +30,10 @@ class WPML_ElementPack_Slider extends WPML_Module_With_Items {
 		switch( $field ) {
 
 			case 'tab_title':
-				return esc_html__( 'Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Title', 'bdthemes-element-pack-lite' );
 
 			case 'tab_content':
-				return esc_html__( 'Content', 'bdthemes-element-pack' );
+				return esc_html__( 'Content', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';

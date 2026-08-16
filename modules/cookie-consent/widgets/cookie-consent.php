@@ -21,7 +21,7 @@ class Cookie_Consent extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Cookie Consent', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Cookie Consent', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -65,16 +65,16 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[ 
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'message',
 			[ 
-				'label'   => esc_html__( 'Message', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Message', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXTAREA,
-				'default' => esc_html__('This website uses cookies to ensure you get the best experience on our website. ', 'bdthemes-element-pack'),
+				'default' => esc_html__('This website uses cookies to ensure you get the best experience on our website. ', 'bdthemes-element-pack-lite'),
 				'dynamic' => [ 'active' => true ],
 			]
 		);
@@ -82,21 +82,21 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'learn_more_text',
 			[ 
-				'label'       => esc_html__( 'Learn More Text', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Learn More Text', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => esc_html__( 'Learn more', 'bdthemes-element-pack' ),
+				'placeholder' => esc_html__( 'Learn more', 'bdthemes-element-pack-lite' ),
 				'dynamic'     => [ 'active' => true ],
-				'default'     => esc_html__('Learn more', 'bdthemes-element-pack'),
+				'default'     => esc_html__('Learn more', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'learn_more_link',
 			[ 
-				'label'         => esc_html__( 'Learn More Link', 'bdthemes-element-pack' ),
+				'label'         => esc_html__( 'Learn More Link', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
-				'placeholder'   => esc_html__( 'https://your-link.com', 'bdthemes-element-pack' ),
+				'placeholder'   => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
 				'default'       => [ 
 					'url' => 'http://cookiesandyou.com/',
 				],
@@ -107,24 +107,24 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'button_text',
 			[ 
-				'label'   => esc_html__( 'Button Text', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => [ 'active' => true ],
-				'default' => esc_html__('Got it!', 'bdthemes-element-pack'),
+				'default' => esc_html__('Got it!', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'position',
 			[ 
-				'label'     => esc_html__( 'Position', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Position', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'bottom',
 				'options'   => [ 
-					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack' ),
-					'bottom-left'  => esc_html__( 'Bottom Start', 'bdthemes-element-pack' ),
-					'bottom-right' => esc_html__( 'Bottom End', 'bdthemes-element-pack' ),
-					'top'          => esc_html__( 'Top', 'bdthemes-element-pack' ),
+					'bottom'       => esc_html__( 'Bottom', 'bdthemes-element-pack-lite' ),
+					'bottom-left'  => esc_html__( 'Bottom Start', 'bdthemes-element-pack-lite' ),
+					'bottom-right' => esc_html__( 'Bottom End', 'bdthemes-element-pack-lite' ),
+					'top'          => esc_html__( 'Top', 'bdthemes-element-pack-lite' ),
 				],
 				'separator' => 'before',
 			]
@@ -133,7 +133,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'pushdown',
 			[ 
-				'label'     => esc_html__( 'Push Down', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Push Down', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'position' => 'top',
@@ -144,8 +144,8 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'expiry_days',
 			[ 
-				'label'       => esc_html__( 'Expiry Days', 'bdthemes-element-pack' ),
-				'description' => esc_html__( 'Specify -1 for no expiry', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Expiry Days', 'bdthemes-element-pack-lite' ),
+				'description' => esc_html__( 'Specify -1 for no expiry', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [ 
 					'size' => 7,
@@ -163,17 +163,17 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'google_tag_assistant',
 			[ 
-				'label'       => esc_html__( 'Google Consent Mode', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label'       => esc_html__( 'Google Consent Mode', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type'        => Controls_Manager::SWITCHER,
 				'separator'   => 'before',
-				'description' => esc_html__( 'Google Consent Mode for cookie consent. Must make sure, you have installed GTAG on your website. If you disabled any features then they will be sent as denied', 'bdthemes-element-pack' ) . ' <a href="https://developers.google.com/tag-platform/security/guides/consent?sjid=14345995958166516665-AP&consentmode=advanced" target="_blank">' . esc_html__( 'Learn More', 'bdthemes-element-pack' ) . '</a>',
+				'description' => esc_html__( 'Google Consent Mode for cookie consent. Must make sure, you have installed GTAG on your website. If you disabled any features then they will be sent as denied', 'bdthemes-element-pack-lite' ) . ' <a href="https://developers.google.com/tag-platform/security/guides/consent?sjid=14345995958166516665-AP&consentmode=advanced" target="_blank">' . esc_html__( 'Learn More', 'bdthemes-element-pack-lite' ) . '</a>',
 			]
 		);
 
 		$this->add_control(
 			'google_tag_ad_user_data',
 			[ 
-				'label'     => esc_html__( 'Ad User Data', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Ad User Data', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'google_tag_assistant' => 'yes',
@@ -185,7 +185,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'google_tag_ad_storage',
 			[ 
-				'label'     => esc_html__( 'Ad Storage', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Ad Storage', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'google_tag_assistant' => 'yes',
@@ -197,7 +197,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'google_tag_ad_personalization',
 			[ 
-				'label'     => esc_html__( 'Ad Personalization', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Ad Personalization', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'google_tag_assistant' => 'yes',
@@ -209,7 +209,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'google_tag_analytics_storage',
 			[ 
-				'label'     => esc_html__( 'Analytics Storage', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Analytics Storage', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [ 
 					'google_tag_assistant' => 'yes',
@@ -226,22 +226,22 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_section(
 			'section_additional_options',
 			[ 
-				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Options', 'bdthemes-element-pack-lite' ),
 			]
 		);
 		$this->add_control(
 			'close_button',
 			[ 
-				'label'                => esc_html__( 'Close Button', 'bdthemes-element-pack' ),
+				'label'                => esc_html__( 'Close Button', 'bdthemes-element-pack-lite' ),
 				'type'                 => Controls_Manager::SELECT,
 				'default'              => 'default',
 				'options'              => [ 
-					'default'      => esc_html__( 'Default', 'bdthemes-element-pack' ),
-					'none'         => esc_html__( 'None', 'bdthemes-element-pack' ),
-					'top-left'     => esc_html__( 'Top Left', 'bdthemes-element-pack' ),
-					'top-right'    => esc_html__( 'Top Right', 'bdthemes-element-pack' ),
-					'bottom-left'  => esc_html__( 'Bottom Left', 'bdthemes-element-pack' ),
-					'bottom-right' => esc_html__( 'Bottom Right', 'bdthemes-element-pack' ),
+					'default'      => esc_html__( 'Default', 'bdthemes-element-pack-lite' ),
+					'none'         => esc_html__( 'None', 'bdthemes-element-pack-lite' ),
+					'top-left'     => esc_html__( 'Top Left', 'bdthemes-element-pack-lite' ),
+					'top-right'    => esc_html__( 'Top Right', 'bdthemes-element-pack-lite' ),
+					'bottom-left'  => esc_html__( 'Bottom Left', 'bdthemes-element-pack-lite' ),
+					'bottom-right' => esc_html__( 'Bottom Right', 'bdthemes-element-pack-lite' ),
 				],
 				'selectors_dictionary' => [ 
 					'default'      => '',
@@ -264,7 +264,7 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_section(
 			'section_style',
 			[ 
-				'label' => esc_html__( 'Dialog', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Dialog', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -272,7 +272,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'text_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => [ 
@@ -284,7 +284,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'learn_more_color',
 			[ 
-				'label'     => esc_html__( 'Link Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Link Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#4593E3',
 				'selectors' => [ 
@@ -295,7 +295,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'learn_more_hover_color',
 			[ 
-				'label'     => esc_html__( 'Link Hover Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Link Hover Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#4593E3',
 				'selectors' => [ 
@@ -307,7 +307,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'background',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#3937a3',
 				'selectors' => [ 
@@ -328,7 +328,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'cc_border_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -339,7 +339,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'cc_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -350,7 +350,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'cc_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -361,7 +361,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'cc_spacing',
 			[ 
-				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -387,7 +387,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'cc_max_width',
 			[ 
-				'label'      => esc_html__( 'Max Width', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Max Width', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', '%' ],
 				'range'      => [ 
@@ -414,23 +414,23 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'content_alignment',
 			[ 
-				'label'     => esc_html__( 'Text Align', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Align', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'left'    => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'   => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 					'justify' => [ 
-						'title' => esc_html__( 'Justify', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Justify', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -445,30 +445,30 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_section(
 			'section_style_dismiss_button',
 			[ 
-				'label' => esc_html__( 'Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 		$this->add_responsive_control(
 			'button_align',
 			[ 
-				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [ 
 					'flex-start' => [ 
-						'title' => esc_html__( 'Start', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Start', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-align-start-h',
 					],
 					'center'     => [ 
-						'title' => esc_html__( 'Center', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Center', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-align-center-h',
 					],
 					'flex-end'   => [ 
-						'title' => esc_html__( 'End', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'End', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-align-end-h',
 					],
 					'stretch'    => [ 
-						'title' => esc_html__( 'Stretch', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Stretch', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-align-stretch-h',
 					],
 				],
@@ -481,14 +481,14 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dismiss_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dismiss_button_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				// 'default'   => '#ffffff',
 				'selectors' => [ 
@@ -500,7 +500,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'dismiss_button_background',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				// 'default'   => '#41aab9',
 				'selectors' => [ 
@@ -520,7 +520,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_button_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -532,7 +532,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -544,7 +544,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_button_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -555,7 +555,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_button_spacing',
 			[ 
-				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -568,7 +568,7 @@ class Cookie_Consent extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[ 
 				'name'     => 'dismiss_button_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
 				'selector' => 'body .cc-window a.cc-btn.cc-dismiss',
 			]
@@ -578,14 +578,14 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dismiss_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dismiss_button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'body .cc-window a.cc-btn.cc-dismiss:hover' => 'color: {{VALUE}} !important;',
@@ -596,7 +596,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'dismiss_button_hover_background',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'body .cc-window a.cc-btn.cc-dismiss:hover' => 'background-color: {{VALUE}} !important;',
@@ -607,7 +607,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'dismiss_button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'dismiss_button_border_border!' => '',
@@ -626,7 +626,7 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_section(
 			'section_style_dismiss_close_button',
 			[ 
-				'label'     => esc_html__( 'Close Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Close Button', 'bdthemes-element-pack-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [ 
 					'close_button!' => 'none',
@@ -637,15 +637,15 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'close_button_alignment',
 			[ 
-				'label'                => esc_html__( 'Alignment', 'bdthemes-element-pack' ),
+				'label'                => esc_html__( 'Alignment', 'bdthemes-element-pack-lite' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'options'              => [ 
 					'row-reverse' => [ 
-						'title' => esc_html__( 'Left', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Left', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'row'         => [ 
-						'title' => esc_html__( 'Right', 'bdthemes-element-pack' ),
+						'title' => esc_html__( 'Right', 'bdthemes-element-pack-lite' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -666,14 +666,14 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dismiss_close_button_normal',
 			[ 
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dismiss_close_button_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'color: {{VALUE}} !important;',
@@ -684,7 +684,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'dismiss_close_button_background',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'body .cc-window .cc-compliance .bdt-cc-close-btn' => 'background-color: {{VALUE}} !important;',
@@ -703,7 +703,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_close_button_radius',
 			[ 
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [ 
@@ -715,7 +715,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_close_button_padding',
 			[ 
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -727,7 +727,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_close_button_margin',
 			[ 
-				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [ 
@@ -739,7 +739,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_responsive_control(
 			'dismiss_close_button_size',
 			[ 
-				'label'     => esc_html__( 'Icon Size', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Icon Size', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [ 
 					'px' => [ 
@@ -757,14 +757,14 @@ class Cookie_Consent extends Module_Base {
 		$this->start_controls_tab(
 			'tab_dismiss_close_button_hover',
 			[ 
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dismiss_close_button_hover_color',
 			[ 
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'body .cc-window .cc-compliance .bdt-cc-close-btn:hover' => 'color: {{VALUE}} !important;',
@@ -775,7 +775,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'dismiss_close_button_hover_background',
 			[ 
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ 
 					'body .cc-window .cc-compliance .bdt-cc-close-btn:hover' => 'background-color: {{VALUE}} !important;',
@@ -786,7 +786,7 @@ class Cookie_Consent extends Module_Base {
 		$this->add_control(
 			'dismiss_close_button_hover_border_color',
 			[ 
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [ 
 					'dismiss_close_button_border_border!' => '',

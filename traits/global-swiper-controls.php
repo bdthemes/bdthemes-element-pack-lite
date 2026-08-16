@@ -18,7 +18,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'columns',
 			[
-				'label'          => esc_html__('Columns', 'bdthemes-element-pack'),
+				'label'          => esc_html__('Columns', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SELECT,
 				'default'        => 3,
 				'tablet_default' => 2,
@@ -37,7 +37,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'item_gap',
 			[
-				'label'   => __('Item Gap', 'bdthemes-element-pack'),
+				'label'   => __('Item Gap', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 35,
@@ -64,16 +64,16 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'navigation',
 			[
-				'label'        => __('Navigation', 'bdthemes-element-pack'),
+				'label'        => __('Navigation', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'arrows',
 				'options'      => [
-					'both'            => esc_html__('Arrows and Dots', 'bdthemes-element-pack'),
-					'arrows-fraction' => esc_html__('Arrows and Fraction', 'bdthemes-element-pack'),
-					'arrows'          => esc_html__('Arrows', 'bdthemes-element-pack'),
-					'dots'            => esc_html__('Dots', 'bdthemes-element-pack'),
-					'progressbar'     => esc_html__('Progress', 'bdthemes-element-pack'),
-					'none'            => esc_html__('None', 'bdthemes-element-pack'),
+					'both'            => esc_html__('Arrows and Dots', 'bdthemes-element-pack-lite'),
+					'arrows-fraction' => esc_html__('Arrows and Fraction', 'bdthemes-element-pack-lite'),
+					'arrows'          => esc_html__('Arrows', 'bdthemes-element-pack-lite'),
+					'dots'            => esc_html__('Dots', 'bdthemes-element-pack-lite'),
+					'progressbar'     => esc_html__('Progress', 'bdthemes-element-pack-lite'),
+					'none'            => esc_html__('None', 'bdthemes-element-pack-lite'),
 				],
 				'prefix_class' => 'bdt-navigation-type-',
 				'render_type'  => 'template',
@@ -83,7 +83,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'dynamic_bullets',
 			[
-				'label'     => __('Dynamic Bullets?', 'bdthemes-element-pack'),
+				'label'     => __('Dynamic Bullets?', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [
 					'navigation' => ['dots', 'both'],
@@ -94,7 +94,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'show_scrollbar',
 			[
-				'label' => __('Show Scrollbar?', 'bdthemes-element-pack'),
+				'label' => __('Show Scrollbar?', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -102,7 +102,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'both_position',
 			[
-				'label'     => __('Arrows and Dots Position', 'bdthemes-element-pack'),
+				'label'     => __('Arrows and Dots Position', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'center',
 				'options'   => element_pack_navigation_position(),
@@ -116,7 +116,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_fraction_position',
 			[
-				'label'     => __('Arrows and Fraction Position', 'bdthemes-element-pack'),
+				'label'     => __('Arrows and Fraction Position', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'center',
 				'options'   => element_pack_navigation_position(),
@@ -130,7 +130,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_position',
 			[
-				'label'     => __('Arrows Position', 'bdthemes-element-pack'),
+				'label'     => __('Arrows Position', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'center',
 				'options'   => element_pack_navigation_position(),
@@ -144,7 +144,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'dots_position',
 			[
-				'label'     => __('Dots Position', 'bdthemes-element-pack'),
+				'label'     => __('Dots Position', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'bottom-center',
 				'options'   => element_pack_pagination_position(),
@@ -158,12 +158,12 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'progress_position',
 			[
-				'label'     => __('Progress Position', 'bdthemes-element-pack'),
+				'label'     => __('Progress Position', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'bottom',
 				'options'   => [
-					'bottom' => esc_html__('Bottom', 'bdthemes-element-pack'),
-					'top'    => esc_html__('Top', 'bdthemes-element-pack'),
+					'bottom' => esc_html__('Bottom', 'bdthemes-element-pack-lite'),
+					'top'    => esc_html__('Top', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'navigation' => 'progressbar',
@@ -175,34 +175,34 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'nav_arrows_icon',
 			[
-				'label'     => esc_html__('Arrows Icon', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Arrows Icon', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => '0',
 				'options'   => [
-					'0'        => esc_html__('Default', 'bdthemes-element-pack'),
-					'1'        => esc_html__('Style 1', 'bdthemes-element-pack'),
-					'2'        => esc_html__('Style 2', 'bdthemes-element-pack'),
-					'3'        => esc_html__('Style 3', 'bdthemes-element-pack'),
-					'4'        => esc_html__('Style 4', 'bdthemes-element-pack'),
-					'5'        => esc_html__('Style 5', 'bdthemes-element-pack'),
-					'6'        => esc_html__('Style 6', 'bdthemes-element-pack'),
-					'7'        => esc_html__('Style 7', 'bdthemes-element-pack'),
-					'8'        => esc_html__('Style 8', 'bdthemes-element-pack'),
-					'9'        => esc_html__('Style 9', 'bdthemes-element-pack'),
-					'10'       => esc_html__('Style 10', 'bdthemes-element-pack'),
-					'11'       => esc_html__('Style 11', 'bdthemes-element-pack'),
-					'12'       => esc_html__('Style 12', 'bdthemes-element-pack'),
-					'13'       => esc_html__('Style 13', 'bdthemes-element-pack'),
-					'14'       => esc_html__('Style 14', 'bdthemes-element-pack'),
-					'15'       => esc_html__('Style 15', 'bdthemes-element-pack'),
-					'16'       => esc_html__('Style 16', 'bdthemes-element-pack'),
-					'17'       => esc_html__('Style 17', 'bdthemes-element-pack'),
-					'18'       => esc_html__('Style 18', 'bdthemes-element-pack'),
-					'circle-1' => esc_html__('Style 19', 'bdthemes-element-pack'),
-					'circle-2' => esc_html__('Style 20', 'bdthemes-element-pack'),
-					'circle-3' => esc_html__('Style 21', 'bdthemes-element-pack'),
-					'circle-4' => esc_html__('Style 22', 'bdthemes-element-pack'),
-					'square-1' => esc_html__('Style 23', 'bdthemes-element-pack'),
+					'0'        => esc_html__('Default', 'bdthemes-element-pack-lite'),
+					'1'        => esc_html__('Style 1', 'bdthemes-element-pack-lite'),
+					'2'        => esc_html__('Style 2', 'bdthemes-element-pack-lite'),
+					'3'        => esc_html__('Style 3', 'bdthemes-element-pack-lite'),
+					'4'        => esc_html__('Style 4', 'bdthemes-element-pack-lite'),
+					'5'        => esc_html__('Style 5', 'bdthemes-element-pack-lite'),
+					'6'        => esc_html__('Style 6', 'bdthemes-element-pack-lite'),
+					'7'        => esc_html__('Style 7', 'bdthemes-element-pack-lite'),
+					'8'        => esc_html__('Style 8', 'bdthemes-element-pack-lite'),
+					'9'        => esc_html__('Style 9', 'bdthemes-element-pack-lite'),
+					'10'       => esc_html__('Style 10', 'bdthemes-element-pack-lite'),
+					'11'       => esc_html__('Style 11', 'bdthemes-element-pack-lite'),
+					'12'       => esc_html__('Style 12', 'bdthemes-element-pack-lite'),
+					'13'       => esc_html__('Style 13', 'bdthemes-element-pack-lite'),
+					'14'       => esc_html__('Style 14', 'bdthemes-element-pack-lite'),
+					'15'       => esc_html__('Style 15', 'bdthemes-element-pack-lite'),
+					'16'       => esc_html__('Style 16', 'bdthemes-element-pack-lite'),
+					'17'       => esc_html__('Style 17', 'bdthemes-element-pack-lite'),
+					'18'       => esc_html__('Style 18', 'bdthemes-element-pack-lite'),
+					'circle-1' => esc_html__('Style 19', 'bdthemes-element-pack-lite'),
+					'circle-2' => esc_html__('Style 20', 'bdthemes-element-pack-lite'),
+					'circle-3' => esc_html__('Style 21', 'bdthemes-element-pack-lite'),
+					'circle-4' => esc_html__('Style 22', 'bdthemes-element-pack-lite'),
+					'square-1' => esc_html__('Style 23', 'bdthemes-element-pack-lite'),
 				],
 				'condition' => [
 					'navigation' => ['arrows-fraction', 'both', 'arrows'],
@@ -213,7 +213,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'hide_arrow_on_mobile',
 			[
-				'label'     => __('Hide Arrow on Mobile', 'bdthemes-element-pack'),
+				'label'     => __('Hide Arrow on Mobile', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => [
@@ -228,19 +228,19 @@ trait Global_Swiper_Controls {
 		$this->start_controls_section(
 			'section_carousel_settings',
 			[
-				'label' => __('Carousel Settings', 'bdthemes-element-pack'),
+				'label' => __('Carousel Settings', 'bdthemes-element-pack-lite'),
 			]
 		);
 
 		$this->add_control(
 			'skin',
 			[
-				'label'        => esc_html__('Layout', 'bdthemes-element-pack'),
+				'label'        => esc_html__('Layout', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'carousel',
 				'options'      => [
-					'carousel'  => esc_html__('Carousel', 'bdthemes-element-pack'),
-					'coverflow' => esc_html__('Coverflow', 'bdthemes-element-pack'),
+					'carousel'  => esc_html__('Carousel', 'bdthemes-element-pack-lite'),
+					'coverflow' => esc_html__('Coverflow', 'bdthemes-element-pack-lite'),
 				],
 				'prefix_class' => 'bdt-carousel-style-',
 				'render_type'  => 'template',
@@ -250,7 +250,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'coverflow_toggle',
 			[
-				'label'        => __('Coverflow Effect', 'bdthemes-element-pack'),
+				'label'        => __('Coverflow Effect', 'bdthemes-element-pack-lite'),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'return_value' => 'yes',
 				'condition'    => [
@@ -264,7 +264,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'coverflow_rotate',
 			[
-				'label'       => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'label'       => esc_html__('Rotate', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [
 					'size' => 50,
@@ -286,7 +286,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'coverflow_stretch',
 			[
-				'label'       => __('Stretch', 'bdthemes-element-pack'),
+				'label'       => __('Stretch', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [
 					'size' => 0,
@@ -308,7 +308,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'coverflow_modifier',
 			[
-				'label'       => __('Modifier', 'bdthemes-element-pack'),
+				'label'       => __('Modifier', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [
 					'size' => 1,
@@ -330,7 +330,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'coverflow_depth',
 			[
-				'label'       => __('Depth', 'bdthemes-element-pack'),
+				'label'       => __('Depth', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [
 					'size' => 100,
@@ -364,7 +364,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'autoplay',
 			[
-				'label'   => __('Autoplay', 'bdthemes-element-pack'),
+				'label'   => __('Autoplay', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 
@@ -374,7 +374,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'autoplay_speed',
 			[
-				'label'     => esc_html__('Autoplay Speed', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Autoplay Speed', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::NUMBER,
 				'default'   => 5000,
 				'condition' => [
@@ -386,7 +386,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'pauseonhover',
 			[
-				'label' => esc_html__('Pause on Hover', 'bdthemes-element-pack'),
+				'label' => esc_html__('Pause on Hover', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -395,7 +395,7 @@ trait Global_Swiper_Controls {
 			'slides_to_scroll',
 			[
 				'type'           => Controls_Manager::SELECT,
-				'label'          => esc_html__('Slides to Scroll', 'bdthemes-element-pack'),
+				'label'          => esc_html__('Slides to Scroll', 'bdthemes-element-pack-lite'),
 				'default'        => 1,
 				'tablet_default' => 1,
 				'mobile_default' => 1,
@@ -413,8 +413,8 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'centered_slides',
 			[
-				'label'       => __('Center Slide', 'bdthemes-element-pack'),
-				'description' => __('Use even items from Layout > Columns settings for better preview.', 'bdthemes-element-pack'),
+				'label'       => __('Center Slide', 'bdthemes-element-pack-lite'),
+				'description' => __('Use even items from Layout > Columns settings for better preview.', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SWITCHER,
 			]
 		);
@@ -422,7 +422,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'grab_cursor',
 			[
-				'label' => __('Grab Cursor', 'bdthemes-element-pack'),
+				'label' => __('Grab Cursor', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -430,7 +430,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'free_mode',
 			[
-				'label' => __('Drag Free Mode', 'bdthemes-element-pack'),
+				'label' => __('Drag Free Mode', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -438,7 +438,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'loop',
 			[
-				'label'   => __('Loop', 'bdthemes-element-pack'),
+				'label'   => __('Loop', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 
@@ -448,7 +448,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'speed',
 			[
-				'label'   => __('Animation Speed (ms)', 'bdthemes-element-pack'),
+				'label'   => __('Animation Speed (ms)', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 500,
@@ -466,8 +466,8 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'observer',
 			[
-				'label'       => __('Observer', 'bdthemes-element-pack'),
-				'description' => __('When you use carousel in any hidden place (in tabs, accordion etc) keep it yes.', 'bdthemes-element-pack'),
+				'label'       => __('Observer', 'bdthemes-element-pack-lite'),
+				'description' => __('When you use carousel in any hidden place (in tabs, accordion etc) keep it yes.', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::SWITCHER,
 			]
 		);
@@ -475,7 +475,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'mousewheel',
 			[
-				'label' => __('Mousewheel', 'bdthemes-element-pack'),
+				'label' => __('Mousewheel', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -483,7 +483,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'show_hidden_item',
 			[
-				'label' => __('Show Hidden Item', 'bdthemes-element-pack'),
+				'label' => __('Show Hidden Item', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-show-hidden-item--',
 				'render_type' => 'template'
@@ -493,7 +493,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'hidden_item_opacity',
 			[
-				'label' => __('Hidden Item Opacity', 'bdthemes-element-pack'),
+				'label' => __('Hidden Item Opacity', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -520,7 +520,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_heading',
 			[
-				'label'     => __('ARROWS', 'bdthemes-element-pack'),
+				'label'     => __('ARROWS', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation!' => ['dots', 'progressbar', 'none'],
@@ -533,7 +533,7 @@ trait Global_Swiper_Controls {
 		$this->start_controls_tab(
 			'tabs_nav_arrows_normal',
 			[
-				'label'     => __('Normal', 'bdthemes-element-pack'),
+				'label'     => __('Normal', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'navigation!' => ['dots', 'progressbar', 'none'],
 				],
@@ -543,7 +543,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navigation-prev i, {{WRAPPER}} .bdt-navigation-next i' => 'color: {{VALUE}}',
@@ -557,7 +557,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_background',
 			[
-				'label'     => __('Background', 'bdthemes-element-pack'),
+				'label'     => __('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navigation-prev, {{WRAPPER}} .bdt-navigation-next' => 'background-color: {{VALUE}}',
@@ -582,7 +582,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'border_radius',
 			[
-				'label'      => __('Border Radius', 'bdthemes-element-pack'),
+				'label'      => __('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -597,7 +597,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_padding',
 			[
-				'label'      => esc_html__('Padding', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Padding', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', 'em', '%'],
 				'selectors'  => [
@@ -612,7 +612,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_size',
 			[
-				'label'     => __('Size', 'bdthemes-element-pack'),
+				'label'     => __('Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -633,7 +633,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_space',
 			[
-				'label'     => __('Space Between Arrows', 'bdthemes-element-pack'),
+				'label'     => __('Space Between Arrows', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -667,7 +667,7 @@ trait Global_Swiper_Controls {
 		$this->start_controls_tab(
 			'tabs_nav_arrows_hover',
 			[
-				'label'     => __('Hover', 'bdthemes-element-pack'),
+				'label'     => __('Hover', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'navigation!' => ['dots', 'progressbar', 'none'],
 				],
@@ -677,7 +677,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_hover_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navigation-prev:hover i, {{WRAPPER}} .bdt-navigation-next:hover i' => 'color: {{VALUE}}',
@@ -691,7 +691,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'arrows_hover_background',
 			[
-				'label'     => __('Background', 'bdthemes-element-pack'),
+				'label'     => __('Background', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navigation-prev:hover, {{WRAPPER}} .bdt-navigation-next:hover' => 'background-color: {{VALUE}}',
@@ -705,7 +705,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'nav_arrows_hover_border_color',
 			[
-				'label'     => __('Border Color', 'bdthemes-element-pack'),
+				'label'     => __('Border Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-navigation-prev:hover, {{WRAPPER}} .bdt-navigation-next:hover' => 'border-color: {{VALUE}};',
@@ -745,7 +745,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'dots_heading',
 			[
-				'label'     => __('DOTS', 'bdthemes-element-pack'),
+				'label'     => __('DOTS', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -758,7 +758,7 @@ trait Global_Swiper_Controls {
 		$this->start_controls_tab(
 			'tabs_nav_dots_normal',
 			[
-				'label'     => __('Normal', 'bdthemes-element-pack'),
+				'label'     => __('Normal', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
 				],
@@ -768,7 +768,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'dots_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet' => 'background-color: {{VALUE}}',
@@ -782,7 +782,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'dots_space_between',
 			[
-				'label'     => __('Space Between', 'bdthemes-element-pack'),
+				'label'     => __('Space Between', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}}' => '--ep-swiper-dots-space-between: {{SIZE}}{{UNIT}};',
@@ -796,7 +796,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'dots_size',
 			[
-				'label'     => __('Size', 'bdthemes-element-pack'),
+				'label'     => __('Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -817,7 +817,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'advanced_dots_size',
 			[
-				'label'     => __('Advanced Size', 'bdthemes-element-pack'),
+				'label'     => __('Advanced Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -828,7 +828,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'advanced_dots_width',
 			[
-				'label'     => __('Width(px)', 'bdthemes-element-pack'),
+				'label'     => __('Width(px)', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -849,7 +849,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'advanced_dots_height',
 			[
-				'label'     => __('Height(px)', 'bdthemes-element-pack'),
+				'label'     => __('Height(px)', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -870,7 +870,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'advanced_dots_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -899,7 +899,7 @@ trait Global_Swiper_Controls {
 		$this->start_controls_tab(
 			'tabs_nav_dots_active',
 			[
-				'label'     => __('Active', 'bdthemes-element-pack'),
+				'label'     => __('Active', 'bdthemes-element-pack-lite'),
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
 				],
@@ -909,7 +909,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'active_dot_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-dots-container .swiper-pagination-bullet-active' => 'background-color: {{VALUE}}',
@@ -923,7 +923,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'active_dots_size',
 			[
-				'label'     => __('Size', 'bdthemes-element-pack'),
+				'label'     => __('Size', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -945,7 +945,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'active_advanced_dots_width',
 			[
-				'label'     => __('Width(px)', 'bdthemes-element-pack'),
+				'label'     => __('Width(px)', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -966,7 +966,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'active_advanced_dots_height',
 			[
-				'label'     => __('Height(px)', 'bdthemes-element-pack'),
+				'label'     => __('Height(px)', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -988,7 +988,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'active_advanced_dots_radius',
 			[
-				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Border Radius', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
@@ -1004,19 +1004,19 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'active_advanced_dots_align',
 			[
-				'label'   => __('Alignment', 'bdthemes-element-pack'),
+				'label'   => __('Alignment', 'bdthemes-element-pack-lite'),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
-						'title' => __('Top', 'bdthemes-element-pack'),
+						'title' => __('Top', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'center' => [
-						'title' => __('Center', 'bdthemes-element-pack'),
+						'title' => __('Center', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'flex-end' => [
-						'title' => __('Bottom', 'bdthemes-element-pack'),
+						'title' => __('Bottom', 'bdthemes-element-pack-lite'),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -1058,7 +1058,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'fraction_heading',
 			[
-				'label'     => __('FRACTION', 'bdthemes-element-pack'),
+				'label'     => __('FRACTION', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation' => 'arrows-fraction',
@@ -1079,7 +1079,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'fraction_color',
 			[
-				'label'     => __('Color', 'bdthemes-element-pack'),
+				'label'     => __('Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .swiper-pagination-fraction' => 'color: {{VALUE}}',
@@ -1093,7 +1093,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'active_fraction_color',
 			[
-				'label'     => __('Active Color', 'bdthemes-element-pack'),
+				'label'     => __('Active Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .swiper-pagination-current' => 'color: {{VALUE}}',
@@ -1108,7 +1108,7 @@ trait Global_Swiper_Controls {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'fraction_typography',
-				'label'     => esc_html__('Typography', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Typography', 'bdthemes-element-pack-lite'),
 				'selector'  => '{{WRAPPER}} .swiper-pagination-fraction',
 				'condition' => [
 					'navigation' => 'arrows-fraction',
@@ -1129,7 +1129,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'progresbar_heading',
 			[
-				'label'     => __('PROGRESBAR', 'bdthemes-element-pack'),
+				'label'     => __('PROGRESBAR', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation' => 'progressbar',
@@ -1150,7 +1150,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'progresbar_color',
 			[
-				'label'     => __('Bar Color', 'bdthemes-element-pack'),
+				'label'     => __('Bar Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .swiper-pagination-progressbar' => 'background-color: {{VALUE}}',
@@ -1164,7 +1164,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'progres_color',
 			[
-				'label'     => __('Progress Color', 'bdthemes-element-pack'),
+				'label'     => __('Progress Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'separator' => 'after',
 				'selectors' => [
@@ -1189,7 +1189,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'scrollbar_heading',
 			[
-				'label'     => __('SCROLLBAR', 'bdthemes-element-pack'),
+				'label'     => __('SCROLLBAR', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'show_scrollbar' => 'yes'
@@ -1210,7 +1210,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'scrollbar_color',
 			[
-				'label'     => __('Bar Color', 'bdthemes-element-pack'),
+				'label'     => __('Bar Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .swiper-scrollbar' => 'background: {{VALUE}}',
@@ -1224,7 +1224,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'scrollbar_drag_color',
 			[
-				'label'     => __('Drag Color', 'bdthemes-element-pack'),
+				'label'     => __('Drag Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .swiper-scrollbar .swiper-scrollbar-drag' => 'background: {{VALUE}}',
@@ -1238,7 +1238,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'scrollbar_height',
 			[
-				'label'     => __('Height', 'bdthemes-element-pack'),
+				'label'     => __('Height', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => [
 					'px' => [
@@ -1265,7 +1265,7 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'navi_offset_heading',
 			[
-				'label' => __('OFFSET', 'bdthemes-element-pack'),
+				'label' => __('OFFSET', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::HEADING,
 			]
 		);
@@ -1280,7 +1280,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_ncx_position',
 			[
-				'label'          => __('Arrows Horizontal Offset', 'bdthemes-element-pack'),
+				'label'          => __('Arrows Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 0,
@@ -1319,7 +1319,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_ncy_position',
 			[
-				'label'          => __('Arrows Vertical Offset', 'bdthemes-element-pack'),
+				'label'          => __('Arrows Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 40,
@@ -1358,7 +1358,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_acx_position',
 			[
-				'label'      => __('Arrows Horizontal Offset', 'bdthemes-element-pack'),
+				'label'      => __('Arrows Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [
 					'size' => -60,
@@ -1391,7 +1391,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'dots_nnx_position',
 			[
-				'label'          => __('Dots Horizontal Offset', 'bdthemes-element-pack'),
+				'label'          => __('Dots Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 0,
@@ -1430,7 +1430,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'dots_nny_position',
 			[
-				'label'          => __('Dots Vertical Offset', 'bdthemes-element-pack'),
+				'label'          => __('Dots Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 30,
@@ -1469,7 +1469,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'both_ncx_position',
 			[
-				'label'          => __('Arrows & Dots Horizontal Offset', 'bdthemes-element-pack'),
+				'label'          => __('Arrows & Dots Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 0,
@@ -1508,7 +1508,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'both_ncy_position',
 			[
-				'label'          => __('Arrows & Dots Vertical Offset', 'bdthemes-element-pack'),
+				'label'          => __('Arrows & Dots Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 40,
@@ -1547,7 +1547,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'both_cx_position',
 			[
-				'label'      => __('Arrows Offset', 'bdthemes-element-pack'),
+				'label'      => __('Arrows Offset', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [
 					'size' => -60,
@@ -1580,7 +1580,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'both_cy_position',
 			[
-				'label'      => __('Dots Offset', 'bdthemes-element-pack'),
+				'label'      => __('Dots Offset', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [
 					'size' => 30,
@@ -1612,7 +1612,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_fraction_ncx_position',
 			[
-				'label'          => __('Arrows & Fraction Horizontal Offset', 'bdthemes-element-pack'),
+				'label'          => __('Arrows & Fraction Horizontal Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 0,
@@ -1651,7 +1651,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_fraction_ncy_position',
 			[
-				'label'          => __('Arrows & Fraction Vertical Offset', 'bdthemes-element-pack'),
+				'label'          => __('Arrows & Fraction Vertical Offset', 'bdthemes-element-pack-lite'),
 				'type'           => Controls_Manager::SLIDER,
 				'default'        => [
 					'size' => 40,
@@ -1690,7 +1690,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_fraction_cx_position',
 			[
-				'label'      => __('Arrows Offset', 'bdthemes-element-pack'),
+				'label'      => __('Arrows Offset', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [
 					'size' => -60,
@@ -1723,7 +1723,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'arrows_fraction_cy_position',
 			[
-				'label'      => __('Fraction Offset', 'bdthemes-element-pack'),
+				'label'      => __('Fraction Offset', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [
 					'size' => 30,
@@ -1755,7 +1755,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'progress_y_position',
 			[
-				'label'     => __('Progress Offset', 'bdthemes-element-pack'),
+				'label'     => __('Progress Offset', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 15,
@@ -1778,7 +1778,7 @@ trait Global_Swiper_Controls {
 		$this->add_responsive_control(
 			'scrollbar_vertical_offset',
 			[
-				'label'     => __('Scrollbar Offset', 'bdthemes-element-pack'),
+				'label'     => __('Scrollbar Offset', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .swiper-horizontal > .swiper-scrollbar' => 'bottom: {{SIZE}}px;',

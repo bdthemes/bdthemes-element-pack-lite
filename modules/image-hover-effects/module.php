@@ -25,7 +25,7 @@ class Module extends Element_Pack_Module_Base {
 			'ep_image_hover_effects_controls',
 			[
 				'tab'   => Controls_Manager::TAB_STYLE,
-				'label' => BDTEP_CP . esc_html__('Image Hover Effects', 'bdthemes-element-pack'),
+				'label' => BDTEP_CP . esc_html__('Image Hover Effects', 'bdthemes-element-pack-lite'),
 			]
 		);
 		$element->end_controls_section();
@@ -36,14 +36,14 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'ep_image_hover_effects_on',
 			[
-				'label' => esc_html__('Hover Effects?', 'bdthemes-element-pack'),
+				'label' => esc_html__('Hover Effects?', 'bdthemes-element-pack-lite'),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
 		$widget->add_control(
 			'hover_effects',
 			[
-				'label'     => esc_html__('Choose Effect', 'bdthemes-element-pack') . BDTEP_UC,
+				'label'     => esc_html__('Choose Effect', 'bdthemes-element-pack-lite') . BDTEP_UC,
 				'type'      => Controls_Manager::SELECT,
 				'options'   => [
 					'1'    => 'Effect 01',
@@ -64,7 +64,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'effects_color',
 			[
-				'label'     => esc_html__('Effects Color', 'bdthemes-element-pack'),
+				'label'     => esc_html__('Effects Color', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => 'rgba(0, 0, 0, .1)',
 				'condition' => [
@@ -79,7 +79,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'effets_width',
 			[
-				'label'      => esc_html__('Effects Width', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Effects Width', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px', '%'],
 				'condition' => [
@@ -94,7 +94,7 @@ class Module extends Element_Pack_Module_Base {
 		$widget->add_control(
 			'effects_duration',
 			[
-				'label'      => esc_html__('Effects Duration(ms)', 'bdthemes-element-pack'),
+				'label'      => esc_html__('Effects Duration(ms)', 'bdthemes-element-pack-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['ms'],
 				'range'      => [

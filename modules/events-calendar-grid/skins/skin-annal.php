@@ -16,7 +16,7 @@ class Skin_Annal extends Elementor_Skin_Base {
 	}
 
 	public function get_title() {
-		return __('Annal', 'bdthemes-element-pack');
+		return __('Annal', 'bdthemes-element-pack-lite');
 	}
 
 	public function render_date() {
@@ -31,8 +31,8 @@ class Skin_Annal extends Elementor_Skin_Base {
 
 ?>
 		<span class="bdt-event-date">
-			<a href="javascript:void(0);" title="<?php esc_html_e('Start Date:', 'bdthemes-element-pack');
-								echo esc_html($start_datetime); ?>  - <?php esc_html_e('End Date:', 'bdthemes-element-pack');
+			<a href="javascript:void(0);" title="<?php esc_html_e('Start Date:', 'bdthemes-element-pack-lite');
+								echo esc_html($start_datetime); ?>  - <?php esc_html_e('End Date:', 'bdthemes-element-pack-lite');
 																		echo esc_html($end_datetime); ?>">
 				<span class="bdt-event-day">
 					<?php echo esc_html($event_date); ?>
@@ -59,7 +59,7 @@ class Skin_Annal extends Elementor_Skin_Base {
 				<?php if (!empty($cost)) : ?>
 					<div class="bdt-width-auto bdt-padding-remove">
 						<div class="bdt-event-price">
-							<a href="javascript:void(0);"><?php esc_html_e('Cost:', 'bdthemes-element-pack'); ?></a>
+							<a href="javascript:void(0);"><?php esc_html_e('Cost:', 'bdthemes-element-pack-lite'); ?></a>
 							<a href="javascript:void(0);"><?php echo esc_html($cost); ?></a>
 						</div>
 					</div>
@@ -68,7 +68,7 @@ class Skin_Annal extends Elementor_Skin_Base {
 				<?php if (!empty($more_icon)) : ?>
 					<div class="bdt-width-expand bdt-text-right">
 						<div class="bdt-more-icon">
-							<a href="javascript:void(0);" bdt-tooltip="<?php echo esc_html__('Find out more', 'bdthemes-element-pack'); ?>" class="ep-icon-arrow-right-4" aria-hidden="true"></a>
+							<a href="javascript:void(0);" bdt-tooltip="<?php echo esc_html__('Find out more', 'bdthemes-element-pack-lite'); ?>" class="ep-icon-arrow-right-4" aria-hidden="true"></a>
 						</div>
 					</div>
 				<?php endif; ?>

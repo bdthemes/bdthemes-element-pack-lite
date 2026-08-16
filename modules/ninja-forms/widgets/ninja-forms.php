@@ -17,7 +17,7 @@ class Ninja_Forms extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Ninja Forms', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Ninja Forms', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -45,14 +45,14 @@ class Ninja_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'ninja_form',
 			[
-				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Select Form', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => element_pack_ninja_forms_options(),
 			]
@@ -63,7 +63,7 @@ class Ninja_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_style_label',
 			[
-				'label' => esc_html__( 'Label', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Label', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -71,7 +71,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'label_color',
 			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .nf-field-label label' => 'color: {{VALUE}};',
@@ -83,7 +83,7 @@ class Ninja_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'label_typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'   => Schemes\Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .nf-field-label label',
 			]
@@ -94,7 +94,7 @@ class Ninja_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_style_input',
 			[
-				'label' => esc_html__( 'Input', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Input', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -102,7 +102,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'input_placeholder_color',
 			[
-				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Placeholder Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap>div input:not([type*="button"])::placeholder'   => 'color: {{VALUE}};',
@@ -113,7 +113,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'input_text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap>div input:not([type *="button"])' => 'color: {{VALUE}};',
@@ -127,7 +127,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'input_text_background',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap>div input:not([type *="button"])' => 'background-color: {{VALUE}};',
@@ -141,7 +141,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'textarea_height',
 			[
-				'label' => esc_html__( 'Textarea Height', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Textarea Height', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 125,
@@ -163,7 +163,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'input_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -177,7 +177,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_responsive_control(
 			'input_space',
 			[
-				'label'   => esc_html__( 'Element Space', 'bdthemes-element-pack' ),
+				'label'   => esc_html__( 'Element Space', 'bdthemes-element-pack-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 25,
@@ -197,7 +197,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(), [
 				'name'        => 'input_border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .field-wrap>div input:not([type*="button"]), {{WRAPPER}} .field-wrap textarea, {{WRAPPER}} .field-wrap select',
@@ -207,7 +207,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'input_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -224,7 +224,7 @@ class Ninja_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_style_submit_button',
 			[
-				'label' => esc_html__( 'Submit Button', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Submit Button', 'bdthemes-element-pack-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -234,14 +234,14 @@ class Ninja_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'button_text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]' => 'color: {{VALUE}};',
@@ -252,7 +252,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'background_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]' => 'background-color: {{VALUE}};',
@@ -264,7 +264,7 @@ class Ninja_Forms extends Module_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]',
@@ -275,7 +275,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -295,7 +295,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'text_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -309,7 +309,7 @@ class Ninja_Forms extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'button_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack-lite' ),
 				//'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
 				'selector'  => '{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]',
 				'separator' => 'before',
@@ -321,14 +321,14 @@ class Ninja_Forms extends Module_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			[
-				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'hover_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Text Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]:hover' => 'color: {{VALUE}};',
@@ -339,7 +339,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'button_background_hover_color',
 			[
-				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap.submit-wrap .nf-field-element input[type*=submit]:hover' => 'background-color: {{VALUE}};',
@@ -350,7 +350,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'button_hover_border_color',
 			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => [
 					'border_border!' => '',
@@ -370,7 +370,7 @@ class Ninja_Forms extends Module_Base {
 		$this->start_controls_section(
 			'section_style_additional_option',
 			[
-				'label' => esc_html__( 'Additional Option', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Additional Option', 'bdthemes-element-pack-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -378,7 +378,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'fullwidth_input',
 			[
-				'label'     => esc_html__( 'Fullwidth Input', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Fullwidth Input', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap>div input:not([type*="button"])' => 'width: 100%;',
@@ -390,7 +390,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'fullwidth_textarea',
 			[
-				'label'     => esc_html__( 'Fullwidth Texarea', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Fullwidth Texarea', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap textarea' => 'width: 100%;',
@@ -401,7 +401,7 @@ class Ninja_Forms extends Module_Base {
 		$this->add_control(
 			'fullwidth_button',
 			[
-				'label'     => esc_html__( 'Fullwidth Button', 'bdthemes-element-pack' ),
+				'label'     => esc_html__( 'Fullwidth Button', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'selectors' => [
 					'{{WRAPPER}} .field-wrap>div input[type="submit"], {{WRAPPER}} .field-wrap>div input[type="button"], {{WRAPPER}} .field-wrap>div button' => 'width: 100%;',
@@ -417,7 +417,7 @@ class Ninja_Forms extends Module_Base {
 		$settings = $this->get_settings_for_display();
 
 		if (!$settings['ninja_form']) {
-			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Ninja Forms From Setting!', 'bdthemes-element-pack').'</div>';
+			return '<div class="bdt-alert bdt-alert-warning">'.__('Please select a Ninja Forms From Setting!', 'bdthemes-element-pack-lite').'</div>';
 		}
 
 		$attributes = [

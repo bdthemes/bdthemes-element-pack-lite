@@ -18,7 +18,7 @@ class Document_Viewer extends Module_Base {
 	}
 
 	public function get_title() {
-		return BDTEP . esc_html__( 'Document Viewer', 'bdthemes-element-pack' );
+		return BDTEP . esc_html__( 'Document Viewer', 'bdthemes-element-pack-lite' );
 	}
 
 	public function get_icon() {
@@ -45,18 +45,18 @@ class Document_Viewer extends Module_Base {
 		$this->start_controls_section(
 			'section_content_layout',
 			[
-				'label' => esc_html__( 'Layout', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Layout', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'file_source',
 			[
-				'label'         => esc_html__( 'File Source', 'bdthemes-element-pack' ),
-				'description'   => esc_html__( 'Enter the URL of your document', 'bdthemes-element-pack' ),
+				'label'         => esc_html__( 'File Source', 'bdthemes-element-pack-lite' ),
+				'description'   => esc_html__( 'Enter the URL of your document', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'dynamic'       => [ 'active' => true ],
-				'placeholder'   => esc_html__( 'https://example.com/sample.pdf', 'bdthemes-element-pack' ),
+				'placeholder'   => esc_html__( 'https://example.com/sample.pdf', 'bdthemes-element-pack-lite' ),
 				'label_block'   => true,
 				'show_external' => false,
 			]
@@ -65,7 +65,7 @@ class Document_Viewer extends Module_Base {
 		$this->add_responsive_control(
 			'document_height',
 			[
-				'label' => esc_html__( 'Document Height', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Document Height', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 800,
@@ -86,12 +86,12 @@ class Document_Viewer extends Module_Base {
 		$this->add_control(
 			'viewer_type',
 			[
-				'label' => esc_html__( 'Viewer Type', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'label' => esc_html__( 'Viewer Type', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
 				'type' => Controls_Manager::SELECT,
 				'default' => 'google_docs',
 				'options' => [
-					'google_docs' => esc_html__( 'Google Docs (Public URLs Only)', 'bdthemes-element-pack' ),
-					'browser' => esc_html__( 'Browser Native', 'bdthemes-element-pack' ),
+					'google_docs' => esc_html__( 'Google Docs (Public URLs Only)', 'bdthemes-element-pack-lite' ),
+					'browser' => esc_html__( 'Browser Native', 'bdthemes-element-pack-lite' ),
 				],
 			]
 		);
@@ -100,7 +100,7 @@ class Document_Viewer extends Module_Base {
 			'document_viewer_notice',
 			[
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'Google Docs viewer only works with publicly accessible URLs, not local network files.', 'bdthemes-element-pack' ),
+				'raw'             => esc_html__( 'Google Docs viewer only works with publicly accessible URLs, not local network files.', 'bdthemes-element-pack-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 				'condition' => [
 					'viewer_type' => 'google_docs',
@@ -120,7 +120,7 @@ class Document_Viewer extends Module_Base {
 		if (!$source_url) {
 			echo '<div class="bdt-alert-warning" bdt-alert>';
 			echo '<a class="bdt-alert-close" bdt-close></a>';
-			echo '<p>' . esc_html__('Please enter correct URL of your document.', 'bdthemes-element-pack') . '</p>';
+			echo '<p>' . esc_html__('Please enter correct URL of your document.', 'bdthemes-element-pack-lite') . '</p>';
 			echo '</div>';
 			return;
 		}
@@ -169,7 +169,7 @@ class Document_Viewer extends Module_Base {
 			<div class="bdt-document-viewer">
 				<?php if ($is_local_url): ?>
 				<div class="bdt-alert-info" bdt-alert>
-					<p><?php echo esc_html__('Note: Google Docs viewer only works with publicly accessible URLs, not local network files.', 'bdthemes-element-pack'); ?></p>
+					<p><?php echo esc_html__('Note: Google Docs viewer only works with publicly accessible URLs, not local network files.', 'bdthemes-element-pack-lite'); ?></p>
 				</div>
 				<?php endif; ?>
 				<iframe src="<?php echo esc_url( $final_url ); ?>" class="bdt-document"></iframe>

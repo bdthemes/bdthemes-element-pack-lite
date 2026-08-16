@@ -29,13 +29,13 @@ class WPML_ElementPack_Review_Card_Carousel extends WPML_Module_With_Items {
 	protected function get_title( $field ) {
 		switch( $field ) {
 			case 'reviewer_name':
-				return esc_html__( 'Reviewer Name', 'bdthemes-element-pack' );
+				return esc_html__( 'Reviewer Name', 'bdthemes-element-pack-lite' );
 
 			case 'reviewer_job_title':
-				return esc_html__( 'Job Title', 'bdthemes-element-pack' );
+				return esc_html__( 'Job Title', 'bdthemes-element-pack-lite' );
 
 			case 'review_text':
-				return esc_html__( 'Review Text', 'bdthemes-element-pack' );
+				return esc_html__( 'Review Text', 'bdthemes-element-pack-lite' );
 
 			default:
 				return '';
