@@ -1020,9 +1020,9 @@ if (!class_exists('ElementPack_Settings_API')) :
 												<div>
 													<ul
 														class="bdt-subnav bdt-subnav-pill ep-widget-filter bdt-widget-type-content bdt-flex-inline">
-														<li class="ep-widget-all bdt-active" bdt-filter-control="*"><a
+														<li class="ep-widget-all" bdt-filter-control="*"><a
 																href="#"><?php esc_html_e('All', 'bdthemes-element-pack-lite'); ?></a></li>
-														<li class="ep-widget-free"
+														<li class="ep-widget-free bdt-active"
 															bdt-filter-control="filter: [data-widget-type='free']; group: data-content-type">
 															<a href="#"><?php esc_html_e('Free', 'bdthemes-element-pack-lite'); ?></a>
 														</li>
