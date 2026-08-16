@@ -5,7 +5,7 @@ Tags: elementor addons, elementor widgets, elementor templates, elementor extens
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.7.19
+Stable tag: 8.8.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -282,7 +282,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.7.19 [14th August 2026] =
+= 8.8.0 [16th August 2026] =
 
 * Removed: Custom CSS / JS module and the site-wide custom code editors
 * Removed: White Label settings and the now-empty Extra Options screen
