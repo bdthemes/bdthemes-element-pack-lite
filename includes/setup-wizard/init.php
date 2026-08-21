@@ -48,7 +48,7 @@ class Setup_Wizard {
 
 	// Initialize hooks
 	private function init_hooks() {
-		add_action( 'wp_ajax_setup_wizard_install_plugins', array( $this, 'install_plugins' ) );
+		add_action( 'wp_ajax_ep_setup_wizard_install_plugins', array( $this, 'install_plugins' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_init', array( $this, 'activate_default_widgets' ) );
 		add_action( 'admin_init', array( $this, 'maybe_display_setup_wizard' ) );
@@ -222,7 +222,7 @@ class Setup_Wizard {
 			'BDT_SetupWizard',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'setup_wizard_nonce' ),
+				'nonce'    => wp_create_nonce( 'ep_setup_wizard_nonce' ),
 				'is_fullscreen' => true
 			)
 		);
@@ -238,18 +238,63 @@ class Setup_Wizard {
 		return $arr_obj;
 	}
 
+	/**
+	 * Validate a caller-supplied plugin file reference.
+	 *
+	 * Only the "directory/file.php" shape used by WordPress plugin basenames is
+	 * accepted. Absolute paths, traversal sequences and anything that is not a
+	 * PHP file inside a single plugin directory are rejected outright, so a
+	 * request can never point installation or activation at a path of its own
+	 * choosing.
+	 *
+	 * @param mixed $plugin_slug Raw value from the request.
+	 * @return string Sanitized plugin basename, or an empty string if invalid.
+	 */
+	private function sanitize_plugin_basename( $plugin_slug ) {
+		if ( ! is_string( $plugin_slug ) ) {
+			return '';
+		}
+
+		$plugin_slug = sanitize_text_field( wp_unslash( $plugin_slug ) );
+
+		if ( ! preg_match( '#^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*\.php$#', $plugin_slug ) ) {
+			return '';
+		}
+
+		// Belt and braces: reject any traversal that survived the pattern.
+		if ( false !== strpos( $plugin_slug, '..' ) ) {
+			return '';
+		}
+
+		return $plugin_slug;
+	}
+
 	// Install plugins
 	public function install_plugins() {
-		check_ajax_referer( 'setup_wizard_nonce', 'nonce' );
+		check_ajax_referer( 'ep_setup_wizard_nonce', 'nonce' );
 
-		$plugin_slugs = isset( $_POST['plugins'] ) ? $_POST['plugins'] : array();
+		// Installing and activating are separate capabilities; this endpoint does both.
+		if ( ! current_user_can( 'install_plugins' ) || ! current_user_can( 'activate_plugins' ) ) {
+			wp_send_json_error( array( 'message' => 'Unauthorized' ) );
+		}
 
-		if ( empty( $plugin_slugs ) || ! is_array( $plugin_slugs ) ) {
+		$raw_slugs = isset( $_POST['plugins'] ) ? wp_unslash( $_POST['plugins'] ) : array();
+
+		if ( empty( $raw_slugs ) || ! is_array( $raw_slugs ) ) {
 			wp_send_json_error( array( 'message' => 'Invalid plugins array' ) );
 		}
 
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( array( 'message' => 'Unauthorized' ) );
+		$plugin_slugs = array();
+		foreach ( $raw_slugs as $raw_slug ) {
+			$clean_slug = $this->sanitize_plugin_basename( $raw_slug );
+
+			if ( '' !== $clean_slug ) {
+				$plugin_slugs[] = $clean_slug;
+			}
+		}
+
+		if ( empty( $plugin_slugs ) ) {
+			wp_send_json_error( array( 'message' => 'Invalid plugins array' ) );
 		}
 
 		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -305,10 +350,23 @@ class Setup_Wizard {
 
             // active the plugin
             if ( is_plugin_inactive($plugin_slug) ) {
+                // validate_plugin() confirms the file is a real plugin inside
+                // WP_PLUGIN_DIR before we hand it to activate_plugin().
+                $is_valid_plugin = validate_plugin( $plugin_slug );
+
+                if ( is_wp_error( $is_valid_plugin ) ) {
+                    $results[] = array(
+                        'slug'    => $plugin_slug,
+                        'success' => false,
+                        'message' => $is_valid_plugin->get_error_message(),
+                    );
+                    continue;
+                }
+
                 $activation_result = activate_plugin( $plugin_slug );
                 if ( is_wp_error( $activation_result ) ) {
                     $results[] = array(
-                        'slug'    => $slug,
+                        'slug'    => $plugin_slug,
                         'success' => false,
                         'message' => $activation_result->get_error_message(),
                     );
@@ -417,8 +475,8 @@ Setup_Wizard::get_instance();
 
 use Elementor\TemplateLibrary\Source_Local;
 
-add_action('wp_ajax_import_elementor_template', function () {
-		check_ajax_referer( 'setup_wizard_nonce', 'nonce' );
+add_action('wp_ajax_ep_setup_wizard_import_template', function () {
+		check_ajax_referer( 'ep_setup_wizard_nonce', 'nonce' );
 
 		// Capability check - only administrators can import templates
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -515,8 +573,8 @@ add_action('wp_ajax_import_elementor_template', function () {
 );
 
 
-add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
-    check_ajax_referer('setup_wizard_nonce', 'nonce');
+add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
+    check_ajax_referer('ep_setup_wizard_nonce', 'nonce');
 
     // Capability check - only administrators can import templates
     if ( ! current_user_can( 'manage_options' ) ) {
@@ -611,8 +669,8 @@ add_action('wp_ajax_import_ep_elementor_bundle_template', function () {
     }
 });
 
-add_action('wp_ajax_import_ep_elementor_bundle_runner_template', function () {
-    check_ajax_referer('setup_wizard_nonce', 'nonce');
+add_action('wp_ajax_ep_setup_wizard_import_bundle_runner', function () {
+    check_ajax_referer('ep_setup_wizard_nonce', 'nonce');
 
     // Capability check - only administrators can import templates
     if ( ! current_user_can( 'manage_options' ) ) {

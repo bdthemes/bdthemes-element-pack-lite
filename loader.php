@@ -647,7 +647,13 @@ class Element_Pack_Loader {
         add_action('elementor/frontend/after_enqueue_scripts', [$this, 'enqueue_minified_js']);
 
 
-        add_shortcode('rooten_custom_template', [$this, 'shortcode_template']);
+        // Element_Pack_Rooten_Theme_Compatibility registers this same shortcode
+        // (with Elementor's CSS enabled) when the Rooten theme is active. Register
+        // the generic fallback only when that class is not in play, so the tag has
+        // exactly one owner.
+        if (!class_exists('\ElementPack\Includes\Element_Pack_Rooten_Theme_Compatibility')) {
+            add_shortcode('rooten_custom_template', [$this, 'shortcode_template']);
+        }
 
 
         // When user not login add this action

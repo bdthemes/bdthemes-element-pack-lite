@@ -137,11 +137,11 @@ if (!class_exists('ElementPack_Settings_API')) :
                 $class = '';
 
                 if (!empty($field['args']['class'])) {
-                    $class .= ' ' . esc_attr($field['args']['class']);
+                    $class .= ' ' . $field['args']['class'];
                 }
 
                 if (!empty($field['args']['widget_type'])) {
-                    $class .= ' ep-widget-' . esc_attr($field['args']['widget_type']);
+                    $class .= ' ep-widget-' . $field['args']['widget_type'];
                 }
 
                 if (!empty($field['args']['widget_type']) && 'pro' == $field['args']['widget_type'] && true !== element_pack_pro_activated()) {
@@ -167,13 +167,23 @@ if (!class_exists('ElementPack_Settings_API')) :
 
 
 
-                $data_type = ' data-widget-type="' . esc_attr($field['args']['widget_type']) . '" data-content-type="' . esc_attr($field['args']['content_type']) . esc_attr($widget_used_status) . '" data-widget-name="' . strtolower($field['args']['name']) . '"';
+                $widget_type  = isset($field['args']['widget_type']) ? $field['args']['widget_type'] : '';
+                $content_type = isset($field['args']['content_type']) ? $field['args']['content_type'] : '';
+                $widget_label = isset($field['args']['name']) ? strtolower($field['args']['name']) : '';
 
-                if (!empty($field['args']['widget_type']) && 'pro' == $field['args']['widget_type'] && true !== element_pack_pro_activated()) {
-                    $data_type .= ' bdt-tooltip="' . esc_attr__( 'Pro widget only works with Pro version.', 'bdthemes-element-pack-lite' ) . '"';
+                $tooltip = '';
+                if ('pro' === $widget_type && true !== element_pack_pro_activated()) {
+                    $tooltip = ' bdt-tooltip="' . esc_attr__('Pro widget only works with Pro version.', 'bdthemes-element-pack-lite') . '"';
                 }
 
-                echo "<div class='ep-option-item {$class} {$widget_used_status}' {$data_type}>";
+                printf(
+                    '<div class="%1$s" data-widget-type="%2$s" data-content-type="%3$s" data-widget-name="%4$s"%5$s>',
+                    esc_attr(trim('ep-option-item ' . $class . ' ' . $widget_used_status)),
+                    esc_attr($widget_type),
+                    esc_attr($content_type . $widget_used_status),
+                    esc_attr($widget_label),
+                    $tooltip // Escaped above; the only dynamic part is a translated literal.
+                );
 
 
 

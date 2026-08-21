@@ -904,7 +904,7 @@ function render_notice() {
 
 		printf(
 			'<p><a href="%s" class="button button-primary">%s</a></p>',
-			esc_url( clean_url() ),
+			esc_url( cleanup_action_url() ),
 			esc_html__( 'Clean up this site', 'bdthemes-element-pack-lite' )
 		);
 	}
@@ -1050,9 +1050,13 @@ function handle_clean() {
 /**
  * The nonce-protected cleanup URL.
  *
+ * Deliberately not named after the deprecated core escaping helper, whose
+ * name collides here and trips static analysis even though the namespace
+ * means core is never reached.
+ *
  * @return string
  */
-function clean_url() {
+function cleanup_action_url() {
 	return wp_nonce_url(
 		add_query_arg( 'action', KEY_PREFIX . '_clean', admin_url( 'admin-post.php' ) ),
 		KEY_PREFIX . '_clean'

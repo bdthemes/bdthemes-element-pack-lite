@@ -42,8 +42,8 @@ if ( ! class_exists( 'RC_Reviews_Collector' ) ) {
 			$this->review_url = isset( $params['review_url'] ) ? $params['review_url'] : false;
 
 			// add_action( 'admin_enqueue_scripts', array( $this, 'rc_enqueue_scripts' ) );
-			add_action( 'wp_ajax_rc_sdk_insights', array( $this, 'rc_sdk_insights' ) );
-			add_action( 'wp_ajax_rc_sdk_dismiss_biggopti', array( $this, 'rc_sdk_dismiss_biggopti' ) );
+			add_action( 'wp_ajax_bdt_rc_sdk_insights', array( $this, 'rc_sdk_insights' ) );
+			add_action( 'wp_ajax_bdt_rc_sdk_dismiss_biggopti', array( $this, 'rc_sdk_dismiss_biggopti' ) );
 
 			$security_key        = md5( $params['plugin_name'] );
 			$this->rc_name       = 'rc_' . str_replace( '-', '_', sanitize_title( $params['plugin_name'] ) . '_' . $security_key );
@@ -223,8 +223,8 @@ if ( ! class_exists( 'RC_Reviews_Collector' ) ) {
 		 * @since 1.0.0
 		 */
 		public function rc_enqueue_scripts() {
-			wp_enqueue_style( 'rc-sdk', plugins_url( 'assets/css/feedback-hub.css', __FILE__ ), array(), '1.0.0' );
-			wp_enqueue_script( 'rc-sdk', plugins_url( 'assets/js/rc.min.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
+			wp_enqueue_style( 'bdt-rc-sdk', plugins_url( 'assets/css/feedback-hub.css', __FILE__ ), array(), '1.0.0' );
+			wp_enqueue_script( 'bdt-rc-sdk', plugins_url( 'assets/js/rc.min.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
 			
 			// Add inline style to hide all but the first biggopti on page load
 			$inline_css = '.rc-global-biggopti { display: none; }';

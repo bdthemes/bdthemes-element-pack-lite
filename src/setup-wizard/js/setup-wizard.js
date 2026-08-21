@@ -436,7 +436,7 @@
                                 url: BDT_SetupWizard.ajax_url,
                                 method: 'POST',
                                 data: {
-                                    action: 'setup_wizard_install_plugins',
+                                    action: 'ep_setup_wizard_install_plugins',
                                     nonce: BDT_SetupWizard.nonce,
                                     plugins: [slug]
                                 },
@@ -531,7 +531,7 @@
                 url: BDT_SetupWizard.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'import_elementor_template',
+                    action: 'ep_setup_wizard_import_template',
                     nonce: BDT_SetupWizard.nonce,
                     import_url: importUrl
                 },
@@ -578,7 +578,7 @@
                 url: BDT_SetupWizard.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'import_ep_elementor_bundle_template',
+                    action: 'ep_setup_wizard_import_bundle',
                     nonce: BDT_SetupWizard.nonce,
                     import_url: importUrl
                 },
@@ -670,7 +670,7 @@
             const response = await new Promise((resolve, reject) => {
                 $.ajax({
                     url: BDT_SetupWizard.ajax_url, type: 'POST', data: {
-                        action: 'import_ep_elementor_bundle_runner_template',
+                        action: 'ep_setup_wizard_import_bundle_runner',
                         nonce: BDT_SetupWizard.nonce,
                         sessionId: sessionId,
                         runner: runner,
