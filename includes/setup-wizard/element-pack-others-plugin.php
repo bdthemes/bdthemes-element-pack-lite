@@ -22,9 +22,11 @@ class ElementPack_Others_Plugin_Manager {
      * Constructor
      */
     public function __construct() {
-        // Add AJAX handlers
-        add_action('wp_ajax_ep_get_plugins', [$this, 'ajax_get_plugins']);
-        add_action('wp_ajax_ep_install_plugin', [$this, 'install_plugin_ajax']);
+        // The ep_get_plugins and ep_install_plugin handlers are registered once,
+        // by Remote_Data_Handler and the admin settings class respectively. This
+        // class is only loaded while rendering the screen, so registering them
+        // again here both duplicated the hook and came too late to serve a real
+        // AJAX request.
     }
 
     /**
@@ -554,7 +556,7 @@ class ElementPack_Others_Plugin_Manager {
             wp_send_json_error(['message' => __('You do not have permission to install plugins', 'bdthemes-element-pack-lite')]);
         }
 
-        $plugin_slug = sanitize_text_field($_POST['plugin_slug']);
+        $plugin_slug = isset($_POST['plugin_slug']) ? sanitize_key(wp_unslash($_POST['plugin_slug'])) : '';
 
         if (empty($plugin_slug)) {
             wp_send_json_error(['message' => __('Plugin slug is required', 'bdthemes-element-pack-lite')]);

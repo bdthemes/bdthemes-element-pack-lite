@@ -5,7 +5,7 @@ Tags: elementor addons, elementor widgets, elementor templates, elementor extens
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 8.8.0
+Stable tag: 8.8.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -229,6 +229,26 @@ Networks with share counters, and their legal pages:
 * OK - https://ok.ru/regulations
 * Mail.Ru - https://help.mail.ru/legal/terms/common/ua | https://help.mail.ru/legal/terms/common/privacy
 
+= Vimeo oEmbed =
+Used by the bundled UIkit library's video component. When a Vimeo video is embedded in a
+widget, UIkit asks Vimeo for the video's dimensions so the player can be sized correctly.
+Data sent: the Vimeo video URL is sent to vimeo.com/api/oembed.json from the visitor's
+browser when a page containing that video is viewed. The request is made without
+credentials and no personal data is transmitted.
+Service provided by Vimeo.
+Terms: https://vimeo.com/terms
+Privacy Policy: https://vimeo.com/privacy
+
+= WordPress.org Plugin API =
+Used by the setup wizard and the plugin-recommendation screens to look up the name,
+icon and download link of the free plugins offered there.
+Data sent: the slug of the plugin being looked up is sent to api.wordpress.org when an
+administrator opens one of those screens or chooses to install a plugin. No personal data
+is transmitted.
+Service provided by the WordPress Foundation.
+Terms: https://wordpress.org/about/terms/
+Privacy Policy: https://wordpress.org/about/privacy/
+
 == Source code ==
 
 The human-readable source for this plugin, together with the build tooling used to
@@ -281,6 +301,18 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Widgets List
 
 == Changelog ==
+
+= 8.8.1 [21st August 2026] =
+
+* Security: SVG Image widget no longer fetches or inlines remote SVG files; only SVG attachments from this site's media library are rendered inline
+* Security: Replaced the SVG sanitizer with a strict element and attribute allowlist, so only known-safe markup can be output
+* Security: Setup wizard plugin installer now validates the submitted plugin file, requires the activate_plugins capability and rejects paths outside the plugins directory
+* Removed: Unused marquee editor script, which carried a GreenSock Club helper that is not GPL compatible
+* Fixed: Escaped the Elementor install and activate notice URLs, the widget settings item attributes and the admin-ajax URL in the settings screen
+* Fixed: Prefixed the setup wizard and feedback-hub AJAX actions, nonce and asset handles to avoid collisions
+* Fixed: Removed duplicate registrations of the ep_install_plugin and ep_get_plugins AJAX handlers and the rooten_custom_template shortcode
+* Fixed: Renamed an internal helper whose name matched a deprecated WordPress function
+* Updated: readme documents the Vimeo oEmbed and WordPress.org Plugin API requests
 
 = 8.8.0 [16th August 2026] =
 

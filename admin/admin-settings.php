@@ -2084,7 +2084,7 @@ class ElementPack_Admin_Settings {
 				
 				// Perform AJAX request
 				jQuery.ajax({
-					url: '<?php echo admin_url('admin-ajax.php'); ?>',
+					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
 					type: 'POST',
 					data: {
 						action: 'ep_install_plugin',
