@@ -333,7 +333,7 @@ class Biggopties {
 	 * AJAX: Build and return API biggopties HTML for dynamic injection
 	 */
 	public function ajax_fetch_api_biggopti() {
-		$nonce = isset($_POST['_wpnonce']) ? sanitize_text_field($_POST['_wpnonce']) : '';
+		$nonce = isset($_POST['_wpnonce']) ? sanitize_text_field(wp_unslash($_POST['_wpnonce'])) : '';
 		if (!wp_verify_nonce($nonce, 'element-pack')) {
 			wp_send_json_error([ 'message' => 'invalid_nonce' ]);
 		}
@@ -348,7 +348,7 @@ class Biggopties {
 		}
 
 		// Don't show biggopties on plugin/theme install and upload pages
-		$current_url = isset($_POST['current_url']) ? sanitize_text_field($_POST['current_url']) : '';
+		$current_url = isset($_POST['current_url']) ? sanitize_text_field(wp_unslash($_POST['current_url'])) : '';
 		
 		if (!empty($current_url)) {
 			$excluded_patterns = [
@@ -405,7 +405,7 @@ class Biggopties {
 	 * Dismiss Biggopti.
 	 */
 	public function dismiss() {
-		$nonce = (isset($_POST['_wpnonce'])) ? sanitize_text_field($_POST['_wpnonce']) : '';
+		$nonce = (isset($_POST['_wpnonce'])) ? sanitize_text_field(wp_unslash($_POST['_wpnonce'])) : '';
 		$id   = (isset($_POST['id'])) ? sanitize_text_field(wp_unslash($_POST['id'])) : '';
 		$time = (isset($_POST['time'])) ? sanitize_text_field( wp_unslash( $_POST['time'] ) ) : '';
 		$meta = (isset($_POST['meta'])) ? sanitize_text_field( wp_unslash( $_POST['meta'] ) ) : '';

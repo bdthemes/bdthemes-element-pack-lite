@@ -11,7 +11,7 @@
  * Domain Path: /languages
  * License: GPL3
  * Elementor requires at least: 4.0.0
- * Elementor tested up to: 4.2.2
+ * Elementor tested up to: 4.2.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,8 +36,8 @@ if ( ! function_exists( 'element_pack_pro_installed' ) ) {
 
 
 
-if ( ! function_exists( '_is_ep_pro_activated_check' ) ) {
-	function _is_ep_pro_activated_check() {
+if ( ! function_exists( 'element_pack_is_pro_activated_check' ) ) {
+	function element_pack_is_pro_activated_check() {
 
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -54,8 +54,8 @@ if ( ! function_exists( '_is_ep_pro_activated_check' ) ) {
 }
 
 // Check if the Pro version is activated
-if ( ! function_exists( 'is_element_pack_pro_activated' ) ) {
-	function is_element_pack_pro_activated() {
+if ( ! function_exists( 'element_pack_is_pro_activated' ) ) {
+	function element_pack_is_pro_activated() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
@@ -63,7 +63,7 @@ if ( ! function_exists( 'is_element_pack_pro_activated' ) ) {
 	}
 }
 
-if ( is_element_pack_pro_activated() ) {
+if ( element_pack_is_pro_activated() ) {
 	return;
 }
 
@@ -81,16 +81,10 @@ require_once __DIR__ . '/includes/security-remediation.php';
 
 if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 	function element_pack_pro_activated() {
-		if ( function_exists( 'bdt_license_validation' ) ) {
-			if ( bdt_license_validation() ) {
-				return true;
-			}
+		if ( function_exists( 'element_pack_license_validation' ) && element_pack_license_validation() ) {
+			return true;
 		}
-		if ( ! function_exists( 'bdt_license_validation' ) ) {
-			if ( bdt_license_validation() ) {
-				return true;
-			}
-		}
+
 		return false;
 	}
 }
@@ -111,17 +105,22 @@ if ( ! element_pack_pro_installed() ) {
 	require_once( dirname( __FILE__ ) . '/includes/utils.php' );
 	require_once BDTEP_INC_PATH . 'class-pro-widget-map.php';
 
+	// Old, unprefixed names for the helpers above, kept so existing integrations
+	// keep working. Loaded after helper.php so the wrappers can forward to it.
+	require_once BDTEP_INC_PATH . 'deprecated-function-aliases.php';
+
 	/**
-	 * Loads translations
+	 * Translations are loaded automatically by WordPress for plugins hosted on
+	 * WordPress.org, so no load_plugin_textdomain() call is needed here (it has
+	 * been discouraged since WordPress 4.6). The function is kept as a no-op
+	 * because it is a public global that other code may still call.
 	 *
 	 * @return void
 	 */
-
-	if ( ! function_exists( 'ep_load_textdomain' ) ) {
-		function ep_load_textdomain() {
-			load_plugin_textdomain( 'bdthemes-element-pack-lite', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	if ( ! function_exists( 'element_pack_load_textdomain' ) ) {
+		function element_pack_load_textdomain() {
+			// Intentionally empty; see the note above.
 		}
-		add_action( 'init', 'ep_load_textdomain' );
 	}
 
 	/**
@@ -161,7 +160,7 @@ if ( ! element_pack_pro_installed() ) {
 
 		$plugin = 'elementor/elementor.php';
 
-		if ( _is_elementor_installed() ) {
+		if ( element_pack_is_elementor_installed() ) {
 			if ( ! current_user_can( 'activate_plugins' ) ) {
 				return;
 			}
@@ -183,8 +182,8 @@ if ( ! element_pack_pro_installed() ) {
 	/**
 	 * Check the elementor installed or not
 	 */
-	if ( ! function_exists( '_is_elementor_installed' ) ) {
-		function _is_elementor_installed() {
+	if ( ! function_exists( 'element_pack_is_elementor_installed' ) ) {
+		function element_pack_is_elementor_installed() {
 			$file_path         = 'elementor/elementor.php';
 			$installed_plugins = get_plugins();
 
@@ -198,26 +197,27 @@ if ( ! element_pack_pro_installed() ) {
 	 * @param string $plugin
 	 * @return void
 	 */
-	if ( ! function_exists( 'ep_activation_redirect' ) ) {
-		function ep_activation_redirect( $plugin ) {
+	if ( ! function_exists( 'element_pack_activation_redirect' ) ) {
+		function element_pack_activation_redirect( $plugin ) {
 			if ( ! did_action( 'elementor/loaded' ) ) {
 				return;
 			}
 
 			if ( $plugin == plugin_basename( BDTEP__FILE__ ) ) {
-				exit( wp_redirect( admin_url( 'admin.php?page=element_pack_options' ) ) );
+				wp_safe_redirect( admin_url( 'admin.php?page=element_pack_options' ) );
+				exit;
 			}
 		}
 	}
 
-	add_action( 'activated_plugin', 'ep_activation_redirect', 20 );
+	add_action( 'activated_plugin', 'element_pack_activation_redirect', 20 );
 
 	/**
 	 * Review Automation Integration
 	 */
 
-	if ( ! function_exists( 'rc_ep_lite_plugin' ) ) {
-		function rc_ep_lite_plugin() {
+	if ( ! function_exists( 'element_pack_rc_lite_plugin' ) ) {
+		function element_pack_rc_lite_plugin() {
 
 			if ( defined( 'BDTEP_INC_PATH' ) ) {
 				require_once BDTEP_INC_PATH . 'feedback-hub/start.php';
@@ -238,6 +238,6 @@ if ( ! element_pack_pro_installed() ) {
 			}
 
 		}
-		add_action( 'admin_init', 'rc_ep_lite_plugin' );
+		add_action( 'admin_init', 'element_pack_rc_lite_plugin' );
 	}
 }

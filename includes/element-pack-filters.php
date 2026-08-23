@@ -11,8 +11,8 @@ use ElementPack\Admin\ModuleService;
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 // Settings Filters
-if (!function_exists('ep_is_dashboard_enabled')) {
-    function ep_is_dashboard_enabled() {
+if (!function_exists('element_pack_is_dashboard_enabled')) {
+    function element_pack_is_dashboard_enabled() {
         return apply_filters('elementpack/settings/dashboard', true);
     }
 }
@@ -28,6 +28,7 @@ if (!function_exists('element_pack_is_widget_enabled')) {
             $hook = 'elementpack/widget/' . str_replace('-', '_', $widget_id);
             // Skip the filter machinery unless something is actually listening;
             // these per-widget hooks are almost never used, but stay overridable.
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- $hook is built above and always starts with the "elementpack/" prefix.
             return has_filter($hook) ? apply_filters($hook, true) : true;
         }
     }
@@ -42,6 +43,7 @@ if (!function_exists('element_pack_is_extend_enabled')) {
 
         if( ModuleService::is_module_active($widget_id, $options)){
             $hook = 'elementpack/extend/' . str_replace('-', '_', $widget_id);
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- $hook is built above and always starts with the "elementpack/" prefix.
             return has_filter($hook) ? apply_filters($hook, true) : true;
         }
     }
@@ -56,6 +58,7 @@ if (!function_exists('element_pack_is_third_party_enabled')) {
 
         if( ModuleService::is_module_active($widget_id, $options)){
             $hook = 'elementpack/widget/' . str_replace('-', '_', $widget_id);
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- $hook is built above and always starts with the "elementpack/" prefix.
             return has_filter($hook) ? apply_filters($hook, true) : true;
         }
     }

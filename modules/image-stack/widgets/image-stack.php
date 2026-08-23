@@ -1101,6 +1101,33 @@ class Image_Stack extends Module_Base {
 
 	}
 
+	/**
+	 * Sanitize user supplied tooltip text before it is printed into an attribute.
+	 *
+	 * Entities are decoded first (repeatedly, so multi-encoded payloads collapse)
+	 * because `esc_attr()` does not double encode existing entities. Without the
+	 * decode, a payload such as `&#X3C;img src=1 ONError&#x3d;alert(1)&#X3E;`
+	 * survives `wp_strip_all_tags()` untouched and is decoded back into live
+	 * markup by the browser when it parses the attribute.
+	 *
+	 * @param string $text Raw tooltip text.
+	 * @return string Plain text, safe for `esc_attr()`.
+	 */
+	protected function sanitize_tooltip_text( $text ) {
+		$text = (string) $text;
+
+		// Three passes is plenty for any realistic multi-encoded payload.
+		for ( $i = 0; $i < 3; $i++ ) {
+			$decoded = html_entity_decode( $text, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+			if ( $decoded === $text ) {
+				break;
+			}
+			$text = $decoded;
+		}
+
+		return wp_strip_all_tags( $text );
+	}
+
 	protected function render_media( $item, $settings ) {
 		$media_type = isset( $item['media_type'] ) ? $item['media_type'] : 'image';
 		if ( $media_type === 'icon' ) {
@@ -1110,7 +1137,7 @@ class Image_Stack extends Module_Base {
 		} elseif ( $media_type === 'image' ) {
 			$img_id = isset( $item['image']['id'] ) ? $item['image']['id'] : 0;
 			$img_url = isset( $item['image']['url'] ) ? $item['image']['url'] : '';
-			$alt_text = isset( $item['tooltip_text'] ) ? $item['tooltip_text'] : '';
+			$alt_text = $this->sanitize_tooltip_text( isset( $item['tooltip_text'] ) ? $item['tooltip_text'] : '' );
 			$size_name = isset( $settings['thumbnail_size_size'] ) ? $settings['thumbnail_size_size'] : 'full';
 
 			$thumb_url = $img_id ? Group_Control_Image_Size::get_attachment_image_src( $img_id, 'thumbnail_size', $settings ) : false;
@@ -1153,8 +1180,7 @@ class Image_Stack extends Module_Base {
 					$tooltip_placement = isset( $item['tooltip_placement'] ) ? $item['tooltip_placement'] : 'top';
 					$this->add_render_attribute( 'stack-item', 'data-tippy-placement', esc_attr( $tooltip_placement ), true );
 
-					$tooltip_text = wp_kses_post( wp_strip_all_tags( $tooltip_text ) );
-					$tooltip = $tooltip_text;
+					$tooltip = $this->sanitize_tooltip_text( $tooltip_text );
 				}
 
 				$link_url = isset( $item['link_url']['url'] ) ? $item['link_url']['url'] : '';
@@ -1191,7 +1217,7 @@ class Image_Stack extends Module_Base {
 				var tooltipAttrs = '';
 				if ( tooltipText ) {
 					itemClasses += ' bdt-tippy-tooltip';
-					tooltipAttrs = 'data-tippy="" data-tippy-arrow="true" data-tippy-placement="' + tooltipPlacement + '" data-tippy-content="' + tooltipText + '"';
+					tooltipAttrs = 'data-tippy="" data-tippy-arrow="true" data-tippy-placement="' + _.escape( tooltipPlacement ) + '" data-tippy-content="' + _.escape( tooltipText ) + '"';
 				}
 				var iconHTML = elementor.helpers.renderIcon( view, item.selected_icon, { 'aria-hidden': 'true' }, 'i', 'object' );
 				var imageUrl = ( item.image && item.image.url ) ? item.image.url : '';

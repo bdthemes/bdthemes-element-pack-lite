@@ -91,12 +91,15 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
         $this->verify_ajax_access();
 
+        // Nonce and capability are verified by verify_ajax_access() above.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended -- Verified in verify_ajax_access().
         if ( isset( $_REQUEST ) ) {
-            $demo_url         = isset($_REQUEST['demo_url']) ? esc_url_raw($_REQUEST['demo_url']) : '';
+            $demo_url         = isset($_REQUEST['demo_url']) ? esc_url_raw(wp_unslash($_REQUEST['demo_url'])) : '';
             $demo_id          = isset($_REQUEST['demo_id']) ? absint($_REQUEST['demo_id']) : 0;
-            $page_title       = isset($_REQUEST['page_title']) ? sanitize_text_field($_REQUEST['page_title']) : '';
-            $defaultPageTitle = isset($_REQUEST['default_page_title']) ? sanitize_text_field($_REQUEST['default_page_title']) : '';
-            $importType       = isset($_REQUEST['demo_import_type']) ? sanitize_text_field($_REQUEST['demo_import_type']) : '';
+            $page_title       = isset($_REQUEST['page_title']) ? sanitize_text_field(wp_unslash($_REQUEST['page_title'])) : '';
+            $defaultPageTitle = isset($_REQUEST['default_page_title']) ? sanitize_text_field(wp_unslash($_REQUEST['default_page_title'])) : '';
+            $importType       = isset($_REQUEST['demo_import_type']) ? sanitize_text_field(wp_unslash($_REQUEST['demo_import_type'])) : '';
+            // phpcs:enable WordPress.Security.NonceVerification.Recommended
 
             $response_data = $this->templates_get_content_remote_request( $demo_url );
             $sourceData    = "";
@@ -362,12 +365,15 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
     /** Load data when click on Demo Tab **/
     function demo_tab_ajax_loading_demo() {
         $this->verify_ajax_access();
-        $this->searchVal      = isset($_REQUEST['s']) ? sanitize_text_field($_REQUEST['s']) : '';
-        $this->termSlug       = isset($_REQUEST['term_slug']) ? sanitize_text_field($_REQUEST['term_slug']) : '';
-        $this->demoType       = isset($_REQUEST['demo_type']) ? sanitize_text_field($_REQUEST['demo_type']) : '';
-        $this->sortByTitle    = isset($_REQUEST['sort_By_title']) ? sanitize_text_field($_REQUEST['sort_By_title']) : '';
-        $this->sortByDate     = isset($_REQUEST['sort_By_date']) ? sanitize_text_field($_REQUEST['sort_By_date']) : '';
+        // Nonce and capability are verified by verify_ajax_access() above.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended -- Verified in verify_ajax_access().
+        $this->searchVal      = isset($_REQUEST['s']) ? sanitize_text_field(wp_unslash($_REQUEST['s'])) : '';
+        $this->termSlug       = isset($_REQUEST['term_slug']) ? sanitize_text_field(wp_unslash($_REQUEST['term_slug'])) : '';
+        $this->demoType       = isset($_REQUEST['demo_type']) ? sanitize_text_field(wp_unslash($_REQUEST['demo_type'])) : '';
+        $this->sortByTitle    = isset($_REQUEST['sort_By_title']) ? sanitize_text_field(wp_unslash($_REQUEST['sort_By_title'])) : '';
+        $this->sortByDate     = isset($_REQUEST['sort_By_date']) ? sanitize_text_field(wp_unslash($_REQUEST['sort_By_date'])) : '';
         $paged                = isset($_REQUEST['paged']) ? intval($_REQUEST['paged']) : 0;
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
 
         $filterData = $this->getData($paged);
         ob_start();
@@ -405,16 +411,19 @@ class ElementPack_Template_Library extends ElementPack_Template_Library_Base{
 
     public function send_report(){
         $this->verify_ajax_access();
+        // Nonce and capability are verified by verify_ajax_access() above.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended -- Verified in verify_ajax_access().
         if(isset($_REQUEST['demo_id']) && $_REQUEST['demo_id'] > 0 && isset($_REQUEST['demo_json_url'])){
             $demo_id        = absint($_REQUEST['demo_id']);
-            $demo_json_url  = esc_url_raw($_REQUEST['demo_json_url']);
+            $demo_json_url  = esc_url_raw(wp_unslash($_REQUEST['demo_json_url']));
+            // phpcs:enable WordPress.Security.NonceVerification.Recommended
             $json_url       = 'Demo ID:' . $demo_id;
             $demo_url       = $demo_json_url;
             $demo_title     = 'No Demo Title';
 
             $postTable      = $this->table_post;
             $resultData = $this->wpdb->get_row(
-                // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Prepared query on internal plugin table; demo_id is cast via prepare().
+                // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is internal ($wpdb->prefix based); demo_id is bound via prepare().
                 $this->wpdb->prepare("SELECT * FROM {$postTable} WHERE demo_id = %d", $demo_id)
             );
 

@@ -3,13 +3,13 @@ Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman
 Donate link: http://bdthemes.com/
 Tags: elementor addons, elementor widgets, elementor templates, elementor extensions, woocommerce
 Requires at least: 6.8
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4.0
 Stable tag: 8.8.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.2.2
+Elementor tested up to: 4.2.3
 
 
 Elementor addons with 300+ widgets, WooCommerce elements, ready templates, mega menu and header footer builder.
@@ -260,7 +260,7 @@ licences. Each is the upstream distribution of the named project:
 
 * bdt-uikit 3.21.7 (UIkit) - https://getuikit.com/
 * Leaflet - https://leafletjs.com/
-* goodshare.js 4.1.2 - https://github.com/artemsemkin/goodshare.js
+* goodshare.js 4.1.2 - https://github.com/koddr/goodshare.js
 * Popper - https://popper.js.org/
 * Tippy.js - https://atomiks.github.io/tippyjs/
 * anime.js 3.2.1 - https://animejs.com/

@@ -1,7 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) )
 	exit; // Exit if accessed directly
-// phpcs:disable WordPress.WP.AlternativeFunctions.parse_url_parse_url,WordPress.WP.AlternativeFunctions.rand_mt_rand,WordPress.Security.ValidatedSanitizedInput -- Third-party OAuth library; kept as-is for compatibility.
+// Vendored third-party library (oauth.net PHP reference implementation). Its
+// class names are part of that library's public API and cannot be prefixed
+// without forking it, and file_get_contents() reads the request body, not a URL.
+// phpcs:disable WordPress.WP.AlternativeFunctions.parse_url_parse_url,WordPress.WP.AlternativeFunctions.rand_mt_rand,WordPress.Security.ValidatedSanitizedInput,WordPress.NamingConventions.PrefixAllGlobals,WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Vendored third-party OAuth library; kept as-is for compatibility.
 // vim: foldmethod=marker
 
 /* Generic exception class

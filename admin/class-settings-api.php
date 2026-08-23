@@ -173,7 +173,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 
                 $tooltip = '';
                 if ('pro' === $widget_type && true !== element_pack_pro_activated()) {
-                    $tooltip = ' bdt-tooltip="' . esc_attr__('Pro widget only works with Pro version.', 'bdthemes-element-pack-lite') . '"';
+                    $tooltip = __('Pro widget only works with Pro version.', 'bdthemes-element-pack-lite');
                 }
 
                 printf(
@@ -182,7 +182,7 @@ if (!class_exists('ElementPack_Settings_API')) :
                     esc_attr($widget_type),
                     esc_attr($content_type . $widget_used_status),
                     esc_attr($widget_label),
-                    $tooltip // Escaped above; the only dynamic part is a translated literal.
+                    '' === $tooltip ? '' : ' bdt-tooltip="' . esc_attr($tooltip) . '"'
                 );
 
 
@@ -214,7 +214,7 @@ if (!class_exists('ElementPack_Settings_API')) :
                 if (isset($section['desc']) && !empty($section['desc'])) {
                     $section['desc'] = '<div class="inside">' . $section['desc'] . '</div>';
                     $callback = function () use ($section) {
-                        echo str_replace('"', '\"', $section['desc']);
+                        echo wp_kses_post( str_replace('"', '\"', $section['desc']) );
                     };
                 } else if (isset($section['callback'])) {
                     $callback = $section['callback'];
@@ -446,10 +446,14 @@ if (!class_exists('ElementPack_Settings_API')) :
 
 			$html .= '<div class="ep-option-links">';
 			if ($args['demo_url']) {
-				$html .= '<a href="' . esc_url( $args['demo_url'] ) . '" target="_blank" class="ep-option-demo" title="' . esc_attr( sprintf( __( 'View %s Widget Demo', 'bdthemes-element-pack-lite' ), $args['name'] ) ) . '">' . esc_html__( 'Demo', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-preview" aria-hidden="true"></i></a>';
+				/* translators: %s: Widget name. */
+				$demo_title = sprintf( __( 'View %s Widget Demo', 'bdthemes-element-pack-lite' ), $args['name'] );
+				$html .= '<a href="' . esc_url( $args['demo_url'] ) . '" target="_blank" class="ep-option-demo" title="' . esc_attr( $demo_title ) . '">' . esc_html__( 'Demo', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-preview" aria-hidden="true"></i></a>';
 			}
 			if ($args['video_url']) {
-				$html .= '<a href="' . esc_url( $args['video_url'] ) . '" target="_blank" class="ep-option-video" title="' . esc_attr( sprintf( __( 'View %s Video Tutorial', 'bdthemes-element-pack-lite' ), $args['name'] ) ) . '">' . esc_html__( 'Video', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
+				/* translators: %s: Widget name. */
+				$video_title = sprintf( __( 'View %s Video Tutorial', 'bdthemes-element-pack-lite' ), $args['name'] );
+				$html .= '<a href="' . esc_url( $args['video_url'] ) . '" target="_blank" class="ep-option-video" title="' . esc_attr( $video_title ) . '">' . esc_html__( 'Video', 'bdthemes-element-pack-lite' ) . '<i class="bdt-wi-tutorial" aria-hidden="true"></i></a>';
 			}
 			$html .= '</div>';
 			$html .= '</div>';
@@ -760,7 +764,9 @@ if (!class_exists('ElementPack_Settings_API')) :
                 'id'       => $args['section'] . '[' . $args['id'] . ']',
                 'echo'     => 0
             );
-            $html = wp_dropdown_pages($dropdown_args);
+            // 'echo' => 0 above, so nothing is printed here; the returned markup
+            // is escaped through wp_kses() on the next line.
+            $html = wp_dropdown_pages($dropdown_args); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns markup, escaped below.
             echo wp_kses( $html, $this->get_allowed_field_html() );
         }
 
@@ -967,6 +973,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             }
 
             if (isset($_POST[$moudle_id])) {
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized on the next statement.
                 $raw_value = wp_unslash($_POST[$moudle_id]);
 
                 // Route the value through the registered per-field sanitizers

@@ -56,8 +56,10 @@
 			}
 			
 			/** Recaptcha*/
+			// The nonce is verified by element_pack_do_register_user() before this runs.
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Verified in element_pack_do_register_user().
 			$post_id   = isset($_REQUEST['page_id']) ? (int) $_REQUEST['page_id'] : 0;
-			$widget_id = isset($_REQUEST['widget_id']) ? $_REQUEST['widget_id'] : 0;
+			$widget_id = isset($_REQUEST['widget_id']) ? sanitize_text_field( wp_unslash( $_REQUEST['widget_id'] ) ) : 0;
 			
 			if ( $this->is_recaptcha_required( $post_id, $widget_id, 'show_recaptcha_checker' ) ) {
 				$gRecaptcha = isset($_REQUEST['g-recaptcha-response']) ? sanitize_text_field( wp_unslash($_REQUEST['g-recaptcha-response']) ) : '';
@@ -68,6 +70,7 @@
 				}
 				
 			}
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 			
 			if ( empty( $is_password_required ) ) {
 				$password = wp_generate_password( 12, false );
@@ -91,6 +94,7 @@
 			$result = wp_insert_user( $user_data );
 			$notify = 'both';
 			
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook, fired deliberately.
 			do_action( 'edit_user_created_user', $result, $notify );
 			
 			return $result;
@@ -118,15 +122,18 @@
 				} else {
 					
 					$post_id   = isset($_REQUEST['page_id']) ? (int) $_REQUEST['page_id'] : 0;
-					$widget_id = isset($_REQUEST['widget_id']) ? $_REQUEST['widget_id'] : 0;
+					$widget_id = isset($_REQUEST['widget_id']) ? sanitize_text_field( wp_unslash( $_REQUEST['widget_id'] ) ) : 0;
 
 					$terms = isset($_REQUEST['user_terms']) ? sanitize_text_field( wp_unslash( $_REQUEST['user_terms'] ) ) : '';
 					
 					$settings = $this->get_widget_settings( $post_id, $widget_id );
 					
 					$email                = isset($_REQUEST['email']) ? sanitize_email( wp_unslash( $_REQUEST['email'] ) ) : '';
+					// The password is intentionally left unfiltered — sanitizing it would
+					// silently change what the user typed. wp_insert_user() hashes it.
+					// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Raw password required by wp_insert_user().
 					$password             = isset($_REQUEST['password']) ? wp_unslash( $_REQUEST['password'] ) : NULL  ;
-					$is_password_required = isset($_REQUEST['is_password_required']) ? wp_unslash( $_REQUEST['is_password_required'] ) : '';
+					$is_password_required = isset($_REQUEST['is_password_required']) ? sanitize_text_field( wp_unslash( $_REQUEST['is_password_required'] ) ) : '';
 					$first_name           = isset($_REQUEST['first_name']) ? sanitize_text_field( wp_unslash( $_REQUEST['first_name'] ) ) : '';
 					$last_name            = isset($_REQUEST['last_name']) ? sanitize_text_field( wp_unslash( $_REQUEST['last_name'] ) ) : '';
 					
@@ -147,6 +154,7 @@
 							wp_set_current_user( $user->ID );
 							wp_set_auth_cookie( $user->ID );
 							
+							// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook, fired deliberately.
 							do_action( 'wp_login', $user->user_login, $user );
 						}
 

@@ -869,7 +869,7 @@ class Module extends Element_Pack_Module_Base {
 		 * Suffix will give error
 		 * BDTU-011
 		 */
-		wp_register_script( 'anime', BDTEP_ASSETS_URL . 'vendor/js/anime.min.js', [], '3.2.1', true );
+		wp_register_script( 'anime', BDTEP_ASSETS_URL . 'vendor/js/anime.min.js', [], '4.5.0', true );
 
 		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
 			wp_enqueue_script( 'anime' );

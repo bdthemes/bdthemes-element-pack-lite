@@ -43,8 +43,16 @@ if ( ! defined( 'BDTEP_SLUG' ) ) {
 	define( 'BDTEP_SLUG', 'element-pack' );
 } // set your own alias
 
-function is_ep_pro() {
-	return apply_filters( 'bdt_ep_init_pro', false );
+function element_pack_is_pro() {
+	$is_pro = apply_filters( 'element_pack_init_pro', false );
+
+	/**
+	 * Deprecated alias of the `element_pack_init_pro` filter.
+	 *
+	 * @deprecated Use `element_pack_init_pro` instead.
+	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Deprecated alias of element_pack_init_pro.
+	return apply_filters( 'bdt_ep_init_pro', $is_pro );
 }
 
 /**
@@ -133,7 +141,7 @@ function element_pack_is_preview() {
 	return Plugin::$instance->preview->is_preview_mode();
 }
 
-function bdt_get_widget_badge( $widget_name ) {
+function element_pack_get_widget_badge( $widget_name ) {
 	if ( ! class_exists( '\ElementPack\Admin\ElementPack_Permission_Manager' ) ) {
 		return '';
 	}
@@ -1886,6 +1894,9 @@ function element_pack_download_file_list() {
 
 	$output = [];
 	if ( defined( 'DLM_VERSION' ) ) {
+		// Editor-only control population; the Elementor editor request is already
+		// nonce-checked and capability-gated before this helper runs.
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified by the calling editor AJAX handler.
 		$search_query = ( ! empty( $_POST['dlm_search'] ) ? sanitize_text_field( wp_unslash( $_POST['dlm_search'] ) ) : '' );
 		$limit        = 100;
 		$filters      = array( 'post_status' => 'publish' );
@@ -2207,6 +2218,7 @@ function element_pack_user_roles() {
 		$wp_roles = new WP_Roles();
 	}
 	$all_roles      = $wp_roles->roles;
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter, applied deliberately.
 	$editable_roles = apply_filters( 'editable_roles', $all_roles );
 
 	$users = [ 'bdt-all-users' => 'All Users' ];
@@ -2369,8 +2381,8 @@ if ( ! function_exists( 'element_pack_array_except' ) ) {
 /**
  * License Validation
  */
-if ( ! function_exists( 'bdt_license_validation' ) ) {
-	function bdt_license_validation() {
+if ( ! function_exists( 'element_pack_license_validation' ) ) {
+	function element_pack_license_validation() {
 
 		if ( ! class_exists( 'ElementPack\Base\Element_Pack_Base' ) ) {
 			return false;
@@ -2389,17 +2401,28 @@ if ( ! function_exists( 'bdt_license_validation' ) ) {
 /**
  * Crypto Currency API
  */
-if ( ! function_exists( 'ep_crypto' ) ) {
-	function ep_crypto() {
-		$currency = isset( $_GET['currency'] ) ? $_GET['currency'] : 'usd';
+if ( ! function_exists( 'element_pack_crypto' ) ) {
+	function element_pack_crypto() {
+		// Public read-only market data lookup; nothing is written, so no nonce.
+		// Every value is normalised before it reaches the outbound URL so a request
+		// parameter cannot smuggle extra query arguments into the API call.
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only remote lookup, no state change.
+		$currency = isset( $_GET['currency'] ) ? sanitize_key( wp_unslash( $_GET['currency'] ) ) : 'usd';
 		$param    = [ 
-			'page'     => isset( $_GET['page'] ) && is_int( $_GET['page'] ) ? $_GET['page'] : 1,
-			'per_page' => isset( $_GET['per_page'] ) && $_GET['per_page'] ? $_GET['per_page'] : 100,
-			'order'    => isset( $_GET['order'] ) ? $_GET['order'] : 'market_cap_desc',
+			'page'     => isset( $_GET['page'] ) && is_int( $_GET['page'] ) ? absint( wp_unslash( $_GET['page'] ) ) : 1,
+			'per_page' => ( isset( $_GET['per_page'] ) && absint( wp_unslash( $_GET['per_page'] ) ) ) ? absint( wp_unslash( $_GET['per_page'] ) ) : 100,
+			'order'    => isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : 'market_cap_desc',
 		];
 		//$data = $client->coins()->getMarkets($currency, $param); // stoped api sdk here
 
-		$ids = ! empty( $_GET['ids'] ) && 'all' !== $_GET['ids'] ? 'ids=' . $_GET['ids'] . '&' : '';
+		$ids = '';
+		if ( ! empty( $_GET['ids'] ) ) {
+			$requested_ids = sanitize_text_field( wp_unslash( $_GET['ids'] ) );
+			if ( 'all' !== $requested_ids ) {
+				$ids = 'ids=' . rawurlencode( $requested_ids ) . '&';
+			}
+		}
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		// $market_url = 'https://api.coingecko.com/api/v3/coins/markets?' . $ids . 'vs_currency=' . $currency . '&order=' . $param['order'] . '&per_page=' . $param['per_page'] . '&page=' . $param['page'] . '&sparkline=true&price_change_percentage=1h%2C24h%2C7d';
 		$market_url = 'https://api.coingecko.com/api/v3/coins/markets?' . $ids . 'vs_currency=' . $currency . '&order=' . $param['order'] . '&page=' . $param['page'] . '&sparkline=true&price_change_percentage=1h%2C24h%2C7d';
@@ -2467,8 +2490,8 @@ if ( ! function_exists( 'ep_crypto' ) ) {
 	}
 }
 
-if ( ! function_exists( 'ep_crypto_data' ) ) {
-	function ep_crypto_data() {
+if ( ! function_exists( 'element_pack_crypto_data' ) ) {
+	function element_pack_crypto_data() {
 		try {
 			/**
 			 * initialization
@@ -2477,6 +2500,8 @@ if ( ! function_exists( 'ep_crypto_data' ) ) {
 			/**
 			 * setting param
 			 */
+			// Public read-only market data lookup; nothing is written, so no nonce.
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only remote lookup, no state change.
 			$allowed_orders = [ 'market_cap_desc', 'market_cap_asc', 'volume_desc', 'volume_asc', 'id_asc', 'id_desc' ];
 			$requested_order = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : 'market_cap_desc';
 
@@ -2495,6 +2520,7 @@ if ( ! function_exists( 'ep_crypto_data' ) ) {
 					$ids = 'ids=' . rawurlencode( $requested_ids ) . '&';
 				}
 			}
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 			// $market_url = 'https://api.coingecko.com/api/v3/coins/markets?' . $ids . 'vs_currency=' . $currency . '&order=' . $param['order'] . '&per_page=' . $param['per_page'] . '&page=' . $param['page'] . '&sparkline=true&price_change_percentage=1h%2C24h%2C7d';
 			$market_url = 'https://api.coingecko.com/api/v3/coins/markets?' . $ids . 'vs_currency=' . $currency . '&order=' . $param['order'] . '&page=' . $param['page'] . '&sparkline=true&price_change_percentage=1h%2C24h%2C7d';
@@ -2596,6 +2622,10 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 		<?php
 	}
 	function element_pack_ajax_load_query_args() {
+		// Called from the widget load-more AJAX handlers, which verify their own
+		// nonce before building query args. Every value read here is cast or
+		// sanitized below.
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- Verified by the calling AJAX handler.
 		$postSettings = isset( $_POST['settings'] ) && is_array( $_POST['settings'] )
 			? map_deep( wp_unslash( $_POST['settings'] ), 'sanitize_text_field' )
 			: [];
@@ -2738,8 +2768,8 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 			 */
 			$args = $GLOBALS['wp_query']->query_vars;
 			// unset($args['paged']);
-			$args['paged']  = isset( $_POST['paged'] ) ? $_POST['paged'] : 1;
-			$args['offset'] = isset( $_POST['offset'] ) ? $_POST['offset'] : 0;
+			$args['paged']  = isset( $_POST['paged'] ) ? max( 1, absint( wp_unslash( $_POST['paged'] ) ) ) : 1;
+			$args['offset'] = isset( $_POST['offset'] ) ? absint( wp_unslash( $_POST['offset'] ) ) : 0;
 
 			$args = apply_filters( 'element_pack/query/get_query_args/current_query', $args );
 		} elseif ( '_related_post_type' === $postSettings['posts_source'] ) {
@@ -2837,6 +2867,8 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 			}
 		}
 
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+
 		$ajaxposts = new \WP_Query( $args );
 		if ( 'rand' === $posts_orderby ) {
 			if ( $ajaxposts->have_posts() ) {
@@ -2863,22 +2895,22 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 }
 
 // Start: Add to cart quantity buttons conversion
-if ( ! function_exists( 'ep_display_quantity_minus' ) ) {
-	function ep_display_quantity_minus() {
+if ( ! function_exists( 'element_pack_display_quantity_minus' ) ) {
+	function element_pack_display_quantity_minus() {
 		if ( ! is_product() ) return;
 		echo '<button type="button" class="bdt-add-to-cart-qty-minus" ><i class="ep-icon-minus-3"></i></button>';
 	}
 }
 
-if ( ! function_exists( 'ep_display_quantity_plus' ) ) {
-	function ep_display_quantity_plus() {
+if ( ! function_exists( 'element_pack_display_quantity_plus' ) ) {
+	function element_pack_display_quantity_plus() {
 		if ( ! is_product() ) return;
 		echo '<button type="button" class="bdt-add-to-cart-qty-plus" ><i class="ep-icon-plus-3"></i></button>';
 	}
 }
 
-if ( ! function_exists( 'ep_add_cart_quantity_plus_minus' ) ) {
-	function ep_add_cart_quantity_plus_minus() {
+if ( ! function_exists( 'element_pack_add_cart_quantity_plus_minus' ) ) {
+	function element_pack_add_cart_quantity_plus_minus() {
 
 		echo '<style>
 			input[type="number"]::-webkit-outer-spin-button,
@@ -2912,8 +2944,8 @@ if ( ! function_exists( 'ep_add_cart_quantity_plus_minus' ) ) {
 	}
 }
 
-if ( ! function_exists( 'ep_setup_quantity_buttons' ) ) {
-	function ep_setup_quantity_buttons() {
+if ( ! function_exists( 'element_pack_setup_quantity_buttons' ) ) {
+	function element_pack_setup_quantity_buttons() {
 		if ( function_exists( 'is_product' ) ) {		
 			// Remove the default version
 			remove_all_actions( 'woocommerce_before_quantity_input_field' );
@@ -2921,15 +2953,15 @@ if ( ! function_exists( 'ep_setup_quantity_buttons' ) ) {
 			remove_all_actions( 'woocommerce_before_single_product' );
 
 			// Add our version
-			add_action( 'woocommerce_before_quantity_input_field', 'ep_display_quantity_minus' );
-			add_action( 'woocommerce_after_quantity_input_field', 'ep_display_quantity_plus' );
-			add_action( 'woocommerce_after_single_product', 'ep_add_cart_quantity_plus_minus' );
+			add_action( 'woocommerce_before_quantity_input_field', 'element_pack_display_quantity_minus' );
+			add_action( 'woocommerce_after_quantity_input_field', 'element_pack_display_quantity_plus' );
+			add_action( 'woocommerce_after_single_product', 'element_pack_add_cart_quantity_plus_minus' );
 		}
 		
 	}
 }
 
-//add_action( 'template_redirect', 'ep_setup_quantity_buttons' );
+//add_action( 'template_redirect', 'element_pack_setup_quantity_buttons' );
 // End: Add to cart quantity buttons conversion
 
 /**
@@ -2937,8 +2969,8 @@ if ( ! function_exists( 'ep_setup_quantity_buttons' ) ) {
  * 
  * @return bool
  */
-if ( ! function_exists( 'ep_is_main_site' ) ) {
-	function ep_is_main_site() {
+if ( ! function_exists( 'element_pack_is_main_site' ) ) {
+	function element_pack_is_main_site() {
 		if ( ! is_multisite() ) {
 			return true;
 		}
@@ -2953,8 +2985,8 @@ if ( ! function_exists( 'ep_is_main_site' ) ) {
  * 
  * @return array
  */
-if ( ! function_exists( 'ep_get_subsites' ) ) {
-	function ep_get_subsites() {
+if ( ! function_exists( 'element_pack_get_subsites' ) ) {
+	function element_pack_get_subsites() {
 		if ( ! is_multisite() ) {
 			return array();
 		}
@@ -2986,8 +3018,8 @@ if ( ! function_exists( 'ep_get_subsites' ) ) {
  * @param int $site_id
  * @return string
  */
-if ( ! function_exists( 'ep_get_subsite_activation_source' ) ) {
-	function ep_get_subsite_activation_source($site_id) {
+if ( ! function_exists( 'element_pack_get_subsite_activation_source' ) ) {
+	function element_pack_get_subsite_activation_source($site_id) {
 		if ( ! is_multisite() ) {
 			return '';
 		}

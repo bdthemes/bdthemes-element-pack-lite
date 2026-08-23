@@ -20,7 +20,10 @@ class Admin {
 	public function __construct() {
 
 		// Embed the Script on our Plugin's Option Page Only
-		if (isset($_GET['page']) && ($_GET['page'] == 'element_pack_options')) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only screen check, no state is changed.
+		$current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+
+		if ('element_pack_options' == $current_page) {
 			add_action('admin_init', [$this, 'admin_script']);
 		}
 
@@ -48,7 +51,7 @@ class Admin {
 		wp_enqueue_style('ep-editor', BDTEP_ASSETS_URL . 'css/ep-editor.css', [], BDTEP_VER);
 		wp_enqueue_style('ep-admin', BDTEP_ADMIN_URL . 'assets/css/ep-admin.css', [], BDTEP_VER);
 
-		wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit.min.js', ['jquery'], '3.21.7');
+		wp_enqueue_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit.min.js', ['jquery'], '3.21.7', false);
 	}
 
 	/**
@@ -111,7 +114,7 @@ class Admin {
 	public function admin_script() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		if ( is_admin() ) { // for Admin Dashboard Only
-			wp_enqueue_script('chart', BDTEP_ASSETS_URL . 'vendor/js/chart.min.js', ['jquery'], '2.7.3', true);
+			wp_enqueue_script('chart', BDTEP_ASSETS_URL . 'vendor/js/chart.min.js', ['jquery'], '4.5.1', true);
 			wp_enqueue_script('ep-admin', BDTEP_ADMIN_URL  . 'assets/js/ep-admin.min.js', ['jquery'], BDTEP_VER, true);
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-form');
@@ -144,9 +147,13 @@ class Admin {
 		$table_post     = $wpdb->prefix . 'ep_template_library_post';
 		$table_cat_post = $wpdb->prefix . 'ep_template_library_cat_post';
 
-		@$wpdb->query('DROP TABLE IF EXISTS ' . $table_cat_post);
-		@$wpdb->query('DROP TABLE IF EXISTS ' . $table_cat);
-		@$wpdb->query('DROP TABLE IF EXISTS ' . $table_post);
+		// Table names cannot be passed through $wpdb->prepare(); these are built
+		// from $wpdb->prefix plus hardcoded literals, so no user input is involved.
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, PluginCheck.Security.DirectDB.UnescapedDBParameter
+		$wpdb->query('DROP TABLE IF EXISTS ' . $table_cat_post);
+		$wpdb->query('DROP TABLE IF EXISTS ' . $table_cat);
+		$wpdb->query('DROP TABLE IF EXISTS ' . $table_post);
+		// phpcs:enable
 	}
 
 	/**

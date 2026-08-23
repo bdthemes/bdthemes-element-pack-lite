@@ -1102,7 +1102,10 @@ class Navbar extends Module_Base {
 		?>
 		<div <?php $this->print_render_attribute_string( 'navbar-wrap' ); ?>>
 			<nav <?php $this->print_render_attribute_string( 'navbar-attr' ); ?>>
-				<?php wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $settings ) ); ?>
+				<?php
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter, applied deliberately.
+				wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $settings ) );
+				?>
 			</nav>
 		</div>
 		<?php

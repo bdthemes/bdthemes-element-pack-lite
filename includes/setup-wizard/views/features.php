@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+// Template partial: the variables below are file-scoped for this view, not
+// plugin globals, so the global-prefix rule does not apply.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- View-local variables.
 $widget_map     = \ElementPack\Includes\Setup_Wizard::get_widget_map();
 $active_modules = get_option( 'element_pack_active_modules', array() );
 

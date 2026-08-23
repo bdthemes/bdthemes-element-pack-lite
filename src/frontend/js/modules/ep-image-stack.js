@@ -15,7 +15,7 @@
 
         tooltips.forEach((el) => {
             tippy(el, {
-                allowHTML: true,
+                allowHTML: false,
                 theme: 'bdt-tippy-' + widgetID
             });
         });

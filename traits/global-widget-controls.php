@@ -48,6 +48,7 @@ trait Global_Widget_Controls {
 			[ 
 				'type' => Controls_Manager::RAW_HTML,
 				'raw' => sprintf(
+					/* translators: 1: Opening anchor tag to the Ultimate Post Kit site. 2: Closing anchor tag. */
 					esc_html__( 'Note: This widget is deprecated and will be removed in a future version. Please use %1$sUltimate Post Kit%2$s plugin instead. You can find all post type widgets in this plugin.', 'bdthemes-element-pack-lite' ),
 					'<a href="' . esc_url( 'https://postkit.pro/' ) . '" target="_blank">',
 					'</a>'

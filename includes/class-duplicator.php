@@ -150,7 +150,8 @@ class BdThemes_Duplicator {
 				wp_set_object_terms( $bdt_new_post_id, $bdt_post_terms, $bdt_taxonomy, false );
 			}
 
-			$bdt_post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : false;
+			// $post_id was already validated (nonce + capability check) by the caller.
+			$bdt_post_id = $post_id ? absint( $post_id ) : false;
 
 			/**
 			 * Duplicate all post meta just in two SQL queries

@@ -7,7 +7,7 @@
  * plugin source files so tests exercise the actual implementation (not mocks of it).
  */
 
-// phpcs:ignore WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting -- PHPUnit bootstrap sets explicit error reporting for test runs.
+// phpcs:ignore WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, PluginCheck.CodeAnalysis.PHPErrorReporting.DirectErrorReportingCall -- PHPUnit bootstrap; this file is excluded from the release build.
 error_reporting(E_ALL);
 
 // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- PHPUnit bootstrap path variable.

@@ -105,11 +105,14 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         $postCatTable   = $this->table_cat_post;
         $catTable       = $this->table_cat;
 
-        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are internal ($wpdb->prefix based) and $demoDataType is cast via absint().
+        // Table names are internal ($wpdb->prefix based) and cannot be bound as
+        // placeholders; $demoDataType is cast through absint() above.
+        // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
         $demoData = $this->wpdb->get_results("SELECT COUNT(*) as ttotal, {$catTable}.* FROM {$postTable}
  LEFT JOIN {$postCatTable} ON {$postTable}.demo_id = {$postCatTable}.demo_id
  LEFT JOIN {$catTable} ON {$catTable}.term_id = {$postCatTable}.term_id
  WHERE {$postTable}.type={$demoDataType} GROUP BY {$catTable}.term_id", ARRAY_A);
+        // phpcs:enable
 
         $navItems = array();
         $totalDemo = 0;
@@ -149,7 +152,7 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
 
         $this->termSlug = 'demo_term_all';
         if(isset($_REQUEST['term_slug']) && !empty($_REQUEST['term_slug'])){
-            $this->termSlug = sanitize_text_field($_REQUEST['term_slug']);
+            $this->termSlug = sanitize_text_field(wp_unslash($_REQUEST['term_slug']));
         }
 
         $this->perPage = 500000;

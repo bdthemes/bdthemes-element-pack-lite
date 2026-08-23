@@ -58,7 +58,8 @@ class Setup_Wizard {
 
 	// Check for manual wizard requests
 	public function check_manual_wizard_request() {
-		$is_setup_wizard_request = isset($_GET['ep_setup_wizard']) && $_GET['ep_setup_wizard'] === 'show';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only screen routing, no state change.
+		$is_setup_wizard_request = isset($_GET['ep_setup_wizard']) && 'show' === sanitize_text_field(wp_unslash($_GET['ep_setup_wizard']));
 		
 		if ( $is_setup_wizard_request ) {
 			// Use the same approach as first activation - completely override the page
@@ -278,6 +279,7 @@ class Setup_Wizard {
 			wp_send_json_error( array( 'message' => 'Unauthorized' ) );
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Each entry is sanitized through sanitize_plugin_basename() below.
 		$raw_slugs = isset( $_POST['plugins'] ) ? wp_unslash( $_POST['plugins'] ) : array();
 
 		if ( empty( $raw_slugs ) || ! is_array( $raw_slugs ) ) {
@@ -526,7 +528,7 @@ add_action('wp_ajax_ep_setup_wizard_import_template', function () {
         $template_id = $templateData[0]['template_id'];
         $metaData = get_post_meta($template_id);
 
-        $page_title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : esc_html__("No Title", 'bdthemes-element-pack-lite');
+        $page_title = isset($_POST['title']) ? sanitize_text_field(wp_unslash($_POST['title'])) : esc_html__("No Title", 'bdthemes-element-pack-lite');
 
         // Validate Elementor Data
         if (!isset($metaData['_elementor_data'][0])) {
@@ -691,6 +693,7 @@ add_action('wp_ajax_ep_setup_wizard_import_bundle_runner', function () {
     }
 
     try {
+        // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged -- Long-running kit import needs a larger budget than the default.
         @ini_set('max_execution_time', 60 * 5);
 
         $import_export_module = $app->get_component('import-export');

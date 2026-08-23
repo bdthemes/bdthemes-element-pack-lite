@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 class Parsedown {
     # ~
 
-    const version = '1.8.0-beta-5';
+    const version = '1.8.0';
 
     # ~
     public $addTag      = '<span class="bdt-label bdt-added">Added</span>';

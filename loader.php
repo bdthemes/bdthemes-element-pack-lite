@@ -213,7 +213,7 @@ class Element_Pack_Loader {
         $api_settings = get_option('element_pack_api_settings');
 
         if ( element_pack_is_widget_enabled( 'social-share' ) ) {
-			wp_register_script( 'goodshare', BDTEP_ASSETS_URL . 'vendor/js/goodshare.min.js', [ 'jquery' ], '4.1.2', true );
+			wp_register_script( 'goodshare', BDTEP_ASSETS_URL . 'vendor/js/goodshare.min.js', [ 'jquery' ], '6.3.0', true );
 		}
         if (element_pack_is_widget_enabled('progress-pie')) {
             wp_register_script('aspieprogress', BDTEP_ASSETS_URL . 'vendor/js/jquery-asPieProgress.min.js', ['jquery'], '0.4.7', true);
@@ -225,31 +225,31 @@ class Element_Pack_Loader {
             wp_register_script('gridtab', BDTEP_ASSETS_URL . 'vendor/js/gridtab.min.js', ['jquery'], '2.1.1', true);
         }
         if (element_pack_is_widget_enabled('user-register') or element_pack_is_widget_enabled('contact-form')) {
-            wp_register_script('recaptcha', 'https://www.google.com/recaptcha/api.js', ['jquery'], null, true);
+            wp_register_script('recaptcha', 'https://www.google.com/recaptcha/api.js', ['jquery'], '2.0', true);
         }
         if (element_pack_is_widget_enabled('open-street-map')) {
-            wp_register_script('leaflet', BDTEP_ASSETS_URL . 'vendor/js/leaflet.min.js', ['jquery'], '', true);
+            wp_register_script('leaflet', BDTEP_ASSETS_URL . 'vendor/js/leaflet.min.js', ['jquery'], '1.9.4', true);
         }
         if (element_pack_is_widget_enabled('panel-slider')) {
-            wp_register_script('bdt-parallax', BDTEP_ASSETS_URL . 'vendor/js/parallax.min.js', ['jquery'], null, true);
+            wp_register_script('bdt-parallax', BDTEP_ASSETS_URL . 'vendor/js/parallax.min.js', ['jquery'], '3.1.0', true);
         }
         if (element_pack_is_widget_enabled('image-magnifier')) {
-            wp_register_script('imagezoom', BDTEP_ASSETS_URL . 'vendor/js/jquery.imagezoom.min.js', ['jquery'], null, true);
+            wp_register_script('imagezoom', BDTEP_ASSETS_URL . 'vendor/js/jquery.imagezoom.min.js', ['jquery'], BDTEP_VER, true);
         }
         if (element_pack_is_widget_enabled('logo-grid')) {
-            wp_register_script('popper', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', ['jquery'], null, true);
-            wp_register_script('tippyjs', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', ['jquery'], null, true);
+            wp_register_script('popper', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', ['jquery'], '2.11.8', true);
+            wp_register_script('tippyjs', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', ['jquery'], '6.3.7', true);
         }
         //advanced-image-gallery
         if (element_pack_is_widget_enabled('custom-gallery') or element_pack_is_widget_enabled('tutor-lms-course-grid')) {
-            wp_register_script('tilt', BDTEP_ASSETS_URL . 'vendor/js/vanilla-tilt.min.js', ['jquery'], null, true);
+            wp_register_script('tilt', BDTEP_ASSETS_URL . 'vendor/js/vanilla-tilt.min.js', ['jquery'], '1.8.1', true);
         }
         if (element_pack_is_widget_enabled('reading-progress')) {
             wp_register_script('progressHorizontal', BDTEP_ASSETS_URL . 'vendor/js/jquery.progressHorizontal.min.js', ['jquery'], '2.0.2', true);
             // wp_register_script('progressScroll', BDTEP_ASSETS_URL . 'vendor/js/jquery.progressScroll.min.js', ['jquery'], '2.0.2', true);
         }
         if (element_pack_is_widget_enabled('image-compare')) {
-            wp_register_script('image-compare-viewer', BDTEP_ASSETS_URL . 'vendor/js/image-compare-viewer.min.js', ['jquery'], '0.0.1', true);
+            wp_register_script('image-compare-viewer', BDTEP_ASSETS_URL . 'vendor/js/image-compare-viewer.min.js', ['jquery'], '1.6.2', true);
         }
         if (element_pack_is_widget_enabled('calendly')) {
             wp_register_script('calendly', BDTEP_ASSETS_URL . 'vendor/js/calendly.min.js', ['jquery'], '0.0.1', true);
@@ -320,8 +320,10 @@ class Element_Pack_Loader {
             'nonce'         => wp_create_nonce('element-pack-site'),
             'data_table'    => [
                 'language' => [
-                    'lengthMenu' => sprintf(esc_html_x('Show %1s Entries', 'DataTable String', 'bdthemes-element-pack-lite'), '_MENU_'),
-                    'info'       => sprintf(esc_html_x('Showing %1s to %2s of %3s entries', 'DataTable String', 'bdthemes-element-pack-lite'), '_START_', '_END_', '_TOTAL_'),
+                    /* translators: %s: DataTables placeholder replaced with the page length dropdown. */
+                    'lengthMenu' => sprintf(esc_html_x('Show %s Entries', 'DataTable String', 'bdthemes-element-pack-lite'), '_MENU_'),
+                    /* translators: 1: First entry number on the page. 2: Last entry number on the page. 3: Total number of entries. */
+                    'info'       => sprintf(esc_html_x('Showing %1$s to %2$s of %3$s entries', 'DataTable String', 'bdthemes-element-pack-lite'), '_START_', '_END_', '_TOTAL_'),
                     'search'     => esc_html_x('Search :', 'DataTable String', 'bdthemes-element-pack-lite'),
                     'paginate'   => [
                         'previous' => esc_html_x('Previous', 'DataTable String', 'bdthemes-element-pack-lite'),
@@ -551,7 +553,11 @@ class Element_Pack_Loader {
 
         // Nonce is checked, get the POST data and sign user on
         $access_info                  = [];
-        $access_info['user_login']    = !empty($_POST['user_login']) ? $_POST['user_login'] : "";
+        $access_info['user_login']    = !empty($_POST['user_login']) ? sanitize_text_field(wp_unslash($_POST['user_login'])) : "";
+        // The password is deliberately passed through untouched: unslashing or
+        // sanitizing it would corrupt legitimate credentials. This mirrors how
+        // wp_signon() reads $_POST['pwd'] in wp-login.php.
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Raw password required by wp_signon().
         $access_info['user_password'] = !empty($_POST['user_password']) ? $_POST['user_password'] : "";
         $access_info['remember']      = !empty($_POST['rememberme']) ? true : false;
         $user_signon                  = wp_signon($access_info, false);

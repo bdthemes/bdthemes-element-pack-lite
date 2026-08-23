@@ -32,6 +32,8 @@ class ElementPack_FB_Access_Token_Generator_Control extends Base_Data_Control {
 		$control_uid = $this->get_control_uid();
 		$options     = get_option( 'element_pack_api_settings' );
 		$app_id      = isset( $options['facebook_app_id'] ) ? $options['facebook_app_id'] : '';
+		$app_id      = apply_filters( 'element_pack_facebook_page_access_token_generator_app_id', $app_id );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Deprecated alias of the filter above.
 		$app_id      = apply_filters( 'ep_facebook_page_access_token_generator_app_id', $app_id );
 		?>
 		<div class="elementor-control-field">
@@ -57,6 +59,8 @@ class ElementPack_FB_Access_Token_Generator_Control extends Base_Data_Control {
 
 		$options = get_option( 'element_pack_api_settings' );
 		$app_id  = isset( $options['facebook_app_id'] ) ? $options['facebook_app_id'] : '';
+		$app_id  = apply_filters( 'element_pack_facebook_page_access_token_generator_app_id', $app_id );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Deprecated alias of the filter above.
 		$app_id  = apply_filters( 'ep_facebook_page_access_token_generator_app_id', $app_id );
 
 		if ( $app_id ) :
