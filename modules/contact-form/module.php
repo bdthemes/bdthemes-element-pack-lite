@@ -23,6 +23,9 @@ class Module extends Element_Pack_Module_Base {
     public function is_valid_captcha() {
         $ep_api_settings = get_option('element_pack_api_settings');
 
+        // The reCAPTCHA token is itself the anti-automation check here; the
+        // calling handler verifies the form nonce before this runs.
+        // phpcs:disable WordPress.Security.NonceVerification.Missing -- Verified by the calling form handler.
         if (isset($_POST['g-recaptcha-response']) && !empty($ep_api_settings['recaptcha_secret_key'])) {
             $remote_ip = isset($_SERVER["REMOTE_ADDR"]) ? sanitize_text_field( wp_unslash( $_SERVER["REMOTE_ADDR"] ) ) : '';
 
@@ -37,6 +40,7 @@ class Module extends Element_Pack_Module_Base {
                 )
             );
 
+            // phpcs:enable WordPress.Security.NonceVerification.Missing
             if (is_wp_error($response)) {
                 return false;
             }
@@ -97,7 +101,7 @@ class Module extends Element_Pack_Module_Base {
             }
 
             $post_id   = isset( $_REQUEST['page_id'] ) ? absint($_REQUEST['page_id']) : 0;
-            $widget_id = isset( $_REQUEST['widget_id'] ) ? $_REQUEST['widget_id'] : 0;
+            $widget_id = isset( $_REQUEST['widget_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['widget_id'] ) ) : 0;
 
             $error = false;
 

@@ -455,7 +455,7 @@ trait Group_Control_Query {
          */
 
         if ($this->get_settings_for_display('posts_only_with_featured_image') === 'yes') {
-            $args['meta_key'] = '_thumbnail_id';
+            $args['meta_key'] = '_thumbnail_id'; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Featured-image filter is an opt-in widget control.
         }
 
         /**
@@ -532,7 +532,7 @@ trait Group_Control_Query {
         if ($this->getGroupControlQueryPostType() === 'post' && $this->get_settings_for_display('posts_ignore_sticky_posts') === 'yes') {
             $args['ignore_sticky_posts'] = true;
             if (in_array('current_post', $exclude_by)) {
-                $args['post__not_in'] = [get_the_ID()];
+                $args['post__not_in'] = [get_the_ID()]; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Excludes the current post from its own widget query.
             }
         }
 
@@ -564,7 +564,7 @@ trait Group_Control_Query {
 
             $exclude_by = $this->getGroupControlQueryParamBy('exclude');
             if (in_array('current_post', $exclude_by)) {
-                $args['post__not_in'] = [get_the_ID()];
+                $args['post__not_in'] = [get_the_ID()]; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Excludes the current post from its own widget query.
             }
 
             /**
@@ -598,7 +598,7 @@ trait Group_Control_Query {
 
             if (in_array('manual_selection', $exclude_by)) {
                 $exclude_ids          = $settings['posts_exclude_ids'];
-                $args['post__not_in'] = array_merge($current_post, wp_parse_id_list($exclude_ids));
+                $args['post__not_in'] = array_merge($current_post, wp_parse_id_list($exclude_ids)); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- User-configured exclusion list.
             }
 
             /**
@@ -696,7 +696,7 @@ trait Group_Control_Query {
         }
 
         if (!empty($terms_query)) {
-            $args['tax_query']             = $terms_query;
+            $args['tax_query']             = $terms_query; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Taxonomy filtering is an opt-in widget control.
             $args['tax_query']['relation'] = 'AND';
         }
 
@@ -718,8 +718,9 @@ trait Group_Control_Query {
      * @return array|mixed
      */
     private function getGroupControlQueryParamBy($by = 'exclude') {
+        // Not query args: this maps a direction onto the widget's control name.
         $mapBy = [
-            'exclude' => 'posts_exclude_by',
+            'exclude' => 'posts_exclude_by', // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Control-name lookup, not a WP_Query argument.
             'include' => 'posts_include_by',
         ];
 

@@ -143,8 +143,8 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 /**
  * register the widget class to widget action
  */
-function register_ep_elementor_template_widget() {
+function element_pack_register_elementor_template_widget() {
 	register_widget( 'Element_Pack_Elementor_Template_Widget' );
 }
 
-add_action( 'widgets_init', 'register_ep_elementor_template_widget' );
+add_action( 'widgets_init', 'element_pack_register_elementor_template_widget' );

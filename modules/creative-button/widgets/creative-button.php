@@ -55,7 +55,7 @@ class Creative_Button extends Module_Base {
 
 	protected function get_upsale_data(): array {
 		return [
-			'condition' => ! is_ep_pro(),
+			'condition' => ! element_pack_is_pro(),
 			'image' => esc_url( BDTEP_ASSETS_URL . 'images/go-pro.svg' ),
 			'image_alt' => esc_attr__( 'Upgrade', 'bdthemes-element-pack-lite' ),
 			'title' => esc_html__( 'Unlock Premium Features', 'bdthemes-element-pack-lite' ),

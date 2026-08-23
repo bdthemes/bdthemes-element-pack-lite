@@ -9,7 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Template partial: the variables below are file-scoped for this view, not
+// plugin globals, so the global-prefix rule does not apply.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- View-local variables.
 $templates_path = BDTEP_INC_PATH . 'setup-wizard/assets/data.json';
+// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local bundled JSON file, not a remote request.
 $templates      = json_decode( file_get_contents( $templates_path ), true );
 
 ?>

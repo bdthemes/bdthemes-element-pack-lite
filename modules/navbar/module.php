@@ -83,6 +83,7 @@ class ep_menu_walker extends Walker_Nav_Menu {
         }
         
         // create item output
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter, applied deliberately.
         $id = apply_filters('nav_menu_item_id', '', $item, $args);
        
         if($classes) {
@@ -127,8 +128,10 @@ class ep_menu_walker extends Walker_Nav_Menu {
         }
 
         // create link output
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter, applied deliberately.
         $item_output = sprintf($format, $args->before, $attributes, $args->link_before.apply_filters('the_title', $item->title, $item->ID).$args->link_after, $args->after);
 
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter, applied deliberately.
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
     }
 

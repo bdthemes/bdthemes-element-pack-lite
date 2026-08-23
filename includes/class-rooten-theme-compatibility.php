@@ -149,8 +149,9 @@ class Element_Pack_Rooten_Theme_Compatibility {
         if ( !$this->is_secured('rooten_custom_template_nonce_field', 'rooten_custom_template_nonce_action', $post_id) ) {
             return $post_id;
         }
-        $template = isset($_POST['rooten_template_type']) ? $_POST['rooten_template_type'] : '';
-        $template = sanitize_text_field($template);
+        // Nonce and capability are verified by is_secured() above.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in is_secured().
+        $template = isset($_POST['rooten_template_type']) ? sanitize_text_field(wp_unslash($_POST['rooten_template_type'])) : '';
         update_post_meta($post_id, 'rooten_template_type', $template);
     }
 

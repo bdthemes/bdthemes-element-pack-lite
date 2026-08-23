@@ -49,7 +49,7 @@ class Dynamic_Select_Input_Module {
      * get Ajax Data
      */
     public function getSelectInputData() {
-        $nonce = isset($_POST['security']) ? sanitize_text_field($_POST['security']) : '';
+        $nonce = isset($_POST['security']) ? sanitize_text_field(wp_unslash($_POST['security'])) : '';
 
         try {
             if (!wp_verify_nonce($nonce, 'ep_dynamic_select')) {
@@ -60,9 +60,9 @@ class Dynamic_Select_Input_Module {
                 throw new Exception('Unauthorized request');
             }
 
-            $query = isset($_POST['query']) ? sanitize_text_field($_POST['query']) : '';
-            $post_type = isset($_POST['post_type']) ? sanitize_text_field($_POST['post_type']) : '';
-            $field_type = isset($_POST['field_type']) ? array_map('sanitize_text_field', $_POST['field_type']) : '';
+            $query = isset($_POST['query']) ? sanitize_text_field(wp_unslash($_POST['query'])) : '';
+            $post_type = isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : '';
+            $field_type = isset($_POST['field_type']) ? array_map('sanitize_text_field', (array) wp_unslash($_POST['field_type'])) : '';
 
             // Initialize ACF_Global
             $acf_global = new ACF_Global();
@@ -110,7 +110,9 @@ class Dynamic_Select_Input_Module {
      * @return string
      */
     protected function getPostType() {
-        return isset($_POST['post_type']) ? sanitize_text_field($_POST['post_type']) : '';
+        // Nonce and capability are verified in getSelectInputData() before this runs.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in getSelectInputData().
+        return isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : '';
     }
 
     /**
@@ -124,7 +126,9 @@ class Dynamic_Select_Input_Module {
      * @return string
      */
     protected function getSearchQuery() {
-        return isset($_POST['search_text']) ? sanitize_text_field($_POST['search_text']) : '';
+        // Nonce and capability are verified in getSelectInputData() before this runs.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in getSelectInputData().
+        return isset($_POST['search_text']) ? sanitize_text_field(wp_unslash($_POST['search_text'])) : '';
     }
 
     /**
@@ -132,7 +136,10 @@ class Dynamic_Select_Input_Module {
      */
     protected function getselecedIds() {
         $results = [];
+        // Nonce and capability are verified in getSelectInputData() before this runs.
+        // phpcs:disable WordPress.Security.NonceVerification.Missing -- Verified in getSelectInputData().
         if (!empty($_POST['ids']) ){
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized in the branches below.
             $raw_ids = wp_unslash($_POST['ids']);
             if (is_array($raw_ids)) {
                 $results = array_map('sanitize_text_field', $raw_ids);
@@ -140,6 +147,7 @@ class Dynamic_Select_Input_Module {
                 $results = explode(',', sanitize_text_field($raw_ids));
             }
         }
+        // phpcs:enable WordPress.Security.NonceVerification.Missing
         $results = array_map('absint', array_filter($results, 'is_numeric'));
         return $results;
     }

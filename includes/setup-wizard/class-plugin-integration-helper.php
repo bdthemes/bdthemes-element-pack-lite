@@ -14,6 +14,23 @@ if (!defined('ABSPATH')) {
 class Plugin_Integration_Helper {
 
     /**
+     * Ordered list of icon URLs to try for a plugin, largest first.
+     *
+     * Plugin icons come from the WordPress.org plugins API at runtime (see
+     * Remote_Data_Handler); the plugin never hardcodes or hotlinks asset URLs
+     * of its own. When the API has not answered yet, callers fall back to the
+     * bundled placeholder icon instead of guessing a remote URL.
+     *
+     * @param string $slug Plugin slug or "slug/file.php" basename.
+     * @return string[] Always empty; kept for backwards compatibility.
+     */
+    public static function plugin_icon_fallbacks( $slug ) {
+        unset( $slug );
+
+        return [];
+    }
+
+    /**
      * Get predefined plugin configurations
      *
      * @return array Plugin configurations
@@ -36,7 +53,7 @@ class Plugin_Integration_Helper {
                 'fallback' => [
                     'name' => 'Prime Slider',
                     'description' => 'Create eye-catching sliders for your website quickly and easily with 55+ modern Elementor slider widgets.',
-                    'logo' => 'https://ps.w.org/bdthemes-prime-slider-lite/assets/icon-256x256.png',
+                    'logo' => '', // Resolved from the WordPress.org plugins API at runtime.
                     'rating' => 4.7,
                     'num_ratings' => 500,
                     'active_installs' => '100,000+'
@@ -47,7 +64,7 @@ class Plugin_Integration_Helper {
                 'fallback' => [
                     'name' => 'Ultimate Post Kit',
                     'description' => 'Design beautiful post layouts with simple, ready-made blocks.',
-                    'logo' => 'https://ps.w.org/ultimate-post-kit/assets/icon-256x256.png',
+                    'logo' => '', // Resolved from the WordPress.org plugins API at runtime.
                     'rating' => 4.8,
                     'num_ratings' => 1000,
                     'active_installs' => '50,000+'
@@ -58,7 +75,7 @@ class Plugin_Integration_Helper {
                 'fallback' => [
                     'name' => 'Live Copy Paste',
                     'description' => 'Copy and paste website elements between WordPress sites instantly.',
-                    'logo' => 'https://ps.w.org/live-copy-paste/assets/icon-256x256.png',
+                    'logo' => '', // Resolved from the WordPress.org plugins API at runtime.
                     'rating' => 4.9,
                     'num_ratings' => 200,
                     'active_installs' => '10,000+'
@@ -69,7 +86,7 @@ class Plugin_Integration_Helper {
                 'fallback' => [
                     'name' => 'Ultimate Store Kit',
                     'description' => 'Improve your online store with tools to display products better.',
-                    'logo' => 'https://ps.w.org/ultimate-store-kit/assets/icon-256x256.png',
+                    'logo' => '', // Resolved from the WordPress.org plugins API at runtime.
                     'rating' => 4.6,
                     'num_ratings' => 300,
                     'active_installs' => '20,000+'

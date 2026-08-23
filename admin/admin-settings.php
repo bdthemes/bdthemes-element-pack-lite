@@ -345,7 +345,11 @@ class ElementPack_Admin_Settings {
 
 	// Redirect to Element Pack Pro pricing page
 	public function ep_redirect_to_upgrade() {
-		if (isset($_GET['page']) && $_GET['page'] === self::PAGE_ID . '_upgrade') {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin screen routing, no state is changed.
+		$page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+
+		if ($page === self::PAGE_ID . '_upgrade') {
+			// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- Hardcoded external upgrade URL, never user input.
 			wp_redirect('https://www.elementpack.pro/pricing/');
 			exit;
 		}
@@ -535,13 +539,16 @@ class ElementPack_Admin_Settings {
 					<p class="ep-dashboard-welcome-desc">
 						<?php esc_html_e('Empower your web creation with powerful widgets, advanced extensions, and 2700+ ready templates and more.', 'bdthemes-element-pack-lite'); ?>
 					</p>
-					<a href="<?php echo admin_url('?ep_setup_wizard=show'); ?>"
+					<a href="<?php echo esc_url( admin_url('?ep_setup_wizard=show') ); ?>"
 						class="bdt-button bdt-welcome-button bdt-margin-small-top"
 						target="_blank"><?php esc_html_e('Setup Element Pack', 'bdthemes-element-pack-lite'); ?></a>
 
 					<div class="ep-dashboard-compare-section">
 						<h4 class="ep-feature-sub-title">
-							<?php printf(esc_html__('Unlock %sPremium Features%s', 'bdthemes-element-pack-lite'), '<strong class="ep-highlight-text">', '</strong>'); ?>
+							<?php
+							/* translators: 1: Opening <strong> tag. 2: Closing <strong> tag. */
+							printf(esc_html__('Unlock %1$sPremium Features%2$s', 'bdthemes-element-pack-lite'), '<strong class="ep-highlight-text">', '</strong>');
+							?>
 						</h4>
 						<h1 class="ep-feature-title ep-dashboard-compare-title">
 							<?php esc_html_e('Create Your Sleek Website with Element Pack Pro!', 'bdthemes-element-pack-lite'); ?>
@@ -569,7 +576,7 @@ class ElementPack_Admin_Settings {
 
 				<div class="ep-dashboard-item ep-dashboard-template-quick-access bdt-card bdt-card-body">
 					<div class="ep-dashboard-template-section">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/template.jpg'; ?>"
+						<img src="<?php echo esc_url( BDTEP_ADMIN_URL . 'assets/images/template.jpg' ); ?>"
 							alt="Element Pack Dashboard Template">
 						<h1 class="ep-feature-title ">
 							<?php esc_html_e('Faster Web Creation with Sleek and Ready-to-Use Templates!', 'bdthemes-element-pack-lite'); ?>
@@ -582,7 +589,7 @@ class ElementPack_Admin_Settings {
 					</div>
 
 					<div class="ep-dashboard-quick-access bdt-margin-medium-top">
-						<img src="<?php echo BDTEP_ADMIN_URL . 'assets/images/support.svg'; ?>"
+						<img src="<?php echo esc_url( BDTEP_ADMIN_URL . 'assets/images/support.svg' ); ?>"
 							alt="Element Pack Dashboard Template">
 						<h1 class="ep-feature-title">
 							<?php esc_html_e('Getting Started with Quick Access', 'bdthemes-element-pack-lite'); ?>
@@ -842,6 +849,7 @@ class ElementPack_Admin_Settings {
 				<div class="bdt-text-default">
 				<?php
 					printf(
+						/* translators: 1: Opening <b> tag. 2: Closing <b> tag. */
 						esc_html__('To view widgets analytics, Elementor %1$sUsage Data Sharing%2$s feature by Elementor needs to be activated. Please activate the feature to get widget analytics instantly ', 'bdthemes-element-pack-lite'),
 						'<b>', '</b>'
 					);
@@ -1232,7 +1240,7 @@ class ElementPack_Admin_Settings {
 					<span class="label1"><?php esc_html_e('Uploads folder writable:', 'bdthemes-element-pack-lite'); ?></span>
 
 					<?php
-					if (!is_writable($upload_path)) {
+					if (!wp_is_writable($upload_path)) {
 						echo wp_kses_post($no_icon);
 					} else {
 						echo wp_kses_post($yes_icon);
@@ -1278,8 +1286,8 @@ class ElementPack_Admin_Settings {
 		<div class="bdt-admin-alert">
 			<strong><?php esc_html_e('Note:', 'bdthemes-element-pack-lite'); ?></strong>
 			<?php
-			/* translators: %s: Plugin name 'Element Pack' */
 			printf(
+				/* translators: %s: Plugin name, wrapped in bold tags. */
 				esc_html__('If you have multiple addons like %s so you may need to allocate additional memory for other addons as well.', 'bdthemes-element-pack-lite'),
 				'<b>Element Pack</b>'
 			);
@@ -1318,7 +1326,7 @@ class ElementPack_Admin_Settings {
 						</div>
 
 						<div class="ep-logo">
-							<img src="<?php echo BDTEP_URL . 'assets/images/logo-with-text.svg'; ?>" alt="Element Pack Logo">
+							<img src="<?php echo esc_url( BDTEP_URL . 'assets/images/logo-with-text.svg' ); ?>" alt="Element Pack Logo">
 						</div>
 					</div>
 

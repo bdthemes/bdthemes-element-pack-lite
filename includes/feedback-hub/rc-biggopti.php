@@ -161,8 +161,8 @@ if ( ! class_exists( 'RC_Reviews_Collector' ) ) {
 		 * Ajax callback
 		 */
 		public function rc_sdk_insights() {
-			$sanitized_status = isset( $_POST['button_val'] ) ? sanitize_text_field( $_POST['button_val'] ) : '';
-			$nonce            = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+			$sanitized_status = isset( $_POST['button_val'] ) ? sanitize_text_field( wp_unslash( $_POST['button_val'] ) ) : '';
+			$nonce            = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 			$allow_name       = isset( $_POST['allow_name'] ) ? sanitize_key( wp_unslash( $_POST['allow_name'] ) ) : '';
 			$date_name        = isset( $_POST['date_name'] ) ? sanitize_key( wp_unslash( $_POST['date_name'] ) ) : '';
 
@@ -295,8 +295,8 @@ if ( ! class_exists( 'RC_Reviews_Collector' ) ) {
 		 * @return void
 		 */
 		public function rc_sdk_dismiss_biggopti() {
-			$nonce   = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
-			$rc_name = isset( $_POST['rc_name'] ) ? sanitize_text_field( $_POST['rc_name'] ) : '';
+			$nonce   = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+			$rc_name = isset( $_POST['rc_name'] ) ? sanitize_text_field( wp_unslash( $_POST['rc_name'] ) ) : '';
 
 			if ( ! wp_verify_nonce( $nonce, 'rc_sdk' ) ) {
 				wp_send_json( array(
@@ -332,6 +332,15 @@ if ( ! class_exists( 'RC_Reviews_Collector' ) ) {
 /**
  * Main Insights Function
  */
+/*
+ * The `rc_*` names below belong to the shared BdThemes Review Collector SDK,
+ * which is vendored identically into several BdThemes plugins. The unprefixed
+ * name IS the cross-plugin lock: the first plugin to load defines it and the
+ * function_exists() guards stop every other copy from loading, so exactly one
+ * review prompt is ever registered. Prefixing them per plugin would defeat that
+ * and show the user one review notice per installed BdThemes plugin.
+ */
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- Shared SDK entry point; the name is the cross-plugin de-duplication lock.
 if ( ! function_exists( 'rc_sdk_automate' ) ) {
 	function rc_sdk_automate( $params ) {
 		if ( class_exists( 'RC_Reviews_Collector' ) ) {

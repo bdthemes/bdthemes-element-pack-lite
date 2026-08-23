@@ -57,7 +57,10 @@ final class Manager
     public function load_module_instance($module)
     {
 
-        if (isset($_GET['page']) && 'element_pack_options' == $_GET['page']) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only screen check, no state is changed.
+        $current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+
+        if ('element_pack_options' == $current_page) {
             return;
         }
 

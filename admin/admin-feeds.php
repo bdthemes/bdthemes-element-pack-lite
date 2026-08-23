@@ -295,6 +295,7 @@ class Admin_Feeds {
 	}
 }
 
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- File-scoped config for this include, not a plugin global.
 $settings = array(
 	'feed_title'       => 'BdThemes News & Updates',
 	'transient_key'    => 'bdthemes_product_feeds',

@@ -38,6 +38,11 @@ const TEXT_DOMAIN = 'bdthemes-element-pack-lite';
 /** Prefix for options, hooks, nonces and user meta. Must be unique per plugin. */
 const KEY_PREFIX = 'bdthemes_ep_secfix';
 
+// Every hook below is named KEY_PREFIX . '_something', i.e. it always resolves to
+// 'bdthemes_ep_secfix_*'. The sniff cannot evaluate the constant, so it reports
+// these as unprefixed.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Names resolve to the 'bdthemes_ep_secfix' prefix.
+
 /** Bump to re-run the scan and re-show the notice to users who dismissed it. */
 const MODULE_VERSION = '1.1.0';
 
@@ -557,7 +562,9 @@ function find_infected_options() {
 		. implode( ' OR ', $where )
 		. ' ) AND option_name != %s LIMIT 200';
 
-	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- placeholders built above, values passed to prepare().
+	// One-off remediation scan of wp_options; there is nothing worth caching and
+	// no core API that can express this LIKE search.
+	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Placeholders built above, values passed to prepare().
 	$names = $wpdb->get_col( $wpdb->prepare( $sql, $params ) );
 
 	return is_array( $names ) ? $names : array();

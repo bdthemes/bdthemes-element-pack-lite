@@ -42,13 +42,13 @@ class Svg_Image extends Module_Base {
 
 		public function get_script_depends() {
 		if ( $this->ep_is_edit_mode() ) {
-			if ( true == is_ep_pro() ) {
+			if ( true == element_pack_is_pro() ) {
 				return [ 'draw-svg-plugin-js', 'scroll-trigger', 'ep-scripts' ];
 			} else {
 				return [ 'ep-scripts' ];
 			}
 		} else {
-			if ( true == is_ep_pro() ) {
+			if ( true == element_pack_is_pro() ) {
 				return [ 'gsap', 'draw-svg-plugin-js', 'scroll-trigger', 'ep-svg-image' ];
 			} else {
 				return [];
@@ -192,7 +192,7 @@ class Svg_Image extends Module_Base {
 			]
 		);
 
-		if ( true === is_ep_pro() ) {
+		if ( true === element_pack_is_pro() ) {
 
 			$this->add_control(
 				'svg_image_draw',
@@ -508,7 +508,7 @@ class Svg_Image extends Module_Base {
 			);
 		}
 
-		if ( true !== is_ep_pro() ) {
+		if ( true !== element_pack_is_pro() ) {
 			$this->add_control(
 				'on_hover_animation',
 				[ 
@@ -1282,7 +1282,7 @@ class Svg_Image extends Module_Base {
 	public function render_image() {
 		$settings = $this->get_settings_for_display();
 
-		if ( true !== is_ep_pro() ) {
+		if ( true !== element_pack_is_pro() ) {
 			if ( $settings['on_hover_animation'] ) {
 				$this->add_render_attribute( 'svg-image', 'class', 'bdt-animation-stroke' );
 				$this->add_render_attribute( 'svg-image', 'data-bdt-svg', 'stroke-animation: true' );
@@ -1316,7 +1316,7 @@ class Svg_Image extends Module_Base {
 		$has_caption = $this->has_caption( $settings );
 		$this->add_render_attribute( 'wrapper', 'class', 'elementor-image bdt-svg-image bdt-animation-toggle' );
 
-		if ( true !== is_ep_pro() ) {
+		if ( true !== element_pack_is_pro() ) {
 			$parallax_stroke   = 100 - ( isset( $settings['parallax_effects_stroke_value']['size'] ) ? $settings['parallax_effects_stroke_value']['size'] : 0 );
 			$parallax_viewport = ( isset( $settings['parallax_effects_viewport_value']['size'] ) ? $settings['parallax_effects_viewport_value']['size'] : 0.7 );
 			if ( $settings['svg_parallax_effects_show'] ) {

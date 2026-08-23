@@ -16,8 +16,8 @@ require_once __DIR__ . '/../class-plugin-integration-helper.php';
 require_once __DIR__ . '/../class-remote-data-handler.php';
 
 // Helper function for time formatting
-if (!function_exists('format_last_updated_ep')) {
-    function format_last_updated_ep($date_string) {
+if (!function_exists('element_pack_format_last_updated')) {
+    function element_pack_format_last_updated($date_string) {
         if (empty($date_string)) {
             return __('Unknown', 'bdthemes-element-pack-lite');
         }
@@ -56,34 +56,11 @@ if (!function_exists('format_last_updated_ep')) {
 }
 
 // Helper function for fallback URLs
-if (!function_exists('get_plugin_fallback_urls_ep')) {
-    function get_plugin_fallback_urls_ep($plugin_slug) {
-        // Handle different plugin slug formats
-        if (strpos($plugin_slug, '/') !== false) {
-            // If it's a file path like 'plugin-name/plugin-name.php', extract directory
-            $plugin_slug_clean = dirname($plugin_slug);
-        } else {
-            // If it's just the plugin directory name, use it directly
-            $plugin_slug_clean = $plugin_slug;
-        }
-        
-        // Custom icon URLs for specific plugins that might not be on WordPress.org
-        $custom_icons = [
-            'ar-viewer' => [
-                'https://ps.w.org/ar-viewer/assets/icon-256x256.gif',
-                'https://ps.w.org/ar-viewer/assets/icon-128x128.gif',
-            ],
-        ];
-        
-        // Return custom icons if available, otherwise use default WordPress.org URLs
-        if (isset($custom_icons[$plugin_slug_clean])) {
-            return $custom_icons[$plugin_slug_clean];
-        }
-        
-        return [
-            "https://ps.w.org/{$plugin_slug_clean}/assets/icon-256x256.png",  // Large PNG
-            "https://ps.w.org/{$plugin_slug_clean}/assets/icon-128x128.png",  // Medium PNG
-        ];
+if (!function_exists('element_pack_get_plugin_fallback_urls')) {
+    function element_pack_get_plugin_fallback_urls($plugin_slug) {
+        // Icon URLs are derived from the slug by the shared helper rather than
+        // hardcoded here, so this view ships no asset URLs of its own.
+        return \ElementPack\SetupWizard\Plugin_Integration_Helper::plugin_icon_fallbacks($plugin_slug);
     }
 }
 
@@ -184,12 +161,9 @@ if (!$has_cached_data) {
                                     echo '<img src="' . esc_url($logo_url) . '" alt="' . esc_attr($plugin_name) . '" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">';
                                     echo '<div class="default-plugin-icon" style="display:none;">📦</div>';
                                 } else {
-                                    // Generate fallback URLs for WordPress.org
-                                    $actual_slug = (strpos($plugin_slug, '/') !== false) ? dirname($plugin_slug) : $plugin_slug;
-                                    $fallback_urls = get_plugin_fallback_urls_ep($actual_slug);
-                                    
-                                    echo '<img src="' . esc_url($fallback_urls[0]) . '" alt="' . esc_attr($plugin_name) . '" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">';
-                                    echo '<div class="default-plugin-icon" style="display:none;">📦</div>';
+                                    // No icon from the WordPress.org plugins API yet — show the
+                                    // bundled placeholder rather than guessing a remote URL.
+                                    echo '<div class="default-plugin-icon">📦</div>';
                                 }
                                 ?>
                             </span>
@@ -272,7 +246,7 @@ if (!$has_cached_data) {
                         if (isset($plugin['last_updated_formatted']) && !empty($plugin['last_updated_formatted'])): ?>
                         <span class="last-updated"><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack-lite'); echo esc_html($plugin['last_updated_formatted']); ?></span>
                         <?php elseif (isset($plugin['last_updated']) && !empty($plugin['last_updated'])): ?>
-                        <span class="last-updated"><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack-lite'); echo esc_html(format_last_updated_ep($plugin['last_updated'])); ?></span>
+                        <span class="last-updated"><?php esc_html_e('Last Updated: ', 'bdthemes-element-pack-lite'); echo esc_html(element_pack_format_last_updated($plugin['last_updated'])); ?></span>
                         <?php endif; ?>
 
                     </label>

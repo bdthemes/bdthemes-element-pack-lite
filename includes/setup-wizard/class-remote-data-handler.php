@@ -58,14 +58,18 @@ class Remote_Data_Handler {
         }
 
         // Check if this is an AJAX request for our plugins
+        // Read-only routing check: this only decides whether to preload cached
+        // data for our own screen, it never acts on the request.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only screen detection, no state change.
         if (wp_doing_ajax() && isset($_REQUEST['action'])) {
-            $action = sanitize_text_field($_REQUEST['action']);
+            $action = sanitize_text_field(wp_unslash($_REQUEST['action']));
             if (in_array($action, ['ep_get_plugins'])) {
                 return true;
             }
         }
 
-        $page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
+        $page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
         return $page === 'element_pack_options';
     }
 
