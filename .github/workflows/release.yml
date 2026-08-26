@@ -1,10 +1,4 @@
 name: Publish Release
-
-# Only ONE trigger. Previously both `push: tags` and `release: published`
-# were enabled, so every release started two jobs at the same time. Both jobs
-# ran with `removeArtifacts: true`, so one job deleted/replaced the zip while
-# the other was still uploading it -> corrupt/partial asset on the release
-# page (and "Failed to upload artifact ... Not Found" failures).
 on:
   release:
     types: [published]
