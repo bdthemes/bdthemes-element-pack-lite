@@ -1,61 +1,106 @@
 name: Publish Release
 
+# Only ONE trigger. Previously both `push: tags` and `release: published`
+# were enabled, so every release started two jobs at the same time. Both jobs
+# ran with `removeArtifacts: true`, so one job deleted/replaced the zip while
+# the other was still uploading it -> corrupt/partial asset on the release
+# page (and "Failed to upload artifact ... Not Found" failures).
 on:
-  push:
-    tags:
-      - '*'
   release:
     types: [published]
 
 permissions:
   contents: write
 
+# Belt and braces: never allow two release jobs for the same tag to overlap.
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  PLUGIN_SLUG: bdthemes-element-pack-lite
+
 jobs:
-  release-pro:
+  release:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Create bdthemes-element-pack-lite directory and move files
+      - name: Build plugin directory
         run: |
-          mkdir -p bdthemes-element-pack-lite &&
-          find . -maxdepth 1 -not -name 'bdthemes-element-pack-lite' -exec mv {} bdthemes-element-pack-lite \;
+          set -euo pipefail
 
-      - name: Archive release
-        uses: thedoctor0/zip-release@0.7.6
-        with:
-          filename: 'bdthemes-element-pack-lite.zip'
-          exclusions: "/*node_modules/* /*less/* /*tests/* /*gruntfile.js /*package.json /*package-lock.json /*sync.ffs_db /*.idea/* /*.DS_Store /*.gitignore /*.github/* /*.git/* /*LICENSE /*.eslintrc /*.gitattributes /*.prettierrc"
+          # Copy the plugin into a folder named after the slug so the zip
+          # extracts as bdthemes-element-pack-lite/... (WordPress requirement).
+          BUILD_DIR="$RUNNER_TEMP/build/$PLUGIN_SLUG"
+          mkdir -p "$BUILD_DIR"
+
+          rsync -a ./ "$BUILD_DIR/" \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '.gitignore' \
+            --exclude '.gitattributes' \
+            --exclude '.idea' \
+            --exclude '.DS_Store' \
+            --exclude '.eslintrc' \
+            --exclude '.prettierrc' \
+            --exclude 'node_modules' \
+            --exclude 'tests' \
+            --exclude 'test' \
+            --exclude 'gruntfile.js' \
+            --exclude 'package.json' \
+            --exclude 'package-lock.json' \
+            --exclude '*sync.ffs_db' \
+            --exclude 'src/uikit-less' \
+            --exclude '*.zip'
+
+          echo "BUILD_DIR=$RUNNER_TEMP/build" >> "$GITHUB_ENV"
+
+          echo "Top level of build dir:"
+          ls -la "$BUILD_DIR"
+
+      - name: Create zip archive
+        run: |
+          set -euo pipefail
+          cd "$BUILD_DIR"
+          rm -f "$GITHUB_WORKSPACE/$PLUGIN_SLUG.zip"
+          zip -r -X "$GITHUB_WORKSPACE/$PLUGIN_SLUG.zip" "$PLUGIN_SLUG" -x '*.DS_Store'
 
       - name: Verify release archive
         run: |
-          echo "PWD:"
-          pwd
-
-          echo "Files:"
-          ls -lah
-
-          echo "ZIP:"
-          ls -lah ./bdthemes-element-pack-lite.zip
+          set -euo pipefail
+          ZIP="$GITHUB_WORKSPACE/$PLUGIN_SLUG.zip"
 
           echo "ZIP size:"
-          du -h ./bdthemes-element-pack-lite.zip
+          ls -lah "$ZIP"
+          test -s "$ZIP"
 
           echo "ZIP integrity:"
-          unzip -t ./bdthemes-element-pack-lite.zip
+          unzip -tq "$ZIP"
 
-          test -s ./bdthemes-element-pack-lite.zip
+          echo "Main plugin file present at expected path:"
+          unzip -l "$ZIP" | grep -q " $PLUGIN_SLUG/$PLUGIN_SLUG.php$"
+          unzip -l "$ZIP" | grep -q " $PLUGIN_SLUG/readme.txt$"
 
-      - name: Create Release
+          echo "Nothing unwanted leaked into the zip:"
+          ! unzip -l "$ZIP" | grep -E " $PLUGIN_SLUG/(\.git/|\.github/|node_modules/|tests?/|package\.json|gruntfile\.js|src/uikit-less/)"
+
+          echo "File count:"
+          unzip -l "$ZIP" | tail -1
+
+      - name: Upload zip to release
         uses: ncipollo/release-action@v1.14.0
         with:
-          artifacts: './bdthemes-element-pack-lite.zip'
+          artifacts: ${{ github.workspace }}/${{ env.PLUGIN_SLUG }}.zip
           token: ${{ secrets.TOKEN }}
-          removeArtifacts: true
+          tag: ${{ github.event.release.tag_name }}
           allowUpdates: true
+          replacesArtifacts: true
+          removeArtifacts: false
           artifactErrorsFailBuild: true
           makeLatest: true
           omitBodyDuringUpdate: true
           omitNameDuringUpdate: true
-          tag: ${{ github.ref_name }}
+          omitPrereleaseDuringUpdate: true
+          omitDraftDuringUpdate: true
