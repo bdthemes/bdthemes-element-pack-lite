@@ -1,7 +1,7 @@
-=== Element Pack Lite - Addons for Elementor ===
+=== Element Pack Addons for Elementor - Elementor Widgets, Elementor Templates, Elementor Addons ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik, shmusuf, arafatakashakku, shaikatazim, shamim496
 Donate link: http://bdthemes.com/
-Tags: elementor addons, elementor widgets, elementor templates, elementor extensions, woocommerce
+Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets, elementor extensions, elementor addon, elementor widget, woocommerce elementor, addons
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
@@ -12,7 +12,7 @@ Elementor requires at least: 4.0.0
 Elementor tested up to: 4.2.3
 
 
-Elementor addons with 300+ widgets, WooCommerce elements, ready templates, mega menu and header footer builder.
+Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
 
 == Description ==
 
