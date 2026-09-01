@@ -123,6 +123,15 @@ class Module extends Element_Pack_Module_Base {
             $widget_settings = $this->get_widget_settings($post_id, $widget_id);
             $contact_required = isset($widget_settings['contact_number_required']) && $widget_settings['contact_number_required'] === 'yes';
 
+            // Read the Receive IP Information toggle from the stored widget settings rather
+            // than a hidden form field, so a submitter cannot suppress their own IP by
+            // tampering with the POST. Widgets saved before this control existed carry no
+            // value, so default to including it and keep the previous behaviour.
+            $receive_ip_information = true;
+            if (is_array($widget_settings) && isset($widget_settings['receive_ip_information'])) {
+                $receive_ip_information = ('yes' === $widget_settings['receive_ip_information']);
+            }
+
             foreach ($form_data as $key => $value) {
                 $value = trim($value);
                 // Skip validation for contact field if it's optional and empty
@@ -206,7 +215,7 @@ class Module extends Element_Pack_Module_Base {
                 // get the website's name and puts it in front of the subject
                 $email_subject = "[" . get_bloginfo('name') . "] " . $contact_subject;
                 // get the message from the form and add the IP address of the user below it
-                $email_message = $this->message_html($form_data['message'], $form_data['name'], $form_data['email'], $contact_number);
+                $email_message = $this->message_html($form_data['message'], $form_data['name'], $form_data['email'], $contact_number, $receive_ip_information);
                 // set the e-mail headers with the user's name, e-mail address and character encoding
                 // Explicitly remove newlines to prevent header injection
                 $safe_name = str_replace(["\r", "\n"], '', $form_data['name']);
@@ -238,7 +247,7 @@ class Module extends Element_Pack_Module_Base {
         die;
     }
 
-    public function message_html($message, $name, $email, $number = '') {
+    public function message_html($message, $name, $email, $number = '', $receive_ip = true) {
 
         $fullmsg = "<html lang='en-US'><body style='background-color: #f5f5f5; padding: 35px;'>";
         $fullmsg .= "<div style='max-width: 768px; margin: 0 auto; background-color: #fff; padding: 50px 35px;'>";
@@ -247,7 +256,7 @@ class Module extends Element_Pack_Module_Base {
         $fullmsg .= "<b>" . esc_html($name) . "<b><br>";
         $fullmsg .= esc_html($email) . "<br>";
         $fullmsg .= ($number) ? esc_html($number) . "<br>" : "";
-        $fullmsg .= "<em>IP: " . Utils::get_client_ip() . "</em>";
+        $fullmsg .= $receive_ip ? "<em>IP: " . Utils::get_client_ip() . "</em>" : "";
         $fullmsg .= "</div>";
         $fullmsg .= "</body></html>";
 
