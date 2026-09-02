@@ -577,6 +577,18 @@ class Contact_Form extends Module_Base {
 		);
 
 		$this->add_control(
+			'receive_ip_information',
+			[ 
+				'label'       => esc_html__( 'Receive IP Information', 'bdthemes-element-pack-lite' ) . BDTEP_NC,
+				'description' => esc_html__( 'Include the sender IP address at the bottom of the notification email.', 'bdthemes-element-pack-lite' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'default'     => 'yes',
+				'render_type' => 'none',
+				'separator'   => 'before',
+			]
+		);
+
+		$this->add_control(
 			'redirect_after_submit',
 			[ 
 				'label'     => esc_html__( 'Redirect After Submit', 'bdthemes-element-pack-lite' ),
