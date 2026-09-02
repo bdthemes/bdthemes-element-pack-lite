@@ -9,7 +9,7 @@ Stable tag: 8.8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.2.3
+Elementor tested up to: 4.2.4
 
 
 Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
@@ -302,7 +302,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.8.2 [1st September 2026] =
+= 8.8.2 [2nd September 2026] =
 
 * Added: Simple Contact Form option to include or omit the sender IP address in the notification email
 
