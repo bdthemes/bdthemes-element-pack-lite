@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.2
+Stable tag: 8.8.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -302,7 +302,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.8.3 [13th September 2026] =
+= 8.8.3 [15th September 2026] =
 
 * Added: Bundled logos for the recommended plugins, so the admin dashboard and the setup wizard integration step show a real icon immediately instead of waiting on the WordPress.org API
 * Changed: Other Plugins tab on the admin dashboard now uses the same card grid as the setup wizard integration step, without the short description
