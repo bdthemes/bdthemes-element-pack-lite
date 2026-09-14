@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.2
+Stable tag: 8.8.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -301,6 +301,21 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Widgets List
 
 == Changelog ==
+
+= 8.8.3 [15th September 2026] =
+
+* Added: Bundled logos for the recommended plugins, so the admin dashboard and the setup wizard integration step show a real icon immediately instead of waiting on the WordPress.org API
+* Changed: Other Plugins tab on the admin dashboard now uses the same card grid as the setup wizard integration step, without the short description
+* Changed: Core Widgets, 3rd Party Widgets and Extensions now open on the All filter instead of Free
+* Fixed: Setup wizard could not install any plugin; the selected plugins were rejected as an invalid plugins array before anything was downloaded
+* Fixed: Install button on the Other Plugins tab sent two installation requests for the same plugin, which could report success and failure at the same time
+* Fixed: Plugins that are closed on WordPress.org are no longer listed with empty ratings and an install button that cannot succeed
+* Fixed: Plugin icons returned by the WordPress.org API were never used, because the icon sizes were read under the wrong keys
+* Fixed: Plugin titles showed HTML codes such as &#8211; instead of the dash and ampersand characters
+* Fixed: Template kit import failed on kits that do not declare any required plugins
+* Fixed: Active button on the plugin cards stretched to the full card width and its icon was misaligned
+* Fixed: Dashboard charts did not render and logged "Cannot use import statement outside a module", because the bundled Chart.js was a module build loaded as a regular script
+* Fixed: Business Hours widget logged "jclock library is not loaded" and the dynamic clock never started, because the bundled jclock library was never registered
 
 = 8.8.2 [2nd September 2026] =
 

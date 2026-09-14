@@ -258,7 +258,15 @@ class Setup_Wizard {
 
 		$plugin_slug = sanitize_text_field( wp_unslash( $plugin_slug ) );
 
-		if ( ! preg_match( '#^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*\.php$#', $plugin_slug ) ) {
+		// The integration step posts WordPress.org slugs ("ultimate-post-kit"),
+		// because that is all the plugins API reports for something that is not
+		// installed yet; the main file is only knowable afterwards. Accept that
+		// form as well as a full "dir/file.php" basename, and let
+		// get_plugin_file() resolve a slug to its real file.
+		$is_basename = (bool) preg_match( '#^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*\.php$#', $plugin_slug );
+		$is_slug     = (bool) preg_match( '#^[A-Za-z0-9][A-Za-z0-9._-]*$#', $plugin_slug );
+
+		if ( ! $is_basename && ! $is_slug ) {
 			return '';
 		}
 
@@ -311,12 +319,15 @@ class Setup_Wizard {
 
 		// $upgrader = new \Plugin_Upgrader();
 
-        $installedPlugins = get_plugins();
 		$results = array();
 
 		foreach ( $plugin_slugs as $plugin_slug ) {
+            // The request carries a wp.org slug, so the main file is whatever
+            // the installed plugin actually uses ('' while not installed).
+            $plugin_file = $this->get_plugin_file( $plugin_slug );
+
             // skip when the plugin is already active
-            if (is_plugin_active($plugin_slug)) {
+            if ('' !== $plugin_file && is_plugin_active($plugin_file)) {
                 $results[] = array(
                     'slug'    => $plugin_slug,
                     'success' => true,
@@ -326,7 +337,7 @@ class Setup_Wizard {
             }
 
             // Download the plugin if the plugin is not installed
-            if (!isset($installedPlugins[$plugin_slug])) {
+            if ('' === $plugin_file) {
                 $slug = explode('/', $plugin_slug)[0];
                 $api = plugins_api( 'plugin_information', array( 'slug' => $slug ) );
 
@@ -348,13 +359,27 @@ class Setup_Wizard {
                     );
                     continue;
                 }
+
+                // The plugin list is cached; refresh it so the file that was
+                // just written is visible, then resolve the real basename.
+                wp_clean_plugins_cache( false );
+                $plugin_file = $this->get_plugin_file( $plugin_slug );
+
+                if ( '' === $plugin_file ) {
+                    $results[] = array(
+                        'slug'    => $plugin_slug,
+                        'success' => false,
+                        'message' => 'Installed, but the plugin file could not be located.',
+                    );
+                    continue;
+                }
             }
 
             // active the plugin
-            if ( is_plugin_inactive($plugin_slug) ) {
+            if ( is_plugin_inactive($plugin_file) ) {
                 // validate_plugin() confirms the file is a real plugin inside
                 // WP_PLUGIN_DIR before we hand it to activate_plugin().
-                $is_valid_plugin = validate_plugin( $plugin_slug );
+                $is_valid_plugin = validate_plugin( $plugin_file );
 
                 if ( is_wp_error( $is_valid_plugin ) ) {
                     $results[] = array(
@@ -365,7 +390,7 @@ class Setup_Wizard {
                     continue;
                 }
 
-                $activation_result = activate_plugin( $plugin_slug );
+                $activation_result = activate_plugin( $plugin_file );
                 if ( is_wp_error( $activation_result ) ) {
                     $results[] = array(
                         'slug'    => $plugin_slug,
@@ -389,21 +414,31 @@ class Setup_Wizard {
 	}
 
 	/**
-	 * Get the main plugin file path for a given slug.
+	 * Resolve a plugin reference to the installed plugin's main file.
 	 *
-	 * @param string $slug Plugin slug.
-	 * @return string|false Plugin file path or false if not found.
+	 * Accepts either a WordPress.org slug ("ultimate-post-kit") or a full
+	 * basename ("ultimate-post-kit/ultimate-post-kit.php"). Matching is exact
+	 * on the plugin's own directory: a substring match would let "ai-image"
+	 * resolve to an unrelated "ai-image-extras/..." that happens to be
+	 * installed.
+	 *
+	 * @param string $slug Plugin slug or basename.
+	 * @return string Plugin file path, or '' when the plugin is not installed.
 	 */
 	private function get_plugin_file( $slug ) {
 		$plugins = get_plugins();
 
+		if ( false !== strpos( $slug, '/' ) ) {
+			return isset( $plugins[ $slug ] ) ? $slug : '';
+		}
+
 		foreach ( $plugins as $file => $plugin ) {
-			if ( strpos( $file, $slug ) !== false ) {
+			if ( dirname( $file ) === $slug ) {
 				return $file;
 			}
 		}
 
-		return false;
+		return '';
 	}
     
     /**
@@ -616,7 +651,10 @@ add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
     try {
         $result = $import_export_module->upload_kit($kit_zip_path, 'local');
         $manifest = $result['manifest'] ?? [];
-        $plugins = $manifest['plugins'];
+        // A kit may legitimately declare no plugins; every other manifest key
+        // below is read defensively, and an unguarded read here turned such a
+        // kit into "Import failed: foreach() argument must be of type array".
+        $plugins = $manifest['plugins'] ?? [];
 
         $missingPlugins = [];
         foreach ($plugins as $plugin) {
@@ -633,7 +671,11 @@ add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
             ]);
         }
 
-        $tmp_folder_id = $result['session'];
+        $tmp_folder_id = $result['session'] ?? '';
+
+        if ('' === $tmp_folder_id) {
+            wp_send_json_error(['message' => esc_html__('Import failed: the uploaded kit returned no session.', 'bdthemes-element-pack-lite')]);
+        }
         $includes = [];
         $selectedCustomPostTypes = [];
 

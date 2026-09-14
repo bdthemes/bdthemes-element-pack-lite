@@ -187,8 +187,10 @@ class Remote_Data_Handler {
         // Get recommended flags from Plugin_Integration_Helper (key may be 'slug' or 'slug/script.php')
         $recommended_by_slug = [];
         $helper_file = __DIR__ . '/class-plugin-integration-helper.php';
+        $helper_loaded = false;
         if (file_exists($helper_file)) {
             require_once $helper_file;
+            $helper_loaded = true;
             $predefined = \ElementPack\SetupWizard\Plugin_Integration_Helper::get_predefined_plugins();
             foreach ($predefined as $key => $config) {
                 $dir = (strpos($key, '/') !== false) ? dirname($key) : $key;
@@ -208,12 +210,21 @@ class Remote_Data_Handler {
             if (!empty($data['last_updated'])) {
                 $last_updated_formatted = self::format_last_updated($data['last_updated']);
             }
+
+            // Prefer the logo bundled with Element Pack; fall back to the icon
+            // returned by the WordPress.org plugins API.
+            $local_logo = $helper_loaded
+                ? \ElementPack\SetupWizard\Plugin_Integration_Helper::plugin_logo_url($slug)
+                : '';
             
             $formatted_plugins[] = [
-                'name' => $data['name'] ?? '',
+                // The plugins API returns HTML-encoded text ("Prime Slider &#8211; …").
+                // Both screens escape before printing, so hand them plain text
+                // instead of entities that would otherwise be escaped twice.
+                'name' => self::decode_entities($data['name'] ?? ''),
                 'slug' => $data['slug'] ?? '',
-                'description' => $data['description'] ?? '',
-                'logo' => $data['logo'] ?? '',
+                'description' => self::decode_entities($data['description'] ?? ''),
+                'logo' => $local_logo ?: ($data['logo'] ?? ''),
                 'rating' => $data['rating'] ?? 0,
                 'rating_percentage' => $data['rating_percentage'] ?? 0,
                 'num_ratings' => $data['num_ratings'] ?? 0,
@@ -298,6 +309,20 @@ class Remote_Data_Handler {
         }
         
         return null;
+    }
+
+    /**
+     * Decode HTML entities returned by the WordPress.org plugins API.
+     *
+     * @param string $text Raw text from the API.
+     * @return string Plain text.
+     */
+    private static function decode_entities($text) {
+        if (!is_string($text) || '' === $text) {
+            return '';
+        }
+
+        return html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     }
 
     /**
@@ -399,6 +424,14 @@ class Remote_Data_Handler {
             return false;
         }
 
+        // A plugin that is closed or missing on WordPress.org still answers with
+        // a name and a slug, alongside {"error": "closed"}. Without this check
+        // that error body was cached as a real plugin and offered for install
+        // with zeroed stats, no icon and a button that could only ever fail.
+        if (!empty($data['error']) || !empty($data['closed'])) {
+            return false;
+        }
+
         $formatted_data = self::format_plugin_data($data);
         
         if (empty($formatted_data['name']) && empty($formatted_data['slug'])) {
@@ -465,7 +498,11 @@ class Remote_Data_Handler {
      */
     private static function get_valid_plugin_icon($icons) {
         $valid_extensions = ['gif', 'png', 'jpg', 'jpeg', 'svg'];
-        $icon_sizes = ['256', '128', 'default'];
+
+        // The plugins API v1.2 keys icons as "2x"/"1x"/"svg" (and occasionally
+        // "default"); the numeric keys this used to look for never matched, so
+        // the remote icon fallback always came back empty. Largest first.
+        $icon_sizes = ['2x', '256', 'svg', '1x', '128', 'default'];
         
         foreach ($icon_sizes as $size) {
             if (!empty($icons[$size])) {

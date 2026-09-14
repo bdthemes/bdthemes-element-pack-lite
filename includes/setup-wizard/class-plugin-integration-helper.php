@@ -30,6 +30,68 @@ class Plugin_Integration_Helper {
         return [];
     }
 
+
+    /**
+     * Map of plugin slug => bundled logo file name.
+     *
+     * Logos are shipped with the plugin (assets/images/others-plugin-logo/) so
+     * the dashboard and the setup wizard can paint a real icon immediately,
+     * without waiting for — or depending on — the WordPress.org plugins API.
+     *
+     * @return array<string,string>
+     */
+    public static function get_local_logo_map() {
+        return [
+            'bdthemes-element-pack-lite'  => 'element-pack.png',
+            'bdthemes-prime-slider-lite'  => 'prime-slider.png',
+            'ultimate-post-kit'           => 'ultimate-post-kit.png',
+            'ultimate-store-kit'          => 'ultimate-store-kit.png',
+            'zoloblocks'                  => 'zoloblocks.png',
+            'pixel-gallery'               => 'pixel-gallery.png',
+            'live-copy-paste'             => 'live-copy-paste.png',
+            'spin-wheel'                  => 'spin-wheel.png',
+            'ai-image'                    => 'ai-image.png',
+            'dark-reader'                 => 'dark-reader.png',
+            'ar-viewer'                   => 'ar-viewer.png',
+            'smart-admin-assistant'       => 'smart-admin-assistant.png',
+            'website-accessibility'       => 'one-accessibility.png',
+            'launch-guard'                => 'launch-guard.png',
+            'sigma-forms'                 => 'sigma-forms.png',
+            'sigma-media-manager'         => 'sigma-media-manager.png',
+            'sigma-store-locator'         => 'sigma-store-locator.png',
+            'swift-checkout'              => 'swift-checkout.png',
+        ];
+    }
+
+    /**
+     * Resolve the bundled logo URL for a plugin.
+     *
+     * @param string $slug Plugin slug or "slug/file.php" basename.
+     * @return string Logo URL, or empty string when no logo ships for the slug.
+     */
+    public static function plugin_logo_url( $slug ) {
+        if ( ! is_string( $slug ) || '' === $slug ) {
+            return '';
+        }
+
+        // Accept both "slug" and "slug/file.php" forms.
+        $slug = ( strpos( $slug, '/' ) !== false ) ? dirname( $slug ) : $slug;
+
+        $map = self::get_local_logo_map();
+
+        if ( empty( $map[ $slug ] ) ) {
+            return '';
+        }
+
+        $file = 'images/others-plugin-logo/' . $map[ $slug ];
+
+        if ( ! file_exists( BDTEP_ASSETS_PATH . $file ) ) {
+            return '';
+        }
+
+        return BDTEP_ASSETS_URL . $file;
+    }
+
     /**
      * Get predefined plugin configurations
      *
@@ -185,6 +247,10 @@ class Plugin_Integration_Helper {
             $api_slug = (strpos($slug, '/') !== false) ? dirname($slug) : $slug;
             $api_data = $fetched_data[$api_slug] ?? null;
 
+            // Bundled logo wins over the remote icon so the list never waits on
+            // (or depends on) the WordPress.org plugins API to show an icon.
+            $local_logo = self::plugin_logo_url($api_slug);
+
             // Ensure api_data is a valid array with required fields
             if ($api_data && self::validate_plugin_data($api_data)) {
                 // Determine the correct plugin slug format
@@ -193,7 +259,7 @@ class Plugin_Integration_Helper {
                 
                 // Use API data with fallbacks and proper null checking
                 $plugins[] = [
-                    'logo' => $api_data['logo'] ?? ($config['fallback']['logo'] ?? ''),
+                    'logo' => $local_logo ?: ($api_data['logo'] ?? ($config['fallback']['logo'] ?? '')),
                     'rating' => $api_data['rating'] ?? 0,
                     'rating_percentage' => $api_data['rating_percentage'] ?? 0,
                     'num_ratings' => $api_data['num_ratings'] ?? 0,
@@ -218,7 +284,7 @@ class Plugin_Integration_Helper {
                 // Use fallback data with proper null checking
                 $fallback = $config['fallback'] ?? [];
                 $plugins[] = [
-                    'logo' => $fallback['logo'] ?? '',
+                    'logo' => $local_logo ?: ($fallback['logo'] ?? ''),
                     'rating' => $fallback['rating'] ?? 0,
                     'rating_percentage' => 0,
                     'num_ratings' => $fallback['num_ratings'] ?? 0,
