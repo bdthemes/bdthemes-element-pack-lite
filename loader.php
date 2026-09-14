@@ -251,6 +251,13 @@ class Element_Pack_Loader {
         if (element_pack_is_widget_enabled('image-compare')) {
             wp_register_script('image-compare-viewer', BDTEP_ASSETS_URL . 'vendor/js/image-compare-viewer.min.js', ['jquery'], '1.6.2', true);
         }
+        if (element_pack_is_widget_enabled('business-hours')) {
+            // The Business Hours widget lists 'jclock' in get_script_depends(), and
+            // its module script bails with "jclock library is not loaded" when the
+            // plugin is missing. The library ships with the plugin but the handle
+            // was never registered, so the dynamic clock never ran.
+            wp_register_script('jclock', BDTEP_ASSETS_URL . 'vendor/js/jquery.jclock.min.js', ['jquery'], '2.4.3', true);
+        }
         if (element_pack_is_widget_enabled('calendly')) {
             wp_register_script('calendly', BDTEP_ASSETS_URL . 'vendor/js/calendly.min.js', ['jquery'], '0.0.1', true);
         }

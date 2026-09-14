@@ -2076,80 +2076,10 @@ class ElementPack_Admin_Settings {
 			// Start the chart initialization
 			setTimeout(initElementPackCharts, 1000);
 
-			// Handle plugin installation via AJAX
-			jQuery(document).on('click', '.ep-install-plugin', function(e) {
-				e.preventDefault();
-				
-				var $button = jQuery(this);
-				var pluginSlug = $button.data('plugin-slug');
-				var nonce = $button.data('nonce');
-				var originalText = $button.text();
-				
-				// Disable button and show loading state
-				$button.prop('disabled', true)
-					   .text('<?php echo esc_js(__('Installing...', 'bdthemes-element-pack-lite')); ?>')
-					   .addClass('bdt-installing');
-				
-				// Perform AJAX request
-				jQuery.ajax({
-					url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
-					type: 'POST',
-					data: {
-						action: 'ep_install_plugin',
-						plugin_slug: pluginSlug,
-						nonce: nonce
-					},
-					success: function(response) {
-						if (response.success) {
-							// Show success message
-							$button.text('<?php echo esc_js(__('Installed!', 'bdthemes-element-pack-lite')); ?>')
-								   .removeClass('bdt-installing')
-								   .addClass('bdt-installed');
-							
-							// Show success notification
-							if (typeof bdtUIkit !== 'undefined' && bdtUIkit.notification) {
-								bdtUIkit.notification({
-									message: '<span class="dashicons dashicons-yes"></span> ' + response.data.message,
-									status: 'success'
-								});
-							}
-							
-							// Reload the page after 2 seconds to update button states
-							setTimeout(function() {
-								window.location.reload();
-							}, 2000);
-							
-						} else {
-							// Show error message
-							$button.prop('disabled', false)
-								   .text(originalText)
-								   .removeClass('bdt-installing');
-							
-							// Show error notification
-							if (typeof bdtUIkit !== 'undefined' && bdtUIkit.notification) {
-								bdtUIkit.notification({
-									message: '<span class="dashicons dashicons-warning"></span> ' + response.data.message,
-									status: 'danger'
-								});
-							}
-						}
-					},
-					error: function() {
-						// Handle network/server errors
-						$button.prop('disabled', false)
-							   .text(originalText)
-							   .removeClass('bdt-installing');
-						
-						// Show error notification
-						if (typeof bdtUIkit !== 'undefined' && bdtUIkit.notification) {
-							bdtUIkit.notification({
-								message: '<span class="dashicons dashicons-warning"></span> <?php echo esc_js(__('Installation failed. Please try again.', 'bdthemes-element-pack-lite')); ?>',
-								status: 'danger'
-							});
-						}
-					}
-				});
-			});
+			// The Install button handler lives with the markup that creates it,
+			// in includes/setup-wizard/element-pack-others-plugin.php. A second
+			// delegated copy here fired on the same click and sent a duplicate
+			// ep_install_plugin request for the same plugin.
 
 			jQuery(document).ready(function ($) {
                 const getProLink = $('a[href="admin.php?page=element_pack_options_upgrade"]');

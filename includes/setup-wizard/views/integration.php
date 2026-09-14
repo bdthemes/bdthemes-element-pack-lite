@@ -152,17 +152,22 @@ if (!$has_cached_data) {
                         <span class="bdt-flex bdt-flex-middle bdt-flex-between bdt-margin-small-bottom">
                             <span class="bdt-plugin-logo">
                                 <?php 
-                                $logo_url = $plugin['logo'] ?? '';
-                                $plugin_name = $plugin['name'] ?? '';
+                                // The plugins API returns HTML-encoded text; decode it
+                                // so escaping on output does not double-encode.
+                                $plugin_name = html_entity_decode($plugin['name'] ?? '', ENT_QUOTES | ENT_HTML5, 'UTF-8');
                                 $plugin_slug = $plugin['slug'] ?? '';
+
+                                // Bundled logo first, remote icon only as a fallback.
+                                $local_logo = \ElementPack\SetupWizard\Plugin_Integration_Helper::plugin_logo_url($slug_key);
+                                $logo_url   = $local_logo ?: ($plugin['logo'] ?? '');
                                 
                                 if (!empty($logo_url) && filter_var($logo_url, FILTER_VALIDATE_URL)) {
-                                    // Show the original logo from API
+                                    // Bundled Element Pack logo, or the WordPress.org icon.
                                     echo '<img src="' . esc_url($logo_url) . '" alt="' . esc_attr($plugin_name) . '" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">';
                                     echo '<div class="default-plugin-icon" style="display:none;">📦</div>';
                                 } else {
-                                    // No icon from the WordPress.org plugins API yet — show the
-                                    // bundled placeholder rather than guessing a remote URL.
+                                    // No bundled logo for this slug and no icon from the
+                                    // WordPress.org plugins API yet — show the placeholder.
                                     echo '<div class="default-plugin-icon">📦</div>';
                                 }
                                 ?>
@@ -191,7 +196,7 @@ if (!$has_cached_data) {
                         </span>
                         <div class="bdt-flex bdt-flex-middle">
                                 <span class="bdt-plugin-name">
-                                    <?php echo wp_kses_post($plugin['name']); ?>
+                                    <?php echo esc_html($plugin_name); ?>
                                 </span>
                             </div>
                             
@@ -329,6 +334,14 @@ jQuery(document).ready(function($) {
         'retry'               => __( 'Retry', 'bdthemes-element-pack-lite' ),
     ] ); ?>;
     let integrationDataLoaded = false;
+
+    // Plugin data comes from a remote catalog; escape it before it is
+    // concatenated into markup.
+    function epEsc(value) {
+        return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
     
     // Function to load integration data
     function loadIntegrationData() {
@@ -379,7 +392,7 @@ jQuery(document).ready(function($) {
                 const isRecommended = plugin.recommended && !isActive;
                 
                 html += `
-                    <label class="plugin-item" data-slug="${plugin.slug}">
+                    <label class="plugin-item" data-slug="${epEsc(plugin.slug)}">
                         <span class="bdt-flex bdt-flex-middle bdt-flex-between bdt-margin-small-bottom">
                             <span class="bdt-plugin-logo">
                                 ${generatePluginLogo(plugin)}
@@ -389,22 +402,22 @@ jQuery(document).ready(function($) {
                                 ${isActive ? '<span class="active-badge">' + epI18n.active + '</span>' : ''}
                                 ${!isActive ? `
                                     <label class="switch">
-                                        <input type="checkbox" class="plugin-slider-checkbox" ${plugin.recommended ? 'checked' : ''} name="plugins[]${plugin.slug}">
+                                        <input type="checkbox" class="plugin-slider-checkbox" ${plugin.recommended ? 'checked' : ''} name="plugins[]${epEsc(plugin.slug)}">
                                         <span class="slider round"></span>
                                     </label>
                                 ` : ''}
                             </div>
                         </span>
                         <div class="bdt-flex bdt-flex-middle">
-                            <span class="bdt-plugin-name">${plugin.name}</span>
+                            <span class="bdt-plugin-name">${epEsc(plugin.name)}</span>
                         </div>
                         <span class="active-installs">
                             ${epI18n.active_installs}
                             <span class="installs-count">${plugin.active_installs_count > 0 ? plugin.active_installs_count.toLocaleString() + '+' : epI18n.fewer_than_10}</span>
                         </span>
-                        ${plugin.downloaded_formatted ? `<span class="downloads">${epI18n.downloads} ${plugin.downloaded_formatted}</span>` : ''}
+                        ${plugin.downloaded_formatted ? `<span class="downloads">${epI18n.downloads} ${epEsc(plugin.downloaded_formatted)}</span>` : ''}
                         <div class="rating-section">
-                            <div class="wporg-ratings" title="${plugin.rating} ${epI18n.out_of_5_stars}" style="color:var(--wp--preset--color--pomegrade-1, #e26f56);">
+                            <div class="wporg-ratings" title="${epEsc(plugin.rating)} ${epI18n.out_of_5_stars}" style="color:var(--wp--preset--color--pomegrade-1, #e26f56);">
                                 ${generateStarRating(plugin.rating)}
                             </div>
                             <span class="rating-text">
@@ -412,7 +425,7 @@ jQuery(document).ready(function($) {
                                 ${plugin.num_ratings > 0 ? `<span class="rating-count">(${plugin.num_ratings.toLocaleString()} ${epI18n.ratings})</span>` : ''}
                             </span>
                         </div>
-                        ${plugin.last_updated_formatted ? `<span class="last-updated">${epI18n.last_updated} ${plugin.last_updated_formatted}</span>` : ''}
+                        ${plugin.last_updated_formatted ? `<span class="last-updated">${epI18n.last_updated} ${epEsc(plugin.last_updated_formatted)}</span>` : ''}
                     </label>
                 `;
             });
@@ -424,11 +437,11 @@ jQuery(document).ready(function($) {
     // Helper function to generate plugin logo
     function generatePluginLogo(plugin) {
         if (plugin.logo && plugin.logo.match(/^https?:\/\//)) {
-            return `<img src="${plugin.logo}" alt="${plugin.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            return `<img src="${epEsc(plugin.logo)}" alt="${epEsc(plugin.name)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="default-plugin-icon" style="display:none;">📦</div>`;
         } else {
             const slug = plugin.slug.includes('/') ? plugin.slug.split('/')[0] : plugin.slug;
-            return `<div class="default-plugin-icon" aria-label="${plugin.name}">📦</div>`;
+            return `<div class="default-plugin-icon" aria-label="${epEsc(plugin.name)}">📦</div>`;
         }
     }
     
