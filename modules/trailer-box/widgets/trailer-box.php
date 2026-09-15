@@ -2160,7 +2160,7 @@ class Trailer_Box extends Module_Base {
 		?>
 		<#
 		var origin   = 'bdt-position-' + ( settings.origin || 'bottom-left' );
-		var titleTag = settings.title_tags || 'h3';
+		var titleTag = elementor.helpers.validateHTMLTag( settings.title_tags || 'h3' );
 		var iconHTML = elementor.helpers.renderIcon( view, settings.button_icon, { 'aria-hidden': true, 'class': 'fa-fw' }, 'i', 'object' );
 		var migrated = elementor.helpers.isIconMigrated( settings, 'button_icon' );
 		#>

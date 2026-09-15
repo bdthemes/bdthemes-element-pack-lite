@@ -1239,14 +1239,14 @@ class Static_Grid_Tab extends Module_Base {
 						<div class="bdt-ep-static-grid-tab-desc">
 							<div class="bdt-post-grid-desc-inner bdt-gt-mh">
 								<# if ( 'yes' === settings.show_title && item.title ) { #>
-								<{{ settings.title_tag }} class="bdt-ep-static-grid-tab-main-title">{{{ item.title }}}</{{ settings.title_tag }}>
+								<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-ep-static-grid-tab-main-title">{{{ item.title }}}</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 								<# } #>
 								<# if ( 'yes' === settings.show_text && item.text ) { #>
 								<div class="bdt-ep-static-grid-tab-excerpt">{{{ item.text }}}</div>
 								<# } #>
 								<# if ( 'yes' === settings.show_readmore && item.readmore_link && item.readmore_link.url ) { #>
 								<div class="bdt-ep-static-grid-tab-readmore-wrap">
-									<a class="<# print( readmoreClass ); #>"<# print( linkAttrs( item.readmore_link ) ); #>>
+									<a class="<# print( _.escape( readmoreClass ) ); #>"<# print( linkAttrs( item.readmore_link ) ); #>>
 										<# if ( hasRmIcon && 'left' === iconAlign ) { #>
 										<span class="bdt-button-icon-align-left">{{{ iconHTML.value }}}</span>
 										<# } #>

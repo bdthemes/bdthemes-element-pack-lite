@@ -123,12 +123,38 @@ class Module extends Element_Pack_Module_Base {
 		],
 	];
 
+	/**
+	 * Whether a name is one of the registered social media keys.
+	 *
+	 * This is the single allow-list every caller must validate against before a
+	 * submitted value is used to build markup.
+	 *
+	 * @param mixed $media_name Value submitted through the repeater control.
+	 * @return bool
+	 */
+	public static function is_social_media( $media_name ) {
+		return is_string( $media_name ) && isset( self::$medias[ $media_name ] );
+	}
+
+	/**
+	 * Look a social media entry up, or return the whole map when called with no
+	 * argument.
+	 *
+	 * The lookup is keyed on an explicit null check rather than on truthiness:
+	 * a falsy-but-present key ('' or '0', both reachable from a repeater row
+	 * saved with an empty Social Media select) used to fall through to the
+	 * "return everything" branch, so callers testing `null === get_social_media( $x )`
+	 * as an allow-list saw the full array and treated the value as valid.
+	 *
+	 * @param string|null $media_name Registered key, or null for the full map.
+	 * @return array|null Entry, the full map, or null when the key is unknown.
+	 */
 	public static function get_social_media( $media_name = null ) {
-		if ( $media_name ) {
-			return isset( self::$medias[ $media_name ] ) ? self::$medias[ $media_name ] : null;
+		if ( null === $media_name ) {
+			return self::$medias;
 		}
 
-		return self::$medias;
+		return self::is_social_media( $media_name ) ? self::$medias[ $media_name ] : null;
 	}
 
 	public function get_name() {

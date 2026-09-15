@@ -1258,15 +1258,15 @@ class Scrollnav extends Module_Base {
 							tippyExtra += ' data-tippy';
 							tippyExtra += ' data-tippy-content="' + _.escape( item.nav_title || '' ) + '"';
 							if ( settings.dotnav_tooltip_placement ) {
-								tippyExtra += ' data-tippy-placement="' + settings.dotnav_tooltip_placement + '"';
+								tippyExtra += ' data-tippy-placement="' + _.escape( settings.dotnav_tooltip_placement ) + '"';
 							}
 							if ( settings.dotnav_tooltip_animation ) {
-								tippyExtra += ' data-tippy-animation="' + settings.dotnav_tooltip_animation + '"';
+								tippyExtra += ' data-tippy-animation="' + _.escape( settings.dotnav_tooltip_animation ) + '"';
 							}
 							var ox = ( settings.dotnav_tooltip_x_offset && settings.dotnav_tooltip_x_offset.size ) ? settings.dotnav_tooltip_x_offset.size : 0;
 							var oy = ( settings.dotnav_tooltip_y_offset && settings.dotnav_tooltip_y_offset.size ) ? settings.dotnav_tooltip_y_offset.size : 0;
 							if ( ox || oy ) {
-								tippyExtra += ' data-tippy-offset="[' + ox + ',' + oy + ']"';
+								tippyExtra += ' data-tippy-offset="[' + ( parseFloat( ox ) || 0 ) + ',' + ( parseFloat( oy ) || 0 ) + ']"';
 							}
 							if ( settings.dotnav_tooltip_arrow === 'yes' ) {
 								tippyExtra += ' data-tippy-arrow="true"';
@@ -1279,7 +1279,7 @@ class Scrollnav extends Module_Base {
 						}
 					#>
 					<li>
-						<a href="<# print( linkHref ); #>"<# print( linkTarget ); #><# print( linkRel ); #><# print( tippyExtra ); #>>
+						<a href="<# print( _.escape( linkHref ) ); #>"<# print( linkTarget ); #><# print( linkRel ); #><# print( tippyExtra ); #>>
 							<# if ( item.scroll_nav_icon && item.scroll_nav_icon.value && iconAlign === 'left' ) { #>
 							<span class="bdt-button-icon-align-left">
 								<i class="{{ item.scroll_nav_icon.value }}" aria-hidden="true"></i>

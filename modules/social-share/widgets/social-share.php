@@ -18,14 +18,24 @@ class Social_Share extends Module_Base {
 		'vkontakte'  => 'ep-icon-vk',
 	];
 
+	/**
+	 * Build the icon class for a social media name.
+	 *
+	 * The allow-list is checked first and unconditionally: a class is only ever
+	 * concatenated out of a name that Module has registered, so no submitted
+	 * value can reach the class attribute. Unknown names get a fixed fallback.
+	 *
+	 * @param mixed $media_name Value submitted through the repeater control.
+	 * @return string Icon class safe to print.
+	 */
 	private static function get_social_media_class( $media_name ) {
-		if ( isset( self::$medias_class[ $media_name ] ) ) {
-			return self::$medias_class[ $media_name ];
+		// Never build a class out of an arbitrary value, only out of a registered social media key.
+		if ( ! Module::is_social_media( $media_name ) ) {
+			return 'ep-icon-link';
 		}
 
-		// Never build a class out of an arbitrary value, only out of a registered social media key.
-		if ( ! is_string( $media_name ) || null === Module::get_social_media( $media_name ) ) {
-			return 'ep-icon-link';
+		if ( isset( self::$medias_class[ $media_name ] ) ) {
+			return self::$medias_class[ $media_name ];
 		}
 
 		return 'ep-icon-' . $media_name;
@@ -157,7 +167,9 @@ class Social_Share extends Module_Base {
 					[ 'button' => 'twitter' ],
 					[ 'button' => 'pinterest' ],
 				],
-				'title_field' => '{{{ button }}}',
+				// {{ }} escapes, {{{ }}} does not. The repeater row label renders the
+				// submitted value in the editor panel, so it must be the escaping form.
+				'title_field' => '{{ button }}',
 			]
 		);
 
@@ -692,8 +704,9 @@ class Social_Share extends Module_Base {
 
 	private function has_counter( $media_name ) {
 		$settings = $this->get_active_settings();
+		$media    = Module::get_social_media( $media_name );
 
-		return 'icon' !== $settings['view'] && 'yes' === $settings['show_counter'] && ! empty( Module::get_social_media( $media_name )['has_counter'] );
+		return 'icon' !== $settings['view'] && 'yes' === $settings['show_counter'] && ! empty( $media['has_counter'] );
 	}
 	
 	public function render() {
@@ -712,7 +725,7 @@ class Social_Share extends Module_Base {
 				$social_name = isset( $button['button'] ) ? $button['button'] : '';
 
 				// Skip anything that is not one of the registered social media keys.
-				if ( ! is_string( $social_name ) || null === Module::get_social_media( $social_name ) ) {
+				if ( ! Module::is_social_media( $social_name ) ) {
 					continue;
 				}
 
@@ -812,7 +825,14 @@ class Social_Share extends Module_Base {
 		<#
 		var mediasMap = <?php echo wp_json_encode( $medias_for_js ); ?>;
 		var linkButtonDataUrl = <?php echo wp_json_encode( $link_current_url ); ?>;
+		// Mirrors Social_Share::get_social_media_class(). mediasMap is built from the
+		// registered keys, so the allow-list is checked first and a class is never
+		// concatenated out of a submitted value. _.has() is used rather than a plain
+		// property read so inherited names ('constructor', '__proto__') cannot pass.
 		var getIconClass = function( name ) {
+			if ( ! _.has( mediasMap, name ) ) {
+				return 'ep-icon-link';
+			}
 			if ( name === 'email' ) {
 				return 'ep-icon-envelope';
 			}
@@ -867,7 +887,7 @@ class Social_Share extends Module_Base {
 				<div<# print( divAttrs ); #>>
 					<# if ( 'icon' === viewMode || 'icon-text' === viewMode ) { #>
 					<span class="bdt-ss-icon">
-						<i class="<# print( getIconClass( socialName ) ); #>"></i>
+						<i class="<# print( _.escape( getIconClass( socialName ) ) ); #>"></i>
 					</span>
 					<# } #>
 					<# if ( showText || hasCounter ) { #>

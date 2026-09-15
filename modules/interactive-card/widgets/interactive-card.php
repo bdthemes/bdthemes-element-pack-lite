@@ -1720,7 +1720,7 @@ class Interactive_Card extends Module_Base {
 			widthClass = 'bdt-width-1-1 bdt-width-1-2@s';
 		}
 		var imageUrl = ( settings.image && settings.image.url ) ? settings.image.url : '';
-		var titleTag = settings.title_size || 'h3';
+		var titleTag = elementor.helpers.validateHTMLTag( settings.title_size || 'h3' );
 		var badgePosition = settings.badge_position || 'top-right';
 
 		var imageEffectClass = 'bdt-interactive-card-image';

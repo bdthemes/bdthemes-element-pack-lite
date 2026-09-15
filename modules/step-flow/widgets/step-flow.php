@@ -2376,9 +2376,9 @@ class Step_Flow extends Module_Base {
 				</span>
 			</div>
 			<div class="bdt-step-flow-content">
-				<{{ settings.title_size }} class="bdt-step-flow-title">
+				<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-step-flow-title">
 					<span>{{ settings.title_text }}</span>
-				</{{ settings.title_size }}>
+				</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
 				<# if ( 'yes' === settings.show_separator ) { #>
 				<#
 				var sepType = settings.title_separator_type || 'line';
@@ -2392,7 +2392,7 @@ class Step_Flow extends Module_Base {
 				<# if ( 'line' === sepType ) { #>
 					<div class="bdt-title-separator"></div>
 				<# } else { #>
-					<img class="bdt-animation-stroke <# print( lineCapClass ); #>" src="<# print( dividerSrc ); #>" alt="advanced divider">
+					<img class="bdt-animation-stroke <# print( _.escape( lineCapClass ) ); #>" src="<# print( _.escape( dividerSrc ) ); #>" alt="advanced divider">
 				<# } #>
 				</div>
 				<# } #>

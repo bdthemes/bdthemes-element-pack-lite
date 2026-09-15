@@ -1413,11 +1413,13 @@ class Member extends Module_Base {
 						}
 						var tooltipAttr = '';
 						if ( settings.social_icon_tooltip === 'yes' && link.social_link_title ) {
-							var tipText = String( link.social_link_title ).replace( /<[^>]+>/g, '' ).replace( /"/g, '&quot;' );
-							tooltipAttr = ' data-bdt-tooltip="title: ' + tipText + ';"';
+							// _.escape() rather than a hand-rolled quote replace: the old one left
+							// '&' alone, so an entity typed into the title round-tripped wrong.
+							var tipText = String( link.social_link_title ).replace( /<[^>]+>/g, '' );
+							tooltipAttr = ' data-bdt-tooltip="title: ' + _.escape( tipText ) + ';"';
 						}
 					#>
-						<a class="bdt-member-icon elementor-repeater-item-{{ link._id }}" href="<# print( linkUrl ); #>"<# print( linkExtra ); #><# print( tooltipAttr ); #>>
+						<a class="bdt-member-icon elementor-repeater-item-{{ link._id }}" href="<# print( _.escape( linkUrl ) ); #>"<# print( linkExtra ); #><# print( tooltipAttr ); #>>
 							<# if ( socialIconHTML && socialIconHTML.rendered && ( ! link.social_icon || migrated ) ) { #>
 								{{{ socialIconHTML.value }}}
 							<# } else if ( link.social_icon ) { #>
@@ -1435,8 +1437,21 @@ class Member extends Module_Base {
 		<#
 		var skin = settings._skin || '';
 		var hasAltPhoto = settings.member_alternative_photo && settings.alternative_photo && settings.alternative_photo.url;
-		var hoverAnimClass = ( settings.photo_hover_animation && settings.photo_hover_animation !== '' ) ? 'bdt-transition-scale-' + settings.photo_hover_animation : '';
+		// Escaped where it is built, not at each of its six print sites, so a new
+		// print site cannot reintroduce the hole. maskClass is a constant either
+		// way, so it is left alone.
+		var hoverAnimClass = ( settings.photo_hover_animation && settings.photo_hover_animation !== '' ) ? _.escape( 'bdt-transition-scale-' + settings.photo_hover_animation ) : '';
 		var maskClass = ( settings.image_mask_popover === 'yes' ) ? ' bdt-image-mask' : '';
+
+		// A URL going into url('…') inside a style attribute is parsed twice: HTML
+		// entities are decoded first, then CSS. _.escape() alone is therefore not
+		// enough — its &#x27; decodes back to a quote that closes the CSS string —
+		// so quotes, parens and backslashes are percent-encoded before escaping.
+		var cssUrl = function( u ) {
+			return encodeURI( String( u ) ).replace( /['"()\\]/g, function( c ) {
+				return '%' + c.charCodeAt( 0 ).toString( 16 );
+			} );
+		};
 		#>
 
 		<# if ( skin === 'bdt-band' ) { #>
@@ -1591,7 +1606,7 @@ class Member extends Module_Base {
 			<# var flipFrontUrl = ( settings.photo && settings.photo.url ) ? settings.photo.url : '';
 			var flipBackUrl = ( settings.member_alternative_photo === 'yes' && settings.alternative_photo && settings.alternative_photo.url ) ? settings.alternative_photo.url : '';
 			#>
-			<div class="bdt-skin-flip-layer bdt-skin-flip-front" style="background-image: url('<# print( flipFrontUrl ); #>');">
+			<div class="bdt-skin-flip-layer bdt-skin-flip-front" style="background-image: url('<# print( _.escape( cssUrl( flipFrontUrl ) ) ); #>');">
 				<div class="bdt-skin-flip-layer-overlay">
 					<div class="bdt-skin-flip-layer-inner">
 						<div class="bdt-member-content bdt-position-bottom-center">
@@ -1601,7 +1616,7 @@ class Member extends Module_Base {
 					</div>
 				</div>
 			</div>
-			<div class="bdt-skin-flip-layer bdt-skin-flip-back" style="background-image: url('<# print( flipBackUrl ); #>');">
+			<div class="bdt-skin-flip-layer bdt-skin-flip-back" style="background-image: url('<# print( _.escape( cssUrl( flipBackUrl ) ) ); #>');">
 				<div class="bdt-skin-flip-layer-overlay">
 					<div class="bdt-skin-flip-layer-inner">
 						<?php $this->print_member_social_icons_content_template( 'bdt-position-bottom-center' ); ?>
