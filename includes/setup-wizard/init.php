@@ -529,7 +529,27 @@ add_action('wp_ajax_ep_setup_wizard_import_template', function () {
         ));
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
+            wp_send_json_error([
+                'message' => sprintf(
+                    /* translators: %s: error reported by the HTTP request. */
+                    esc_html__('Failed to fetch template from URL: %s', 'bdthemes-element-pack-lite'),
+                    esc_html($response->get_error_message())
+                ),
+            ]);
+            wp_die();
+        }
+
+        $response_code = (int) wp_remote_retrieve_response_code($response);
+
+        if (200 !== $response_code) {
+            wp_send_json_error([
+                'message' => sprintf(
+                    /* translators: 1: HTTP status code, 2: template URL. */
+                    esc_html__('Failed to fetch template from URL (HTTP %1$d): %2$s', 'bdthemes-element-pack-lite'),
+                    $response_code,
+                    esc_html($json_url)
+                ),
+            ]);
             wp_die();
         }
 
@@ -537,7 +557,7 @@ add_action('wp_ajax_ep_setup_wizard_import_template', function () {
         $sourceData2 = json_decode($sourceData, true);
 
         if (!$sourceData2 || !is_array($sourceData2)) {
-            wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
+            wp_send_json_error(['message' => esc_html__('The template URL did not return valid template JSON.', 'bdthemes-element-pack-lite')]);
             wp_die();
         }
 
@@ -610,6 +630,49 @@ add_action('wp_ajax_ep_setup_wizard_import_template', function () {
 );
 
 
+/**
+ * Map an import URL back to a starter kit that ships inside this plugin.
+ *
+ * Full builds carry the .zip kits under includes/setup-wizard/assets/templates/.
+ * wordpress.org builds cannot ship compressed files, so those kits are fetched
+ * from the remote host instead. Returns the absolute path for a bundled kit and
+ * null for anything else, which is then downloaded over HTTP.
+ *
+ * @param string $file_url Import URL supplied by the wizard.
+ * @return string|null
+ */
+function element_pack_setup_wizard_bundled_kit_path( $file_url ) {
+	$templates_url  = plugins_url( 'includes/setup-wizard/assets/templates/', BDTEP__FILE__ );
+	$templates_path = BDTEP_INC_PATH . 'setup-wizard/assets/templates/';
+
+	// The site may be reached over either scheme, so compare without one.
+	$strip_scheme = static function ( $url ) {
+		return preg_replace( '#^https?://#i', '', (string) $url );
+	};
+
+	if ( 0 !== strpos( $strip_scheme( $file_url ), $strip_scheme( $templates_url ) ) ) {
+		return null;
+	}
+
+	$file_name = sanitize_file_name( wp_basename( (string) wp_parse_url( $file_url, PHP_URL_PATH ) ) );
+
+	if ( '' === $file_name || 'zip' !== strtolower( pathinfo( $file_name, PATHINFO_EXTENSION ) ) ) {
+		return null;
+	}
+
+	$real_base = realpath( $templates_path );
+	$real_file = realpath( $templates_path . $file_name );
+
+	// Confine reads to the bundled templates directory, whatever the URL says.
+	if ( false === $real_base || false === $real_file
+		|| 0 !== strpos( $real_file, $real_base . DIRECTORY_SEPARATOR )
+		|| ! is_file( $real_file ) ) {
+		return null;
+	}
+
+	return $real_file;
+}
+
 add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
     check_ajax_referer('ep_setup_wizard_nonce', 'nonce');
 
@@ -625,21 +688,50 @@ add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
         wp_send_json_error(['message' => esc_html__('Invalid import URL', 'bdthemes-element-pack-lite')]);
     }
 
-    $remote_zip_request = wp_safe_remote_get($file_url, array(
-        'timeout'   => 60,
-        'sslverify' => false,
-    ));
+    // A kit that ships with the plugin is read from disk. Pulling it over HTTP
+    // would make the site request its own URL, which many hosts block.
+    $local_kit = element_pack_setup_wizard_bundled_kit_path($file_url);
 
-    if (is_wp_error($remote_zip_request)) {
-        wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
+    if ($local_kit) {
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reading a validated file inside this plugin.
+        $kit_body = file_get_contents($local_kit);
+
+        if (false === $kit_body) {
+            wp_send_json_error(['message' => esc_html__('The bundled template could not be read.', 'bdthemes-element-pack-lite')]);
+        }
+    } else {
+        $remote_zip_request = wp_safe_remote_get($file_url, array(
+            'timeout'   => 60,
+            'sslverify' => false,
+        ));
+
+        if (is_wp_error($remote_zip_request)) {
+            wp_send_json_error([
+                'message' => sprintf(
+                    /* translators: %s: error reported by the HTTP request. */
+                    esc_html__('Failed to fetch template from URL: %s', 'bdthemes-element-pack-lite'),
+                    esc_html($remote_zip_request->get_error_message())
+                ),
+            ]);
+        }
+
+        $response_code = (int) wp_remote_retrieve_response_code($remote_zip_request);
+
+        if (200 !== $response_code) {
+            wp_send_json_error([
+                'message' => sprintf(
+                    /* translators: 1: HTTP status code, 2: template URL. */
+                    esc_html__('Failed to fetch template from URL (HTTP %1$d): %2$s', 'bdthemes-element-pack-lite'),
+                    $response_code,
+                    esc_html($file_url)
+                ),
+            ]);
+        }
+
+        $kit_body = wp_remote_retrieve_body($remote_zip_request);
     }
 
-
-    if (200 !== $remote_zip_request['response']['code']) {
-        wp_send_json_error(['message' => esc_html__('Failed to fetch template from URL.', 'bdthemes-element-pack-lite')]);
-    }
-
-    $kit_zip_path = Plugin::$instance->uploads_manager->create_temp_file($remote_zip_request['body'], 'kit.zip');
+    $kit_zip_path = Plugin::$instance->uploads_manager->create_temp_file($kit_body, 'kit.zip');
 
     $app = Plugin::$instance->app;
     if (!$app) {

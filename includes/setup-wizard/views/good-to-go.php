@@ -44,9 +44,15 @@ $templates      = json_decode( file_get_contents( $templates_path ), true );
                 );
 
                 // Entries may already be absolute; only prefix the relative ones.
-                $importUrl = preg_match( '#^https?://#i', $template['import_url'] )
-                    ? $template['import_url']
-                    : $kit_base_url . $template['import_url'];
+                if ( preg_match( '#^https?://#i', $template['import_url'] ) ) {
+                    $importUrl = $template['import_url'];
+                } elseif ( file_exists( BDTEP_INC_PATH . 'setup-wizard/assets' . $template['import_url'] ) ) {
+                    // Full builds ship the kit, so serve it from the plugin.
+                    $importUrl = $assets_url . $template['import_url'];
+                } else {
+                    // wordpress.org builds have the kits stripped out; fetch them remotely.
+                    $importUrl = $kit_base_url . $template['import_url'];
+                }
                 $thumbnailUrl = preg_match( '#^https?://#i', $template['thumbnail'] )
                     ? $template['thumbnail']
                     : $assets_url . $template['thumbnail'];
