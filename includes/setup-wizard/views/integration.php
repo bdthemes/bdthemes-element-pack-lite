@@ -186,7 +186,7 @@ if (!$has_cached_data) {
                              if (!$is_active) : ?>
                                  <label class="switch">
                                      <input type="checkbox" class="plugin-slider-checkbox" <?php echo esc_attr( $plugin_recommended ? 'checked' : '' ); ?>
-                                            name="plugins[]<?php echo isset($plugin['slug']) ? wp_kses_post($plugin['slug']) : ''; ?>">
+                                            name="plugins[]<?php echo isset($plugin['slug']) ? esc_attr($plugin['slug']) : ''; ?>">
                                      <span class="slider round"></span>
                                  </label>
                              <?php

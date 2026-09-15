@@ -183,7 +183,7 @@ class Module extends Element_Pack_Module_Base {
 			}
 		}
 
-		$attributes = ' data-ep-wrapper-link="' . $encoded_link . '" class="bdt-element-link" style="cursor: pointer"';
+		$attributes = ' data-ep-wrapper-link="' . esc_attr( $encoded_link ) . '" class="bdt-element-link" style="cursor: pointer"';
 
 		return preg_replace( '/<([a-zA-Z][^\\s>]*)([^>]*)>/', '<$1$2' . $attributes . '>', $widget_content, 1 ) ?: $widget_content;
 	}

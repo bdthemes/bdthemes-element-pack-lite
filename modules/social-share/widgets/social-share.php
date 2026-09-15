@@ -22,6 +22,12 @@ class Social_Share extends Module_Base {
 		if ( isset( self::$medias_class[ $media_name ] ) ) {
 			return self::$medias_class[ $media_name ];
 		}
+
+		// Never build a class out of an arbitrary value, only out of a registered social media key.
+		if ( ! is_string( $media_name ) || null === Module::get_social_media( $media_name ) ) {
+			return 'ep-icon-link';
+		}
+
 		return 'ep-icon-' . $media_name;
 	}
 
@@ -703,7 +709,13 @@ class Social_Share extends Module_Base {
 		<div class="bdt-social-share bdt-ep-grid">
 			<?php
 			foreach ( $settings['share_buttons'] as $button ) {
-				$social_name = $button['button'];
+				$social_name = isset( $button['button'] ) ? $button['button'] : '';
+
+				// Skip anything that is not one of the registered social media keys.
+				if ( ! is_string( $social_name ) || null === Module::get_social_media( $social_name ) ) {
+					continue;
+				}
+
 				$has_counter = $this->has_counter( $social_name );
 
 				if ( 'custom' === $settings['share_url_type'] ) {
@@ -756,7 +768,7 @@ class Social_Share extends Module_Base {
 					<div <?php $this->print_render_attribute_string( 'social-attrs' ); ?>>
 						<?php if ( 'icon' === $settings['view'] || 'icon-text' === $settings['view'] ) : ?>
 							<span class="bdt-ss-icon">
-								<i class="<?php echo wp_kses_post(self::get_social_media_class( $social_name )); ?>"></i>
+								<i class="<?php echo esc_attr( self::get_social_media_class( $social_name ) ); ?>"></i>
 							</span>
 						<?php endif; ?>
 						<?php if ( $show_text || $has_counter ) : ?>

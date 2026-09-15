@@ -1420,7 +1420,7 @@ class Contact_Form extends Module_Base {
 
 					<?php if ( $settings['reset_after_submit'] == 'yes' ) : ?>
 						<input type="hidden" name="reset-after-submit"
-							value="<?php echo wp_kses_post( $settings['reset_after_submit'] ); ?>" />
+							value="<?php echo esc_attr( $settings['reset_after_submit'] ); ?>" />
 					<?php endif; ?>
 
 					<input type="hidden" class="widget_id" name="widget_id" value="<?php

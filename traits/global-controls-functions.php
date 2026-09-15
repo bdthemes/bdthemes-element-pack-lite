@@ -7198,7 +7198,7 @@ trait Global_Controls_Functions {
 		if ( 'portfolio-carousel' === $widget_prefix ) {
 			$is_external = ! empty( $settings['external_link'] );
 			?>
-			<a href="<?php echo esc_url( get_the_permalink() ); ?>"<?php echo esc_attr( $is_external ? ' target="_blank"' : '' ); ?>>
+			<a href="<?php echo esc_url( get_the_permalink() ); ?>"<?php echo $is_external ? ' target="_blank"' : ''; ?>>
 				<<?php echo esc_attr( $tag ); ?> class="bdt-gallery-item-title bdt-margin-remove">
 					<?php echo esc_html( get_the_title() ); ?>
 				</<?php echo esc_attr( $tag ); ?>>
@@ -24928,7 +24928,7 @@ trait Global_Controls_Functions {
 
 		?>
 		<a href="<?php echo esc_url( $review_link ); ?>" class="bdt-review-platform bdt-flex-inline"
-			bdt-tooltip="<?php echo wp_kses_post( $platform ); ?>">
+			bdt-tooltip="<?php echo esc_attr( $platform ); ?>">
 			<i class="ep-icon-<?php echo esc_attr( strtolower( $platform ) ); ?> bdt-platform-icon bdt-flex bdt-flex-middle bdt-flex-center"
 				aria-hidden="true"></i>
 		</a>
