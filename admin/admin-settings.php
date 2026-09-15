@@ -687,8 +687,8 @@ class ElementPack_Admin_Settings {
 	public function element_pack_widgets_status() {
 		$track_nw_msg = '';
 		if (!Tracker::is_allow_track()) {
-			$track_nw = esc_html__('This feature is not working because the Elementor Usage Data Sharing feature is Not Enabled.', 'bdthemes-element-pack-lite');
-			$track_nw_msg = 'bdt-tooltip="' . $track_nw . '"';
+			$track_nw = __('This feature is not working because the Elementor Usage Data Sharing feature is Not Enabled.', 'bdthemes-element-pack-lite');
+			$track_nw_msg = 'bdt-tooltip="' . esc_attr($track_nw) . '"';
 		}
 		?>
 		<div class="ep-dashboard-widgets-status">

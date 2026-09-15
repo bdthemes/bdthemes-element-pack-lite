@@ -316,6 +316,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 * Fixed: Active button on the plugin cards stretched to the full card width and its icon was misaligned
 * Fixed: Dashboard charts did not render and logged "Cannot use import statement outside a module", because the bundled Chart.js was a module build loaded as a regular script
 * Fixed: Business Hours widget logged "jclock library is not loaded" and the dynamic clock never started, because the bundled jclock library was never registered
+* Fixed: Social Share widget did not escape the social network name it printed into the icon class, and now ignores any button whose value is not one of the supported networks
+* Fixed: Portfolio Carousel ignored the Open in New Window option on the title link, because the target attribute was printed with its quotes encoded
+* Fixed: Navbar widget printed menu item titles, targets, link relationships, URLs and CSS classes into the markup without escaping them
+* Fixed: Wrapper Link extension wrote the raw link data into its data attribute, which broke the attribute whenever the link contained a quote
+* Fixed: Simple Contact Form escaped the redirect URL it returns to the browser with the wrong function, so the URL could break out of its attribute
+* Fixed: Escaping corrected on several other attributes, in the setup wizard integration step, the dashboard widget status tooltips, the Elementor Template widget and the plugin settings fields
+* Updated: Security improved
 
 = 8.8.2 [2nd September 2026] =
 

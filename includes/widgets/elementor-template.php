@@ -112,9 +112,8 @@ class Element_Pack_Elementor_Template_Widget extends WP_Widget {
 				</option>
 				<?php
 				foreach ( $template_list as $template ) :
-					$selected_template = selected( $template['template_id'], $instance['template_id'] );
 					?>
-					<option value="<?php echo esc_attr( $template['template_id'] ); ?>" <?php echo wp_kses_post( $selected_template ); ?> data-type="<?php echo esc_attr( $template['type'] ); ?>">
+					<option value="<?php echo esc_attr( $template['template_id'] ); ?>" <?php selected( $template['template_id'], $instance['template_id'] ); ?> data-type="<?php echo esc_attr( $template['type'] ); ?>">
 						<?php echo esc_html( $template['title'] ); ?> (
 						<?php echo esc_html( $template['type'] ); ?>)
 					</option>

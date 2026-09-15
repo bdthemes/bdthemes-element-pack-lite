@@ -231,13 +231,13 @@ class Module extends Element_Pack_Module_Base {
             }
 
 
-            $redirect_url = (isset($form_data['redirect-url']) && !empty($form_data['redirect-url'])) ? esc_url($form_data['redirect-url']) : 'no';
+            $redirect_url = (isset($form_data['redirect-url']) && !empty($form_data['redirect-url'])) ? esc_url_raw($form_data['redirect-url']) : 'no';
             $is_external  = (isset($form_data['is-external']) && !empty($form_data['is-external'])) ? esc_attr($form_data['is-external']) : 'no';
 
             $reset_status = (isset($form_data['reset-after-submit']) && ($form_data['reset-after-submit'] == 'yes')) ? 'yes' : 'no';
 
             if ($error == false) {
-                echo '<span class="bdt-text-success" data-resetstatus="' . esc_html($reset_status) . '"  data-redirect="' . wp_kses_post($redirect_url) . '" data-external="' . esc_attr($is_external) . '">' . esc_html($result) . '</span>';
+                echo '<span class="bdt-text-success" data-resetstatus="' . esc_html($reset_status) . '"  data-redirect="' . esc_attr($redirect_url) . '" data-external="' . esc_attr($is_external) . '">' . esc_html($result) . '</span>';
                 // wp_redirect( $form_data['redirect_url'] );
             } else {
                 echo '<span class="bdt-text-warning">' . esc_html($result) . '</span>';

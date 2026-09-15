@@ -79,7 +79,7 @@ class ep_menu_walker extends Walker_Nav_Menu {
         }
         $attributes = '';
         foreach ($data as $name => $value) {      
-            $attributes .= sprintf(' %s="%s"', $name, $value);
+            $attributes .= sprintf(' %s="%s"', esc_attr($name), esc_attr($value));
         }
         
         // create item output
@@ -90,7 +90,7 @@ class ep_menu_walker extends Walker_Nav_Menu {
             $class .= implode(' ', $classes);                    
         }
         if($class) {
-           $class = ' class="'.$class.'"';
+           $class = ' class="'.esc_attr($class).'"';
         } else {
             $class = '';
         }  
@@ -101,7 +101,8 @@ class ep_menu_walker extends Walker_Nav_Menu {
         $attributes = '';
         foreach (array('attr_title' => 'title', 'target' => 'target', 'xfn' => 'rel', 'url' => 'href') as $var => $attr) {
             if (!empty($item->$var)) {
-                $attributes .= sprintf(' %s="%s"', $attr, $item->$var);
+                $value       = ('href' === $attr) ? esc_url($item->$var) : esc_attr($item->$var);
+                $attributes .= sprintf(' %s="%s"', $attr, $value);
             }
         }
 
@@ -122,7 +123,7 @@ class ep_menu_walker extends Walker_Nav_Menu {
 
             $format     = '%s<a href="#" %s>%s</a>%s';
             $classes   .= ' seperator';
-            $attributes = ' class="'.$classes.'" data-type="'.$type.'"';
+            $attributes = ' class="'.esc_attr($classes).'" data-type="'.esc_attr($type).'"';
         } else {
             $format = '%s<a%s>%s</a>%s';
         }

@@ -326,7 +326,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             $value       = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
             $class       = 'bdt-input';
             $type        = isset($args['type']) ? $args['type'] : 'text';
-            $placeholder = empty($args['placeholder']) ? '' : ' placeholder="' . $args['placeholder'] . '"';
+            $placeholder = empty($args['placeholder']) ? '' : ' placeholder="' . esc_attr($args['placeholder']) . '"';
             $html = '';
 
 
@@ -366,10 +366,10 @@ if (!class_exists('ElementPack_Settings_API')) :
             $value       = esc_attr($this->get_option($args['id'], $args['section'], $args['std']));
             $size        = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
             $type        = isset($args['type']) ? $args['type'] : 'number';
-            $placeholder = empty($args['placeholder']) ? '' : ' placeholder="' . $args['placeholder'] . '"';
-            $min         = ($args['min'] == '') ? '' : ' min="' . $args['min'] . '"';
-            $max         = ($args['max'] == '') ? '' : ' max="' . $args['max'] . '"';
-            $step        = ($args['step'] == '') ? '' : ' step="' . $args['step'] . '"';
+            $placeholder = empty($args['placeholder']) ? '' : ' placeholder="' . esc_attr($args['placeholder']) . '"';
+            $min         = ($args['min'] == '') ? '' : ' min="' . esc_attr($args['min']) . '"';
+            $max         = ($args['max'] == '') ? '' : ' max="' . esc_attr($args['max']) . '"';
+            $step        = ($args['step'] == '') ? '' : ' step="' . esc_attr($args['step']) . '"';
 
             $html        = sprintf('<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, esc_attr($args['section']), esc_attr($args['id']), $value, $placeholder, $min, $max, $step);
             $html       .= $this->get_field_description($args);
@@ -621,7 +621,7 @@ if (!class_exists('ElementPack_Settings_API')) :
 
             $value       = esc_textarea($this->get_option($args['id'], $args['section'], $args['std']));
             $size        = isset($args['size']) && !is_null($args['size']) ? $args['size'] : 'regular';
-            $placeholder = empty($args['placeholder']) ? '' : ' placeholder="' . $args['placeholder'] . '"';
+            $placeholder = empty($args['placeholder']) ? '' : ' placeholder="' . esc_attr($args['placeholder']) . '"';
 
             $html  = '';
             $html .= sprintf('<label for="bdt_ep_%1$s[%2$s]">', esc_attr($args['section']), esc_attr($args['id']));
@@ -657,7 +657,7 @@ if (!class_exists('ElementPack_Settings_API')) :
             $label = isset($args['options']['button_label']) ? $args['options']['button_label'] : __('Choose File', 'bdthemes-element-pack-lite');
 
             $html  = sprintf('<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, esc_attr($args['section']), esc_attr($args['id']), $value);
-            $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
+            $html  .= '<input type="button" class="button wpsa-browse" value="' . esc_attr($label) . '" />';
             $html  .= $this->get_field_description($args);
 
             echo wp_kses( $html, $this->get_allowed_field_html() );
