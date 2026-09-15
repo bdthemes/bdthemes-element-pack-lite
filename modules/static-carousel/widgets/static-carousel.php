@@ -1182,7 +1182,7 @@ class Static_Carousel extends Module_Base {
 			return a;
 		};
 		#>
-		<div id="<# print( carouselId ); #>" class="<# print( carouselClass ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
+		<div id="<# print( carouselId ); #>" class="<# print( _.escape( carouselClass ) ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
 			<div class="swiper-carousel swiper" role="region" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $this->get_title() ); ?>" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
 				<div class="swiper-wrapper">
 					<# _.each( settings.carousel_items || [], function( item ) {
@@ -1205,22 +1205,22 @@ class Static_Carousel extends Module_Base {
 						<# } #>
 						<div class="bdt-ep-static-carousel-content">
 							<# if ( 'yes' === settings.show_title && item.title ) { #>
-							<{{ settings.title_tag }} class="<# print( titleWrapClass ); #>">
+							<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="<# print( _.escape( titleWrapClass ) ); #>">
 								{{{ item.title }}}
 								<# if ( settings.readmore_link_to === 'title' && item.readmore_link && item.readmore_link.url ) { #>
 								<a class="bdt-ep-static-carousel-title-link"<# print( linkAttrs( item.readmore_link ) ); #>></a>
 								<# } #>
-							</{{ settings.title_tag }}>
+							</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_sub_title && item.sub_title ) { #>
-							<{{ settings.sub_title_tag }} class="bdt-ep-static-carousel-sub-title">{{{ item.sub_title }}}</{{ settings.sub_title_tag }}>
+							<{{{ elementor.helpers.validateHTMLTag( settings.sub_title_tag ) }}} class="bdt-ep-static-carousel-sub-title">{{{ item.sub_title }}}</{{{ elementor.helpers.validateHTMLTag( settings.sub_title_tag ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_text && item.text ) { #>
 							<div class="bdt-ep-static-carousel-text">{{{ item.text }}}</div>
 							<# } #>
 							<# if ( 'button' === settings.readmore_link_to && item.readmore_link && item.readmore_link.url ) { #>
 							<div class="bdt-ep-static-carousel-readmore-wrap">
-								<a class="<# print( readmoreClass ); #>"<# print( linkAttrs( item.readmore_link ) ); #>>
+								<a class="<# print( _.escape( readmoreClass ) ); #>"<# print( linkAttrs( item.readmore_link ) ); #>>
 									<# if ( hasRmIcon && 'left' === iconAlign ) { #>
 									<span class="bdt-button-icon-align-left">{{{ iconHTML.value }}}</span>
 									<# } #>

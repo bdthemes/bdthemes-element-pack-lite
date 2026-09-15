@@ -6809,7 +6809,10 @@ trait Global_Widget_Controls {
                 'type'          => Controls_Manager::REPEATER,
                 'fields'        => $repeater->get_controls(),
                 'prevent_empty' => false,
-                'title_field'   => '<img src="{{{ section_bg.url }}}" style="height: 40px; width: 40px; object-fit: cover;">',
+                // {{ }} escapes, {{{ }}} does not, and this one sits inside an
+                // attribute, where a quote in the value would close src and add
+                // attributes of its own.
+                'title_field'   => '<img src="{{ section_bg.url }}" style="height: 40px; width: 40px; object-fit: cover;">',
             ]
         );
 

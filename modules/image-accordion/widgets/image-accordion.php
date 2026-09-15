@@ -1633,7 +1633,7 @@ class Image_Accordion extends Module_Base {
 		?>
 		<#
 		var skinType = settings.skin_type || 'default';
-		var titleTag = settings.title_tags || 'h3';
+		var titleTag = elementor.helpers.validateHTMLTag( settings.title_tags || 'h3' );
 		var items = settings.image_accordion_items || [];
 
 		var accordionId = 'bdt-ep-image-accordion-' + view.getID();

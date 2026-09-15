@@ -246,12 +246,12 @@ class Product_Grid extends Module_Base {
 					<div>
 						<div class="{{ titlePriceClass }}">
 							<# if ( settings.show_title === 'yes' && item.title ) { #>
-							<{{ settings.title_tag }} class="bdt-ep-product-grid-title">
+							<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-ep-product-grid-title">
 								{{{ item.title }}}
 								<# if ( settings.readmore_link_to === 'title' ) { #>
 									<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-grid-link"></a>
 								<# } #>
-							</{{ settings.title_tag }}>
+							</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 							<# } #>
 
 							<# if ( settings.show_price === 'yes' && item.price ) { #>

@@ -281,7 +281,7 @@ protected function is_dynamic_content(): bool {
 		var iconAlign  = settings.icon_align || 'right';
 		var readmoreLabel = settings.readmore_text || '<?php echo esc_js( __( 'Read More', 'bdthemes-element-pack-lite' ) ); ?>';
 		#>
-		<div id="<# print( carouselId ); #>" class="<# print( carouselClass ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
+		<div id="<# print( carouselId ); #>" class="<# print( _.escape( carouselClass ) ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
 			<div class="swiper-carousel swiper" role="region" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $this->get_title() ); ?>" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
 				<div class="swiper-wrapper">
 					<# _.each( settings.product_items, function( item ) {
@@ -320,12 +320,12 @@ protected function is_dynamic_content(): bool {
 							<div>
 								<div class="bdt-ep-product-carousel-title-price bdt-flex bdt-flex-middle bdt-flex-between">
 									<# if ( settings.show_title === 'yes' && item.title ) { #>
-									<{{ settings.title_tag }} class="bdt-ep-product-carousel-title">
+									<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-ep-product-carousel-title">
 										{{{ item.title }}}
 										<# if ( settings.readmore_link_to === 'title' ) { #>
 											<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-carousel-link"></a>
 										<# } #>
-									</{{ settings.title_tag }}>
+									</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 									<# } #>
 
 									<# if ( settings.show_price === 'yes' && item.price ) { #>

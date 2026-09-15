@@ -1530,8 +1530,8 @@ class Flip_Box extends Module_Base {
 		var graphicElement  = settings.graphic_element || 'icon';
 		var iconView        = settings.icon_view || 'default';
 		var iconShape       = ( iconView !== 'default' ) ? ( settings.icon_shape || 'circle' ) : '';
-		var frontTitleTag   = settings.front_title_tags || 'h3';
-		var backTitleTag    = settings.back_title_tags || 'h3';
+		var frontTitleTag   = elementor.helpers.validateHTMLTag( settings.front_title_tags || 'h3' );
+		var backTitleTag    = elementor.helpers.validateHTMLTag( settings.back_title_tags || 'h3' );
 		var buttonSize      = settings.button_size || 'sm';
 		var linkUrl         = settings.link && settings.link.url ? settings.link.url : '';
 		var linkClick       = settings.link_click || 'button';

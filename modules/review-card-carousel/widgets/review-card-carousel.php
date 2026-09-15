@@ -313,7 +313,7 @@ class Review_Card_Carousel extends Module_Base {
 			return html;
 		};
 		#>
-		<div id="<# print( carouselId ); #>" class="<# print( carouselClass ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
+		<div id="<# print( carouselId ); #>" class="<# print( _.escape( carouselClass ) ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
 			<div class="swiper-carousel swiper" role="region" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $this->get_title() ); ?>" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
 				<div class="swiper-wrapper">
 					<# _.each( settings.review_items || [], function( item ) { #>
@@ -335,7 +335,7 @@ class Review_Card_Carousel extends Module_Base {
 								<# } #>
 								<div class="bdt-flex bdt-flex-column bdt-flex-center">
 									<# if ( settings.show_reviewer_name === 'yes' && item.reviewer_name ) { #>
-									<{{ settings.review_name_tag }} class="bdt-ep-review-card-carousel-name">{{{ item.reviewer_name }}}</{{ settings.review_name_tag }}>
+									<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-carousel-name">{{{ item.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 									<# } #>
 									<# if ( settings.show_reviewer_job_title === 'yes' && item.reviewer_job_title ) { #>
 									<div class="bdt-ep-review-card-carousel-job-title">{{{ item.reviewer_job_title }}}</div>
@@ -349,7 +349,7 @@ class Review_Card_Carousel extends Module_Base {
 
 							<# if ( imageInline !== 'yes' ) { #>
 							<# if ( settings.show_reviewer_name === 'yes' && item.reviewer_name ) { #>
-							<{{ settings.review_name_tag }} class="bdt-ep-review-card-carousel-name">{{{ item.reviewer_name }}}</{{ settings.review_name_tag }}>
+							<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-carousel-name">{{{ item.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 							<# } #>
 							<# if ( settings.show_reviewer_job_title === 'yes' && item.reviewer_job_title ) { #>
 							<div class="bdt-ep-review-card-carousel-job-title">{{{ item.reviewer_job_title }}}</div>

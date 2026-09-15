@@ -1217,7 +1217,7 @@ class Panel_Slider extends Module_Base {
 		var nav = settings.navigation || 'arrows';
 		var navAlignClass = '';
 		if ( nav === 'arrows' && settings.arrows_position ) {
-			navAlignClass = 'bdt-arrows-align-' + settings.arrows_position;
+			navAlignClass = _.escape( 'bdt-arrows-align-' + settings.arrows_position );
 		} else if ( nav === 'dots' && settings.dots_position ) {
 			navAlignClass = 'bdt-dots-align-' + settings.dots_position;
 		} else if ( nav === 'both' && settings.both_position ) {
@@ -1313,29 +1313,37 @@ class Panel_Slider extends Module_Base {
 
 		var ds = JSON.stringify( swiperSettings );
 		var dw = JSON.stringify( widgetSettings );
+		// A URL inside url('…') in a style attribute is parsed as HTML then as CSS,
+		// so quotes/parens are percent-encoded before _.escape() closes the attribute.
+		var cssUrl = function( u ) {
+			return encodeURI( String( u ) ).replace( /['"()\\]/g, function( c ) {
+				return '%' + c.charCodeAt( 0 ).toString( 16 );
+			} );
+		};
+
 
 		var fallbackImg = '<?php echo esc_js( $fallback_image ); ?>';
 		var hideArrowMobile = settings.hide_arrow_on_mobile === 'yes' ? ' bdt-visible@m' : '';
 		var hideArrowMobileClass = hideArrowMobile.trim();
-		var titleTag = settings.title_tags || 'h3';
+		var titleTag = elementor.helpers.validateHTMLTag( settings.title_tags || 'h3' );
 		#>
-		<div id="<# print( panelId ); #>" class="bdt-panel-slider <# print( navAlignClass ); #> <# print( skinClass ); #>" data-settings='<# print( ds ); #>' data-widget-settings='<# print( dw ); #>'>
+		<div id="<# print( panelId ); #>" class="bdt-panel-slider <# print( navAlignClass ); #> <# print( skinClass ); #>" data-settings='<# print( _.escape( ds ) ); #>' data-widget-settings='<# print( _.escape( dw ) ); #>'>
 			<div class="swiper-carousel swiper">
 				<div class="swiper-wrapper">
 					<# _.each( settings.tabs || [], function( item ) { #>
 					<#
 					var imageUrl = ( item.tab_image && item.tab_image.url ) ? item.tab_image.url : fallbackImg;
 					var linkUrl = ( item.tab_link && item.tab_link.url ) ? item.tab_link.url : '';
-					var btnAnim = settings.button_hover_animation ? ' elementor-animation-' + settings.button_hover_animation : '';
+					var btnAnim = settings.button_hover_animation ? _.escape( ' elementor-animation-' + settings.button_hover_animation ) : '';
 					var slideOnclick = '';
 					if ( settings.global_link === 'yes' && linkUrl ) {
 						var t = ( item.tab_link && item.tab_link.is_external ) ? '_blank' : '_self';
 						slideOnclick = 'window.open(' + JSON.stringify( linkUrl ) + ', ' + JSON.stringify( t ) + ')';
 					}
 					#>
-					<div class="bdt-panel-slide-item swiper-slide bdt-transition-toggle"<# if ( slideOnclick !== '' ) { #> onclick="<# print( slideOnclick ); #>"<# } #>>
+					<div class="bdt-panel-slide-item swiper-slide bdt-transition-toggle"<# if ( slideOnclick !== '' ) { #> onclick="<# print( _.escape( slideOnclick ) ); #>"<# } #>>
 						<div class="bdt-panel-slide-thumb-wrapper">
-							<div class="bdt-panel-slide-thumb bdt-background-cover" data-depth="0.2" style="background-image: url('<# print( imageUrl ); #>');"></div>
+							<div class="bdt-panel-slide-thumb bdt-background-cover" data-depth="0.2" style="background-image: url('<# print( _.escape( cssUrl( imageUrl ) ) ); #>');"></div>
 						</div>
 						<div class="bdt-panel-slide-desc bdt-position-bottom-left bdt-position-z-index">
 							<# if ( settings.show_title === 'yes' && item.tab_title ) { #>
@@ -1349,7 +1357,7 @@ class Panel_Slider extends Module_Base {
 							</div>
 							<# } #>
 							<# if ( linkUrl && settings.button === 'yes' ) { #>
-							<a class="bdt-panel-slide-link bdt-transition-slide-bottom<# print( btnAnim ); #>" href="<# print( linkUrl ); #>">
+							<a class="bdt-panel-slide-link bdt-transition-slide-bottom<# print( btnAnim ); #>" href="<# print( _.escape( linkUrl ) ); #>">
 								<# if ( settings.panel_slider_icon && settings.panel_slider_icon.value && settings.icon_align === 'left' ) { #>
 								<span class="bdt-button-icon-align-left">
 									<# var iconHTML = elementor.helpers.renderIcon( view, settings.panel_slider_icon, { 'aria-hidden': true }, 'i', 'object' ); #>
