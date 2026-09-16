@@ -127,6 +127,17 @@ Service provided by BdThemes.
 Terms: https://elementpack.pro/terms-and-conditions/
 Privacy Policy: https://bdthemes.com/privacy-policy/
 
+= Element Pack newsletter (BdThemes) =
+Used to send the Element Pack newsletter (news, tips and security notices) to administrators
+who ask for it.
+Data sent: only if an administrator ticks the newsletter checkbox on the setup wizard's welcome
+screen (it is unticked by default) and then clicks "Get Started", the plugin sends the email
+address entered there, together with the first and last name from that administrator's
+WordPress profile, to marketing.sigmative.com. Nothing is sent when the box is left unticked.
+Service provided by BdThemes.
+Terms: https://elementpack.pro/terms-and-conditions/
+Privacy Policy: https://bdthemes.com/privacy-policy/
+
 = Google reCAPTCHA =
 Used to verify form submissions in the Contact Form and User Register widgets, and only
 when you have entered reCAPTCHA keys and enabled the option on the widget.
