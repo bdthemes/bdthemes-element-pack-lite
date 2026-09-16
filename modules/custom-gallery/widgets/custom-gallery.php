@@ -1471,9 +1471,9 @@ class Custom_Gallery extends Module_Base {
 								</div>
 								<# } #>
 								<# if ( settings.show_title === 'yes' && item.image_title ) { #>
-								<{{ settings.title_tag }} class="bdt-gallery-item-title bdt-transition-slide-top-small">
+								<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-gallery-item-title bdt-transition-slide-top-small">
 									{{{ item.image_title }}}
-								</{{ settings.title_tag }}>
+								</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 								<# } #>
 								<# if ( settings.show_text === 'yes' && item.image_text ) { #>
 								<div class="bdt-gallery-item-text bdt-transition-slide-bottom-small">
@@ -1518,9 +1518,9 @@ class Custom_Gallery extends Module_Base {
 					<# if ( ( settings.show_title === 'yes' && item.image_title ) || ( settings.show_text === 'yes' && item.image_text ) ) { #>
 					<div class="bdt-skin-{{ skinSlug }}-desc bdt-padding-small">
 						<# if ( settings.show_title === 'yes' && item.image_title ) { #>
-						<{{ settings.title_tag }} class="bdt-gallery-item-title">
+						<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-gallery-item-title">
 							{{{ item.image_title }}}
-						</{{ settings.title_tag }}>
+						</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 						<# } #>
 						<# if ( settings.show_text === 'yes' && item.image_text ) { #>
 						<div class="bdt-gallery-item-text">{{{ item.image_text }}}</div>

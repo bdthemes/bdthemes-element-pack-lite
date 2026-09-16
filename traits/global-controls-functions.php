@@ -31660,10 +31660,12 @@ trait Global_Controls_Functions {
 			end_point: lottieEnd,
 			lottie_renderer: settings.lottie_renderer
 		};
-		var lottieDataAttr = JSON.stringify( lottieSettingsObj ).replace( /"/g, '&quot;' );
+		// Escaped at the print sites with _.escape() instead of a hand-rolled quote
+		// replace, which left '&' alone and so corrupted any entity in the payload.
+		var lottieDataAttr = JSON.stringify( lottieSettingsObj );
 		var lottieId = 'bdt-lottie-' + view.getID();
 
-		var wrapperShapeClass = settings.shape ? ' elementor-image-shape-' + settings.shape : '';
+		var wrapperShapeClass = settings.shape ? _.escape( ' elementor-image-shape-' + settings.shape ) : '';
 
 		var rmHref = ( settings.readmore_link && settings.readmore_link.url ) ? settings.readmore_link.url : '#';
 		var rmTarget = ( settings.readmore_link && settings.readmore_link.is_external ) ? ' target="_blank"' : '';
@@ -31681,27 +31683,34 @@ trait Global_Controls_Functions {
 			rmClasses += ' bdt-ep-attention-button';
 		}
 		if ( settings.readmore_hover_animation ) {
-			rmClasses += ' elementor-animation-' + settings.readmore_hover_animation;
+			rmClasses += _.escape( ' elementor-animation-' + settings.readmore_hover_animation );
 		}
+
+		// The URL lands inside a JS string inside an onclick attribute, so it is
+		// parsed twice. JSON.stringify() terminates the JS string context (an
+		// _.escape()d quote would decode back to a real quote before the JS parser
+		// sees it); _.escape() at the print site then closes the attribute context.
+		var onclickFor = function( link ) {
+			var target = link.is_external ? '_blank' : '_self';
+			return 'window.open(' + JSON.stringify( String( link.url ) ) + ', ' + JSON.stringify( target ) + ')';
+		};
 
 		var globalOnclick = '';
 		if ( 'yes' === settings.global_link && settings.global_link_url && settings.global_link_url.url ) {
-			var gTarget = settings.global_link_url.is_external ? '_blank' : '_self';
-			globalOnclick = "window.open('" + settings.global_link_url.url + "', '" + gTarget + "')";
+			globalOnclick = onclickFor( settings.global_link_url );
 		}
 
 		var titleOnclick = '';
 		if ( 'yes' !== settings.global_link && 'yes' === settings.title_link && settings.title_link_url && settings.title_link_url.url ) {
-			var tTarget = settings.title_link_url.is_external ? '_blank' : '_self';
-			titleOnclick = "window.open('" + settings.title_link_url.url + "', '" + tTarget + "')";
+			titleOnclick = onclickFor( settings.title_link_url );
 		}
 		#>
-		<div class="bdt-lottie-icon-box"<# if ( globalOnclick ) { #> onclick="<# print( globalOnclick ); #>"<# } #>>
+		<div class="bdt-lottie-icon-box"<# if ( globalOnclick ) { #> onclick="<# print( _.escape( globalOnclick ) ); #>"<# } #>>
 
 			<# if ( '' === settings.icon_inline ) { #>
 				<div class="bdt-lottie-icon-box-icon">
 					<div class="bdt-lottie-image bdt-lottie-icon-box-icon-wrap<# print( wrapperShapeClass ); #>">
-						<div id="<# print( lottieId ); #>-stack" class="bdt-lottie-container" data-settings="<# print( lottieDataAttr ); #>"></div>
+						<div id="<# print( lottieId ); #>-stack" class="bdt-lottie-container" data-settings="<# print( _.escape( lottieDataAttr ) ); #>"></div>
 					</div>
 				</div>
 			<# } #>
@@ -31718,14 +31727,14 @@ trait Global_Controls_Functions {
 					<div class="<# print( iconHeadingClass ); #>">
 						<div class="bdt-lottie-icon-box-icon">
 							<div class="bdt-lottie-image bdt-lottie-icon-box-icon-wrap<# print( wrapperShapeClass ); #>">
-								<div id="<# print( lottieId ); #>-inline" class="bdt-lottie-container" data-settings="<# print( lottieDataAttr ); #>"></div>
+								<div id="<# print( lottieId ); #>-inline" class="bdt-lottie-container" data-settings="<# print( _.escape( lottieDataAttr ) ); #>"></div>
 							</div>
 						</div>
 						<div class="bdt-icon-box-title-wrapper">
 							<# if ( settings.title_text ) { #>
-								<{{{ settings.title_size }}} class="bdt-lottie-icon-box-title"<# if ( titleOnclick ) { #> onclick="<# print( titleOnclick ); #>"<# } #>>
+								<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-lottie-icon-box-title"<# if ( titleOnclick ) { #> onclick="<# print( _.escape( titleOnclick ) ); #>"<# } #>>
 									<span class="elementor-inline-editing" data-elementor-setting-key="title_text" data-elementor-inline-editing-toolbar="none">{{{ settings.title_text }}}</span>
-								</{{{ settings.title_size }}}>
+								</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_sub_title && settings.sub_title_text ) { #>
 								<div class="bdt-lottie-icon-box-sub-title">{{{ settings.sub_title_text }}}</div>
@@ -31736,9 +31745,9 @@ trait Global_Controls_Functions {
 					<div>
 						<div class="bdt-icon-box-title-wrapper">
 							<# if ( settings.title_text ) { #>
-								<{{{ settings.title_size }}} class="bdt-lottie-icon-box-title"<# if ( titleOnclick ) { #> onclick="<# print( titleOnclick ); #>"<# } #>>
+								<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-lottie-icon-box-title"<# if ( titleOnclick ) { #> onclick="<# print( _.escape( titleOnclick ) ); #>"<# } #>>
 									<span class="elementor-inline-editing" data-elementor-setting-key="title_text" data-elementor-inline-editing-toolbar="none">{{{ settings.title_text }}}</span>
-								</{{{ settings.title_size }}}>
+								</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_sub_title && settings.sub_title_text ) { #>
 								<div class="bdt-lottie-icon-box-sub-title">{{{ settings.sub_title_text }}}</div>
@@ -31754,7 +31763,7 @@ trait Global_Controls_Functions {
 						</div>
 					<# } else { #>
 						<div class="bdt-lottie-icon-box-separator-wrap">
-							<img class="bdt-animation-stroke" src="<# print( dividerBase + settings.title_separator_type + '.svg' ); #>" alt="">
+							<img class="bdt-animation-stroke" src="<# print( _.escape( dividerBase + settings.title_separator_type + '.svg' ) ); #>" alt="">
 						</div>
 					<# } #>
 				<# } #>
@@ -31764,7 +31773,7 @@ trait Global_Controls_Functions {
 				<# } #>
 
 				<# if ( settings.readmore ) { #>
-					<a class="<# print( rmClasses ); #>" href="<# print( rmHref ); #>"<# print( rmTarget ); #><# print( rmRel ); #><# if ( settings.button_css_id ) { #> id="<# print( settings.button_css_id ); #>"<# } #>>
+					<a class="<# print( rmClasses ); #>" href="<# print( _.escape( rmHref ) ); #>"<# print( rmTarget ); #><# print( rmRel ); #><# if ( settings.button_css_id ) { #> id="<# print( _.escape( settings.button_css_id ) ); #>"<# } #>>
 						<# if ( readmoreIconHTML && readmoreIconHTML.rendered && 'left' === settings.readmore_icon_align ) { #>
 							<span class="bdt-button-icon-align-left">{{{ readmoreIconHTML.value }}}</span>
 						<# } #>

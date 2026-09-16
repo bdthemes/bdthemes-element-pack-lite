@@ -1279,11 +1279,11 @@ class Animated_Card extends Module_Base {
 				<div class="bdt-ep-animated-card-content">
 
 					<# if ( 'yes' === settings.show_sub_title && settings.sub_title_text ) { #>
-						<{{{ settings.sub_title_size }}} class="bdt-ep-animated-card-sub-title">{{{ settings.sub_title_text }}}</{{{ settings.sub_title_size }}}>
+						<{{{ elementor.helpers.validateHTMLTag( settings.sub_title_size ) }}} class="bdt-ep-animated-card-sub-title">{{{ settings.sub_title_text }}}</{{{ elementor.helpers.validateHTMLTag( settings.sub_title_size ) }}}>
 					<# } #>
 
 					<# if ( 'yes' === settings.show_title && settings.title_text ) { #>
-						<{{{ settings.title_size }}} class="bdt-ep-animated-card-title">{{{ settings.title_text }}}</{{{ settings.title_size }}}>
+						<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-ep-animated-card-title">{{{ settings.title_text }}}</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
 					<# } #>
 
 					<# if ( 'yes' === settings.show_description && settings.description_text ) { #>

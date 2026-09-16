@@ -317,6 +317,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 * Fixed: Dashboard charts did not render and logged "Cannot use import statement outside a module", because the bundled Chart.js was a module build loaded as a regular script
 * Fixed: Business Hours widget logged "jclock library is not loaded" and the dynamic clock never started, because the bundled jclock library was never registered
 * Fixed: Social Share widget did not escape the social network name it printed into the icon class, and now ignores any button whose value is not one of the supported networks
+* Fixed: Social Share widget printed the same unescaped social network name into the icon class and into the repeater row label while the page was open in the Elementor editor, where the earlier fix did not reach
+* Fixed: Social Share widget treated a button left empty as a supported network, which let it through the new check and logged PHP warnings while building the icon and the label
+* Fixed: Heading tag choices were written straight into the markup of the editor preview, so a saved value other than the offered headings could add attributes of its own; all widgets now fall back to a div, as the Accordion already did
+* Fixed: Editor preview of Member, Panel Slider, Scroll Nav, Static Carousel, Static Grid Tab, Step Flow, Review Card, Review Card Carousel and Product Carousel printed links, image URLs, tooltip text and animation choices into attributes without escaping them
 * Fixed: Portfolio Carousel ignored the Open in New Window option on the title link, because the target attribute was printed with its quotes encoded
 * Fixed: Navbar widget printed menu item titles, targets, link relationships, URLs and CSS classes into the markup without escaping them
 * Fixed: Wrapper Link extension wrote the raw link data into its data attribute, which broke the attribute whenever the link contained a quote

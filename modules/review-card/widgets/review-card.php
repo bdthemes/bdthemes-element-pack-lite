@@ -179,7 +179,7 @@ class Review_Card extends Module_Base {
 						<# } #>
 						<div class="bdt-flex bdt-flex-column bdt-flex-center">
 							<# if ( settings.show_reviewer_name === 'yes' && settings.reviewer_name ) { #>
-							<{{ settings.review_name_tag }} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{ settings.review_name_tag }}>
+							<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 							<# } #>
 							<# if ( settings.show_reviewer_job_title === 'yes' && settings.reviewer_job_title ) { #>
 							<div class="bdt-ep-review-card-job-title">{{{ settings.reviewer_job_title }}}</div>
@@ -193,7 +193,7 @@ class Review_Card extends Module_Base {
 
 					<# if ( imageInline !== 'yes' ) { #>
 					<# if ( settings.show_reviewer_name === 'yes' && settings.reviewer_name ) { #>
-					<{{ settings.review_name_tag }} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{ settings.review_name_tag }}>
+					<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 					<# } #>
 					<# if ( settings.show_reviewer_job_title === 'yes' && settings.reviewer_job_title ) { #>
 					<div class="bdt-ep-review-card-job-title">{{{ settings.reviewer_job_title }}}</div>

@@ -1615,7 +1615,7 @@ class Featured_Box extends Module_Base {
 		<#
 		var skinId = settings._skin || '';
 		var contentPosition = settings.content_position || 'center-left';
-		var titleTag        = settings.title_size || 'h3';
+		var titleTag        = elementor.helpers.validateHTMLTag( settings.title_size || 'h3' );
 		var imgUrl          = settings.image && settings.image.url ? settings.image.url : '';
 		var showSubTitle    = settings.show_sub_title === 'yes';
 		var showBadge       = settings.badge === 'yes';

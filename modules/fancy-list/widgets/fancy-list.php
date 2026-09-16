@@ -266,7 +266,7 @@ class Fancy_List extends Module_Base {
 		?>
 		<#
 		var layout     = settings.layout_style || 'style-1';
-		var titleTag   = settings.title_tags || 'h4';
+		var titleTag   = elementor.helpers.validateHTMLTag( settings.title_tags || 'h4' );
 		var showNumber = settings.show_number_icon === 'yes';
 		var lineNum    = 1;
 		#>
