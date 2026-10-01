@@ -313,6 +313,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 8.8.X [XXth October 2026] =
+
+* Fixed: Added a correct condition to the pause on hover control so it is available only when Autoplay is enabled
+
 = 8.8.5 [23rd September 2026] =
 
 * Updated: System improved
