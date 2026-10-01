@@ -5,11 +5,11 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.5
+Stable tag: 8.8.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.3.0
+Elementor tested up to: 4.3.3
 
 
 Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
@@ -313,7 +313,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.8.X [XXth October 2026] =
+= 8.8.6 [1st October 2026] =
 
 * Fixed: Added a correct condition to the pause on hover control so it is available only when Autoplay is enabled
 
