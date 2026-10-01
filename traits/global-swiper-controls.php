@@ -386,8 +386,11 @@ trait Global_Swiper_Controls {
 		$this->add_control(
 			'pauseonhover',
 			[
-				'label' => esc_html__('Pause on Hover', 'bdthemes-element-pack-lite'),
-				'type'  => Controls_Manager::SWITCHER,
+				'label' 	=> esc_html__('Pause on Hover', 'bdthemes-element-pack-lite'),
+				'type'  	=> Controls_Manager::SWITCHER,
+				'condition' => [
+					'autoplay' => 'yes',
+				],
 			]
 		);
 
