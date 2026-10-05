@@ -41,3 +41,4 @@ require __DIR__ . '/wp-stubs.php';
 // ModuleService first: element-pack-filters.php `use`s it and calls its methods.
 require $root . '/admin/module-settings.php';
 require $root . '/includes/element-pack-filters.php';
+require $root . '/includes/class-content-guard.php';

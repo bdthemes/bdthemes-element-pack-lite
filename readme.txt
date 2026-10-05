@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, elementor temp
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.6
+Stable tag: 8.8.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -312,6 +312,13 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Widgets List
 
 == Changelog ==
+
+= 8.8.7 [5th October 2026] =
+
+* Security: Bundled UIkit: SVG and lightbox iframe sources must be http(s); scripts, event handlers and script URLs are dropped from every parsed HTML fragment, including lightbox captions (reported by Intrudify)
+* Security: UIkit component attributes (bdt-* and data-bdt-*) are stripped from post, page, excerpt, Elementor and comment content saved by users without unfiltered_html, and unsafe option keys and values are removed on output
+* Security: Creative Button: the Button ID is now escaped in the Elementor editor preview
+* Security: Cursor Effects: cursor markup is built with DOM calls, so a saved image URL, icon, style or text label can no longer inject HTML (reported by nh4tvd)
 
 = 8.8.6 [1st October 2026] =
 

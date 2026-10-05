@@ -158,7 +158,7 @@ function esc_html__($text, $domain = 'default') { return $text; }
 function esc_html_x($text, $context, $domain = 'default') { return $text; }
 function esc_attr__($text, $domain = 'default') { return $text; }
 function esc_html($text) { return $text; }
-function esc_attr($text) { return $text; }
+function esc_attr($text) { return htmlspecialchars((string) $text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8', false); }
 
 /* -------------------------------------------------------------------------
  * Plugin helpers (inert by default; overridable per test)
@@ -207,4 +207,33 @@ function __wp_clear_hook($hook) {
 /** Set the value of an option WITHOUT firing any actions (simulates an external change). */
 function __wp_set_option_silently($name, $value) {
     $GLOBALS['__wp_options'][$name] = $value;
+}
+
+function current_user_can( $cap ) {
+	$caps = $GLOBALS['__wp_current_user_caps'] ?? [ 'manage_options', 'administrator' ];
+	return in_array( $cap, $caps, true );
+}
+
+function map_deep( $value, $callback ) {
+	if ( is_array( $value ) ) {
+		foreach ( $value as $index => $item ) {
+			$value[ $index ] = map_deep( $item, $callback );
+		}
+	} elseif ( is_object( $value ) ) {
+		foreach ( get_object_vars( $value ) as $property_name => $property_value ) {
+			$value->$property_name = map_deep( $property_value, $callback );
+		}
+	} else {
+		$value = call_user_func( $callback, $value );
+	}
+
+	return $value;
+}
+
+function wp_unslash( $value ) {
+	return is_string( $value ) ? stripslashes( $value ) : $value;
+}
+
+function wp_slash( $value ) {
+	return is_string( $value ) ? addslashes( $value ) : $value;
 }

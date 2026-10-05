@@ -103,42 +103,86 @@ if (!function_exists('element_pack_is_asset_optimization_enabled')) {
  *     lightbox toggle and applies each pair with setAttribute(), so
  *     `data-attrs="onload: alert(1)"` becomes a real event handler. No widget
  *     ever emits this attribute, so removing it costs us nothing.
- *   - `template` is stripped from `data-bdt-*` option strings. It is a String
- *     prop on the lightbox panel (merged into the lightbox component's own props
- *     by its install()) and is injected as raw HTML. Our widgets only ever emit
- *     `animation`, `toggle` and similar scalar options.
+ *   - `template` and `attributes` are stripped from `bdt-*` / `data-bdt-*`
+ *     option strings, along with every `on*` key and every value that carries a
+ *     javascript:, vbscript: or data: scheme (the svg component's `src`). The
+ *     string is parsed the way UIkit's parseOptions() does: a value starting
+ *     with `{` is JSON, anything else is `key: value;` pairs. Our widgets only
+ *     ever emit `animation`, `toggle`, `stroke-animation` and similar scalar
+ *     options, and JSON objects without any of those keys, so their markup
+ *     passes through byte-identical.
  */
 if (!function_exists('element_pack_unsafe_uikit_option_keys')) {
     function element_pack_unsafe_uikit_option_keys() {
-        return apply_filters('elementpack/security/unsafe_uikit_option_keys', ['template']);
+        return apply_filters('elementpack/security/unsafe_uikit_option_keys', ['template', 'attributes']);
+    }
+}
+
+if (!function_exists('element_pack_uikit_option_key_is_unsafe')) {
+    function element_pack_uikit_option_key_is_unsafe($key) {
+        // Normalise before comparing so case- or padding-obfuscated spellings
+        // (`TEMPLATE`, ` template `) cannot slip through.
+        $key = strtolower(trim((string) $key));
+        $key = preg_replace('/[^a-z0-9_-]/', '', $key);
+
+        return in_array($key, element_pack_unsafe_uikit_option_keys(), true) || 0 === strpos($key, 'on');
+    }
+}
+
+if (!function_exists('element_pack_uikit_option_value_is_unsafe')) {
+    function element_pack_uikit_option_value_is_unsafe($value) {
+        // A script or data: URL in any option (`src` of bdt-svg, `source` of a
+        // lightbox item) is never something our widgets emit.
+        return is_string($value) && 1 === preg_match('/^\s*(?:javascript|vbscript|data)\s*:/i', $value);
+    }
+}
+
+if (!function_exists('element_pack_strip_unsafe_uikit_json_keys')) {
+    function element_pack_strip_unsafe_uikit_json_keys($options) {
+        $decoded = json_decode($options, true);
+
+        // UIkit JSON.parse()s a value that starts with `{`; one PHP cannot parse
+        // is dropped rather than kept, so a parser difference cannot be abused.
+        if (!is_array($decoded)) {
+            return '';
+        }
+
+        $removed = false;
+
+        foreach ($decoded as $key => $value) {
+            if (element_pack_uikit_option_key_is_unsafe($key) || element_pack_uikit_option_value_is_unsafe($value)) {
+                unset($decoded[$key]);
+                $removed = true;
+            }
+        }
+
+        return $removed ? wp_json_encode((object) $decoded, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : $options;
     }
 }
 
 if (!function_exists('element_pack_strip_unsafe_uikit_keys')) {
     function element_pack_strip_unsafe_uikit_keys($options) {
+        // UIkit's parseOptions(): a value starting with `{` is a JSON object.
+        $trimmed = ltrim($options);
+        if ('' !== $trimmed && '{' === $trimmed[0]) {
+            return element_pack_strip_unsafe_uikit_json_keys($trimmed);
+        }
+
         // Without a `key: value` pair the whole string is shorthand for the
         // component's primary prop (e.g. `data-bdt-lightbox="animation"`).
         if (false === strpos($options, ':')) {
             return $options;
         }
 
-        $unsafe  = element_pack_unsafe_uikit_option_keys();
         $kept    = [];
         $removed = false;
 
         foreach (explode(';', $options) as $pair) {
             $parts = explode(':', $pair, 2);
 
-            if (2 === count($parts)) {
-                // Normalise before comparing so case- or padding-obfuscated
-                // spellings (`TEMPLATE`, ` template `) cannot slip through.
-                $key = strtolower(trim($parts[0]));
-                $key = preg_replace('/[^a-z0-9_-]/', '', $key);
-
-                if (in_array($key, $unsafe, true) || 0 === strpos($key, 'on')) {
-                    $removed = true;
-                    continue;
-                }
+            if (2 === count($parts) && (element_pack_uikit_option_key_is_unsafe($parts[0]) || element_pack_uikit_option_value_is_unsafe($parts[1]))) {
+                $removed = true;
+                continue;
             }
 
             $kept[] = $pair;
@@ -172,7 +216,7 @@ if (!function_exists('element_pack_sanitize_uikit_attributes')) {
         }
 
         // The overwhelming majority of content carries neither attribute.
-        if (false === stripos($content, 'data-bdt-') && false === stripos($content, 'attrs')) {
+        if (false === stripos($content, 'bdt-') && false === stripos($content, 'attrs')) {
             return $content;
         }
 
@@ -190,7 +234,7 @@ if (!function_exists('element_pack_sanitize_uikit_attributes')) {
         }
 
         $filtered = preg_replace_callback(
-            '/(\sdata-bdt-[\w-]+\s*=\s*)(["\'])(.*?)\2/is',
+            '/(\s(?:data-)?bdt-[\w-]+\s*=\s*)(["\'])(.*?)\2/is',
             'element_pack_sanitize_uikit_attribute_match',
             $content
         );
@@ -223,9 +267,15 @@ if (!function_exists('element_pack_register_uikit_content_guard')) {
         add_filter('the_content', 'element_pack_sanitize_uikit_attributes', PHP_INT_MAX);
         add_filter('widget_text', 'element_pack_sanitize_uikit_attributes', PHP_INT_MAX);
 
+        // Hand-written excerpts are stored with the same kses rules as content
+        // and rendered on home, archive and search pages.
+        add_filter('get_the_excerpt', 'element_pack_sanitize_uikit_attributes', PHP_INT_MAX);
+        add_filter('the_excerpt', 'element_pack_sanitize_uikit_attributes', PHP_INT_MAX);
+
         // Defence in depth: also clean payloads at rest, so already-stored
         // content stops being a liability outside the_content (feeds, REST).
         add_filter('content_save_pre', 'element_pack_sanitize_uikit_attributes_on_save', 11);
+        add_filter('excerpt_save_pre', 'element_pack_sanitize_uikit_attributes_on_save', 11);
     }
     add_action('init', 'element_pack_register_uikit_content_guard');
 }

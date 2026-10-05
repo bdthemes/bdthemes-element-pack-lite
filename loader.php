@@ -130,6 +130,9 @@ class Element_Pack_Loader {
         require_once BDTEP_INC_PATH . 'class-json-file-upload-control.php';
         // svg support for full wordpress site
         require_once BDTEP_INC_PATH . 'class-svg-support.php';
+        // Keeps UIkit component attributes out of content saved by users without unfiltered_html
+        require_once BDTEP_INC_PATH . 'class-content-guard.php';
+        Includes\Content_Guard::init();
         // All modules loading from here
         require_once BDTEP_INC_PATH . 'modules-manager.php';
         // wpml compatibility class for wpml support
