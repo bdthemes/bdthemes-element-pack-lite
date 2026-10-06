@@ -992,7 +992,7 @@ class Creative_Button extends Module_Base {
 			relParts.push( 'nofollow' );
 		}
 		var relAttr = relParts.length ? ' rel="' + relParts.join( ' ' ) + '"' : '';
-		var idAttr = ( settings.button_css_id && String( settings.button_css_id ).trim() !== '' ) ? ' id="' + settings.button_css_id + '"' : '';
+		var idAttr = ( settings.button_css_id && String( settings.button_css_id ).trim() !== '' ) ? ' id="' + _.escape( String( settings.button_css_id ).trim() ) + '"' : '';
 		var extraAttrs = idAttr + targetAttr + relAttr;
 
 		var btnClasses = 'bdt-ep-creative-button bdt-ep-creative-button--' + settings.button_style;

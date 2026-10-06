@@ -4533,6 +4533,59 @@ jQuery(document).ready(function () {
                 return this.getElementSettings('element_pack_cursor_effects_' + key);
             },
 
+            /**
+             * Every value below comes from the element's saved settings, which any
+             * user who can edit the document controls, so the cursor markup is
+             * built with DOM calls instead of HTML strings: a URL is only ever set
+             * as an attribute after its scheme is checked, text goes in as text,
+             * and class names are added token by token.
+             */
+            isHttpUrl: function (value) {
+                if (typeof value !== 'string' || value.trim() === '') {
+                    return false;
+                }
+                try {
+                    var url = new URL(value, document.baseURI);
+                    return url.protocol === 'http:' || url.protocol === 'https:';
+                } catch (e) {
+                    return false;
+                }
+            },
+
+            createImage: function (src) {
+                if (!this.isHttpUrl(src)) {
+                    return null;
+                }
+                var img = document.createElement('img');
+                img.className = 'bdt-cursor-image';
+                img.setAttribute('src', src);
+                return img;
+            },
+
+            addClassTokens: function (el, value) {
+                String(value || '').split(/\s+/).forEach(function (token) {
+                    if (/^[A-Za-z0-9_-]+$/.test(token)) {
+                        el.classList.add(token);
+                    }
+                });
+            },
+
+            createCursorMarkup: function (elementID, wrapperClass, inner) {
+                var effects = document.createElement('div');
+                effects.className = 'bdt-cursor-effects';
+                if (wrapperClass) {
+                    effects.classList.add(wrapperClass);
+                }
+                var ball = document.createElement('div');
+                ball.id = 'bdt-ep-cursor-ball-effects-' + elementID;
+                ball.className = 'ep-cursor-ball';
+                if (inner) {
+                    ball.appendChild(inner);
+                }
+                effects.appendChild(ball);
+                return effects;
+            },
+
             copyCursorVarsToWrapper: function (wrapper, source) {
                 var elementEl = this.$element[0];
                 var computed = window.getComputedStyle(elementEl);
@@ -4646,25 +4699,27 @@ jQuery(document).ready(function () {
                 if (isGsap) {
                     var staleWrap = document.getElementById(cursorWrapId);
                     if (staleWrap) staleWrap.remove();
-                    var gsapImage = this.settings("image_src.url");
-                    var gsapWidth = this.settings("gsap_width.size") || 385;
-                    var gsapHeight = this.settings("gsap_height.size") || 280;
+                    var gsapImage = this.createImage(this.settings("image_src.url"));
+                    var gsapWidth = parseFloat(this.settings("gsap_width.size")) || 385;
+                    var gsapHeight = parseFloat(this.settings("gsap_height.size")) || 280;
 
                     // Rebuild gallery on each run() so size/image changes apply
                     var existing = document.getElementById(gsapId);
                     if (existing) existing.remove();
 
-                    // position:fixed at 0,0 — movement via transform x/y for GPU compositing
-                    $("body").append(
-                        '<div id="' + gsapId + '" class="bdt-cursor-gsap-gallery"' +
-                        ' style="position:fixed;top:0;left:0;width:' + gsapWidth + 'px;height:' + gsapHeight + 'px;' +
-                        'z-index:9999;overflow:hidden;pointer-events:none;will-change:transform;">' +
-                        '<img class="bdt-cursor-image" src="' + gsapImage + '"' +
-                        ' style="width:100%;height:100%;object-fit:cover;display:block;">' +
-                        "</div>"
-                    );
+                    if (!gsapImage) {
+                        return; // No usable image: nothing to follow the cursor with.
+                    }
 
-                    var galleryEl = document.getElementById(gsapId);
+                    // position:fixed at 0,0 — movement via transform x/y for GPU compositing
+                    var galleryEl = document.createElement("div");
+                    galleryEl.id = gsapId;
+                    galleryEl.className = "bdt-cursor-gsap-gallery";
+                    galleryEl.style.cssText = "position:fixed;top:0;left:0;width:" + gsapWidth + "px;height:" + gsapHeight + "px;" +
+                        "z-index:9999;overflow:hidden;pointer-events:none;will-change:transform;";
+                    gsapImage.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;";
+                    galleryEl.appendChild(gsapImage);
+                    document.body.appendChild(galleryEl);
 
                     gsap.set(galleryEl, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
 
@@ -4700,65 +4755,50 @@ jQuery(document).ready(function () {
                     return; // Skip Cotton.js initialisation
                 }
 
-                var cursorInnerHtml = "";
-                    if (source === "image") {
-                        var image = this.settings("image_src.url");
-                        cursorInnerHtml =
-                            '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                            elementID +
-                            '" class="ep-cursor-ball"><img class="bdt-cursor-image" src="' +
-                            image +
-                            '"></div></div>';
-                    } else if (source === "icons") {
-                        var svg = this.settings("icons.value.url");
-                        var icons = this.settings("icons.value");
-                        if (svg !== undefined) {
-                            cursorInnerHtml =
-                                '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                                elementID +
-                                '" class="ep-cursor-ball"><img class="bdt-cursor-image" src="' +
-                                svg +
-                                '"></img></div></div>';
-                        } else {
-                            cursorInnerHtml =
-                                '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                                elementID +
-                                '" class="ep-cursor-ball"><i class="' +
-                                icons +
-                                ' bdt-cursor-icons"></i></div></div>';
-                        }
-                    } else if (source === "text") {
-                        var text = this.settings("text_label");
-                        cursorInnerHtml =
-                            '<div class="bdt-cursor-effects"><div id="bdt-ep-cursor-ball-effects-' +
-                            elementID +
-                            '" class="ep-cursor-ball"><span class="bdt-cursor-text">' +
-                            text +
-                            "</span></div></div>";
+                var cursorMarkup = null;
+                if (source === "image") {
+                    cursorMarkup = this.createCursorMarkup(elementID, "", this.createImage(this.settings("image_src.url")));
+                } else if (source === "icons") {
+                    var svg = this.settings("icons.value.url");
+                    var icons = this.settings("icons.value");
+                    if (svg !== undefined) {
+                        cursorMarkup = this.createCursorMarkup(elementID, "", this.createImage(svg));
                     } else {
-                        cursorInnerHtml =
-                            '<div class="bdt-cursor-effects ' +
-                            cursorStyle +
-                            '"><div id="bdt-ep-cursor-ball-effects-' +
-                            elementID +
-                            '" class="ep-cursor-ball"></div><div id="bdt-ep-cursor-circle-effects-' +
-                            elementID +
-                            '"  class="ep-cursor-circle"></div></div>';
+                        var icon = document.createElement("i");
+                        this.addClassTokens(icon, icons);
+                        icon.classList.add("bdt-cursor-icons");
+                        cursorMarkup = this.createCursorMarkup(elementID, "", icon);
                     }
-
-                    if (cursorInnerHtml) {
-                        document.getElementById(cursorWrapId) && document.getElementById(cursorWrapId).remove();
-                        var wrapper = document.createElement("div");
-                        wrapper.id = cursorWrapId;
-                        wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap" + (source === "icons" ? " bdt-cursor-effects--icons" : "") + (source === "image" ? " bdt-cursor-effects--image" : "");
-                        wrapper.innerHTML = cursorInnerHtml;
-                        this.copyCursorVarsToWrapper(wrapper, source);
-                        document.body.appendChild(wrapper);
-
-                        if (source === "image") {
-                            this.applyImageSize(wrapper);
-                        }
+                } else if (source === "text") {
+                    var label = document.createElement("span");
+                    label.className = "bdt-cursor-text";
+                    label.textContent = this.settings("text_label") || "";
+                    cursorMarkup = this.createCursorMarkup(elementID, "", label);
+                } else {
+                    var allowedStyles = ["ep-cursor-style-1", "ep-cursor-style-2", "ep-cursor-style-3"];
+                    if (allowedStyles.indexOf(cursorStyle) === -1) {
+                        cursorStyle = allowedStyles[0];
                     }
+                    cursorMarkup = this.createCursorMarkup(elementID, cursorStyle, null);
+                    var circle = document.createElement("div");
+                    circle.id = "bdt-ep-cursor-circle-effects-" + elementID;
+                    circle.className = "ep-cursor-circle";
+                    cursorMarkup.appendChild(circle);
+                }
+
+                if (cursorMarkup) {
+                    document.getElementById(cursorWrapId) && document.getElementById(cursorWrapId).remove();
+                    var wrapper = document.createElement("div");
+                    wrapper.id = cursorWrapId;
+                    wrapper.className = "bdt-cursor-effects-yes bdt-cursor-effects-body-wrap" + (source === "icons" ? " bdt-cursor-effects--icons" : "") + (source === "image" ? " bdt-cursor-effects--image" : "");
+                    wrapper.appendChild(cursorMarkup);
+                    this.copyCursorVarsToWrapper(wrapper, source);
+                    document.body.appendChild(wrapper);
+
+                    if (source === "image") {
+                        this.applyImageSize(wrapper);
+                    }
+                }
                 var cursorBallID =
                     "#bdt-ep-cursor-ball-effects-" + this.$element.data("id");
                 const cursorBall = document.querySelector(cursorBallID);
