@@ -9,7 +9,7 @@ Stable tag: 8.8.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
-Elementor tested up to: 4.3.3
+Elementor tested up to: 4.3.4
 
 
 Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
@@ -313,12 +313,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.8.7 [5th October 2026] =
+= 8.8.7 [6th October 2026] =
 
-* Security: Bundled UIkit: SVG and lightbox iframe sources must be http(s); scripts, event handlers and script URLs are dropped from every parsed HTML fragment, including lightbox captions (reported by Intrudify)
-* Security: UIkit component attributes (bdt-* and data-bdt-*) are stripped from post, page, excerpt, Elementor and comment content saved by users without unfiltered_html, and unsafe option keys and values are removed on output
-* Security: Creative Button: the Button ID is now escaped in the Elementor editor preview
-* Security: Cursor Effects: cursor markup is built with DOM calls, so a saved image URL, icon, style or text label can no longer inject HTML (reported by nh4tvd)
+* Security: UIkit: only http(s) SVG and lightbox iframe sources are allowed, and scripts, event handlers and script URLs are removed from parsed HTML (reported by Intrudify)
+* Security: bdt-* and data-bdt-* attributes are stripped from content saved by users without unfiltered_html
+* Security: Creative Button: Button ID is now escaped in the editor preview
+* Security: Cursor Effects: markup is now built with DOM calls to prevent HTML injection (reported by nh4tvd)
 
 = 8.8.6 [1st October 2026] =
 
