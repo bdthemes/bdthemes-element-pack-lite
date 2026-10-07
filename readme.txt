@@ -1,7 +1,7 @@
-=== Element Pack Addons for Elementor - Elementor Widgets, Elementor Templates, Elementor Addons ===
+=== Element Pack Addons for Elementor - MCP & AI-Ready Elementor Widgets, Elementor Templates, Elementor Addons ===
 Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik, shmusuf, arafatakashakku, shaikatazim, shamim496
 Donate link: http://bdthemes.com/
-Tags: elementor widgets, widgets for elementor, elementor addons, elementor templates, woocommerce widgets, elementor extensions, elementor addon, elementor widget, woocommerce elementor, addons
+Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor templates, woocommerce widgets, elementor extensions, elementor addon, AI elementor widget, woocommerce elementor, AI addons
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
@@ -16,15 +16,23 @@ Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, El
 
 == Description ==
 
-Element Pack Lite is a powerful Elementor addon that extends the Elementor page builder with advanced widgets, ready-made templates and design extensions.
+Element Pack Lite is a powerful Elementor addon that extends the Elementor page builder with advanced Elementor widgets, ready-made Elementor templates and design extensions.
 
-Build professional WordPress websites without writing code, using widgets that work directly inside the Elementor editor.
+Build professional WordPress websites without writing code, using Element Pack widgets that work directly inside the Elementor editor.
 
 **[Get Element Pack](https://elementpack.pro)**
 
+= User-friendly Element Pack admin dashboard =
+
+Manage Element Pack Elementor widgets and extensions with a brand new, user-friendly admin dashboard interface.
+
+= Elementor MCP & AI Abilities =
+
+Build Elementor pages with Claude, ChatGPT, Cursor or Angie using a compatible Elementor MCP & AI Abilities setup. AI tool support depends on your Elementor version and connected integrations.
+
 = Advanced Elementor widgets =
 
-A large collection of widgets for landing pages, business sites, portfolios and blogs:
+A large collection of Elementor widgets for landing pages, business sites, portfolios and blogs:
 
 * Pricing Table, Testimonial and Review Card
 * Image Gallery, Image Accordion and Image Compare
@@ -33,17 +41,17 @@ A large collection of widgets for landing pages, business sites, portfolios and 
 * Social Feed, Twitter Grid and Facebook Feed
 * Post Grid, Slider and Carousel widgets
 
-= WooCommerce widgets =
+= WooCommerce Elementor widgets =
 
-Design fully customised shops inside Elementor:
+Design fully customised shops with WooCommerce Elementor widgets:
 
 * Product Grid and Product Carousel
 * Product Category and Product Gallery
 * Add to Cart and Product Slider
 
-= Form integrations =
+= Elementor form integrations =
 
-Style and display forms from the plugins you already use:
+Style and display forms in Elementor from the WordPress form plugins you already use:
 
 * Contact Form 7, WPForms and Ninja Forms
 * Fluent Forms, Formidable Forms and Forminator
@@ -51,35 +59,35 @@ Style and display forms from the plugins you already use:
 
 = Elementor extensions =
 
-Extensions that add capability to any Elementor element:
+Elementor extensions that add capability to any Elementor element:
 
 * Wrapper Link, Tooltip and Floating Effects
 * Cursor Effects, Grid Line and Backdrop Filter
 * Equal Height, Transform Effects and Reading Progress
 * Dark Mode, Cookie Consent and Scroll Button
 
-= Ready-made templates =
+= Ready-made Elementor templates =
 
-Import complete page and section templates from the built-in template library and customise everything in Elementor.
+Import complete Elementor page and section templates from the built-in template library and customise everything in Elementor.
 
-= Third-party integrations =
+= Third-party Elementor integrations =
 
-Widgets for Tutor LMS, GiveWP, Events Calendar and more, so your existing plugins fit your design.
+Elementor widgets for Tutor LMS, GiveWP, Events Calendar and more, so your existing plugins fit your design.
 
-= Documentation and support =
+= Element Pack documentation and support =
 
-Full documentation is available at [elementpack.pro](https://elementpack.pro). For help, visit our [support centre](https://bdthemes.com/support/).
+Full Element Pack Elementor addon documentation is available at [elementpack.pro](https://elementpack.pro). For help, visit our [support centre](https://bdthemes.com/support/).
 
 == Common Issues and Solutions: 🐣 ==
 
-* **Editor fails to load**
+* **Elementor editor fails to load**
   Ans. It is due to your server PHP setting. You can increase PHP memory limit from wp-config.php file or php.ini file
   [View Documentation](https://bdthemes.com/fix-elementor-stuck-on-loading-screen-instantly/)
 
 == Need Help? ==
 
-Have a feature suggestion? Share it with us on our [Feature Suggestion Page](https://feedback.bdthemes.com/b/6vr2250l/feature-requests/idea/new).
-For assistance, [Contact us](https://bdthemes.com/support/) 💌 or check out our Tutorials.
+Have an Elementor addon feature suggestion? Share it with us on our [Feature Suggestion Page](https://feedback.bdthemes.com/b/6vr2250l/feature-requests/idea/new).
+For Element Pack assistance, [Contact us](https://bdthemes.com/support/) 💌 or check out our Tutorials.
 
 == Checkout our other Plugins 👑 ==
 
@@ -288,28 +296,28 @@ licences. Each is the upstream distribution of the named project:
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+This section describes how to install the Element Pack Elementor addon and get it working.
 
 e.g.
 
 1. Upload `bdthemes-element-pack-lite` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Start using it by going to the editor.
+3. Start using Element Pack widgets by going to the Elementor editor.
 
 https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Screenshots ==
 
 1. Element Pack Elementor Addons
-2. Ready-Made Templates
-3. Powerful Widgets
-4. 3rd Party Widgets
+2. Ready-Made Elementor Templates
+3. Powerful Elementor Widgets
+4. 3rd Party Elementor Widgets
 5. Elementor Extend Features
-6. Mega Menu Builder Demo 01
-7. Mega Menu Builder Demo 02
-8. WooCommerce Widgets List
-9. Header Footer Features
-10. Others Widgets List
+6. Elementor Mega Menu Builder Demo 01
+7. Elementor Mega Menu Builder Demo 02
+8. WooCommerce Elementor Widgets List
+9. Elementor Header Footer Features
+10. Others Elementor Widgets List
 
 == Changelog ==
 
@@ -810,13 +818,13 @@ Details [changelog here](https://feedback.bdthemes.com/announcements?category=ca
 
 == Frequently Asked Questions ==
 
-### Does it work with all WordPress themes?
+### Does Element Pack work with all WordPress themes?
 
 - Absolutely! Our plugin supports any kind of theme as long as the theme supports Elementor.
 
-### What if I update to the Premium version?
+### What if I update to the Element Pack Premium version?
 
-- You get an update, that’s all. No user settings will be affected upon upgrading to the latest version of the plugin. But, you will unlock hundreds more premium features to boost your site developing experience further.
+- You get an update, that’s all. No user settings will be affected upon upgrading to the latest version of Element Pack. But, you will unlock hundreds more premium Elementor features to boost your site developing experience further.
 
 ### Can I use the plugin without Elementor Page Builder?
 
@@ -836,13 +844,13 @@ Details [changelog here](https://feedback.bdthemes.com/announcements?category=ca
 
 ### Does it work with Elementor Pro?
 
-- Without a doubt.
+- Without a doubt. Element Pack works with Elementor Pro.
 
 ### Will Element Pack break my site after an update?
 
 - No, we ensure that our plugin will not change or break any existing layout on your website due to an update issue. We have your backs in this matter.
 
-### How long do I get support and updates?
+### How long do I get Element Pack support and updates?
 
 - As long as Element Pack exists, we will provide you with frequent updates and 24/7 support. We are committed to doing so.
 Note: we don’t provide plugin support for Adult sites.
@@ -855,14 +863,14 @@ Note: we don’t provide plugin support for Adult sites.
 
 - Yes, you can. In fact, the white label option is available for the developer and agency package only and should give you full freedom over the plugin’s info.
 
-### Can we get more widgets in the near future?
+### Can we get more Elementor widgets in the near future?
 
-- Of course, you can. In fact, we bring new and unique widgets over the frequent updates (minor updates). With every leap of the base plugin version (major updates), we bring tones of new widgets and features to let you take advantage of our plugin.
+- Of course, you can. In fact, we bring new and unique Elementor widgets over the frequent updates (minor updates). With every leap of the base plugin version (major updates), we bring tones of new widgets and features to let you take advantage of our plugin.
 
 ### Can I use Element Pack on client sites?
 
 - Yes, definitely. You can use our plugin on any website, self or client, within the allowed number of licenses provided by the package you purchase. There are no bindings to the usage.
 
-###  How can I report security bugs? 
+###  How can I report Element Pack security bugs? 
 
 -  You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/9e5fbc2f-c2b2-434c-b42e-2516005fddbc)
