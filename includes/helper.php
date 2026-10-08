@@ -740,8 +740,6 @@ function element_pack_get_taxonomy_by_post_type($post_type) {
 			return 'campaign_category';
 		case 'lightbox_library':
 			return 'ngg_tag';
-		case 'give_forms':
-			return 'give_forms_category';
 		case 'tribe_events':
 			return 'tribe_events_cat';
 		case 'product':
@@ -1670,24 +1668,6 @@ function element_pack_fluent_forms_options() { {
 }
 
 /**
- * [element_pack_everest_forms_options description]
- * @return [type] [description]
- */
-function element_pack_everest_forms_options() {
-	$everest_form = array();
-	$ev_form      = get_posts( 'post_type="everest_form"&numberposts=-1' );
-	if ( $ev_form ) {
-		foreach ( $ev_form as $evform ) {
-			$everest_form[ $evform->ID ] = $evform->post_title;
-		}
-	} else {
-		$everest_form[0] = esc_html__( 'Form Not Found!', 'bdthemes-element-pack-lite' );
-	}
-
-	return $everest_form;
-}
-
-/**
  * [element_pack_formidable_forms_options description]
  * @return [type] [description]
  */
@@ -1824,24 +1804,6 @@ function element_pack_gravity_forms_options() {
 	}
 
 	return $form_options;
-}
-
-/**
- * [element_pack_give_forms_options description]
- * @return [type] [description]
- */
-function element_pack_give_forms_options() {
-	$give_form = [ '0' => esc_html__( 'Select Form', 'bdthemes-element-pack-lite' ) ];
-	$gwp_form  = get_posts( 'post_type="give_forms"&numberposts=-1' );
-	if ( $gwp_form ) {
-		foreach ( $gwp_form as $gwpform ) {
-			$give_form[ $gwpform->ID ] = $gwpform->post_title;
-		}
-	} else {
-		$give_form[0] = esc_html__( 'Form Not Found!', 'bdthemes-element-pack-lite' );
-	}
-
-	return $give_form;
 }
 
 /**

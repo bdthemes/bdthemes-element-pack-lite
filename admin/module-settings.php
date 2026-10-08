@@ -118,16 +118,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/7hnmMdd2-Yo',
 				],
 				[
-					'name'         => 'age-gate',
-					'label'        => esc_html__('Age Gate', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'free',
-					'content_type' => 'custom',
-					'demo_url'     => 'https://elementpack.pro/demo/element/age-gate/',
-					'video_url'    => 'https://youtu.be/I32wKLfNIes',
-				],
-				[
 					'name'         => 'air-pollution',
 					'label'        => esc_html__('Air Pollution', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -257,17 +247,6 @@ class ModuleService {
 					'content_type' => 'others',
 					'demo_url'     => 'https://elementpack.pro/demo/element/calendly/',
 					'video_url'    => 'https://youtu.be/nl4zC46SrhY',
-				],
-				[
-					'name'         => 'call-out',
-					'label'        => esc_html__('Call Out', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'free',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/call-out/',
-					'video_url'    => 'https://youtu.be/1tNppRHvSvQ',
-
 				],
 				[
 					'name'         => 'carousel',
@@ -500,18 +479,6 @@ class ModuleService {
 
 				],
 				[
-					'name'         => 'dark-mode',
-					'label'        => esc_html__('Dark Mode', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'free',
-					'content_type' => 'custom',
-					'demo_url'     => 'https://elementpack.pro/demo/element/dark-mode',
-					'video_url'    => 'https://youtu.be/nuYa-0sWFxU',
-
-				],
-
-				[
 					'name'         => 'document-viewer',
 					'label'        => esc_html__('Document Viewer', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -532,17 +499,6 @@ class ModuleService {
 					'content_type' => 'custom slider',
 					'demo_url'     => 'https://elementpack.pro/demo/element/device-slider/',
 					'video_url'    => 'https://youtu.be/GACXtqun5Og',
-
-				],
-				[
-					'name'         => 'dropbar',
-					'label'        => esc_html__('Dropbar', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'free',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/dropbar/',
-					'video_url'    => 'https://youtu.be/cXMq8nOCdqk',
 
 				],
 				[
@@ -794,16 +750,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/uj9WpuFIZb8',
 				],
 				[
-					'name'         => 'image-accordion',
-					'label'        => esc_html__('Image Accordion', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'free',
-					'content_type' => 'custom',
-					'demo_url'     => 'https://elementpack.pro/demo/element/image-accordion/',
-					'video_url'    => 'https://youtu.be/jQWU4kxXJpM',
-				],
-				[
 					'name'         => 'image-compare',
 					'label'        => esc_html__('Image Compare', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -962,16 +908,6 @@ class ModuleService {
 					'content_type' => 'others',
 					'demo_url'     => 'https://elementpack.pro/demo/element/marker/',
 					'video_url'    => 'https://youtu.be/1iKQD4HfZG4',
-				],
-				[
-					'name'         => 'member',
-					'label'        => esc_html__('Member', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'free',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/member/',
-					'video_url'    => 'https://youtu.be/m8_KOHzssPA',
 				],
 				[
 					'name'         => 'navbar',
@@ -2227,7 +2163,7 @@ class ModuleService {
 				[
 					'name'        => 'asset-manager',
 					'label'       => esc_html__('Asset Manager', 'bdthemes-element-pack-lite'),
-					'tooltip'  => __('If you want to combine your JS and css and load in a single file so enable it. When you enable it all widgets css and JS will combine in a single file.', 'bdthemes-element-pack-lite'),
+					'tooltip'  => __('If you want to combine your JS and css and load in a single file so enable it. Only the widgets used on each page are combined, into one CSS and one JS file.', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
 					'default'     => 'off',
 					'widget_type' => 'free',
@@ -3115,19 +3051,6 @@ class ModuleService {
 			];
 		}
 		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'everest-forms',
-			'label'        => esc_html__('Everest Forms', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'everest-forms',
-			'plugin_path'  => 'everest-forms/everest-forms.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/everest-forms/',
-			'video_url'    => 'https://youtu.be/jfZhIFpdvcg',
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'events-calendar-grid',
 			'label'       => esc_html__('Events Calendar Grid', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
@@ -3254,144 +3177,6 @@ class ModuleService {
 			'content_type' => 'forms',
 			'demo_url'     => 'https://elementpack.pro/demo/element/forminator-forms/',
 			'video_url'    => 'https://youtu.be/DdBvY0dnGsk',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-donation-history',
-			'label'        => esc_html__('Give Donation History', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-donation-history/',
-			'video_url'    => 'https://youtu.be/n2Cnlubi-E8',
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-donor-wall',
-			'label'        => esc_html__('Give Donor Wall', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-donor-wall/',
-			'video_url'    => 'https://youtu.be/W_RRrE4cmEo',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-form-grid',
-			'label'        => esc_html__('Give Form Grid', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-form-grid/',
-			'video_url'    => 'https://youtu.be/hq4ElaX0nrE',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-form',
-			'label'        => esc_html__('Give Form', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-form/',
-			'video_url'    => 'https://youtu.be/k18Mgivy9Mw',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-goal',
-			'label'        => esc_html__('Give Goal', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-goal/',
-			'video_url'    => 'https://youtu.be/WdRBJL7fOvk',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-login',
-			'label'        => esc_html__('Give Login', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-login/',
-			'video_url'    => 'https://youtu.be/_mgg8ms12Gw',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-profile-editor',
-			'label'        => esc_html__('Give Profile Editor', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-profile-editor/',
-			'video_url'    => 'https://youtu.be/oaUUPA7eX2A',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-receipt',
-			'label'        => esc_html__('Give Receipt', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-receipt/',
-			'video_url'    => 'https://youtu.be/2xoXNi_Hx3k',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-register',
-			'label'        => esc_html__('Give Register', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-register/',
-			'video_url'    => 'https://youtu.be/4pO-fTXuW3Q',
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'give-totals',
-			'label'        => esc_html__('Give Totals', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'give',
-			'plugin_path'  => 'give/give.php',
-			'widget_type'  => 'free',
-			'content_type' => 'forms',
-			'demo_url'     => 'https://elementpack.pro/demo/element/give-totals/',
-			'video_url'    => 'https://youtu.be/fZMljNFdvKs',
 
 		];
 

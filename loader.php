@@ -133,6 +133,11 @@ class Element_Pack_Loader {
         // Keeps UIkit component attributes out of content saved by users without unfiltered_html
         require_once BDTEP_INC_PATH . 'class-content-guard.php';
         Includes\Content_Guard::init();
+        // Loads UIkit/helper only where Element Pack is used, combines per-page assets
+        require_once BDTEP_INC_PATH . 'class-asset-cache.php';
+        require_once BDTEP_INC_PATH . 'class-page-assets.php';
+        Includes\Asset_Cache::init();
+        Includes\Page_Assets::init();
         // All modules loading from here
         require_once BDTEP_INC_PATH . 'modules-manager.php';
         // wpml compatibility class for wpml support
@@ -264,9 +269,6 @@ class Element_Pack_Loader {
         if (element_pack_is_widget_enabled('calendly')) {
             wp_register_script('calendly', BDTEP_ASSETS_URL . 'vendor/js/calendly.min.js', ['jquery'], '0.0.1', true);
         }
-        if (element_pack_is_widget_enabled('dark-mode')) {
-            wp_register_script('darkmode', BDTEP_ASSETS_URL . 'vendor/js/darkmode.min.js', ['jquery'], '1.1.1', true);
-        }
 
         if ( element_pack_is_widget_enabled( 'review-card' )
 			or element_pack_is_widget_enabled( 'review-card-carousel' )
@@ -302,26 +304,34 @@ class Element_Pack_Loader {
         wp_register_style('bdt-uikit', BDTEP_ASSETS_URL . 'css/bdt-uikit' . $direction_suffix . '.css', [], '3.21.7');
         wp_register_style('ep-helper', BDTEP_ASSETS_URL . 'css/ep-helper.css', [], BDTEP_VER);
 
-		wp_enqueue_style( 'bdt-uikit' );
-		wp_enqueue_style( 'ep-helper' );
+        // On the front end these are pulled in by the widgets that need them (see
+        // Includes\Page_Assets). Only the editor preview needs them up front.
+        if (Includes\Page_Assets::is_editor()) {
+            wp_enqueue_style('bdt-uikit');
+            wp_enqueue_style('ep-helper');
+        }
     }
 
 
     /**
-     * Loading site related script that needs all time such as uikit.
-     * @return [type] [description]mn
+     * Registers UIkit and the helper script. They are enqueued by the widgets that
+     * need them, and always in the editor preview.
+     * @return [type] [description]
      */
     public function enqueue_site_scripts() {
 
         $suffix           = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_register_script('bdt-uikit', BDTEP_ASSETS_URL . 'js/bdt-uikit.min.js', ['jquery'], '3.21.7', true);
+		wp_register_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper.min.js', ['jquery', 'bdt-uikit'], BDTEP_VER, true);
 
-		wp_enqueue_script( 'bdt-uikit' );
+        if (Includes\Page_Assets::is_editor()) {
+            wp_enqueue_script('bdt-uikit');
 
-        if (!element_pack_is_asset_optimization_enabled()) {
-			wp_register_script('element-pack-helper', BDTEP_ASSETS_URL . 'js/common/helper.min.js', ['jquery'], BDTEP_VER, true);
-            wp_enqueue_script('element-pack-helper');
+            // With the Asset Manager on, the editor's combined bundle already holds the helper.
+            if (!element_pack_is_asset_optimization_enabled()) {
+                wp_enqueue_script('element-pack-helper');
+            }
         }
 
 
@@ -475,12 +485,10 @@ class Element_Pack_Loader {
             wp_register_style('ep-styles', $upload_url, [], $version);
         } else {
             wp_register_style('ep-styles', BDTEP_URL . 'assets/css/ep-styles.css', [], BDTEP_VER);
-            wp_register_style('ep-font', BDTEP_ASSETS_URL . 'css/ep-font.css', [], BDTEP_VER);
         }
 
-        if (element_pack_is_asset_optimization_enabled()) {
-            wp_enqueue_style('ep-styles');
-        }
+        // Widgets list this as a style dependency, so it is registered in both modes.
+        wp_register_style('ep-font', BDTEP_ASSETS_URL . 'css/ep-font.css', [], BDTEP_VER);
 
 		/**
 		 * Must load into Editor for Extension Support
@@ -506,9 +514,6 @@ class Element_Pack_Loader {
             wp_register_script('ep-scripts', BDTEP_URL . 'assets/js/ep-scripts' . $suffix . '.js', ['jquery'], BDTEP_VER, true);
         }
 
-        if (element_pack_is_asset_optimization_enabled()) {
-            wp_enqueue_script('ep-scripts');
-        }
 		/**
 		 * Must load into Editor for Extension Support
 		 * 

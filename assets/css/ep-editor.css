@@ -141,9 +141,6 @@
 .bdt-wi-static-grid-tab:before {
   content: "\e903";
 }
-.bdt-wi-age-gate:before {
-  content: "\e904";
-}
 .bdt-wi-animated-link:before {
   content: "\e905";
 }
@@ -240,9 +237,6 @@
 .bdt-wi-hover-video:before {
   content: "\e9a0";
 }
-.bdt-wi-image-accordion:before {
-  content: "\e9a1";
-}
 .bdt-wi-interactive-card:before {
   content: "\e99e";
 }
@@ -315,9 +309,6 @@
 .bdt-wi-tags-cloud:before {
   content: "\e979";
 }
-.bdt-wi-dark-mode:before {
-  content: "\e97a";
-}
 .bdt-wi-lottie-image:before {
   content: "\e975";
 }
@@ -357,9 +348,6 @@
 .bdt-wi-business-hours:before {
   content: "\e911";
 }
-.bdt-wi-call-out:before {
-  content: "\e912";
-}
 .bdt-wi-carousel:before {
   content: "\e913";
 }
@@ -386,9 +374,6 @@
 }
 .bdt-wi-document-viewer:before {
   content: "\e91c";
-}
-.bdt-wi-dropbar:before {
-  content: "\e91d";
 }
 .bdt-wi-dual-button:before {
   content: "\e91e";
@@ -419,9 +404,6 @@
 }
 .bdt-wi-marker:before {
   content: "\e929";
-}
-.bdt-wi-member:before {
-  content: "\e92a";
 }
 .bdt-wi-modal:before {
   content: "\e92b";
@@ -729,9 +711,6 @@
 .bdt-wi-events-calendar-list:before {
   content: "\e995";
 }
-.bdt-wi-everest-forms:before {
-  content: "\e999";
-}
 .bdt-wi-faq:before {
   content: "\e99c";
 }
@@ -743,36 +722,6 @@
 }
 .bdt-wi-forminator-forms:before {
   content: "\e9a5";
-}
-.bdt-wi-give-donation-history:before {
-  content: "\e9a6";
-}
-.bdt-wi-give-donor-wall:before {
-  content: "\e9a7";
-}
-.bdt-wi-give-form:before {
-  content: "\e9a9";
-}
-.bdt-wi-give-form-grid:before {
-  content: "\e9aa";
-}
-.bdt-wi-give-goal:before {
-  content: "\e9ab";
-}
-.bdt-wi-give-login:before {
-  content: "\e9ac";
-}
-.bdt-wi-give-profile-editor:before {
-  content: "\e9ad";
-}
-.bdt-wi-give-receipt:before {
-  content: "\e9ae";
-}
-.bdt-wi-give-register:before {
-  content: "\e9af";
-}
-.bdt-wi-give-totals:before {
-  content: "\e9b0";
 }
 .bdt-wi-gravity-forms:before {
   content: "\e9b1";

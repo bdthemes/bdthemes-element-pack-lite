@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.7
+Stable tag: 8.8.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -55,7 +55,7 @@ Style and display forms in Elementor from the WordPress form plugins you already
 
 * Contact Form 7, WPForms and Ninja Forms
 * Fluent Forms, Formidable Forms and Forminator
-* Everest Forms and weForms
+* weForms
 
 = Elementor extensions =
 
@@ -64,7 +64,7 @@ Elementor extensions that add capability to any Elementor element:
 * Wrapper Link, Tooltip and Floating Effects
 * Cursor Effects, Grid Line and Backdrop Filter
 * Equal Height, Transform Effects and Reading Progress
-* Dark Mode, Cookie Consent and Scroll Button
+* Cookie Consent and Scroll Button
 
 = Ready-made Elementor templates =
 
@@ -72,7 +72,7 @@ Import complete Elementor page and section templates from the built-in template 
 
 = Third-party Elementor integrations =
 
-Elementor widgets for Tutor LMS, GiveWP, Events Calendar and more, so your existing plugins fit your design.
+Elementor widgets for Tutor LMS, Events Calendar and more, so your existing plugins fit your design.
 
 = Element Pack documentation and support =
 
@@ -320,6 +320,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 8.8.8 [7th October 2026] =
+
+* Improved: UIkit and helper CSS/JS now load only on pages that use Element Pack, cutting frontend CSS by up to 40%
+* Improved: Total Blocking Time up to 60% lower and Largest Contentful Paint up to 20% faster on pages without Element Pack widgets
+* Improved: Asset Manager now combines only the widgets a page uses into one CSS and one JS file: up to 54% less CSS, pages up to 30% lighter, LCP up to 11% faster
+* Improved: Elementor's cached asset lists are cleared after an update or module change, so "Regenerate CSS & Data" is no longer needed
+* Removed: Deprecated widgets Age Gate, Call Out, Dark Mode, Dropbar, Everest Forms, Image Accordion, Member and all Give widgets (Donation History, Donor Wall, Form, Form Grid, Goal, Login, Profile Editor, Receipt, Register, Totals) along with their CSS and JS assets
 
 = 8.8.7 [6th October 2026] =
 
