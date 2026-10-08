@@ -157,7 +157,7 @@ class Price_List extends Module_Base {
 						'link'  => [ 'url' => '#' ],
 					],
 				],
-				'title_field' => '{{{ title }}}',
+				'title_field' => '{{ title }}',
 			]
 		);
 
@@ -1851,7 +1851,7 @@ class Price_List extends Module_Base {
 								<span class="bdt-price-list-separator bdt-width-expand"></span>
 							</div>
 							<# if ( item.item_description ) { #>
-							<p class="bdt-price-list-description">{{{ item.item_description }}}</p>
+							<p class="bdt-price-list-description">{{{ elementor.helpers.sanitize( item.item_description ) }}}</p>
 							<# } #>
 						</div>
 					</div>

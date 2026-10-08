@@ -2168,15 +2168,15 @@ class Trailer_Box extends Module_Base {
 			<div class="bdt-trailer-box-desc {{ origin }}">
 				<div class="bdt-trailer-box-desc-inner">
 					<# if ( settings.pre_title ) { #>
-						<div class="bdt-trailer-box-pre-title">{{{ settings.pre_title }}}</div>
+						<div class="bdt-trailer-box-pre-title">{{{ elementor.helpers.sanitize( settings.pre_title ) }}}</div>
 					<# } #>
 					<# if ( settings.title ) { #>
 						<div class="bdt-trailer-box-title-wrap">
-							<{{ titleTag }} class="bdt-trailer-box-title">{{{ settings.title }}}</{{ titleTag }}>
+							<{{ titleTag }} class="bdt-trailer-box-title">{{{ elementor.helpers.sanitize( settings.title ) }}}</{{ titleTag }}>
 						</div>
 					<# } #>
 					<# if ( settings.content ) { #>
-						<div class="bdt-trailer-box-text">{{{ settings.content }}}</div>
+						<div class="bdt-trailer-box-text">{{{ elementor.helpers.sanitize( settings.content ) }}}</div>
 					<# } #>
 					<# if ( 'button' === settings.link_type && ! settings.button_position ) { #>
 						<div class="bdt-trailer-box-button-position">

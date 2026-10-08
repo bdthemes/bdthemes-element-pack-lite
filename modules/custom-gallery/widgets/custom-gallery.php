@@ -261,7 +261,7 @@ class Custom_Gallery extends Module_Base {
 						'gallery_image' => [ 'url' => BDTEP_ASSETS_URL . 'images/gallery/item-6.svg' ],
 					],
 				],
-				'title_field' => '{{{ image_title }}}',
+				'title_field' => '{{ image_title }}',
 			]
 		);
 
@@ -1472,12 +1472,12 @@ class Custom_Gallery extends Module_Base {
 								<# } #>
 								<# if ( settings.show_title === 'yes' && item.image_title ) { #>
 								<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-gallery-item-title bdt-transition-slide-top-small">
-									{{{ item.image_title }}}
+									{{{ elementor.helpers.sanitize( item.image_title ) }}}
 								</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 								<# } #>
 								<# if ( settings.show_text === 'yes' && item.image_text ) { #>
 								<div class="bdt-gallery-item-text bdt-transition-slide-bottom-small">
-									{{{ item.image_text }}}
+									{{{ elementor.helpers.sanitize( item.image_text ) }}}
 								</div>
 								<# } #>
 							</div>
@@ -1519,11 +1519,11 @@ class Custom_Gallery extends Module_Base {
 					<div class="bdt-skin-{{ skinSlug }}-desc bdt-padding-small">
 						<# if ( settings.show_title === 'yes' && item.image_title ) { #>
 						<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-gallery-item-title">
-							{{{ item.image_title }}}
+							{{{ elementor.helpers.sanitize( item.image_title ) }}}
 						</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 						<# } #>
 						<# if ( settings.show_text === 'yes' && item.image_text ) { #>
-						<div class="bdt-gallery-item-text">{{{ item.image_text }}}</div>
+						<div class="bdt-gallery-item-text">{{{ elementor.helpers.sanitize( item.image_text ) }}}</div>
 						<# } #>
 					</div>
 					<# } #>

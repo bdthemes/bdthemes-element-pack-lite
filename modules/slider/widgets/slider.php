@@ -180,7 +180,7 @@ class Slider extends Module_Base {
 						'tab_content' => esc_html__('I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite'),
 					],
 				],
-				'title_field' => '{{{ tab_title }}}',
+				'title_field' => '{{ tab_title }}',
 			]
 		);
 

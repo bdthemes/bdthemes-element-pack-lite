@@ -321,7 +321,7 @@ protected function is_dynamic_content(): bool {
 								<div class="bdt-ep-product-carousel-title-price bdt-flex bdt-flex-middle bdt-flex-between">
 									<# if ( settings.show_title === 'yes' && item.title ) { #>
 									<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-ep-product-carousel-title">
-										{{{ item.title }}}
+										{{{ elementor.helpers.sanitize( item.title ) }}}
 										<# if ( settings.readmore_link_to === 'title' ) { #>
 											<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-carousel-link"></a>
 										<# } #>
@@ -329,12 +329,12 @@ protected function is_dynamic_content(): bool {
 									<# } #>
 
 									<# if ( settings.show_price === 'yes' && item.price ) { #>
-									<div class="bdt-ep-product-carousel-price">{{{ item.price }}}</div>
+									<div class="bdt-ep-product-carousel-price">{{{ elementor.helpers.sanitize( item.price ) }}}</div>
 									<# } #>
 								</div>
 
 								<# if ( settings.show_text === 'yes' && item.text ) { #>
-								<div class="bdt-ep-product-carousel-text">{{{ item.text }}}</div>
+								<div class="bdt-ep-product-carousel-text">{{{ elementor.helpers.sanitize( item.text ) }}}</div>
 								<# } #>
 
 								<# if ( settings.readmore_link_to === 'button' && item.readmore_link && item.readmore_link.url ) { #>
@@ -345,7 +345,7 @@ protected function is_dynamic_content(): bool {
 											{{{ rmIconHTML.value }}}
 										</span>
 										<# } #>
-										{{{ readmoreLabel }}}
+										{{ readmoreLabel }}
 										<# if ( settings.readmore_icon && settings.readmore_icon.value && iconAlign === 'right' ) { #>
 										<span class="bdt-button-icon-align-right">
 											{{{ rmIconHTML.value }}}
@@ -373,14 +373,14 @@ protected function is_dynamic_content(): bool {
 											</span>
 										<# } #>
 									</div>
-									<span class="bdt-ep-product-carousel-rating-count">{{{ item.rating_count }}}</span>
+									<span class="bdt-ep-product-carousel-rating-count">{{ item.rating_count }}</span>
 								</div>
 								<# } #>
 
 								<# if ( settings.show_time === 'yes' && item.time ) { #>
 								<div class="bdt-ep-product-carousel-time">
 									<i class="ep-icon-clock-o" aria-hidden="true"></i>
-									{{{ item.time }}}
+									{{{ elementor.helpers.sanitize( item.time ) }}}
 								</div>
 								<# } #>
 							</div>
@@ -388,7 +388,7 @@ protected function is_dynamic_content(): bool {
 
 						<# if ( settings.badge === 'yes' && item.badge_text ) { #>
 						<div class="bdt-ep-product-carousel-badge bdt-position-small bdt-position-{{ settings.badge_position }}">
-							<span class="bdt-badge bdt-padding-small">{{{ item.badge_text }}}</span>
+							<span class="bdt-badge bdt-padding-small">{{ item.badge_text }}</span>
 						</div>
 						<# } #>
 

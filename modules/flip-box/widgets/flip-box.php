@@ -1568,10 +1568,10 @@ class Flip_Box extends Module_Base {
 						</div>
 						<# } #>
 						<# if ( settings.front_title_text ) { #>
-						<{{ frontTitleTag }} class="bdt-flip-box-layer-title">{{{ settings.front_title_text }}}</{{ frontTitleTag }}>
+						<{{ frontTitleTag }} class="bdt-flip-box-layer-title">{{{ elementor.helpers.sanitize( settings.front_title_text ) }}}</{{ frontTitleTag }}>
 						<# } #>
 						<# if ( settings.front_description_text ) { #>
-						<div class="bdt-flip-box-layer-desc">{{{ settings.front_description_text }}}</div>
+						<div class="bdt-flip-box-layer-desc">{{{ elementor.helpers.sanitize( settings.front_description_text ) }}}</div>
 						<# } #>
 					</div>
 				</div>
@@ -1584,16 +1584,16 @@ class Flip_Box extends Module_Base {
 				<div class="bdt-flip-box-layer-overlay">
 					<div class="bdt-flip-box-layer-inner">
 						<# if ( settings.back_title_text ) { #>
-						<{{ backTitleTag }} class="bdt-flip-box-layer-title">{{{ settings.back_title_text }}}</{{ backTitleTag }}>
+						<{{ backTitleTag }} class="bdt-flip-box-layer-title">{{{ elementor.helpers.sanitize( settings.back_title_text ) }}}</{{ backTitleTag }}>
 						<# } #>
 						<# if ( settings.back_description_text ) { #>
-						<div class="bdt-flip-box-layer-desc">{{{ settings.back_description_text }}}</div>
+						<div class="bdt-flip-box-layer-desc">{{{ elementor.helpers.sanitize( settings.back_description_text ) }}}</div>
 						<# } #>
 						<# if ( settings.button_text ) { #>
 							<# if ( wrapBackAsLink ) { #>
-							<button type="button" class="{{ btnClasses }}">{{{ settings.button_text }}}</button>
+							<button type="button" class="{{ btnClasses }}">{{{ elementor.helpers.sanitize( settings.button_text ) }}}</button>
 							<# } else { #>
-							<a class="{{ btnClasses }}" href="{{ btnHref }}"<# if ( linkUrl && settings.link && settings.link.is_external ) { #> target="_blank"<# } #><# if ( linkUrl && settings.link && settings.link.nofollow ) { #> rel="nofollow"<# } #>>{{{ settings.button_text }}}</a>
+							<a class="{{ btnClasses }}" href="{{ btnHref }}"<# if ( linkUrl && settings.link && settings.link.is_external ) { #> target="_blank"<# } #><# if ( linkUrl && settings.link && settings.link.nofollow ) { #> rel="nofollow"<# } #>>{{{ elementor.helpers.sanitize( settings.button_text ) }}}</a>
 							<# } #>
 						<# } #>
 					</div>

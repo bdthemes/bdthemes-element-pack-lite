@@ -166,7 +166,7 @@ class Accordion extends Module_Base {
 						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'bdthemes-element-pack-lite' ),
 					],
 				],
-				'title_field' => '{{{ tab_title }}}',
+				'title_field' => '{{ tab_title }}',
 			]
 		);
 
@@ -485,14 +485,14 @@ class Accordion extends Module_Base {
 											<span class="bdt-ep-accordion-custom-icon">{{{ customIconHTML.value }}}</span>
 										<# }
 									} #>
-									{{{ item.tab_title }}}
+									{{ item.tab_title }}
 								</span>
 
 							</{{{ titleHTMLTag }}}>
 
 							<div {{{ view.getRenderAttributeString( tabContentKey ) }}}>
 								<# if ( item.source === 'custom' || ! item.source ) { #>
-									{{{ item.tab_content }}}
+									{{{ elementor.helpers.sanitize( item.tab_content ) }}}
 								<# } else { #>
 									<div style="padding:20px;text-align:center;color:#888;border:1px dashed #ccc;">
 										<i class="eicon-column" style="font-size:24px;display:block;margin-bottom:8px;"></i>

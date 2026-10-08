@@ -301,7 +301,7 @@ class Business_Hours extends Module_Base
                         'highlight_this' => 'yes',
                     ],
                 ],
-                'title_field' => '{{{ enter_day }}}',
+                'title_field' => '{{ enter_day }}',
             ]
         );
 
@@ -582,7 +582,7 @@ class Business_Hours extends Module_Base
                         'dynamic_highlight_this' => 'yes',
                     ],
                 ],
-                'title_field' => '{{{ dynamic_enter_day }}}',
+                'title_field' => '{{ dynamic_enter_day }}',
             ]
         );
 

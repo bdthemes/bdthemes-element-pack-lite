@@ -196,7 +196,7 @@ class Fancy_Icons extends Module_Base {
                         'social_icon' => ['value' => 'fab fa-instagram', 'library' => 'fa-brands'],
                     ],
                 ],
-                'title_field' => '{{{ social_name }}}',
+                'title_field' => '{{ social_name }}',
             ]
         );
 
@@ -679,7 +679,7 @@ class Fancy_Icons extends Module_Base {
                             <# } else if ( hasIcon ) { #>
                                 <i class="{{ item.social_icon.value }}" aria-hidden="true"></i>
                             <# } else if ( hasText ) { #>
-                                {{{ item.social_name }}}
+                                {{{ elementor.helpers.sanitize( item.social_name ) }}}
                             <# } #>
                         </span>
                         <# } #>

@@ -152,7 +152,7 @@ class Static_Carousel extends Module_Base {
 				'show_label'  => false,
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ title }}}',
+				'title_field' => '{{ title }}',
 				'default'     => [
 					[ 'title' => __( 'This is a title', 'bdthemes-element-pack-lite' ), 'sub_title' => __( 'Sub Title', 'bdthemes-element-pack-lite' ) ],
 					[ 'title' => __( 'This is a title', 'bdthemes-element-pack-lite' ), 'sub_title' => __( 'Sub Title', 'bdthemes-element-pack-lite' ) ],
@@ -1206,17 +1206,17 @@ class Static_Carousel extends Module_Base {
 						<div class="bdt-ep-static-carousel-content">
 							<# if ( 'yes' === settings.show_title && item.title ) { #>
 							<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="<# print( _.escape( titleWrapClass ) ); #>">
-								{{{ item.title }}}
+								{{{ elementor.helpers.sanitize( item.title ) }}}
 								<# if ( settings.readmore_link_to === 'title' && item.readmore_link && item.readmore_link.url ) { #>
 								<a class="bdt-ep-static-carousel-title-link"<# print( linkAttrs( item.readmore_link ) ); #>></a>
 								<# } #>
 							</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_sub_title && item.sub_title ) { #>
-							<{{{ elementor.helpers.validateHTMLTag( settings.sub_title_tag ) }}} class="bdt-ep-static-carousel-sub-title">{{{ item.sub_title }}}</{{{ elementor.helpers.validateHTMLTag( settings.sub_title_tag ) }}}>
+							<{{{ elementor.helpers.validateHTMLTag( settings.sub_title_tag ) }}} class="bdt-ep-static-carousel-sub-title">{{{ elementor.helpers.sanitize( item.sub_title ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.sub_title_tag ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_text && item.text ) { #>
-							<div class="bdt-ep-static-carousel-text">{{{ item.text }}}</div>
+							<div class="bdt-ep-static-carousel-text">{{{ elementor.helpers.sanitize( item.text ) }}}</div>
 							<# } #>
 							<# if ( 'button' === settings.readmore_link_to && item.readmore_link && item.readmore_link.url ) { #>
 							<div class="bdt-ep-static-carousel-readmore-wrap">

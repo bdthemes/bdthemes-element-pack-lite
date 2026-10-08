@@ -179,10 +179,10 @@ class Review_Card extends Module_Base {
 						<# } #>
 						<div class="bdt-flex bdt-flex-column bdt-flex-center">
 							<# if ( settings.show_reviewer_name === 'yes' && settings.reviewer_name ) { #>
-							<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
+							<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-name">{{{ elementor.helpers.sanitize( settings.reviewer_name ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 							<# } #>
 							<# if ( settings.show_reviewer_job_title === 'yes' && settings.reviewer_job_title ) { #>
-							<div class="bdt-ep-review-card-job-title">{{{ settings.reviewer_job_title }}}</div>
+							<div class="bdt-ep-review-card-job-title">{{ settings.reviewer_job_title }}</div>
 							<# } #>
 							<# if ( settings.show_rating === 'yes' && ratingPosition === 'before' ) { #>
 							{{{ renderRating() }}}
@@ -193,10 +193,10 @@ class Review_Card extends Module_Base {
 
 					<# if ( imageInline !== 'yes' ) { #>
 					<# if ( settings.show_reviewer_name === 'yes' && settings.reviewer_name ) { #>
-					<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-name">{{{ settings.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
+					<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-name">{{{ elementor.helpers.sanitize( settings.reviewer_name ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 					<# } #>
 					<# if ( settings.show_reviewer_job_title === 'yes' && settings.reviewer_job_title ) { #>
-					<div class="bdt-ep-review-card-job-title">{{{ settings.reviewer_job_title }}}</div>
+					<div class="bdt-ep-review-card-job-title">{{ settings.reviewer_job_title }}</div>
 					<# } #>
 					<# if ( settings.show_rating === 'yes' && ratingPosition === 'before' ) { #>
 					{{{ renderRating() }}}
@@ -204,7 +204,7 @@ class Review_Card extends Module_Base {
 					<# } #>
 
 					<# if ( settings.show_review_text === 'yes' && settings.review_text ) { #>
-					<div class="bdt-ep-review-card-text<# if ( settings.review_words_length ) { #> bdt-ep-read-more-text<# } #>"<# if ( settings.review_words_length ) { #> data-read-more="<# print( _.escape( readMoreData ) ); #>"<# } #>>{{{ settings.review_text }}}</div>
+					<div class="bdt-ep-review-card-text<# if ( settings.review_words_length ) { #> bdt-ep-read-more-text<# } #>"<# if ( settings.review_words_length ) { #> data-read-more="<# print( _.escape( readMoreData ) ); #>"<# } #>>{{{ elementor.helpers.sanitize( settings.review_text ) }}}</div>
 					<# } #>
 
 					<# if ( settings.show_rating === 'yes' && ratingPosition === 'after' ) { #>
