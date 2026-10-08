@@ -155,7 +155,7 @@ class Fancy_List extends Module_Base {
 						'text' => esc_html__( 'List Item #3', 'bdthemes-element-pack-lite' ),
 					],
 				],
-				'title_field' => '{{{ elementor.helpers.renderIcon( this, list_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ text }}}',
+				'title_field' => '{{{ elementor.helpers.renderIcon( this, list_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{ text }}',
 			]
 		);
 
@@ -301,10 +301,10 @@ class Fancy_List extends Module_Base {
 							<# if ( item.text || item.text_details ) { #>
 							<div class="bdt-fancy-list-content">
 								<# if ( item.text ) { #>
-								<{{ titleTag }} class="bdt-fancy-list-title">{{{ item.text }}}</{{ titleTag }}>
+								<{{ titleTag }} class="bdt-fancy-list-title">{{{ elementor.helpers.sanitize( item.text ) }}}</{{ titleTag }}>
 								<# } #>
 								<# if ( item.text_details ) { #>
-								<p class="bdt-fancy-list-text">{{{ item.text_details }}}</p>
+								<p class="bdt-fancy-list-text">{{{ elementor.helpers.sanitize( item.text_details ) }}}</p>
 								<# } #>
 							</div>
 							<# } #>

@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.7
+Stable tag: 8.8.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 8.8.8 [8th October 2026] =
+
+* Security: Image Compare: the Before and After labels are now escaped in the editor preview. A single quote in a label could close the data-settings attribute and inject event handlers that ran in the editor (reported by nh4tvd)
+* Security: Interactive Card and Image Accordion: settings are escaped in the same editor preview attribute, which shared the unsafe pattern
+* Security: repeater row labels shown in the editor panel are escaped instead of printed raw
+* Security: editor previews now pass HTML-bearing settings through elementor.helpers.sanitize(), so the editor applies the same rules as wp_kses on the front end
+* Security: Dynamic Select control: post titles are escaped before being rendered in the control panel
 
 = 8.8.7 [6th October 2026] =
 

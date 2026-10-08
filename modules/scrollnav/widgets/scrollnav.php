@@ -158,7 +158,7 @@ class Scrollnav extends Module_Base {
 						]
 					],
 				],
-				'title_field' => '{{{ nav_title }}}',
+				'title_field' => '{{ nav_title }}',
 			]
 		);
 

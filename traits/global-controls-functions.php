@@ -99,7 +99,7 @@ trait Global_Controls_Functions {
 				'show_label'  => false,
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ brand_name }}}',
+				'title_field' => '{{ brand_name }}',
 				'default'     => [
 					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
 					[ 'image' => [ 'url' => Utils::get_placeholder_image_src() ] ],
@@ -888,7 +888,7 @@ trait Global_Controls_Functions {
 				'show_label'  => false,
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ name }}}',
+				'title_field' => '{{ name }}',
 				'default'     => $args['default_items'],
 			]
 		);
@@ -1557,7 +1557,7 @@ trait Global_Controls_Functions {
 				'show_label'  => false,
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ reviewer_name }}}',
+				'title_field' => '{{ reviewer_name }}',
 				'default'     => [
 					[
 						'reviewer_name'      => __( 'Adam Smith', 'bdthemes-element-pack-lite' ),
@@ -3509,7 +3509,7 @@ trait Global_Controls_Functions {
 				'show_label'  => false,
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ title }}}',
+				'title_field' => '{{ title }}',
 				'default'     => [
 					[ 'title' => __( 'Pizza', 'bdthemes-element-pack-lite' ) ],
 					[ 'title' => __( 'Burger', 'bdthemes-element-pack-lite' ) ],
@@ -31733,11 +31733,11 @@ trait Global_Controls_Functions {
 						<div class="bdt-icon-box-title-wrapper">
 							<# if ( settings.title_text ) { #>
 								<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-lottie-icon-box-title"<# if ( titleOnclick ) { #> onclick="<# print( _.escape( titleOnclick ) ); #>"<# } #>>
-									<span class="elementor-inline-editing" data-elementor-setting-key="title_text" data-elementor-inline-editing-toolbar="none">{{{ settings.title_text }}}</span>
+									<span class="elementor-inline-editing" data-elementor-setting-key="title_text" data-elementor-inline-editing-toolbar="none">{{{ elementor.helpers.sanitize( settings.title_text ) }}}</span>
 								</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_sub_title && settings.sub_title_text ) { #>
-								<div class="bdt-lottie-icon-box-sub-title">{{{ settings.sub_title_text }}}</div>
+								<div class="bdt-lottie-icon-box-sub-title">{{{ elementor.helpers.sanitize( settings.sub_title_text ) }}}</div>
 							<# } #>
 						</div>
 					</div>
@@ -31746,11 +31746,11 @@ trait Global_Controls_Functions {
 						<div class="bdt-icon-box-title-wrapper">
 							<# if ( settings.title_text ) { #>
 								<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-lottie-icon-box-title"<# if ( titleOnclick ) { #> onclick="<# print( _.escape( titleOnclick ) ); #>"<# } #>>
-									<span class="elementor-inline-editing" data-elementor-setting-key="title_text" data-elementor-inline-editing-toolbar="none">{{{ settings.title_text }}}</span>
+									<span class="elementor-inline-editing" data-elementor-setting-key="title_text" data-elementor-inline-editing-toolbar="none">{{{ elementor.helpers.sanitize( settings.title_text ) }}}</span>
 								</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
 							<# } #>
 							<# if ( 'yes' === settings.show_sub_title && settings.sub_title_text ) { #>
-								<div class="bdt-lottie-icon-box-sub-title">{{{ settings.sub_title_text }}}</div>
+								<div class="bdt-lottie-icon-box-sub-title">{{{ elementor.helpers.sanitize( settings.sub_title_text ) }}}</div>
 							<# } #>
 						</div>
 					</div>
@@ -31769,7 +31769,7 @@ trait Global_Controls_Functions {
 				<# } #>
 
 				<# if ( settings.description_text ) { #>
-					<div class="bdt-lottie-icon-box-description elementor-inline-editing" data-elementor-setting-key="description_text" data-elementor-inline-editing-toolbar="advanced">{{{ settings.description_text }}}</div>
+					<div class="bdt-lottie-icon-box-description elementor-inline-editing" data-elementor-setting-key="description_text" data-elementor-inline-editing-toolbar="advanced">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div>
 				<# } #>
 
 				<# if ( settings.readmore ) { #>

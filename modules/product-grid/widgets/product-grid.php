@@ -247,7 +247,7 @@ class Product_Grid extends Module_Base {
 						<div class="{{ titlePriceClass }}">
 							<# if ( settings.show_title === 'yes' && item.title ) { #>
 							<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-ep-product-grid-title">
-								{{{ item.title }}}
+								{{{ elementor.helpers.sanitize( item.title ) }}}
 								<# if ( settings.readmore_link_to === 'title' ) { #>
 									<a href="{{ itemHref }}"{{{ itemTarget }}}{{{ itemRel }}} class="bdt-ep-product-grid-link"></a>
 								<# } #>
@@ -255,12 +255,12 @@ class Product_Grid extends Module_Base {
 							<# } #>
 
 							<# if ( settings.show_price === 'yes' && item.price ) { #>
-							<div class="bdt-ep-product-grid-price">{{{ item.price }}}</div>
+							<div class="bdt-ep-product-grid-price">{{{ elementor.helpers.sanitize( item.price ) }}}</div>
 							<# } #>
 						</div>
 
 						<# if ( settings.show_text === 'yes' && item.text ) { #>
-						<div class="bdt-ep-product-grid-text">{{{ item.text }}}</div>
+						<div class="bdt-ep-product-grid-text">{{{ elementor.helpers.sanitize( item.text ) }}}</div>
 						<# } #>
 
 						<# if ( settings.readmore_link_to === 'button' && item.readmore_link && item.readmore_link.url ) { #>
@@ -275,7 +275,7 @@ class Product_Grid extends Module_Base {
 									<# } #>
 								</span>
 								<# } #>
-								{{{ settings.readmore_text }}}
+								{{ settings.readmore_text }}
 								<# if ( settings.readmore_icon && settings.readmore_icon.value && iconAlign === 'right' ) { #>
 								<span class="bdt-button-icon-align-right">
 									<# if ( rmIconHTML && rmIconHTML.rendered && rmMigrated ) { #>
@@ -314,7 +314,7 @@ class Product_Grid extends Module_Base {
 						<# if ( settings.show_time === 'yes' && item.time ) { #>
 						<div class="bdt-ep-product-grid-time">
 							<i class="ep-icon-clock-o" aria-hidden="true"></i>
-							{{{ item.time }}}
+							{{{ elementor.helpers.sanitize( item.time ) }}}
 						</div>
 						<# } #>
 					</div>
@@ -322,7 +322,7 @@ class Product_Grid extends Module_Base {
 
 				<# if ( settings.badge === 'yes' && item.badge_text ) { #>
 				<div class="bdt-ep-product-grid-badge bdt-position-small bdt-position-{{ settings.badge_position }}">
-					<span class="bdt-badge bdt-padding-small">{{{ item.badge_text }}}</span>
+					<span class="bdt-badge bdt-padding-small">{{ item.badge_text }}</span>
 				</div>
 				<# } #>
 

@@ -1635,15 +1635,15 @@ class Featured_Box extends Module_Base {
 				<div class="bdt-width-1-1 bdt-width-2-5@s">
 					<div class="bdt-ep-featured-box-content bdt-position-z-index bdt-position-center-{{ skinPos }} bdt-text-{{ skinPos }}">
 						<# if ( showSubTitle && settings.sub_title_text ) { #>
-						<div class="bdt-ep-featured-box-sub-title">{{{ settings.sub_title_text }}}</div>
+						<div class="bdt-ep-featured-box-sub-title">{{{ elementor.helpers.sanitize( settings.sub_title_text ) }}}</div>
 						<# } #>
 						<# if ( settings.title_text ) { #>
 						<{{ titleTag }} class="bdt-ep-featured-box-title">
-							<span>{{{ settings.title_text }}}</span>
+							<span>{{{ elementor.helpers.sanitize( settings.title_text ) }}}</span>
 						</{{ titleTag }}>
 						<# } #>
 						<# if ( settings.description_text ) { #>
-						<div class="bdt-ep-featured-box-text">{{{ settings.description_text }}}</div>
+						<div class="bdt-ep-featured-box-text">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div>
 						<# } #>
 						<# if ( showReadmore ) { #>
 						<div class="bdt-ep-featured-box-button">
@@ -1692,15 +1692,15 @@ class Featured_Box extends Module_Base {
 			<# } #>
 			<div class="bdt-ep-featured-box-content bdt-position-{{ contentPosition }}">
 				<# if ( showSubTitle && settings.sub_title_text ) { #>
-				<div class="bdt-ep-featured-box-sub-title">{{{ settings.sub_title_text }}}</div>
+				<div class="bdt-ep-featured-box-sub-title">{{{ elementor.helpers.sanitize( settings.sub_title_text ) }}}</div>
 				<# } #>
 				<# if ( settings.title_text ) { #>
 				<{{ titleTag }} class="bdt-ep-featured-box-title">
-					<span>{{{ settings.title_text }}}</span>
+					<span>{{{ elementor.helpers.sanitize( settings.title_text ) }}}</span>
 				</{{ titleTag }}>
 				<# } #>
 				<# if ( settings.description_text ) { #>
-				<div class="bdt-ep-featured-box-text">{{{ settings.description_text }}}</div>
+				<div class="bdt-ep-featured-box-text">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div>
 				<# } #>
 				<# if ( showReadmore ) { #>
 				<div class="bdt-ep-featured-box-button">

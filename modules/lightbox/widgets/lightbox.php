@@ -1071,7 +1071,7 @@ class Lightbox extends Module_Base {
 									<# } #>
 								</span>
 							<# } #>
-							<span class="elementor-button-text">{{{ settings.button_text }}}</span>
+							<span class="elementor-button-text">{{{ elementor.helpers.sanitize( settings.button_text ) }}}</span>
 							<# if ( settings.icon_align === 'right' && hasButtonIcon ) { #>
 								<span class="elementor-button-icon elementor-align-icon-right">
 									<# if ( buttonIconHTML && buttonIconHTML.rendered ) { #>
@@ -1084,7 +1084,7 @@ class Lightbox extends Module_Base {
 				</a>
 
 				<# if ( shouldShowIconText ) { #>
-					<a class="bdt-icon-text" data-elementor-open-lightbox="no"<# if ( iconContentUrl ) { #> href="{{ iconContentUrl }}"<# } #><# if ( iconDataIframe ) { #> data-type="iframe"<# } #>>{{{ settings.icon_text }}}</a>
+					<a class="bdt-icon-text" data-elementor-open-lightbox="no"<# if ( iconContentUrl ) { #> href="{{ iconContentUrl }}"<# } #><# if ( iconDataIframe ) { #> data-type="iframe"<# } #>>{{{ elementor.helpers.sanitize( settings.icon_text ) }}}</a>
 				<# } #>
 			</div>
 		</div>

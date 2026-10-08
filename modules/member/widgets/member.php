@@ -312,7 +312,7 @@ class Member extends Module_Base {
 						'social_link_title' => __( 'Instagram', 'bdthemes-element-pack-lite' ),
 					],
 				],
-				'title_field' => '{{{ social_link_title }}}',
+				'title_field' => '{{ social_link_title }}',
 			]
 		);
 
@@ -1478,9 +1478,9 @@ class Member extends Module_Base {
 				</div>
 				<# } #>
 				<div class="bdt-member-content">
-					<# if ( settings.name ) { #><span class="bdt-member-name">{{{ settings.name }}}</span><# } #>
-					<# if ( settings.role ) { #><span class="bdt-member-role">{{{ settings.role }}}</span><# } #>
-					<# if ( settings.description_text ) { #><div class="bdt-member-text bdt-content-wrap">{{{ settings.description_text }}}</div><# } #>
+					<# if ( settings.name ) { #><span class="bdt-member-name">{{{ elementor.helpers.sanitize( settings.name ) }}}</span><# } #>
+					<# if ( settings.role ) { #><span class="bdt-member-role">{{{ elementor.helpers.sanitize( settings.role ) }}}</span><# } #>
+					<# if ( settings.description_text ) { #><div class="bdt-member-text bdt-content-wrap">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div><# } #>
 				</div>
 			</div>
 		</div>
@@ -1504,8 +1504,8 @@ class Member extends Module_Base {
 			<div class="bdt-member-overlay bdt-overlay bdt-position-bottom bdt-text-center bdt-position-z-index">
 				<div class="bdt-member-desc">
 					<div class="bdt-member-content bdt-transition-slide-bottom-small">
-						<# if ( settings.name ) { #><span class="bdt-member-name">{{{ settings.name }}}</span><# } #>
-						<# if ( settings.role ) { #><span class="bdt-member-role">{{{ settings.role }}}</span><# } #>
+						<# if ( settings.name ) { #><span class="bdt-member-name">{{{ elementor.helpers.sanitize( settings.name ) }}}</span><# } #>
+						<# if ( settings.role ) { #><span class="bdt-member-role">{{{ elementor.helpers.sanitize( settings.role ) }}}</span><# } #>
 					</div>
 					<?php $this->print_member_social_icons_content_template( 'bdt-transition-slide-bottom' ); ?>
 				</div>
@@ -1531,8 +1531,8 @@ class Member extends Module_Base {
 			<div class="ekip-overlay bdt-position-z-index">
 				<div class="bdt-member-desc">
 					<div class="bdt-member-content">
-						<# if ( settings.role ) { #><span class="bdt-member-role">{{{ settings.role }}}</span><# } #>
-						<# if ( settings.name ) { #><span class="bdt-member-name">{{{ settings.name }}}</span><# } #>
+						<# if ( settings.role ) { #><span class="bdt-member-role">{{{ elementor.helpers.sanitize( settings.role ) }}}</span><# } #>
+						<# if ( settings.name ) { #><span class="bdt-member-name">{{{ elementor.helpers.sanitize( settings.name ) }}}</span><# } #>
 					</div>
 					<?php $this->print_member_social_icons_content_template(); ?>
 				</div>
@@ -1558,8 +1558,8 @@ class Member extends Module_Base {
 			<div class="bdt-member-overlay bdt-overlay-default bdt-position-cover bdt-transition-fade bdt-position-z-index">
 				<div class="bdt-member-desc bdt-position-center bdt-text-center">
 					<div class="bdt-member-content bdt-transition-slide-top-small">
-						<# if ( settings.name ) { #><span class="bdt-member-name">{{{ settings.name }}}</span><# } #>
-						<# if ( settings.role ) { #><span class="bdt-member-role">{{{ settings.role }}}</span><# } #>
+						<# if ( settings.name ) { #><span class="bdt-member-name">{{{ elementor.helpers.sanitize( settings.name ) }}}</span><# } #>
+						<# if ( settings.role ) { #><span class="bdt-member-role">{{{ elementor.helpers.sanitize( settings.role ) }}}</span><# } #>
 					</div>
 					<?php $this->print_member_social_icons_content_template( 'bdt-transition-slide-bottom-small' ); ?>
 				</div>
@@ -1591,9 +1591,9 @@ class Member extends Module_Base {
 				<div class="bdt-member-desc bdt-position-relative bdt-flex bdt-flex-middle">
 					<div class="bdt-text-center bdt-member-desc-wrapper">
 						<div class="bdt-member-content">
-							<# if ( settings.name ) { #><span class="bdt-member-name">{{{ settings.name }}}</span><# } #>
-							<# if ( settings.role ) { #><span class="bdt-member-role">{{{ settings.role }}}</span><# } #>
-							<# if ( settings.description_text ) { #><div class="bdt-member-text bdt-content-wrap">{{{ settings.description_text }}}</div><# } #>
+							<# if ( settings.name ) { #><span class="bdt-member-name">{{{ elementor.helpers.sanitize( settings.name ) }}}</span><# } #>
+							<# if ( settings.role ) { #><span class="bdt-member-role">{{{ elementor.helpers.sanitize( settings.role ) }}}</span><# } #>
+							<# if ( settings.description_text ) { #><div class="bdt-member-text bdt-content-wrap">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div><# } #>
 						</div>
 						<?php $this->print_member_social_icons_content_template(); ?>
 					</div>
@@ -1610,8 +1610,8 @@ class Member extends Module_Base {
 				<div class="bdt-skin-flip-layer-overlay">
 					<div class="bdt-skin-flip-layer-inner">
 						<div class="bdt-member-content bdt-position-bottom-center">
-							<# if ( settings.name ) { #><span class="bdt-member-name">{{{ settings.name }}}</span><# } #>
-							<# if ( settings.role ) { #><span class="bdt-member-role">{{{ settings.role }}}</span><# } #>
+							<# if ( settings.name ) { #><span class="bdt-member-name">{{{ elementor.helpers.sanitize( settings.name ) }}}</span><# } #>
+							<# if ( settings.role ) { #><span class="bdt-member-role">{{{ elementor.helpers.sanitize( settings.role ) }}}</span><# } #>
 						</div>
 					</div>
 				</div>
@@ -1621,7 +1621,7 @@ class Member extends Module_Base {
 					<div class="bdt-skin-flip-layer-inner">
 						<?php $this->print_member_social_icons_content_template( 'bdt-position-bottom-center' ); ?>
 						<# if ( settings.description_text ) { #>
-						<div class="bdt-member-text bdt-position-center">{{{ settings.description_text }}}</div>
+						<div class="bdt-member-text bdt-position-center">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div>
 						<# } #>
 					</div>
 				</div>
@@ -1652,13 +1652,13 @@ class Member extends Module_Base {
 
 			<div class="bdt-member-content">
 				<# if ( settings.name ) { #>
-					<span class="bdt-member-name">{{{ settings.name }}}</span>
+					<span class="bdt-member-name">{{{ elementor.helpers.sanitize( settings.name ) }}}</span>
 				<# } #>
 				<# if ( settings.role ) { #>
-					<span class="bdt-member-role">{{{ settings.role }}}</span>
+					<span class="bdt-member-role">{{{ elementor.helpers.sanitize( settings.role ) }}}</span>
 				<# } #>
 				<# if ( settings.description_text ) { #>
-					<div class="bdt-member-text bdt-content-wrap">{{{ settings.description_text }}}</div>
+					<div class="bdt-member-text bdt-content-wrap">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div>
 				<# } #>
 			</div>
 

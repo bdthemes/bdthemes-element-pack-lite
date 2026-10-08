@@ -1585,7 +1585,7 @@ class DualButton extends Module_Base {
 							</div>
 						</div>
 						<# } #>
-						<div class="bdt-btn-text">{{{ settings.button_a_text }}}</div>
+						<div class="bdt-btn-text">{{{ elementor.helpers.sanitize( settings.button_a_text ) }}}</div>
 					</div>
 				</a>
 
@@ -1602,7 +1602,7 @@ class DualButton extends Module_Base {
 							</div>
 						</div>
 						<# } #>
-						<div class="bdt-btn-text">{{{ settings.button_b_text }}}</div>
+						<div class="bdt-btn-text">{{{ elementor.helpers.sanitize( settings.button_b_text ) }}}</div>
 					</div>
 				</a>
 			</div>
