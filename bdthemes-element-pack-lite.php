@@ -67,18 +67,6 @@ if ( element_pack_is_pro_activated() ) {
 	return;
 }
 
-/**
- * Security remediation safety-net.
- *
- * Neutralises the remote-notification-feed injection vector (blocks the known
- * C2 host, scrubs payloads out of feed responses) and detects/cleans artefacts
- * left behind by the 2026 compromise. Loaded as early as possible so its
- * pre_http_request / http_response guards are in place before anything fetches
- * a remote feed. See includes/security-remediation.php.
- */
-require_once __DIR__ . '/includes/security-remediation.php';
-\BDThemes\ElementPack\Security_Remediation\bootstrap();
-
 if ( ! function_exists( 'element_pack_pro_activated' ) ) {
 	function element_pack_pro_activated() {
 		if ( function_exists( 'element_pack_license_validation' ) && element_pack_license_validation() ) {
