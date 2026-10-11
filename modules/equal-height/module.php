@@ -149,6 +149,8 @@ class Module extends Element_Pack_Module_Base {
 
 			if ($height_option) {
 				$section->add_render_attribute('_wrapper', 'bdt-height-match', $height_option);
+				// UIkit's height-match component is what reads the attribute.
+				wp_enqueue_script('bdt-uikit');
 			}
 		}
 	}

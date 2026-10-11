@@ -3776,6 +3776,25 @@ class ModuleService {
 		}
 	}
 
+	/**
+	 * Elementor widget names registered by a module.
+	 *
+	 * Widgets are named `bdt-<module>` by convention. A module whose widget keeps
+	 * another name lists it under `widget_names` in module.info.php, so usage
+	 * lookups still find it.
+	 *
+	 * @param string $module_id Module slug.
+	 * @return string[]
+	 */
+	public static function get_module_widget_names($module_id) {
+		$module_data = self::get_module_info($module_id);
+		if (is_array($module_data) && !empty($module_data['widget_names'])) {
+			return array_values((array) $module_data['widget_names']);
+		}
+
+		return ['bdt-' . str_replace('_', '-', $module_id)];
+	}
+
 	public static function has_module_style($module_id) {
 		$module_data = self::get_module_info($module_id);
 		if (is_array($module_data) && isset($module_data['has_style'])) {

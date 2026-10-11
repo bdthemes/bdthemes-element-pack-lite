@@ -39,6 +39,8 @@ class Module extends Element_Pack_Module_Base {
                 'label'         => BDTEP_CP . esc_html__('Enable', 'bdthemes-element-pack-lite'),
                 'type'          => Controls_Manager::SWITCHER,
 				'prefix_class'  => 'bdt-background-overlay-',
+				// The over/underlay rules are in the helper stylesheet.
+				'assets'        => self::switcher_assets( 'element_pack_background_overlay', [ 'ep-helper' ] ),
             ]
         );
 
@@ -255,6 +257,10 @@ class Module extends Element_Pack_Module_Base {
 
 		if ( Plugin::instance()->editor->is_edit_mode() ) {
 			return;
+		}
+
+		if ( isset( $settings['element_pack_background_overlay'] ) && 'yes' === $settings['element_pack_background_overlay'] ) {
+			wp_enqueue_style( 'ep-helper' );
 		}
 	}
 

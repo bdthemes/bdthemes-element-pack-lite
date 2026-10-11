@@ -234,7 +234,10 @@ class TwitterOAuth {
     $this->http_code = curl_getinfo($ci, CURLINFO_HTTP_CODE);
     $this->http_info = array_merge($this->http_info, curl_getinfo($ci));
     $this->url = $url;
-    curl_close ($ci);
+    // curl_close() has had no effect since PHP 8.0 and is deprecated in PHP 8.5.
+    if (PHP_VERSION_ID < 80000) {
+      curl_close($ci);
+    }
     return $response;
   }
 

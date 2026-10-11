@@ -28,6 +28,8 @@ class Module extends Element_Pack_Module_Base {
                 'return_value'  => 'yes',
                 'separator'    => 'before',
                 'prefix_class' => 'bdt-backdrop-filter-',
+                // Backdrop filter and liquid glass rules are in the helper stylesheet.
+                'assets'       => self::switcher_assets('element_pack_backdrop_filter', ['ep-helper']),
             ]
         );
 
@@ -391,6 +393,11 @@ class Module extends Element_Pack_Module_Base {
     
     public function should_script_enqueue( $element ) {
         $settings = $element->get_settings_for_display();
+
+        if ( ! empty( $settings['element_pack_backdrop_filter'] ) && 'yes' === $settings['element_pack_backdrop_filter'] ) {
+            wp_enqueue_style( 'ep-helper' );
+        }
+
         if ( ! empty( $settings['element_pack_backdrop_filter_type'] ) && 'liquid_glass' === $settings['element_pack_backdrop_filter_type'] ) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static, plugin-defined SVG filter markup.
             echo $this->bdt_liquid_glass_effects_svg();

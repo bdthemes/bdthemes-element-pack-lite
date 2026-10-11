@@ -5,14 +5,14 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.8
+Stable tag: 10.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
 Elementor tested up to: 4.3.4
 
 
-Elementor addons with 300+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
+Elementor addons with 230+ Elementor widgets, WooCommerce Elementor elements, Elementor templates, Elementor mega menu, Elementor header footer builder and extensions.
 
 == Description ==
 
@@ -93,7 +93,7 @@ For Element Pack assistance, [Contact us](https://bdthemes.com/support/) 💌 or
 
 Explore the best free addons for Elementor and Gutenberg to boost your site with advanced blocks, sliders and eCommerce tools.
 
-* **[Element Pack](https://wordpress.org/plugins/bdthemes-element-pack-lite/)** - Build responsive websites from scratch with an all-rounder package of 300+ widgets and 2700+ ready-to-use assets for Elementor.
+* **[Element Pack](https://wordpress.org/plugins/bdthemes-element-pack-lite/)** - Build responsive websites from scratch with an all-rounder package of 230+ widgets and 2700+ ready-to-use assets for Elementor.
 * **[Prime Slider](https://wordpress.org/plugins/bdthemes-prime-slider-lite/)** - The revolutionary slider builder addon for Elementor with a next-gen superb interface and 50+ unique slider designs.
 * **[Ultimate Post Kit](https://wordpress.org/plugins/ultimate-post-kit/)** - Best blogging addon for building a quality blogging website with fine-tuned post layouts, carousels, sliders and lists.
 * **[Ultimate Store Kit](https://wordpress.org/plugins/ultimate-store-kit/)** - The only eCommerce addon for answering all your online store design problems in one package for WooCommerce and EDD.
@@ -321,13 +321,20 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 8.8.8 [7th October 2026] =
+= 10.0.0 [8th October 2026] =
 
+* Added: New React-based admin dashboard with Dashboard, Widgets, Extensions, Features, Integrations, Performance, System Status and Other Plugins screens
 * Improved: UIkit and helper CSS/JS now load only on pages that use Element Pack, cutting frontend CSS by up to 40%
 * Improved: Total Blocking Time up to 60% lower and Largest Contentful Paint up to 20% faster on pages without Element Pack widgets
 * Improved: Asset Manager now combines only the widgets a page uses into one CSS and one JS file: up to 54% less CSS, pages up to 30% lighter, LCP up to 11% faster
 * Improved: Elementor's cached asset lists are cleared after an update or module change, so "Regenerate CSS & Data" is no longer needed
 * Removed: Deprecated widgets Age Gate, Call Out, Dark Mode, Dropbar, Everest Forms, Image Accordion, Member and all Give widgets (Donation History, Donor Wall, Form, Form Grid, Goal, Login, Profile Editor, Receipt, Register, Totals) along with their CSS and JS assets
+* Fixed: Floating Effects did not animate because the bundled anime.js version no longer matched the code that uses it
+* Fixed: Setup Wizard "Activate All" and "Deactivate All" no longer touch Pro-only widgets
+* Fixed: Setup Wizard "Good to Go" step grows with its content instead of scrolling inside a fixed-height box
+* Fixed: Dashboard release notes now count Improved, Security, Changed and Deprecated entries
+* Security: UIkit: HTML parsed from a component option or fetched for an inline SVG now drops iframe, frame, form, meta, link, object and embed elements, srcdoc and is attributes, and URL attributes whose scheme hides behind control characters (java&#9;script:); only http(s), mailto, tel, relative and fragment URLs are kept, plus data:image on media elements (reported by nh4tvd)
+* Security: Content Guard: a bdt-* / data-bdt-* attribute written after a "/" with no whitespace is stripped too; markup is now walked with the WordPress HTML API, the same parser wp_kses_post() uses to normalise a tag (reported by nh4tvd)
 
 = 8.8.7 [6th October 2026] =
 
@@ -844,7 +851,7 @@ Details [changelog here](https://feedback.bdthemes.com/announcements?category=ca
 
 ### Is Element Pack an Elementor addon or an Elementor extension?
 
-- Both. Element Pack is an Elementor addon built with 300+ Elementor widgets and Elementor extensions, plus a template library, mega menu builder and header and footer builder.
+- Both. Element Pack is an Elementor addon built with 230+ Elementor widgets and Elementor extensions, plus a template library, mega menu builder and header and footer builder.
 
 ### Does Element Pack include WooCommerce Elementor widgets?
 
@@ -862,6 +869,10 @@ Details [changelog here](https://feedback.bdthemes.com/announcements?category=ca
 
 - As long as Element Pack exists, we will provide you with frequent updates and 24/7 support. We are committed to doing so.
 Note: we don’t provide plugin support for Adult sites.
+
+### Where is the source code of the admin dashboard?
+
+- The Element Pack dashboard is a React app. Its readable source is in the plugin at `src/admin/app`, and the compiled files are in `build/admin`. To rebuild it, run `npm install` and then `npm run build:admin` in the plugin folder (it uses `@wordpress/scripts`; the config is in `package.json`, `webpack.config.js`, `postcss.config.js` and `tailwind.config.js`).
 
 ### Can I translate Element Pack into my language?
 

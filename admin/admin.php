@@ -19,14 +19,6 @@ class Admin {
 
 	public function __construct() {
 
-		// Embed the Script on our Plugin's Option Page Only
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only screen check, no state is changed.
-		$current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
-
-		if ('element_pack_options' == $current_page) {
-			add_action('admin_init', [$this, 'admin_script']);
-		}
-
 		add_action('admin_init', [$this, 'admin_biggopti_script']);
 
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
@@ -104,21 +96,6 @@ class Admin {
 		$links = array_merge([sprintf('<a href="%s">%s</a>', element_pack_dashboard_link('#element_pack_welcome'), esc_html__('Settings', 'bdthemes-element-pack-lite'))], $links);
 
 		return $links;
-	}
-
-	/**
-	 * Register admin script
-	 * @access public
-	 */
-
-	public function admin_script() {
-		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-		if ( is_admin() ) { // for Admin Dashboard Only
-			wp_enqueue_script('chart', BDTEP_ASSETS_URL . 'vendor/js/chart.min.js', ['jquery'], '4.5.1', true);
-			wp_enqueue_script('ep-admin', BDTEP_ADMIN_URL  . 'assets/js/ep-admin.min.js', ['jquery'], BDTEP_VER, true);
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-form');
-		}
 	}
 
 	public function admin_biggopti_script() {

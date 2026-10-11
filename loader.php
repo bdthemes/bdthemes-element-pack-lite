@@ -113,6 +113,8 @@ class Element_Pack_Loader {
 
         // Admin settings controller
         require_once BDTEP_ADMIN_PATH . 'module-settings.php';
+        // React admin dashboard: REST API layer + dashboard mount
+        require_once BDTEP_INC_PATH . 'react-admin-init.php';
         //Assets Manager
         require_once 'admin/optimizer/asset-minifier-manager.php';
 

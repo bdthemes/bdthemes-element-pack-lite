@@ -37,6 +37,9 @@ if (!defined('BDTEP_ASSETS_URL')) {
 // --- WordPress stub layer (must precede the plugin source) -----------------
 require __DIR__ . '/wp-stubs.php';
 
+// --- Optional WordPress core HTML API + kses (real parser for Content_Guard) ---
+require __DIR__ . '/wp-core-html.php';
+
 // --- Real plugin source under test -----------------------------------------
 // ModuleService first: element-pack-filters.php `use`s it and calls its methods.
 require $root . '/admin/module-settings.php';

@@ -11,3 +11,4 @@ test/
 tests/
 
 *sync.ffs_db
+node_modules/
