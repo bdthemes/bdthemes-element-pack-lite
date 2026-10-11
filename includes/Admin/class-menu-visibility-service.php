@@ -35,6 +35,8 @@ class Menu_Visibility_Service {
 			'settings_perf' => true,
 			'system_status' => true,
 			'other_plugins' => true,
+			// The Go Pro landing page is only offered while Pro is not active.
+			'go_pro'        => ! ( function_exists( 'element_pack_pro_activated' ) && element_pack_pro_activated() ),
 		];
 
 		return (array) apply_filters( 'element_pack/admin/nav_visibility', $visibility );

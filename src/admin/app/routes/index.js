@@ -22,6 +22,7 @@ import {
 	ShieldIcon,
 	StoreIcon,
 	ZapIcon,
+	RocketIcon,
 } from '../components/ui/Icons';
 
 const Dashboard = lazy( () => import( '../pages/Dashboard' ) );
@@ -32,6 +33,7 @@ const ApiSettingsPage = lazy( () => import( '../pages/ApiSettingsPage' ) );
 const PerformancePage = lazy( () => import( '../pages/PerformancePage' ) );
 const SystemStatusPage = lazy( () => import( '../pages/SystemStatusPage' ) );
 const OtherPluginsPage = lazy( () => import( '../pages/OtherPluginsPage' ) );
+const GoProPage = lazy( () => import( '../pages/GoProPage' ) );
 
 /**
  * Each item drives both the shell navigation and the router.
@@ -107,6 +109,17 @@ export const routes = [
 		icon: StoreIcon,
 		element: OtherPluginsPage,
 		group: 'primary',
+	},
+	{
+		// Upsell landing page; hidden once Pro is active (navVisibility.go_pro).
+		// Always the last tab; the tab strip pins it after "More" so it never overflows.
+		navKey: 'go_pro',
+		path: '/go-pro',
+		label: __( 'You may also need', 'bdthemes-element-pack-lite' ),
+		icon: RocketIcon,
+		element: GoProPage,
+		group: 'primary',
+		highlight: true,
 	},
 ];
 

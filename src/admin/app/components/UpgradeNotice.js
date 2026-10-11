@@ -3,13 +3,17 @@
  * Styled after the mockup's AI recommendation banner (gradient tile + CTA).
  */
 import { __ } from '@wordpress/i18n';
+import { useNavigate } from 'react-router-dom';
 import config from '../utils/config';
 import { ZapIcon } from './ui/Icons';
 
 export default function UpgradeNotice( { isPro } ) {
+	const navigate = useNavigate();
+
 	if ( isPro ) {
 		return null;
 	}
+
 
 	return (
 		<div className="flex items-center gap-[14px] mb-4 bg-[linear-gradient(135deg,#eef1ff,#e9fbef)] dark:bg-[linear-gradient(135deg,#1b1e3a,#0f2318)] border border-[#d9def9] dark:border-ink-border rounded-panel py-[15px] px-[18px] flex-wrap">
@@ -27,6 +31,13 @@ export default function UpgradeNotice( { isPro } ) {
 					) }
 				</div>
 			</div>
+			<button
+				type="button"
+				onClick={ () => navigate( '/go-pro' ) }
+				className="bg-transparent border-0 p-0 text-[13px] font-bold text-brand cursor-pointer hover:underline flex-none"
+			>
+				{ __( 'See what’s included', 'bdthemes-element-pack-lite' ) }
+			</button>
 			<a
 				href={ config.upgradeUrl }
 				target="_blank"

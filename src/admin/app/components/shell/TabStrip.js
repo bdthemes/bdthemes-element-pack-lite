@@ -34,12 +34,17 @@ const TAB_IDLE =
 // Horizontal gap between tabs (`gap-1` = 4px) — must match the row below.
 const TAB_GAP = 4;
 
-function Tab( { active, onClick, icon: TabIcon, label } ) {
+function Tab( { active, onClick, icon: TabIcon, label, highlight = false } ) {
+	// A highlighted tab (Go Pro) keeps a brand tint while idle so it stands out.
+	const idle = highlight
+		? 'bg-[rgba(64,142,250,.08)] text-brand hover:bg-[rgba(64,142,250,.16)]'
+		: TAB_IDLE;
+
 	return (
 		<button
 			type="button"
 			onClick={ onClick }
-			className={ `${ TAB_BASE } ${ active ? TAB_ACTIVE : TAB_IDLE }` }
+			className={ `${ TAB_BASE } ${ active ? TAB_ACTIVE : idle }` }
 		>
 			<span className="w-[18px] h-[18px] grid place-items-center">
 				<TabIcon size={ 17 } />
@@ -127,6 +132,7 @@ export default function TabStrip( { flushBottom = false } ) {
 			icon: route.icon,
 			label: route.label,
 			path: route.path,
+			highlight: !! route.highlight,
 			active: isActive( route ) && ! settingsActive,
 		} ) ),
 		...( visibleSettings.length > 0
@@ -156,6 +162,11 @@ export default function TabStrip( { flushBottom = false } ) {
 		inlineTabs.push( item );
 	} );
 
+	// Highlighted tabs (Go Pro) are pinned: they always render last, after the
+	// "More" button, so they stay visible when the other tabs overflow into it.
+	const pinnedTabs = inlineTabs.filter( ( tab ) => tab.highlight );
+	const flowTabs = inlineTabs.filter( ( tab ) => ! tab.highlight );
+
 	// Secondary routes that always live in "More".
 	const secondaryItems = [
 		...visibleMore.map( ( route ) => ( {
@@ -173,7 +184,8 @@ export default function TabStrip( { flushBottom = false } ) {
 	const ghostRef = useRef( null );
 	const itemWidthsRef = useRef( [] );
 	const moreWidthRef = useRef( 0 );
-	const [ visibleCount, setVisibleCount ] = useState( inlineTabs.length );
+	const pinnedWidthRef = useRef( 0 );
+	const [ visibleCount, setVisibleCount ] = useState( flowTabs.length );
 
 	const recompute = useCallback( () => {
 		const row = rowRef.current;
@@ -189,10 +201,12 @@ export default function TabStrip( { flushBottom = false } ) {
 			parseFloat( styles.paddingRight );
 		const available = row.clientWidth - padX;
 		const moreW = moreWidthRef.current || 0;
+		const pinnedW = pinnedWidthRef.current || 0;
 		const total = widths.length;
 
-		// Full width if every inline tab is shown (no More button).
-		let allWidth = 0;
+		// Full width if every flowing tab is shown (no More button); the pinned
+		// tabs (each counted with its leading gap) are always on screen.
+		let allWidth = pinnedW;
 		widths.forEach( ( w, i ) => {
 			allWidth += w + ( i > 0 ? TAB_GAP : 0 );
 		} );
@@ -204,7 +218,7 @@ export default function TabStrip( { flushBottom = false } ) {
 		}
 
 		// Otherwise reserve room for the More button and greedily fit tabs.
-		const budget = available - moreW - TAB_GAP;
+		const budget = available - moreW - TAB_GAP - pinnedW;
 		let used = 0;
 		let count = 0;
 		for ( let i = 0; i < total; i++ ) {
@@ -229,8 +243,13 @@ export default function TabStrip( { flushBottom = false } ) {
 		}
 		const kids = Array.from( ghost.children );
 		const moreEl = kids.pop();
-		itemWidthsRef.current = kids.map(
-			( el ) => el.getBoundingClientRect().width
+		const widths = kids.map( ( el ) => el.getBoundingClientRect().width );
+		// Ghost order: flowing tabs, pinned tabs, More.
+		const pinnedWidths = widths.splice( flowTabs.length );
+		itemWidthsRef.current = widths;
+		pinnedWidthRef.current = pinnedWidths.reduce(
+			( sum, w ) => sum + w + TAB_GAP,
+			0
 		);
 		moreWidthRef.current = moreEl
 			? moreEl.getBoundingClientRect().width
@@ -249,8 +268,8 @@ export default function TabStrip( { flushBottom = false } ) {
 		return () => observer.disconnect();
 	}, [ recompute ] );
 
-	const shownTabs = inlineTabs.slice( 0, visibleCount );
-	const overflowTabs = inlineTabs.slice( visibleCount );
+	const shownTabs = flowTabs.slice( 0, visibleCount );
+	const overflowTabs = flowTabs.slice( visibleCount );
 	const moreItems = [ ...overflowTabs, ...secondaryItems ];
 	const moreActive = moreItems.some( ( item ) => item.active ) || moreOpen;
 
@@ -279,13 +298,14 @@ export default function TabStrip( { flushBottom = false } ) {
 					ref={ ghostRef }
 					className="flex w-max gap-1 py-2 px-4 invisible"
 				>
-					{ inlineTabs.map( ( item ) => (
+					{ flowTabs.concat( pinnedTabs ).map( ( item ) => (
 						<Tab
 							key={ item.key }
 							active={ false }
 							onClick={ () => {} }
 							icon={ item.icon }
 							label={ item.label }
+							highlight={ item.highlight }
 						/>
 					) ) }
 					<Tab
@@ -305,6 +325,7 @@ export default function TabStrip( { flushBottom = false } ) {
 						onClick={ () => go( item ) }
 						icon={ item.icon }
 						label={ item.label }
+						highlight={ item.highlight }
 					/>
 				) ) }
 
@@ -334,6 +355,17 @@ export default function TabStrip( { flushBottom = false } ) {
 						/>
 					</span>
 				) : null }
+
+				{ pinnedTabs.map( ( item ) => (
+					<Tab
+						key={ item.key }
+						active={ item.active }
+						onClick={ () => go( item ) }
+						icon={ item.icon }
+						label={ item.label }
+						highlight={ item.highlight }
+					/>
+				) ) }
 			</div>
 
 			{ moreOpen ? (

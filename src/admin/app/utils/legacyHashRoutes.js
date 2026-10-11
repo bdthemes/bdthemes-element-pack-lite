@@ -18,6 +18,8 @@ export const LEGACY_HASH_ROUTES = {
 	element_pack_analytics_system_req_page: '/system-status',
 	element_pack_other_plugins: '/other-plugins',
 	element_pack_other_plugins_page: '/other-plugins',
+	element_pack_get_pro: '/go-pro',
+	element_pack_get_pro_page: '/go-pro',
 };
 
 export function legacyHashToRoute( hash ) {

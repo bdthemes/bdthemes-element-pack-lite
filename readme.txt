@@ -321,9 +321,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 10.0.0 [8th October 2026] =
+= 10.0.0 [12th October 2026] =
 
 * Added: New React-based admin dashboard with Dashboard, Widgets, Extensions, Features, Integrations, Performance, System Status and Other Plugins screens
+* Added: New "You may also need" page in the dashboard with the Pro highlights (including Elementor MCP & AI Abilities), a Free vs Pro comparison and an FAQ
 * Improved: UIkit and helper CSS/JS now load only on pages that use Element Pack, cutting frontend CSS by up to 40%
 * Improved: Total Blocking Time up to 60% lower and Largest Contentful Paint up to 20% faster on pages without Element Pack widgets
 * Improved: Asset Manager now combines only the widgets a page uses into one CSS and one JS file: up to 54% less CSS, pages up to 30% lighter, LCP up to 11% faster

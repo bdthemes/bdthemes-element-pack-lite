@@ -37,6 +37,8 @@ class Admin_Cutover {
 		'element_pack_analytics_system_req_page' => '/system-status',
 		'element_pack_other_plugins'             => '/other-plugins',
 		'element_pack_other_plugins_page'        => '/other-plugins',
+		'element_pack_get_pro'                   => '/go-pro',
+		'element_pack_get_pro_page'              => '/go-pro',
 	];
 
 	public function __construct() {
@@ -46,6 +48,7 @@ class Admin_Cutover {
 
 		add_action( 'admin_menu', [ $this, 'prune_legacy_submenus' ], 999 );
 		add_action( 'admin_head', [ $this, 'fix_toplevel_menu_link' ], 1 );
+		add_action( 'admin_head', [ $this, 'print_go_pro_menu_css' ] );
 	}
 
 	public static function is_default(): bool {
@@ -188,6 +191,7 @@ class Admin_Cutover {
 			[ 'settings_perf', '/settings/perf', __( 'Performance', 'bdthemes-element-pack-lite' ) ],
 			[ 'system_status', '/system-status', __( 'System Status', 'bdthemes-element-pack-lite' ) ],
 			[ 'other_plugins', '/other-plugins', __( 'Other Plugins', 'bdthemes-element-pack-lite' ) ],
+			[ 'go_pro', '/go-pro', __( 'You may also need', 'bdthemes-element-pack-lite' ) ],
 		];
 
 		$items = [];
@@ -213,6 +217,62 @@ class Admin_Cutover {
 	 * After wp-admin/includes/menu.php rewrites the parent slug, force the root
 	 * menu link back to the React dashboard page.
 	 */
+	/**
+	 * Make the "You may also need" (Go Pro) sidebar entry stand out with a brand
+	 * gradient pill. It styles that one link on every admin
+	 * screen, since the menu is visible everywhere, and only while the entry is
+	 * offered.
+	 */
+	public function print_go_pro_menu_css(): void {
+		$visibility = Menu_Visibility_Service::get_nav_visibility();
+
+		if ( empty( $visibility['go_pro'] ) ) {
+			return;
+		}
+
+		?>
+		<style id="ep-go-pro-menu">
+			#adminmenu .wp-submenu li a[href$="#/go-pro"] {
+				/* Pill inset so the label still lines up with the other entries. */
+				margin: 3px 6px;
+				padding: 5px 6px;
+				border-radius: 8px;
+				background: linear-gradient(90deg, rgba(64, 142, 250, .28), rgba(132, 237, 146, .16));
+				color: #9af0b5;
+				font-weight: 700;
+			}
+			#adminmenu .wp-submenu li a[href$="#/go-pro"]:hover,
+			#adminmenu .wp-submenu li a[href$="#/go-pro"]:focus,
+			#adminmenu .wp-submenu li a[href$="#/go-pro"]:active,
+			#adminmenu .wp-submenu li.current a[href$="#/go-pro"] {
+				background: linear-gradient(90deg, rgba(64, 142, 250, .5), rgba(132, 237, 146, .3));
+				color: #fff;
+			}
+			/* WP draws a light glow/outline on hover and focus; keep the pill clean. */
+			#adminmenu .wp-submenu li a[href$="#/go-pro"],
+			#adminmenu .wp-submenu li a[href$="#/go-pro"]:hover,
+			#adminmenu .wp-submenu li a[href$="#/go-pro"]:focus,
+			#adminmenu .wp-submenu li a[href$="#/go-pro"]:active {
+				box-shadow: none;
+				outline: 0;
+				border: 0;
+			}
+			/* Active page: accent line on the left, so the left corners go square. */
+			#adminmenu .wp-submenu li.current a.current[href$="#/go-pro"] {
+				border-left: 3px solid #9af0b5;
+				border-radius: 0 8px 8px 0;
+				padding-left: 3px;
+				color: #fff;
+			}
+			#adminmenu .wp-submenu li:has(> a[href$="#/go-pro"]),
+			#adminmenu .wp-submenu li:has(> a[href$="#/go-pro"]):hover {
+				background: transparent;
+				box-shadow: none;
+			}
+		</style>
+		<?php
+	}
+
 	public function fix_toplevel_menu_link(): void {
 		if ( ! self::is_default() ) {
 			return;
