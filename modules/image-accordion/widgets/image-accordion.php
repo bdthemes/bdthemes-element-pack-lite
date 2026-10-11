@@ -1589,7 +1589,7 @@ class Image_Accordion extends Module_Base {
 
 		if ( ! empty( $settings['show_lightbox'] ) && $settings['show_lightbox'] === 'yes' ) {
 			$lightbox_animation = isset( $settings['lightbox_animation'] ) ? $settings['lightbox_animation'] : 'slide';
-			$this->add_render_attribute( 'image-accordion', 'data-bdt-lightbox', 'toggle: .bdt-ep-image-accordion-lightbox; animation:' . esc_attr( $lightbox_animation ) . ';' );
+			$this->add_render_attribute( 'image-accordion', 'data-bdt-lightbox', 'toggle: .bdt-ep-image-accordion-lightbox; animation:' . element_pack_lightbox_animation( $lightbox_animation ) . ';' );
 			if ( ! empty( $settings['lightbox_autoplay'] ) && $settings['lightbox_autoplay'] === 'yes' ) {
 				$this->add_render_attribute( 'image-accordion', 'data-bdt-lightbox', 'autoplay: 500;' );
 				if ( ! empty( $settings['lightbox_pause'] ) && $settings['lightbox_pause'] === 'yes' ) {
@@ -1658,9 +1658,16 @@ class Image_Accordion extends Module_Base {
 		}
 		var dataSettings = JSON.stringify( ds );
 
+		// UIkit re-parses this option string, so only the values the control
+		// offers may reach it; a semicolon would otherwise introduce an option
+		// of UIkit's own.
+		var epLightboxAnimation = function( value, fallback ) {
+			return [ 'slide', 'fade', 'scale' ].indexOf( value ) !== -1 ? value : fallback;
+		};
+
 		var lbAttr = '';
 		if ( settings.show_lightbox === 'yes' ) {
-			lbAttr = 'toggle: .bdt-ep-image-accordion-lightbox; animation:' + ( settings.lightbox_animation || 'slide' ) + ';';
+			lbAttr = 'toggle: .bdt-ep-image-accordion-lightbox; animation:' + epLightboxAnimation( settings.lightbox_animation, 'slide' ) + ';';
 			if ( settings.lightbox_autoplay === 'yes' ) {
 				lbAttr += ' autoplay: 500;';
 				if ( settings.lightbox_pause === 'yes' ) {

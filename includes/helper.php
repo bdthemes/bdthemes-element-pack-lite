@@ -813,6 +813,37 @@ function element_pack_ajax_settings( $settings ) {
 }
 
 /**
+ * Validate a lightbox animation against the values the control actually offers.
+ *
+ * The value is interpolated into a UIkit `data-bdt-lightbox` option string,
+ * which UIkit re-parses in the browser as `key: value;` pairs. Escaping the
+ * value does not make that safe: the dangerous payload is structural rather
+ * than HTML, so a semicolon can close `animation` and introduce an option of
+ * UIkit's own - `template` among them, which is a script sink. Only the three
+ * values the SELECT control offers are let through.
+ *
+ * @param mixed  $animation Raw setting value.
+ * @param string $fallback  Value to use when the setting is not recognised.
+ * @return string
+ */
+if ( ! function_exists( 'element_pack_lightbox_animation' ) ) {
+	function element_pack_lightbox_animation( $animation, $fallback = 'slide' ) {
+		$allowed = (array) apply_filters(
+			'element_pack/lightbox/allowed_animations',
+			array( 'slide', 'fade', 'scale' )
+		);
+
+		$animation = is_string( $animation ) ? strtolower( trim( $animation ) ) : '';
+
+		if ( in_array( $animation, $allowed, true ) ) {
+			return $animation;
+		}
+
+		return in_array( $fallback, $allowed, true ) ? $fallback : 'slide';
+	}
+}
+
+/**
  * @return array of all transition names
  */
 function element_pack_transition_options() {

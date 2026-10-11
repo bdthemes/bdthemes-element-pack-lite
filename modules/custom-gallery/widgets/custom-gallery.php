@@ -1287,7 +1287,7 @@ class Custom_Gallery extends Module_Base {
 		
 		if ( $settings['show_lightbox'] ) {
 			$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'video-autoplay: true;' );
-			$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'toggle: .bdt-gallery-lightbox-item; animation:' . $settings['lightbox_animation'] . ';' );
+			$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'toggle: .bdt-gallery-lightbox-item; animation:' . element_pack_lightbox_animation( $settings['lightbox_animation'] ) . ';' );
 			if ( $settings['lightbox_autoplay'] ) {
 				$this->add_render_attribute( 'custom-gallery', 'data-bdt-lightbox', 'autoplay: 500;' );
 
@@ -1424,9 +1424,16 @@ class Custom_Gallery extends Module_Base {
 			skinInnerClass += ' bdt-image-mask';
 		}
 
+		// UIkit re-parses this option string, so only the values the control
+		// offers may reach it; a semicolon would otherwise introduce an option
+		// of UIkit's own.
+		var epLightboxAnimation = function( value, fallback ) {
+			return [ 'slide', 'fade', 'scale' ].indexOf( value ) !== -1 ? value : fallback;
+		};
+
 		var lightboxAttr = '';
 		if ( settings.show_lightbox === 'yes' ) {
-			lightboxAttr = 'video-autoplay: true; toggle: .bdt-gallery-lightbox-item; animation: ' + ( settings.lightbox_animation || 'fade' ) + ';';
+			lightboxAttr = 'video-autoplay: true; toggle: .bdt-gallery-lightbox-item; animation: ' + epLightboxAnimation( settings.lightbox_animation, 'fade' ) + ';';
 			if ( settings.lightbox_autoplay === 'yes' ) {
 				lightboxAttr += ' autoplay: 500;';
 				if ( settings.lightbox_pause === 'yes' ) {

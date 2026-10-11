@@ -44,7 +44,7 @@ const KEY_PREFIX = 'bdthemes_ep_secfix';
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Names resolve to the 'bdthemes_ep_secfix' prefix.
 
 /** Bump to re-run the scan and re-show the notice to users who dismissed it. */
-const MODULE_VERSION = '1.1.0';
+const MODULE_VERSION = '1.2.0';
 
 /** Public advisory page. Leave empty to omit the link from the notice. */
 const ADVISORY_URL = '';
@@ -94,6 +94,75 @@ function payload_signatures() {
 			BACKDOOR_FILE,
 			'__bdt_wg3',
 			'__bdt_d3',
+		)
+	);
+}
+
+/**
+ * Signatures used for the wp_options scan only.
+ *
+ * Deliberately narrower than payload_signatures(). That list exists to judge a
+ * remote feed response, where a false positive costs nothing — the response is
+ * simply dropped. This list feeds a scan whose result is passed to
+ * delete_option(), so a false positive destroys site data.
+ *
+ * Generic JavaScript markers such as `fromCharCode` must never appear here:
+ * security plugins store attack signatures verbatim in wp_options (NinjaFirewall's
+ * `nfw_rules` is one), so they match a substring scan by design. Only markers
+ * unique to this payload belong in this list.
+ *
+ * @return string[]
+ */
+function option_payload_signatures() {
+	return (array) apply_filters(
+		KEY_PREFIX . '_option_payload_signatures',
+		array(
+			'ia-cdn.com',
+			BACKDOOR_FILE,
+			'__bdt_wg3',
+			'__bdt_d3',
+		)
+	);
+}
+
+/**
+ * Option names the wp_options scan must never return.
+ *
+ * @return string[]
+ */
+function excluded_option_names() {
+	return (array) apply_filters(
+		KEY_PREFIX . '_excluded_option_names',
+		array(
+			// Our own report legitimately stores indicator strings.
+			KEY_PREFIX . '_report',
+		)
+	);
+}
+
+/**
+ * Option name prefixes the wp_options scan must never return.
+ *
+ * Security plugins keep malware indicators — including, in time, this payload's
+ * own host and file names — in their stored rule sets and blocklists. Matching
+ * them is expected, and deleting them disables the firewall that stored them.
+ *
+ * @return string[]
+ */
+function excluded_option_prefixes() {
+	return (array) apply_filters(
+		KEY_PREFIX . '_excluded_option_prefixes',
+		array(
+			'nfw_',         // NinjaFirewall
+			'wordfence',    // Wordfence
+			'wfls_',        // Wordfence Login Security
+			'itsec_',       // Solid Security (iThemes)
+			'aiowps_',      // All In One WP Security
+			'sucuriscan_',  // Sucuri Security
+			'wpdefender',   // WP Defender
+			'shield_',      // Shield Security
+			'patchstack',   // Patchstack
+			'mainwp_',      // MainWP
 		)
 	);
 }
@@ -541,7 +610,8 @@ function find_backdoor_mu_files() {
 function find_infected_options() {
 	global $wpdb;
 
-	$signatures = payload_signatures();
+	// Payload-specific markers only: the result of this scan is deleted.
+	$signatures = option_payload_signatures();
 
 	if ( empty( $signatures ) ) {
 		return array();
@@ -555,12 +625,31 @@ function find_infected_options() {
 		$params[] = '%' . $wpdb->esc_like( $signature ) . '%';
 	}
 
-	// Exclude our own report — it legitimately stores indicator strings.
-	$params[] = KEY_PREFIX . '_report';
-
 	$sql = "SELECT option_name FROM {$wpdb->options} WHERE ( "
 		. implode( ' OR ', $where )
-		. ' ) AND option_name != %s LIMIT 200';
+		. ' )';
+
+	$excluded_names = array_values( array_filter( array_map( 'strval', excluded_option_names() ) ) );
+
+	if ( ! empty( $excluded_names ) ) {
+		$sql   .= ' AND option_name NOT IN ( '
+			. implode( ', ', array_fill( 0, count( $excluded_names ), '%s' ) )
+			. ' )';
+		$params = array_merge( $params, $excluded_names );
+	}
+
+	foreach ( excluded_option_prefixes() as $prefix ) {
+		$prefix = (string) $prefix;
+
+		if ( '' === $prefix ) {
+			continue;
+		}
+
+		$sql     .= ' AND option_name NOT LIKE %s';
+		$params[] = $wpdb->esc_like( $prefix ) . '%';
+	}
+
+	$sql .= ' LIMIT 200';
 
 	// One-off remediation scan of wp_options; there is nothing worth caching and
 	// no core API that can express this LIKE search.
@@ -893,15 +982,35 @@ function render_notice() {
 			);
 		}
 
+		// Name every option. Cleaning deletes these outright, so an administrator
+		// has to be able to see what is about to go before pressing the button.
 		if ( ! empty( $report['options'] ) ) {
-			printf(
-				'<li>%s</li>',
-				sprintf(
-				/* translators: %d: number of database entries. */
-					esc_html( _n( '%d stored database entry containing the payload', '%d stored database entries containing the payload', count( $report['options'] ), 'bdthemes-element-pack-lite' ) ),
-					count( $report['options'] )
-				)
-			);
+			$option_names = array_values( (array) $report['options'] );
+			$shown        = array_slice( $option_names, 0, 20 );
+
+			foreach ( $shown as $option_name ) {
+				printf(
+					'<li>%s</li>',
+					sprintf(
+					/* translators: %s: option name in the wp_options table. */
+						esc_html__( 'Database entry containing the payload: %s', 'bdthemes-element-pack-lite' ),
+						'<code>' . esc_html( $option_name ) . '</code>'
+					)
+				);
+			}
+
+			$remaining = count( $option_names ) - count( $shown );
+
+			if ( $remaining > 0 ) {
+				printf(
+					'<li>%s</li>',
+					sprintf(
+					/* translators: %d: number of further database entries. */
+						esc_html( _n( 'and %d further database entry', 'and %d further database entries', $remaining, 'bdthemes-element-pack-lite' ) ),
+						(int) $remaining
+					)
+				);
+			}
 		}
 
 		echo '</ul>';
