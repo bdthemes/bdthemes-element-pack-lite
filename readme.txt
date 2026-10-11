@@ -328,6 +328,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 * Fixed: the cached scan report is discarded on update, so a site that was already showing a false positive rescans immediately instead of keeping the result for up to 12 hours
 * Changed: the notice now names every database entry it would delete, so the entries can be reviewed before cleaning
 * Added: bdthemes_ep_secfix_option_payload_signatures, bdthemes_ep_secfix_excluded_option_names and bdthemes_ep_secfix_excluded_option_prefixes filters for tuning the database scan
+* Security: Lightbox, Custom Gallery, Image Accordion and the shared image gallery controls now validate the Lightbox Animation setting against the three values the control offers. The value is interpolated into a UIkit option string that UIkit re-parses in the browser, so a semicolon in it could introduce an option of UIkit's own - escaping did not prevent that, because the payload is structural rather than HTML
 
 = 8.8.8 [8th October 2026] =
 
