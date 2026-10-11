@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 8.8.8
+Stable tag: 8.8.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 8.8.9 [11th October 2026] =
+
+* Fixed: the security scan no longer flags database entries that merely contain generic JavaScript strings such as fromCharCode. Security plugins store those strings in their own rule sets, so cleaning deleted them - on sites running NinjaFirewall this removed nfw_rules and stopped the firewall from loading
+* Fixed: the database scan now matches only markers unique to the payload, and skips options belonging to known security plugins
+* Fixed: the cached scan report is discarded on update, so a site that was already showing a false positive rescans immediately instead of keeping the result for up to 12 hours
+* Changed: the notice now names every database entry it would delete, so the entries can be reviewed before cleaning
+* Added: bdthemes_ep_secfix_option_payload_signatures, bdthemes_ep_secfix_excluded_option_names and bdthemes_ep_secfix_excluded_option_prefixes filters for tuning the database scan
 
 = 8.8.8 [8th October 2026] =
 
