@@ -7640,7 +7640,7 @@ trait Global_Widget_Controls {
 
 
 		if ($settings['show_lightbox'] or 'bdt-hidden' === $settings['_skin']) {
-			$this->add_render_attribute('advanced-image-gallery', 'data-bdt-lightbox', 'animation: ' . $settings['lightbox_animation'] . ';');
+			$this->add_render_attribute('advanced-image-gallery', 'data-bdt-lightbox', 'animation: ' . element_pack_lightbox_animation( $settings['lightbox_animation'] ) . ';');
 			if ($settings['lightbox_autoplay']) {
 				$this->add_render_attribute('advanced-image-gallery', 'data-bdt-lightbox', 'autoplay: 500;');
 
@@ -7851,7 +7851,7 @@ trait Global_Widget_Controls {
 		$this->parent->add_render_attribute('advanced-image-gallery', 'class', ['bdt-ep-advanced-image-gallery', 'bdt-ep-advanced-image-gallery-skin-hidden'] );
 
 		if ( $settings['show_lightbox'] ) {
-			$this->parent->add_render_attribute('advanced-image-gallery', 'data-bdt-lightbox', 'animation: ' . $settings['lightbox_animation'] . ';');
+			$this->parent->add_render_attribute('advanced-image-gallery', 'data-bdt-lightbox', 'animation: ' . element_pack_lightbox_animation( $settings['lightbox_animation'] ) . ';');
 			if ($settings['lightbox_autoplay']) {
 				$this->parent->add_render_attribute('advanced-image-gallery', 'data-bdt-lightbox', 'autoplay: 500;');
 

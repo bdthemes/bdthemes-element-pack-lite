@@ -604,7 +604,7 @@ class Scroll_Button extends Module_Base {
 
 					</span>
 					<# } #>
-					<span class="bdt-scroll-button-text">{{{ settings.scroll_button_text }}}</span>
+					<span class="bdt-scroll-button-text">{{ settings.scroll_button_text }}</span>
 				</span>
 			</button>
 		</div>

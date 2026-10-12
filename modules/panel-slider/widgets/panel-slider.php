@@ -156,7 +156,7 @@ class Panel_Slider extends Module_Base {
 						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text.', 'bdthemes-element-pack-lite' ),
 					],
 				],
-				'title_field' => '{{{ tab_title }}}',
+				'title_field' => '{{ tab_title }}',
 			]
 		);
 
@@ -1348,12 +1348,12 @@ class Panel_Slider extends Module_Base {
 						<div class="bdt-panel-slide-desc bdt-position-bottom-left bdt-position-z-index">
 							<# if ( settings.show_title === 'yes' && item.tab_title ) { #>
 							<# print( '<' + titleTag + ' class="bdt-panel-slide-title bdt-transition-slide-bottom">' ); #>
-								{{{ item.tab_title }}}
+								{{ item.tab_title }}
 							<# print( '</' + titleTag + '>' ); #>
 							<# } #>
 							<# if ( item.tab_content ) { #>
 							<div class="bdt-panel-slide-text bdt-transition-slide-bottom">
-								{{{ item.tab_content }}}
+								{{{ elementor.helpers.sanitize( item.tab_content ) }}}
 							</div>
 							<# } #>
 							<# if ( linkUrl && settings.button === 'yes' ) { #>

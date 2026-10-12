@@ -335,10 +335,10 @@ class Review_Card_Carousel extends Module_Base {
 								<# } #>
 								<div class="bdt-flex bdt-flex-column bdt-flex-center">
 									<# if ( settings.show_reviewer_name === 'yes' && item.reviewer_name ) { #>
-									<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-carousel-name">{{{ item.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
+									<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-carousel-name">{{{ elementor.helpers.sanitize( item.reviewer_name ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 									<# } #>
 									<# if ( settings.show_reviewer_job_title === 'yes' && item.reviewer_job_title ) { #>
-									<div class="bdt-ep-review-card-carousel-job-title">{{{ item.reviewer_job_title }}}</div>
+									<div class="bdt-ep-review-card-carousel-job-title">{{ item.reviewer_job_title }}</div>
 									<# } #>
 									<# if ( settings.show_rating === 'yes' && ratingPosition === 'before' ) { #>
 									{{{ renderItemRating( item ) }}}
@@ -349,10 +349,10 @@ class Review_Card_Carousel extends Module_Base {
 
 							<# if ( imageInline !== 'yes' ) { #>
 							<# if ( settings.show_reviewer_name === 'yes' && item.reviewer_name ) { #>
-							<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-carousel-name">{{{ item.reviewer_name }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
+							<{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}} class="bdt-ep-review-card-carousel-name">{{{ elementor.helpers.sanitize( item.reviewer_name ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.review_name_tag ) }}}>
 							<# } #>
 							<# if ( settings.show_reviewer_job_title === 'yes' && item.reviewer_job_title ) { #>
-							<div class="bdt-ep-review-card-carousel-job-title">{{{ item.reviewer_job_title }}}</div>
+							<div class="bdt-ep-review-card-carousel-job-title">{{ item.reviewer_job_title }}</div>
 							<# } #>
 							<# if ( settings.show_rating === 'yes' && ratingPosition === 'before' ) { #>
 							{{{ renderItemRating( item ) }}}
@@ -360,7 +360,7 @@ class Review_Card_Carousel extends Module_Base {
 							<# } #>
 
 							<# if ( settings.show_review_text === 'yes' && item.review_text ) { #>
-							<div class="bdt-ep-review-card-carousel-text<# if ( settings.review_words_length ) { #> bdt-ep-read-more-text<# } #>"<# if ( settings.review_words_length ) { #> data-read-more="<# print( _.escape( readMoreData ) ); #>"<# } #>>{{{ item.review_text }}}</div>
+							<div class="bdt-ep-review-card-carousel-text<# if ( settings.review_words_length ) { #> bdt-ep-read-more-text<# } #>"<# if ( settings.review_words_length ) { #> data-read-more="<# print( _.escape( readMoreData ) ); #>"<# } #>>{{{ elementor.helpers.sanitize( item.review_text ) }}}</div>
 							<# } #>
 
 							<# if ( settings.show_rating === 'yes' && ratingPosition === 'after' ) { #>

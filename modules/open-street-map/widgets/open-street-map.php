@@ -290,7 +290,7 @@ class Open_Street_Map extends Module_Base {
 						'marker_content' => '<strong>BdThemes Limited</strong>,<br>Latifpur, Bogra - 5800,<br>Bangladesh',
 					],
 				],
-				'title_field' => '{{{ marker_title }}}',
+				'title_field' => '{{ marker_title }}',
 			]
 		);
 

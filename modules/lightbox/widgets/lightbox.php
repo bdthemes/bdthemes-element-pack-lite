@@ -901,7 +901,7 @@ class Lightbox extends Module_Base {
 
 		$lightbox_animation = isset( $settings['lightbox_animation'] ) ? $settings['lightbox_animation'] : '';
 		if ( ! empty( $lightbox_animation ) ) {
-			$this->add_render_attribute( 'lightbox', 'data-bdt-lightbox', 'animation: ' . wp_kses_post( $lightbox_animation ) . ';' );
+			$this->add_render_attribute( 'lightbox', 'data-bdt-lightbox', 'animation: ' . element_pack_lightbox_animation( $lightbox_animation ) . ';' );
 		}
 
 		$video_autoplay = isset( $settings['video_autoplay'] ) ? $settings['video_autoplay'] : '';
@@ -1016,9 +1016,16 @@ class Lightbox extends Module_Base {
 		}
 		var iconDataIframe = ( lc === 'google-map' && iconContentUrl );
 
+		// UIkit re-parses this option string, so only the values the control
+		// offers may reach it; a semicolon would otherwise introduce an option
+		// of UIkit's own.
+		var epLightboxAnimation = function( value, fallback ) {
+			return [ 'slide', 'fade', 'scale' ].indexOf( value ) !== -1 ? value : fallback;
+		};
+
 		var lbParts = [];
 		if ( settings.lightbox_animation ) {
-			lbParts.push( 'animation: ' + settings.lightbox_animation + ';' );
+			lbParts.push( 'animation: ' + epLightboxAnimation( settings.lightbox_animation, 'slide' ) + ';' );
 		}
 		if ( settings.video_autoplay === 'yes' ) {
 			lbParts.push( 'video-autoplay: true;' );
@@ -1071,7 +1078,7 @@ class Lightbox extends Module_Base {
 									<# } #>
 								</span>
 							<# } #>
-							<span class="elementor-button-text">{{{ settings.button_text }}}</span>
+							<span class="elementor-button-text">{{{ elementor.helpers.sanitize( settings.button_text ) }}}</span>
 							<# if ( settings.icon_align === 'right' && hasButtonIcon ) { #>
 								<span class="elementor-button-icon elementor-align-icon-right">
 									<# if ( buttonIconHTML && buttonIconHTML.rendered ) { #>
@@ -1084,7 +1091,7 @@ class Lightbox extends Module_Base {
 				</a>
 
 				<# if ( shouldShowIconText ) { #>
-					<a class="bdt-icon-text" data-elementor-open-lightbox="no"<# if ( iconContentUrl ) { #> href="{{ iconContentUrl }}"<# } #><# if ( iconDataIframe ) { #> data-type="iframe"<# } #>>{{{ settings.icon_text }}}</a>
+					<a class="bdt-icon-text" data-elementor-open-lightbox="no"<# if ( iconContentUrl ) { #> href="{{ iconContentUrl }}"<# } #><# if ( iconDataIframe ) { #> data-type="iframe"<# } #>>{{{ elementor.helpers.sanitize( settings.icon_text ) }}}</a>
 				<# } #>
 			</div>
 		</div>

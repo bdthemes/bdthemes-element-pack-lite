@@ -1220,7 +1220,7 @@ class Static_Grid_Tab extends Module_Base {
 				#>
 				<dt>
 					<# if ( gridTabType === 'title' && settings.show_title === 'yes' && item.title ) { #>
-					<div class="bdt-ep-static-grid-tab-title">{{{ item.title }}}</div>
+					<div class="bdt-ep-static-grid-tab-title">{{{ elementor.helpers.sanitize( item.title ) }}}</div>
 					<# } else if ( gridTabType !== 'title' && settings.show_image === 'yes' && item.image && item.image.url ) { #>
 					<div class="bdt-ep-static-grid-tab-thumbnail">
 						<img src="{{ item.image.url }}" alt="{{ item.title }}">
@@ -1239,10 +1239,10 @@ class Static_Grid_Tab extends Module_Base {
 						<div class="bdt-ep-static-grid-tab-desc">
 							<div class="bdt-post-grid-desc-inner bdt-gt-mh">
 								<# if ( 'yes' === settings.show_title && item.title ) { #>
-								<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-ep-static-grid-tab-main-title">{{{ item.title }}}</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
+								<{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}} class="bdt-ep-static-grid-tab-main-title">{{{ elementor.helpers.sanitize( item.title ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}}>
 								<# } #>
 								<# if ( 'yes' === settings.show_text && item.text ) { #>
-								<div class="bdt-ep-static-grid-tab-excerpt">{{{ item.text }}}</div>
+								<div class="bdt-ep-static-grid-tab-excerpt">{{{ elementor.helpers.sanitize( item.text ) }}}</div>
 								<# } #>
 								<# if ( 'yes' === settings.show_readmore && item.readmore_link && item.readmore_link.url ) { #>
 								<div class="bdt-ep-static-grid-tab-readmore-wrap">

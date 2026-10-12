@@ -432,7 +432,7 @@ class Content_Switcher extends Module_Base {
 					],
 				],
 				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ title }}}',
+				'title_field' => '{{ title }}',
 			]
 		);
 

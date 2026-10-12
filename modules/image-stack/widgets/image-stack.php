@@ -250,7 +250,7 @@ class Image_Stack extends Module_Base {
 						'image' => [ 'url' => Utils::get_placeholder_image_src() ],
 					],
 				],
-				'title_field' => '{{{ tooltip_text }}}',
+				'title_field' => '{{ tooltip_text }}',
 			]
 		);
 

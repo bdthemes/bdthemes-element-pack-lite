@@ -1779,7 +1779,7 @@ class Interactive_Card extends Module_Base {
 		}
 		var readmoreText = settings.readmore_text ? settings.readmore_text : 'Read More';
 		#>
-		<div class="bdt-interactive-card bdt-interactive-card-default"<# if ( showWavify ) { #> id="{{ cardId }}" data-settings='{{{ dataSettings }}}'<# } #><# if ( globalOnclick ) { #> onclick="{{ globalOnclick }}"<# } #>>
+		<div class="bdt-interactive-card bdt-interactive-card-default"<# if ( showWavify ) { #> id="{{ cardId }}" data-settings='{{ dataSettings }}'<# } #><# if ( globalOnclick ) { #> onclick="{{ globalOnclick }}"<# } #>>
 			<div class="{{ wrapperClasses }}">
 				<div class="{{ widthClass }}">
 					<div class="bdt-position-relative">
@@ -1808,15 +1808,15 @@ class Interactive_Card extends Module_Base {
 				<div class="{{ widthClass }}">
 					<div class="bdt-interactive-card-content">
 						<# if ( settings.show_sub_title === 'yes' && settings.sub_title_text ) { #>
-						<div class="bdt-interactive-card-sub-title">{{{ settings.sub_title_text }}}</div>
+						<div class="bdt-interactive-card-sub-title">{{{ elementor.helpers.sanitize( settings.sub_title_text ) }}}</div>
 						<# } #>
 						<# if ( settings.title_text ) { #>
 						<{{ titleTag }} class="bdt-interactive-card-title"<# if ( titleOnclick ) { #> onclick="{{ titleOnclick }}"<# } #>>
-							<span class="elementor-inline-editing" data-elementor-setting-key="title_text">{{{ settings.title_text }}}</span>
+							<span class="elementor-inline-editing" data-elementor-setting-key="title_text">{{{ elementor.helpers.sanitize( settings.title_text ) }}}</span>
 						</{{ titleTag }}>
 						<# } #>
 						<# if ( settings.description_text ) { #>
-						<div class="bdt-interactive-card-text elementor-inline-editing" data-elementor-setting-key="description_text">{{{ settings.description_text }}}</div>
+						<div class="bdt-interactive-card-text elementor-inline-editing" data-elementor-setting-key="description_text">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div>
 						<# } #>
 						<# if ( settings.readmore === 'yes' ) { #>
 						<div class="bdt-interactive-card-button">

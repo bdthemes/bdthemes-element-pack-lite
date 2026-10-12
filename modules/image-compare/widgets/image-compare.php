@@ -512,7 +512,7 @@ class Image_Compare extends Module_Base {
 		});
 		#>
 		<div class="bdt-image-compare bdt-position-relative">
-			<div id="{{ widgetId }}" class="image-compare{{ overlayClass }}" data-settings='{{{ dataSettings }}}'>
+			<div id="{{ widgetId }}" class="image-compare{{ overlayClass }}" data-settings='{{ dataSettings }}'>
 				<# if ( beforeImage ) { #><img src="{{ beforeImage }}" alt="{{ settings.before_label }}"><# } #>
 				<# if ( afterImage ) { #><img src="{{ afterImage }}" alt="{{ settings.after_label }}"><# } #>
 			</div>

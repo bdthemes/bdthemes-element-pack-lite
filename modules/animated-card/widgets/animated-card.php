@@ -1279,15 +1279,15 @@ class Animated_Card extends Module_Base {
 				<div class="bdt-ep-animated-card-content">
 
 					<# if ( 'yes' === settings.show_sub_title && settings.sub_title_text ) { #>
-						<{{{ elementor.helpers.validateHTMLTag( settings.sub_title_size ) }}} class="bdt-ep-animated-card-sub-title">{{{ settings.sub_title_text }}}</{{{ elementor.helpers.validateHTMLTag( settings.sub_title_size ) }}}>
+						<{{{ elementor.helpers.validateHTMLTag( settings.sub_title_size ) }}} class="bdt-ep-animated-card-sub-title">{{{ elementor.helpers.sanitize( settings.sub_title_text ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.sub_title_size ) }}}>
 					<# } #>
 
 					<# if ( 'yes' === settings.show_title && settings.title_text ) { #>
-						<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-ep-animated-card-title">{{{ settings.title_text }}}</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
+						<{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}} class="bdt-ep-animated-card-title">{{{ elementor.helpers.sanitize( settings.title_text ) }}}</{{{ elementor.helpers.validateHTMLTag( settings.title_size ) }}}>
 					<# } #>
 
 					<# if ( 'yes' === settings.show_description && settings.description_text ) { #>
-						<div class="bdt-ep-animated-card-text">{{{ settings.description_text }}}</div>
+						<div class="bdt-ep-animated-card-text">{{{ elementor.helpers.sanitize( settings.description_text ) }}}</div>
 					<# } #>
 
 					<# if ( settings.readmore ) { #>

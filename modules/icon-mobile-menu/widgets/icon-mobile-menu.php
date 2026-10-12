@@ -142,7 +142,7 @@ class Icon_Mobile_Menu extends Module_Base {
 						'menu_icon' => [ 'value' => 'fas fa-user', 'library' => 'fa-solid' ],
 					],
 				],
-				'title_field' => '{{{ elementor.helpers.renderIcon( this, menu_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ menu_text }}}',
+				'title_field' => '{{{ elementor.helpers.renderIcon( this, menu_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{ menu_text }}',
 			]
 		);
 
@@ -997,7 +997,7 @@ class Icon_Mobile_Menu extends Module_Base {
 							{{{ iconHTML.value }}}
 						</span>
 						<# } #>
-						<span class="bdt-text-mobile-menu">{{{ item.menu_text }}}</span>
+						<span class="bdt-text-mobile-menu">{{{ elementor.helpers.sanitize( item.menu_text ) }}}</span>
 					<# if ( linkUrl ) { #>
 					</a>
 					<# } else { #>

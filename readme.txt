@@ -337,6 +337,19 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 * Security: UIkit: HTML parsed from a component option or fetched for an inline SVG now drops iframe, frame, form, meta, link, object and embed elements, srcdoc and is attributes, and URL attributes whose scheme hides behind control characters (java&#9;script:); only http(s), mailto, tel, relative and fragment URLs are kept, plus data:image on media elements (reported by nh4tvd)
 * Security: Content Guard: a bdt-* / data-bdt-* attribute written after a "/" with no whitespace is stripped too; markup is now walked with the WordPress HTML API, the same parser wp_kses_post() uses to normalise a tag (reported by nh4tvd)
 
+= 8.8.9 [11th October 2026] =
+
+* Removed: the security remediation module added in 8.7.18. Its database scan could flag options that merely contain generic JavaScript strings, and cleaning then deleted them - on sites running NinjaFirewall it removed nfw_rules and stopped the firewall from loading. The module, its scan, its admin notice and its cleanup action are all gone
+* Security: Lightbox, Custom Gallery, Image Accordion and the shared image gallery controls now validate the Lightbox Animation setting against the three values the control offers. The value is interpolated into a UIkit option string that UIkit re-parses in the browser, so a semicolon in it could introduce an option of UIkit's own - escaping did not prevent that, because the payload is structural rather than HTML
+
+= 8.8.8 [8th October 2026] =
+
+* Security: Image Compare: the Before and After labels are now escaped in the editor preview. A single quote in a label could close the data-settings attribute and inject event handlers that ran in the editor (reported by nh4tvd)
+* Security: Interactive Card and Image Accordion: settings are escaped in the same editor preview attribute, which shared the unsafe pattern
+* Security: repeater row labels shown in the editor panel are escaped instead of printed raw
+* Security: editor previews now pass HTML-bearing settings through elementor.helpers.sanitize(), so the editor applies the same rules as wp_kses on the front end
+* Security: Dynamic Select control: post titles are escaped before being rendered in the control panel
+
 = 8.8.7 [6th October 2026] =
 
 * Security: UIkit: only http(s) SVG and lightbox iframe sources are allowed, and scripts, event handlers and script URLs are removed from parsed HTML (reported by Intrudify)
