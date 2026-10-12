@@ -72,19 +72,16 @@ final class Manager
         $class_name = str_replace(' ', '', ucwords($class_name));
         $class_name = __NAMESPACE__ . '\\Modules\\' . $class_name . '\\Module';
 
-        if (!element_pack_is_asset_optimization_enabled()) {
-            if (!element_pack_is_preview()) {
-                // register widgets css
-                // if (ModuleService::has_module_style($module_id)) {
-                //     wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . $direction . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
-                // }
-                if (ModuleService::has_module_style($module_id)) {
-                    wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
-                }
-                // register widget JS
-                if (ModuleService::has_module_script($module_id)) {
-                    wp_register_script('ep-' . $module_id, BDTEP_URL . 'assets/js/modules/ep-' . $module_id . '.min.js', ['jquery', 'bdt-uikit'], BDTEP_VER, true);
-                }
+        // Registered in both modes: with the Asset Manager on, Includes\Page_Assets
+        // merges the handles a page actually uses into one combined file.
+        if (!element_pack_is_preview()) {
+            // register widgets css
+            if (ModuleService::has_module_style($module_id)) {
+                wp_register_style('ep-' . $module_id, BDTEP_URL . 'assets/css/ep-' . $module_id . '.css', ['bdt-uikit', 'ep-helper'], BDTEP_VER);
+            }
+            // register widget JS
+            if (ModuleService::has_module_script($module_id)) {
+                wp_register_script('ep-' . $module_id, BDTEP_URL . 'assets/js/modules/ep-' . $module_id . '.min.js', ['jquery', 'bdt-uikit'], BDTEP_VER, true);
             }
         }
 

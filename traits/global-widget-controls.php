@@ -18,24 +18,6 @@ defined( 'ABSPATH' ) || die();
 
 trait Global_Widget_Controls {
 
-	protected function register_deprecated_widget_controls() {
-		$this->start_controls_section(
-			'deprecated_controls_section',
-			[ 
-				'label' => esc_html__( 'Deprecated Widget', 'bdthemes-element-pack-lite' ),
-			]
-		);
-		$this->add_control(
-			'deprecated_widget_note',
-			[ 
-				'type' => Controls_Manager::RAW_HTML,
-				'raw' => esc_html__( 'Note: This widget is deprecated and will be removed in a future version. Please use the new widget instead.', 'bdthemes-element-pack-lite' ),
-				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
-			]
-		);
-		$this->end_controls_section();
-	}
-
 	protected function register_deprecated_post_widget_controls() {
 		$this->start_controls_section(
 			'deprecated_post_widget_section',

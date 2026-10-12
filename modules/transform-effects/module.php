@@ -29,6 +29,8 @@ class Module extends Element_Pack_Module_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-motion-effect-',
 				'separator'    => 'before',
+				// The transform rules are in the helper stylesheet.
+				'assets'       => self::switcher_assets('element_pack_widget_transform', ['ep-helper']),
 			]
 		);
 
@@ -689,6 +691,7 @@ class Module extends Element_Pack_Module_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-motion-effect-',
 				'separator'    => 'before',
+				'assets'       => self::switcher_assets('element_pack_section_transform', ['ep-helper'], [], 'wrapper'),
 				'return_value' => 'wrapper',
 			]
 		);
@@ -722,6 +725,7 @@ class Module extends Element_Pack_Module_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'bdt-motion-effect-',
 				'separator'    => 'before',
+				'assets'       => self::switcher_assets('element_pack_column_transform', ['ep-helper'], [], 'wrapper'),
 				'return_value' => 'wrapper',
 			]
 		);
@@ -746,11 +750,25 @@ class Module extends Element_Pack_Module_Base {
 		);
 	}
 
+	/**
+	 * Load the helper stylesheet, which holds the transform rules, for an element that
+	 * uses the effect. The controls' `assets` put it in the head of pages Elementor
+	 * renders as documents; this covers elements rendered any other way.
+	 */
+	public function enqueue_styles($element) {
+		foreach (['element_pack_widget_transform', 'element_pack_section_transform', 'element_pack_column_transform'] as $control) {
+			if (!empty($element->get_settings($control))) {
+				wp_enqueue_style('ep-helper');
+				return;
+			}
+		}
+	}
+
 	protected function add_actions() {
 
 		add_action('elementor/element/section/section_effects/before_section_end', [$this, 'register_controls_section_transform_effect'], 10, 11);
 		add_action('elementor/element/column/section_effects/before_section_end', [$this, 'register_controls_column_transform_effect'], 10, 11);
 		add_action('elementor/element/common/section_effects/before_section_end', [$this, 'register_controls_widget_transform_effect'], 10, 11);
-		// add_action('elementor/frontend/widget/before_render', [$this, 'render_assets_before_render'], 10, 1);
+		add_action('elementor/frontend/before_render', [$this, 'enqueue_styles']);
 	}
 }

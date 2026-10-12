@@ -19,7 +19,13 @@ abstract class Module_Base extends Widget_Base {
             }
             return $this->_get_style_depends();
         }
-        return array();
+        // UIkit and the helper CSS no longer load on every page, so a widget that
+        // declares no style handle of its own still has to ask for them.
+        return ['bdt-uikit', 'ep-helper'];
+    }
+
+    public function get_script_depends() {
+        return ['bdt-uikit'];
     }
 
     protected function ep_is_edit_mode() {

@@ -1,0 +1,28 @@
+{
+  "name": "bdthemes-element-pack-lite",
+  "version": "10.0.0",
+  "description": "Element Pack Lite - source for the React admin dashboard (src/admin/app), compiled to build/admin.",
+  "private": true,
+  "scripts": {
+    "start:admin": "wp-scripts start",
+    "build:admin": "wp-scripts build",
+    "lint:admin": "wp-scripts lint-js src/admin/app",
+    "format:admin": "wp-scripts format src/admin/app"
+  },
+  "author": "bdthemes",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/scripts": "^27.9.0",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.25",
+    "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "@wordpress/api-fetch": "^7.4.0",
+    "@wordpress/data": "^10.4.0",
+    "@wordpress/element": "^6.4.0",
+    "@wordpress/html-entities": "^4.4.0",
+    "@wordpress/i18n": "^5.4.0",
+    "react-router-dom": "^6.26.0"
+  }
+}

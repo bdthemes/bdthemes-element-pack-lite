@@ -43,10 +43,8 @@ class Element_Pack_WPML {
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-fancy-icons.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-fancy-list.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-icon-mobile-menu.php' );
-		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-image-accordion.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-image-stack.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-logo-grid.php' );
-		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-member.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-open-street-map.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-panel-slider.php' );
 		require_once( BDTEP_INC_PATH . 'compatiblity/wpml/class-wpml-element-pack-price-list.php' );
@@ -73,52 +71,6 @@ class Element_Pack_WPML {
 			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Accordion',
 		];
 
-		$nodes_to_translate[ 'bdt-age-gate' ] = [
-			'conditions' => [ 'widgetType' => 'bdt-age-gate' ],
-			'fields'     => [
-				[
-					'field'       => 'form_placeholder',
-					'type'        => esc_html__( 'Form Placeholder', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-				[
-					'field'       => 'button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-				[
-					'field'       => 'button_text_yes',
-					'type'        => esc_html__( 'Button Text (Yes)', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-				[
-					'field'       => 'button_text_no',
-					'type'        => esc_html__( 'Button Text (No)', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-				[
-					'field'       => 'age_invalid_msg',
-					'type'        => esc_html__( 'Age Invalid Message', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'AREA',
-				],
-				[
-					'field'       => 'header',
-					'type'        => esc_html__( 'Header Text', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-				[
-					'field'       => 'content',
-					'type'        => esc_html__( 'ModalContent', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'AREA',
-				],
-				[
-					'field'       => 'footer',
-					'type'        => esc_html__( 'Footer Text', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'AREA',
-				],
-			],
-		];
-
 		$nodes_to_translate[ 'bdt-business-hours' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-business-hours' ],
 			'fields'     => [
@@ -134,27 +86,6 @@ class Element_Pack_WPML {
 				],
 			],
 			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Business_Hours',
-		];
-
-		$nodes_to_translate[ 'bdt-call-out' ] = [
-			'conditions' => [ 'widgetType' => 'bdt-call-out' ],
-			'fields'     => [
-				[
-					'field'       => 'title',
-					'type'        => esc_html__( 'Title', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-				[
-					'field'       => 'description',
-					'type'        => esc_html__( 'Description', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'AREA',
-				],
-				[
-					'field'       => 'button_text',
-					'type'        => esc_html__( 'Button Text', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-			],
 		];
 
 		$nodes_to_translate[ 'bdt-contact-form' ] = [
@@ -248,17 +179,6 @@ class Element_Pack_WPML {
 			'conditions' => [ 'widgetType' => 'bdt-custom-gallery' ],
 			'fields'     => [],
 			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Custom_Gallery',
-		];
-
-		$nodes_to_translate[ 'bdt-dropbar' ] = [
-			'conditions' => [ 'widgetType' => 'bdt-dropbar' ],
-			'fields'     => [
-				[
-					'field'       => 'button_text',
-					'type'        => esc_html__( 'Text', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-			],
 		];
 
 		$nodes_to_translate[ 'bdt-dual-button' ] = [
@@ -372,12 +292,6 @@ class Element_Pack_WPML {
 			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Fancy_List',
 		];
 
-		$nodes_to_translate[ 'bdt-image-accordion' ] = [
-			'conditions' => [ 'widgetType' => 'bdt-image-accordion' ],
-			'fields'     => [],
-			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Image_Accordion',
-		];
-
 		$nodes_to_translate[ 'bdt-logo-grid' ] = [
 			'conditions' => [ 'widgetType' => 'bdt-logo-grid' ],
 			'fields'     => [],
@@ -445,29 +359,6 @@ class Element_Pack_WPML {
 					'editor_type' => 'LINE',
 				],
 			],
-		];
-
-		$nodes_to_translate[ 'bdt-member' ] = [
-			'conditions' => [ 'widgetType' => 'bdt-member' ],
-			'fields'     => [
-				[
-					'field'       => 'name',
-					'type'        => esc_html__( 'Member Name', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-				[
-					'field'       => 'description_text',
-					'type'        => esc_html__( 'Member Description', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'AREA',
-				],
-				[
-					'field'       => 'role',
-					'type'        => esc_html__( 'Member Role', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'LINE',
-				],
-
-			],
-			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Team_Member',
 		];
 
 		$nodes_to_translate[ 'bdt-open-street-map' ] = [
@@ -682,17 +573,6 @@ class Element_Pack_WPML {
 				],
 			],
 			'integration-class' => __NAMESPACE__ . '\\WPML_ElementPack_Static_Carousel',
-		];
-
-		$nodes_to_translate[ 'bdt-dark-mode' ] = [
-			'conditions' => [ 'widgetType' => 'bdt-dark-mode' ],
-			'fields'     => [
-				[
-					'field'       => 'ignore_element',
-					'type'        => __( 'Ignore Elements', 'bdthemes-element-pack-lite' ),
-					'editor_type' => 'AREA'
-				],
-			],
 		];
 
 		$nodes_to_translate[ 'bdt-image-stack' ] = [

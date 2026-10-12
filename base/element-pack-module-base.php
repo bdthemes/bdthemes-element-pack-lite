@@ -95,6 +95,59 @@ abstract class Element_Pack_Module_Base extends Module {
     }
 
     /**
+     * `assets` argument for an extension's on/off switcher control.
+     *
+     * Elementor records the handles a document needs in `_elementor_page_assets`
+     * and enqueues them in the head on later page views. An extension that only
+     * enqueues its stylesheet while the element renders gets it printed as a late
+     * style at the end of the page instead, i.e. a flash of unstyled content.
+     * The render-time enqueue stays as the fallback (e.g. before a page is saved).
+     *
+     * @param string $control Switcher control name.
+     * @param string $handle  Style handle to load while it is on.
+     * @return array
+     */
+    protected static function switcher_style_assets($control, $handle) {
+        return self::switcher_assets($control, [$handle]);
+    }
+
+    /**
+     * `assets` argument for a switcher control that needs several handles, or
+     * scripts, while it is on, typically the shared ones (`bdt-uikit`, `ep-helper`)
+     * that are not loaded on every page. See switcher_style_assets().
+     *
+     * @param string   $control Switcher control name.
+     * @param string[] $styles  Style handles to load while it is on.
+     * @param string[] $scripts Script handles to load while it is on.
+     * @param string   $value   The switcher's return value when it is on.
+     * @return array
+     */
+    protected static function switcher_assets($control, array $styles, array $scripts = [], $value = 'yes') {
+        $when_on = [
+            'terms' => [
+                [
+                    'name'     => $control,
+                    'operator' => '===',
+                    'value'    => $value,
+                ],
+            ],
+        ];
+
+        $assets = [];
+
+        foreach (['styles' => $styles, 'scripts' => $scripts] as $type => $handles) {
+            foreach ($handles as $handle) {
+                $assets[$type][] = [
+                    'name'       => $handle,
+                    'conditions' => $when_on,
+                ];
+            }
+        }
+
+        return $assets;
+    }
+
+    /**
      * Whether the reCAPTCHA gate must run for the current form submission.
      *
      * get_widget_settings() yields an error string or an empty array whenever the
