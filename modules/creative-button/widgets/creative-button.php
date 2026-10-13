@@ -133,7 +133,7 @@ class Creative_Button extends Module_Base {
 				'label'       => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://your-link.com',
 				'default'     => [
 					'url' => '#',
 				],

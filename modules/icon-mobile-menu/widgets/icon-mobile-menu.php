@@ -118,7 +118,7 @@ class Icon_Mobile_Menu extends Module_Base {
 				'default'     => [ 'url' => '#' ],
 				'description' => __( 'Add your section id WITH the # key. e.g: #my-id also you can add internal/external URL', 'bdthemes-element-pack-lite' ),
 				'label_block' => true,
-				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://your-link.com',
 			]
 		);
 

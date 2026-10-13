@@ -58,7 +58,7 @@ class Module extends Element_Pack_Module_Base {
 			[ 
 				'label' => esc_html__( 'Link', 'bdthemes-element-pack-lite' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => esc_html__( 'https://example.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://example.com',
 				'show_external' => true,
 				'default' => [ 'url' => '' ],
 				'dynamic' => [ 'active' => true ],

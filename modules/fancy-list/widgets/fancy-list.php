@@ -134,7 +134,7 @@ class Fancy_List extends Module_Base {
 					'active' => true,
 				],
 				'label_block' => true,
-				'placeholder' => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://your-link.com',
 			]
 		);
 

@@ -78,7 +78,7 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
         }
 
         if($result['is_pro'] == 1 && !$this->packLicenseActivated){
-            throw new \Exception( esc_html__( 'required_activated_license', 'bdthemes-element-pack-lite' ) );
+            throw new \Exception( 'required_activated_license' );
         }
 
         $args['demo_json'] = $result['json_url'];

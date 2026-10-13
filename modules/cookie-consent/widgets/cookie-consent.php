@@ -96,7 +96,7 @@ class Cookie_Consent extends Module_Base {
 				'label'         => esc_html__( 'Learn More Link', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
-				'placeholder'   => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder'   => 'https://your-link.com',
 				'default'       => [ 
 					'url' => 'http://cookiesandyou.com/',
 				],
