@@ -290,7 +290,7 @@ class Flip_Box extends Module_Base {
 				'label'       => __('Link', 'bdthemes-element-pack-lite'),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => ['active' => true],
-				'placeholder' => __('http://your-link.com', 'bdthemes-element-pack-lite'),
+				'placeholder' => 'http://your-link.com',
 			]
 		);
 

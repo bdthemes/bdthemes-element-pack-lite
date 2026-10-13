@@ -338,7 +338,7 @@ class Animated_Card extends Module_Base {
 				'dynamic'     => [ 
 					'active' => true,
 				],
-				'placeholder' => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://your-link.com',
 				'default'     => [ 
 					'url' => '#',
 				],

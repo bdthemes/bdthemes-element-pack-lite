@@ -184,7 +184,7 @@ class Fancy_Icons extends Module_Base {
                         'social_icon' => ['value' => 'fab fa-facebook-f', 'library' => 'fa-brands'],
                     ],
                     [
-                        'social_name' => esc_html__('X', 'bdthemes-element-pack-lite'),
+                        'social_name' => 'X',
                         'social_icon' => ['value' => 'fab fa-x-twitter', 'library' => 'fa-brands'],
                     ],
                     [

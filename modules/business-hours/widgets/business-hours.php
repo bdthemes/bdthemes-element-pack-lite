@@ -631,7 +631,7 @@ class Business_Hours extends Module_Base
             [
                 'label'       => esc_html__('Separator', 'bdthemes-element-pack-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'default'     => esc_html__('-', 'bdthemes-element-pack-lite'),
+                'default'     => '-',
                 'dynamic'     => ['active' => true,],
                 'condition'      => [
                     'business_hour_style' => 'dynamic',

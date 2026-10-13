@@ -1441,7 +1441,7 @@ class User_Register extends Module_Base {
 		$this->add_control(
 			'links_heading',
 			[ 
-				'label'     => esc_html__( 'L I N K S', 'bdthemes-element-pack-lite' ),
+				'label'     => esc_html__( 'LINKS', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]

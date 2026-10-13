@@ -69,7 +69,7 @@ trait Global_Controls_Functions {
 			[
 				'label'         => esc_html__( 'Website Url', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
-				'placeholder'   => esc_html__( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder'   => 'https://your-link.com',
 				'show_external' => true,
 				'default'       => [
 					'url'         => '#',
@@ -27633,7 +27633,7 @@ trait Global_Controls_Functions {
 		$this->add_control(
 			'share_button_drop_menu_name',
 			[ 
-				'label'     => esc_html__( 'L I S T', 'bdthemes-element-pack-lite' ),
+				'label'     => esc_html__( 'LIST', 'bdthemes-element-pack-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -27786,7 +27786,7 @@ trait Global_Controls_Functions {
                         </li>',
 						esc_url( $data['permalink_url'] ),
 						esc_attr( $settings['link_target'] ),
-						esc_html__( 'X', 'bdthemes-element-pack-lite' )
+						'X'
 					);
 					printf(
 						'<li>
@@ -29243,7 +29243,7 @@ trait Global_Controls_Functions {
 				'dynamic'     => [ 
 					'active' => true,
 				],
-				'placeholder' => esc_html__('https://your-link.com', 'bdthemes-element-pack-lite'),
+				'placeholder' => 'https://your-link.com',
 				'default'     => [ 
 					'url' => '#',
 				],
@@ -30954,7 +30954,7 @@ trait Global_Controls_Functions {
 				'dynamic'     => [ 
 					'active' => true,
 				],
-				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://your-link.com',
 				'condition'   => [ 
 					'link_to' => 'custom',
 				],

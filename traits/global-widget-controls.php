@@ -5087,7 +5087,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'arrows_heading',
 			[
-				'label'     => __('A R R O W S', 'bdthemes-element-pack-lite'),
+				'label'     => __('ARROWS', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation!' => ['dots', 'progressbar', 'none'],
@@ -5274,7 +5274,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'dots_heading',
 			[
-				'label'     => __('D O T S', 'bdthemes-element-pack-lite'),
+				'label'     => __('DOTS', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation!' => ['arrows', 'arrows-fraction', 'progressbar', 'none'],
@@ -5565,7 +5565,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'fraction_heading',
 			[
-				'label'     => __('F R A C T I O N', 'bdthemes-element-pack-lite'),
+				'label'     => __('FRACTION', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation' => 'arrows-fraction',
@@ -5632,7 +5632,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'progresbar_heading',
 			[
-				'label'     => __('P R O G R E S B A R', 'bdthemes-element-pack-lite'),
+				'label'     => __('PROGRESBAR', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'navigation' => 'progressbar',
@@ -5687,7 +5687,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'scrollbar_heading',
 			[
-				'label'     => __('S C R O L L B A R', 'bdthemes-element-pack-lite'),
+				'label'     => __('SCROLLBAR', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition'   => [
 					'show_scrollbar' => 'yes'
@@ -5757,7 +5757,7 @@ trait Global_Widget_Controls {
 		$this->add_control(
 			'navi_offset_heading',
 			[
-				'label'     => __('O F F S E T', 'bdthemes-element-pack-lite'),
+				'label'     => __('OFFSET', 'bdthemes-element-pack-lite'),
 				'type'      => Controls_Manager::HEADING,
 			]
 		);

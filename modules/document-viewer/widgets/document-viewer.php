@@ -56,7 +56,7 @@ class Document_Viewer extends Module_Base {
 				'description'   => esc_html__( 'Enter the URL of your document', 'bdthemes-element-pack-lite' ),
 				'type'          => Controls_Manager::URL,
 				'dynamic'       => [ 'active' => true ],
-				'placeholder'   => esc_html__( 'https://example.com/sample.pdf', 'bdthemes-element-pack-lite' ),
+				'placeholder'   => 'https://example.com/sample.pdf',
 				'label_block'   => true,
 				'show_external' => false,
 			]

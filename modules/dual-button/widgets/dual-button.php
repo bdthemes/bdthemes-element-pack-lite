@@ -228,7 +228,7 @@ class DualButton extends Module_Base {
 				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://your-link.com',
 				'default'     => [
 					'url' => '#',
 				],
@@ -378,7 +378,7 @@ class DualButton extends Module_Base {
 				'label'       => __( 'Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::URL,
 				'dynamic'     => [ 'active' => true ],
-				'placeholder' => __( 'https://your-link.com', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://your-link.com',
 				'default'     => [
 					'url' => '#',
 				],

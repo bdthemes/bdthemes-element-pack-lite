@@ -78,12 +78,12 @@ class Module extends Element_Pack_Module_Base {
 				'render_type'        => 'none',
 				'default'            => [ 
 					[ 
-						'start_color' => esc_html__( '#0591F9', 'bdthemes-element-pack-lite' ),
-						'end_color'   => esc_html__( '#fefefe', 'bdthemes-element-pack-lite' ),
+						'start_color' => '#0591F9',
+						'end_color'   => '#fefefe',
 					],
 					[ 
-						'start_color' => esc_html__( '#567445', 'bdthemes-element-pack-lite' ),
-						'end_color'   => esc_html__( '#1D1BE0', 'bdthemes-element-pack-lite' ),
+						'start_color' => '#567445',
+						'end_color'   => '#1D1BE0',
 					],
 				],
 				'title_field'        => '{{start_color}}',

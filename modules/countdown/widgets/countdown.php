@@ -650,7 +650,7 @@ class Countdown extends Module_Base {
 			[ 
 				'label'       => __( 'Redirection Link', 'bdthemes-element-pack-lite' ),
 				'type'        => Controls_Manager::TEXT,
-				'placeholder' => __( 'https://elementpack.pro/', 'bdthemes-element-pack-lite' ),
+				'placeholder' => 'https://elementpack.pro/',
 				'condition'   => [ 
 					'end_action_type' => 'url'
 				],
@@ -1059,7 +1059,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_days_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
+				'label' => __( 'Number', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -1147,7 +1147,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_days_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
+				'label'     => __( 'Label', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],
@@ -1344,7 +1344,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_hours_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
+				'label' => __( 'Number', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -1432,7 +1432,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_hours_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
+				'label'     => __( 'Label', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],
@@ -1629,7 +1629,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_minutes_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
+				'label' => __( 'Number', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -1717,7 +1717,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_minutes_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
+				'label'     => __( 'Label', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],
@@ -1914,7 +1914,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_seconds_number',
 			[ 
-				'label' => __( 'N u m b e r', 'bdthemes-element-pack-lite' ),
+				'label' => __( 'Number', 'bdthemes-element-pack-lite' ),
 			]
 		);
 
@@ -2002,7 +2002,7 @@ class Countdown extends Module_Base {
 		$this->start_controls_tab(
 			'tab_seconds_label',
 			[ 
-				'label'     => __( 'L a b e l', 'bdthemes-element-pack-lite' ),
+				'label'     => __( 'Label', 'bdthemes-element-pack-lite' ),
 				'condition' => [ 
 					'show_labels' => 'yes',
 				],

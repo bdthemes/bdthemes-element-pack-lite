@@ -2127,7 +2127,7 @@ class ModuleService {
                     'name'              => 'open_street_map_access_token',
                     'label'             => esc_html__('MapBox Access Token (for Open Street Map)', 'bdthemes-element-pack-lite'),
                     'desc'              => __('<a href="https://www.mapbox.com/account/access-tokens" target="_blank">Click Here</a> to get access token. This Access Token needs for show Open Street Map widget correctly.', 'bdthemes-element-pack-lite'),
-                    'placeholder'       => esc_attr__( '------------- -------------------------', 'bdthemes-element-pack-lite' ),
+                    'placeholder'       => '------------- -------------------------',
                     'type'              => 'text',
                     'sanitize_callback' => 'sanitize_text_field'
                 ],
