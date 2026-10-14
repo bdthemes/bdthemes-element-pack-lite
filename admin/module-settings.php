@@ -118,16 +118,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/7hnmMdd2-Yo',
 				],
 				[
-					'name'         => 'air-pollution',
-					'label'        => esc_html__('Air Pollution', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'custom',
-					'demo_url'     => 'https://elementpack.pro/demo/element/air-pollution/',
-					'video_url'    => 'https://youtu.be/m38ddVi52-Q',
-				],
-				[
 					'name'         => 'animated-card',
 					'label'        => esc_html__('Animated Card', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -247,17 +237,6 @@ class ModuleService {
 					'content_type' => 'others',
 					'demo_url'     => 'https://elementpack.pro/demo/element/calendly/',
 					'video_url'    => 'https://youtu.be/nl4zC46SrhY',
-				],
-				[
-					'name'         => 'carousel',
-					'label'        => esc_html__('Carousel', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post carousel',
-					'demo_url'     => 'https://elementpack.pro/demo/element/carousel',
-					'video_url'    => 'https://youtu.be/biF3GtBf0qc',
-
 				],
 				[
 					'name'         => 'changelog',
@@ -388,86 +367,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/6f2t-79MfnU',
 				],
 				[
-					'name'         => 'crypto-currency-card',
-					'label'        => esc_html__('Crypto Currency Card', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-card/',
-					'video_url'    => 'https://youtu.be/F13YPkFkLso',
-				],
-				[
-					'name'         => 'crypto-currency-table',
-					'label'        => esc_html__('Crypto Currency Table', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-table/',
-					'video_url'    => 'https://youtu.be/F13YPkFkLso',
-				],
-				[
-					'name'         => 'crypto-currency-grid',
-					'label'        => esc_html__('Crypto Currency Grid', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-grid/',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'crypto-currency-carousel',
-					'label'        => esc_html__('Crypto Currency Carousel', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-carousel/',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'crypto-currency-ticker',
-					'label'        => esc_html__('Crypto Currency Ticker', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-ticker/',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'crypto-currency-chart',
-					'label'        => esc_html__('Crypto Currency Chart', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-chart/',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'crypto-currency-chart-carousel',
-					'label'        => esc_html__('Crypto Currency Chart Carousel', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-chart/',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'crypto-currency-list',
-					'label'        => esc_html__('Crypto Currency list', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/crypto-currency-list/',
-					'video_url'    => '',
-				],
-				[
 					'name'         => 'coupon-code',
 					'label'        => esc_html__('Coupon Code', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -546,17 +445,6 @@ class ModuleService {
 
 				],
 				[
-					'name'         => 'fancy-card',
-					'label'        => esc_html__('Fancy Card', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'custom',
-					'demo_url'     => 'https://elementpack.pro/demo/element/fancy-card/',
-					'video_url'    => 'https://youtu.be/BXdVB1pLfXE',
-
-				],
-				[
 					'name'         => 'fancy-list',
 					'label'        => esc_html__('Fancy List', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -623,16 +511,6 @@ class ModuleService {
 
 				],
 				[
-					'name'         => 'global-badge',
-					'label'        => esc_html__( 'Global Badge', 'bdthemes-element-pack-lite' ),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'new',
-					'demo_url'     => 'https://elementpack.pro/demo/element/global-badge/',
-					'video_url'    => '',
-				],
-				[
 					'name'         => 'featured-box',
 					'label'        => esc_html__('Featured Box', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -685,17 +563,6 @@ class ModuleService {
 					'content_type' => 'custom',
 					'demo_url'     => 'https://elementpack.pro/demo/element/hover-video/',
 					'video_url'    => 'https://youtu.be/RgoWlIm5KOo',
-
-				],
-				[
-					'name'         => 'honeycombs',
-					'label'        => esc_html__('Honeycombs', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'custom',
-					'demo_url'     => 'https://elementpack.pro/demo/element/honeycombs/',
-					'video_url'    => 'https://youtu.be/iTWXzc329vQ',
 
 				],
 				[
@@ -920,16 +787,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/ZXdDAi9tCxE',
 				],
 				[
-					'name'         => 'news-ticker',
-					'label'        => esc_html__('News Ticker', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/news-ticker',
-					'video_url'    => 'https://youtu.be/FmpFhNTR7uY',
-				],
-				[
 					'name'         => 'notification',
 					'label'        => esc_html__('Notification', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -1010,46 +867,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/_piVTeJd0g4',
 				],
 				[
-					'name'         => 'post-slider',
-					'label'        => esc_html__('Post Slider', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post slider',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post-slider',
-					'video_url'    => 'https://youtu.be/oPYzWVLPF7A',
-				],
-				[
-					'name'         => 'post-card',
-					'label'        => esc_html__('Post Card', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post-card/',
-					'video_url'    => 'https://youtu.be/VKtQCjnEJvE',
-				],
-				[
-					'name'         => 'post-block',
-					'label'        => esc_html__('Post Block', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post-block/',
-					'video_url'    => 'https://youtu.be/bFEyizMaPmw',
-				],
-				[
-					'name'         => 'post-block-modern',
-					'label'        => esc_html__('Post Block Modern', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post-block/',
-					'video_url'    => 'https://youtu.be/bFEyizMaPmw',
-				],
-				[
 					'name'         => 'progress-pie',
 					'label'        => esc_html__('Progress Pie', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -1058,96 +875,6 @@ class ModuleService {
 					'content_type' => 'others',
 					'demo_url'     => 'https://elementpack.pro/demo/element/progress-pie/',
 					'video_url'    => 'https://youtu.be/c5ap86jbCeg',
-				],
-				[
-					'name'         => 'post-gallery',
-					'label'        => esc_html__('Post Gallery', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post gallery',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post-gallery',
-					'video_url'    => 'https://youtu.be/iScykjTKlNA',
-				],
-				[
-					'name'         => 'post-grid',
-					'label'        => esc_html__('Post Grid', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post%20grid/',
-					'video_url'    => 'https://youtu.be/z3gWwPIsCkg',
-				],
-				[
-					'name'         => 'post-grid-tab',
-					'label'        => esc_html__('Post Grid Tab', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post-grid-tab',
-					'video_url'    => 'https://youtu.be/kFEL4AGnIv4',
-				],
-				[
-					'name'         => 'post-list',
-					'label'        => esc_html__('Post List', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/post-list/',
-					'video_url'    => 'https://youtu.be/5aQTAsLRF0o',
-				],
-				[
-					'name'         => 'post-title',
-					'label'        => esc_html__('Post Title', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => "off",
-					'widget_type'  => 'pro',
-					'content_type' => 'template-builder new',
-					'demo_url'     => '',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'post-comments',
-					'label'        => esc_html__('Post Comments', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => "off",
-					'widget_type'  => 'pro',
-					'content_type' => 'template-builder new',
-					'demo_url'     => '',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'post-content',
-					'label'        => esc_html__('Post Content', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => "off",
-					'widget_type'  => 'pro',
-					'content_type' => 'template-builder new',
-					'demo_url'     => '',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'post-featured-image',
-					'label'        => esc_html__('Post Featured Image', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => "off",
-					'widget_type'  => 'pro',
-					'content_type' => 'template-builder new',
-					'demo_url'     => '',
-					'video_url'    => '',
-				],
-				[
-					'name'         => 'post-info',
-					'label'        => esc_html__('Post Info', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => "off",
-					'widget_type'  => 'pro',
-					'content_type' => 'template-builder new',
-					'demo_url'     => '',
-					'video_url'    => '',
 				],
 				[
 					'name'         => 'profile-card',
@@ -1291,16 +1018,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/BrrKmDfJ5ZI',
 				],
 				[
-					'name'         => 'slinky-vertical-menu',
-					'label'        => esc_html__('Slinky Vertical Menu', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'others',
-					'demo_url'     => 'https://elementpack.pro/demo/element/slinky-vertical-menu/',
-					'video_url'    => 'https://youtu.be/5RE9w-JqKwk',
-				],
-				[
 					'name'        => 'scrollnav',
 					'label'       => esc_html__('Scrollnav', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
@@ -1379,16 +1096,6 @@ class ModuleService {
 					'content_type' => 'custom',
 					'demo_url'     => 'https://elementpack.pro/demo/element/static-grid-tab',
 					'video_url'    => 'https://www.youtube.com/watch?v=HIvQX9eLWU8',
-				],
-				[
-					'name'         => 'single-post',
-					'label'        => esc_html__('Single Post', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/single-post',
-					'video_url'    => 'https://youtu.be/32g-F4_Avp4',
 				],
 				[
 					'name'         => 'social-share',
@@ -1502,26 +1209,6 @@ class ModuleService {
 					'video_url'    => 'https://youtu.be/DbPrqUD8cOY',
 				],
 				[
-					'name'         => 'tags-cloud',
-					'label'        => esc_html__('Tags Cloud', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'off',
-					'widget_type'  => 'pro',
-					'content_type' => 'custom',
-					'demo_url'     => 'https://elementpack.pro/demo/element/tags-cloud/',
-					'video_url'    => 'https://youtu.be/LW_WFs9gybU',
-				],
-				[
-					'name'         => 'timeline',
-					'label'        => esc_html__('Timeline', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post',
-					'demo_url'     => 'https://elementpack.pro/demo/element/timeline/',
-					'video_url'    => 'https://youtu.be/lp4Zqn6niXU',
-				],
-				[
 					'name'         => 'time-zone',
 					'label'        => esc_html__('Time Zone', 'bdthemes-element-pack-lite'),
 					'type'         => 'checkbox',
@@ -1550,16 +1237,6 @@ class ModuleService {
 					'content_type' => 'others',
 					'demo_url'     => 'https://elementpack.pro/demo/element/trailer-box/',
 					'video_url'    => 'https://youtu.be/3AR5RlBAAYg',
-				],
-				[
-					'name'         => 'thumb-gallery',
-					'label'        => esc_html__('Thumb Gallery', 'bdthemes-element-pack-lite'),
-					'type'         => 'checkbox',
-					'default'      => 'on',
-					'widget_type'  => 'pro',
-					'content_type' => 'post gallery',
-					'demo_url'     => 'https://elementpack.pro/demo/element/thumb-gallery/',
-					'video_url'    => 'https://youtu.be/NJ5ZR-9ODus',
 				],
 				[
 					'name'         => 'toggle',
@@ -1757,6 +1434,15 @@ class ModuleService {
 					'video_url'   => 'https://youtu.be/Pnev5lPByEc',
 				],
 				[
+					'name'        => 'custom-js',
+					'label'       => esc_html__('Custom CSS / JS', 'bdthemes-element-pack-lite'),
+					'type'        => 'checkbox',
+					'default'     => 'off',
+					'widget_type' => 'pro',
+					'demo_url'    => 'https://elementpack.pro/demo/element/custom-js/',
+					'video_url'   => 'https://youtu.be/e-_qQl6dBbE?t=312',
+				],
+				[
 					'name'        => 'equal-height',
 					'label'       => esc_html__('Widget Equal Height', 'bdthemes-element-pack-lite'),
 					'type'        => 'checkbox',
@@ -1773,6 +1459,16 @@ class ModuleService {
 					'widget_type' => 'free',
 					'demo_url'    => 'https://elementpack.pro/demo/element/floating-effects',
 					'video_url'   => 'https://youtu.be/hVFqjc9b3dE',
+				],
+				[
+					'name'         => 'global-badge',
+					'label'        => esc_html__( 'Global Badge', 'bdthemes-element-pack-lite' ),
+					'type'         => 'checkbox',
+					'default'      => 'off',
+					'widget_type'  => 'pro',
+					'content_type' => 'new',
+					'demo_url'     => 'https://elementpack.pro/demo/element/global-badge/',
+					'video_url'    => '',
 				],
 				[
 					'name'        => 'hash-link',
@@ -2360,180 +2056,6 @@ class ModuleService {
 		];
 
 		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-forum-form',
-			'label'       => esc_html__('bbPress Forum Form', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-forum-form',
-			'video_url'   => '',
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-forum-index',
-			'label'       => esc_html__('bbPress Forum Index', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-forum-index',
-			'video_url'   => '',
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-single-forum',
-			'label'       => esc_html__('bbPress Single Forum', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-single-forum',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-topic-index',
-			'label'       => esc_html__('bbPress Topic Index', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-topic-index',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-topic-form',
-			'label'       => esc_html__('bbPress Topic Form', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-topic-form',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-single-topic',
-			'label'       => esc_html__('bbPress Single Topic', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-single-topic',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-reply-form',
-			'label'       => esc_html__('bbPress Reply Form', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-reply-form',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-single-reply',
-			'label'       => esc_html__('bbPress Single Reply', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-single-reply',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-topic-tags',
-			'label'       => esc_html__('bbPress Topic Tags', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-topic-tags',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-single-tag',
-			'label'       => esc_html__('bbPress Single Tag', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-single-tag',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-single-view',
-			'label'       => esc_html__('bbPress Single View', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-single-view',
-			'video_url'   => '',
-		];
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'bbpress-stats',
-			'label'       => esc_html__('bbPress Stats', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'bbpress',
-			'plugin_path' => 'bbpress/bbpress.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/bbpress-stats',
-			'video_url'   => '',
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'buddypress-friends',
-			'label'       => esc_html__('BuddyPress Friends', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'buddypress',
-			'plugin_path' => 'buddypress/bp-loader.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/buddypress-friends/',
-			'video_url'   => 'https://youtu.be/CLV9RCdq09k',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'buddypress-group',
-			'label'       => esc_html__('BuddyPress Group', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'buddypress',
-			'plugin_path' => 'buddypress/bp-loader.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/buddypress-group/',
-			'video_url'   => 'https://youtu.be/CccODcBw_9w',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'buddypress-member',
-			'label'       => esc_html__('BuddyPress Member', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'buddypress',
-			'plugin_path' => 'buddypress/bp-loader.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/buddypress-member/',
-			'video_url'   => 'https://youtu.be/t6t0M5kGEig',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'contact-form-7',
 			'label'       => esc_html__('Contact Form 7', 'bdthemes-element-pack-lite'),
 			'type'        => 'checkbox',
@@ -2546,510 +2068,6 @@ class ModuleService {
 
 		];
 
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-campaigns',
-			'label'        => esc_html__('Charitable Campaigns', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https: //elementpack.pro/demo/element/charitable-campaigns/',
-			'video_url'    => 'https://youtu.be/ugKfZyvSbGA',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-donations',
-			'label'        => esc_html__('Charitable Donations', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https://elementpack.pro/demo/element/charitable-donations/',
-			'video_url'    => 'https://youtu.be/C38sbaKx9x0',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-donors',
-			'label'        => esc_html__('Charitable Donors', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https://elementpack.pro/demo/element/charitable-donors/',
-			'video_url'    => 'https://youtu.be/ljnbE8JVg7w',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-donation-form',
-			'label'        => esc_html__('Charitable Donation Form', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https://elementpack.pro/demo/element/charitable-donation-form/',
-			'video_url'    => 'https://youtu.be/aufVwEUZJhY',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-stat',
-			'label'        => esc_html__('Charitable Stat', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https://elementpack.pro/demo/element/charitable-stat/',
-			'video_url'    => 'https://youtu.be/54cw85jmhtg',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-login',
-			'label'        => esc_html__('Charitable Login', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https://elementpack.pro/demo/element/charitable-login/',
-			'video_url'    => 'https://youtu.be/c0A90DdfGGM',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-registration',
-			'label'        => esc_html__('Charitable Registration', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https://elementpack.pro/demo/element/charitable-registration/',
-			'video_url'    => 'https://youtu.be/N-IMBmjGJsA',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'charitable-profile',
-			'label'        => esc_html__('Charitable Profile', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'charitable',
-			'plugin_path'  => 'charitable/charitable.php',
-			'widget_type'  => 'pro',
-			'content_type' => 'others',
-			'demo_url'     => 'https://elementpack.pro/demo/element/charitable-profile/',
-			'video_url'    => 'https://youtu.be/DD7ZiMpxK-w',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'        => 'download-monitor',
-			'label'       => esc_html__('Download Monitor', 'bdthemes-element-pack-lite'),
-			'type'        => 'checkbox',
-			'default'     => 'off',
-			'plugin_name' => 'download-monitor',
-			'plugin_path' => 'download-monitor/download-monitor.php',
-			'widget_type' => 'pro',
-			'demo_url'    => 'https://elementpack.pro/demo/element/download-monitor',
-			'video_url'   => 'https://youtu.be/7LaBSh3_G5A',
-
-		];
-
-		if (ModuleService::_is_plugin_installed('easy-digital-downloads', 'easy-digital-downloads/easy-digital-downloads.php') === true && is_plugin_active('easy-digital-downloads-pro/easy-digital-downloads.php') !== true) {
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-cart',
-				'label'       => esc_html__('EDD Cart', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-cart/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-category-grid',
-				'label'       => esc_html__('EDD Category Grid', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-category-grid/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-category-carousel',
-				'label'       => esc_html__('EDD Category Carousel', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-category-carousel/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-checkout',
-				'label'       => esc_html__('EDD Checkout', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-checkout/',
-				'video_url'   => '',
-			];
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-login',
-				'label'       => esc_html__('EDD Login', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-login/',
-				'video_url'   => '',
-			];
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-mini-cart',
-				'label'       => esc_html__('EDD Mini Cart', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-mini-cart/',
-				'video_url'   => '',
-			];
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product',
-				'label'       => esc_html__('EDD Product', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product-carousel',
-				'label'       => esc_html__('EDD Product Carousel', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product-carousel/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product-reviews',
-				'label'       => esc_html__('EDD Product Reviews', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product-reviews/',
-				'video_url'   => 'https://youtu.be/drn_yEGoC_E?si=Qh5D4urdf-biAinR',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product-review-carousel',
-				'label'       => esc_html__('EDD Product Review Carousel', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product-review-carousel/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-profile-editor',
-				'label'       => esc_html__('EDD Profile Editor', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-profile-editor/',
-				'video_url'   => 'https://youtu.be/f2v7EFla94c',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-purchase-history',
-				'label'       => esc_html__('EDD Purchase History', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-purchase-history/',
-				'video_url'   => 'https://youtu.be/oUppcuQTB7M',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-register',
-				'label'       => esc_html__('EDD Register', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-register/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-tabs',
-				'label'       => esc_html__('EDD Tabs', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-tabs/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'easy-digital-downloads',
-				'label'       => esc_html__('Easy Digital Download', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/easy-digital-downloads/',
-				'video_url'   => 'https://youtu.be/f2v7EFla94c',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-download-history',
-				'label'       => esc_html__('EDD History', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-download-history/',
-				'video_url'   => 'https://youtu.be/taM7whXxmNY',
-			];
-		} else {
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-cart',
-				'label'       => esc_html__('EDD Cart', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-cart/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-category-grid',
-				'label'       => esc_html__('EDD Category Grid', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-category-grid/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-category-carousel',
-				'label'       => esc_html__('EDD Category Carousel', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-category-carousel/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-checkout',
-				'label'       => esc_html__('EDD Checkout', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-checkout/',
-				'video_url'   => '',
-			];
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-login',
-				'label'       => esc_html__('EDD Login', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-login/',
-				'video_url'   => '',
-			];
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-mini-cart',
-				'label'       => esc_html__('EDD Mini Cart', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-mini-cart/',
-				'video_url'   => '',
-			];
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product',
-				'label'       => esc_html__('EDD Product', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product-carousel',
-				'label'       => esc_html__('EDD Product Carousel', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product-carousel/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product-reviews',
-				'label'       => esc_html__('EDD Product Reviews', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product-reviews/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-product-review-carousel',
-				'label'       => esc_html__('EDD Product Review Carousel', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-product-review-carousel/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-profile-editor',
-				'label'       => esc_html__('EDD Profile Editor', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-profile-editor/',
-				'video_url'   => 'https://youtu.be/f2v7EFla94c',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-purchase-history',
-				'label'       => esc_html__('EDD Purchase History', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-purchase-history/',
-				'video_url'   => 'https://youtu.be/oUppcuQTB7M',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-register',
-				'label'       => esc_html__('EDD Register', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-register/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-tabs',
-				'label'       => esc_html__('EDD Tabs', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-tabs/',
-				'video_url'   => '',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'easy-digital-downloads',
-				'label'       => esc_html__('Easy Digital Download', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/easy-digital-downloads/',
-				'video_url'   => 'https://youtu.be/f2v7EFla94c',
-			];
-
-			$settings_fields['element_pack_third_party_widget'][] = [
-				'name'        => 'edd-download-history',
-				'label'       => esc_html__('EDD History', 'bdthemes-element-pack-lite'),
-				'type'        => 'checkbox',
-				'default'     => 'off',
-				'plugin_name' => 'easy-digital-downloads',
-				'plugin_path' => 'easy-digital-downloads-pro/easy-digital-downloads.php',
-				'widget_type' => 'pro',
-				'demo_url'    => 'https://elementpack.pro/demo/element/edd-download-history/',
-				'video_url'   => 'https://youtu.be/taM7whXxmNY',
-			];
-		}
 		$settings_fields['element_pack_third_party_widget'][] = [
 			'name'        => 'events-calendar-grid',
 			'label'       => esc_html__('Events Calendar Grid', 'bdthemes-element-pack-lite'),
@@ -3205,21 +2223,6 @@ class ModuleService {
 			'widget_type' => 'pro',
 			'demo_url'    => 'https://elementpack.pro/demo/element/instagram-feed/',
 			'video_url'   => 'https://youtu.be/Wf7naA7EL7s',
-
-		];
-
-		$settings_fields['element_pack_third_party_widget'][] = [
-			'name'         => 'layer-slider',
-			'label'        => esc_html__('Layer Slider', 'bdthemes-element-pack-lite'),
-			'type'         => 'checkbox',
-			'default'      => 'off',
-			'plugin_name'  => 'LayerSlider',
-			'plugin_path'  => 'LayerSlider/layerslider.php',
-			'paid'         => 'https://layerslider.com/pricing/',
-			'widget_type'  => 'pro',
-			'content_type' => 'slider',
-			'demo_url'     => 'https://elementpack.pro/demo/element/layer-slider/',
-			'video_url'    => 'https://youtu.be/I2xpXLyCkkE',
 
 		];
 
