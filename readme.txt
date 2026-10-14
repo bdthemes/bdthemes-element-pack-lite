@@ -321,21 +321,21 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 10.0.0 [12th October 2026] =
+= 10.0.0 [14th October 2026] =
 
-* Added: New React-based admin dashboard with Dashboard, Widgets, Extensions, Features, Integrations, Performance, System Status and Other Plugins screens
-* Added: New "You may also need" page in the dashboard with the Pro highlights (including Elementor MCP & AI Abilities), a Free vs Pro comparison and an FAQ
-* Improved: UIkit and helper CSS/JS now load only on pages that use Element Pack, cutting frontend CSS by up to 40%
-* Improved: Total Blocking Time up to 60% lower and Largest Contentful Paint up to 20% faster on pages without Element Pack widgets
-* Improved: Asset Manager now combines only the widgets a page uses into one CSS and one JS file: up to 54% less CSS, pages up to 30% lighter, LCP up to 11% faster
-* Improved: Elementor's cached asset lists are cleared after an update or module change, so "Regenerate CSS & Data" is no longer needed
-* Removed: Deprecated widgets Age Gate, Call Out, Dark Mode, Dropbar, Everest Forms, Image Accordion, Member and all Give widgets (Donation History, Donor Wall, Form, Form Grid, Goal, Login, Profile Editor, Receipt, Register, Totals) along with their CSS and JS assets
-* Fixed: Floating Effects did not animate because the bundled anime.js version no longer matched the code that uses it
-* Fixed: Setup Wizard "Activate All" and "Deactivate All" no longer touch Pro-only widgets
-* Fixed: Setup Wizard "Good to Go" step grows with its content instead of scrolling inside a fixed-height box
-* Fixed: Dashboard release notes now count Improved, Security, Changed and Deprecated entries
-* Security: UIkit: HTML parsed from a component option or fetched for an inline SVG now drops iframe, frame, form, meta, link, object and embed elements, srcdoc and is attributes, and URL attributes whose scheme hides behind control characters (java&#9;script:); only http(s), mailto, tel, relative and fragment URLs are kept, plus data:image on media elements (reported by nh4tvd)
-* Security: Content Guard: a bdt-* / data-bdt-* attribute written after a "/" with no whitespace is stripped too; markup is now walked with the WordPress HTML API, the same parser wp_kses_post() uses to normalise a tag (reported by nh4tvd)
+* Added: New React-based admin dashboard
+* Added: "You may also need" page with Pro highlights, Free vs Pro comparison and FAQ
+* Improved: UIkit and helper assets load only on pages that use Element Pack
+* Improved: Faster TBT and LCP on pages without Element Pack widgets
+* Improved: Asset Manager combines only the widgets a page uses into one CSS and JS file
+* Improved: Elementor asset cache is cleared automatically after updates or module changes
+* Removed: Deprecated widgets (Age Gate, Call Out, Dark Mode, Dropbar, Everest Forms, Image Accordion, Member and all Give widgets) with their assets
+* Fixed: Floating Effects animation not working
+* Fixed: Setup Wizard "Activate All" / "Deactivate All" affecting Pro-only widgets
+* Fixed: Setup Wizard "Good to Go" step scrollbar
+* Fixed: Dashboard release notes missing some entry types
+* Security: Hardened UIkit HTML and inline SVG sanitization (reported by nh4tvd)
+* Security: Hardened Content Guard attribute filtering (reported by nh4tvd)
 
 = 8.8.9 [11th October 2026] =
 
