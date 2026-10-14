@@ -3,3 +3,4 @@
 .github export-ignore
 tests export-ignore
 *.zip export-ignore
+/src export-ignore

@@ -22,6 +22,9 @@ jobs:
           mkdir -p bdthemes-element-pack-lite &&
           find . -maxdepth 1 -not -name 'bdthemes-element-pack-lite' -exec mv {} bdthemes-element-pack-lite \;
 
+      - name: Remove dashboard source from the release
+        run: rm -rf bdthemes-element-pack-lite/src
+
       - name: Archive release
         uses: thedoctor0/zip-release@0.7.6
         with:

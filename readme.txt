@@ -886,7 +886,7 @@ Note: we don’t provide plugin support for Adult sites.
 
 ### Where is the source code of the admin dashboard?
 
-- The Element Pack dashboard is a React app. Its readable source is in the plugin at `src/admin/app`, and the compiled files are in `build/admin`. To rebuild it, run `npm install` and then `npm run build:admin` in the plugin folder (it uses `@wordpress/scripts`; the config is in `package.json`, `webpack.config.js`, `postcss.config.js` and `tailwind.config.js`).
+- The Element Pack dashboard is a React app. The compiled files are in `build/admin`, and its readable source (`src/admin/app`) is on GitHub: https://github.com/bdthemes/bdthemes-element-pack-lite/tree/main/src/admin/app . To rebuild it, clone that repository, run `npm install` and then `npm run build:admin` (it uses `@wordpress/scripts`; the config is in `package.json`, `webpack.config.js`, `postcss.config.js` and `tailwind.config.js`).
 
 ### Can I translate Element Pack into my language?
 
