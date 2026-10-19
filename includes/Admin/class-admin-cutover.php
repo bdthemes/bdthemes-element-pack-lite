@@ -41,6 +41,11 @@ class Admin_Cutover {
 		'element_pack_get_pro_page'              => '/go-pro',
 	];
 
+	/**
+	 * BdThemes deals page, linked from the "Up To 86% Off" sidebar entry.
+	 */
+	const DEALS_URL = 'https://bdthemes.com/deals/?utm_source=element_pack_lite&utm_medium=admin_menu&utm_campaign=deals';
+
 	public function __construct() {
 		if ( ! React_App::is_enabled() ) {
 			return;
@@ -49,6 +54,7 @@ class Admin_Cutover {
 		add_action( 'admin_menu', [ $this, 'prune_legacy_submenus' ], 999 );
 		add_action( 'admin_head', [ $this, 'fix_toplevel_menu_link' ], 1 );
 		add_action( 'admin_head', [ $this, 'print_go_pro_menu_css' ] );
+		add_action( 'admin_footer', [ $this, 'print_deals_menu_script' ] );
 	}
 
 	public static function is_default(): bool {
@@ -210,6 +216,15 @@ class Admin_Cutover {
 			];
 		}
 
+		// External deals link, offered alongside the upgrade page.
+		if ( $is_visible( 'go_pro' ) ) {
+			$items[] = [
+				__( 'Up To 86% Off', 'bdthemes-element-pack-lite' ),
+				'manage_options',
+				self::DEALS_URL,
+			];
+		}
+
 		return $items;
 	}
 
@@ -269,7 +284,37 @@ class Admin_Cutover {
 				background: transparent;
 				box-shadow: none;
 			}
+			#adminmenu .wp-submenu li a[href^="https://bdthemes.com/deals/"] {
+				color: #ffb547;
+				font-weight: 700;
+			}
+			#adminmenu .wp-submenu li a[href^="https://bdthemes.com/deals/"]:hover,
+			#adminmenu .wp-submenu li a[href^="https://bdthemes.com/deals/"]:focus {
+				color: #ffd08a;
+				box-shadow: none;
+			}
 		</style>
+		<?php
+	}
+
+	/**
+	 * Open the external deals link in a new tab; WordPress menu entries have no
+	 * target attribute of their own.
+	 */
+	public function print_deals_menu_script(): void {
+		$visibility = Menu_Visibility_Service::get_nav_visibility();
+
+		if ( empty( $visibility['go_pro'] ) ) {
+			return;
+		}
+
+		?>
+		<script id="ep-deals-menu">
+			document.querySelectorAll( '#adminmenu a[href^="https://bdthemes.com/deals/"]' ).forEach( function ( link ) {
+				link.target = '_blank';
+				link.rel = 'noopener noreferrer';
+			} );
+		</script>
 		<?php
 	}
 
