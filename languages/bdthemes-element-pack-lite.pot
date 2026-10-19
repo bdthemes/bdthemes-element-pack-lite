@@ -2,9 +2,9 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Element Pack Lite 10.0.0\n"
+"Project-Id-Version: Element Pack Lite 10.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bdthemes-element-pack-lite\n"
-"POT-Creation-Date: 2026-10-13 00:00+0000\n"
+"POT-Creation-Date: 2026-10-19 00:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,9 +30,9 @@ msgid "ago"
 msgstr ""
 
 #: admin/admin-settings.php:59 admin/admin-settings.php:70
-#: admin/admin-settings.php:71 includes/Admin/class-admin-cutover.php:146
-#: includes/Admin/class-admin-cutover.php:148
-#: includes/Admin/class-admin-cutover.php:149
+#: admin/admin-settings.php:71 includes/Admin/class-admin-cutover.php:152
+#: includes/Admin/class-admin-cutover.php:154
+#: includes/Admin/class-admin-cutover.php:155
 msgid "Dashboard"
 msgstr ""
 
@@ -140,22 +140,18 @@ msgstr ""
 msgid "Advanced Progress Bar"
 msgstr ""
 
-#: admin/module-settings.php:122
-msgid "Air Pollution"
-msgstr ""
-
-#: admin/module-settings.php:132 modules/animated-card/module.info.php:5
+#: admin/module-settings.php:122 modules/animated-card/module.info.php:5
 #: modules/animated-card/widgets/animated-card.php:28
 #: modules/animated-card/widgets/animated-card.php:67
 msgid "Animated Card"
 msgstr ""
 
-#: admin/module-settings.php:142
+#: admin/module-settings.php:132
 #: includes/class-elements-wpml-compatibility.php:728
 msgid "Animated Heading"
 msgstr ""
 
-#: admin/module-settings.php:152 modules/animated-link/module.info.php:5
+#: admin/module-settings.php:142 modules/animated-link/module.info.php:5
 #: modules/animated-link/widgets/animated-link.php:22
 #: modules/animated-link/widgets/animated-link.php:57
 #: modules/animated-link/widgets/animated-link.php:93
@@ -163,902 +159,784 @@ msgstr ""
 msgid "Animated Link"
 msgstr ""
 
-#: admin/module-settings.php:162
+#: admin/module-settings.php:152
 msgid "Audio Player"
 msgstr ""
 
-#: admin/module-settings.php:172
+#: admin/module-settings.php:162
 msgid "Barcode"
 msgstr ""
 
-#: admin/module-settings.php:182 modules/brand-grid/module.info.php:5
+#: admin/module-settings.php:172 modules/brand-grid/module.info.php:5
 #: modules/brand-grid/widgets/brand-grid.php:24
 msgid "Brand Grid"
 msgstr ""
 
-#: admin/module-settings.php:192
+#: admin/module-settings.php:182
 msgid "Brand Carousel"
 msgstr ""
 
-#: admin/module-settings.php:202
+#: admin/module-settings.php:192
 msgid "Breadcrumbs"
 msgstr ""
 
-#: admin/module-settings.php:212 modules/business-hours/module.info.php:5
+#: admin/module-settings.php:202 modules/business-hours/module.info.php:5
 #: modules/business-hours/widgets/business-hours.php:26
 msgid "Business Hours"
 msgstr ""
 
-#: admin/module-settings.php:222 modules/dual-button/module.info.php:5
+#: admin/module-settings.php:212 modules/dual-button/module.info.php:5
 #: modules/dual-button/widgets/dual-button.php:23
 msgid "Dual Button"
 msgstr ""
 
-#: admin/module-settings.php:232
+#: admin/module-settings.php:222
 msgid "Chart"
 msgstr ""
 
-#: admin/module-settings.php:243 modules/calendly/module.info.php:5
+#: admin/module-settings.php:233 modules/calendly/module.info.php:5
 #: modules/calendly/widgets/calendly.php:19
 #: modules/calendly/widgets/calendly.php:54
 #: modules/calendly/widgets/calendly.php:127
 msgid "Calendly"
 msgstr ""
 
-#: admin/module-settings.php:253 includes/setup-wizard/views/features.php:42
-#: traits/global-swiper-controls.php:242
-msgid "Carousel"
-msgstr ""
-
-#: admin/module-settings.php:264
+#: admin/module-settings.php:243
 msgid "Changelog"
 msgstr ""
 
-#: admin/module-settings.php:275
+#: admin/module-settings.php:254
 msgid "Circle Menu"
 msgstr ""
 
-#: admin/module-settings.php:286
+#: admin/module-settings.php:265
 msgid "Comparison List"
 msgstr ""
 
-#: admin/module-settings.php:296
+#: admin/module-settings.php:275
 msgid "Circle Info"
 msgstr ""
 
-#: admin/module-settings.php:307 modules/content-switcher/module.info.php:5
+#: admin/module-settings.php:286 modules/content-switcher/module.info.php:5
 #: modules/content-switcher/widgets/content-switcher.php:28
 msgid "Content Switcher"
 msgstr ""
 
-#: admin/module-settings.php:317 modules/cookie-consent/module.info.php:5
+#: admin/module-settings.php:296 modules/cookie-consent/module.info.php:5
 #: modules/cookie-consent/widgets/cookie-consent.php:24
 msgid "Cookie Consent"
 msgstr ""
 
-#: admin/module-settings.php:328 modules/countdown/module.info.php:5
+#: admin/module-settings.php:307 modules/countdown/module.info.php:5
 #: modules/countdown/widgets/countdown.php:26
 msgid "Countdown"
 msgstr ""
 
-#: admin/module-settings.php:339 modules/contact-form/module.info.php:5
+#: admin/module-settings.php:318 modules/contact-form/module.info.php:5
 #: modules/contact-form/widgets/contact-form.php:24
 msgid "Simple Contact Form"
 msgstr ""
 
-#: admin/module-settings.php:350
+#: admin/module-settings.php:329
 msgid "Comment"
 msgstr ""
 
-#: admin/module-settings.php:360 modules/custom-gallery/module.info.php:5
+#: admin/module-settings.php:339 modules/custom-gallery/module.info.php:5
 #: modules/custom-gallery/widgets/custom-gallery.php:29
 #: modules/custom-gallery/widgets/custom-gallery.php:80
 msgid "Custom Gallery"
 msgstr ""
 
-#: admin/module-settings.php:371
+#: admin/module-settings.php:350
 msgid "Custom Carousel"
 msgstr ""
 
-#: admin/module-settings.php:382 modules/creative-button/module.info.php:5
+#: admin/module-settings.php:361 modules/creative-button/module.info.php:5
 #: modules/creative-button/widgets/creative-button.php:22
 #: modules/creative-button/widgets/creative-button.php:77
 #: modules/creative-button/widgets/creative-button.php:190
 msgid "Creative Button"
 msgstr ""
 
-#: admin/module-settings.php:392
-msgid "Crypto Currency Card"
-msgstr ""
-
-#: admin/module-settings.php:402
-msgid "Crypto Currency Table"
-msgstr ""
-
-#: admin/module-settings.php:412
-msgid "Crypto Currency Grid"
-msgstr ""
-
-#: admin/module-settings.php:422
-msgid "Crypto Currency Carousel"
-msgstr ""
-
-#: admin/module-settings.php:432
-msgid "Crypto Currency Ticker"
-msgstr ""
-
-#: admin/module-settings.php:442
-msgid "Crypto Currency Chart"
-msgstr ""
-
-#: admin/module-settings.php:452
-msgid "Crypto Currency Chart Carousel"
-msgstr ""
-
-#: admin/module-settings.php:462
-msgid "Crypto Currency list"
-msgstr ""
-
-#: admin/module-settings.php:472 modules/countdown/widgets/countdown.php:602
+#: admin/module-settings.php:371 modules/countdown/widgets/countdown.php:602
 msgid "Coupon Code"
 msgstr ""
 
-#: admin/module-settings.php:483 modules/document-viewer/module.info.php:5
+#: admin/module-settings.php:382 modules/document-viewer/module.info.php:5
 #: modules/document-viewer/widgets/document-viewer.php:21
 msgid "Document Viewer"
 msgstr ""
 
-#: admin/module-settings.php:495
+#: admin/module-settings.php:394
 msgid "Device Slider"
 msgstr ""
 
-#: admin/module-settings.php:506
+#: admin/module-settings.php:405
 msgid "Dynamic Grid"
 msgstr ""
 
-#: admin/module-settings.php:517
+#: admin/module-settings.php:416
 msgid "Dynamic Carousel"
 msgstr ""
 
-#: admin/module-settings.php:528 modules/facebook-feed/module.info.php:5
+#: admin/module-settings.php:427 modules/facebook-feed/module.info.php:5
 #: modules/facebook-feed/widgets/facebook-feed.php:20
 #: traits/global-controls-functions.php:25904
 msgid "Facebook Feed"
 msgstr ""
 
-#: admin/module-settings.php:539
+#: admin/module-settings.php:438
 msgid "Facebook Feed Carousel"
 msgstr ""
 
-#: admin/module-settings.php:550
-msgid "Fancy Card"
-msgstr ""
-
-#: admin/module-settings.php:561 modules/fancy-list/module.info.php:5
+#: admin/module-settings.php:449 modules/fancy-list/module.info.php:5
 #: modules/fancy-list/widgets/fancy-list.php:24
 #: modules/fancy-list/widgets/fancy-list.php:59
 msgid "Fancy List"
 msgstr ""
 
-#: admin/module-settings.php:572 modules/fancy-icons/module.info.php:5
+#: admin/module-settings.php:460 modules/fancy-icons/module.info.php:5
 #: modules/fancy-icons/widgets/fancy-icons.php:25
 #: modules/fancy-icons/widgets/fancy-icons.php:64
 #: modules/fancy-icons/widgets/fancy-icons.php:325
 msgid "Fancy Icons"
 msgstr ""
 
-#: admin/module-settings.php:583
+#: admin/module-settings.php:471
 msgid "Fancy Slider"
 msgstr ""
 
-#: admin/module-settings.php:594
+#: admin/module-settings.php:482
 msgid "Fancy Tabs"
 msgstr ""
 
-#: admin/module-settings.php:605 modules/flip-box/module.info.php:5
+#: admin/module-settings.php:493 modules/flip-box/module.info.php:5
 #: modules/flip-box/widgets/flip-box.php:27
 msgid "Flip Box"
 msgstr ""
 
-#: admin/module-settings.php:616
+#: admin/module-settings.php:504
 msgid "Floating Knowledgebase"
 msgstr ""
 
-#: admin/module-settings.php:627
-msgid "Global Badge"
-msgstr ""
-
-#: admin/module-settings.php:637 modules/featured-box/module.info.php:5
+#: admin/module-settings.php:515 modules/featured-box/module.info.php:5
 #: modules/featured-box/widgets/featured-box.php:34
 msgid "Featured Box"
 msgstr ""
 
-#: admin/module-settings.php:648
+#: admin/module-settings.php:526
 msgid "Google Reviews"
 msgstr ""
 
-#: admin/module-settings.php:659
+#: admin/module-settings.php:537
 msgid "Help Desk"
 msgstr ""
 
-#: admin/module-settings.php:670
+#: admin/module-settings.php:548
 msgid "Hover Box"
 msgstr ""
 
-#: admin/module-settings.php:681
+#: admin/module-settings.php:559
 msgid "Hover Video"
 msgstr ""
 
-#: admin/module-settings.php:692
-msgid "Honeycombs"
-msgstr ""
-
-#: admin/module-settings.php:703
+#: admin/module-settings.php:570
 msgid "Horizontal Scroller"
 msgstr ""
 
-#: admin/module-settings.php:714 modules/icon-mobile-menu/module.info.php:5
+#: admin/module-settings.php:581 modules/icon-mobile-menu/module.info.php:5
 #: modules/icon-mobile-menu/widgets/icon-mobile-menu.php:29
 msgid "Icon Mobile Menu"
 msgstr ""
 
-#: admin/module-settings.php:724
+#: admin/module-settings.php:591
 msgid "Icon Nav"
 msgstr ""
 
-#: admin/module-settings.php:734
+#: admin/module-settings.php:601
 msgid "Iframe"
 msgstr ""
 
-#: admin/module-settings.php:744
+#: admin/module-settings.php:611
 #: modules/fancy-icons/widgets/fancy-icons.php:195
 msgid "Instagram"
 msgstr ""
 
-#: admin/module-settings.php:754 modules/image-compare/module.info.php:5
+#: admin/module-settings.php:621 modules/image-compare/module.info.php:5
 #: modules/image-compare/widgets/image-compare.php:20
 msgid "Image Compare"
 msgstr ""
 
-#: admin/module-settings.php:764
+#: admin/module-settings.php:631
 msgid "Image Expand"
 msgstr ""
 
-#: admin/module-settings.php:774 modules/image-stack/module.info.php:5
+#: admin/module-settings.php:641 modules/image-stack/module.info.php:5
 #: modules/image-stack/widgets/image-stack.php:26
 #: modules/image-stack/widgets/image-stack.php:64
 msgid "Image Stack"
 msgstr ""
 
-#: admin/module-settings.php:784 modules/image-magnifier/module.info.php:5
+#: admin/module-settings.php:651 modules/image-magnifier/module.info.php:5
 #: modules/image-magnifier/widgets/image-magnifier.php:19
 msgid "Image Magnifier"
 msgstr ""
 
-#: admin/module-settings.php:794 modules/interactive-card/module.info.php:5
+#: admin/module-settings.php:661 modules/interactive-card/module.info.php:5
 #: modules/interactive-card/widgets/interactive-card.php:32
 msgid "Interactive Card"
 msgstr ""
 
-#: admin/module-settings.php:804
+#: admin/module-settings.php:671
 msgid "Interactive Tabs"
 msgstr ""
 
-#: admin/module-settings.php:814
+#: admin/module-settings.php:681
 #: modules/custom-gallery/widgets/custom-gallery.php:425
 #: modules/lightbox/module.info.php:5 modules/lightbox/widgets/lightbox.php:23
 #: modules/lightbox/widgets/lightbox.php:737
 msgid "Lightbox"
 msgstr ""
 
-#: admin/module-settings.php:824 traits/global-controls-functions.php:30874
+#: admin/module-settings.php:691 traits/global-controls-functions.php:30874
 msgid "Lottie Image"
 msgstr ""
 
-#: admin/module-settings.php:834
+#: admin/module-settings.php:701
 msgid "Lottie Icon Box"
 msgstr ""
 
-#: admin/module-settings.php:844 modules/logo-grid/module.info.php:5
+#: admin/module-settings.php:711 modules/logo-grid/module.info.php:5
 #: modules/logo-grid/widgets/logo-grid.php:33
 #: modules/logo-grid/widgets/logo-grid.php:238
 msgid "Logo Grid"
 msgstr ""
 
-#: admin/module-settings.php:854
+#: admin/module-settings.php:721
 msgid "Logo Carousel"
 msgstr ""
 
-#: admin/module-settings.php:864 admin/module-settings.php:2176
+#: admin/module-settings.php:731 admin/module-settings.php:1872
 msgid "Mega Menu"
 msgstr ""
 
-#: admin/module-settings.php:874
+#: admin/module-settings.php:741
 msgid "Marquee"
 msgstr ""
 
-#: admin/module-settings.php:884 modules/search/widgets/search.php:81
+#: admin/module-settings.php:751 modules/search/widgets/search.php:81
 #: modules/user-register/skins/skin-modal.php:24
 msgid "Modal"
 msgstr ""
 
-#: admin/module-settings.php:894
+#: admin/module-settings.php:761
 msgid "Mailchimp"
 msgstr ""
 
-#: admin/module-settings.php:904
+#: admin/module-settings.php:771
 #: modules/open-street-map/widgets/open-street-map.php:224
 msgid "Marker"
 msgstr ""
 
-#: admin/module-settings.php:914 modules/navbar/module.info.php:5
+#: admin/module-settings.php:781 modules/navbar/module.info.php:5
 #: modules/navbar/widgets/navbar.php:30 modules/navbar/widgets/navbar.php:67
 #: modules/navbar/widgets/navbar.php:329
 msgid "Navbar"
 msgstr ""
 
-#: admin/module-settings.php:924
-msgid "News Ticker"
-msgstr ""
-
-#: admin/module-settings.php:934
+#: admin/module-settings.php:791
 msgid "Notification"
 msgstr ""
 
-#: admin/module-settings.php:944
+#: admin/module-settings.php:801
 msgid "Offcanvas"
 msgstr ""
 
-#: admin/module-settings.php:954 modules/open-street-map/module.info.php:5
+#: admin/module-settings.php:811 modules/open-street-map/module.info.php:5
 #: modules/open-street-map/widgets/open-street-map.php:66
 msgid "Open Street Map"
 msgstr ""
 
-#: admin/module-settings.php:964 modules/price-list/module.info.php:5
+#: admin/module-settings.php:821 modules/price-list/module.info.php:5
 #: modules/price-list/widgets/price-list.php:26
 msgid "Price List"
 msgstr ""
 
-#: admin/module-settings.php:974
+#: admin/module-settings.php:831
 msgid "Price Table"
 msgstr ""
 
-#: admin/module-settings.php:984 modules/product-grid/module.info.php:5
+#: admin/module-settings.php:841 modules/product-grid/module.info.php:5
 #: modules/product-grid/widgets/product-grid.php:25
 msgid "Product Grid"
 msgstr ""
 
-#: admin/module-settings.php:994 modules/product-carousel/module.info.php:5
+#: admin/module-settings.php:851 modules/product-carousel/module.info.php:5
 #: modules/product-carousel/widgets/product-carousel.php:26
 msgid "Product Carousel"
 msgstr ""
 
-#: admin/module-settings.php:1004 modules/panel-slider/module.info.php:5
+#: admin/module-settings.php:861 modules/panel-slider/module.info.php:5
 #: modules/panel-slider/widgets/panel-slider.php:35
 msgid "Panel Slider"
 msgstr ""
 
-#: admin/module-settings.php:1014
-msgid "Post Slider"
-msgstr ""
-
-#: admin/module-settings.php:1024
-msgid "Post Card"
-msgstr ""
-
-#: admin/module-settings.php:1034
-msgid "Post Block"
-msgstr ""
-
-#: admin/module-settings.php:1044
-msgid "Post Block Modern"
-msgstr ""
-
-#: admin/module-settings.php:1054 modules/progress-pie/module.info.php:5
+#: admin/module-settings.php:871 modules/progress-pie/module.info.php:5
 #: modules/progress-pie/widgets/progress-pie.php:20
 #: modules/progress-pie/widgets/progress-pie.php:177
 msgid "Progress Pie"
 msgstr ""
 
-#: admin/module-settings.php:1064
-msgid "Post Gallery"
-msgstr ""
-
-#: admin/module-settings.php:1074
-msgid "Post Grid"
-msgstr ""
-
-#: admin/module-settings.php:1084
-msgid "Post Grid Tab"
-msgstr ""
-
-#: admin/module-settings.php:1094
-msgid "Post List"
-msgstr ""
-
-#: admin/module-settings.php:1104
-msgid "Post Title"
-msgstr ""
-
-#: admin/module-settings.php:1114
-msgid "Post Comments"
-msgstr ""
-
-#: admin/module-settings.php:1124
-msgid "Post Content"
-msgstr ""
-
-#: admin/module-settings.php:1134
-msgid "Post Featured Image"
-msgstr ""
-
-#: admin/module-settings.php:1144
-msgid "Post Info"
-msgstr ""
-
-#: admin/module-settings.php:1154
+#: admin/module-settings.php:881
 msgid "Profile Card"
 msgstr ""
 
-#: admin/module-settings.php:1164
+#: admin/module-settings.php:891
 msgid "Protected Content"
 msgstr ""
 
-#: admin/module-settings.php:1175
+#: admin/module-settings.php:902
 msgid "QR Code"
 msgstr ""
 
-#: admin/module-settings.php:1185 modules/reading-progress/module.info.php:5
+#: admin/module-settings.php:912 modules/reading-progress/module.info.php:5
 #: modules/reading-progress/widgets/reading-progress.php:30
 #: modules/reading-progress/widgets/reading-progress.php:80
 msgid "Reading Progress"
 msgstr ""
 
-#: admin/module-settings.php:1195 modules/reading-timer/module.info.php:5
+#: admin/module-settings.php:922 modules/reading-timer/module.info.php:5
 #: modules/reading-timer/widgets/reading-timer.php:21
 #: modules/reading-timer/widgets/reading-timer.php:61
 msgid "Reading Timer"
 msgstr ""
 
-#: admin/module-settings.php:1205
+#: admin/module-settings.php:932
 msgid "Remote Arrows"
 msgstr ""
 
-#: admin/module-settings.php:1215
+#: admin/module-settings.php:942
 msgid "Remote Fraction"
 msgstr ""
 
-#: admin/module-settings.php:1225
+#: admin/module-settings.php:952
 msgid "Remote Pagination"
 msgstr ""
 
-#: admin/module-settings.php:1235
+#: admin/module-settings.php:962
 msgid "Remote Thumbs"
 msgstr ""
 
-#: admin/module-settings.php:1245 modules/review-card/module.info.php:5
+#: admin/module-settings.php:972 modules/review-card/module.info.php:5
 #: modules/review-card/widgets/review-card.php:25
 #: traits/global-controls-functions.php:1351
 msgid "Review Card"
 msgstr ""
 
-#: admin/module-settings.php:1255
+#: admin/module-settings.php:982
 msgid "Review Card Grid"
 msgstr ""
 
-#: admin/module-settings.php:1265
-#: modules/review-card-carousel/module.info.php:5
+#: admin/module-settings.php:992 modules/review-card-carousel/module.info.php:5
 #: modules/review-card-carousel/widgets/review-card-carousel.php:28
 msgid "Review Card Carousel"
 msgstr ""
 
-#: admin/module-settings.php:1275 includes/setup-wizard/views/features.php:41
+#: admin/module-settings.php:1002 includes/setup-wizard/views/features.php:41
 #: modules/panel-slider/widgets/panel-slider.php:511
 #: modules/slider/module.info.php:5 modules/slider/widgets/slider.php:27
 #: traits/global-widget-controls.php:4687
 msgid "Slider"
 msgstr ""
 
-#: admin/module-settings.php:1285
+#: admin/module-settings.php:1012
 msgid "Slideshow"
 msgstr ""
 
-#: admin/module-settings.php:1295
-msgid "Slinky Vertical Menu"
-msgstr ""
-
-#: admin/module-settings.php:1305 modules/scrollnav/module.info.php:5
+#: admin/module-settings.php:1022 modules/scrollnav/module.info.php:5
 #: modules/scrollnav/widgets/scrollnav.php:86
 msgid "Scrollnav"
 msgstr ""
 
-#: admin/module-settings.php:1315 modules/search/module.info.php:5
+#: admin/module-settings.php:1032 modules/search/module.info.php:5
 #: modules/search/widgets/search.php:23 modules/search/widgets/search.php:107
 #: modules/search/widgets/search.php:1756
 msgid "Search"
 msgstr ""
 
-#: admin/module-settings.php:1325 modules/scroll-button/module.info.php:5
+#: admin/module-settings.php:1042 modules/scroll-button/module.info.php:5
 #: modules/scroll-button/widgets/scroll-button.php:26
 msgid "Scroll Button"
 msgstr ""
 
-#: admin/module-settings.php:1335
+#: admin/module-settings.php:1052
 msgid "Scroll Image"
 msgstr ""
 
-#: admin/module-settings.php:1345
+#: admin/module-settings.php:1062
 msgid "Source Code"
 msgstr ""
 
-#: admin/module-settings.php:1355
+#: admin/module-settings.php:1072
 msgid "Stacker"
 msgstr ""
 
-#: admin/module-settings.php:1365 modules/static-carousel/module.info.php:5
+#: admin/module-settings.php:1082 modules/static-carousel/module.info.php:5
 #: modules/static-carousel/widgets/static-carousel.php:37
 msgid "Static Carousel"
 msgstr ""
 
-#: admin/module-settings.php:1375 modules/static-grid-tab/module.info.php:5
+#: admin/module-settings.php:1092 modules/static-grid-tab/module.info.php:5
 #: modules/static-grid-tab/widgets/static-grid-tab.php:35
 msgid "Static Grid Tab"
 msgstr ""
 
-#: admin/module-settings.php:1385
-msgid "Single Post"
-msgstr ""
-
-#: admin/module-settings.php:1395 modules/social-share/module.info.php:5
+#: admin/module-settings.php:1102 modules/social-share/module.info.php:5
 #: modules/social-share/widgets/social-share.php:50
 msgid "Social Share"
 msgstr ""
 
-#: admin/module-settings.php:1405
+#: admin/module-settings.php:1112
 msgid "Social Proof"
 msgstr ""
 
-#: admin/module-settings.php:1415 modules/step-flow/module.info.php:5
+#: admin/module-settings.php:1122 modules/step-flow/module.info.php:5
 #: modules/step-flow/widgets/step-flow.php:28
 #: modules/step-flow/widgets/step-flow.php:66
 msgid "Step Flow"
 msgstr ""
 
-#: admin/module-settings.php:1425
+#: admin/module-settings.php:1132
 msgid "Sub Menu"
 msgstr ""
 
-#: admin/module-settings.php:1435
+#: admin/module-settings.php:1142
 #: modules/content-switcher/widgets/content-switcher.php:89
 #: modules/content-switcher/widgets/content-switcher.php:1069
 msgid "Switcher"
 msgstr ""
 
-#: admin/module-settings.php:1445
+#: admin/module-settings.php:1152
 msgid "SVG Blob"
 msgstr ""
 
-#: admin/module-settings.php:1455 modules/svg-image/module.info.php:5
+#: admin/module-settings.php:1162 modules/svg-image/module.info.php:5
 #: modules/svg-image/widgets/svg-image.php:28
 msgid "SVG Image"
 msgstr ""
 
-#: admin/module-settings.php:1466
+#: admin/module-settings.php:1173
 msgid "SVG Maps"
 msgstr ""
 
-#: admin/module-settings.php:1476
+#: admin/module-settings.php:1183
 msgid "Tabs"
 msgstr ""
 
-#: admin/module-settings.php:1486
+#: admin/module-settings.php:1193
 msgid "Table"
 msgstr ""
 
-#: admin/module-settings.php:1496
+#: admin/module-settings.php:1203
 msgid "Table Of Content"
 msgstr ""
 
-#: admin/module-settings.php:1506
-msgid "Tags Cloud"
-msgstr ""
-
-#: admin/module-settings.php:1516
-msgid "Timeline"
-msgstr ""
-
-#: admin/module-settings.php:1526
+#: admin/module-settings.php:1213
 msgid "Time Zone"
 msgstr ""
 
-#: admin/module-settings.php:1536
+#: admin/module-settings.php:1223
 msgid "Total Count"
 msgstr ""
 
-#: admin/module-settings.php:1546 modules/trailer-box/module.info.php:5
+#: admin/module-settings.php:1233 modules/trailer-box/module.info.php:5
 #: modules/trailer-box/widgets/trailer-box.php:24
 #: modules/trailer-box/widgets/trailer-box.php:338
 msgid "Trailer Box"
 msgstr ""
 
-#: admin/module-settings.php:1556
-msgid "Thumb Gallery"
-msgstr ""
-
-#: admin/module-settings.php:1566 modules/toggle/module.info.php:5
+#: admin/module-settings.php:1243 modules/toggle/module.info.php:5
 #: modules/toggle/widgets/toggle.php:25
 msgid "Read More Toggle"
 msgstr ""
 
-#: admin/module-settings.php:1576
+#: admin/module-settings.php:1253
 msgid "Twitter Carousel"
 msgstr ""
 
-#: admin/module-settings.php:1586 modules/twitter-grid/module.info.php:5
+#: admin/module-settings.php:1263 modules/twitter-grid/module.info.php:5
 #: modules/twitter-grid/widgets/twitter-grid.php:22
 msgid "Twitter Grid"
 msgstr ""
 
-#: admin/module-settings.php:1596
+#: admin/module-settings.php:1273
 msgid "Twitter Slider"
 msgstr ""
 
-#: admin/module-settings.php:1606
+#: admin/module-settings.php:1283
 msgid "360 Product Viewer"
 msgstr ""
 
-#: admin/module-settings.php:1616
+#: admin/module-settings.php:1293
 msgid "User Login"
 msgstr ""
 
-#: admin/module-settings.php:1626 modules/user-register/module.info.php:5
+#: admin/module-settings.php:1303 modules/user-register/module.info.php:5
 #: modules/user-register/widgets/user-register.php:26
 msgid "User Register"
 msgstr ""
 
-#: admin/module-settings.php:1636
+#: admin/module-settings.php:1313
 msgid "Vertical Menu"
 msgstr ""
 
-#: admin/module-settings.php:1646
+#: admin/module-settings.php:1323
 msgid "Video Gallery"
 msgstr ""
 
-#: admin/module-settings.php:1656
+#: admin/module-settings.php:1333
 msgid "Video Player"
 msgstr ""
 
-#: admin/module-settings.php:1666
+#: admin/module-settings.php:1343
 msgid "Weather"
 msgstr ""
 
-#: admin/module-settings.php:1676
+#: admin/module-settings.php:1353
 msgid "Webhook Form"
 msgstr ""
 
-#: admin/module-settings.php:1689
+#: admin/module-settings.php:1366
 msgid "AdBlock Detector"
 msgstr ""
 
-#: admin/module-settings.php:1698
+#: admin/module-settings.php:1375
 msgid "Animated Gradient BG"
 msgstr ""
 
-#: admin/module-settings.php:1707 modules/backdrop-filter/module.info.php:5
+#: admin/module-settings.php:1384 modules/backdrop-filter/module.info.php:5
 #: modules/backdrop-filter/module.php:45
 msgid "Backdrop Filter"
 msgstr ""
 
-#: admin/module-settings.php:1716
+#: admin/module-settings.php:1393
 msgid "Background Expand"
 msgstr ""
 
-#: admin/module-settings.php:1725 modules/background-overlay/module.info.php:5
+#: admin/module-settings.php:1402 modules/background-overlay/module.info.php:5
 #: modules/flip-box/widgets/flip-box.php:224
 #: modules/flip-box/widgets/flip-box.php:358
 #: modules/trailer-box/widgets/trailer-box.php:1930
 msgid "Background Overlay"
 msgstr ""
 
-#: admin/module-settings.php:1734
+#: admin/module-settings.php:1411
 msgid "BG Parallax Effects"
 msgstr ""
 
-#: admin/module-settings.php:1743
+#: admin/module-settings.php:1420
 msgid "Confetti Effects"
 msgstr ""
 
-#: admin/module-settings.php:1752 modules/cursor-effects/module.info.php:5
+#: admin/module-settings.php:1429 modules/cursor-effects/module.info.php:5
 #: modules/cursor-effects/module.php:34
 msgid "Cursor Effects"
 msgstr ""
 
-#: admin/module-settings.php:1761
+#: admin/module-settings.php:1438
+msgid "Custom CSS / JS"
+msgstr ""
+
+#: admin/module-settings.php:1447
 msgid "Widget Equal Height"
 msgstr ""
 
-#: admin/module-settings.php:1770 modules/floating-effects/module.info.php:5
+#: admin/module-settings.php:1456 modules/floating-effects/module.info.php:5
 #: modules/floating-effects/module.php:34
 msgid "Floating Effects"
 msgstr ""
 
-#: admin/module-settings.php:1779
+#: admin/module-settings.php:1465
+msgid "Global Badge"
+msgstr ""
+
+#: admin/module-settings.php:1475
 msgid "Hash Link"
 msgstr ""
 
-#: admin/module-settings.php:1788 modules/grid-line/module.info.php:5
+#: admin/module-settings.php:1484 modules/grid-line/module.info.php:5
 #: modules/grid-line/module.php:27
 msgid "Grid Line"
 msgstr ""
 
-#: admin/module-settings.php:1797
+#: admin/module-settings.php:1493
 msgid "Content Protector"
 msgstr ""
 
-#: admin/module-settings.php:1806 modules/image-hover-effects/module.info.php:5
+#: admin/module-settings.php:1502 modules/image-hover-effects/module.info.php:5
 #: modules/image-hover-effects/module.php:28
 msgid "Image Hover Effects"
 msgstr ""
 
-#: admin/module-settings.php:1816
+#: admin/module-settings.php:1512
 msgid "Background Image Parallax"
 msgstr ""
 
-#: admin/module-settings.php:1826
+#: admin/module-settings.php:1522
 msgid "Image Masking"
 msgstr ""
 
-#: admin/module-settings.php:1836
+#: admin/module-settings.php:1532
 msgid "Section Image Parallax"
 msgstr ""
 
-#: admin/module-settings.php:1845
+#: admin/module-settings.php:1541
 msgid "Notation"
 msgstr ""
 
-#: admin/module-settings.php:1854
+#: admin/module-settings.php:1550
 msgid "Parallax/Scrolling Effects"
 msgstr ""
 
-#: admin/module-settings.php:1863
+#: admin/module-settings.php:1559
 msgid "Section Particles"
 msgstr ""
 
-#: admin/module-settings.php:1872
+#: admin/module-settings.php:1568
 msgid "Reveal Effects"
 msgstr ""
 
-#: admin/module-settings.php:1881
+#: admin/module-settings.php:1577
 msgid "Ripple Effects"
 msgstr ""
 
-#: admin/module-settings.php:1890
+#: admin/module-settings.php:1586
 msgid "Scroll Box"
 msgstr ""
 
-#: admin/module-settings.php:1899
+#: admin/module-settings.php:1595
 msgid "Scroll Fill Effect"
 msgstr ""
 
-#: admin/module-settings.php:1908 traits/global-widget-controls.php:7552
+#: admin/module-settings.php:1604 traits/global-widget-controls.php:7552
 msgid "Sticky"
 msgstr ""
 
-#: admin/module-settings.php:1918
+#: admin/module-settings.php:1614
 msgid "Sound Effects"
 msgstr ""
 
-#: admin/module-settings.php:1927
+#: admin/module-settings.php:1623
 msgid "Shape Builder"
 msgstr ""
 
-#: admin/module-settings.php:1937
+#: admin/module-settings.php:1633
 msgid "Shape Divider"
 msgstr ""
 
-#: admin/module-settings.php:1947 modules/threed-text/atomic/support.php:77
+#: admin/module-settings.php:1643 modules/threed-text/atomic/support.php:77
 #: modules/threed-text/atomic/support.php:84
 #: modules/threed-text/module.info.php:5 modules/threed-text/module.php:35
 #: modules/threed-text/module.php:47
 msgid "3D Text"
 msgstr ""
 
-#: admin/module-settings.php:1956
+#: admin/module-settings.php:1652
 msgid "Tile Scroll"
 msgstr ""
 
-#: admin/module-settings.php:1965
+#: admin/module-settings.php:1661
 msgid "Text Gradient Background"
 msgstr ""
 
-#: admin/module-settings.php:1975
+#: admin/module-settings.php:1671
 msgid "Realistic Image Shadow"
 msgstr ""
 
-#: admin/module-settings.php:1984
+#: admin/module-settings.php:1680
 msgid "Widget Tooltip"
 msgstr ""
 
-#: admin/module-settings.php:1993 modules/transform-effects/module.info.php:5
+#: admin/module-settings.php:1689 modules/transform-effects/module.info.php:5
 #: modules/transform-effects/module.php:27
 msgid "Transform Effects"
 msgstr ""
 
-#: admin/module-settings.php:2002
+#: admin/module-settings.php:1698
 msgid "Visibility Controls"
 msgstr ""
 
-#: admin/module-settings.php:2012 modules/wrapper-link/module.info.php:5
+#: admin/module-settings.php:1708 modules/wrapper-link/module.info.php:5
 #: modules/wrapper-link/module.php:43 modules/wrapper-link/module.php:95
 #: modules/wrapper-link/module.php:103
 msgid "Wrapper Link"
 msgstr ""
 
-#: admin/module-settings.php:2024
+#: admin/module-settings.php:1720
 msgid "reCAPTCHA Access"
 msgstr ""
 
-#: admin/module-settings.php:2025
+#: admin/module-settings.php:1721
 msgid "Go to your Google <a href=\"https://www.google.com/recaptcha/\" target=\"_blank\">reCAPTCHA</a> > Account > Generate Keys (reCAPTCHA V2 > Invisible) and Copy and Paste here."
 msgstr ""
 
-#: admin/module-settings.php:2031
+#: admin/module-settings.php:1727
 msgid "Site key"
 msgstr ""
 
-#: admin/module-settings.php:2038
+#: admin/module-settings.php:1734
 msgid "Secret key"
 msgstr ""
 
-#: admin/module-settings.php:2051
+#: admin/module-settings.php:1747
 msgid "Twitter Access"
 msgstr ""
 
-#: admin/module-settings.php:2052
+#: admin/module-settings.php:1748
 msgid "Go to <a href=\"https://developer.twitter.com/en\" target=\"_blank\">https://developer.twitter.com/en</a> for create your Consumer key and Access Token."
 msgstr ""
 
-#: admin/module-settings.php:2059
+#: admin/module-settings.php:1755
 msgid "User Name"
 msgstr ""
 
-#: admin/module-settings.php:2060
+#: admin/module-settings.php:1756
 msgid "for example: bdthemescom"
 msgstr ""
 
-#: admin/module-settings.php:2066
+#: admin/module-settings.php:1762
 msgid "Consumer Key"
 msgstr ""
 
-#: admin/module-settings.php:2073
+#: admin/module-settings.php:1769
 msgid "Consumer Secret"
 msgstr ""
 
-#: admin/module-settings.php:2080 traits/global-controls-functions.php:25940
+#: admin/module-settings.php:1776 traits/global-controls-functions.php:25940
 msgid "Access Token"
 msgstr ""
 
-#: admin/module-settings.php:2087
+#: admin/module-settings.php:1783
 msgid "Access Token Secret"
 msgstr ""
 
-#: admin/module-settings.php:2099
+#: admin/module-settings.php:1795
 msgid "Simple Contact Form "
 msgstr ""
 
-#: admin/module-settings.php:2100
+#: admin/module-settings.php:1796
 msgid "Set your simple contact form settings from here."
 msgstr ""
 
-#: admin/module-settings.php:2106
+#: admin/module-settings.php:1802
 msgid "Contact Form Email"
 msgstr ""
 
-#: admin/module-settings.php:2107
+#: admin/module-settings.php:1803
 msgid "You can set alternative email for simple contact form"
 msgstr ""
 
-#: admin/module-settings.php:2108
+#: admin/module-settings.php:1804
 #: modules/contact-form/widgets/contact-form.php:465
 #: modules/contact-form/widgets/contact-form.php:1210
 #: modules/user-register/widgets/user-register.php:552
@@ -1066,508 +944,344 @@ msgstr ""
 msgid "example@email.com"
 msgstr ""
 
-#: admin/module-settings.php:2114
+#: admin/module-settings.php:1810
 msgid "Spam Email List"
 msgstr ""
 
-#: admin/module-settings.php:2115
+#: admin/module-settings.php:1811
 msgid "add spam email here for block spamming from your contact form. multiple email separated by comma (,)."
 msgstr ""
 
-#: admin/module-settings.php:2116
+#: admin/module-settings.php:1812
 msgid "example@email.com, example2@email.com"
 msgstr ""
 
-#: admin/module-settings.php:2128
+#: admin/module-settings.php:1824
 msgid "MapBox Access Token (for Open Street Map)"
 msgstr ""
 
-#: admin/module-settings.php:2129
+#: admin/module-settings.php:1825
 msgid "<a href=\"https://www.mapbox.com/account/access-tokens\" target=\"_blank\">Click Here</a> to get access token. This Access Token needs for show Open Street Map widget correctly."
 msgstr ""
 
-#: admin/module-settings.php:2137
+#: admin/module-settings.php:1833
 msgid "Facebook Social Access"
 msgstr ""
 
-#: admin/module-settings.php:2138
+#: admin/module-settings.php:1834
 msgid "Go to your <a href=\"https://developers.facebook.com/apps/\" target=\"_blank\">Facebook Developer Account</a> to get access Page ID and Access Token. This credential need for Social Feeds widget."
 msgstr ""
 
-#: admin/module-settings.php:2143
+#: admin/module-settings.php:1839
 msgid "Facebook Page ID"
 msgstr ""
 
-#: admin/module-settings.php:2150
+#: admin/module-settings.php:1846
 msgid "Facebook Access Token"
 msgstr ""
 
-#: admin/module-settings.php:2165
+#: admin/module-settings.php:1861
 msgid "Asset Manager"
 msgstr ""
 
-#: admin/module-settings.php:2166
+#: admin/module-settings.php:1862
 msgid "If you want to combine your JS and css and load in a single file so enable it. Only the widgets used on each page are combined, into one CSS and one JS file."
 msgstr ""
 
-#: admin/module-settings.php:2177
+#: admin/module-settings.php:1873
 msgid "The Mega Menu by Element Pack Pro allows the users to create organized and oversized menus with full custom layouts having images, columns, sliders, icons, forms, buttons, and lots of links. This is one of the most demanding feature and now it is in your hands."
 msgstr ""
 
-#: admin/module-settings.php:2187
+#: admin/module-settings.php:1883
 msgid "Dynamic Content"
 msgstr ""
 
-#: admin/module-settings.php:2188
+#: admin/module-settings.php:1884
 msgid "The Dynamic Content feature allows users to automatically populate Elementor widgets with real-time data from WordPress."
 msgstr ""
 
-#: admin/module-settings.php:2200
+#: admin/module-settings.php:1896
 msgid "Smooth Scroller"
 msgstr ""
 
-#: admin/module-settings.php:2201
+#: admin/module-settings.php:1897
 msgid "Turn on this switcher to enable the Smooth Scroller Features, The Smooth Scroller feature enhances user experience by providing seamless, visually pleasing content navigation through animated transitions."
 msgstr ""
 
-#: admin/module-settings.php:2212
+#: admin/module-settings.php:1908
 msgid "Live Copy/Paste"
 msgstr ""
 
-#: admin/module-settings.php:2213
+#: admin/module-settings.php:1909
 msgid "Live copy is a copy feature that allow you to copy and paste content from one domain to another. For example you can copy demo content directly from our demo website."
 msgstr ""
 
-#: admin/module-settings.php:2223
+#: admin/module-settings.php:1919
 msgid "Essential Shortcodes"
 msgstr ""
 
-#: admin/module-settings.php:2224
+#: admin/module-settings.php:1920
 msgid "If you need element pack essential shortcodes feature so you can do that from here. it's included some basic content feature that not possible by element pack."
 msgstr ""
 
-#: admin/module-settings.php:2234
+#: admin/module-settings.php:1930
 msgid "Template Library (in Editor)"
 msgstr ""
 
-#: admin/module-settings.php:2235
+#: admin/module-settings.php:1931
 msgid "If you need to show element pack template library in your editor so please enable this option. It's amazing feature for elementor."
 msgstr ""
 
-#: admin/module-settings.php:2245
+#: admin/module-settings.php:1941
 msgid "Context Menu"
 msgstr ""
 
-#: admin/module-settings.php:2246
+#: admin/module-settings.php:1942
 msgid "Turn on this switcher to enable the Context Menu inside \"Site Settings\" of Elementor Editor Page to use the right-click menu."
 msgstr ""
 
-#: admin/module-settings.php:2256
+#: admin/module-settings.php:1952
 msgid "Duplicator"
 msgstr ""
 
-#: admin/module-settings.php:2257
+#: admin/module-settings.php:1953
 msgid "Just hit the button below to enable the duplicator. It can duplicate anything like posts,pages and elementor templates. A masterclass duplication with just one click."
 msgstr ""
 
-#: admin/module-settings.php:2267
+#: admin/module-settings.php:1963
 msgid "SVG Support"
 msgstr ""
 
-#: admin/module-settings.php:2268
+#: admin/module-settings.php:1964
 msgid "Turn on this option to enable SVG support in your widgets & Upload Media Library."
 msgstr ""
 
-#: admin/module-settings.php:2279
+#: admin/module-settings.php:1975
 msgid "Variation Swatches"
 msgstr ""
 
-#: admin/module-settings.php:2280
+#: admin/module-settings.php:1976
 msgid "Replace dropdowns with color swatches, image swatches or text/button swatches."
 msgstr ""
 
-#: admin/module-settings.php:2294
+#: admin/module-settings.php:1990
 msgid "ACF Accordion"
 msgstr ""
 
-#: admin/module-settings.php:2308
+#: admin/module-settings.php:2004
 msgid "ACF Gallery"
 msgstr ""
 
-#: admin/module-settings.php:2322
+#: admin/module-settings.php:2018
 msgid "ACF Slider"
 msgstr ""
 
-#: admin/module-settings.php:2336
+#: admin/module-settings.php:2032
 msgid "ACF Tabs"
 msgstr ""
 
-#: admin/module-settings.php:2350
+#: admin/module-settings.php:2046
 msgid "ACF List"
 msgstr ""
 
-#: admin/module-settings.php:2364
-msgid "bbPress Forum Form"
-msgstr ""
-
-#: admin/module-settings.php:2376
-msgid "bbPress Forum Index"
-msgstr ""
-
-#: admin/module-settings.php:2388
-msgid "bbPress Single Forum"
-msgstr ""
-
-#: admin/module-settings.php:2399
-msgid "bbPress Topic Index"
-msgstr ""
-
-#: admin/module-settings.php:2410
-msgid "bbPress Topic Form"
-msgstr ""
-
-#: admin/module-settings.php:2421
-msgid "bbPress Single Topic"
-msgstr ""
-
-#: admin/module-settings.php:2432
-msgid "bbPress Reply Form"
-msgstr ""
-
-#: admin/module-settings.php:2443
-msgid "bbPress Single Reply"
-msgstr ""
-
-#: admin/module-settings.php:2454
-msgid "bbPress Topic Tags"
-msgstr ""
-
-#: admin/module-settings.php:2465
-msgid "bbPress Single Tag"
-msgstr ""
-
-#: admin/module-settings.php:2476
-msgid "bbPress Single View"
-msgstr ""
-
-#: admin/module-settings.php:2487
-msgid "bbPress Stats"
-msgstr ""
-
-#: admin/module-settings.php:2499
-msgid "BuddyPress Friends"
-msgstr ""
-
-#: admin/module-settings.php:2512
-msgid "BuddyPress Group"
-msgstr ""
-
-#: admin/module-settings.php:2525
-msgid "BuddyPress Member"
-msgstr ""
-
-#: admin/module-settings.php:2538 modules/contact-form-7/module.info.php:5
+#: admin/module-settings.php:2060 modules/contact-form-7/module.info.php:5
 #: modules/contact-form-7/widgets/contact-form-7.php:22
 msgid "Contact Form 7"
 msgstr ""
 
-#: admin/module-settings.php:2551
-msgid "Charitable Campaigns"
-msgstr ""
-
-#: admin/module-settings.php:2565
-msgid "Charitable Donations"
-msgstr ""
-
-#: admin/module-settings.php:2579
-msgid "Charitable Donors"
-msgstr ""
-
-#: admin/module-settings.php:2593
-msgid "Charitable Donation Form"
-msgstr ""
-
-#: admin/module-settings.php:2607
-msgid "Charitable Stat"
-msgstr ""
-
-#: admin/module-settings.php:2621
-msgid "Charitable Login"
-msgstr ""
-
-#: admin/module-settings.php:2635
-msgid "Charitable Registration"
-msgstr ""
-
-#: admin/module-settings.php:2649
-msgid "Charitable Profile"
-msgstr ""
-
-#: admin/module-settings.php:2663
-msgid "Download Monitor"
-msgstr ""
-
-#: admin/module-settings.php:2677 admin/module-settings.php:2866
-msgid "EDD Cart"
-msgstr ""
-
-#: admin/module-settings.php:2689 admin/module-settings.php:2878
-msgid "EDD Category Grid"
-msgstr ""
-
-#: admin/module-settings.php:2701 admin/module-settings.php:2890
-msgid "EDD Category Carousel"
-msgstr ""
-
-#: admin/module-settings.php:2713 admin/module-settings.php:2902
-msgid "EDD Checkout"
-msgstr ""
-
-#: admin/module-settings.php:2724 admin/module-settings.php:2913
-msgid "EDD Login"
-msgstr ""
-
-#: admin/module-settings.php:2735 admin/module-settings.php:2924
-msgid "EDD Mini Cart"
-msgstr ""
-
-#: admin/module-settings.php:2746 admin/module-settings.php:2935
-msgid "EDD Product"
-msgstr ""
-
-#: admin/module-settings.php:2758 admin/module-settings.php:2947
-msgid "EDD Product Carousel"
-msgstr ""
-
-#: admin/module-settings.php:2770 admin/module-settings.php:2959
-msgid "EDD Product Reviews"
-msgstr ""
-
-#: admin/module-settings.php:2782 admin/module-settings.php:2971
-msgid "EDD Product Review Carousel"
-msgstr ""
-
-#: admin/module-settings.php:2794 admin/module-settings.php:2983
-msgid "EDD Profile Editor"
-msgstr ""
-
-#: admin/module-settings.php:2806 admin/module-settings.php:2995
-msgid "EDD Purchase History"
-msgstr ""
-
-#: admin/module-settings.php:2818 admin/module-settings.php:3007
-msgid "EDD Register"
-msgstr ""
-
-#: admin/module-settings.php:2830 admin/module-settings.php:3019
-msgid "EDD Tabs"
-msgstr ""
-
-#: admin/module-settings.php:2842 admin/module-settings.php:3031
-msgid "Easy Digital Download"
-msgstr ""
-
-#: admin/module-settings.php:2854 admin/module-settings.php:3043
-msgid "EDD History"
-msgstr ""
-
-#: admin/module-settings.php:3055
+#: admin/module-settings.php:2073
 #: modules/events-calendar-grid/module.info.php:5
 #: modules/events-calendar-grid/widgets/events-calendar-grid.php:23
 msgid "Events Calendar Grid"
 msgstr ""
 
-#: admin/module-settings.php:3067
+#: admin/module-settings.php:2085
 msgid "Events Calendar Carousel"
 msgstr ""
 
-#: admin/module-settings.php:3079
+#: admin/module-settings.php:2097
 msgid "Events Calendar List"
 msgstr ""
 
-#: admin/module-settings.php:3091
+#: admin/module-settings.php:2109
 msgid "FooEvents Calendar"
 msgstr ""
 
-#: admin/module-settings.php:3104
+#: admin/module-settings.php:2122
 msgid "FooEvents Calendar Events"
 msgstr ""
 
-#: admin/module-settings.php:3117
+#: admin/module-settings.php:2135
 msgid "FooEvents Calendar Carousel"
 msgstr ""
 
-#: admin/module-settings.php:3130
+#: admin/module-settings.php:2148
 msgid "FAQ"
 msgstr ""
 
-#: admin/module-settings.php:3144 modules/fluent-forms/module.info.php:5
+#: admin/module-settings.php:2162 modules/fluent-forms/module.info.php:5
 #: modules/fluent-forms/widgets/fluent-forms.php:20
 msgid "Fluent Forms"
 msgstr ""
 
-#: admin/module-settings.php:3158 modules/formidable-forms/module.info.php:5
+#: admin/module-settings.php:2176 modules/formidable-forms/module.info.php:5
 #: modules/formidable-forms/widgets/formidable-forms.php:19
 msgid "Formidable Forms"
 msgstr ""
 
-#: admin/module-settings.php:3171 modules/forminator-forms/module.info.php:5
+#: admin/module-settings.php:2189 modules/forminator-forms/module.info.php:5
 #: modules/forminator-forms/widgets/forminator-forms.php:20
 msgid "Forminator Forms"
 msgstr ""
 
-#: admin/module-settings.php:3185
+#: admin/module-settings.php:2203
 msgid "Gravity Forms"
 msgstr ""
 
-#: admin/module-settings.php:3200
+#: admin/module-settings.php:2218
 msgid "Instagram Feed"
 msgstr ""
 
-#: admin/module-settings.php:3213
-msgid "Layer Slider"
-msgstr ""
-
-#: admin/module-settings.php:3228
+#: admin/module-settings.php:2231
 msgid "LearnPress Grid"
 msgstr ""
 
-#: admin/module-settings.php:3240
+#: admin/module-settings.php:2243
 msgid "LearnPress Carousel"
 msgstr ""
 
-#: admin/module-settings.php:3253
+#: admin/module-settings.php:2256
 msgid "Mailchimp For WP"
 msgstr ""
 
-#: admin/module-settings.php:3266 modules/ninja-forms/module.info.php:5
+#: admin/module-settings.php:2269 modules/ninja-forms/module.info.php:5
 #: modules/ninja-forms/widgets/ninja-forms.php:20
 msgid "Ninja Forms"
 msgstr ""
 
-#: admin/module-settings.php:3280
+#: admin/module-settings.php:2283
 msgid "Portfolio Gallery"
 msgstr ""
 
-#: admin/module-settings.php:3295
+#: admin/module-settings.php:2298
 msgid "Portfolio Carousel"
 msgstr ""
 
-#: admin/module-settings.php:3310
+#: admin/module-settings.php:2313
 msgid "Portfolio List"
 msgstr ""
 
-#: admin/module-settings.php:3325
+#: admin/module-settings.php:2328
 msgid "QuForm"
 msgstr ""
 
-#: admin/module-settings.php:3340
+#: admin/module-settings.php:2343
 msgid "Revolution Slider"
 msgstr ""
 
-#: admin/module-settings.php:3354
+#: admin/module-settings.php:2357
 msgid "TablePress"
 msgstr ""
 
-#: admin/module-settings.php:3366
+#: admin/module-settings.php:2369
 msgid "Testimonial Carousel"
 msgstr ""
 
-#: admin/module-settings.php:3380 modules/testimonial-grid/module.info.php:5
+#: admin/module-settings.php:2383 modules/testimonial-grid/module.info.php:5
 #: modules/testimonial-grid/widgets/testimonial-grid.php:26
 msgid "Testimonial Grid"
 msgstr ""
 
-#: admin/module-settings.php:3394
+#: admin/module-settings.php:2397
 msgid "Testimonial Slider"
 msgstr ""
 
-#: admin/module-settings.php:3408
+#: admin/module-settings.php:2411
 msgid "The Newsletter"
 msgstr ""
 
-#: admin/module-settings.php:3421
+#: admin/module-settings.php:2424
 msgid "Tutor LMS Grid"
 msgstr ""
 
-#: admin/module-settings.php:3433
+#: admin/module-settings.php:2436
 msgid "Tutor LMS Carousel"
 msgstr ""
 
-#: admin/module-settings.php:3445
+#: admin/module-settings.php:2448
 msgid "Woocommerce Products"
 msgstr ""
 
-#: admin/module-settings.php:3458
+#: admin/module-settings.php:2461
 msgid "WooCommerce Add To Cart"
 msgstr ""
 
-#: admin/module-settings.php:3471
+#: admin/module-settings.php:2474
 msgid "WooCommerce Elements"
 msgstr ""
 
-#: admin/module-settings.php:3484
+#: admin/module-settings.php:2487
 msgid "WooCommerce Categories"
 msgstr ""
 
-#: admin/module-settings.php:3497
+#: admin/module-settings.php:2500
 msgid "WooCommerce Carousel"
 msgstr ""
 
-#: admin/module-settings.php:3510
+#: admin/module-settings.php:2513
 msgid "WooCommerce Slider"
 msgstr ""
 
-#: admin/module-settings.php:3523
+#: admin/module-settings.php:2526
 msgid "WooCommerce Mini Cart"
 msgstr ""
 
-#: admin/module-settings.php:3536 modules/we-forms/module.info.php:5
+#: admin/module-settings.php:2539 modules/we-forms/module.info.php:5
 #: modules/we-forms/widgets/we-forms.php:24
 msgid "weForms"
 msgstr ""
 
-#: admin/module-settings.php:3550 admin/module-settings.php:3564
+#: admin/module-settings.php:2553 admin/module-settings.php:2567
 msgid "Wp Forms"
 msgstr ""
 
-#: admin/module-settings.php:3829
+#: admin/module-settings.php:2832
 msgid "Setup Required"
 msgstr ""
 
-#: admin/module-settings.php:3830
+#: admin/module-settings.php:2833
 msgid "Please configure your Google OAuth Client ID above before connecting your Google account."
 msgstr ""
 
-#: admin/module-settings.php:3832
+#: admin/module-settings.php:2835
 msgid "Add your Google OAuth Client ID and Client Secret in the field above"
 msgstr ""
 
-#: admin/module-settings.php:3833
+#: admin/module-settings.php:2836
 msgid "Save the settings"
 msgstr ""
 
-#: admin/module-settings.php:3834
+#: admin/module-settings.php:2837
 msgid "Refresh this page to see the connection button"
 msgstr ""
 
-#: admin/module-settings.php:3839
+#: admin/module-settings.php:2842
 msgid "Google Sheets Connected"
 msgstr ""
 
-#: admin/module-settings.php:3843
+#: admin/module-settings.php:2846
 msgid "Disconnect"
 msgstr ""
 
-#: admin/module-settings.php:3851
+#: admin/module-settings.php:2854
 msgid "Connect your Google account to access to your Google Sheets from webhook forms."
 msgstr ""
 
-#: admin/module-settings.php:3853
+#: admin/module-settings.php:2856
 msgid "This is your Redirect URI: "
 msgstr ""
 
-#: admin/module-settings.php:3857
+#: admin/module-settings.php:2860
 msgid "Connect"
 msgstr ""
 
@@ -1625,36 +1339,40 @@ msgstr ""
 msgid "You do not have permission to access this resource."
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:187
+#: includes/Admin/class-admin-cutover.php:193
 msgid "Widgets"
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:188
+#: includes/Admin/class-admin-cutover.php:194
 msgid "Extensions"
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:189
+#: includes/Admin/class-admin-cutover.php:195
 msgid "Features"
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:190
+#: includes/Admin/class-admin-cutover.php:196
 msgid "Integrations"
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:191
+#: includes/Admin/class-admin-cutover.php:197
 msgid "Performance"
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:192
+#: includes/Admin/class-admin-cutover.php:198
 msgid "System Status"
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:193
+#: includes/Admin/class-admin-cutover.php:199
 msgid "Other Plugins"
 msgstr ""
 
-#: includes/Admin/class-admin-cutover.php:194
+#: includes/Admin/class-admin-cutover.php:200
 msgid "You may also need"
+msgstr ""
+
+#: includes/Admin/class-admin-cutover.php:222
+msgid "Up To 86% Off"
 msgstr ""
 
 #: includes/Admin/class-other-plugins-service.php:24
@@ -4711,6 +4429,11 @@ msgstr ""
 
 #: includes/setup-wizard/views/features.php:40
 msgid "Gallery"
+msgstr ""
+
+#: includes/setup-wizard/views/features.php:42
+#: traits/global-swiper-controls.php:242
+msgid "Carousel"
 msgstr ""
 
 #: includes/setup-wizard/views/features.php:43
