@@ -321,9 +321,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 10.0.1 [19th October 2026] =
+= 10.0.1 [20th October 2026] =
 
 * Added: "Up To 86% Off" deals link in the Element Pack admin menu
+* Added: BdThemes deals notice on the Dashboard, Plugins screen and plugin dashboard; “Don’t Show Again” hides it in every BdThemes plugin
 * Fixed: "debounce is not defined" error from Floating Effects and other extensions on pages without Element Pack widgets
 * Fixed: Dashboard widget count included widgets that no longer exist
 * Fixed: Global Badge listed under Widgets instead of Extensions
