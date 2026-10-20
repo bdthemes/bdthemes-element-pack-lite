@@ -18,6 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// BdThemes deals biggopti, shared by all BdThemes plugins (shown once).
+if ( is_admin() ) {
+	require_once __DIR__ . '/includes/bdthemes-deals-biggopti.php';
+}
+
 
 if ( ! function_exists( 'element_pack_pro_installed' ) ) {
 
