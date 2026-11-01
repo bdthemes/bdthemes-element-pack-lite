@@ -321,8 +321,9 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
-= 10.0.2 [28th October 2026] =
+= 10.0.2 [1st November 2026] =
 
+* Fixed: SVG files could still be uploaded to the Media Library while the SVG Support setting was turned off
 * Updated: System improved
 
 = 10.0.1 [20th October 2026] =

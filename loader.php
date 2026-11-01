@@ -710,7 +710,11 @@ class Element_Pack_Loader {
         // Finally hooked up all things here
         $this->setup_hooks();
 
-        $this->element_pack_svg_support()->init();
+        $svg_support = element_pack_option( 'svg-support', 'element_pack_other_settings', 'on' );
+
+        if ( 'on' === $svg_support ) {
+            $this->element_pack_svg_support()->init();
+        }
 
         $this->wpml_compatiblity()->init();
 
