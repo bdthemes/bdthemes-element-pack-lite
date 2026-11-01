@@ -728,7 +728,8 @@ class Logo_Grid extends Module_Base {
 				}
 				var hasTooltip = itemName && itemDesc && item.logo_tooltip === 'yes';
 				var tooltipHtml = '<span class="bdt-title">' + _.escape( itemName ) + '</span>' + _.escape( itemDesc );
-				var tooltipAttr = tooltipHtml.replace( /"/g, '&quot;' );
+				// Fully escaped so the browser's one attribute decode gives back tooltipHtml, whose text stays text.
+				var tooltipAttr = _.escape( tooltipHtml );
 				var itemClasses = 'bdt-item';
 				if ( itemLinkUrl ) {
 					itemClasses += ' bdt-logo-grid-link';

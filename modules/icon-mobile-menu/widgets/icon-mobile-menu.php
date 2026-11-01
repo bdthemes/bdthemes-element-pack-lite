@@ -914,10 +914,12 @@ class Icon_Mobile_Menu extends Module_Base {
 					}
 
 					if ( $menu_text !== '' && $menu_tooltip ) {
-						$tooltip_content = '<span class="bdt-title">' . esc_html( $menu_text ) . '</span>';
+						// Escaped twice: the attribute is printed with esc_attr() (no double
+						// encoding) and the browser decodes it once before tippy uses it as HTML.
+						$tooltip_content = '<span class="bdt-title">' . htmlspecialchars( esc_html( $menu_text ), ENT_QUOTES, 'UTF-8', true ) . '</span>';
 						$this->add_render_attribute( $repeater_key, 'class', 'bdt-tippy-tooltip' );
 						$this->add_render_attribute( $repeater_key, 'data-tippy', '', true );
-						$this->add_render_attribute( $repeater_key, 'data-tippy-content', wp_kses_post( $tooltip_content ), true );
+						$this->add_render_attribute( $repeater_key, 'data-tippy-content', $tooltip_content, true );
 
 						$tooltip_placement = isset( $settings['menu_tooltip_placement'] ) ? $settings['menu_tooltip_placement'] : '';
 						if ( $tooltip_placement !== '' ) {
@@ -983,7 +985,8 @@ class Icon_Mobile_Menu extends Module_Base {
 					var menuText = item.menu_text || '';
 					var tooltipHtml = '';
 					if ( menuTooltip && menuText ) {
-						tooltipHtml = '<span class="bdt-title">' + menuText + '</span>';
+						// Text escaped here; {{ tooltipHtml }} escapes the whole string again for the attribute.
+						tooltipHtml = '<span class="bdt-title">' + _.escape( menuText ) + '</span>';
 					}
 				#>
 				<li class="bdt-icon-mobile-menu-list">

@@ -1179,6 +1179,21 @@ trait Global_Controls_Functions {
 	}
 
 	/**
+	 * Escape text for a tooltip that is stored in a data-tippy-content attribute.
+	 *
+	 * The attribute is printed with esc_attr(), which does not double-encode, and
+	 * the browser decodes it once before tippy writes it to innerHTML. Escaping the
+	 * text twice (double_encode = true) keeps it text after that one decode, even
+	 * when the value already holds entities such as "&lt;img ...&gt;".
+	 *
+	 * @param string $text Raw text.
+	 * @return string
+	 */
+	protected function ep_tooltip_text( $text ) {
+		return htmlspecialchars( esc_html( (string) $text ), ENT_QUOTES, 'UTF-8', true );
+	}
+
+	/**
 	 * Build logo tooltip content HTML.
 	 *
 	 * @param array  $item   Repeater item.
@@ -1189,13 +1204,10 @@ trait Global_Controls_Functions {
 		$item_description = isset( $item['description'] ) ? $item['description'] : '';
 
 		if ( 'carousel' === $format ) {
-			return '<div><strong>' . esc_html( $item_name ) . '</strong></div>' . esc_html( $item_description );
+			return '<div><strong>' . $this->ep_tooltip_text( $item_name ) . '</strong></div>' . $this->ep_tooltip_text( $item_description );
 		}
 
-		$tooltip_content = '<span class="bdt-title">' . esc_html( $item_name ) . '</span>' . esc_html( $item_description );
-		$allowed_tags    = '<p><b><strong><em><u><span><br><i>';
-
-		return strip_tags( $tooltip_content, $allowed_tags );
+		return '<span class="bdt-title">' . $this->ep_tooltip_text( $item_name ) . '</span>' . $this->ep_tooltip_text( $item_description );
 	}
 
 	/**
@@ -1226,7 +1238,8 @@ trait Global_Controls_Functions {
 		$has_tooltip       = ! empty( $item_name ) && ! empty( $item_description ) && $item_logo_tooltip;
 
 		if ( 'grid' === $args['format'] || $has_tooltip ) {
-			$this->add_render_attribute( $key, 'data-tippy-content', wp_kses_post( $this->get_logo_tooltip_content( $item, $args['format'] ) ), $overwrite );
+			// Already escaped for the attribute; wp_kses_post() would not touch entities.
+			$this->add_render_attribute( $key, 'data-tippy-content', $this->get_logo_tooltip_content( $item, $args['format'] ), $overwrite );
 		}
 
 		if ( ! $has_tooltip ) {
