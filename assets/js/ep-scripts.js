@@ -1031,6 +1031,41 @@
 (function () {
     'use strict';
 
+    // Rebuild the tooltip from data-tippy-content, keeping only the markup the widget
+    // prints (text, span.bdt-title, strong, div, br). The string is parsed in an inert
+    // <template>, so nothing in it runs, and tippy is handed a node instead of HTML.
+    const safeTooltipContent = (el) => {
+        const source = document.createElement('template');
+        const content = document.createElement('div');
+
+        source.innerHTML = el.getAttribute('data-tippy-content') || '';
+        el.removeAttribute('data-tippy-content');
+
+        const copy = (from, to) => {
+            from.childNodes.forEach((node) => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    to.appendChild(document.createTextNode(node.textContent));
+                    return;
+                }
+                if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+                const tag = node.tagName.toLowerCase();
+                if (!['span', 'strong', 'div', 'br'].includes(tag)) {
+                    to.appendChild(document.createTextNode(node.textContent));
+                    return;
+                }
+
+                const clean = document.createElement(tag);
+                if (node.classList.contains('bdt-title')) clean.className = 'bdt-title';
+                copy(node, clean);
+                to.appendChild(clean);
+            });
+        };
+
+        copy(source.content, content);
+        return content;
+    };
+
     const widgetIconMobileMenu = (scope) => {
         const scopeEl = scope?.jquery ? scope[0] : scope;
         const marker = scopeEl.querySelector('.bdt-icon-mobile-menu-wrap');
@@ -1040,8 +1075,11 @@
         const widgetID = scopeEl.dataset.id || '';
 
         tooltips.forEach((el) => {
+            if (el._tippy) return;
+
             tippy(el, {
-                allowHTML: true,
+                content: safeTooltipContent(el),
+                allowHTML: false,
                 theme: 'bdt-tippy-' + widgetID
             });
         });
@@ -1064,6 +1102,41 @@
 (function () {
     'use strict';
 
+    // Rebuild the tooltip from data-tippy-content, keeping only the markup the widget
+    // prints (text, span.bdt-title, strong, div, br). The string is parsed in an inert
+    // <template>, so nothing in it runs, and tippy is handed a node instead of HTML.
+    const safeTooltipContent = (el) => {
+        const source = document.createElement('template');
+        const content = document.createElement('div');
+
+        source.innerHTML = el.getAttribute('data-tippy-content') || '';
+        el.removeAttribute('data-tippy-content');
+
+        const copy = (from, to) => {
+            from.childNodes.forEach((node) => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    to.appendChild(document.createTextNode(node.textContent));
+                    return;
+                }
+                if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+                const tag = node.tagName.toLowerCase();
+                if (!['span', 'strong', 'div', 'br'].includes(tag)) {
+                    to.appendChild(document.createTextNode(node.textContent));
+                    return;
+                }
+
+                const clean = document.createElement(tag);
+                if (node.classList.contains('bdt-title')) clean.className = 'bdt-title';
+                copy(node, clean);
+                to.appendChild(clean);
+            });
+        };
+
+        copy(source.content, content);
+        return content;
+    };
+
     const widgetLogoGrid = (scope) => {
         const scopeEl = scope?.jquery ? scope[0] : scope;
         const logoGrid = scopeEl.querySelector('.bdt-logo-grid-wrapper');
@@ -1073,8 +1146,11 @@
         const widgetID = scopeEl.dataset.id || '';
 
         tooltips.forEach((el) => {
+            if (el._tippy) return;
+
             tippy(el, {
-                allowHTML: true,
+                content: safeTooltipContent(el),
+                allowHTML: false,
                 theme: 'bdt-tippy-' + widgetID
             });
         });
