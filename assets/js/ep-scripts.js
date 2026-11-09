@@ -446,7 +446,18 @@
         const settings     = parseData('settings');
         const gtagSettings = parseData('gtag');
 
-        window.cookieconsent.initialise(settings);
+        const { linkAttributes, ...consentSettings } = settings || {};
+
+        window.cookieconsent.initialise(consentSettings);
+
+        // Learn More link attributes are set as plain values, never spliced into the banner markup.
+        const learnMoreLink = document.querySelector('.cc-window .cc-link');
+        if (learnMoreLink && linkAttributes && typeof linkAttributes === 'object') {
+            Object.entries(linkAttributes).forEach(([name, value]) => {
+                if (!/^[a-z0-9_-]+$/i.test(name) || /^on/i.test(name) || name.toLowerCase() === 'href') return;
+                learnMoreLink.setAttribute(name, String(value));
+            });
+        }
 
         const compliance = document.querySelector('.cc-compliance');
         const denyBtn    = document.createElement('button');

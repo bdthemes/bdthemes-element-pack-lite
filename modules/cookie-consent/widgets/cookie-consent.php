@@ -821,7 +821,20 @@ class Cookie_Consent extends Module_Base {
 
 		$this->add_render_attribute( 'cookie-consent', 'class', [ 'bdt-cookie-consent', 'bdt-hidden' ] );
 
-		$this->add_link_attributes( 'custom-attr', $settings['learn_more_link'] );
+		// Learn More link attributes travel as a plain name => value map and are applied with
+		// setAttribute() in JS. Never send pre-built attribute markup: the cookieconsent library
+		// builds the banner with innerHTML, where it would be re-parsed as HTML.
+		$link_attributes = [];
+
+		if ( ! empty( $settings['learn_more_link']['nofollow'] ) ) {
+			$link_attributes['rel'] = 'nofollow';
+		}
+
+		if ( ! empty( $settings['learn_more_link']['custom_attributes'] ) ) {
+			// Elementor's parser keeps names to [-_a-z0-9] and drops href and on* handlers.
+			$link_attributes = array_merge( $link_attributes, \Elementor\Utils::parse_custom_attributes( $settings['learn_more_link']['custom_attributes'] ) );
+		}
+
 		$this->add_render_attribute(
 			[ 
 				'cookie-consent' => [ 
@@ -834,8 +847,8 @@ class Cookie_Consent extends Module_Base {
 								'dismiss'     => esc_html( $settings['button_text'] ),
 								'link'        => esc_html( $settings['learn_more_text'] ),
 								'href'        => esc_url( $settings['learn_more_link']['url'] ),
-								'custom_attr' => esc_attr( $this->get_render_attribute_string( 'custom-attr' ) ),
 							],
+							'linkAttributes' => (object) $link_attributes,
 							'cookie'   => [ 
 								'name'       => 'element_pack_cookie_widget',
 								'domain'     => Utils::get_site_domain(),

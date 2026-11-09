@@ -323,6 +323,7 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 = 10.0.4 [9th November 2026] =
 
+* Security: Fixed stored XSS in the Cookie Consent widget, where Custom Attributes on the Learn More link could add event handlers to the banner link (reported by nh4tvd via Patchstack)
 * Fixed: Terms, Posts and Template select fields (Accordion, Toggle, Content Switcher, Slider and other widgets) did not let you type a search on Elementor 4.3+
 * Fixed: The same select fields could stay disabled with a spinning loader when the saved values failed to load
 
