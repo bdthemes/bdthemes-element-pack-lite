@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.3
+Stable tag: 10.0.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.4 [9th November 2026] =
+
+* Fixed: Terms, Posts and Template select fields (Accordion, Toggle, Content Switcher, Slider and other widgets) did not let you type a search on Elementor 4.3+
+* Fixed: The same select fields could stay disabled with a spinning loader when the saved values failed to load
 
 = 10.0.3 [1st November 2026] =
 
