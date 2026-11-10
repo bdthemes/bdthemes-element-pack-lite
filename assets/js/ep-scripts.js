@@ -448,6 +448,12 @@
 
         const { linkAttributes, ...consentSettings } = settings || {};
 
+        // The library turns `position` into the banner's class attribute via innerHTML,
+        // so only the widget's own options are passed through.
+        if (!['bottom', 'bottom-left', 'bottom-right', 'top'].includes(consentSettings.position)) {
+            consentSettings.position = 'bottom';
+        }
+
         window.cookieconsent.initialise(consentSettings);
 
         // Learn More link attributes are set as plain values, never spliced into the banner markup.

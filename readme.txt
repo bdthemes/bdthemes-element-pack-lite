@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.4
+Stable tag: 10.0.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.5 [10th November 2026] =
+
+* Security: Fixed stored XSS in the Cookie Consent widget, where a tampered Position value could add event handlers to the consent banner (reported by nh4tvd via Patchstack)
 
 = 10.0.4 [9th November 2026] =
 
