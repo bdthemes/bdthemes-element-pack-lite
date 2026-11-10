@@ -1,6 +1,6 @@
 {
   "name": "bdthemes-element-pack-lite",
-  "version": "10.0.4",
+  "version": "10.0.5",
   "description": "Element Pack Lite - source for the React admin dashboard (src/admin/app), compiled to build/admin.",
   "private": true,
   "scripts": {

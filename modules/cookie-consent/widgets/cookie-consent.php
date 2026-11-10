@@ -807,17 +807,18 @@ class Cookie_Consent extends Module_Base {
 
 		$settings = $this->get_settings_for_display();
 
-		$cc_position = $settings['position'];
+		// The cookieconsent library builds the banner's class attribute from `position` with
+		// innerHTML, so only the control's own options may reach it; a tampered save falls back
+		// to the default.
+		$position_classes = [
+			'bottom'       => 'cc-bottom cc-banner',
+			'bottom-left'  => 'cc-bottom cc-left cc-floating',
+			'bottom-right' => 'cc-bottom cc-right cc-floating',
+			'top'          => 'cc-top cc-banner',
+		];
 
-		if ( $cc_position == 'bottom-left' ) {
-			$cc_position = 'cc-bottom cc-left cc-floating';
-		} else if ( $cc_position == 'bottom-right' ) {
-			$cc_position = 'cc-bottom cc-right cc-floating';
-		} else if ( $cc_position == 'top' ) {
-			$cc_position = 'cc-top cc-banner';
-		} else if ( $cc_position == 'bottom' ) {
-			$cc_position = 'cc-bottom cc-banner';
-		}
+		$position    = isset( $settings['position'] ) && is_string( $settings['position'] ) && isset( $position_classes[ $settings['position'] ] ) ? $settings['position'] : 'bottom';
+		$cc_position = $position_classes[ $position ];
 
 		$this->add_render_attribute( 'cookie-consent', 'class', [ 'bdt-cookie-consent', 'bdt-hidden' ] );
 
@@ -840,8 +841,8 @@ class Cookie_Consent extends Module_Base {
 				'cookie-consent' => [ 
 					'data-settings' => [ 
 						wp_json_encode( [ 
-							'position' => $settings['position'],
-							'static'   => ( 'top' == $settings['position'] and $settings['pushdown'] ) ? true : false,
+							'position' => $position,
+							'static'   => ( 'top' === $position && ! empty( $settings['pushdown'] ) ),
 							'content'  => [ 
 								'message'     => esc_html( $settings['message'] ),
 								'dismiss'     => esc_html( $settings['button_text'] ),
