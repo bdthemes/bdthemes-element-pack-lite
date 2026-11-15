@@ -321,6 +321,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 10.0.6 [15th November 2026] =
+
+* Security: Fixed stored XSS in post content, where removing a UIkit attrs option could join neighbouring attributes and turn content WordPress had already made safe into a script (reported by Dthangws via Patchstack)
+* Security: Fixed stored XSS in the Search widget, where the Section / Widget Selector setting could run a script when the page loaded (reported by nh4tvd via Patchstack)
+* Security: Elementor templates selected in Accordion, Content Switcher, Slider, Toggle, the Elementor Template widget or the rooten_custom_template shortcode are now shown only to visitors who may read them, so private, draft and pending content no longer appears
+
 = 10.0.5 [10th November 2026] =
 
 * Security: Fixed stored XSS in the Cookie Consent widget, where a tampered Position value could add event handlers to the consent banner (reported by nh4tvd via Patchstack)
