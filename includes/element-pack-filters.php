@@ -209,6 +209,73 @@ if (!function_exists('element_pack_sanitize_uikit_attribute_match')) {
     }
 }
 
+if (!function_exists('element_pack_uikit_attrs_attribute_name')) {
+    /**
+     * Whether an attribute name is UIkit's generic option carrier.
+     *
+     * UIkit's data() helper drops a leading `data-` before looking the option up,
+     * so both spellings count. Compared case-insensitively, as HTML attribute
+     * names are.
+     */
+    function element_pack_uikit_attrs_attribute_name($name) {
+        $name = strtolower((string) $name);
+
+        if (0 === strpos($name, 'data-')) {
+            $name = substr($name, 5);
+        }
+
+        return 'attrs' === $name;
+    }
+}
+
+if (!function_exists('element_pack_remove_uikit_attrs_attributes')) {
+    /**
+     * Remove UIkit's generic `attrs` / `data-attrs` option attribute from markup.
+     *
+     * The plugin's own widgets never emit either spelling, so dropping the whole
+     * attribute breaks nothing, and UIkit applies its value as arbitrary
+     * attributes on the component's element.
+     *
+     * Parsed, never pattern-matched. The previous implementation deleted
+     * ` attrs=…` with a quote-blind regular expression whose `[^\s>]+` branch
+     * consumed the closing quote of an enclosing attribute when the text
+     * `attrs=` appeared inside that attribute's value:
+     *
+     *     <img src="x" alt="A attrs=y" border=" onerror=alert(1) z">
+     *
+     * Deleting that match collapsed the attribute boundary and promoted the
+     * inert text in `border` into a real event handler, turning markup
+     * wp_kses_post() had already made safe back into stored XSS. Here only real
+     * attributes of a tag are removed, never text inside another value.
+     */
+    function element_pack_remove_uikit_attrs_attributes($content) {
+        if (!is_string($content) || false === stripos($content, 'attrs')) {
+            return $content;
+        }
+
+        // Without WordPress's HTML API (WordPress < 6.2, below this plugin's
+        // minimum) there is no safe way to remove an attribute: a pattern cannot
+        // tell where a browser will consider an attribute value to start and end,
+        // and getting that wrong is exactly what re-armed content here before. An
+        // unchanged document can never gain an event handler, so leave it alone.
+        if (!class_exists('\WP_HTML_Tag_Processor')) {
+            return $content;
+        }
+
+        $processor = new \WP_HTML_Tag_Processor($content);
+
+        while ($processor->next_tag()) {
+            foreach ((array) $processor->get_attribute_names_with_prefix('') as $name) {
+                if (element_pack_uikit_attrs_attribute_name($name)) {
+                    $processor->remove_attribute($name);
+                }
+            }
+        }
+
+        return $processor->get_updated_html();
+    }
+}
+
 if (!function_exists('element_pack_sanitize_uikit_attributes')) {
     function element_pack_sanitize_uikit_attributes($content) {
         if (!is_string($content) || '' === $content) {
@@ -221,17 +288,10 @@ if (!function_exists('element_pack_sanitize_uikit_attributes')) {
         }
 
         // UIkit's data() helper reads both the bare and the `data-` prefixed form.
-        $stripped = preg_replace(
-            '/\s(?:data-)?attrs\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+)/i',
-            '',
-            $content
-        );
-
-        // PCRE returns null if it hits the backtrack/recursion limit on very
-        // large documents; keep the original content rather than blanking it.
-        if (null !== $stripped) {
-            $content = $stripped;
-        }
+        // Removed as real attributes of a tag, never by pattern: see
+        // element_pack_remove_uikit_attrs_attributes() for why a quote-blind
+        // pattern here was itself an XSS vector.
+        $content = element_pack_remove_uikit_attrs_attributes($content);
 
         $filtered = preg_replace_callback(
             '/(\s(?:data-)?bdt-[\w-]+\s*=\s*)(["\'])(.*?)\2/is',
@@ -274,8 +334,14 @@ if (!function_exists('element_pack_register_uikit_content_guard')) {
 
         // Defence in depth: also clean payloads at rest, so already-stored
         // content stops being a liability outside the_content (feeds, REST).
-        add_filter('content_save_pre', 'element_pack_sanitize_uikit_attributes_on_save', 11);
-        add_filter('excerpt_save_pre', 'element_pack_sanitize_uikit_attributes_on_save', 11);
+        //
+        // Priority 5, i.e. BEFORE wp_filter_post_kses() at 10, and alongside
+        // Content_Guard. A sanitizer that rewrites markup must never run after
+        // kses on a save: whatever it changes is persisted with no further
+        // checking, so a bug here (as in the quote-blind `attrs=` pattern this
+        // replaced) re-arms content kses had already made safe.
+        add_filter('content_save_pre', 'element_pack_sanitize_uikit_attributes_on_save', 5);
+        add_filter('excerpt_save_pre', 'element_pack_sanitize_uikit_attributes_on_save', 5);
     }
     add_action('init', 'element_pack_register_uikit_content_guard');
 }

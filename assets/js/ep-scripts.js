@@ -1791,6 +1791,40 @@
 (function ($, elementor) {
   'use strict';
   var serachTimer;
+
+  /**
+   * Find the element named by the "Section / Widget Selector" setting, strictly
+   * as a CSS selector.
+   *
+   * Never pass the setting to $(): jQuery treats a string that starts with `<`
+   * as HTML and builds it, so a stored `<img src=x onerror=…>` ran its handler
+   * on page load. find() only ever runs a selector query; an invalid selector
+   * throws, and is treated as matching nothing.
+   */
+  var findConnectedElement = function (selector) {
+    if (typeof selector !== 'string' || !selector.trim()) {
+      return $();
+    }
+
+    try {
+      return $(document).find(selector);
+    } catch (e) {
+      return $();
+    }
+  };
+
+  /**
+   * Escape text for insertion into an HTML string.
+   */
+  var escapeHtml = function (value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  };
+
   var widgetAjaxSearch = function ($scope, $) {
     var $searchContainer = $scope.find('.bdt-search-container'),
       $searchWidget = $scope.find('.bdt-ajax-search');
@@ -1819,7 +1853,7 @@
     clearTimeout(serachTimer);
 
     if ($connectSettings && $connectSettings.element_connect) {
-      $($connectSettings.element_selector).hide();
+      findConnectedElement($connectSettings.element_selector).hide();
     }
 
     $($searchWidget).on('keyup keypress', function (e) {
@@ -1881,7 +1915,7 @@
               if ($search.length > 3) {
                 var not_found = `<div class="bdt-search-result-inner">
                                   <h3 class="bdt-search-result-header">${window.ElementPackConfig.search.search_result}<i class="ep-icon-close bdt-search-result-close-btn"></i></h3>
-                                  <div class="bdt-search-text">${$search} ${window.ElementPackConfig.search.not_found}</div>
+                                  <div class="bdt-search-text">${escapeHtml($search)} ${window.ElementPackConfig.search.not_found}</div>
                                 </div>`;
                 $resultHolder.html(not_found);
                 $resultHolder.show();
@@ -1894,7 +1928,7 @@
                 if ($connectSettings && $connectSettings.element_connect) {
                   $resultHolder.hide();
                   setTimeout(function () {
-                    $($connectSettings.element_selector).show();
+                    findConnectedElement($connectSettings.element_selector).show();
                   }, 1500);
                 }
 

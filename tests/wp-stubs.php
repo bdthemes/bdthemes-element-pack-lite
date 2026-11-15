@@ -114,6 +114,8 @@ function wp_json_encode($data, $options = 0, $depth = 512) {
 
 function add_filter($hook, $callback, $priority = 10, $accepted_args = 1) {
     $GLOBALS['__wp_hooks'][$hook][] = $callback;
+    // Recorded apart from __wp_hooks so code that reads that registry keeps working.
+    $GLOBALS['__wp_hook_priorities'][$hook][] = [$callback, $priority];
     return true;
 }
 
