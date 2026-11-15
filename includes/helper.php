@@ -1267,6 +1267,8 @@ function element_pack_load_svg( $icon ) {
 	return $svg;
 }
 
+require_once __DIR__ . '/security-helpers.php';
+
 /**
  * weather code to icon and description output
  * more info: http://www.apixu.com/doc/Apixu_weather_conditions.json

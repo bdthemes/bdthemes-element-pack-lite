@@ -31513,21 +31513,12 @@ trait Global_Controls_Functions {
 					<?php elseif ('line' != $settings['title_separator_type'] ) : ?>
 						<div class="bdt-lottie-icon-box-separator-wrap">
 							<?php
-							// basename() strips any path separators / traversal so the
-							// SELECT value can only ever resolve a file inside the
-							// bundled divider directory — include() executes PHP, so
-							// the path must never be steerable outside this folder.
-							$separator_type = basename( (string) $settings['title_separator_type'] );
-							$svg_image      = BDTEP_ASSETS_PATH . 'images/divider/' . $separator_type . '.svg';
+							// Only a bundled divider name is accepted, the resolved path
+							// must stay inside the divider folder, and the file is read,
+							// never include()d as PHP (see element_pack_divider_svg()).
+							$svg_image = element_pack_divider_svg( $settings['title_separator_type'] );
 
-							if ( '' !== $separator_type && file_exists( $svg_image ) ) {
-
-								ob_start();
-
-								include( $svg_image );
-
-								$svg_image = ob_get_clean();
-
+							if ( $svg_image ) {
 								echo wp_kses( $svg_image, element_pack_allow_tags('svg') );
 							}
 							?>

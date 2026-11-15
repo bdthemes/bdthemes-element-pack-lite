@@ -546,8 +546,10 @@ class Element_Pack_Loader {
             return '';
         }
 
+        // Shortcode attributes are author-controlled: only render what the viewer may read.
+        // Passes false for $with_css to keep this shortcode's existing output unchanged.
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor renders and escapes this document markup itself; escaping again would corrupt the output.
-        return self::elementor()->frontend->get_builder_content_for_display($id);
+        return element_pack_render_template($id, false);
     }
 
 

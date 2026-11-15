@@ -289,8 +289,9 @@ class Element_Pack_Rooten_Theme_Compatibility {
 
         // return self::$elementor_instance->frontend->get_builder_content_for_display($id);
         // Using the correct Elementor method to get builder content
+        // Shortcode attributes are author-controlled: only render what the viewer may read.
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor renders and escapes this document markup itself; escaping again would corrupt the output.
-        return Plugin::instance()->frontend->get_builder_content_for_display($id, true);
+        return element_pack_render_template($id, true);
     }
 }
 
