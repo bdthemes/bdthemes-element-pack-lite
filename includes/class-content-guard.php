@@ -33,9 +33,10 @@ final class Content_Guard {
 
 	/**
 	 * A UIkit component attribute, with or without the `data-` prefix, inside a tag.
-	 * Matches the attribute name and its value in any of the three HTML quoting forms,
-	 * whether the attribute follows whitespace or a stray `/`.
-	 * Only used where WP_HTML_Tag_Processor is unavailable.
+	 *
+	 * @deprecated No longer used: stripping attributes with it was an XSS vector
+	 * (its `[^\s>]+` branch can eat an enclosing attribute's closing quote).
+	 * Kept only so anything that referenced the constant keeps working.
 	 */
 	const ATTRIBUTE_PATTERN = '/[\s\/]+(?:data-)?bdt-[^\s\/>=]*(?:\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+))?/i';
 
@@ -120,7 +121,7 @@ final class Content_Guard {
 	 * @return string
 	 */
 	public static function strip_component_attributes( $html ) {
-		if ( false === stripos( $html, 'bdt-' ) ) {
+		if ( false === stripos( $html, 'bdt-' ) && false === stripos( $html, 'attrs' ) ) {
 			return $html;
 		}
 
@@ -132,13 +133,32 @@ final class Content_Guard {
 
 		while ( $processor->next_tag() ) {
 			foreach ( (array) $processor->get_attribute_names_with_prefix( '' ) as $name ) {
-				if ( self::is_component_attribute( $name ) ) {
+				if ( self::is_removable_attribute( $name ) ) {
 					$processor->remove_attribute( $name );
 				}
 			}
 		}
 
 		return $processor->get_updated_html();
+	}
+
+	/**
+	 * Whether an attribute should be removed from untrusted markup.
+	 *
+	 * Either a `bdt-*` component attribute or UIkit's generic `attrs` carrier,
+	 * which applies its value as arbitrary attributes on the element. Neither is
+	 * ever emitted by a widget into content that passes through these filters.
+	 *
+	 * @param string $name Attribute name.
+	 * @return bool
+	 */
+	public static function is_removable_attribute( $name ) {
+		if ( self::is_component_attribute( $name ) ) {
+			return true;
+		}
+
+		return function_exists( 'element_pack_uikit_attrs_attribute_name' )
+			&& \element_pack_uikit_attrs_attribute_name( $name );
 	}
 
 	/**
@@ -161,25 +181,24 @@ final class Content_Guard {
 	}
 
 	/**
-	 * Fallback for an environment without the HTML API (WordPress < 6.2): strip by
-	 * pattern. A tag runs to its closing `>`, skipping any `>` inside a quoted
-	 * attribute value, so a component option such as `template: <img ...>` is
-	 * removed whole.
+	 * Fallback for an environment without the HTML API (WordPress < 6.2, below this
+	 * plugin's minimum): leave the markup unchanged.
+	 *
+	 * This used to strip attributes with ATTRIBUTE_PATTERN, but no pattern can tell
+	 * where a browser considers an attribute value to start and end. Its `[^\s>]+`
+	 * branch could eat an enclosing attribute's closing quote, collapsing the
+	 * attribute boundary and promoting inert text into a live event handler: the
+	 * same defect that made the `attrs=` pattern in element-pack-filters.php an XSS
+	 * vector. A hand-written quote-aware scanner was tried in its place, and fuzzing
+	 * it against WP_HTML_Tag_Processor still found inputs it re-armed. An unchanged
+	 * document can never gain an event handler, and kses still runs on the save.
+	 *
+	 * Kept as a method so the call site and its tests stay stable.
 	 *
 	 * @param string $html Markup.
 	 * @return string
 	 */
 	private static function strip_component_attributes_by_pattern( $html ) {
-		$stripped = preg_replace_callback(
-			'/<[a-zA-Z][^>"\']*(?:(?:"[^"]*"|\'[^\']*\')[^>"\']*)*>/',
-			function ( $match ) {
-				$tag = preg_replace( self::ATTRIBUTE_PATTERN, ' ', $match[0] );
-
-				return null === $tag ? $match[0] : $tag;
-			},
-			$html
-		);
-
-		return null === $stripped ? $html : $stripped;
+		return $html;
 	}
 }

@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.5
+Stable tag: 10.0.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.6 [15th November 2026] =
+
+* Security: Fixed stored XSS in post content, where removing a UIkit attrs option could join neighbouring attributes and turn content WordPress had already made safe into a script (reported by Dthangws via Patchstack)
+* Security: Fixed stored XSS in the Search widget, where the Section / Widget Selector setting could run a script when the page loaded (reported by nh4tvd via Patchstack)
+* Security: Elementor templates selected in Accordion, Content Switcher, Slider, Toggle, the Elementor Template widget or the rooten_custom_template shortcode are now shown only to visitors who may read them, so private, draft and pending content no longer appears
 
 = 10.0.5 [10th November 2026] =
 

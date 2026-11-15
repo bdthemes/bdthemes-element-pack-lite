@@ -1712,6 +1712,40 @@ class Search extends Module_Base {
 
 		return $post_types;
 	}
+	/**
+	 * Reduce the "Section / Widget Selector" setting to a plain CSS selector.
+	 *
+	 * The control is free text that any user who can edit with Elementor may fill
+	 * in, and the frontend uses the value to find an element on the page, so
+	 * anything that is not a selector is dropped rather than repaired. In
+	 * particular `<` (jQuery treats a string starting with it as HTML to create)
+	 * and `&` (which lets `&lt;` survive kses and be decoded back to `<` in the
+	 * browser) can never appear in a selector this widget needs.
+	 *
+	 * @param mixed $selector Raw setting value.
+	 * @return string The selector, or '' when it is not a plain CSS selector.
+	 */
+	protected function sanitize_element_selector($selector) {
+		if (!is_string($selector)) {
+			return '';
+		}
+
+		$selector = trim($selector);
+
+		if ('' === $selector || strlen($selector) > 200) {
+			return '';
+		}
+
+		// IDs, classes, tags, attribute selectors, combinators and pseudo-classes
+		// such as `:not(.a)` or `:nth-child(2)`. No `<`, `&`, backslashes, `;`,
+		// braces, slashes or backticks.
+		if (!preg_match('/^[A-Za-z0-9_\-\s#.,>+~:()\[\]="\'*^$|]+$/', $selector)) {
+			return '';
+		}
+
+		return $selector;
+	}
+
 	public function render() {
 		$settings    = $this->get_settings_for_display();
 		$current_url = remove_query_arg('fake_arg');
@@ -1721,12 +1755,22 @@ class Search extends Module_Base {
 			'class' => 'bdt-search-container'
 		]);
 
-		if (isset($settings['element_connect']) && !empty($settings['element_selector']) && true !== $this->ep_is_edit_mode()) {
+		$element_selector = isset($settings['element_selector']) ? $this->sanitize_element_selector($settings['element_selector']) : '';
+
+		if (isset($settings['element_connect']) && '' !== $element_selector && true !== $this->ep_is_edit_mode()) {
 			$this->add_render_attribute('search_container', [
-				'data-settings' => wp_json_encode([
-					'element_connect'  => true,
-					'element_selector' => !empty($settings['element_selector']) ? $settings['element_selector'] : ''
-				])
+				// JSON_HEX_* so no `<`, `>`, `&` or quote reaches the attribute literally.
+				// Without them a stored `&lt;img …&gt;` came out of esc_attr() unchanged
+				// (it does not re-encode existing entities), the browser decoded it back
+				// to `<img …>` when reading the attribute, and the frontend script
+				// handed that string to $(), which builds HTML from it.
+				'data-settings' => wp_json_encode(
+					[
+						'element_connect'  => true,
+						'element_selector' => $element_selector,
+					],
+					JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_HEX_APOS
+				)
 			]);
 		}
 

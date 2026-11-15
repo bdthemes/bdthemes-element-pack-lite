@@ -114,6 +114,8 @@ function wp_json_encode($data, $options = 0, $depth = 512) {
 
 function add_filter($hook, $callback, $priority = 10, $accepted_args = 1) {
     $GLOBALS['__wp_hooks'][$hook][] = $callback;
+    // Recorded apart from __wp_hooks so code that reads that registry keeps working.
+    $GLOBALS['__wp_hook_priorities'][$hook][] = [$callback, $priority];
     return true;
 }
 
@@ -236,4 +238,34 @@ function wp_unslash( $value ) {
 
 function wp_slash( $value ) {
 	return is_string( $value ) ? addslashes( $value ) : $value;
+}
+
+// --- Posts (minimal, for render-permission helpers) -------------------------
+$GLOBALS['__wp_posts'] = [];
+
+/** Replace the in-memory post table: [ id => [ 'post_status' => …, 'post_password' => … ] ]. */
+function __wp_reset_posts( array $posts = [] ) {
+	$GLOBALS['__wp_posts'] = $posts;
+}
+
+function get_post( $post = null ) {
+	$id = is_object( $post ) ? (int) $post->ID : (int) $post;
+	if ( ! isset( $GLOBALS['__wp_posts'][ $id ] ) ) {
+		return null;
+	}
+	return (object) array_merge( [ 'ID' => $id, 'post_status' => 'publish', 'post_password' => '' ], $GLOBALS['__wp_posts'][ $id ] );
+}
+
+function get_post_status( $post = null ) {
+	$p = get_post( $post );
+	return $p ? $p->post_status : false;
+}
+
+function post_password_required( $post = null ) {
+	$p = get_post( $post );
+	return $p && '' !== (string) $p->post_password;
+}
+
+function absint( $maybeint ) {
+	return abs( (int) $maybeint );
 }

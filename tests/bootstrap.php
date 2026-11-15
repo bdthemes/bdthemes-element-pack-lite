@@ -33,6 +33,9 @@ if (!defined('BDTEP_URL')) {
 if (!defined('BDTEP_ASSETS_URL')) {
     define('BDTEP_ASSETS_URL', BDTEP_URL . 'assets/');
 }
+if (!defined('BDTEP_ASSETS_PATH')) {
+    define('BDTEP_ASSETS_PATH', $root . '/assets/');
+}
 
 // --- WordPress stub layer (must precede the plugin source) -----------------
 require __DIR__ . '/wp-stubs.php';
@@ -45,3 +48,4 @@ require __DIR__ . '/wp-core-html.php';
 require $root . '/admin/module-settings.php';
 require $root . '/includes/element-pack-filters.php';
 require $root . '/includes/class-content-guard.php';
+require $root . '/includes/security-helpers.php';
