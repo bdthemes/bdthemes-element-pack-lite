@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.7
+Stable tag: 10.0.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.8 [16th November 2026] =
+
+* Security: Fixed stored XSS in the Tooltip extension, where its HTML filter could let some markup through; tooltip HTML is now filtered with the browser's own HTML parser, and links using javascript:, vbscript: or data: are removed
 
 = 10.0.7 [16th November 2026] =
 
