@@ -120,7 +120,7 @@ class Module extends Element_Pack_Module_Base {
             }
 
             // Get widget settings to check if contact number is required
-            $widget_settings = $this->get_widget_settings($post_id, $widget_id);
+            $widget_settings = $this->get_request_form_settings($post_id, $widget_id, 'bdt-contact-form');
             $contact_required = isset($widget_settings['contact_number_required']) && $widget_settings['contact_number_required'] === 'yes';
 
             // Read the Receive IP Information toggle from the stored widget settings rather
@@ -194,7 +194,7 @@ class Module extends Element_Pack_Module_Base {
             }
 
             /** Recaptcha*/
-            if ($this->is_recaptcha_required($post_id, $widget_id, 'show_recaptcha')) {
+            if ($this->is_recaptcha_required($post_id, $widget_id, 'show_recaptcha', 'bdt-contact-form')) {
                 if (!empty($ep_api_settings['recaptcha_site_key']) and !empty($ep_api_settings['recaptcha_secret_key'])) {
                     if (!$this->is_valid_captcha()) {
                         $error  = true;

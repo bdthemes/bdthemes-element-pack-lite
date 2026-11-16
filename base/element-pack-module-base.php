@@ -88,6 +88,54 @@ abstract class Element_Pack_Module_Base extends Module {
      *
      * @return bool
      */
+    /**
+     * Saved settings of the form widget a front-end request names, or null.
+     *
+     * The page and widget IDs are posted by the browser, so they are only trusted when they name a
+     * widget of $widget_type on a page the visitor can view (published and not password
+     * protected) or the current user can edit. An Elementor Pro global widget resolves to the
+     * template it references.
+     *
+     * @param int|string $post_id     Page, post or template ID from the request.
+     * @param mixed      $widget_id   Elementor element ID from the request.
+     * @param string     $widget_type Expected widget name, e.g. 'bdt-contact-form'.
+     * @return array|null
+     */
+    protected function get_request_form_settings($post_id, $widget_id, $widget_type) {
+        $post_id   = absint($post_id);
+        $widget_id = is_scalar($widget_id) ? (string) $widget_id : '';
+
+        if (!$post_id || '' === $widget_id || !get_post($post_id)) {
+            return null;
+        }
+
+        $viewable = 'publish' === get_post_status($post_id) && !post_password_required($post_id);
+        if (!$viewable && !current_user_can('edit_post', $post_id)) {
+            return null;
+        }
+
+        $document = Plugin::$instance->documents->get($post_id);
+        if (!$document) {
+            return null;
+        }
+
+        $element = $this->find_element_recursive((array) $document->get_elements_data(), $widget_id);
+
+        if ($element && 'global' === ($element['widgetType'] ?? '') && !empty($element['templateID'])) {
+            $global  = Plugin::$instance->documents->get(absint($element['templateID']));
+            $data    = $global ? (array) $global->get_elements_data() : [];
+            $element = !empty($data[0]) ? array_merge($data[0], ['id' => $widget_id]) : null;
+        }
+
+        if (!$element || $widget_type !== ($element['widgetType'] ?? '')) {
+            return null;
+        }
+
+        $widget = Plugin::$instance->elements_manager->create_element_instance($element);
+
+        return $widget ? (array) $widget->get_settings() : null;
+    }
+
     protected function has_recaptcha_keys() {
         $api_settings = get_option('element_pack_api_settings');
 
@@ -168,7 +216,28 @@ abstract class Element_Pack_Module_Base extends Module {
      * @param string $setting_key Widget control holding the on/off flag.
      * @return bool
      */
-    protected function is_recaptcha_required($post_id, $widget_id, $setting_key) {
+    protected function is_recaptcha_required($post_id, $widget_id, $setting_key, $widget_type = '') {
+        // The page and widget IDs come from the request. When the caller names the form widget
+        // being submitted, the IDs are trusted only if they point at a widget of that type on a
+        // page the visitor may see (get_request_form_settings()); that form's own reCAPTCHA
+        // switch then decides, so a form with reCAPTCHA switched off keeps working on a site
+        // that has keys. Anything else (another widget type such as a Heading, an unknown ID, a
+        // draft or private page) fails closed while keys are configured.
+        if ('' !== $widget_type) {
+            $settings = $this->get_request_form_settings($post_id, $widget_id, $widget_type);
+
+            if (null !== $settings) {
+                return isset($settings[$setting_key]) && 'yes' === $settings[$setting_key];
+            }
+
+            return $this->has_recaptcha_keys();
+        }
+
+        // No form type given: fail closed whenever the site has reCAPTCHA keys configured.
+        if ($this->has_recaptcha_keys()) {
+            return true;
+        }
+
         $settings = $this->get_widget_settings($post_id, $widget_id);
 
         if (is_array($settings) && !empty($settings)) {
