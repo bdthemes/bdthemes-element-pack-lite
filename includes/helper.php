@@ -2633,7 +2633,7 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 
 		// setmeta args
 		$args = [ 
-			'posts_per_page'      => isset( $_POST['per_page'] ) ? absint( wp_unslash( $_POST['per_page'] ) ) : 3,
+			'posts_per_page'      => min( ( isset( $_POST['per_page'] ) ? absint( wp_unslash( $_POST['per_page'] ) ) : 3 ) ?: 3, 50 ),
 			'post_status'         => 'publish',
 			'suppress_filters'    => false,
 			'order'               => $posts_order,
@@ -2762,6 +2762,8 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 			 * Make Current Query
 			 */
 			$args = $GLOBALS['wp_query']->query_vars;
+			$args['post_status'] = 'publish';
+			unset( $args['post_password'], $args['perm'] );
 			// unset($args['paged']);
 			$args['paged']  = isset( $_POST['paged'] ) ? max( 1, absint( wp_unslash( $_POST['paged'] ) ) ) : 1;
 			$args['offset'] = isset( $_POST['offset'] ) ? absint( wp_unslash( $_POST['offset'] ) ) : 0;

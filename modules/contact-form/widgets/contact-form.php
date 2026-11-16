@@ -1426,7 +1426,12 @@ class Contact_Form extends Module_Base {
 					<input type="hidden" class="widget_id" name="widget_id" value="<?php
 					echo esc_attr( $id ); ?>" />
 					<input type="hidden" name="<?php echo esc_attr( $form_id ); ?>" value="true" />
-					<input type="hidden" class="page_id" name="page_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+					<?php
+			// The document holding this widget (a template when the form sits in a popup, header or
+			// footer), so the submit handler can find this form's saved settings.
+			$ep_form_document = \Elementor\Plugin::$instance->documents->get_current();
+			?>
+			<input type="hidden" class="page_id" name="page_id" value="<?php echo esc_attr( $ep_form_document ? $ep_form_document->get_main_id() : get_the_ID() ); ?>" />
 
 					<div <?php $this->print_render_attribute_string( 'submit-group' ); ?>>
 						<button type="submit" <?php $this->print_render_attribute_string( 'button' ); ?>>

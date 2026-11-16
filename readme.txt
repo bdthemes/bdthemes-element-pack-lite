@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.6
+Stable tag: 10.0.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,14 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.7 [16th November 2026] =
+
+* Security: Fixed a reCAPTCHA bypass in the Contact Form and User Register widgets, where a submission could name a different widget on the site to skip the check (reported by Karamo Njie)
+* Security: Dynamic select fields in the Elementor editor now list only published content of public post types, so Contributors no longer see the titles of other users' drafts or private posts
+* Security: The weForms widget now rejects event-handler and style attributes passed through its shortcode attributes
+* Security: Loading more posts with AJAX now returns only published posts, and at most 50 per request
+* Fixed: Contact Form and User Register forms placed in a template, such as a header, footer or popup, were refused when reCAPTCHA keys were set, even with reCAPTCHA switched off for that form
 
 = 10.0.6 [15th November 2026] =
 

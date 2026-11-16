@@ -2374,7 +2374,12 @@ class User_Register extends Module_Base {
 				do_action( 'element_pack_google_rechatcha_render', $this, 'onLoadElementPackRegisterCaptcha', 'button' );
 			}
 			?>
-			<input type="hidden" class="page_id" name="page_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+			<?php
+			// The document holding this widget (a template when the form sits in a popup, header or
+			// footer), so the submit handler can find this form's saved settings.
+			$ep_form_document = \Elementor\Plugin::$instance->documents->get_current();
+			?>
+			<input type="hidden" class="page_id" name="page_id" value="<?php echo esc_attr( $ep_form_document ? $ep_form_document->get_main_id() : get_the_ID() ); ?>" />
 
 			<?php if ( 'yes' !== $settings['remove_first_name'] ) : ?>
 				<div <?php $this->print_render_attribute_string( 'field-group' ); ?>>

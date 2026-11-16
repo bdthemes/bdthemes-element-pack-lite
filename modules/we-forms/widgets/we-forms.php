@@ -704,8 +704,13 @@ class We_Forms extends Module_Base {
 						$attr[1] = '';
 					}
 
-					if ( ! in_array( strtolower( $attr[0] ), $reserved_attr ) ) {
-						$this->add_render_attribute( 'shortcode', trim( $attr[0] ), trim( $attr[1] ) );
+					$attr_key = trim( $attr[0] );
+					$attr_val = trim( $attr[1] );
+					if ( ! preg_match( '/^[A-Za-z][A-Za-z0-9_:-]*$/', $attr_key ) || 0 === stripos( $attr_key, 'on' ) || 'style' === strtolower( $attr_key ) ) {
+						continue; // reject event handlers, style, and non-simple attribute names
+					}
+					if ( ! in_array( strtolower( $attr_key ), $reserved_attr ) ) {
+						$this->add_render_attribute( 'shortcode', $attr_key, $attr_val );
 					}
 				}
 			}

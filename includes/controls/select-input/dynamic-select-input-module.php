@@ -183,13 +183,21 @@ class Dynamic_Select_Input_Module {
         $args = [];
 
         if ($this->getPostType() && $this->getPostType() !== '_related_post_type') {
-            $args['post_type'] = $this->getPostType();
+            $post_type = $this->getPostType();
+            // Restrict to registered public post types to prevent arbitrary post_type enumeration.
+            if (!in_array($post_type, get_post_types(['public' => true]), true)) {
+                $post_type = 'post';
+            }
+            $args['post_type'] = $post_type;
         } else {
             $args['post_type'] = $this->getAllPublicPostTypes();
         }
 
         if ($this->getPostType() == 'attachment') {
             $args['post_status'] = 'inherit';
+        } else {
+            // Only expose published content (avoid leaking other authors' drafts).
+            $args['post_status'] = 'publish';
         }
 
         if (!empty($include)) {
@@ -308,7 +316,15 @@ class Dynamic_Select_Input_Module {
 
         $args = [];
 
-        $args['post_type'] = $post_type;
+        // Restrict to registered public post types to prevent arbitrary post_type enumeration.
+        $public_types = get_post_types(['public' => true]);
+        if (!in_array($post_type, $public_types, true)) {
+            $post_type = 'post';
+        }
+
+        $args['post_type']   = $post_type;
+        // Only expose published content (avoid leaking other authors' drafts).
+        $args['post_status'] = 'publish';
 
         if (!empty($include)) {
             $args['post__in']       = $include;
