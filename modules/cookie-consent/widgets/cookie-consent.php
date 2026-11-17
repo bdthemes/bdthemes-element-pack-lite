@@ -844,9 +844,12 @@ class Cookie_Consent extends Module_Base {
 							'position' => $position,
 							'static'   => ( 'top' === $position && ! empty( $settings['pushdown'] ) ),
 							'content'  => [ 
-								'message'     => esc_html( $settings['message'] ),
-								'dismiss'     => esc_html( $settings['button_text'] ),
-								'link'        => esc_html( $settings['learn_more_text'] ),
+								// Plain text (entities decoded, as the browser showed them before), JSON-encoded:
+								// the handler escapes it before the banner is built,
+								// so markup imitating this widget cannot get around the escaping.
+								'message'     => html_entity_decode( (string) $settings['message'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ),
+								'dismiss'     => html_entity_decode( (string) $settings['button_text'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ),
+								'link'        => html_entity_decode( (string) $settings['learn_more_text'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ),
 								'href'        => esc_url( $settings['learn_more_link']['url'] ),
 							],
 							'linkAttributes' => (object) $link_attributes,
