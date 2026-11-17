@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.8
+Stable tag: 10.0.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.9 [17th November 2026] =
+
+* Fixed: Tooltip extension and the Icon Mobile Menu, Image Stack, Logo Grid and Scrollnav tooltips: they failed with "createPopper is not a function" on themes that load their own Popper 1, such as Hairly; Element Pack now loads its own Popper 2 for its tooltips and leaves the theme's Popper untouched
 
 = 10.0.8 [16th November 2026] =
 
