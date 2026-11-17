@@ -214,6 +214,39 @@ class Element_Pack_Loader {
     }
 
     /**
+     * Register Popper 2 and Tippy 6 for the Tooltip extension and the tooltip widgets.
+     *
+     * Some themes (Hairly, Bootstrap 4 themes) load Popper 1 under the plain "popper"
+     * handle and the global `window.Popper`. Tippy 6 needs Popper 2's `createPopper`, so
+     * either one broke every tooltip with "createPopper is not a function": a theme
+     * that registered "popper" first made WordPress drop ours, and a theme global loaded
+     * in between replaced ours before Tippy read it. So the libraries use our own
+     * handles, Tippy depends on Popper, and Tippy is handed our Popper 2 while the
+     * theme's `window.Popper` is put back for the theme's own code.
+     *
+     * The old "popper" and "tippyjs" handles stay as aliases for code that still
+     * enqueues them; when a theme already owns one, the theme keeps it.
+     *
+     * @return void
+     */
+    public static function register_tooltip_scripts() {
+        if (wp_script_is('bdt-tippyjs', 'registered')) {
+            return;
+        }
+
+        wp_register_script('bdt-popper', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', [], BDTEP_VER, true);
+        wp_add_inline_script('bdt-popper', 'window.bdtPopperPrev=window.Popper;', 'before');
+        wp_add_inline_script('bdt-popper', 'window.bdtPopper=window.Popper;if(window.bdtPopperPrev){window.Popper=window.bdtPopperPrev;}', 'after');
+
+        wp_register_script('bdt-tippyjs', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', ['jquery', 'bdt-popper'], BDTEP_VER, true);
+        wp_add_inline_script('bdt-tippyjs', 'window.bdtPopperPrev=window.Popper;window.Popper=window.bdtPopper;', 'before');
+        wp_add_inline_script('bdt-tippyjs', 'if(window.bdtPopperPrev){window.Popper=window.bdtPopperPrev;}', 'after');
+
+        wp_register_script('popper', false, ['bdt-popper'], BDTEP_VER, true);
+        wp_register_script('tippyjs', false, ['bdt-tippyjs'], BDTEP_VER, true);
+    }
+
+    /**
      * Register all script that need for any specific widget on call basis.
      * @return [type] [description]
      */
@@ -247,8 +280,7 @@ class Element_Pack_Loader {
             wp_register_script('imagezoom', BDTEP_ASSETS_URL . 'vendor/js/jquery.imagezoom.min.js', ['jquery'], BDTEP_VER, true);
         }
         if (element_pack_is_widget_enabled('logo-grid')) {
-            wp_register_script('popper', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', ['jquery'], '2.11.8', true);
-            wp_register_script('tippyjs', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', ['jquery'], '6.3.7', true);
+            self::register_tooltip_scripts();
         }
         //advanced-image-gallery
         if (element_pack_is_widget_enabled('custom-gallery') or element_pack_is_widget_enabled('tutor-lms-course-grid')) {

@@ -44,9 +44,9 @@ class Scrollnav extends Module_Base {
 
 	public function get_script_depends() {
 		if ( $this->ep_is_edit_mode() ) {
-			return [ 'popper', 'tippyjs', 'ep-scripts' ];
+			return [ 'bdt-tippyjs', 'ep-scripts' ];
 		} else {
-			return [ 'popper', 'tippyjs', 'ep-scrollnav' ];
+			return [ 'bdt-tippyjs', 'ep-scrollnav' ];
 		}
 	}
 

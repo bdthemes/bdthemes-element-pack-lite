@@ -46,7 +46,7 @@ class Icon_Mobile_Menu extends Module_Base {
 	}
 
 	public function get_script_depends() {
-		return $this->ep_is_edit_mode() ? [ 'popper', 'tippyjs', 'ep-scripts' ] : [ 'popper', 'tippyjs', 'ep-icon-mobile-menu' ];
+		return $this->ep_is_edit_mode() ? [ 'bdt-tippyjs', 'ep-scripts' ] : [ 'bdt-tippyjs', 'ep-icon-mobile-menu' ];
 	}
 
 	public function get_custom_help_url() {

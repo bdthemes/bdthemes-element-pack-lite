@@ -427,12 +427,10 @@ class Module extends Element_Pack_Module_Base {
 	public function enqueue_scripts() {
 
 		wp_register_style( 'tippy', BDTEP_ASSETS_URL . 'css/tippy.css', [], BDTEP_VER );
-		wp_register_script( 'popper', BDTEP_ASSETS_URL . 'vendor/js/popper.min.js', [ 'jquery' ], BDTEP_VER, true );
-		wp_register_script( 'tippyjs', BDTEP_ASSETS_URL . 'vendor/js/tippy.all.min.js', [ 'jquery' ], BDTEP_VER, true );
+		\ElementPack\Element_Pack_Loader::register_tooltip_scripts();
 
 		if ( \ElementPack\Element_Pack_Loader::elementor()->preview->is_preview_mode() || \ElementPack\Element_Pack_Loader::elementor()->editor->is_edit_mode() ) {
-			wp_enqueue_script( 'popper' );
-			wp_enqueue_script( 'tippyjs' );
+			wp_enqueue_script( 'bdt-tippyjs' );
 			wp_enqueue_style( 'tippy' );
 		}
 	}
@@ -441,8 +439,7 @@ class Module extends Element_Pack_Module_Base {
 		if ( 'yes' === $widget->get_settings_for_display( 'element_pack_widget_tooltip' ) ) {
 			$this->enqueue_scripts();
 			wp_enqueue_style( 'tippy' );
-			wp_enqueue_script( 'popper' );
-			wp_enqueue_script( 'tippyjs' );
+			wp_enqueue_script( 'bdt-tippyjs' );
 			wp_enqueue_script( 'ep-tooltip' );
 		}
 	}

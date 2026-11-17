@@ -43,7 +43,7 @@ class Image_Stack extends Module_Base {
 	}
 
 	public function get_script_depends() {
-		return $this->ep_is_edit_mode() ? [ 'popper', 'tippyjs', 'ep-scripts' ] : [ 'popper', 'tippyjs', 'ep-image-stack' ];
+		return $this->ep_is_edit_mode() ? [ 'bdt-tippyjs', 'ep-scripts' ] : [ 'bdt-tippyjs', 'ep-image-stack' ];
 	}
 
 	public function get_custom_help_url() {
