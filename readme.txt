@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.9
+Stable tag: 10.0.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,12 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.10 [17th November 2026] =
+
+* Security: Search: password-protected posts and pages no longer appear in the live search results of logged-in users, whose results included their title, link and the start of their text without the password being entered
+* Security: Slider, Panel Slider and the carousel widgets: options are now checked before they reach the carousel library, so page text made to look like one of these widgets (for example in an approved comment) can no longer run scripts
+* Security: Cookie Consent: the banner now builds its text and settings itself and escapes them, so page text made to look like the widget can no longer run scripts
 
 = 10.0.9 [17th November 2026] =
 
