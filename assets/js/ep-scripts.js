@@ -446,12 +446,48 @@
         const settings     = parseData('settings');
         const gtagSettings = parseData('gtag');
 
-        const { linkAttributes, ...consentSettings } = settings || {};
+        // data-settings is read from the page, and markup that imitates this widget reaches
+        // this handler too. The cookieconsent library builds the banner with innerHTML, so
+        // only the widget's own options are copied, and every text is escaped here.
+        const source  = settings && typeof settings === 'object' ? settings : {};
+        const content = source.content && typeof source.content === 'object' ? source.content : {};
+        const cookie  = source.cookie && typeof source.cookie === 'object' ? source.cookie : {};
+        const linkAttributes = source.linkAttributes;
 
-        // The library turns `position` into the banner's class attribute via innerHTML,
-        // so only the widget's own options are passed through.
-        if (!['bottom', 'bottom-left', 'bottom-right', 'top'].includes(consentSettings.position)) {
-            consentSettings.position = 'bottom';
+        const escapeText = (value) => String(value == null ? '' : value).replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[char]));
+
+        const safeHref = (value) => {
+            if (typeof value !== 'string' || value === '') return '';
+            try {
+                const url = new URL(value, window.location.href);
+                return ['http:', 'https:'].includes(url.protocol) ? escapeText(url.href) : '';
+            } catch (e) {
+                return '';
+            }
+        };
+
+        const position   = ['bottom', 'bottom-left', 'bottom-right', 'top'].includes(source.position) ? source.position : 'bottom';
+        const expiryDays = Number(cookie.expiryDays);
+
+        const consentSettings = {
+            position,
+            static  : position === 'top' && source.static === true,
+            content : {
+                message : escapeText(content.message),
+                dismiss : escapeText(content.dismiss),
+                link    : escapeText(content.link),
+                href    : safeHref(content.href),
+            },
+            cookie  : {
+                name       : 'element_pack_cookie_widget',
+                expiryDays : Number.isFinite(expiryDays) ? expiryDays : 365,
+            },
+        };
+
+        if (typeof cookie.domain === 'string' && /^[a-z0-9.-]+$/i.test(cookie.domain)) {
+            consentSettings.cookie.domain = cookie.domain;
         }
 
         window.cookieconsent.initialise(consentSettings);
@@ -487,11 +523,13 @@
 
         const updateGtagConsent = (args) => gtag('consent', 'update', args);
 
+        const consentValue = (value) => (value === 'granted' ? 'granted' : 'denied');
+
         const gtagConsentObj = {
-            ad_user_data       : gtagSettings.ad_user_data,
-            ad_personalization : gtagSettings.ad_personalization,
-            ad_storage         : gtagSettings.ad_storage,
-            analytics_storage  : gtagSettings.analytics_storage,
+            ad_user_data       : consentValue(gtagSettings.ad_user_data),
+            ad_personalization : consentValue(gtagSettings.ad_personalization),
+            ad_storage         : consentValue(gtagSettings.ad_storage),
+            analytics_storage  : consentValue(gtagSettings.analytics_storage),
         };
 
         document.querySelector('.cc-btn.cc-dismiss')?.addEventListener('click', () => {
@@ -1303,7 +1341,7 @@
 		const Swiper = elementorFrontend.utils.swiper;
 		initSwiper();
 		async function initSwiper() {
-			const swiper = await new Swiper($sliderContainer, $settings);
+			const swiper = await new Swiper($sliderContainer, epSafeSwiperSettings($settings));
 
 			if ($settings.pauseOnHover) {
 				$($sliderContainer).hover(function () {
@@ -1316,7 +1354,7 @@
 
 		if ($widgetSettings.mouseInteractivity == true) {
 			setTimeout(() => {
-				const data = $($widgetSettings.id).find('.bdt-panel-slide-item');
+				const data = $(epSafeSelector($widgetSettings.id)).find('.bdt-panel-slide-item');
 				$(data).each((index, element) => {
 					const scene = $(element).get(0);
 					new Parallax(scene, {
@@ -1709,7 +1747,7 @@
 		const Swiper = elementorFrontend.utils.swiper;
 		initSwiper();
 		async function initSwiper() {
-			var swiper = await new Swiper($reviewCardCarouselContainer, $settings);
+			var swiper = await new Swiper($reviewCardCarouselContainer, epSafeSwiperSettings($settings));
 
 			if ($settings.pauseOnHover) {
 				$($reviewCardCarouselContainer).hover(function () {
@@ -1979,7 +2017,7 @@
 
         async function initSwiper() {
 
-			await new Swiper($sliderContainer, $settings);
+			await new Swiper($sliderContainer, epSafeSwiperSettings($settings));
 
 			if ($settings.pauseOnHover) {
 				 $($sliderContainer).hover(function() {
@@ -2028,7 +2066,7 @@
 
         async function initSwiper() {
 
-			await new Swiper($StaticCarouselContainer, $settings);
+			await new Swiper($StaticCarouselContainer, epSafeSwiperSettings($settings));
 
 			if ($settings.pauseOnHover) {
 				 $($StaticCarouselContainer).hover(function() {
@@ -2382,7 +2420,7 @@
 
 		async function initSwiper() {
 
-			await new Swiper($tutorCarouselContainer, $settings);
+			await new Swiper($tutorCarouselContainer, epSafeSwiperSettings($settings));
 
 			if ($settings.pauseOnHover) {
 				$($tutorCarouselContainer).hover(function () {
@@ -2906,7 +2944,7 @@ jQuery(document).ready(function () {
         
         async function initSwiper() {
 
-			await new Swiper($ProductCarouselContainer, $settings);
+			await new Swiper($ProductCarouselContainer, epSafeSwiperSettings($settings));
 
 			if ($settings.pauseOnHover) {
 				 $($ProductCarouselContainer).hover(function() {

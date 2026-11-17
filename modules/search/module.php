@@ -160,6 +160,8 @@ class Module extends Element_Pack_Module_Base {
 				's'              => sanitize_text_field( $search_input ),
 				'posts_per_page' => $fetch_pool,
 				'post_status'    => 'publish',
+				// Never match password-protected posts: core only excludes them for logged-out users.
+				'has_password'   => false,
 			];
 
 			/**
@@ -252,6 +254,9 @@ class Module extends Element_Pack_Module_Base {
 				$query_posts = array_slice( $query_posts, 0, $response_limit );
 
 				foreach ( $query_posts as $post ) {
+					if ( post_password_required( $post ) ) {
+						continue;
+					}
 					$content = ! empty( $post->post_excerpt ) ? wp_strip_all_tags( strip_shortcodes( $post->post_excerpt ) ) : wp_strip_all_tags( strip_shortcodes( $post->post_content ) );
 					if ( strlen( $content ) > 180 ) {
 						$content = substr( $content, 0, 179 ) . '...';
