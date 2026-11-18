@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.10
+Stable tag: 10.0.11
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.11 [18th November 2026] =
+
+* Security: Toggle: the Widget Selector is now checked to be a plain CSS selector before it is used, so a value entered by a contributor can no longer run scripts on the page; Scroll Button's target selector is checked the same way
 
 = 10.0.10 [17th November 2026] =
 
