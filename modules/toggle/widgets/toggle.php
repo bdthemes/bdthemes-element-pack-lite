@@ -672,6 +672,32 @@ class Toggle extends Module_Base {
         $this->end_controls_section();
     }
 
+    /**
+     * The Widget Selector as a plain CSS selector, or '' when it is not one.
+     *
+     * The field is free text that any user who can edit with Elementor can fill,
+     * and the frontend hands it to jQuery. Entities are decoded first, so an
+     * encoded "<" cannot slip through, and only characters a selector needs
+     * (ids, classes, combinators, attribute and pseudo-class syntax)
+     * are allowed.
+     *
+     * @param mixed $selector Stored setting.
+     * @return string
+     */
+    protected function sanitize_source_selector( $selector ) {
+        if ( ! is_string( $selector ) ) {
+            return '';
+        }
+
+        $selector = trim( html_entity_decode( $selector, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+
+        if ( '' === $selector || strlen( $selector ) > 200 || ! preg_match( '/^[\p{L}\p{M}\p{N}_\-#.\s,>+~:*\[\]=()^$|"\']+$/u', $selector ) ) {
+            return '';
+        }
+
+        return $selector;
+    }
+
     protected function render() {
         $settings = $this->get_settings_for_display();
         $id       = $this->get_id();
@@ -713,14 +739,15 @@ class Toggle extends Module_Base {
                                 "hash_location"        => $settings['hash_location'],
                                 "toggle_initially_open"     => ($settings['toggle_initially_open'] == 'yes') ? 'yes' : ' ',
                                 "by_widget_selector_status" => ($settings['source'] == 'widget') ? 'yes' : 'no',
-                                "source_selector"           => ($settings['source'] == 'widget') ? $settings['source_selector'] : '',
+                                "source_selector"           => ($settings['source'] == 'widget') ? $this->sanitize_source_selector($settings['source_selector']) : '',
                                 "widget_visibility"         => $widget_visibility,
                                 "widget_visibility_tablet"  => $widget_visibility_tablet,
                                 "widget_visibility_mobile"  => $widget_visibility_mobile,
                                 "viewport_lg"               => $viewport_lg,
                                 "viewport_md"               => $viewport_md,
 
-                            ])
+                            ]),
+                            JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP
                         ),
                     ],
                 ],
