@@ -1790,7 +1790,7 @@
 	    	return;
 	    }
 
-			const $selector = $scrollButton.data('selector'),
+			const $selector = epSafeSelector($scrollButton.data('selector')),
 			$settings = $scrollButton.data('settings');
 
 	    if ($settings.HideOnBeforeScrolling == true) {
@@ -2186,7 +2186,8 @@
 
         var by_widget_selector_status = $settings.by_widget_selector_status;
         var toggle_initially_open     = $settings.toggle_initially_open;
-        var source_selector           = $settings.source_selector;
+        // Read from page markup: never let it reach jQuery as HTML.
+        var source_selector           = epSafeSelector($settings.source_selector || '');
         var widget_visibility         = $settings.widget_visibility;
         var widget_visibility_tablet  = $settings.widget_visibility_tablet;
         var widget_visibility_mobile  = $settings.widget_visibility_mobile;
