@@ -1,5 +1,5 @@
 === Element Pack Addons for Elementor - MCP & AI-Ready Elementor Widgets, Elementor Templates, Elementor Addons ===
-Contributors: bdthemes, selimmw, mohammaadfarid, maudud, abutalib, sohanurrahman, muhammadasik, shmusuf, arafatakashakku, shaikatazim, shamim496
+Contributors: bdthemes, selimmw, maudud, abutalib, sohanurrahman, arafatakashakku, shamim496
 Donate link: http://bdthemes.com/
 Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor templates, woocommerce widgets, elementor extensions, elementor addon, AI elementor widget, woocommerce elementor, AI addons
 Requires at least: 6.8

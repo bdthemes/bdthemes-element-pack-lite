@@ -18,6 +18,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ACF_Global {
 
 	/**
+	 * Settings array of an ACF field post.
+	 *
+	 * ACF stores a field's settings as a serialized array in post_content. Import
+	 * and migration tools sometimes leave it serialized twice, which unserializes
+	 * to a string, so one extra level is unwrapped. Objects are never created, and
+	 * anything that is not an array comes back as an empty array.
+	 *
+	 * @param \WP_Post|null $post acf-field (or acf-field-group) post.
+	 *
+	 * @return array
+	 */
+	public static function get_field_settings( $post ) {
+		$settings = ( $post instanceof \WP_Post ) ? $post->post_content : '';
+
+		for ( $level = 0; $level < 2 && is_string( $settings ) && is_serialized( $settings ); $level++ ) {
+			$settings = @unserialize( trim( $settings ), [ 'allowed_classes' => false ] ); // phpcs:ignore Generic.PHP.ForbiddenFunctions.Found, WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize -- ACF field settings; objects disallowed.
+		}
+
+		return is_array( $settings ) ? $settings : [];
+	}
+
+	/**
 	 * Format Acf Options.
 	 *
 	 * @since 4.4.8
@@ -37,7 +59,11 @@ class ACF_Global {
 
 		foreach ( $posts as $post ) {
 
-			$acf_settings = unserialize( $post->post_content, ['allowed_classes' => false] );
+			$acf_settings = self::get_field_settings( $post );
+
+			if ( empty( $acf_settings['type'] ) || ! is_string( $acf_settings['type'] ) ) {
+				continue;
+			}
 
 			$acf_type = $show_field_type ? ucwords( $acf_settings['type'] ) . ': ' : '';
 
@@ -238,14 +264,10 @@ class ACF_Global {
             if ($acf_field->post_parent) {
                 $acf_field_parent = get_post($acf_field->post_parent);
                 if ($acf_field_parent) {
-                    $acf_field_parent_settings = is_serialized($acf_field_parent->post_content)
-                        ? unserialize($acf_field_parent->post_content, ['allowed_classes' => false])
-                        : $acf_field_parent->post_content;
+                    $acf_field_parent_settings = self::get_field_settings($acf_field_parent);
                 }
             }
-            $acf_field_settings = is_serialized($acf_field->post_content)
-                ? unserialize($acf_field->post_content, ['allowed_classes' => false])
-                : $acf_field->post_content;
+            $acf_field_settings = self::get_field_settings($acf_field);
             //if (isset($acf_field_settings['type']) && (empty($types) || in_array($acf_field_settings['type'], $types))) {
             if (isset($acf_field_settings['type']) && in_array($acf_field_settings['type'], $field_type)) {
                 if ($group && $acf_field_parent) {
