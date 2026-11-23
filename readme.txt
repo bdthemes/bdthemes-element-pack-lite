@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.12
+Stable tag: 10.0.13
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,11 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.13 [23rd November 2026] =
+
+* Security: Content Switcher: the widget ID used for linked sections is now limited to the characters an ID may contain, and the section container is built without an HTML string, so a contributor can no longer run scripts on the page through it
+* Security: Scroll Navigation: dot tooltips now use only the widget's own tooltip settings and sanitize their text, so tooltip attributes added through a link's custom attributes can no longer run scripts
 
 = 10.0.12 [19th November 2026] =
 

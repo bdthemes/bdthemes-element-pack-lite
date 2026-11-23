@@ -1122,15 +1122,35 @@ class Scrollnav extends Module_Base {
 
 		foreach ( $settings['navs'] as $index => $nav ) :
 			$link_key = 'link_' . $index;
-			$this->add_render_attribute(
-				[ 
-					$link_key => [ 
-						'data-tippy-content' => ( 'dot' == $settings['nav_style'] ) ? htmlspecialchars( esc_html( $nav["nav_title"] ), ENT_QUOTES, 'UTF-8' ) : '',
-					]
-				], '', '', true
-			);
 
-			$this->add_link_attributes( $link_key, $nav['nav_link'] );
+			// The Link control's custom attributes are applied to this same anchor, and
+			// add_link_attributes() appends to keys that are already set, so a
+			// data-tippy-* pair saved there would reach the tooltip script. The tooltip
+			// is driven only by this widget's own controls, so drop those keys.
+			$nav_link = ( isset( $nav['nav_link'] ) && is_array( $nav['nav_link'] ) ) ? $nav['nav_link'] : [];
+
+			if ( ! empty( $nav_link['custom_attributes'] ) && is_string( $nav_link['custom_attributes'] ) ) {
+				$nav_link['custom_attributes'] = implode(
+					',',
+					array_filter(
+						explode( ',', $nav_link['custom_attributes'] ),
+						static function ( $attribute ) {
+							return 0 !== stripos( ltrim( $attribute ), 'data-tippy' );
+						}
+					)
+				);
+			}
+
+			$this->add_link_attributes( $link_key, $nav_link );
+
+			// Set after add_link_attributes(), with overwrite, so this value replaces
+			// anything that arrived with the link rather than being appended to.
+			$this->add_render_attribute(
+				$link_key,
+				'data-tippy-content',
+				( 'dot' == $settings['nav_style'] ) ? htmlspecialchars( esc_html( $nav["nav_title"] ), ENT_QUOTES, 'UTF-8' ) : '',
+				true
+			);
 
 			if ( ! isset( $nav['nav_icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
 				// add old default
