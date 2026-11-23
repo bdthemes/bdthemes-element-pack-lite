@@ -4558,9 +4558,15 @@ jQuery(document).ready(function () {
 
         const sectionContainerId = linkedSections ? `bdt-content-switcher-section-${linkedSections.id}` : null;
 
+        // The id arrives from the widget's own data attribute, so it is whatever was
+        // saved on the document. Escape it before it is used as a CSS selector.
+        const escapeId = (value) => (window.CSS && typeof CSS.escape === 'function')
+            ? CSS.escape(value)
+            : String(value).replace(/[^\w-]/g, '\\$&');
+
         const updateLinkedSectionActive = (index) => {
             if (!linkedSections?.positionUnchanged || !sectionContainerId) return;
-            const items = document.querySelectorAll(`#${sectionContainerId} .bdt-switcher-section-content-inner`);
+            const items = document.querySelectorAll(`#${escapeId(sectionContainerId)} .bdt-switcher-section-content-inner`);
             items.forEach(item => item.classList.remove('bdt-active'));
             items[index]?.classList.add('bdt-active');
         };
@@ -4596,10 +4602,13 @@ jQuery(document).ready(function () {
                     const activeClass     = (idx === 0 && isPrimaryActive) || (idx > 0 && isIndexActive) ? 'bdt-active' : '';
 
                     if (!document.getElementById(sectionContainerId)) {
-                        sectionContent.parentElement.insertAdjacentHTML(
-                            'beforeend',
-                            `<div id="${sectionContainerId}" class="bdt-switcher bdt-switcher-section-content"></div>`
-                        );
+                        // Built as an element rather than an HTML string: the id comes
+                        // from the saved element id, and a quote in it would otherwise
+                        // close the id attribute and add event handlers to this div.
+                        const sectionWrap = document.createElement('div');
+                        sectionWrap.id = sectionContainerId;
+                        sectionWrap.className = 'bdt-switcher bdt-switcher-section-content';
+                        sectionContent.parentElement.appendChild(sectionWrap);
                     }
 
                     const container = document.getElementById(sectionContainerId);
@@ -4767,10 +4776,47 @@ jQuery(document).ready(function () {
 			widgetID = $scope.data('id');
 
 		$tooltip.each( function() {
-			tippy( this, {
-				allowHTML: true,
+			const el = this;
+
+			// tippy() takes its options from the element's own data-tippy-* attributes by
+			// default and writes the content into innerHTML. The nav Link control can put
+			// custom attributes on this same anchor, so a data-tippy-content or
+			// data-tippy-showoncreate saved there would run as markup. Ignore the
+			// attributes, pass this widget's own options explicitly, and sanitize the
+			// content.
+			const options = {
+				content: ( 'function' === typeof EP_SAFE_HTML )
+					? EP_SAFE_HTML( el.getAttribute( 'data-tippy-content' ) || '' )
+					: ( el.getAttribute( 'data-tippy-content' ) || '' ),
+				allowHTML: 'function' === typeof EP_SAFE_HTML,
+				ignoreAttributes: true,
+				arrow: 'false' !== el.getAttribute( 'data-tippy-arrow' ),
 				theme: 'bdt-tippy-' + widgetID
-			});
+			};
+
+			const placement = el.getAttribute( 'data-tippy-placement' );
+			if ( placement ) {
+				options.placement = placement;
+			}
+
+			const animation = el.getAttribute( 'data-tippy-animation' );
+			if ( animation ) {
+				options.animation = animation;
+			}
+
+			const trigger = el.getAttribute( 'data-tippy-trigger' );
+			if ( trigger ) {
+				options.trigger = trigger;
+			}
+
+			try {
+				const offset = JSON.parse( el.getAttribute( 'data-tippy-offset' ) );
+				if ( Array.isArray( offset ) ) {
+					options.offset = offset.map( Number );
+				}
+			} catch ( e ) {}
+
+			tippy( el, options );
 		});
 
 	};

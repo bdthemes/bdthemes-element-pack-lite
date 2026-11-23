@@ -2550,6 +2550,11 @@ class Content_Switcher extends Module_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
+		// Elementor stores an element id exactly as the editor sent it, so it can hold
+		// any character, quotes included. The widget script turns this value into a DOM
+		// id and a CSS selector, so keep it to the characters an id may use.
+		$widget_id = preg_replace('/[^A-Za-z0-9_-]/', '', (string) $this->get_id());
+
 		$primary   = (isset($settings['switcher_items'][0]) ? $settings['switcher_items'][0] : '');
 		$secondary = (isset($settings['switcher_items'][1]) ? $settings['switcher_items'][1] : '');
 
@@ -2557,7 +2562,7 @@ class Content_Switcher extends Module_Base {
 		$this->add_render_attribute('content-switcher', [
 			'data-settings' => [
 				wp_json_encode(array_filter([
-					'id' => '#bdt-content-switcher-' . $this->get_id(),
+					'id' => '#bdt-content-switcher-' . $widget_id,
 					'switcherStyle' => $settings['switcher_style'],
 				]))
 			]
@@ -2580,7 +2585,7 @@ class Content_Switcher extends Module_Base {
 			$this->add_render_attribute('content-switcher', [
 				'data-linked-sections' => [
 					wp_json_encode([
-						'id' => $this->get_id(),
+						'id' => $widget_id,
 						'sections' => $linked_sections,
 						'positionUnchanged' => $settings['content_position_unchanged'] == 'yes' ? true : false
 					])
@@ -2593,7 +2598,7 @@ class Content_Switcher extends Module_Base {
 			$this->add_render_attribute('content-switcher', [
 				'data-linked-widgets' => [
 					wp_json_encode([
-						'id' => $this->get_id(),
+						'id' => $widget_id,
 						'widgets' => $linked_widgets
 					])
 				]
@@ -2654,7 +2659,7 @@ class Content_Switcher extends Module_Base {
 						$this->add_render_attribute('button', 'class', esc_attr(($item['switcher_active'] == 'yes') ? 'bdt-content-switcher-tab bdt-active' : 'bdt-content-switcher-tab'), true);
 
 						if (!empty($item['_id'])) {
-							$this->add_render_attribute('button', 'id', $this->get_id() . esc_attr($item['_id']), true);
+							$this->add_render_attribute('button', 'id', $widget_id . esc_attr($item['_id']), true);
 						}
 
 						?>
@@ -2724,7 +2729,7 @@ class Content_Switcher extends Module_Base {
 						$this->add_render_attribute('switcher_content', 'class', esc_attr(($item['switcher_active'] == 'yes') ? 'bdt-switcher-content bdt-active' : 'bdt-switcher-content'), true);
 
 						if (!empty($item['_id'])) {
-							$this->add_render_attribute('switcher_content', 'data-content-id', $this->get_id() . esc_attr($item['_id']), true);
+							$this->add_render_attribute('switcher_content', 'data-content-id', $widget_id . esc_attr($item['_id']), true);
 						}
 						?>
 
