@@ -287,9 +287,52 @@
         }
     };
 
+    // The form markup, its action URL and the widget id can come from page
+    // content a Contributor wrote, so none of them are trusted below.
+    const getSameOriginEndpoint = (formEl) => {
+        try {
+            const url     = new URL(formEl.getAttribute('action') || '', window.location.href);
+            const allowed = [window.location.origin];
+            // The real form posts to site_url(), whose host can differ from the page's.
+            const ajaxUrl = window.ElementPackConfig && window.ElementPackConfig.ajaxurl;
+            if (ajaxUrl) {
+                allowed.push(new URL(ajaxUrl, window.location.href).origin);
+            }
+            return allowed.includes(url.origin) ? url.href : null;
+        } catch (e) {
+            return null;
+        }
+    };
+
+    const getSafeRedirect = (value) => {
+        try {
+            const url = new URL(value, window.location.href);
+            return /^https?:$/.test(url.protocol) ? url.href : null;
+        } catch (e) {
+            return null;
+        }
+    };
+
+    const buildNotificationMessage = (widgetID, data) => {
+        const box = document.createElement('div');
+        box.className = 'bdt-contact-form-success-message-' + String(widgetID || '').replace(/[^A-Za-z0-9_-]/g, '');
+        if (typeof EP_SAFE_HTML === 'function') {
+            box.innerHTML = EP_SAFE_HTML(data);
+        } else {
+            box.textContent = new DOMParser().parseFromString(data, 'text/html').body.textContent;
+        }
+        return box.outerHTML;
+    };
+
     const sendContactForm = async (formEl, widgetID = false) => {
         const langStr = window.ElementPackConfig.contact_form;
         const zIndex  = getNotificationZIndex(formEl);
+
+        // Only post to this site; a foreign endpoint would control the response.
+        const endpoint = getSameOriginEndpoint(formEl);
+        if (!endpoint) {
+            return;
+        }
 
         const loadingNote = bdtUIkit.notification({
             message : `<div bdt-spinner></div> ${langStr.sending_msg}`,
@@ -299,7 +342,7 @@
         applyNotificationZIndex(loadingNote, zIndex);
 
         try {
-            const response = await fetch(formEl.getAttribute('action'), {
+            const response = await fetch(endpoint, {
                 method  : 'POST',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body    : new URLSearchParams(new FormData(formEl)).toString()
@@ -317,14 +360,17 @@
             bdtUIkit.notification.closeAll();
 
             const notification = bdtUIkit.notification({
-                message: `<div class="bdt-contact-form-success-message-${widgetID}">${data}</div>`
+                message: buildNotificationMessage(widgetID, data)
             });
             applyNotificationZIndex(notification, zIndex);
 
-            if (redirectURL && redirectURL !== 'no') {
+            const safeRedirect = redirectURL && redirectURL !== 'no' ? getSafeRedirect(redirectURL) : null;
+
+            if (safeRedirect) {
+                const target = isExternal === '_blank' ? '_blank' : '_self';
                 bdtUIkit.util.on(document, 'close', (evt) => {
                     if (evt.detail[0] === notification) {
-                        window.open(redirectURL, isExternal);
+                        window.open(safeRedirect, target);
                     }
                 });
             }
@@ -590,15 +636,32 @@
         };
     };
 
+    // data-settings can come from page markup a Contributor wrote, so the request
+    // endpoint comes from the localized config and the redirect must be http(s).
+    const safeRedirectUrl = (value) => {
+        if (typeof value !== 'string' || !value) return null;
+        let url;
+        try {
+            url = new URL(value, window.location.href);
+        } catch (e) {
+            return null;
+        }
+        return (url.protocol === 'http:' || url.protocol === 'https:') ? url.href : null;
+    };
+
     const handleCountdownEnd = async (settings, endTime) => {
         try {
+            const config = window.ElementPackConfig || {};
+            if (!config.ajaxurl) return;
+
             const body = new URLSearchParams({
                 action         : 'element_pack_countdown_end',
-                endTime,
-                couponTrickyId : settings.couponTrickyId
+                nonce          : config.nonce ?? '',
+                endTime        : String(endTime ?? ''),
+                couponTrickyId : String(settings.couponTrickyId ?? '')
             });
 
-            const response = await fetch(settings.adminAjaxUrl, { method: 'POST', body });
+            const response = await fetch(config.ajaxurl, { method: 'POST', body, credentials: 'same-origin' });
             const data     = await response.text();
 
             if (data !== 'ended') return;
@@ -608,11 +671,15 @@
                 document.querySelector(`${settings.id}-timer`)?.style.setProperty('display', 'none');
             }
 
-            if (settings.endActionType === 'url' && settings.redirectUrl?.includes('http')) {
-                setTimeout(() => { window.location.href = settings.redirectUrl; }, settings.redirectDelay);
+            if (settings.endActionType === 'url') {
+                const redirectUrl = safeRedirectUrl(settings.redirectUrl);
+                if (redirectUrl) {
+                    setTimeout(() => { window.location.href = redirectUrl; }, Number(settings.redirectDelay) || 0);
+                }
             }
 
-            if (settings.triggerId) {
+            // Only a plain element id may be clicked, never a crafted value.
+            if (typeof settings.triggerId === 'string' && /^[A-Za-z0-9_-]+$/.test(settings.triggerId)) {
                 setTimeout(() => {
                     document.getElementById(settings.triggerId)?.click();
                 }, 1500);
@@ -720,10 +787,18 @@
         const customGalleryEl = scopeEl.querySelector('.bdt-custom-gallery');
         if (!customGalleryEl) return;
 
-        const settings = JSON.parse(customGalleryEl.dataset.settings || '{}');
+        // data-settings can come from page markup, so a bad value must not break the
+        // page and its "id" is not used as a selector; tilt targets are looked up
+        // inside this gallery instead.
+        let settings = {};
+        try {
+            settings = JSON.parse(customGalleryEl.dataset.settings || '{}') || {};
+        } catch (e) {
+            return;
+        }
 
-        if (settings.tiltShow === true) {
-            const elements = document.querySelectorAll(settings.id + ' [data-tilt]');
+        if (settings.tiltShow === true && typeof VanillaTilt !== 'undefined') {
+            const elements = customGalleryEl.querySelectorAll('[data-tilt]');
             VanillaTilt.init(elements);
         }
     };
@@ -965,6 +1040,20 @@
             .replace(/'/g, '&#039;');
     };
 
+    // The viewer writes controlColor into an SVG string via innerHTML, and
+    // data-settings can come from page markup a Contributor saved, so only
+    // plain colour values (hex, rgb/hsl, CSS variables, names) are allowed.
+    const safeColor = (color) => {
+        if (typeof color !== 'string') return '#fff';
+        const value = color.trim();
+        return /^(#[0-9a-fA-F]{3,8}|(rgb|hsl)a?\([0-9.,%\s\/]+\)|var\(--[\w-]+\)|[a-zA-Z]+)$/.test(value) ? value : '#fff';
+    };
+
+    const safeNumber = (value, fallback) => {
+        const num = parseFloat(value);
+        return Number.isFinite(num) ? num : fallback;
+    };
+
     const widgetImageCompare = (scope) => {
         const scopeEl = scope?.jquery ? scope[0] : scope;
         const imageCompareEls = scopeEl.querySelectorAll('.image-compare');
@@ -978,7 +1067,7 @@
         } catch (_) {}
 
         const options = {
-            controlColor: settings.bar_color,
+            controlColor: safeColor(settings.bar_color),
             controlShadow: settings.add_circle_shadow,
             addCircle: settings.add_circle,
             addCircleBlur: settings.add_circle_blur,
@@ -989,10 +1078,10 @@
                 onHover: settings.on_hover
             },
             smoothing: settings.smoothing,
-            smoothingAmount: settings.smoothing_amount ?? 0,
+            smoothingAmount: safeNumber(settings.smoothing_amount, 0),
             hoverStart: settings.move_slider_on_hover,
             verticalMode: settings.orientation,
-            startingPoint: settings.default_offset_pct,
+            startingPoint: safeNumber(settings.default_offset_pct, 50),
             fluidMode: false
         };
 
@@ -1031,9 +1120,53 @@
             const raw = imageMagnifier.dataset.settings;
             settings = raw ? JSON.parse(raw) : {};
         } catch (_) {}
+        if (!settings || typeof settings !== 'object') settings = {};
+
+        // data-settings and the img attributes can come from page markup a
+        // Contributor wrote, and the ImageZoom library concatenates its options
+        // and the image src/alt into HTML strings. Pass only allow-listed,
+        // normalised values and never the raw settings object.
+        const toInt = (value, fallback) => {
+            const n = parseInt(value, 10);
+            return Number.isFinite(n) ? n : fallback;
+        };
+        // new URL().href percent-encodes quotes and angle brackets, so the
+        // result cannot break out of the library's src="..." attribute.
+        const safeUrl = (value) => {
+            try {
+                const url = new URL(String(value || ''), window.location.href);
+                return /^https?:$/.test(url.protocol) ? url.href : '';
+            } catch (_) {
+                return '';
+            }
+        };
+
+        const imageSrc = safeUrl(magnifier.getAttribute('src'));
+        if (!imageSrc) return;
+        magnifier.setAttribute('src', imageSrc);
+        // The library appends alt as HTML in its description box.
+        magnifier.removeAttribute('alt');
+
+        const zoomSize = Array.isArray(settings.zoomSize) ? settings.zoomSize : [];
+        const offset   = Array.isArray(settings.offset) ? settings.offset : [];
+
+        const options = {
+            type: ['inner', 'standard', 'follow'].includes(settings.type) ? settings.type : 'inner',
+            bigImageSrc: safeUrl(settings.bigImageSrc) || imageSrc,
+            smoothMove: !!settings.smoothMove,
+            preload: !!settings.preload,
+            position: settings.position === 'left' ? 'left' : 'right',
+            zoomSize: [toInt(zoomSize[0], 480), toInt(zoomSize[1], 300)],
+            offset: [toInt(offset[0], 10), toInt(offset[1], 0)],
+            showDescription: false,
+            zoomViewerClass: '',
+            zoomHandlerClass: '',
+            descriptionClass: 'zm-description',
+            alignTo: '',
+        };
 
         // ImageZoom is a jQuery plugin - requires jQuery
-        jQuery(magnifier).ImageZoom(settings);
+        jQuery(magnifier).ImageZoom(options);
     };
 
     window.addEventListener('elementor/frontend/init', () => {
@@ -1062,7 +1195,7 @@
         const widgetID = scopeEl.dataset.id || '';
 
         tooltips.forEach((el) => {
-            tippy(el, {
+            epSafeTippy(el, {
                 allowHTML: false,
                 theme: 'bdt-tippy-' + widgetID
             });
@@ -1132,7 +1265,7 @@
         tooltips.forEach((el) => {
             if (el._tippy) return;
 
-            tippy(el, {
+            epSafeTippy(el, {
                 content: safeTooltipContent(el),
                 allowHTML: false,
                 theme: 'bdt-tippy-' + widgetID
@@ -1203,7 +1336,7 @@
         tooltips.forEach((el) => {
             if (el._tippy) return;
 
-            tippy(el, {
+            epSafeTippy(el, {
                 content: safeTooltipContent(el),
                 allowHTML: false,
                 theme: 'bdt-tippy-' + widgetID
@@ -1229,24 +1362,38 @@
 
 	'use strict';
 
-	// Build popup markup while stripping scripts and inline event handlers to prevent XSS.
+	// Popup text comes from the widget's data-map_markers attribute, which page content
+	// can imitate, so it is untrusted. Parsing it into a live element would already run
+	// load-time handlers (onloadstart, ontoggle, ...), and a list of blocked handler names
+	// can never be complete. Clean it with the allow-list sanitizer, which parses in an
+	// inert <template>, and fall back to plain text when that sanitizer is not loaded.
 	function createSafePopup( html ) {
 		var popupContent = document.createElement('div');
-		popupContent.innerHTML = html;
+		var text = ( null === html || undefined === html ) ? '' : String( html );
 
-		popupContent.querySelectorAll('script').forEach(function (script) {
-			script.remove();
-		});
+		if ( 'function' !== typeof EP_SAFE_HTML ) {
+			popupContent.textContent = text;
+			return popupContent;
+		}
 
-		popupContent.querySelectorAll('[onclick], [onload], [onerror], [onmouseover], [onmouseout]').forEach(function (el) {
-			el.removeAttribute('onclick');
-			el.removeAttribute('onload');
-			el.removeAttribute('onerror');
-			el.removeAttribute('onmouseover');
-			el.removeAttribute('onmouseout');
-		});
+		var template = document.createElement('template');
+		template.innerHTML = EP_SAFE_HTML( text );
+		popupContent.appendChild( template.content );
 
 		return popupContent;
+	}
+
+	// The marker icon URL also comes from page markup, so only an http(s),
+	// protocol-relative or site-relative path is used; anything else falls back
+	// to Leaflet's default marker.
+	function safeIconUrl( url ) {
+		var value = ( 'string' === typeof url ) ? url.trim() : '';
+
+		if ( /^(?:https?:)?\/\//i.test( value ) || /^\/(?!\/)/.test( value ) ) {
+			return value;
+		}
+
+		return '';
 	}
 
 	var widgetOpenStreetMap = function( $scope, $ ) {
@@ -1286,8 +1433,9 @@
         }
 
 
-        for (var i in markers) { 
-            if( (markers[i]['iconUrl']) != '' && typeof (markers[i]['iconUrl']) !== 'undefined'){ 
+        for (var i in markers) {
+            var iconUrl = safeIconUrl( markers[i]['iconUrl'] );
+            if( iconUrl !== '' ){
                 const LeafIcon = L.Icon.extend({
                     options: {
                         iconSize   : [25, 41],
@@ -1295,7 +1443,7 @@
                         popupAnchor: [2, -41]
                     }
                 });
-                const greenIcon = new LeafIcon({iconUrl: markers[i]['iconUrl'] });
+                const greenIcon = new LeafIcon({iconUrl: iconUrl });
                 L.marker( [markers[i]['lat'], markers[i]['lng']], {icon: greenIcon} ).bindPopup(createSafePopup(markers[i]['infoWindow'])).addTo(avdOSMap);
             } else {
                 if( (markers[i]['lat']) != '' && typeof (markers[i]['lat']) !== 'undefined'){ 
@@ -1396,14 +1544,26 @@
             return;
         }
 
+        var pieClasses = {
+            element: 'pie_progress',
+            svg: 'bdt-progress-pie-svg',
+            number: 'bdt-progress-pie-number',
+            content: 'bdt-progress-pie-content'
+        };
+
         epObserveTarget($scope[0], function () {
+            // asPieProgress merges the element's data-* over our options and
+            // puts classes.svg into an HTML string. The markup can come from
+            // post content, so pin these keys in the jQuery data cache; .data()
+            // then ignores matching data-* attributes.
+            $progressPie.each(function () {
+                $(this).data('classes', $.extend({}, pieClasses));
+                $(this).data('namespace', 'pieProgress');
+            });
+
             $progressPie.asPieProgress({
                 namespace: 'pieProgress',
-                classes: {
-                    svg: 'bdt-progress-pie-svg',
-                    number: 'bdt-progress-pie-number',
-                    content: 'bdt-progress-pie-content'
-                }
+                classes: pieClasses
             });
 
             $progressPie.asPieProgress('start');
@@ -1669,12 +1829,15 @@
       },
 
       calculateReadingTime: function (ReadingContent) {
-        let wordCount = ReadingContent.split(/\s+/).filter(function (word) {
+        let avgSetting = this.settings("avg_words_per_minute"),
+          wordCount = ReadingContent.split(/\s+/).filter(function (word) {
             return word !== "";
           }).length,
-          averageReadingSpeed = this.settings("avg_words_per_minute")
-            ? this.settings("avg_words_per_minute").size
-            : 200,
+          // Settings can come from page markup; keep the speed a positive number.
+          averageReadingSpeed =
+            (avgSetting && parseInt(avgSetting.size, 10) > 0
+              ? parseInt(avgSetting.size, 10)
+              : 0) || 200,
           readingTime = Math.floor(wordCount / averageReadingSpeed),
           reading_seconds = Math.floor(
             (wordCount % averageReadingSpeed) / (averageReadingSpeed / 60)
@@ -1694,22 +1857,26 @@
       },
 
       run: function () {
-        const widgetID = this.$element.data("id"),
-          widgetContainer = `.elementor-element-${widgetID} .bdt-reading-timer`,
+        // Scope to this widget instead of building a selector from data-id.
+        const $container = this.$element.find(".bdt-reading-timer"),
           contentSelector = this.settings("content_id");
         let minText = this.settings("minute_text")
           ? this.settings("minute_text")
           : "min read";
 
+        // The texts and the content id come from data-settings, which a
+        // Contributor (or fake widget markup) controls, so they are only ever
+        // inserted as text nodes and the id is never parsed as a selector.
         const editMode = Boolean(elementorFrontend.isEditMode());
         if (editMode) {
-          $(widgetContainer).append("2 " + minText + "");
+          $container.append(document.createTextNode("2 " + String(minText)));
           return;
         }
         if (contentSelector) {
-          ReadingContent = $(document).find(`#${contentSelector}`).text();
+          const target = document.getElementById(String(contentSelector)),
+            ReadingContent = target ? target.textContent : "";
           const readTime = this.calculateReadingTime(ReadingContent);
-          $(widgetContainer).append(readTime);
+          $container.append(document.createTextNode(String(readTime)));
         } else return;
       },
     });
@@ -2108,7 +2275,50 @@
 		}
 
 		const gridTab = $postGridTab.find('.gridtab');
-		const $settings = $postGridTab.data('settings');
+		const rawSettings = $postGridTab.data('settings');
+
+		// data-settings can come from page markup a Contributor wrote, and gridtab
+		// concatenates its selector and colour options into HTML and a <style> tag.
+		// Rebuild the options from the numeric/boolean keys the widget really emits
+		// so selectors, colours and callbacks always keep the library defaults.
+		const toInt = function (value) {
+			const n = parseInt(value, 10);
+			return Number.isFinite(n) ? n : undefined;
+		};
+		const raw = (rawSettings && typeof rawSettings === 'object') ? rawSettings : {};
+		const rawConfig = (raw.config && typeof raw.config === 'object') ? raw.config : {};
+
+		const $settings = {
+			config: {
+				layout: rawConfig.layout === 'tab' ? 'tab' : 'grid',
+				speed: toInt(rawConfig.speed) !== undefined ? Math.max(0, toInt(rawConfig.speed)) : 500,
+				activeTab: toInt(rawConfig.activeTab) || 0,
+				showClose: rawConfig.showClose === true,
+				scrollToTab: rawConfig.scrollToTab === true,
+				rtl: rawConfig.rtl === true
+			},
+			responsive: null
+		};
+
+		// PHP drops zero values, so only copy keys that are present; missing ones
+		// fall back to the library defaults exactly as before.
+		if (toInt(raw.grid) > 0) {
+			$settings.grid = toInt(raw.grid);
+		}
+		if (toInt(raw.borderWidth) !== undefined) {
+			$settings.borderWidth = Math.max(0, toInt(raw.borderWidth));
+		}
+		if (Array.isArray(raw.responsive)) {
+			$settings.responsive = raw.responsive.map(function (item) {
+				const itemSettings = (item && item.settings && typeof item.settings === 'object') ? item.settings : {};
+				return {
+					breakpoint: Math.max(0, toInt(item && item.breakpoint) || 0),
+					settings: {
+						grid: Math.max(1, toInt(itemSettings.grid) || 1)
+					}
+				};
+			});
+		}
 
 		$(gridTab).gridtab($settings);
 
@@ -2455,12 +2665,20 @@
 
         registraitonFormSubmit: function (_this, $scope) {
 
+            // The spinner text is read from page markup, which a Contributor can
+            // influence, so it is inserted as text only. Only the widget's own
+            // hidden input is read (kses never allows <input> in label settings).
+            var $spinnerMsg = $('<span>').text($(_this).find('input.bdt_spinner_message').first().val() || '');
             bdtUIkit.notification({
-                message: '<div bdt-spinner></div>' + $(_this).find('.bdt_spinner_message').val(),
+                message: '<div bdt-spinner></div>' + $spinnerMsg.prop('outerHTML'),
                 timeout: false
             });
             $(_this).find('button.bdt-button').attr("disabled", true);
-            var redirect_url = $(_this).find('.redirect_after_register').val();
+            var redirect_url = $(_this).find('input.redirect_after_register').first().val() || '';
+            // Only follow http(s) or relative redirects; the value comes from the DOM.
+            if (redirect_url && !/^(https?:\/\/|\/(?!\/)|\.{0,2}\/|#|\?)/i.test(String(redirect_url).trim())) {
+                redirect_url = '';
+            }
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -2480,6 +2698,12 @@
                     'lang': element_pack_ajax_login_config.language
                 },
                 success: function (data) {
+                    // Server messages may carry simple formatting (<strong>); keep it
+                    // but run it through the allow-list sanitizer before innerHTML.
+                    var safeMessage = function (msg) {
+                        msg = (msg === undefined || msg === null) ? '' : String(msg);
+                        return (typeof EP_SAFE_HTML === 'function') ? EP_SAFE_HTML(msg) : $('<span>').text(msg).html();
+                    };
                     var recaptcha_field = _this.find('.element-pack-google-recaptcha');
                     if (recaptcha_field.length > 0) {
                         var recaptcha_id = recaptcha_field.attr('data-widgetid');
@@ -2490,7 +2714,7 @@
                     if (data.registered === true) {
                         bdtUIkit.notification.closeAll();
                         bdtUIkit.notification({
-                            message: '<div class="bdt-flex"><span bdt-icon=\'icon: info\'></span><span>' + data.message + '</span></div>',
+                            message: '<div class="bdt-flex"><span bdt-icon=\'icon: info\'></span><span>' + safeMessage(data.message) + '</span></div>',
                             status: 'primary'
                         });
                         if (redirect_url) {
@@ -2499,7 +2723,7 @@
                     } else {
                         bdtUIkit.notification.closeAll();
                         bdtUIkit.notification({
-                            message: '<div class="bdt-flex"><span bdt-icon=\'icon: warning\'></span><span>' + data.message + '</span></div>',
+                            message: '<div class="bdt-flex"><span bdt-icon=\'icon: warning\'></span><span>' + safeMessage(data.message) + '</span></div>',
                             status: 'warning'
                         });
                     }
@@ -3150,6 +3374,209 @@ jQuery(document).ready(function () {
         'bookmark-vertical',
     ];
 
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+
+    var SAFE_CSS_UNITS = ['px', '%', 'em', 'rem', 'vw', 'vh', 'deg', 'turn'];
+
+    // Badge SVG layer / SVG icon allow-list (mirrors the PHP kses list, plus a few
+    // harmless shape tags). Anything else, including its children, is dropped.
+    var SVG_ALLOWED_TAGS = [
+        'svg', 'g', 'path', 'circle', 'ellipse', 'rect', 'line', 'polyline', 'polygon',
+        'defs', 'lineargradient', 'radialgradient', 'stop', 'clippath', 'mask',
+        'symbol', 'use', 'title', 'desc', 'text', 'tspan',
+    ];
+
+    var SVG_TEXT_TAGS = ['title', 'desc', 'text', 'tspan'];
+
+    var cssEscape = function (value) {
+        value = String(value == null ? '' : value);
+
+        if (window.CSS && typeof window.CSS.escape === 'function') {
+            return window.CSS.escape(value);
+        }
+
+        return value.replace(/[^a-zA-Z0-9_-]/g, function (ch) {
+            return '\\' + ch.charCodeAt(0).toString(16) + ' ';
+        });
+    };
+
+    var copySafeSvgAttributes = function (source, target) {
+        var i, attr, name, value;
+
+        for (i = 0; i < source.attributes.length; i++) {
+            attr = source.attributes[i];
+            name = attr.name.toLowerCase();
+            value = attr.value;
+
+            if (!/^[a-z][a-z0-9:_-]*$/.test(name) || name.indexOf('on') === 0 || name.indexOf('xmlns') === 0) {
+                continue;
+            }
+
+            // Only same-document references; no external or script URLs.
+            if (name === 'href' || name === 'xlink:href') {
+                if (value.trim().charAt(0) !== '#') {
+                    continue;
+                }
+
+                name = 'href';
+            }
+
+            if (/(javascript|vbscript|data)\s*:/i.test(value.replace(/[\u0000- ]/g, ''))) {
+                continue;
+            }
+
+            try {
+                target.setAttribute(attr.name === 'xlink:href' ? 'href' : attr.name, value);
+            } catch (e) {
+                // Ignore attribute names the DOM refuses.
+            }
+        }
+    };
+
+    var copySafeSvgNode = function (node, allowText) {
+        var tag, el, i, child;
+
+        if (node.nodeType === 3) {
+            return allowText ? document.createTextNode(node.nodeValue) : null;
+        }
+
+        if (node.nodeType !== 1 || node.namespaceURI !== SVG_NS) {
+            return null;
+        }
+
+        tag = node.localName.toLowerCase();
+
+        if (SVG_ALLOWED_TAGS.indexOf(tag) === -1) {
+            return null;
+        }
+
+        el = document.createElementNS(SVG_NS, node.localName);
+        copySafeSvgAttributes(node, el);
+
+        for (i = 0; i < node.childNodes.length; i++) {
+            child = copySafeSvgNode(node.childNodes[i], SVG_TEXT_TAGS.indexOf(tag) !== -1);
+
+            if (child) {
+                el.appendChild(child);
+            }
+        }
+
+        return el;
+    };
+
+    /**
+     * The SVG code comes from widget settings (a Contributor can save it, and in
+     * the editor it is not run through the PHP sanitizer), so rebuild it as SVG
+     * nodes from an inert parse instead of inserting the raw string.
+     */
+    var sanitizeSvgToFragment = function (code) {
+        var fragment = document.createDocumentFragment(),
+            doc, nodes, i, safe;
+
+        if (typeof code !== 'string' || !code.trim() || typeof window.DOMParser !== 'function') {
+            return fragment;
+        }
+
+        doc = new window.DOMParser().parseFromString('<!DOCTYPE html><body>' + code, 'text/html');
+        nodes = doc.body ? doc.body.childNodes : [];
+
+        for (i = 0; i < nodes.length; i++) {
+            safe = copySafeSvgNode(nodes[i], false);
+
+            if (safe) {
+                fragment.appendChild(safe);
+            }
+        }
+
+        return fragment;
+    };
+
+    /**
+     * Lottie JSON can come from a Contributor (custom code or URL) or from badge
+     * markup placed in post content. The bundled lottie build runs
+     * any truthy "x" property as a JavaScript expression (strings, and arrays,
+     * which get joined into the code), so remove every "x" that is not a number,
+     * a plain object or an all-number array (keyframe easing) before loading.
+     */
+    var isSafeLottieX = function (value) {
+        var j;
+
+        if (typeof value === 'number') {
+            return true;
+        }
+
+        if (Array.isArray(value)) {
+            for (j = 0; j < value.length; j++) {
+                if (typeof value[j] !== 'number') {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        return !!value && typeof value === 'object';
+    };
+
+    var stripLottieExpressions = function (root) {
+        var stack = [root],
+            node, keys, i;
+
+        while (stack.length) {
+            node = stack.pop();
+
+            if (!node || typeof node !== 'object') {
+                continue;
+            }
+
+            keys = Object.keys(node);
+
+            for (i = 0; i < keys.length; i++) {
+                if (keys[i] === 'x' && !isSafeLottieX(node.x)) {
+                    delete node.x;
+                } else if (node[keys[i]] && typeof node[keys[i]] === 'object') {
+                    stack.push(node[keys[i]]);
+                }
+            }
+        }
+
+        return root;
+    };
+
+    // Only http(s) (absolute or relative to the page) JSON URLs are fetched.
+    var getSafeLottieUrl = function (url) {
+        var parsed;
+
+        if (typeof url !== 'string' || !url.trim()) {
+            return '';
+        }
+
+        try {
+            parsed = new URL(url.trim(), window.location.href);
+        } catch (e) {
+            return '';
+        }
+
+        return (parsed.protocol === 'http:' || parsed.protocol === 'https:') ? parsed.href : '';
+    };
+
+    // lottie resolves external image assets against the JSON's folder when it
+    // loads by path; keep that working now that the data is passed in directly.
+    var rebaseLottieAssets = function (data, url) {
+        var base = url.split(/[?#]/)[0];
+
+        base = base.slice(0, base.lastIndexOf('/') + 1);
+
+        if (data && Array.isArray(data.assets)) {
+            data.assets.forEach(function (asset) {
+                if (asset && typeof asset.p === 'string' && asset.p && !asset.e) {
+                    asset.u = base + (typeof asset.u === 'string' ? asset.u : '');
+                }
+            });
+        }
+
+        return data;
+    };
+
     $(window).on('elementor/frontend/init', function () {
         if (!elementorFrontend?.hooks || window.__epGlobalBadgeInitialized) {
             return;
@@ -3190,18 +3617,24 @@ jQuery(document).ready(function () {
                 return this.settings('svg_layer') === 'yes' && !!this.getSvgCode();
             },
 
-            getSvgInnerStyle: function () {
+            applySvgInnerStyle: function (inner) {
                 var width, size, unit;
 
                 if (!this.hasSvgLayer()) {
-                    return '';
+                    return;
                 }
 
                 width = this.getElementSettings('ep_global_badge_svg_width');
-                size = width && width.size !== undefined && width.size !== '' ? width.size : 100;
-                unit = width && width.unit ? width.unit : 'px';
+                size = width && width.size !== undefined && width.size !== '' ? parseFloat(width.size) : 100;
+                unit = width && SAFE_CSS_UNITS.indexOf(width.unit) !== -1 ? width.unit : 'px';
 
-                return 'overflow:visible;min-inline-size:' + size + unit + ';min-block-size:' + size + unit + ';';
+                if (!isFinite(size)) {
+                    size = 100;
+                }
+
+                inner.style.setProperty('overflow', 'visible');
+                inner.style.setProperty('min-inline-size', size + unit);
+                inner.style.setProperty('min-block-size', size + unit);
             },
 
             getEditor: function () {
@@ -3228,21 +3661,25 @@ jQuery(document).ready(function () {
                 this.initBadgeLottie(this.getBadgeElement());
             },
 
-            getSvgIconHtml: function (icon) {
+            getSvgIconNode: function (icon) {
                 var helpers = this.getElementorHelpers(),
                     rendered,
+                    fragment,
                     svgValue = icon.value,
                     self = this;
 
                 if (!svgValue || !svgValue.url) {
-                    return '';
+                    return null;
                 }
 
                 if (helpers && helpers.renderIcon) {
                     rendered = helpers.renderIcon(null, icon, { 'aria-hidden': true });
 
                     if (rendered && rendered.value) {
-                        return rendered.value;
+                        // The icon URL is a widget setting; keep only safe SVG nodes.
+                        fragment = sanitizeSvgToFragment(String(rendered.value));
+
+                        return fragment.childNodes.length ? fragment : null;
                     }
                 }
 
@@ -3264,7 +3701,7 @@ jQuery(document).ready(function () {
                     });
                 }
 
-                return '';
+                return null;
             },
 
             needsMarkupRefresh: function (prop) {
@@ -3387,23 +3824,23 @@ jQuery(document).ready(function () {
                 };
             },
 
-            getLottieHtml: function () {
-                var lottieId = 'bdt-ep-global-badge-lottie-' + this.getID(),
-                    dataSettings;
+            getLottieNode: function () {
+                var el;
 
                 if (!this.hasLottieContent()) {
-                    return '';
+                    return null;
                 }
 
-                dataSettings = JSON.stringify(this.getLottieDataSettings())
-                    .replace(/"/g, '&quot;');
+                el = document.createElement('div');
+                el.id = 'bdt-ep-global-badge-lottie-' + this.getID();
+                el.className = 'bdt-lottie-container';
+                el.setAttribute('data-settings', JSON.stringify(this.getLottieDataSettings()));
+                el.setAttribute('aria-hidden', 'true');
 
-                return '<div id="' + lottieId + '" class="bdt-lottie-container" data-settings="' + dataSettings + '" aria-hidden="true"></div>';
+                return el;
             },
 
             initBadgeLottie: function ($badge) {
-                var self = this;
-
                 if (!$badge || !$badge.length || typeof window.lottie === 'undefined') {
                     return;
                 }
@@ -3411,13 +3848,17 @@ jQuery(document).ready(function () {
                 $badge.find('.bdt-lottie-container').each(function () {
                     var lottieEl = this,
                         settings = {},
-                        jsonPathUrl,
-                        animation;
+                        token = {},
+                        jsonUrl,
+                        source;
 
                     if (lottieEl._epGlobalBadgeLottie) {
                         lottieEl._epGlobalBadgeLottie.destroy();
                         lottieEl._epGlobalBadgeLottie = null;
                     }
+
+                    // A newer init wins over a load that is still in flight.
+                    lottieEl._epGlobalBadgeLottieToken = token;
 
                     try {
                         settings = lottieEl.dataset.settings ? JSON.parse(lottieEl.dataset.settings) : {};
@@ -3425,45 +3866,74 @@ jQuery(document).ready(function () {
                         settings = {};
                     }
 
-                    if (settings.is_json_url == 1 || settings.is_json_url === true) {
-                        if (settings.json_path) {
-                            jsonPathUrl = settings.json_path;
-                        }
-                    } else if (settings.json_code) {
-                        jsonPathUrl = URL.createObjectURL(new Blob([settings.json_code], { type: 'application/javascript' }));
-                    }
-
-                    if (!jsonPathUrl) {
+                    if (!settings || typeof settings !== 'object') {
                         return;
                     }
 
-                    animation = window.lottie.loadAnimation({
-                        container: lottieEl,
-                        path: jsonPathUrl,
-                        renderer: settings.lottie_renderer || 'svg',
-                        autoplay: settings.play_action === 'autoplay',
-                        loop: settings.loop,
-                    });
+                    // Load the JSON ourselves and hand lottie plain data (never a path),
+                    // so expressions can be stripped first.
+                    if (settings.is_json_url == 1 || settings.is_json_url === true) {
+                        jsonUrl = getSafeLottieUrl(settings.json_path);
 
-                    if (jsonPathUrl.indexOf('blob:') === 0) {
-                        URL.revokeObjectURL(jsonPathUrl);
+                        if (!jsonUrl || typeof window.fetch !== 'function') {
+                            return;
+                        }
+
+                        source = window.fetch(jsonUrl, { credentials: 'same-origin' })
+                            .then(function (response) {
+                                if (!response.ok) {
+                                    throw new Error('Lottie JSON request failed');
+                                }
+
+                                return response.json();
+                            })
+                            .then(function (data) {
+                                return rebaseLottieAssets(data, jsonUrl);
+                            });
+                    } else if (typeof settings.json_code === 'string' && settings.json_code.trim()) {
+                        source = Promise.resolve(settings.json_code).then(function (code) {
+                            return JSON.parse(code);
+                        });
+                    } else {
+                        return;
                     }
 
-                    animation.addEventListener('DOMLoaded', function () {
-                        var firstFrame = animation.firstFrame,
-                            totalFrame = animation.totalFrames,
-                            getFrameNumberByPercent = function (percent) {
-                                percent = Math.min(100, Math.max(0, percent));
-                                return firstFrame + (totalFrame - firstFrame) * percent / 100;
-                            },
-                            startPoint = getFrameNumberByPercent(settings.start_point ?? 0),
-                            endPoint = getFrameNumberByPercent(settings.end_point ?? 100);
+                    source.then(function (data) {
+                        var animation,
+                            speed = parseFloat(settings.speed),
+                            renderer = settings.lottie_renderer === 'canvas' ? 'canvas' : 'svg';
 
-                        animation.playSegments([startPoint, endPoint], true);
+                        if (lottieEl._epGlobalBadgeLottieToken !== token || !data || typeof data !== 'object') {
+                            return;
+                        }
+
+                        animation = window.lottie.loadAnimation({
+                            container: lottieEl,
+                            animationData: stripLottieExpressions(data),
+                            renderer: renderer,
+                            autoplay: settings.play_action === 'autoplay',
+                            loop: settings.loop,
+                        });
+
+                        animation.addEventListener('DOMLoaded', function () {
+                            var firstFrame = animation.firstFrame,
+                                totalFrame = animation.totalFrames,
+                                getFrameNumberByPercent = function (percent) {
+                                    percent = parseFloat(percent);
+                                    percent = Math.min(100, Math.max(0, isFinite(percent) ? percent : 0));
+                                    return firstFrame + (totalFrame - firstFrame) * percent / 100;
+                                },
+                                startPoint = getFrameNumberByPercent(settings.start_point ?? 0),
+                                endPoint = getFrameNumberByPercent(settings.end_point ?? 100);
+
+                            animation.playSegments([startPoint, endPoint], true);
+                        });
+
+                        animation.setSpeed(isFinite(speed) ? speed : 1);
+                        lottieEl._epGlobalBadgeLottie = animation;
+                    }).catch(function () {
+                        // Invalid or unreachable JSON: leave the icon empty.
                     });
-
-                    animation.setSpeed(settings.speed ?? 1);
-                    lottieEl._epGlobalBadgeLottie = animation;
                 });
             },
 
@@ -3557,16 +4027,13 @@ jQuery(document).ready(function () {
                 }
             },
 
-            escapeHtml: function (text) {
-                return $('<div/>').text(text || '').html();
-            },
-
             getBadgeMountElement: function () {
                 var id = this.getID(),
                     $mount;
 
                 if (id) {
-                    $mount = $('.elementor-element-' + id);
+                    // Element ids are stored data; escape them for the selector.
+                    $mount = $('.elementor-element-' + cssEscape(id));
 
                     if ($mount.length) {
                         return $mount.first();
@@ -3651,6 +4118,10 @@ jQuery(document).ready(function () {
                 }
             },
 
+            getBadgeSelector: function (forId) {
+                return '.bdt-ep-global-badge[data-ep-global-badge-for="' + cssEscape(forId) + '"]';
+            },
+
             getBadgeElement: function () {
                 var forId = this.getBadgeForAttr();
 
@@ -3658,7 +4129,7 @@ jQuery(document).ready(function () {
                     return $();
                 }
 
-                return $('.bdt-ep-global-badge[data-ep-global-badge-for="' + forId + '"]').first();
+                return $(this.getBadgeSelector(forId)).first();
             },
 
             dedupeBadges: function () {
@@ -3669,7 +4140,7 @@ jQuery(document).ready(function () {
                     return;
                 }
 
-                $badges = $('.bdt-ep-global-badge[data-ep-global-badge-for="' + forId + '"]');
+                $badges = $(this.getBadgeSelector(forId));
 
                 if ($badges.length <= 1) {
                     return;
@@ -3685,7 +4156,7 @@ jQuery(document).ready(function () {
                     return;
                 }
 
-                $('.bdt-ep-global-badge[data-ep-global-badge-for="' + forId + '"]').remove();
+                $(this.getBadgeSelector(forId)).remove();
             },
 
             /**
@@ -3738,20 +4209,28 @@ jQuery(document).ready(function () {
                 return (map[horizontal] && map[horizontal][vertical]) ? map[horizontal][vertical] : 'top-right';
             },
 
-            getSliderCSSValue: function (key) {
-                var data = this.getElementSettings('ep_global_badge_' + key);
+            getSliderCSSValue: function (key, defaultUnit) {
+                var data = this.getElementSettings('ep_global_badge_' + key),
+                    size;
 
                 if (!data || data.size === '' || data.size === undefined || data.size === null) {
                     return null;
                 }
 
-                return String(data.size) + (data.unit || 'px');
+                // Numeric size and a known unit only: these end up in inline CSS.
+                size = parseFloat(data.size);
+
+                if (!isFinite(size)) {
+                    return null;
+                }
+
+                return size + (SAFE_CSS_UNITS.indexOf(data.unit) !== -1 ? data.unit : (defaultUnit || 'px'));
             },
 
             getLayoutTransformValue: function () {
                 var offsetX = this.getSliderCSSValue('offset_x') || '0px',
                     offsetY = this.getSliderCSSValue('offset_y') || '0px',
-                    rotate = this.getSliderCSSValue('rotate') || '0deg';
+                    rotate = this.getSliderCSSValue('rotate', 'deg') || '0deg';
 
                 return 'translate(' + offsetX + ', ' + offsetY + ') rotate(' + rotate + ')';
             },
@@ -3818,25 +4297,26 @@ jQuery(document).ready(function () {
                 $badge.addClass('bdt-ep-global-badge--' + style);
             },
 
-            getIconHtml: function () {
+            getIconNode: function () {
                 var icon = this.settings('icon_selected'),
                     helpers,
+                    el,
                     iconType = this.getBadgeIconType();
 
                 if (!this.hasBadgeIconContent()) {
-                    return '';
+                    return null;
                 }
 
                 if (iconType === 'lottie') {
-                    return this.getLottieHtml();
+                    return this.getLottieNode();
                 }
 
                 if (!icon || !icon.value) {
-                    return '';
+                    return null;
                 }
 
                 if (icon.library === 'svg') {
-                    return this.getSvgIconHtml(icon);
+                    return this.getSvgIconNode(icon);
                 }
 
                 helpers = this.getElementorHelpers();
@@ -3845,22 +4325,38 @@ jQuery(document).ready(function () {
                     helpers.enqueueIconFonts(icon.library);
                 }
 
-                return '<i class="' + icon.value + '" aria-hidden="true"></i>';
+                el = document.createElement('i');
+                el.className = String(icon.value);
+                el.setAttribute('aria-hidden', 'true');
+
+                return el;
             },
 
-            getBadgeIconWrapHtml: function (iconHtml) {
-                if (!iconHtml) {
-                    return '';
+            getBadgeIconWrapNode: function (iconNode) {
+                var wrap;
+
+                if (!iconNode) {
+                    return null;
                 }
 
-                return '<span class="bdt-ep-global-badge-icon bdt-ep-global-badge-icon--' + this.getBadgeIconType() + '">' + iconHtml + '</span>';
+                wrap = document.createElement('span');
+                wrap.className = 'bdt-ep-global-badge-icon bdt-ep-global-badge-icon--' + this.getBadgeIconType();
+                wrap.appendChild(iconNode);
+
+                return wrap;
             },
 
+            /**
+             * Editor-only badge render. Settings here are not escaped by PHP and can
+             * be saved by a Contributor, so the badge is built with DOM APIs
+             * (textContent / setAttribute / style.setProperty), never HTML strings.
+             */
             updateBadgeMarkup: function () {
                 var $mount = this.getBadgeMountElement(),
-                    style, positionClass, text, innerStyle, svgHtml, iconHtml, textHtml, badgeHtml,
+                    style, positionClass, text, clipPath, badge, inner, svgWrap, content, iconWrap, textEl,
                     transform = this.getLayoutTransformValue(),
                     forId = this.getBadgeForAttr(),
+                    hasSvg,
                     $parent;
 
                 this.removeAllBadges();
@@ -3872,44 +4368,56 @@ jQuery(document).ready(function () {
                 style = this.normalizeStyleSlug(this.settings('style') || 'default');
                 positionClass = this.getPositionClass();
                 text = this.settings('text') || '';
-                var hasSvg = this.hasSvgLayer();
+                hasSvg = this.hasSvgLayer();
 
-                innerStyle = this.getSvgInnerStyle();
+                badge = document.createElement('div');
+                badge.className = 'bdt-ep-global-badge bdt-position-small bdt-position-' + positionClass + ' bdt-ep-global-badge--' + style + (hasSvg ? ' bdt-ep-global-badge-has-svg' : '');
+                badge.setAttribute('data-ep-global-badge-for', forId);
+                badge.style.transform = transform;
+
+                inner = document.createElement('div');
+                inner.className = 'bdt-ep-global-badge-inner';
+                this.applySvgInnerStyle(inner);
 
                 if (this.settings('clip_path') === 'yes' && this.settings('clip_path_value')) {
-                    innerStyle += 'clip-path:' + this.settings('clip_path_value') + ';-webkit-clip-path:' + this.settings('clip_path_value') + ';';
+                    clipPath = String(this.settings('clip_path_value')).trim();
+                    inner.style.setProperty('clip-path', clipPath);
+                    inner.style.setProperty('-webkit-clip-path', clipPath);
                 }
-
-                svgHtml = '';
 
                 if (hasSvg) {
-                    svgHtml = '<div class="bdt-ep-global-badge-svg" aria-hidden="true">' + this.getSvgCode() + '</div>';
+                    svgWrap = document.createElement('div');
+                    svgWrap.className = 'bdt-ep-global-badge-svg';
+                    svgWrap.setAttribute('aria-hidden', 'true');
+                    svgWrap.appendChild(sanitizeSvgToFragment(this.getSvgCode()));
+                    inner.appendChild(svgWrap);
                 }
 
-                iconHtml = this.getIconHtml();
-                textHtml = '';
+                content = document.createElement('div');
+                content.className = 'bdt-ep-global-badge-content';
+
+                iconWrap = this.getBadgeIconWrapNode(this.getIconNode());
+
+                if (iconWrap) {
+                    content.appendChild(iconWrap);
+                }
 
                 if (text) {
-                    textHtml = '<span class="bdt-ep-global-badge-text">' + this.escapeHtml(text) + '</span>';
+                    textEl = document.createElement('span');
+                    textEl.className = 'bdt-ep-global-badge-text';
+                    textEl.textContent = String(text);
+                    content.appendChild(textEl);
                 }
 
-                badgeHtml =
-                    '<div class="bdt-ep-global-badge bdt-position-small bdt-position-' + positionClass + ' bdt-ep-global-badge--' + style + (hasSvg ? ' bdt-ep-global-badge-has-svg' : '') + '" data-ep-global-badge-for="' + forId + '" style="transform:' + transform + '">' +
-                        '<div class="bdt-ep-global-badge-inner"' + (innerStyle ? ' style="' + innerStyle + '"' : '') + '>' +
-                            svgHtml +
-                            '<div class="bdt-ep-global-badge-content">' +
-                                this.getBadgeIconWrapHtml(iconHtml) +
-                                textHtml +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
+                inner.appendChild(content);
+                badge.appendChild(inner);
 
                 $parent = this.getBadgeInsertParent();
 
                 if ($parent.length) {
-                    $parent.append(badgeHtml);
+                    $parent.append(badge);
                 } else {
-                    $mount.append(badgeHtml);
+                    $mount.append(badge);
                 }
 
                 this.ensureBadgePlacement();
@@ -4178,7 +4686,7 @@ jQuery(document).ready(function () {
                 }
                 if (this.settings('tooltip')) {
                     options.theme = 'bdt-tippy-' + widgetID;
-                    this.instance = tippy(widgetContainer, options);
+                    this.instance = epSafeTippy(widgetContainer, options);
                 }
             }
         });

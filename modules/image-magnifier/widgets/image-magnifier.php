@@ -289,6 +289,10 @@ class Image_Magnifier extends Module_Base {
 		$zoom_ratio_width  = ( isset($settings['zoom_ratio']['width']) ? $settings['zoom_ratio']['width'] : 480);
 		$zoom_ratio_height = (isset($settings['zoom_ratio']['height']) ? $settings['zoom_ratio']['height'] : 300);
 
+		// SELECT values are not validated on save, so allow-list them here.
+		$zoom_type     = in_array( $settings['type'], [ 'inner', 'standard', 'follow' ], true ) ? $settings['type'] : 'inner';
+		$zoom_position = ( 'left' === $settings['position'] ) ? 'left' : 'right';
+
 		$this->add_render_attribute(
 			[
 				'image-magnifier' => [
@@ -304,11 +308,11 @@ class Image_Magnifier extends Module_Base {
 				'image-magnifier-settings' => [
 					'data-settings' => [
 						wp_json_encode(array_filter([
-							"type"        => $settings["type"],
+							"type"        => $zoom_type,
 							"bigImageSrc" => isset($big_image_src[0]) ? esc_url($big_image_src[0]) : '',
 							"smoothMove"  => $settings["smooth_move"] ? true : false,
 							"preload"     => $settings["preload"] ? true : false,
-							"position"    => $settings["position"],
+							"position"    => $zoom_position,
 							"zoomSize"    => [ (int) $zoom_ratio_width , (int) $zoom_ratio_height ],
 							"offset"      => [ (int) $horizontal_offset , (int) $vertical_offset ],
 				        ]))

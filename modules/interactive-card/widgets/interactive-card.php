@@ -63,6 +63,28 @@ class Interactive_Card extends Module_Base {
 		return false;
 	}
 
+	/**
+	 * Build a safe window.open() handler for an onclick attribute.
+	 *
+	 * The URL is saved by any page editor (Contributor included), so it is
+	 * JSON-encoded instead of being placed inside a quoted JS string, and only
+	 * web / mail / phone / relative URLs are accepted.
+	 *
+	 * @param string $url    Link URL from a URL control.
+	 * @param bool   $is_new Open in a new tab.
+	 * @return string Empty string when the URL is not allowed.
+	 */
+	private function get_window_open_handler( $url, $is_new ) {
+		$url = esc_url_raw( trim( (string) $url ), [ 'http', 'https', 'mailto', 'tel' ] );
+		if ( '' === $url ) {
+			return '';
+		}
+
+		$flags = JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP;
+
+		return 'window.open(' . wp_json_encode( $url, $flags ) . ', ' . wp_json_encode( $is_new ? '_blank' : '_self' ) . ')';
+	}
+
     protected function register_controls() {
         $this->start_controls_section(
             'section_interactive-card_layout',
@@ -1571,12 +1593,10 @@ class Interactive_Card extends Module_Base {
 		$this->add_render_attribute( 'interactive-card-title', 'class', 'bdt-interactive-card-title' );
 		$title_link_url = isset( $settings['title_link_url']['url'] ) ? $settings['title_link_url']['url'] : '';
 		if ( ! empty( $settings['title_link'] ) && $settings['title_link'] === 'yes' && $title_link_url !== '' ) {
-			$target = ( ! empty( $settings['title_link_url']['is_external'] ) && $settings['title_link_url']['is_external'] ) ? '_blank' : '_self';
-			$this->add_render_attribute(
-				'interactive-card-title',
-				'onclick',
-				"window.open('" . esc_url( $title_link_url ) . "', '" . esc_attr( $target ) . "')"
-			);
+			$title_onclick = $this->get_window_open_handler( $title_link_url, ! empty( $settings['title_link_url']['is_external'] ) );
+			if ( '' !== $title_onclick ) {
+				$this->add_render_attribute( 'interactive-card-title', 'onclick', $title_onclick );
+			}
 		}
 
 		$this->add_render_attribute( 'interactive-card-sub-title', 'class', 'bdt-interactive-card-sub-title' );
@@ -1683,8 +1703,10 @@ class Interactive_Card extends Module_Base {
 
 		$global_link_url = isset( $settings['global_link_url']['url'] ) ? $settings['global_link_url']['url'] : '';
 		if ( ! empty( $settings['global_link'] ) && $settings['global_link'] === 'yes' && $global_link_url !== '' ) {
-			$target = ( ! empty( $settings['global_link_url']['is_external'] ) && $settings['global_link_url']['is_external'] ) ? '_blank' : '_self';
-			$this->add_render_attribute( 'interactive-card', 'onclick', "window.open('" . esc_url( $global_link_url ) . "', '" . esc_attr( $target ) . "')" );
+			$global_onclick = $this->get_window_open_handler( $global_link_url, ! empty( $settings['global_link_url']['is_external'] ) );
+			if ( '' !== $global_onclick ) {
+				$this->add_render_attribute( 'interactive-card', 'onclick', $global_onclick );
+			}
 		}
 		?>
 		<div <?php $this->print_render_attribute_string( 'interactive-card' ); ?>>
@@ -1749,19 +1771,29 @@ class Interactive_Card extends Module_Base {
 			} );
 		}
 
+		// Link URLs are page data (any editor can save them): only web, mail, phone,
+		// relative and # URLs are allowed, and the value is JSON-encoded, never
+		// spliced into a quoted JS string.
+		var epSafeLinkUrl = function( url ) {
+			url = String( url || '' ).trim();
+			return /^(https?:|mailto:|tel:|\/|#|\?|\.)/i.test( url ) || ! /^[^\/?#]*:/.test( url ) ? url : '';
+		};
+		var epWindowOpen = function( url, isNew ) {
+			url = epSafeLinkUrl( url );
+			return url ? 'window.open(' + JSON.stringify( url ) + ', ' + JSON.stringify( isNew ? '_blank' : '_self' ) + ')' : '';
+		};
+
 		var globalOnclick = '';
 		if ( settings.global_link === 'yes' && settings.global_link_url && settings.global_link_url.url ) {
-			var gTarget = ( settings.global_link_url.is_external ) ? '_blank' : '_self';
-			globalOnclick = "window.open('" + String( settings.global_link_url.url ).replace( /\\/g, '\\\\' ).replace( /'/g, "\\'" ) + "', '" + gTarget + "')";
+			globalOnclick = epWindowOpen( settings.global_link_url.url, settings.global_link_url.is_external );
 		}
 
 		var titleOnclick = '';
 		if ( settings.title_link === 'yes' && settings.title_link_url && settings.title_link_url.url ) {
-			var tTarget = ( settings.title_link_url.is_external ) ? '_blank' : '_self';
-			titleOnclick = "window.open('" + String( settings.title_link_url.url ).replace( /\\/g, '\\\\' ).replace( /'/g, "\\'" ) + "', '" + tTarget + "')";
+			titleOnclick = epWindowOpen( settings.title_link_url.url, settings.title_link_url.is_external );
 		}
 
-		var readmoreLinkUrl = ( settings.readmore_link && settings.readmore_link.url ) ? settings.readmore_link.url : '';
+		var readmoreLinkUrl = ( settings.readmore_link && settings.readmore_link.url ) ? epSafeLinkUrl( settings.readmore_link.url ) : '';
 		var rmTarget = ( settings.readmore_link && settings.readmore_link.is_external ) ? '_blank' : '_self';
 		var rmRel = '';
 		if ( settings.readmore_link && settings.readmore_link.is_external ) {
@@ -1779,7 +1811,7 @@ class Interactive_Card extends Module_Base {
 		}
 		var readmoreText = settings.readmore_text ? settings.readmore_text : 'Read More';
 		#>
-		<div class="bdt-interactive-card bdt-interactive-card-default"<# if ( showWavify ) { #> id="{{ cardId }}" data-settings='{{ dataSettings }}'<# } #><# if ( globalOnclick ) { #> onclick="{{ globalOnclick }}"<# } #>>
+		<div class="bdt-interactive-card bdt-interactive-card-default"<# if ( showWavify ) { #> id="{{ cardId }}" data-settings="{{ dataSettings }}"<# } #><# if ( globalOnclick ) { #> onclick="{{ globalOnclick }}"<# } #>>
 			<div class="{{ wrapperClasses }}">
 				<div class="{{ widthClass }}">
 					<div class="bdt-position-relative">

@@ -59,7 +59,13 @@ class Brand_Grid extends Module_Base {
 	protected function content_template() {
 		?>
 		<#
-		var nameTag = settings.brand_html_tag || 'h3';
+		// Settings are author-controlled: allow-list the tag and only allow safe link schemes.
+		var nameTag = elementor.helpers.validateHTMLTag( settings.brand_html_tag || 'h3' );
+		var isSafeUrl = function( url ) {
+			// Browsers ignore whitespace/control chars inside a scheme, so strip them before checking.
+			url = String( url ).replace( /[\u0000-\u0020\u007f]/g, '' );
+			return /^(https?:|mailto:|tel:)/i.test( url ) || ! /^[a-z][a-z0-9+.\-]*:/i.test( url );
+		};
 		#>
 		<div class="bdt-ep-brand-grid">
 			<# _.each( settings.brand_items, function( item ) {
@@ -67,7 +73,6 @@ class Brand_Grid extends Module_Base {
 				if ( settings.brand_event === 'hover-item' ) {
 					itemClass += ' bdt-ep-brand-grid-item-hover';
 				}
-				var nameHtml = '<' + nameTag + ' class="bdt-ep-brand-grid-name">' + item.brand_name + '</' + nameTag + '>';
 			#>
 			<div class="{{ itemClass }}">
 				<div class="bdt-ep-brand-grid-image">
@@ -84,9 +89,9 @@ class Brand_Grid extends Module_Base {
 					</div>
 					<div class="bdt-ep-brand-grid-inner">
 						<# if ( item.brand_name && settings.show_brand_name === 'yes' ) { #>
-						{{{ nameHtml }}}
+						<{{ nameTag }} class="bdt-ep-brand-grid-name">{{ item.brand_name }}</{{ nameTag }}>
 						<# } #>
-						<# if ( item.link && item.link.url && settings.show_website_link === 'yes' ) { #>
+						<# if ( item.link && item.link.url && isSafeUrl( item.link.url ) && settings.show_website_link === 'yes' ) { #>
 						<div class="bdt-ep-brand-grid-text">
 							<a href="{{ item.link.url }}" class="bdt-ep-brand-grid-link">{{ item.website_link_text }}</a>
 						</div>

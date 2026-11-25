@@ -230,6 +230,24 @@ class Dynamic_Select_Input_Module {
         return $results;
     }
 
+    /**
+     * Limit a post query to entries anyone may read.
+     *
+     * This endpoint only needs edit_posts, which a Contributor has. Without an
+     * explicit post_status, WP_Query in admin-ajax also returns drafts, pending and
+     * scheduled posts, and nothing excludes password-protected ones.
+     *
+     * @param array $args WP_Query arguments.
+     * @return array
+     */
+    protected function readableQueryArgs(array $args) {
+        $args['post_status']  = 'publish';
+        $args['has_password'] = false;
+        $args['perm']         = 'readable';
+
+        return $args;
+    }
+
     public function getDynamicTemplates() {
         $searchText        = $this->getSearchQuery();
         $args              = [];
@@ -237,7 +255,7 @@ class Dynamic_Select_Input_Module {
         if ($searchText) {
             $args['s'] = $searchText;
         }
-        $query   = new WP_Query($args);
+        $query   = new WP_Query($this->readableQueryArgs($args));
         $results = [];
         foreach ($query->posts as $post) {
             $post_type_obj = get_post_type_object($post->post_type);
@@ -256,7 +274,7 @@ class Dynamic_Select_Input_Module {
         if ($searchText) {
             $args['s'] = $searchText;
         }
-        $query   = new WP_Query($args);
+        $query   = new WP_Query($this->readableQueryArgs($args));
         $results = [];
         foreach ($query->posts as $post) {
             $post_type_obj = get_post_type_object($post->post_type);
@@ -277,7 +295,7 @@ class Dynamic_Select_Input_Module {
         if ($searchText) {
             $args['s'] = $searchText;
         }
-        $query   = new WP_Query($args);
+        $query   = new WP_Query($this->readableQueryArgs($args));
         $results = [];
         foreach ($query->posts as $post) {
             $post_type_obj = get_post_type_object($post->post_type);
@@ -297,7 +315,7 @@ class Dynamic_Select_Input_Module {
         if ($searchText) {
             $args['s'] = $searchText;
         }
-        $query   = new WP_Query($args);
+        $query   = new WP_Query($this->readableQueryArgs($args));
         $results = [];
         foreach ($query->posts as $post) {
             $post_type_obj = get_post_type_object($post->post_type);
@@ -512,15 +530,33 @@ class Dynamic_Select_Input_Module {
         $args = [
             'fields'  => ['ID', 'display_name'],
             'orderby' => 'display_name',
+            // Always bounded: without a limit an empty search returns every user.
+            'number'  => 20,
         ];
+
+        // This endpoint only requires 'edit_posts', so a Contributor can reach it.
+        // WordPress itself offers callers without 'list_users' only users who have
+        // published something (WP_REST_Users_Controller::get_items); match that.
+        $can_list_users = current_user_can('list_users');
+
+        if (!$can_list_users) {
+            $args['has_published_posts'] = true;
+        }
 
         if (!empty($include)) {
             $args['include'] = $include;
+            // Room for every already-selected value, still bounded.
+            $args['number'] = min(100, max(20, count($include)));
         }
 
         if ($search_text) {
-            $args['number'] = 20;
             $args['search'] = "*$search_text*";
+            // WP_User_Query also searches user_email and user_login. Callers without
+            // 'list_users' may match names only, so the search cannot probe e-mail
+            // addresses or logins.
+            if (!$can_list_users) {
+                $args['search_columns'] = ['user_nicename', 'display_name'];
+            }
         }
 
         $users = get_users($args);
@@ -581,6 +617,13 @@ class Dynamic_Select_Input_Module {
             $results = ['0' => __('Template Not Found!', 'bdthemes-element-pack-lite')];
         } else {
             foreach ($templates as $template) {
+                // The local source also lists other users' drafts; keep only templates
+                // that are published or that this user may edit anyway.
+                $template_id = (int) $template['template_id'];
+                if ('publish' !== get_post_status($template_id) && !current_user_can('edit_post', $template_id)) {
+                    continue;
+                }
+
                 $results[] = [
                     'id'   => $template['template_id'],
                     'text' => $template['title'],
@@ -597,12 +640,12 @@ class Dynamic_Select_Input_Module {
         $search_text = $this->getSearchQuery();
         $results     = [];
         if (post_type_exists('ae_global_templates')) {
-            $anywhere = get_posts(array(
+            $anywhere = get_posts($this->readableQueryArgs(array(
                 'fields'         => 'ids', // Only get post IDs
                 'posts_per_page' => -1,
                 'post_type'      => 'ae_global_templates',
                 's'              => $search_text,
-            ));
+            )));
             foreach ($anywhere as $key => $value) {
                 $results[] = [
                     'id'   => $value,
@@ -626,16 +669,23 @@ class Dynamic_Select_Input_Module {
         $include    = $this->getselecedIds();
         $searchText = $this->getSearchQuery();
 
+        $can_moderate = current_user_can('moderate_comments');
+
         $args = [
-            'status'  => 'approve',
-            'number'  => 0, // Always get all unless explicitly limited
+            'status'      => 'approve',
+            // Only comments on published posts: approval says nothing about whether the
+            // post itself is public.
+            'post_status' => 'publish',
+            'number'      => 100,
         ];
 
         if (!empty($include)) {
             $args['comment__in'] = $include;
         }
 
-        if ($searchText) {
+        // WP_Comment_Query's search also matches the author e-mail, URL and IP, which
+        // only moderators may see. Others are matched on name and text below instead.
+        if ($searchText && $can_moderate) {
             $args['search'] = $searchText;
         }
 
@@ -646,6 +696,16 @@ class Dynamic_Select_Input_Module {
         $results = [];
 
         foreach ($query->comments as $comment) {
+            $comment_post = get_post($comment->comment_post_ID);
+
+            if (!$comment_post || (!$can_moderate && (post_password_required($comment_post) || !current_user_can('read_post', $comment_post->ID)))) {
+                continue;
+            }
+
+            if ($searchText && !$can_moderate && false === stripos($comment->comment_author . ' ' . $comment->comment_content, $searchText)) {
+                continue;
+            }
+
             $comment_text = wp_trim_words($comment->comment_content, 10, '...');
             $post_title   = get_the_title($comment->comment_post_ID);
             $text = sprintf(

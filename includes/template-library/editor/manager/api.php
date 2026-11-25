@@ -173,16 +173,15 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
             wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'bdthemes-element-pack-lite' ) ), 403 );
         }
 
+        // Sync drops, truncates and refills the library tables and makes a long
+        // remote request, so never run it through a plain GET link.
+        if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) ) {
+            wp_send_json_error( array( 'message' => esc_html__( 'Invalid request', 'bdthemes-element-pack-lite' ) ), 405 );
+        }
+
         $this->createTemplateTables();
 
-        echo wp_json_encode(
-            array(
-                'success' => true,
-                'data'    => array(),
-            )
-        );
-
-        wp_die();
+        wp_send_json_success( array() );
     }
 }
 

@@ -232,7 +232,7 @@ class Module extends Element_Pack_Module_Base {
 
 
             $redirect_url = (isset($form_data['redirect-url']) && !empty($form_data['redirect-url'])) ? esc_url_raw($form_data['redirect-url']) : 'no';
-            $is_external  = (isset($form_data['is-external']) && !empty($form_data['is-external'])) ? esc_attr($form_data['is-external']) : 'no';
+            $is_external  = (isset($form_data['is-external']) && !empty($form_data['is-external'])) && in_array($form_data['is-external'], ['_blank', '_self'], true) ? $form_data['is-external'] : 'no';
 
             $reset_status = (isset($form_data['reset-after-submit']) && ($form_data['reset-after-submit'] == 'yes')) ? 'yes' : 'no';
 

@@ -542,7 +542,20 @@ trait Group_Control_Query {
              */
             $selected_ids      = $this->get_settings_for_display('posts_selected_ids');
             $selected_ids      = wp_parse_id_list($selected_ids);
-            $args['post_type'] = 'any';
+            // Selected IDs are free text (a Contributor can enter any ID), so keep
+            // them to types the old 'any' query allowed (searchable) that are also
+            // public, and never saved templates / builder or mega menu content.
+            $args['post_type'] = array_keys(array_diff_key(
+                get_post_types(['public' => true, 'exclude_from_search' => false]),
+                [
+                    'attachment'           => '',
+                    'elementor_library'    => '',
+                    'bdt-template-builder' => '',
+                    'ep_megamenu_content'  => '',
+                    'e-floating-buttons'   => '',
+                    'bdt-custom-template'  => '',
+                ]
+            ));
             if (!empty($selected_ids)) {
                 $args['post__in'] = $selected_ids;
             }
@@ -707,7 +720,19 @@ trait Group_Control_Query {
      * @return mixed
      */
     private function getGroupControlQueryPostType() {
-        return $this->get_settings_for_display('posts_source');
+        $type = $this->get_settings_for_display('posts_source');
+
+        /**
+         * The saved value is not limited to the Source options (anyone who
+         * can edit the page can store any string), so only accept a public
+         * post type from the option list; otherwise non-public records
+         * could be printed on the page.
+         */
+        if (!is_string($type) || !array_key_exists($type, $this->getGroupControlQueryPostTypes())) {
+            return 'post';
+        }
+
+        return $type;
     }
 
     /**

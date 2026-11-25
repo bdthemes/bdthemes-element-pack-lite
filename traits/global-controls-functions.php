@@ -24931,7 +24931,24 @@ trait Global_Controls_Functions {
 		$platform    = get_post_meta( $post_id, 'bdthemes_tm_platform', true );
 		$review_link = get_post_meta( $post_id, 'bdthemes_tm_review_link', true );
 
-		if ( ! $platform ) {
+		// The meta is free text from whoever edits the testimonial, and UIkit renders
+		// a tooltip title as HTML, so only a known platform label may reach it.
+		$platform_labels = [
+			'self'        => 'Self',
+			'capterra'    => 'Capterra',
+			'facebook'    => 'Facebook',
+			'foursquare'  => 'Foursquare',
+			'g2'          => 'G2',
+			'glassdoor'   => 'Glassdoor',
+			'google'      => 'Google',
+			'tripadvisor' => 'TripAdvisor',
+			'trustpilot'  => 'Trustpilot',
+			'trustradius' => 'TrustRadius',
+			'yelp'        => 'Yelp',
+		];
+
+		$platform = sanitize_key( (string) $platform );
+		if ( ! isset( $platform_labels[ $platform ] ) ) {
 			$platform = 'self';
 		}
 
@@ -24941,8 +24958,8 @@ trait Global_Controls_Functions {
 
 		?>
 		<a href="<?php echo esc_url( $review_link ); ?>" class="bdt-review-platform bdt-flex-inline"
-			bdt-tooltip="<?php echo esc_attr( $platform ); ?>">
-			<i class="ep-icon-<?php echo esc_attr( strtolower( $platform ) ); ?> bdt-platform-icon bdt-flex bdt-flex-middle bdt-flex-center"
+			bdt-tooltip="<?php echo esc_attr( $platform_labels[ $platform ] ); ?>">
+			<i class="ep-icon-<?php echo esc_attr( $platform ); ?> bdt-platform-icon bdt-flex bdt-flex-middle bdt-flex-center"
 				aria-hidden="true"></i>
 		</a>
 		<?php

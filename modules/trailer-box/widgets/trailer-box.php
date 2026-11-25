@@ -2111,7 +2111,14 @@ class Trailer_Box extends Module_Base {
 			<div class="elementor-background-overlay"></div>
 		<?php endif; ?>
 		<?php if ( $link_type === 'item' && $button_url ) : ?>
-			<div onclick="window.open('<?php echo esc_url( $button_url ); ?>','<?php echo esc_attr( $target ); ?>');" style="cursor: pointer;">
+			<?php
+			// The URL comes from a widget setting (any Contributor can save it), and the browser
+			// decodes entities in the attribute before running the handler, so it must be emitted
+			// as a JSON string literal, not spliced inside JS quotes. A wrapping <a> is not used
+			// because the box can already contain links (button, content).
+			$json_flags = JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP;
+			?>
+			<div onclick="window.open(<?php echo esc_attr( wp_json_encode( esc_url_raw( $button_url ), $json_flags ) ); ?>, <?php echo esc_attr( wp_json_encode( $target, $json_flags ) ); ?>);" style="cursor: pointer;">
 		<?php endif; ?>
 		<?php
 		if ( $pre_title ) {
