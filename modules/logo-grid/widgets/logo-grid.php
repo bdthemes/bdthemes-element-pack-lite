@@ -652,12 +652,15 @@ class Logo_Grid extends Module_Base {
 				$image_alt = $this->get_logo_image_alt( $item );
 
 				$this->add_render_attribute( $repeater_key, 'class', 'bdt-item' );
-				$this->add_logo_tooltip_attributes( $repeater_key, $item, $settings, [ 'format' => 'grid' ] );
 
 				if ( ! empty( $item_link_url ) ) {
 					$this->add_render_attribute( $repeater_key, 'class', 'bdt-logo-grid-link' );
 					$this->add_link_attributes( $repeater_key, $item['link'] );
 				}
+
+				// Tooltip attributes go after the link's custom attributes and overwrite
+				// them, so a data-tippy-* value set on the link cannot add to the tooltip.
+				$this->add_logo_tooltip_attributes( $repeater_key, $item, $settings, [ 'format' => 'grid' ] );
 
 				$this->add_render_attribute( 'image-wrap', 'class', 'bdt-logo-grid-figure' . $image_mask_class );
 
@@ -717,7 +720,11 @@ class Logo_Grid extends Module_Base {
 				var itemName = item.name || '';
 				var itemDesc = item.description || '';
 				var imageAlt = itemName + ' : ' + itemDesc;
-				var itemLinkUrl = ( item.link && item.link.url ) ? item.link.url : '';
+				var itemLinkUrl = ( item.link && item.link.url ) ? String( item.link.url ) : '';
+				// The URL is a saved setting: keep only http(s), mailto, tel, relative and # links.
+				if ( itemLinkUrl && /^\s*[a-z][a-z0-9+.\-]*:/i.test( itemLinkUrl ) && ! /^\s*(https?|mailto|tel):/i.test( itemLinkUrl ) ) {
+					itemLinkUrl = '#';
+				}
 				var linkTarget = ( item.link && item.link.is_external ) ? '_blank' : '_self';
 				var linkRel = '';
 				if ( item.link && item.link.is_external ) {

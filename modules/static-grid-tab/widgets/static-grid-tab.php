@@ -931,9 +931,9 @@ class Static_Grid_Tab extends Module_Base {
 			'grid'        => isset( $settings['columns'] ) ? (int) $settings['columns'] : 4,
 			'borderWidth' => $border_size,
 			'config'      => [
-				'layout'     => isset( $settings['layout_type'] ) ? $settings['layout_type'] : 'grid',
+				'layout'     => ( isset( $settings['layout_type'] ) && 'tab' === $settings['layout_type'] ) ? 'tab' : 'grid',
 				'speed'      => isset( $settings['speed'] ) ? (int) $settings['speed'] : 500,
-				'activeTab'  => isset( $settings['active_tab_no'] ) ? $settings['active_tab_no'] : '',
+				'activeTab'  => ( isset( $settings['active_tab_no'] ) && is_numeric( $settings['active_tab_no'] ) ) ? (int) $settings['active_tab_no'] : '',
 				'showClose'  => ! empty( $settings['show_close'] ) && $settings['show_close'] === 'yes',
 				'scrollToTab' => ! empty( $settings['scroll_to_tab'] ) && $settings['scroll_to_tab'] === 'yes',
 				'rtl'        => is_rtl(),
@@ -1182,7 +1182,7 @@ class Static_Grid_Tab extends Module_Base {
 			grid: settings.columns ? parseInt( settings.columns, 10 ) : 4,
 			borderWidth: borderW,
 			config: {
-				layout: settings.layout_type || 'grid',
+				layout: 'tab' === settings.layout_type ? 'tab' : 'grid',
 				speed: settings.speed ? parseInt( settings.speed, 10 ) : 500,
 				activeTab: settings.active_tab_no || '',
 				showClose: settings.show_close === 'yes',
@@ -1199,7 +1199,8 @@ class Static_Grid_Tab extends Module_Base {
 			if ( ! link || ! link.url ) {
 				return '';
 			}
-			var a = ' href="' + _.escape( link.url ) + '"';
+			// Drop javascript:/data: URLs in the editor preview, as the front end's esc_url does.
+			var a = ' href="' + _.escape( elementor.helpers.sanitizeUrl( link.url ) ) + '"';
 			if ( link.is_external ) {
 				a += ' target="_blank"';
 			}
@@ -1210,7 +1211,7 @@ class Static_Grid_Tab extends Module_Base {
 		};
 		#>
 		<div class="bdt-static-grid-tab" data-settings="<# print( _.escape( dataSettings ) ); #>">
-			<dl id="<# print( gridId ); #>" class="gridtab">
+			<dl id="{{ gridId }}" class="gridtab">
 				<# _.each( settings.static_tabs_item || [], function( item ) {
 					var gridTabType = settings.grid_tab_type || 'image';
 					var readmoreAnim = ( settings.readmore_hover_animation && settings.readmore_hover_animation !== '' ) ? ' elementor-animation-' + settings.readmore_hover_animation : '';

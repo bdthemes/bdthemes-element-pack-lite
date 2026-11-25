@@ -72,7 +72,8 @@ class Setup_Wizard {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only screen routing, no state change.
 		$is_setup_wizard_request = isset($_GET['ep_setup_wizard']) && 'show' === sanitize_text_field(wp_unslash($_GET['ep_setup_wizard']));
 		
-		if ( $is_setup_wizard_request ) {
+		// The wizard is an admin-only screen: its forms write plugin settings and install plugins.
+		if ( $is_setup_wizard_request && current_user_can( 'manage_options' ) ) {
 			// Use the same approach as first activation - completely override the page
 			add_action('admin_head', function() {
 				?>
@@ -160,6 +161,19 @@ class Setup_Wizard {
 
 	// Check if this is first activation and display setup wizard if needed
 	public function maybe_display_setup_wizard() {
+		// admin_init also runs for admin-ajax.php, REST and cron requests, which never
+		// reach admin_head. Marking the wizard completed there would consume it without
+		// ever rendering it.
+		if ( wp_doing_ajax() || wp_doing_cron() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
+
+		// Only administrators may see the wizard. Returning before the option is read
+		// also stops a low-privileged user from using up the one-shot first-run flag.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		// Only check for first activation here
 		if ( get_option( 'bdtep_setup_wizard_completed' ) === false ) {
 			// Set the flag so it doesn't run again
@@ -210,6 +224,15 @@ class Setup_Wizard {
 	}
 
 	public function display_page() {
+		// Both admin_init callbacks can ask for the wizard in the same load, and the
+		// step views are require_once'd, so a second call would paint an empty overlay.
+		static $rendered = false;
+
+		if ( $rendered ) {
+			return;
+		}
+
+		$rendered = true;
 		?>
 		<div class="bdt-setup-wizard-overlay ep-setup-wizard">
 			<div class="bdt-setup-wizard content-loaded">
@@ -223,6 +246,11 @@ class Setup_Wizard {
 
 	// Enqueue necessary scripts
 	public function enqueue_scripts() {
+		// Only administrators can use the wizard, so only they get its script and nonce.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		wp_register_script( 'bdt-setup-wizard', plugins_url( 'assets/js/setup-wizard.min.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
 		wp_register_style( 'bdt-setup-wizard', plugins_url( 'assets/css/setup-wizard.css', __FILE__ ), array(), '1.0.0' );
 
@@ -617,6 +645,96 @@ Setup_Wizard::get_instance();
 
 use Elementor\TemplateLibrary\Source_Local;
 
+/**
+ * Map an import URL back to a starter kit or template that ships inside this plugin.
+ *
+ * Full builds carry the kits under includes/setup-wizard/assets/templates/.
+ * wordpress.org builds cannot ship compressed files, so those kits are fetched
+ * from the remote host instead. Returns the absolute path for a bundled file and
+ * null for anything else, which is then downloaded over HTTP.
+ *
+ * @param string $file_url  Import URL supplied by the wizard.
+ * @param string $extension Expected file extension, 'zip' or 'json'.
+ * @return string|null
+ */
+function element_pack_setup_wizard_bundled_kit_path( $file_url, $extension = 'zip' ) {
+	$templates_url  = plugins_url( 'includes/setup-wizard/assets/templates/', BDTEP__FILE__ );
+	$templates_path = BDTEP_INC_PATH . 'setup-wizard/assets/templates/';
+
+	// The site may be reached over either scheme, so compare without one.
+	$strip_scheme = static function ( $url ) {
+		return preg_replace( '#^https?://#i', '', (string) $url );
+	};
+
+	if ( 0 !== strpos( $strip_scheme( $file_url ), $strip_scheme( $templates_url ) ) ) {
+		return null;
+	}
+
+	$file_name = sanitize_file_name( wp_basename( (string) wp_parse_url( $file_url, PHP_URL_PATH ) ) );
+
+	if ( '' === $file_name || $extension !== strtolower( pathinfo( $file_name, PATHINFO_EXTENSION ) ) ) {
+		return null;
+	}
+
+	$real_base = realpath( $templates_path );
+	$real_file = realpath( $templates_path . $file_name );
+
+	// Confine reads to the bundled templates directory, whatever the URL says.
+	if ( false === $real_base || false === $real_file
+		|| 0 !== strpos( $real_file, $real_base . DIRECTORY_SEPARATOR )
+		|| ! is_file( $real_file ) ) {
+		return null;
+	}
+
+	return $real_file;
+}
+
+/**
+ * Whether an import URL may be downloaded over HTTP by the setup wizard.
+ *
+ * Only the starter-kit host (the element_pack/setup_wizard/kit_base_url filter,
+ * the same one the wizard view builds its links from) and this site itself are
+ * allowed, and only for the expected file type. A crafted import_url therefore
+ * cannot make the import pull Elementor data from anywhere else.
+ *
+ * @param string $file_url  Import URL supplied by the wizard.
+ * @param string $extension Expected file extension, 'zip' or 'json'.
+ * @return bool
+ */
+function element_pack_setup_wizard_is_allowed_remote_url( $file_url, $extension = 'zip' ) {
+	$parts = wp_parse_url( (string) $file_url );
+
+	if ( ! is_array( $parts ) || empty( $parts['host'] ) || empty( $parts['scheme'] ) ) {
+		return false;
+	}
+
+	if ( ! in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true ) ) {
+		return false;
+	}
+
+	$path = isset( $parts['path'] ) ? (string) $parts['path'] : '';
+
+	if ( $extension !== strtolower( pathinfo( $path, PATHINFO_EXTENSION ) ) ) {
+		return false;
+	}
+
+	$kit_base_url = apply_filters(
+		'element_pack/setup_wizard/kit_base_url',
+		'https://templates.elementpack.pro/element-pack-lite/setup-wizard'
+	);
+
+	$allowed_hosts = array_filter(
+		array(
+			wp_parse_url( (string) $kit_base_url, PHP_URL_HOST ),
+			wp_parse_url( home_url(), PHP_URL_HOST ),
+			wp_parse_url( plugins_url( '/', BDTEP__FILE__ ), PHP_URL_HOST ),
+		)
+	);
+	$allowed_hosts = array_map( 'strtolower', $allowed_hosts );
+
+	return in_array( strtolower( $parts['host'] ), $allowed_hosts, true );
+}
+
 add_action('wp_ajax_ep_setup_wizard_import_template', function () {
 		check_ajax_referer( 'ep_setup_wizard_nonce', 'nonce' );
 
@@ -628,37 +746,57 @@ add_action('wp_ajax_ep_setup_wizard_import_template', function () {
 
 		$json_url = isset( $_POST['import_url'] ) ? esc_url_raw( wp_unslash( $_POST['import_url'] ) ) : '';
 
-        $response = wp_safe_remote_get($json_url, array(
-            'timeout'   => 60,
-            'sslverify' => false
-        ));
+        // A template that ships with the plugin is read from disk; anything else may only
+        // come from the starter-kit host or this site, over verified TLS.
+        $local_template = element_pack_setup_wizard_bundled_kit_path($json_url, 'json');
 
-        if (is_wp_error($response)) {
-            wp_send_json_error([
-                'message' => sprintf(
-                    /* translators: %s: error reported by the HTTP request. */
-                    esc_html__('Failed to fetch template from URL: %s', 'bdthemes-element-pack-lite'),
-                    esc_html($response->get_error_message())
-                ),
-            ]);
-            wp_die();
+        if ($local_template) {
+            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reading a validated file inside this plugin.
+            $sourceData = file_get_contents($local_template);
+
+            if (false === $sourceData) {
+                wp_send_json_error(['message' => esc_html__('The bundled template could not be read.', 'bdthemes-element-pack-lite')]);
+                wp_die();
+            }
+        } else {
+            if (!element_pack_setup_wizard_is_allowed_remote_url($json_url, 'json')) {
+                wp_send_json_error(['message' => esc_html__('Invalid import URL', 'bdthemes-element-pack-lite')]);
+                wp_die();
+            }
+
+            $response = wp_safe_remote_get($json_url, array(
+                'timeout'   => 60,
+                'sslverify' => true,
+            ));
+
+            if (is_wp_error($response)) {
+                wp_send_json_error([
+                    'message' => sprintf(
+                        /* translators: %s: error reported by the HTTP request. */
+                        esc_html__('Failed to fetch template from URL: %s', 'bdthemes-element-pack-lite'),
+                        esc_html($response->get_error_message())
+                    ),
+                ]);
+                wp_die();
+            }
+
+            $response_code = (int) wp_remote_retrieve_response_code($response);
+
+            if (200 !== $response_code) {
+                wp_send_json_error([
+                    'message' => sprintf(
+                        /* translators: 1: HTTP status code, 2: template URL. */
+                        esc_html__('Failed to fetch template from URL (HTTP %1$d): %2$s', 'bdthemes-element-pack-lite'),
+                        $response_code,
+                        esc_html($json_url)
+                    ),
+                ]);
+                wp_die();
+            }
+
+            $sourceData = wp_remote_retrieve_body($response);
         }
 
-        $response_code = (int) wp_remote_retrieve_response_code($response);
-
-        if (200 !== $response_code) {
-            wp_send_json_error([
-                'message' => sprintf(
-                    /* translators: 1: HTTP status code, 2: template URL. */
-                    esc_html__('Failed to fetch template from URL (HTTP %1$d): %2$s', 'bdthemes-element-pack-lite'),
-                    $response_code,
-                    esc_html($json_url)
-                ),
-            ]);
-            wp_die();
-        }
-
-        $sourceData = wp_remote_retrieve_body($response);
         $sourceData2 = json_decode($sourceData, true);
 
         if (!$sourceData2 || !is_array($sourceData2)) {
@@ -735,49 +873,6 @@ add_action('wp_ajax_ep_setup_wizard_import_template', function () {
 );
 
 
-/**
- * Map an import URL back to a starter kit that ships inside this plugin.
- *
- * Full builds carry the .zip kits under includes/setup-wizard/assets/templates/.
- * wordpress.org builds cannot ship compressed files, so those kits are fetched
- * from the remote host instead. Returns the absolute path for a bundled kit and
- * null for anything else, which is then downloaded over HTTP.
- *
- * @param string $file_url Import URL supplied by the wizard.
- * @return string|null
- */
-function element_pack_setup_wizard_bundled_kit_path( $file_url ) {
-	$templates_url  = plugins_url( 'includes/setup-wizard/assets/templates/', BDTEP__FILE__ );
-	$templates_path = BDTEP_INC_PATH . 'setup-wizard/assets/templates/';
-
-	// The site may be reached over either scheme, so compare without one.
-	$strip_scheme = static function ( $url ) {
-		return preg_replace( '#^https?://#i', '', (string) $url );
-	};
-
-	if ( 0 !== strpos( $strip_scheme( $file_url ), $strip_scheme( $templates_url ) ) ) {
-		return null;
-	}
-
-	$file_name = sanitize_file_name( wp_basename( (string) wp_parse_url( $file_url, PHP_URL_PATH ) ) );
-
-	if ( '' === $file_name || 'zip' !== strtolower( pathinfo( $file_name, PATHINFO_EXTENSION ) ) ) {
-		return null;
-	}
-
-	$real_base = realpath( $templates_path );
-	$real_file = realpath( $templates_path . $file_name );
-
-	// Confine reads to the bundled templates directory, whatever the URL says.
-	if ( false === $real_base || false === $real_file
-		|| 0 !== strpos( $real_file, $real_base . DIRECTORY_SEPARATOR )
-		|| ! is_file( $real_file ) ) {
-		return null;
-	}
-
-	return $real_file;
-}
-
 add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
     check_ajax_referer('ep_setup_wizard_nonce', 'nonce');
 
@@ -805,9 +900,14 @@ add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
             wp_send_json_error(['message' => esc_html__('The bundled template could not be read.', 'bdthemes-element-pack-lite')]);
         }
     } else {
+        // Only the starter-kit host or this site may serve a kit, over verified TLS.
+        if (!element_pack_setup_wizard_is_allowed_remote_url($file_url, 'zip')) {
+            wp_send_json_error(['message' => esc_html__('Invalid import URL', 'bdthemes-element-pack-lite')]);
+        }
+
         $remote_zip_request = wp_safe_remote_get($file_url, array(
             'timeout'   => 60,
-            'sslverify' => false,
+            'sslverify' => true,
         ));
 
         if (is_wp_error($remote_zip_request)) {
@@ -900,9 +1000,10 @@ add_action('wp_ajax_ep_setup_wizard_import_bundle', function () {
             'selectedCustomPostTypes' => $selectedCustomPostTypes,
         ];
 
+        // Do not switch on Elementor's site-wide "unfiltered file uploads" setting here:
+        // that is a security choice for the site owner. The runner request below allows
+        // SVG imports for itself only.
         $import = $import_export_module->import_kit($tmp_folder_id, $settings, true);
-
-        Plugin::$instance->uploads_manager->enable_unfiltered_files_upload();
 
         wp_send_json_success($import);
     } catch (\Throwable $e) {
@@ -936,6 +1037,14 @@ add_action('wp_ajax_ep_setup_wizard_import_bundle_runner', function () {
         @ini_set('max_execution_time', 60 * 5);
 
         $import_export_module = $app->get_component('import-export');
+
+        // The bundled kits use SVG icons and images, which Elementor only imports when
+        // unfiltered uploads are allowed. Allow them for this admin request only (Elementor
+        // still sanitizes each SVG) instead of changing the site owner's setting.
+        if ( class_exists( '\Elementor\Core\Files\File_Types\Svg' ) && \Elementor\Core\Files\File_Types\Svg::file_sanitizer_can_run() ) {
+            add_filter( 'elementor/files/allow_unfiltered_upload', '__return_true' );
+        }
+
         $import = $import_export_module->import_kit_by_runner($sessionId, $runner);
 
         do_action('elementor/import-export/import-kit/runner/after-run', $import);

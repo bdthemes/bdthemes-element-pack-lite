@@ -1098,12 +1098,22 @@ class Svg_Image extends Module_Base {
 				continue;
 			}
 
-			if ( XML_ELEMENT_NODE !== $child->nodeType ) {
-				// Text and CDATA are inert once the element allowlist holds.
+			// The page is parsed as HTML, not XML, so a CDATA section is not
+			// guaranteed to stay text there. Re-emit it as a plain text node,
+			// which saveXML() entity-escapes.
+			if ( XML_CDATA_SECTION_NODE === $child->nodeType ) {
+				$node->replaceChild( $node->ownerDocument->createTextNode( $child->nodeValue ), $child );
 				continue;
 			}
 
-			if ( ! in_array( strtolower( $child->nodeName ), $allowed_tags, true ) ) {
+			if ( XML_TEXT_NODE === $child->nodeType ) {
+				continue;
+			}
+
+			// Elements outside the allowlist, and any other node type (entity
+			// references and the like), are removed.
+			if ( XML_ELEMENT_NODE !== $child->nodeType
+				|| ! in_array( strtolower( $child->nodeName ), $allowed_tags, true ) ) {
 				$node->removeChild( $child );
 				continue;
 			}
@@ -1130,7 +1140,7 @@ class Svg_Image extends Module_Base {
 			$value = $attribute->nodeValue;
 
 			if ( ! in_array( $name, $allowed_attributes, true ) ) {
-				$remove[] = $attribute->nodeName;
+				$remove[] = $attribute;
 				continue;
 			}
 
@@ -1138,7 +1148,7 @@ class Svg_Image extends Module_Base {
 				$safe_style = $this->sanitize_svg_style( $value );
 
 				if ( '' === $safe_style ) {
-					$remove[] = $attribute->nodeName;
+					$remove[] = $attribute;
 				} elseif ( $safe_style !== $value ) {
 					$rewrite[ $attribute->nodeName ] = $safe_style;
 				}
@@ -1149,7 +1159,7 @@ class Svg_Image extends Module_Base {
 			// Presentation attributes such as fill or clip-path accept url();
 			// only same-document fragments are allowed.
 			if ( ! $this->svg_url_references_are_local( $value ) ) {
-				$remove[] = $attribute->nodeName;
+				$remove[] = $attribute;
 			}
 		}
 
@@ -1157,8 +1167,9 @@ class Svg_Image extends Module_Base {
 			$element->setAttribute( $name, $value );
 		}
 
-		foreach ( $remove as $name ) {
-			$element->removeAttribute( $name );
+		// Remove by node so namespaced attributes (xlink:*, foo:*) go too.
+		foreach ( $remove as $attribute ) {
+			$element->removeAttributeNode( $attribute );
 		}
 	}
 
@@ -1173,7 +1184,7 @@ class Svg_Image extends Module_Base {
 			return '';
 		}
 
-		if ( preg_match( '/(@import|expression\s*\(|behaviou?r\s*:|javascript\s*:|-moz-binding|<)/i', $value ) ) {
+		if ( preg_match( '/(@import|expression\s*\(|behaviou?r\s*:|javascript\s*:|-moz-binding|<|\\\\)/i', $value ) ) {
 			return '';
 		}
 

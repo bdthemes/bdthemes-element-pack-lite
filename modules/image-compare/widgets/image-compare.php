@@ -459,7 +459,8 @@ class Image_Compare extends Module_Base {
 							'add_circle_shadow'  	=> ('yes' == $settings['add_circle_shadow']) ? true : false,
 							'smoothing'  			=> ('yes' == $settings['smoothing']) ? true : false,
 							'smoothing_amount'    	=> ('yes' == $settings['smoothing']) ? $settings['smoothing_amount']['size'] : 0,
-							'bar_color'    			=> $settings['bar_color'],
+							// The viewer injects this colour into an SVG string, so allow plain colour values only.
+							'bar_color'    			=> ( is_string( $settings['bar_color'] ) && preg_match( '/^(#[0-9a-fA-F]{3,8}|(rgb|hsl)a?\([0-9.,%\s\/]+\)|var\(--[\w-]+\)|[a-zA-Z]+)$/', trim( $settings['bar_color'] ) ) ) ? trim( $settings['bar_color'] ) : '#fff',
                             ])
                         ),
                     ],
@@ -494,6 +495,9 @@ class Image_Compare extends Module_Base {
 		var overlayClass = ( settings.no_overlay === 'yes' ) ? ' bdt-image-compare-overlay' : '';
 		var smoothingYes = settings.smoothing === 'yes';
 		var smoothingAmount = ( smoothingYes && settings.smoothing_amount && settings.smoothing_amount.size !== undefined ) ? settings.smoothing_amount.size : 0;
+		var barColor = ( typeof settings.bar_color === 'string' ) ? settings.bar_color.trim() : '';
+		// The viewer injects this colour into an SVG string, so allow plain colour values only.
+		if ( ! /^(#[0-9a-fA-F]{3,8}|(rgb|hsl)a?\([0-9.,%\s\/]+\)|var\(--[\w-]+\)|[a-zA-Z]+)$/.test( barColor ) ) { barColor = ''; }
 		var dataSettings = JSON.stringify({
 			id: widgetId,
 			default_offset_pct: defaultOffset,
@@ -508,11 +512,11 @@ class Image_Compare extends Module_Base {
 			add_circle_shadow: settings.add_circle_shadow === 'yes',
 			smoothing: smoothingYes,
 			smoothing_amount: smoothingAmount,
-			bar_color: settings.bar_color || ''
+			bar_color: barColor
 		});
 		#>
 		<div class="bdt-image-compare bdt-position-relative">
-			<div id="{{ widgetId }}" class="image-compare{{ overlayClass }}" data-settings='{{ dataSettings }}'>
+			<div id="{{ widgetId }}" class="image-compare{{ overlayClass }}" data-settings="{{ dataSettings }}">
 				<# if ( beforeImage ) { #><img src="{{ beforeImage }}" alt="{{ settings.before_label }}"><# } #>
 				<# if ( afterImage ) { #><img src="{{ afterImage }}" alt="{{ settings.after_label }}"><# } #>
 			</div>

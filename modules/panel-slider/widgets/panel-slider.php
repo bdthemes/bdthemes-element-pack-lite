@@ -1215,18 +1215,21 @@ class Panel_Slider extends Module_Base {
 		}
 
 		var nav = settings.navigation || 'arrows';
+		// SELECT values are saved verbatim (a Contributor can store any string), so every branch is escaped.
 		var navAlignClass = '';
 		if ( nav === 'arrows' && settings.arrows_position ) {
 			navAlignClass = _.escape( 'bdt-arrows-align-' + settings.arrows_position );
 		} else if ( nav === 'dots' && settings.dots_position ) {
-			navAlignClass = 'bdt-dots-align-' + settings.dots_position;
+			navAlignClass = _.escape( 'bdt-dots-align-' + settings.dots_position );
 		} else if ( nav === 'both' && settings.both_position ) {
-			navAlignClass = 'bdt-arrows-dots-align-' + settings.both_position;
+			navAlignClass = _.escape( 'bdt-arrows-dots-align-' + settings.both_position );
 		} else if ( nav === 'arrows-fraction' && settings.arrows_fraction_position ) {
-			navAlignClass = 'bdt-arrows-dots-align-' + settings.arrows_fraction_position;
+			navAlignClass = _.escape( 'bdt-arrows-dots-align-' + settings.arrows_fraction_position );
 		}
 
-		var panelId = 'bdt-panel-slider-' + view.getID();
+		// The element id comes from saved page data; keep only id-safe characters so it
+		// cannot break out of the id attribute or the Swiper selectors built from it.
+		var panelId = 'bdt-panel-slider-' + String( view.getID() ).replace( /[^A-Za-z0-9_-]/g, '' );
 		var pidSelector = '#' + panelId;
 
 		var columns = ( skin === 'bdt-middle' ) ? settings.skin_columns : settings.columns;
@@ -1327,7 +1330,7 @@ class Panel_Slider extends Module_Base {
 		var hideArrowMobileClass = hideArrowMobile.trim();
 		var titleTag = elementor.helpers.validateHTMLTag( settings.title_tags || 'h3' );
 		#>
-		<div id="<# print( panelId ); #>" class="bdt-panel-slider <# print( navAlignClass ); #> <# print( skinClass ); #>" data-settings='<# print( _.escape( ds ) ); #>' data-widget-settings='<# print( _.escape( dw ) ); #>'>
+		<div id="{{ panelId }}" class="bdt-panel-slider <# print( navAlignClass ); #> <# print( skinClass ); #>" data-settings='<# print( _.escape( ds ) ); #>' data-widget-settings='<# print( _.escape( dw ) ); #>'>
 			<div class="swiper-carousel swiper">
 				<div class="swiper-wrapper">
 					<# _.each( settings.tabs || [], function( item ) { #>

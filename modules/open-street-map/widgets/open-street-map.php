@@ -492,7 +492,9 @@ class Open_Street_Map extends Module_Base {
 				$marker_settings['lat']        = ( $marker_item['marker_lat'] ) ? $marker_item['marker_lat'] : '';
 				$marker_settings['lng']        = ( $marker_item['marker_lng'] ) ? $marker_item['marker_lng'] : '';
 				$marker_settings['title']      = ( $marker_item['marker_title'] ) ? sanitize_text_field( $marker_item['marker_title'] ) : '';
-				$marker_settings['iconUrl']    = ( $marker_item['custom_marker']['url'] ) ? $marker_item['custom_marker']['url'] : BDTEP_ASSETS_URL . 'images/marker-icon.png';
+				// The marker image URL is a Contributor-editable setting; keep it to web URLs.
+				$icon_url                      = ! empty( $marker_item['custom_marker']['url'] ) ? esc_url_raw( $marker_item['custom_marker']['url'], [ 'http', 'https' ] ) : '';
+				$marker_settings['iconUrl']    = $icon_url ? $icon_url : BDTEP_ASSETS_URL . 'images/marker-icon.png';
 				// $marker_settings['infoWindow'] = ( $marker_item['marker_content'] ) ? wp_kses( $marker_item['marker_content'], element_pack_allow_tags('safe_formatting') ) : '';
 				$marker_settings['infoWindow'] = $marker_item['marker_content'] ? wp_kses_post( htmlspecialchars( $marker_item['marker_content'], ENT_QUOTES ) ) : '';
 

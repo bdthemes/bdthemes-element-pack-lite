@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.13
+Stable tag: 10.0.14
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,15 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.14 [25th November 2026] =
+
+* Security: Widgets that read their settings in the browser now escape or sanitize every value before showing it, so text saved by a contributor, or page content made to look like a widget, can no longer run scripts: Contact Form, Countdown, Custom Gallery, Image Compare, Image Magnifier, Open Street Map, Progress Pie, Reading Timer, Static Grid Tab, Social Share and User Register
+* Security: Tooltips (Logo Grid, Image Stack, Icon Mobile Menu and the Tooltip extension) use only the widget's own options
+* Security: Editor previews of Brand Grid, Panel Slider, Trailer Box and 3D Text escape their settings
+* Security: Dynamic select fields in the editor list only published content, comments on published posts and authors with published posts, and their searches no longer match e-mail addresses
+* Security: The setup wizard shows only to administrators and verifies its downloads; the template library sync accepts only POST requests
+* Security: Post queries in widgets return only public post types
 
 = 10.0.13 [23rd November 2026] =
 

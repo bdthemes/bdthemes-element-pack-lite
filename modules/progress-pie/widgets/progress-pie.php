@@ -434,7 +434,7 @@ class Progress_Pie extends Module_Base {
 					'aria-valuemin' => '0',
 					/*'data-step'     => $settings['step'],
 					'data-delay'    => $settings['delay']*1000,*/
-					'data-speed'    => $settings['duration']*15,
+					'data-speed'    => floatval( $settings['duration'] ) * 15,
 					'data-barsize'  => intval($settings['line_width']),
 					'aria-valuemax' => '100'
 				]

@@ -702,6 +702,27 @@ class Social_Share extends Module_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Reduce a button label to plain text for a data-* attribute.
+	 *
+	 * The label is Contributor-editable and the front-end copies it into the
+	 * page, so decode every entity layer (nested encoding would otherwise
+	 * survive one pass and be decoded by the browser) before stripping tags.
+	 */
+	private function plain_label( $text ) {
+		$text = (string) $text;
+		for ( $i = 0; $i < 5; $i++ ) {
+			$decoded = html_entity_decode( $text, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+			if ( $decoded === $text ) {
+				break;
+			}
+			$text = $decoded;
+		}
+		$text = wp_strip_all_tags( $text );
+		// Anything still left over (deeper nesting) must not form a tag.
+		return str_replace( [ '<', '>' ], '', $text );
+	}
+
 	private function has_counter( $media_name ) {
 		$settings = $this->get_active_settings();
 		$media    = Module::get_social_media( $media_name );
@@ -766,8 +787,9 @@ class Social_Share extends Module_Base {
 					$this->add_render_attribute(
 						[
 							'social-attrs' => [
-								'data-orginal' => $button['text'] ? esc_html($button['text']) : Module::get_social_media($social_name)['title'],
-								'data-copied' => $button['copied_text']
+								// Plain-text labels (see plain_label()).
+								'data-orginal' => $button['text'] ? $this->plain_label( $button['text'] ) : Module::get_social_media($social_name)['title'],
+								'data-copied' => $this->plain_label( $button['copied_text'] )
 							]
 						],
 						'',
