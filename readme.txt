@@ -5,7 +5,7 @@ Tags: elementor widgets, widgets for elementor, elementor addons, AI elementor t
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4.0
-Stable tag: 10.0.14
+Stable tag: 10.0.15
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 4.0.0
@@ -320,6 +320,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 10. Others Elementor Widgets List
 
 == Changelog ==
+
+= 10.0.15 [25th November 2026] =
+
+* Security: Search: the search box no longer runs shortcodes typed into the search term, so a visitor can no longer use a search URL to run any shortcode on the site and see its output
 
 = 10.0.14 [25th November 2026] =
 
