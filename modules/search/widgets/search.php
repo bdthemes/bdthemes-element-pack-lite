@@ -1798,7 +1798,8 @@ class Search extends Module_Base {
 				'type'        => 'search',
 				'name'        => 's',
 				'title'       => esc_html__('Search', 'bdthemes-element-pack-lite'),
-				'value'       => get_search_query(),
+				// The term is printed into the_content, which then goes through do_shortcode().
+				'value'       => element_pack_escape_shortcode_brackets( get_search_query() ),
 			]
 		);
 

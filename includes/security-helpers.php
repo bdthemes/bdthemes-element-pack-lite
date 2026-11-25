@@ -88,3 +88,22 @@ if ( ! function_exists( 'element_pack_divider_svg' ) ) {
 		return is_string( $svg ) ? $svg : '';
 	}
 }
+
+if ( ! function_exists( 'element_pack_escape_shortcode_brackets' ) ) {
+	/**
+	 * Turn the square brackets in visitor-supplied text into HTML entities.
+	 *
+	 * Elementor output is part of the_content, and core runs do_shortcode() on it
+	 * afterwards, including inside quoted attribute values. Text taken from the
+	 * request (the search term, a URL parameter) that is printed into that output
+	 * must therefore not keep a literal [ or ], or a visitor can run any registered
+	 * shortcode, e.g. ?s=[gallery include=123]. The entities display as the same
+	 * characters, and esc_attr()/esc_html() leave them as they are.
+	 *
+	 * @param string $text Text from the request.
+	 * @return string
+	 */
+	function element_pack_escape_shortcode_brackets( $text ) {
+		return str_replace( [ '[', ']' ], [ '&#91;', '&#93;' ], (string) $text );
+	}
+}
