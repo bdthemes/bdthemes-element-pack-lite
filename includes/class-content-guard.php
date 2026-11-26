@@ -51,6 +51,15 @@ final class Content_Guard {
 		// Comments, before kses (priority 10).
 		add_filter( 'pre_comment_content', [ __CLASS__, 'filter_untrusted_content' ], 5 );
 
+		// And again after kses. kses splits tags on the first `>`, even inside a
+		// quoted attribute value, while this guard reads tags the way a browser
+		// does; `<p title="a><div data-settings=…>">` looked like one harmless
+		// `<p>` here and became a real `<div data-settings>` after kses. Removing
+		// attributes from kses output cannot add anything back.
+		add_filter( 'content_save_pre', [ __CLASS__, 'filter_untrusted_content' ], 11 );
+		add_filter( 'excerpt_save_pre', [ __CLASS__, 'filter_untrusted_content' ], 11 );
+		add_filter( 'pre_comment_content', [ __CLASS__, 'filter_untrusted_content' ], 11 );
+
 		// Elementor data written as post meta without Document::save(), such as the
 		// REST API's `meta._elementor_data`, which skips the filter above.
 		add_filter( 'sanitize_post_meta__elementor_data', [ __CLASS__, 'filter_elementor_meta' ], 5 );
@@ -187,7 +196,7 @@ final class Content_Guard {
 	 * @return string
 	 */
 	public static function strip_component_attributes( $html ) {
-		if ( false === stripos( $html, 'bdt-' ) && false === stripos( $html, 'attrs' ) ) {
+		if ( ! preg_match( '/bdt-|attrs|data-settings|data-widget_type|data-element_type|data-tippy-/i', $html ) ) {
 			return $html;
 		}
 
@@ -223,8 +232,32 @@ final class Content_Guard {
 			return true;
 		}
 
+		if ( self::is_handler_option_attribute( $name ) ) {
+			return true;
+		}
+
 		return function_exists( 'element_pack_uikit_attrs_attribute_name' )
 			&& \element_pack_uikit_attrs_attribute_name( $name );
+	}
+
+	/**
+	 * Whether an attribute feeds a frontend handler its options.
+	 *
+	 * Widget handlers read `data-settings` (Swiper and other options) and pick
+	 * their markup by `data-widget_type` / `data-element_type`; the tooltip helper
+	 * reads `data-tippy-*`. Markup that imitates a widget would hand those options
+	 * to the same code, and wp_kses_post() lets every `data-*` attribute through.
+	 * The widgets print these attributes when they render, never into stored
+	 * content, so removing them from untrusted saves breaks nothing.
+	 *
+	 * @param string $name Attribute name.
+	 * @return bool
+	 */
+	public static function is_handler_option_attribute( $name ) {
+		$name = strtolower( (string) $name );
+
+		return in_array( $name, [ 'data-settings', 'data-widget_type', 'data-element_type' ], true )
+			|| 0 === strpos( $name, 'data-tippy-' );
 	}
 
 	/**
