@@ -321,6 +321,10 @@ https://youtu.be/NhaIMIrFh1Q?si=GA64tzuOaEAYqAvV
 
 == Changelog ==
 
+= 10.0.16 [26th November 2026] =
+
+* Updated: Admin offer banner now shows the BdThemes Combo Bundle deal
+
 = 10.0.15 [25th November 2026] =
 
 * Security: Search: the search box no longer runs shortcodes typed into the search term, so a visitor can no longer use a search URL to run any shortcode on the site and see its output
