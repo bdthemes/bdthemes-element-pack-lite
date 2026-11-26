@@ -1172,7 +1172,7 @@ class Animated_Card extends Module_Base {
 
 			$target = $settings['title_link_url']['is_external'] ? '_blank' : '_self';
 
-			$this->add_render_attribute( 'animated-title', 'onclick', "window.open('" . esc_url($settings['title_link_url']['url']) . "', '$target')" );
+			$this->add_render_attribute( 'animated-title', 'onclick', element_pack_window_open_handler( $settings['title_link_url']['url'], '_blank' === $target ) );
 		}
 
 		$this->add_render_attribute( 'animated_sub_title', 'class', 'bdt-ep-animated-card-sub-title' );

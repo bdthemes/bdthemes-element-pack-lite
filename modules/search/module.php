@@ -136,7 +136,14 @@ class Module extends Element_Pack_Module_Base {
 
 		if ( strlen( $search_input ) >= 3 ) {
 
-			$allowed_post_types = get_post_types( array( 'public' => true ) );
+			// Public types, minus the builder's own storage types: Elementor and Element
+			// Pack keep templates, headers, mega menus and floating buttons there, and
+			// Elementor hides them from visitors (the post content holds a plain-text copy
+			// of each template).
+			$allowed_post_types = array_diff_key(
+				get_post_types( array( 'public' => true ) ),
+				array_flip( [ 'elementor_library', 'bdt-template-builder', 'bdt_template_manager', 'bdt-custom-template', 'ep_megamenu_content', 'e-floating-buttons' ] )
+			);
 			$requested_type = isset( $settings['post_type'] ) ? $settings['post_type'] : 'post';
 			$post_type = isset( $allowed_post_types[ $requested_type ] ) ? $requested_type : 'post';
 

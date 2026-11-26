@@ -191,7 +191,7 @@ protected function is_dynamic_content(): bool {
 		$ep_viewport_md = ! empty( get_option( 'elementor_viewport_md' ) ) ? (int) get_option( 'elementor_viewport_md' ) - 1 : 767;
 		?>
 		<#
-		var carouselId = 'bdt-product-carousel-' + view.getID();
+		var carouselId = 'bdt-product-carousel-' + String( view.getID() ).replace( /[^A-Za-z0-9_-]/g, '' );
 		var nav = settings.navigation || 'none';
 		var carouselClass = 'bdt-ep-product-carousel';
 		if ( nav === 'arrows' ) {
@@ -281,7 +281,7 @@ protected function is_dynamic_content(): bool {
 		var iconAlign  = settings.icon_align || 'right';
 		var readmoreLabel = settings.readmore_text || '<?php echo esc_js( __( 'Read More', 'bdthemes-element-pack-lite' ) ); ?>';
 		#>
-		<div id="<# print( carouselId ); #>" class="<# print( _.escape( carouselClass ) ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
+		<div id="{{ carouselId }}" class="<# print( _.escape( carouselClass ) ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
 			<div class="swiper-carousel swiper" role="region" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $this->get_title() ); ?>" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
 				<div class="swiper-wrapper">
 					<# _.each( settings.product_items, function( item ) {

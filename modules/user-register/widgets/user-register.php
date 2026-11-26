@@ -2293,7 +2293,7 @@ class User_Register extends Module_Base {
 				<div class="bdt-user-register">
 					<?php
 					esc_html_e( 'You are Logged in as', 'bdthemes-element-pack-lite' );
-					echo esc_html( ' ' . $current_user->display_name );
+					echo ' ' . element_pack_escape_shortcode_brackets( esc_html( $current_user->display_name ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_html() output; the brackets become entities so do_shortcode() on the_content leaves a display name like [gallery] alone.
 					?>
 					<a href="<?php echo esc_url( wp_logout_url( $current_url ) ); ?>">
 						<?php esc_html_e( 'Logout', 'bdthemes-element-pack-lite' ); ?>

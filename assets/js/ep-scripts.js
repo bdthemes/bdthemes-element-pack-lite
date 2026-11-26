@@ -1130,12 +1130,15 @@
             const n = parseInt(value, 10);
             return Number.isFinite(n) ? n : fallback;
         };
-        // new URL().href percent-encodes quotes and angle brackets, so the
-        // result cannot break out of the library's src="..." attribute.
+        // The library puts the URL inside src="..." of an HTML string. new
+        // URL().href percent-encodes quotes in the path, query and fragment but
+        // keeps them in the host (https://a"onerror="..."b/), so any URL that
+        // still holds a quote, angle bracket, backtick, backslash or whitespace
+        // is refused.
         const safeUrl = (value) => {
             try {
                 const url = new URL(String(value || ''), window.location.href);
-                return /^https?:$/.test(url.protocol) ? url.href : '';
+                return /^https?:$/.test(url.protocol) && !/["'<>`\\\s]/.test(url.href) ? url.href : '';
             } catch (_) {
                 return '';
             }
@@ -4654,7 +4657,9 @@ jQuery(document).ready(function () {
             run: function () {
                 var options = this.getDefaultSettings();
                 var widgetID = this.$element.data('id');
-                var widgetContainer = document.querySelector('.elementor-element-' + widgetID);
+                // The handler's own element: a selector lookup would return the first
+                // element on the page with that class, which page content can supply.
+                var widgetContainer = this.$element[0];
 
                 if (this.settings('tooltip_text')) {
                     options.content = EP_SAFE_HTML(this.settings('tooltip_text'));

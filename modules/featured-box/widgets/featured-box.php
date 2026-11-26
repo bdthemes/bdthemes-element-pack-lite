@@ -1530,7 +1530,7 @@ class Featured_Box extends Module_Base {
 			$this->add_render_attribute(
 				'feature-title',
 				'onclick',
-				"window.open('" . esc_url( $title_link_url ) . "', '" . esc_attr( $target ) . "')"
+				element_pack_window_open_handler( $title_link_url, '_blank' === $target )
 			);
 		}
 

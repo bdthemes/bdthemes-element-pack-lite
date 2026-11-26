@@ -501,8 +501,15 @@ class Skin_Event_Countdown extends Elementor_Skin_Base {
 
 	public function render() {
 		$settings  = $this->parent->get_settings();
-		$event_id  = $this->get_instance_value('event_id');
-		$event_url = get_permalink($event_id);
+		$event_id  = absint( $this->get_instance_value('event_id') );
+
+		// The ID is a setting any page editor can save, so only a real event the
+		// visitor may see is shown; other posts' titles and links stay private.
+		if ( $event_id && ( 'tribe_events' !== get_post_type( $event_id ) || ! element_pack_can_render_template( $event_id ) ) ) {
+			$event_id = 0;
+		}
+
+		$event_url = $event_id ? get_permalink($event_id) : '';
 
 		if ($event_id) {
 			$this->parent->add_render_attribute(

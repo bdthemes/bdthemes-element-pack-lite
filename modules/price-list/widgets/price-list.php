@@ -1734,7 +1734,7 @@ class Price_List extends Module_Base {
 
 		if ( $item['link']['url'] ) {
 			$target = $item['link']['is_external'] ? '_blank' : '_self';
-			$this->add_render_attribute( $unique_link_id, 'onclick', "window.open('" . esc_url( $item['link']['url'] ) . "', '$target')" );
+			$this->add_render_attribute( $unique_link_id, 'onclick', element_pack_window_open_handler( $item['link']['url'], '_blank' === $target ) );
 		}
 
 		?>

@@ -27,7 +27,10 @@ class SVG_Support {
 	 */
 	function set_svg_mimes( $mimes = array() ) {
 
-		if ( current_user_can( 'administrator' ) ) {
+		// An SVG can carry script, and uploads are not sanitized, so only users who may
+		// already post unfiltered HTML get it. That excludes administrators on multisite
+		// and on sites with DISALLOW_UNFILTERED_HTML.
+		if ( current_user_can( 'unfiltered_html' ) ) {
 
 			// allow SVG file upload
 			$mimes['svg']  = 'image/svg+xml';

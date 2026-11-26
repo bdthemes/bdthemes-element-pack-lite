@@ -2752,7 +2752,8 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 			 */
 			$selected_ids      = $postSettings['posts_selected_ids'];
 			$selected_ids      = wp_parse_id_list( $selected_ids );
-			$args['post_type'] = 'any';
+			// IDs come from the request: public, searchable types only, never 'any'.
+			$args['post_type'] = element_pack_ajax_query_post_types( true );
 			if ( ! empty( $selected_ids ) ) {
 				$args['post__in'] = $selected_ids;
 			}
@@ -2794,7 +2795,9 @@ if ( ! function_exists( 'element_pack_render_mini_cart_item' ) ) {
 			$args['ignore_sticky_posts'] = 1;
 			$args                        = apply_filters( 'element_pack/query/get_query_args/related_query', $args );
 		} else {
-			$args['post_type'] = $postSettings['posts_source'];
+			// The post type comes from the request, so only public types are allowed.
+			$requested_type    = is_string( $postSettings['posts_source'] ) ? $postSettings['posts_source'] : '';
+			$args['post_type'] = in_array( $requested_type, element_pack_ajax_query_post_types(), true ) ? $requested_type : 'post';
 			$current_post      = [];
 
 

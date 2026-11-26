@@ -133,7 +133,10 @@
 					// silently change what the user typed. wp_insert_user() hashes it.
 					// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Raw password required by wp_insert_user().
 					$password             = isset($_REQUEST['password']) ? wp_unslash( $_REQUEST['password'] ) : NULL  ;
-					$is_password_required = isset($_REQUEST['is_password_required']) ? sanitize_text_field( wp_unslash( $_REQUEST['is_password_required'] ) ) : '';
+					// Whether the form has a password field comes from the saved form, never from the
+					// request: otherwise anyone could set the password of an account created for an
+					// e-mail address they do not own on a form that only asks for the address.
+					$is_password_required = ( is_array( $settings ) && isset( $settings['is_needed_password_input'] ) && 'yes' === $settings['is_needed_password_input'] ) ? 'yes' : '';
 					$first_name           = isset($_REQUEST['first_name']) ? sanitize_text_field( wp_unslash( $_REQUEST['first_name'] ) ) : '';
 					$last_name            = isset($_REQUEST['last_name']) ? sanitize_text_field( wp_unslash( $_REQUEST['last_name'] ) ) : '';
 					

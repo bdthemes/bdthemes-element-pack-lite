@@ -1078,7 +1078,7 @@ class Static_Carousel extends Module_Base {
 		$ep_viewport_md = ! empty( get_option( 'elementor_viewport_md' ) ) ? (int) get_option( 'elementor_viewport_md' ) - 1 : 767;
 		?>
 		<#
-		var carouselId = 'bdt-static-carousel-' + view.getID();
+		var carouselId = 'bdt-static-carousel-' + String( view.getID() ).replace( /[^A-Za-z0-9_-]/g, '' );
 		var nav = settings.navigation || 'none';
 		var carouselClass = 'bdt-static-carousel';
 		if ( nav === 'arrows' ) {
@@ -1182,7 +1182,7 @@ class Static_Carousel extends Module_Base {
 			return a;
 		};
 		#>
-		<div id="<# print( carouselId ); #>" class="<# print( _.escape( carouselClass ) ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
+		<div id="{{ carouselId }}" class="<# print( _.escape( carouselClass ) ); #>" data-settings="<# print( _.escape( dataSettings ) ); #>">
 			<div class="swiper-carousel swiper" role="region" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $this->get_title() ); ?>" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
 				<div class="swiper-wrapper">
 					<# _.each( settings.carousel_items || [], function( item ) {

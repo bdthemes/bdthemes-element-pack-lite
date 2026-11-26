@@ -113,8 +113,8 @@ class Review_Card extends Module_Base {
 		<#
 		var ratingNumber = settings.rating_number && settings.rating_number.size !== undefined ? parseFloat( settings.rating_number.size ) : 0;
 		ratingNumber = Math.min( 5.0, Math.max( 0.5, ratingNumber ) );
-		var ratingType     = settings.rating_type || 'star';
-		var ratingPosition = settings.rating_position || 'before';
+		var ratingType     = 'number' === settings.rating_type ? 'number' : 'star';
+		var ratingPosition = 'after' === settings.rating_position ? 'after' : 'before';
 		var imageInline    = settings.image_inline || '';
 		var imagePosition  = settings.iamge_position || 'top';
 		var imageInlineRowClass = ( imagePosition === 'right' ) ? 'bdt-ep-img-inline bdt-flex bdt-flex-row-reverse' : 'bdt-ep-img-inline bdt-flex';
