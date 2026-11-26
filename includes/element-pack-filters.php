@@ -341,9 +341,20 @@ if (!function_exists('element_pack_filter_uikit_option_attributes')) {
                 // browser hands UIkit, so `template&#58;…` is recognised.
                 $filtered = element_pack_strip_unsafe_uikit_keys($value);
 
-                if ($filtered !== $value) {
-                    $processor->set_attribute($name, $filtered);
-                    $changed = true;
+                if ($filtered === $value) {
+                    continue;
+                }
+
+                $changed = true;
+
+                // Keep the cleaned value only if it reads back exactly as
+                // written. Older HTML API releases escaped with esc_attr(),
+                // which does not re-encode `&`, so `template&#58;…` kept as
+                // text would reach the browser as `template:…`. When the
+                // round trip is not exact (or set_attribute() refuses the
+                // value) the attribute goes rather than staying unsafe.
+                if (!$processor->set_attribute($name, $filtered) || $processor->get_attribute($name) !== $filtered) {
+                    $processor->remove_attribute($name);
                 }
             }
         }

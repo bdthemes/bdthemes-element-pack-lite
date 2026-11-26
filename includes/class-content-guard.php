@@ -51,6 +51,15 @@ final class Content_Guard {
 		// Comments, before kses (priority 10).
 		add_filter( 'pre_comment_content', [ __CLASS__, 'filter_untrusted_content' ], 5 );
 
+		// And again after kses. kses splits tags on the first `>`, even inside a
+		// quoted attribute value, while this guard reads tags the way a browser
+		// does; `<p title="a><div data-settings=…>">` looked like one harmless
+		// `<p>` here and became a real `<div data-settings>` after kses. Removing
+		// attributes from kses output cannot add anything back.
+		add_filter( 'content_save_pre', [ __CLASS__, 'filter_untrusted_content' ], 11 );
+		add_filter( 'excerpt_save_pre', [ __CLASS__, 'filter_untrusted_content' ], 11 );
+		add_filter( 'pre_comment_content', [ __CLASS__, 'filter_untrusted_content' ], 11 );
+
 		// Elementor data written as post meta without Document::save(), such as the
 		// REST API's `meta._elementor_data`, which skips the filter above.
 		add_filter( 'sanitize_post_meta__elementor_data', [ __CLASS__, 'filter_elementor_meta' ], 5 );
