@@ -293,13 +293,63 @@ if (!function_exists('element_pack_sanitize_uikit_attributes')) {
         // pattern here was itself an XSS vector.
         $content = element_pack_remove_uikit_attrs_attributes($content);
 
-        $filtered = preg_replace_callback(
-            '/(\s(?:data-)?bdt-[\w-]+\s*=\s*)(["\'])(.*?)\2/is',
-            'element_pack_sanitize_uikit_attribute_match',
-            $content
-        );
+        if (false === stripos($content, 'bdt-')) {
+            return $content;
+        }
 
-        return (null === $filtered) ? $content : $filtered;
+        return element_pack_filter_uikit_option_attributes($content);
+    }
+}
+
+if (!function_exists('element_pack_filter_uikit_option_attributes')) {
+    /**
+     * Strip unsafe UIkit options from every real `bdt-*` / `data-bdt-*` attribute.
+     *
+     * Parsed, never pattern-matched. This used to be a quote-blind regular
+     * expression that re-emitted the matched span; when the text `bdt-x=` sat
+     * inside another attribute's value, the match ran from that value's closing
+     * quote across the tag boundary, and re-quoting it promoted inert attribute
+     * text into a live event handler (Patchstack 41524). The HTML API reads each
+     * attribute where a browser ends it and writes values back escaped, so text
+     * inside another attribute is never touched and no boundary can move.
+     */
+    function element_pack_filter_uikit_option_attributes($content) {
+        // See element_pack_remove_uikit_attrs_attributes(): without the HTML API
+        // the only safe edit is none.
+        if (!class_exists('\WP_HTML_Tag_Processor')) {
+            return $content;
+        }
+
+        $processor = new \WP_HTML_Tag_Processor($content);
+        $changed   = false;
+
+        while ($processor->next_tag()) {
+            $names = array_merge(
+                (array) $processor->get_attribute_names_with_prefix('bdt-'),
+                (array) $processor->get_attribute_names_with_prefix('data-bdt-')
+            );
+
+            foreach ($names as $name) {
+                $value = $processor->get_attribute($name);
+
+                // A boolean attribute (`bdt-sticky`) carries no options.
+                if (!is_string($value)) {
+                    continue;
+                }
+
+                // get_attribute() returns the decoded value, i.e. what the
+                // browser hands UIkit, so `template&#58;…` is recognised.
+                $filtered = element_pack_strip_unsafe_uikit_keys($value);
+
+                if ($filtered !== $value) {
+                    $processor->set_attribute($name, $filtered);
+                    $changed = true;
+                }
+            }
+        }
+
+        // Leave untouched documents byte-identical.
+        return $changed ? $processor->get_updated_html() : $content;
     }
 }
 
