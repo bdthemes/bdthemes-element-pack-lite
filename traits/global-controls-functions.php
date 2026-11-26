@@ -17901,6 +17901,11 @@ trait Global_Controls_Functions {
 			return;
 		}
 
+		// Events behind a password keep their text private, like any other post.
+		if ( post_password_required( $post ) ) {
+			return;
+		}
+
 	?>
 		<div class="bdt-event-excerpt">
 			<?php
@@ -31444,7 +31449,7 @@ trait Global_Controls_Functions {
 
 			$target = $settings['title_link_url']['is_external'] ? '_blank' : '_self';
 
-			$this->add_render_attribute('advanced-icon-box-title', 'onclick', "window.open('" . esc_url($settings['title_link_url']['url']) . "', '$target')" );
+			$this->add_render_attribute('advanced-icon-box-title', 'onclick', element_pack_window_open_handler( $settings['title_link_url']['url'], '_blank' === $target ) );
 		}
 
 		$this->add_render_attribute('description_text', 'class', 'bdt-lottie-icon-box-description');
@@ -31476,7 +31481,7 @@ trait Global_Controls_Functions {
 
 			$target = $settings['global_link_url']['is_external'] ? '_blank' : '_self';
 
-			$this->add_render_attribute('advanced-icon-box', 'onclick', "window.open('" . esc_url($settings['global_link_url']['url']) . "', '$target')" );
+			$this->add_render_attribute('advanced-icon-box', 'onclick', element_pack_window_open_handler( $settings['global_link_url']['url'], '_blank' === $target ) );
 		}
 
 		if ('yes' == $settings['icon_inline'] && 'top' != $settings['position'] ) {
@@ -31684,7 +31689,7 @@ trait Global_Controls_Functions {
 		// Escaped at the print sites with _.escape() instead of a hand-rolled quote
 		// replace, which left '&' alone and so corrupted any entity in the payload.
 		var lottieDataAttr = JSON.stringify( lottieSettingsObj );
-		var lottieId = 'bdt-lottie-' + view.getID();
+		var lottieId = 'bdt-lottie-' + String( view.getID() ).replace( /[^A-Za-z0-9_-]/g, '' );
 
 		var wrapperShapeClass = settings.shape ? _.escape( ' elementor-image-shape-' + settings.shape ) : '';
 
@@ -31713,7 +31718,12 @@ trait Global_Controls_Functions {
 		// sees it); _.escape() at the print site then closes the attribute context.
 		var onclickFor = function( link ) {
 			var target = link.is_external ? '_blank' : '_self';
-			return 'window.open(' + JSON.stringify( String( link.url ) ) + ', ' + JSON.stringify( target ) + ')';
+			var url = String( link.url || '' ).trim();
+			// Web, mail, phone and relative links only.
+			if ( ! /^(https?:|mailto:|tel:|\/|#|\?|\.)/i.test( url ) && /^[^\/?#]*:/.test( url ) ) {
+				return '';
+			}
+			return 'window.open(' + JSON.stringify( url ) + ', ' + JSON.stringify( target ) + ')';
 		};
 
 		var globalOnclick = '';
@@ -31731,7 +31741,7 @@ trait Global_Controls_Functions {
 			<# if ( '' === settings.icon_inline ) { #>
 				<div class="bdt-lottie-icon-box-icon">
 					<div class="bdt-lottie-image bdt-lottie-icon-box-icon-wrap<# print( wrapperShapeClass ); #>">
-						<div id="<# print( lottieId ); #>-stack" class="bdt-lottie-container" data-settings="<# print( _.escape( lottieDataAttr ) ); #>"></div>
+						<div id="{{ lottieId }}-stack" class="bdt-lottie-container" data-settings="<# print( _.escape( lottieDataAttr ) ); #>"></div>
 					</div>
 				</div>
 			<# } #>
@@ -31748,7 +31758,7 @@ trait Global_Controls_Functions {
 					<div class="<# print( iconHeadingClass ); #>">
 						<div class="bdt-lottie-icon-box-icon">
 							<div class="bdt-lottie-image bdt-lottie-icon-box-icon-wrap<# print( wrapperShapeClass ); #>">
-								<div id="<# print( lottieId ); #>-inline" class="bdt-lottie-container" data-settings="<# print( _.escape( lottieDataAttr ) ); #>"></div>
+								<div id="{{ lottieId }}-inline" class="bdt-lottie-container" data-settings="<# print( _.escape( lottieDataAttr ) ); #>"></div>
 							</div>
 						</div>
 						<div class="bdt-icon-box-title-wrapper">

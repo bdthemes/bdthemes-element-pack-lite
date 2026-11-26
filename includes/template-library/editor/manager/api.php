@@ -169,7 +169,10 @@ class ElementPackTemplateLibraryEditorApi extends ElementPack_Template_Library_B
     public function sync_now(){
         check_ajax_referer( 'ep-template-library', 'nonce' );
 
-        if ( ! current_user_can( 'edit_posts' ) ) {
+        // Sync rebuilds the site-wide library tables, so it is an admin task, as in
+        // Element Pack Pro. Browsing does not need it: the library refreshes its own
+        // tables when they are missing or stale.
+        if ( ! current_user_can( 'manage_options' ) ) {
             wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'bdthemes-element-pack-lite' ) ), 403 );
         }
 

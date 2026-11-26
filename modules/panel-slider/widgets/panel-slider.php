@@ -1114,7 +1114,7 @@ class Panel_Slider extends Module_Base {
 
 							$target = $item['tab_link']['is_external'] ? '_blank' : '_self';
 
-							$this->add_render_attribute( 'panel-slide-item', 'onclick', "window.open('" . esc_url( $item['tab_link']['url'] ) . "', '$target')", true );
+							$this->add_render_attribute( 'panel-slide-item', 'onclick', element_pack_window_open_handler( $item['tab_link']['url'], '_blank' === $target ), true );
 						}
 
 						if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
@@ -1336,7 +1336,12 @@ class Panel_Slider extends Module_Base {
 					<# _.each( settings.tabs || [], function( item ) { #>
 					<#
 					var imageUrl = ( item.tab_image && item.tab_image.url ) ? item.tab_image.url : fallbackImg;
-					var linkUrl = ( item.tab_link && item.tab_link.url ) ? item.tab_link.url : '';
+					var linkUrl = ( item.tab_link && item.tab_link.url ) ? String( item.tab_link.url ).trim() : '';
+					// Web, mail, phone and relative links only: the slide's onclick and the
+					// button href would run a javascript: URL in the editor.
+					if ( ! /^(https?:|mailto:|tel:|\/|#|\?|\.)/i.test( linkUrl ) && /^[^\/?#]*:/.test( linkUrl ) ) {
+						linkUrl = '';
+					}
 					var btnAnim = settings.button_hover_animation ? _.escape( ' elementor-animation-' + settings.button_hover_animation ) : '';
 					var slideOnclick = '';
 					if ( settings.global_link === 'yes' && linkUrl ) {

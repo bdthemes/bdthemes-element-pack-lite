@@ -50,6 +50,29 @@ final class Content_Guard {
 
 		// Comments, before kses (priority 10).
 		add_filter( 'pre_comment_content', [ __CLASS__, 'filter_untrusted_content' ], 5 );
+
+		// Elementor data written as post meta without Document::save(), such as the
+		// REST API's `meta._elementor_data`, which skips the filter above.
+		add_filter( 'sanitize_post_meta__elementor_data', [ __CLASS__, 'filter_elementor_meta' ], 5 );
+
+		// Elementor registers `_elementor_data` per post type on rest_api_init with its
+		// own sanitize callback, and core then runs only the per-type filter, never the
+		// one above, so hook those as well, after Elementor's.
+		add_action( 'rest_api_init', [ __CLASS__, 'hook_elementor_rest_meta' ], 100 );
+	}
+
+	/**
+	 * Attach filter_elementor_meta() to every per-post-type `_elementor_data`
+	 * sanitize filter Elementor registered for the REST API.
+	 */
+	public static function hook_elementor_rest_meta() {
+		foreach ( get_post_types() as $post_type ) {
+			$hook = 'sanitize_post_meta__elementor_data_for_' . $post_type;
+
+			if ( has_filter( $hook ) && ! has_filter( $hook, [ __CLASS__, 'filter_elementor_meta' ] ) ) {
+				add_filter( $hook, [ __CLASS__, 'filter_elementor_meta' ], 20 );
+			}
+		}
 	}
 
 	/**
@@ -75,6 +98,49 @@ final class Content_Guard {
 		}
 
 		return map_deep( $data, [ __CLASS__, 'strip_from_value' ] );
+	}
+
+	/**
+	 * `sanitize_post_meta__elementor_data`: the same stripping for Elementor data that
+	 * reaches update_metadata() directly. The value is the JSON string Elementor
+	 * stores; it is only re-encoded when something was removed, so saves that have
+	 * already been through filter_elementor_save_data() are left byte-identical.
+	 *
+	 * @param mixed $meta_value Meta value (unslashed).
+	 * @return mixed
+	 */
+	public static function filter_elementor_meta( $meta_value ) {
+		if ( self::current_user_is_trusted() || ! is_string( $meta_value ) || false === strpos( $meta_value, '<' ) ) {
+			return $meta_value;
+		}
+
+		$data = json_decode( $meta_value, true );
+
+		if ( ! is_array( $data ) ) {
+			return $meta_value;
+		}
+
+		$changed = false;
+		$clean   = map_deep(
+			$data,
+			static function ( $value ) use ( &$changed ) {
+				$stripped = self::strip_from_value( $value );
+
+				if ( $stripped !== $value ) {
+					$changed = true;
+				}
+
+				return $stripped;
+			}
+		);
+
+		if ( ! $changed ) {
+			return $meta_value;
+		}
+
+		$encoded = wp_json_encode( $clean );
+
+		return false === $encoded ? $meta_value : $encoded;
 	}
 
 	/**

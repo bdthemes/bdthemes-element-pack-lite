@@ -2208,7 +2208,7 @@ class Step_Flow extends Module_Base {
 
 		if ( ! empty( $settings['title_link'] ) && $settings['title_link'] === 'yes' && ! empty( $settings['title_link_url']['url'] ) ) {
 			$target = ! empty( $settings['title_link_url']['is_external'] ) ? '_blank' : '_self';
-			$this->add_render_attribute( 'step-flow-title', 'onclick', "window.open('" . esc_url( $settings['title_link_url']['url'] ) . "', '$target')" );
+			$this->add_render_attribute( 'step-flow-title', 'onclick', element_pack_window_open_handler( $settings['title_link_url']['url'], '_blank' === $target ) );
 		}
 
 		$title_tag = isset( $settings['title_size'] ) ? Utils::get_valid_html_tag( $settings['title_size'] ) : 'h3';
@@ -2288,7 +2288,7 @@ class Step_Flow extends Module_Base {
 
 		if ( ! empty( $settings['global_link'] ) && $settings['global_link'] === 'yes' && ! empty( $settings['global_link_url']['url'] ) ) {
 			$target = ! empty( $settings['global_link_url']['is_external'] ) ? '_blank' : '_self';
-			$this->add_render_attribute( 'step-flow', 'onclick', "window.open('" . esc_url( $settings['global_link_url']['url'] ) . "', '$target')" );
+			$this->add_render_attribute( 'step-flow', 'onclick', element_pack_window_open_handler( $settings['global_link_url']['url'], '_blank' === $target ) );
 		}
 		?>
 		<div <?php $this->print_render_attribute_string( 'step-flow' ); ?>>

@@ -75,14 +75,7 @@ class Interactive_Card extends Module_Base {
 	 * @return string Empty string when the URL is not allowed.
 	 */
 	private function get_window_open_handler( $url, $is_new ) {
-		$url = esc_url_raw( trim( (string) $url ), [ 'http', 'https', 'mailto', 'tel' ] );
-		if ( '' === $url ) {
-			return '';
-		}
-
-		$flags = JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP;
-
-		return 'window.open(' . wp_json_encode( $url, $flags ) . ', ' . wp_json_encode( $is_new ? '_blank' : '_self' ) . ')';
+		return element_pack_window_open_handler( $url, $is_new );
 	}
 
     protected function register_controls() {
